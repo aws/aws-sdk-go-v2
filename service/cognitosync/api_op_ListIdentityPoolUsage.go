@@ -59,7 +59,7 @@ func (c *Client) ListIdentityPoolUsage(ctx context.Context, params *ListIdentity
 type ListIdentityPoolUsageInput struct {
 
 	// The maximum number of results to be returned.
-	MaxResults int32
+	MaxResults *int32
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string

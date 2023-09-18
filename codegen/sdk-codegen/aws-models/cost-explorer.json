@@ -154,6 +154,7 @@
                     "arnNamespace": "ce",
                     "cloudFormationName": "CostExplorer",
                     "cloudTrailEventSource": "costexplorer.amazonaws.com",
+                    "docId": "ce-2017-10-25",
                     "endpointPrefix": "ce"
                 },
                 "aws.auth#sigv4": {

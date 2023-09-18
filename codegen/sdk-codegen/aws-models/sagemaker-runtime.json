@@ -49,6 +49,7 @@
                     "arnNamespace": "sagemaker",
                     "cloudFormationName": "SageMakerRuntime",
                     "cloudTrailEventSource": "sagemakerruntime.amazonaws.com",
+                    "docId": "runtime.sagemaker-2017-05-13",
                     "endpointPrefix": "runtime.sagemaker"
                 },
                 "aws.auth#sigv4": {

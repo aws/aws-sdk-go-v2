@@ -2562,6 +2562,7 @@
                     "arnNamespace": "monitoring",
                     "cloudFormationName": "CloudWatch",
                     "cloudTrailEventSource": "cloudwatch.amazonaws.com",
+                    "docId": "monitoring-2010-08-01",
                     "endpointPrefix": "monitoring"
                 },
                 "aws.auth#sigv4": {

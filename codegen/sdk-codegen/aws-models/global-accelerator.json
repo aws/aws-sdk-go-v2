@@ -2893,6 +2893,7 @@
                     "arnNamespace": "globalaccelerator",
                     "cloudFormationName": "GlobalAccelerator",
                     "cloudTrailEventSource": "globalaccelerator.amazonaws.com",
+                    "docId": "globalaccelerator-2018-08-08",
                     "endpointPrefix": "globalaccelerator"
                 },
                 "aws.auth#sigv4": {

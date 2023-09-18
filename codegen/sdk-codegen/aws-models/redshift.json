@@ -81,6 +81,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#AcceptReservedNodeExchangeOutputMessage": {
@@ -92,6 +95,9 @@
                         "smithy.api#documentation": "<p></p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#AccessToClusterDeniedFault": {
@@ -348,6 +354,9 @@
                         "smithy.api#documentation": "<p>From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#AssociatedClusterList": {
@@ -646,7 +655,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#AuthorizeClusterSecurityGroupIngressResult": {
@@ -694,6 +704,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#AuthorizeEndpointAccess": {
@@ -750,6 +763,9 @@
                         "smithy.api#documentation": "<p>The virtual private cloud (VPC) identifiers to grant access to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#AuthorizeSnapshotAccess": {
@@ -817,7 +833,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#AuthorizeSnapshotAccessResult": {
@@ -989,6 +1006,9 @@
                         "smithy.api#documentation": "<p>A boolean value indicating whether to override an exception if the retention period\n            has passed. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#BatchModifyClusterSnapshotsOutputMessage": {
@@ -1006,6 +1026,9 @@
                         "smithy.api#documentation": "<p>A list of any errors returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#BatchSnapshotOperationErrorList": {
@@ -1088,6 +1111,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CertificateAssociation": {
@@ -1583,6 +1609,9 @@
                         "smithy.api#documentation": "<p>A list of revisions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ClusterExtendedCredentials": {
@@ -1893,7 +1922,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterParameterGroups</a>\n            action. </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterParameterGroups</a>\n            action. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ClusterParameterStatus": {
@@ -2046,7 +2076,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ClusterSecurityGroupNameList": {
@@ -2264,7 +2295,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterSubnetGroups</a> action.\n        </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterSubnetGroups</a> action.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ClusterSubnetGroupNotFoundFault": {
@@ -2379,7 +2411,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterVersions</a> action.\n        </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterVersions</a> action.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ClustersMessage": {
@@ -2399,7 +2432,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusters</a> action. </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusters</a> action. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CopyClusterSnapshot": {
@@ -2462,7 +2496,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CopyClusterSnapshotResult": {
@@ -2533,6 +2568,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateAuthenticationProfileResult": {
@@ -2848,7 +2886,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterParameterGroup": {
@@ -2909,7 +2948,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterParameterGroupResult": {
@@ -2985,7 +3025,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterSecurityGroupResult": {
@@ -3065,7 +3106,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterSnapshotResult": {
@@ -3149,7 +3191,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterSubnetGroupResult": {
@@ -3210,6 +3253,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateCustomDomainAssociationResult": {
@@ -3323,6 +3369,9 @@
                         "smithy.api#documentation": "<p>The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateEventSubscription": {
@@ -3427,7 +3476,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateEventSubscriptionResult": {
@@ -3485,7 +3535,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateHsmClientCertificateResult": {
@@ -3578,7 +3629,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateHsmConfigurationResult": {
@@ -3679,6 +3731,9 @@
                         "smithy.api#documentation": "<p>If true, the schedule is enabled. If false, the scheduled action does not trigger. \n            For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateSnapshotCopyGrant": {
@@ -3737,7 +3792,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of the <code>CreateSnapshotCopyGrant</code> action.</p>"
+                "smithy.api#documentation": "<p>The result of the <code>CreateSnapshotCopyGrant</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateSnapshotCopyGrantResult": {
@@ -3822,6 +3878,9 @@
                         "smithy.api#documentation": "<p></p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateTags": {
@@ -3869,7 +3928,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <code>CreateTags</code> action. </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <code>CreateTags</code> action. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateUsageLimit": {
@@ -3957,6 +4017,9 @@
                         "smithy.api#documentation": "<p>A list of tag instances.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CustomCnameAssociationFault": {
@@ -4008,6 +4071,9 @@
                         "smithy.api#documentation": "<p>The associations for the custom domain.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CustomDomainCertificateArnString": {
@@ -4047,6 +4113,9 @@
                         "smithy.api#documentation": "<p>The total amount of storage currently provisioned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DataShare": {
@@ -4317,6 +4386,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DefaultClusterParameters": {
@@ -4410,6 +4482,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteAuthenticationProfileResult": {
@@ -4486,7 +4561,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteClusterParameterGroup": {
@@ -4521,7 +4597,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteClusterResult": {
@@ -4567,7 +4644,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteClusterSnapshot": {
@@ -4666,7 +4744,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteCustomDomainAssociation": {
@@ -4702,6 +4781,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteEndpointAccess": {
@@ -4743,6 +4825,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteEventSubscription": {
@@ -4777,7 +4862,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteHsmClientCertificate": {
@@ -4812,7 +4898,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteHsmConfiguration": {
@@ -4847,7 +4934,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeletePartner": {
@@ -4903,6 +4991,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteSnapshotCopyGrant": {
@@ -4937,7 +5028,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of the <code>DeleteSnapshotCopyGrant</code> action.</p>"
+                "smithy.api#documentation": "<p>The result of the <code>DeleteSnapshotCopyGrant</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteSnapshotSchedule": {
@@ -4970,6 +5062,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteTags": {
@@ -5011,7 +5106,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <code>DeleteTags</code> action. </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <code>DeleteTags</code> action. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DeleteUsageLimit": {
@@ -5044,6 +5140,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DependentServiceRequestThrottlingFault": {
@@ -5101,6 +5200,9 @@
                         "smithy.api#documentation": "<p>A list of attribute names.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeAuthenticationProfiles": {
@@ -5132,6 +5234,9 @@
                         "smithy.api#documentation": "<p>The name of the authentication profile to describe. If not specified then all authentication profiles owned by the account are listed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeAuthenticationProfilesResult": {
@@ -5195,6 +5300,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point for returning a set of\n            response records. When the results of a <code>DescribeClusterDbRevisions</code> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value\n            in the <code>marker</code> field of the response. You can retrieve the next set of\n            response records by providing the returned <code>marker</code> value in the\n                <code>marker</code> parameter and retrying the request. </p>\n         <p>Constraints: You can specify either the <code>ClusterIdentifier</code> parameter, or\n            the <code>marker</code> parameter, but not both.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterParameterGroups": {
@@ -5258,7 +5366,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterParameters": {
@@ -5314,7 +5423,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterSecurityGroups": {
@@ -5378,7 +5488,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterSnapshots": {
@@ -5533,7 +5644,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterSubnetGroups": {
@@ -5597,7 +5709,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterTracks": {
@@ -5647,6 +5760,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <code>DescribeClusterTracks</code> request exceed the\n            value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the\n                <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterVersions": {
@@ -5696,7 +5812,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusters": {
@@ -5852,7 +5969,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeCustomDomainAssociations": {
@@ -5908,6 +6026,9 @@
                         "smithy.api#documentation": "<p>The marker for the custom domain association.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeDataShares": {
@@ -5983,6 +6104,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesForConsumerResult": {
@@ -6055,6 +6179,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesForProducerResult": {
@@ -6098,6 +6225,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesResult": {
@@ -6162,7 +6292,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeDefaultClusterParametersResult": {
@@ -6244,6 +6375,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeEndpointAccess</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by the\n            <code>MaxRecords</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeEndpointAuthorization": {
@@ -6305,6 +6439,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by the\n            <code>MaxRecords</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeEventCategories": {
@@ -6330,7 +6467,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeEventSubscriptions": {
@@ -6394,7 +6532,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeEvents": {
@@ -6462,7 +6601,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeHsmClientCertificates": {
@@ -6526,7 +6666,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeHsmConfigurations": {
@@ -6590,7 +6731,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeLoggingStatus": {
@@ -6622,7 +6764,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeNodeConfigurationOptions": {
@@ -6713,6 +6856,9 @@
                         "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>\n         <p>Default: <code>500</code>\n         </p>\n         <p>Constraints: minimum 100, maximum 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeOrderableClusterOptions": {
@@ -6762,7 +6908,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribePartners": {
@@ -6814,6 +6961,9 @@
                         "smithy.api#documentation": "<p>The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribePartnersOutputMessage": {
@@ -6825,6 +6975,9 @@
                         "smithy.api#documentation": "<p>A list of partner integrations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeReservedNodeExchangeStatus": {
@@ -6883,6 +7036,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this \n            parameter is specified, the response includes only records beyond the marker, up to the value \n            specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeReservedNodeExchangeStatusOutputMessage": {
@@ -6900,6 +7056,9 @@
                         "smithy.api#documentation": "<p>A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeReservedNodeOfferings": {
@@ -6954,7 +7113,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeReservedNodes": {
@@ -7006,7 +7166,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeResize": {
@@ -7041,7 +7202,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeScheduledActions": {
@@ -7121,6 +7283,9 @@
                         "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>\n         <p>Default: <code>100</code>\n         </p>\n         <p>Constraints: minimum 20, maximum 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeSnapshotCopyGrants": {
@@ -7184,7 +7349,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of the <code>DescribeSnapshotCopyGrants</code> action.</p>"
+                "smithy.api#documentation": "<p>The result of the <code>DescribeSnapshotCopyGrants</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeSnapshotSchedules": {
@@ -7244,6 +7410,9 @@
                         "smithy.api#documentation": "<p>The maximum number or response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned <code>marker</code>\n            value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeSnapshotSchedulesOutputMessage": {
@@ -7261,6 +7430,9 @@
                         "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a\n            subsequent request. If a value is returned in a response, you can retrieve the next set\n            of records by providing this returned marker value in the <code>marker</code> parameter\n            and retrying the command. If the <code>marker</code> field is empty, all response\n            records have been retrieved for the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeStorage": {
@@ -7330,7 +7502,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeTags": {
@@ -7400,7 +7573,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DescribeUsageLimits": {
@@ -7474,6 +7648,9 @@
                         "smithy.api#documentation": "<p>A tag value or values for which you want to return all matching usage limit objects\n            that are associated with the specified tag value or values. For example, suppose\n            that you have parameter groups that are tagged with values called <code>admin</code> and\n            <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift\n            returns a response with the usage limit objects that have either or both of these tag\n            values associated with them.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DisableLogging": {
@@ -7508,7 +7685,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DisableSnapshotCopy": {
@@ -7549,7 +7727,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#DisableSnapshotCopyResult": {
@@ -7611,6 +7790,9 @@
                         "smithy.api#documentation": "<p>From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#Double": {
@@ -7760,7 +7942,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#EnableSnapshotCopy": {
@@ -7847,7 +8030,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#EnableSnapshotCopyResult": {
@@ -8282,7 +8466,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#EventInfoMap": {
@@ -8453,7 +8638,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#EventsMessage": {
@@ -8473,7 +8659,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ExceptionMessage": {
@@ -8547,7 +8734,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request parameters to get cluster credentials.</p>"
+                "smithy.api#documentation": "<p>The request parameters to get cluster credentials.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#GetClusterCredentialsWithIAM": {
@@ -8597,6 +8785,9 @@
                         "smithy.api#documentation": "<p>The custom domain name for the IAM message cluster credentials.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions": {
@@ -8677,6 +8868,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this \n            parameter is specified, the response includes only records beyond the marker, up to the value \n            specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsOutputMessage": {
@@ -8694,6 +8888,9 @@
                         "smithy.api#documentation": "<p>the configuration options for the reserved-node\n            exchange. These options include information about the source reserved node and target reserved\n            node. Details include the node type, the price, the node count, and the offering\n            type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#GetReservedNodeExchangeOfferings": {
@@ -8758,7 +8955,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#GetReservedNodeExchangeOfferingsOutputMessage": {
@@ -8776,6 +8974,9 @@
                         "smithy.api#documentation": "<p>Returns an array of <a>ReservedNodeOffering</a> objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#HsmClientCertificate": {
@@ -8847,7 +9048,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#HsmClientCertificateNotFoundFault": {
@@ -8965,7 +9167,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#HsmConfigurationNotFoundFault": {
@@ -9865,6 +10068,9 @@
                         "smithy.api#documentation": "<p>This parameter is retired. Amazon Redshift automatically  determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyAquaOutputMessage": {
@@ -9876,6 +10082,9 @@
                         "smithy.api#documentation": "<p>This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyAuthenticationProfile": {
@@ -9918,6 +10127,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyAuthenticationProfileResult": {
@@ -10057,6 +10269,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterDbRevisionResult": {
@@ -10120,7 +10335,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterIamRolesResult": {
@@ -10194,6 +10410,9 @@
                         "smithy.api#documentation": "<p>An integer indicating the duration of the maintenance window in days. If you specify a\n            duration, you can't specify an end time. The duration must be 45 days or less.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterMaintenanceResult": {
@@ -10363,7 +10582,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterParameterGroup": {
@@ -10405,7 +10625,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a modify cluster parameter group operation. </p>"
+                "smithy.api#documentation": "<p>Describes a modify cluster parameter group operation. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterResult": {
@@ -10465,6 +10686,9 @@
                         "smithy.api#documentation": "<p>A Boolean option to override an exception if the retention period has already\n            passed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterSnapshotResult": {
@@ -10523,6 +10747,9 @@
                         "smithy.api#documentation": "<p>A boolean to indicate whether to remove the assoiciation between the cluster and the\n            schedule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterSubnetGroup": {
@@ -10582,7 +10809,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterSubnetGroupResult": {
@@ -10641,6 +10869,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyCustomDomainAssociationResult": {
@@ -10723,6 +10954,9 @@
                         "smithy.api#documentation": "<p>The complete list of VPC security groups associated with the endpoint after the endpoint is modified.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyEventSubscription": {
@@ -10814,7 +11048,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyEventSubscriptionResult": {
@@ -10909,6 +11144,9 @@
                         "smithy.api#documentation": "<p>A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifySnapshotCopyRetentionPeriod": {
@@ -10967,7 +11205,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifySnapshotCopyRetentionPeriodResult": {
@@ -11021,6 +11260,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyUsageLimit": {
@@ -11068,6 +11310,9 @@
                         "smithy.api#documentation": "<p>The new action that Amazon Redshift takes when the limit is reached. \n            For more information about this parameter, see <a>UsageLimit</a>. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#NetworkInterface": {
@@ -11233,6 +11478,9 @@
                         "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a\n            subsequent request. If a value is returned in a response, you can retrieve the next set\n            of records by providing this returned marker value in the <code>Marker</code> parameter\n            and retrying the command. If the <code>Marker</code> field is empty, all response\n            records have been retrieved for the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#NumberOfNodesPerClusterLimitExceededFault": {
@@ -11374,7 +11622,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeOrderableClusterOptions</a>\n            action. </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeOrderableClusterOptions</a>\n            action. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#Parameter": {
@@ -11844,7 +12093,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#PurchaseReservedNodeOfferingResult": {
@@ -11890,7 +12140,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RebootClusterResult": {
@@ -12385,9 +12636,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://redshift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://redshift.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://redshift-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -12400,15 +12855,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://redshift.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://redshift.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -12420,283 +12910,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://redshift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://redshift.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://redshift-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://redshift.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://redshift.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -13420,6 +13635,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ReservedNode": {
@@ -13875,7 +14093,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ReservedNodeQuotaExceededFault": {
@@ -13912,7 +14131,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ResetClusterParameterGroup": {
@@ -13960,7 +14180,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ResizeCluster": {
@@ -14566,7 +14787,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RestoreFromClusterSnapshotResult": {
@@ -14728,7 +14950,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RestoreTableFromClusterSnapshotResult": {
@@ -14879,7 +15102,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RevokeClusterSecurityGroupIngressResult": {
@@ -14956,6 +15180,9 @@
                         "smithy.api#documentation": "<p>Indicates whether to force the revoke action. \n           If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RevokeSnapshotAccess": {
@@ -15014,7 +15241,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RevokeSnapshotAccessResult": {
@@ -15063,7 +15291,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#RotateEncryptionKeyResult": {
@@ -15454,6 +15683,9 @@
                         "smithy.api#documentation": "<p>List of retrieved scheduled actions. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ScheduledSnapshotTimeList": {
@@ -15837,7 +16069,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#SnapshotCopyGrantNotFoundFault": {
@@ -15941,7 +16174,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterSnapshots</a> action.\n        </p>"
+                "smithy.api#documentation": "<p>Contains the output from the <a>DescribeClusterSnapshots</a> action.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#SnapshotSchedule": {
@@ -16535,7 +16769,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#TableRestoreStatusType": {
@@ -16689,7 +16924,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#TrackList": {
@@ -16716,6 +16952,9 @@
                         "smithy.api#documentation": "<p>The starting point to return a set of response tracklist records. You can retrieve the\n            next set of response records by providing the returned marker value in the\n                <code>Marker</code> parameter and retrying the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#UnauthorizedOperation": {
@@ -16870,6 +17109,9 @@
                         "smithy.api#documentation": "<p>The status message provided by the partner.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#UpdateTarget": {

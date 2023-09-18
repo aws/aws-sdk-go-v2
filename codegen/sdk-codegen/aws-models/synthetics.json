@@ -109,11 +109,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#AssociateResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#BadRequestException": {
             "type": "structure",
@@ -491,37 +497,43 @@
             }
         },
         "com.amazonaws.synthetics#CanaryRunState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "PASSED",
-                        "name": "PASSED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#CanaryRunStateReasonCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CANARY_FAILURE",
-                        "name": "CANARY_FAILURE"
-                    },
-                    {
-                        "value": "EXECUTION_FAILURE",
-                        "name": "EXECUTION_FAILURE"
+            "type": "enum",
+            "members": {
+                "CANARY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANARY_FAILURE"
                     }
-                ]
+                },
+                "EXECUTION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXECUTION_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#CanaryRunStatus": {
@@ -618,101 +630,139 @@
             }
         },
         "com.amazonaws.synthetics#CanaryState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "READY",
-                        "name": "READY"
-                    },
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#CanaryStateReasonCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INVALID_PERMISSIONS",
-                        "name": "INVALID_PERMISSIONS"
-                    },
-                    {
-                        "value": "CREATE_PENDING",
-                        "name": "CREATE_PENDING"
-                    },
-                    {
-                        "value": "CREATE_IN_PROGRESS",
-                        "name": "CREATE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "CREATE_FAILED",
-                        "name": "CREATE_FAILED"
-                    },
-                    {
-                        "value": "UPDATE_PENDING",
-                        "name": "UPDATE_PENDING"
-                    },
-                    {
-                        "value": "UPDATE_IN_PROGRESS",
-                        "name": "UPDATE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "UPDATE_COMPLETE",
-                        "name": "UPDATE_COMPLETE"
-                    },
-                    {
-                        "value": "ROLLBACK_COMPLETE",
-                        "name": "ROLLBACK_COMPLETE"
-                    },
-                    {
-                        "value": "ROLLBACK_FAILED",
-                        "name": "ROLLBACK_FAILED"
-                    },
-                    {
-                        "value": "DELETE_IN_PROGRESS",
-                        "name": "DELETE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
-                    },
-                    {
-                        "value": "SYNC_DELETE_IN_PROGRESS",
-                        "name": "SYNC_DELETE_IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "INVALID_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PERMISSIONS"
                     }
-                ]
+                },
+                "CREATE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_PENDING"
+                    }
+                },
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_PENDING"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_COMPLETE"
+                    }
+                },
+                "ROLLBACK_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_COMPLETE"
+                    }
+                },
+                "ROLLBACK_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_FAILED"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "SYNC_DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNC_DELETE_IN_PROGRESS"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#CanaryStatus": {
@@ -905,6 +955,9 @@
                         "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, including \n         the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#CreateCanaryResponse": {
@@ -916,6 +969,9 @@
                         "smithy.api#documentation": "<p>The full details about the canary you have created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#CreateGroup": {
@@ -965,6 +1021,9 @@
                         "smithy.api#documentation": "<p>A list of key-value pairs to associate with the group. \n         You can associate as many as 50 tags with a group.</p>\n         <p>Tags can help you organize and categorize your\n         resources. You can also use them to scope user permissions, by \n         granting a user permission to access or change only the resources that have\n         certain tag values.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#CreateGroupResponse": {
@@ -976,6 +1035,9 @@
                         "smithy.api#documentation": "<p>A structure that contains information about the group that was just created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#DeleteCanary": {
@@ -1001,7 +1063,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Permanently deletes the specified canary.</p>\n         <p>If you specify <code>DeleteLambda</code> to <code>true</code>, CloudWatch Synthetics also deletes\n         the Lambda functions and layers that are used by the canary.</p>\n         <p>Other resources used and created by the canary are not automatically deleted. \n         After you delete a canary that you do not intend to\n         use again, you\n      should also delete the following:</p>\n         <ul>\n            <li>\n               <p>The CloudWatch alarms created for this canary. These alarms have a name of\n                     <code>Synthetics-SharpDrop-Alarm-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>Amazon S3 objects and buckets, such as the canary's artifact location.</p>\n            </li>\n            <li>\n               <p>IAM roles created for the canary. If they were created in the console, these roles\n               have the name <code>\n                     role/service-role/CloudWatchSyntheticsRole-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs log groups created for the canary. These logs groups have the name\n                     <code>/aws/lambda/cwsyn-<i>MyCanaryName</i>\n                  </code>. </p>\n            </li>\n         </ul>\n      \n         <p>Before you delete a canary, you might want to use <code>GetCanary</code> to display\n         the information about this canary. Make\n         note of the information returned by this operation so that you can delete these resources\n         after you delete the canary.</p>",
+                "smithy.api#documentation": "<p>Permanently deletes the specified canary.</p>\n         <p>If you specify <code>DeleteLambda</code> to <code>true</code>, CloudWatch Synthetics also deletes\n         the Lambda functions and layers that are used by the canary.</p>\n         <p>Other resources used and created by the canary are not automatically deleted. \n         After you delete a canary that you do not intend to\n         use again, you\n      should also delete the following:</p>\n         <ul>\n            <li>\n               <p>The CloudWatch alarms created for this canary. These alarms have a name of\n                     <code>Synthetics-SharpDrop-Alarm-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>Amazon S3 objects and buckets, such as the canary's artifact location.</p>\n            </li>\n            <li>\n               <p>IAM roles created for the canary. If they were created in the console, these roles\n               have the name <code>\n                     role/service-role/CloudWatchSyntheticsRole-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs log groups created for the canary. These logs groups have the name\n                     <code>/aws/lambda/cwsyn-<i>MyCanaryName</i>\n                  </code>. </p>\n            </li>\n         </ul>\n         <p>Before you delete a canary, you might want to use <code>GetCanary</code> to display\n         the information about this canary. Make\n         note of the information returned by this operation so that you can delete these resources\n         after you delete the canary.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/canary/{Name}",
@@ -1028,11 +1090,17 @@
                         "smithy.api#httpQuery": "deleteLambda"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#DeleteCanaryResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#DeleteGroup": {
             "type": "operation",
@@ -1076,11 +1144,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#DeleteGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#DescribeCanaries": {
             "type": "operation",
@@ -1129,7 +1203,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to see information from the most recent run of each canary that you have created.</p>\n    \n         <p>This operation supports resource-level authorization using an IAM policy and \n         the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>",
+                "smithy.api#documentation": "<p>Use this operation to see information from the most recent run of each canary that you have created.</p>\n         <p>This operation supports resource-level authorization using an IAM policy and \n         the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/canaries/last-run",
@@ -1175,6 +1249,9 @@
                         "smithy.api#documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can\n         specify as many as five canary names.</p>\n         <p>If you specify this parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#DescribeCanariesLastRunResponse": {
@@ -1192,6 +1269,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>DescribeCanariesLastRun</code> operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#DescribeCanariesNameFilter": {
@@ -1227,6 +1307,9 @@
                         "smithy.api#documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can\n         specify as many as five canary names.</p>\n         <p>If you specify this parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use this parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#DescribeCanariesResponse": {
@@ -1244,6 +1327,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>DescribeCanaries</code> operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#DescribeRuntimeVersions": {
@@ -1291,6 +1377,9 @@
                         "smithy.api#documentation": "<p>Specify this parameter to limit how many runs are returned each time you use\n         the <code>DescribeRuntimeVersions</code> operation. If you omit this parameter, the default of 100 is used.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#DescribeRuntimeVersionsResponse": {
@@ -1308,6 +1397,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>DescribeRuntimeVersions</code> operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#DisassociateResource": {
@@ -1359,25 +1451,33 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#DisassociateResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#EncryptionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SSE_S3",
-                        "name": "SSE_S3"
-                    },
-                    {
-                        "value": "SSE_KMS",
-                        "name": "SSE_KMS"
+            "type": "enum",
+            "members": {
+                "SSE_S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE_S3"
                     }
-                ]
+                },
+                "SSE_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE_KMS"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#EnvironmentVariableName": {
@@ -1447,6 +1547,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#GetCanaryResponse": {
@@ -1458,6 +1561,9 @@
                         "smithy.api#documentation": "<p>A structure that contains the full information about the canary.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#GetCanaryRuns": {
@@ -1516,6 +1622,9 @@
                         "smithy.api#documentation": "<p>Specify this parameter to limit how many runs are returned each time you use\n         the <code>GetCanaryRuns</code> operation. If you omit this parameter, the default of 100 is used.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#GetCanaryRunsResponse": {
@@ -1533,6 +1642,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>GetCanaryRuns</code> \n         operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#GetGroup": {
@@ -1577,6 +1689,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#GetGroupResponse": {
@@ -1588,6 +1703,9 @@
                         "smithy.api#documentation": "<p>A structure that contains information about the group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#Group": {
@@ -1786,6 +1904,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#ListAssociatedGroupsResponse": {
@@ -1803,6 +1924,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>ListAssociatedGroups</code> operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#ListGroupResources": {
@@ -1864,6 +1988,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#ListGroupResourcesResponse": {
@@ -1881,6 +2008,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>ListGroupResources</code> operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#ListGroups": {
@@ -1928,6 +2058,9 @@
                         "smithy.api#documentation": "<p>Specify this parameter to limit how many groups are returned each time you use\n         the <code>ListGroups</code> operation. If you omit this parameter, the default of 20 is used.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#ListGroupsResponse": {
@@ -1945,6 +2078,9 @@
                         "smithy.api#documentation": "<p>A token that indicates that there is more data\n         available. You can use this token in a subsequent <code>ListGroups</code> operation to retrieve the next \n         set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#ListTagsForResource": {
@@ -1987,11 +2123,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.synthetics#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the canary or group that you want to view tags for.</p>\n         <p>The ARN format of a canary is\n               <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i>\n            </code>.</p>\n         <p>The ARN format of a group is\n         <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i>\n            </code>   \n         </p>",
+                        "smithy.api#documentation": "<p>The ARN of the canary or group that you want to view tags for.</p>\n         <p>The ARN format of a canary is\n               <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i>\n            </code>.</p>\n         <p>The ARN format of a group is\n         <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i>\n            </code>\n         </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#ListTagsForResourceResponse": {
@@ -2003,6 +2142,9 @@
                         "smithy.api#documentation": "<p>The list of tag keys and values associated with the resource that you specified.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.synthetics#MaxCanaryResults": {
@@ -2195,7 +2337,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary\n         uploads to Amazon S3. </p>\n         <p>For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a>\n            </p>"
+                "smithy.api#documentation": "<p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary\n         uploads to Amazon S3. </p>\n         <p>For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a>\n         </p>"
             }
         },
         "com.amazonaws.synthetics#SecurityGroupId": {
@@ -2268,11 +2410,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#StartCanaryResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#StopCanary": {
             "type": "operation",
@@ -2316,11 +2464,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#StopCanaryResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#String": {
             "type": "string",
@@ -2432,7 +2586,7 @@
                     "name": "synthetics"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon CloudWatch Synthetics</fullname>\n         <p>You can use Amazon CloudWatch Synthetics to continually monitor your services. You can\n         create and manage <i>canaries</i>, which are modular, lightweight scripts \n         that monitor your endpoints and APIs\n            from the outside-in. You can set up your canaries to run\n         24 hours a day, once per minute. The canaries help you check the availability and latency\n         of your web services and troubleshoot anomalies by investigating load time data,\n         screenshots of the UI, logs, and metrics. The canaries seamlessly integrate with CloudWatch\n         ServiceLens to help you trace the causes of impacted nodes in your applications. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html\">Using ServiceLens to Monitor\n            the Health of Your Applications</a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>\n      \n         <p>Before you create and manage canaries, be aware of the security considerations. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security\n            Considerations for Synthetics Canaries</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon CloudWatch Synthetics</fullname>\n         <p>You can use Amazon CloudWatch Synthetics to continually monitor your services. You can\n         create and manage <i>canaries</i>, which are modular, lightweight scripts \n         that monitor your endpoints and APIs\n            from the outside-in. You can set up your canaries to run\n         24 hours a day, once per minute. The canaries help you check the availability and latency\n         of your web services and troubleshoot anomalies by investigating load time data,\n         screenshots of the UI, logs, and metrics. The canaries seamlessly integrate with CloudWatch\n         ServiceLens to help you trace the causes of impacted nodes in your applications. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html\">Using ServiceLens to Monitor\n            the Health of Your Applications</a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>\n         <p>Before you create and manage canaries, be aware of the security considerations. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security\n            Considerations for Synthetics Canaries</a>.</p>",
                 "smithy.api#title": "Synthetics",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2494,9 +2648,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://synthetics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://synthetics-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2509,15 +2842,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://synthetics.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://synthetics.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2529,258 +2897,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://synthetics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://synthetics-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://synthetics.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://synthetics.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2795,8 +2913,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2808,8 +2926,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2821,8 +2939,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2834,8 +2952,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2847,8 +2965,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2860,8 +2978,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2873,8 +2991,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2886,8 +3004,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2899,8 +3017,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2912,8 +3030,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2925,8 +3043,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2938,8 +3056,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2951,8 +3069,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2964,8 +3082,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2977,8 +3095,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2990,8 +3108,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3003,8 +3121,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3016,8 +3134,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3029,8 +3147,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3042,8 +3160,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3055,8 +3173,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3068,8 +3186,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3081,8 +3199,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3094,8 +3212,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3107,8 +3225,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3120,8 +3238,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3133,8 +3251,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3146,8 +3264,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3159,8 +3277,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3172,8 +3290,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3185,8 +3303,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3198,8 +3316,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3211,8 +3329,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3224,8 +3342,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3237,8 +3355,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3250,8 +3368,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3263,8 +3381,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3276,8 +3394,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3289,8 +3407,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3302,8 +3420,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3315,8 +3444,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3328,8 +3468,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3341,8 +3492,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3354,8 +3516,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3367,8 +3529,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3379,8 +3541,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3391,9 +3553,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3478,7 +3646,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.synthetics#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the canary or group that you're adding tags to.</p>\n         <p>The ARN format of a canary is\n<code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i>\n            </code>.</p>\n         <p>The ARN format of a group is\n <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i>\n            </code>   \n         </p>",
+                        "smithy.api#documentation": "<p>The ARN of the canary or group that you're adding tags to.</p>\n         <p>The ARN format of a canary is\n<code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i>\n            </code>.</p>\n         <p>The ARN format of a group is\n <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i>\n            </code>\n         </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3490,11 +3658,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#TagValue": {
             "type": "string",
@@ -3576,7 +3750,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.synthetics#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the canary or group that you're removing tags from.</p>\n         <p>The ARN format of a canary is\n               <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i>\n            </code>.</p> \n         <p>The ARN format of a group is\n         <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i>\n            </code>   \n         </p>",
+                        "smithy.api#documentation": "<p>The ARN of the canary or group that you're removing tags from.</p>\n         <p>The ARN format of a canary is\n               <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i>\n            </code>.</p>\n         <p>The ARN format of a group is\n         <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i>\n            </code>\n         </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3589,11 +3763,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#UpdateCanary": {
             "type": "operation",
@@ -3706,11 +3886,17 @@
                         "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, \n         including the encryption-at-rest settings for artifacts that \n         the canary uploads to Amazon S3.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.synthetics#UpdateCanaryResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.synthetics#ValidationException": {
             "type": "structure",
@@ -3743,7 +3929,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary. It can\n         optionally also specify parts of the screenshots to ignore during the visual monitoring comparison.</p>\n      \n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b>\n         runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\">\n            Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\">\n               Visual monitoring blueprint</a>\n         </p>"
+                "smithy.api#documentation": "<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary. It can\n         optionally also specify parts of the screenshots to ignore during the visual monitoring comparison.</p>\n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b>\n         runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\">\n            Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\">\n               Visual monitoring blueprint</a>\n         </p>"
             }
         },
         "com.amazonaws.synthetics#VisualReferenceOutput": {

@@ -32,7 +32,7 @@
         "com.amazonaws.opsworkscm#AWSOpsWorksCMResourceArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws.*:opsworks-cm:.*:[0-9]{12}:.*"
+                "smithy.api#pattern": "^arn:aws.*:opsworks-cm:.*:[0-9]{12}:"
             }
         },
         "com.amazonaws.opsworkscm#AccountAttribute": {
@@ -117,6 +117,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#AssociateNodeResponse": {
@@ -128,6 +131,9 @@
                         "smithy.api#documentation": "<p>Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the association request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#AttributeName": {
@@ -137,7 +143,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[A-Z][A-Z0-9_]*"
+                "smithy.api#pattern": "^[A-Z][A-Z0-9_]*$"
             }
         },
         "com.amazonaws.opsworkscm#AttributeValue": {
@@ -147,7 +153,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "(?s).*"
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.opsworkscm#Backup": {
@@ -311,7 +317,7 @@
                     "min": 0,
                     "max": 79
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*$"
             }
         },
         "com.amazonaws.opsworkscm#BackupRetentionCountDefinition": {
@@ -323,41 +329,49 @@
             }
         },
         "com.amazonaws.opsworkscm#BackupStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "OK",
-                        "name": "OK"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OK"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworkscm#BackupType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUTOMATED",
-                        "name": "AUTOMATED"
-                    },
-                    {
-                        "value": "MANUAL",
-                        "name": "MANUAL"
+            "type": "enum",
+            "members": {
+                "AUTOMATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATED"
                     }
-                ]
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworkscm#Backups": {
@@ -417,6 +431,9 @@
                         "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#CreateBackupResponse": {
@@ -428,6 +445,9 @@
                         "smithy.api#documentation": "<p>Backup created by request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#CreateServer": {
@@ -590,6 +610,9 @@
                         "smithy.api#documentation": "<p>\n      If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#CreateServerResponse": {
@@ -601,6 +624,9 @@
                         "smithy.api#documentation": "<p>The server that is created by the request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#CustomCertificate": {
@@ -610,7 +636,7 @@
                     "min": 0,
                     "max": 2097152
                 },
-                "smithy.api#pattern": "(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*"
+                "smithy.api#pattern": "^(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*$"
             }
         },
         "com.amazonaws.opsworkscm#CustomDomain": {
@@ -630,7 +656,7 @@
                     "min": 0,
                     "max": 4096
                 },
-                "smithy.api#pattern": "(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*",
+                "smithy.api#pattern": "^(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -667,11 +693,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DeleteBackupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.opsworkscm#DeleteServer": {
             "type": "operation",
@@ -706,11 +738,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DeleteServerResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.opsworkscm#DescribeAccountAttributes": {
             "type": "operation",
@@ -726,7 +764,10 @@
         },
         "com.amazonaws.opsworkscm#DescribeAccountAttributesRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.opsworkscm#DescribeAccountAttributesResponse": {
             "type": "structure",
@@ -737,6 +778,9 @@
                         "smithy.api#documentation": "<p>\n      The attributes that are currently set for the account.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeBackups": {
@@ -795,6 +839,9 @@
                         "smithy.api#documentation": "<p>This is not currently implemented for <code>DescribeBackups</code> requests.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeBackupsResponse": {
@@ -812,6 +859,9 @@
                         "smithy.api#documentation": "<p>This is not currently implemented for <code>DescribeBackups</code> requests.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeEvents": {
@@ -865,6 +915,9 @@
                         "smithy.api#documentation": "<p>To receive a paginated response, use this parameter to specify the maximum number\n      of results to be returned with a single call. If the number of available results exceeds\n      this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code>\n      request parameter to get the next set of results.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeEventsResponse": {
@@ -882,6 +935,9 @@
                         "smithy.api#documentation": "<p>NextToken is a string that is returned in some command responses. It indicates that\n      not all entries have been returned, and that you must run at least one more request to get remaining\n      items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous\n      results as the value of the <code>nextToken</code> parameter. If there are no more results,\n      the response object's <code>nextToken</code> parameter value is <code>null</code>.\n      Setting a <code>nextToken</code> value that was not returned in\n      your previous results causes an <code>InvalidNextTokenException</code> to occur.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeNodeAssociationStatus": {
@@ -949,6 +1005,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeNodeAssociationStatusResponse": {
@@ -966,6 +1025,9 @@
                         "smithy.api#documentation": "<p>Attributes specific to the node association. \n      In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeServers": {
@@ -1018,6 +1080,9 @@
                         "smithy.api#documentation": "<p>This is not currently implemented for <code>DescribeServers</code> requests.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DescribeServersResponse": {
@@ -1035,6 +1100,9 @@
                         "smithy.api#documentation": "<p>This is not currently implemented for <code>DescribeServers</code> requests.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#DisassociateNode": {
@@ -1083,6 +1151,9 @@
                         "smithy.api#documentation": "<p>Engine attributes that are used for disassociating the node. No attributes are required for Puppet.\n    </p>\n         <p class=\"title\">\n            <b>Attributes required in a DisassociateNode request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_ORGANIZATION</code>: The Chef organization\n          with which the node was associated. By default only one organization\n          named <code>default</code> can exist.\n      </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#DisassociateNodeResponse": {
@@ -1094,6 +1165,9 @@
                         "smithy.api#documentation": "<p>Contains a token which can be passed to the\n      <code>DescribeNodeAssociationStatus</code> API call to get the status of\n      the disassociation request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#EngineAttribute": {
@@ -1123,7 +1197,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "(?s).*"
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.opsworkscm#EngineAttributeValue": {
@@ -1133,7 +1207,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "(?s).*",
+                "smithy.api#pattern": "^(?s)",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1189,6 +1263,9 @@
                         "smithy.api#documentation": "<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. An <code>EngineAttribute</code> list item \n      is a pair that includes an attribute name and its value. For the <code>Userdata</code> ExportAttributeName, the following are \n      supported engine attribute names.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>RunList</b> In Chef, a list of roles or recipes that are run in the specified order. \n        In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OrganizationName</b> In Chef, an organization name. AWS OpsWorks for Chef Automate \n        always creates the organization <code>default</code>. In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeEnvironment</b> In Chef, a node environment (for example, development, staging, or one-box). \n        In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeClientVersion</b> In Chef, the version of the Chef engine (three numbers separated \n        by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, \n        this parameter is ignored.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#ExportServerEngineAttributeResponse": {
@@ -1206,6 +1283,9 @@
                         "smithy.api#documentation": "<p>The server name used in the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#InstanceProfileArn": {
@@ -1215,7 +1295,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "arn:aws:iam::[0-9]{12}:instance-profile/.*"
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:instance-profile/"
             }
         },
         "com.amazonaws.opsworkscm#Integer": {
@@ -1324,6 +1404,9 @@
                         "smithy.api#documentation": "<p>To receive a paginated response, use this parameter to specify the maximum number\n        of results to be returned with a single call. If the number of available results exceeds\n        this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code>\n        request parameter to get the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#ListTagsForResourceResponse": {
@@ -1341,21 +1424,26 @@
                         "smithy.api#documentation": "<p>A token that you can use as the value of <code>NextToken</code> in subsequent calls to the API to show more results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#MaintenanceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworkscm#MaxResults": {
@@ -1373,27 +1461,33 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "(?s).*"
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.opsworkscm#NodeAssociationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The status of the association or disassociation request.\n    </p>\n         <p class=\"title\">\n            <b>Possible values:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The association or disassociation succeeded.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The association or disassociation failed.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The association or disassociation is still in progress.\n      </p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the association or disassociation request.\n    </p>\n         <p class=\"title\">\n            <b>Possible values:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The association or disassociation succeeded.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The association or disassociation failed.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The association or disassociation is still in progress.\n      </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opsworkscm#NodeAssociationStatusToken": {
@@ -1403,7 +1497,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "(?s).*"
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.opsworkscm#NodeName": {
@@ -1556,9 +1650,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://opsworks-cm-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://opsworks-cm-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -1571,15 +1844,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://opsworks-cm.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://opsworks-cm.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -1591,258 +1899,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://opsworks-cm-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://opsworks-cm-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://opsworks-cm.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://opsworks-cm.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1857,8 +1915,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1870,8 +1928,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1883,8 +1941,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1896,8 +1954,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1909,8 +1967,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1922,8 +1980,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1935,8 +1993,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1948,8 +2006,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1961,8 +2019,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1974,8 +2032,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1987,8 +2045,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2000,8 +2058,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2013,8 +2071,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2026,8 +2084,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2039,8 +2097,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2052,8 +2110,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2065,8 +2123,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2078,8 +2136,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2091,8 +2149,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2104,8 +2162,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2117,8 +2186,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2130,8 +2210,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2143,8 +2234,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2156,8 +2258,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2169,8 +2271,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2182,8 +2284,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2194,8 +2296,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2206,9 +2308,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2298,6 +2406,9 @@
                         "smithy.api#documentation": "<p> The name of the key pair to set on the new EC2 instance. This can be helpful\n      if the administrator no longer has the SSH key.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#RestoreServerResponse": {
@@ -2306,6 +2417,9 @@
                 "Server": {
                     "target": "com.amazonaws.opsworkscm#Server"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#Server": {
@@ -2505,66 +2619,90 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-]*$"
             }
         },
         "com.amazonaws.opsworkscm#ServerStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BACKING_UP",
-                        "name": "BACKING_UP"
-                    },
-                    {
-                        "value": "CONNECTION_LOST",
-                        "name": "CONNECTION_LOST"
-                    },
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "MODIFYING",
-                        "name": "MODIFYING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "RESTORING",
-                        "name": "RESTORING"
-                    },
-                    {
-                        "value": "SETUP",
-                        "name": "SETUP"
-                    },
-                    {
-                        "value": "UNDER_MAINTENANCE",
-                        "name": "UNDER_MAINTENANCE"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "TERMINATED",
-                        "name": "TERMINATED"
+            "type": "enum",
+            "members": {
+                "BACKING_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BACKING_UP"
                     }
-                ]
+                },
+                "CONNECTION_LOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_LOST"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "MODIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODIFYING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
+                },
+                "SETUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETUP"
+                    }
+                },
+                "UNDER_MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDER_MAINTENANCE"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworkscm#Servers": {
@@ -2580,7 +2718,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "arn:aws:iam::[0-9]{12}:role/.*"
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/"
             }
         },
         "com.amazonaws.opsworkscm#StartMaintenance": {
@@ -2622,6 +2760,9 @@
                         "smithy.api#documentation": "<p>Engine attributes that are specific to the server on which you want to run maintenance.</p>\n         <p class=\"title\">\n            <b>Attributes accepted in a StartMaintenance request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, \n        add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see \n        <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html\">Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2</a>.\n      </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#StartMaintenanceResponse": {
@@ -2633,6 +2774,9 @@
                         "smithy.api#documentation": "<p>Contains the response to a <code>StartMaintenance</code> request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#String": {
@@ -2642,7 +2786,7 @@
                     "min": 0,
                     "max": 10000
                 },
-                "smithy.api#pattern": "(?s).*"
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.opsworkscm#Strings": {
@@ -2747,11 +2891,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.opsworkscm#TagValue": {
             "type": "string",
@@ -2817,11 +2967,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.opsworkscm#UpdateServer": {
             "type": "operation",
@@ -2892,6 +3048,9 @@
                         "smithy.api#documentation": "<p>The value to set for the attribute.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#UpdateServerEngineAttributesResponse": {
@@ -2903,6 +3062,9 @@
                         "smithy.api#documentation": "<p>Contains the response to an <code>UpdateServerEngineAttributes</code> request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#UpdateServerRequest": {
@@ -2933,6 +3095,9 @@
                 "PreferredBackupWindow": {
                     "target": "com.amazonaws.opsworkscm#TimeWindowDefinition"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworkscm#UpdateServerResponse": {
@@ -2944,6 +3109,9 @@
                         "smithy.api#documentation": "<p>Contains the response to a <code>UpdateServer</code> request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworkscm#ValidationException": {

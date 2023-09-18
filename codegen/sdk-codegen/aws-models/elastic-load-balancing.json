@@ -120,7 +120,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for EnableAvailabilityZonesForLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for EnableAvailabilityZonesForLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AddAvailabilityZonesOutput": {
@@ -134,7 +135,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of EnableAvailabilityZonesForLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output of EnableAvailabilityZonesForLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AddTags": {
@@ -157,7 +159,28 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags.</p>\n        \n        <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated \n            with the load balancer, <code>AddTags</code> updates its value.</p> \n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html\">Tag Your Classic Load Balancer</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags.</p>\n        \n        <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated \n            with the load balancer, <code>AddTags</code> updates its value.</p> \n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html\">Tag Your Classic Load Balancer</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add tags to a load balancer",
+                        "documentation": "This example adds two tags to the specified load balancer.",
+                        "input": {
+                            "LoadBalancerNames": [
+                                "my-load-balancer"
+                            ],
+                            "Tags": [
+                                {
+                                    "Key": "project",
+                                    "Value": "lima"
+                                },
+                                {
+                                    "Key": "department",
+                                    "Value": "digital-media"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#AddTagsInput": {
@@ -179,14 +202,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for AddTags.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for AddTags.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AddTagsOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of AddTags.</p>"
+                "smithy.api#documentation": "<p>Contains the output of AddTags.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AdditionalAttribute": {
@@ -287,7 +312,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.</p> \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups\">Security Groups for Load Balancers in a VPC</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.</p> \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups\">Security Groups for Load Balancers in a VPC</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To associate a security group with a load balancer in a VPC",
+                        "documentation": "This example associates a security group with the specified load balancer in a VPC.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "SecurityGroups": [
+                                "sg-fc448899"
+                            ]
+                        },
+                        "output": {
+                            "SecurityGroups": [
+                                "sg-fc448899"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#ApplySecurityGroupsToLoadBalancerInput": {
@@ -309,7 +351,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for ApplySecurityGroupsToLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for ApplySecurityGroupsToLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#ApplySecurityGroupsToLoadBalancerOutput": {
@@ -323,7 +366,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of ApplySecurityGroupsToLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output of ApplySecurityGroupsToLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AttachLoadBalancerToSubnets": {
@@ -349,7 +393,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more subnets to the set of configured subnets for the specified load balancer.</p>  \n        <p>The load balancer evenly distributes requests across all registered subnets. \n            For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html\">Add or Remove Subnets for Your Load Balancer in a VPC</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds one or more subnets to the set of configured subnets for the specified load balancer.</p>  \n        <p>The load balancer evenly distributes requests across all registered subnets. \n            For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html\">Add or Remove Subnets for Your Load Balancer in a VPC</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To attach subnets to a load balancer",
+                        "documentation": "This example adds the specified subnet to the set of configured subnets for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Subnets": [
+                                "subnet-0ecac448"
+                            ]
+                        },
+                        "output": {
+                            "Subnets": [
+                                "subnet-15aaab61",
+                                "subnet-0ecac448"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#AttachLoadBalancerToSubnetsInput": {
@@ -371,7 +433,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for AttachLoaBalancerToSubnets.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for AttachLoaBalancerToSubnets.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AttachLoadBalancerToSubnetsOutput": {
@@ -385,7 +448,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of AttachLoadBalancerToSubnets.</p>"
+                "smithy.api#documentation": "<p>Contains the output of AttachLoadBalancerToSubnets.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#AttributeName": {
@@ -467,7 +531,32 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the health check settings to use when evaluating the health state of your EC2 instances.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html\">Configure Health Checks for Your Load Balancer</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Specifies the health check settings to use when evaluating the health state of your EC2 instances.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html\">Configure Health Checks for Your Load Balancer</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To specify the health check settings for your backend EC2 instances",
+                        "documentation": "This example specifies the health check settings used to evaluate the health of your backend EC2 instances.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "HealthCheck": {
+                                "Target": "HTTP:80/png",
+                                "Interval": 30,
+                                "Timeout": 3,
+                                "UnhealthyThreshold": 2,
+                                "HealthyThreshold": 2
+                            }
+                        },
+                        "output": {
+                            "HealthCheck": {
+                                "HealthyThreshold": 2,
+                                "Interval": 30,
+                                "Target": "HTTP:80/png",
+                                "Timeout": 3,
+                                "UnhealthyThreshold": 2
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#ConfigureHealthCheckInput": {
@@ -489,7 +578,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for ConfigureHealthCheck.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for ConfigureHealthCheck.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#ConfigureHealthCheckOutput": {
@@ -503,7 +593,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of ConfigureHealthCheck.</p>"
+                "smithy.api#documentation": "<p>Contains the output of ConfigureHealthCheck.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#ConnectionDraining": {
@@ -607,7 +698,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateAccessPointOutput": {
@@ -621,7 +713,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output for CreateLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output for CreateLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateAppCookieStickinessPolicy": {
@@ -647,7 +740,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners.</p>\n        <p>This policy is similar to the policy created by <a>CreateLBCookieStickinessPolicy</a>, \n            except that the lifetime of the special Elastic Load Balancing cookie, <code>AWSELB</code>, \n            follows the lifetime of the application-generated cookie specified in the policy configuration. \n            The load balancer only inserts a new stickiness cookie when the application response\n            includes a new application cookie.</p>\n        <p>If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application\">Application-Controlled Session Stickiness</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners.</p>\n        <p>This policy is similar to the policy created by <a>CreateLBCookieStickinessPolicy</a>, \n            except that the lifetime of the special Elastic Load Balancing cookie, <code>AWSELB</code>, \n            follows the lifetime of the application-generated cookie specified in the policy configuration. \n            The load balancer only inserts a new stickiness cookie when the application response\n            includes a new application cookie.</p>\n        <p>If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application\">Application-Controlled Session Stickiness</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To generate a stickiness policy for your load balancer",
+                        "documentation": "This example generates a stickiness policy that follows the sticky session lifetimes of the application-generated cookie.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyName": "my-app-cookie-policy",
+                            "CookieName": "my-app-cookie"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateAppCookieStickinessPolicyInput": {
@@ -676,14 +780,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for CreateAppCookieStickinessPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for CreateAppCookieStickinessPolicy.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateAppCookieStickinessPolicyOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output for CreateAppCookieStickinessPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the output for CreateAppCookieStickinessPolicy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLBCookieStickinessPolicy": {
@@ -709,7 +815,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners.</p>\n        <p>When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. \n            If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm.</p>\n        <p>A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration\">Duration-Based Session Stickiness</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners.</p>\n        <p>When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. \n            If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm.</p>\n        <p>A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration\">Duration-Based Session Stickiness</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To generate a duration-based stickiness policy for your load balancer",
+                        "documentation": "This example generates a stickiness policy with sticky session lifetimes controlled by the specified expiration period.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyName": "my-duration-cookie-policy",
+                            "CookieExpirationPeriod": 60
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLBCookieStickinessPolicyInput": {
@@ -737,14 +854,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for CreateLBCookieStickinessPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for CreateLBCookieStickinessPolicy.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLBCookieStickinessPolicyOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output for CreateLBCookieStickinessPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the output for CreateLBCookieStickinessPolicy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancer": {
@@ -794,7 +913,33 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Classic Load Balancer.</p>\n\n        <p>You can add listeners, security groups, subnets, and tags when you create your load balancer, \n            or you can add them later using <a>CreateLoadBalancerListeners</a>, \n            <a>ApplySecurityGroupsToLoadBalancer</a>, <a>AttachLoadBalancerToSubnets</a>, \n            and <a>AddTags</a>.</p>\n        <p>To describe your current load balancers, see <a>DescribeLoadBalancers</a>.\n            When you are finished with a load balancer, you can delete it using \n            <a>DeleteLoadBalancer</a>.</p>\n        \n        <p>You can create up to 20 load balancers per region per account. \n            You can request an increase for the number of load balancers for your account. \n            For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html\">Limits for Your Classic Load Balancer</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a Classic Load Balancer.</p>\n\n        <p>You can add listeners, security groups, subnets, and tags when you create your load balancer, \n            or you can add them later using <a>CreateLoadBalancerListeners</a>, \n            <a>ApplySecurityGroupsToLoadBalancer</a>, <a>AttachLoadBalancerToSubnets</a>, \n            and <a>AddTags</a>.</p>\n        <p>To describe your current load balancers, see <a>DescribeLoadBalancers</a>.\n            When you are finished with a load balancer, you can delete it using \n            <a>DeleteLoadBalancer</a>.</p>\n        \n        <p>You can create up to 20 load balancers per region per account. \n            You can request an increase for the number of load balancers for your account. \n            For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html\">Limits for Your Classic Load Balancer</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an HTTP load balancer in a VPC",
+                        "documentation": "This example creates a load balancer with an HTTP listener in a VPC.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTP",
+                                    "LoadBalancerPort": 80,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80
+                                }
+                            ],
+                            "Subnets": [
+                                "subnet-15aaab61"
+                            ],
+                            "SecurityGroups": [
+                                "sg-a61988c3"
+                            ]
+                        },
+                        "output": {
+                            "DNSName": "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancerListenerInput": {
@@ -816,14 +961,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancerListeners.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancerListeners.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancerListenerOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancerListener.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancerListener.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancerListeners": {
@@ -852,7 +999,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html\">Listeners for Your Classic Load Balancer</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html\">Listeners for Your Classic Load Balancer</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an HTTP listener for a load balancer",
+                        "documentation": "This example creates a listener for your load balancer at port 80 using the HTTP protocol.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTP",
+                                    "LoadBalancerPort": 80,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancerPolicy": {
@@ -881,7 +1045,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a policy with the specified attributes for the specified load balancer.</p>\n         <p>Policies are settings that are saved for your load balancer and that can be applied to the listener or the application server, depending on the policy type.</p>"
+                "smithy.api#documentation": "<p>Creates a policy with the specified attributes for the specified load balancer.</p>\n         <p>Policies are settings that are saved for your load balancer and that can be applied to the listener or the application server, depending on the policy type.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a policy that enables Proxy Protocol on a load balancer",
+                        "documentation": "This example creates a policy that enables Proxy Protocol on the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyName": "my-ProxyProtocol-policy",
+                            "PolicyTypeName": "ProxyProtocolPolicyType",
+                            "PolicyAttributes": [
+                                {
+                                    "AttributeName": "ProxyProtocol",
+                                    "AttributeValue": "true"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancerPolicyInput": {
@@ -916,14 +1097,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancerPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for CreateLoadBalancerPolicy.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreateLoadBalancerPolicyOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of CreateLoadBalancerPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the output of CreateLoadBalancerPolicy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#CreatedTime": {
@@ -969,14 +1152,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DeleteLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DeleteLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteAccessPointOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DeleteLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DeleteLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancer": {
@@ -988,7 +1173,16 @@
                 "target": "com.amazonaws.elasticloadbalancing#DeleteAccessPointOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified load balancer.</p>\n        <p>If you are attempting to recreate a load balancer, you must reconfigure all settings. The DNS name associated with a deleted load balancer are no longer usable. The name and associated DNS record of the deleted load balancer no longer exist and traffic sent to any of its IP addresses is no longer delivered to your instances.</p>\n        <p>If the load balancer does not exist or has already been deleted, the call to\n            <code>DeleteLoadBalancer</code> still succeeds.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified load balancer.</p>\n        <p>If you are attempting to recreate a load balancer, you must reconfigure all settings. The DNS name associated with a deleted load balancer are no longer usable. The name and associated DNS record of the deleted load balancer no longer exist and traffic sent to any of its IP addresses is no longer delivered to your instances.</p>\n        <p>If the load balancer does not exist or has already been deleted, the call to\n            <code>DeleteLoadBalancer</code> still succeeds.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a load balancer",
+                        "documentation": "This example deletes the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancerListenerInput": {
@@ -1010,14 +1204,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DeleteLoadBalancerListeners.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DeleteLoadBalancerListeners.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancerListenerOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DeleteLoadBalancerListeners.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DeleteLoadBalancerListeners.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancerListeners": {
@@ -1034,7 +1230,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified listeners from the specified load balancer.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified listeners from the specified load balancer.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a listener from your load balancer",
+                        "documentation": "This example deletes the listener for the specified port from the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerPorts": [
+                                80
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancerPolicy": {
@@ -1054,7 +1262,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified policy from the specified load balancer. This policy must not be enabled for any listeners.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified policy from the specified load balancer. This policy must not be enabled for any listeners.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a policy from your load balancer",
+                        "documentation": "This example deletes the specified policy from the specified load balancer. The policy must not be enabled on any listener.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyName": "my-duration-cookie-policy"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancerPolicyInput": {
@@ -1076,14 +1294,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DeleteLoadBalancerPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DeleteLoadBalancerPolicy.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeleteLoadBalancerPolicyOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DeleteLoadBalancerPolicy.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DeleteLoadBalancerPolicy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DependencyThrottleException": {
@@ -1122,7 +1342,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DeregisterInstancesFromLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DeregisterInstancesFromLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeregisterEndPointsOutput": {
@@ -1136,7 +1357,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DeregisterInstancesFromLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DeregisterInstancesFromLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DeregisterInstancesFromLoadBalancer": {
@@ -1156,7 +1378,31 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer.</p>\n        \n        <p>You can use <a>DescribeLoadBalancers</a> to verify that the instance is deregistered from the load balancer.</p>  \n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html\">Register or De-Register EC2 Instances</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer.</p>\n        \n        <p>You can use <a>DescribeLoadBalancers</a> to verify that the instance is deregistered from the load balancer.</p>  \n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html\">Register or De-Register EC2 Instances</a> \n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To deregister instances from a load balancer",
+                        "documentation": "This example deregisters the specified instance from the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Instances": [
+                                {
+                                    "InstanceId": "i-d6f6fae3"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Instances": [
+                                {
+                                    "InstanceId": "i-207d9717"
+                                },
+                                {
+                                    "InstanceId": "i-afefb49b"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeAccessPointsInput": {
@@ -1182,7 +1428,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancers.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancers.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeAccessPointsOutput": {
@@ -1202,7 +1449,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancers.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancers.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeAccountLimits": {
@@ -1232,6 +1480,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return with this call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeAccountLimitsOutput": {
@@ -1249,6 +1500,9 @@
                         "smithy.api#documentation": "<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeEndPointStateInput": {
@@ -1269,7 +1523,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeInstanceHealth.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeInstanceHealth.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeEndPointStateOutput": {
@@ -1283,7 +1538,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output for DescribeInstanceHealth.</p>"
+                "smithy.api#documentation": "<p>Contains the output for DescribeInstanceHealth.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeInstanceHealth": {
@@ -1304,6 +1560,34 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes the state of the specified instances with respect to the specified load balancer. If no instances are specified, the call describes the state of all instances that are currently registered with the load balancer. If instances are specified, their state is returned even if they are no longer registered with the load balancer. The state of terminated instances is not returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe the health of the instances for a load balancer",
+                        "documentation": "This example describes the health of the instances for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer"
+                        },
+                        "output": {
+                            "InstanceStates": [
+                                {
+                                    "InstanceId": "i-207d9717",
+                                    "ReasonCode": "N/A",
+                                    "State": "InService",
+                                    "Description": "N/A"
+                                },
+                                {
+                                    "InstanceId": "i-afefb49b",
+                                    "ReasonCode": "N/A",
+                                    "State": "InService",
+                                    "Description": "N/A"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "AnyInstanceInService": {
                         "acceptors": [
@@ -1315,6 +1599,48 @@
                                         "expected": "InService",
                                         "comparator": "anyStringEquals"
                                     }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    },
+                    "InstanceDeregistered": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "InstanceStates[].State",
+                                        "expected": "OutOfService",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "InvalidInstance"
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    },
+                    "InstanceInService": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "InstanceStates[].State",
+                                        "expected": "InService",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InvalidInstance"
                                 }
                             }
                         ],
@@ -1340,7 +1666,33 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the attributes for the specified load balancer.</p>"
+                "smithy.api#documentation": "<p>Describes the attributes for the specified load balancer.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe the attributes of a load balancer",
+                        "documentation": "This example describes the attributes of the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer"
+                        },
+                        "output": {
+                            "LoadBalancerAttributes": {
+                                "ConnectionDraining": {
+                                    "Enabled": false,
+                                    "Timeout": 300
+                                },
+                                "CrossZoneLoadBalancing": {
+                                    "Enabled": false
+                                },
+                                "ConnectionSettings": {
+                                    "IdleTimeout": 60
+                                },
+                                "AccessLog": {
+                                    "Enabled": false
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerAttributesInput": {
@@ -1355,7 +1707,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancerAttributes.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancerAttributes.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerAttributesOutput": {
@@ -1369,7 +1722,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DescribeLoadBalancerAttributes.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DescribeLoadBalancerAttributes.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerPolicies": {
@@ -1389,7 +1743,33 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified policies.</p>\n         <p>If you specify a load balancer name, the action returns the descriptions of all policies created for the load balancer.\n    If you specify a policy name associated with your load balancer, the action returns the description of that policy. \n    If you don't specify a load balancer name, the action returns descriptions of the specified sample policies, or descriptions of all sample policies.\n    The names of the sample policies have the <code>ELBSample-</code> prefix.</p>"
+                "smithy.api#documentation": "<p>Describes the specified policies.</p>\n         <p>If you specify a load balancer name, the action returns the descriptions of all policies created for the load balancer.\n    If you specify a policy name associated with your load balancer, the action returns the description of that policy. \n    If you don't specify a load balancer name, the action returns descriptions of the specified sample policies, or descriptions of all sample policies.\n    The names of the sample policies have the <code>ELBSample-</code> prefix.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a policy associated with a load balancer",
+                        "documentation": "This example describes the specified policy associated with the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyNames": [
+                                "my-authentication-policy"
+                            ]
+                        },
+                        "output": {
+                            "PolicyDescriptions": [
+                                {
+                                    "PolicyAttributeDescriptions": [
+                                        {
+                                            "AttributeName": "PublicKeyPolicyName",
+                                            "AttributeValue": "my-PublicKey-policy"
+                                        }
+                                    ],
+                                    "PolicyName": "my-authentication-policy",
+                                    "PolicyTypeName": "BackendServerAuthenticationPolicyType"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerPoliciesInput": {
@@ -1409,7 +1789,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancerPolicies.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancerPolicies.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerPoliciesOutput": {
@@ -1423,7 +1804,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DescribeLoadBalancerPolicies.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DescribeLoadBalancerPolicies.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerPolicyTypes": {
@@ -1440,7 +1822,33 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified load balancer policy types or all load balancer policy types.</p>\n         <p>The description of each type indicates how it can be used. For example, \n           some policies can be used only with layer 7 listeners,\n           some policies can be used only with layer 4 listeners,\n           and some policies can be used only with your EC2 instances.</p>\n         <p>You can use <a>CreateLoadBalancerPolicy</a> to create a policy configuration for any of these policy types. \n           Then, depending on the policy type, use either <a>SetLoadBalancerPoliciesOfListener</a> or \n           <a>SetLoadBalancerPoliciesForBackendServer</a> to set the policy.</p>"
+                "smithy.api#documentation": "<p>Describes the specified load balancer policy types or all load balancer policy types.</p>\n         <p>The description of each type indicates how it can be used. For example, \n           some policies can be used only with layer 7 listeners,\n           some policies can be used only with layer 4 listeners,\n           and some policies can be used only with your EC2 instances.</p>\n         <p>You can use <a>CreateLoadBalancerPolicy</a> to create a policy configuration for any of these policy types. \n           Then, depending on the policy type, use either <a>SetLoadBalancerPoliciesOfListener</a> or \n           <a>SetLoadBalancerPoliciesForBackendServer</a> to set the policy.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a load balancer policy type defined by Elastic Load Balancing",
+                        "documentation": "This example describes the specified load balancer policy type.",
+                        "input": {
+                            "PolicyTypeNames": [
+                                "ProxyProtocolPolicyType"
+                            ]
+                        },
+                        "output": {
+                            "PolicyTypeDescriptions": [
+                                {
+                                    "PolicyAttributeTypeDescriptions": [
+                                        {
+                                            "Cardinality": "ONE",
+                                            "AttributeName": "ProxyProtocol",
+                                            "AttributeType": "Boolean"
+                                        }
+                                    ],
+                                    "PolicyTypeName": "ProxyProtocolPolicyType",
+                                    "Description": "Policy that controls whether to include the IP address and port of the originating request for TCP messages. This policy operates on TCP listeners only."
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerPolicyTypesInput": {
@@ -1454,7 +1862,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancerPolicyTypes.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeLoadBalancerPolicyTypes.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancerPolicyTypesOutput": {
@@ -1468,7 +1877,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DescribeLoadBalancerPolicyTypes.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DescribeLoadBalancerPolicyTypes.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeLoadBalancers": {
@@ -1489,6 +1899,105 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes the specified the load balancers. If no load balancers are specified, the call describes all of your load balancers.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe one of your load balancers",
+                        "documentation": "This example describes the specified load balancer.",
+                        "input": {
+                            "LoadBalancerNames": [
+                                "my-load-balancer"
+                            ]
+                        },
+                        "output": {
+                            "LoadBalancerDescriptions": [
+                                {
+                                    "Subnets": [
+                                        "subnet-15aaab61"
+                                    ],
+                                    "CanonicalHostedZoneNameID": "Z3DZXE0EXAMPLE",
+                                    "CanonicalHostedZoneName": "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com",
+                                    "ListenerDescriptions": [
+                                        {
+                                            "Listener": {
+                                                "InstancePort": 80,
+                                                "LoadBalancerPort": 80,
+                                                "Protocol": "HTTP",
+                                                "InstanceProtocol": "HTTP"
+                                            },
+                                            "PolicyNames": []
+                                        },
+                                        {
+                                            "Listener": {
+                                                "InstancePort": 443,
+                                                "SSLCertificateId": "arn:aws:iam::123456789012:server-certificate/my-server-cert",
+                                                "LoadBalancerPort": 443,
+                                                "Protocol": "HTTPS",
+                                                "InstanceProtocol": "HTTPS"
+                                            },
+                                            "PolicyNames": [
+                                                "ELBSecurityPolicy-2015-03"
+                                            ]
+                                        }
+                                    ],
+                                    "HealthCheck": {
+                                        "HealthyThreshold": 2,
+                                        "Interval": 30,
+                                        "Target": "HTTP:80/png",
+                                        "Timeout": 3,
+                                        "UnhealthyThreshold": 2
+                                    },
+                                    "VPCId": "vpc-a01106c2",
+                                    "BackendServerDescriptions": [
+                                        {
+                                            "InstancePort": 80,
+                                            "PolicyNames": [
+                                                "my-ProxyProtocol-policy"
+                                            ]
+                                        }
+                                    ],
+                                    "Instances": [
+                                        {
+                                            "InstanceId": "i-207d9717"
+                                        },
+                                        {
+                                            "InstanceId": "i-afefb49b"
+                                        }
+                                    ],
+                                    "DNSName": "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com",
+                                    "SecurityGroups": [
+                                        "sg-a61988c3"
+                                    ],
+                                    "Policies": {
+                                        "LBCookieStickinessPolicies": [
+                                            {
+                                                "PolicyName": "my-duration-cookie-policy",
+                                                "CookieExpirationPeriod": 60
+                                            }
+                                        ],
+                                        "AppCookieStickinessPolicies": [],
+                                        "OtherPolicies": [
+                                            "my-PublicKey-policy",
+                                            "my-authentication-policy",
+                                            "my-SSLNegotiation-policy",
+                                            "my-ProxyProtocol-policy",
+                                            "ELBSecurityPolicy-2015-03"
+                                        ]
+                                    },
+                                    "LoadBalancerName": "my-load-balancer",
+                                    "CreatedTime": "2015-03-19T03:24:02.650Z",
+                                    "AvailabilityZones": [
+                                        "us-west-2a"
+                                    ],
+                                    "Scheme": "internet-facing",
+                                    "SourceSecurityGroup": {
+                                        "OwnerAlias": "123456789012",
+                                        "GroupName": "my-elb-sg"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "NextMarker",
@@ -1510,7 +2019,35 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the tags associated with the specified load balancers.</p>"
+                "smithy.api#documentation": "<p>Describes the tags associated with the specified load balancers.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe the tags for a load balancer",
+                        "documentation": "This example describes the tags for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerNames": [
+                                "my-load-balancer"
+                            ]
+                        },
+                        "output": {
+                            "TagDescriptions": [
+                                {
+                                    "Tags": [
+                                        {
+                                            "Key": "project",
+                                            "Value": "lima"
+                                        },
+                                        {
+                                            "Key": "department",
+                                            "Value": "digital-media"
+                                        }
+                                    ],
+                                    "LoadBalancerName": "my-load-balancer"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeTagsInput": {
@@ -1525,7 +2062,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DescribeTags.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DescribeTags.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeTagsOutput": {
@@ -1539,7 +2077,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output for DescribeTags.</p>"
+                "smithy.api#documentation": "<p>Contains the output for DescribeTags.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#Description": {
@@ -1562,7 +2101,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified subnets from the set of configured subnets for the load balancer.</p> \n        <p>After a subnet is removed, all EC2 instances registered with the load balancer  \n            in the removed subnet go into the <code>OutOfService</code> state. Then, \n            the load balancer balances the traffic among the remaining routable subnets.</p>"
+                "smithy.api#documentation": "<p>Removes the specified subnets from the set of configured subnets for the load balancer.</p> \n        <p>After a subnet is removed, all EC2 instances registered with the load balancer  \n            in the removed subnet go into the <code>OutOfService</code> state. Then, \n            the load balancer balances the traffic among the remaining routable subnets.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To detach a load balancer from a subnet",
+                        "documentation": "This example detaches the specified load balancer from the specified subnet.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Subnets": [
+                                "subnet-0ecac448"
+                            ]
+                        },
+                        "output": {
+                            "Subnets": [
+                                "subnet-15aaab61"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DetachLoadBalancerFromSubnetsInput": {
@@ -1584,7 +2140,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DetachLoadBalancerFromSubnets.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DetachLoadBalancerFromSubnets.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DetachLoadBalancerFromSubnetsOutput": {
@@ -1598,7 +2155,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of DetachLoadBalancerFromSubnets.</p>"
+                "smithy.api#documentation": "<p>Contains the output of DetachLoadBalancerFromSubnets.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#DisableAvailabilityZonesForLoadBalancer": {
@@ -1618,7 +2176,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer\n            in EC2-Classic or a default VPC.</p>\n        <p>For load balancers in a non-default VPC, use <a>DetachLoadBalancerFromSubnets</a>.</p>\n        <p>There must be at least one Availability Zone registered with a load balancer at all times. \n         After an Availability Zone is removed, all instances registered with the load balancer that are in the removed\n         Availability Zone go into the <code>OutOfService</code> state. Then, the load balancer attempts to equally balance\n         the traffic among its remaining Availability Zones.</p> \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html\">Add or Remove Availability Zones</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer\n            in EC2-Classic or a default VPC.</p>\n        <p>For load balancers in a non-default VPC, use <a>DetachLoadBalancerFromSubnets</a>.</p>\n        <p>There must be at least one Availability Zone registered with a load balancer at all times. \n         After an Availability Zone is removed, all instances registered with the load balancer that are in the removed\n         Availability Zone go into the <code>OutOfService</code> state. Then, the load balancer attempts to equally balance\n         the traffic among its remaining Availability Zones.</p> \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html\">Add or Remove Availability Zones</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable an Availability Zone for a load balancer",
+                        "documentation": "This example removes the specified Availability Zone from the set of Availability Zones for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "AvailabilityZones": [
+                                "us-west-2a"
+                            ]
+                        },
+                        "output": {
+                            "AvailabilityZones": [
+                                "us-west-2b"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DuplicateAccessPointNameException": {
@@ -1787,6 +2362,7 @@
                     "arnNamespace": "elasticloadbalancing",
                     "cloudFormationName": "ElasticLoadBalancing",
                     "cloudTrailEventSource": "elasticloadbalancing.amazonaws.com",
+                    "docId": "elasticloadbalancing-2012-06-01",
                     "endpointPrefix": "elasticloadbalancing"
                 },
                 "aws.auth#sigv4": {
@@ -1858,9 +2434,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticloadbalancing-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://elasticloadbalancing.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticloadbalancing-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -1873,15 +2653,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticloadbalancing.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://elasticloadbalancing.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -1893,283 +2708,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticloadbalancing-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticloadbalancing.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticloadbalancing-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticloadbalancing.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://elasticloadbalancing.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2184,8 +2724,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2197,8 +2737,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2210,8 +2750,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2223,8 +2763,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2236,8 +2776,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2249,8 +2789,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2262,8 +2802,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2275,8 +2815,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2288,8 +2828,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2301,8 +2841,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2314,8 +2854,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2327,8 +2867,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2340,8 +2880,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2353,8 +2893,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2366,8 +2906,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2379,8 +2919,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2392,8 +2932,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2405,8 +2945,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2418,8 +2958,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2431,8 +2971,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2444,8 +2984,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2457,8 +2997,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2470,8 +3010,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2483,8 +3023,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2496,8 +3036,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2509,8 +3049,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2522,8 +3062,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2535,8 +3075,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2548,8 +3088,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2561,8 +3101,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2574,8 +3114,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2587,8 +3127,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2600,8 +3140,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2613,8 +3153,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2626,8 +3166,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2639,8 +3179,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2652,8 +3192,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2665,8 +3205,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2678,8 +3218,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2691,8 +3231,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2704,8 +3244,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2717,8 +3268,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2730,8 +3292,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2743,8 +3316,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2756,8 +3340,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2769,8 +3353,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2781,8 +3365,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2793,9 +3377,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2817,7 +3407,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer\n            in EC2-Classic or a default VPC.</p>\n        <p>For load balancers in a non-default VPC, use <a>AttachLoadBalancerToSubnets</a>.</p>\n        <p>The load balancer evenly distributes requests across all its registered Availability Zones \n            that contain instances. For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html\">Add or Remove Availability Zones</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer\n            in EC2-Classic or a default VPC.</p>\n        <p>For load balancers in a non-default VPC, use <a>AttachLoadBalancerToSubnets</a>.</p>\n        <p>The load balancer evenly distributes requests across all its registered Availability Zones \n            that contain instances. For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html\">Add or Remove Availability Zones</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable an Availability Zone for a load balancer",
+                        "documentation": "This example adds the specified Availability Zone to the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "AvailabilityZones": [
+                                "us-west-2b"
+                            ]
+                        },
+                        "output": {
+                            "AvailabilityZones": [
+                                "us-west-2a",
+                                "us-west-2b"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#EndPointPort": {
@@ -3427,7 +4035,29 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the attributes of the specified load balancer.</p> \n        <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and \n            <code>CrossZoneLoadBalancing</code> by either enabling or disabling them. Or, you can modify the load balancer attribute \n            <code>ConnectionSettings</code> by specifying an idle connection timeout value for your load balancer.</p> \n        <p>For more information, see the following in the <i>Classic Load Balancers Guide</i>:</p>\n        <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html\">Cross-Zone Load Balancing</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html\">Connection Draining</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html\">Access Logs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html\">Idle Connection Timeout</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Modifies the attributes of the specified load balancer.</p> \n        <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and \n            <code>CrossZoneLoadBalancing</code> by either enabling or disabling them. Or, you can modify the load balancer attribute \n            <code>ConnectionSettings</code> by specifying an idle connection timeout value for your load balancer.</p> \n        <p>For more information, see the following in the <i>Classic Load Balancers Guide</i>:</p>\n        <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html\">Cross-Zone Load Balancing</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html\">Connection Draining</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html\">Access Logs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html\">Idle Connection Timeout</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable cross-zone load balancing",
+                        "documentation": "This example enables cross-zone load balancing for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerAttributes": {
+                                "CrossZoneLoadBalancing": {
+                                    "Enabled": true
+                                }
+                            }
+                        },
+                        "output": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerAttributes": {
+                                "CrossZoneLoadBalancing": {
+                                    "Enabled": true
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#ModifyLoadBalancerAttributesInput": {
@@ -3449,7 +4079,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for ModifyLoadBalancerAttributes.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for ModifyLoadBalancerAttributes.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#ModifyLoadBalancerAttributesOutput": {
@@ -3469,7 +4100,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of ModifyLoadBalancerAttributes.</p>"
+                "smithy.api#documentation": "<p>Contains the output of ModifyLoadBalancerAttributes.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#Name": {
@@ -3770,7 +4402,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for RegisterInstancesWithLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for RegisterInstancesWithLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#RegisterEndPointsOutput": {
@@ -3784,7 +4417,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of RegisterInstancesWithLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output of RegisterInstancesWithLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#RegisterInstancesWithLoadBalancer": {
@@ -3804,7 +4438,34 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified instances to the specified load balancer.</p>\n\n        <p>The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC.</p>\n\n        <p>Note that <code>RegisterInstanceWithLoadBalancer</code> completes when the request has been registered.\n         Instance registration takes a little time to complete. To check the state of the registered instances, use \n         <a>DescribeLoadBalancers</a> or <a>DescribeInstanceHealth</a>.</p>  \n        \n        <p>After the instance is registered, it starts receiving traffic\n         and requests from the load balancer. Any instance that is not\n         in one of the Availability Zones registered for the load balancer\n         is moved to the <code>OutOfService</code> state. If an Availability Zone\n         is added to the load balancer later, any instances registered with the\n         load balancer move to the <code>InService</code> state.</p>\n\n        <p>To deregister instances from a load balancer, use <a>DeregisterInstancesFromLoadBalancer</a>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html\">Register or De-Register EC2 Instances</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds the specified instances to the specified load balancer.</p>\n\n        <p>The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC.</p>\n\n        <p>Note that <code>RegisterInstanceWithLoadBalancer</code> completes when the request has been registered.\n         Instance registration takes a little time to complete. To check the state of the registered instances, use \n         <a>DescribeLoadBalancers</a> or <a>DescribeInstanceHealth</a>.</p>  \n        \n        <p>After the instance is registered, it starts receiving traffic\n         and requests from the load balancer. Any instance that is not\n         in one of the Availability Zones registered for the load balancer\n         is moved to the <code>OutOfService</code> state. If an Availability Zone\n         is added to the load balancer later, any instances registered with the\n         load balancer move to the <code>InService</code> state.</p>\n\n        <p>To deregister instances from a load balancer, use <a>DeregisterInstancesFromLoadBalancer</a>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html\">Register or De-Register EC2 Instances</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To register instances with a load balancer",
+                        "documentation": "This example registers the specified instance with the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Instances": [
+                                {
+                                    "InstanceId": "i-d6f6fae3"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Instances": [
+                                {
+                                    "InstanceId": "i-d6f6fae3"
+                                },
+                                {
+                                    "InstanceId": "i-207d9717"
+                                },
+                                {
+                                    "InstanceId": "i-afefb49b"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#RemoveAvailabilityZonesInput": {
@@ -3826,7 +4487,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for DisableAvailabilityZonesForLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for DisableAvailabilityZonesForLoadBalancer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#RemoveAvailabilityZonesOutput": {
@@ -3840,7 +4502,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output for DisableAvailabilityZonesForLoadBalancer.</p>"
+                "smithy.api#documentation": "<p>Contains the output for DisableAvailabilityZonesForLoadBalancer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#RemoveTags": {
@@ -3857,7 +4520,23 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from the specified load balancer.</p>"
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified load balancer.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove tags from a load balancer",
+                        "documentation": "This example removes the specified tag from the specified load balancer.",
+                        "input": {
+                            "LoadBalancerNames": [
+                                "my-load-balancer"
+                            ],
+                            "Tags": [
+                                {
+                                    "Key": "project"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#RemoveTagsInput": {
@@ -3879,14 +4558,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for RemoveTags.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for RemoveTags.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#RemoveTagsOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of RemoveTags.</p>"
+                "smithy.api#documentation": "<p>Contains the output of RemoveTags.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#S3BucketName": {
@@ -3936,7 +4617,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.</p>\n        \n        <p>For more information about updating your SSL certificate, see \n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html\">Replace the SSL Certificate for Your Load Balancer</a>\n                in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.</p>\n        \n        <p>For more information about updating your SSL certificate, see \n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html\">Replace the SSL Certificate for Your Load Balancer</a>\n                in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update the SSL certificate for an HTTPS listener",
+                        "documentation": "This example replaces the existing SSL certificate for the specified HTTPS listener.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerPort": 443,
+                            "SSLCertificateId": "arn:aws:iam::123456789012:server-certificate/new-server-cert"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerListenerSSLCertificateInput": {
@@ -3966,14 +4658,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for SetLoadBalancerListenerSSLCertificate.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for SetLoadBalancerListenerSSLCertificate.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerListenerSSLCertificateOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of SetLoadBalancerListenerSSLCertificate.</p>"
+                "smithy.api#documentation": "<p>Contains the output of SetLoadBalancerListenerSSLCertificate.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerPoliciesForBackendServer": {
@@ -3996,7 +4690,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. \n            At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.</p>\n        <p>Each time you use <code>SetLoadBalancerPoliciesForBackendServer</code> to enable the policies, \n            use the <code>PolicyNames</code> parameter to list the policies that you want to enable.</p>\n        <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeLoadBalancerPolicies</a> to verify that the policy \n            is associated with the EC2 instance.</p>     \n\n        <p>For more information about enabling back-end instance authentication, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt\">Configure Back-end Instance Authentication</a>\n            in the <i>Classic Load Balancers Guide</i>. For more information about Proxy Protocol, see \n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html\">Configure Proxy Protocol Support</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. \n            At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.</p>\n        <p>Each time you use <code>SetLoadBalancerPoliciesForBackendServer</code> to enable the policies, \n            use the <code>PolicyNames</code> parameter to list the policies that you want to enable.</p>\n        <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeLoadBalancerPolicies</a> to verify that the policy \n            is associated with the EC2 instance.</p>     \n\n        <p>For more information about enabling back-end instance authentication, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt\">Configure Back-end Instance Authentication</a>\n            in the <i>Classic Load Balancers Guide</i>. For more information about Proxy Protocol, see \n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html\">Configure Proxy Protocol Support</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To replace the policies associated with a port for a backend instance",
+                        "documentation": "This example replaces the policies that are currently associated with the specified port.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "InstancePort": 80,
+                            "PolicyNames": [
+                                "my-ProxyProtocol-policy"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerPoliciesForBackendServerInput": {
@@ -4025,14 +4732,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for SetLoadBalancerPoliciesForBackendServer.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for SetLoadBalancerPoliciesForBackendServer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerPoliciesForBackendServerOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of SetLoadBalancerPoliciesForBackendServer.</p>"
+                "smithy.api#documentation": "<p>Contains the output of SetLoadBalancerPoliciesForBackendServer.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerPoliciesOfListener": {
@@ -4058,7 +4767,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Replaces the current set of policies for the specified load balancer port with the specified set of policies.</p>\n        <p>To enable back-end server authentication, use <a>SetLoadBalancerPoliciesForBackendServer</a>.</p>\n        <p>For more information about setting policies, see\n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html\">Update the SSL Negotiation Configuration</a>,\n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration\">Duration-Based Session Stickiness</a>, and\n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application\">Application-Controlled Session Stickiness</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Replaces the current set of policies for the specified load balancer port with the specified set of policies.</p>\n        <p>To enable back-end server authentication, use <a>SetLoadBalancerPoliciesForBackendServer</a>.</p>\n        <p>For more information about setting policies, see\n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html\">Update the SSL Negotiation Configuration</a>,\n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration\">Duration-Based Session Stickiness</a>, and\n            <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application\">Application-Controlled Session Stickiness</a>\n            in the <i>Classic Load Balancers Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To replace the policies associated with a listener",
+                        "documentation": "This example replaces the policies that are currently associated with the specified listener.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerPort": 80,
+                            "PolicyNames": [
+                                "my-SSLNegotiation-policy"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerPoliciesOfListenerInput": {
@@ -4088,14 +4810,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for SetLoadBalancePoliciesOfListener.</p>"
+                "smithy.api#documentation": "<p>Contains the parameters for SetLoadBalancePoliciesOfListener.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#SetLoadBalancerPoliciesOfListenerOutput": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the output of SetLoadBalancePoliciesOfListener.</p>"
+                "smithy.api#documentation": "<p>Contains the output of SetLoadBalancePoliciesOfListener.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticloadbalancing#SourceSecurityGroup": {

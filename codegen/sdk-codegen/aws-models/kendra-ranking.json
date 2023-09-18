@@ -141,18 +141,28 @@
                             ]
                         },
                         {
-                            "conditions": [],
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
                             "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
                                         {
-                                            "fn": "isSet",
+                                            "fn": "aws.partition",
                                             "argv": [
                                                 {
                                                     "ref": "Region"
                                                 }
-                                            ]
+                                            ],
+                                            "assign": "PartitionResult"
                                         }
                                     ],
                                     "type": "tree",
@@ -160,19 +170,35 @@
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "aws.partition",
+                                                    "fn": "booleanEquals",
                                                     "argv": [
+                                                        true,
                                                         {
-                                                            "ref": "Region"
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
                                                         }
-                                                    ],
-                                                    "assign": "PartitionResult"
+                                                    ]
                                                 }
                                             ],
                                             "type": "tree",
                                             "rules": [
                                                 {
-                                                    "conditions": [],
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
                                                     "type": "tree",
                                                     "rules": [
                                                         {
@@ -187,7 +213,7 @@
                                                                                 {
                                                                                     "ref": "PartitionResult"
                                                                                 },
-                                                                                "supportsDualStack"
+                                                                                "supportsFIPS"
                                                                             ]
                                                                         }
                                                                     ]
@@ -196,61 +222,9 @@
                                                             "type": "tree",
                                                             "rules": [
                                                                 {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "UseFIPS"
-                                                                                },
-                                                                                true
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "booleanEquals",
-                                                                                    "argv": [
-                                                                                        true,
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "supportsFIPS"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "type": "tree",
-                                                                            "rules": [
-                                                                                {
-                                                                                    "conditions": [],
-                                                                                    "endpoint": {
-                                                                                        "url": "https://kendra-ranking-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": {},
-                                                                                        "headers": {}
-                                                                                    },
-                                                                                    "type": "endpoint"
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                            "type": "error"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
                                                                     "conditions": [],
                                                                     "endpoint": {
-                                                                        "url": "https://kendra-ranking.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "url": "https://kendra-ranking-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                                         "properties": {},
                                                                         "headers": {}
                                                                     },
@@ -260,95 +234,91 @@
                                                         },
                                                         {
                                                             "conditions": [],
-                                                            "type": "tree",
-                                                            "rules": [
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://kendra-ranking.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
                                                                 {
-                                                                    "conditions": [
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
                                                                         {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "UseFIPS"
-                                                                                },
-                                                                                true
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "booleanEquals",
-                                                                                    "argv": [
-                                                                                        true,
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "supportsFIPS"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "type": "tree",
-                                                                            "rules": [
-                                                                                {
-                                                                                    "conditions": [],
-                                                                                    "type": "tree",
-                                                                                    "rules": [
-                                                                                        {
-                                                                                            "conditions": [],
-                                                                                            "endpoint": {
-                                                                                                "url": "https://kendra-ranking-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                                "properties": {},
-                                                                                                "headers": {}
-                                                                                            },
-                                                                                            "type": "endpoint"
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ]
+                                                                            "ref": "PartitionResult"
                                                                         },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                            "type": "error"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://kendra-ranking.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
+                                                                        "supportsFIPS"
                                                                     ]
                                                                 }
                                                             ]
                                                         }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://kendra-ranking-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
                                                     ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
                                                 }
                                             ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://kendra-ranking.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
                                         }
                                     ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
                                 }
                             ]
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -460,6 +430,12 @@
                                 "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -610,6 +586,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#CreateRescoreExecutionPlanResponse": {
@@ -629,6 +608,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#DeleteRescoreExecutionPlan": {
@@ -679,6 +661,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#DescribeRescoreExecutionPlan": {
@@ -726,6 +711,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#DescribeRescoreExecutionPlanResponse": {
@@ -785,6 +773,9 @@
                         "smithy.api#documentation": "<p>When the <code>Status</code> field value is \n            <code>FAILED</code>, the <code>ErrorMessage</code> field \n            contains a message that explains why.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#Description": {
@@ -982,6 +973,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#ListRescoreExecutionPlansResponse": {
@@ -999,6 +993,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra Intelligent \n            Ranking returns a pagination token in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#ListTagsForResource": {
@@ -1042,7 +1039,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request information for listing tags associated with \n            a rescore execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API.</p>"
+                "smithy.api#documentation": "<p>The request information for listing tags associated with \n            a rescore execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for \n            provisioning the <code>Rescore</code> API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#ListTagsForResourceResponse": {
@@ -1056,7 +1054,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response.</p>"
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#MaxResultsIntegerForListRescoreExecutionPlansRequest": {
@@ -1267,6 +1266,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#RescoreResult": {
@@ -1284,6 +1286,9 @@
                         "smithy.api#documentation": "<p>A list of result items for documents with new relevancy \n            scores. The results are in descending order.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#RescoreResultItem": {
@@ -1468,14 +1473,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request information for tagging a rescore execution \n            plan. A rescore execution plan is an Amazon Kendra \n            Intelligent Ranking resource used for provisioning the \n            <code>Rescore</code> API.</p>"
+                "smithy.api#documentation": "<p>The request information for tagging a rescore execution \n            plan. A rescore execution plan is an Amazon Kendra \n            Intelligent Ranking resource used for provisioning the \n            <code>Rescore</code> API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#TagResourceResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response with an empty HTTP body.</p>"
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response with an empty HTTP body.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#TagValue": {
@@ -1571,14 +1578,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request information to remove a tag from a rescore \n            execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for\n            provisioning the <code>Rescore</code> API.</p>"
+                "smithy.api#documentation": "<p>The request information to remove a tag from a rescore \n            execution plan. A rescore execution plan is an \n            Amazon Kendra Intelligent Ranking resource used for\n            provisioning the <code>Rescore</code> API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#UntagResourceResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response with an empty HTTP body.</p>"
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an \n            HTTP 200 response with an empty HTTP body.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kendraranking#UpdateRescoreExecutionPlan": {
@@ -1650,6 +1659,9 @@
                         "smithy.api#documentation": "<p>You can set additional capacity units to meet the needs \n            of your rescore execution plan. You are given a single capacity \n            unit by default. If you want to use the default capacity, you \n            don't set additional capacity units. For more information on the\n            default capacity and additional capacity units, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting capacity</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kendraranking#ValidationException": {

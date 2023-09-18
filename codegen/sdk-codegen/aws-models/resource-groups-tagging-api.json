@@ -88,7 +88,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was denied because performing this operation violates a constraint. </p>\n        <p>Some of the reasons in the following list might not apply to this specific\n            operation.</p>\n        <ul>\n            <li>\n                <p>You must meet the prerequisites for using tag policies. For information, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html\">Prerequisites and Permissions for Using Tag Policies</a> in the\n                        <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>You must enable the tag policies service principal\n                        (<code>tagpolicies.tag.amazonaws.com</code>) to integrate with Organizations For\n                    information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html\">EnableAWSServiceAccess</a>.</p>\n            </li>\n            <li>\n                <p>You must have a tag policy attached to the organization root, an OU, or an\n                    account.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The request was denied because performing this operation violates a constraint. </p>\n         <p>Some of the reasons in the following list might not apply to this specific\n            operation.</p>\n         <ul>\n            <li>\n               <p>You must meet the prerequisites for using tag policies. For information, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html\">Prerequisites and Permissions for Using Tag Policies</a> in the\n                        <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n               <p>You must enable the tag policies service principal\n                        (<code>tagpolicies.tag.amazonaws.com</code>) to integrate with Organizations For\n                    information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html\">EnableAWSServiceAccess</a>.</p>\n            </li>\n            <li>\n               <p>You must have a tag policy attached to the organization root, an OU, or an\n                    account.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -115,12 +115,15 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of the <code>StartReportCreation</code> operation. </p>\n        <p>You can call this operation only from the organization's \n    management account and from the us-east-1 Region.</p>"
+                "smithy.api#documentation": "<p>Describes the status of the <code>StartReportCreation</code> operation. </p>\n         <p>You can call this operation only from the organization's \n    management account and from the us-east-1 Region.</p>"
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationInput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationOutput": {
             "type": "structure",
@@ -128,7 +131,7 @@
                 "Status": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reports the status of the operation.</p>\n        <p>The operation status can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>RUNNING</code> - Report creation is in progress.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCEEDED</code> - Report creation is complete. You can open the report\n                    from the Amazon S3 bucket that you specified when you ran\n                        <code>StartReportCreation</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> - Report creation timed out or the Amazon S3 bucket is not\n                    accessible. </p>\n            </li>\n            <li>\n                <p>\n                  <code>NO REPORT</code> - No report was generated in the last 90 days.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Reports the status of the operation.</p>\n         <p>The operation status can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Report creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code> - Report creation is complete. You can open the report\n                    from the Amazon S3 bucket that you specified when you ran\n                        <code>StartReportCreation</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Report creation timed out or the Amazon S3 bucket is not\n                    accessible. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NO REPORT</code> - No report was generated in the last 90 days.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "S3Location": {
@@ -149,21 +152,26 @@
                         "smithy.api#documentation": "<p>Details of the common errors that all operations return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InternalServiceException",
-                        "name": "INTERNAL_SERVICE_EXCEPTION"
-                    },
-                    {
-                        "value": "InvalidParameterException",
-                        "name": "INVALID_PARAMETER_EXCEPTION"
+            "type": "enum",
+            "members": {
+                "INTERNAL_SERVICE_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalServiceException"
                     }
-                ]
+                },
+                "INVALID_PARAMETER_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidParameterException"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#ErrorMessage": {
@@ -214,7 +222,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the errors that are returned for each failed resource. This\n            information can include <code>InternalServiceException</code> and\n                <code>InvalidParameterException</code> errors. It can also include any valid error\n            code returned by the Amazon Web Services service that hosts the resource that the ARN key\n            represents.</p>\n        <p>The following are common error codes that you might receive from other Amazon Web Services\n            services:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>InternalServiceException</b> – This can\n                    mean that the Resource Groups Tagging API didn't receive a response from another Amazon Web Services service. It\n                    can also mean that the resource type in the request is not supported by the\n                    Resource Groups Tagging API. In these cases, it's safe to retry the request and then call <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> to verify the changes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AccessDeniedException</b> – This can mean\n                    that you need permission to call the tagging operations in the Amazon Web Services service\n                    that contains the resource. For example, to use the Resource Groups Tagging API to tag a Amazon CloudWatch\n                    alarm resource, you need permission to call both <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">\n                     <code>TagResources</code>\n                  </a>\n                    <i>and</i>\n                    <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">\n                     <code>TagResource</code>\n                  </a> in the CloudWatch API. </p>\n            </li>\n         </ul>\n        <p>For more information on errors that are generated from other Amazon Web Services services, see the\n            documentation for that service. </p>"
+                "smithy.api#documentation": "<p>Information about the errors that are returned for each failed resource. This\n            information can include <code>InternalServiceException</code> and\n                <code>InvalidParameterException</code> errors. It can also include any valid error\n            code returned by the Amazon Web Services service that hosts the resource that the ARN key\n            represents.</p>\n         <p>The following are common error codes that you might receive from other Amazon Web Services\n            services:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>InternalServiceException</b> – This can\n                    mean that the Resource Groups Tagging API didn't receive a response from another Amazon Web Services service. It\n                    can also mean that the resource type in the request is not supported by the\n                    Resource Groups Tagging API. In these cases, it's safe to retry the request and then call <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> to verify the changes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AccessDeniedException</b> – This can mean\n                    that you need permission to call the tagging operations in the Amazon Web Services service\n                    that contains the resource. For example, to use the Resource Groups Tagging API to tag a Amazon CloudWatch\n                    alarm resource, you need permission to call both <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">\n                     <code>TagResources</code>\n                  </a>\n                  <i>and</i>\n                  <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">\n                     <code>TagResource</code>\n                  </a> in the CloudWatch API. </p>\n            </li>\n         </ul>\n         <p>For more information on errors that are generated from other Amazon Web Services services, see the\n            documentation for that service. </p>"
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummary": {
@@ -240,7 +248,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a table that shows counts of resources that are noncompliant with their tag\n            policies.</p>\n        <p>For more information on tag policies, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">Tag Policies</a> in\n            the <i>Organizations User Guide.</i>\n         </p>\n        <p>You can call this operation only from the organization's \n    management account and from the us-east-1 Region.</p>\n        <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
+                "smithy.api#documentation": "<p>Returns a table that shows counts of resources that are noncompliant with their tag\n            policies.</p>\n         <p>For more information on tag policies, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">Tag Policies</a> in\n            the <i>Organizations User Guide.</i>\n         </p>\n         <p>You can call this operation only from the organization's \n    management account and from the us-east-1 Region.</p>\n         <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "PaginationToken",
                     "outputToken": "PaginationToken",
@@ -267,7 +275,7 @@
                 "ResourceTypeFilters": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want the response to include information for only resources of the\n            specified types. The format of each resource type is\n            <code>service[:resourceType]</code>. For example, specifying a resource type of\n                <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).\n            Specifying a resource type of <code>ec2:instance</code> returns only EC2\n            instances.</p>\n        <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). Consult the <i>\n               <a href=\"https://docs.aws.amazon.com/general/latest/gr/\">Amazon Web Services General Reference</a>\n            </i>\n            for the following:</p>\n        <ul>\n            <li>\n                <p>For a list of service name strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services Service Namespaces</a>.</p>\n            </li>\n            <li>\n                <p>For resource type strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example\n                        ARNs</a>.</p>\n            </li>\n            <li>\n                <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names\n                        (ARNs) and Amazon Web Services Service Namespaces</a>.</p>\n            </li>\n         </ul>\n        <p>You can specify multiple resource types by using a comma separated array. The array\n            can include up to 100 items. Note that the length constraint requirement applies to each\n            resource type filter. </p>"
+                        "smithy.api#documentation": "<p>Specifies that you want the response to include information for only resources of the\n            specified types. The format of each resource type is\n            <code>service[:resourceType]</code>. For example, specifying a resource type of\n                <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).\n            Specifying a resource type of <code>ec2:instance</code> returns only EC2\n            instances.</p>\n         <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). Consult the <i>\n               <a href=\"https://docs.aws.amazon.com/general/latest/gr/\">Amazon Web Services General Reference</a>\n            </i>\n            for the following:</p>\n         <ul>\n            <li>\n               <p>For a list of service name strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services Service Namespaces</a>.</p>\n            </li>\n            <li>\n               <p>For resource type strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example\n                        ARNs</a>.</p>\n            </li>\n            <li>\n               <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names\n                        (ARNs) and Amazon Web Services Service Namespaces</a>.</p>\n            </li>\n         </ul>\n         <p>You can specify multiple resource types by using a comma separated array. The array\n            can include up to 100 items. Note that the length constraint requirement applies to each\n            resource type filter. </p>"
                     }
                 },
                 "TagKeyFilters": {
@@ -294,6 +302,9 @@
                         "smithy.api#documentation": "<p>Specifies a <code>PaginationToken</code> response value from a \n    previous request to indicate that you want the next page of results. Leave this parameter empty \n    in your initial request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummaryOutput": {
@@ -311,6 +322,9 @@
                         "smithy.api#documentation": "<p>A string that indicates that there is more data available than this\n    response contains. To receive the next part of the response, specify this response value \n    as the <code>PaginationToken</code> value in the request for the next page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetResources": {
@@ -336,7 +350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all the tagged or previously tagged resources that are located in the\n            specified Amazon Web Services Region for the account.</p>\n        <p>Depending on what information you want returned, you can also specify the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>Filters</i> that specify what tags and resource types you\n                    want returned. The response includes all tags that are associated with the\n                    requested resources.</p>\n            </li>\n            <li>\n                <p>Information about compliance with the account's effective tag policy. For more\n                    information on tag policies, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">Tag\n                        Policies</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>\n        <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
+                "smithy.api#documentation": "<p>Returns all the tagged or previously tagged resources that are located in the\n            specified Amazon Web Services Region for the account.</p>\n         <p>Depending on what information you want returned, you can also specify the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Filters</i> that specify what tags and resource types you\n                    want returned. The response includes all tags that are associated with the\n                    requested resources.</p>\n            </li>\n            <li>\n               <p>Information about compliance with the account's effective tag policy. For more\n                    information on tag policies, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">Tag\n                        Policies</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>\n         <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "PaginationToken",
                     "outputToken": "PaginationToken",
@@ -357,7 +371,7 @@
                 "TagFilters": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#TagFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of TagFilters (keys and values) to restrict the output to only those\n            resources that have tags with the specified keys and, if included, the specified values.\n            Each <code>TagFilter</code> must contain a key with values optional. A request can\n            include up to 50 keys, and each key can include up to 20 values. </p>\n        <p>Note the following when deciding how to use TagFilters:</p>\n        <ul>\n            <li>\n                <p>If you <i>don't</i> specify a <code>TagFilter</code>, the\n                    response includes all resources that are currently tagged or ever had a tag.\n                    Resources that currently don't have tags are shown with an empty tag set, like\n                    this: <code>\"Tags\": []</code>.</p>\n            </li>\n            <li>\n                <p>If you specify more than one filter in a single request, the response returns\n                    only those resources that satisfy all filters.</p>\n            </li>\n            <li>\n                <p>If you specify a filter that contains more than one value for a key, the\n                    response returns resources that match <i>any</i> of the specified\n                    values for that key.</p>\n            </li>\n            <li>\n                <p>If you don't specify a value for a key, the response returns all resources\n                    that are tagged with that key, with any or no value.</p>\n                <p>For example, for the following filters: <code>filter1= {keyA,{value1}}</code>,\n                        <code>filter2={keyB,{value2,value3,value4}}</code>, <code>filter3=\n                        {keyC}</code>:</p>\n                <ul>\n                  <li>\n                        <p>\n                        <code>GetResources({filter1})</code> returns resources tagged with\n                                <code>key1=value1</code>\n                     </p>\n                    </li>\n                  <li>\n                        <p>\n                        <code>GetResources({filter2})</code> returns resources tagged with\n                                <code>key2=value2</code> or <code>key2=value3</code> or\n                                <code>key2=value4</code>\n                     </p>\n                    </li>\n                  <li>\n                        <p>\n                        <code>GetResources({filter3})</code> returns resources tagged with any\n                            tag with the key <code>key3</code>, and with any or no value</p>\n                    </li>\n                  <li>\n                        <p>\n                        <code>GetResources({filter1,filter2,filter3})</code> returns resources\n                            tagged with <code>(key1=value1) and (key2=value2 or key2=value3 or\n                                key2=value4) and (key3, any or no value)</code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies a list of TagFilters (keys and values) to restrict the output to only those\n            resources that have tags with the specified keys and, if included, the specified values.\n            Each <code>TagFilter</code> must contain a key with values optional. A request can\n            include up to 50 keys, and each key can include up to 20 values. </p>\n         <p>Note the following when deciding how to use TagFilters:</p>\n         <ul>\n            <li>\n               <p>If you <i>don't</i> specify a <code>TagFilter</code>, the\n                    response includes all resources that are currently tagged or ever had a tag.\n                    Resources that currently don't have tags are shown with an empty tag set, like\n                    this: <code>\"Tags\": []</code>.</p>\n            </li>\n            <li>\n               <p>If you specify more than one filter in a single request, the response returns\n                    only those resources that satisfy all filters.</p>\n            </li>\n            <li>\n               <p>If you specify a filter that contains more than one value for a key, the\n                    response returns resources that match <i>any</i> of the specified\n                    values for that key.</p>\n            </li>\n            <li>\n               <p>If you don't specify a value for a key, the response returns all resources\n                    that are tagged with that key, with any or no value.</p>\n               <p>For example, for the following filters: <code>filter1= {keyA,{value1}}</code>,\n                        <code>filter2={keyB,{value2,value3,value4}}</code>, <code>filter3=\n                        {keyC}</code>:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>GetResources({filter1})</code> returns resources tagged with\n                                <code>key1=value1</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>GetResources({filter2})</code> returns resources tagged with\n                                <code>key2=value2</code> or <code>key2=value3</code> or\n                                <code>key2=value4</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>GetResources({filter3})</code> returns resources tagged with any\n                            tag with the key <code>key3</code>, and with any or no value</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>GetResources({filter1,filter2,filter3})</code> returns resources\n                            tagged with <code>(key1=value1) and (key2=value2 or key2=value3 or\n                                key2=value4) and (key3, any or no value)</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "ResourcesPerPage": {
@@ -369,13 +383,13 @@
                 "TagsPerPage": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#TagsPerPage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Web Services recommends using <code>ResourcesPerPage</code> instead of this parameter.</p>\n        <p>A limit that restricts the number of tags (key and value pairs) returned by\n                <code>GetResources</code> in paginated output. A resource with no tags is counted as\n            having one tag (one key and value pair).</p>\n        <p>\n            <code>GetResources</code> does not split a resource and its associated tags across\n            pages. If the specified <code>TagsPerPage</code> would cause such a break, a\n                <code>PaginationToken</code> is returned in place of the affected resource and its\n            tags. Use that token in another request to get the remaining data. For example, if you\n            specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources\n            with 10 tags each (meaning that each resource has 10 key and value pairs), the output\n            will consist of three pages. The first page displays the first 10 resources, each with\n            its 10 tags. The second page displays the next 10 resources, each with its 10 tags. The\n            third page displays the remaining 2 resources, each with its 10 tags.</p>\n        <p>You can set <code>TagsPerPage</code> to a minimum of 100 items up to a maximum of 500\n            items.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services recommends using <code>ResourcesPerPage</code> instead of this parameter.</p>\n         <p>A limit that restricts the number of tags (key and value pairs) returned by\n                <code>GetResources</code> in paginated output. A resource with no tags is counted as\n            having one tag (one key and value pair).</p>\n         <p>\n            <code>GetResources</code> does not split a resource and its associated tags across\n            pages. If the specified <code>TagsPerPage</code> would cause such a break, a\n                <code>PaginationToken</code> is returned in place of the affected resource and its\n            tags. Use that token in another request to get the remaining data. For example, if you\n            specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources\n            with 10 tags each (meaning that each resource has 10 key and value pairs), the output\n            will consist of three pages. The first page displays the first 10 resources, each with\n            its 10 tags. The second page displays the next 10 resources, each with its 10 tags. The\n            third page displays the remaining 2 resources, each with its 10 tags.</p>\n         <p>You can set <code>TagsPerPage</code> to a minimum of 100 items up to a maximum of 500\n            items.</p>"
                     }
                 },
                 "ResourceTypeFilters": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the resource types that you want included in the response. The format of\n            each resource type is <code>service[:resourceType]</code>. For example, specifying a\n            resource type of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2\n            instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2\n            instances. </p>\n        <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). For the list of services whose resources you can\n            use in this parameter, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html\">Services that support the Resource Groups Tagging API</a>.</p>\n        <p>You can specify multiple resource types by using an array. The array can include up to\n            100 items. Note that the length constraint requirement applies to each resource type\n            filter. For example, the following string would limit the response to only Amazon EC2\n            instances, Amazon S3 buckets, or any Audit Manager resource:</p>\n        <p>\n            <code>ec2:instance,s3:bucket,auditmanager</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the resource types that you want included in the response. The format of\n            each resource type is <code>service[:resourceType]</code>. For example, specifying a\n            resource type of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2\n            instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2\n            instances. </p>\n         <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). For the list of services whose resources you can\n            use in this parameter, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html\">Services that support the Resource Groups Tagging API</a>.</p>\n         <p>You can specify multiple resource types by using an array. The array can include up to\n            100 items. Note that the length constraint requirement applies to each resource type\n            filter. For example, the following string would limit the response to only Amazon EC2\n            instances, Amazon S3 buckets, or any Audit Manager resource:</p>\n         <p>\n            <code>ec2:instance,s3:bucket,auditmanager</code>\n         </p>"
                     }
                 },
                 "IncludeComplianceDetails": {
@@ -387,15 +401,18 @@
                 "ExcludeCompliantResources": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#ExcludeCompliantResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to exclude resources that are compliant with the tag policy. Set\n            this to <code>true</code> if you are interested in retrieving information on\n            noncompliant resources only.</p>\n        <p>You can use this parameter only if the <code>IncludeComplianceDetails</code> parameter\n            is also set to <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to exclude resources that are compliant with the tag policy. Set\n            this to <code>true</code> if you are interested in retrieving information on\n            noncompliant resources only.</p>\n         <p>You can use this parameter only if the <code>IncludeComplianceDetails</code> parameter\n            is also set to <code>true</code>.</p>"
                     }
                 },
                 "ResourceARNList": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARNListForGet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of ARNs of resources for which you want to retrieve tag data. You\n            can't specify both this parameter and any of the pagination parameters\n                (<code>ResourcesPerPage</code>, <code>TagsPerPage</code>,\n                <code>PaginationToken</code>) in the same request. If you specify both, you get an\n                <code>Invalid Parameter</code> exception.</p>\n        <p>If a resource specified by this parameter doesn't exist, it doesn't generate an error;\n            it simply isn't included in the response.</p>\n        <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the\n                <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a list of ARNs of resources for which you want to retrieve tag data. You\n            can't specify both this parameter and any of the pagination parameters\n                (<code>ResourcesPerPage</code>, <code>TagsPerPage</code>,\n                <code>PaginationToken</code>) in the same request. If you specify both, you get an\n                <code>Invalid Parameter</code> exception.</p>\n         <p>If a resource specified by this parameter doesn't exist, it doesn't generate an error;\n            it simply isn't included in the response.</p>\n         <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the\n                <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetResourcesOutput": {
@@ -413,6 +430,9 @@
                         "smithy.api#documentation": "<p>A list of resource ARNs and the tags (keys and values) associated with \n    each.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetTagKeys": {
@@ -438,7 +458,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all tag keys currently in use in the specified Amazon Web Services Region for the calling\n            account.</p>\n        <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
+                "smithy.api#documentation": "<p>Returns all tag keys currently in use in the specified Amazon Web Services Region for the calling\n            account.</p>\n         <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "PaginationToken",
                     "outputToken": "PaginationToken",
@@ -455,6 +475,9 @@
                         "smithy.api#documentation": "<p>Specifies a <code>PaginationToken</code> response value from a \n    previous request to indicate that you want the next page of results. Leave this parameter empty \n    in your initial request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetTagKeysOutput": {
@@ -472,6 +495,9 @@
                         "smithy.api#documentation": "<p>A list of all tag keys in the Amazon Web Services account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetTagValues": {
@@ -497,7 +523,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all tag values for the specified key that are used in the specified Amazon Web Services\n            Region for the calling account.</p>\n        <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
+                "smithy.api#documentation": "<p>Returns all tag values for the specified key that are used in the specified Amazon Web Services\n            Region for the calling account.</p>\n         <p>This operation supports pagination, where the response can be sent in \n    multiple pages. You should check the <code>PaginationToken</code> response parameter to determine\n    if there are additional results available to return. Repeat the query, passing the\n    <code>PaginationToken</code> response parameter value as an input to the next request until you\n    recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that\n    there are no more results waiting to be returned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "PaginationToken",
                     "outputToken": "PaginationToken",
@@ -521,6 +547,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GetTagValuesOutput": {
@@ -538,6 +567,9 @@
                         "smithy.api#documentation": "<p>A list of all tag values for the specified key currently used in the specified Amazon Web Services\n            Region for the calling account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GroupBy": {
@@ -547,22 +579,26 @@
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#GroupByAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TARGET_ID",
-                        "name": "TARGET_ID"
-                    },
-                    {
-                        "value": "REGION",
-                        "name": "REGION"
-                    },
-                    {
-                        "value": "RESOURCE_TYPE",
-                        "name": "RESOURCE_TYPE"
+            "type": "enum",
+            "members": {
+                "TARGET_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_ID"
                     }
-                ]
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGION"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#IncludeComplianceDetails": {
@@ -588,7 +624,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This error indicates one of the following:</p>\n        <ul>\n            <li>\n                <p>A parameter is missing.</p>\n            </li>\n            <li>\n                <p>A malformed string was supplied for the request parameter.</p>\n            </li>\n            <li>\n                <p>An out-of-range value was supplied for the request parameter.</p>\n            </li>\n            <li>\n                <p>The target ID is invalid, unsupported, or doesn't exist.</p>\n            </li>\n            <li>\n                <p>You can't access the Amazon S3 bucket for report storage. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report\">Additional Requirements for Organization-wide Tag Compliance\n                        Reports</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This error indicates one of the following:</p>\n         <ul>\n            <li>\n               <p>A parameter is missing.</p>\n            </li>\n            <li>\n               <p>A malformed string was supplied for the request parameter.</p>\n            </li>\n            <li>\n               <p>An out-of-range value was supplied for the request parameter.</p>\n            </li>\n            <li>\n               <p>The target ID is invalid, unsupported, or doesn't exist.</p>\n            </li>\n            <li>\n               <p>You can't access the Amazon S3 bucket for report storage. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report\">Additional Requirements for Organization-wide Tag Compliance\n                        Reports</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -723,6 +759,7 @@
                     "arnNamespace": "tagging",
                     "cloudFormationName": "ResourceGroupsTaggingAPI",
                     "cloudTrailEventSource": "resourcegroupstaggingapi.amazonaws.com",
+                    "docId": "resourcegroupstaggingapi-2017-01-26",
                     "endpointPrefix": "tagging"
                 },
                 "aws.auth#sigv4": {
@@ -791,9 +828,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://tagging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://tagging-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -806,15 +1022,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://tagging.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://tagging.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -826,258 +1077,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://tagging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://tagging-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://tagging.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://tagging.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1092,8 +1093,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1105,8 +1106,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1118,8 +1119,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1131,8 +1132,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1144,8 +1145,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1157,8 +1158,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1170,8 +1171,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1183,8 +1184,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1196,8 +1197,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1209,8 +1210,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1222,8 +1223,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1235,8 +1236,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1248,8 +1249,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1261,8 +1262,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1274,8 +1275,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1287,8 +1288,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1300,8 +1301,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1313,8 +1314,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1326,8 +1327,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1339,8 +1340,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1352,8 +1353,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1365,8 +1366,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1378,8 +1379,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1391,8 +1392,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1404,8 +1405,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1417,8 +1418,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1430,8 +1431,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1443,8 +1444,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1456,8 +1457,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1469,8 +1470,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1482,8 +1483,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1495,8 +1496,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1508,8 +1509,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1521,8 +1522,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1534,8 +1535,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1547,8 +1548,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1560,8 +1572,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1573,8 +1596,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1586,8 +1620,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1599,8 +1644,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1612,8 +1657,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1624,8 +1669,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1636,9 +1681,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1729,7 +1780,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a report that lists all tagged resources in the accounts across your\n            organization and tells whether each resource is compliant with the effective tag policy.\n            Compliance data is refreshed daily. The report is generated asynchronously.</p>\n        <p>The generated report is saved to the following location:</p>\n        <p>\n            <code>s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv</code>\n         </p>\n        <p>You can call this operation only from the organization's \n    management account and from the us-east-1 Region.</p>"
+                "smithy.api#documentation": "<p>Generates a report that lists all tagged resources in the accounts across your\n            organization and tells whether each resource is compliant with the effective tag policy.\n            Compliance data is refreshed daily. The report is generated asynchronously.</p>\n         <p>The generated report is saved to the following location:</p>\n         <p>\n            <code>s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv</code>\n         </p>\n         <p>You can call this operation only from the organization's \n    management account and from the us-east-1 Region.</p>"
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#StartReportCreationInput": {
@@ -1738,15 +1789,21 @@
                 "S3Bucket": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#S3Bucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where the report will be stored; for example:</p>\n        <p>\n            <code>awsexamplebucket</code>\n         </p>\n        <p>For more information on S3 bucket requirements, including an example bucket policy,\n            see the example S3 bucket policy on this page.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where the report will be stored; for example:</p>\n         <p>\n            <code>awsexamplebucket</code>\n         </p>\n         <p>For more information on S3 bucket requirements, including an example bucket policy,\n            see the example S3 bucket policy on this page.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#StartReportCreationOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.resourcegroupstaggingapi#Status": {
             "type": "string"
@@ -1943,7 +2000,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies one or more tags to the specified resources. Note the following:</p>\n        <ul>\n            <li>\n                <p>Not all resources can have tags. For a list of services with resources that\n                    support tagging using this operation, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html\">Services that support the\n                        Resource Groups Tagging API</a>. If the resource doesn't yet support\n                    this operation, the resource's service might support tagging using its own API\n                    operations. For more information, refer to the documentation for that\n                    service.</p>\n            </li>\n            <li>\n                <p>Each resource can have up to 50 tags. For other limits, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions\">Tag Naming and Usage Conventions</a> in the <i>Amazon Web Services General\n                        Reference.</i>\n               </p>\n            </li>\n            <li>\n                <p>You can only tag resources that are located in the specified Amazon Web Services Region for\n                    the Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>To add tags to a resource, you need the necessary permissions for the service\n                    that the resource belongs to as well as permissions for adding tags. For more\n                    information, see the documentation for each service.</p>\n            </li>\n         </ul>\n        <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n        </important>\n        <p>\n            <b>Minimum permissions</b>\n         </p>\n        <p>In addition to the <code>tag:TagResources</code> permission required by this\n            operation, you must also have the tagging permission defined by the service that created\n            the resource. For example, to tag an Amazon EC2 instance using the <code>TagResources</code>\n            operation, you must have both of the following permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag:TagResource</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>ec2:CreateTags</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Applies one or more tags to the specified resources. Note the following:</p>\n         <ul>\n            <li>\n               <p>Not all resources can have tags. For a list of services with resources that\n                    support tagging using this operation, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html\">Services that support the\n                        Resource Groups Tagging API</a>. If the resource doesn't yet support\n                    this operation, the resource's service might support tagging using its own API\n                    operations. For more information, refer to the documentation for that\n                    service.</p>\n            </li>\n            <li>\n               <p>Each resource can have up to 50 tags. For other limits, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions\">Tag Naming and Usage Conventions</a> in the <i>Amazon Web Services General\n                        Reference.</i>\n               </p>\n            </li>\n            <li>\n               <p>You can only tag resources that are located in the specified Amazon Web Services Region for\n                    the Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>To add tags to a resource, you need the necessary permissions for the service\n                    that the resource belongs to as well as permissions for adding tags. For more\n                    information, see the documentation for each service.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>In addition to the <code>tag:TagResources</code> permission required by this\n            operation, you must also have the tagging permission defined by the service that created\n            the resource. For example, to tag an Amazon EC2 instance using the <code>TagResources</code>\n            operation, you must have both of the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag:TagResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateTags</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#TagResourcesInput": {
@@ -1952,7 +2009,7 @@
                 "ResourceARNList": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARNListForTagUntag",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the list of ARNs of the resources that you want to apply tags to.</p>\n        <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services\n                General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the list of ARNs of the resources that you want to apply tags to.</p>\n         <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services\n                General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1963,6 +2020,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#TagResourcesOutput": {
@@ -1974,6 +2034,9 @@
                         "smithy.api#documentation": "<p>A map containing a key-value pair for each failed item that couldn't be tagged. The\n            key is the ARN of the failed resource. The value is a <code>FailureInfo</code> object\n            that contains an error code, a status code, and an error message. If there are no\n            errors, the <code>FailedResourcesMap</code> is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#TagValue": {
@@ -2030,22 +2093,26 @@
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#TargetIdType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCOUNT",
-                        "name": "ACCOUNT"
-                    },
-                    {
-                        "value": "OU",
-                        "name": "OU"
-                    },
-                    {
-                        "value": "ROOT",
-                        "name": "ROOT"
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
                     }
-                ]
+                },
+                "OU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OU"
+                    }
+                },
+                "ROOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROOT"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#ThrottledException": {
@@ -2080,7 +2147,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from the specified resources. When you specify a tag key,\n            the action removes both that key and its associated value. The operation succeeds even\n            if you attempt to remove tags from a resource that were already removed. Note the\n            following:</p>\n        <ul>\n            <li>\n                <p>To remove tags from a resource, you need the necessary permissions for the\n                    service that the resource belongs to as well as permissions for removing tags.\n                    For more information, see the documentation for the service whose resource you\n                    want to untag.</p>\n            </li>\n            <li>\n                <p>You can only tag resources that are located in the specified Amazon Web Services Region for\n                    the calling Amazon Web Services account.</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Minimum permissions</b>\n         </p>\n        <p>In addition to the <code>tag:UntagResources</code> permission required by this\n            operation, you must also have the remove tags permission defined by the service that\n            created the resource. For example, to remove the tags from an Amazon EC2 instance using the\n                <code>UntagResources</code> operation, you must have both of the following\n            permissions:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag:UntagResource</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>ec2:DeleteTags</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified resources. When you specify a tag key,\n            the action removes both that key and its associated value. The operation succeeds even\n            if you attempt to remove tags from a resource that were already removed. Note the\n            following:</p>\n         <ul>\n            <li>\n               <p>To remove tags from a resource, you need the necessary permissions for the\n                    service that the resource belongs to as well as permissions for removing tags.\n                    For more information, see the documentation for the service whose resource you\n                    want to untag.</p>\n            </li>\n            <li>\n               <p>You can only tag resources that are located in the specified Amazon Web Services Region for\n                    the calling Amazon Web Services account.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>In addition to the <code>tag:UntagResources</code> permission required by this\n            operation, you must also have the remove tags permission defined by the service that\n            created the resource. For example, to remove the tags from an Amazon EC2 instance using the\n                <code>UntagResources</code> operation, you must have both of the following\n            permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag:UntagResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteTags</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#UntagResourcesInput": {
@@ -2089,7 +2156,7 @@
                 "ResourceARNList": {
                     "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARNListForTagUntag",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of ARNs of the resources that you want to remove tags from.</p>\n        <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services\n                General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies a list of ARNs of the resources that you want to remove tags from.</p>\n         <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services\n                General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2100,6 +2167,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.resourcegroupstaggingapi#UntagResourcesOutput": {
@@ -2111,6 +2181,9 @@
                         "smithy.api#documentation": "<p>A map containing a key-value pair for each failed item that couldn't be untagged. The\n            key is the ARN of the failed resource. The value is a <code>FailureInfo</code> object\n            that contains an error code, a status code, and an error message. If there are no\n            errors, the <code>FailedResourcesMap</code> is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         }
     }

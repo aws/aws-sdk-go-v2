@@ -260,9 +260,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -275,15 +454,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -295,258 +509,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -561,8 +525,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -574,8 +538,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -587,8 +551,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -600,8 +564,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -613,8 +577,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -626,8 +590,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -639,8 +603,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -652,8 +616,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -665,8 +629,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -678,8 +642,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -691,8 +655,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -704,8 +668,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -717,8 +681,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -730,8 +694,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -743,8 +707,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -756,8 +720,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -769,8 +733,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -782,8 +746,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -795,8 +759,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -808,8 +772,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -821,8 +785,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -834,8 +798,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -847,8 +811,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -860,8 +824,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -873,8 +837,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -886,8 +850,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -899,8 +863,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -912,8 +876,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -925,8 +889,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -938,8 +902,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -951,8 +915,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -964,8 +928,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -977,8 +941,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -990,8 +954,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1003,8 +978,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1016,8 +1002,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1029,8 +1026,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1042,8 +1050,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1055,8 +1063,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1068,8 +1076,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1080,8 +1088,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1092,9 +1100,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1119,19 +1133,23 @@
             }
         },
         "com.amazonaws.pinpointemail#BehaviorOnMxFailure": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The action that you want Amazon Pinpoint to take if it can't read the required MX record for a\n            custom MAIL FROM domain. When you set this value to <code>UseDefaultValue</code>, Amazon Pinpoint\n            uses <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, Amazon Pinpoint returns a <code>MailFromDomainNotVerified</code>\n            error, and doesn't attempt to deliver the email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "USE_DEFAULT_VALUE",
-                        "name": "USE_DEFAULT_VALUE"
-                    },
-                    {
-                        "value": "REJECT_MESSAGE",
-                        "name": "REJECT_MESSAGE"
+            "type": "enum",
+            "members": {
+                "USE_DEFAULT_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USE_DEFAULT_VALUE"
                     }
-                ]
+                },
+                "REJECT_MESSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT_MESSAGE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action that you want Amazon Pinpoint to take if it can't read the required MX record for a\n            custom MAIL FROM domain. When you set this value to <code>UseDefaultValue</code>, Amazon Pinpoint\n            uses <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, Amazon Pinpoint returns a <code>MailFromDomainNotVerified</code>\n            error, and doesn't attempt to deliver the email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>"
             }
         },
         "com.amazonaws.pinpointemail#BlacklistEntries": {
@@ -1413,14 +1431,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to add an event destination to a configuration set.</p>"
+                "smithy.api#documentation": "<p>A request to add an event destination to a configuration set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateConfigurationSetEventDestinationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateConfigurationSetRequest": {
@@ -1465,14 +1485,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to create a configuration set.</p>"
+                "smithy.api#documentation": "<p>A request to create a configuration set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateConfigurationSetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateDedicatedIpPool": {
@@ -1527,14 +1549,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to create a new dedicated IP pool.</p>"
+                "smithy.api#documentation": "<p>A request to create a new dedicated IP pool.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateDedicatedIpPoolResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateDeliverabilityTestReport": {
@@ -1614,7 +1638,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will\n            be handled by various email providers around the world. When you perform a predictive inbox placement test, you\n            provide a sample message that contains the content that you plan to send to your\n            customers. Amazon Pinpoint then sends that message to special email addresses spread across\n            several major email providers. After about 24 hours, the test is complete, and you can\n            use the <code>GetDeliverabilityTestReport</code> operation to view the results of the\n            test.</p>"
+                "smithy.api#documentation": "<p>A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will\n            be handled by various email providers around the world. When you perform a predictive inbox placement test, you\n            provide a sample message that contains the content that you plan to send to your\n            customers. Amazon Pinpoint then sends that message to special email addresses spread across\n            several major email providers. After about 24 hours, the test is complete, and you can\n            use the <code>GetDeliverabilityTestReport</code> operation to view the results of the\n            test.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateDeliverabilityTestReportResponse": {
@@ -1636,7 +1661,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the predictive inbox placement test that you created.</p>"
+                "smithy.api#documentation": "<p>Information about the predictive inbox placement test that you created.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateEmailIdentity": {
@@ -1688,7 +1714,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to begin the verification process for an email identity (an email address or\n            domain).</p>"
+                "smithy.api#documentation": "<p>A request to begin the verification process for an email identity (an email address or\n            domain).</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#CreateEmailIdentityResponse": {
@@ -1715,7 +1742,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If the email identity is a domain, this object contains tokens that you can use to\n            create a set of CNAME records. To sucessfully verify your domain, you have to add these\n            records to the DNS configuration for your domain.</p>\n        <p>If the email identity is an email address, this object is empty. </p>"
+                "smithy.api#documentation": "<p>If the email identity is a domain, this object contains tokens that you can use to\n            create a set of CNAME records. To sucessfully verify your domain, you have to add these\n            records to the DNS configuration for your domain.</p>\n        <p>If the email identity is an email address, this object is empty. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#CustomRedirectDomain": {
@@ -1886,14 +1914,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete an event destination from a configuration set.</p>"
+                "smithy.api#documentation": "<p>A request to delete an event destination from a configuration set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteConfigurationSetEventDestinationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteConfigurationSetRequest": {
@@ -1909,14 +1939,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete a configuration set.</p>"
+                "smithy.api#documentation": "<p>A request to delete a configuration set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteConfigurationSetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteDedicatedIpPool": {
@@ -1963,14 +1995,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete a dedicated IP pool.</p>"
+                "smithy.api#documentation": "<p>A request to delete a dedicated IP pool.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteDedicatedIpPoolResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteEmailIdentity": {
@@ -2017,34 +2051,42 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete an existing email identity. When you delete an identity, you lose\n            the ability to use Amazon Pinpoint to send email from that identity. You can restore your ability\n            to send email by completing the verification process for the identity again.</p>"
+                "smithy.api#documentation": "<p>A request to delete an existing email identity. When you delete an identity, you lose\n            the ability to use Amazon Pinpoint to send email from that identity. You can restore your ability\n            to send email by completing the verification process for the identity again.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#DeleteEmailIdentityResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#DeliverabilityDashboardAccountStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The current status of your Deliverability dashboard subscription. If this value is\n                <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end\n            of the current calendar month.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "PENDING_EXPIRATION",
-                        "name": "PENDING_EXPIRATION"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "PENDING_EXPIRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_EXPIRATION"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current status of your Deliverability dashboard subscription. If this value is\n                <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end\n            of the current calendar month.</p>"
             }
         },
         "com.amazonaws.pinpointemail#DeliverabilityTestReport": {
@@ -2098,19 +2140,23 @@
             }
         },
         "com.amazonaws.pinpointemail#DeliverabilityTestStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is\n            currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test.\n            If the status is <code>COMPLETE</code>, then the test is finished, and you can use the\n                <code>GetDeliverabilityTestReport</code> operation to view the results of the\n            test.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is\n            currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test.\n            If the status is <code>COMPLETE</code>, then the test is finished, and you can use the\n                <code>GetDeliverabilityTestReport</code> operation to view the results of the\n            test.</p>"
             }
         },
         "com.amazonaws.pinpointemail#DeliverabilityTestSubject": {
@@ -2172,23 +2218,29 @@
             }
         },
         "com.amazonaws.pinpointemail#DimensionValueSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The location where Amazon Pinpoint finds the value of a dimension to publish to Amazon CloudWatch. If you\n            want Amazon Pinpoint to use the message tags that you specify using an X-SES-MESSAGE-TAGS header\n            or a parameter to the SendEmail/SendRawEmail API, choose <code>messageTag</code>. If you\n            want Amazon Pinpoint to use your own email headers, choose <code>emailHeader</code>. If you want\n            Amazon Pinpoint to use link tags, choose <code>linkTags</code>.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "MESSAGE_TAG",
-                        "name": "MESSAGE_TAG"
-                    },
-                    {
-                        "value": "EMAIL_HEADER",
-                        "name": "EMAIL_HEADER"
-                    },
-                    {
-                        "value": "LINK_TAG",
-                        "name": "LINK_TAG"
+            "type": "enum",
+            "members": {
+                "MESSAGE_TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_TAG"
                     }
-                ]
+                },
+                "EMAIL_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_HEADER"
+                    }
+                },
+                "LINK_TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINK_TAG"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location where Amazon Pinpoint finds the value of a dimension to publish to Amazon CloudWatch. If you\n            want Amazon Pinpoint to use the message tags that you specify using an X-SES-MESSAGE-TAGS header\n            or a parameter to the SendEmail/SendRawEmail API, choose <code>messageTag</code>. If you\n            want Amazon Pinpoint to use your own email headers, choose <code>emailHeader</code>. If you want\n            Amazon Pinpoint to use link tags, choose <code>linkTags</code>.</p>"
             }
         },
         "com.amazonaws.pinpointemail#DkimAttributes": {
@@ -2219,31 +2271,41 @@
             }
         },
         "com.amazonaws.pinpointemail#DkimStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The DKIM authentication status of the identity. The status can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PENDING</code> – The DKIM verification process was initiated, and\n                    Amazon Pinpoint is still waiting for the required CNAME records to appear in the DNS\n                    configuration for the domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS</code> – The DKIM authentication process completed\n                    successfully.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> – The DKIM authentication process failed. This can\n                    happen when Amazon Pinpoint fails to find the required CNAME records in the DNS\n                    configuration of the domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon Pinpoint\n                    from determining the DKIM authentication status of the domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NOT_STARTED</code> – The DKIM verification process hasn't been\n                    initiated for the domain.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "TEMPORARY_FAILURE",
-                        "name": "TEMPORARY_FAILURE"
-                    },
-                    {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "TEMPORARY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEMPORARY_FAILURE"
+                    }
+                },
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DKIM authentication status of the identity. The status can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PENDING</code> – The DKIM verification process was initiated, and\n                    Amazon Pinpoint is still waiting for the required CNAME records to appear in the DNS\n                    configuration for the domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS</code> – The DKIM authentication process completed\n                    successfully.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> – The DKIM authentication process failed. This can\n                    happen when Amazon Pinpoint fails to find the required CNAME records in the DNS\n                    configuration of the domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon Pinpoint\n                    from determining the DKIM authentication status of the domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NOT_STARTED</code> – The DKIM verification process hasn't been\n                    initiated for the domain.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.pinpointemail#DnsToken": {
@@ -2602,43 +2664,59 @@
             }
         },
         "com.amazonaws.pinpointemail#EventType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>An email sending event type. For example, email sends, opens, and bounces are all\n            email events.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "SEND",
-                        "name": "SEND"
-                    },
-                    {
-                        "value": "REJECT",
-                        "name": "REJECT"
-                    },
-                    {
-                        "value": "BOUNCE",
-                        "name": "BOUNCE"
-                    },
-                    {
-                        "value": "COMPLAINT",
-                        "name": "COMPLAINT"
-                    },
-                    {
-                        "value": "DELIVERY",
-                        "name": "DELIVERY"
-                    },
-                    {
-                        "value": "OPEN",
-                        "name": "OPEN"
-                    },
-                    {
-                        "value": "CLICK",
-                        "name": "CLICK"
-                    },
-                    {
-                        "value": "RENDERING_FAILURE",
-                        "name": "RENDERING_FAILURE"
+            "type": "enum",
+            "members": {
+                "SEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND"
                     }
-                ]
+                },
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                },
+                "BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOUNCE"
+                    }
+                },
+                "COMPLAINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLAINT"
+                    }
+                },
+                "DELIVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY"
+                    }
+                },
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN"
+                    }
+                },
+                "CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLICK"
+                    }
+                },
+                "RENDERING_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RENDERING_FAILURE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An email sending event type. For example, email sends, opens, and bounces are all\n            email events.</p>"
             }
         },
         "com.amazonaws.pinpointemail#EventTypes": {
@@ -2679,7 +2757,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain information about the email-sending capabilities of your Amazon Pinpoint\n            account.</p>"
+                "smithy.api#documentation": "<p>A request to obtain information about the email-sending capabilities of your Amazon Pinpoint\n            account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetAccountResponse": {
@@ -2720,7 +2799,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of details about the email-sending capabilities of your Amazon Pinpoint account in the\n            current AWS Region.</p>"
+                "smithy.api#documentation": "<p>A list of details about the email-sending capabilities of your Amazon Pinpoint account in the\n            current AWS Region.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetBlacklistReports": {
@@ -2764,7 +2844,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to retrieve a list of the blacklists that your dedicated IP addresses appear\n            on.</p>"
+                "smithy.api#documentation": "<p>A request to retrieve a list of the blacklists that your dedicated IP addresses appear\n            on.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetBlacklistReportsResponse": {
@@ -2779,7 +2860,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about blacklist events.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about blacklist events.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetConfigurationSet": {
@@ -2851,7 +2933,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain information about the event destinations for a configuration\n            set.</p>"
+                "smithy.api#documentation": "<p>A request to obtain information about the event destinations for a configuration\n            set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetConfigurationSetEventDestinationsResponse": {
@@ -2865,7 +2948,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an event destination for a configuration set.</p>"
+                "smithy.api#documentation": "<p>Information about an event destination for a configuration set.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetConfigurationSetRequest": {
@@ -2881,7 +2965,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain information about a configuration set.</p>"
+                "smithy.api#documentation": "<p>A request to obtain information about a configuration set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetConfigurationSetResponse": {
@@ -2925,7 +3010,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a configuration set.</p>"
+                "smithy.api#documentation": "<p>Information about a configuration set.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDedicatedIp": {
@@ -2969,7 +3055,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain more information about a dedicated IP address.</p>"
+                "smithy.api#documentation": "<p>A request to obtain more information about a dedicated IP address.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDedicatedIpResponse": {
@@ -2983,7 +3070,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a dedicated IP address.</p>"
+                "smithy.api#documentation": "<p>Information about a dedicated IP address.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDedicatedIps": {
@@ -3045,7 +3133,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain more information about dedicated IP pools.</p>"
+                "smithy.api#documentation": "<p>A request to obtain more information about dedicated IP pools.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDedicatedIpsResponse": {
@@ -3065,7 +3154,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the dedicated IP addresses that are associated with your Amazon Pinpoint\n            account.</p>"
+                "smithy.api#documentation": "<p>Information about the dedicated IP addresses that are associated with your Amazon Pinpoint\n            account.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDeliverabilityDashboardOptions": {
@@ -3100,7 +3190,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account.\n            When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and\n            other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the\n            ability to perform predictive inbox placement tests.</p>\n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon Pinpoint. For more information about the\n            features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
+                "smithy.api#documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account.\n            When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and\n            other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the\n            ability to perform predictive inbox placement tests.</p>\n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon Pinpoint. For more information about the\n            features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDeliverabilityDashboardOptionsResponse": {
@@ -3140,7 +3231,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.</p>"
+                "smithy.api#documentation": "<p>An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDeliverabilityTestReport": {
@@ -3184,7 +3276,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to retrieve the results of a predictive inbox placement test.</p>"
+                "smithy.api#documentation": "<p>A request to retrieve the results of a predictive inbox placement test.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDeliverabilityTestReportResponse": {
@@ -3225,7 +3318,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The results of the predictive inbox placement test.</p>"
+                "smithy.api#documentation": "<p>The results of the predictive inbox placement test.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDomainDeliverabilityCampaign": {
@@ -3269,7 +3363,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve all the deliverability data for a specific campaign. This data is available\n            for a campaign only if the campaign sent email by using a domain that the\n            Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code>\n            operation).</p>"
+                "smithy.api#documentation": "<p>Retrieve all the deliverability data for a specific campaign. This data is available\n            for a campaign only if the campaign sent email by using a domain that the\n            Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code>\n            operation).</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDomainDeliverabilityCampaignResponse": {
@@ -3284,7 +3379,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains all the deliverability data for a specific campaign. This data\n            is available for a campaign only if the campaign sent email by using a domain that the\n            Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code>\n            operation).</p>"
+                "smithy.api#documentation": "<p>An object that contains all the deliverability data for a specific campaign. This data\n            is available for a campaign only if the campaign sent email by using a domain that the\n            Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code>\n            operation).</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDomainStatisticsReport": {
@@ -3344,7 +3440,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain deliverability metrics for a domain.</p>"
+                "smithy.api#documentation": "<p>A request to obtain deliverability metrics for a domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetDomainStatisticsReportResponse": {
@@ -3366,7 +3463,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that includes statistics that are related to the domain that you\n            specified.</p>"
+                "smithy.api#documentation": "<p>An object that includes statistics that are related to the domain that you\n            specified.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#GetEmailIdentity": {
@@ -3410,7 +3508,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to return details about an email identity.</p>"
+                "smithy.api#documentation": "<p>A request to return details about an email identity.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#GetEmailIdentityResponse": {
@@ -3456,7 +3555,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about an email identity.</p>"
+                "smithy.api#documentation": "<p>Details about an email identity.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#Identity": {
@@ -3496,23 +3596,29 @@
             }
         },
         "com.amazonaws.pinpointemail#IdentityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The email identity type. The identity type can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DOMAIN</code> – The identity is a domain.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "EMAIL_ADDRESS",
-                        "name": "EMAIL_ADDRESS"
-                    },
-                    {
-                        "value": "DOMAIN",
-                        "name": "DOMAIN"
-                    },
-                    {
-                        "value": "MANAGED_DOMAIN",
-                        "name": "MANAGED_DOMAIN"
+            "type": "enum",
+            "members": {
+                "EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_ADDRESS"
                     }
-                ]
+                },
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN"
+                    }
+                },
+                "MANAGED_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_DOMAIN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The email identity type. The identity type can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DOMAIN</code> – The identity is a domain.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.pinpointemail#ImageUrl": {
@@ -3679,7 +3785,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current\n            AWS Region.</p>"
+                "smithy.api#documentation": "<p>A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current\n            AWS Region.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#ListConfigurationSetsResponse": {
@@ -3699,7 +3806,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of configuration sets in your Amazon Pinpoint account in the current AWS Region.</p>"
+                "smithy.api#documentation": "<p>A list of configuration sets in your Amazon Pinpoint account in the current AWS Region.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#ListDedicatedIpPools": {
@@ -3751,7 +3859,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain a list of dedicated IP pools.</p>"
+                "smithy.api#documentation": "<p>A request to obtain a list of dedicated IP pools.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#ListDedicatedIpPoolsResponse": {
@@ -3771,7 +3880,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of dedicated IP pools.</p>"
+                "smithy.api#documentation": "<p>A list of dedicated IP pools.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#ListDeliverabilityTestReports": {
@@ -3826,7 +3936,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to list all of the predictive inbox placement tests that you've performed.</p>"
+                "smithy.api#documentation": "<p>A request to list all of the predictive inbox placement tests that you've performed.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#ListDeliverabilityTestReportsResponse": {
@@ -3847,7 +3958,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of the predictive inbox placement test reports that are available for your account, regardless of\n            whether or not those tests are complete.</p>"
+                "smithy.api#documentation": "<p>A list of the predictive inbox placement test reports that are available for your account, regardless of\n            whether or not those tests are complete.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#ListDomainDeliverabilityCampaigns": {
@@ -3926,7 +4038,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve deliverability data for all the campaigns that used a specific domain to send\n            email during a specified time range. This data is available for a domain only if you\n            enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation)\n            for the domain.</p>"
+                "smithy.api#documentation": "<p>Retrieve deliverability data for all the campaigns that used a specific domain to send\n            email during a specified time range. This data is available for a domain only if you\n            enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation)\n            for the domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#ListDomainDeliverabilityCampaignsResponse": {
@@ -3947,7 +4060,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of objects that provide deliverability data for all the campaigns that used a\n            specific domain to send email during a specified time range. This data is available for\n            a domain only if you enabled the Deliverability dashboard\n                (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.</p>"
+                "smithy.api#documentation": "<p>An array of objects that provide deliverability data for all the campaigns that used a\n            specific domain to send email during a specified time range. This data is available for\n            a domain only if you enabled the Deliverability dashboard\n                (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#ListEmailIdentities": {
@@ -3999,7 +4113,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to list all of the email identities associated with your Amazon Pinpoint account. This\n            list includes identities that you've already verified, identities that are unverified,\n            and identities that were verified in the past, but are no longer verified.</p>"
+                "smithy.api#documentation": "<p>A request to list all of the email identities associated with your Amazon Pinpoint account. This\n            list includes identities that you've already verified, identities that are unverified,\n            and identities that were verified in the past, but are no longer verified.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#ListEmailIdentitiesResponse": {
@@ -4019,7 +4134,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of all of the identities that you've attempted to verify for use with Amazon Pinpoint,\n            regardless of whether or not those identities were successfully verified.</p>"
+                "smithy.api#documentation": "<p>A list of all of the identities that you've attempted to verify for use with Amazon Pinpoint,\n            regardless of whether or not those identities were successfully verified.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#ListOfDedicatedIpPools": {
@@ -4070,6 +4186,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#ListTagsForResourceResponse": {
@@ -4082,6 +4201,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#MailFromAttributes": {
@@ -4133,27 +4255,35 @@
             }
         },
         "com.amazonaws.pinpointemail#MailFromDomainStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The status of the MAIL FROM domain. This status can have the following values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PENDING</code> – Amazon Pinpoint hasn't started searching for the MX record\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS</code> – Amazon Pinpoint detected the required MX record for the\n                    MAIL FROM domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> – Amazon Pinpoint can't find the required MX record, or the\n                    record no longer exists.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue occurred, which\n                    prevented Amazon Pinpoint from determining the status of the MAIL FROM domain.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "TEMPORARY_FAILURE",
-                        "name": "TEMPORARY_FAILURE"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "TEMPORARY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEMPORARY_FAILURE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the MAIL FROM domain. This status can have the following values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PENDING</code> – Amazon Pinpoint hasn't started searching for the MX record\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS</code> – Amazon Pinpoint detected the required MX record for the\n                    MAIL FROM domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> – Amazon Pinpoint can't find the required MX record, or the\n                    record no longer exists.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue occurred, which\n                    prevented Amazon Pinpoint from determining the status of the MAIL FROM domain.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.pinpointemail#Max24HourSend": {
@@ -4407,14 +4537,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to enable or disable the automatic IP address warm-up feature.</p>"
+                "smithy.api#documentation": "<p>A request to enable or disable the automatic IP address warm-up feature.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutAccountDedicatedIpWarmupAttributesResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutAccountSendingAttributes": {
@@ -4454,14 +4586,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change the ability of your account to send email.</p>"
+                "smithy.api#documentation": "<p>A request to change the ability of your account to send email.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutAccountSendingAttributesResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetDeliveryOptions": {
@@ -4517,14 +4651,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to associate a configuration set with a dedicated IP pool.</p>"
+                "smithy.api#documentation": "<p>A request to associate a configuration set with a dedicated IP pool.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetDeliveryOptionsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetReputationOptions": {
@@ -4575,14 +4711,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to enable or disable tracking of reputation metrics for a configuration\n            set.</p>"
+                "smithy.api#documentation": "<p>A request to enable or disable tracking of reputation metrics for a configuration\n            set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetReputationOptionsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetSendingOptions": {
@@ -4633,14 +4771,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to enable or disable the ability of Amazon Pinpoint to send emails that use a specific\n            configuration set.</p>"
+                "smithy.api#documentation": "<p>A request to enable or disable the ability of Amazon Pinpoint to send emails that use a specific\n            configuration set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetSendingOptionsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetTrackingOptions": {
@@ -4690,14 +4830,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to add a custom domain for tracking open and click events to a configuration\n            set.</p>"
+                "smithy.api#documentation": "<p>A request to add a custom domain for tracking open and click events to a configuration\n            set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutConfigurationSetTrackingOptionsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutDedicatedIpInPool": {
@@ -4748,14 +4890,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to move a dedicated IP address to a dedicated IP pool.</p>"
+                "smithy.api#documentation": "<p>A request to move a dedicated IP address to a dedicated IP pool.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutDedicatedIpInPoolResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutDedicatedIpWarmupAttributes": {
@@ -4806,14 +4950,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change the warm-up attributes for a dedicated IP address. This operation\n            is useful when you want to resume the warm-up process for an existing IP address.</p>"
+                "smithy.api#documentation": "<p>A request to change the warm-up attributes for a dedicated IP address. This operation\n            is useful when you want to resume the warm-up process for an existing IP address.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutDedicatedIpWarmupAttributesResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutDeliverabilityDashboardOption": {
@@ -4869,14 +5015,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the\n            Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for\n            the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform\n            predictive inbox placement tests.</p>\n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon Pinpoint. For more information about the\n            features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
+                "smithy.api#documentation": "<p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the\n            Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for\n            the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform\n            predictive inbox placement tests.</p>\n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon Pinpoint. For more information about the\n            features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutDeliverabilityDashboardOptionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint\n            account.</p>"
+                "smithy.api#documentation": "<p>A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint\n            account.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutEmailIdentityDkimAttributes": {
@@ -4927,14 +5075,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to enable or disable DKIM signing of email that you send from an email\n            identity.</p>"
+                "smithy.api#documentation": "<p>A request to enable or disable DKIM signing of email that you send from an email\n            identity.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutEmailIdentityDkimAttributesResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutEmailIdentityFeedbackAttributes": {
@@ -4985,14 +5135,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to set the attributes that control how bounce and complaint events are\n            processed.</p>"
+                "smithy.api#documentation": "<p>A request to set the attributes that control how bounce and complaint events are\n            processed.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutEmailIdentityFeedbackAttributesResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#PutEmailIdentityMailFromAttributes": {
@@ -5048,14 +5200,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to configure the custom MAIL FROM domain for a verified identity.</p>"
+                "smithy.api#documentation": "<p>A request to configure the custom MAIL FROM domain for a verified identity.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#PutEmailIdentityMailFromAttributesResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#RawMessage": {
@@ -5210,7 +5364,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to send an email message.</p>"
+                "smithy.api#documentation": "<p>A request to send an email message.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#SendEmailResponse": {
@@ -5224,7 +5379,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A unique message ID that you receive when Amazon Pinpoint accepts an email for sending.</p>"
+                "smithy.api#documentation": "<p>A unique message ID that you receive when Amazon Pinpoint accepts an email for sending.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#SendQuota": {
@@ -5399,11 +5555,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.pinpointemail#TagValue": {
             "type": "string"
@@ -5441,19 +5603,23 @@
             "type": "timestamp"
         },
         "com.amazonaws.pinpointemail#TlsPolicy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>Optional</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "REQUIRE",
-                        "name": "REQUIRE"
-                    },
-                    {
-                        "value": "OPTIONAL",
-                        "name": "OPTIONAL"
+            "type": "enum",
+            "members": {
+                "REQUIRE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRE"
                     }
-                ]
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>Optional</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
             }
         },
         "com.amazonaws.pinpointemail#TooManyRequestsException": {
@@ -5534,11 +5700,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.pinpointemail#UpdateConfigurationSetEventDestination": {
             "type": "operation",
@@ -5596,14 +5768,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change the settings for an event destination for a configuration\n            set.</p>"
+                "smithy.api#documentation": "<p>A request to change the settings for an event destination for a configuration\n            set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointemail#UpdateConfigurationSetEventDestinationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointemail#Volume": {
@@ -5645,19 +5819,23 @@
             }
         },
         "com.amazonaws.pinpointemail#WarmupStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The warmup status of a dedicated IP.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "DONE",
-                        "name": "DONE"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "DONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The warmup status of a dedicated IP.</p>"
             }
         }
     }

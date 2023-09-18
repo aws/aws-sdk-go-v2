@@ -112,7 +112,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            The BatchCreateTableRows API allows you to create one or more rows at the end of a table in a workbook.\n            The API allows you to specify the values to set in some or all of the columns in the new rows.\n        </p>\n        <p>\n            If a column is not explicitly set in a specific row, then the column level formula specified in the table\n            will be applied to the new row. If there is no column level formula but the last row of the table has a\n            formula, then that formula will be copied down to the new row. If there is no column level formula and\n            no formula in the last row of the table, then that column will be left blank for the new rows.\n        </p>",
+                "smithy.api#documentation": "<p>\n            The BatchCreateTableRows API allows you to create one or more rows at the end of a table in a workbook.\n            The API allows you to specify the values to set in some or all of the columns in the new rows.\n        </p>\n         <p>\n            If a column is not explicitly set in a specific row, then the column level formula specified in the table\n            will be applied to the new row. If there is no column level formula but the last row of the table has a\n            formula, then that formula will be copied down to the new row. If there is no column level formula and\n            no formula in the last row of the table, then that column will be left blank for the new rows.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workbooks/{workbookId}/tables/{tableId}/rows/batchcreate",
@@ -126,7 +126,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook where the new rows are being added.</p>\n        <p>\n            If a workbook with the specified ID could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook where the new rows are being added.</p>\n         <p>\n            If a workbook with the specified ID could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -134,7 +134,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table where the new rows are being added.</p>\n        <p>\n            If a table with the specified ID could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table where the new rows are being added.</p>\n         <p>\n            If a table with the specified ID could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -142,16 +142,19 @@
                 "rowsToCreate": {
                     "target": "com.amazonaws.honeycode#CreateRowDataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The list of rows to create at the end of the table. Each item in this list needs to have a batch item id\n            to uniquely identify the element in the request and the cells to create for that row.\n            You need to specify at least one item in this list.\n        </p>\n        <p>\n            Note that if one of the column ids in any of the rows in the request does not exist in the table, then the\n            request fails and no updates are made to the table.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The list of rows to create at the end of the table. Each item in this list needs to have a batch item id\n            to uniquely identify the element in the request and the cells to create for that row.\n            You need to specify at least one item in this list.\n        </p>\n         <p>\n            Note that if one of the column ids in any of the rows in the request does not exist in the table, then the\n            request fails and no updates are made to the table.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.honeycode#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The request token for performing the batch create operation.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the operation again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The request token for performing the batch create operation.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the operation again.\n        </p>\n         <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#BatchCreateTableRowsResult": {
@@ -178,6 +181,9 @@
                         "smithy.api#documentation": "<p>\n            The list of batch items in the request that could not be added to the table. Each element in this list\n            contains one item from the request that could not be added to the table along with the reason why\n            that item could not be added.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#BatchDeleteTableRows": {
@@ -226,7 +232,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being deleted.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being deleted.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -234,7 +240,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table where the rows are being deleted.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table where the rows are being deleted.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -242,16 +248,19 @@
                 "rowIds": {
                     "target": "com.amazonaws.honeycode#RowIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The list of row ids to delete from the table. You need to specify at least one row id in this list.\n        </p>\n        <p>\n            Note that if one of the row ids provided in the request does not exist in the table, then the request fails\n            and no rows are deleted from the table.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The list of row ids to delete from the table. You need to specify at least one row id in this list.\n        </p>\n         <p>\n            Note that if one of the row ids provided in the request does not exist in the table, then the request fails\n            and no rows are deleted from the table.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.honeycode#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The request token for performing the delete action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The request token for performing the delete action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n         <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#BatchDeleteTableRowsResult": {
@@ -271,6 +280,9 @@
                         "smithy.api#documentation": "<p>\n            The list of row ids in the request that could not be deleted from the table. Each element in this list\n            contains one row id from the request that could not be deleted along with the reason why that item could not\n            be deleted.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#BatchErrorMessage": {
@@ -321,7 +333,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            The BatchUpdateTableRows API allows you to update one or more rows in a table in a workbook.\n        </p>\n        <p>\n            You can specify the values to set in some or all of the columns in the table for the specified\n            rows.\n            If a column is not explicitly specified in a particular row, then that column will not be updated\n            for that row. To clear out the data in a specific cell, you need to set the value as an empty string\n            (\"\").\n        </p>",
+                "smithy.api#documentation": "<p>\n            The BatchUpdateTableRows API allows you to update one or more rows in a table in a workbook.\n        </p>\n         <p>\n            You can specify the values to set in some or all of the columns in the table for the specified\n            rows.\n            If a column is not explicitly specified in a particular row, then that column will not be updated\n            for that row. To clear out the data in a specific cell, you need to set the value as an empty string\n            (\"\").\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workbooks/{workbookId}/tables/{tableId}/rows/batchupdate",
@@ -335,7 +347,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being updated.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being updated.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -343,7 +355,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table where the rows are being updated.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table where the rows are being updated.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -351,16 +363,19 @@
                 "rowsToUpdate": {
                     "target": "com.amazonaws.honeycode#UpdateRowDataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The list of rows to update in the table. Each item in this list needs to contain the row id to update\n            along with the map of column id to cell values for each column in that row that needs to be updated.\n            You need to specify at least one row in this list, and for each row, you need to specify at least one\n            column to update.\n        </p>\n        <p>\n            Note that if one of the row or column ids in the request does not exist in the table, then the request fails\n            and no updates are made to the table.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The list of rows to update in the table. Each item in this list needs to contain the row id to update\n            along with the map of column id to cell values for each column in that row that needs to be updated.\n            You need to specify at least one row in this list, and for each row, you need to specify at least one\n            column to update.\n        </p>\n         <p>\n            Note that if one of the row or column ids in the request does not exist in the table, then the request fails\n            and no updates are made to the table.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.honeycode#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The request token for performing the update action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The request token for performing the update action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n         <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#BatchUpdateTableRowsResult": {
@@ -380,6 +395,9 @@
                         "smithy.api#documentation": "<p>\n            The list of batch items in the request that could not be updated in the table. Each element in this list\n            contains one item from the request that could not be updated in the table along with the reason why\n            that item could not be updated.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#BatchUpsertTableRows": {
@@ -417,7 +435,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            The BatchUpsertTableRows API allows you to upsert one or more rows in a table. The upsert\n            operation takes a filter expression as input and evaluates it to find matching rows on the destination\n            table. If matching rows are found, it will update the cells in the matching rows to new values specified\n            in the request. If no matching rows are found, a new row is added at the end of the table and the cells in\n            that row are set to the new values specified in the request.\n        </p>\n        <p>\n            You can specify the values to set in some or all of the columns in the table for the\n            matching or newly appended rows. If a column is not explicitly specified for a particular row, then that\n            column will not be updated for that row. To clear out the data in a specific cell, you need to set the value\n            as an empty string (\"\").\n        </p>",
+                "smithy.api#documentation": "<p>\n            The BatchUpsertTableRows API allows you to upsert one or more rows in a table. The upsert\n            operation takes a filter expression as input and evaluates it to find matching rows on the destination\n            table. If matching rows are found, it will update the cells in the matching rows to new values specified\n            in the request. If no matching rows are found, a new row is added at the end of the table and the cells in\n            that row are set to the new values specified in the request.\n        </p>\n         <p>\n            You can specify the values to set in some or all of the columns in the table for the\n            matching or newly appended rows. If a column is not explicitly specified for a particular row, then that\n            column will not be updated for that row. To clear out the data in a specific cell, you need to set the value\n            as an empty string (\"\").\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workbooks/{workbookId}/tables/{tableId}/rows/batchupsert",
@@ -431,7 +449,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being upserted.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being upserted.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -439,7 +457,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table where the rows are being upserted.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table where the rows are being upserted.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -447,16 +465,19 @@
                 "rowsToUpsert": {
                     "target": "com.amazonaws.honeycode#UpsertRowDataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The list of rows to upsert in the table. Each item in this list needs to have a batch item id to uniquely\n            identify the element in the request, a filter expression to find the rows to update for that element\n            and the cell values to set for each column in the upserted rows. You need to specify\n            at least one item in this list.\n        </p>\n        <p>\n            Note that if one of the filter formulas in the request fails to evaluate because of an error or one of the\n            column ids in any of the rows does not exist in the table, then the request fails\n            and no updates are made to the table.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The list of rows to upsert in the table. Each item in this list needs to have a batch item id to uniquely\n            identify the element in the request, a filter expression to find the rows to update for that element\n            and the cell values to set for each column in the upserted rows. You need to specify\n            at least one item in this list.\n        </p>\n         <p>\n            Note that if one of the filter formulas in the request fails to evaluate because of an error or one of the\n            column ids in any of the rows does not exist in the table, then the request fails\n            and no updates are made to the table.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.honeycode#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The request token for performing the update action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The request token for performing the update action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n         <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#BatchUpsertTableRowsResult": {
@@ -483,6 +504,9 @@
                         "smithy.api#documentation": "<p>\n            The list of batch items in the request that could not be updated or appended in the table. Each element in\n            this list contains one item from the request that could not be updated in the table along with the reason\n            why that item could not be updated or appended.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#Cell": {
@@ -503,13 +527,13 @@
                 "rawValue": {
                     "target": "com.amazonaws.honeycode#RawValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The raw value of the data contained in the cell. The raw value depends on the format of the data in the\n            cell. However the attribute in the API return value is always a string containing the raw value.\n        </p>\n        <p>\n            Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point\n            number where the whole number represents the number of days since 1/1/1900 and the fractional part\n            represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value\n            \"44138\". A cell with the time 9:00 AM has the raw value \"0.375\" and a cell with date/time value of\n            11/3/2020 9:00 AM has the raw value \"44138.375\". Notice that even though the raw value is a number in all\n            three cases, it is still represented as a string.\n        </p>\n        <p>\n            Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number\n            representing the data being displayed. For example, the number 1.325 with two decimal places in the format\n            will have it's raw value as \"1.325\" and formatted value as \"1.33\". A currency value for\n            $10 will have the raw value as \"10\" and formatted value as \"$10.00\". A value representing 20% with two\n            decimal places in the format will have its raw value as \"0.2\" and the formatted value as \"20.00%\". An\n            accounting value of -$25 will have \"-25\" as the raw value and \"$  (25.00)\" as the formatted value.\n        </p>\n        <p>\n            Cells with format TEXT will have the raw text as the raw value. For example, a cell with text \"John Smith\"\n            will have \"John Smith\" as both the raw value and the formatted value.\n        </p>\n        <p>\n            Cells with format CONTACT will have the name of the contact as a formatted value and the email address of\n            the contact as the raw value. For example, a contact for John Smith will have \"John Smith\" as the\n            formatted value and \"john.smith@example.com\" as the raw value.\n        </p>\n        <p>\n            Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value\n            and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table\n            that displays task status might have \"Completed\" as the formatted value and\n            \"row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n        <p>\n            Cells with format ROWSET (aka multi-select or multi-record picklist) will by default have the first column\n            of each of the linked rows as the formatted value in the list, and the rowset id of the linked rows as the\n            raw value. For example, a cell containing a multi-select picklist to a table that contains items might have\n            \"Item A\", \"Item B\" in the formatted value list and \"rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/\n            [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]\" as the raw value.\n        </p>\n        <p>\n            Cells with format ATTACHMENT will have the name of the attachment as the formatted value and the attachment\n            id as the raw value. For example, a cell containing an attachment named \"image.jpeg\" will have\n            \"image.jpeg\" as the formatted value and \"attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n        <p>\n            Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will\n            contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no\n            auto-detected format, the raw and formatted values will be the same as the data in the cell.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The raw value of the data contained in the cell. The raw value depends on the format of the data in the\n            cell. However the attribute in the API return value is always a string containing the raw value.\n        </p>\n         <p>\n            Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point\n            number where the whole number represents the number of days since 1/1/1900 and the fractional part\n            represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value\n            \"44138\". A cell with the time 9:00 AM has the raw value \"0.375\" and a cell with date/time value of\n            11/3/2020 9:00 AM has the raw value \"44138.375\". Notice that even though the raw value is a number in all\n            three cases, it is still represented as a string.\n        </p>\n         <p>\n            Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number\n            representing the data being displayed. For example, the number 1.325 with two decimal places in the format\n            will have it's raw value as \"1.325\" and formatted value as \"1.33\". A currency value for\n            $10 will have the raw value as \"10\" and formatted value as \"$10.00\". A value representing 20% with two\n            decimal places in the format will have its raw value as \"0.2\" and the formatted value as \"20.00%\". An\n            accounting value of -$25 will have \"-25\" as the raw value and \"$  (25.00)\" as the formatted value.\n        </p>\n         <p>\n            Cells with format TEXT will have the raw text as the raw value. For example, a cell with text \"John Smith\"\n            will have \"John Smith\" as both the raw value and the formatted value.\n        </p>\n         <p>\n            Cells with format CONTACT will have the name of the contact as a formatted value and the email address of\n            the contact as the raw value. For example, a contact for John Smith will have \"John Smith\" as the\n            formatted value and \"john.smith@example.com\" as the raw value.\n        </p>\n         <p>\n            Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value\n            and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table\n            that displays task status might have \"Completed\" as the formatted value and\n            \"row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n         <p>\n            Cells with format ROWSET (aka multi-select or multi-record picklist) will by default have the first column\n            of each of the linked rows as the formatted value in the list, and the rowset id of the linked rows as the\n            raw value. For example, a cell containing a multi-select picklist to a table that contains items might have\n            \"Item A\", \"Item B\" in the formatted value list and \"rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/\n            [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]\" as the raw value.\n        </p>\n         <p>\n            Cells with format ATTACHMENT will have the name of the attachment as the formatted value and the attachment\n            id as the raw value. For example, a cell containing an attachment named \"image.jpeg\" will have\n            \"image.jpeg\" as the formatted value and \"attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n         <p>\n            Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will\n            contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no\n            auto-detected format, the raw and formatted values will be the same as the data in the cell.\n        </p>"
                     }
                 },
                 "formattedValue": {
                     "target": "com.amazonaws.honeycode#FormattedValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The formatted value of the cell. This is the value that you see displayed in the cell in the UI.\n        </p>\n        <p>\n            Note that the formatted value of a cell is always represented as a string irrespective of the data that is\n            stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string\n            representation of the formatted date being shown in the cell in the UI. See details in the rawValue field\n            below for how cells of different formats will have different raw and formatted values.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The formatted value of the cell. This is the value that you see displayed in the cell in the UI.\n        </p>\n         <p>\n            Note that the formatted value of a cell is always represented as a string irrespective of the data that is\n            stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string\n            representation of the formatted date being shown in the cell in the UI. See details in the rawValue field\n            below for how cells of different formats will have different raw and formatted values.\n        </p>"
                     }
                 },
                 "formattedValues": {
@@ -541,7 +565,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            CellInput object contains the data needed to create or update cells in a table.\n        </p>\n        <note>\n            <p>\n                CellInput object has only a facts field or a fact field, but not both. A 400 bad request will be\n                thrown if both fact and facts field are present.\n            </p>\n        </note>"
+                "smithy.api#documentation": "<p>\n            CellInput object contains the data needed to create or update cells in a table.\n        </p>\n         <note>\n            <p>\n                CellInput object has only a facts field or a fact field, but not both. A 400 bad request will be\n                thrown if both fact and facts field are present.\n            </p>\n         </note>"
             }
         },
         "com.amazonaws.honeycode#Cells": {
@@ -749,7 +773,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook into which data was imported.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook into which data was imported.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -757,7 +781,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table into which data was imported.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table into which data was imported.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -765,11 +789,14 @@
                 "jobId": {
                     "target": "com.amazonaws.honeycode#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the job that was returned by the StartTableDataImportJob request.</p>\n        <p>\n            If a job with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the job that was returned by the StartTableDataImportJob request.</p>\n         <p>\n            If a job with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#DescribeTableDataImportJobResult": {
@@ -802,6 +829,9 @@
                         "smithy.api#documentation": "<p>\n            If job status is failed, error code to understand reason for the failure.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#DestinationOptions": {
@@ -830,66 +860,92 @@
             }
         },
         "com.amazonaws.honeycode#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "AccessDenied"
-                    },
-                    {
-                        "value": "INVALID_URL_ERROR",
-                        "name": "InvalidUrlError"
-                    },
-                    {
-                        "value": "INVALID_IMPORT_OPTIONS_ERROR",
-                        "name": "InvalidImportOptionsError"
-                    },
-                    {
-                        "value": "INVALID_TABLE_ID_ERROR",
-                        "name": "InvalidTableIdError"
-                    },
-                    {
-                        "value": "INVALID_TABLE_COLUMN_ID_ERROR",
-                        "name": "InvalidTableColumnIdError"
-                    },
-                    {
-                        "value": "TABLE_NOT_FOUND_ERROR",
-                        "name": "TableNotFoundError"
-                    },
-                    {
-                        "value": "FILE_EMPTY_ERROR",
-                        "name": "FileEmptyError"
-                    },
-                    {
-                        "value": "INVALID_FILE_TYPE_ERROR",
-                        "name": "InvalidFileTypeError"
-                    },
-                    {
-                        "value": "FILE_PARSING_ERROR",
-                        "name": "FileParsingError"
-                    },
-                    {
-                        "value": "FILE_SIZE_LIMIT_ERROR",
-                        "name": "FileSizeLimitError"
-                    },
-                    {
-                        "value": "FILE_NOT_FOUND_ERROR",
-                        "name": "FileNotFoundError"
-                    },
-                    {
-                        "value": "UNKNOWN_ERROR",
-                        "name": "UnknownError"
-                    },
-                    {
-                        "value": "RESOURCE_NOT_FOUND_ERROR",
-                        "name": "ResourceNotFoundError"
-                    },
-                    {
-                        "value": "SYSTEM_LIMIT_ERROR",
-                        "name": "SystemLimitError"
+            "type": "enum",
+            "members": {
+                "AccessDenied": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
                     }
-                ]
+                },
+                "InvalidUrlError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_URL_ERROR"
+                    }
+                },
+                "InvalidImportOptionsError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_IMPORT_OPTIONS_ERROR"
+                    }
+                },
+                "InvalidTableIdError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TABLE_ID_ERROR"
+                    }
+                },
+                "InvalidTableColumnIdError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TABLE_COLUMN_ID_ERROR"
+                    }
+                },
+                "TableNotFoundError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLE_NOT_FOUND_ERROR"
+                    }
+                },
+                "FileEmptyError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_EMPTY_ERROR"
+                    }
+                },
+                "InvalidFileTypeError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FILE_TYPE_ERROR"
+                    }
+                },
+                "FileParsingError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_PARSING_ERROR"
+                    }
+                },
+                "FileSizeLimitError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_SIZE_LIMIT_ERROR"
+                    }
+                },
+                "FileNotFoundError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_NOT_FOUND_ERROR"
+                    }
+                },
+                "UnknownError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_ERROR"
+                    }
+                },
+                "ResourceNotFoundError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND_ERROR"
+                    }
+                },
+                "SystemLimitError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_LIMIT_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.honeycode#ErrorMessage": {
@@ -974,58 +1030,80 @@
             }
         },
         "com.amazonaws.honeycode#Format": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUTO",
-                        "name": "Auto"
-                    },
-                    {
-                        "value": "NUMBER",
-                        "name": "Number"
-                    },
-                    {
-                        "value": "CURRENCY",
-                        "name": "Currency"
-                    },
-                    {
-                        "value": "DATE",
-                        "name": "Date"
-                    },
-                    {
-                        "value": "TIME",
-                        "name": "Time"
-                    },
-                    {
-                        "value": "DATE_TIME",
-                        "name": "DateTime"
-                    },
-                    {
-                        "value": "PERCENTAGE",
-                        "name": "Percentage"
-                    },
-                    {
-                        "value": "TEXT",
-                        "name": "Text"
-                    },
-                    {
-                        "value": "ACCOUNTING",
-                        "name": "Accounting"
-                    },
-                    {
-                        "value": "CONTACT",
-                        "name": "Contact"
-                    },
-                    {
-                        "value": "ROWLINK",
-                        "name": "Rowlink"
-                    },
-                    {
-                        "value": "ROWSET",
-                        "name": "Rowset"
+            "type": "enum",
+            "members": {
+                "Auto": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
                     }
-                ]
+                },
+                "Number": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER"
+                    }
+                },
+                "Currency": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURRENCY"
+                    }
+                },
+                "Date": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                },
+                "Time": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME"
+                    }
+                },
+                "DateTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE_TIME"
+                    }
+                },
+                "Percentage": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENTAGE"
+                    }
+                },
+                "Text": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT"
+                    }
+                },
+                "Accounting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNTING"
+                    }
+                },
+                "Contact": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT"
+                    }
+                },
+                "Rowlink": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWLINK"
+                    }
+                },
+                "Rowset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROWSET"
+                    }
+                }
             }
         },
         "com.amazonaws.honeycode#FormattedValue": {
@@ -1134,15 +1212,18 @@
                 "maxResults": {
                     "target": "com.amazonaws.honeycode#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The number of results to be returned on a single page.\n            Specify a number between 1 and 100. The maximum value is 100.\n        </p>\n        <p>\n            This parameter is optional. If you don't specify this parameter, the default page size is 100.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The number of results to be returned on a single page.\n            Specify a number between 1 and 100. The maximum value is 100.\n        </p>\n         <p>\n            This parameter is optional. If you don't specify this parameter, the default page size is 100.\n        </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.honeycode#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n         <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#GetScreenDataResult": {
@@ -1169,6 +1250,9 @@
                         "smithy.api#documentation": "<p>\n            Provides the pagination token to load the next page if there are more results matching the request. If a\n            pagination token is not present in the response, it means that all data matching the query has been loaded.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#HasHeaderRow": {
@@ -1199,34 +1283,44 @@
             }
         },
         "com.amazonaws.honeycode#ImportDataCharacterEncoding": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UTF-8",
-                        "name": "UTF_8"
-                    },
-                    {
-                        "value": "US-ASCII",
-                        "name": "US_ASCII"
-                    },
-                    {
-                        "value": "ISO-8859-1",
-                        "name": "ISO_8859_1"
-                    },
-                    {
-                        "value": "UTF-16BE",
-                        "name": "UTF_16BE"
-                    },
-                    {
-                        "value": "UTF-16LE",
-                        "name": "UTF_16LE"
-                    },
-                    {
-                        "value": "UTF-16",
-                        "name": "UTF_16"
+            "type": "enum",
+            "members": {
+                "UTF_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTF-8"
                     }
-                ]
+                },
+                "US_ASCII": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US-ASCII"
+                    }
+                },
+                "ISO_8859_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISO-8859-1"
+                    }
+                },
+                "UTF_16BE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTF-16BE"
+                    }
+                },
+                "UTF_16LE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTF-16LE"
+                    }
+                },
+                "UTF_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTF-16"
+                    }
+                }
             }
         },
         "com.amazonaws.honeycode#ImportDataSource": {
@@ -1299,14 +1393,14 @@
             }
         },
         "com.amazonaws.honeycode#ImportSourceDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DELIMITED_TEXT",
-                        "name": "DelimitedText"
+            "type": "enum",
+            "members": {
+                "DelimitedText": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIMITED_TEXT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.honeycode#InternalServerException": {
@@ -1421,9 +1515,12 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.honeycode#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The request token for performing the automation action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will return the\n            response of the previous call rather than performing the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The request token for performing the automation action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will return the\n            response of the previous call rather than performing the action again.\n        </p>\n         <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#InvokeScreenAutomationResult": {
@@ -1437,6 +1534,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#JobId": {
@@ -1489,7 +1589,8 @@
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
-                    "outputToken": "nextToken"
+                    "outputToken": "nextToken",
+                    "items": "tableColumns"
                 }
             }
         },
@@ -1499,7 +1600,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook that contains the table whose columns are being retrieved.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook that contains the table whose columns are being retrieved.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1507,7 +1608,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table whose columns are being retrieved.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table whose columns are being retrieved.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1515,10 +1616,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.honeycode#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n         <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#ListTableColumnsResult": {
@@ -1544,6 +1648,9 @@
                         "smithy.api#documentation": "<p>\n            Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor\n            keeps increasing with every update and the increments are not sequential.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#ListTableRows": {
@@ -1587,6 +1694,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "rows",
                     "pageSize": "maxResults"
                 }
             }
@@ -1597,7 +1705,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook that contains the table whose rows are being retrieved.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook that contains the table whose rows are being retrieved.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1605,7 +1713,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table whose rows are being retrieved.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table whose rows are being retrieved.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1625,9 +1733,12 @@
                 "nextToken": {
                     "target": "com.amazonaws.honeycode#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n         <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#ListTableRowsResult": {
@@ -1667,6 +1778,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#ListTables": {
@@ -1710,6 +1824,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "tables",
                     "pageSize": "maxResults"
                 }
             }
@@ -1720,7 +1835,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook whose tables are being retrieved.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook whose tables are being retrieved.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1735,10 +1850,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.honeycode#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n         <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#ListTablesResult": {
@@ -1764,6 +1882,9 @@
                         "smithy.api#documentation": "<p>\n            Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor\n            keeps increasing with every update and the increments are not sequential.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#ListTagsForResource": {
@@ -1817,6 +1938,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#ListTagsForResourceResult": {
@@ -1828,6 +1952,9 @@
                         "smithy.api#documentation": "<p>The resource's tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#MaxResults": {
@@ -1896,6 +2023,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "rows",
                     "pageSize": "maxResults"
                 }
             }
@@ -1906,7 +2034,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook whose table rows are being queried.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook whose table rows are being queried.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1914,7 +2042,7 @@
                 "tableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table whose rows are being queried.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table whose rows are being queried.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1935,9 +2063,12 @@
                 "nextToken": {
                     "target": "com.amazonaws.honeycode#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n         <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#QueryTableRowsResult": {
@@ -1971,6 +2102,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#RawValue": {
@@ -2080,7 +2214,7 @@
                 "headers": {
                     "target": "com.amazonaws.honeycode#ResultHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            List of headers for all the data cells in the block. The header identifies the name and default format of\n            the data cell. Data cells appear in the same order in all rows as defined in the header. The names and\n            formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank\n            value is used.\n        </p>\n        <p>\n            For example, a task list that displays the task name, due date and assigned person might have headers\n            [ { \"name\": \"Task Name\"}, {\"name\": \"Due Date\", \"format\": \"DATE\"}, {\"name\": \"Assigned\", \"format\": \"CONTACT\"} ].\n            Every row in the result will have the task name as the first item, due date as the second item and assigned\n            person as the third item. If a particular task does not have a due date, that row will still have a blank\n            value in the second element and the assigned person will still be in the third element.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            List of headers for all the data cells in the block. The header identifies the name and default format of\n            the data cell. Data cells appear in the same order in all rows as defined in the header. The names and\n            formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank\n            value is used.\n        </p>\n         <p>\n            For example, a task list that displays the task name, due date and assigned person might have headers\n            [ { \"name\": \"Task Name\"}, {\"name\": \"Due Date\", \"format\": \"DATE\"}, {\"name\": \"Assigned\", \"format\": \"CONTACT\"} ].\n            Every row in the result will have the task name as the first item, due date as the second item and assigned\n            person as the third item. If a particular task does not have a due date, that row will still have a blank\n            value in the second element and the assigned person will still be in the third element.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2306,9 +2440,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://honeycode-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://honeycode-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2321,15 +2634,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://honeycode.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://honeycode.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2341,258 +2689,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://honeycode-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://honeycode-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://honeycode.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://honeycode.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2607,8 +2705,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2620,8 +2718,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2633,8 +2731,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2646,8 +2744,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2659,8 +2757,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2672,8 +2770,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2685,8 +2783,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2698,8 +2796,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2711,8 +2809,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2724,8 +2822,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2737,8 +2835,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2750,8 +2848,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2763,8 +2861,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2776,8 +2885,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2789,8 +2909,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2802,8 +2933,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2815,8 +2957,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2828,8 +2970,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2841,8 +2983,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2853,8 +2995,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2865,9 +3007,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2948,7 +3096,7 @@
                 "workbookId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being imported.</p>\n        <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the workbook where the rows are being imported.</p>\n         <p>\n            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2970,7 +3118,7 @@
                 "destinationTableId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the table where the rows are being imported.</p>\n        <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the table where the rows are being imported.</p>\n         <p>\n            If a table with the specified id could not be found, this API throws ResourceNotFoundException.\n        </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2985,10 +3133,13 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.honeycode#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The request token for performing the update action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The request token for performing the update action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will not perform\n            the action again.\n        </p>\n         <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#StartTableDataImportJobResult": {
@@ -3008,6 +3159,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.honeycode#Table": {
@@ -3105,26 +3259,32 @@
             }
         },
         "com.amazonaws.honeycode#TableDataImportJobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUBMITTED",
-                        "name": "Submitted"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "InProgress"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "Completed"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "Failed"
+            "type": "enum",
+            "members": {
+                "Submitted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
                     }
-                ]
+                },
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "Completed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.honeycode#TableName": {
@@ -3245,11 +3405,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#TagResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.honeycode#TagValue": {
             "type": "string",
@@ -3352,11 +3518,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.honeycode#UntagResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.honeycode#UpdateRowData": {
             "type": "structure",
@@ -3393,18 +3565,20 @@
             }
         },
         "com.amazonaws.honeycode#UpsertAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UPDATED",
-                        "name": "Updated"
-                    },
-                    {
-                        "value": "APPENDED",
-                        "name": "Appended"
+            "type": "enum",
+            "members": {
+                "Updated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
                     }
-                ]
+                },
+                "Appended": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPENDED"
+                    }
+                }
             }
         },
         "com.amazonaws.honeycode#UpsertRowData": {
@@ -3420,7 +3594,7 @@
                 "filter": {
                     "target": "com.amazonaws.honeycode#Filter",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The filter formula to use to find existing matching rows to update. The formula needs to return zero or more\n            rows. If the formula returns 0 rows, then a new row will be appended in the target table. If the formula\n            returns one or more rows, then the returned rows will be updated.\n        </p>\n        <p>\n            Note that the filter formula needs to return rows from the target table for the upsert operation to succeed.\n            If the filter formula has a syntax error or it doesn't evaluate to zero or more rows in the target table\n            for any one item in the input list, then the entire BatchUpsertTableRows request fails and no updates are\n            made to the table.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The filter formula to use to find existing matching rows to update. The formula needs to return zero or more\n            rows. If the formula returns 0 rows, then a new row will be appended in the target table. If the formula\n            returns one or more rows, then the returned rows will be updated.\n        </p>\n         <p>\n            Note that the filter formula needs to return rows from the target table for the upsert operation to succeed.\n            If the filter formula has a syntax error or it doesn't evaluate to zero or more rows in the target table\n            for any one item in the input list, then the entire BatchUpsertTableRows request fails and no updates are\n            made to the table.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -193,6 +193,7 @@
                     "arnNamespace": "events",
                     "cloudFormationName": "Events",
                     "cloudTrailEventSource": "cloudwatchevents.amazonaws.com",
+                    "docId": "events-2015-10-07",
                     "endpointPrefix": "events"
                 },
                 "aws.auth#sigv4": {

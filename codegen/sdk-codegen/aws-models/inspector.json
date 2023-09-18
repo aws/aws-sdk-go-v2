@@ -30,42 +30,56 @@
     },
     "shapes": {
         "com.amazonaws.inspector#AccessDeniedErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCESS_DENIED_TO_ASSESSMENT_TARGET",
-                        "name": "ACCESS_DENIED_TO_ASSESSMENT_TARGET"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE",
-                        "name": "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_ASSESSMENT_RUN",
-                        "name": "ACCESS_DENIED_TO_ASSESSMENT_RUN"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_FINDING",
-                        "name": "ACCESS_DENIED_TO_FINDING"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_RESOURCE_GROUP",
-                        "name": "ACCESS_DENIED_TO_RESOURCE_GROUP"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_RULES_PACKAGE",
-                        "name": "ACCESS_DENIED_TO_RULES_PACKAGE"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_SNS_TOPIC",
-                        "name": "ACCESS_DENIED_TO_SNS_TOPIC"
-                    },
-                    {
-                        "value": "ACCESS_DENIED_TO_IAM_ROLE",
-                        "name": "ACCESS_DENIED_TO_IAM_ROLE"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED_TO_ASSESSMENT_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_ASSESSMENT_TARGET"
                     }
-                ]
+                },
+                "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"
+                    }
+                },
+                "ACCESS_DENIED_TO_ASSESSMENT_RUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_ASSESSMENT_RUN"
+                    }
+                },
+                "ACCESS_DENIED_TO_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_FINDING"
+                    }
+                },
+                "ACCESS_DENIED_TO_RESOURCE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_RESOURCE_GROUP"
+                    }
+                },
+                "ACCESS_DENIED_TO_RULES_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_RULES_PACKAGE"
+                    }
+                },
+                "ACCESS_DENIED_TO_SNS_TOPIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_SNS_TOPIC"
+                    }
+                },
+                "ACCESS_DENIED_TO_IAM_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED_TO_IAM_ROLE"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#AccessDeniedException": {
@@ -125,7 +139,27 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns attributes (key and value pairs) to the findings that are specified by the\n         ARNs of the findings.</p>"
+                "smithy.api#documentation": "<p>Assigns attributes (key and value pairs) to the findings that are specified by the\n         ARNs of the findings.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Add attributes to findings",
+                        "documentation": "Assigns attributes (key and value pairs) to the findings that are specified by the ARNs of the findings.",
+                        "input": {
+                            "findingArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-8l1VIE0D/run/0-Z02cjjug/finding/0-T8yM9mEU"
+                            ],
+                            "attributes": [
+                                {
+                                    "key": "Example",
+                                    "value": "example"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "failedItems": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#AddAttributesToFindingsRequest": {
@@ -145,6 +179,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#AddAttributesToFindingsResponse": {
@@ -157,6 +194,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#AddRemoveAttributesFindingArnList": {
@@ -228,53 +268,67 @@
             }
         },
         "com.amazonaws.inspector#AgentHealth": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
                     }
-                ]
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#AgentHealthCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IDLE",
-                        "name": "IDLE"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "SHUTDOWN",
-                        "name": "SHUTDOWN"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "THROTTLED",
-                        "name": "THROTTLED"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDLE"
                     }
-                ]
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SHUTDOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHUTDOWN"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#AgentHealthCodeList": {
@@ -848,85 +902,115 @@
             }
         },
         "com.amazonaws.inspector#AssessmentRunNotificationSnsStatusCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "TOPIC_DOES_NOT_EXIST",
-                        "name": "TOPIC_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
                     }
-                ]
+                },
+                "TOPIC_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPIC_DOES_NOT_EXIST"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#AssessmentRunState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "START_DATA_COLLECTION_PENDING",
-                        "name": "START_DATA_COLLECTION_PENDING"
-                    },
-                    {
-                        "value": "START_DATA_COLLECTION_IN_PROGRESS",
-                        "name": "START_DATA_COLLECTION_IN_PROGRESS"
-                    },
-                    {
-                        "value": "COLLECTING_DATA",
-                        "name": "COLLECTING_DATA"
-                    },
-                    {
-                        "value": "STOP_DATA_COLLECTION_PENDING",
-                        "name": "STOP_DATA_COLLECTION_PENDING"
-                    },
-                    {
-                        "value": "DATA_COLLECTED",
-                        "name": "DATA_COLLECTED"
-                    },
-                    {
-                        "value": "START_EVALUATING_RULES_PENDING",
-                        "name": "START_EVALUATING_RULES_PENDING"
-                    },
-                    {
-                        "value": "EVALUATING_RULES",
-                        "name": "EVALUATING_RULES"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "COMPLETED_WITH_ERRORS",
-                        "name": "COMPLETED_WITH_ERRORS"
-                    },
-                    {
-                        "value": "CANCELED",
-                        "name": "CANCELED"
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
                     }
-                ]
+                },
+                "START_DATA_COLLECTION_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_DATA_COLLECTION_PENDING"
+                    }
+                },
+                "START_DATA_COLLECTION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_DATA_COLLECTION_IN_PROGRESS"
+                    }
+                },
+                "COLLECTING_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLLECTING_DATA"
+                    }
+                },
+                "STOP_DATA_COLLECTION_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_DATA_COLLECTION_PENDING"
+                    }
+                },
+                "DATA_COLLECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_COLLECTED"
+                    }
+                },
+                "START_EVALUATING_RULES_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_EVALUATING_RULES_PENDING"
+                    }
+                },
+                "EVALUATING_RULES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVALUATING_RULES"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "COMPLETED_WITH_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED_WITH_ERRORS"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#AssessmentRunStateChange": {
@@ -1241,14 +1325,14 @@
             }
         },
         "com.amazonaws.inspector#AssetType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ec2-instance",
-                        "name": "EC2_INSTANCE"
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ec2-instance"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.inspector#Attribute": {
@@ -1382,7 +1466,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new assessment target using the ARN of the resource group that is generated\n         by <a>CreateResourceGroup</a>. If resourceGroupArn is not specified, all EC2\n         instances in the current AWS account and region are included in the assessment target. If\n         the <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html\">service-linked role</a> isn’t already registered, this action also creates and\n         registers a service-linked role to grant Amazon Inspector access to AWS Services needed to\n         perform security assessments. You can create up to 50 assessment targets per AWS account.\n         You can run up to 500 concurrent agents per AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html\">\n            Amazon Inspector Assessment Targets</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a new assessment target using the ARN of the resource group that is generated\n         by <a>CreateResourceGroup</a>. If resourceGroupArn is not specified, all EC2\n         instances in the current AWS account and region are included in the assessment target. If\n         the <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html\">service-linked role</a> isn’t already registered, this action also creates and\n         registers a service-linked role to grant Amazon Inspector access to AWS Services needed to\n         perform security assessments. You can create up to 50 assessment targets per AWS account.\n         You can run up to 500 concurrent agents per AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html\">\n            Amazon Inspector Assessment Targets</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create assessment target",
+                        "documentation": "Creates a new assessment target using the ARN of the resource group that is generated by CreateResourceGroup. You can create up to 50 assessment targets per AWS account. You can run up to 500 concurrent agents per AWS account.",
+                        "input": {
+                            "assessmentTargetName": "ExampleAssessmentTarget",
+                            "resourceGroupArn": "arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv"
+                        },
+                        "output": {
+                            "assessmentTargetArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#CreateAssessmentTargetRequest": {
@@ -1401,6 +1498,9 @@
                         "smithy.api#documentation": "<p>The ARN that specifies the resource group that is used to create the assessment\n         target. If resourceGroupArn is not specified, all EC2 instances in the current AWS account\n         and region are included in the assessment target.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#CreateAssessmentTargetResponse": {
@@ -1413,6 +1513,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#CreateAssessmentTemplate": {
@@ -1444,7 +1547,30 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an assessment template for the assessment target that is specified by the ARN\n         of the assessment target. If the <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html\">service-linked role</a> isn’t already registered, this action also creates and\n         registers a service-linked role to grant Amazon Inspector access to AWS Services needed to\n         perform security assessments.</p>"
+                "smithy.api#documentation": "<p>Creates an assessment template for the assessment target that is specified by the ARN\n         of the assessment target. If the <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html\">service-linked role</a> isn’t already registered, this action also creates and\n         registers a service-linked role to grant Amazon Inspector access to AWS Services needed to\n         perform security assessments.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create assessment template",
+                        "documentation": "Creates an assessment template for the assessment target that is specified by the ARN of the assessment target.",
+                        "input": {
+                            "assessmentTargetArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX",
+                            "assessmentTemplateName": "ExampleAssessmentTemplate",
+                            "durationInSeconds": 180,
+                            "rulesPackageArns": [
+                                "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-11B9DBXp"
+                            ],
+                            "userAttributesForFindings": [
+                                {
+                                    "key": "Example",
+                                    "value": "example"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "assessmentTemplateArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#CreateAssessmentTemplateRequest": {
@@ -1485,6 +1611,9 @@
                         "smithy.api#documentation": "<p>The user-defined attributes that are assigned to every finding that is generated by\n         the assessment run that uses this assessment template. An attribute is a key and value pair\n         (an <a>Attribute</a> object). Within an assessment template, each key must be\n         unique.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#CreateAssessmentTemplateResponse": {
@@ -1497,6 +1626,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#CreateExclusionsPreview": {
@@ -1541,6 +1673,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#CreateExclusionsPreviewResponse": {
@@ -1553,6 +1688,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#CreateResourceGroup": {
@@ -1581,7 +1719,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource group using the specified set of tags (key and value pairs) that\n         are used to select the EC2 instances to be included in an Amazon Inspector assessment\n         target. The created resource group is then used to create an Amazon Inspector assessment\n         target. For more information, see <a>CreateAssessmentTarget</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a resource group using the specified set of tags (key and value pairs) that\n         are used to select the EC2 instances to be included in an Amazon Inspector assessment\n         target. The created resource group is then used to create an Amazon Inspector assessment\n         target. For more information, see <a>CreateAssessmentTarget</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create resource group",
+                        "documentation": "Creates a resource group using the specified set of tags (key and value pairs) that are used to select the EC2 instances to be included in an Amazon Inspector assessment target. The created resource group is then used to create an Amazon Inspector assessment target. ",
+                        "input": {
+                            "resourceGroupTags": [
+                                {
+                                    "key": "Name",
+                                    "value": "example"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "resourceGroupArn": "arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#CreateResourceGroupRequest": {
@@ -1594,6 +1749,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#CreateResourceGroupResponse": {
@@ -1606,6 +1764,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DeleteAssessmentRun": {
@@ -1637,7 +1798,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the assessment run that is specified by the ARN of the assessment\n         run.</p>"
+                "smithy.api#documentation": "<p>Deletes the assessment run that is specified by the ARN of the assessment\n         run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete assessment run",
+                        "documentation": "Deletes the assessment run that is specified by the ARN of the assessment run.",
+                        "input": {
+                            "assessmentRunArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-11LMTAVe"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#DeleteAssessmentRunRequest": {
@@ -1650,6 +1820,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DeleteAssessmentTarget": {
@@ -1681,7 +1854,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the assessment target that is specified by the ARN of the assessment\n         target.</p>"
+                "smithy.api#documentation": "<p>Deletes the assessment target that is specified by the ARN of the assessment\n         target.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete assessment target",
+                        "documentation": "Deletes the assessment target that is specified by the ARN of the assessment target.",
+                        "input": {
+                            "assessmentTargetArn": "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#DeleteAssessmentTargetRequest": {
@@ -1694,6 +1876,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DeleteAssessmentTemplate": {
@@ -1725,7 +1910,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the assessment template that is specified by the ARN of the assessment\n         template.</p>"
+                "smithy.api#documentation": "<p>Deletes the assessment template that is specified by the ARN of the assessment\n         template.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete assessment template",
+                        "documentation": "Deletes the assessment template that is specified by the ARN of the assessment template.",
+                        "input": {
+                            "assessmentTemplateArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#DeleteAssessmentTemplateRequest": {
@@ -1738,6 +1932,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeAssessmentRuns": {
@@ -1770,6 +1967,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeAssessmentRunsResponse": {
@@ -1789,6 +1989,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeAssessmentTargets": {
@@ -1821,6 +2024,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeAssessmentTargetsResponse": {
@@ -1840,6 +2046,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeAssessmentTemplates": {
@@ -1871,6 +2080,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeAssessmentTemplatesResponse": {
@@ -1890,6 +2102,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeCrossAccountAccessRole": {
@@ -1933,6 +2148,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeExclusions": {
@@ -1971,6 +2189,9 @@
                         "smithy.api#documentation": "<p>The locale into which you want to translate the exclusion's title, description, and\n         recommendation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeExclusionsResponse": {
@@ -1990,6 +2211,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeFindings": {
@@ -2028,6 +2252,9 @@
                         "smithy.api#documentation": "<p>The locale into which you want to translate a finding description, recommendation,\n         and the short description that identifies the finding.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeFindingsResponse": {
@@ -2047,6 +2274,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeResourceGroups": {
@@ -2079,6 +2309,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeResourceGroupsResponse": {
@@ -2098,6 +2331,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DescribeRulesPackages": {
@@ -2117,7 +2353,30 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the rules packages that are specified by the ARNs of the rules\n         packages.</p>"
+                "smithy.api#documentation": "<p>Describes the rules packages that are specified by the ARNs of the rules\n         packages.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe rules packages",
+                        "documentation": "Describes the rules packages that are specified by the ARNs of the rules packages.",
+                        "input": {
+                            "rulesPackageArns": [
+                                "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ"
+                            ]
+                        },
+                        "output": {
+                            "rulesPackages": [
+                                {
+                                    "arn": "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ",
+                                    "description": "The rules in this package help determine whether your systems are configured securely.",
+                                    "name": "Security Best Practices",
+                                    "provider": "Amazon Web Services, Inc.",
+                                    "version": "1.1"
+                                }
+                            ],
+                            "failedItems": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#DescribeRulesPackagesRequest": {
@@ -2136,6 +2395,9 @@
                         "smithy.api#documentation": "<p>The locale that you want to translate a rules package description into.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#DescribeRulesPackagesResponse": {
@@ -2155,6 +2417,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#DurationRange": {
@@ -2363,34 +2628,44 @@
             }
         },
         "com.amazonaws.inspector#FailedItemErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INVALID_ARN",
-                        "name": "INVALID_ARN"
-                    },
-                    {
-                        "value": "DUPLICATE_ARN",
-                        "name": "DUPLICATE_ARN"
-                    },
-                    {
-                        "value": "ITEM_DOES_NOT_EXIST",
-                        "name": "ITEM_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "LIMIT_EXCEEDED",
-                        "name": "LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
+            "type": "enum",
+            "members": {
+                "INVALID_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ARN"
                     }
-                ]
+                },
+                "DUPLICATE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_ARN"
+                    }
+                },
+                "ITEM_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITEM_DOES_NOT_EXIST"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#FailedItems": {
@@ -2677,6 +2952,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#GetAssessmentReportResponse": {
@@ -2695,6 +2973,9 @@
                         "smithy.api#documentation": "<p>Specifies the URL where you can find the generated assessment report. This parameter\n         is only returned if the report is successfully generated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#GetExclusionsPreview": {
@@ -2763,6 +3044,9 @@
                         "smithy.api#documentation": "<p>The locale into which you want to translate the exclusion's title, description, and\n         recommendation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#GetExclusionsPreviewResponse": {
@@ -2787,6 +3071,9 @@
                         "smithy.api#documentation": "<p>When a response is generated, if there is more data to be listed, this parameters is\n         present in the response and contains the value to use for the nextToken parameter in a\n         subsequent pagination request. If there is no more data to be listed, this parameter is set\n         to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#GetTelemetryMetadata": {
@@ -2812,7 +3099,165 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Information about the data that is collected for the specified assessment\n         run.</p>"
+                "smithy.api#documentation": "<p>Information about the data that is collected for the specified assessment\n         run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get telemetry metadata",
+                        "documentation": "Information about the data that is collected for the specified assessment run.",
+                        "input": {
+                            "assessmentRunArn": "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE"
+                        },
+                        "output": {
+                            "telemetryMetadata": [
+                                {
+                                    "count": 2,
+                                    "dataSize": 345,
+                                    "messageType": "InspectorDuplicateProcess"
+                                },
+                                {
+                                    "count": 3,
+                                    "dataSize": 255,
+                                    "messageType": "InspectorTimeEventMsg"
+                                },
+                                {
+                                    "count": 4,
+                                    "dataSize": 1082,
+                                    "messageType": "InspectorNetworkInterface"
+                                },
+                                {
+                                    "count": 2,
+                                    "dataSize": 349,
+                                    "messageType": "InspectorDnsEntry"
+                                },
+                                {
+                                    "count": 11,
+                                    "dataSize": 2514,
+                                    "messageType": "InspectorDirectoryInfoMsg"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 179,
+                                    "messageType": "InspectorTcpV6ListeningPort"
+                                },
+                                {
+                                    "count": 101,
+                                    "dataSize": 10949,
+                                    "messageType": "InspectorTerminal"
+                                },
+                                {
+                                    "count": 26,
+                                    "dataSize": 5916,
+                                    "messageType": "InspectorUser"
+                                },
+                                {
+                                    "count": 282,
+                                    "dataSize": 32148,
+                                    "messageType": "InspectorDynamicallyLoadedCodeModule"
+                                },
+                                {
+                                    "count": 18,
+                                    "dataSize": 10172,
+                                    "messageType": "InspectorCreateProcess"
+                                },
+                                {
+                                    "count": 3,
+                                    "dataSize": 8001,
+                                    "messageType": "InspectorProcessPerformance"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 360,
+                                    "messageType": "InspectorOperatingSystem"
+                                },
+                                {
+                                    "count": 6,
+                                    "dataSize": 546,
+                                    "messageType": "InspectorStopProcess"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 1553,
+                                    "messageType": "InspectorInstanceMetaData"
+                                },
+                                {
+                                    "count": 2,
+                                    "dataSize": 434,
+                                    "messageType": "InspectorTcpV4Connection"
+                                },
+                                {
+                                    "count": 474,
+                                    "dataSize": 2960322,
+                                    "messageType": "InspectorPackageInfo"
+                                },
+                                {
+                                    "count": 3,
+                                    "dataSize": 2235,
+                                    "messageType": "InspectorSystemPerformance"
+                                },
+                                {
+                                    "count": 105,
+                                    "dataSize": 46048,
+                                    "messageType": "InspectorCodeModule"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 182,
+                                    "messageType": "InspectorUdpV6ListeningPort"
+                                },
+                                {
+                                    "count": 2,
+                                    "dataSize": 371,
+                                    "messageType": "InspectorUdpV4ListeningPort"
+                                },
+                                {
+                                    "count": 18,
+                                    "dataSize": 8362,
+                                    "messageType": "InspectorKernelModule"
+                                },
+                                {
+                                    "count": 29,
+                                    "dataSize": 48788,
+                                    "messageType": "InspectorConfigurationInfo"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 79,
+                                    "messageType": "InspectorMonitoringStart"
+                                },
+                                {
+                                    "count": 5,
+                                    "dataSize": 0,
+                                    "messageType": "InspectorSplitMsgBegin"
+                                },
+                                {
+                                    "count": 51,
+                                    "dataSize": 4593,
+                                    "messageType": "InspectorGroup"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 184,
+                                    "messageType": "InspectorTcpV4ListeningPort"
+                                },
+                                {
+                                    "count": 1159,
+                                    "dataSize": 3146579,
+                                    "messageType": "Total"
+                                },
+                                {
+                                    "count": 5,
+                                    "dataSize": 0,
+                                    "messageType": "InspectorSplitMsgEnd"
+                                },
+                                {
+                                    "count": 1,
+                                    "dataSize": 612,
+                                    "messageType": "InspectorLoadImageInProcess"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#GetTelemetryMetadataRequest": {
@@ -2825,6 +3270,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#GetTelemetryMetadataResponse": {
@@ -2837,6 +3285,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#Hostname": {
@@ -2849,30 +3300,38 @@
             }
         },
         "com.amazonaws.inspector#InspectorEvent": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSESSMENT_RUN_STARTED",
-                        "name": "ASSESSMENT_RUN_STARTED"
-                    },
-                    {
-                        "value": "ASSESSMENT_RUN_COMPLETED",
-                        "name": "ASSESSMENT_RUN_COMPLETED"
-                    },
-                    {
-                        "value": "ASSESSMENT_RUN_STATE_CHANGED",
-                        "name": "ASSESSMENT_RUN_STATE_CHANGED"
-                    },
-                    {
-                        "value": "FINDING_REPORTED",
-                        "name": "FINDING_REPORTED"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "ASSESSMENT_RUN_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_RUN_STARTED"
                     }
-                ]
+                },
+                "ASSESSMENT_RUN_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_RUN_COMPLETED"
+                    }
+                },
+                "ASSESSMENT_RUN_STATE_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_RUN_STATE_CHANGED"
+                    }
+                },
+                "FINDING_REPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINDING_REPORTED"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#InspectorService": {
@@ -3065,9 +3524,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -3080,15 +3718,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://inspector.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -3100,258 +3773,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://inspector-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://inspector-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://inspector.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://inspector.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -3366,8 +3789,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3379,8 +3802,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3392,8 +3815,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3405,8 +3828,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3418,8 +3841,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3431,8 +3854,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3444,8 +3867,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3457,8 +3880,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3470,8 +3893,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3483,8 +3906,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3496,8 +3919,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3509,8 +3932,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3522,8 +3945,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3535,8 +3958,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3548,8 +3971,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3561,8 +3984,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3574,8 +3997,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3587,8 +4010,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3600,8 +4023,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3613,8 +4036,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3626,8 +4049,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3639,8 +4062,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3652,8 +4075,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3665,8 +4088,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3678,8 +4101,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3691,8 +4114,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3704,8 +4127,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3717,8 +4140,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3730,8 +4164,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3743,8 +4188,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3756,8 +4212,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3769,8 +4236,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3782,8 +4249,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3795,8 +4262,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3807,8 +4274,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3819,9 +4286,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3881,18 +4354,20 @@
             }
         },
         "com.amazonaws.inspector#InvalidCrossAccountRoleErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP",
-                        "name": "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
-                    },
-                    {
-                        "value": "ROLE_DOES_NOT_HAVE_CORRECT_POLICY",
-                        "name": "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
+            "type": "enum",
+            "members": {
+                "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
                     }
-                ]
+                },
+                "ROLE_DOES_NOT_HAVE_CORRECT_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#InvalidCrossAccountRoleException": {
@@ -3926,226 +4401,332 @@
             }
         },
         "com.amazonaws.inspector#InvalidInputErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INVALID_ASSESSMENT_TARGET_ARN",
-                        "name": "INVALID_ASSESSMENT_TARGET_ARN"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TEMPLATE_ARN",
-                        "name": "INVALID_ASSESSMENT_TEMPLATE_ARN"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_RUN_ARN",
-                        "name": "INVALID_ASSESSMENT_RUN_ARN"
-                    },
-                    {
-                        "value": "INVALID_FINDING_ARN",
-                        "name": "INVALID_FINDING_ARN"
-                    },
-                    {
-                        "value": "INVALID_RESOURCE_GROUP_ARN",
-                        "name": "INVALID_RESOURCE_GROUP_ARN"
-                    },
-                    {
-                        "value": "INVALID_RULES_PACKAGE_ARN",
-                        "name": "INVALID_RULES_PACKAGE_ARN"
-                    },
-                    {
-                        "value": "INVALID_RESOURCE_ARN",
-                        "name": "INVALID_RESOURCE_ARN"
-                    },
-                    {
-                        "value": "INVALID_SNS_TOPIC_ARN",
-                        "name": "INVALID_SNS_TOPIC_ARN"
-                    },
-                    {
-                        "value": "INVALID_IAM_ROLE_ARN",
-                        "name": "INVALID_IAM_ROLE_ARN"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TARGET_NAME",
-                        "name": "INVALID_ASSESSMENT_TARGET_NAME"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TARGET_NAME_PATTERN",
-                        "name": "INVALID_ASSESSMENT_TARGET_NAME_PATTERN"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TEMPLATE_NAME",
-                        "name": "INVALID_ASSESSMENT_TEMPLATE_NAME"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN",
-                        "name": "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TEMPLATE_DURATION",
-                        "name": "INVALID_ASSESSMENT_TEMPLATE_DURATION"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE",
-                        "name": "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_RUN_DURATION_RANGE",
-                        "name": "INVALID_ASSESSMENT_RUN_DURATION_RANGE"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_RUN_START_TIME_RANGE",
-                        "name": "INVALID_ASSESSMENT_RUN_START_TIME_RANGE"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE",
-                        "name": "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE",
-                        "name": "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"
-                    },
-                    {
-                        "value": "INVALID_ASSESSMENT_RUN_STATE",
-                        "name": "INVALID_ASSESSMENT_RUN_STATE"
-                    },
-                    {
-                        "value": "INVALID_TAG",
-                        "name": "INVALID_TAG"
-                    },
-                    {
-                        "value": "INVALID_TAG_KEY",
-                        "name": "INVALID_TAG_KEY"
-                    },
-                    {
-                        "value": "INVALID_TAG_VALUE",
-                        "name": "INVALID_TAG_VALUE"
-                    },
-                    {
-                        "value": "INVALID_RESOURCE_GROUP_TAG_KEY",
-                        "name": "INVALID_RESOURCE_GROUP_TAG_KEY"
-                    },
-                    {
-                        "value": "INVALID_RESOURCE_GROUP_TAG_VALUE",
-                        "name": "INVALID_RESOURCE_GROUP_TAG_VALUE"
-                    },
-                    {
-                        "value": "INVALID_ATTRIBUTE",
-                        "name": "INVALID_ATTRIBUTE"
-                    },
-                    {
-                        "value": "INVALID_USER_ATTRIBUTE",
-                        "name": "INVALID_USER_ATTRIBUTE"
-                    },
-                    {
-                        "value": "INVALID_USER_ATTRIBUTE_KEY",
-                        "name": "INVALID_USER_ATTRIBUTE_KEY"
-                    },
-                    {
-                        "value": "INVALID_USER_ATTRIBUTE_VALUE",
-                        "name": "INVALID_USER_ATTRIBUTE_VALUE"
-                    },
-                    {
-                        "value": "INVALID_PAGINATION_TOKEN",
-                        "name": "INVALID_PAGINATION_TOKEN"
-                    },
-                    {
-                        "value": "INVALID_MAX_RESULTS",
-                        "name": "INVALID_MAX_RESULTS"
-                    },
-                    {
-                        "value": "INVALID_AGENT_ID",
-                        "name": "INVALID_AGENT_ID"
-                    },
-                    {
-                        "value": "INVALID_AUTO_SCALING_GROUP",
-                        "name": "INVALID_AUTO_SCALING_GROUP"
-                    },
-                    {
-                        "value": "INVALID_RULE_NAME",
-                        "name": "INVALID_RULE_NAME"
-                    },
-                    {
-                        "value": "INVALID_SEVERITY",
-                        "name": "INVALID_SEVERITY"
-                    },
-                    {
-                        "value": "INVALID_LOCALE",
-                        "name": "INVALID_LOCALE"
-                    },
-                    {
-                        "value": "INVALID_EVENT",
-                        "name": "INVALID_EVENT"
-                    },
-                    {
-                        "value": "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN",
-                        "name": "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"
-                    },
-                    {
-                        "value": "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN",
-                        "name": "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS",
-                        "name": "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS",
-                        "name": "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS",
-                        "name": "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_FINDING_ARNS",
-                        "name": "INVALID_NUMBER_OF_FINDING_ARNS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS",
-                        "name": "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS",
-                        "name": "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES",
-                        "name": "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_TAGS",
-                        "name": "INVALID_NUMBER_OF_TAGS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS",
-                        "name": "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_ATTRIBUTES",
-                        "name": "INVALID_NUMBER_OF_ATTRIBUTES"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_USER_ATTRIBUTES",
-                        "name": "INVALID_NUMBER_OF_USER_ATTRIBUTES"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_AGENT_IDS",
-                        "name": "INVALID_NUMBER_OF_AGENT_IDS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS",
-                        "name": "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_RULE_NAMES",
-                        "name": "INVALID_NUMBER_OF_RULE_NAMES"
-                    },
-                    {
-                        "value": "INVALID_NUMBER_OF_SEVERITIES",
-                        "name": "INVALID_NUMBER_OF_SEVERITIES"
+            "type": "enum",
+            "members": {
+                "INVALID_ASSESSMENT_TARGET_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TARGET_ARN"
                     }
-                ]
+                },
+                "INVALID_ASSESSMENT_TEMPLATE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TEMPLATE_ARN"
+                    }
+                },
+                "INVALID_ASSESSMENT_RUN_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_RUN_ARN"
+                    }
+                },
+                "INVALID_FINDING_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FINDING_ARN"
+                    }
+                },
+                "INVALID_RESOURCE_GROUP_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RESOURCE_GROUP_ARN"
+                    }
+                },
+                "INVALID_RULES_PACKAGE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RULES_PACKAGE_ARN"
+                    }
+                },
+                "INVALID_RESOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RESOURCE_ARN"
+                    }
+                },
+                "INVALID_SNS_TOPIC_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SNS_TOPIC_ARN"
+                    }
+                },
+                "INVALID_IAM_ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_IAM_ROLE_ARN"
+                    }
+                },
+                "INVALID_ASSESSMENT_TARGET_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TARGET_NAME"
+                    }
+                },
+                "INVALID_ASSESSMENT_TARGET_NAME_PATTERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TARGET_NAME_PATTERN"
+                    }
+                },
+                "INVALID_ASSESSMENT_TEMPLATE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TEMPLATE_NAME"
+                    }
+                },
+                "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"
+                    }
+                },
+                "INVALID_ASSESSMENT_TEMPLATE_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TEMPLATE_DURATION"
+                    }
+                },
+                "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"
+                    }
+                },
+                "INVALID_ASSESSMENT_RUN_DURATION_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_RUN_DURATION_RANGE"
+                    }
+                },
+                "INVALID_ASSESSMENT_RUN_START_TIME_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_RUN_START_TIME_RANGE"
+                    }
+                },
+                "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"
+                    }
+                },
+                "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"
+                    }
+                },
+                "INVALID_ASSESSMENT_RUN_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ASSESSMENT_RUN_STATE"
+                    }
+                },
+                "INVALID_TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TAG"
+                    }
+                },
+                "INVALID_TAG_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TAG_KEY"
+                    }
+                },
+                "INVALID_TAG_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TAG_VALUE"
+                    }
+                },
+                "INVALID_RESOURCE_GROUP_TAG_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RESOURCE_GROUP_TAG_KEY"
+                    }
+                },
+                "INVALID_RESOURCE_GROUP_TAG_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RESOURCE_GROUP_TAG_VALUE"
+                    }
+                },
+                "INVALID_ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE"
+                    }
+                },
+                "INVALID_USER_ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_USER_ATTRIBUTE"
+                    }
+                },
+                "INVALID_USER_ATTRIBUTE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_USER_ATTRIBUTE_KEY"
+                    }
+                },
+                "INVALID_USER_ATTRIBUTE_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_USER_ATTRIBUTE_VALUE"
+                    }
+                },
+                "INVALID_PAGINATION_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PAGINATION_TOKEN"
+                    }
+                },
+                "INVALID_MAX_RESULTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_MAX_RESULTS"
+                    }
+                },
+                "INVALID_AGENT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_AGENT_ID"
+                    }
+                },
+                "INVALID_AUTO_SCALING_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_AUTO_SCALING_GROUP"
+                    }
+                },
+                "INVALID_RULE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RULE_NAME"
+                    }
+                },
+                "INVALID_SEVERITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SEVERITY"
+                    }
+                },
+                "INVALID_LOCALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_LOCALE"
+                    }
+                },
+                "INVALID_EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_EVENT"
+                    }
+                },
+                "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"
+                    }
+                },
+                "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"
+                    }
+                },
+                "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"
+                    }
+                },
+                "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"
+                    }
+                },
+                "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"
+                    }
+                },
+                "INVALID_NUMBER_OF_FINDING_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_FINDING_ARNS"
+                    }
+                },
+                "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"
+                    }
+                },
+                "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"
+                    }
+                },
+                "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"
+                    }
+                },
+                "INVALID_NUMBER_OF_TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_TAGS"
+                    }
+                },
+                "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"
+                    }
+                },
+                "INVALID_NUMBER_OF_ATTRIBUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_ATTRIBUTES"
+                    }
+                },
+                "INVALID_NUMBER_OF_USER_ATTRIBUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_USER_ATTRIBUTES"
+                    }
+                },
+                "INVALID_NUMBER_OF_AGENT_IDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_AGENT_IDS"
+                    }
+                },
+                "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"
+                    }
+                },
+                "INVALID_NUMBER_OF_RULE_NAMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_RULE_NAMES"
+                    }
+                },
+                "INVALID_NUMBER_OF_SEVERITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NUMBER_OF_SEVERITIES"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#InvalidInputException": {
@@ -4225,30 +4806,38 @@
             }
         },
         "com.amazonaws.inspector#LimitExceededErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSESSMENT_TARGET_LIMIT_EXCEEDED",
-                        "name": "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED",
-                        "name": "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "ASSESSMENT_RUN_LIMIT_EXCEEDED",
-                        "name": "ASSESSMENT_RUN_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "RESOURCE_GROUP_LIMIT_EXCEEDED",
-                        "name": "RESOURCE_GROUP_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED",
-                        "name": "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
+            "type": "enum",
+            "members": {
+                "ASSESSMENT_TARGET_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
                     }
-                ]
+                },
+                "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"
+                    }
+                },
+                "ASSESSMENT_RUN_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_RUN_LIMIT_EXCEEDED"
+                    }
+                },
+                "RESOURCE_GROUP_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_GROUP_LIMIT_EXCEEDED"
+                    }
+                },
+                "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#LimitExceededException": {
@@ -4305,6 +4894,174 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the agents of the assessment runs that are specified by the ARNs of the\n         assessment runs.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List assessment run agents",
+                        "documentation": "Lists the agents of the assessment runs that are specified by the ARNs of the assessment runs.",
+                        "input": {
+                            "assessmentRunArn": "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE",
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "assessmentRunAgents": [
+                                {
+                                    "agentHealth": "HEALTHY",
+                                    "agentHealthCode": "RUNNING",
+                                    "agentId": "i-49113b93",
+                                    "assessmentRunArn": "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE",
+                                    "telemetryMetadata": [
+                                        {
+                                            "count": 2,
+                                            "dataSize": 345,
+                                            "messageType": "InspectorDuplicateProcess"
+                                        },
+                                        {
+                                            "count": 3,
+                                            "dataSize": 255,
+                                            "messageType": "InspectorTimeEventMsg"
+                                        },
+                                        {
+                                            "count": 4,
+                                            "dataSize": 1082,
+                                            "messageType": "InspectorNetworkInterface"
+                                        },
+                                        {
+                                            "count": 2,
+                                            "dataSize": 349,
+                                            "messageType": "InspectorDnsEntry"
+                                        },
+                                        {
+                                            "count": 11,
+                                            "dataSize": 2514,
+                                            "messageType": "InspectorDirectoryInfoMsg"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 179,
+                                            "messageType": "InspectorTcpV6ListeningPort"
+                                        },
+                                        {
+                                            "count": 101,
+                                            "dataSize": 10949,
+                                            "messageType": "InspectorTerminal"
+                                        },
+                                        {
+                                            "count": 26,
+                                            "dataSize": 5916,
+                                            "messageType": "InspectorUser"
+                                        },
+                                        {
+                                            "count": 282,
+                                            "dataSize": 32148,
+                                            "messageType": "InspectorDynamicallyLoadedCodeModule"
+                                        },
+                                        {
+                                            "count": 18,
+                                            "dataSize": 10172,
+                                            "messageType": "InspectorCreateProcess"
+                                        },
+                                        {
+                                            "count": 3,
+                                            "dataSize": 8001,
+                                            "messageType": "InspectorProcessPerformance"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 360,
+                                            "messageType": "InspectorOperatingSystem"
+                                        },
+                                        {
+                                            "count": 6,
+                                            "dataSize": 546,
+                                            "messageType": "InspectorStopProcess"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 1553,
+                                            "messageType": "InspectorInstanceMetaData"
+                                        },
+                                        {
+                                            "count": 2,
+                                            "dataSize": 434,
+                                            "messageType": "InspectorTcpV4Connection"
+                                        },
+                                        {
+                                            "count": 474,
+                                            "dataSize": 2960322,
+                                            "messageType": "InspectorPackageInfo"
+                                        },
+                                        {
+                                            "count": 3,
+                                            "dataSize": 2235,
+                                            "messageType": "InspectorSystemPerformance"
+                                        },
+                                        {
+                                            "count": 105,
+                                            "dataSize": 46048,
+                                            "messageType": "InspectorCodeModule"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 182,
+                                            "messageType": "InspectorUdpV6ListeningPort"
+                                        },
+                                        {
+                                            "count": 2,
+                                            "dataSize": 371,
+                                            "messageType": "InspectorUdpV4ListeningPort"
+                                        },
+                                        {
+                                            "count": 18,
+                                            "dataSize": 8362,
+                                            "messageType": "InspectorKernelModule"
+                                        },
+                                        {
+                                            "count": 29,
+                                            "dataSize": 48788,
+                                            "messageType": "InspectorConfigurationInfo"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 79,
+                                            "messageType": "InspectorMonitoringStart"
+                                        },
+                                        {
+                                            "count": 5,
+                                            "dataSize": 0,
+                                            "messageType": "InspectorSplitMsgBegin"
+                                        },
+                                        {
+                                            "count": 51,
+                                            "dataSize": 4593,
+                                            "messageType": "InspectorGroup"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 184,
+                                            "messageType": "InspectorTcpV4ListeningPort"
+                                        },
+                                        {
+                                            "count": 1159,
+                                            "dataSize": 3146579,
+                                            "messageType": "Total"
+                                        },
+                                        {
+                                            "count": 5,
+                                            "dataSize": 0,
+                                            "messageType": "InspectorSplitMsgEnd"
+                                        },
+                                        {
+                                            "count": 1,
+                                            "dataSize": 612,
+                                            "messageType": "InspectorLoadImageInProcess"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4340,6 +5097,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in\n         the response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentRunAgentsResponse": {
@@ -4358,6 +5118,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentRuns": {
@@ -4384,6 +5147,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the assessment runs that correspond to the assessment templates that are\n         specified by the ARNs of the assessment templates.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List assessment runs",
+                        "documentation": "Lists the assessment runs that correspond to the assessment templates that are specified by the ARNs of the assessment templates.",
+                        "input": {
+                            "assessmentTemplateArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw"
+                            ],
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "assessmentRunArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE",
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-v5D6fI3v"
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4418,6 +5200,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in\n         the response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentRunsResponse": {
@@ -4436,6 +5221,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentTargets": {
@@ -4459,6 +5247,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the ARNs of the assessment targets within this AWS account. For more\n         information about assessment targets, see <a href=\"https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html\">Amazon Inspector Assessment\n            Targets</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List assessment targets",
+                        "documentation": "Lists the ARNs of the assessment targets within this AWS account. ",
+                        "input": {
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "assessmentTargetArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4487,6 +5290,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentTargetsResponse": {
@@ -4505,6 +5311,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentTemplates": {
@@ -4531,6 +5340,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the assessment templates that correspond to the assessment targets that are\n         specified by the ARNs of the assessment targets.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List assessment templates",
+                        "documentation": "Lists the assessment templates that correspond to the assessment targets that are specified by the ARNs of the assessment targets.",
+                        "input": {
+                            "assessmentTargetArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"
+                            ],
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "assessmentTemplateArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw",
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-Uza6ihLh"
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4565,6 +5393,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListAssessmentTemplatesResponse": {
@@ -4583,6 +5414,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListEventSubscriptions": {
@@ -4640,6 +5474,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListEventSubscriptionsResponse": {
@@ -4658,6 +5495,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListExclusions": {
@@ -4713,6 +5553,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 100. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListExclusionsResponse": {
@@ -4731,6 +5574,9 @@
                         "smithy.api#documentation": "<p>When a response is generated, if there is more data to be listed, this parameters is\n         present in the response and contains the value to use for the nextToken parameter in a\n         subsequent pagination request. If there is no more data to be listed, this parameter is set\n         to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListFindings": {
@@ -4757,6 +5603,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists findings that are generated by the assessment runs that are specified by the\n         ARNs of the assessment runs.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List findings",
+                        "documentation": "Lists findings that are generated by the assessment runs that are specified by the ARNs of the assessment runs.",
+                        "input": {
+                            "assessmentRunArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE"
+                            ],
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "findingArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE/finding/0-HwPnsDm4",
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-v5D6fI3v/finding/0-tyvmqBLy"
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4791,6 +5656,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListFindingsResponse": {
@@ -4809,6 +5677,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListMaxResults": {
@@ -4859,6 +5730,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists all available Amazon Inspector rules packages.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List rules packages",
+                        "documentation": "Lists all available Amazon Inspector rules packages.",
+                        "input": {
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "rulesPackageArns": [
+                                "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-9hgA516p",
+                                "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-H5hpSawc",
+                                "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ",
+                                "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-vg5GGHSD"
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4881,6 +5770,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListRulesPackagesResponse": {
@@ -4899,6 +5791,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ListTagsForResource": {
@@ -4924,7 +5819,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags associated with an assessment template.</p>"
+                "smithy.api#documentation": "<p>Lists all tags associated with an assessment template.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List tags for resource",
+                        "documentation": "Lists all tags associated with an assessment template.",
+                        "input": {
+                            "resourceArn": "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-gcwFliYu"
+                        },
+                        "output": {
+                            "tags": [
+                                {
+                                    "key": "Name",
+                                    "value": "Example"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#ListTagsForResourceRequest": {
@@ -4937,6 +5849,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#ListTagsForResourceResponse": {
@@ -4949,17 +5864,20 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#Locale": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EN_US",
-                        "name": "EN_US"
+            "type": "enum",
+            "members": {
+                "EN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EN_US"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.inspector#Long": {
@@ -5067,42 +5985,56 @@
             }
         },
         "com.amazonaws.inspector#NoSuchEntityErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSESSMENT_TARGET_DOES_NOT_EXIST",
-                        "name": "ASSESSMENT_TARGET_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST",
-                        "name": "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "ASSESSMENT_RUN_DOES_NOT_EXIST",
-                        "name": "ASSESSMENT_RUN_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "FINDING_DOES_NOT_EXIST",
-                        "name": "FINDING_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "RESOURCE_GROUP_DOES_NOT_EXIST",
-                        "name": "RESOURCE_GROUP_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "RULES_PACKAGE_DOES_NOT_EXIST",
-                        "name": "RULES_PACKAGE_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "SNS_TOPIC_DOES_NOT_EXIST",
-                        "name": "SNS_TOPIC_DOES_NOT_EXIST"
-                    },
-                    {
-                        "value": "IAM_ROLE_DOES_NOT_EXIST",
-                        "name": "IAM_ROLE_DOES_NOT_EXIST"
+            "type": "enum",
+            "members": {
+                "ASSESSMENT_TARGET_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_TARGET_DOES_NOT_EXIST"
                     }
-                ]
+                },
+                "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"
+                    }
+                },
+                "ASSESSMENT_RUN_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSESSMENT_RUN_DOES_NOT_EXIST"
+                    }
+                },
+                "FINDING_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINDING_DOES_NOT_EXIST"
+                    }
+                },
+                "RESOURCE_GROUP_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_GROUP_DOES_NOT_EXIST"
+                    }
+                },
+                "RULES_PACKAGE_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULES_PACKAGE_DOES_NOT_EXIST"
+                    }
+                },
+                "SNS_TOPIC_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNS_TOPIC_DOES_NOT_EXIST"
+                    }
+                },
+                "IAM_ROLE_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ROLE_DOES_NOT_EXIST"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#NoSuchEntityException": {
@@ -5199,6 +6131,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Previews the agents installed on the EC2 instances that are part of the specified\n         assessment target.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Preview agents",
+                        "documentation": "Previews the agents installed on the EC2 instances that are part of the specified assessment target.",
+                        "input": {
+                            "previewAgentsArn": "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq",
+                            "maxResults": 123
+                        },
+                        "output": {
+                            "agentPreviews": [
+                                {
+                                    "agentId": "i-49113b93"
+                                }
+                            ],
+                            "nextToken": "1"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5231,6 +6181,9 @@
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n         response. The default value is 10. The maximum value is 500.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#PreviewAgentsResponse": {
@@ -5249,6 +6202,9 @@
                         "smithy.api#documentation": "<p> When a response is generated, if there is more data to be listed, this parameter is\n         present in the response and contains the value to use for the <b>nextToken</b> parameter in a subsequent pagination request. If there is no more\n         data to be listed, this parameter is set to null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#PreviewGenerationInProgressException": {
@@ -5267,18 +6223,20 @@
             }
         },
         "com.amazonaws.inspector#PreviewStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WORK_IN_PROGRESS",
-                        "name": "WORK_IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
+            "type": "enum",
+            "members": {
+                "WORK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORK_IN_PROGRESS"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#PrivateIp": {
@@ -5342,7 +6300,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers the IAM role that grants Amazon Inspector access to AWS Services needed to\n         perform security assessments.</p>"
+                "smithy.api#documentation": "<p>Registers the IAM role that grants Amazon Inspector access to AWS Services needed to\n         perform security assessments.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Register cross account access role",
+                        "documentation": "Registers the IAM role that Amazon Inspector uses to list your EC2 instances at the start of the assessment run or when you call the PreviewAgents action.",
+                        "input": {
+                            "roleArn": "arn:aws:iam::123456789012:role/inspector"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#RegisterCrossAccountAccessRoleRequest": {
@@ -5355,6 +6322,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#RemoveAttributesFromFindings": {
@@ -5383,7 +6353,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes entire attributes (key and value pairs) from the findings that are specified\n         by the ARNs of the findings where an attribute with the specified key exists.</p>"
+                "smithy.api#documentation": "<p>Removes entire attributes (key and value pairs) from the findings that are specified\n         by the ARNs of the findings where an attribute with the specified key exists.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Remove attributes from findings",
+                        "documentation": "Removes entire attributes (key and value pairs) from the findings that are specified by the ARNs of the findings where an attribute with the specified key exists.",
+                        "input": {
+                            "findingArns": [
+                                "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-8l1VIE0D/run/0-Z02cjjug/finding/0-T8yM9mEU"
+                            ],
+                            "attributeKeys": [
+                                "key=Example,value=example"
+                            ]
+                        },
+                        "output": {
+                            "failedItems": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#RemoveAttributesFromFindingsRequest": {
@@ -5403,6 +6390,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#RemoveAttributesFromFindingsResponse": {
@@ -5415,55 +6405,66 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#ReportFileFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HTML",
-                        "name": "HTML"
-                    },
-                    {
-                        "value": "PDF",
-                        "name": "PDF"
+            "type": "enum",
+            "members": {
+                "HTML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTML"
                     }
-                ]
+                },
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PDF"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#ReportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WORK_IN_PROGRESS",
-                        "name": "WORK_IN_PROGRESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
+            "type": "enum",
+            "members": {
+                "WORK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORK_IN_PROGRESS"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#ReportType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FINDING",
-                        "name": "FINDING"
-                    },
-                    {
-                        "value": "FULL",
-                        "name": "FULL"
+            "type": "enum",
+            "members": {
+                "FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINDING"
                     }
-                ]
+                },
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#ResourceGroup": {
@@ -5656,18 +6657,20 @@
             }
         },
         "com.amazonaws.inspector#ScopeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INSTANCE_ID",
-                        "name": "INSTANCE_ID"
-                    },
-                    {
-                        "value": "RULES_PACKAGE_ARN",
-                        "name": "RULES_PACKAGE_ARN"
+            "type": "enum",
+            "members": {
+                "INSTANCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_ID"
                     }
-                ]
+                },
+                "RULES_PACKAGE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULES_PACKAGE_ARN"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#ScopeValue": {
@@ -5758,7 +6761,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets tags (key and value pairs) to the assessment template that is specified by the\n         ARN of the assessment template.</p>"
+                "smithy.api#documentation": "<p>Sets tags (key and value pairs) to the assessment template that is specified by the\n         ARN of the assessment template.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Set tags for resource",
+                        "documentation": "Sets tags (key and value pairs) to the assessment template that is specified by the ARN of the assessment template.",
+                        "input": {
+                            "resourceArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0",
+                            "tags": [
+                                {
+                                    "key": "Example",
+                                    "value": "example"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#SetTagsForResourceRequest": {
@@ -5777,33 +6795,44 @@
                         "smithy.api#documentation": "<p>A collection of key and value pairs that you want to set to the assessment\n         template.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#Severity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Low",
-                        "name": "LOW"
-                    },
-                    {
-                        "value": "Medium",
-                        "name": "MEDIUM"
-                    },
-                    {
-                        "value": "High",
-                        "name": "HIGH"
-                    },
-                    {
-                        "value": "Informational",
-                        "name": "INFORMATIONAL"
-                    },
-                    {
-                        "value": "Undefined",
-                        "name": "UNDEFINED"
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
                     }
-                ]
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Informational"
+                    }
+                },
+                "UNDEFINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Undefined"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#SeverityList": {
@@ -5853,7 +6882,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the assessment run specified by the ARN of the assessment template. For this\n         API to function properly, you must not exceed the limit of running up to 500 concurrent\n         agents per AWS account.</p>"
+                "smithy.api#documentation": "<p>Starts the assessment run specified by the ARN of the assessment template. For this\n         API to function properly, you must not exceed the limit of running up to 500 concurrent\n         agents per AWS account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start assessment run",
+                        "documentation": "Starts the assessment run specified by the ARN of the assessment template. For this API to function properly, you must not exceed the limit of running up to 500 concurrent agents per AWS account.",
+                        "input": {
+                            "assessmentTemplateArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T",
+                            "assessmentRunName": "examplerun"
+                        },
+                        "output": {
+                            "assessmentRunArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-jOoroxyY"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#StartAssessmentRunRequest": {
@@ -5872,6 +6914,9 @@
                         "smithy.api#documentation": "<p>You can specify the name for the assessment run. The name must be unique for the\n         assessment template whose ARN is used to start the assessment run.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#StartAssessmentRunResponse": {
@@ -5884,21 +6929,26 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector#StopAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "START_EVALUATION",
-                        "name": "START_EVALUATION"
-                    },
-                    {
-                        "value": "SKIP_EVALUATION",
-                        "name": "SKIP_EVALUATION"
+            "type": "enum",
+            "members": {
+                "START_EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_EVALUATION"
                     }
-                ]
+                },
+                "SKIP_EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIP_EVALUATION"
+                    }
+                }
             }
         },
         "com.amazonaws.inspector#StopAssessmentRun": {
@@ -5927,7 +6977,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops the assessment run that is specified by the ARN of the assessment\n         run.</p>"
+                "smithy.api#documentation": "<p>Stops the assessment run that is specified by the ARN of the assessment\n         run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Stop assessment run",
+                        "documentation": "Stops the assessment run that is specified by the ARN of the assessment run.",
+                        "input": {
+                            "assessmentRunArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-11LMTAVe"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#StopAssessmentRunRequest": {
@@ -5946,6 +7005,9 @@
                         "smithy.api#documentation": "<p>An input option that can be set to either START_EVALUATION or SKIP_EVALUATION.\n         START_EVALUATION (the default value), stops the AWS agent from collecting data and begins\n         the results evaluation and the findings generation process. SKIP_EVALUATION cancels the\n         assessment run immediately, after which no findings are generated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#SubscribeToEvent": {
@@ -5977,7 +7039,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the process of sending Amazon Simple Notification Service (SNS) notifications\n         about a specified event to a specified SNS topic.</p>"
+                "smithy.api#documentation": "<p>Enables the process of sending Amazon Simple Notification Service (SNS) notifications\n         about a specified event to a specified SNS topic.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Subscribe to event",
+                        "documentation": "Enables the process of sending Amazon Simple Notification Service (SNS) notifications about a specified event to a specified SNS topic.",
+                        "input": {
+                            "resourceArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0",
+                            "event": "ASSESSMENT_RUN_COMPLETED",
+                            "topicArn": "arn:aws:sns:us-west-2:123456789012:exampletopic"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#SubscribeToEventRequest": {
@@ -6004,6 +7077,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#Subscription": {
@@ -6179,7 +7255,7 @@
         "com.amazonaws.inspector#UUID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.inspector#UnsubscribeFromEvent": {
@@ -6208,7 +7284,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the process of sending Amazon Simple Notification Service (SNS)\n         notifications about a specified event to a specified SNS topic.</p>"
+                "smithy.api#documentation": "<p>Disables the process of sending Amazon Simple Notification Service (SNS)\n         notifications about a specified event to a specified SNS topic.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Unsubscribe from event",
+                        "documentation": "Disables the process of sending Amazon Simple Notification Service (SNS) notifications about a specified event to a specified SNS topic.",
+                        "input": {
+                            "resourceArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0",
+                            "event": "ASSESSMENT_RUN_COMPLETED",
+                            "topicArn": "arn:aws:sns:us-west-2:123456789012:exampletopic"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#UnsubscribeFromEventRequest": {
@@ -6235,6 +7322,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#UnsupportedFeatureException": {
@@ -6284,7 +7374,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the assessment target that is specified by the ARN of the assessment\n         target.</p>\n         <p>If resourceGroupArn is not specified, all EC2 instances in the current AWS account\n         and region are included in the assessment target.</p>"
+                "smithy.api#documentation": "<p>Updates the assessment target that is specified by the ARN of the assessment\n         target.</p>\n         <p>If resourceGroupArn is not specified, all EC2 instances in the current AWS account\n         and region are included in the assessment target.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update assessment target",
+                        "documentation": "Updates the assessment target that is specified by the ARN of the assessment target.",
+                        "input": {
+                            "assessmentTargetArn": "arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX",
+                            "assessmentTargetName": "Example",
+                            "resourceGroupArn": "arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-yNbgL5Pt"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector#UpdateAssessmentTargetRequest": {
@@ -6310,6 +7411,9 @@
                         "smithy.api#documentation": "<p>The ARN of the resource group that is used to specify the new resource group to\n         associate with the assessment target.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.inspector#Url": {

@@ -1828,6 +1828,7 @@
                     "arnNamespace": "kinesisvideo",
                     "cloudFormationName": "KinesisVideo",
                     "cloudTrailEventSource": "kinesisvideo.amazonaws.com",
+                    "docId": "kinesisvideo-2017-09-30",
                     "endpointPrefix": "kinesisvideo"
                 },
                 "aws.auth#sigv4": {

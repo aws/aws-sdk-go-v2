@@ -133,6 +133,7 @@
                     "arnNamespace": "finspace-api",
                     "cloudFormationName": "Finspacedata",
                     "cloudTrailEventSource": "finspacedata.amazonaws.com",
+                    "docId": "finspace-2020-07-13",
                     "endpointPrefix": "finspace-api"
                 },
                 "aws.auth#sigv4": {
@@ -201,9 +202,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://finspace-api-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://finspace-api-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -216,15 +396,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://finspace-api.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://finspace-api.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -236,258 +451,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://finspace-api-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://finspace-api-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://finspace-api.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://finspace-api.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -502,8 +467,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -515,8 +480,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -528,8 +493,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -541,8 +506,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -554,8 +519,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -567,8 +532,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -580,8 +545,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -593,8 +558,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -606,8 +571,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -619,8 +584,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -632,8 +597,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -645,8 +610,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -658,8 +623,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -671,8 +636,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -684,8 +649,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -697,8 +662,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -710,8 +686,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -723,8 +710,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -736,8 +734,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -749,8 +758,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -762,8 +771,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -775,8 +784,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -787,8 +796,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -799,9 +808,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -843,53 +858,67 @@
             }
         },
         "com.amazonaws.finspacedata#ApiAccess": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#ApplicationPermission": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CreateDataset",
-                        "name": "CreateDataset"
-                    },
-                    {
-                        "value": "ManageClusters",
-                        "name": "ManageClusters"
-                    },
-                    {
-                        "value": "ManageUsersAndGroups",
-                        "name": "ManageUsersAndGroups"
-                    },
-                    {
-                        "value": "ManageAttributeSets",
-                        "name": "ManageAttributeSets"
-                    },
-                    {
-                        "value": "ViewAuditData",
-                        "name": "ViewAuditData"
-                    },
-                    {
-                        "value": "AccessNotebooks",
-                        "name": "AccessNotebooks"
-                    },
-                    {
-                        "value": "GetTemporaryCredentials",
-                        "name": "GetTemporaryCredentials"
+            "type": "enum",
+            "members": {
+                "CreateDataset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateDataset"
                     }
-                ]
+                },
+                "ManageClusters": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManageClusters"
+                    }
+                },
+                "ManageUsersAndGroups": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManageUsersAndGroups"
+                    }
+                },
+                "ManageAttributeSets": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManageAttributeSets"
+                    }
+                },
+                "ViewAuditData": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ViewAuditData"
+                    }
+                },
+                "AccessNotebooks": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessNotebooks"
+                    }
+                },
+                "GetTemporaryCredentials": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetTemporaryCredentials"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#ApplicationPermissionList": {
@@ -961,6 +990,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#AssociateUserToPermissionGroupResponse": {
@@ -974,6 +1006,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#AwsCredentials": {
@@ -1017,23 +1052,29 @@
             }
         },
         "com.amazonaws.finspacedata#ChangeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Indicates how the given change will be applied to the dataset.",
-                "smithy.api#enum": [
-                    {
-                        "value": "REPLACE",
-                        "name": "REPLACE"
-                    },
-                    {
-                        "value": "APPEND",
-                        "name": "APPEND"
-                    },
-                    {
-                        "value": "MODIFY",
-                        "name": "MODIFY"
+            "type": "enum",
+            "members": {
+                "REPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE"
                     }
-                ]
+                },
+                "APPEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPEND"
+                    }
+                },
+                "MODIFY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODIFY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Indicates how the given change will be applied to the dataset."
             }
         },
         "com.amazonaws.finspacedata#ChangesetArn": {
@@ -1130,7 +1171,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#IngestionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the Changeset ingestion.</p>\n         <ul>\n            <li> \n               <p>\n                  <code>PENDING</code> – Changeset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Changeset creation has failed.</p>\n            </li>\n            <li> \n               <p>\n                  <code>SUCCESS</code> – Changeset creation has succeeded.</p>\n            </li>\n            <li> \n               <p>\n                  <code>RUNNING</code> – Changeset creation is running.</p>\n            </li>\n            <li> \n               <p>\n                  <code>STOP_REQUESTED</code> – User requested Changeset creation to stop.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Status of the Changeset ingestion.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – Changeset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Changeset creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Changeset creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Changeset creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_REQUESTED</code> – User requested Changeset creation to stop.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "errorInfo": {
@@ -1182,59 +1223,83 @@
             }
         },
         "com.amazonaws.finspacedata#ColumnDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Data type of a column.",
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "CHAR",
-                        "name": "CHAR"
-                    },
-                    {
-                        "value": "INTEGER",
-                        "name": "INTEGER"
-                    },
-                    {
-                        "value": "TINYINT",
-                        "name": "TINYINT"
-                    },
-                    {
-                        "value": "SMALLINT",
-                        "name": "SMALLINT"
-                    },
-                    {
-                        "value": "BIGINT",
-                        "name": "BIGINT"
-                    },
-                    {
-                        "value": "FLOAT",
-                        "name": "FLOAT"
-                    },
-                    {
-                        "value": "DOUBLE",
-                        "name": "DOUBLE"
-                    },
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "DATETIME",
-                        "name": "DATETIME"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "BINARY",
-                        "name": "BINARY"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "CHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAR"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                },
+                "TINYINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TINYINT"
+                    }
+                },
+                "SMALLINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMALLINT"
+                    }
+                },
+                "BIGINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIGINT"
+                    }
+                },
+                "FLOAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                },
+                "DATETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATETIME"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Data type of a column."
             }
         },
         "com.amazonaws.finspacedata#ColumnDefinition": {
@@ -1394,13 +1459,14 @@
                 "formatParams": {
                     "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> – CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> – XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n          {\n          \"withHeader\": \"true\",\n          \"separator\": \",\"\n           }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> – CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> – XML source file format.</p>\n            </li>\n         </ul>\n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n      </code>\n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n          {\n          \"withHeader\": \"true\",\n          \"separator\": \",\"\n           }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The request for a CreateChangeset operation."
+                "smithy.api#documentation": "The request for a CreateChangeset operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#CreateChangesetResponse": {
@@ -1420,7 +1486,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response from a CreateChangeset operation."
+                "smithy.api#documentation": "The response from a CreateChangeset operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#CreateDataView": {
@@ -1513,7 +1580,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for creating a data view."
+                "smithy.api#documentation": "Request for creating a data view.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#CreateDataViewResponse": {
@@ -1533,7 +1601,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response for creating a data view."
+                "smithy.api#documentation": "Response for creating a data view.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#CreateDataset": {
@@ -1633,7 +1702,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The request for a CreateDataset operation"
+                "smithy.api#documentation": "The request for a CreateDataset operation",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#CreateDatasetResponse": {
@@ -1647,7 +1717,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response from a CreateDataset operation"
+                "smithy.api#documentation": "The response from a CreateDataset operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#CreatePermissionGroup": {
@@ -1717,6 +1788,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#CreatePermissionGroupResponse": {
@@ -1728,6 +1802,9 @@
                         "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#CreateUser": {
@@ -1815,6 +1892,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#CreateUserResponse": {
@@ -1826,6 +1906,9 @@
                         "smithy.api#documentation": "<p>The unique identifier for the user.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#Credentials": {
@@ -1885,7 +1968,7 @@
                 "s3DestinationExportFileFormatOptions": {
                     "target": "com.amazonaws.finspacedata#S3DestinationFormatOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Format Options for S3 Destination type.</p>\n         <p>Here is an example of how you could specify the <code>s3DestinationExportFileFormatOptions</code> \n         </p>\n         <p>\n            <code>\n        {\n        \"header\": \"true\",\n        \"delimiter\": \",\",\n        \"compression\": \"gzip\"\n        }</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Format Options for S3 Destination type.</p>\n         <p>Here is an example of how you could specify the <code>s3DestinationExportFileFormatOptions</code>\n         </p>\n         <p>\n            <code>\n        {\n        \"header\": \"true\",\n        \"delimiter\": \",\",\n        \"compression\": \"gzip\"\n        }</code>\n         </p>"
                     }
                 }
             },
@@ -1933,43 +2016,59 @@
             }
         },
         "com.amazonaws.finspacedata#DataViewStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Status of a DataView",
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "TIMEOUT",
-                        "name": "TIMEOUT"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "FAILED_CLEANUP_FAILED",
-                        "name": "FAILED_CLEANUP_FAILED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMEOUT"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "FAILED_CLEANUP_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_CLEANUP_FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of a DataView"
             }
         },
         "com.amazonaws.finspacedata#DataViewSummary": {
@@ -2015,7 +2114,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#DataViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataview creation is running.</p> \n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – Dataview creation is starting.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataview creation has failed.</p> \n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Dataview creation has been cancelled.</p> \n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code> – Dataview creation has timed out.</p> \n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataview creation has succeeded.</p> \n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataview creation is pending.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p> \n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataview creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – Dataview creation is starting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataview creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Dataview creation has been cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code> – Dataview creation has timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataview creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataview creation is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "errorInfo": {
@@ -2154,19 +2253,23 @@
             }
         },
         "com.amazonaws.finspacedata#DatasetKind": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Dataset Kind",
-                "smithy.api#enum": [
-                    {
-                        "value": "TABULAR",
-                        "name": "TABULAR"
-                    },
-                    {
-                        "value": "NON_TABULAR",
-                        "name": "NON_TABULAR"
+            "type": "enum",
+            "members": {
+                "TABULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABULAR"
                     }
-                ]
+                },
+                "NON_TABULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_TABULAR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dataset Kind"
             }
         },
         "com.amazonaws.finspacedata#DatasetList": {
@@ -2205,27 +2308,35 @@
             }
         },
         "com.amazonaws.finspacedata#DatasetStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Status of the dataset process returned from scheduler service.",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of the dataset process returned from scheduler service."
             }
         },
         "com.amazonaws.finspacedata#DatasetTitle": {
@@ -2300,7 +2411,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The request for a DeleteDataset operation."
+                "smithy.api#documentation": "The request for a DeleteDataset operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#DeleteDatasetResponse": {
@@ -2314,7 +2426,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response from an DeleteDataset operation"
+                "smithy.api#documentation": "The response from an DeleteDataset operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#DeletePermissionGroup": {
@@ -2376,6 +2489,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#DeletePermissionGroupResponse": {
@@ -2387,6 +2503,9 @@
                         "smithy.api#documentation": "<p>The unique identifier for the deleted permission group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#DisableUser": {
@@ -2444,6 +2563,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#DisableUserResponse": {
@@ -2455,6 +2577,9 @@
                         "smithy.api#documentation": "<p>The unique identifier for the disabled user account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroup": {
@@ -2521,6 +2646,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroupResponse": {
@@ -2534,6 +2662,9 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#Email": {
@@ -2605,6 +2736,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#EnableUserResponse": {
@@ -2616,46 +2750,65 @@
                         "smithy.api#documentation": "<p>The unique identifier for the enabled user account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ErrorCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Changeset Error Category",
-                "smithy.api#enum": [
-                    {
-                        "value": "VALIDATION",
-                        "name": "VALIDATION"
-                    },
-                    {
-                        "value": "SERVICE_QUOTA_EXCEEDED",
-                        "name": "SERVICE_QUOTA_EXCEEDED"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "RESOURCE_NOT_FOUND",
-                        "name": "RESOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "THROTTLING",
-                        "name": "THROTTLING"
-                    },
-                    {
-                        "value": "INTERNAL_SERVICE_EXCEPTION",
-                        "name": "INTERNAL_SERVICE_EXCEPTION"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "USER_RECOVERABLE",
-                        "name": "USER_RECOVERABLE"
+            "type": "enum",
+            "members": {
+                "VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION"
                     }
-                ]
+                },
+                "SERVICE_QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_QUOTA_EXCEEDED"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
+                    }
+                },
+                "THROTTLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLING"
+                    }
+                },
+                "INTERNAL_SERVICE_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_EXCEPTION"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "USER_RECOVERABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_RECOVERABLE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Changeset Error Category"
             }
         },
         "com.amazonaws.finspacedata#ErrorMessage": {
@@ -2672,19 +2825,23 @@
             "type": "string"
         },
         "com.amazonaws.finspacedata#ExportFileFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Data View Export File Format",
-                "smithy.api#enum": [
-                    {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
-                    },
-                    {
-                        "value": "DELIMITED_TEXT",
-                        "name": "DELIMITED_TEXT"
+            "type": "enum",
+            "members": {
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
                     }
-                ]
+                },
+                "DELIMITED_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIMITED_TEXT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Data View Export File Format"
             }
         },
         "com.amazonaws.finspacedata#FirstName": {
@@ -2768,7 +2925,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request to describe a changeset."
+                "smithy.api#documentation": "Request to describe a changeset.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetChangesetResponse": {
@@ -2857,7 +3015,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response from a describe changeset operation"
+                "smithy.api#documentation": "The response from a describe changeset operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetDataView": {
@@ -2915,7 +3074,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for retrieving a data view detail. Grouped / accessible within a dataset by its dataset id."
+                "smithy.api#documentation": "Request for retrieving a data view detail. Grouped / accessible within a dataset by its dataset id.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetDataViewResponse": {
@@ -2994,12 +3154,13 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#DataViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataview creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – Dataview creation is starting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataview creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Dataview creation has been cancelled.</p>\n            </li>\n            <li> \n               <p>\n                  <code>TIMEOUT</code> – Dataview creation has timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataview creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataview creation is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataview creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – Dataview creation is starting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataview creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Dataview creation has been cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code> – Dataview creation has timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataview creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataview creation is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response from retrieving a dataview, which includes details on the target database and table name"
+                "smithy.api#documentation": "Response from retrieving a dataview, which includes details on the target database and table name",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetDataset": {
@@ -3052,7 +3213,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for the GetDataset operation."
+                "smithy.api#documentation": "Request for the GetDataset operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetDatasetResponse": {
@@ -3122,7 +3284,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response for the GetDataset operation"
+                "smithy.api#documentation": "Response for the GetDataset operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetExternalDataViewAccessDetails": {
@@ -3178,6 +3341,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetExternalDataViewAccessDetailsResponse": {
@@ -3195,6 +3361,9 @@
                         "smithy.api#documentation": "<p>The location where the external Dataview is stored.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetPermissionGroup": {
@@ -3242,6 +3411,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetPermissionGroupResponse": {
@@ -3250,6 +3422,9 @@
                 "permissionGroup": {
                     "target": "com.amazonaws.finspacedata#PermissionGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials": {
@@ -3304,7 +3479,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for GetProgrammaticAccessCredentials operation"
+                "smithy.api#documentation": "Request for GetProgrammaticAccessCredentials operation",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetProgrammaticAccessCredentialsResponse": {
@@ -3325,7 +3501,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response for GetProgrammaticAccessCredentials operation"
+                "smithy.api#documentation": "Response for GetProgrammaticAccessCredentials operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetUser": {
@@ -3373,6 +3550,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetUserResponse": {
@@ -3461,6 +3641,9 @@
                         "smithy.api#documentation": "<p>Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#GetWorkingLocation": {
@@ -3503,6 +3686,9 @@
                         "smithy.api#documentation": "<p>Specify the type of the working location.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAGEMAKER</code> – Use the Amazon S3 location as a temporary location to store data content when\n          working with FinSpace Notebooks that run on SageMaker studio.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INGESTION</code> – Use the Amazon S3 location as a staging location to copy your\n          data content and then use the location with the Changeset creation operation.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#GetWorkingLocationResponse": {
@@ -3526,6 +3712,9 @@
                         "smithy.api#documentation": "<p>Returns the Amazon S3 bucket name for the working location.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#IdType": {
@@ -3538,31 +3727,41 @@
             }
         },
         "com.amazonaws.finspacedata#IngestionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Status of the ingestion process returned from scheduler service.",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STOP_REQUESTED",
-                        "name": "STOP_REQUESTED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of the ingestion process returned from scheduler service."
             }
         },
         "com.amazonaws.finspacedata#InternalServerException": {
@@ -3673,7 +3872,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request to ListChangesetsRequest. It exposes minimal query filters."
+                "smithy.api#documentation": "Request to ListChangesetsRequest. It exposes minimal query filters.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListChangesetsResponse": {
@@ -3693,7 +3893,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response to ListChangesetsResponse. This returns a list of dataset changesets that match the query criteria."
+                "smithy.api#documentation": "Response to ListChangesetsResponse. This returns a list of dataset changesets that match the query criteria.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ListDataViews": {
@@ -3764,7 +3965,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for a list data views."
+                "smithy.api#documentation": "Request for a list data views.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListDataViewsResponse": {
@@ -3782,6 +3984,9 @@
                         "smithy.api#documentation": "<p>A list of Dataviews.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ListDatasets": {
@@ -3844,7 +4049,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for the ListDatasets operation."
+                "smithy.api#documentation": "Request for the ListDatasets operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListDatasetsResponse": {
@@ -3864,7 +4070,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response for the ListDatasets operation"
+                "smithy.api#documentation": "Response for the ListDatasets operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ListPermissionGroups": {
@@ -3965,6 +4172,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListPermissionGroupsByUserResponse": {
@@ -3982,6 +4192,9 @@
                         "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ListPermissionGroupsRequest": {
@@ -4003,6 +4216,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListPermissionGroupsResponse": {
@@ -4020,6 +4236,9 @@
                         "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ListUsers": {
@@ -4120,6 +4339,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListUsersByPermissionGroupResponse": {
@@ -4137,6 +4359,9 @@
                         "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ListUsersRequest": {
@@ -4158,6 +4383,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ListUsersResponse": {
@@ -4175,6 +4403,9 @@
                         "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#OwnerName": {
@@ -4323,22 +4554,26 @@
             }
         },
         "com.amazonaws.finspacedata#PermissionGroupMembershipStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADDITION_IN_PROGRESS",
-                        "name": "ADDITION_IN_PROGRESS"
-                    },
-                    {
-                        "value": "ADDITION_SUCCESS",
-                        "name": "ADDITION_SUCCESS"
-                    },
-                    {
-                        "value": "REMOVAL_IN_PROGRESS",
-                        "name": "REMOVAL_IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "ADDITION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION_IN_PROGRESS"
                     }
-                ]
+                },
+                "ADDITION_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION_SUCCESS"
+                    }
+                },
+                "REMOVAL_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVAL_IN_PROGRESS"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#PermissionGroupName": {
@@ -4438,6 +4673,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#ResetUserPasswordResponse": {
@@ -4455,6 +4693,9 @@
                         "smithy.api#documentation": "<p>A randomly generated temporary password for the requested user account. This password expires in 7 days.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#ResourceNotFoundException": {
@@ -4800,13 +5041,14 @@
                 "formatParams": {
                     "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> – CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> – XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n        \"formatParams\": \n        {\n        \"formatType\": \"CSV\",\n        \"withHeader\": \"true\",\n        \"separator\": \",\",\n        \"compression\":\"None\"\n        } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n        {\n        \"withHeader\": \"true\",\n        \"separator\": \",\"\n        }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> – CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> – XML source file format.</p>\n            </li>\n         </ul>\n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n        \"formatParams\": \n        {\n        \"formatType\": \"CSV\",\n        \"withHeader\": \"true\",\n        \"separator\": \",\",\n        \"compression\":\"None\"\n        } \n      </code>\n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n        {\n        \"withHeader\": \"true\",\n        \"separator\": \",\"\n        }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request to update an existing changeset."
+                "smithy.api#documentation": "Request to update an existing changeset.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#UpdateChangesetResponse": {
@@ -4826,7 +5068,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response from a update changeset operation."
+                "smithy.api#documentation": "The response from a update changeset operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#UpdateDataset": {
@@ -4918,7 +5161,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The request for an UpdateDataset operation"
+                "smithy.api#documentation": "The request for an UpdateDataset operation",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#UpdateDatasetResponse": {
@@ -4932,7 +5176,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response from an UpdateDataset operation"
+                "smithy.api#documentation": "The response from an UpdateDataset operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#UpdatePermissionGroup": {
@@ -5008,6 +5253,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#UpdatePermissionGroupResponse": {
@@ -5019,6 +5267,9 @@
                         "smithy.api#documentation": "<p>The unique identifier for the updated permission group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#UpdateUser": {
@@ -5106,6 +5357,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.finspacedata#UpdateUserResponse": {
@@ -5117,6 +5371,9 @@
                         "smithy.api#documentation": "<p>The unique identifier of the updated user account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspacedata#User": {
@@ -5295,37 +5552,43 @@
             }
         },
         "com.amazonaws.finspacedata#UserStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#UserType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUPER_USER",
-                        "name": "SUPER_USER"
-                    },
-                    {
-                        "value": "APP_USER",
-                        "name": "APP_USER"
+            "type": "enum",
+            "members": {
+                "SUPER_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPER_USER"
                     }
-                ]
+                },
+                "APP_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APP_USER"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#ValidationException": {
@@ -5345,18 +5608,20 @@
             }
         },
         "com.amazonaws.finspacedata#locationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INGESTION",
-                        "name": "INGESTION"
-                    },
-                    {
-                        "value": "SAGEMAKER",
-                        "name": "SAGEMAKER"
+            "type": "enum",
+            "members": {
+                "INGESTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTION"
                     }
-                ]
+                },
+                "SAGEMAKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAGEMAKER"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#stringValueLength1to1024": {

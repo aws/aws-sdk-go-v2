@@ -232,6 +232,7 @@
                     "arnNamespace": "s3",
                     "cloudFormationName": "S3Control",
                     "cloudTrailEventSource": "s3control.amazonaws.com",
+                    "docId": "s3control-2018-08-20",
                     "endpointPrefix": "s3-control"
                 },
                 "aws.auth#sigv4": {

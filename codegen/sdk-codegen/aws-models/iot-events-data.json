@@ -163,7 +163,7 @@
                 "stateName": {
                     "target": "com.amazonaws.ioteventsdata#AlarmStateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the alarm state. The state name can be one of the following values:</p>\n         <ul>\n            <li>\n\t\t             <p>\n                  <code>DISABLED</code> - When the alarm is in the <code>DISABLED</code> state, \n\t\tit isn't ready to evaluate data. To enable the alarm, \n\t\tyou must change the alarm to the <code>NORMAL</code> state.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>NORMAL</code> - When the alarm is in the <code>NORMAL</code> state, \n\t\tit's ready to evaluate data.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>ACTIVE</code> - If the alarm is in the <code>ACTIVE</code> state, \n\t\tthe alarm is invoked.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>ACKNOWLEDGED</code> - When the alarm is in the <code>ACKNOWLEDGED</code> state, \n\t\tthe alarm was invoked and you acknowledged the alarm.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>SNOOZE_DISABLED</code> - When the alarm is in the <code>SNOOZE_DISABLED</code> state, \n\t\tthe alarm is disabled for a specified period of time. After the snooze time, \n\t\tthe alarm automatically changes to the <code>NORMAL</code> state. </p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>LATCHED</code> - When the alarm is in the <code>LATCHED</code> state, \n\t\tthe alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. \n\t\tTo change the alarm to the <code>NORMAL</code> state, you must acknowledge the alarm.</p>\n\t           </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the alarm state. The state name can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISABLED</code> - When the alarm is in the <code>DISABLED</code> state, \n\t\tit isn't ready to evaluate data. To enable the alarm, \n\t\tyou must change the alarm to the <code>NORMAL</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NORMAL</code> - When the alarm is in the <code>NORMAL</code> state, \n\t\tit's ready to evaluate data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - If the alarm is in the <code>ACTIVE</code> state, \n\t\tthe alarm is invoked.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACKNOWLEDGED</code> - When the alarm is in the <code>ACKNOWLEDGED</code> state, \n\t\tthe alarm was invoked and you acknowledged the alarm.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SNOOZE_DISABLED</code> - When the alarm is in the <code>SNOOZE_DISABLED</code> state, \n\t\tthe alarm is disabled for a specified period of time. After the snooze time, \n\t\tthe alarm automatically changes to the <code>NORMAL</code> state. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LATCHED</code> - When the alarm is in the <code>LATCHED</code> state, \n\t\tthe alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. \n\t\tTo change the alarm to the <code>NORMAL</code> state, you must acknowledge the alarm.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ruleEvaluation": {
@@ -190,34 +190,44 @@
             }
         },
         "com.amazonaws.ioteventsdata#AlarmStateName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "NORMAL",
-                        "name": "NORMAL"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "ACKNOWLEDGED",
-                        "name": "ACKNOWLEDGED"
-                    },
-                    {
-                        "value": "SNOOZE_DISABLED",
-                        "name": "SNOOZE_DISABLED"
-                    },
-                    {
-                        "value": "LATCHED",
-                        "name": "LATCHED"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMAL"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ACKNOWLEDGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACKNOWLEDGED"
+                    }
+                },
+                "SNOOZE_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNOOZE_DISABLED"
+                    }
+                },
+                "LATCHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATCHED"
+                    }
+                }
             }
         },
         "com.amazonaws.ioteventsdata#AlarmSummaries": {
@@ -250,7 +260,7 @@
                 "stateName": {
                     "target": "com.amazonaws.ioteventsdata#AlarmStateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the alarm state. The state name can be one of the following values:</p>\n         <ul>\n            <li>\n\t\t             <p>\n                  <code>DISABLED</code> - When the alarm is in the <code>DISABLED</code> state, \n\t\tit isn't ready to evaluate data. To enable the alarm, \n\t\tyou must change the alarm to the <code>NORMAL</code> state.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>NORMAL</code> - When the alarm is in the <code>NORMAL</code> state, \n\t\tit's ready to evaluate data.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>ACTIVE</code> - If the alarm is in the <code>ACTIVE</code> state, \n\t\tthe alarm is invoked.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>ACKNOWLEDGED</code> - When the alarm is in the <code>ACKNOWLEDGED</code> state, \n\t\tthe alarm was invoked and you acknowledged the alarm.</p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>SNOOZE_DISABLED</code> - When the alarm is in the <code>SNOOZE_DISABLED</code> state, \n\t\tthe alarm is disabled for a specified period of time. After the snooze time, \n\t\tthe alarm automatically changes to the <code>NORMAL</code> state. </p>\n\t           </li>\n            <li>\n\t\t             <p>\n                  <code>LATCHED</code> - When the alarm is in the <code>LATCHED</code> state, \n\t\tthe alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. \n\t\tTo change the alarm to the <code>NORMAL</code> state, you must acknowledge the alarm.</p>\n\t           </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the alarm state. The state name can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISABLED</code> - When the alarm is in the <code>DISABLED</code> state, \n\t\tit isn't ready to evaluate data. To enable the alarm, \n\t\tyou must change the alarm to the <code>NORMAL</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NORMAL</code> - When the alarm is in the <code>NORMAL</code> state, \n\t\tit's ready to evaluate data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - If the alarm is in the <code>ACTIVE</code> state, \n\t\tthe alarm is invoked.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACKNOWLEDGED</code> - When the alarm is in the <code>ACKNOWLEDGED</code> state, \n\t\tthe alarm was invoked and you acknowledged the alarm.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SNOOZE_DISABLED</code> - When the alarm is in the <code>SNOOZE_DISABLED</code> state, \n\t\tthe alarm is disabled for a specified period of time. After the snooze time, \n\t\tthe alarm automatically changes to the <code>NORMAL</code> state. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LATCHED</code> - When the alarm is in the <code>LATCHED</code> state, \n\t\tthe alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. \n\t\tTo change the alarm to the <code>NORMAL</code> state, you must acknowledge the alarm.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "creationTime": {
@@ -311,6 +321,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchAcknowledgeAlarmResponse": {
@@ -322,6 +335,9 @@
                         "smithy.api#documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. \nEach error entry contains an entry ID that helps you identify the entry that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchAlarmActionErrorEntries": {
@@ -429,6 +445,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchDeleteDetectorResponse": {
@@ -440,6 +459,9 @@
                         "smithy.api#documentation": "<p>A list of errors associated with the request, or an empty array (<code>[]</code>) if there are no errors. Each error entry contains a <code>messageId</code> that helps you identify the entry that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchDisableAlarm": {
@@ -483,6 +505,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchDisableAlarmResponse": {
@@ -494,6 +519,9 @@
                         "smithy.api#documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. \nEach error entry contains an entry ID that helps you identify the entry that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchEnableAlarm": {
@@ -537,6 +565,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchEnableAlarmResponse": {
@@ -548,6 +579,9 @@
                         "smithy.api#documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. \nEach error entry contains an entry ID that helps you identify the entry that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchPutMessage": {
@@ -623,6 +657,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchPutMessageResponse": {
@@ -634,6 +671,9 @@
                         "smithy.api#documentation": "<p>A list of any errors encountered when sending the messages.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchResetAlarm": {
@@ -677,6 +717,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchResetAlarmResponse": {
@@ -688,6 +731,9 @@
                         "smithy.api#documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. \nEach error entry contains an entry ID that helps you identify the entry that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchSnoozeAlarm": {
@@ -731,6 +777,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchSnoozeAlarmResponse": {
@@ -742,6 +791,9 @@
                         "smithy.api#documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. \nEach error entry contains an entry ID that helps you identify the entry that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchUpdateDetector": {
@@ -817,6 +869,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#BatchUpdateDetectorResponse": {
@@ -828,37 +883,50 @@
                         "smithy.api#documentation": "<p>A list of those detector updates that resulted in errors. (If an error is listed here, the\n      specific update did not occur.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#ComparisonOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GREATER",
-                        "name": "GREATER"
-                    },
-                    {
-                        "value": "GREATER_OR_EQUAL",
-                        "name": "GREATER_OR_EQUAL"
-                    },
-                    {
-                        "value": "LESS",
-                        "name": "LESS"
-                    },
-                    {
-                        "value": "LESS_OR_EQUAL",
-                        "name": "LESS_OR_EQUAL"
-                    },
-                    {
-                        "value": "EQUAL",
-                        "name": "EQUAL"
-                    },
-                    {
-                        "value": "NOT_EQUAL",
-                        "name": "NOT_EQUAL"
+            "type": "enum",
+            "members": {
+                "GREATER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER"
                     }
-                ]
+                },
+                "GREATER_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_OR_EQUAL"
+                    }
+                },
+                "LESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS"
+                    }
+                },
+                "LESS_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_OR_EQUAL"
+                    }
+                },
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
+                    }
+                },
+                "NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.ioteventsdata#CustomerAction": {
@@ -867,7 +935,7 @@
                 "actionName": {
                     "target": "com.amazonaws.ioteventsdata#CustomerActionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the action. The action name can be one of the following values:</p>\n         <ul>\n            <li>\n\t\t\t            <p>\n                  <code>SNOOZE</code> - When you snooze the alarm, the alarm state changes to <code>SNOOZE_DISABLED</code>.</p>\n\t\t          </li>\n            <li>\n\t\t\t            <p>\n                  <code>ENABLE</code> - When you enable the alarm, the alarm state changes to <code>NORMAL</code>.</p>\n\t\t          </li>\n            <li>\n\t\t\t            <p>\n                  <code>DISABLE</code> - When you disable the alarm, the alarm state changes to <code>DISABLED</code>.</p>\n\t\t          </li>\n            <li>\n\t\t\t            <p>\n                  <code>ACKNOWLEDGE</code> - When you acknowledge the alarm, the alarm state changes to <code>ACKNOWLEDGED</code>.</p>\n\t\t          </li>\n            <li>\n\t\t\t            <p>\n                  <code>RESET</code> - When you reset the alarm, the alarm state changes to <code>NORMAL</code>.</p>\n\t\t          </li>\n         </ul>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html\">AlarmState</a> API.</p>"
+                        "smithy.api#documentation": "<p>The name of the action. The action name can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SNOOZE</code> - When you snooze the alarm, the alarm state changes to <code>SNOOZE_DISABLED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLE</code> - When you enable the alarm, the alarm state changes to <code>NORMAL</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLE</code> - When you disable the alarm, the alarm state changes to <code>DISABLED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACKNOWLEDGE</code> - When you acknowledge the alarm, the alarm state changes to <code>ACKNOWLEDGED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESET</code> - When you reset the alarm, the alarm state changes to <code>NORMAL</code>.</p>\n            </li>\n         </ul>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html\">AlarmState</a> API.</p>"
                     }
                 },
                 "snoozeActionConfiguration": {
@@ -906,30 +974,38 @@
             }
         },
         "com.amazonaws.ioteventsdata#CustomerActionName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SNOOZE",
-                        "name": "SNOOZE"
-                    },
-                    {
-                        "value": "ENABLE",
-                        "name": "ENABLE"
-                    },
-                    {
-                        "value": "DISABLE",
-                        "name": "DISABLE"
-                    },
-                    {
-                        "value": "ACKNOWLEDGE",
-                        "name": "ACKNOWLEDGE"
-                    },
-                    {
-                        "value": "RESET",
-                        "name": "RESET"
+            "type": "enum",
+            "members": {
+                "SNOOZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNOOZE"
                     }
-                ]
+                },
+                "ENABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE"
+                    }
+                },
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE"
+                    }
+                },
+                "ACKNOWLEDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACKNOWLEDGE"
+                    }
+                },
+                "RESET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESET"
+                    }
+                }
             }
         },
         "com.amazonaws.ioteventsdata#DeleteDetectorRequest": {
@@ -1023,6 +1099,9 @@
                         "smithy.api#httpQuery": "keyValue"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#DescribeAlarmResponse": {
@@ -1034,6 +1113,9 @@
                         "smithy.api#documentation": "<p>Contains information about an alarm.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#DescribeDetector": {
@@ -1088,6 +1170,9 @@
                         "smithy.api#httpQuery": "keyValue"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#DescribeDetectorResponse": {
@@ -1099,6 +1184,9 @@
                         "smithy.api#documentation": "<p>Information about the detector (instance).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#Detector": {
@@ -1424,44 +1512,52 @@
             }
         },
         "com.amazonaws.ioteventsdata#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "InvalidRequestException",
-                        "name": "InvalidRequestException"
-                    },
-                    {
-                        "value": "InternalFailureException",
-                        "name": "InternalFailureException"
-                    },
-                    {
-                        "value": "ServiceUnavailableException",
-                        "name": "ServiceUnavailableException"
-                    },
-                    {
-                        "value": "ThrottlingException",
-                        "name": "ThrottlingException"
+            "type": "enum",
+            "members": {
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
                     }
-                ]
+                },
+                "InvalidRequestException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidRequestException"
+                    }
+                },
+                "InternalFailureException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailureException"
+                    }
+                },
+                "ServiceUnavailableException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceUnavailableException"
+                    }
+                },
+                "ThrottlingException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThrottlingException"
+                    }
+                }
             }
         },
         "com.amazonaws.ioteventsdata#ErrorMessage": {
             "type": "string"
         },
         "com.amazonaws.ioteventsdata#EventType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STATE_CHANGE",
-                        "name": "STATE_CHANGE"
+            "type": "enum",
+            "members": {
+                "STATE_CHANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATE_CHANGE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ioteventsdata#InputPropertyValue": {
@@ -1546,6 +1642,7 @@
                     "arnNamespace": "ioteventsdata",
                     "cloudFormationName": "IoTEventsData",
                     "cloudTrailEventSource": "ioteventsdata.amazonaws.com",
+                    "docId": "iotevents-data-2018-10-23",
                     "endpointPrefix": "data.iotevents"
                 },
                 "aws.auth#sigv4": {
@@ -1614,9 +1711,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://data.iotevents-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://data.iotevents-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -1629,15 +1905,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://data.iotevents.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://data.iotevents.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -1649,258 +1960,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://data.iotevents-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://data.iotevents-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://data.iotevents.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://data.iotevents.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1915,8 +1976,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1928,8 +1989,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1941,8 +2002,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1954,8 +2015,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1967,8 +2028,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1980,8 +2041,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1993,8 +2054,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2006,8 +2067,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2019,8 +2080,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2032,8 +2093,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2045,8 +2106,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2058,8 +2119,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2071,8 +2143,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2084,8 +2167,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2097,8 +2191,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2110,8 +2215,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2123,8 +2228,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2136,8 +2241,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2148,8 +2253,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2160,9 +2265,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2239,6 +2350,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#ListAlarmsResponse": {
@@ -2256,6 +2370,9 @@
                         "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#ListDetectors": {
@@ -2324,6 +2441,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ioteventsdata#ListDetectorsResponse": {
@@ -2341,6 +2461,9 @@
                         "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ioteventsdata#MaxResults": {
@@ -2796,14 +2919,14 @@
             }
         },
         "com.amazonaws.ioteventsdata#TriggerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SNOOZE_TIMEOUT",
-                        "name": "SNOOZE_TIMEOUT"
+            "type": "enum",
+            "members": {
+                "SNOOZE_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNOOZE_TIMEOUT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ioteventsdata#UpdateDetectorRequest": {

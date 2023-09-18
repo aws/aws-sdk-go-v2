@@ -244,7 +244,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new dataset  in an Amazon Lookout for Vision project. <code>CreateDataset</code> can create a \n      training or a test dataset from a valid dataset source (<code>DatasetSource</code>).</p>\n         <p>If you want a single dataset project, specify <code>train</code> for the value of \n         <code>DatasetType</code>.</p>\n        <p>To have a project with separate training and test datasets, call <code>CreateDataset</code> twice.\n           On the first call, specify <code>train</code> for the value of \n           <code>DatasetType</code>. On the second call, specify <code>test</code> for the value of \n           <code>DatasetType</code>. </p>\n        <p>This operation requires permissions to perform the\n           <code>lookoutvision:CreateDataset</code> operation.</p>",
+                "smithy.api#documentation": "<p>Creates a new dataset  in an Amazon Lookout for Vision project. <code>CreateDataset</code> can create a \n      training or a test dataset from a valid dataset source (<code>DatasetSource</code>).</p>\n         <p>If you want a single dataset project, specify <code>train</code> for the value of \n         <code>DatasetType</code>.</p>\n         <p>To have a project with separate training and test datasets, call <code>CreateDataset</code> twice.\n           On the first call, specify <code>train</code> for the value of \n           <code>DatasetType</code>. On the second call, specify <code>test</code> for the value of \n           <code>DatasetType</code>. </p>\n         <p>This operation requires permissions to perform the\n           <code>lookoutvision:CreateDataset</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-11-20/projects/{ProjectName}/datasets",
@@ -284,6 +284,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#CreateDatasetResponse": {
@@ -295,6 +298,9 @@
                         "smithy.api#documentation": "<p>Information about the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#CreateModel": {
@@ -357,7 +363,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code>\n      completes only once.  You choose the value to pass. For example, An issue\n      might prevent you from getting a response from <code>CreateModel</code>.\n      In this case, safely retry your call\n       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n            This prevents retries after a network error from starting multiple training jobs. You'll need to\n            provide your own value for other use cases. </p>  \n        <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code>\n      completes only once.  You choose the value to pass. For example, An issue\n      might prevent you from getting a response from <code>CreateModel</code>.\n      In this case, safely retry your call\n       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n            This prevents retries after a network error from starting multiple training jobs. You'll need to\n            provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -381,6 +387,9 @@
                         "smithy.api#documentation": "<p>A set of tags (key-value pairs) that you want to attach to the model.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#CreateModelResponse": {
@@ -392,6 +401,9 @@
                         "smithy.api#documentation": "<p>The response from a call to <code>CreateModel</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#CreateProject": {
@@ -447,11 +459,14 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you from \n      getting a response from <code>CreateProject</code>.\n      In this case, safely retry your call\n       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n          This prevents retries after a network error from making multiple project creation requests. You'll need to\n           provide your own value for other use cases. </p>      \n         <p>An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you from \n      getting a response from <code>CreateProject</code>.\n      In this case, safely retry your call\n       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n          This prevents retries after a network error from making multiple project creation requests. You'll need to\n           provide your own value for other use cases. </p>\n         <p>An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#CreateProjectResponse": {
@@ -463,6 +478,9 @@
                         "smithy.api#documentation": "<p>Information about the project.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DatasetChanges": {
@@ -778,16 +796,22 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you from getting a response from <code>DeleteDataset</code>.\n      In this case, safely retry your call\n       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n                 This prevents retries after a network error from making multiple deletetion requests. You'll need to\n                 provide your own value for other use cases. </p>       \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you from getting a response from <code>DeleteDataset</code>.\n      In this case, safely retry your call\n       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n                 This prevents retries after a network error from making multiple deletetion requests. You'll need to\n                 provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DeleteDatasetResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lookoutvision#DeleteModel": {
             "type": "operation",
@@ -848,11 +872,14 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code>\n      completes only once.  You choose the value to pass. For example, an issue might prevent\n      you from getting a response from <code>DeleteModel</code>.\n      In this case, safely retry your call\n       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple model deletion requests. You'll need to\n         provide your own value for other use cases. </p>\n    \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code>\n      completes only once.  You choose the value to pass. For example, an issue might prevent\n      you from getting a response from <code>DeleteModel</code>.\n      In this case, safely retry your call\n       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple model deletion requests. You'll need to\n         provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DeleteModelResponse": {
@@ -864,6 +891,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DeleteProject": {
@@ -922,6 +952,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DeleteProjectResponse": {
@@ -933,6 +966,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeDataset": {
@@ -991,6 +1027,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeDatasetResponse": {
@@ -1002,6 +1041,9 @@
                         "smithy.api#documentation": "<p>The description of the requested dataset. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeModel": {
@@ -1067,7 +1109,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an Amazon Lookout for Vision model packaging job.\n</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DescribeModelPackagingJob</code> operation.</p>\n      \n         <p>For more information, see \n         <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#documentation": "<p>Describes an Amazon Lookout for Vision model packaging job.\n</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DescribeModelPackagingJob</code> operation.</p>\n         <p>For more information, see \n         <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-11-20/projects/{ProjectName}/modelpackagingjobs/{JobName}",
@@ -1094,6 +1136,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeModelPackagingJobResponse": {
@@ -1105,6 +1150,9 @@
                         "smithy.api#documentation": "<p>The description of the model packaging job.\n</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeModelRequest": {
@@ -1126,6 +1174,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeModelResponse": {
@@ -1137,6 +1188,9 @@
                         "smithy.api#documentation": "<p>Contains the description of the model.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeProject": {
@@ -1187,6 +1241,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DescribeProjectResponse": {
@@ -1198,6 +1255,9 @@
                         "smithy.api#documentation": "<p>The description of the project.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DetectAnomalies": {
@@ -1229,7 +1289,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects anomalies in an image that you supply. </p>\n         <p>The response from <code>DetectAnomalies</code> includes a boolean prediction\n         that the image contains one or more anomalies and a confidence value for the prediction.\n      If the model is an image segmentation model, the response also includes segmentation\n      information for each type of anomaly found in the image.</p>\n         <note>\n            <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation.\n         You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your\n         model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> \n         </note>\n      \n         <p>For more information, see <i>Detecting anomalies in an image</i> in the Amazon Lookout for Vision developer guide.</p>\n      \n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DetectAnomalies</code> operation.</p>",
+                "smithy.api#documentation": "<p>Detects anomalies in an image that you supply. </p>\n         <p>The response from <code>DetectAnomalies</code> includes a boolean prediction\n         that the image contains one or more anomalies and a confidence value for the prediction.\n      If the model is an image segmentation model, the response also includes segmentation\n      information for each type of anomaly found in the image.</p>\n         <note>\n            <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation.\n         You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your\n         model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p>\n         </note>\n         <p>For more information, see <i>Detecting anomalies in an image</i> in the Amazon Lookout for Vision developer guide.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DetectAnomalies</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}/detect",
@@ -1272,6 +1332,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#DetectAnomaliesResponse": {
@@ -1283,6 +1346,9 @@
                         "smithy.api#documentation": "<p>The results of the <code>DetectAnomalies</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#DetectAnomalyResult": {
@@ -1336,7 +1402,7 @@
                 "CompilerOptions": {
                     "target": "com.amazonaws.lookoutvision#CompilerOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional compiler options for the Greengrass component. Currently, \n   only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are supported. \n   If you specify <code>TargetDevice</code>, don't specify <code>CompilerOptions</code>.</p> \n   \n   \n         <p>For more information, see \n      <i>Compiler options</i> in the  Amazon Lookout for Vision Developer Guide. </p>"
+                        "smithy.api#documentation": "<p>Additional compiler options for the Greengrass component. Currently, \n   only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are supported. \n   If you specify <code>TargetDevice</code>, don't specify <code>CompilerOptions</code>.</p>\n         <p>For more information, see \n      <i>Compiler options</i> in the  Amazon Lookout for Vision Developer Guide. </p>"
                     }
                 },
                 "TargetDevice": {
@@ -1621,6 +1687,9 @@
                         "smithy.api#httpQuery": "sourceRefContains"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#ListDatasetEntriesResponse": {
@@ -1638,6 +1707,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Lookout for Vision returns this token\n         that you can use in the subsequent request to retrieve the next set ofdataset entries.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#ListModelPackagingJobs": {
@@ -1666,7 +1738,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nLists the model packaging jobs created for an Amazon Lookout for Vision project.\n</p>\n         <p>This operation requires permissions to perform the\n    <code>lookoutvision:ListModelPackagingJobs</code> operation.\n</p>\n   \n         <p>For more information, see \n      <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#documentation": "<p>\nLists the model packaging jobs created for an Amazon Lookout for Vision project.\n</p>\n         <p>This operation requires permissions to perform the\n    <code>lookoutvision:ListModelPackagingJobs</code> operation.\n</p>\n         <p>For more information, see \n      <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-11-20/projects/{ProjectName}/modelpackagingjobs",
@@ -1705,6 +1777,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#ListModelPackagingJobsResponse": {
@@ -1722,6 +1797,9 @@
                         "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n   results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination \n   token to retrieve the next set of results.\n</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#ListModels": {
@@ -1792,6 +1870,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#ListModelsResponse": {
@@ -1809,6 +1890,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Lookout for Vision returns this token\n         that you can use in the subsequent request to retrieve the next set of models. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#ListProjects": {
@@ -1871,6 +1955,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#ListProjectsResponse": {
@@ -1888,6 +1975,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Lookout for Vision returns this token\n         that you can use in the subsequent request to retrieve the next set of projects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#ListTagsForResource": {
@@ -1938,6 +2028,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#ListTagsForResourceResponse": {
@@ -1949,6 +2042,9 @@
                         "smithy.api#documentation": "<p>A map of tag keys and values attached to the specified model.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#LookoutVisionService": {
@@ -2096,9 +2192,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutvision-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutvision-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2111,15 +2386,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutvision.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://lookoutvision.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2131,258 +2441,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://lookoutvision-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://lookoutvision-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://lookoutvision.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://lookoutvision.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2397,8 +2457,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2410,8 +2470,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2423,8 +2483,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2436,8 +2496,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2449,8 +2509,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2462,8 +2522,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2475,8 +2535,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2488,8 +2548,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2501,8 +2561,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2514,8 +2574,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2527,8 +2587,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2540,8 +2600,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2553,8 +2613,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2566,8 +2626,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2579,8 +2639,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2592,8 +2652,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2605,8 +2665,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2618,8 +2678,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2631,8 +2702,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2644,8 +2726,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2657,8 +2750,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2670,8 +2774,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2683,8 +2787,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2696,8 +2800,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2708,8 +2812,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2720,9 +2824,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3676,7 +3786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an Amazon Lookout for Vision model packaging job. A model packaging job creates an AWS IoT Greengrass component for\n   a Lookout for Vision model. You can use the component to deploy your model to an edge device managed by Greengrass.\n</p>\n   \n         <p>Use the <a>DescribeModelPackagingJob</a> API to determine the current status of the job.\n     \n  The model packaging job is complete if the value of <code>Status</code> is <code>SUCCEEDED</code>.</p>\n         <p>To deploy the component\n      to the target device, use the component name and component version\n      with the AWS IoT Greengrass <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html\">CreateDeployment</a> API.</p>\n\n         <p>This operation requires the following permissions:</p> \n         <ul>\n            <li>\n               <p>\n                  <code>lookoutvision:StartModelPackagingJob</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:PutObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetBucketLocation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:GenerateDataKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>greengrass:CreateComponentVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>greengrass:DescribeComponent</code>\n               </p>\n            </li>\n            <li>\n               <p>(Optional) <code>greengrass:TagResource</code>. Only required if you want to tag the component.</p>\n            </li>\n         </ul>\n   \n   \n         <p>For more information, see \n      <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#documentation": "<p>Starts an Amazon Lookout for Vision model packaging job. A model packaging job creates an AWS IoT Greengrass component for\n   a Lookout for Vision model. You can use the component to deploy your model to an edge device managed by Greengrass.\n</p>\n         <p>Use the <a>DescribeModelPackagingJob</a> API to determine the current status of the job.\n     \n  The model packaging job is complete if the value of <code>Status</code> is <code>SUCCEEDED</code>.</p>\n         <p>To deploy the component\n      to the target device, use the component name and component version\n      with the AWS IoT Greengrass <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html\">CreateDeployment</a> API.</p>\n         <p>This operation requires the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lookoutvision:StartModelPackagingJob</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:PutObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetBucketLocation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:GenerateDataKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>greengrass:CreateComponentVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>greengrass:DescribeComponent</code>\n               </p>\n            </li>\n            <li>\n               <p>(Optional) <code>greengrass:TagResource</code>. Only required if you want to tag the component.</p>\n            </li>\n         </ul>\n         <p>For more information, see \n      <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-11-20/projects/{ProjectName}/modelpackagingjobs",
@@ -3729,6 +3839,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#StartModelPackagingJobResponse": {
@@ -3740,6 +3853,9 @@
                         "smithy.api#documentation": "<p>The job name for the model packaging job. If you don't supply a job name in the <code>JobName</code> input parameter,\n   the service creates a job name for you.\n\n</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#StartModelRequest": {
@@ -3771,7 +3887,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>\n         completes only once.  You choose the value to pass. For example, An issue might prevent \n         you from getting a response from <code>StartModel</code>.\n         In this case, safely retry your call\n         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple start requests. You'll need to\n         provide your own value for other use cases. </p>\n         \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>\n         completes only once.  You choose the value to pass. For example, An issue might prevent \n         you from getting a response from <code>StartModel</code>.\n         In this case, safely retry your call\n         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple start requests. You'll need to\n         provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -3782,6 +3898,9 @@
                         "smithy.api#documentation": "<p>The maximum number of inference units to use for auto-scaling the model. If you don't\n         specify a value, Amazon Lookout for Vision doesn't auto-scale the model.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#StartModelResponse": {
@@ -3793,6 +3912,9 @@
                         "smithy.api#documentation": "<p>The current running status of the model.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#StopModel": {
@@ -3859,6 +3981,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#StopModelResponse": {
@@ -3870,6 +3995,9 @@
                         "smithy.api#documentation": "<p>The status of the model.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#Stream": {
@@ -4002,11 +4130,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lookoutvision#TagValue": {
             "type": "string",
@@ -4188,11 +4322,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lookoutvision#UpdateDatasetEntries": {
             "type": "operation",
@@ -4223,7 +4363,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes information about an image\n         used for training or testing an Amazon Lookout for Vision model.</p>\n         <p>To update an existing JSON Line, use the <code>source-ref</code> field to identify the JSON Line. The JSON line\n         that you supply replaces the existing JSON line. Any existing annotations that are not in the new JSON line are removed from the dataset.\n      </p>\n      \n      \n         <p>For more information, see \n         <i>Defining JSON lines for anomaly classification</i> in the  Amazon Lookout for Vision Developer Guide. </p>\n      \n         <note>\n            <p>The images you reference in the <code>source-ref</code> field of a JSON line, must be \n      in the same S3 bucket as the existing images in the dataset. </p>\n         </note>\n        \n         <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and\n         check the <code>Status</code> field in the response.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:UpdateDatasetEntries</code> operation.</p>",
+                "smithy.api#documentation": "<p>Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes information about an image\n         used for training or testing an Amazon Lookout for Vision model.</p>\n         <p>To update an existing JSON Line, use the <code>source-ref</code> field to identify the JSON Line. The JSON line\n         that you supply replaces the existing JSON line. Any existing annotations that are not in the new JSON line are removed from the dataset.\n      </p>\n         <p>For more information, see \n         <i>Defining JSON lines for anomaly classification</i> in the  Amazon Lookout for Vision Developer Guide. </p>\n         <note>\n            <p>The images you reference in the <code>source-ref</code> field of a JSON line, must be \n      in the same S3 bucket as the existing images in the dataset. </p>\n         </note>\n         <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and\n         check the <code>Status</code> field in the response.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:UpdateDatasetEntries</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}/entries",
@@ -4265,6 +4405,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutvision#UpdateDatasetEntriesResponse": {
@@ -4276,6 +4419,9 @@
                         "smithy.api#documentation": "<p>The status of the dataset update.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutvision#ValidationException": {

@@ -32,7 +32,7 @@
         "com.amazonaws.elastictranscoder#AccessControl": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)"
+                "smithy.api#pattern": "^(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AccessControls": {
@@ -122,25 +122,25 @@
         "com.amazonaws.elastictranscoder#Ascending": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^true$)|(^false$)"
+                "smithy.api#pattern": "^(^true$)|(^false$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AspectRatio": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)"
+                "smithy.api#pattern": "^(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioBitDepth": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^8$)|(^16$)|(^24$)|(^32$)"
+                "smithy.api#pattern": "^(^8$)|(^16$)|(^24$)|(^32$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioBitOrder": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^LittleEndian$)"
+                "smithy.api#pattern": "^(^LittleEndian$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioBitRate": {
@@ -152,13 +152,13 @@
         "com.amazonaws.elastictranscoder#AudioChannels": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^0$)|(^1$)|(^2$)"
+                "smithy.api#pattern": "^(^auto$)|(^0$)|(^1$)|(^2$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioCodec": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^AAC$)|(^vorbis$)|(^mp3$)|(^mp2$)|(^pcm$)|(^flac$)"
+                "smithy.api#pattern": "^(^AAC$)|(^vorbis$)|(^mp3$)|(^mp2$)|(^pcm$)|(^flac$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioCodecOptions": {
@@ -196,13 +196,13 @@
         "com.amazonaws.elastictranscoder#AudioCodecProfile": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^AAC-LC$)|(^HE-AAC$)|(^HE-AACv2$)"
+                "smithy.api#pattern": "^(^auto$)|(^AAC-LC$)|(^HE-AAC$)|(^HE-AACv2$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioPackingMode": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^SingleTrack$)|(^OneChannelPerTrack$)|(^OneChannelPerTrackWithMosTo8Tracks$)"
+                "smithy.api#pattern": "^(^SingleTrack$)|(^OneChannelPerTrack$)|(^OneChannelPerTrackWithMosTo8Tracks$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioParameters": {
@@ -252,19 +252,19 @@
         "com.amazonaws.elastictranscoder#AudioSampleRate": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)|(^192000$)"
+                "smithy.api#pattern": "^(^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)|(^192000$)$"
             }
         },
         "com.amazonaws.elastictranscoder#AudioSigned": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Unsigned$)|(^Signed$)"
+                "smithy.api#pattern": "^(^Unsigned$)|(^Signed$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Base64EncodedString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^$|(^(?:[A-Za-z0-9\\+/]{4})*(?:[A-Za-z0-9\\+/]{2}==|[A-Za-z0-9\\+/]{3}=)?$)"
+                "smithy.api#pattern": "^$|(^(?:[A-Za-z0-9\\+/]{4})*(?:[A-Za-z0-9\\+/]{2}==|[A-Za-z0-9\\+/]{3}=)?$)$"
             }
         },
         "com.amazonaws.elastictranscoder#BucketName": {
@@ -323,14 +323,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CancelJobRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>CancelJobRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#CancelJobResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The response body contains a JSON object. If the job is successfully canceled, the value\n            of <code>Success</code> is <code>true</code>.</p>"
+                "smithy.api#documentation": "<p>The response body contains a JSON object. If the job is successfully canceled, the value\n            of <code>Success</code> is <code>true</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#CaptionFormat": {
@@ -362,13 +364,13 @@
         "com.amazonaws.elastictranscoder#CaptionFormatFormat": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^mov-text$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)|(^cea-708$)"
+                "smithy.api#pattern": "^(^mov-text$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)|(^cea-708$)$"
             }
         },
         "com.amazonaws.elastictranscoder#CaptionFormatPattern": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^$)|(^.*\\{language\\}.*$)"
+                "smithy.api#pattern": "^(^$)|(^.*\\{language\\}.*$)$"
             }
         },
         "com.amazonaws.elastictranscoder#CaptionFormats": {
@@ -386,7 +388,7 @@
         "com.amazonaws.elastictranscoder#CaptionMergePolicy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^MergeOverride$)|(^MergeRetain$)|(^Override$)"
+                "smithy.api#pattern": "^(^MergeOverride$)|(^MergeRetain$)|(^Override$)$"
             }
         },
         "com.amazonaws.elastictranscoder#CaptionSource": {
@@ -743,7 +745,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateJobRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>CreateJobRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#CreateJobResponse": {
@@ -757,7 +760,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CreateJobResponse structure.</p>"
+                "smithy.api#documentation": "<p>The CreateJobResponse structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#CreatePipeline": {
@@ -853,7 +857,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreatePipelineRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>CreatePipelineRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#CreatePipelineResponse": {
@@ -873,7 +878,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When you create a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>"
+                "smithy.api#documentation": "<p>When you create a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#CreatePreset": {
@@ -953,7 +959,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreatePresetRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>CreatePresetRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#CreatePresetResponse": {
@@ -973,7 +980,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreatePresetResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>CreatePresetResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#DeletePipeline": {
@@ -1026,14 +1034,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>DeletePipelineRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>DeletePipelineRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#DeletePipelineResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The <code>DeletePipelineResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>DeletePipelineResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#DeletePreset": {
@@ -1083,14 +1093,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>DeletePresetRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>DeletePresetRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#DeletePresetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The <code>DeletePresetResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>DeletePresetResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#Description": {
@@ -1149,7 +1161,7 @@
         "com.amazonaws.elastictranscoder#DigitsOrAuto": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^\\d{2,4}$)"
+                "smithy.api#pattern": "^(^auto$)|(^\\d{2,4}$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Encryption": {
@@ -1187,7 +1199,7 @@
         "com.amazonaws.elastictranscoder#EncryptionMode": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^s3$)|(^s3-aws-kms$)|(^aes-cbc-pkcs7$)|(^aes-ctr$)|(^aes-gcm$)"
+                "smithy.api#pattern": "^(^s3$)|(^s3-aws-kms$)|(^aes-cbc-pkcs7$)|(^aes-ctr$)|(^aes-gcm$)$"
             }
         },
         "com.amazonaws.elastictranscoder#EtsCustomerService": {
@@ -1252,6 +1264,7 @@
                     "arnNamespace": "elastictranscoder",
                     "cloudFormationName": "ElasticTranscoder",
                     "cloudTrailEventSource": "elastictranscoder.amazonaws.com",
+                    "docId": "elastictranscoder-2012-09-25",
                     "endpointPrefix": "elastictranscoder"
                 },
                 "aws.auth#sigv4": {
@@ -1323,9 +1336,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elastictranscoder-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elastictranscoder-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -1338,15 +1530,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elastictranscoder.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://elastictranscoder.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -1358,258 +1585,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elastictranscoder-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elastictranscoder-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elastictranscoder.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://elastictranscoder.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1624,8 +1601,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1637,8 +1614,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1650,8 +1627,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1663,8 +1640,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1676,8 +1653,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1689,8 +1666,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1702,8 +1679,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1715,8 +1692,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1728,8 +1705,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1741,8 +1718,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1754,8 +1731,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1767,8 +1744,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1780,8 +1757,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1793,8 +1770,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1806,8 +1783,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1819,8 +1796,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1832,8 +1809,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1845,8 +1822,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1858,8 +1835,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1871,8 +1859,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1884,8 +1883,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1897,8 +1907,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1910,8 +1931,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1923,8 +1944,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1936,8 +1957,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1948,8 +1969,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1960,9 +1981,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1991,7 +2018,7 @@
         "com.amazonaws.elastictranscoder#FixedGOP": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^true$)|(^false$)"
+                "smithy.api#pattern": "^(^true$)|(^false$)$"
             }
         },
         "com.amazonaws.elastictranscoder#FloatString": {
@@ -2003,7 +2030,7 @@
         "com.amazonaws.elastictranscoder#FrameRate": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)"
+                "smithy.api#pattern": "^(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Grantee": {
@@ -2018,7 +2045,7 @@
         "com.amazonaws.elastictranscoder#GranteeType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Canonical$)|(^Email$)|(^Group$)"
+                "smithy.api#pattern": "^(^Canonical$)|(^Email$)|(^Group$)$"
             }
         },
         "com.amazonaws.elastictranscoder#HlsContentProtection": {
@@ -2068,13 +2095,13 @@
         "com.amazonaws.elastictranscoder#HlsContentProtectionMethod": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^aes-128$)"
+                "smithy.api#pattern": "^(^aes-128$)$"
             }
         },
         "com.amazonaws.elastictranscoder#HorizontalAlign": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Left$)|(^Right$)|(^Center$)"
+                "smithy.api#pattern": "^(^Left$)|(^Right$)|(^Center$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Id": {
@@ -2121,7 +2148,7 @@
         "com.amazonaws.elastictranscoder#Interlaced": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^true$)|(^false$)"
+                "smithy.api#pattern": "^(^auto$)|(^true$)|(^false$)$"
             }
         },
         "com.amazonaws.elastictranscoder#InternalServiceException": {
@@ -2242,7 +2269,7 @@
         "com.amazonaws.elastictranscoder#JobContainer": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)"
+                "smithy.api#pattern": "^(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)$"
             }
         },
         "com.amazonaws.elastictranscoder#JobInput": {
@@ -2469,7 +2496,7 @@
         "com.amazonaws.elastictranscoder#JobStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Submitted$)|(^Progressing$)|(^Complete$)|(^Canceled$)|(^Error$)"
+                "smithy.api#pattern": "^(^Submitted$)|(^Progressing$)|(^Complete$)|(^Canceled$)|(^Error$)$"
             }
         },
         "com.amazonaws.elastictranscoder#JobWatermark": {
@@ -2513,7 +2540,7 @@
         "com.amazonaws.elastictranscoder#JpgOrPng": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^jpg$)|(^png$)"
+                "smithy.api#pattern": "^(^jpg$)|(^png$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Key": {
@@ -2537,13 +2564,13 @@
         "com.amazonaws.elastictranscoder#KeyIdGuid": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$)|(^[0-9A-Fa-f]{32}$)"
+                "smithy.api#pattern": "^(^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$)|(^[0-9A-Fa-f]{32}$)$"
             }
         },
         "com.amazonaws.elastictranscoder#KeyStoragePolicy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^NoStore$)|(^WithVariantPlaylists$)"
+                "smithy.api#pattern": "^(^NoStore$)|(^WithVariantPlaylists$)$"
             }
         },
         "com.amazonaws.elastictranscoder#KeyframesMaxDist": {
@@ -2634,7 +2661,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListJobsByPipelineRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ListJobsByPipelineRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListJobsByPipelineResponse": {
@@ -2654,7 +2682,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListJobsByPipelineResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ListJobsByPipelineResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListJobsByStatus": {
@@ -2723,7 +2752,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListJobsByStatusRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ListJobsByStatusRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListJobsByStatusResponse": {
@@ -2743,7 +2773,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The <code>ListJobsByStatusResponse</code> structure.\n        </p>"
+                "smithy.api#documentation": "<p>\n            The <code>ListJobsByStatusResponse</code> structure.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListPipelines": {
@@ -2801,7 +2832,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListPipelineRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ListPipelineRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListPipelinesResponse": {
@@ -2821,7 +2853,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of the pipelines associated with the current AWS account.</p>"
+                "smithy.api#documentation": "<p>A list of the pipelines associated with the current AWS account.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListPresets": {
@@ -2879,7 +2912,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListPresetsRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ListPresetsRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ListPresetsResponse": {
@@ -2899,7 +2933,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListPresetsResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ListPresetsResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#LongKey": {
@@ -2914,13 +2949,13 @@
         "com.amazonaws.elastictranscoder#MaxFrameRate": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)"
+                "smithy.api#pattern": "^(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)$"
             }
         },
         "com.amazonaws.elastictranscoder#MergePolicy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)"
+                "smithy.api#pattern": "^(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Name": {
@@ -2935,7 +2970,7 @@
         "com.amazonaws.elastictranscoder#NonEmptyBase64EncodedString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^(?:[A-Za-z0-9\\+/]{4})*(?:[A-Za-z0-9\\+/]{2}==|[A-Za-z0-9\\+/]{3}=)?$)"
+                "smithy.api#pattern": "^(^(?:[A-Za-z0-9\\+/]{4})*(?:[A-Za-z0-9\\+/]{2}==|[A-Za-z0-9\\+/]{3}=)?$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Notifications": {
@@ -3006,7 +3041,7 @@
         "com.amazonaws.elastictranscoder#PaddingPolicy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Pad$)|(^NoPad$)"
+                "smithy.api#pattern": "^(^Pad$)|(^NoPad$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Permission": {
@@ -3150,7 +3185,7 @@
         "com.amazonaws.elastictranscoder#PipelineStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Active$)|(^Paused$)"
+                "smithy.api#pattern": "^(^Active$)|(^Paused$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Pipelines": {
@@ -3162,7 +3197,7 @@
         "com.amazonaws.elastictranscoder#PixelsOrPercent": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^\\d{1,3}(\\.\\d{0,5})?%$)|(^\\d{1,4}?px$)"
+                "smithy.api#pattern": "^(^\\d{1,3}(\\.\\d{0,5})?%$)|(^\\d{1,4}?px$)$"
             }
         },
         "com.amazonaws.elastictranscoder#PlayReadyDrm": {
@@ -3212,7 +3247,7 @@
         "com.amazonaws.elastictranscoder#PlayReadyDrmFormatString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^microsoft$)|(^discretix-3.0$)"
+                "smithy.api#pattern": "^(^microsoft$)|(^discretix-3.0$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Playlist": {
@@ -3268,7 +3303,7 @@
         "com.amazonaws.elastictranscoder#PlaylistFormat": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^HLSv3$)|(^HLSv4$)|(^Smooth$)|(^MPEG-DASH$)"
+                "smithy.api#pattern": "^(^HLSv3$)|(^HLSv4$)|(^Smooth$)|(^MPEG-DASH$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Playlists": {
@@ -3342,13 +3377,13 @@
         "com.amazonaws.elastictranscoder#PresetContainer": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^flac$)|(^oga$)|(^ogg$)|(^fmp4$)|(^mpg$)|(^flv$)|(^gif$)|(^mxf$)|(^wav$)|(^mp2$)"
+                "smithy.api#pattern": "^(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^flac$)|(^oga$)|(^ogg$)|(^fmp4$)|(^mpg$)|(^flv$)|(^gif$)|(^mxf$)|(^wav$)|(^mp2$)$"
             }
         },
         "com.amazonaws.elastictranscoder#PresetType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^System$)|(^Custom$)"
+                "smithy.api#pattern": "^(^System$)|(^Custom$)$"
             }
         },
         "com.amazonaws.elastictranscoder#PresetWatermark": {
@@ -3524,7 +3559,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReadJobRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ReadJobRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ReadJobResponse": {
@@ -3538,7 +3574,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReadJobResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ReadJobResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#ReadPipeline": {
@@ -3588,7 +3625,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReadPipelineRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ReadPipelineRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ReadPipelineResponse": {
@@ -3608,7 +3646,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReadPipelineResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ReadPipelineResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#ReadPreset": {
@@ -3658,7 +3697,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReadPresetRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ReadPresetRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#ReadPresetResponse": {
@@ -3672,13 +3712,14 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReadPresetResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>ReadPresetResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#Resolution": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^\\d{1,5}x\\d{1,5}$)"
+                "smithy.api#pattern": "^(^auto$)|(^\\d{1,5}x\\d{1,5}$)$"
             }
         },
         "com.amazonaws.elastictranscoder#ResourceInUseException": {
@@ -3722,19 +3763,19 @@
         "com.amazonaws.elastictranscoder#Rotate": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^auto$)|(^0$)|(^90$)|(^180$)|(^270$)"
+                "smithy.api#pattern": "^(^auto$)|(^0$)|(^90$)|(^180$)|(^270$)$"
             }
         },
         "com.amazonaws.elastictranscoder#SizingPolicy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)"
+                "smithy.api#pattern": "^(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)$"
             }
         },
         "com.amazonaws.elastictranscoder#SnsTopic": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)"
+                "smithy.api#pattern": "^(^$)|(^arn:aws:sns:.*:\\w{12}:.+$)$"
             }
         },
         "com.amazonaws.elastictranscoder#SnsTopics": {
@@ -3752,7 +3793,7 @@
         "com.amazonaws.elastictranscoder#StorageClass": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^ReducedRedundancy$)|(^Standard$)"
+                "smithy.api#pattern": "^(^ReducedRedundancy$)|(^Standard$)$"
             }
         },
         "com.amazonaws.elastictranscoder#String": {
@@ -3761,13 +3802,13 @@
         "com.amazonaws.elastictranscoder#Success": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^true$)|(^false$)"
+                "smithy.api#pattern": "^(^true$)|(^false$)$"
             }
         },
         "com.amazonaws.elastictranscoder#Target": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Content$)|(^Frame$)"
+                "smithy.api#pattern": "^(^Content$)|(^Frame$)$"
             }
         },
         "com.amazonaws.elastictranscoder#TestRole": {
@@ -3839,7 +3880,8 @@
             },
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p> The <code>TestRoleRequest</code> structure. </p>"
+                "smithy.api#documentation": "<p> The <code>TestRoleRequest</code> structure. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#TestRoleResponse": {
@@ -3860,13 +3902,14 @@
             },
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>The <code>TestRoleResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>TestRoleResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#ThumbnailPattern": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^$)|(^.*\\{count\\}.*$)"
+                "smithy.api#pattern": "^(^$)|(^.*\\{count\\}.*$)$"
             }
         },
         "com.amazonaws.elastictranscoder#ThumbnailResolution": {
@@ -3934,13 +3977,13 @@
         "com.amazonaws.elastictranscoder#Time": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^\\d{1,5}(\\.\\d{0,3})?$)|(^([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\\.\\d{0,3})?$)"
+                "smithy.api#pattern": "^(^\\d{1,5}(\\.\\d{0,3})?$)|(^([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\\.\\d{0,3})?$)$"
             }
         },
         "com.amazonaws.elastictranscoder#TimeOffset": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^[+-]?\\d{1,5}(\\.\\d{0,3})?$)|(^[+-]?([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\\.\\d{0,3})?$)"
+                "smithy.api#pattern": "^(^[+-]?\\d{1,5}(\\.\\d{0,3})?$)|(^[+-]?([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\\.\\d{0,3})?$)$"
             }
         },
         "com.amazonaws.elastictranscoder#TimeSpan": {
@@ -4083,7 +4126,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#UpdatePipelineNotificationsResponse": {
@@ -4097,7 +4141,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>UpdatePipelineNotificationsResponse</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>UpdatePipelineNotificationsResponse</code> structure.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#UpdatePipelineRequest": {
@@ -4155,7 +4200,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>UpdatePipelineRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>UpdatePipelineRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#UpdatePipelineResponse": {
@@ -4175,7 +4221,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When you update a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>"
+                "smithy.api#documentation": "<p>When you update a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#UpdatePipelineStatus": {
@@ -4235,7 +4282,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>UpdatePipelineStatusRequest</code> structure.</p>"
+                "smithy.api#documentation": "<p>The <code>UpdatePipelineStatusRequest</code> structure.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elastictranscoder#UpdatePipelineStatusResponse": {
@@ -4249,7 +4297,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When you update status for a pipeline,\n            Elastic Transcoder returns the values that you specified in the request.</p>"
+                "smithy.api#documentation": "<p>When you update status for a pipeline,\n            Elastic Transcoder returns the values that you specified in the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elastictranscoder#UserMetadata": {
@@ -4280,19 +4329,19 @@
         "com.amazonaws.elastictranscoder#VerticalAlign": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Top$)|(^Bottom$)|(^Center$)"
+                "smithy.api#pattern": "^(^Top$)|(^Bottom$)|(^Center$)$"
             }
         },
         "com.amazonaws.elastictranscoder#VideoBitRate": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^\\d{2,5}$)|(^auto$)"
+                "smithy.api#pattern": "^(^\\d{2,5}$)|(^auto$)$"
             }
         },
         "com.amazonaws.elastictranscoder#VideoCodec": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^H\\.264$)|(^vp8$)|(^vp9$)|(^mpeg2$)|(^gif$)"
+                "smithy.api#pattern": "^(^H\\.264$)|(^vp8$)|(^vp9$)|(^mpeg2$)|(^gif$)$"
             }
         },
         "com.amazonaws.elastictranscoder#VideoParameters": {
@@ -4426,13 +4475,13 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "(^.{1,1020}.jpg$)|(^.{1,1019}.jpeg$)|(^.{1,1020}.png$)"
+                "smithy.api#pattern": "^(^.{1,1020}.jpg$)|(^.{1,1019}.jpeg$)|(^.{1,1020}.png$)$"
             }
         },
         "com.amazonaws.elastictranscoder#WatermarkSizingPolicy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^Fit$)|(^Stretch$)|(^ShrinkToFit$)"
+                "smithy.api#pattern": "^(^Fit$)|(^Stretch$)|(^ShrinkToFit$)$"
             }
         },
         "com.amazonaws.elastictranscoder#ZeroTo255String": {

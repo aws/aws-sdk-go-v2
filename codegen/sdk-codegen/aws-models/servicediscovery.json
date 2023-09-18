@@ -105,7 +105,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an HTTP namespace. Service instances registered using an HTTP namespace can be\n   discovered using a <code>DiscoverInstances</code> request but can't be discovered using\n   DNS.</p>\n         <p>For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an HTTP namespace. Service instances registered using an HTTP namespace can be\n   discovered using a <code>DiscoverInstances</code> request but can't be discovered using\n   DNS.</p>\n         <p>For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateHttpNamespace example",
+                        "documentation": "This example creates an HTTP namespace.",
+                        "input": {
+                            "CreatorRequestId": "example-creator-request-id-0001",
+                            "Name": "example-http.com",
+                            "Description": "Example.com AWS Cloud Map HTTP Namespace"
+                        },
+                        "output": {
+                            "OperationId": "httpvoqozuhfet5kzxoxg-a-response-example"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#CreateHttpNamespaceRequest": {
@@ -182,7 +196,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a private namespace based on DNS, which is visible only inside a specified Amazon\n   VPC. The namespace defines your service naming scheme. For example, if you name your namespace\n    <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for\n   the service is <code>backend.example.com</code>. Service instances that are registered using a\n   private DNS namespace can be discovered using either a <code>DiscoverInstances</code> request or\n   using DNS. For the current quota on the number of namespaces that you can create using the same\n    Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a private namespace based on DNS, which is visible only inside a specified Amazon\n   VPC. The namespace defines your service naming scheme. For example, if you name your namespace\n    <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for\n   the service is <code>backend.example.com</code>. Service instances that are registered using a\n   private DNS namespace can be discovered using either a <code>DiscoverInstances</code> request or\n   using DNS. For the current quota on the number of namespaces that you can create using the same\n    Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Create private DNS namespace",
+                        "documentation": "Example: Create private DNS namespace",
+                        "input": {
+                            "Name": "example.com",
+                            "Vpc": "vpc-1c56417b",
+                            "CreatorRequestId": "eedd6892-50f3-41b2-8af9-611d6e1d1a8c"
+                        },
+                        "output": {
+                            "OperationId": "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#CreatePrivateDnsNamespaceRequest": {
@@ -272,7 +300,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a public namespace based on DNS, which is visible on the internet. The namespace\n   defines your service naming scheme. For example, if you name your namespace\n    <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for\n   the service is <code>backend.example.com</code>. You can discover instances that were registered\n   with a public DNS namespace by using either a <code>DiscoverInstances</code> request or using\n   DNS. For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>\n         <important>\n            <p>The <code>CreatePublicDnsNamespace</code> API operation is not supported in the Amazon Web Services GovCloud (US) Regions.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates a public namespace based on DNS, which is visible on the internet. The namespace\n   defines your service naming scheme. For example, if you name your namespace\n    <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for\n   the service is <code>backend.example.com</code>. You can discover instances that were registered\n   with a public DNS namespace by using either a <code>DiscoverInstances</code> request or using\n   DNS. For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>\n         <important>\n            <p>The <code>CreatePublicDnsNamespace</code> API operation is not supported in the Amazon Web Services GovCloud (US) Regions.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreatePublicDnsNamespace example",
+                        "documentation": "This example creates a public namespace based on DNS.",
+                        "input": {
+                            "CreatorRequestId": "example-creator-request-id-0003",
+                            "Name": "example-public-dns.com",
+                            "Description": "Example.com AWS Cloud Map Public DNS Namespace"
+                        },
+                        "output": {
+                            "OperationId": "dns2voqozuhfet5kzxoxg-a-response-example"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#CreatePublicDnsNamespaceRequest": {
@@ -355,7 +397,48 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a service. This action defines the configuration for the following entities:</p>\n         <ul>\n            <li>\n               <p>For public and private DNS namespaces, one of the following combinations of DNS records in\n     Amazon Route 53:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>A</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AAAA</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>A</code> and <code>AAAA</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SRV</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CNAME</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Optionally, a health check</p>\n            </li>\n         </ul>\n         <p>After you create the service, you can submit a <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html\">RegisterInstance</a> request, and\n   Cloud Map uses the values in the configuration to create the specified entities.</p>\n         <p>For the current quota on the number of instances that you can register using the same\n   namespace and using the same service, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a service. This action defines the configuration for the following entities:</p>\n         <ul>\n            <li>\n               <p>For public and private DNS namespaces, one of the following combinations of DNS records in\n     Amazon Route 53:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>A</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AAAA</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>A</code> and <code>AAAA</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SRV</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CNAME</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Optionally, a health check</p>\n            </li>\n         </ul>\n         <p>After you create the service, you can submit a <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html\">RegisterInstance</a> request, and\n   Cloud Map uses the values in the configuration to create the specified entities.</p>\n         <p>For the current quota on the number of instances that you can register using the same\n   namespace and using the same service, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Create service",
+                        "documentation": "Example: Create service",
+                        "input": {
+                            "Name": "myservice",
+                            "NamespaceId": "ns-ylexjili4cdxy3xm",
+                            "DnsConfig": {
+                                "NamespaceId": "ns-ylexjili4cdxy3xm",
+                                "RoutingPolicy": "MULTIVALUE",
+                                "DnsRecords": [
+                                    {
+                                        "Type": "A",
+                                        "TTL": 60
+                                    }
+                                ]
+                            },
+                            "CreatorRequestId": "567c1193-6b00-4308-bd57-ad38a8822d25"
+                        },
+                        "output": {
+                            "Service": {
+                                "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita",
+                                "CreateDate": 1.587081768334E9,
+                                "CreatorRequestId": "567c1193-6b00-4308-bd57-ad38a8822d25",
+                                "DnsConfig": {
+                                    "DnsRecords": [
+                                        {
+                                            "TTL": 60,
+                                            "Type": "A"
+                                        }
+                                    ],
+                                    "NamespaceId": "ns-ylexjili4cdxy3xm",
+                                    "RoutingPolicy": "MULTIVALUE"
+                                },
+                                "Id": "srv-p5zdwlg5uvvzjita",
+                                "Name": "myservice",
+                                "NamespaceId": "ns-ylexjili4cdxy3xm"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#CreateServiceRequest": {
@@ -489,7 +572,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a namespace from the current account. If the namespace still contains one or more\n   services, the request fails.</p>"
+                "smithy.api#documentation": "<p>Deletes a namespace from the current account. If the namespace still contains one or more\n   services, the request fails.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Delete namespace",
+                        "documentation": "Example: Delete namespace",
+                        "input": {
+                            "Id": "ns-ylexjili4cdxy3xm"
+                        },
+                        "output": {
+                            "OperationId": "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k98y6drk"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#DeleteNamespaceRequest": {
@@ -541,7 +636,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specified service. If the service still contains one or more registered instances,\n   the request fails.</p>"
+                "smithy.api#documentation": "<p>Deletes a specified service. If the service still contains one or more registered instances,\n   the request fails.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Delete service",
+                        "documentation": "Example: Delete service",
+                        "input": {
+                            "Id": "srv-p5zdwlg5uvvzjita"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#DeleteServiceRequest": {
@@ -592,7 +697,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the\n   specified instance.</p>"
+                "smithy.api#documentation": "<p>Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the\n   specified instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Deregister a service instance",
+                        "documentation": "Example: Deregister a service instance",
+                        "input": {
+                            "ServiceId": "srv-p5zdwlg5uvvzjita",
+                            "InstanceId": "myservice-53"
+                        },
+                        "output": {
+                            "OperationId": "4yejorelbukcjzpnr6tlmrghsjwpngf4-k98rnaiq"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#DeregisterInstanceRequest": {
@@ -657,7 +775,33 @@
                 "smithy.api#documentation": "<p>Discovers registered instances for a specified namespace and service. You can use\n    <code>DiscoverInstances</code> to discover instances for any type of namespace. For public and\n   private DNS namespaces, you can also use DNS queries to discover instances.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data-"
-                }
+                },
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Discover registered instances",
+                        "documentation": "Example: Discover registered instances",
+                        "input": {
+                            "NamespaceName": "example.com",
+                            "ServiceName": "myservice",
+                            "MaxResults": 10,
+                            "HealthStatus": "ALL"
+                        },
+                        "output": {
+                            "Instances": [
+                                {
+                                    "Attributes": {
+                                        "AWS_INSTANCE_IPV4": "172.2.1.3",
+                                        "AWS_INSTANCE_PORT": "808"
+                                    },
+                                    "HealthStatus": "UNKNOWN",
+                                    "InstanceId": "myservice-53",
+                                    "NamespaceName": "example.com",
+                                    "ServiceName": "myservice"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#DiscoverInstancesRequest": {
@@ -920,7 +1064,29 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specified instance.</p>"
+                "smithy.api#documentation": "<p>Gets information about a specified instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetInstance example",
+                        "documentation": "This example gets information about a specified instance.",
+                        "input": {
+                            "InstanceId": "i-abcd1234",
+                            "ServiceId": "srv-e4anhexample0004"
+                        },
+                        "output": {
+                            "Instance": {
+                                "Id": "i-abcd1234",
+                                "Attributes": {
+                                    "AWS_INSTANCE_IPV4": "192.0.2.44",
+                                    "AWS_INSTANCE_PORT": "80",
+                                    "color": "green",
+                                    "region": "us-west-2",
+                                    "stage": "beta"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#GetInstanceRequest": {
@@ -980,6 +1146,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets the current health status (<code>Healthy</code>, <code>Unhealthy</code>, or\n    <code>Unknown</code>) of one or more instances that are associated with a specified\n   service.</p>\n         <note>\n            <p>There's a brief delay between when you register an instance and when the health status for\n    the instance is available. </p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetInstancesHealthStatus example",
+                        "documentation": "This example gets the current health status of one or more instances that are associate with a specified service.",
+                        "input": {
+                            "ServiceId": "srv-e4anhexample0004"
+                        },
+                        "output": {
+                            "Status": {
+                                "i-abcd1234": "HEALTHY",
+                                "i-abcd1235": "UNHEALTHY"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1106,7 +1287,28 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about any operation that returns an operation ID in the response, such as a\n    <code>CreateService</code> request.</p>\n         <note>\n            <p>To get a list of operations that match specified criteria, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html\">ListOperations</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Gets information about any operation that returns an operation ID in the response, such as a\n    <code>CreateService</code> request.</p>\n         <note>\n            <p>To get a list of operations that match specified criteria, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html\">ListOperations</a>.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Get operation result",
+                        "documentation": "Example: Get operation result",
+                        "input": {
+                            "OperationId": "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd"
+                        },
+                        "output": {
+                            "Operation": {
+                                "CreateDate": 1.587055860121E9,
+                                "Id": "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd",
+                                "Status": "SUCCESS",
+                                "Targets": {
+                                    "NAMESPACE": "ns-ylexjili4cdxy3xm"
+                                },
+                                "Type": "CREATE_NAMESPACE",
+                                "UpdateDate": 1.587055900469E9
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#GetOperationRequest": {
@@ -1512,6 +1714,26 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists summary information about the instances that you registered by using a specified\n   service.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: List service instances",
+                        "documentation": "Example: List service instances",
+                        "input": {
+                            "ServiceId": "srv-qzpwvt2tfqcegapy"
+                        },
+                        "output": {
+                            "Instances": [
+                                {
+                                    "Attributes": {
+                                        "AWS_INSTANCE_IPV4": "172.2.1.3",
+                                        "AWS_INSTANCE_PORT": "808"
+                                    },
+                                    "Id": "i-06bdabbae60f65a4e"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1581,6 +1803,60 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists summary information about the namespaces that were created by the current Amazon Web Services account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: List namespaces",
+                        "documentation": "Example: List namespaces",
+                        "output": {
+                            "Namespaces": [
+                                {
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile",
+                                    "CreateDate": 1.585354387357E9,
+                                    "Id": "ns-a3ccy2e7e3a7rile",
+                                    "Name": "local",
+                                    "Properties": {
+                                        "DnsProperties": {
+                                            "HostedZoneId": "Z06752353VBUDTC32S84S"
+                                        },
+                                        "HttpProperties": {
+                                            "HttpName": "local"
+                                        }
+                                    },
+                                    "Type": "DNS_PRIVATE"
+                                },
+                                {
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx",
+                                    "CreateDate": 1.586468974698E9,
+                                    "Description": "My second namespace",
+                                    "Id": "ns-pocfyjtrsmwtvcxx",
+                                    "Name": "My-second-namespace",
+                                    "Properties": {
+                                        "DnsProperties": {},
+                                        "HttpProperties": {
+                                            "HttpName": "My-second-namespace"
+                                        }
+                                    },
+                                    "Type": "HTTP"
+                                },
+                                {
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm",
+                                    "CreateDate": 1.587055896798E9,
+                                    "Id": "ns-ylexjili4cdxy3xm",
+                                    "Name": "example.com",
+                                    "Properties": {
+                                        "DnsProperties": {
+                                            "HostedZoneId": "Z09983722P0QME1B3KC8I"
+                                        },
+                                        "HttpProperties": {
+                                            "HttpName": "example.com"
+                                        }
+                                    },
+                                    "Type": "DNS_PRIVATE"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1649,6 +1925,40 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists operations that match the criteria that you specify.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListOperations Example",
+                        "documentation": "This example gets the operations that have a STATUS of either PENDING or SUCCESS.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "STATUS",
+                                    "Condition": "IN",
+                                    "Values": [
+                                        "PENDING",
+                                        "SUCCESS"
+                                    ]
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Operations": [
+                                {
+                                    "Id": "76yy8ovhpdz0plmjzbsnqgnrqvpv2qdt-kexample",
+                                    "Status": "SUCCESS"
+                                },
+                                {
+                                    "Id": "prysnyzpji3u2ciy45nke83x2zanl7yk-dexample",
+                                    "Status": "SUCCESS"
+                                },
+                                {
+                                    "Id": "ko4ekftir7kzlbechsh7xvcdgcpk66gh-7example",
+                                    "Status": "PENDING"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1717,6 +2027,31 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists summary information for all the services that are associated with one or more\n   specified namespaces.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: List services",
+                        "documentation": "Example: List services",
+                        "output": {
+                            "Services": [
+                                {
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita",
+                                    "CreateDate": 1.587081768334E9,
+                                    "DnsConfig": {
+                                        "DnsRecords": [
+                                            {
+                                                "TTL": 60,
+                                                "Type": "A"
+                                            }
+                                        ],
+                                        "RoutingPolicy": "MULTIVALUE"
+                                    },
+                                    "Id": "srv-p5zdwlg5uvvzjita",
+                                    "Name": "myservice"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1787,7 +2122,28 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists tags for the specified resource.</p>"
+                "smithy.api#documentation": "<p>Lists tags for the specified resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListTagsForResource example",
+                        "documentation": "This example lists the tags of a resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm"
+                        },
+                        "output": {
+                            "Tags": [
+                                {
+                                    "Key": "Project",
+                                    "Value": "Zeta"
+                                },
+                                {
+                                    "Key": "Department",
+                                    "Value": "Engineering"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#ListTagsForResourceRequest": {
@@ -2649,7 +3005,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates one or more records and, optionally, creates a health check based on the\n   settings in a specified service. When you submit a <code>RegisterInstance</code> request, the\n   following occurs:</p>\n         <ul>\n            <li>\n               <p>For each DNS record that you define in the service that's specified by\n      <code>ServiceId</code>, a record is created or updated in the hosted zone that's associated\n     with the corresponding namespace.</p>\n            </li>\n            <li>\n               <p>If the service includes <code>HealthCheckConfig</code>, a health check is created based on\n     the settings in the health check configuration.</p>\n            </li>\n            <li>\n               <p>The health check, if any, is associated with each of the new or updated records.</p>\n            </li>\n         </ul>\n         <important>\n            <p>One <code>RegisterInstance</code> request must complete before you can submit another\n    request and specify the same service ID and instance ID.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html\">CreateService</a>.</p>\n         <p>When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable\n   value:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>If the health check is healthy</b>: returns all the\n     records</p>\n            </li>\n            <li>\n               <p>\n                  <b>If the health check is unhealthy</b>: returns the applicable\n     value for the last healthy instance</p>\n            </li>\n            <li>\n               <p>\n                  <b>If you didn't specify a health check configuration</b>:\n     returns all the records</p>\n            </li>\n         </ul>\n         <p>For the current quota on the number of instances that you can register using the same\n   namespace and using the same service, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates one or more records and, optionally, creates a health check based on the\n   settings in a specified service. When you submit a <code>RegisterInstance</code> request, the\n   following occurs:</p>\n         <ul>\n            <li>\n               <p>For each DNS record that you define in the service that's specified by\n      <code>ServiceId</code>, a record is created or updated in the hosted zone that's associated\n     with the corresponding namespace.</p>\n            </li>\n            <li>\n               <p>If the service includes <code>HealthCheckConfig</code>, a health check is created based on\n     the settings in the health check configuration.</p>\n            </li>\n            <li>\n               <p>The health check, if any, is associated with each of the new or updated records.</p>\n            </li>\n         </ul>\n         <important>\n            <p>One <code>RegisterInstance</code> request must complete before you can submit another\n    request and specify the same service ID and instance ID.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html\">CreateService</a>.</p>\n         <p>When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable\n   value:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>If the health check is healthy</b>: returns all the\n     records</p>\n            </li>\n            <li>\n               <p>\n                  <b>If the health check is unhealthy</b>: returns the applicable\n     value for the last healthy instance</p>\n            </li>\n            <li>\n               <p>\n                  <b>If you didn't specify a health check configuration</b>:\n     returns all the records</p>\n            </li>\n         </ul>\n         <p>For the current quota on the number of instances that you can register using the same\n   namespace and using the same service, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html\">Cloud Map quotas</a> in the\n    <i>Cloud Map Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example: Register Instance",
+                        "documentation": "Example: Register Instance",
+                        "input": {
+                            "ServiceId": "srv-p5zdwlg5uvvzjita",
+                            "InstanceId": "myservice-53",
+                            "Attributes": {
+                                "AWS_INSTANCE_IPV4": "172.2.1.3",
+                                "AWS_INSTANCE_PORT": "808"
+                            },
+                            "CreatorRequestId": "7a48a98a-72e6-4849-bfa7-1a458e030d7b"
+                        },
+                        "output": {
+                            "OperationId": "4yejorelbukcjzpnr6tlmrghsjwpngf4-k95yg2u7"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#RegisterInstanceRequest": {
@@ -2941,9 +3315,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicediscovery-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicediscovery-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2956,15 +3509,125 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://servicediscovery.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-cn",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://servicediscovery.{Region}.amazonaws.com.cn",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://servicediscovery.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicediscovery.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://servicediscovery.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2976,258 +3639,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicediscovery-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicediscovery-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicediscovery.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://servicediscovery.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -3241,9 +3654,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3254,9 +3667,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3267,9 +3680,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3280,9 +3693,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3293,9 +3706,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3306,9 +3719,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3319,9 +3732,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3332,9 +3745,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3345,9 +3758,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3358,9 +3771,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3371,9 +3784,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3384,9 +3797,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3397,9 +3810,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3410,9 +3823,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3423,9 +3836,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3436,9 +3849,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3449,9 +3862,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3462,9 +3875,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3475,9 +3888,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3488,9 +3901,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3501,9 +3914,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3514,9 +3927,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3527,9 +3940,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3540,9 +3953,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3553,9 +3966,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3566,22 +3979,22 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://servicediscovery.us-east-1.api.aws"
+                                    "url": "https://servicediscovery.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3592,9 +4005,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3605,9 +4018,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3618,9 +4031,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3631,22 +4044,22 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://servicediscovery.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://servicediscovery.cn-north-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3657,9 +4070,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3670,9 +4083,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3683,9 +4096,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3696,9 +4109,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3709,22 +4122,22 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://servicediscovery.us-gov-east-1.api.aws"
+                                    "url": "https://servicediscovery.us-gov-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3733,9 +4146,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3746,9 +4159,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3757,9 +4170,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3770,9 +4183,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3781,9 +4194,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3794,9 +4207,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3805,9 +4218,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3818,9 +4231,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3831,9 +4244,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3856,9 +4269,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3868,9 +4281,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4313,7 +4726,27 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>"
+                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "TagResource example",
+                        "documentation": "This example adds \"Department\" and \"Project\" tags to a resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm",
+                            "Tags": [
+                                {
+                                    "Key": "Department",
+                                    "Value": "Engineering"
+                                },
+                                {
+                                    "Key": "Project",
+                                    "Value": "Zeta"
+                                }
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#TagResourceRequest": {
@@ -4393,7 +4826,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>"
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UntagResource example",
+                        "documentation": "This example removes the \"Department\" and \"Project\" tags from a resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm",
+                            "TagKeys": [
+                                "Project",
+                                "Department"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#UntagResourceRequest": {
@@ -4517,7 +4964,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits a request to change the health status of a custom health check to healthy or\n   unhealthy.</p>\n         <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for\n   custom health checks, which you define using <code>HealthCheckCustomConfig</code> when you create\n   a service. You can't use it to change the status for Route 53 health checks, which you define using\n    <code>HealthCheckConfig</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html\">HealthCheckCustomConfig</a>.</p>"
+                "smithy.api#documentation": "<p>Submits a request to change the health status of a custom health check to healthy or\n   unhealthy.</p>\n         <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for\n   custom health checks, which you define using <code>HealthCheckCustomConfig</code> when you create\n   a service. You can't use it to change the status for Route 53 health checks, which you define using\n    <code>HealthCheckConfig</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html\">HealthCheckCustomConfig</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateInstanceCustomHealthStatus Example",
+                        "documentation": "This example submits a request to change the health status of an instance associated with a service with a custom health check to HEALTHY.",
+                        "input": {
+                            "InstanceId": "i-abcd1234",
+                            "ServiceId": "srv-e4anhexample0004",
+                            "Status": "HEALTHY"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatusRequest": {
@@ -4707,7 +5165,34 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits a request to perform the following operations:</p>\n         <ul>\n            <li>\n               <p>Update the TTL setting for existing <code>DnsRecords</code> configurations</p>\n            </li>\n            <li>\n               <p>Add, update, or delete <code>HealthCheckConfig</code> for a specified service</p>\n               <note>\n                  <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code>\n      configuration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For public and private DNS namespaces, note the following:</p>\n         <ul>\n            <li>\n               <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code>\n     configurations from an <code>UpdateService</code> request, the configurations are deleted from\n     the service.</p>\n            </li>\n            <li>\n               <p>If you omit an existing <code>HealthCheckCustomConfig</code> configuration from an\n      <code>UpdateService</code> request, the configuration isn't deleted from the service.</p>\n            </li>\n         </ul>\n         <p>When you update settings for a service, Cloud Map also updates the corresponding settings\n   in all the records and health checks that were created by using the specified service.</p>"
+                "smithy.api#documentation": "<p>Submits a request to perform the following operations:</p>\n         <ul>\n            <li>\n               <p>Update the TTL setting for existing <code>DnsRecords</code> configurations</p>\n            </li>\n            <li>\n               <p>Add, update, or delete <code>HealthCheckConfig</code> for a specified service</p>\n               <note>\n                  <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code>\n      configuration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For public and private DNS namespaces, note the following:</p>\n         <ul>\n            <li>\n               <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code>\n     configurations from an <code>UpdateService</code> request, the configurations are deleted from\n     the service.</p>\n            </li>\n            <li>\n               <p>If you omit an existing <code>HealthCheckCustomConfig</code> configuration from an\n      <code>UpdateService</code> request, the configuration isn't deleted from the service.</p>\n            </li>\n         </ul>\n         <p>When you update settings for a service, Cloud Map also updates the corresponding settings\n   in all the records and health checks that were created by using the specified service.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateService Example",
+                        "documentation": "This example submits a request to replace the DnsConfig and HealthCheckConfig settings of a specified service.",
+                        "input": {
+                            "Id": "srv-e4anhexample0004",
+                            "Service": {
+                                "HealthCheckConfig": {
+                                    "Type": "HTTP",
+                                    "ResourcePath": "/",
+                                    "FailureThreshold": 2
+                                },
+                                "DnsConfig": {
+                                    "DnsRecords": [
+                                        {
+                                            "Type": "A",
+                                            "TTL": 60
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "OperationId": "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#UpdateServiceRequest": {

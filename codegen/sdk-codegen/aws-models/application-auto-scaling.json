@@ -140,6 +140,7 @@
                     "arnNamespace": "application-autoscaling",
                     "cloudFormationName": "ApplicationAutoScaling",
                     "cloudTrailEventSource": "applicationautoscaling.amazonaws.com",
+                    "docId": "application-autoscaling-2016-02-06",
                     "endpointPrefix": "application-autoscaling"
                 },
                 "aws.auth#sigv4": {
@@ -208,9 +209,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://application-autoscaling.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -223,15 +428,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -243,283 +483,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://application-autoscaling.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1251,7 +1216,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified scaling policy for an Application Auto Scaling scalable target.</p>\n         <p>Deleting a step scaling policy deletes the underlying alarm action, but does not delete\n         the CloudWatch alarm associated with the scaling policy, even if it no longer has an associated\n         action.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy\">Delete a step scaling policy</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy\">Delete a target tracking scaling policy</a> in the\n            <i>Application Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified scaling policy for an Application Auto Scaling scalable target.</p>\n         <p>Deleting a step scaling policy deletes the underlying alarm action, but does not delete\n         the CloudWatch alarm associated with the scaling policy, even if it no longer has an associated\n         action.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy\">Delete a step scaling policy</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy\">Delete a target tracking scaling policy</a> in the\n            <i>Application Auto Scaling User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a scaling policy",
+                        "documentation": "This example deletes a scaling policy for the Amazon ECS service called web-app, which is running in the default cluster.",
+                        "input": {
+                            "PolicyName": "web-app-cpu-lt-25",
+                            "ServiceNamespace": "ecs",
+                            "ResourceId": "service/default/web-app",
+                            "ScalableDimension": "ecs:service:DesiredCount"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#DeleteScalingPolicyRequest": {
@@ -1320,7 +1298,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified scheduled action for an Application Auto Scaling scalable target.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html#delete-scheduled-action\">Delete a scheduled action</a> in the <i>Application Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified scheduled action for an Application Auto Scaling scalable target.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html#delete-scheduled-action\">Delete a scheduled action</a> in the <i>Application Auto Scaling User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a scheduled action",
+                        "documentation": "This example deletes a scheduled action for the AppStream 2.0 fleet called sample-fleet.",
+                        "input": {
+                            "ServiceNamespace": "appstream",
+                            "ScheduledActionName": "my-recurring-action",
+                            "ResourceId": "fleet/sample-fleet",
+                            "ScalableDimension": "appstream:fleet:DesiredCapacity"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#DeleteScheduledActionRequest": {
@@ -1389,7 +1380,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters an Application Auto Scaling scalable target when you have finished using it. To see which\n         resources have been registered, use <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. </p>\n         <note>\n            <p>Deregistering a scalable target deletes the scaling policies and the scheduled\n            actions that are associated with it.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deregisters an Application Auto Scaling scalable target when you have finished using it. To see which\n         resources have been registered, use <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. </p>\n         <note>\n            <p>Deregistering a scalable target deletes the scaling policies and the scheduled\n            actions that are associated with it.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To deregister a scalable target",
+                        "documentation": "This example deregisters a scalable target for an Amazon ECS service called web-app that is running in the default cluster.",
+                        "input": {
+                            "ServiceNamespace": "ecs",
+                            "ResourceId": "service/default/web-app",
+                            "ScalableDimension": "ecs:service:DesiredCount"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#DeregisterScalableTargetRequest": {
@@ -1452,6 +1455,33 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about the scalable targets in the specified namespace.</p>\n         <p>You can filter the results using <code>ResourceIds</code> and\n            <code>ScalableDimension</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe scalable targets",
+                        "documentation": "This example describes the scalable targets for the ECS service namespace.",
+                        "input": {
+                            "ServiceNamespace": "ecs"
+                        },
+                        "output": {
+                            "ScalableTargets": [
+                                {
+                                    "ScalableDimension": "ecs:service:DesiredCount",
+                                    "ResourceId": "service/default/web-app",
+                                    "RoleARN": "arn:aws:iam::012345678910:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+                                    "CreationTime": "2019-05-06T11:21:46.199Z",
+                                    "MinCapacity": 1,
+                                    "ServiceNamespace": "ecs",
+                                    "MaxCapacity": 10,
+                                    "SuspendedState": {
+                                        "DynamicScalingInSuspended": false,
+                                        "DynamicScalingOutSuspended": false,
+                                        "ScheduledScalingSuspended": false
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1543,6 +1573,33 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Provides descriptive information about the scaling activities in the specified namespace\n         from the previous six weeks.</p>\n         <p>You can filter the results using <code>ResourceId</code> and\n            <code>ScalableDimension</code>.</p>\n         <p>For information about viewing scaling activities using the Amazon Web Services CLI, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html\">Scaling activities for Application Auto Scaling</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe scaling activities for a scalable target",
+                        "documentation": "This example describes the scaling activities for an Amazon ECS service called web-app that is running in the default cluster.",
+                        "input": {
+                            "ServiceNamespace": "ecs",
+                            "ResourceId": "service/default/web-app",
+                            "ScalableDimension": "ecs:service:DesiredCount"
+                        },
+                        "output": {
+                            "ScalingActivities": [
+                                {
+                                    "ScalableDimension": "ecs:service:DesiredCount",
+                                    "Description": "Setting desired count to 1.",
+                                    "ResourceId": "service/default/web-app",
+                                    "ActivityId": "e6c5f7d1-dbbb-4a3f-89b2-51f33e766399",
+                                    "StartTime": "2019-05-06T16:03:58.171Z",
+                                    "ServiceNamespace": "ecs",
+                                    "EndTime": "2019-05-06T16:04:32.111Z",
+                                    "Cause": "monitor alarm web-app-cpu-lt-25 in state ALARM triggered policy web-app-cpu-lt-25",
+                                    "StatusMessage": "Successfully set desired count to 1. Change successfully fulfilled by ecs.",
+                                    "StatusCode": "Successful"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1643,6 +1700,45 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes the Application Auto Scaling scaling policies for the specified service namespace.</p>\n         <p>You can filter the results using <code>ResourceId</code>,\n         <code>ScalableDimension</code>, and <code>PolicyNames</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">Target tracking scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">Step scaling policies</a> in the <i>Application Auto Scaling User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe scaling policies",
+                        "documentation": "This example describes the scaling policies for the ECS service namespace.",
+                        "input": {
+                            "ServiceNamespace": "ecs"
+                        },
+                        "output": {
+                            "ScalingPolicies": [
+                                {
+                                    "PolicyName": "web-app-cpu-gt-75",
+                                    "ScalableDimension": "ecs:service:DesiredCount",
+                                    "ResourceId": "service/default/web-app",
+                                    "CreationTime": "2019-05-06T12:11:39.230Z",
+                                    "StepScalingPolicyConfiguration": {
+                                        "Cooldown": 60,
+                                        "StepAdjustments": [
+                                            {
+                                                "ScalingAdjustment": 200,
+                                                "MetricIntervalLowerBound": 0
+                                            }
+                                        ],
+                                        "AdjustmentType": "PercentChangeInCapacity"
+                                    },
+                                    "PolicyARN": "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75",
+                                    "PolicyType": "StepScaling",
+                                    "Alarms": [
+                                        {
+                                            "AlarmName": "web-app-cpu-gt-75",
+                                            "AlarmARN": "arn:aws:cloudwatch:us-west-2:012345678910:alarm:web-app-cpu-gt-75"
+                                        }
+                                    ],
+                                    "ServiceNamespace": "ecs"
+                                }
+                            ],
+                            "NextToken": ""
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1740,6 +1836,45 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes the Application Auto Scaling scheduled actions for the specified service namespace.</p>\n         <p>You can filter the results using the <code>ResourceId</code>,\n            <code>ScalableDimension</code>, and <code>ScheduledActionNames</code> parameters.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html\">Scheduled scaling</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html\">Managing scheduled scaling</a> in the\n         <i>Application Auto Scaling User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe scheduled actions",
+                        "documentation": "This example describes the scheduled actions for the dynamodb service namespace.",
+                        "input": {
+                            "ServiceNamespace": "dynamodb"
+                        },
+                        "output": {
+                            "ScheduledActions": [
+                                {
+                                    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+                                    "Schedule": "at(2019-05-20T18:35:00)",
+                                    "ResourceId": "table/my-table",
+                                    "CreationTime": 1.561571888361E9,
+                                    "ScheduledActionARN": "arn:aws:autoscaling:us-west-2:123456789012:scheduledAction:2d36aa3b-cdf9-4565-b290-81db519b227d:resource/dynamodb/table/my-table:scheduledActionName/my-first-scheduled-action",
+                                    "ScalableTargetAction": {
+                                        "MinCapacity": 15,
+                                        "MaxCapacity": 20
+                                    },
+                                    "ScheduledActionName": "my-first-scheduled-action",
+                                    "ServiceNamespace": "dynamodb"
+                                },
+                                {
+                                    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+                                    "Schedule": "at(2019-05-20T18:40:00)",
+                                    "ResourceId": "table/my-table",
+                                    "CreationTime": 1.561571946021E9,
+                                    "ScheduledActionARN": "arn:aws:autoscaling:us-west-2:123456789012:scheduledAction:2d36aa3b-cdf9-4565-b290-81db519b227d:resource/dynamodb/table/my-table:scheduledActionName/my-second-scheduled-action",
+                                    "ScalableTargetAction": {
+                                        "MinCapacity": 5,
+                                        "MaxCapacity": 10
+                                    },
+                                    "ScheduledActionName": "my-second-scheduled-action",
+                                    "ServiceNamespace": "dynamodb"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1927,7 +2062,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all the tags on the specified Application Auto Scaling scalable target.</p>\n         <p>For general information about tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                "smithy.api#documentation": "<p>Returns all the tags on the specified Application Auto Scaling scalable target.</p>\n         <p>For general information about tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list tags for a scalable target",
+                        "documentation": "This example lists the tag key names and values that are attached to the scalable target specified by its ARN.",
+                        "input": {
+                            "ResourceARN": "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123"
+                        },
+                        "output": {
+                            "Tags": {
+                                "environment": "production"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#ListTagsForResourceRequest": {
@@ -2345,7 +2494,41 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a scaling policy for an Application Auto Scaling scalable target.</p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scaling policy applies to the scalable target identified by those three\n         attributes. You cannot create a scaling policy until you have registered the resource as a\n         scalable target.</p>\n         <p>Multiple scaling policies can be in force at the same time for the same scalable target.\n         You can have one or more target tracking scaling policies, one or more step scaling\n         policies, or both. However, there is a chance that multiple policies could conflict,\n         instructing the scalable target to scale out or in at the same time. Application Auto Scaling gives\n         precedence to the policy that provides the largest capacity for both scale out and scale\n         in. For example, if one policy increases capacity by 3, another policy increases capacity\n         by 200 percent, and the current capacity is 10, Application Auto Scaling uses the policy with the highest\n         calculated capacity (200% of 10 = 20) and scales out to 30. </p>\n         <p>We recommend caution, however, when using target tracking scaling policies with step\n         scaling policies because conflicts between these policies can cause undesirable behavior.\n         For example, if the step scaling policy initiates a scale-in activity before the target\n         tracking policy is ready to scale in, the scale-in activity will not be blocked. After the\n         scale-in activity completes, the target tracking policy could instruct the scalable target\n         to scale out again. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">Target tracking scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">Step scaling policies</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            use scaling policies. Any scaling policies that were specified for the scalable target\n            are deleted.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a scaling policy for an Application Auto Scaling scalable target.</p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scaling policy applies to the scalable target identified by those three\n         attributes. You cannot create a scaling policy until you have registered the resource as a\n         scalable target.</p>\n         <p>Multiple scaling policies can be in force at the same time for the same scalable target.\n         You can have one or more target tracking scaling policies, one or more step scaling\n         policies, or both. However, there is a chance that multiple policies could conflict,\n         instructing the scalable target to scale out or in at the same time. Application Auto Scaling gives\n         precedence to the policy that provides the largest capacity for both scale out and scale\n         in. For example, if one policy increases capacity by 3, another policy increases capacity\n         by 200 percent, and the current capacity is 10, Application Auto Scaling uses the policy with the highest\n         calculated capacity (200% of 10 = 20) and scales out to 30. </p>\n         <p>We recommend caution, however, when using target tracking scaling policies with step\n         scaling policies because conflicts between these policies can cause undesirable behavior.\n         For example, if the step scaling policy initiates a scale-in activity before the target\n         tracking policy is ready to scale in, the scale-in activity will not be blocked. After the\n         scale-in activity completes, the target tracking policy could instruct the scalable target\n         to scale out again. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html\">Target tracking scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html\">Step scaling policies</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            use scaling policies. Any scaling policies that were specified for the scalable target\n            are deleted.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To apply a target tracking scaling policy with a predefined metric specification",
+                        "documentation": "The following example applies a target tracking scaling policy with a predefined metric specification to an Amazon ECS service called web-app in the default cluster. The policy keeps the average CPU utilization of the service at 75 percent, with scale-out and scale-in cooldown periods of 60 seconds.",
+                        "input": {
+                            "PolicyName": "cpu75-target-tracking-scaling-policy",
+                            "ServiceNamespace": "ecs",
+                            "ResourceId": "service/default/web-app",
+                            "ScalableDimension": "ecs:service:DesiredCount",
+                            "PolicyType": "TargetTrackingScaling",
+                            "TargetTrackingScalingPolicyConfiguration": {
+                                "TargetValue": 75,
+                                "PredefinedMetricSpecification": {
+                                    "PredefinedMetricType": "ECSServiceAverageCPUUtilization"
+                                },
+                                "ScaleOutCooldown": 60,
+                                "ScaleInCooldown": 60
+                            }
+                        },
+                        "output": {
+                            "PolicyARN": "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/cpu75-target-tracking-scaling-policy",
+                            "Alarms": [
+                                {
+                                    "AlarmARN": "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca",
+                                    "AlarmName": "TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca"
+                                },
+                                {
+                                    "AlarmARN": "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmLow-1b437334-d19b-4a63-a812-6c67aaf2910d",
+                                    "AlarmName": "TargetTracking-service/default/web-app-AlarmLow-1b437334-d19b-4a63-a812-6c67aaf2910d"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#PutScalingPolicyRequest": {
@@ -2449,7 +2632,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a scheduled action for an Application Auto Scaling scalable target. </p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scheduled action applies to the scalable target identified by those three\n         attributes. You cannot create a scheduled action until you have registered the resource as\n         a scalable target.</p>\n         <p>When you specify start and end times with a recurring schedule using a cron expression\n         or rates, they form the boundaries for when the recurring action starts and stops.</p>\n         <p>To update a scheduled action, specify the parameters that you want to change. If you\n         don't specify start and end times, the old values are deleted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html\">Scheduled scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            run scheduled actions. Any scheduled actions that were specified for the scalable target\n            are deleted.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a scheduled action for an Application Auto Scaling scalable target. </p>\n         <p>Each scalable target is identified by a service namespace, resource ID, and scalable\n         dimension. A scheduled action applies to the scalable target identified by those three\n         attributes. You cannot create a scheduled action until you have registered the resource as\n         a scalable target.</p>\n         <p>When you specify start and end times with a recurring schedule using a cron expression\n         or rates, they form the boundaries for when the recurring action starts and stops.</p>\n         <p>To update a scheduled action, specify the parameters that you want to change. If you\n         don't specify start and end times, the old values are deleted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html\">Scheduled scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>If a scalable target is deregistered, the scalable target is no longer available to\n            run scheduled actions. Any scheduled actions that were specified for the scalable target\n            are deleted.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a recurring scheduled action",
+                        "documentation": "This example adds a scheduled action to a DynamoDB table called TestTable to scale out on a recurring schedule. On the specified schedule (every day at 12:15pm UTC), if the current capacity is below the value specified for MinCapacity, Application Auto Scaling scales out to the value specified by MinCapacity.",
+                        "input": {
+                            "ServiceNamespace": "dynamodb",
+                            "Schedule": "cron(15 12 * * ? *)",
+                            "ScheduledActionName": "my-recurring-action",
+                            "ResourceId": "table/TestTable",
+                            "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+                            "ScalableTargetAction": {
+                                "MinCapacity": 6
+                            }
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#PutScheduledActionRequest": {
@@ -2548,7 +2748,23 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers or updates a scalable target, which is the resource that you want to\n         scale.</p>\n         <p>Scalable targets are uniquely identified by the combination of resource ID, scalable\n         dimension, and namespace, which represents some capacity dimension of the underlying\n         service.</p>\n         <p>When you register a new scalable target, you must specify values for the minimum and\n         maximum capacity. If the specified resource is not active in the target service, this\n         operation does not change the resource's current capacity. Otherwise, it changes the\n         resource's current capacity to a value that is inside of this range.</p>\n         <p>If you add a scaling policy, current capacity is adjustable within the specified range\n         when scaling starts. Application Auto Scaling scaling policies will not scale capacity to values that are\n         outside of the minimum and maximum range.</p>\n         <p>After you register a scalable target, you do not need to register it again to use other\n         Application Auto Scaling operations. To see which resources have been registered, use <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. You can also view the scaling policies for a service\n         namespace by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. If you no longer need a scalable target, you can\n         deregister it by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html\">DeregisterScalableTarget</a>.</p>\n         <p>To update a scalable target, specify the parameters that you want to change. Include the\n         parameters that identify the scalable target: resource ID, scalable dimension, and\n         namespace. Any parameters that you don't specify are not changed by this update request. </p>\n         <note>\n            <p>If you call the <code>RegisterScalableTarget</code> API operation to create a\n            scalable target, there might be a brief delay until the operation achieves <a href=\"https://en.wikipedia.org/wiki/Eventual_consistency\">eventual\n            consistency</a>. You might become aware of this brief delay if you get unexpected\n            errors when performing sequential operations. The typical strategy is to retry the\n            request, and some Amazon Web Services SDKs include automatic backoff and retry logic.</p>\n            <p>If you call the <code>RegisterScalableTarget</code> API operation to update an\n            existing scalable target, Application Auto Scaling retrieves the current capacity of the resource. If\n            it's below the minimum capacity or above the maximum capacity, Application Auto Scaling adjusts the\n            capacity of the scalable target to place it within these bounds, even if you don't\n            include the <code>MinCapacity</code> or <code>MaxCapacity</code> request\n            parameters.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Registers or updates a scalable target, which is the resource that you want to\n         scale.</p>\n         <p>Scalable targets are uniquely identified by the combination of resource ID, scalable\n         dimension, and namespace, which represents some capacity dimension of the underlying\n         service.</p>\n         <p>When you register a new scalable target, you must specify values for the minimum and\n         maximum capacity. If the specified resource is not active in the target service, this\n         operation does not change the resource's current capacity. Otherwise, it changes the\n         resource's current capacity to a value that is inside of this range.</p>\n         <p>If you add a scaling policy, current capacity is adjustable within the specified range\n         when scaling starts. Application Auto Scaling scaling policies will not scale capacity to values that are\n         outside of the minimum and maximum range.</p>\n         <p>After you register a scalable target, you do not need to register it again to use other\n         Application Auto Scaling operations. To see which resources have been registered, use <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. You can also view the scaling policies for a service\n         namespace by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html\">DescribeScalableTargets</a>. If you no longer need a scalable target, you can\n         deregister it by using <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html\">DeregisterScalableTarget</a>.</p>\n         <p>To update a scalable target, specify the parameters that you want to change. Include the\n         parameters that identify the scalable target: resource ID, scalable dimension, and\n         namespace. Any parameters that you don't specify are not changed by this update request. </p>\n         <note>\n            <p>If you call the <code>RegisterScalableTarget</code> API operation to create a\n            scalable target, there might be a brief delay until the operation achieves <a href=\"https://en.wikipedia.org/wiki/Eventual_consistency\">eventual\n            consistency</a>. You might become aware of this brief delay if you get unexpected\n            errors when performing sequential operations. The typical strategy is to retry the\n            request, and some Amazon Web Services SDKs include automatic backoff and retry logic.</p>\n            <p>If you call the <code>RegisterScalableTarget</code> API operation to update an\n            existing scalable target, Application Auto Scaling retrieves the current capacity of the resource. If\n            it's below the minimum capacity or above the maximum capacity, Application Auto Scaling adjusts the\n            capacity of the scalable target to place it within these bounds, even if you don't\n            include the <code>MinCapacity</code> or <code>MaxCapacity</code> request\n            parameters.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To register an ECS service as a scalable target",
+                        "documentation": "This example registers a scalable target from an Amazon ECS service called web-app that is running on the default cluster, with a minimum desired count of 1 task and a maximum desired count of 10 tasks.",
+                        "input": {
+                            "ServiceNamespace": "ecs",
+                            "ResourceId": "service/default/web-app",
+                            "ScalableDimension": "ecs:service:DesiredCount",
+                            "MinCapacity": 1,
+                            "MaxCapacity": 10
+                        },
+                        "output": {
+                            "ScalableTargetARN": "arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#RegisterScalableTargetRequest": {
@@ -3466,7 +3682,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or edits tags on an Application Auto Scaling scalable target.</p>\n         <p>Each tag consists of a tag key and a tag value, which are both case-sensitive strings.\n         To add a tag, specify a new tag key and a tag value. To edit a tag, specify an existing tag\n         key and a new tag value.</p>\n         <p>You can use this operation to tag an Application Auto Scaling scalable target, but you cannot tag a\n         scaling policy or scheduled action.</p>\n         <p>You can also add tags to an Application Auto Scaling scalable target while creating it\n            (<code>RegisterScalableTarget</code>).</p>\n         <p>For general information about tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>Use tags to control access to a scalable target. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html\">Tagging support\n            for Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds or edits tags on an Application Auto Scaling scalable target.</p>\n         <p>Each tag consists of a tag key and a tag value, which are both case-sensitive strings.\n         To add a tag, specify a new tag key and a tag value. To edit a tag, specify an existing tag\n         key and a new tag value.</p>\n         <p>You can use this operation to tag an Application Auto Scaling scalable target, but you cannot tag a\n         scaling policy or scheduled action.</p>\n         <p>You can also add tags to an Application Auto Scaling scalable target while creating it\n            (<code>RegisterScalableTarget</code>).</p>\n         <p>For general information about tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>Use tags to control access to a scalable target. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html\">Tagging support\n            for Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add a tag to a scalable target",
+                        "documentation": "This example adds a tag with the key name \"environment\" and the value \"production\" to the scalable target specified by its ARN.",
+                        "input": {
+                            "ResourceARN": "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123",
+                            "Tags": {
+                                "environment": "production"
+                            }
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#TagResourceRequest": {
@@ -3768,7 +3997,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes tags from an Application Auto Scaling scalable target. To delete a tag, specify the tag key and\n         the Application Auto Scaling scalable target.</p>"
+                "smithy.api#documentation": "<p>Deletes tags from an Application Auto Scaling scalable target. To delete a tag, specify the tag key and\n         the Application Auto Scaling scalable target.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove a tag from a scalable target",
+                        "documentation": "This example removes the tag pair with the key name \"environment\" from the scalable target specified by its ARN.",
+                        "input": {
+                            "ResourceARN": "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123",
+                            "TagKeys": [
+                                "environment"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#UntagResourceRequest": {

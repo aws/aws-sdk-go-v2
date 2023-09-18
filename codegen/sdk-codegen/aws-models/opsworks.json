@@ -157,61 +157,79 @@
             }
         },
         "com.amazonaws.opsworks#AppAttributesKeys": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DocumentRoot",
-                        "name": "DocumentRoot"
-                    },
-                    {
-                        "value": "RailsEnv",
-                        "name": "RailsEnv"
-                    },
-                    {
-                        "value": "AutoBundleOnDeploy",
-                        "name": "AutoBundleOnDeploy"
-                    },
-                    {
-                        "value": "AwsFlowRubySettings",
-                        "name": "AwsFlowRubySettings"
+            "type": "enum",
+            "members": {
+                "DocumentRoot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentRoot"
                     }
-                ]
+                },
+                "RailsEnv": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RailsEnv"
+                    }
+                },
+                "AutoBundleOnDeploy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoBundleOnDeploy"
+                    }
+                },
+                "AwsFlowRubySettings": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsFlowRubySettings"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#AppType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "aws-flow-ruby",
-                        "name": "aws_flow_ruby"
-                    },
-                    {
-                        "value": "java",
-                        "name": "java"
-                    },
-                    {
-                        "value": "rails",
-                        "name": "rails"
-                    },
-                    {
-                        "value": "php",
-                        "name": "php"
-                    },
-                    {
-                        "value": "nodejs",
-                        "name": "nodejs"
-                    },
-                    {
-                        "value": "static",
-                        "name": "static"
-                    },
-                    {
-                        "value": "other",
-                        "name": "other"
+            "type": "enum",
+            "members": {
+                "aws_flow_ruby": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws-flow-ruby"
                     }
-                ]
+                },
+                "java": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "java"
+                    }
+                },
+                "rails": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rails"
+                    }
+                },
+                "php": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "php"
+                    }
+                },
+                "nodejs": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nodejs"
+                    }
+                },
+                "static": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "static"
+                    }
+                },
+                "other": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#Apps": {
@@ -221,18 +239,20 @@
             }
         },
         "com.amazonaws.opsworks#Architecture": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "x86_64",
-                        "name": "x86_64"
-                    },
-                    {
-                        "value": "i386",
-                        "name": "i386"
+            "type": "enum",
+            "members": {
+                "x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "x86_64"
                     }
-                ]
+                },
+                "i386": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i386"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#AssignInstance": {
@@ -272,6 +292,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#AssignVolume": {
@@ -310,6 +333,9 @@
                         "smithy.api#documentation": "<p>The instance ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#AssociateElasticIp": {
@@ -348,6 +374,9 @@
                         "smithy.api#documentation": "<p>The instance ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#AttachElasticLoadBalancer": {
@@ -387,6 +416,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#AutoScalingThresholds": {
@@ -440,18 +472,20 @@
             }
         },
         "com.amazonaws.opsworks#AutoScalingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "load",
-                        "name": "load"
-                    },
-                    {
-                        "value": "timer",
-                        "name": "timer"
+            "type": "enum",
+            "members": {
+                "load": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "load"
                     }
-                ]
+                },
+                "timer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "timer"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#BlockDeviceMapping": {
@@ -672,6 +706,9 @@
                         "smithy.api#documentation": "<p>The default AWS OpsWorks Stacks agent version. You have the following options:</p>\n         <ul>\n            <li>\n               <p>Auto-update - Set this parameter to <code>LATEST</code>. AWS OpsWorks Stacks\n      automatically installs new agent versions on the stack's instances as soon as\n      they are available.</p>\n            </li>\n            <li>\n               <p>Fixed version - Set this parameter to your preferred agent version. To update \n             the agent version, you must edit the stack configuration and specify a new version. \n             AWS OpsWorks Stacks then automatically installs that version on the stack's instances.</p>\n            </li>\n         </ul>\n         <p>The default setting is <code>LATEST</code>. To specify an agent version,\n      you must use the complete version number, not the abbreviated number shown on the console.\n      For a list of available agent version numbers, call <a>DescribeAgentVersions</a>. AgentVersion cannot be set to Chef 12.2.</p>\n         <note>\n            <p>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CloneStackResult": {
@@ -685,7 +722,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CloneStack</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CloneStack</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#CloudWatchLogsConfiguration": {
@@ -709,395 +747,583 @@
             }
         },
         "com.amazonaws.opsworks#CloudWatchLogsEncoding": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Specifies the encoding of the log file so that the file can be read correctly. The default is <code>utf_8</code>. Encodings supported by Python <code>codecs.decode()</code> can be used here.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ascii",
-                        "name": "ascii"
-                    },
-                    {
-                        "value": "big5",
-                        "name": "big5"
-                    },
-                    {
-                        "value": "big5hkscs",
-                        "name": "big5hkscs"
-                    },
-                    {
-                        "value": "cp037",
-                        "name": "cp037"
-                    },
-                    {
-                        "value": "cp424",
-                        "name": "cp424"
-                    },
-                    {
-                        "value": "cp437",
-                        "name": "cp437"
-                    },
-                    {
-                        "value": "cp500",
-                        "name": "cp500"
-                    },
-                    {
-                        "value": "cp720",
-                        "name": "cp720"
-                    },
-                    {
-                        "value": "cp737",
-                        "name": "cp737"
-                    },
-                    {
-                        "value": "cp775",
-                        "name": "cp775"
-                    },
-                    {
-                        "value": "cp850",
-                        "name": "cp850"
-                    },
-                    {
-                        "value": "cp852",
-                        "name": "cp852"
-                    },
-                    {
-                        "value": "cp855",
-                        "name": "cp855"
-                    },
-                    {
-                        "value": "cp856",
-                        "name": "cp856"
-                    },
-                    {
-                        "value": "cp857",
-                        "name": "cp857"
-                    },
-                    {
-                        "value": "cp858",
-                        "name": "cp858"
-                    },
-                    {
-                        "value": "cp860",
-                        "name": "cp860"
-                    },
-                    {
-                        "value": "cp861",
-                        "name": "cp861"
-                    },
-                    {
-                        "value": "cp862",
-                        "name": "cp862"
-                    },
-                    {
-                        "value": "cp863",
-                        "name": "cp863"
-                    },
-                    {
-                        "value": "cp864",
-                        "name": "cp864"
-                    },
-                    {
-                        "value": "cp865",
-                        "name": "cp865"
-                    },
-                    {
-                        "value": "cp866",
-                        "name": "cp866"
-                    },
-                    {
-                        "value": "cp869",
-                        "name": "cp869"
-                    },
-                    {
-                        "value": "cp874",
-                        "name": "cp874"
-                    },
-                    {
-                        "value": "cp875",
-                        "name": "cp875"
-                    },
-                    {
-                        "value": "cp932",
-                        "name": "cp932"
-                    },
-                    {
-                        "value": "cp949",
-                        "name": "cp949"
-                    },
-                    {
-                        "value": "cp950",
-                        "name": "cp950"
-                    },
-                    {
-                        "value": "cp1006",
-                        "name": "cp1006"
-                    },
-                    {
-                        "value": "cp1026",
-                        "name": "cp1026"
-                    },
-                    {
-                        "value": "cp1140",
-                        "name": "cp1140"
-                    },
-                    {
-                        "value": "cp1250",
-                        "name": "cp1250"
-                    },
-                    {
-                        "value": "cp1251",
-                        "name": "cp1251"
-                    },
-                    {
-                        "value": "cp1252",
-                        "name": "cp1252"
-                    },
-                    {
-                        "value": "cp1253",
-                        "name": "cp1253"
-                    },
-                    {
-                        "value": "cp1254",
-                        "name": "cp1254"
-                    },
-                    {
-                        "value": "cp1255",
-                        "name": "cp1255"
-                    },
-                    {
-                        "value": "cp1256",
-                        "name": "cp1256"
-                    },
-                    {
-                        "value": "cp1257",
-                        "name": "cp1257"
-                    },
-                    {
-                        "value": "cp1258",
-                        "name": "cp1258"
-                    },
-                    {
-                        "value": "euc_jp",
-                        "name": "euc_jp"
-                    },
-                    {
-                        "value": "euc_jis_2004",
-                        "name": "euc_jis_2004"
-                    },
-                    {
-                        "value": "euc_jisx0213",
-                        "name": "euc_jisx0213"
-                    },
-                    {
-                        "value": "euc_kr",
-                        "name": "euc_kr"
-                    },
-                    {
-                        "value": "gb2312",
-                        "name": "gb2312"
-                    },
-                    {
-                        "value": "gbk",
-                        "name": "gbk"
-                    },
-                    {
-                        "value": "gb18030",
-                        "name": "gb18030"
-                    },
-                    {
-                        "value": "hz",
-                        "name": "hz"
-                    },
-                    {
-                        "value": "iso2022_jp",
-                        "name": "iso2022_jp"
-                    },
-                    {
-                        "value": "iso2022_jp_1",
-                        "name": "iso2022_jp_1"
-                    },
-                    {
-                        "value": "iso2022_jp_2",
-                        "name": "iso2022_jp_2"
-                    },
-                    {
-                        "value": "iso2022_jp_2004",
-                        "name": "iso2022_jp_2004"
-                    },
-                    {
-                        "value": "iso2022_jp_3",
-                        "name": "iso2022_jp_3"
-                    },
-                    {
-                        "value": "iso2022_jp_ext",
-                        "name": "iso2022_jp_ext"
-                    },
-                    {
-                        "value": "iso2022_kr",
-                        "name": "iso2022_kr"
-                    },
-                    {
-                        "value": "latin_1",
-                        "name": "latin_1"
-                    },
-                    {
-                        "value": "iso8859_2",
-                        "name": "iso8859_2"
-                    },
-                    {
-                        "value": "iso8859_3",
-                        "name": "iso8859_3"
-                    },
-                    {
-                        "value": "iso8859_4",
-                        "name": "iso8859_4"
-                    },
-                    {
-                        "value": "iso8859_5",
-                        "name": "iso8859_5"
-                    },
-                    {
-                        "value": "iso8859_6",
-                        "name": "iso8859_6"
-                    },
-                    {
-                        "value": "iso8859_7",
-                        "name": "iso8859_7"
-                    },
-                    {
-                        "value": "iso8859_8",
-                        "name": "iso8859_8"
-                    },
-                    {
-                        "value": "iso8859_9",
-                        "name": "iso8859_9"
-                    },
-                    {
-                        "value": "iso8859_10",
-                        "name": "iso8859_10"
-                    },
-                    {
-                        "value": "iso8859_13",
-                        "name": "iso8859_13"
-                    },
-                    {
-                        "value": "iso8859_14",
-                        "name": "iso8859_14"
-                    },
-                    {
-                        "value": "iso8859_15",
-                        "name": "iso8859_15"
-                    },
-                    {
-                        "value": "iso8859_16",
-                        "name": "iso8859_16"
-                    },
-                    {
-                        "value": "johab",
-                        "name": "johab"
-                    },
-                    {
-                        "value": "koi8_r",
-                        "name": "koi8_r"
-                    },
-                    {
-                        "value": "koi8_u",
-                        "name": "koi8_u"
-                    },
-                    {
-                        "value": "mac_cyrillic",
-                        "name": "mac_cyrillic"
-                    },
-                    {
-                        "value": "mac_greek",
-                        "name": "mac_greek"
-                    },
-                    {
-                        "value": "mac_iceland",
-                        "name": "mac_iceland"
-                    },
-                    {
-                        "value": "mac_latin2",
-                        "name": "mac_latin2"
-                    },
-                    {
-                        "value": "mac_roman",
-                        "name": "mac_roman"
-                    },
-                    {
-                        "value": "mac_turkish",
-                        "name": "mac_turkish"
-                    },
-                    {
-                        "value": "ptcp154",
-                        "name": "ptcp154"
-                    },
-                    {
-                        "value": "shift_jis",
-                        "name": "shift_jis"
-                    },
-                    {
-                        "value": "shift_jis_2004",
-                        "name": "shift_jis_2004"
-                    },
-                    {
-                        "value": "shift_jisx0213",
-                        "name": "shift_jisx0213"
-                    },
-                    {
-                        "value": "utf_32",
-                        "name": "utf_32"
-                    },
-                    {
-                        "value": "utf_32_be",
-                        "name": "utf_32_be"
-                    },
-                    {
-                        "value": "utf_32_le",
-                        "name": "utf_32_le"
-                    },
-                    {
-                        "value": "utf_16",
-                        "name": "utf_16"
-                    },
-                    {
-                        "value": "utf_16_be",
-                        "name": "utf_16_be"
-                    },
-                    {
-                        "value": "utf_16_le",
-                        "name": "utf_16_le"
-                    },
-                    {
-                        "value": "utf_7",
-                        "name": "utf_7"
-                    },
-                    {
-                        "value": "utf_8",
-                        "name": "utf_8"
-                    },
-                    {
-                        "value": "utf_8_sig",
-                        "name": "utf_8_sig"
+            "type": "enum",
+            "members": {
+                "ascii": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ascii"
                     }
-                ]
+                },
+                "big5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "big5"
+                    }
+                },
+                "big5hkscs": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "big5hkscs"
+                    }
+                },
+                "cp037": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp037"
+                    }
+                },
+                "cp424": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp424"
+                    }
+                },
+                "cp437": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp437"
+                    }
+                },
+                "cp500": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp500"
+                    }
+                },
+                "cp720": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp720"
+                    }
+                },
+                "cp737": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp737"
+                    }
+                },
+                "cp775": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp775"
+                    }
+                },
+                "cp850": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp850"
+                    }
+                },
+                "cp852": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp852"
+                    }
+                },
+                "cp855": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp855"
+                    }
+                },
+                "cp856": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp856"
+                    }
+                },
+                "cp857": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp857"
+                    }
+                },
+                "cp858": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp858"
+                    }
+                },
+                "cp860": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp860"
+                    }
+                },
+                "cp861": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp861"
+                    }
+                },
+                "cp862": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp862"
+                    }
+                },
+                "cp863": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp863"
+                    }
+                },
+                "cp864": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp864"
+                    }
+                },
+                "cp865": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp865"
+                    }
+                },
+                "cp866": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp866"
+                    }
+                },
+                "cp869": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp869"
+                    }
+                },
+                "cp874": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp874"
+                    }
+                },
+                "cp875": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp875"
+                    }
+                },
+                "cp932": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp932"
+                    }
+                },
+                "cp949": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp949"
+                    }
+                },
+                "cp950": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp950"
+                    }
+                },
+                "cp1006": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1006"
+                    }
+                },
+                "cp1026": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1026"
+                    }
+                },
+                "cp1140": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1140"
+                    }
+                },
+                "cp1250": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1250"
+                    }
+                },
+                "cp1251": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1251"
+                    }
+                },
+                "cp1252": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1252"
+                    }
+                },
+                "cp1253": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1253"
+                    }
+                },
+                "cp1254": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1254"
+                    }
+                },
+                "cp1255": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1255"
+                    }
+                },
+                "cp1256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1256"
+                    }
+                },
+                "cp1257": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1257"
+                    }
+                },
+                "cp1258": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cp1258"
+                    }
+                },
+                "euc_jp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "euc_jp"
+                    }
+                },
+                "euc_jis_2004": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "euc_jis_2004"
+                    }
+                },
+                "euc_jisx0213": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "euc_jisx0213"
+                    }
+                },
+                "euc_kr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "euc_kr"
+                    }
+                },
+                "gb2312": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gb2312"
+                    }
+                },
+                "gbk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gbk"
+                    }
+                },
+                "gb18030": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gb18030"
+                    }
+                },
+                "hz": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hz"
+                    }
+                },
+                "iso2022_jp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_jp"
+                    }
+                },
+                "iso2022_jp_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_jp_1"
+                    }
+                },
+                "iso2022_jp_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_jp_2"
+                    }
+                },
+                "iso2022_jp_2004": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_jp_2004"
+                    }
+                },
+                "iso2022_jp_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_jp_3"
+                    }
+                },
+                "iso2022_jp_ext": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_jp_ext"
+                    }
+                },
+                "iso2022_kr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso2022_kr"
+                    }
+                },
+                "latin_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "latin_1"
+                    }
+                },
+                "iso8859_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_2"
+                    }
+                },
+                "iso8859_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_3"
+                    }
+                },
+                "iso8859_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_4"
+                    }
+                },
+                "iso8859_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_5"
+                    }
+                },
+                "iso8859_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_6"
+                    }
+                },
+                "iso8859_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_7"
+                    }
+                },
+                "iso8859_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_8"
+                    }
+                },
+                "iso8859_9": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_9"
+                    }
+                },
+                "iso8859_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_10"
+                    }
+                },
+                "iso8859_13": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_13"
+                    }
+                },
+                "iso8859_14": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_14"
+                    }
+                },
+                "iso8859_15": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_15"
+                    }
+                },
+                "iso8859_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iso8859_16"
+                    }
+                },
+                "johab": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "johab"
+                    }
+                },
+                "koi8_r": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "koi8_r"
+                    }
+                },
+                "koi8_u": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "koi8_u"
+                    }
+                },
+                "mac_cyrillic": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac_cyrillic"
+                    }
+                },
+                "mac_greek": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac_greek"
+                    }
+                },
+                "mac_iceland": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac_iceland"
+                    }
+                },
+                "mac_latin2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac_latin2"
+                    }
+                },
+                "mac_roman": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac_roman"
+                    }
+                },
+                "mac_turkish": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac_turkish"
+                    }
+                },
+                "ptcp154": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ptcp154"
+                    }
+                },
+                "shift_jis": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shift_jis"
+                    }
+                },
+                "shift_jis_2004": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shift_jis_2004"
+                    }
+                },
+                "shift_jisx0213": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shift_jisx0213"
+                    }
+                },
+                "utf_32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_32"
+                    }
+                },
+                "utf_32_be": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_32_be"
+                    }
+                },
+                "utf_32_le": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_32_le"
+                    }
+                },
+                "utf_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_16"
+                    }
+                },
+                "utf_16_be": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_16_be"
+                    }
+                },
+                "utf_16_le": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_16_le"
+                    }
+                },
+                "utf_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_7"
+                    }
+                },
+                "utf_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_8"
+                    }
+                },
+                "utf_8_sig": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "utf_8_sig"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the encoding of the log file so that the file can be read correctly. The default is <code>utf_8</code>. Encodings supported by Python <code>codecs.decode()</code> can be used here.</p>"
             }
         },
         "com.amazonaws.opsworks#CloudWatchLogsInitialPosition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file. It's only used if there is no state persisted for that log stream.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "start_of_file",
-                        "name": "start_of_file"
-                    },
-                    {
-                        "value": "end_of_file",
-                        "name": "end_of_file"
+            "type": "enum",
+            "members": {
+                "start_of_file": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "start_of_file"
                     }
-                ]
+                },
+                "end_of_file": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "end_of_file"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file. It's only used if there is no state persisted for that log stream.</p>"
             }
         },
         "com.amazonaws.opsworks#CloudWatchLogsLogStream": {
@@ -1184,19 +1410,23 @@
             }
         },
         "com.amazonaws.opsworks#CloudWatchLogsTimeZone": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The preferred time zone for logs streamed to CloudWatch Logs. Valid values are <code>LOCAL</code> and <code>UTC</code>, for Coordinated Universal Time.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "LOCAL",
-                        "name": "LOCAL"
-                    },
-                    {
-                        "value": "UTC",
-                        "name": "UTC"
+            "type": "enum",
+            "members": {
+                "LOCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL"
                     }
-                ]
+                },
+                "UTC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The preferred time zone for logs streamed to CloudWatch Logs. Valid values are <code>LOCAL</code> and <code>UTC</code>, for Coordinated Universal Time.</p>"
             }
         },
         "com.amazonaws.opsworks#Command": {
@@ -1371,6 +1601,9 @@
                         "smithy.api#documentation": "<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be\n      associated with the app. After you deploy the app, these variables are defined on the\n      associated app server instance. For more information, see <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment\"> Environment Variables</a>.</p>\n         <p>There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, \"Environment: is too large (maximum is 20KB).\"</p>\n         <note>\n            <p>If you have specified one or more environment variables, you cannot modify the stack's Chef version.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CreateAppResult": {
@@ -1384,7 +1617,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CreateApp</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CreateApp</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#CreateDeployment": {
@@ -1454,6 +1688,9 @@
                         "smithy.api#documentation": "<p>A string that contains user-defined, custom JSON. You can use this parameter to override some corresponding default stack configuration JSON values. The string should be in the following format:</p>\n         <p>\n            <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n         </p>\n         <p>For more information about custom JSON, see <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to\n          Modify the Stack Configuration Attributes</a> and \n          <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html\">Overriding Attributes With Custom JSON</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CreateDeploymentResult": {
@@ -1467,7 +1704,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CreateDeployment</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CreateDeployment</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#CreateInstance": {
@@ -1604,6 +1842,9 @@
                         "smithy.api#documentation": "<p>The instance's tenancy option. The default option is no tenancy, or if the instance is running in a VPC, inherit tenancy settings from the VPC. The following are valid values for this parameter:  <code>dedicated</code>, <code>default</code>, or <code>host</code>. Because there are costs associated with changes in tenancy options, we recommend that you research tenancy options before choosing them for your instances. For more information about dedicated hosts, see <a href=\"http://aws.amazon.com/ec2/dedicated-hosts/\">Dedicated Hosts Overview</a> and <a href=\"http://aws.amazon.com/ec2/dedicated-hosts/\">Amazon EC2 Dedicated Hosts</a>. For more information about dedicated instances, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> and <a href=\"http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/\">Amazon EC2 Dedicated Instances</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CreateInstanceResult": {
@@ -1617,7 +1858,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CreateInstance</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CreateInstance</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#CreateLayer": {
@@ -1755,6 +1997,9 @@
                         "smithy.api#documentation": "<p>A <code>LifeCycleEventConfiguration</code> object that you can use to configure the Shutdown event to\n      specify an execution timeout and enable or disable Elastic Load Balancer connection\n      draining.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CreateLayerResult": {
@@ -1768,7 +2013,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CreateLayer</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CreateLayer</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#CreateStack": {
@@ -1909,6 +2155,9 @@
                         "smithy.api#documentation": "<p>The default AWS OpsWorks Stacks agent version. You have the following options:</p>\n         <ul>\n            <li>\n               <p>Auto-update - Set this parameter to <code>LATEST</code>. AWS OpsWorks Stacks\n        automatically installs new agent versions on the stack's instances as soon as\n        they are available.</p>\n            </li>\n            <li>\n               <p>Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the stack's instances.</p>\n            </li>\n         </ul>\n         <p>The default setting is the most recent release of the agent. To specify an agent version,\n      you must use the complete version number, not the abbreviated number shown on the console.\n      For a list of available agent version numbers, call <a>DescribeAgentVersions</a>. AgentVersion cannot be set to Chef 12.2.</p>\n         <note>\n            <p>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CreateStackResult": {
@@ -1922,7 +2171,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CreateStack</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CreateStack</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#CreateUserProfile": {
@@ -1970,6 +2220,9 @@
                         "smithy.api#documentation": "<p>Whether users can specify their own SSH public key through the My Settings page. For more\n      information, see <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html\">Setting an IAM\n        User's Public SSH Key</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#CreateUserProfileResult": {
@@ -1983,7 +2236,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>CreateUserProfile</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>CreateUserProfile</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DailyAutoScalingSchedule": {
@@ -2060,6 +2314,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeleteInstance": {
@@ -2104,6 +2361,9 @@
                         "smithy.api#documentation": "<p>Whether to delete the instance's Amazon EBS volumes.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeleteLayer": {
@@ -2136,6 +2396,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeleteStack": {
@@ -2168,6 +2431,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeleteUserProfile": {
@@ -2200,6 +2466,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#Deployment": {
@@ -2313,58 +2582,80 @@
             }
         },
         "com.amazonaws.opsworks#DeploymentCommandName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "install_dependencies",
-                        "name": "install_dependencies"
-                    },
-                    {
-                        "value": "update_dependencies",
-                        "name": "update_dependencies"
-                    },
-                    {
-                        "value": "update_custom_cookbooks",
-                        "name": "update_custom_cookbooks"
-                    },
-                    {
-                        "value": "execute_recipes",
-                        "name": "execute_recipes"
-                    },
-                    {
-                        "value": "configure",
-                        "name": "configure"
-                    },
-                    {
-                        "value": "setup",
-                        "name": "setup"
-                    },
-                    {
-                        "value": "deploy",
-                        "name": "deploy"
-                    },
-                    {
-                        "value": "rollback",
-                        "name": "rollback"
-                    },
-                    {
-                        "value": "start",
-                        "name": "start"
-                    },
-                    {
-                        "value": "stop",
-                        "name": "stop"
-                    },
-                    {
-                        "value": "restart",
-                        "name": "restart"
-                    },
-                    {
-                        "value": "undeploy",
-                        "name": "undeploy"
+            "type": "enum",
+            "members": {
+                "install_dependencies": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "install_dependencies"
                     }
-                ]
+                },
+                "update_dependencies": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update_dependencies"
+                    }
+                },
+                "update_custom_cookbooks": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update_custom_cookbooks"
+                    }
+                },
+                "execute_recipes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "execute_recipes"
+                    }
+                },
+                "configure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "configure"
+                    }
+                },
+                "setup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "setup"
+                    }
+                },
+                "deploy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deploy"
+                    }
+                },
+                "rollback": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rollback"
+                    }
+                },
+                "start": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "start"
+                    }
+                },
+                "stop": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stop"
+                    }
+                },
+                "restart": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "restart"
+                    }
+                },
+                "undeploy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "undeploy"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#Deployments": {
@@ -2403,6 +2694,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeregisterElasticIp": {
@@ -2435,6 +2729,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeregisterInstance": {
@@ -2467,6 +2764,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeregisterRdsDbInstance": {
@@ -2499,6 +2799,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DeregisterVolume": {
@@ -2531,6 +2834,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeAgentVersions": {
@@ -2568,6 +2874,9 @@
                         "smithy.api#documentation": "<p>The configuration manager.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeAgentVersionsResult": {
@@ -2581,7 +2890,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeAgentVersions</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeAgentVersions</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeApps": {
@@ -2638,6 +2948,9 @@
                         "smithy.api#documentation": "<p>An array of app IDs for the apps to be described. If you use this parameter,\n        <code>DescribeApps</code> returns a description of the specified apps. Otherwise, it returns\n      a description of every app.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeAppsResult": {
@@ -2651,7 +2964,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeApps</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeApps</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeCommands": {
@@ -2695,6 +3009,9 @@
                         "smithy.api#documentation": "<p>An array of command IDs. If you include this parameter, <code>DescribeCommands</code> returns\n      a description of the specified commands. Otherwise, it returns a description of every\n      command.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeCommandsResult": {
@@ -2708,7 +3025,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeCommands</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeCommands</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeDeployments": {
@@ -2780,6 +3098,9 @@
                         "smithy.api#documentation": "<p>An array of deployment IDs to be described. If you include this parameter,\n        the command returns a description of the specified deployments.\n      Otherwise, it returns a description of every deployment.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeDeploymentsResult": {
@@ -2793,7 +3114,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeDeployments</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeDeployments</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeEcsClusters": {
@@ -2849,6 +3171,9 @@
                         "smithy.api#documentation": "<p>To receive a paginated response, use this parameter to specify the maximum number\n      of results to be returned with a single call. If the number of available results exceeds this maximum, the\n      response includes a <code>NextToken</code> value that you can assign\n      to the <code>NextToken</code> request parameter to get the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeEcsClustersResult": {
@@ -2868,7 +3193,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeEcsClusters</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeEcsClusters</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeElasticIps": {
@@ -2912,6 +3238,9 @@
                         "smithy.api#documentation": "<p>An array of Elastic IP addresses to be described. If you include this parameter,\n        <code>DescribeElasticIps</code> returns a description of the specified Elastic IP addresses.\n      Otherwise, it returns a description of every Elastic IP address.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeElasticIpsResult": {
@@ -2925,7 +3254,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeElasticIps</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeElasticIps</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeElasticLoadBalancers": {
@@ -2963,6 +3293,9 @@
                         "smithy.api#documentation": "<p>A list of layer IDs. The action describes the Elastic Load Balancing instances for the specified layers.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeElasticLoadBalancersResult": {
@@ -2976,7 +3309,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeElasticLoadBalancers</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeElasticLoadBalancers</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeInstances": {
@@ -3402,6 +3736,9 @@
                         "smithy.api#documentation": "<p>An array of instance IDs to be described. If you use this parameter,\n        <code>DescribeInstances</code> returns a description of the specified instances. Otherwise,\n      it returns a description of every instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeInstancesResult": {
@@ -3415,7 +3752,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeInstances</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeInstances</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeLayers": {
@@ -3453,6 +3791,9 @@
                         "smithy.api#documentation": "<p>An array of layer IDs that specify the layers to be described. If you omit this parameter,\n        <code>DescribeLayers</code> returns a description of every layer in the specified stack.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeLayersResult": {
@@ -3466,7 +3807,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeLayers</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeLayers</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeLoadBasedAutoScaling": {
@@ -3499,6 +3841,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeLoadBasedAutoScalingResult": {
@@ -3512,7 +3857,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeLoadBasedAutoScaling</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeLoadBasedAutoScaling</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeMyUserProfile": {
@@ -3538,7 +3884,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeMyUserProfile</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeMyUserProfile</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeOperatingSystems": {
@@ -3564,7 +3911,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The response to a <code>DescribeOperatingSystems</code> request.</p>"
+                "smithy.api#documentation": "<p>The response to a <code>DescribeOperatingSystems</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribePermissions": {
@@ -3602,6 +3950,9 @@
                         "smithy.api#documentation": "<p>The stack ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribePermissionsResult": {
@@ -3615,7 +3966,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribePermissions</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribePermissions</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeRaidArrays": {
@@ -3659,6 +4011,9 @@
                         "smithy.api#documentation": "<p>An array of RAID array IDs. If you use this parameter, <code>DescribeRaidArrays</code>\n      returns descriptions of the specified arrays. Otherwise, it returns a description of every\n      array.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeRaidArraysResult": {
@@ -3672,7 +4027,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeRaidArrays</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeRaidArrays</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeRdsDbInstances": {
@@ -3711,6 +4067,9 @@
                         "smithy.api#documentation": "<p>An array containing the ARNs of the instances to be described.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeRdsDbInstancesResult": {
@@ -3724,7 +4083,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeRdsDbInstances</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeRdsDbInstances</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeServiceErrors": {
@@ -3768,6 +4128,9 @@
                         "smithy.api#documentation": "<p>An array of service error IDs. If you use this parameter, <code>DescribeServiceErrors</code>\n      returns descriptions of the specified errors. Otherwise, it returns a description of every\n      error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeServiceErrorsResult": {
@@ -3781,7 +4144,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeServiceErrors</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeServiceErrors</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeStackProvisioningParameters": {
@@ -3814,6 +4178,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeStackProvisioningParametersResult": {
@@ -3833,7 +4200,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeStackProvisioningParameters</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeStackProvisioningParameters</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeStackSummary": {
@@ -3866,6 +4234,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeStackSummaryResult": {
@@ -3879,7 +4250,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeStackSummary</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeStackSummary</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeStacks": {
@@ -3911,6 +4283,9 @@
                         "smithy.api#documentation": "<p>An array of stack IDs that specify the stacks to be described. If you omit this parameter,\n        <code>DescribeStacks</code> returns a description of every stack.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeStacksResult": {
@@ -3924,7 +4299,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeStacks</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeStacks</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeTimeBasedAutoScaling": {
@@ -3957,6 +4333,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeTimeBasedAutoScalingResult": {
@@ -3970,7 +4349,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeTimeBasedAutoScaling</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeTimeBasedAutoScaling</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeUserProfiles": {
@@ -4002,6 +4382,9 @@
                         "smithy.api#documentation": "<p>An array of IAM or federated user ARNs that identify the users to be described.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeUserProfilesResult": {
@@ -4015,7 +4398,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeUserProfiles</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeUserProfiles</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DescribeVolumes": {
@@ -4065,6 +4449,9 @@
                         "smithy.api#documentation": "<p>Am array of volume IDs. If you use this parameter, <code>DescribeVolumes</code> returns\n      descriptions of the specified volumes. Otherwise, it returns a description of every\n      volume.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DescribeVolumesResult": {
@@ -4078,7 +4465,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeVolumes</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>DescribeVolumes</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#DetachElasticLoadBalancer": {
@@ -4115,6 +4503,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#DisassociateElasticIp": {
@@ -4147,6 +4538,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#Double": {
@@ -4404,6 +4798,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#GetHostnameSuggestionResult": {
@@ -4423,7 +4820,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>GetHostnameSuggestion</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>GetHostnameSuggestion</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#GrantAccess": {
@@ -4462,6 +4860,9 @@
                         "smithy.api#documentation": "<p>The length of time (in minutes) that the grant is valid. When the grant expires at the end of this period, the user will no longer be able to use the credentials to log in. If the user is logged in at the time, he or she automatically will be logged out.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#GrantAccessResult": {
@@ -4475,7 +4876,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>GrantAccess</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>GrantAccess</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#Hour": {
@@ -5048,165 +5450,235 @@
             }
         },
         "com.amazonaws.opsworks#LayerAttributesKeys": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EcsClusterArn",
-                        "name": "EcsClusterArn"
-                    },
-                    {
-                        "value": "EnableHaproxyStats",
-                        "name": "EnableHaproxyStats"
-                    },
-                    {
-                        "value": "HaproxyStatsUrl",
-                        "name": "HaproxyStatsUrl"
-                    },
-                    {
-                        "value": "HaproxyStatsUser",
-                        "name": "HaproxyStatsUser"
-                    },
-                    {
-                        "value": "HaproxyStatsPassword",
-                        "name": "HaproxyStatsPassword"
-                    },
-                    {
-                        "value": "HaproxyHealthCheckUrl",
-                        "name": "HaproxyHealthCheckUrl"
-                    },
-                    {
-                        "value": "HaproxyHealthCheckMethod",
-                        "name": "HaproxyHealthCheckMethod"
-                    },
-                    {
-                        "value": "MysqlRootPassword",
-                        "name": "MysqlRootPassword"
-                    },
-                    {
-                        "value": "MysqlRootPasswordUbiquitous",
-                        "name": "MysqlRootPasswordUbiquitous"
-                    },
-                    {
-                        "value": "GangliaUrl",
-                        "name": "GangliaUrl"
-                    },
-                    {
-                        "value": "GangliaUser",
-                        "name": "GangliaUser"
-                    },
-                    {
-                        "value": "GangliaPassword",
-                        "name": "GangliaPassword"
-                    },
-                    {
-                        "value": "MemcachedMemory",
-                        "name": "MemcachedMemory"
-                    },
-                    {
-                        "value": "NodejsVersion",
-                        "name": "NodejsVersion"
-                    },
-                    {
-                        "value": "RubyVersion",
-                        "name": "RubyVersion"
-                    },
-                    {
-                        "value": "RubygemsVersion",
-                        "name": "RubygemsVersion"
-                    },
-                    {
-                        "value": "ManageBundler",
-                        "name": "ManageBundler"
-                    },
-                    {
-                        "value": "BundlerVersion",
-                        "name": "BundlerVersion"
-                    },
-                    {
-                        "value": "RailsStack",
-                        "name": "RailsStack"
-                    },
-                    {
-                        "value": "PassengerVersion",
-                        "name": "PassengerVersion"
-                    },
-                    {
-                        "value": "Jvm",
-                        "name": "Jvm"
-                    },
-                    {
-                        "value": "JvmVersion",
-                        "name": "JvmVersion"
-                    },
-                    {
-                        "value": "JvmOptions",
-                        "name": "JvmOptions"
-                    },
-                    {
-                        "value": "JavaAppServer",
-                        "name": "JavaAppServer"
-                    },
-                    {
-                        "value": "JavaAppServerVersion",
-                        "name": "JavaAppServerVersion"
+            "type": "enum",
+            "members": {
+                "EcsClusterArn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EcsClusterArn"
                     }
-                ]
+                },
+                "EnableHaproxyStats": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EnableHaproxyStats"
+                    }
+                },
+                "HaproxyStatsUrl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HaproxyStatsUrl"
+                    }
+                },
+                "HaproxyStatsUser": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HaproxyStatsUser"
+                    }
+                },
+                "HaproxyStatsPassword": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HaproxyStatsPassword"
+                    }
+                },
+                "HaproxyHealthCheckUrl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HaproxyHealthCheckUrl"
+                    }
+                },
+                "HaproxyHealthCheckMethod": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HaproxyHealthCheckMethod"
+                    }
+                },
+                "MysqlRootPassword": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MysqlRootPassword"
+                    }
+                },
+                "MysqlRootPasswordUbiquitous": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MysqlRootPasswordUbiquitous"
+                    }
+                },
+                "GangliaUrl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GangliaUrl"
+                    }
+                },
+                "GangliaUser": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GangliaUser"
+                    }
+                },
+                "GangliaPassword": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GangliaPassword"
+                    }
+                },
+                "MemcachedMemory": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemcachedMemory"
+                    }
+                },
+                "NodejsVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodejsVersion"
+                    }
+                },
+                "RubyVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RubyVersion"
+                    }
+                },
+                "RubygemsVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RubygemsVersion"
+                    }
+                },
+                "ManageBundler": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManageBundler"
+                    }
+                },
+                "BundlerVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BundlerVersion"
+                    }
+                },
+                "RailsStack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RailsStack"
+                    }
+                },
+                "PassengerVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PassengerVersion"
+                    }
+                },
+                "Jvm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jvm"
+                    }
+                },
+                "JvmVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JvmVersion"
+                    }
+                },
+                "JvmOptions": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JvmOptions"
+                    }
+                },
+                "JavaAppServer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JavaAppServer"
+                    }
+                },
+                "JavaAppServerVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JavaAppServerVersion"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#LayerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "aws-flow-ruby",
-                        "name": "aws_flow_ruby"
-                    },
-                    {
-                        "value": "ecs-cluster",
-                        "name": "ecs_cluster"
-                    },
-                    {
-                        "value": "java-app",
-                        "name": "java_app"
-                    },
-                    {
-                        "value": "lb",
-                        "name": "lb"
-                    },
-                    {
-                        "value": "web",
-                        "name": "web"
-                    },
-                    {
-                        "value": "php-app",
-                        "name": "php_app"
-                    },
-                    {
-                        "value": "rails-app",
-                        "name": "rails_app"
-                    },
-                    {
-                        "value": "nodejs-app",
-                        "name": "nodejs_app"
-                    },
-                    {
-                        "value": "memcached",
-                        "name": "memcached"
-                    },
-                    {
-                        "value": "db-master",
-                        "name": "db_master"
-                    },
-                    {
-                        "value": "monitoring-master",
-                        "name": "monitoring_master"
-                    },
-                    {
-                        "value": "custom",
-                        "name": "custom"
+            "type": "enum",
+            "members": {
+                "aws_flow_ruby": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws-flow-ruby"
                     }
-                ]
+                },
+                "ecs_cluster": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ecs-cluster"
+                    }
+                },
+                "java_app": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "java-app"
+                    }
+                },
+                "lb": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lb"
+                    }
+                },
+                "web": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "web"
+                    }
+                },
+                "php_app": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "php-app"
+                    }
+                },
+                "rails_app": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rails-app"
+                    }
+                },
+                "nodejs_app": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nodejs-app"
+                    }
+                },
+                "memcached": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "memcached"
+                    }
+                },
+                "db_master": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-master"
+                    }
+                },
+                "monitoring_master": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monitoring-master"
+                    }
+                },
+                "custom": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "custom"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#Layers": {
@@ -5272,6 +5744,9 @@
                         "smithy.api#documentation": "<p>Do not use. A validation exception occurs if you add a <code>NextToken</code> parameter to a <code>ListTagsRequest</code> call.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#ListTagsResult": {
@@ -5291,7 +5766,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>ListTags</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>ListTags</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#LoadBasedAutoScalingConfiguration": {
@@ -5736,9 +6212,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://opsworks-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://opsworks-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -5751,15 +6406,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://opsworks.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://opsworks.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -5771,258 +6461,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://opsworks-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://opsworks-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://opsworks.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://opsworks.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -6037,8 +6477,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6050,8 +6490,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6063,8 +6503,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6076,8 +6516,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6089,8 +6529,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6102,8 +6542,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6115,8 +6555,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6128,8 +6568,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6141,8 +6581,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6154,8 +6594,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6167,8 +6607,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6180,8 +6620,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6193,8 +6633,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6206,8 +6646,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6219,8 +6659,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6232,8 +6672,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6245,8 +6685,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6258,8 +6698,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6271,8 +6711,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6284,8 +6724,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6297,8 +6737,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6310,8 +6750,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6323,8 +6763,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6336,8 +6776,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6349,8 +6789,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6362,8 +6802,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6375,8 +6826,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6388,8 +6850,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6401,8 +6874,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6414,8 +6898,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6427,8 +6911,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6440,8 +6924,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6452,8 +6936,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6464,9 +6948,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -6717,6 +7207,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#Recipes": {
@@ -6794,6 +7287,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#RegisterEcsClusterResult": {
@@ -6807,7 +7303,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterEcsCluster</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterEcsCluster</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#RegisterElasticIp": {
@@ -6847,6 +7344,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#RegisterElasticIpResult": {
@@ -6860,7 +7360,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterElasticIp</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterElasticIp</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#RegisterInstance": {
@@ -6929,6 +7430,9 @@
                         "smithy.api#documentation": "<p>An InstanceIdentity object that contains the instance's identity.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#RegisterInstanceResult": {
@@ -6942,7 +7446,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterInstanceResult</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterInstanceResult</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#RegisterRdsDbInstance": {
@@ -6996,6 +7501,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#RegisterVolume": {
@@ -7034,6 +7542,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#RegisterVolumeResult": {
@@ -7047,7 +7558,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterVolume</code> request.</p>"
+                "smithy.api#documentation": "<p>Contains the response to a <code>RegisterVolume</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opsworks#ReportedOs": {
@@ -7095,18 +7607,20 @@
             }
         },
         "com.amazonaws.opsworks#RootDeviceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ebs",
-                        "name": "ebs"
-                    },
-                    {
-                        "value": "instance-store",
-                        "name": "instance_store"
+            "type": "enum",
+            "members": {
+                "ebs": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ebs"
                     }
-                ]
+                },
+                "instance_store": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instance-store"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#SelfUserProfile": {
@@ -7239,6 +7753,9 @@
                         "smithy.api#documentation": "<p>An <code>AutoScalingThresholds</code> object with the downscaling threshold configuration. If\n      the load falls below these thresholds for a specified amount of time, AWS OpsWorks Stacks stops a specified\n      number of instances.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#SetPermission": {
@@ -7296,6 +7813,9 @@
                         "smithy.api#documentation": "<p>The user's permission level, which must be set to one of the following strings. You cannot set your own permissions level.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deny</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>show</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>deploy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>manage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>iam_only</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about the permissions associated with these levels, see <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#SetTimeBasedAutoScaling": {
@@ -7334,6 +7854,9 @@
                         "smithy.api#documentation": "<p>An <code>AutoScalingSchedule</code> with the instance schedule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#ShutdownEventConfiguration": {
@@ -7401,26 +7924,32 @@
             }
         },
         "com.amazonaws.opsworks#SourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "git",
-                        "name": "git"
-                    },
-                    {
-                        "value": "svn",
-                        "name": "svn"
-                    },
-                    {
-                        "value": "archive",
-                        "name": "archive"
-                    },
-                    {
-                        "value": "s3",
-                        "name": "s3"
+            "type": "enum",
+            "members": {
+                "git": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "git"
                     }
-                ]
+                },
+                "svn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "svn"
+                    }
+                },
+                "archive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "archive"
+                    }
+                },
+                "s3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#SslConfiguration": {
@@ -7601,14 +8130,14 @@
             }
         },
         "com.amazonaws.opsworks#StackAttributesKeys": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Color",
-                        "name": "Color"
+            "type": "enum",
+            "members": {
+                "Color": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Color"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.opsworks#StackConfigurationManager": {
@@ -7711,6 +8240,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#StartStack": {
@@ -7743,6 +8275,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#StopInstance": {
@@ -7781,6 +8316,9 @@
                         "smithy.api#documentation": "<p>Specifies whether to force an instance to stop. If the instance's root device type is <code>ebs</code>, or EBS-backed, \n            adding the <code>Force</code> parameter to the <code>StopInstances</code> API call disassociates the AWS OpsWorks Stacks instance from EC2, and forces deletion of <i>only</i> the OpsWorks Stacks instance. \n            You must also delete the formerly-associated instance in EC2 after troubleshooting and replacing the AWS OpsWorks Stacks instance with a new one.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#StopStack": {
@@ -7813,6 +8351,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#String": {
@@ -7873,6 +8414,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#TagValue": {
@@ -7975,6 +8519,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UnassignVolume": {
@@ -8007,6 +8554,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UntagResource": {
@@ -8046,6 +8596,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateApp": {
@@ -8138,6 +8691,9 @@
                         "smithy.api#documentation": "<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be\n      associated with the app. After you deploy the app, these variables are defined on the\n      associated app server instances.For more information, see <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment\"> Environment Variables</a>.</p>\n         <p>There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, \"Environment: is too large (maximum is 20 KB).\"</p>\n         <note>\n            <p>If you have specified one or more environment variables, you cannot modify the stack's Chef version.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateElasticIp": {
@@ -8176,6 +8732,9 @@
                         "smithy.api#documentation": "<p>The new name.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateInstance": {
@@ -8274,6 +8833,9 @@
                         "smithy.api#documentation": "<p>The default AWS OpsWorks Stacks agent version. You have the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INHERIT</code> - Use the stack's default agent version setting.</p>\n            </li>\n            <li>\n               <p>\n                  <i>version_number</i> - Use the specified agent version.\n        This value overrides the stack's default setting.\n        To update the agent version, you must edit the instance configuration and specify a\n        new version.\n        AWS OpsWorks Stacks then automatically installs that version on the instance.</p>\n            </li>\n         </ul>\n         <p>The default setting is <code>INHERIT</code>. To specify an agent version,\n      you must use the complete version number, not the abbreviated number shown on the console.\n      For a list of available agent version numbers, call <a>DescribeAgentVersions</a>.</p>\n         <p>AgentVersion cannot be set to Chef 12.2.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateLayer": {
@@ -8402,6 +8964,9 @@
                         "smithy.api#documentation": "<p></p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateMyUserProfile": {
@@ -8430,6 +8995,9 @@
                         "smithy.api#documentation": "<p>The user's SSH public key.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateRdsDbInstance": {
@@ -8474,6 +9042,9 @@
                         "smithy.api#documentation": "<p>The database password.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateStack": {
@@ -8608,6 +9179,9 @@
                         "smithy.api#documentation": "<p>The default AWS OpsWorks Stacks agent version. You have the following options:</p>\n         <ul>\n            <li>\n               <p>Auto-update - Set this parameter to <code>LATEST</code>. AWS OpsWorks Stacks\n        automatically installs new agent versions on the stack's instances as soon as\n        they are available.</p>\n            </li>\n            <li>\n               <p>Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the stack's instances.</p>\n            </li>\n         </ul>\n         <p>The default setting is <code>LATEST</code>. To specify an agent version,\n      you must use the complete version number, not the abbreviated number shown on the console.\n      For a list of available agent version numbers, call <a>DescribeAgentVersions</a>. \n          AgentVersion cannot be set to Chef 12.2.</p>\n         <note>\n            <p>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateUserProfile": {
@@ -8658,6 +9232,9 @@
                         "smithy.api#documentation": "<p>Whether users can specify their own SSH public key through the My Settings page. For more\n      information, see <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html\">Managing User\n        Permissions</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UpdateVolume": {
@@ -8702,6 +9279,9 @@
                         "smithy.api#documentation": "<p>The new mount point.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opsworks#UserProfile": {
@@ -8773,18 +9353,20 @@
             }
         },
         "com.amazonaws.opsworks#VirtualizationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "paravirtual",
-                        "name": "paravirtual"
-                    },
-                    {
-                        "value": "hvm",
-                        "name": "hvm"
+            "type": "enum",
+            "members": {
+                "paravirtual": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "paravirtual"
                     }
-                ]
+                },
+                "hvm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hvm"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#Volume": {
@@ -8939,22 +9521,26 @@
             }
         },
         "com.amazonaws.opsworks#VolumeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "gp2",
-                        "name": "gp2"
-                    },
-                    {
-                        "value": "io1",
-                        "name": "io1"
-                    },
-                    {
-                        "value": "standard",
-                        "name": "standard"
+            "type": "enum",
+            "members": {
+                "gp2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gp2"
                     }
-                ]
+                },
+                "io1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "io1"
+                    }
+                },
+                "standard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                }
             }
         },
         "com.amazonaws.opsworks#Volumes": {

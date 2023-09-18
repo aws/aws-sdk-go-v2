@@ -82,6 +82,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#AddTagsOutput": {
@@ -101,19 +104,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon ML returns the following elements.</p>"
+                "smithy.api#documentation": "<p>Amazon ML returns the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#Algorithm": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The function used to train an <code>MLModel</code>. Training choices supported by Amazon ML include the following:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>SGD</code> - Stochastic Gradient Descent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RandomForest</code> - Random forest of decision trees.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "sgd",
-                        "name": "SGD"
+            "type": "enum",
+            "members": {
+                "SGD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sgd"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The function used to train an <code>MLModel</code>. Training choices supported by Amazon ML include the following:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>SGD</code> - Stochastic Gradient Descent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RandomForest</code> - Random forest of decision trees.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.machinelearning#AmazonML_20141212": {
@@ -211,6 +217,7 @@
                     "arnNamespace": "machinelearning",
                     "cloudFormationName": "MachineLearning",
                     "cloudTrailEventSource": "machinelearning.amazonaws.com",
+                    "docId": "machinelearning-2014-12-12",
                     "endpointPrefix": "machinelearning"
                 },
                 "aws.auth#sigv4": {
@@ -282,9 +289,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://machinelearning-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://machinelearning-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -297,15 +483,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://machinelearning.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://machinelearning.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -317,258 +538,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://machinelearning-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://machinelearning-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://machinelearning.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://machinelearning.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -583,8 +554,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -596,8 +567,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -609,8 +580,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -622,8 +593,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -635,8 +606,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -648,8 +619,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -661,8 +632,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -674,8 +645,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -687,8 +658,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -700,8 +671,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -713,8 +684,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -726,8 +697,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -739,8 +710,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -752,8 +734,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -765,8 +758,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -778,8 +782,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -791,8 +806,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -804,8 +819,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -817,8 +832,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -829,8 +844,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -841,9 +856,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -855,7 +876,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>An Amazon Web Service (AWS) user account identifier. The account identifier can be an AWS root account or an AWS Identity and Access Management (IAM) user.</p>",
-                "smithy.api#pattern": "arn:aws:iam::[0-9]+:((user/.+)|(root))"
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]+:((user/.+)|(root))$"
             }
         },
         "com.amazonaws.machinelearning#BatchPrediction": {
@@ -948,43 +969,59 @@
             }
         },
         "com.amazonaws.machinelearning#BatchPredictionFilterVariable": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>A list of the variables to use in searching or filtering <code>BatchPrediction</code>.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>CreatedAt</code> - Sets the search criteria to <code>BatchPrediction</code> creation date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - Sets the search criteria to <code>BatchPrediction</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> - Sets the search criteria to the contents of <code>BatchPrediction</code> \n                  <code>Name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>BatchPrediction</code> creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MLModelId</code> - Sets the search criteria to the <code>MLModel</code> used in the <code>BatchPrediction</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in the <code>BatchPrediction</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataURI</code> - Sets the search criteria to the data file(s) used in the <code>BatchPrediction</code>. The URL can \n                identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "CreatedAt",
-                        "name": "CREATED_AT"
-                    },
-                    {
-                        "value": "LastUpdatedAt",
-                        "name": "LAST_UPDATED_AT"
-                    },
-                    {
-                        "value": "Status",
-                        "name": "STATUS"
-                    },
-                    {
-                        "value": "Name",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "IAMUser",
-                        "name": "IAM_USER"
-                    },
-                    {
-                        "value": "MLModelId",
-                        "name": "ML_MODEL_ID"
-                    },
-                    {
-                        "value": "DataSourceId",
-                        "name": "DATASOURCE_ID"
-                    },
-                    {
-                        "value": "DataURI",
-                        "name": "DATA_URI"
+            "type": "enum",
+            "members": {
+                "CREATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedAt"
                     }
-                ]
+                },
+                "LAST_UPDATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedAt"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "IAM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAMUser"
+                    }
+                },
+                "ML_MODEL_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MLModelId"
+                    }
+                },
+                "DATASOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataSourceId"
+                    }
+                },
+                "DATA_URI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataURI"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the variables to use in searching or filtering <code>BatchPrediction</code>.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>CreatedAt</code> - Sets the search criteria to <code>BatchPrediction</code> creation date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - Sets the search criteria to <code>BatchPrediction</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> - Sets the search criteria to the contents of <code>BatchPrediction</code> \n                  <code>Name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>BatchPrediction</code> creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MLModelId</code> - Sets the search criteria to the <code>MLModel</code> used in the <code>BatchPrediction</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in the <code>BatchPrediction</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataURI</code> - Sets the search criteria to the data file(s) used in the <code>BatchPrediction</code>. The URL can \n                identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.machinelearning#BatchPredictions": {
@@ -1001,7 +1038,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*|^$"
+                "smithy.api#pattern": "\\S.*|^$"
             }
         },
         "com.amazonaws.machinelearning#ComputeStatistics": {
@@ -1070,6 +1107,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateBatchPredictionOutput": {
@@ -1083,7 +1123,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>CreateBatchPrediction</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n         <p>The <code>CreateBatchPrediction</code> operation is asynchronous. You can poll for status updates by using the <code>>GetBatchPrediction</code> \n            operation and checking the <code>Status</code> parameter of the result.\n        </p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>CreateBatchPrediction</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n         <p>The <code>CreateBatchPrediction</code> operation is asynchronous. You can poll for status updates by using the <code>>GetBatchPrediction</code> \n            operation and checking the <code>Status</code> parameter of the result.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#CreateDataSourceFromRDS": {
@@ -1146,6 +1187,9 @@
                         "smithy.api#documentation": "<p>The compute statistics for a <code>DataSource</code>. The statistics are generated from the observation data referenced by \n            a <code>DataSource</code>. Amazon ML uses the statistics internally during <code>MLModel</code> training.\n            This parameter must be set to <code>true</code> if the <code></code>DataSource<code></code> needs to be used for <code>MLModel</code> training.\n            </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateDataSourceFromRDSOutput": {
@@ -1159,7 +1203,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>CreateDataSourceFromRDS</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n         <p>The <code>CreateDataSourceFromRDS</code>> operation is asynchronous. You can poll for updates by using\n        the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. You can \n            inspect the <code>Message</code> when <code>Status</code> shows up as <code>FAILED</code>. You can\n            also check the progress of the copy operation by going to the <code>DataPipeline</code> console and looking up\n            the pipeline using the <code>pipelineId </code> from the describe call.</p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>CreateDataSourceFromRDS</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n         <p>The <code>CreateDataSourceFromRDS</code>> operation is asynchronous. You can poll for updates by using\n        the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. You can \n            inspect the <code>Message</code> when <code>Status</code> shows up as <code>FAILED</code>. You can\n            also check the progress of the copy operation by going to the <code>DataPipeline</code> console and looking up\n            the pipeline using the <code>pipelineId </code> from the describe call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#CreateDataSourceFromRedshift": {
@@ -1222,6 +1267,9 @@
                         "smithy.api#documentation": "<p>The compute statistics for a <code>DataSource</code>. The statistics are generated from the observation data referenced by \n            a <code>DataSource</code>. Amazon ML uses the statistics internally during <code>MLModel</code> training.\n           This parameter must be set to <code>true</code> if the <code>DataSource</code> needs to\n          be used for <code>MLModel</code> training.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateDataSourceFromRedshiftOutput": {
@@ -1235,7 +1283,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>CreateDataSourceFromRedshift</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n         <p>The <code>CreateDataSourceFromRedshift</code> operation is asynchronous. You can poll for updates by using\n        the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. </p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>CreateDataSourceFromRedshift</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n         <p>The <code>CreateDataSourceFromRedshift</code> operation is asynchronous. You can poll for updates by using\n        the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#CreateDataSourceFromS3": {
@@ -1291,6 +1340,9 @@
                         "smithy.api#documentation": "<p>The compute statistics for a <code>DataSource</code>. The statistics are generated from the observation data referenced by \n            a <code>DataSource</code>. Amazon ML uses the statistics internally during <code>MLModel</code> training.\n            This parameter must be set to <code>true</code> if the <code></code>DataSource<code></code> needs to be used for <code>MLModel</code> training.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateDataSourceFromS3Output": {
@@ -1304,7 +1356,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>CreateDataSourceFromS3</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n        <p>The <code>CreateDataSourceFromS3</code> operation is asynchronous. You can poll for updates by using\n            the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. </p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>CreateDataSourceFromS3</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n        <p>The <code>CreateDataSourceFromS3</code> operation is asynchronous. You can poll for updates by using\n            the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#CreateEvaluation": {
@@ -1360,6 +1413,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateEvaluationOutput": {
@@ -1373,7 +1429,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>CreateEvaluation</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n        <p>\n            <code>CreateEvaluation</code> operation is asynchronous. You can poll for status updates\n          by using the <code>GetEvcaluation</code> operation \n            and checking the <code>Status</code> parameter.\n        </p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>CreateEvaluation</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n        <p>\n            <code>CreateEvaluation</code> operation is asynchronous. You can poll for status updates\n          by using the <code>GetEvcaluation</code> operation \n            and checking the <code>Status</code> parameter.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#CreateMLModel": {
@@ -1447,6 +1504,9 @@
                         "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) location and file name that contains the <code>MLModel</code> recipe. You must specify either the recipe or its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateMLModelOutput": {
@@ -1460,7 +1520,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>CreateMLModel</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n        <p>The <code>CreateMLModel</code> operation is asynchronous. You can poll for status updates by using the \n            <code>GetMLModel</code> operation and checking the <code>Status</code> parameter.\n        </p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>CreateMLModel</code> operation, and is an acknowledgement that Amazon ML received the request.</p>\n        <p>The <code>CreateMLModel</code> operation is asynchronous. You can poll for status updates by using the \n            <code>GetMLModel</code> operation and checking the <code>Status</code> parameter.\n        </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#CreateRealtimeEndpoint": {
@@ -1496,6 +1557,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#CreateRealtimeEndpointOutput": {
@@ -1515,7 +1579,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of an <code>CreateRealtimeEndpoint</code> operation.</p>\n        <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>.</p>\n        <p>\n            <b>Note:</b> The endpoint information includes the URI of the <code>MLModel</code>; that is, the location to send online prediction requests for the specified <code>MLModel</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of an <code>CreateRealtimeEndpoint</code> operation.</p>\n        <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>.</p>\n        <p>\n            <b>Note:</b> The endpoint information includes the URI of the <code>MLModel</code>; that is, the location to send online prediction requests for the specified <code>MLModel</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DataRearrangement": {
@@ -1631,35 +1696,47 @@
             }
         },
         "com.amazonaws.machinelearning#DataSourceFilterVariable": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>A list of the variables to use in searching or filtering <code>DataSource</code>.</p>    \n        <ul>\n            <li>\n               <p>\n                  <code>CreatedAt</code> - Sets the search criteria to <code>DataSource</code> creation date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - Sets the search criteria to <code>DataSource</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> - Sets the search criteria to the contents of <code>DataSource</code> \n                  <code>Name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataUri</code> - Sets the search criteria to the URI of data files used to create the <code>DataSource</code>. The URI can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>DataSource</code> creation.</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Note:</b> \n            The variable names should match the variable names in the <code>DataSource</code>.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "CreatedAt",
-                        "name": "CREATED_AT"
-                    },
-                    {
-                        "value": "LastUpdatedAt",
-                        "name": "LAST_UPDATED_AT"
-                    },
-                    {
-                        "value": "Status",
-                        "name": "STATUS"
-                    },
-                    {
-                        "value": "Name",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "DataLocationS3",
-                        "name": "DATA_URI"
-                    },
-                    {
-                        "value": "IAMUser",
-                        "name": "IAM_USER"
+            "type": "enum",
+            "members": {
+                "CREATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedAt"
                     }
-                ]
+                },
+                "LAST_UPDATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedAt"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "DATA_URI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataLocationS3"
+                    }
+                },
+                "IAM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAMUser"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the variables to use in searching or filtering <code>DataSource</code>.</p>    \n        <ul>\n            <li>\n               <p>\n                  <code>CreatedAt</code> - Sets the search criteria to <code>DataSource</code> creation date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - Sets the search criteria to <code>DataSource</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> - Sets the search criteria to the contents of <code>DataSource</code> \n                  <code>Name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataUri</code> - Sets the search criteria to the URI of data files used to create the <code>DataSource</code>. The URI can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>DataSource</code> creation.</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Note:</b> \n            The variable names should match the variable names in the <code>DataSource</code>.</p>"
             }
         },
         "com.amazonaws.machinelearning#DataSources": {
@@ -1701,6 +1778,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteBatchPredictionOutput": {
@@ -1714,7 +1794,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>DeleteBatchPrediction</code> operation.</p>        \n        <p>You can use the <code>GetBatchPrediction</code> operation and check the value of the <code>Status</code> parameter to see whether a \n            <code>BatchPrediction</code> is marked as <code>DELETED</code>.</p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>DeleteBatchPrediction</code> operation.</p>        \n        <p>You can use the <code>GetBatchPrediction</code> operation and check the value of the <code>Status</code> parameter to see whether a \n            <code>BatchPrediction</code> is marked as <code>DELETED</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteDataSource": {
@@ -1750,6 +1831,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteDataSourceOutput": {
@@ -1763,7 +1847,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>DeleteDataSource</code> operation.</p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>DeleteDataSource</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteEvaluation": {
@@ -1799,6 +1884,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteEvaluationOutput": {
@@ -1812,7 +1900,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the output of a <code>DeleteEvaluation</code> operation. The output indicates that Amazon Machine Learning (Amazon ML) received the request.</p>\n        <p>You can use the <code>GetEvaluation</code> operation and check the value of the <code>Status</code> parameter to see whether an \n            <code>Evaluation</code> is marked as <code>DELETED</code>.</p>"
+                "smithy.api#documentation": "<p> Represents the output of a <code>DeleteEvaluation</code> operation. The output indicates that Amazon Machine Learning (Amazon ML) received the request.</p>\n        <p>You can use the <code>GetEvaluation</code> operation and check the value of the <code>Status</code> parameter to see whether an \n            <code>Evaluation</code> is marked as <code>DELETED</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteMLModel": {
@@ -1848,6 +1937,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteMLModelOutput": {
@@ -1861,7 +1953,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>DeleteMLModel</code> operation.</p>\n        <p>You can use the <code>GetMLModel</code> operation and check the value of the <code>Status</code> parameter to see whether an \n            <code>MLModel</code> is marked as <code>DELETED</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>DeleteMLModel</code> operation.</p>\n        <p>You can use the <code>GetMLModel</code> operation and check the value of the <code>Status</code> parameter to see whether an \n            <code>MLModel</code> is marked as <code>DELETED</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteRealtimeEndpoint": {
@@ -1897,6 +1990,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteRealtimeEndpointOutput": {
@@ -1916,7 +2012,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of an <code>DeleteRealtimeEndpoint</code> operation.</p>\n        <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>. </p>"
+                "smithy.api#documentation": "<p>Represents the output of an <code>DeleteRealtimeEndpoint</code> operation.</p>\n        <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteTags": {
@@ -1969,6 +2066,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DeleteTagsOutput": {
@@ -1988,7 +2088,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon ML returns the following elements.</p>"
+                "smithy.api#documentation": "<p>Amazon ML returns the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeBatchPredictions": {
@@ -2113,6 +2214,9 @@
                         "smithy.api#documentation": "<p>The number of pages of information to include in the result. The range of acceptable values is <code>1</code> through <code>100</code>. The default value is <code>100</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeBatchPredictionsOutput": {
@@ -2132,7 +2236,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>DescribeBatchPredictions</code> operation. The content is essentially a list of <code>BatchPrediction</code>s.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>DescribeBatchPredictions</code> operation. The content is essentially a list of <code>BatchPrediction</code>s.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeDataSources": {
@@ -2257,6 +2362,9 @@
                         "smithy.api#documentation": "<p> The maximum number of <code>DataSource</code> to include in the result.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeDataSourcesOutput": {
@@ -2276,7 +2384,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the query results from a <a>DescribeDataSources</a> operation. The content is essentially a list of <code>DataSource</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the query results from a <a>DescribeDataSources</a> operation. The content is essentially a list of <code>DataSource</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeEvaluations": {
@@ -2401,6 +2510,9 @@
                         "smithy.api#documentation": "<p> The maximum number of <code>Evaluation</code> to include in the result.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeEvaluationsOutput": {
@@ -2420,7 +2532,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the query results from a <code>DescribeEvaluations</code> operation. The content is essentially a list of <code>Evaluation</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the query results from a <code>DescribeEvaluations</code> operation. The content is essentially a list of <code>Evaluation</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeMLModels": {
@@ -2545,6 +2658,9 @@
                         "smithy.api#documentation": "<p>The number of pages of information to include in the result. The range of acceptable values is <code>1</code> through <code>100</code>. The default value is <code>100</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeMLModelsOutput": {
@@ -2564,7 +2680,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>DescribeMLModels</code> operation. The content is essentially a list of <code>MLModel</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>DescribeMLModels</code> operation. The content is essentially a list of <code>MLModel</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeTags": {
@@ -2607,6 +2724,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#DescribeTagsOutput": {
@@ -2632,23 +2752,28 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon ML returns the following elements.</p>"
+                "smithy.api#documentation": "<p>Amazon ML returns the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#DetailsAttributes": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Contains the key values of <code>DetailsMap</code>:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>PredictiveModelType</code> - Indicates the type of the <code>MLModel</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Algorithm</code> - Indicates the algorithm that was used for the <code>MLModel</code>.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PredictiveModelType",
-                        "name": "PREDICTIVE_MODEL_TYPE"
-                    },
-                    {
-                        "value": "Algorithm",
-                        "name": "ALGORITHM"
+            "type": "enum",
+            "members": {
+                "PREDICTIVE_MODEL_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PredictiveModelType"
                     }
-                ]
+                },
+                "ALGORITHM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Algorithm"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the key values of <code>DetailsMap</code>:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>PredictiveModelType</code> - Indicates the type of the <code>MLModel</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Algorithm</code> - Indicates the algorithm that was used for the <code>MLModel</code>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.machinelearning#DetailsMap": {
@@ -2729,7 +2854,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.machinelearning#EntityName": {
@@ -2740,35 +2865,45 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*|^$"
+                "smithy.api#pattern": "\\S.*|^$"
             }
         },
         "com.amazonaws.machinelearning#EntityStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Object status with the following possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INPROGRESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "INPROGRESS",
-                        "name": "INPROGRESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "INPROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object status with the following possible values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INPROGRESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.machinelearning#EpochTime": {
@@ -2876,43 +3011,59 @@
             }
         },
         "com.amazonaws.machinelearning#EvaluationFilterVariable": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>A list of the variables to use in searching or filtering <code>Evaluation</code>.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>CreatedAt</code> - Sets the search criteria to <code>Evaluation</code> creation date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - Sets the search criteria to <code>Evaluation</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> - Sets the search criteria to the contents of <code>Evaluation</code> \n                  <b> </b> \n                  <code>Name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAMUser</code> - Sets the search criteria to the user account that invoked an evaluation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MLModelId</code> - Sets the search criteria to the <code>Predictor</code> that was evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in evaluation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataUri</code> - Sets the search criteria to the data file(s) used in evaluation. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "CreatedAt",
-                        "name": "CREATED_AT"
-                    },
-                    {
-                        "value": "LastUpdatedAt",
-                        "name": "LAST_UPDATED_AT"
-                    },
-                    {
-                        "value": "Status",
-                        "name": "STATUS"
-                    },
-                    {
-                        "value": "Name",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "IAMUser",
-                        "name": "IAM_USER"
-                    },
-                    {
-                        "value": "MLModelId",
-                        "name": "ML_MODEL_ID"
-                    },
-                    {
-                        "value": "DataSourceId",
-                        "name": "DATASOURCE_ID"
-                    },
-                    {
-                        "value": "DataURI",
-                        "name": "DATA_URI"
+            "type": "enum",
+            "members": {
+                "CREATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedAt"
                     }
-                ]
+                },
+                "LAST_UPDATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedAt"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "IAM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAMUser"
+                    }
+                },
+                "ML_MODEL_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MLModelId"
+                    }
+                },
+                "DATASOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataSourceId"
+                    }
+                },
+                "DATA_URI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataURI"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the variables to use in searching or filtering <code>Evaluation</code>.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>CreatedAt</code> - Sets the search criteria to <code>Evaluation</code> creation date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> - Sets the search criteria to <code>Evaluation</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code> - Sets the search criteria to the contents of <code>Evaluation</code> \n                  <b> </b> \n                  <code>Name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAMUser</code> - Sets the search criteria to the user account that invoked an evaluation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MLModelId</code> - Sets the search criteria to the <code>Predictor</code> that was evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in evaluation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DataUri</code> - Sets the search criteria to the data file(s) used in evaluation. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.machinelearning#Evaluations": {
@@ -2954,6 +3105,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#GetBatchPredictionOutput": {
@@ -3063,7 +3217,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#GetDataSource": {
@@ -3106,6 +3261,9 @@
                         "smithy.api#documentation": "<p>Specifies whether the <code>GetDataSource</code> operation should return <code>DataSourceSchema</code>.</p>\n        <p>If true, <code>DataSourceSchema</code> is returned.</p>\n        <p>If false, <code>DataSourceSchema</code> is not returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#GetDataSourceOutput": {
@@ -3225,7 +3383,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>GetDataSource</code> operation and describes a <code>DataSource</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>GetDataSource</code> operation and describes a <code>DataSource</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#GetEvaluation": {
@@ -3261,6 +3420,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#GetEvaluationOutput": {
@@ -3358,7 +3520,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>GetEvaluation</code> operation and describes an <code>Evaluation</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>GetEvaluation</code> operation and describes an <code>Evaluation</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#GetMLModel": {
@@ -3401,6 +3564,9 @@
                         "smithy.api#documentation": "<p>Specifies whether the <code>GetMLModel</code> operation should return <code>Recipe</code>.</p>\n        <p>If true, <code>Recipe</code> is returned.</p>\n        <p>If false, <code>Recipe</code> is not returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#GetMLModelOutput": {
@@ -3531,7 +3697,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>GetMLModel</code> operation, and provides detailed information about a <code>MLModel</code>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>GetMLModel</code> operation, and provides detailed information about a <code>MLModel</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#IdempotentParameterMismatchException": {
@@ -3750,50 +3917,68 @@
             }
         },
         "com.amazonaws.machinelearning#MLModelFilterVariable": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CreatedAt",
-                        "name": "CREATED_AT"
-                    },
-                    {
-                        "value": "LastUpdatedAt",
-                        "name": "LAST_UPDATED_AT"
-                    },
-                    {
-                        "value": "Status",
-                        "name": "STATUS"
-                    },
-                    {
-                        "value": "Name",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "IAMUser",
-                        "name": "IAM_USER"
-                    },
-                    {
-                        "value": "TrainingDataSourceId",
-                        "name": "TRAINING_DATASOURCE_ID"
-                    },
-                    {
-                        "value": "RealtimeEndpointStatus",
-                        "name": "REAL_TIME_ENDPOINT_STATUS"
-                    },
-                    {
-                        "value": "MLModelType",
-                        "name": "ML_MODEL_TYPE"
-                    },
-                    {
-                        "value": "Algorithm",
-                        "name": "ALGORITHM"
-                    },
-                    {
-                        "value": "TrainingDataURI",
-                        "name": "TRAINING_DATA_URI"
+            "type": "enum",
+            "members": {
+                "CREATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedAt"
                     }
-                ]
+                },
+                "LAST_UPDATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedAt"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "IAM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAMUser"
+                    }
+                },
+                "TRAINING_DATASOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TrainingDataSourceId"
+                    }
+                },
+                "REAL_TIME_ENDPOINT_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RealtimeEndpointStatus"
+                    }
+                },
+                "ML_MODEL_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MLModelType"
+                    }
+                },
+                "ALGORITHM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Algorithm"
+                    }
+                },
+                "TRAINING_DATA_URI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TrainingDataURI"
+                    }
+                }
             }
         },
         "com.amazonaws.machinelearning#MLModelName": {
@@ -3806,22 +3991,26 @@
             }
         },
         "com.amazonaws.machinelearning#MLModelType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REGRESSION",
-                        "name": "REGRESSION"
-                    },
-                    {
-                        "value": "BINARY",
-                        "name": "BINARY"
-                    },
-                    {
-                        "value": "MULTICLASS",
-                        "name": "MULTICLASS"
+            "type": "enum",
+            "members": {
+                "REGRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGRESSION"
                     }
-                ]
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
+                    }
+                },
+                "MULTICLASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTICLASS"
+                    }
+                }
             }
         },
         "com.amazonaws.machinelearning#MLModels": {
@@ -3926,6 +4115,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#PredictOutput": {
@@ -3934,6 +4126,9 @@
                 "Prediction": {
                     "target": "com.amazonaws.machinelearning#Prediction"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#Prediction": {
@@ -4139,7 +4334,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-z0-9-]+"
+                "smithy.api#pattern": "^[a-z0-9-]+$"
             }
         },
         "com.amazonaws.machinelearning#RDSMetadata": {
@@ -4227,26 +4422,32 @@
             }
         },
         "com.amazonaws.machinelearning#RealtimeEndpointStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "READY",
-                        "name": "READY"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.machinelearning#Recipe": {
@@ -4278,7 +4479,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-z0-9-]+"
+                "smithy.api#pattern": "^[a-z0-9-]+$"
             }
         },
         "com.amazonaws.machinelearning#RedshiftDataSpec": {
@@ -4383,7 +4584,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-z0-9]+"
+                "smithy.api#pattern": "^[a-z0-9]+$"
             }
         },
         "com.amazonaws.machinelearning#RedshiftDatabasePassword": {
@@ -4506,7 +4707,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "s3://([^/]+)(/.*)?"
+                "smithy.api#pattern": "^s3://([^/]+)(/.*)?$"
             }
         },
         "com.amazonaws.machinelearning#ScoreThreshold": {
@@ -4531,19 +4732,23 @@
             }
         },
         "com.amazonaws.machinelearning#SortOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The sort order specified in a listing condition. Possible values include the following:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>asc</code> - Present the information in ascending order (from A-Z).</p>\n            </li>\n            <li>\n               <p>\n                  <code>dsc</code> - Present the information in descending order (from Z-A).</p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "asc",
-                        "name": "ASC"
-                    },
-                    {
-                        "value": "dsc",
-                        "name": "DSC"
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "asc"
                     }
-                ]
+                },
+                "DSC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dsc"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort order specified in a listing condition. Possible values include the following:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>asc</code> - Present the information in ascending order (from A-Z).</p>\n            </li>\n            <li>\n               <p>\n                  <code>dsc</code> - Present the information in descending order (from Z-A).</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.machinelearning#StringType": {
@@ -4628,26 +4833,32 @@
             }
         },
         "com.amazonaws.machinelearning#TaggableResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BatchPrediction",
-                        "name": "BATCH_PREDICTION"
-                    },
-                    {
-                        "value": "DataSource",
-                        "name": "DATASOURCE"
-                    },
-                    {
-                        "value": "Evaluation",
-                        "name": "EVALUATION"
-                    },
-                    {
-                        "value": "MLModel",
-                        "name": "ML_MODEL"
+            "type": "enum",
+            "members": {
+                "BATCH_PREDICTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BatchPrediction"
                     }
-                ]
+                },
+                "DATASOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataSource"
+                    }
+                },
+                "EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Evaluation"
+                    }
+                },
+                "ML_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MLModel"
+                    }
+                }
             }
         },
         "com.amazonaws.machinelearning#TrainingParameters": {
@@ -4699,6 +4910,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateBatchPredictionOutput": {
@@ -4712,7 +4926,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateBatchPrediction</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetBatchPrediction</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateBatchPrediction</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetBatchPrediction</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateDataSource": {
@@ -4755,6 +4970,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateDataSourceOutput": {
@@ -4768,7 +4986,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateDataSource</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetBatchPrediction</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateDataSource</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetBatchPrediction</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateEvaluation": {
@@ -4811,6 +5030,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateEvaluationOutput": {
@@ -4824,7 +5046,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateEvaluation</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetEvaluation</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateEvaluation</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetEvaluation</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateMLModel": {
@@ -4872,6 +5095,9 @@
                         "smithy.api#documentation": "<p>The <code>ScoreThreshold</code> used in binary classification <code>MLModel</code> that marks the boundary between a positive prediction and a negative prediction.</p>\n        <p>Output values greater than or equal to the <code>ScoreThreshold</code> receive a positive result from the <code>MLModel</code>, such as <code>true</code>. Output values less than the <code>ScoreThreshold</code> receive a negative response from the <code>MLModel</code>, such as <code>false</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.machinelearning#UpdateMLModelOutput": {
@@ -4885,7 +5111,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateMLModel</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetMLModel</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of an <code>UpdateMLModel</code> operation.</p>\n        <p>You can see the updated content by using the <code>GetMLModel</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.machinelearning#VariableName": {
@@ -4914,7 +5141,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "https://[a-zA-Z0-9-.]*\\.amazon(aws)?\\.com[/]?"
+                "smithy.api#pattern": "^https://[a-zA-Z0-9-.]*\\.amazon(aws)?\\.com[/]?$"
             }
         },
         "com.amazonaws.machinelearning#floatLabel": {

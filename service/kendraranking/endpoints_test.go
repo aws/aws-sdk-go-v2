@@ -338,3 +338,19 @@ func TestEndpointCase8(t *testing.T) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
+
+// Missing region
+func TestEndpointCase9(t *testing.T) {
+	var params = EndpointParameters{}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Missing Region", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}

@@ -56,10 +56,8 @@ type DeleteModelInput struct {
 	// value for you. This prevents retries after a network error from making multiple
 	// model deletion requests. You'll need to provide your own value for other use
 	// cases. An error occurs if the other input parameters are not the same as in the
-	// first request. Using a different
-	//
-	// value for ClientToken is considered a new call to DeleteModel . An idempotency
-	// token is active for 8 hours.
+	// first request. Using a different value for ClientToken is considered a new call
+	// to DeleteModel . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -173,6 +173,98 @@ func (c *Client) addOperationListFragmentsMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
+// ListFragmentsAPIClient is a client that implements the ListFragments operation.
+type ListFragmentsAPIClient interface {
+	ListFragments(context.Context, *ListFragmentsInput, ...func(*Options)) (*ListFragmentsOutput, error)
+}
+
+var _ ListFragmentsAPIClient = (*Client)(nil)
+
+// ListFragmentsPaginatorOptions is the paginator options for ListFragments
+type ListFragmentsPaginatorOptions struct {
+	// The total number of fragments to return. If the total number of fragments
+	// available is more than the value specified in max-results , then a
+	// ListFragmentsOutput$NextToken is provided in the output that you can use to
+	// resume pagination.
+	Limit int64
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFragmentsPaginator is a paginator for ListFragments
+type ListFragmentsPaginator struct {
+	options   ListFragmentsPaginatorOptions
+	client    ListFragmentsAPIClient
+	params    *ListFragmentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFragmentsPaginator returns a new ListFragmentsPaginator
+func NewListFragmentsPaginator(client ListFragmentsAPIClient, params *ListFragmentsInput, optFns ...func(*ListFragmentsPaginatorOptions)) *ListFragmentsPaginator {
+	if params == nil {
+		params = &ListFragmentsInput{}
+	}
+
+	options := ListFragmentsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListFragmentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFragmentsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListFragments page.
+func (p *ListFragmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFragmentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int64
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListFragments(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListFragments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

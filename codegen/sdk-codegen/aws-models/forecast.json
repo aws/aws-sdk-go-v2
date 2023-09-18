@@ -359,9 +359,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://forecast-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://forecast-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -374,15 +553,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://forecast.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://forecast.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -394,258 +608,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://forecast-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://forecast-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://forecast.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://forecast.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -660,8 +624,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -673,8 +637,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -686,8 +650,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -699,8 +663,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -712,8 +676,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -725,8 +689,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -738,8 +702,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -751,8 +715,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -764,8 +728,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -777,8 +741,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -790,8 +754,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -803,8 +767,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -816,8 +780,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -829,8 +793,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -842,8 +806,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -855,8 +819,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -868,8 +832,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -881,8 +845,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -894,8 +858,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -907,8 +871,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -920,8 +884,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -933,8 +897,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -946,8 +910,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -959,8 +934,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -972,8 +958,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -985,8 +982,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -998,8 +1006,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1011,8 +1019,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1024,8 +1032,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1036,8 +1044,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1048,9 +1056,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1440,6 +1454,9 @@
                         "smithy.api#documentation": "<p>The time boundary Forecast uses to align and aggregate any data that doesn't align with your forecast frequency. Provide the unit of time and the time boundary as a key value pair. \n            For more information on specifying a time boundary, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary\">Specifying a Time Boundary</a>.\n            If you\n            don't provide a time boundary, Forecast uses a set of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries\">Default Time Boundaries</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateAutoPredictorResponse": {
@@ -1451,6 +1468,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateDataset": {
@@ -1534,6 +1554,9 @@
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset group to help you categorize and\n      organize them. Each tag consists of a key and an optional value, both of which you\n      define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one\n          value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that\n          other services may have restrictions on allowed characters. Generally allowed characters\n          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +\n          - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination\n          of such as a prefix for keys as it is reserved for Amazon Web Services use. You cannot edit or delete tag\n          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as\n          its prefix but the key does not, then Forecast considers it to be a user tag and will\n          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do\n          not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateDatasetGroupResponse": {
@@ -1545,6 +1568,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateDatasetImportJob": {
@@ -1643,6 +1669,9 @@
                         "smithy.api#documentation": "<p>Specifies whether the dataset import job is a <code>FULL</code> or <code>INCREMENTAL</code> import. A <code>FULL</code> dataset import replaces all of the existing data with the newly imported data. An <code>INCREMENTAL</code> import appends the imported data to the existing data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateDatasetImportJobResponse": {
@@ -1654,6 +1683,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset import job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateDatasetRequest": {
@@ -1705,6 +1737,9 @@
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the dataset to help you categorize and organize\n      them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one\n          value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that\n          other services may have restrictions on allowed characters. Generally allowed characters\n          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +\n          - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination\n          of such as a prefix for keys as it is reserved for Amazon Web Services use. You cannot edit or delete tag\n          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as\n          its prefix but the key does not, then Forecast considers it to be a user tag and will\n          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do\n          not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateDatasetResponse": {
@@ -1716,6 +1751,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateExplainability": {
@@ -1811,6 +1849,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateExplainabilityExportResponse": {
@@ -1822,6 +1863,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the export.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateExplainabilityRequest": {
@@ -1878,6 +1922,9 @@
                         "smithy.api#documentation": "<p>Optional metadata to help you categorize and organize your resources. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys and values\n            are case sensitive.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>For each resource, each tag key must be unique and each tag key must have one\n                    value.</p>\n            </li>\n            <li>\n               <p>Maximum number of tags per resource: 50.</p>\n            </li>\n            <li>\n               <p>Maximum key length: 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length: 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,\n                    and + - = . _ : / @. If your tagging schema is used across other services and\n                    resources, the character restrictions of those services also apply. </p>\n            </li>\n            <li>\n               <p>Key prefixes cannot include any upper or lowercase combination of\n                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a\n                    tag value has <code>aws</code> as its prefix but the key does not, Forecast\n                    considers it to be a user tag and will count against the limit of 50 tags. Tags\n                    with only the key prefix of <code>aws</code> do not count against your tags per\n                    resource limit. You cannot edit or delete tag keys with this prefix.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateExplainabilityResponse": {
@@ -1889,6 +1936,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateForecast": {
@@ -1985,6 +2035,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET. The default value is CSV.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateForecastExportJobResponse": {
@@ -1996,6 +2049,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the export job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateForecastRequest": {
@@ -2033,6 +2089,9 @@
                         "smithy.api#documentation": "<p>Defines the set of time series that are used to create the forecasts in a <code>TimeSeriesIdentifiers</code> object.</p>\n         <p>The <code>TimeSeriesIdentifiers</code> object needs the following information:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DataSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Format</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Schema</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateForecastResponse": {
@@ -2044,6 +2103,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateMonitor": {
@@ -2098,6 +2160,9 @@
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html\">tags</a> to apply to the monitor resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateMonitorResponse": {
@@ -2109,6 +2174,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the monitor resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreatePredictor": {
@@ -2204,6 +2272,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET. The default value is CSV.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreatePredictorBacktestExportJobResponse": {
@@ -2215,6 +2286,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor backtest export job that you want to\n            export.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreatePredictorRequest": {
@@ -2314,6 +2388,9 @@
                         "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreatePredictorResponse": {
@@ -2325,6 +2402,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateWhatIfAnalysis": {
@@ -2385,6 +2465,9 @@
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html\">tags</a> to apply to the what if forecast.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateWhatIfAnalysisResponse": {
@@ -2396,6 +2479,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateWhatIfForecast": {
@@ -2492,6 +2578,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateWhatIfForecastExportResponse": {
@@ -2503,6 +2592,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#CreateWhatIfForecastRequest": {
@@ -2540,6 +2632,9 @@
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html\">tags</a> to apply to the what if forecast.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#CreateWhatIfForecastResponse": {
@@ -2551,6 +2646,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DataConfig": {
@@ -2897,6 +2995,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteDatasetImportJob": {
@@ -2933,6 +3034,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteDatasetRequest": {
@@ -2945,6 +3049,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteExplainability": {
@@ -3005,6 +3112,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteExplainabilityRequest": {
@@ -3017,6 +3127,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteForecast": {
@@ -3077,6 +3190,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteForecastRequest": {
@@ -3089,6 +3205,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteMonitor": {
@@ -3125,6 +3244,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeletePredictor": {
@@ -3185,6 +3307,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeletePredictorRequest": {
@@ -3197,6 +3322,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteResourceTree": {
@@ -3233,6 +3361,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteWhatIfAnalysis": {
@@ -3269,6 +3400,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteWhatIfForecast": {
@@ -3329,6 +3463,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DeleteWhatIfForecastRequest": {
@@ -3341,6 +3478,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeAutoPredictor": {
@@ -3374,6 +3514,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeAutoPredictorResponse": {
@@ -3490,6 +3633,9 @@
                         "smithy.api#documentation": "<p>The time boundary Forecast uses when aggregating data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeDataset": {
@@ -3544,6 +3690,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeDatasetGroupResponse": {
@@ -3591,6 +3740,9 @@
                         "smithy.api#documentation": "<p>When the dataset group was created or last updated from a call to the <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html\">UpdateDatasetGroup</a> operation. While the dataset group is being updated,\n        <code>LastModificationTime</code> is the current time of the\n        <code>DescribeDatasetGroup</code> call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeDatasetImportJob": {
@@ -3624,6 +3776,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeDatasetImportJobResponse": {
@@ -3732,6 +3887,9 @@
                         "smithy.api#documentation": "<p>The import mode of the dataset import job, FULL or INCREMENTAL.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeDatasetRequest": {
@@ -3744,6 +3902,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeDatasetResponse": {
@@ -3809,6 +3970,9 @@
                         "smithy.api#documentation": "<p>When you create a dataset, <code>LastModificationTime</code> is the same as\n        <code>CreationTime</code>. While data is being imported to the dataset,\n        <code>LastModificationTime</code> is the current time of the <code>DescribeDataset</code>\n      call. After a <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>\n      operation has finished, <code>LastModificationTime</code> is when the import job completed or\n      failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeExplainability": {
@@ -3863,6 +4027,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeExplainabilityExportResponse": {
@@ -3919,6 +4086,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeExplainabilityRequest": {
@@ -3931,6 +4101,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeExplainabilityResponse": {
@@ -4014,6 +4187,9 @@
                         "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n            job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeForecast": {
@@ -4068,6 +4244,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeForecastExportJobResponse": {
@@ -4127,6 +4306,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeForecastRequest": {
@@ -4139,6 +4321,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeForecastResponse": {
@@ -4210,6 +4395,9 @@
                         "smithy.api#documentation": "<p>The time series to include in the forecast.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeMonitor": {
@@ -4243,6 +4431,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeMonitorResponse": {
@@ -4314,6 +4505,9 @@
                         "smithy.api#documentation": "<p>The estimated number of minutes remaining before the monitor resource finishes its current evaluation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribePredictor": {
@@ -4368,6 +4562,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribePredictorBacktestExportJobResponse": {
@@ -4424,6 +4621,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribePredictorRequest": {
@@ -4436,6 +4636,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribePredictorResponse": {
@@ -4585,6 +4788,9 @@
                         "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeWhatIfAnalysis": {
@@ -4618,6 +4824,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeWhatIfAnalysisResponse": {
@@ -4674,6 +4883,9 @@
                 "TimeSeriesSelector": {
                     "target": "com.amazonaws.forecast#TimeSeriesSelector"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeWhatIfForecast": {
@@ -4728,6 +4940,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeWhatIfForecastExportResponse": {
@@ -4790,6 +5005,9 @@
                         "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#DescribeWhatIfForecastRequest": {
@@ -4802,6 +5020,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#DescribeWhatIfForecastResponse": {
@@ -4873,6 +5094,9 @@
                         "smithy.api#documentation": "<p>The quantiles at which probabilistic forecasts are generated. You can specify up to five quantiles per what-if\n      forecast in the <a>CreateWhatIfForecast</a> operation. If you didn't specify quantiles, the default\n      values are <code>[\"0.1\", \"0.5\", \"0.9\"]</code>. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#Detail": {
@@ -5628,6 +5852,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#GetAccuracyMetricsResponse": {
@@ -5657,6 +5884,9 @@
                         "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#Hour": {
@@ -5858,6 +6088,9 @@
                         "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListDatasetGroupsResponse": {
@@ -5875,6 +6108,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListDatasetImportJobs": {
@@ -5925,6 +6161,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the datasets that match the statement from the list, respectively. The match\n      statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the datasets that match the statement, specify\n            <code>IS</code>. To exclude matching datasets, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>DatasetArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all dataset import jobs whose status is ACTIVE, you specify the\n      following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListDatasetImportJobsResponse": {
@@ -5942,6 +6181,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListDatasets": {
@@ -5983,6 +6225,9 @@
                         "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListDatasetsResponse": {
@@ -6000,6 +6245,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListExplainabilities": {
@@ -6050,6 +6298,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n            include or exclude the resources that match the statement from the list. The match\n            statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>ResourceArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListExplainabilitiesResponse": {
@@ -6067,6 +6318,9 @@
                         "smithy.api#documentation": "<p>Returns this token if the response is truncated. To retrieve the next set of results,\n            use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListExplainabilityExports": {
@@ -6117,6 +6371,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n            include or exclude resources that match the statement from the list. The match statement\n            consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>ResourceArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListExplainabilityExportsResponse": {
@@ -6134,6 +6391,9 @@
                         "smithy.api#documentation": "<p>Returns this token if the response is truncated. To retrieve the next set of results,\n            use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListForecastExportJobs": {
@@ -6184,6 +6444,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the forecast export jobs that match the statement from the list, respectively. The\n      match statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the forecast export jobs that match the statement,\n          specify <code>IS</code>. To exclude matching forecast export jobs, specify\n            <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>ForecastArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n        <i>electricityforecast</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"ForecastArn\", \"Value\":\n        \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListForecastExportJobsResponse": {
@@ -6201,6 +6464,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListForecasts": {
@@ -6251,6 +6517,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the forecasts that match the statement from the list, respectively. The match\n      statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the forecasts that match the statement, specify\n            <code>IS</code>. To exclude matching forecasts, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>DatasetGroupArn</code>, <code>PredictorArn</code>, and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all forecasts whose status is not ACTIVE, you would specify:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS_NOT\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" }\n      ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListForecastsResponse": {
@@ -6268,6 +6537,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set\n      of results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListMonitorEvaluations": {
@@ -6328,6 +6600,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n         condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n         include or exclude the resources that match the statement from the list. The match\n         statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n               <code>IS</code> and <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. The only valid value is \n               <code>EvaluationState</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match. Valid values are only <code>SUCCESS</code> or <code>FAILURE</code>.</p>\n            </li>\n         </ul>\n         <p>For example, to list only successful monitor evaluations, you would specify:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"EvaluationState\", \"Value\": \"SUCCESS\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListMonitorEvaluationsResponse": {
@@ -6345,6 +6620,9 @@
                         "smithy.api#documentation": "<p>The monitoring results and predictor events collected by the monitor resource during different windows of time.</p>\n         <p>For information about monitoring see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html\">Viewing Monitoring Results</a>. For more information about retrieving monitoring results see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html\">Viewing Monitoring Results</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListMonitors": {
@@ -6395,6 +6673,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n         condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n         include or exclude the resources that match the statement from the list. The match\n         statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n               <code>IS</code> and <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. The only valid value is \n               <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all monitors who's status is ACTIVE, you would specify:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListMonitorsResponse": {
@@ -6412,6 +6693,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n         results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListPredictorBacktestExportJobs": {
@@ -6462,6 +6746,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n            include or exclude the predictor backtest export jobs that match the statement from the\n            list. The match statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>. To include the predictor backtest\n                    export jobs that match the statement, specify <code>IS</code>. To exclude\n                    matching predictor backtest export jobs, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>PredictorArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListPredictorBacktestExportJobsResponse": {
@@ -6479,6 +6766,9 @@
                         "smithy.api#documentation": "<p>Returns this token if the response is truncated. To retrieve the next set of results,\n            use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListPredictors": {
@@ -6529,6 +6819,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The\n      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include\n      or exclude the predictors that match the statement from the list, respectively. The match\n      statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the predictors that match the statement, specify\n            <code>IS</code>. To exclude matching predictors, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>DatasetGroupArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all predictors whose status is ACTIVE, you would specify:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" }\n      ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListPredictorsResponse": {
@@ -6546,6 +6839,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of\n      results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListTagsForResource": {
@@ -6578,6 +6874,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListTagsForResourceResponse": {
@@ -6589,6 +6888,9 @@
                         "smithy.api#documentation": "<p>The tags for the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListWhatIfAnalyses": {
@@ -6639,6 +6941,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either\n        <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the what-if analysis jobs\n      that match the statement from the list, respectively. The match statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the what-if analysis jobs that match the statement, specify <code>IS</code>.\n          To exclude matching what-if analysis jobs, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>WhatIfAnalysisArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n        <i>electricityWhatIf</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"WhatIfAnalysisArn\", \"Value\":\n        \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListWhatIfAnalysesResponse": {
@@ -6656,6 +6961,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Forecast returns this token. To retrieve the next set of results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListWhatIfForecastExports": {
@@ -6706,6 +7014,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either\n        <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the what-if forecast\n      export jobs that match the statement from the list, respectively. The match statement consists of a key and a\n      value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n          <code>IS_NOT</code>. To include the forecast export jobs that match the statement,\n          specify <code>IS</code>. To exclude matching forecast export jobs, specify\n          <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n          <code>WhatIfForecastExportArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n      <i>electricityWIFExport</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"WhatIfForecastExportArn\", \"Value\":\n      \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWIFExport\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListWhatIfForecastExportsResponse": {
@@ -6723,6 +7034,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Forecast returns this token. To retrieve the next set of results, use the token in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#ListWhatIfForecasts": {
@@ -6773,6 +7087,9 @@
                         "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either\n        <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the what-if forecast\n      export jobs that match the statement from the list, respectively. The match statement consists of a key and a\n      value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n          <code>IS_NOT</code>. To include the forecast export jobs that match the statement,\n          specify <code>IS</code>. To exclude matching forecast export jobs, specify\n          <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n          <code>WhatIfForecastArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n      <i>electricityWhatIfForecast</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"WhatIfForecastArn\", \"Value\":\n      \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIfForecast\" } ]</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#ListWhatIfForecastsResponse": {
@@ -6790,6 +7107,9 @@
                         "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next\u2028 request. Tokens expire after 24 hours.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.forecast#LocalDateTime": {
@@ -7604,6 +7924,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#S3Config": {
@@ -7859,6 +8182,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#String": {
@@ -7990,11 +8316,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.forecast#TagValue": {
             "type": "string",
@@ -8358,11 +8690,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.forecast#UpdateDatasetGroup": {
             "type": "operation",
@@ -8405,11 +8743,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.forecast#UpdateDatasetGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.forecast#UseGeolocationForTimeZone": {
             "type": "boolean",

@@ -162,9 +162,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cognito-sync-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cognito-sync-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -177,15 +356,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cognito-sync.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://cognito-sync.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -197,258 +411,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cognito-sync-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cognito-sync-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cognito-sync.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://cognito-sync.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -463,8 +427,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -476,8 +440,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -489,8 +453,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -502,8 +466,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -515,8 +479,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -528,8 +492,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -541,8 +505,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -554,8 +518,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -567,8 +531,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -580,8 +544,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -593,8 +557,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -606,8 +570,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -619,8 +583,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -632,8 +596,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -645,8 +609,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -658,8 +622,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -671,8 +635,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -684,8 +648,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -697,8 +661,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -710,8 +674,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -723,8 +687,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -736,8 +700,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -749,8 +724,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -762,8 +748,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -775,8 +772,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -788,8 +796,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -801,8 +809,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -814,8 +822,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -826,8 +834,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -838,9 +846,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -860,6 +874,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AlreadyStreamed",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -868,7 +886,7 @@
         "com.amazonaws.cognitosync#ApplicationArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:sns:[-0-9a-z]+:\\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^arn:aws:sns:[-0-9a-z]+:\\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.cognitosync#ApplicationArnList": {
@@ -884,7 +902,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws:iam::\\d+:role/.*"
+                "smithy.api#pattern": "^arn:aws:iam::\\d+:role/"
             }
         },
         "com.amazonaws.cognitosync#Boolean": {
@@ -943,7 +961,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The input for the BulkPublish operation."
+                "smithy.api#documentation": "The input for the BulkPublish operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#BulkPublishResponse": {
@@ -957,30 +976,37 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The output for the BulkPublish operation."
+                "smithy.api#documentation": "The output for the BulkPublish operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#BulkPublishStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+            "type": "enum",
+            "members": {
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitosync#ClientContext": {
@@ -1027,6 +1053,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentModification",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Thrown if there are parallel requests to modify a resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1095,7 +1125,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.:-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.:-]+$"
             }
         },
         "com.amazonaws.cognitosync#Date": {
@@ -1167,7 +1197,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request to delete the specific\n      dataset."
+                "smithy.api#documentation": "A request to delete the specific\n      dataset.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#DeleteDatasetResponse": {
@@ -1181,7 +1212,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response to a successful DeleteDataset\n      request."
+                "smithy.api#documentation": "Response to a successful DeleteDataset\n      request.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#DescribeDataset": {
@@ -1247,7 +1279,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request for meta data about a dataset (creation\n      date, number of records, size) by owner and dataset name."
+                "smithy.api#documentation": "A request for meta data about a dataset (creation\n      date, number of records, size) by owner and dataset name.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#DescribeDatasetResponse": {
@@ -1261,7 +1294,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response to a successful DescribeDataset\n      request."
+                "smithy.api#documentation": "Response to a successful DescribeDataset\n      request.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#DescribeIdentityPoolUsage": {
@@ -1311,7 +1345,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request for usage information about\n      the identity pool."
+                "smithy.api#documentation": "A request for usage information about\n      the identity pool.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#DescribeIdentityPoolUsageResponse": {
@@ -1325,7 +1360,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response to a successful\n      DescribeIdentityPoolUsage request."
+                "smithy.api#documentation": "Response to a successful\n      DescribeIdentityPoolUsage request.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#DescribeIdentityUsage": {
@@ -1383,7 +1419,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request for information about the usage of\n      an identity pool."
+                "smithy.api#documentation": "A request for information about the usage of\n      an identity pool.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#DescribeIdentityUsageResponse": {
@@ -1397,7 +1434,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The response to a successful\n      DescribeIdentityUsage request."
+                "smithy.api#documentation": "The response to a successful\n      DescribeIdentityUsage request.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#DeviceId": {
@@ -1421,6 +1459,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateRequest",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1488,7 +1530,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The input for the GetBulkPublishDetails operation."
+                "smithy.api#documentation": "The input for the GetBulkPublishDetails operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#GetBulkPublishDetailsResponse": {
@@ -1526,7 +1569,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The output for the GetBulkPublishDetails operation."
+                "smithy.api#documentation": "The output for the GetBulkPublishDetails operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#GetCognitoEvents": {
@@ -1576,7 +1620,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request for a list of the configured Cognito Events</p>"
+                "smithy.api#documentation": "<p>A request for a list of the configured Cognito Events</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#GetCognitoEventsResponse": {
@@ -1590,7 +1635,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The response from the GetCognitoEvents request</p>"
+                "smithy.api#documentation": "<p>The response from the GetCognitoEvents request</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#GetIdentityPoolConfiguration": {
@@ -1640,7 +1686,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input for the GetIdentityPoolConfiguration operation.</p>"
+                "smithy.api#documentation": "<p>The input for the GetIdentityPoolConfiguration operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#GetIdentityPoolConfigurationResponse": {
@@ -1666,7 +1713,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The output for the GetIdentityPoolConfiguration operation.</p>"
+                "smithy.api#documentation": "<p>The output for the GetIdentityPoolConfiguration operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#IdentityId": {
@@ -1676,7 +1724,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+                "smithy.api#pattern": "^[\\w-]+:[0-9a-f-]+$"
             }
         },
         "com.amazonaws.cognitosync#IdentityPoolId": {
@@ -1686,7 +1734,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+                "smithy.api#pattern": "^[\\w-]+:[0-9a-f-]+$"
             }
         },
         "com.amazonaws.cognitosync#IdentityPoolUsage": {
@@ -1773,10 +1821,7 @@
             }
         },
         "com.amazonaws.cognitosync#IntegerString": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.cognitosync#InternalErrorException": {
             "type": "structure",
@@ -1790,6 +1835,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "Indicates an internal service\n      error.",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -1807,6 +1856,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidConfiguration",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1823,6 +1876,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidLambdaFunctionOutput",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The AWS Lambda function returned invalid output or an exception.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1840,6 +1897,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "Thrown when a request parameter does not comply\n      with the associated constraints.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1860,6 +1921,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LambdaThrottled",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "<p>AWS Lambda throttled your account, please contact AWS Support</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
@@ -1877,6 +1942,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "Thrown when the limit on the number of objects or\n      operations has been exceeded.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1942,14 +2011,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitosync#IntegerString",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to be\n      returned.",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request for a list of datasets for an\n      identity."
+                "smithy.api#documentation": "Request for a list of datasets for an\n      identity.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#ListDatasetsResponse": {
@@ -1976,7 +2045,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Returned for a successful ListDatasets\n      request."
+                "smithy.api#documentation": "Returned for a successful ListDatasets\n      request.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#ListIdentityPoolUsage": {
@@ -2023,14 +2093,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitosync#IntegerString",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to\n      be returned.",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request for usage information on an\n      identity pool."
+                "smithy.api#documentation": "A request for usage information on an\n      identity pool.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#ListIdentityPoolUsageResponse": {
@@ -2064,7 +2134,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Returned for a successful\n      ListIdentityPoolUsage request."
+                "smithy.api#documentation": "Returned for a successful\n      ListIdentityPoolUsage request.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#ListRecords": {
@@ -2142,7 +2213,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitosync#IntegerString",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to be\n      returned.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2156,7 +2226,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request for a list of records."
+                "smithy.api#documentation": "A request for a list of records.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#ListRecordsResponse": {
@@ -2221,7 +2292,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Returned for a successful\n      ListRecordsRequest."
+                "smithy.api#documentation": "Returned for a successful\n      ListRecordsRequest.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#Long": {
@@ -2245,47 +2317,59 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NotAuthorizedError",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "Thrown when a user is not authorized to access the\n      requested resource.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
         },
         "com.amazonaws.cognitosync#Operation": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "replace",
-                        "name": "replace"
-                    },
-                    {
-                        "value": "remove",
-                        "name": "remove"
+            "type": "enum",
+            "members": {
+                "replace": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "replace"
                     }
-                ]
+                },
+                "remove": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "remove"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitosync#Platform": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "APNS",
-                        "name": "APNS"
-                    },
-                    {
-                        "value": "APNS_SANDBOX",
-                        "name": "APNS_SANDBOX"
-                    },
-                    {
-                        "value": "GCM",
-                        "name": "GCM"
-                    },
-                    {
-                        "value": "ADM",
-                        "name": "ADM"
+            "type": "enum",
+            "members": {
+                "APNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS"
                     }
-                ]
+                },
+                "APNS_SANDBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_SANDBOX"
+                    }
+                },
+                "GCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCM"
+                    }
+                },
+                "ADM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADM"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitosync#PushSync": {
@@ -2498,7 +2582,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to RegisterDevice.</p>"
+                "smithy.api#documentation": "<p>A request to RegisterDevice.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#RegisterDeviceResponse": {
@@ -2512,7 +2597,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Response to a RegisterDevice request.</p>"
+                "smithy.api#documentation": "<p>Response to a RegisterDevice request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#ResourceConflictException": {
@@ -2527,6 +2613,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceConflict",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "Thrown if an update can't be applied because\n      the resource was changed by another call and this would result in a conflict.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -2544,6 +2634,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "Thrown if the resource doesn't\n      exist.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2603,7 +2697,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to configure Cognito Events\"</p>\""
+                "smithy.api#documentation": "<p>A request to configure Cognito Events\"</p>\"",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#SetIdentityPoolConfiguration": {
@@ -2668,7 +2763,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input for the SetIdentityPoolConfiguration operation.</p>"
+                "smithy.api#documentation": "<p>The input for the SetIdentityPoolConfiguration operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#SetIdentityPoolConfigurationResponse": {
@@ -2694,7 +2790,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The output for the SetIdentityPoolConfiguration operation</p>"
+                "smithy.api#documentation": "<p>The output for the SetIdentityPoolConfiguration operation</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#StreamName": {
@@ -2707,18 +2804,20 @@
             }
         },
         "com.amazonaws.cognitosync#StreamingStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitosync#String": {
@@ -2798,14 +2897,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to SubscribeToDatasetRequest.</p>"
+                "smithy.api#documentation": "<p>A request to SubscribeToDatasetRequest.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#SubscribeToDatasetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Response to a SubscribeToDataset request.</p>"
+                "smithy.api#documentation": "<p>Response to a SubscribeToDataset request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#SyncSessionToken": {
@@ -2823,6 +2924,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyRequests",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "Thrown if the request is\n      throttled.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
@@ -2902,14 +3007,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to UnsubscribeFromDataset.</p>"
+                "smithy.api#documentation": "<p>A request to UnsubscribeFromDataset.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#UnsubscribeFromDatasetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Response to an UnsubscribeFromDataset request.</p>"
+                "smithy.api#documentation": "<p>Response to an UnsubscribeFromDataset request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitosync#UpdateRecords": {
@@ -3013,7 +3120,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request to post updates to records or add and\n      delete records for a dataset and user."
+                "smithy.api#documentation": "A request to post updates to records or add and\n      delete records for a dataset and user.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitosync#UpdateRecordsResponse": {
@@ -3027,7 +3135,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Returned for a successful\n      UpdateRecordsRequest."
+                "smithy.api#documentation": "Returned for a successful\n      UpdateRecordsRequest.",
+                "smithy.api#output": {}
             }
         }
     }

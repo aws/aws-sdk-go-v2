@@ -149,7 +149,7 @@ type CreateSMBFileShareInput struct {
 	// period. SettlingTimeInSeconds has no effect on the timing of the object
 	// uploading to Amazon S3, only the timing of the notification. The following
 	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
-	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
+	// {\"Upload\": {\"SettlingTimeInSeconds\": 60}} The following example sets
 	// NotificationPolicy off. {}
 	NotificationPolicy *string
 

@@ -204,6 +204,97 @@ func (c *Client) addOperationGetImagesMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
+// GetImagesAPIClient is a client that implements the GetImages operation.
+type GetImagesAPIClient interface {
+	GetImages(context.Context, *GetImagesInput, ...func(*Options)) (*GetImagesOutput, error)
+}
+
+var _ GetImagesAPIClient = (*Client)(nil)
+
+// GetImagesPaginatorOptions is the paginator options for GetImages
+type GetImagesPaginatorOptions struct {
+	// The maximum number of images to be returned by the API. The default limit is 25
+	// images per API response. Providing a MaxResults greater than this value will
+	// result in a page size of 25. Any additional results will be paginated.
+	Limit int64
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetImagesPaginator is a paginator for GetImages
+type GetImagesPaginator struct {
+	options   GetImagesPaginatorOptions
+	client    GetImagesAPIClient
+	params    *GetImagesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetImagesPaginator returns a new GetImagesPaginator
+func NewGetImagesPaginator(client GetImagesAPIClient, params *GetImagesInput, optFns ...func(*GetImagesPaginatorOptions)) *GetImagesPaginator {
+	if params == nil {
+		params = &GetImagesInput{}
+	}
+
+	options := GetImagesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetImagesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetImagesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetImages page.
+func (p *GetImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetImagesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int64
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetImages(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opGetImages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

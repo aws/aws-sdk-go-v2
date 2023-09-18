@@ -58,6 +58,7 @@
                     "arnNamespace": "autoscaling-plans",
                     "cloudFormationName": "AutoScalingPlans",
                     "cloudTrailEventSource": "autoscalingplans.amazonaws.com",
+                    "docId": "autoscaling-plans-2018-01-06",
                     "endpointPrefix": "autoscaling-plans"
                 },
                 "aws.auth#sigv4": {
@@ -126,9 +127,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://autoscaling-plans-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://autoscaling-plans-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -141,15 +321,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://autoscaling-plans.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://autoscaling-plans.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -161,258 +376,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://autoscaling-plans-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://autoscaling-plans-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://autoscaling-plans.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://autoscaling-plans.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -427,8 +392,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -440,8 +405,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -453,8 +418,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -466,8 +431,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -479,8 +444,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -492,8 +457,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -505,8 +470,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -518,8 +483,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -531,8 +496,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -544,8 +509,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -557,8 +522,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -570,8 +535,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -583,8 +548,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -596,8 +561,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -609,8 +574,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -622,8 +587,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -635,8 +600,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -648,8 +613,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -661,8 +626,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -674,8 +639,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -687,8 +652,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -700,8 +665,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -713,8 +678,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -726,8 +691,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -739,8 +704,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -752,8 +717,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -765,8 +730,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -778,8 +743,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -791,8 +756,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -804,8 +769,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -817,8 +782,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -830,8 +795,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -843,8 +808,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -856,8 +821,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -869,8 +834,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -882,8 +858,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -895,8 +882,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -908,8 +906,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -921,8 +930,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -934,8 +943,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -947,8 +956,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -959,8 +968,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -971,9 +980,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1015,6 +1030,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentUpdateException",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>Concurrent updates caused an exception, for example, if you request an update to a\n         scaling plan that already has a pending update.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -1073,6 +1092,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.autoscalingplans#CreateScalingPlanResponse": {
@@ -1085,6 +1107,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.autoscalingplans#CustomizedLoadMetricSpecification": {
@@ -1238,11 +1263,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.autoscalingplans#DeleteScalingPlanResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.autoscalingplans#DescribeScalingPlanResources": {
             "type": "operation",
@@ -1299,6 +1330,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.autoscalingplans#DescribeScalingPlanResourcesResponse": {
@@ -1316,6 +1350,9 @@
                         "smithy.api#documentation": "<p>The token required to get the next set of results. This value is <code>null</code> if\n         there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.autoscalingplans#DescribeScalingPlans": {
@@ -1377,6 +1414,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.autoscalingplans#DescribeScalingPlansResponse": {
@@ -1394,6 +1434,9 @@
                         "smithy.api#documentation": "<p>The token required to get the next set of results. This value is <code>null</code> if\n         there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.autoscalingplans#DisableDynamicScaling": {
@@ -1406,26 +1449,32 @@
             "type": "string"
         },
         "com.amazonaws.autoscalingplans#ForecastDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CapacityForecast",
-                        "name": "CapacityForecast"
-                    },
-                    {
-                        "value": "LoadForecast",
-                        "name": "LoadForecast"
-                    },
-                    {
-                        "value": "ScheduledActionMinCapacity",
-                        "name": "ScheduledActionMinCapacity"
-                    },
-                    {
-                        "value": "ScheduledActionMaxCapacity",
-                        "name": "ScheduledActionMaxCapacity"
+            "type": "enum",
+            "members": {
+                "CapacityForecast": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CapacityForecast"
                     }
-                ]
+                },
+                "LoadForecast": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoadForecast"
+                    }
+                },
+                "ScheduledActionMinCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ScheduledActionMinCapacity"
+                    }
+                },
+                "ScheduledActionMaxCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ScheduledActionMaxCapacity"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastData": {
@@ -1507,6 +1556,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastDataResponse": {
@@ -1519,6 +1571,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.autoscalingplans#InternalServiceException": {
@@ -1529,6 +1584,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalServiceException",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The service encountered an internal error.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -1542,6 +1601,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidNextTokenException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The token provided is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1555,32 +1618,42 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceededException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Your account exceeded a limit. This exception is thrown when a per-account resource\n         limit is exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.autoscalingplans#LoadMetricType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASGTotalCPUUtilization",
-                        "name": "ASGTotalCPUUtilization"
-                    },
-                    {
-                        "value": "ASGTotalNetworkIn",
-                        "name": "ASGTotalNetworkIn"
-                    },
-                    {
-                        "value": "ASGTotalNetworkOut",
-                        "name": "ASGTotalNetworkOut"
-                    },
-                    {
-                        "value": "ALBTargetGroupRequestCount",
-                        "name": "ALBTargetGroupRequestCount"
+            "type": "enum",
+            "members": {
+                "ASGTotalCPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASGTotalCPUUtilization"
                     }
-                ]
+                },
+                "ASGTotalNetworkIn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASGTotalNetworkIn"
+                    }
+                },
+                "ASGTotalNetworkOut": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASGTotalNetworkOut"
+                    }
+                },
+                "ALBTargetGroupRequestCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALBTargetGroupRequestCount"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#MaxResults": {
@@ -1630,30 +1703,38 @@
             "type": "double"
         },
         "com.amazonaws.autoscalingplans#MetricStatistic": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Average",
-                        "name": "Average"
-                    },
-                    {
-                        "value": "Minimum",
-                        "name": "Minimum"
-                    },
-                    {
-                        "value": "Maximum",
-                        "name": "Maximum"
-                    },
-                    {
-                        "value": "SampleCount",
-                        "name": "SampleCount"
-                    },
-                    {
-                        "value": "Sum",
-                        "name": "Sum"
+            "type": "enum",
+            "members": {
+                "Average": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Average"
                     }
-                ]
+                },
+                "Minimum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Minimum"
+                    }
+                },
+                "Maximum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Maximum"
+                    }
+                },
+                "SampleCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SampleCount"
+                    }
+                },
+                "Sum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sum"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#MetricUnit": {
@@ -1670,6 +1751,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ObjectNotFoundException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified object could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1682,18 +1767,18 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\p{Print}+"
+                "smithy.api#pattern": "^\\p{Print}+$"
             }
         },
         "com.amazonaws.autoscalingplans#PolicyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TargetTrackingScaling",
-                        "name": "TargetTrackingScaling"
+            "type": "enum",
+            "members": {
+                "TargetTrackingScaling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TargetTrackingScaling"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.autoscalingplans#PredefinedLoadMetricSpecification": {
@@ -1739,37 +1824,43 @@
             }
         },
         "com.amazonaws.autoscalingplans#PredictiveScalingMaxCapacityBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SetForecastCapacityToMaxCapacity",
-                        "name": "SetForecastCapacityToMaxCapacity"
-                    },
-                    {
-                        "value": "SetMaxCapacityToForecastCapacity",
-                        "name": "SetMaxCapacityToForecastCapacity"
-                    },
-                    {
-                        "value": "SetMaxCapacityAboveForecastCapacity",
-                        "name": "SetMaxCapacityAboveForecastCapacity"
+            "type": "enum",
+            "members": {
+                "SetForecastCapacityToMaxCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SetForecastCapacityToMaxCapacity"
                     }
-                ]
+                },
+                "SetMaxCapacityToForecastCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SetMaxCapacityToForecastCapacity"
+                    }
+                },
+                "SetMaxCapacityAboveForecastCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SetMaxCapacityAboveForecastCapacity"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#PredictiveScalingMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ForecastAndScale",
-                        "name": "ForecastAndScale"
-                    },
-                    {
-                        "value": "ForecastOnly",
-                        "name": "ForecastOnly"
+            "type": "enum",
+            "members": {
+                "ForecastAndScale": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ForecastAndScale"
                     }
-                ]
+                },
+                "ForecastOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ForecastOnly"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#ResourceCapacity": {
@@ -1782,7 +1873,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.autoscalingplans#ResourceLabel": {
@@ -1795,42 +1886,56 @@
             }
         },
         "com.amazonaws.autoscalingplans#ScalableDimension": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "autoscaling:autoScalingGroup:DesiredCapacity",
-                        "name": "AutoScalingGroupDesiredCapacity"
-                    },
-                    {
-                        "value": "ecs:service:DesiredCount",
-                        "name": "ECSServiceDesiredCount"
-                    },
-                    {
-                        "value": "ec2:spot-fleet-request:TargetCapacity",
-                        "name": "EC2SpotFleetRequestTargetCapacity"
-                    },
-                    {
-                        "value": "rds:cluster:ReadReplicaCount",
-                        "name": "RDSClusterReadReplicaCount"
-                    },
-                    {
-                        "value": "dynamodb:table:ReadCapacityUnits",
-                        "name": "DynamoDBTableReadCapacityUnits"
-                    },
-                    {
-                        "value": "dynamodb:table:WriteCapacityUnits",
-                        "name": "DynamoDBTableWriteCapacityUnits"
-                    },
-                    {
-                        "value": "dynamodb:index:ReadCapacityUnits",
-                        "name": "DynamoDBIndexReadCapacityUnits"
-                    },
-                    {
-                        "value": "dynamodb:index:WriteCapacityUnits",
-                        "name": "DynamoDBIndexWriteCapacityUnits"
+            "type": "enum",
+            "members": {
+                "AutoScalingGroupDesiredCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "autoscaling:autoScalingGroup:DesiredCapacity"
                     }
-                ]
+                },
+                "ECSServiceDesiredCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ecs:service:DesiredCount"
+                    }
+                },
+                "EC2SpotFleetRequestTargetCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ec2:spot-fleet-request:TargetCapacity"
+                    }
+                },
+                "RDSClusterReadReplicaCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rds:cluster:ReadReplicaCount"
+                    }
+                },
+                "DynamoDBTableReadCapacityUnits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dynamodb:table:ReadCapacityUnits"
+                    }
+                },
+                "DynamoDBTableWriteCapacityUnits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dynamodb:table:WriteCapacityUnits"
+                    }
+                },
+                "DynamoDBIndexReadCapacityUnits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dynamodb:index:ReadCapacityUnits"
+                    }
+                },
+                "DynamoDBIndexWriteCapacityUnits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dynamodb:index:WriteCapacityUnits"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#ScalingInstruction": {
@@ -1938,62 +2043,86 @@
             }
         },
         "com.amazonaws.autoscalingplans#ScalingMetricType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASGAverageCPUUtilization",
-                        "name": "ASGAverageCPUUtilization"
-                    },
-                    {
-                        "value": "ASGAverageNetworkIn",
-                        "name": "ASGAverageNetworkIn"
-                    },
-                    {
-                        "value": "ASGAverageNetworkOut",
-                        "name": "ASGAverageNetworkOut"
-                    },
-                    {
-                        "value": "DynamoDBReadCapacityUtilization",
-                        "name": "DynamoDBReadCapacityUtilization"
-                    },
-                    {
-                        "value": "DynamoDBWriteCapacityUtilization",
-                        "name": "DynamoDBWriteCapacityUtilization"
-                    },
-                    {
-                        "value": "ECSServiceAverageCPUUtilization",
-                        "name": "ECSServiceAverageCPUUtilization"
-                    },
-                    {
-                        "value": "ECSServiceAverageMemoryUtilization",
-                        "name": "ECSServiceAverageMemoryUtilization"
-                    },
-                    {
-                        "value": "ALBRequestCountPerTarget",
-                        "name": "ALBRequestCountPerTarget"
-                    },
-                    {
-                        "value": "RDSReaderAverageCPUUtilization",
-                        "name": "RDSReaderAverageCPUUtilization"
-                    },
-                    {
-                        "value": "RDSReaderAverageDatabaseConnections",
-                        "name": "RDSReaderAverageDatabaseConnections"
-                    },
-                    {
-                        "value": "EC2SpotFleetRequestAverageCPUUtilization",
-                        "name": "EC2SpotFleetRequestAverageCPUUtilization"
-                    },
-                    {
-                        "value": "EC2SpotFleetRequestAverageNetworkIn",
-                        "name": "EC2SpotFleetRequestAverageNetworkIn"
-                    },
-                    {
-                        "value": "EC2SpotFleetRequestAverageNetworkOut",
-                        "name": "EC2SpotFleetRequestAverageNetworkOut"
+            "type": "enum",
+            "members": {
+                "ASGAverageCPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASGAverageCPUUtilization"
                     }
-                ]
+                },
+                "ASGAverageNetworkIn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASGAverageNetworkIn"
+                    }
+                },
+                "ASGAverageNetworkOut": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASGAverageNetworkOut"
+                    }
+                },
+                "DynamoDBReadCapacityUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBReadCapacityUtilization"
+                    }
+                },
+                "DynamoDBWriteCapacityUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBWriteCapacityUtilization"
+                    }
+                },
+                "ECSServiceAverageCPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECSServiceAverageCPUUtilization"
+                    }
+                },
+                "ECSServiceAverageMemoryUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECSServiceAverageMemoryUtilization"
+                    }
+                },
+                "ALBRequestCountPerTarget": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALBRequestCountPerTarget"
+                    }
+                },
+                "RDSReaderAverageCPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDSReaderAverageCPUUtilization"
+                    }
+                },
+                "RDSReaderAverageDatabaseConnections": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDSReaderAverageDatabaseConnections"
+                    }
+                },
+                "EC2SpotFleetRequestAverageCPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2SpotFleetRequestAverageCPUUtilization"
+                    }
+                },
+                "EC2SpotFleetRequestAverageNetworkIn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2SpotFleetRequestAverageNetworkIn"
+                    }
+                },
+                "EC2SpotFleetRequestAverageNetworkOut": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2SpotFleetRequestAverageNetworkOut"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#ScalingPlan": {
@@ -2064,7 +2193,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{Print}&&[^|:/]]+"
+                "smithy.api#pattern": "^[\\p{Print}&&[^|:/]]+$"
             }
         },
         "com.amazonaws.autoscalingplans#ScalingPlanNames": {
@@ -2142,42 +2271,56 @@
             }
         },
         "com.amazonaws.autoscalingplans#ScalingPlanStatusCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "Active"
-                    },
-                    {
-                        "value": "ActiveWithProblems",
-                        "name": "ActiveWithProblems"
-                    },
-                    {
-                        "value": "CreationInProgress",
-                        "name": "CreationInProgress"
-                    },
-                    {
-                        "value": "CreationFailed",
-                        "name": "CreationFailed"
-                    },
-                    {
-                        "value": "DeletionInProgress",
-                        "name": "DeletionInProgress"
-                    },
-                    {
-                        "value": "DeletionFailed",
-                        "name": "DeletionFailed"
-                    },
-                    {
-                        "value": "UpdateInProgress",
-                        "name": "UpdateInProgress"
-                    },
-                    {
-                        "value": "UpdateFailed",
-                        "name": "UpdateFailed"
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "ActiveWithProblems": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ActiveWithProblems"
+                    }
+                },
+                "CreationInProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationInProgress"
+                    }
+                },
+                "CreationFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationFailed"
+                    }
+                },
+                "DeletionInProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletionInProgress"
+                    }
+                },
+                "DeletionFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletionFailed"
+                    }
+                },
+                "UpdateInProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateInProgress"
+                    }
+                },
+                "UpdateFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateFailed"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#ScalingPlanVersion": {
@@ -2224,37 +2367,43 @@
             }
         },
         "com.amazonaws.autoscalingplans#ScalingPolicyUpdateBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KeepExternalPolicies",
-                        "name": "KeepExternalPolicies"
-                    },
-                    {
-                        "value": "ReplaceExternalPolicies",
-                        "name": "ReplaceExternalPolicies"
+            "type": "enum",
+            "members": {
+                "KeepExternalPolicies": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KeepExternalPolicies"
                     }
-                ]
+                },
+                "ReplaceExternalPolicies": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplaceExternalPolicies"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#ScalingStatusCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Inactive",
-                        "name": "Inactive"
-                    },
-                    {
-                        "value": "PartiallyActive",
-                        "name": "PartiallyActive"
-                    },
-                    {
-                        "value": "Active",
-                        "name": "Active"
+            "type": "enum",
+            "members": {
+                "Inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
                     }
-                ]
+                },
+                "PartiallyActive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartiallyActive"
+                    }
+                },
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#ScheduledActionBufferTime": {
@@ -2266,30 +2415,38 @@
             }
         },
         "com.amazonaws.autoscalingplans#ServiceNamespace": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "autoscaling",
-                        "name": "AUTOSCALING"
-                    },
-                    {
-                        "value": "ecs",
-                        "name": "ECS"
-                    },
-                    {
-                        "value": "ec2",
-                        "name": "EC2"
-                    },
-                    {
-                        "value": "rds",
-                        "name": "RDS"
-                    },
-                    {
-                        "value": "dynamodb",
-                        "name": "DYNAMODB"
+            "type": "enum",
+            "members": {
+                "AUTOSCALING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "autoscaling"
                     }
-                ]
+                },
+                "ECS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ecs"
+                    }
+                },
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ec2"
+                    }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rds"
+                    }
+                },
+                "DYNAMODB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dynamodb"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscalingplans#TagFilter": {
@@ -2439,11 +2596,17 @@
                         "smithy.api#documentation": "<p>The scaling instructions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html\">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.autoscalingplans#UpdateScalingPlanResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.autoscalingplans#ValidationException": {
             "type": "structure",
@@ -2453,6 +2616,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>An exception was thrown for a validation issue. Review the parameters provided.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2461,7 +2628,7 @@
         "com.amazonaws.autoscalingplans#XmlString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.autoscalingplans#XmlStringMaxLen128": {
@@ -2471,7 +2638,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.autoscalingplans#XmlStringMaxLen256": {
@@ -2481,7 +2648,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         }
     }

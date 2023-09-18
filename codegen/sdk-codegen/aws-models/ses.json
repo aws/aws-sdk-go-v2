@@ -475,7 +475,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a receipt rule set by cloning an existing one. All receipt rules and\n            configurations are copied to the new receipt rule set and are completely independent of\n            the source rule set.</p>\n         <p>For information about setting up rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules\">Amazon SES Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Creates a receipt rule set by cloning an existing one. All receipt rules and\n            configurations are copied to the new receipt rule set and are completely independent of\n            the source rule set.</p>\n         <p>For information about setting up rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules\">Amazon SES Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CloneReceiptRuleSet",
+                        "documentation": "The following example creates a receipt rule set by cloning an existing one:",
+                        "input": {
+                            "RuleSetName": "RuleSetToCreate",
+                            "OriginalRuleSetName": "RuleSetToClone"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#CloneReceiptRuleSetRequest": {
@@ -971,7 +981,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new IP address filter.</p>\n         <p>For information about setting up IP address filters, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Creates a new IP address filter.</p>\n         <p>For information about setting up IP address filters, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateReceiptFilter",
+                        "documentation": "The following example creates a new IP address filter:",
+                        "input": {
+                            "Filter": {
+                                "Name": "MyFilter",
+                                "IpFilter": {
+                                    "Policy": "Allow",
+                                    "Cidr": "1.2.3.4/24"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#CreateReceiptFilterRequest": {
@@ -1030,7 +1055,31 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a receipt rule.</p>\n         <p>For information about setting up receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Creates a receipt rule.</p>\n         <p>For information about setting up receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateReceiptRule",
+                        "documentation": "The following example creates a new receipt rule:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet",
+                            "After": "",
+                            "Rule": {
+                                "TlsPolicy": "Optional",
+                                "Enabled": true,
+                                "Name": "MyRule",
+                                "Actions": [
+                                    {
+                                        "S3Action": {
+                                            "ObjectKeyPrefix": "email",
+                                            "BucketName": "MyBucket"
+                                        }
+                                    }
+                                ],
+                                "ScanEnabled": true
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#CreateReceiptRuleRequest": {
@@ -1087,7 +1136,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty receipt rule set.</p>\n         <p>For information about setting up receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules\">Amazon SES Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Creates an empty receipt rule set.</p>\n         <p>For information about setting up receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules\">Amazon SES Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateReceiptRuleSet",
+                        "documentation": "The following example creates an empty receipt rule set:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#CreateReceiptRuleSetRequest": {
@@ -1475,7 +1533,16 @@
                 "target": "com.amazonaws.ses#DeleteIdentityResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified identity (an email address or a domain) from the list of\n            verified identities.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified identity (an email address or a domain) from the list of\n            verified identities.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteIdentity",
+                        "documentation": "The following example deletes an identity from the list of identities that have been submitted for verification with Amazon SES:",
+                        "input": {
+                            "Identity": "user@example.com"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DeleteIdentityPolicy": {
@@ -1487,7 +1554,17 @@
                 "target": "com.amazonaws.ses#DeleteIdentityPolicyResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified sending authorization policy for the given identity (an email\n            address or a domain). This operation returns successfully even if a policy with the\n            specified name does not exist.</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified sending authorization policy for the given identity (an email\n            address or a domain). This operation returns successfully even if a policy with the\n            specified name does not exist.</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteIdentityPolicy",
+                        "documentation": "The following example deletes a sending authorization policy for an identity:",
+                        "input": {
+                            "Identity": "user@example.com",
+                            "PolicyName": "MyPolicy"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DeleteIdentityPolicyRequest": {
@@ -1554,7 +1631,16 @@
                 "target": "com.amazonaws.ses#DeleteReceiptFilterResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified IP address filter.</p>\n         <p>For information about managing IP address filters, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified IP address filter.</p>\n         <p>For information about managing IP address filters, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteReceiptFilter",
+                        "documentation": "The following example deletes an IP address filter:",
+                        "input": {
+                            "FilterName": "MyFilter"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DeleteReceiptFilterRequest": {
@@ -1595,7 +1681,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified receipt rule.</p>\n         <p>For information about managing receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified receipt rule.</p>\n         <p>For information about managing receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteReceiptRule",
+                        "documentation": "The following example deletes a receipt rule:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet",
+                            "RuleName": "MyRule"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DeleteReceiptRuleRequest": {
@@ -1643,7 +1739,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified receipt rule set and all of the receipt rules it\n            contains.</p>\n         <note>\n            <p>The currently active rule set cannot be deleted.</p>\n         </note>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified receipt rule set and all of the receipt rules it\n            contains.</p>\n         <note>\n            <p>The currently active rule set cannot be deleted.</p>\n         </note>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteReceiptRuleSet",
+                        "documentation": "The following example deletes a receipt rule set:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DeleteReceiptRuleSetRequest": {
@@ -1714,7 +1819,16 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deprecated. Use the <code>DeleteIdentity</code> operation to delete email addresses\n            and domains.</p>"
+                "smithy.api#documentation": "<p>Deprecated. Use the <code>DeleteIdentity</code> operation to delete email addresses\n            and domains.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteVerifiedEmailAddress",
+                        "documentation": "The following example deletes an email address from the list of identities that have been submitted for verification with Amazon SES:",
+                        "input": {
+                            "EmailAddress": "user@example.com"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DeleteVerifiedEmailAddressRequest": {
@@ -1756,7 +1870,35 @@
                 "target": "com.amazonaws.ses#DescribeActiveReceiptRuleSetResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the metadata and receipt rules for the receipt rule set that is currently\n            active.</p>\n         <p>For information about setting up receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules\">Amazon SES Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns the metadata and receipt rules for the receipt rule set that is currently\n            active.</p>\n         <p>For information about setting up receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules\">Amazon SES Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeActiveReceiptRuleSet",
+                        "documentation": "The following example returns the metadata and receipt rules for the receipt rule set that is currently active:",
+                        "output": {
+                            "Metadata": {
+                                "CreatedTimestamp": "2016-07-15T16:25:59.607Z",
+                                "Name": "default-rule-set"
+                            },
+                            "Rules": [
+                                {
+                                    "TlsPolicy": "Optional",
+                                    "Enabled": true,
+                                    "Name": "MyRule",
+                                    "Actions": [
+                                        {
+                                            "S3Action": {
+                                                "ObjectKeyPrefix": "email",
+                                                "BucketName": "MyBucket"
+                                            }
+                                        }
+                                    ],
+                                    "ScanEnabled": true
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DescribeActiveReceiptRuleSetRequest": {
@@ -1880,7 +2022,33 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of the specified receipt rule.</p>\n         <p>For information about setting up receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns the details of the specified receipt rule.</p>\n         <p>For information about setting up receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeReceiptRule",
+                        "documentation": "The following example returns the details of a receipt rule:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet",
+                            "RuleName": "MyRule"
+                        },
+                        "output": {
+                            "Rule": {
+                                "TlsPolicy": "Optional",
+                                "Enabled": true,
+                                "Name": "MyRule",
+                                "Actions": [
+                                    {
+                                        "S3Action": {
+                                            "ObjectKeyPrefix": "email",
+                                            "BucketName": "MyBucket"
+                                        }
+                                    }
+                                ],
+                                "ScanEnabled": true
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DescribeReceiptRuleRequest": {
@@ -1935,7 +2103,38 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of the specified receipt rule set.</p>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns the details of the specified receipt rule set.</p>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeReceiptRuleSet",
+                        "documentation": "The following example returns the metadata and receipt rules of a receipt rule set:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet"
+                        },
+                        "output": {
+                            "Metadata": {
+                                "CreatedTimestamp": "2016-07-15T16:25:59.607Z",
+                                "Name": "MyRuleSet"
+                            },
+                            "Rules": [
+                                {
+                                    "TlsPolicy": "Optional",
+                                    "Enabled": true,
+                                    "Name": "MyRule",
+                                    "Actions": [
+                                        {
+                                            "S3Action": {
+                                                "ObjectKeyPrefix": "email",
+                                                "BucketName": "MyBucket"
+                                            }
+                                        }
+                                    ],
+                                    "ScanEnabled": true
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#DescribeReceiptRuleSetRequest": {
@@ -2340,7 +2539,16 @@
                 "target": "com.amazonaws.ses#GetAccountSendingEnabledResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the email sending status of the Amazon SES account for the current Region.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns the email sending status of the Amazon SES account for the current Region.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetAccountSendingEnabled",
+                        "documentation": "The following example returns if sending status for an account is enabled. (true / false):",
+                        "output": {
+                            "Enabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetAccountSendingEnabledResponse": {
@@ -2446,7 +2654,36 @@
                 "target": "com.amazonaws.ses#GetIdentityDkimAttributesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current status of Easy DKIM signing for an entity. For domain name\n            identities, this operation also returns the DKIM tokens that are required for Easy DKIM\n            signing, and whether Amazon SES has successfully verified that these tokens have been\n            published.</p>\n         <p>This operation takes a list of identities as input and returns the following\n            information for each:</p>\n         <ul>\n            <li>\n               <p>Whether Easy DKIM signing is enabled or disabled.</p>\n            </li>\n            <li>\n               <p>A set of DKIM tokens that represent the identity. If the identity is an email\n                    address, the tokens represent the domain of that address.</p>\n            </li>\n            <li>\n               <p>Whether Amazon SES has successfully verified the DKIM tokens published in the\n                    domain's DNS. This information is only returned for domain name identities, not\n                    for email addresses.</p>\n            </li>\n         </ul>\n         <p>This operation is throttled at one request per second and can only get DKIM attributes\n            for up to 100 identities at a time.</p>\n         <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html\">Amazon SES\n                Developer Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Returns the current status of Easy DKIM signing for an entity. For domain name\n            identities, this operation also returns the DKIM tokens that are required for Easy DKIM\n            signing, and whether Amazon SES has successfully verified that these tokens have been\n            published.</p>\n         <p>This operation takes a list of identities as input and returns the following\n            information for each:</p>\n         <ul>\n            <li>\n               <p>Whether Easy DKIM signing is enabled or disabled.</p>\n            </li>\n            <li>\n               <p>A set of DKIM tokens that represent the identity. If the identity is an email\n                    address, the tokens represent the domain of that address.</p>\n            </li>\n            <li>\n               <p>Whether Amazon SES has successfully verified the DKIM tokens published in the\n                    domain's DNS. This information is only returned for domain name identities, not\n                    for email addresses.</p>\n            </li>\n         </ul>\n         <p>This operation is throttled at one request per second and can only get DKIM attributes\n            for up to 100 identities at a time.</p>\n         <p>For more information about creating DNS records using DKIM tokens, go to the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html\">Amazon SES\n                Developer Guide</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetIdentityDkimAttributes",
+                        "documentation": "The following example retrieves the Amazon SES Easy DKIM attributes for a list of identities:",
+                        "input": {
+                            "Identities": [
+                                "example.com",
+                                "user@example.com"
+                            ]
+                        },
+                        "output": {
+                            "DkimAttributes": {
+                                "example.com": {
+                                    "DkimTokens": [
+                                        "EXAMPLEjcs5xoyqytjsotsijas7236gr",
+                                        "EXAMPLEjr76cvoc6mysspnioorxsn6ep",
+                                        "EXAMPLEkbmkqkhlm2lyz77ppkulerm4k"
+                                    ],
+                                    "DkimEnabled": true,
+                                    "DkimVerificationStatus": "Success"
+                                },
+                                "user@example.com": {
+                                    "DkimEnabled": false,
+                                    "DkimVerificationStatus": "NotStarted"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetIdentityDkimAttributesRequest": {
@@ -2490,7 +2727,27 @@
                 "target": "com.amazonaws.ses#GetIdentityMailFromDomainAttributesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the custom MAIL FROM attributes for a list of identities (email addresses :\n            domains).</p>\n         <p>This operation is throttled at one request per second and can only get custom MAIL\n            FROM attributes for up to 100 identities at a time.</p>"
+                "smithy.api#documentation": "<p>Returns the custom MAIL FROM attributes for a list of identities (email addresses :\n            domains).</p>\n         <p>This operation is throttled at one request per second and can only get custom MAIL\n            FROM attributes for up to 100 identities at a time.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetIdentityMailFromDomainAttributes",
+                        "documentation": "The following example returns the custom MAIL FROM attributes for an identity:",
+                        "input": {
+                            "Identities": [
+                                "example.com"
+                            ]
+                        },
+                        "output": {
+                            "MailFromDomainAttributes": {
+                                "example.com": {
+                                    "MailFromDomain": "bounces.example.com",
+                                    "BehaviorOnMXFailure": "UseDefaultValue",
+                                    "MailFromDomainStatus": "Success"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetIdentityMailFromDomainAttributesRequest": {
@@ -2534,7 +2791,31 @@
                 "target": "com.amazonaws.ses#GetIdentityNotificationAttributesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Given a list of verified identities (email addresses and/or domains), returns a\n            structure describing identity notification attributes.</p>\n         <p>This operation is throttled at one request per second and can only get notification\n            attributes for up to 100 identities at a time.</p>\n         <p>For more information about using notifications with Amazon SES, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Given a list of verified identities (email addresses and/or domains), returns a\n            structure describing identity notification attributes.</p>\n         <p>This operation is throttled at one request per second and can only get notification\n            attributes for up to 100 identities at a time.</p>\n         <p>For more information about using notifications with Amazon SES, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetIdentityNotificationAttributes",
+                        "documentation": "The following example returns the notification attributes for an identity:",
+                        "input": {
+                            "Identities": [
+                                "example.com"
+                            ]
+                        },
+                        "output": {
+                            "NotificationAttributes": {
+                                "example.com": {
+                                    "ForwardingEnabled": true,
+                                    "HeadersInDeliveryNotificationsEnabled": false,
+                                    "HeadersInComplaintNotificationsEnabled": false,
+                                    "BounceTopic": "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic",
+                                    "ComplaintTopic": "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic",
+                                    "DeliveryTopic": "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic",
+                                    "HeadersInBounceNotificationsEnabled": false
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetIdentityNotificationAttributesRequest": {
@@ -2578,7 +2859,24 @@
                 "target": "com.amazonaws.ses#GetIdentityPoliciesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the requested sending authorization policies for the given identity (an email\n            address or a domain). The policies are returned as a map of policy names to policy\n            contents. You can retrieve a maximum of 20 policies at a time.</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns the requested sending authorization policies for the given identity (an email\n            address or a domain). The policies are returned as a map of policy names to policy\n            contents. You can retrieve a maximum of 20 policies at a time.</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetIdentityPolicies",
+                        "documentation": "The following example returns a sending authorization policy for an identity:",
+                        "input": {
+                            "Identity": "example.com",
+                            "PolicyNames": [
+                                "MyPolicy"
+                            ]
+                        },
+                        "output": {
+                            "Policies": {
+                                "MyPolicy": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Sid\":\"stmt1469123904194\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":[\"ses:SendEmail\",\"ses:SendRawEmail\"],\"Resource\":\"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com\"}]}"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetIdentityPoliciesRequest": {
@@ -2630,6 +2928,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Given a list of identities (email addresses and/or domains), returns the verification\n            status and (for domain identities) the verification token for each identity.</p>\n         <p>The verification status of an email address is \"Pending\" until the email address owner\n            clicks the link within the verification email that Amazon SES sent to that address. If the\n            email address owner clicks the link within 24 hours, the verification status of the\n            email address changes to \"Success\". If the link is not clicked within 24 hours, the\n            verification status changes to \"Failed.\" In that case, to verify the email address, you\n            must restart the verification process from the beginning.</p>\n         <p>For domain identities, the domain's verification status is \"Pending\" as Amazon SES searches\n            for the required TXT record in the DNS settings of the domain. When Amazon SES detects the\n            record, the domain's verification status changes to \"Success\". If Amazon SES is unable to\n            detect the record within 72 hours, the domain's verification status changes to \"Failed.\"\n            In that case, to verify the domain, you must restart the verification process from the\n            beginning.</p>\n         <p>This operation is throttled at one request per second and can only get verification\n            attributes for up to 100 identities at a time.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetIdentityVerificationAttributes",
+                        "documentation": "The following example returns the verification status and the verification token for a domain identity:",
+                        "input": {
+                            "Identities": [
+                                "example.com"
+                            ]
+                        },
+                        "output": {
+                            "VerificationAttributes": {
+                                "example.com": {
+                                    "VerificationToken": "EXAMPLE3VYb9EDI2nTOQRi/Tf6MI/6bD6THIGiP1MVY=",
+                                    "VerificationStatus": "Success"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "IdentityExists": {
                         "acceptors": [
@@ -2690,7 +3007,18 @@
                 "target": "com.amazonaws.ses#GetSendQuotaResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the sending limits for the Amazon SES account. </p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Provides the sending limits for the Amazon SES account. </p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetSendQuota",
+                        "documentation": "The following example returns the Amazon SES sending limits for an AWS account:",
+                        "output": {
+                            "Max24HourSend": 200,
+                            "MaxSendRate": 1,
+                            "SentLast24Hours": 1
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetSendQuotaResponse": {
@@ -2732,7 +3060,38 @@
                 "target": "com.amazonaws.ses#GetSendStatisticsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides sending statistics for the current Amazon Web Services Region. The result is a list of data\n            points, representing the last two weeks of sending activity. Each data point in the list\n            contains statistics for a 15-minute period of time.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Provides sending statistics for the current Amazon Web Services Region. The result is a list of data\n            points, representing the last two weeks of sending activity. Each data point in the list\n            contains statistics for a 15-minute period of time.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetSendStatistics",
+                        "documentation": "The following example returns Amazon SES sending statistics:",
+                        "output": {
+                            "SendDataPoints": [
+                                {
+                                    "Complaints": 0,
+                                    "Timestamp": "2016-07-13T22:43:00Z",
+                                    "DeliveryAttempts": 5,
+                                    "Bounces": 0,
+                                    "Rejects": 0
+                                },
+                                {
+                                    "Complaints": 0,
+                                    "Timestamp": "2016-07-13T23:13:00Z",
+                                    "DeliveryAttempts": 3,
+                                    "Bounces": 0,
+                                    "Rejects": 0
+                                },
+                                {
+                                    "Complaints": 0,
+                                    "Timestamp": "2016-07-13T21:13:00Z",
+                                    "DeliveryAttempts": 1,
+                                    "Bounces": 0,
+                                    "Rejects": 0
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#GetSendStatisticsResponse": {
@@ -3441,6 +3800,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list containing all of the identities (email addresses and domains) for your\n            Amazon Web Services account in the current Amazon Web Services Region, regardless of verification status.</p>\n         <p>You can execute this operation no more than once per second.</p>\n         <note>\n            <p>It's recommended that for successive pagination calls of this API, you continue to\n                the use the same parameter/value pairs as used in the original call, e.g., if you\n                used <code>IdentityType=Domain</code> in the the original call and received a\n                    <code>NextToken</code> in the response, you should continue providing the\n                    <code>IdentityType=Domain</code> parameter for further <code>NextToken</code>\n                calls; however, if you didn't provide the <code>IdentityType</code> parameter in the\n                original call, then continue to not provide it for successive pagination calls.\n                Using this protocol will ensure consistent results.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListIdentities",
+                        "documentation": "The following example lists the email address identities that have been submitted for verification with Amazon SES:",
+                        "input": {
+                            "IdentityType": "EmailAddress",
+                            "NextToken": "",
+                            "MaxItems": 123
+                        },
+                        "output": {
+                            "Identities": [
+                                "user@example.com"
+                            ],
+                            "NextToken": ""
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3507,7 +3883,21 @@
                 "target": "com.amazonaws.ses#ListIdentityPoliciesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of sending authorization policies that are attached to the given\n            identity (an email address or a domain). This operation returns only a list. To get the\n            actual policy content, use <code>GetIdentityPolicies</code>.</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns a list of sending authorization policies that are attached to the given\n            identity (an email address or a domain). This operation returns only a list. To get the\n            actual policy content, use <code>GetIdentityPolicies</code>.</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListIdentityPolicies",
+                        "documentation": "The following example returns a list of sending authorization policies that are attached to an identity:",
+                        "input": {
+                            "Identity": "example.com"
+                        },
+                        "output": {
+                            "PolicyNames": [
+                                "MyPolicy"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#ListIdentityPoliciesRequest": {
@@ -3551,7 +3941,24 @@
                 "target": "com.amazonaws.ses#ListReceiptFiltersResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the IP address filters associated with your Amazon Web Services account in the current\n            Amazon Web Services Region.</p>\n         <p>For information about managing IP address filters, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Lists the IP address filters associated with your Amazon Web Services account in the current\n            Amazon Web Services Region.</p>\n         <p>For information about managing IP address filters, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListReceiptFilters",
+                        "documentation": "The following example lists the IP address filters that are associated with an AWS account:",
+                        "output": {
+                            "Filters": [
+                                {
+                                    "IpFilter": {
+                                        "Policy": "Block",
+                                        "Cidr": "1.2.3.4/24"
+                                    },
+                                    "Name": "MyFilter"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#ListReceiptFiltersRequest": {
@@ -3586,7 +3993,25 @@
                 "target": "com.amazonaws.ses#ListReceiptRuleSetsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the receipt rule sets that exist under your Amazon Web Services account in the current\n            Amazon Web Services Region. If there are additional receipt rule sets to be retrieved, you receive a\n                <code>NextToken</code> that you can provide to the next call to\n                <code>ListReceiptRuleSets</code> to retrieve the additional entries.</p>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Lists the receipt rule sets that exist under your Amazon Web Services account in the current\n            Amazon Web Services Region. If there are additional receipt rule sets to be retrieved, you receive a\n                <code>NextToken</code> that you can provide to the next call to\n                <code>ListReceiptRuleSets</code> to retrieve the additional entries.</p>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListReceiptRuleSets",
+                        "documentation": "The following example lists the receipt rule sets that exist under an AWS account:",
+                        "input": {
+                            "NextToken": ""
+                        },
+                        "output": {
+                            "RuleSets": [
+                                {
+                                    "CreatedTimestamp": "2016-07-15T16:25:59.607Z",
+                                    "Name": "MyRuleSet"
+                                }
+                            ],
+                            "NextToken": ""
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#ListReceiptRuleSetsRequest": {
@@ -3686,7 +4111,19 @@
                 "target": "com.amazonaws.ses#ListVerifiedEmailAddressesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deprecated. Use the <code>ListIdentities</code> operation to list the email addresses\n            and domains associated with your account.</p>"
+                "smithy.api#documentation": "<p>Deprecated. Use the <code>ListIdentities</code> operation to list the email addresses\n            and domains associated with your account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListVerifiedEmailAddresses",
+                        "documentation": "The following example lists all email addresses that have been submitted for verification with Amazon SES:",
+                        "output": {
+                            "VerifiedEmailAddresses": [
+                                "user1@example.com",
+                                "user2@example.com"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#ListVerifiedEmailAddressesResponse": {
@@ -4034,7 +4471,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates a sending authorization policy for the specified identity (an email\n            address or a domain).</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Adds or updates a sending authorization policy for the specified identity (an email\n            address or a domain).</p>\n         <note>\n            <p>This operation is for the identity owner only. If you have not verified the\n                identity, it returns an error.</p>\n         </note>\n         <p>Sending authorization is a feature that enables an identity owner to authorize other\n            senders to use its identities. For information about using sending authorization, see\n            the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "PutIdentityPolicy",
+                        "documentation": "The following example adds a sending authorization policy to an identity:",
+                        "input": {
+                            "Identity": "example.com",
+                            "PolicyName": "MyPolicy",
+                            "Policy": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Sid\":\"stmt1469123904194\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":[\"ses:SendEmail\",\"ses:SendRawEmail\"],\"Resource\":\"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com\"}]}"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#PutIdentityPolicyRequest": {
@@ -4394,7 +4842,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reorders the receipt rules within a receipt rule set.</p>\n         <note>\n            <p>All of the rules in the rule set must be represented in this request. That is, it\n                is error if the reorder request doesn't explicitly position all of the rules.</p>\n         </note>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Reorders the receipt rules within a receipt rule set.</p>\n         <note>\n            <p>All of the rules in the rule set must be represented in this request. That is, it\n                is error if the reorder request doesn't explicitly position all of the rules.</p>\n         </note>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ReorderReceiptRuleSet",
+                        "documentation": "The following example reorders the receipt rules within a receipt rule set:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet",
+                            "RuleNames": [
+                                "MyRule",
+                                "MyOtherRule"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#ReorderReceiptRuleSetRequest": {
@@ -4952,7 +5413,49 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Composes an email message and immediately queues it for sending. To send email using\n            this operation, your message must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>The message must be sent from a verified email address or domain. If you\n                    attempt to send email using a non-verified address or domain, the operation\n                    results in an \"Email address not verified\" error. </p>\n            </li>\n            <li>\n               <p>If your account is still in the Amazon SES sandbox, you may only send to verified\n                    addresses or domains, or to email addresses associated with the Amazon SES Mailbox\n                    Simulator. For more information, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html\">Verifying Email\n                        Addresses and Domains</a> in the <i>Amazon SES Developer\n                        Guide.</i>\n               </p>\n            </li>\n            <li>\n               <p>The maximum message size is 10 MB.</p>\n            </li>\n            <li>\n               <p>The message must include at least one recipient email address. The recipient\n                    address can be a To: address, a CC: address, or a BCC: address. If a recipient\n                    email address is invalid (that is, it is not in the format\n                        <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), the entire\n                    message is rejected, even if the message contains other recipients that are\n                    valid.</p>\n            </li>\n            <li>\n               <p>The message may not include more than 50 recipients, across the To:, CC: and\n                    BCC: fields. If you need to send an email message to a larger audience, you can\n                    divide your recipient list into groups of 50 or fewer, and then call the\n                        <code>SendEmail</code> operation several times to send the message to each\n                    group.</p>\n            </li>\n         </ul>\n         <important>\n            <p>For every message that you send, the total number of recipients (including each\n                recipient in the To:, CC: and BCC: fields) is counted against the maximum number of\n                emails you can send in a 24-hour period (your <i>sending quota</i>).\n                For more information about sending quotas in Amazon SES, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html\">Managing Your Amazon SES Sending\n                    Limits</a> in the <i>Amazon SES Developer Guide.</i>\n            </p>\n         </important>"
+                "smithy.api#documentation": "<p>Composes an email message and immediately queues it for sending. To send email using\n            this operation, your message must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>The message must be sent from a verified email address or domain. If you\n                    attempt to send email using a non-verified address or domain, the operation\n                    results in an \"Email address not verified\" error. </p>\n            </li>\n            <li>\n               <p>If your account is still in the Amazon SES sandbox, you may only send to verified\n                    addresses or domains, or to email addresses associated with the Amazon SES Mailbox\n                    Simulator. For more information, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html\">Verifying Email\n                        Addresses and Domains</a> in the <i>Amazon SES Developer\n                        Guide.</i>\n               </p>\n            </li>\n            <li>\n               <p>The maximum message size is 10 MB.</p>\n            </li>\n            <li>\n               <p>The message must include at least one recipient email address. The recipient\n                    address can be a To: address, a CC: address, or a BCC: address. If a recipient\n                    email address is invalid (that is, it is not in the format\n                        <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), the entire\n                    message is rejected, even if the message contains other recipients that are\n                    valid.</p>\n            </li>\n            <li>\n               <p>The message may not include more than 50 recipients, across the To:, CC: and\n                    BCC: fields. If you need to send an email message to a larger audience, you can\n                    divide your recipient list into groups of 50 or fewer, and then call the\n                        <code>SendEmail</code> operation several times to send the message to each\n                    group.</p>\n            </li>\n         </ul>\n         <important>\n            <p>For every message that you send, the total number of recipients (including each\n                recipient in the To:, CC: and BCC: fields) is counted against the maximum number of\n                emails you can send in a 24-hour period (your <i>sending quota</i>).\n                For more information about sending quotas in Amazon SES, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html\">Managing Your Amazon SES Sending\n                    Limits</a> in the <i>Amazon SES Developer Guide.</i>\n            </p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SendEmail",
+                        "documentation": "The following example sends a formatted email:",
+                        "input": {
+                            "Source": "sender@example.com",
+                            "Destination": {
+                                "ToAddresses": [
+                                    "recipient1@example.com",
+                                    "recipient2@example.com"
+                                ],
+                                "CcAddresses": [
+                                    "recipient3@example.com"
+                                ],
+                                "BccAddresses": []
+                            },
+                            "Message": {
+                                "Subject": {
+                                    "Data": "Test email",
+                                    "Charset": "UTF-8"
+                                },
+                                "Body": {
+                                    "Text": {
+                                        "Data": "This is the message body in text format.",
+                                        "Charset": "UTF-8"
+                                    },
+                                    "Html": {
+                                        "Data": "This message body contains HTML formatting. It can, for example, contain links like this one: <a class=\"ulink\" href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide\" target=\"_blank\">Amazon SES Developer Guide</a>.",
+                                        "Charset": "UTF-8"
+                                    }
+                                }
+                            },
+                            "ReplyToAddresses": [],
+                            "ReturnPath": "",
+                            "SourceArn": "",
+                            "ReturnPathArn": ""
+                        },
+                        "output": {
+                            "MessageId": "EXAMPLE78603177f-7a5433e7-8edb-42ae-af10-f0181f34d6ee-000000"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SendEmailRequest": {
@@ -5063,7 +5566,26 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Composes an email message and immediately queues it for sending.</p>\n         <p>This operation is more flexible than the <code>SendEmail</code> operation. When you\n            use the <code>SendRawEmail</code> operation, you can specify the headers of the message\n            as well as its content. This flexibility is useful, for example, when you need to send a\n            multipart MIME email (such a message that contains both a text and an HTML version). You\n            can also use this operation to send messages that include attachments.</p>\n         <p>The <code>SendRawEmail</code> operation has the following requirements:</p>\n         <ul>\n            <li>\n               <p>You can only send email from <a href=\"https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html\">verified email addresses or domains</a>. If you try to send email from\n                    an address that isn't verified, the operation results in an \"Email address not\n                    verified\" error.</p>\n            </li>\n            <li>\n               <p>If your account is still in the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html\">Amazon SES sandbox</a>, you can only send email to other verified addresses\n                    in your account, or to addresses that are associated with the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html\">Amazon SES mailbox simulator</a>.</p>\n            </li>\n            <li>\n               <p>The maximum message size, including attachments, is 10 MB.</p>\n            </li>\n            <li>\n               <p>Each message has to include at least one recipient address. A recipient\n                    address includes any address on the To:, CC:, or BCC: lines.</p>\n            </li>\n            <li>\n               <p>If you send a single message to more than one recipient address, and one of\n                    the recipient addresses isn't in a valid format (that is, it's not in the format\n                        <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), Amazon SES\n                    rejects the entire message, even if the other addresses are valid.</p>\n            </li>\n            <li>\n               <p>Each message can include up to 50 recipient addresses across the To:, CC:, or\n                    BCC: lines. If you need to send a single message to more than 50 recipients, you\n                    have to split the list of recipient addresses into groups of less than 50\n                    recipients, and send separate messages to each group.</p>\n            </li>\n            <li>\n               <p>Amazon SES allows you to specify 8-bit Content-Transfer-Encoding for MIME message\n                    parts. However, if Amazon SES has to modify the contents of your message (for\n                    example, if you use open and click tracking), 8-bit content isn't preserved. For\n                    this reason, we highly recommend that you encode all content that isn't 7-bit\n                    ASCII. For more information, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html#send-email-mime-encoding\">MIME Encoding</a> in the <i>Amazon SES Developer\n                        Guide</i>.</p>\n            </li>\n         </ul>\n         <p>Additionally, keep the following considerations in mind when using the\n                <code>SendRawEmail</code> operation:</p>\n         <ul>\n            <li>\n               <p>Although you can customize the message headers when using the\n                        <code>SendRawEmail</code> operation, Amazon SES automatically applies its own\n                        <code>Message-ID</code> and <code>Date</code> headers; if you passed these\n                    headers when creating the message, they are overwritten by the values that Amazon SES\n                    provides.</p>\n            </li>\n            <li>\n               <p>If you are using sending authorization to send on behalf of another user,\n                        <code>SendRawEmail</code> enables you to specify the cross-account identity\n                    for the email's Source, From, and Return-Path parameters in one of two ways: you\n                    can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>,\n                    and/or <code>ReturnPathArn</code>, or you can include the following X-headers in\n                    the header of your raw email:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>X-SES-SOURCE-ARN</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>X-SES-FROM-ARN</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>X-SES-RETURN-PATH-ARN</code>\n                     </p>\n                  </li>\n               </ul>\n               <important>\n                  <p>Don't include these X-headers in the DKIM signature. Amazon SES removes these\n                        before it sends the email.</p>\n               </important>\n               <p>If you only specify the <code>SourceIdentityArn</code> parameter, Amazon SES sets\n                    the From and Return-Path addresses to the same identity that you\n                    specified.</p>\n               <p>For more information about sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Using\n                        Sending Authorization with Amazon SES</a> in the <i>Amazon SES Developer\n                        Guide.</i>\n               </p>\n            </li>\n            <li>\n               <p>For every message that you send, the total number of recipients (including\n                    each recipient in the To:, CC: and BCC: fields) is counted against the maximum\n                    number of emails you can send in a 24-hour period (your <i>sending\n                        quota</i>). For more information about sending quotas in Amazon SES, see\n                        <a href=\"https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html\">Managing Your Amazon SES Sending Limits</a> in the <i>Amazon SES Developer\n                        Guide.</i>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Composes an email message and immediately queues it for sending.</p>\n         <p>This operation is more flexible than the <code>SendEmail</code> operation. When you\n            use the <code>SendRawEmail</code> operation, you can specify the headers of the message\n            as well as its content. This flexibility is useful, for example, when you need to send a\n            multipart MIME email (such a message that contains both a text and an HTML version). You\n            can also use this operation to send messages that include attachments.</p>\n         <p>The <code>SendRawEmail</code> operation has the following requirements:</p>\n         <ul>\n            <li>\n               <p>You can only send email from <a href=\"https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html\">verified email addresses or domains</a>. If you try to send email from\n                    an address that isn't verified, the operation results in an \"Email address not\n                    verified\" error.</p>\n            </li>\n            <li>\n               <p>If your account is still in the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html\">Amazon SES sandbox</a>, you can only send email to other verified addresses\n                    in your account, or to addresses that are associated with the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html\">Amazon SES mailbox simulator</a>.</p>\n            </li>\n            <li>\n               <p>The maximum message size, including attachments, is 10 MB.</p>\n            </li>\n            <li>\n               <p>Each message has to include at least one recipient address. A recipient\n                    address includes any address on the To:, CC:, or BCC: lines.</p>\n            </li>\n            <li>\n               <p>If you send a single message to more than one recipient address, and one of\n                    the recipient addresses isn't in a valid format (that is, it's not in the format\n                        <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), Amazon SES\n                    rejects the entire message, even if the other addresses are valid.</p>\n            </li>\n            <li>\n               <p>Each message can include up to 50 recipient addresses across the To:, CC:, or\n                    BCC: lines. If you need to send a single message to more than 50 recipients, you\n                    have to split the list of recipient addresses into groups of less than 50\n                    recipients, and send separate messages to each group.</p>\n            </li>\n            <li>\n               <p>Amazon SES allows you to specify 8-bit Content-Transfer-Encoding for MIME message\n                    parts. However, if Amazon SES has to modify the contents of your message (for\n                    example, if you use open and click tracking), 8-bit content isn't preserved. For\n                    this reason, we highly recommend that you encode all content that isn't 7-bit\n                    ASCII. For more information, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html#send-email-mime-encoding\">MIME Encoding</a> in the <i>Amazon SES Developer\n                        Guide</i>.</p>\n            </li>\n         </ul>\n         <p>Additionally, keep the following considerations in mind when using the\n                <code>SendRawEmail</code> operation:</p>\n         <ul>\n            <li>\n               <p>Although you can customize the message headers when using the\n                        <code>SendRawEmail</code> operation, Amazon SES automatically applies its own\n                        <code>Message-ID</code> and <code>Date</code> headers; if you passed these\n                    headers when creating the message, they are overwritten by the values that Amazon SES\n                    provides.</p>\n            </li>\n            <li>\n               <p>If you are using sending authorization to send on behalf of another user,\n                        <code>SendRawEmail</code> enables you to specify the cross-account identity\n                    for the email's Source, From, and Return-Path parameters in one of two ways: you\n                    can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>,\n                    and/or <code>ReturnPathArn</code>, or you can include the following X-headers in\n                    the header of your raw email:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>X-SES-SOURCE-ARN</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>X-SES-FROM-ARN</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>X-SES-RETURN-PATH-ARN</code>\n                     </p>\n                  </li>\n               </ul>\n               <important>\n                  <p>Don't include these X-headers in the DKIM signature. Amazon SES removes these\n                        before it sends the email.</p>\n               </important>\n               <p>If you only specify the <code>SourceIdentityArn</code> parameter, Amazon SES sets\n                    the From and Return-Path addresses to the same identity that you\n                    specified.</p>\n               <p>For more information about sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html\">Using\n                        Sending Authorization with Amazon SES</a> in the <i>Amazon SES Developer\n                        Guide.</i>\n               </p>\n            </li>\n            <li>\n               <p>For every message that you send, the total number of recipients (including\n                    each recipient in the To:, CC: and BCC: fields) is counted against the maximum\n                    number of emails you can send in a 24-hour period (your <i>sending\n                        quota</i>). For more information about sending quotas in Amazon SES, see\n                        <a href=\"https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html\">Managing Your Amazon SES Sending Limits</a> in the <i>Amazon SES Developer\n                        Guide.</i>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SendRawEmail",
+                        "documentation": "The following example sends an email with an attachment:",
+                        "input": {
+                            "Source": "",
+                            "Destinations": [],
+                            "RawMessage": {
+                                "Data": "From: sender@example.com\\nTo: recipient@example.com\\nSubject: Test email (contains an attachment)\\nMIME-Version: 1.0\\nContent-type: Multipart/Mixed; boundary=\"NextPart\"\\n\\n--NextPart\\nContent-Type: text/plain\\n\\nThis is the message body.\\n\\n--NextPart\\nContent-Type: text/plain;\\nContent-Disposition: attachment; filename=\"attachment.txt\"\\n\\nThis is the text in the attachment.\\n\\n--NextPart--"
+                            },
+                            "FromArn": "",
+                            "SourceArn": "",
+                            "ReturnPathArn": ""
+                        },
+                        "output": {
+                            "MessageId": "EXAMPLEf3f73d99b-c63fb06f-d263-41f8-a0fb-d0dc67d56c07-000000"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SendRawEmailRequest": {
@@ -5286,7 +5808,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the specified receipt rule set as the active receipt rule set.</p>\n         <note>\n            <p>To disable your email-receiving through Amazon SES completely, you can call this\n                operation with <code>RuleSetName</code> set to null.</p>\n         </note>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Sets the specified receipt rule set as the active receipt rule set.</p>\n         <note>\n            <p>To disable your email-receiving through Amazon SES completely, you can call this\n                operation with <code>RuleSetName</code> set to null.</p>\n         </note>\n         <p>For information about managing receipt rule sets, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetActiveReceiptRuleSet",
+                        "documentation": "The following example sets the active receipt rule set:",
+                        "input": {
+                            "RuleSetName": "RuleSetToActivate"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetActiveReceiptRuleSetRequest": {
@@ -5321,7 +5852,17 @@
                 "target": "com.amazonaws.ses#SetIdentityDkimEnabledResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables Easy DKIM signing of email sent from an identity. If Easy DKIM\n            signing is enabled for a domain, then Amazon SES uses DKIM to sign all email that it sends\n            from addresses on that domain. If Easy DKIM signing is enabled for an email address,\n            then Amazon SES uses DKIM to sign all email it sends from that address.</p>\n         <note>\n            <p>For email addresses (for example, <code>user@example.com</code>), you can only\n                enable DKIM signing if the corresponding domain (in this case,\n                    <code>example.com</code>) has been set up to use Easy DKIM.</p>\n         </note>\n         <p>You can enable DKIM signing for an identity at any time after you start the\n            verification process for the identity, even if the verification process isn't complete. </p>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about Easy DKIM signing, go to the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html\">Amazon SES Developer\n                Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Enables or disables Easy DKIM signing of email sent from an identity. If Easy DKIM\n            signing is enabled for a domain, then Amazon SES uses DKIM to sign all email that it sends\n            from addresses on that domain. If Easy DKIM signing is enabled for an email address,\n            then Amazon SES uses DKIM to sign all email it sends from that address.</p>\n         <note>\n            <p>For email addresses (for example, <code>user@example.com</code>), you can only\n                enable DKIM signing if the corresponding domain (in this case,\n                    <code>example.com</code>) has been set up to use Easy DKIM.</p>\n         </note>\n         <p>You can enable DKIM signing for an identity at any time after you start the\n            verification process for the identity, even if the verification process isn't complete. </p>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about Easy DKIM signing, go to the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html\">Amazon SES Developer\n                Guide</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetIdentityDkimEnabled",
+                        "documentation": "The following example configures Amazon SES to Easy DKIM-sign the email sent from an identity:",
+                        "input": {
+                            "Identity": "user@example.com",
+                            "DkimEnabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetIdentityDkimEnabledRequest": {
@@ -5365,7 +5906,17 @@
                 "target": "com.amazonaws.ses#SetIdentityFeedbackForwardingEnabledResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Given an identity (an email address or a domain), enables or disables whether Amazon SES\n            forwards bounce and complaint notifications as email. Feedback forwarding can only be\n            disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and\n            complaints.</p>\n         <note>\n            <p>Feedback forwarding does not apply to delivery notifications. Delivery\n                notifications are only available through Amazon SNS.</p>\n         </note>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about using notifications with Amazon SES, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Given an identity (an email address or a domain), enables or disables whether Amazon SES\n            forwards bounce and complaint notifications as email. Feedback forwarding can only be\n            disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and\n            complaints.</p>\n         <note>\n            <p>Feedback forwarding does not apply to delivery notifications. Delivery\n                notifications are only available through Amazon SNS.</p>\n         </note>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about using notifications with Amazon SES, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetIdentityFeedbackForwardingEnabled",
+                        "documentation": "The following example configures Amazon SES to forward an identity's bounces and complaints via email:",
+                        "input": {
+                            "Identity": "user@example.com",
+                            "ForwardingEnabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetIdentityFeedbackForwardingEnabledRequest": {
@@ -5409,7 +5960,18 @@
                 "target": "com.amazonaws.ses#SetIdentityHeadersInNotificationsEnabledResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Given an identity (an email address or a domain), sets whether Amazon SES includes the\n            original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified\n            type.</p>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about using notifications with Amazon SES, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Given an identity (an email address or a domain), sets whether Amazon SES includes the\n            original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified\n            type.</p>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about using notifications with Amazon SES, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetIdentityHeadersInNotificationsEnabled",
+                        "documentation": "The following example configures Amazon SES to include the original email headers in the Amazon SNS bounce notifications for an identity:",
+                        "input": {
+                            "Identity": "user@example.com",
+                            "NotificationType": "Bounce",
+                            "Enabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetIdentityHeadersInNotificationsEnabledRequest": {
@@ -5460,7 +6022,18 @@
                 "target": "com.amazonaws.ses#SetIdentityMailFromDomainResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables the custom MAIL FROM domain setup for a verified identity (an\n            email address or a domain).</p>\n         <important>\n            <p>To send emails using the specified MAIL FROM domain, you must add an MX record to\n                your MAIL FROM domain's DNS settings. To ensure that your emails pass Sender Policy\n                Framework (SPF) checks, you must also add or update an SPF record. For more\n                information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/mail-from.html\">Amazon SES Developer Guide</a>.</p>\n         </important>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Enables or disables the custom MAIL FROM domain setup for a verified identity (an\n            email address or a domain).</p>\n         <important>\n            <p>To send emails using the specified MAIL FROM domain, you must add an MX record to\n                your MAIL FROM domain's DNS settings. To ensure that your emails pass Sender Policy\n                Framework (SPF) checks, you must also add or update an SPF record. For more\n                information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/mail-from.html\">Amazon SES Developer Guide</a>.</p>\n         </important>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetIdentityMailFromDomain",
+                        "documentation": "The following example configures Amazon SES to use a custom MAIL FROM domain for an identity:",
+                        "input": {
+                            "Identity": "user@example.com",
+                            "MailFromDomain": "bounces.example.com",
+                            "BehaviorOnMXFailure": "UseDefaultValue"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetIdentityMailFromDomainRequest": {
@@ -5508,7 +6081,18 @@
                 "target": "com.amazonaws.ses#SetIdentityNotificationTopicResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets an Amazon Simple Notification Service (Amazon SNS) topic to use when delivering notifications. When you use\n            this operation, you specify a verified identity, such as an email address or domain.\n            When you send an email that uses the chosen identity in the Source field, Amazon SES sends\n            notifications to the topic you specified. You can send bounce, complaint, or delivery\n            notifications (or any combination of the three) to the Amazon SNS topic that you\n            specify.</p>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about feedback notification, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Sets an Amazon Simple Notification Service (Amazon SNS) topic to use when delivering notifications. When you use\n            this operation, you specify a verified identity, such as an email address or domain.\n            When you send an email that uses the chosen identity in the Source field, Amazon SES sends\n            notifications to the topic you specified. You can send bounce, complaint, or delivery\n            notifications (or any combination of the three) to the Amazon SNS topic that you\n            specify.</p>\n         <p>You can execute this operation no more than once per second.</p>\n         <p>For more information about feedback notification, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html\">Amazon SES\n                Developer Guide</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetIdentityNotificationTopic",
+                        "documentation": "The following example sets the Amazon SNS topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with the specified identity as the Source:",
+                        "input": {
+                            "Identity": "user@example.com",
+                            "NotificationType": "Bounce",
+                            "SnsTopic": "arn:aws:sns:us-west-2:111122223333:MyTopic"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetIdentityNotificationTopicRequest": {
@@ -5565,7 +6149,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the position of the specified receipt rule in the receipt rule set.</p>\n         <p>For information about managing receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Sets the position of the specified receipt rule in the receipt rule set.</p>\n         <p>For information about managing receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetReceiptRulePosition",
+                        "documentation": "The following example sets the position of a receipt rule in a receipt rule set:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet",
+                            "RuleName": "RuleToReposition",
+                            "After": "PutRuleAfterThisRule"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#SetReceiptRulePositionRequest": {
@@ -5829,6 +6424,7 @@
                     "arnNamespace": "ses",
                     "cloudFormationName": "SES",
                     "cloudTrailEventSource": "ses.amazonaws.com",
+                    "docId": "email-2010-12-01",
                     "endpointPrefix": "email"
                 },
                 "aws.auth#sigv4": {
@@ -5900,9 +6496,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -5915,15 +6690,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -5935,258 +6745,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -7078,7 +7638,16 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables email sending across your entire Amazon SES account in the current\n            Amazon Web Services Region. You can use this operation in conjunction with Amazon CloudWatch alarms to\n            temporarily pause email sending across your Amazon SES account in a given Amazon Web Services Region when\n            reputation metrics (such as your bounce or complaint rates) reach certain\n            thresholds.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Enables or disables email sending across your entire Amazon SES account in the current\n            Amazon Web Services Region. You can use this operation in conjunction with Amazon CloudWatch alarms to\n            temporarily pause email sending across your Amazon SES account in a given Amazon Web Services Region when\n            reputation metrics (such as your bounce or complaint rates) reach certain\n            thresholds.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateAccountSendingEnabled",
+                        "documentation": "The following example updated the sending status for this account.",
+                        "input": {
+                            "Enabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#UpdateAccountSendingEnabledRequest": {
@@ -7171,7 +7740,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables the publishing of reputation metrics for emails sent using a\n            specific configuration set in a given Amazon Web Services Region. Reputation metrics include bounce\n            and complaint rates. These metrics are published to Amazon CloudWatch. By using CloudWatch, you can\n            create alarms when bounce or complaint rates exceed certain thresholds.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Enables or disables the publishing of reputation metrics for emails sent using a\n            specific configuration set in a given Amazon Web Services Region. Reputation metrics include bounce\n            and complaint rates. These metrics are published to Amazon CloudWatch. By using CloudWatch, you can\n            create alarms when bounce or complaint rates exceed certain thresholds.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateConfigurationSetReputationMetricsEnabled",
+                        "documentation": "Set the reputationMetricsEnabled flag for a specific configuration set.",
+                        "input": {
+                            "ConfigurationSetName": "foo",
+                            "Enabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#UpdateConfigurationSetReputationMetricsEnabledRequest": {
@@ -7212,7 +7791,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables email sending for messages sent using a specific configuration set\n            in a given Amazon Web Services Region. You can use this operation in conjunction with Amazon CloudWatch alarms\n            to temporarily pause email sending for a configuration set when the reputation metrics\n            for that configuration set (such as your bounce on complaint rate) exceed certain\n            thresholds.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Enables or disables email sending for messages sent using a specific configuration set\n            in a given Amazon Web Services Region. You can use this operation in conjunction with Amazon CloudWatch alarms\n            to temporarily pause email sending for a configuration set when the reputation metrics\n            for that configuration set (such as your bounce on complaint rate) exceed certain\n            thresholds.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateConfigurationSetReputationMetricsEnabled",
+                        "documentation": "Set the sending enabled flag for a specific configuration set.",
+                        "input": {
+                            "ConfigurationSetName": "foo",
+                            "Enabled": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#UpdateConfigurationSetSendingEnabledRequest": {
@@ -7390,7 +7979,30 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a receipt rule.</p>\n         <p>For information about managing receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Updates a receipt rule.</p>\n         <p>For information about managing receipt rules, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html\">Amazon SES\n                Developer Guide</a>.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateReceiptRule",
+                        "documentation": "The following example updates a receipt rule to use an Amazon S3 action:",
+                        "input": {
+                            "RuleSetName": "MyRuleSet",
+                            "Rule": {
+                                "TlsPolicy": "Optional",
+                                "Enabled": true,
+                                "Name": "MyRule",
+                                "Actions": [
+                                    {
+                                        "S3Action": {
+                                            "ObjectKeyPrefix": "email",
+                                            "BucketName": "MyBucket"
+                                        }
+                                    }
+                                ],
+                                "ScanEnabled": true
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#UpdateReceiptRuleRequest": {
@@ -7527,7 +8139,23 @@
                 "target": "com.amazonaws.ses#VerifyDomainDkimResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a set of DKIM tokens for a domain identity.</p>\n         <important>\n            <p>When you execute the <code>VerifyDomainDkim</code> operation, the domain that you\n                specify is added to the list of identities that are associated with your account.\n                This is true even if you haven't already associated the domain with your account by\n                using the <code>VerifyDomainIdentity</code> operation. However, you can't send email\n                from the domain until you either successfully <a href=\"https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure\">verify\n                    it</a> or you successfully <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html\">set up DKIM for\n                    it</a>.</p>\n         </important>\n         <p>You use the tokens that are generated by this operation to create CNAME records. When\n            Amazon SES detects that you've added these records to the DNS configuration for a domain, you\n            can start sending email from that domain. You can start sending email even if you\n            haven't added the TXT record provided by the VerifyDomainIdentity operation to the DNS\n            configuration for your domain. All email that you send from the domain is authenticated\n            using DKIM.</p>\n         <p>To create the CNAME records for DKIM authentication, use the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Name</b>:\n                        <i>token</i>._domainkey.<i>example.com</i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Type</b>: CNAME</p>\n            </li>\n            <li>\n               <p>\n                  <b>Value</b>:\n                    <i>token</i>.dkim.amazonses.com</p>\n            </li>\n         </ul>\n         <p>In the preceding example, replace <i>token</i> with one of the tokens\n            that are generated when you execute this operation. Replace\n                <i>example.com</i> with your domain. Repeat this process for each\n            token that's generated by this operation.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Returns a set of DKIM tokens for a domain identity.</p>\n         <important>\n            <p>When you execute the <code>VerifyDomainDkim</code> operation, the domain that you\n                specify is added to the list of identities that are associated with your account.\n                This is true even if you haven't already associated the domain with your account by\n                using the <code>VerifyDomainIdentity</code> operation. However, you can't send email\n                from the domain until you either successfully <a href=\"https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure\">verify\n                    it</a> or you successfully <a href=\"https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html\">set up DKIM for\n                    it</a>.</p>\n         </important>\n         <p>You use the tokens that are generated by this operation to create CNAME records. When\n            Amazon SES detects that you've added these records to the DNS configuration for a domain, you\n            can start sending email from that domain. You can start sending email even if you\n            haven't added the TXT record provided by the VerifyDomainIdentity operation to the DNS\n            configuration for your domain. All email that you send from the domain is authenticated\n            using DKIM.</p>\n         <p>To create the CNAME records for DKIM authentication, use the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Name</b>:\n                        <i>token</i>._domainkey.<i>example.com</i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Type</b>: CNAME</p>\n            </li>\n            <li>\n               <p>\n                  <b>Value</b>:\n                    <i>token</i>.dkim.amazonses.com</p>\n            </li>\n         </ul>\n         <p>In the preceding example, replace <i>token</i> with one of the tokens\n            that are generated when you execute this operation. Replace\n                <i>example.com</i> with your domain. Repeat this process for each\n            token that's generated by this operation.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "VerifyDomainDkim",
+                        "documentation": "The following example generates DKIM tokens for a domain that has been verified with Amazon SES:",
+                        "input": {
+                            "Domain": "example.com"
+                        },
+                        "output": {
+                            "DkimTokens": [
+                                "EXAMPLEq76owjnks3lnluwg65scbemvw",
+                                "EXAMPLEi3dnsj67hstzaj673klariwx2",
+                                "EXAMPLEwfbtcukvimehexktmdtaz6naj"
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#VerifyDomainDkimRequest": {
@@ -7571,7 +8199,19 @@
                 "target": "com.amazonaws.ses#VerifyDomainIdentityResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds a domain to the list of identities for your Amazon SES account in the current\n            Amazon Web Services Region and attempts to verify it. For more information about verifying domains,\n            see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html\">Verifying Email Addresses and Domains</a> in the <i>Amazon SES Developer\n                Guide.</i>\n         </p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Adds a domain to the list of identities for your Amazon SES account in the current\n            Amazon Web Services Region and attempts to verify it. For more information about verifying domains,\n            see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html\">Verifying Email Addresses and Domains</a> in the <i>Amazon SES Developer\n                Guide.</i>\n         </p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "VerifyDomainIdentity",
+                        "documentation": "The following example starts the domain verification process with Amazon SES:",
+                        "input": {
+                            "Domain": "example.com"
+                        },
+                        "output": {
+                            "VerificationToken": "eoEmxw+YaYhb3h3iVJHuXMJXqeu1q1/wwmvjuEXAMPLE"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#VerifyDomainIdentityRequest": {
@@ -7615,7 +8255,16 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deprecated. Use the <code>VerifyEmailIdentity</code> operation to verify a new email\n            address.</p>"
+                "smithy.api#documentation": "<p>Deprecated. Use the <code>VerifyEmailIdentity</code> operation to verify a new email\n            address.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "VerifyEmailAddress",
+                        "documentation": "The following example starts the email address verification process with Amazon SES:",
+                        "input": {
+                            "EmailAddress": "user@example.com"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#VerifyEmailAddressRequest": {
@@ -7643,7 +8292,16 @@
                 "target": "com.amazonaws.ses#VerifyEmailIdentityResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds an email address to the list of identities for your Amazon SES account in the current\n            Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a\n            verification email is sent to the specified address.</p>\n         <p>You can execute this operation no more than once per second.</p>"
+                "smithy.api#documentation": "<p>Adds an email address to the list of identities for your Amazon SES account in the current\n            Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a\n            verification email is sent to the specified address.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "VerifyEmailIdentity",
+                        "documentation": "The following example starts the email address verification process with Amazon SES:",
+                        "input": {
+                            "EmailAddress": "user@example.com"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ses#VerifyEmailIdentityRequest": {

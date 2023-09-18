@@ -12408,6 +12408,7 @@
                     "arnNamespace": "lex",
                     "cloudFormationName": "LexModelsV2",
                     "cloudTrailEventSource": "lexmodelsv2.amazonaws.com",
+                    "docId": "models.lex.v2-2020-08-07",
                     "endpointPrefix": "models-v2-lex"
                 },
                 "aws.auth#sigv4": {

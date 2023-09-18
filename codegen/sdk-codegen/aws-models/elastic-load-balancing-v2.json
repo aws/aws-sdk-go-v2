@@ -3087,6 +3087,7 @@
                     "arnNamespace": "elasticloadbalancing",
                     "cloudFormationName": "ElasticLoadBalancingV2",
                     "cloudTrailEventSource": "elasticloadbalancingv2.amazonaws.com",
+                    "docId": "elasticloadbalancingv2-2015-12-01",
                     "endpointPrefix": "elasticloadbalancing"
                 },
                 "aws.auth#sigv4": {
