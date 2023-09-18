@@ -27,10 +27,10 @@ import software.amazon.smithy.rulesengine.language.syntax.parameters.ParameterTy
 import software.amazon.smithy.rulesengine.language.syntax.parameters.Parameters;
 import software.amazon.smithy.utils.StringUtils;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.stream.StreamSupport;
 
 public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
 
@@ -61,9 +61,6 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
             return;
         }
         Parameters parameters = ruleset.get().getParameters();
-        var paramList = StreamSupport
-            .stream(parameters.spliterator(), false);
-            .collect(Collectors.toList());
 
         var content = new GoWriter.ChainWritable()
                 .add(generatePseudoRegionUtility())
@@ -72,8 +69,8 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                 .add(generateBuiltInResolverMethod(parameters))
                 .compose();
 
-        for (Parameter parameter : paramList) {
-            if (parameter.getBuiltIn().isPresent()) {
+        for(Iterator<Parameter> iter = parameters.iterator(); iter.hasNext();){
+            if (iter.next().getBuiltIn().isPresent()) {
                 writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
                     writer.write("$W", content);
                 });
@@ -148,44 +145,44 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
     }
 
     private GoWriter.Writable generateBuiltInResolverMembers(Parameters parameters) {
-        var paramStream = StreamSupport
-            .stream(parameters.spliterator(), false);
         return (GoWriter w) -> {
-            paramStream.filter(
-                    p -> p.getBuiltIn().isPresent())
-                    .forEach(parameter -> {
-                        String template = """
-                                $W
-                                $L $T
-                                """;
-                        GoWriter.Writable docs;
-                        Symbol paramSymbol;
-                        if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
-                            template = """
-                                    $W
-                                    $L $P
-                                    """;
-                            docs = goDocTemplate(
-                                    "Base endpoint that can potentially be modified during Endpoint resolution.");
-                            paramSymbol = parameterAsSymbol(parameter);
-                        } else if (parameter.getBuiltIn().get().equals("AWS::UseFIPS")) {
-                            docs = goDocTemplate("Sourced BuiltIn value in a historical enabled or disabled state.");
-                            paramSymbol = SymbolUtils
-                                    .createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build();
-                        } else if (parameter.getBuiltIn().get().equals("AWS::UseDualStack")) {
-                            docs = goDocTemplate("Sourced BuiltIn value in a historical enabled or disabled state.");
-                            paramSymbol = SymbolUtils
-                                    .createValueSymbolBuilder("DualStackEndpointState", AwsGoDependency.AWS_CORE)
-                                    .build();
-                        } else {
-                            docs = parameter.getDocumentation().isPresent()
-                                    ? goDocTemplate(parameter.getDocumentation().get())
-                                    : goDocTemplate("");
-                            paramSymbol = parameterAsSymbol(parameter);
-                        }
-                        w.write(template, docs, getExportedParameterName(parameter), paramSymbol);
-                        w.insertTrailingNewline();
-                    });
+            for(Iterator<Parameter> iter = parameters.iterator(); iter.hasNext();){
+                Parameter parameter = iter.next();
+                if (!parameter.getBuiltIn().isPresent()) {
+                    continue;
+                }
+                String template = """
+                    $W
+                    $L $T
+                    """;
+                GoWriter.Writable docs;
+                Symbol paramSymbol;
+                if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
+                    template = """
+                            $W
+                            $L $P
+                            """;
+                    docs = goDocTemplate(
+                            "Base endpoint that can potentially be modified during Endpoint resolution.");
+                    paramSymbol = parameterAsSymbol(parameter);
+                } else if (parameter.getBuiltIn().get().equals("AWS::UseFIPS")) {
+                    docs = goDocTemplate("Sourced BuiltIn value in a historical enabled or disabled state.");
+                    paramSymbol = SymbolUtils
+                            .createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build();
+                } else if (parameter.getBuiltIn().get().equals("AWS::UseDualStack")) {
+                    docs = goDocTemplate("Sourced BuiltIn value in a historical enabled or disabled state.");
+                    paramSymbol = SymbolUtils
+                            .createValueSymbolBuilder("DualStackEndpointState", AwsGoDependency.AWS_CORE)
+                            .build();
+                } else {
+                    docs = parameter.getDocumentation().isPresent()
+                            ? goDocTemplate(parameter.getDocumentation().get())
+                            : goDocTemplate("");
+                    paramSymbol = parameterAsSymbol(parameter);
+                }
+                w.write(template, docs, getExportedParameterName(parameter), paramSymbol);
+                w.insertTrailingNewline();
+            }
         };
     }
 
@@ -202,11 +199,11 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                                     """),
                     AwsEndpointResolverBuiltInGenerator.BUILTIN_RESOLVER_IMPLEMENTATION_TYPE,
                     EndpointResolutionGenerator.PARAMETERS_TYPE_NAME);
-            var paramStream = StreamSupport
-                    .stream(parameters.spliterator(), false);
-            paramStream.filter(
-                    p -> p.getBuiltIn().isPresent())
-                    .forEach(parameter -> {
+                    for(Iterator<Parameter> iter = parameters.iterator(); iter.hasNext();){
+                        Parameter parameter = iter.next();
+                        if (!parameter.getBuiltIn().isPresent()) {
+                            continue;
+                        }
                         if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
                             writer.write("$W", generateSdkEndpointBuiltInResolver(parameter));
                         } else if (parameter.getBuiltIn().get().equals("AWS::Region")) {
@@ -218,20 +215,20 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                         } else if (parameter.getType() == ParameterType.STRING) {
                             writer.write(
                                     "params.$L = $T(b.$L)",
-                                    parameter.getName().asString(),
+                                    parameter.getName().getName().getValue(),
                                     SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build(),
                                     getExportedParameterName(parameter));
                         } else if (parameter.getType() == ParameterType.BOOLEAN) {
                             writer.write(
                                     "params.$L = $T(b.$L)",
-                                    parameter.getName().asString(),
+                                    parameter.getName().getName().getValue(),
                                     SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build(),
                                     getExportedParameterName(parameter));
                         } else {
                             throw new CodegenException(
                                     String.format("Invalid Builtin %s", parameter.getBuiltIn().get()));
                         }
-                    });
+                    }
 
             writer.write(
                     """
@@ -347,52 +344,52 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
         }
 
         private GoWriter.Writable generateBuiltInInitializeFieldMembers(Parameters parameters) {
-            var paramStream = StreamSupport
-                .stream(parameters.spliterator(), false);
-            return (GoWriter writer) -> {
-                paramStream.filter(
-                        p -> p.getBuiltIn().isPresent())
-                        .forEach(parameter -> {
-                            if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
-                                writer.write("$L: options.BaseEndpoint,", getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::Region")) {
-                                writer.write("$L: options.Region,", getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::UseFIPS")) {
-                                writer.write("$L: options.$L.$L,", getExportedParameterName(parameter),
-                                        "EndpointOptions", USE_FIPS_ENDPOINT_OPTION);
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::UseDualStack")) {
-                                writer.write("$L: options.$L.$L,", getExportedParameterName(parameter),
-                                        "EndpointOptions", DUAL_STACK_ENDPOINT_OPTION);
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::S3::ForcePathStyle")) {
-                                writer.write("$L: options.UsePathStyle,", getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::S3::Accelerate")) {
-                                writer.write("$L: options.UseAccelerate,", getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::S3::UseArnRegion")) {
-                                writer.write("$L: options.UseARNRegion,", getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::S3::DisableMultiRegionAccessPoints")) {
-                                writer.write("$L: options.DisableMultiRegionAccessPoints,",
-                                        getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                            if (parameter.getBuiltIn().get().equals("AWS::S3Control::UseArnRegion")) {
-                                writer.write("$L: options.UseARNRegion,", getExportedParameterName(parameter));
-                                writer.insertTrailingNewline();
-                            }
-                        });
+            return (GoWriter writer) -> { 
+                for(Iterator<Parameter> iter = parameters.iterator(); iter.hasNext();){
+                    Parameter parameter = iter.next();
+                    if (!parameter.getBuiltIn().isPresent()) {
+                        continue;
+                    }
+                    if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
+                        writer.write("$L: options.BaseEndpoint,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::Region")) {
+                        writer.write("$L: options.Region,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::UseFIPS")) {
+                        writer.write("$L: options.$L.$L,", getExportedParameterName(parameter),
+                                "EndpointOptions", USE_FIPS_ENDPOINT_OPTION);
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::UseDualStack")) {
+                        writer.write("$L: options.$L.$L,", getExportedParameterName(parameter),
+                                "EndpointOptions", DUAL_STACK_ENDPOINT_OPTION);
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::S3::ForcePathStyle")) {
+                        writer.write("$L: options.UsePathStyle,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::S3::Accelerate")) {
+                        writer.write("$L: options.UseAccelerate,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::S3::UseArnRegion")) {
+                        writer.write("$L: options.UseARNRegion,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::S3::DisableMultiRegionAccessPoints")) {
+                        writer.write("$L: options.DisableMultiRegionAccessPoints,",
+                                getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                    if (parameter.getBuiltIn().get().equals("AWS::S3Control::UseArnRegion")) {
+                        writer.write("$L: options.UseARNRegion,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
+                }
             };
         }
     }
