@@ -1,3 +1,336 @@
+# Release (2023-09-18)
+
+## General Highlights
+* **Feature**: Adds several endpoint ruleset changes across all models: smaller rulesets, removed non-unique regional endpoints, fixes FIPS and DualStack endpoints, and make region not required in SDK::Endpoint. Additional breakfix to cognito-sync field.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.21.0](service/accessanalyzer/CHANGELOG.md#v1210-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.19.0](service/acm/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.15.0](service/amplify/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.13.0](service/apigatewaymanagementapi/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.19.0](service/appconfig/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.8.0](service/appconfigdata/CHANGELOG.md#v180-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.2.0](service/appfabric/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.17.0](service/appintegrations/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.12.0](service/applicationcostprofiler/CHANGELOG.md#v1120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.19.0](service/appmesh/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.3.0](service/arczonalshift/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.15.0](service/autoscalingplans/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.11.0](service/backupgateway/CHANGELOG.md#v1110-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/backupstorage`: [v1.3.0](service/backupstorage/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.19.0](service/braket/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.9.0](service/chimesdkvoice/CHANGELOG.md#v190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.15.0](service/clouddirectory/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.16.0](service/cloudhsmv2/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.16.0](service/cloudsearch/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.14.0](service/cloudsearchdomain/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.2.0](service/cloudtraildata/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.22.0](service/codebuild/CHANGELOG.md#v1220-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.18.0](service/codedeploy/CHANGELOG.md#v1180-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.15.0](service/codeguruprofiler/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.19.0](service/codegurureviewer/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.2.0](service/codegurusecurity/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codestar`: [v1.15.0](service/codestar/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.16.0](service/codestarnotifications/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.17.0](service/cognitoidentity/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.14.0](service/cognitosync/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.7.0](service/connectcases/CHANGELOG.md#v170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.15.0](service/connectcontactlens/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.3.0](service/controltower/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.23.0](service/databrew/CHANGELOG.md#v1230-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.21.0](service/dataexchange/CHANGELOG.md#v1210-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.16.0](service/datapipeline/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.14.0](service/dax/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.17.0](service/devicefarm/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.3.0](service/docdbelastic/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.17.0](service/ec2instanceconnect/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.18.0](service/ecrpublic/CHANGELOG.md#v1180-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.17.0](service/elasticbeanstalk/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.17.0](service/elasticloadbalancing/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/elastictranscoder`: [v1.16.0](service/elastictranscoder/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.13.0](service/evidently/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.16.0](service/finspacedata/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.16.0](service/fis/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.27.0](service/forecast/CHANGELOG.md#v1270-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.15.0](service/forecastquery/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/gamesparks`: [v1.4.0](service/gamesparks/CHANGELOG.md#v140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.16.0](service/glacier/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.17.0](service/greengrass/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.24.0](service/greengrassv2/CHANGELOG.md#v1240-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/honeycode`: [v1.15.0](service/honeycode/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.15.0](service/inspector/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice`: [v1.13.0](service/iot1clickdevicesservice/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickprojects`: [v1.14.0](service/iot1clickprojects/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.16.0](service/iotanalytics/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.17.0](service/iotevents/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.15.0](service/ioteventsdata/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.15.0](service/iotfleethub/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.14.0](service/iotjobsdataplane/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotroborunner`: [v1.3.0](service/iotroborunner/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.17.0](service/iotsecuretunneling/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.16.0](service/iotthingsgraph/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.6.0](service/ivschat/CHANGELOG.md#v160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.2.0](service/kendraranking/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.19.0](service/kinesis/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.16.0](service/kinesisanalytics/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.17.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.13.0](service/kinesisvideomedia/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.13.0](service/kinesisvideosignaling/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.4.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.19.0](service/lexmodelbuildingservice/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.15.0](service/lexruntimeservice/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.19.0](service/lexruntimev2/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.20.0](service/licensemanager/CHANGELOG.md#v1200-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.3.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.4.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.21.0](service/lookoutmetrics/CHANGELOG.md#v1210-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.17.0](service/lookoutvision/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.17.0](service/machinelearning/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/macie`: [v1.17.0](service/macie/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.29.7](service/macie2/CHANGELOG.md#v1297-2023-09-18)
+  * **Documentation**: This release changes the default managedDataIdentifierSelector setting for new classification jobs to RECOMMENDED. By default, new classification jobs now use the recommended set of managed data identifiers.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.14.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.14.0](service/marketplaceentitlementservice/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.16.0](service/marketplacemetering/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.2.0](service/mediapackagev2/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.24.0](service/mediapackagevod/CHANGELOG.md#v1240-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.15.0](service/mediastore/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.15.0](service/mediastoredata/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.2.0](service/medicalimaging/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.15.0](service/migrationhub/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.15.0](service/migrationhubconfig/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.3.0](service/migrationhuborchestrator/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.11.0](service/migrationhubstrategy/CHANGELOG.md#v1110-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/mobile`: [v1.14.0](service/mobile/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.16.0](service/mturk/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.22.0](service/neptune/CHANGELOG.md#v1220-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.19.0](service/networkmanager/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.18.0](service/nimble/CHANGELOG.md#v1180-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.3.0](service/oam/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.5.0](service/opensearchserverless/CHANGELOG.md#v150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/opsworks`: [v1.16.0](service/opsworks/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.17.0](service/opsworkscm/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.2.0](service/osis/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.13.0](service/panorama/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.2.0](service/paymentcryptography/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.15.0](service/personalizeevents/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.15.0](service/personalizeruntime/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.14.0](service/pinpointemail/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.13.0](service/pinpointsmsvoice/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.3.0](service/pinpointsmsvoicev2/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.4.0](service/pipes/CHANGELOG.md#v140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/qldbsession`: [v1.16.0](service/qldbsession/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.10.0](service/rbin/CHANGELOG.md#v1100-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.15.0](service/rdsdata/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.6.0](service/redshiftserverless/CHANGELOG.md#v160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.4.0](service/resourceexplorer2/CHANGELOG.md#v140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.16.0](service/resourcegroups/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.16.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.20.0](service/robomaker/CHANGELOG.md#v1200-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.13.0](service/route53recoverycluster/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.13.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.11.0](service/route53recoveryreadiness/CHANGELOG.md#v1110-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.20.0](service/route53resolver/CHANGELOG.md#v1200-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.12.0](service/rum/CHANGELOG.md#v1120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.18.0](service/s3outposts/CHANGELOG.md#v1180-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.17.0](service/sagemakera2iruntime/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.15.0](service/sagemakeredge/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.5.0](service/sagemakergeospatial/CHANGELOG.md#v150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.2.0](service/sagemakermetrics/CHANGELOG.md#v120-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.3.0](service/scheduler/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.17.0](service/schemas/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.14.0](service/serverlessapplicationrepository/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.19.0](service/servicecatalogappregistry/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.23.0](service/servicediscovery/CHANGELOG.md#v1230-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.20.0](service/shield/CHANGELOG.md#v1200-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.15.0](service/sms/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.11.0](service/snowdevicemanagement/CHANGELOG.md#v1110-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.22.0](service/sns/CHANGELOG.md#v1220-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.17.0](service/ssmcontacts/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.23.0](service/ssmincidents/CHANGELOG.md#v1230-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.5.0](service/ssmsap/CHANGELOG.md#v150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.14.0](service/sso/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.16.0](service/ssooidc/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.20.0](service/storagegateway/CHANGELOG.md#v1200-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.22.0](service/sts/CHANGELOG.md#v1220-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.4.0](service/supportapp/CHANGELOG.md#v140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.19.0](service/synthetics/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.23.0](service/textract/CHANGELOG.md#v1230-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.17.0](service/timestreamquery/CHANGELOG.md#v1170-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.19.0](service/timestreamwrite/CHANGELOG.md#v1190-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.3.0](service/tnb/CHANGELOG.md#v130-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.11.0](service/transcribestreaming/CHANGELOG.md#v1110-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.15.0](service/voiceid/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.14.0](service/waf/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.15.0](service/wafregional/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.16.0](service/workdocs/CHANGELOG.md#v1160-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/worklink`: [v1.15.0](service/worklink/CHANGELOG.md#v1150-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.20.0](service/workmail/CHANGELOG.md#v1200-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+  * **Feature**: This release includes four new APIs UpdateUser, UpdateGroup, ListGroupsForEntity and DescribeEntity, along with RemoteUsers and some enhancements to existing APIs.
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.14.0](service/workmailmessageflow/CHANGELOG.md#v1140-2023-09-18)
+  * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+
 # Release (2023-09-15)
 
 ## Module Highlights

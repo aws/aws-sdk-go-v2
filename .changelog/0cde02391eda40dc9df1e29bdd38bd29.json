@@ -1,8 +1,0 @@
-{
-    "id": "0cde0239-1eda-40dc-9df1-e29bdd38bd29",
-    "type": "feature",
-    "description": "Add sensitive protection for customer information",
-    "modules": [
-        "service/applicationdiscoveryservice"
-    ]
-}

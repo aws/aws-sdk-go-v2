@@ -1,8 +1,0 @@
-{
-    "id": "7dccf3a1-644f-4c7e-9a56-56ce947b3434",
-    "type": "documentation",
-    "description": "This release changes the default managedDataIdentifierSelector setting for new classification jobs to RECOMMENDED. By default, new classification jobs now use the recommended set of managed data identifiers.",
-    "modules": [
-        "service/macie2"
-    ]
-}

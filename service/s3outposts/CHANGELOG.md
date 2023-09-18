@@ -1,3 +1,8 @@
+# v1.18.0 (2023-09-18)
+
+* **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.
+* **Feature**: Adds several endpoint ruleset changes across all models: smaller rulesets, removed non-unique regional endpoints, fixes FIPS and DualStack endpoints, and make region not required in SDK::Endpoint. Additional breakfix to cognito-sync field.
+
 # v1.17.6 (2023-08-25)
 
 * No change notes available for this release.
