@@ -50,6 +50,9 @@ type DeleteOrganizationInput struct {
 	// The idempotency token associated with the request.
 	ClientToken *string
 
+	// Deletes a WorkMail organization even if the organization has enabled users.
+	ForceDelete bool
+
 	noSmithyDocumentSerde
 }
 

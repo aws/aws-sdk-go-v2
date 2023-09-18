@@ -68,6 +68,12 @@ type DescribeOrganizationOutput struct {
 	// with regards to the organization.
 	ErrorMessage *string
 
+	// Indicates if interoperability is enabled for this organization.
+	InteroperabilityEnabled bool
+
+	// The user ID of the migration admin if migration is enabled for the organization.
+	MigrationAdmin *string
+
 	// The identifier of an organization.
 	OrganizationId *string
 

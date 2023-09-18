@@ -39,6 +39,10 @@ type ListResourcesInput struct {
 	// This member is required.
 	OrganizationId *string
 
+	// Limit the resource search results based on the filter criteria. You can only
+	// use one filter per request.
+	Filters *types.ListResourcesFilters
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 

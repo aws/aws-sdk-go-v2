@@ -15,65 +15,58 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the primary email for a user, group, or resource. The current email is
-// moved into the list of aliases (or swapped between an existing alias and the
-// current primary email), and the email provided in the input is promoted as the
-// primary.
-func (c *Client) UpdatePrimaryEmailAddress(ctx context.Context, params *UpdatePrimaryEmailAddressInput, optFns ...func(*Options)) (*UpdatePrimaryEmailAddressOutput, error) {
+// Updates attibutes in a group.
+func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optFns ...func(*Options)) (*UpdateGroupOutput, error) {
 	if params == nil {
-		params = &UpdatePrimaryEmailAddressInput{}
+		params = &UpdateGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePrimaryEmailAddress", params, optFns, c.addOperationUpdatePrimaryEmailAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGroup", params, optFns, c.addOperationUpdateGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdatePrimaryEmailAddressOutput)
+	out := result.(*UpdateGroupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdatePrimaryEmailAddressInput struct {
+type UpdateGroupInput struct {
 
-	// The value of the email to be updated as primary.
-	//
-	// This member is required.
-	Email *string
-
-	// The user, group, or resource to update. The identifier can accept UseriD,
-	// ResourceId, or GroupId, Username, Resourcename, or Groupname, or email. The
-	// following identity formats are available:
-	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
-	//   r-0123456789a0123456789b0123456789, or
+	// The identifier for the group to be updated. The identifier can accept GroupId,
+	// Groupname, or email. The following identity formats are available:
+	//   - Group ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
-	//   - Email address: entity@domain.tld
-	//   - Entity name: entity
+	//   - Email address: group@domain.tld
+	//   - Group name: group
 	//
 	// This member is required.
-	EntityId *string
+	GroupId *string
 
-	// The organization that contains the user, group, or resource to update.
+	// The identifier for the organization under which the group exists.
 	//
 	// This member is required.
 	OrganizationId *string
 
+	// If enabled, the group is hidden from the global address list.
+	HiddenFromGlobalAddressList *bool
+
 	noSmithyDocumentSerde
 }
 
-type UpdatePrimaryEmailAddressOutput struct {
+type UpdateGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrimaryEmailAddress{}, middleware.After)
+func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePrimaryEmailAddress{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -116,13 +109,13 @@ func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdatePrimaryEmailAddressResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addUpdateGroupResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdatePrimaryEmailAddressValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePrimaryEmailAddress(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -143,25 +136,25 @@ func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middlew
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdatePrimaryEmailAddress(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateGroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "workmail",
-		OperationName: "UpdatePrimaryEmailAddress",
+		OperationName: "UpdateGroup",
 	}
 }
 
-type opUpdatePrimaryEmailAddressResolveEndpointMiddleware struct {
+type opUpdateGroupResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opUpdatePrimaryEmailAddressResolveEndpointMiddleware) ID() string {
+func (*opUpdateGroupResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opUpdatePrimaryEmailAddressResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opUpdateGroupResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -263,8 +256,8 @@ func (m *opUpdatePrimaryEmailAddressResolveEndpointMiddleware) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
-func addUpdatePrimaryEmailAddressResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opUpdatePrimaryEmailAddressResolveEndpointMiddleware{
+func addUpdateGroupResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opUpdateGroupResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

@@ -10,50 +10,36 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the primary email for a user, group, or resource. The current email is
-// moved into the list of aliases (or swapped between an existing alias and the
-// current primary email), and the email provided in the input is promoted as the
-// primary.
-func (c *Client) UpdatePrimaryEmailAddress(ctx context.Context, params *UpdatePrimaryEmailAddressInput, optFns ...func(*Options)) (*UpdatePrimaryEmailAddressOutput, error) {
+// Returns basic details about an entity in WorkMail.
+func (c *Client) DescribeEntity(ctx context.Context, params *DescribeEntityInput, optFns ...func(*Options)) (*DescribeEntityOutput, error) {
 	if params == nil {
-		params = &UpdatePrimaryEmailAddressInput{}
+		params = &DescribeEntityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePrimaryEmailAddress", params, optFns, c.addOperationUpdatePrimaryEmailAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEntity", params, optFns, c.addOperationDescribeEntityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdatePrimaryEmailAddressOutput)
+	out := result.(*DescribeEntityOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdatePrimaryEmailAddressInput struct {
+type DescribeEntityInput struct {
 
-	// The value of the email to be updated as primary.
+	// The email under which the entity exists.
 	//
 	// This member is required.
 	Email *string
 
-	// The user, group, or resource to update. The identifier can accept UseriD,
-	// ResourceId, or GroupId, Username, Resourcename, or Groupname, or email. The
-	// following identity formats are available:
-	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
-	//   r-0123456789a0123456789b0123456789, or
-	//   S-1-1-12-1234567890-123456789-123456789-1234
-	//   - Email address: entity@domain.tld
-	//   - Entity name: entity
-	//
-	// This member is required.
-	EntityId *string
-
-	// The organization that contains the user, group, or resource to update.
+	// The identifier for the organization under which the entity exists.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -61,19 +47,29 @@ type UpdatePrimaryEmailAddressInput struct {
 	noSmithyDocumentSerde
 }
 
-type UpdatePrimaryEmailAddressOutput struct {
+type DescribeEntityOutput struct {
+
+	// The entity ID under which the entity exists.
+	EntityId *string
+
+	// Username, GroupName, or ResourceName based on entity type.
+	Name *string
+
+	// Entity type.
+	Type types.EntityType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrimaryEmailAddress{}, middleware.After)
+func (c *Client) addOperationDescribeEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntity{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePrimaryEmailAddress{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntity{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -116,13 +112,13 @@ func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdatePrimaryEmailAddressResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addDescribeEntityResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdatePrimaryEmailAddressValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeEntityValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePrimaryEmailAddress(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEntity(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -143,25 +139,25 @@ func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middlew
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdatePrimaryEmailAddress(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeEntity(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "workmail",
-		OperationName: "UpdatePrimaryEmailAddress",
+		OperationName: "DescribeEntity",
 	}
 }
 
-type opUpdatePrimaryEmailAddressResolveEndpointMiddleware struct {
+type opDescribeEntityResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opUpdatePrimaryEmailAddressResolveEndpointMiddleware) ID() string {
+func (*opDescribeEntityResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opUpdatePrimaryEmailAddressResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opDescribeEntityResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -263,8 +259,8 @@ func (m *opUpdatePrimaryEmailAddressResolveEndpointMiddleware) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
-func addUpdatePrimaryEmailAddressResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opUpdatePrimaryEmailAddressResolveEndpointMiddleware{
+func addDescribeEntityResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opDescribeEntityResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

@@ -40,7 +40,12 @@ type DescribeUserInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier for the user to be described.
+	// The identifier for the user to be described. The identifier can be the UserId,
+	// Username, or email. The following identity formats are available:
+	//   - User ID: 12345678-1234-1234-1234-123456789012 or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: user@domain.tld
+	//   - User name: user
 	//
 	// This member is required.
 	UserId *string
@@ -49,6 +54,18 @@ type DescribeUserInput struct {
 }
 
 type DescribeUserOutput struct {
+
+	// City where the user is located.
+	City *string
+
+	// Company of the user.
+	Company *string
+
+	// Country where the user is located.
+	Country *string
+
+	// Department of the user.
+	Department *string
 
 	// The date and time at which the user was disabled for WorkMail usage, in UNIX
 	// epoch time format.
@@ -64,12 +81,42 @@ type DescribeUserOutput struct {
 	// epoch time format.
 	EnabledDate *time.Time
 
+	// First name of the user.
+	FirstName *string
+
+	// If enabled, the user is hidden from the global address list.
+	HiddenFromGlobalAddressList bool
+
+	// Initials of the user.
+	Initials *string
+
+	// Job title of the user.
+	JobTitle *string
+
+	// Last name of the user.
+	LastName *string
+
+	// The date when the mailbox was removed for the user.
+	MailboxDeprovisionedDate *time.Time
+
+	// The date when the mailbox was created for the user.
+	MailboxProvisionedDate *time.Time
+
 	// The name for the user.
 	Name *string
+
+	// Office where the user is located.
+	Office *string
 
 	// The state of a user: enabled (registered to WorkMail) or disabled (deregistered
 	// or never registered to WorkMail).
 	State types.EntityState
+
+	// Street where the user is located.
+	Street *string
+
+	// User's contact number.
+	Telephone *string
 
 	// The identifier for the described user.
 	UserId *string
@@ -78,9 +125,12 @@ type DescribeUserOutput struct {
 	// enabled, resources are imported into WorkMail as users. Because different
 	// WorkMail organizations rely on different directory types, administrators can
 	// distinguish between an unregistered user (account is disabled and has a user
-	// role) and the directory administrators. The values are USER, RESOURCE, and
-	// SYSTEM_USER.
+	// role) and the directory administrators. The values are USER, RESOURCE,
+	// SYSTEM_USER, and REMOTE_USER.
 	UserRole types.UserRole
+
+	// Zip code of the user.
+	ZipCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

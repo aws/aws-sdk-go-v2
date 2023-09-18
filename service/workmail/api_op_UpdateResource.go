@@ -42,7 +42,12 @@ type UpdateResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the resource to be updated.
+	// The identifier of the resource to be updated. The identifier can accept
+	// ResourceId, Resourcename, or email. The following identity formats are
+	// available:
+	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//   - Email address: resource@domain.tld
+	//   - Resource name: resource
 	//
 	// This member is required.
 	ResourceId *string
@@ -50,8 +55,17 @@ type UpdateResourceInput struct {
 	// The resource's booking options to be updated.
 	BookingOptions *types.BookingOptions
 
+	// Updates the resource description.
+	Description *string
+
+	// If enabled, the resource is hidden from the global address list.
+	HiddenFromGlobalAddressList *bool
+
 	// The name of the resource to be updated.
 	Name *string
+
+	// Updates the resource type.
+	Type types.ResourceType
 
 	noSmithyDocumentSerde
 }

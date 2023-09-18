@@ -35,14 +35,26 @@ func (c *Client) PutMailboxPermissions(ctx context.Context, params *PutMailboxPe
 
 type PutMailboxPermissionsInput struct {
 
-	// The identifier of the user, group, or resource for which to update mailbox
-	// permissions.
+	// The identifier of the user or resource for which to update mailbox permissions.
+	// The identifier can be UserId, ResourceID, or Group Id, Username, Resourcename,
+	// or Groupname, or email.
+	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
+	//   r-0123456789a0123456789b0123456789, or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: entity@domain.tld
+	//   - Entity name: entity
 	//
 	// This member is required.
 	EntityId *string
 
 	// The identifier of the user, group, or resource to which to grant the
-	// permissions.
+	// permissions. The identifier can be UserId, ResourceID, or Group Id, Username,
+	// Resourcename, or Groupname, or email.
+	//   - Grantee ID: 12345678-1234-1234-1234-123456789012,
+	//   r-0123456789a0123456789b0123456789, or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: grantee@domain.tld
+	//   - Grantee name: grantee
 	//
 	// This member is required.
 	GranteeId *string

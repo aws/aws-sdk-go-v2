@@ -41,7 +41,12 @@ type DescribeResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the resource to be described.
+	// The identifier of the resource to be described. The identifier can accept
+	// ResourceId, Resourcename, or email. The following identity formats are
+	// available:
+	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//   - Email address: resource@domain.tld
+	//   - Resource name: resource
 	//
 	// This member is required.
 	ResourceId *string
@@ -54,6 +59,9 @@ type DescribeResourceOutput struct {
 	// The booking options for the described resource.
 	BookingOptions *types.BookingOptions
 
+	// Description of the resource.
+	Description *string
+
 	// The date and time when a resource was disabled from WorkMail, in UNIX epoch
 	// time format.
 	DisabledDate *time.Time
@@ -64,6 +72,9 @@ type DescribeResourceOutput struct {
 	// The date and time when a resource was enabled for WorkMail, in UNIX epoch time
 	// format.
 	EnabledDate *time.Time
+
+	// If enabled, the resource is hidden from the global address list.
+	HiddenFromGlobalAddressList bool
 
 	// The name of the described resource.
 	Name *string

@@ -39,7 +39,10 @@ type DeleteResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the resource to be deleted.
+	// The identifier of the resource to be deleted. The identifier can accept
+	// ResourceId, or Resourcename. The following identity formats are available:
+	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//   - Resource name: resource
 	//
 	// This member is required.
 	ResourceId *string

@@ -10,70 +10,108 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the primary email for a user, group, or resource. The current email is
-// moved into the list of aliases (or swapped between an existing alias and the
-// current primary email), and the email provided in the input is promoted as the
-// primary.
-func (c *Client) UpdatePrimaryEmailAddress(ctx context.Context, params *UpdatePrimaryEmailAddressInput, optFns ...func(*Options)) (*UpdatePrimaryEmailAddressOutput, error) {
+// Updates data for the user. To have the latest information, it must be preceded
+// by a DescribeUser call. The dataset in the request should be the one expected
+// when performing another DescribeUser call.
+func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
-		params = &UpdatePrimaryEmailAddressInput{}
+		params = &UpdateUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePrimaryEmailAddress", params, optFns, c.addOperationUpdatePrimaryEmailAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateUser", params, optFns, c.addOperationUpdateUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdatePrimaryEmailAddressOutput)
+	out := result.(*UpdateUserOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdatePrimaryEmailAddressInput struct {
+type UpdateUserInput struct {
 
-	// The value of the email to be updated as primary.
-	//
-	// This member is required.
-	Email *string
-
-	// The user, group, or resource to update. The identifier can accept UseriD,
-	// ResourceId, or GroupId, Username, Resourcename, or Groupname, or email. The
-	// following identity formats are available:
-	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
-	//   r-0123456789a0123456789b0123456789, or
-	//   S-1-1-12-1234567890-123456789-123456789-1234
-	//   - Email address: entity@domain.tld
-	//   - Entity name: entity
-	//
-	// This member is required.
-	EntityId *string
-
-	// The organization that contains the user, group, or resource to update.
+	// The identifier for the organization under which the user exists.
 	//
 	// This member is required.
 	OrganizationId *string
 
+	// The identifier for the user to be updated. The identifier can be the UserId,
+	// Username, or email. The following identity formats are available:
+	//   - User ID: 12345678-1234-1234-1234-123456789012 or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: user@domain.tld
+	//   - User name: user
+	//
+	// This member is required.
+	UserId *string
+
+	// Updates the user's city.
+	City *string
+
+	// Updates the user's company.
+	Company *string
+
+	// Updates the user's country.
+	Country *string
+
+	// Updates the user's department.
+	Department *string
+
+	// Updates the display name of the user.
+	DisplayName *string
+
+	// Updates the user's first name.
+	FirstName *string
+
+	// If enabled, the user is hidden from the global address list.
+	HiddenFromGlobalAddressList *bool
+
+	// Updates the user's initials.
+	Initials *string
+
+	// Updates the user's job title.
+	JobTitle *string
+
+	// Updates the user's last name.
+	LastName *string
+
+	// Updates the user's office.
+	Office *string
+
+	// Updates the user role. You cannot pass SYSTEM_USER or RESOURCE.
+	Role types.UserRole
+
+	// Updates the user's street address.
+	Street *string
+
+	// Updates the user's contact details.
+	Telephone *string
+
+	// Updates the user's zipcode.
+	ZipCode *string
+
 	noSmithyDocumentSerde
 }
 
-type UpdatePrimaryEmailAddressOutput struct {
+type UpdateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrimaryEmailAddress{}, middleware.After)
+func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUser{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePrimaryEmailAddress{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUser{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -116,13 +154,13 @@ func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdatePrimaryEmailAddressResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addUpdateUserResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdatePrimaryEmailAddressValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateUserValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePrimaryEmailAddress(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -143,25 +181,25 @@ func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middlew
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdatePrimaryEmailAddress(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateUser(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "workmail",
-		OperationName: "UpdatePrimaryEmailAddress",
+		OperationName: "UpdateUser",
 	}
 }
 
-type opUpdatePrimaryEmailAddressResolveEndpointMiddleware struct {
+type opUpdateUserResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opUpdatePrimaryEmailAddressResolveEndpointMiddleware) ID() string {
+func (*opUpdateUserResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opUpdatePrimaryEmailAddressResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opUpdateUserResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -263,8 +301,8 @@ func (m *opUpdatePrimaryEmailAddressResolveEndpointMiddleware) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
-func addUpdatePrimaryEmailAddressResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opUpdatePrimaryEmailAddressResolveEndpointMiddleware{
+func addUpdateUserResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opUpdateUserResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

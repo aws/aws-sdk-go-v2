@@ -41,7 +41,12 @@ type ListResourceDelegatesInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier for the resource whose delegates are listed.
+	// The identifier for the resource whose delegates are listed. The identifier can
+	// accept ResourceId, Resourcename, or email. The following identity formats are
+	// available:
+	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//   - Email address: resource@domain.tld
+	//   - Resource name: resource
 	//
 	// This member is required.
 	ResourceId *string

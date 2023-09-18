@@ -96,6 +96,26 @@ func (EntityState) Values() []EntityState {
 	}
 }
 
+type EntityType string
+
+// Enum values for EntityType
+const (
+	EntityTypeGroup    EntityType = "GROUP"
+	EntityTypeUser     EntityType = "USER"
+	EntityTypeResource EntityType = "RESOURCE"
+)
+
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"GROUP",
+		"USER",
+		"RESOURCE",
+	}
+}
+
 type FolderName string
 
 // Enum values for FolderName
@@ -262,6 +282,7 @@ const (
 	UserRoleUser       UserRole = "USER"
 	UserRoleResource   UserRole = "RESOURCE"
 	UserRoleSystemUser UserRole = "SYSTEM_USER"
+	UserRoleRemoteUser UserRole = "REMOTE_USER"
 )
 
 // Values returns all known values for UserRole. Note that this can be expanded in
@@ -272,5 +293,6 @@ func (UserRole) Values() []UserRole {
 		"USER",
 		"RESOURCE",
 		"SYSTEM_USER",
+		"REMOTE_USER",
 	}
 }

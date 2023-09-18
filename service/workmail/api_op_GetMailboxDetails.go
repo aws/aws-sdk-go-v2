@@ -39,7 +39,13 @@ type GetMailboxDetailsInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier for the user whose mailbox details are being requested.
+	// The identifier for the user whose mailbox details are being requested. The
+	// identifier can be the UserId, Username, or email. The following identity formats
+	// are available:
+	//   - User ID: 12345678-1234-1234-1234-123456789012 or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: user@domain.tld
+	//   - User name: user
 	//
 	// This member is required.
 	UserId *string

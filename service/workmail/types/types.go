@@ -137,6 +137,8 @@ type DnsRecord struct {
 type Domain struct {
 
 	// The fully qualified domain name.
+	//
+	// This member is required.
 	DomainName *string
 
 	// The hosted zone ID for a domain hosted in Route 53. Required when configuring a
@@ -212,6 +214,18 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
+// The identifier that contains the Group ID and name of a group.
+type GroupIdentifier struct {
+
+	// Group ID that matched the group.
+	GroupId *string
+
+	// Group name that matched the group.
+	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // The impersonation rule that matched the input.
 type ImpersonationMatchedRule struct {
 
@@ -282,6 +296,67 @@ type LambdaAvailabilityProvider struct {
 	//
 	// This member is required.
 	LambdaArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Filtering options for ListGroups operation. This is only used as input to
+// Operation.
+type ListGroupsFilters struct {
+
+	// Filters only groups with the provided name prefix.
+	NamePrefix *string
+
+	// Filters only groups with the provided primary email prefix.
+	PrimaryEmailPrefix *string
+
+	// Filters only groups with the provided state.
+	State EntityState
+
+	noSmithyDocumentSerde
+}
+
+// Filtering options for ListGroupsForEntity operation. This is only used as input
+// to Operation.
+type ListGroupsForEntityFilters struct {
+
+	// Filters only group names that start with the provided name prefix.
+	GroupNamePrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Filtering options for ListResources operation. This is only used as input to
+// Operation.
+type ListResourcesFilters struct {
+
+	// Filters only resource that start with the entered name prefix .
+	NamePrefix *string
+
+	// Filters only resource with the provided primary email prefix.
+	PrimaryEmailPrefix *string
+
+	// Filters only resource with the provided state.
+	State EntityState
+
+	noSmithyDocumentSerde
+}
+
+// Filtering options for ListUsers operation. This is only used as input to
+// Operation.
+type ListUsersFilters struct {
+
+	// Filters only users with the provided display name prefix.
+	DisplayNamePrefix *string
+
+	// Filters only users with the provided email prefix.
+	PrimaryEmailPrefix *string
+
+	// Filters only users with the provided state.
+	State EntityState
+
+	// Filters only users with the provided username prefix.
+	UsernamePrefix *string
 
 	noSmithyDocumentSerde
 }
@@ -509,6 +584,9 @@ type RedactedEwsAvailabilityProvider struct {
 
 // The representation of a resource.
 type Resource struct {
+
+	// Resource description.
+	Description *string
 
 	// The date indicating when the resource was disabled from WorkMail use.
 	DisabledDate *time.Time

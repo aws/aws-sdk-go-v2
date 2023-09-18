@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,10 +51,22 @@ type CreateUserInput struct {
 	// This member is required.
 	OrganizationId *string
 
+	// The first name of the new user.
+	FirstName *string
+
+	// If this parameter is enabled, the user will be hidden from the address book.
+	HiddenFromGlobalAddressList bool
+
+	// The last name of the new user.
+	LastName *string
+
 	// The password for the new user.
-	//
-	// This member is required.
 	Password *string
+
+	// The role of the new user. You cannot pass SYSTEM_USER or RESOURCE role in a
+	// single request. When a user role is not selected, the default role of USER is
+	// selected.
+	Role types.UserRole
 
 	noSmithyDocumentSerde
 }

@@ -33,7 +33,12 @@ func (c *Client) AssociateDelegateToResource(ctx context.Context, params *Associ
 
 type AssociateDelegateToResourceInput struct {
 
-	// The member (user or group) to associate to the resource.
+	// The member (user or group) to associate to the resource. The entity ID can
+	// accept UserId or GroupID, Username or Groupname, or email.
+	//   - Entity: 12345678-1234-1234-1234-123456789012 or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: entity@domain.tld
+	//   - Entity: entity
 	//
 	// This member is required.
 	EntityId *string
@@ -43,7 +48,12 @@ type AssociateDelegateToResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The resource for which members (users or groups) are associated.
+	// The resource for which members (users or groups) are associated. The identifier
+	// can accept ResourceId, Resourcename, or email. The following identity formats
+	// are available:
+	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//   - Email address: resource@domain.tld
+	//   - Resource name: resource
 	//
 	// This member is required.
 	ResourceId *string

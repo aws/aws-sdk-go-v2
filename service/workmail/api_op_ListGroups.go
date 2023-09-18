@@ -39,6 +39,10 @@ type ListGroupsInput struct {
 	// This member is required.
 	OrganizationId *string
 
+	// Limit the search results based on the filter criteria. Only one filter per
+	// request is supported.
+	Filters *types.ListGroupsFilters
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 

@@ -39,6 +39,10 @@ type ListUsersInput struct {
 	// This member is required.
 	OrganizationId *string
 
+	// Limit the user search results based on the filter criteria. You can only use
+	// one filter per request.
+	Filters *types.ListUsersFilters
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 

@@ -35,7 +35,12 @@ func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, 
 
 type DescribeGroupInput struct {
 
-	// The identifier for the group to be described.
+	// The identifier for the group to be described. The identifier can accept
+	// GroupId, Groupname, or email. The following identity formats are available:
+	//   - Group ID: 12345678-1234-1234-1234-123456789012 or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: group@domain.tld
+	//   - Group name: group
 	//
 	// This member is required.
 	GroupId *string
@@ -63,6 +68,9 @@ type DescribeGroupOutput struct {
 
 	// The identifier of the described group.
 	GroupId *string
+
+	// If the value is set to true, the group is hidden from the address book.
+	HiddenFromGlobalAddressList bool
 
 	// The name of the described group.
 	Name *string

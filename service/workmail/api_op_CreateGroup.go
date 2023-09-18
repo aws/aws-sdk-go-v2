@@ -44,6 +44,9 @@ type CreateGroupInput struct {
 	// This member is required.
 	OrganizationId *string
 
+	// If this parameter is enabled, the group will be hidden from the address book.
+	HiddenFromGlobalAddressList bool
+
 	noSmithyDocumentSerde
 }
 

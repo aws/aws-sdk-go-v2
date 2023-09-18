@@ -41,7 +41,14 @@ type StartMailboxExportJobInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The identifier of the user or resource associated with the mailbox.
+	// The identifier of the user or resource associated with the mailbox. The
+	// identifier can accept UserId or ResourceId, Username or Resourcename, or email.
+	// The following identity formats are available:
+	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
+	//   r-0123456789a0123456789b0123456789 , or
+	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//   - Email address: entity@domain.tld
+	//   - Entity name: entity
 	//
 	// This member is required.
 	EntityId *string

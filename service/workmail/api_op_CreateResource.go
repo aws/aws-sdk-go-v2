@@ -50,6 +50,12 @@ type CreateResourceInput struct {
 	// This member is required.
 	Type types.ResourceType
 
+	// Resource description.
+	Description *string
+
+	// If this parameter is enabled, the resource will be hidden from the address book.
+	HiddenFromGlobalAddressList bool
+
 	noSmithyDocumentSerde
 }
 
