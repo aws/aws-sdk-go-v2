@@ -8,8 +8,6 @@ import (
 )
 
 func TestTokenize(t *testing.T) {
-	numberToken := newToken(TokenLit, []rune("123"), IntegerType)
-	numberToken.base = 10
 	cases := []struct {
 		r              io.Reader
 		expectedTokens []Token
@@ -22,7 +20,7 @@ func TestTokenize(t *testing.T) {
 				newToken(TokenWS, []rune(" "), NoneType),
 				newToken(TokenOp, []rune("="), NoneType),
 				newToken(TokenWS, []rune(" "), NoneType),
-				numberToken,
+				newToken(TokenLit, []rune("123"), StringType),
 			},
 		},
 		{
