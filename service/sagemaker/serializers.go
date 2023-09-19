@@ -17682,6 +17682,11 @@ func awsAwsjson11_serializeDocumentBatchTransformInput(v *types.BatchTransformIn
 		ok.String(*v.EndTimeOffset)
 	}
 
+	if v.ExcludeFeaturesAttribute != nil {
+		ok := object.Key("ExcludeFeaturesAttribute")
+		ok.String(*v.ExcludeFeaturesAttribute)
+	}
+
 	if v.FeaturesAttribute != nil {
 		ok := object.Key("FeaturesAttribute")
 		ok.String(*v.FeaturesAttribute)
@@ -19566,6 +19571,11 @@ func awsAwsjson11_serializeDocumentEndpointInput(v *types.EndpointInput, value s
 	if v.EndTimeOffset != nil {
 		ok := object.Key("EndTimeOffset")
 		ok.String(*v.EndTimeOffset)
+	}
+
+	if v.ExcludeFeaturesAttribute != nil {
+		ok := object.Key("ExcludeFeaturesAttribute")
+		ok.String(*v.ExcludeFeaturesAttribute)
 	}
 
 	if v.FeaturesAttribute != nil {
@@ -24729,6 +24739,16 @@ func awsAwsjson11_serializeDocumentScalingPolicyObjective(v *types.ScalingPolicy
 func awsAwsjson11_serializeDocumentScheduleConfig(v *types.ScheduleConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DataAnalysisEndTime != nil {
+		ok := object.Key("DataAnalysisEndTime")
+		ok.String(*v.DataAnalysisEndTime)
+	}
+
+	if v.DataAnalysisStartTime != nil {
+		ok := object.Key("DataAnalysisStartTime")
+		ok.String(*v.DataAnalysisStartTime)
+	}
 
 	if v.ScheduleExpression != nil {
 		ok := object.Key("ScheduleExpression")

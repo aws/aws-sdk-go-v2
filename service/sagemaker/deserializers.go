@@ -36916,6 +36916,15 @@ func awsAwsjson11_deserializeDocumentBatchTransformInput(v **types.BatchTransfor
 				sv.EndTimeOffset = ptr.String(jtv)
 			}
 
+		case "ExcludeFeaturesAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExcludeFeaturesAttribute to be of type string, got %T instead", value)
+				}
+				sv.ExcludeFeaturesAttribute = ptr.String(jtv)
+			}
+
 		case "FeaturesAttribute":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -44195,6 +44204,15 @@ func awsAwsjson11_deserializeDocumentEndpointInput(v **types.EndpointInput, valu
 					return fmt.Errorf("expected MonitoringTimeOffsetString to be of type string, got %T instead", value)
 				}
 				sv.EndTimeOffset = ptr.String(jtv)
+			}
+
+		case "ExcludeFeaturesAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExcludeFeaturesAttribute to be of type string, got %T instead", value)
+				}
+				sv.ExcludeFeaturesAttribute = ptr.String(jtv)
 			}
 
 		case "FeaturesAttribute":
@@ -67297,6 +67315,24 @@ func awsAwsjson11_deserializeDocumentScheduleConfig(v **types.ScheduleConfig, va
 
 	for key, value := range shape {
 		switch key {
+		case "DataAnalysisEndTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DataAnalysisEndTime = ptr.String(jtv)
+			}
+
+		case "DataAnalysisStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DataAnalysisStartTime = ptr.String(jtv)
+			}
+
 		case "ScheduleExpression":
 			if value != nil {
 				jtv, ok := value.(string)

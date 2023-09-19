@@ -69,8 +69,8 @@ type ListMonitoringSchedulesInput struct {
 	// job executions, use it in the next request.
 	NextToken *string
 
-	// Whether to sort the results by the Status , CreationTime , or ScheduledTime
-	// field. The default is CreationTime .
+	// Whether to sort results by Status , CreationTime , ScheduledTime field. The
+	// default is CreationTime .
 	SortBy types.MonitoringScheduleSortKey
 
 	// Whether to sort the results in Ascending or Descending order. The default is
@@ -91,8 +91,8 @@ type ListMonitoringSchedulesOutput struct {
 	// This member is required.
 	MonitoringScheduleSummaries []types.MonitoringScheduleSummary
 
-	// The token returned if the response is truncated. To retrieve the next set of
-	// job executions, use it in the next request.
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

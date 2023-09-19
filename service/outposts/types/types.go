@@ -119,6 +119,10 @@ type ComputeAttributes struct {
 	// The host ID of the Dedicated Host on the asset.
 	HostId *string
 
+	// A list of the names of instance families that are currently associated with a
+	// given asset.
+	InstanceFamilies []string
+
 	// The state.
 	//   - ACTIVE - The asset is available and can provide capacity for new compute
 	//   resources.
@@ -196,7 +200,7 @@ type LineItem struct {
 	// The ID of the previous line item.
 	PreviousLineItemId *string
 
-	// The ID of the previous order item.
+	// The ID of the previous order.
 	PreviousOrderId *string
 
 	// The quantity of the line item.
@@ -250,7 +254,7 @@ type Order struct {
 	// The submission date for the order.
 	OrderSubmissionDate *time.Time
 
-	// Type of order.
+	// The type of order.
 	OrderType OrderType
 
 	// The ID of the Outpost in the order.

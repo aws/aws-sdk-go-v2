@@ -4654,6 +4654,11 @@ func awsRestjson1_deserializeDocumentComputeAttributes(v **types.ComputeAttribut
 				sv.HostId = ptr.String(jtv)
 			}
 
+		case "InstanceFamilies":
+			if err := awsRestjson1_deserializeDocumentInstanceFamilies(&sv.InstanceFamilies, value); err != nil {
+				return err
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4896,6 +4901,42 @@ func awsRestjson1_deserializeDocumentEC2CapacityListDefinition(v *[]types.EC2Cap
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInstanceFamilies(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InstanceFamilyName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

@@ -73,8 +73,8 @@ type ListModelBiasJobDefinitionsOutput struct {
 	// This member is required.
 	JobDefinitionSummaries []types.MonitoringJobDefinitionSummary
 
-	// The token returned if the response is truncated. To retrieve the next set of
-	// job executions, use it in the next request.
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

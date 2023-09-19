@@ -1,0 +1,8 @@
+{
+    "id": "b7a03d89-95d2-41e7-ae6f-9ddda47e2ed0",
+    "type": "feature",
+    "description": "This release adds support for C7i, and R7a instance types.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -74,8 +74,8 @@ type ListMonitoringExecutionsInput struct {
 	// Filter for jobs scheduled before a specified time.
 	ScheduledTimeBefore *time.Time
 
-	// Whether to sort the results by the Status , CreationTime , or ScheduledTime
-	// field. The default is CreationTime .
+	// Whether to sort results by Status , CreationTime , ScheduledTime field. The
+	// default is CreationTime .
 	SortBy types.MonitoringExecutionSortKey
 
 	// Whether to sort the results in Ascending or Descending order. The default is
@@ -95,8 +95,8 @@ type ListMonitoringExecutionsOutput struct {
 	// This member is required.
 	MonitoringExecutionSummaries []types.MonitoringExecutionSummary
 
-	// The token returned if the response is truncated. To retrieve the next set of
-	// job executions, use it in the next request.
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of jobs, use it in the subsequent reques
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
