@@ -1,3 +1,7 @@
+# v1.30.0 (2023-09-19)
+
+* **Feature**: This release adds the InstanceFamilies field to the ListAssets response.
+
 # v1.29.6 (2023-08-23)
 
 * No change notes available for this release.

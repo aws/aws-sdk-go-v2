@@ -1,3 +1,7 @@
+# v1.119.0 (2023-09-19)
+
+* **Feature**: This release adds support for C7i, and R7a instance types.
+
 # v1.118.0 (2023-09-12)
 
 * **Feature**: This release adds support for restricting public sharing of AMIs through AMI Block Public Access

@@ -1,3 +1,13 @@
+# Release (2023-09-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.119.0](service/ec2/CHANGELOG.md#v11190-2023-09-19)
+  * **Feature**: This release adds support for C7i, and R7a instance types.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.30.0](service/outposts/CHANGELOG.md#v1300-2023-09-19)
+  * **Feature**: This release adds the InstanceFamilies field to the ListAssets response.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.107.0](service/sagemaker/CHANGELOG.md#v11070-2023-09-19)
+  * **Feature**: This release adds support for one-time model monitoring schedules that are executed immediately without delay, explicit data analysis windows for model monitoring schedules and exclude features attributes to remove features from model monitor analysis.
+
 # Release (2023-09-18)
 
 ## General Highlights

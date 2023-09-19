@@ -1,3 +1,7 @@
+# v1.107.0 (2023-09-19)
+
+* **Feature**: This release adds support for one-time model monitoring schedules that are executed immediately without delay, explicit data analysis windows for model monitoring schedules and exclude features attributes to remove features from model monitor analysis.
+
 # v1.106.0 (2023-09-15)
 
 * **Feature**: This release introduces Skip Model Validation for Model Packages

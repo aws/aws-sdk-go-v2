@@ -1,8 +1,0 @@
-{
-    "id": "290a2def-29f9-48c2-87b8-983fe8284248",
-    "type": "feature",
-    "description": "This release adds support for one-time model monitoring schedules that are executed immediately without delay, explicit data analysis windows for model monitoring schedules and exclude features attributes to remove features from model monitor analysis.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
