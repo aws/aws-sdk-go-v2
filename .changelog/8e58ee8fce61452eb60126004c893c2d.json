@@ -1,0 +1,9 @@
+{
+    "id": "8e58ee8f-ce61-452e-b601-26004c893c2d",
+    "type": "bugfix",
+    "description": "Fixed a bug where merging `max_attempts` or `duration_seconds` fields across shared config files with invalid values would silently default them to 0.",
+    "modules": [
+        "config",
+        "internal/ini"
+    ]
+}
