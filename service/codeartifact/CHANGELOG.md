@@ -1,3 +1,7 @@
+# v1.20.0 (2023-09-20)
+
+* **Feature**: Add support for the Swift package format.
+
 # v1.19.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

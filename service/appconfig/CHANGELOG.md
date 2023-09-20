@@ -1,3 +1,7 @@
+# v1.20.0 (2023-09-20)
+
+* **Feature**: Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors
+
 # v1.19.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

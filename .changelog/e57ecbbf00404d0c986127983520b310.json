@@ -1,8 +1,0 @@
-{
-    "id": "e57ecbbf-0040-4d0c-9861-27983520b310",
-    "type": "feature",
-    "description": "This release adds improvements for managing App Runner auto scaling configuration resources. New APIs: UpdateDefaultAutoScalingConfiguration and ListServicesForAutoScalingConfiguration. Updated API: DeleteAutoScalingConfiguration.",
-    "modules": [
-        "service/apprunner"
-    ]
-}

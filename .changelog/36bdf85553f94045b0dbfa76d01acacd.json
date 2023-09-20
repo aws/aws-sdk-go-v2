@@ -1,8 +1,0 @@
-{
-    "id": "36bdf855-53f9-4045-b0db-fa76d01acacd",
-    "type": "feature",
-    "description": "Add ClientToken to QueryDefinition CFN Handler in CWL",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "ff82d83f-d074-4c45-8118-7a15371f8efa",
-    "type": "feature",
-    "description": "Update FIPS endpoints in aws-us-gov.",
-    "modules": [
-        "service/ssooidc"
-    ]
-}

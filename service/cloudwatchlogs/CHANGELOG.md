@@ -1,3 +1,7 @@
+# v1.24.0 (2023-09-20)
+
+* **Feature**: Add ClientToken to QueryDefinition CFN Handler in CWL
+
 # v1.23.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

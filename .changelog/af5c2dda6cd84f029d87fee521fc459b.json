@@ -1,8 +1,0 @@
-{
-    "id": "af5c2dda-6cd8-4f02-9d87-fee521fc459b",
-    "type": "feature",
-    "description": "Fix an issue where the SDK can fail to unmarshall response due to NumberFormatException",
-    "modules": [
-        "service/s3"
-    ]
-}

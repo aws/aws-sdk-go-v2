@@ -1,3 +1,7 @@
+# v1.20.0 (2023-09-20)
+
+* **Feature**: This release adds improvements for managing App Runner auto scaling configuration resources. New APIs: UpdateDefaultAutoScalingConfiguration and ListServicesForAutoScalingConfiguration. Updated API: DeleteAutoScalingConfiguration.
+
 # v1.19.0 (2023-08-30)
 
 * **Feature**: App Runner adds support for Bitbucket. You can now create App Runner connection that connects to your Bitbucket repositories and deploy App Runner service with the source code stored in a Bitbucket repository.

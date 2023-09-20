@@ -1,3 +1,7 @@
+# v1.24.0 (2023-09-20)
+
+* **Feature**: Adds a new DiscoverInstancesRevision API and also adds InstanceRevision field to the DiscoverInstances API response.
+
 # v1.23.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

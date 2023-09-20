@@ -1,8 +1,0 @@
-{
-    "id": "c8ddd3eb-6256-4e5a-ac2e-da5b2452fc6c",
-    "type": "documentation",
-    "description": "Updated DescribeMediaStorageConfiguration, StartEdgeConfigurationUpdate, ImageGenerationConfiguration$SamplingInterval, and UpdateMediaStorageConfiguration to match AWS Docs.",
-    "modules": [
-        "service/kinesisvideo"
-    ]
-}

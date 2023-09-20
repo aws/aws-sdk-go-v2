@@ -1,8 +1,0 @@
-{
-    "id": "974d4f6f-1beb-4704-a446-00db86266dca",
-    "type": "feature",
-    "description": "Add support for the Swift package format.",
-    "modules": [
-        "service/codeartifact"
-    ]
-}

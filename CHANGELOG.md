@@ -1,3 +1,26 @@
+# Release (2023-09-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.20.0](service/appconfig/CHANGELOG.md#v1200-2023-09-20)
+  * **Feature**: Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.20.0](service/apprunner/CHANGELOG.md#v1200-2023-09-20)
+  * **Feature**: This release adds improvements for managing App Runner auto scaling configuration resources. New APIs: UpdateDefaultAutoScalingConfiguration and ListServicesForAutoScalingConfiguration. Updated API: DeleteAutoScalingConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.24.0](service/cloudwatchlogs/CHANGELOG.md#v1240-2023-09-20)
+  * **Feature**: Add ClientToken to QueryDefinition CFN Handler in CWL
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.20.0](service/codeartifact/CHANGELOG.md#v1200-2023-09-20)
+  * **Feature**: Add support for the Swift package format.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.18.4](service/kinesisvideo/CHANGELOG.md#v1184-2023-09-20)
+  * **Documentation**: Updated DescribeMediaStorageConfiguration, StartEdgeConfigurationUpdate, ImageGenerationConfiguration$SamplingInterval, and UpdateMediaStorageConfiguration to match AWS Docs.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.39.0](service/s3/CHANGELOG.md#v1390-2023-09-20)
+  * **Feature**: Fix an issue where the SDK can fail to unmarshall response due to NumberFormatException
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.24.0](service/servicediscovery/CHANGELOG.md#v1240-2023-09-20)
+  * **Feature**: Adds a new DiscoverInstancesRevision API and also adds InstanceRevision field to the DiscoverInstances API response.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.17.0](service/ssooidc/CHANGELOG.md#v1170-2023-09-20)
+  * **Feature**: Update FIPS endpoints in aws-us-gov.
+
 # Release (2023-09-19)
 
 ## Module Highlights
