@@ -282,6 +282,31 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://oidc.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://oidc-fips.{Region}.{PartitionResult#dnsSuffix}",
@@ -754,7 +779,7 @@
                             "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://oidc-fips.us-gov-east-1.amazonaws.com"
+                                    "url": "https://oidc.us-gov-east-1.amazonaws.com"
                                 }
                             },
                             "params": {

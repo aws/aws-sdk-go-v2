@@ -1673,6 +1673,9 @@
                 },
                 {
                     "target": "com.amazonaws.appconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
@@ -1743,6 +1746,9 @@
                 },
                 {
                     "target": "com.amazonaws.appconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
@@ -1800,7 +1806,7 @@
                 "LocationUri": {
                     "target": "com.amazonaws.appconfig#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URI to locate the configuration. You can specify the following:</p>\n         <ul>\n            <li>\n               <p>For the AppConfig hosted configuration store and for feature flags,\n               specify <code>hosted</code>.</p>\n            </li>\n            <li>\n               <p>For an Amazon Web Services Systems Manager Parameter Store parameter, specify either the parameter name in\n               the format <code>ssm-parameter://<parameter name></code> or the ARN.</p>\n            </li>\n            <li>\n               <p>For an Secrets Manager secret, specify the URI in the following format:\n                  <code>secrets-manager</code>://<secret name>.</p>\n            </li>\n            <li>\n               <p>For an Amazon S3 object, specify the URI in the following format:\n                  <code>s3://<bucket>/<objectKey> </code>. Here is an example:\n                  <code>s3://my-bucket/my-app/us-east-1/my-config.json</code>\n               </p>\n            </li>\n            <li>\n               <p>For an SSM document, specify either the document name in the format\n                  <code>ssm-document://<document name></code> or the Amazon Resource Name\n               (ARN).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A URI to locate the configuration. You can specify the following:</p>\n         <ul>\n            <li>\n               <p>For the AppConfig hosted configuration store and for feature flags,\n               specify <code>hosted</code>.</p>\n            </li>\n            <li>\n               <p>For an Amazon Web Services Systems Manager Parameter Store parameter, specify either the parameter name in\n               the format <code>ssm-parameter://<parameter name></code> or the ARN.</p>\n            </li>\n            <li>\n               <p>For an Amazon Web Services\n               CodePipeline pipeline, specify the URI in the following format:\n                  <code>codepipeline</code>://<pipeline name>.</p>\n            </li>\n            <li>\n               <p>For an Secrets Manager secret, specify the URI in the following format:\n                  <code>secretsmanager</code>://<secret name>.</p>\n            </li>\n            <li>\n               <p>For an Amazon S3 object, specify the URI in the following format:\n                  <code>s3://<bucket>/<objectKey> </code>. Here is an example:\n                  <code>s3://my-bucket/my-app/us-east-1/my-config.json</code>\n               </p>\n            </li>\n            <li>\n               <p>For an SSM document, specify either the document name in the format\n                  <code>ssm-document://<document name></code> or the Amazon Resource Name\n               (ARN).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1847,6 +1853,9 @@
                 },
                 {
                     "target": "com.amazonaws.appconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
@@ -1958,6 +1967,9 @@
                 },
                 {
                     "target": "com.amazonaws.appconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
@@ -2049,7 +2061,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an AppConfig extension. An extension augments your ability to inject\n         logic or behavior at different points during the AppConfig workflow of creating\n         or deploying a configuration.</p>\n         <p>You can create your own extensions or use the Amazon Web Services authored extensions provided by\n            AppConfig. For most use cases, to create your own extension, you must create\n         an Lambda function to perform any computation and processing defined in the\n         extension. For more information about extensions, see <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html\">Working with\n               AppConfig extensions</a> in the\n         <i>AppConfig User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an AppConfig extension. An extension augments your ability to inject\n         logic or behavior at different points during the AppConfig workflow of creating\n         or deploying a configuration.</p>\n         <p>You can create your own extensions or use the Amazon Web Services authored extensions provided by\n            AppConfig. For an AppConfig extension that uses Lambda, you must create a Lambda function to perform any computation and processing\n         defined in the extension. If you plan to create custom versions of the Amazon Web Services\n         authored notification extensions, you only need to specify an Amazon Resource Name (ARN) in\n         the <code>Uri</code> field for the new extension version.</p>\n         <ul>\n            <li>\n               <p>For a custom EventBridge notification extension, enter the ARN of the EventBridge\n               default events in the <code>Uri</code> field.</p>\n            </li>\n            <li>\n               <p>For a custom Amazon SNS notification extension, enter the ARN of an Amazon SNS\n               topic in the <code>Uri</code> field.</p>\n            </li>\n            <li>\n               <p>For a custom Amazon SQS notification extension, enter the ARN of an Amazon SQS\n               message queue in the <code>Uri</code> field. </p>\n            </li>\n         </ul>\n         <p>For more information about extensions, see <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html\">Working with\n               AppConfig extensions</a> in the\n         <i>AppConfig User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/extensions",
@@ -2286,7 +2298,7 @@
                 "VersionLabel": {
                     "target": "com.amazonaws.appconfig#VersionLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional, user-defined label for the AppConfig hosted configuration version. This value must contain at least one non-numeric character. For example, \"v2.2.0\".</p>",
+                        "smithy.api#documentation": "<p>An optional, user-defined label for the AppConfig hosted configuration\n         version. This value must contain at least one non-numeric character. For example,\n         \"v2.2.0\".</p>",
                         "smithy.api#httpHeader": "VersionLabel"
                     }
                 }
@@ -2832,6 +2844,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID to encrypt the configuration data using a customer managed key. </p>"
                     }
+                },
+                "VersionLabel": {
+                    "target": "com.amazonaws.appconfig#VersionLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-defined label for an AppConfig hosted configuration version.</p>"
+                    }
                 }
             }
         },
@@ -2853,7 +2871,7 @@
                 "Description": {
                     "target": "com.amazonaws.appconfig#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the deployment event. Descriptions include, but are not limited to, the\n         user account or the Amazon CloudWatch alarm ARN that initiated a rollback, the percentage of hosts\n         that received the deployment, or in the case of an internal error, a recommendation to\n         attempt a new deployment.</p>"
+                        "smithy.api#documentation": "<p>A description of the deployment event. Descriptions include, but are not limited to, the\n         following:</p>\n         <ul>\n            <li>\n               <p>The Amazon Web Services account or the Amazon CloudWatch alarm ARN that initiated a rollback.</p>\n            </li>\n            <li>\n               <p>The percentage of hosts that received the deployment.</p>\n            </li>\n            <li>\n               <p>A recommendation to attempt a new deployment (in the case of an internal\n               error).</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ActionInvocations": {
@@ -3124,6 +3142,12 @@
                     "target": "com.amazonaws.appconfig#Iso8601DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>Time the deployment completed.</p>"
+                    }
+                },
+                "VersionLabel": {
+                    "target": "com.amazonaws.appconfig#VersionLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-defined label for an AppConfig hosted configuration version.</p>"
                     }
                 }
             },
@@ -4321,6 +4345,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4396,6 +4421,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4483,6 +4509,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4539,6 +4566,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4630,6 +4658,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4691,6 +4720,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4766,6 +4796,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4849,6 +4880,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Items",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4890,7 +4922,7 @@
                 "VersionLabel": {
                     "target": "com.amazonaws.appconfig#QueryName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional filter that can be used to specify the version label of an AppConfig hosted configuration version. This parameter supports filtering by prefix using a wildcard, for example \"v2*\". If you don't specify an asterisk at the end of the value, only an exact match is returned.</p>",
+                        "smithy.api#documentation": "<p>An optional filter that can be used to specify the version label of an AppConfig hosted configuration version. This parameter supports filtering by prefix using a\n         wildcard, for example \"v2*\". If you don't specify an asterisk at the end of the value, only\n         an exact match is returned.</p>",
                         "smithy.api#httpQuery": "version_label"
                     }
                 }
@@ -5197,7 +5229,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The number of hosted configuration versions exceeds the limit for the AppConfig hosted configuration store. Delete one or more versions and try again.</p>",
+                "smithy.api#documentation": "<p>The number of one more AppConfig resources exceeds the maximum allowed. Verify that your\n         environment doesn't exceed the following service quotas:</p>\n         <p>Applications: 100 max</p>\n         <p>Deployment strategies: 20 max</p>\n         <p>Configuration profiles: 100 max per application</p>\n         <p>Environments: 20 max per application</p>\n         <p>To resolve this issue, you can delete one or more resources and try again. Or, you\n         can request a quota increase. For more information about quotas and to request an increase,\n         see <a href=\"https://docs.aws.amazon.com/general/latest/gr/appconfig.html#limits_appconfig\">Service quotas for AppConfig</a> in the Amazon Web Services General Reference.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -5269,7 +5301,7 @@
                 "ConfigurationVersion": {
                     "target": "com.amazonaws.appconfig#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration version to deploy. If deploying an AppConfig hosted configuration version, you can specify either the version number or version label.</p>",
+                        "smithy.api#documentation": "<p>The configuration version to deploy. If deploying an AppConfig hosted\n         configuration version, you can specify either the version number or version label. For all\n         other configurations, you must specify the version number.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -135,6 +135,9 @@
                     "target": "com.amazonaws.apprunner#ListServices"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#ListServicesForAutoScalingConfiguration"
+                },
+                {
                     "target": "com.amazonaws.apprunner#ListTagsForResource"
                 },
                 {
@@ -157,6 +160,9 @@
                 },
                 {
                     "target": "com.amazonaws.apprunner#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#UpdateDefaultAutoScalingConfiguration"
                 },
                 {
                     "target": "com.amazonaws.apprunner#UpdateService"
@@ -1023,16 +1029,14 @@
                     }
                 },
                 "AutoScalingConfigurationRevision": {
-                    "target": "com.amazonaws.apprunner#Integer",
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationRevision",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of this auto scaling configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) that share the same\n        <code>AutoScalingConfigurationName</code>.</p>"
                     }
                 },
                 "Latest": {
-                    "target": "com.amazonaws.apprunner#Boolean",
+                    "target": "com.amazonaws.apprunner#Latest",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same\n        <code>AutoScalingConfigurationName</code>. It's set to <code>false</code> otherwise.</p>"
                     }
                 },
@@ -1043,23 +1047,20 @@
                     }
                 },
                 "MaxConcurrency": {
-                    "target": "com.amazonaws.apprunner#Integer",
+                    "target": "com.amazonaws.apprunner#MaxConcurrency",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service\n      up.</p>"
                     }
                 },
                 "MinSize": {
-                    "target": "com.amazonaws.apprunner#Integer",
+                    "target": "com.amazonaws.apprunner#MinSize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of instances that App Runner provisions for a service. The service always has at least <code>MinSize</code> provisioned instances. Some\n      of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be\n      quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p>\n         <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p>"
                     }
                 },
                 "MaxSize": {
-                    "target": "com.amazonaws.apprunner#Integer",
+                    "target": "com.amazonaws.apprunner#MaxSize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of instances that a service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.</p>"
                     }
                 },
@@ -1073,6 +1074,18 @@
                     "target": "com.amazonaws.apprunner#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the auto scaling configuration was deleted. It's in Unix time stamp format.</p>"
+                    }
+                },
+                "HasAssociatedService": {
+                    "target": "com.amazonaws.apprunner#HasAssociatedService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this auto scaling configuration has an App Runner service associated with it. A value of <code>true</code> indicates one or more services are\n      associated. A value of <code>false</code> indicates no services are associated.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.apprunner#IsDefault",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this auto scaling configuration should be used as the default for a new App Runner service that does not have an\n      auto scaling configuration ARN specified during creation. Each account can have only one\n      default <code>AutoScalingConfiguration</code> per region. The default <code>AutoScalingConfiguration</code> can be any revision under \n      the same <code>AutoScalingConfigurationName</code>.</p>"
                     }
                 }
             },
@@ -1089,6 +1102,9 @@
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}$"
             }
+        },
+        "com.amazonaws.apprunner#AutoScalingConfigurationRevision": {
+            "type": "integer"
         },
         "com.amazonaws.apprunner#AutoScalingConfigurationStatus": {
             "type": "enum",
@@ -1127,6 +1143,30 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of this auto scaling configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) with the same\n        <code>AutoScalingConfigurationName</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the auto scaling configuration. If the status of a configuration revision is <code>INACTIVE</code>, it was deleted and can't be\n      used. Inactive configuration revisions are permanently removed some time after they are deleted.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the auto scaling configuration was created. It's in Unix time stamp format.</p>"
+                    }
+                },
+                "HasAssociatedService": {
+                    "target": "com.amazonaws.apprunner#HasAssociatedService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this auto scaling configuration has an App Runner service associated with it. A value of <code>true</code> indicates one or more services are\n      associated. A value of <code>false</code> indicates no services are associated.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.apprunner#IsDefault",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this auto scaling configuration should be used as the default for a new App Runner service that does not have an\n      auto scaling configuration ARN specified during creation. Each account can have only one\n      default <code>AutoScalingConfiguration</code> per region. The default <code>AutoScalingConfiguration</code> can be any revision under \n      the same <code>AutoScalingConfigurationName</code>.</p>"
                     }
                 }
             },
@@ -1476,7 +1516,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create or update App Runner services and you require\n      non-default auto scaling settings. You can share an auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>AutoScalingConfigurationName</code>. The call\n      returns incremental <code>AutoScalingConfigurationRevision</code> values. When you create a service and configure an auto scaling configuration resource,\n      the service uses the latest active revision of the auto scaling configuration by default. You can optionally configure the service to use a specific\n      revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is\n      a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+                "smithy.api#documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create or update App Runner services and you require\n      non-default auto scaling settings. You can share an auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>AutoScalingConfigurationName</code>. The call\n      returns incremental <code>AutoScalingConfigurationRevision</code> values. When you create a service and configure an auto scaling configuration resource,\n      the service uses the latest active revision of the auto scaling configuration by default. You can optionally configure the service to use a specific\n      revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The\n      tradeoff is a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
             }
         },
         "com.amazonaws.apprunner#CreateAutoScalingConfigurationRequest": {
@@ -1485,7 +1525,7 @@
                 "AutoScalingConfigurationName": {
                     "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this\n      name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>\n         <note>\n            <p>The name <code>DefaultConfiguration</code> is reserved (it's the configuration that App Runner uses if you don't provide a custome one). You can't use it\n        to create a new auto scaling configuration, and you can't create a revision of it.</p>\n            <p>When you want to use your own auto scaling configuration for your App Runner service, <i>create a configuration with a different name</i>,\n        and then provide it when you create or update your service.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number\n        <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>\n         <note>\n            <p>Prior to the release of <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/release-yyyy-mm-dd-asc-improvements.html\">Managing auto\n          scaling</a>, the name <code>DefaultConfiguration</code> was reserved. </p>\n            <p>This restriction is no longer in place. You can now manage <code>DefaultConfiguration</code> the same way you manage your custom auto scaling\n        configurations. This means you can do the following with the <code>DefaultConfiguration</code> that App Runner provides:</p>\n            <ul>\n               <li>\n                  <p>Create new revisions of the <code>DefaultConfiguration</code>.</p>\n               </li>\n               <li>\n                  <p>Delete the revisions of the <code>DefaultConfiguration</code>.</p>\n               </li>\n               <li>\n                  <p>Delete the auto scaling configuration for which the App Runner <code>DefaultConfiguration</code> was created.</p>\n               </li>\n               <li>\n                  <p>If you delete the auto scaling configuration you can create another custom auto scaling configuration with the same\n              <code>DefaultConfiguration</code> name. The original <code>DefaultConfiguration</code> resource provided by App Runner remains in your account unless\n            you make changes to it.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2039,7 +2079,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a\n      configuration that's used by one or more App Runner services.</p>"
+                "smithy.api#documentation": "<p>Delete an App Runner automatic scaling configuration resource. You can delete a top level auto scaling configuration, a specific revision of one, or all\n      revisions associated with the top level configuration. You can't delete the default auto scaling configuration or a configuration that's used by one or\n      more App Runner services.</p>"
             }
         },
         "com.amazonaws.apprunner#DeleteAutoScalingConfigurationRequest": {
@@ -2050,6 +2090,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to delete.</p>\n         <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n          <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is deleted.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DeleteAllRevisions": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to delete all of the revisions associated with the <code>AutoScalingConfigurationArn</code> parameter value.</p>\n         <p>When <code>DeleteAllRevisions</code> is set to <code>true</code>, the only valid value for the Amazon Resource Name (ARN) is a partial ARN ending\n      with: <code>.../name</code>.</p>"
                     }
                 }
             },
@@ -2875,6 +2922,9 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#HasAssociatedService": {
+            "type": "boolean"
+        },
         "com.amazonaws.apprunner#HealthCheckConfiguration": {
             "type": "structure",
             "members": {
@@ -3185,6 +3235,9 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.apprunner#IsDefault": {
+            "type": "boolean"
+        },
         "com.amazonaws.apprunner#KmsKeyArn": {
             "type": "string",
             "traits": {
@@ -3194,6 +3247,9 @@
                 },
                 "smithy.api#pattern": "^arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
+        },
+        "com.amazonaws.apprunner#Latest": {
+            "type": "boolean"
         },
         "com.amazonaws.apprunner#ListAutoScalingConfigurations": {
             "type": "operation",
@@ -3534,6 +3590,82 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#ListServicesForAutoScalingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListServicesForAutoScalingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListServicesForAutoScalingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the associated App Runner services using an auto scaling configuration.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListServicesForAutoScalingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to list the services for.</p>\n         <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n      <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is used.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apprunner#ListServicesForAutoScalingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ServiceArnList": {
+                    "target": "com.amazonaws.apprunner#ServiceArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service ARN records. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.apprunner#ListServicesRequest": {
             "type": "structure",
             "members": {
@@ -3788,6 +3920,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.apprunner#MaxConcurrency": {
+            "type": "integer"
+        },
         "com.amazonaws.apprunner#MaxResults": {
             "type": "integer",
             "traits": {
@@ -3796,6 +3931,9 @@
                     "max": 100
                 }
             }
+        },
+        "com.amazonaws.apprunner#MaxSize": {
+            "type": "integer"
         },
         "com.amazonaws.apprunner#Memory": {
             "type": "string",
@@ -3806,6 +3944,9 @@
                 },
                 "smithy.api#pattern": "^512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB$"
             }
+        },
+        "com.amazonaws.apprunner#MinSize": {
+            "type": "integer"
         },
         "com.amazonaws.apprunner#NetworkConfiguration": {
             "type": "structure",
@@ -4503,6 +4644,12 @@
                 "smithy.api#documentation": "<p>Describes an App Runner service. It can describe a service in any state, including deleted services.</p>\n         <p>This type contains the full information about a service, including configuration details. It's returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html\">CreateService</a>, <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html\">DescribeService</a>, and <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html\">DeleteService</a> actions. A subset of this\n      information is returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html\">ListServices</a> action using the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html\">ServiceSummary</a> type.</p>"
             }
         },
+        "com.amazonaws.apprunner#ServiceArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#AppRunnerResourceArn"
+            }
+        },
         "com.amazonaws.apprunner#ServiceId": {
             "type": "string",
             "traits": {
@@ -5006,6 +5153,59 @@
         "com.amazonaws.apprunner#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apprunner#UpdateDefaultAutoScalingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#UpdateDefaultAutoScalingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#UpdateDefaultAutoScalingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an auto scaling configuration to be the default. The existing default auto scaling configuration will be set to non-default\n      automatically.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#UpdateDefaultAutoScalingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to set as the default.</p>\n         <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n          <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is set as the\n      default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apprunner#UpdateDefaultAutoScalingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfiguration": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner auto scaling configuration that was set as default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }

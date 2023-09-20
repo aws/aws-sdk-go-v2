@@ -4702,6 +4702,12 @@
                     "traits": {
                         "smithy.api#enumValue": "generic"
                     }
+                },
+                "SWIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "swift"
+                    }
                 }
             }
         },
