@@ -15,9 +15,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a log group with the specified name. You can create up to 20,000 log
-// groups per account. You must use the following guidelines when naming a log
-// group:
+// Creates a log group with the specified name. You can create up to 1,000,000 log
+// groups per Region per account. You must use the following guidelines when naming
+// a log group:
 //   - Log group names must be unique within a Region for an Amazon Web Services
 //     account.
 //   - Log group names can be between 1 and 512 characters long.

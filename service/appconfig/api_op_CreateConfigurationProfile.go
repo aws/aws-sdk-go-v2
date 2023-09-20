@@ -66,8 +66,10 @@ type CreateConfigurationProfileInput struct {
 	//   hosted .
 	//   - For an Amazon Web Services Systems Manager Parameter Store parameter,
 	//   specify either the parameter name in the format ssm-parameter:// or the ARN.
+	//   - For an Amazon Web Services CodePipeline pipeline, specify the URI in the
+	//   following format: codepipeline ://.
 	//   - For an Secrets Manager secret, specify the URI in the following format:
-	//   secrets-manager ://.
+	//   secretsmanager ://.
 	//   - For an Amazon S3 object, specify the URI in the following format: s3:/// .
 	//   Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
 	//   - For an SSM document, specify either the document name in the format

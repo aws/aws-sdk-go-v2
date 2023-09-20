@@ -1,0 +1,8 @@
+{
+    "id": "cd25a3a4-c2c1-44ec-9ab5-38c514829d31",
+    "type": "feature",
+    "description": "Adds a new DiscoverInstancesRevision API and also adds InstanceRevision field to the DiscoverInstances API response.",
+    "modules": [
+        "service/servicediscovery"
+    ]
+}

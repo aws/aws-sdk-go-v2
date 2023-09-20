@@ -170,6 +170,26 @@ func (m *validateOpDiscoverInstances) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDiscoverInstancesRevision struct {
+}
+
+func (*validateOpDiscoverInstancesRevision) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDiscoverInstancesRevision) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DiscoverInstancesRevisionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDiscoverInstancesRevisionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInstance struct {
 }
 
@@ -560,6 +580,10 @@ func addOpDeregisterInstanceValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDiscoverInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDiscoverInstances{}, middleware.After)
+}
+
+func addOpDiscoverInstancesRevisionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDiscoverInstancesRevision{}, middleware.After)
 }
 
 func addOpGetInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -1271,6 +1295,24 @@ func validateOpDiscoverInstancesInput(v *DiscoverInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DiscoverInstancesInput"}
+	if v.NamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamespaceName"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDiscoverInstancesRevisionInput(v *DiscoverInstancesRevisionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DiscoverInstancesRevisionInput"}
 	if v.NamespaceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamespaceName"))
 	}

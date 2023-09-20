@@ -1,0 +1,8 @@
+{
+    "id": "a0ce9789-8834-411e-80f8-920ec2b77dc6",
+    "type": "feature",
+    "description": "Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors",
+    "modules": [
+        "service/appconfig"
+    ]
+}

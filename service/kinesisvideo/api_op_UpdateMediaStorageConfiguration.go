@@ -16,8 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a SignalingChannel to a stream to store the media. There are two
-// signaling modes that can specified :
+// This API is related to WebRTC Ingestion (https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html)
+// and is only available in the us-west-2 region. Associates a SignalingChannel to
+// a stream to store the media. There are two signaling modes that can specified :
 //   - If the StorageStatus is disabled, no data will be stored, and the StreamARN
 //     parameter will not be needed.
 //   - If the StorageStatus is enabled, the data will be stored in the StreamARN

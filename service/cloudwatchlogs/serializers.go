@@ -3932,6 +3932,11 @@ func awsAwsjson11_serializeOpDocumentPutQueryDefinitionInput(v *PutQueryDefiniti
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.LogGroupNames != nil {
 		ok := object.Key("logGroupNames")
 		if err := awsAwsjson11_serializeDocumentLogGroupNames(v.LogGroupNames, ok); err != nil {

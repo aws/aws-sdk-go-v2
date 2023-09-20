@@ -17,8 +17,10 @@ import (
 )
 
 // Delete an App Runner automatic scaling configuration resource. You can delete a
-// specific revision or the latest active revision. You can't delete a
-// configuration that's used by one or more App Runner services.
+// top level auto scaling configuration, a specific revision of one, or all
+// revisions associated with the top level configuration. You can't delete the
+// default auto scaling configuration or a configuration that's used by one or more
+// App Runner services.
 func (c *Client) DeleteAutoScalingConfiguration(ctx context.Context, params *DeleteAutoScalingConfigurationInput, optFns ...func(*Options)) (*DeleteAutoScalingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteAutoScalingConfigurationInput{}
@@ -43,6 +45,12 @@ type DeleteAutoScalingConfigurationInput struct {
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
+
+	// Set to true to delete all of the revisions associated with the
+	// AutoScalingConfigurationArn parameter value. When DeleteAllRevisions is set to
+	// true , the only valid value for the Amazon Resource Name (ARN) is a partial ARN
+	// ending with: .../name .
+	DeleteAllRevisions bool
 
 	noSmithyDocumentSerde
 }

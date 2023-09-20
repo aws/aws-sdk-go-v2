@@ -74,7 +74,7 @@ type RegisterInstanceInput struct {
 	//   - If the service that's specified by ServiceId includes HealthCheckConfig
 	//   settings, Cloud Map will create the Route 53 health check, but it doesn't
 	//   associate the health check with the alias record.
-	//   - Auto naming currently doesn't support creating alias records that route
+	//   - Cloud Map currently doesn't support creating alias records that route
 	//   traffic to Amazon Web Services resources other than Elastic Load Balancing load
 	//   balancers.
 	//   - If you specify a value for AWS_ALIAS_DNS_NAME , don't specify values for any

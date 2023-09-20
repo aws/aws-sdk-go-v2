@@ -103,6 +103,7 @@ const (
 	PackageFormatMaven   PackageFormat = "maven"
 	PackageFormatNuget   PackageFormat = "nuget"
 	PackageFormatGeneric PackageFormat = "generic"
+	PackageFormatSwift   PackageFormat = "swift"
 )
 
 // Values returns all known values for PackageFormat. Note that this can be
@@ -115,6 +116,7 @@ func (PackageFormat) Values() []PackageFormat {
 		"maven",
 		"nuget",
 		"generic",
+		"swift",
 	}
 }
 

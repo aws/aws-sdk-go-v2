@@ -159,9 +159,12 @@ type DeploymentEvent struct {
 	ActionInvocations []ActionInvocation
 
 	// A description of the deployment event. Descriptions include, but are not
-	// limited to, the user account or the Amazon CloudWatch alarm ARN that initiated a
-	// rollback, the percentage of hosts that received the deployment, or in the case
-	// of an internal error, a recommendation to attempt a new deployment.
+	// limited to, the following:
+	//   - The Amazon Web Services account or the Amazon CloudWatch alarm ARN that
+	//   initiated a rollback.
+	//   - The percentage of hosts that received the deployment.
+	//   - A recommendation to attempt a new deployment (in the case of an internal
+	//   error).
 	Description *string
 
 	// The type of deployment event. Deployment event types include the start, stop,
@@ -247,6 +250,9 @@ type DeploymentSummary struct {
 
 	// The state of the deployment.
 	State DeploymentState
+
+	// A user-defined label for an AppConfig hosted configuration version.
+	VersionLabel *string
 
 	noSmithyDocumentSerde
 }

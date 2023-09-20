@@ -129,6 +129,9 @@ type StopDeploymentOutput struct {
 	// The state of the deployment.
 	State types.DeploymentState
 
+	// A user-defined label for an AppConfig hosted configuration version.
+	VersionLabel *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

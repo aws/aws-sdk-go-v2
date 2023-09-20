@@ -47,7 +47,7 @@ type StartDeploymentInput struct {
 
 	// The configuration version to deploy. If deploying an AppConfig hosted
 	// configuration version, you can specify either the version number or version
-	// label.
+	// label. For all other configurations, you must specify the version number.
 	//
 	// This member is required.
 	ConfigurationVersion *string
@@ -150,6 +150,9 @@ type StartDeploymentOutput struct {
 
 	// The state of the deployment.
 	State types.DeploymentState
+
+	// A user-defined label for an AppConfig hosted configuration version.
+	VersionLabel *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

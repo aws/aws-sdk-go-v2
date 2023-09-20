@@ -17,6 +17,7 @@
         "api_op_DeleteService.go",
         "api_op_DeregisterInstance.go",
         "api_op_DiscoverInstances.go",
+        "api_op_DiscoverInstancesRevision.go",
         "api_op_GetInstance.go",
         "api_op_GetInstancesHealthStatus.go",
         "api_op_GetNamespace.go",

@@ -126,6 +126,9 @@ func awsRestjson1_deserializeOpErrorCreateApplication(response *smithyhttp.Respo
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -300,6 +303,9 @@ func awsRestjson1_deserializeOpErrorCreateConfigurationProfile(response *smithyh
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -513,6 +519,9 @@ func awsRestjson1_deserializeOpErrorCreateDeploymentStrategy(response *smithyhtt
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -766,6 +775,9 @@ func awsRestjson1_deserializeOpErrorCreateEnvironment(response *smithyhttp.Respo
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3032,6 +3044,15 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 					return fmt.Errorf("expected DeploymentState to be of type string, got %T instead", value)
 				}
 				sv.State = types.DeploymentState(jtv)
+			}
+
+		case "VersionLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionLabel to be of type string, got %T instead", value)
+				}
+				sv.VersionLabel = ptr.String(jtv)
 			}
 
 		default:
@@ -5895,6 +5916,15 @@ func awsRestjson1_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 				sv.State = types.DeploymentState(jtv)
 			}
 
+		case "VersionLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionLabel to be of type string, got %T instead", value)
+				}
+				sv.VersionLabel = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6292,6 +6322,15 @@ func awsRestjson1_deserializeOpDocumentStopDeploymentOutput(v **StopDeploymentOu
 					return fmt.Errorf("expected DeploymentState to be of type string, got %T instead", value)
 				}
 				sv.State = types.DeploymentState(jtv)
+			}
+
+		case "VersionLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionLabel to be of type string, got %T instead", value)
+				}
+				sv.VersionLabel = ptr.String(jtv)
 			}
 
 		default:
@@ -9264,6 +9303,15 @@ func awsRestjson1_deserializeDocumentDeploymentSummary(v **types.DeploymentSumma
 					return fmt.Errorf("expected DeploymentState to be of type string, got %T instead", value)
 				}
 				sv.State = types.DeploymentState(jtv)
+			}
+
+		case "VersionLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionLabel to be of type string, got %T instead", value)
+				}
+				sv.VersionLabel = ptr.String(jtv)
 			}
 
 		default:

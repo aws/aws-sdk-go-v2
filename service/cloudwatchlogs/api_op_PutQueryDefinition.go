@@ -58,6 +58,10 @@ type PutQueryDefinitionInput struct {
 	// This member is required.
 	QueryString *string
 
+	// Used as an idempotency token, to avoid returning an exception if the service
+	// receives the same request twice because of a network error.
+	ClientToken *string
+
 	// Use this parameter to include specific log groups as part of your query
 	// definition. If you are updating a query definition and you omit this parameter,
 	// then the updated definition will contain no log groups.
@@ -136,6 +140,9 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 	if err = addPutQueryDefinitionResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opPutQueryDefinitionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutQueryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,6 +165,39 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpPutQueryDefinition struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpPutQueryDefinition) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpPutQueryDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*PutQueryDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *PutQueryDefinitionInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opPutQueryDefinitionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpPutQueryDefinition{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opPutQueryDefinition(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -25,12 +25,11 @@ import (
 // are charged as custom metrics. To prevent unexpected high charges, do not
 // specify high-cardinality fields such as IPAddress or requestID as dimensions.
 // Each different value found for a dimension is treated as a separate metric and
-// accrues charges as a separate custom metric. CloudWatch Logs disables a metric
-// filter if it generates 1,000 different name/value pairs for your specified
-// dimensions within a certain amount of time. This helps to prevent accidental
-// high charges. You can also set up a billing alarm to alert you if your charges
-// are higher than expected. For more information, see Creating a Billing Alarm to
-// Monitor Your Estimated Amazon Web Services Charges (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
+// accrues charges as a separate custom metric. CloudWatch Logs might disable a
+// metric filter if it generates 1,000 different name/value pairs for your
+// specified dimensions within one hour. You can also set up a billing alarm to
+// alert you if your charges are higher than expected. For more information, see
+// Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services Charges (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
 // .
 func (c *Client) PutMetricFilter(ctx context.Context, params *PutMetricFilterInput, optFns ...func(*Options)) (*PutMetricFilterOutput, error) {
 	if params == nil {

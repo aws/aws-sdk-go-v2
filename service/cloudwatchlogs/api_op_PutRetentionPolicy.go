@@ -26,7 +26,12 @@ import (
 // date is reached. To make sure that log data is deleted permanently, keep a log
 // group at its lower retention setting until 72 hours after the previous retention
 // period ends. Alternatively, wait to change the retention setting until you
-// confirm that the earlier log events are deleted.
+// confirm that the earlier log events are deleted. When log events reach their
+// retention setting they are marked for deletion. After they are marked for
+// deletion, they do not add to your archival storage costs anymore, even if they
+// are not actually deleted until later. These log events marked for deletion are
+// also not included when you use an API to retrieve the storedBytes value to see
+// how many bytes a log group is storing.
 func (c *Client) PutRetentionPolicy(ctx context.Context, params *PutRetentionPolicyInput, optFns ...func(*Options)) (*PutRetentionPolicyOutput, error) {
 	if params == nil {
 		params = &PutRetentionPolicyInput{}

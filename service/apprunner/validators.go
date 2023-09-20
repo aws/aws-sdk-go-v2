@@ -430,6 +430,26 @@ func (m *validateOpListOperations) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListServicesForAutoScalingConfiguration struct {
+}
+
+func (*validateOpListServicesForAutoScalingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServicesForAutoScalingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServicesForAutoScalingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServicesForAutoScalingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -545,6 +565,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDefaultAutoScalingConfiguration struct {
+}
+
+func (*validateOpUpdateDefaultAutoScalingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDefaultAutoScalingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDefaultAutoScalingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDefaultAutoScalingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -674,6 +714,10 @@ func addOpListOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListOperations{}, middleware.After)
 }
 
+func addOpListServicesForAutoScalingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServicesForAutoScalingConfiguration{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -696,6 +740,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateDefaultAutoScalingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDefaultAutoScalingConfiguration{}, middleware.After)
 }
 
 func addOpUpdateServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -1223,6 +1271,21 @@ func validateOpListOperationsInput(v *ListOperationsInput) error {
 	}
 }
 
+func validateOpListServicesForAutoScalingConfigurationInput(v *ListServicesForAutoScalingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServicesForAutoScalingConfigurationInput"}
+	if v.AutoScalingConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1311,6 +1374,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDefaultAutoScalingConfigurationInput(v *UpdateDefaultAutoScalingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDefaultAutoScalingConfigurationInput"}
+	if v.AutoScalingConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

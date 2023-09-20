@@ -17,9 +17,10 @@ import (
 )
 
 // Discovers registered instances for a specified namespace and service. You can
-// use DiscoverInstances to discover instances for any type of namespace. For
-// public and private DNS namespaces, you can also use DNS queries to discover
-// instances.
+// use DiscoverInstances to discover instances for any type of namespace.
+// DiscoverInstances returns a randomized list of instances allowing customers to
+// distribute traffic evenly across instances. For public and private DNS
+// namespaces, you can also use DNS queries to discover instances.
 func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstancesInput, optFns ...func(*Options)) (*DiscoverInstancesOutput, error) {
 	if params == nil {
 		params = &DiscoverInstancesInput{}
@@ -81,6 +82,11 @@ type DiscoverInstancesOutput struct {
 	// A complex type that contains one HttpInstanceSummary for each registered
 	// instance.
 	Instances []types.HttpInstanceSummary
+
+	// The increasing revision associated to the response Instances list. If a new
+	// instance is registered or deregistered, the InstancesRevision updates. The
+	// health status updates don't update InstancesRevision .
+	InstancesRevision *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,7 +43,7 @@ type AutoScalingConfiguration struct {
 	// The revision of this auto scaling configuration. It's unique among all the
 	// active configurations ( "Status": "ACTIVE" ) that share the same
 	// AutoScalingConfigurationName .
-	AutoScalingConfigurationRevision int32
+	AutoScalingConfigurationRevision *int32
 
 	// The time when the auto scaling configuration was created. It's in Unix time
 	// stamp format.
@@ -53,19 +53,31 @@ type AutoScalingConfiguration struct {
 	// stamp format.
 	DeletedAt *time.Time
 
+	// Indicates if this auto scaling configuration has an App Runner service
+	// associated with it. A value of true indicates one or more services are
+	// associated. A value of false indicates no services are associated.
+	HasAssociatedService *bool
+
+	// Indicates if this auto scaling configuration should be used as the default for
+	// a new App Runner service that does not have an auto scaling configuration ARN
+	// specified during creation. Each account can have only one default
+	// AutoScalingConfiguration per region. The default AutoScalingConfiguration can
+	// be any revision under the same AutoScalingConfigurationName .
+	IsDefault *bool
+
 	// It's set to true for the configuration with the highest Revision among all
 	// configurations that share the same AutoScalingConfigurationName . It's set to
 	// false otherwise.
-	Latest bool
+	Latest *bool
 
 	// The maximum number of concurrent requests that an instance processes. If the
 	// number of concurrent requests exceeds this limit, App Runner scales the service
 	// up.
-	MaxConcurrency int32
+	MaxConcurrency *int32
 
 	// The maximum number of instances that a service scales up to. At most MaxSize
 	// instances actively serve traffic for your service.
-	MaxSize int32
+	MaxSize *int32
 
 	// The minimum number of instances that App Runner provisions for a service. The
 	// service always has at least MinSize provisioned instances. Some of them
@@ -75,7 +87,7 @@ type AutoScalingConfiguration struct {
 	// for CPU usage of only the active subset. App Runner temporarily doubles the
 	// number of provisioned instances during deployments, to maintain the same
 	// capacity for both old and new code.
-	MinSize int32
+	MinSize *int32
 
 	// The current state of the auto scaling configuration. If the status of a
 	// configuration revision is INACTIVE , it was deleted and can't be used. Inactive
@@ -106,6 +118,28 @@ type AutoScalingConfigurationSummary struct {
 	// active configurations ( "Status": "ACTIVE" ) with the same
 	// AutoScalingConfigurationName .
 	AutoScalingConfigurationRevision int32
+
+	// The time when the auto scaling configuration was created. It's in Unix time
+	// stamp format.
+	CreatedAt *time.Time
+
+	// Indicates if this auto scaling configuration has an App Runner service
+	// associated with it. A value of true indicates one or more services are
+	// associated. A value of false indicates no services are associated.
+	HasAssociatedService *bool
+
+	// Indicates if this auto scaling configuration should be used as the default for
+	// a new App Runner service that does not have an auto scaling configuration ARN
+	// specified during creation. Each account can have only one default
+	// AutoScalingConfiguration per region. The default AutoScalingConfiguration can
+	// be any revision under the same AutoScalingConfigurationName .
+	IsDefault *bool
+
+	// The current state of the auto scaling configuration. If the status of a
+	// configuration revision is INACTIVE , it was deleted and can't be used. Inactive
+	// configuration revisions are permanently removed some time after they are
+	// deleted.
+	Status AutoScalingConfigurationStatus
 
 	noSmithyDocumentSerde
 }
