@@ -75,24 +75,6 @@ func TestValidDataFiles(t *testing.T) {
 						if e != a {
 							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 						}
-					case int:
-						a := p.Int(k)
-						if int64(e) != a {
-							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
-						}
-					case float64:
-						v := p.values[k]
-						if v.Type == IntegerType {
-							a := p.Int(k)
-							if int64(e) != a {
-								t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
-							}
-						} else {
-							a := p.Float64(k)
-							if e != a {
-								t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
-							}
-						}
 					default:
 						t.Errorf("unexpected type: %T", e)
 					}

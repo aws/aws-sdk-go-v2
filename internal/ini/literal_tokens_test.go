@@ -5,78 +5,6 @@ import (
 	"testing"
 )
 
-func TestIsNumberValue(t *testing.T) {
-	cases := []struct {
-		name     string
-		b        []rune
-		expected bool
-	}{
-		{
-			"integer",
-			[]rune("123"),
-			true,
-		},
-		{
-			"negative integer",
-			[]rune("-123"),
-			true,
-		},
-		{
-			"decimal",
-			[]rune("123.456"),
-			true,
-		},
-		{
-			"small e exponent",
-			[]rune("1e234"),
-			true,
-		},
-		{
-			"big E exponent",
-			[]rune("1E234"),
-			true,
-		},
-		{
-			"error case exponent base 16",
-			[]rune("1ea4"),
-			false,
-		},
-		{
-			"error case negative",
-			[]rune("1-23"),
-			false,
-		},
-		{
-			"error case multiple negative",
-			[]rune("-1-23"),
-			false,
-		},
-		{
-			"error case end negative",
-			[]rune("123-"),
-			false,
-		},
-		{
-			"error case non-number",
-			[]rune("a"),
-			false,
-		},
-		{
-			"utf8 whitespace",
-			[]rune("00"),
-			true,
-		},
-	}
-
-	for i, c := range cases {
-		t.Run(c.name, func(t *testing.T) {
-			if e, a := c.expected, isNumberValue(c.b); e != a {
-				t.Errorf("%d: expected %t, but received %t", i+1, e, a)
-			}
-		})
-	}
-}
-
 // TODO: test errors
 func TestNewLiteralToken(t *testing.T) {
 	cases := []struct {
@@ -92,7 +20,7 @@ func TestNewLiteralToken(t *testing.T) {
 			expectedRead: 3,
 			expectedToken: newToken(TokenLit,
 				[]rune("123"),
-				IntegerType,
+				StringType,
 			),
 		},
 		{
@@ -101,7 +29,7 @@ func TestNewLiteralToken(t *testing.T) {
 			expectedRead: 7,
 			expectedToken: newToken(TokenLit,
 				[]rune("123.456"),
-				DecimalType,
+				StringType,
 			),
 		},
 		{
@@ -110,7 +38,7 @@ func TestNewLiteralToken(t *testing.T) {
 			expectedRead: 3,
 			expectedToken: newToken(TokenLit,
 				[]rune("123"),
-				IntegerType,
+				StringType,
 			),
 		},
 		{
@@ -119,7 +47,7 @@ func TestNewLiteralToken(t *testing.T) {
 			expectedRead: 3,
 			expectedToken: newToken(TokenLit,
 				[]rune("123"),
-				IntegerType,
+				StringType,
 			),
 		},
 		{
@@ -146,7 +74,7 @@ func TestNewLiteralToken(t *testing.T) {
 			expectedRead: 4,
 			expectedToken: newToken(TokenLit,
 				[]rune("true"),
-				BoolType,
+				StringType,
 			),
 		},
 		{
@@ -155,16 +83,16 @@ func TestNewLiteralToken(t *testing.T) {
 			expectedRead: 5,
 			expectedToken: newToken(TokenLit,
 				[]rune("false"),
-				BoolType,
+				StringType,
 			),
 		},
 		{
 			name:         "utf8 whitespace",
 			b:            []rune("00"),
-			expectedRead: 1,
+			expectedRead: 3,
 			expectedToken: newToken(TokenLit,
 				[]rune("0"),
-				IntegerType,
+				StringType,
 			),
 		},
 		{
@@ -211,21 +139,4 @@ func TestNewStringValue(t *testing.T) {
 	if e, a := expect, actual.str; e != a {
 		t.Errorf("expect %v string got %v", e, a)
 	}
-}
-
-func TestNewIntValue(t *testing.T) {
-	const expect int64 = 1234
-
-	actual, err := NewIntValue(expect)
-	if err != nil {
-		t.Fatalf("expect no error, %v", err)
-	}
-
-	if e, a := IntegerType, actual.Type; e != a {
-		t.Errorf("expect %v type got %v", e, a)
-	}
-	if e, a := expect, actual.integer; e != a {
-		t.Errorf("expect %v integer got %v", e, a)
-	}
-
 }
