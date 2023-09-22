@@ -30,7 +30,7 @@ type CredentialsProviderAdapter struct {
 var _ (auth.IdentityResolver) = (*CredentialsProviderAdapter)(nil)
 
 // GetIdentity retrieves AWS credentials using the underlying provider.
-func (v *CredentialsProviderAdapter) GetIdentity(ctx context.Context, props *smithy.Properties) (
+func (v *CredentialsProviderAdapter) GetIdentity(ctx context.Context, _ *smithy.Properties) (
 	auth.Identity, error,
 ) {
 	creds, err := v.provider.Retrieve(ctx)

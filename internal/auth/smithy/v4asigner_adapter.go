@@ -26,7 +26,7 @@ func (v *V4ACredentialsAdapter) Expiration() time.Time {
 	return v.creds.Expires
 }
 
-// V4SignerAdapter adapts v4a.HTTPSigner to smithy http.Signer.
+// V4ASignerAdapter adapts v4a.HTTPSigner to smithy http.Signer.
 type V4ASignerAdapter struct {
 	signer v4a.HTTPSigner
 }
