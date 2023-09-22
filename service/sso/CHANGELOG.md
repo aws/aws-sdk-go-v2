@@ -1,3 +1,7 @@
+# v1.14.1 (2023-09-22)
+
+* No change notes available for this release.
+
 # v1.14.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

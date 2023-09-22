@@ -1,3 +1,30 @@
+# Release (2023-09-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.18.42](config/CHANGELOG.md#v11842-2023-09-22)
+  * **Bug Fix**: Fixed a bug where merging `max_attempts` or `duration_seconds` fields across shared config files with invalid values would silently default them to 0.
+  * **Bug Fix**: Move type assertion of config values out of the parsing stage, which resolves an issue where the contents of a profile would silently be dropped with certain numeric formats.
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.3.43](internal/ini/CHANGELOG.md#v1343-2023-09-22)
+  * **Bug Fix**: Fixed a bug where merging `max_attempts` or `duration_seconds` fields across shared config files with invalid values would silently default them to 0.
+  * **Bug Fix**: Move type assertion of config values out of the parsing stage, which resolves an issue where the contents of a profile would silently be dropped with certain numeric formats.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.20.0](service/braket/CHANGELOG.md#v1200-2023-09-22)
+  * **Feature**: This release adds support to view the device queue depth (the number of queued quantum tasks and hybrid jobs on a device) and queue position for a quantum task and hybrid job.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.18.0](service/cloudwatchevents/CHANGELOG.md#v1180-2023-09-22)
+  * **Feature**: Adds sensitive trait to various shapes in Jetstream Connections API model.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.31.0](service/databasemigrationservice/CHANGELOG.md#v1310-2023-09-22)
+  * **Feature**: new vendors for DMS CSF: MongoDB, MariaDB, DocumentDb and Redshift
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.120.0](service/ec2/CHANGELOG.md#v11200-2023-09-22)
+  * **Feature**: EC2 M2 Pro Mac instances are powered by Apple M2 Pro Mac Mini computers featuring 12 core CPU, 19 core GPU, 32 GiB of memory, and 16 core Apple Neural Engine and uniquely enabled by the AWS Nitro System through high-speed Thunderbolt connections.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.21.7](service/efs/CHANGELOG.md#v1217-2023-09-22)
+  * **Documentation**: Documentation updates for Elastic File System
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.28.0](service/guardduty/CHANGELOG.md#v1280-2023-09-22)
+  * **Feature**: Add `EKS_CLUSTER_NAME` to filter and sort key.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.42.0](service/mediaconvert/CHANGELOG.md#v1420-2023-09-22)
+  * **Feature**: This release supports the creation of of audio-only tracks in CMAF output groups.
+
 # Release (2023-09-20)
 
 ## General Highlights

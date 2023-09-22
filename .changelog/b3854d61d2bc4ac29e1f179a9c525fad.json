@@ -1,8 +1,0 @@
-{
-    "id": "b3854d61-d2bc-4ac2-9e1f-179a9c525fad",
-    "type": "feature",
-    "description": "Adds sensitive trait to various shapes in Jetstream Connections API model.",
-    "modules": [
-        "service/cloudwatchevents"
-    ]
-}

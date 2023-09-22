@@ -1,3 +1,7 @@
+# v1.21.7 (2023-09-22)
+
+* **Documentation**: Documentation updates for Elastic File System
+
 # v1.21.6 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

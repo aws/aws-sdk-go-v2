@@ -1,3 +1,7 @@
+# v1.17.1 (2023-09-22)
+
+* No change notes available for this release.
+
 # v1.17.0 (2023-09-20)
 
 * **Feature**: Update FIPS endpoints in aws-us-gov.

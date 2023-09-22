@@ -1,3 +1,7 @@
+# v1.18.0 (2023-09-22)
+
+* **Feature**: Adds sensitive trait to various shapes in Jetstream Connections API model.
+
 # v1.17.0 (2023-08-31)
 
 * **Feature**: Documentation updates for CloudWatch Events.

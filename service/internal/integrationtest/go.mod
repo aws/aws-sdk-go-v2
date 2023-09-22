@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.21.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.41
+	github.com/aws/aws-sdk-go-v2/config v1.18.42
 	github.com/aws/aws-sdk-go-v2/service/acm v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.5
@@ -25,16 +25,16 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.17.5
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.30.4
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.119.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.120.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/efs v1.21.6
+	github.com/aws/aws-sdk-go-v2/service/efs v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.17.0

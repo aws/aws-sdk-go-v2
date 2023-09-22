@@ -1,8 +1,0 @@
-{
-    "id": "5114904b-500b-4367-b3a8-28e5e2d99486",
-    "type": "feature",
-    "description": "This release supports the creation of of audio-only tracks in CMAF output groups.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

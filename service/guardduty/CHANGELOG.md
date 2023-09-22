@@ -1,3 +1,7 @@
+# v1.28.0 (2023-09-22)
+
+* **Feature**: Add `EKS_CLUSTER_NAME` to filter and sort key.
+
 # v1.27.0 (2023-09-13)
 
 * **Feature**: Add `managementType` field to ListCoverage API response.

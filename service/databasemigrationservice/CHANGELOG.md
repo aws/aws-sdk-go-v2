@@ -1,3 +1,7 @@
+# v1.31.0 (2023-09-22)
+
+* **Feature**: new vendors for DMS CSF: MongoDB, MariaDB, DocumentDb and Redshift
+
 # v1.30.4 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,9 +1,0 @@
-{
-    "id": "87dcac43-e510-40c3-8f8e-72fb9b874042",
-    "type": "bugfix",
-    "description": "Move type assertion of config values out of the parsing stage, which resolves an issue where the contents of a profile would silently be dropped with certain numeric formats.",
-    "modules": [
-        "config",
-        "internal/ini"
-    ]
-}
