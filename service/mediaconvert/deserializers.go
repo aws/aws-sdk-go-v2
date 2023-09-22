@@ -15556,6 +15556,19 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
+		case "followInputIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max149 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FollowInputIndex = ptr.Int32(int32(i64))
+			}
+
 		case "inputs":
 			if err := awsRestjson1_deserializeDocument__listOfInput(&sv.Inputs, value); err != nil {
 				return err
@@ -15807,6 +15820,19 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 		case "extendedDataServices":
 			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
 				return err
+			}
+
+		case "followInputIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max149 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FollowInputIndex = ptr.Int32(int32(i64))
 			}
 
 		case "inputs":
@@ -20476,7 +20502,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternHttpsD to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
 			}
@@ -20544,7 +20570,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternHttpsD to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
 			}

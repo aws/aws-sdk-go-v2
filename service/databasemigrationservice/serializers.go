@@ -5957,9 +5957,27 @@ func awsAwsjson11_serializeDocumentDataProviderSettings(v types.DataProviderSett
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.DataProviderSettingsMemberDocDbSettings:
+		av := object.Key("DocDbSettings")
+		if err := awsAwsjson11_serializeDocumentDocDbDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataProviderSettingsMemberMariaDbSettings:
+		av := object.Key("MariaDbSettings")
+		if err := awsAwsjson11_serializeDocumentMariaDbDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DataProviderSettingsMemberMicrosoftSqlServerSettings:
 		av := object.Key("MicrosoftSqlServerSettings")
 		if err := awsAwsjson11_serializeDocumentMicrosoftSqlServerDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataProviderSettingsMemberMongoDbSettings:
+		av := object.Key("MongoDbSettings")
+		if err := awsAwsjson11_serializeDocumentMongoDbDataProviderSettings(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -5978,6 +5996,12 @@ func awsAwsjson11_serializeDocumentDataProviderSettings(v types.DataProviderSett
 	case *types.DataProviderSettingsMemberPostgreSqlSettings:
 		av := object.Key("PostgreSqlSettings")
 		if err := awsAwsjson11_serializeDocumentPostgreSqlDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataProviderSettingsMemberRedshiftSettings:
+		av := object.Key("RedshiftSettings")
+		if err := awsAwsjson11_serializeDocumentRedshiftDataProviderSettings(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -6000,6 +6024,38 @@ func awsAwsjson11_serializeDocumentDmsTransferSettings(v *types.DmsTransferSetti
 	if v.ServiceAccessRoleArn != nil {
 		ok := object.Key("ServiceAccessRoleArn")
 		ok.String(*v.ServiceAccessRoleArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDocDbDataProviderSettings(v *types.DocDbDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if len(v.SslMode) > 0 {
+		ok := object.Key("SslMode")
+		ok.String(string(v.SslMode))
 	}
 
 	return nil
@@ -6517,6 +6573,33 @@ func awsAwsjson11_serializeDocumentKinesisSettings(v *types.KinesisSettings, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMariaDbDataProviderSettings(v *types.MariaDbDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if len(v.SslMode) > 0 {
+		ok := object.Key("SslMode")
+		ok.String(string(v.SslMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMicrosoftSqlServerDataProviderSettings(v *types.MicrosoftSqlServerDataProviderSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6636,6 +6719,53 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 	if v.UseThirdPartyBackupDevice != nil {
 		ok := object.Key("UseThirdPartyBackupDevice")
 		ok.Boolean(*v.UseThirdPartyBackupDevice)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMongoDbDataProviderSettings(v *types.MongoDbDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AuthMechanism) > 0 {
+		ok := object.Key("AuthMechanism")
+		ok.String(string(v.AuthMechanism))
+	}
+
+	if v.AuthSource != nil {
+		ok := object.Key("AuthSource")
+		ok.String(*v.AuthSource)
+	}
+
+	if len(v.AuthType) > 0 {
+		ok := object.Key("AuthType")
+		ok.String(string(v.AuthType))
+	}
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if len(v.SslMode) > 0 {
+		ok := object.Key("SslMode")
+		ok.String(string(v.SslMode))
 	}
 
 	return nil
@@ -7368,6 +7498,28 @@ func awsAwsjson11_serializeDocumentRedisSettings(v *types.RedisSettings, value s
 	if len(v.SslSecurityProtocol) > 0 {
 		ok := object.Key("SslSecurityProtocol")
 		ok.String(string(v.SslSecurityProtocol))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRedshiftDataProviderSettings(v *types.RedshiftDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
 	}
 
 	return nil

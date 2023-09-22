@@ -7031,6 +7031,11 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 		}
 	}
 
+	if v.FollowInputIndex != nil {
+		ok := object.Key("followInputIndex")
+		ok.Integer(*v.FollowInputIndex)
+	}
+
 	if v.Inputs != nil {
 		ok := object.Key("inputs")
 		if err := awsRestjson1_serializeDocument__listOfInput(v.Inputs, ok); err != nil {
@@ -7118,6 +7123,11 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 		if err := awsRestjson1_serializeDocumentExtendedDataServices(v.ExtendedDataServices, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.FollowInputIndex != nil {
+		ok := object.Key("followInputIndex")
+		ok.Integer(*v.FollowInputIndex)
 	}
 
 	if v.Inputs != nil {

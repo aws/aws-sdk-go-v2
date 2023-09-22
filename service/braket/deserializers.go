@@ -879,6 +879,11 @@ func awsRestjson1_deserializeOpDocumentGetDeviceOutput(v **GetDeviceOutput, valu
 				sv.DeviceName = ptr.String(jtv)
 			}
 
+		case "deviceQueueInfo":
+			if err := awsRestjson1_deserializeDocumentDeviceQueueInfoList(&sv.DeviceQueueInfo, value); err != nil {
+				return err
+			}
+
 		case "deviceStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1166,6 +1171,11 @@ func awsRestjson1_deserializeOpDocumentGetJobOutput(v **GetJobOutput, value inte
 				return err
 			}
 
+		case "queueInfo":
+			if err := awsRestjson1_deserializeDocumentHybridJobQueueInfo(&sv.QueueInfo, value); err != nil {
+				return err
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1448,6 +1458,11 @@ func awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(v **GetQuantumTaskOu
 					return fmt.Errorf("expected QuantumTaskArn to be of type string, got %T instead", value)
 				}
 				sv.QuantumTaskArn = ptr.String(jtv)
+			}
+
+		case "queueInfo":
+			if err := awsRestjson1_deserializeDocumentQuantumTaskQueueInfo(&sv.QueueInfo, value); err != nil {
+				return err
 			}
 
 		case "shots":
@@ -2913,6 +2928,98 @@ func awsRestjson1_deserializeDocumentDeviceOfflineException(v **types.DeviceOffl
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDeviceQueueInfo(v **types.DeviceQueueInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeviceQueueInfo
+	if *v == nil {
+		sv = &types.DeviceQueueInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "queue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueueName to be of type string, got %T instead", value)
+				}
+				sv.Queue = types.QueueName(jtv)
+			}
+
+		case "queuePriority":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueuePriority to be of type string, got %T instead", value)
+				}
+				sv.QueuePriority = types.QueuePriority(jtv)
+			}
+
+		case "queueSize":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QueueSize = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeviceQueueInfoList(v *[]types.DeviceQueueInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DeviceQueueInfo
+	if *v == nil {
+		cv = []types.DeviceQueueInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DeviceQueueInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDeviceQueueInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDeviceRetiredException(v **types.DeviceRetiredException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3060,6 +3167,64 @@ func awsRestjson1_deserializeDocumentDeviceSummaryList(v *[]types.DeviceSummary,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHybridJobQueueInfo(v **types.HybridJobQueueInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HybridJobQueueInfo
+	if *v == nil {
+		sv = &types.HybridJobQueueInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "position":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Position = ptr.String(jtv)
+			}
+
+		case "queue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueueName to be of type string, got %T instead", value)
+				}
+				sv.Queue = types.QueueName(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -3673,6 +3838,73 @@ func awsRestjson1_deserializeDocumentJobSummaryList(v *[]types.JobSummary, value
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuantumTaskQueueInfo(v **types.QuantumTaskQueueInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuantumTaskQueueInfo
+	if *v == nil {
+		sv = &types.QuantumTaskQueueInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "position":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Position = ptr.String(jtv)
+			}
+
+		case "queue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueueName to be of type string, got %T instead", value)
+				}
+				sv.Queue = types.QueueName(jtv)
+			}
+
+		case "queuePriority":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueuePriority to be of type string, got %T instead", value)
+				}
+				sv.QueuePriority = types.QueuePriority(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

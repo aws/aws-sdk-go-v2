@@ -550,6 +550,12 @@ func awsRestjson1_serializeOpHttpBindingsGetJobInput(v *GetJobInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AdditionalAttributeNames != nil {
+		for i := range v.AdditionalAttributeNames {
+			encoder.AddQuery("additionalAttributeNames").String(string(v.AdditionalAttributeNames[i]))
+		}
+	}
+
 	if v.JobArn == nil || len(*v.JobArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member jobArn must not be empty")}
 	}
@@ -613,6 +619,12 @@ func (m *awsRestjson1_serializeOpGetQuantumTask) HandleSerialize(ctx context.Con
 func awsRestjson1_serializeOpHttpBindingsGetQuantumTaskInput(v *GetQuantumTaskInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AdditionalAttributeNames != nil {
+		for i := range v.AdditionalAttributeNames {
+			encoder.AddQuery("additionalAttributeNames").String(string(v.AdditionalAttributeNames[i]))
+		}
 	}
 
 	if v.QuantumTaskArn == nil || len(*v.QuantumTaskArn) == 0 {

@@ -44,10 +44,10 @@ type UpdateOrganizationConfigurationInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// Indicates whether to automatically enable member accounts in the organization.
-	// Even though this is still supported, we recommend using
-	// AutoEnableOrganizationMembers to achieve the similar results. You must provide
-	// the value for either autoEnableOrganizationMembers or autoEnable .
+	// Represents whether or not to automatically enable member accounts in the
+	// organization. Even though this is still supported, we recommend using
+	// AutoEnableOrganizationMembers to achieve the similar results. You must provide a
+	// value for either autoEnableOrganizationMembers or autoEnable .
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable bool

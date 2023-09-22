@@ -3562,6 +3562,7 @@ const (
 	InstanceTypeC7i16xlarge     InstanceType = "c7i.16xlarge"
 	InstanceTypeC7i24xlarge     InstanceType = "c7i.24xlarge"
 	InstanceTypeC7i48xlarge     InstanceType = "c7i.48xlarge"
+	InstanceTypeMac2M2proMetal  InstanceType = "mac2-m2pro.metal"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4309,6 +4310,7 @@ func (InstanceType) Values() []InstanceType {
 		"c7i.16xlarge",
 		"c7i.24xlarge",
 		"c7i.48xlarge",
+		"mac2-m2pro.metal",
 	}
 }
 

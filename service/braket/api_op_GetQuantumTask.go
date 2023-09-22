@@ -40,6 +40,9 @@ type GetQuantumTaskInput struct {
 	// This member is required.
 	QuantumTaskArn *string
 
+	// A list of attributes to return information for.
+	AdditionalAttributeNames []types.QuantumTaskAdditionalAttributeName
+
 	noSmithyDocumentSerde
 }
 
@@ -95,6 +98,11 @@ type GetQuantumTaskOutput struct {
 
 	// The ARN of the Amazon Braket job associated with the quantum task.
 	JobArn *string
+
+	// Queue information for the requested quantum task. Only returned if QueueInfo is
+	// specified in the additionalAttributeNames" field in the GetQuantumTask API
+	// request.
+	QueueInfo *types.QuantumTaskQueueInfo
 
 	// The tags that belong to this task.
 	Tags map[string]string

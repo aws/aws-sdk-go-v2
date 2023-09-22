@@ -1,0 +1,8 @@
+{
+    "id": "1063b634-d799-49fa-8f2b-ec55a6062ef5",
+    "type": "feature",
+    "description": "EC2 M2 Pro Mac instances are powered by Apple M2 Pro Mac Mini computers featuring 12 core CPU, 19 core GPU, 32 GiB of memory, and 16 core Apple Neural Engine and uniquely enabled by the AWS Nitro System through high-speed Thunderbolt connections.",
+    "modules": [
+        "service/ec2"
+    ]
+}

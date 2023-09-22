@@ -84,6 +84,9 @@ type GetDeviceOutput struct {
 	// This member is required.
 	ProviderName *string
 
+	// List of information about tasks and jobs queued on a device.
+	DeviceQueueInfo []types.DeviceQueueInfo
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

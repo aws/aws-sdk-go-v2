@@ -18,8 +18,9 @@ import (
 
 // Invites Amazon Web Services accounts to become members of an organization
 // administered by the Amazon Web Services account that invokes this API. If you
-// are using organizations to manager your GuardDuty environment, this step is not
-// needed. For more information, see Managing accounts with organizations (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html)
+// are using Amazon Web Services Organizations to manage your GuardDuty
+// environment, this step is not needed. For more information, see Managing
+// accounts with organizations (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html)
 // . To invite Amazon Web Services accounts, the first step is to ensure that
 // GuardDuty has been enabled in the potential member accounts. You can now invoke
 // this API to add accounts by invitation. The invited accounts can either accept

@@ -1842,6 +1842,7 @@ const (
 	CmfcAudioTrackTypeAlternateAudioAutoSelectDefault CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"
 	CmfcAudioTrackTypeAlternateAudioAutoSelect        CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"
 	CmfcAudioTrackTypeAlternateAudioNotAutoSelect     CmfcAudioTrackType = "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+	CmfcAudioTrackTypeAudioOnlyVariantStream          CmfcAudioTrackType = "AUDIO_ONLY_VARIANT_STREAM"
 )
 
 // Values returns all known values for CmfcAudioTrackType. Note that this can be
@@ -1852,6 +1853,7 @@ func (CmfcAudioTrackType) Values() []CmfcAudioTrackType {
 		"ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
 		"ALTERNATE_AUDIO_AUTO_SELECT",
 		"ALTERNATE_AUDIO_NOT_AUTO_SELECT",
+		"AUDIO_ONLY_VARIANT_STREAM",
 	}
 }
 

@@ -14904,6 +14904,26 @@ loop:
 			continue
 		}
 		switch key {
+		case "DocDbSettings":
+			var mv types.DocDbDataProviderSettings
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentDocDbDataProviderSettings(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataProviderSettingsMemberDocDbSettings{Value: mv}
+			break loop
+
+		case "MariaDbSettings":
+			var mv types.MariaDbDataProviderSettings
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentMariaDbDataProviderSettings(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataProviderSettingsMemberMariaDbSettings{Value: mv}
+			break loop
+
 		case "MicrosoftSqlServerSettings":
 			var mv types.MicrosoftSqlServerDataProviderSettings
 			destAddr := &mv
@@ -14912,6 +14932,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.DataProviderSettingsMemberMicrosoftSqlServerSettings{Value: mv}
+			break loop
+
+		case "MongoDbSettings":
+			var mv types.MongoDbDataProviderSettings
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentMongoDbDataProviderSettings(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataProviderSettingsMemberMongoDbSettings{Value: mv}
 			break loop
 
 		case "MySqlSettings":
@@ -14942,6 +14972,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.DataProviderSettingsMemberPostgreSqlSettings{Value: mv}
+			break loop
+
+		case "RedshiftSettings":
+			var mv types.RedshiftDataProviderSettings
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentRedshiftDataProviderSettings(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataProviderSettingsMemberRedshiftSettings{Value: mv}
 			break loop
 
 		default:
@@ -15032,6 +15072,86 @@ func awsAwsjson11_deserializeDocumentDmsTransferSettings(v **types.DmsTransferSe
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServiceAccessRoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDocDbDataProviderSettings(v **types.DocDbDataProviderSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocDbDataProviderSettings
+	if *v == nil {
+		sv = &types.DocDbDataProviderSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CertificateArn = ptr.String(jtv)
+			}
+
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServerName = ptr.String(jtv)
+			}
+
+		case "SslMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DmsSslModeValue to be of type string, got %T instead", value)
+				}
+				sv.SslMode = types.DmsSslModeValue(jtv)
 			}
 
 		default:
@@ -18255,6 +18375,77 @@ func awsAwsjson11_deserializeDocumentLimitationList(v *[]types.Limitation, value
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMariaDbDataProviderSettings(v **types.MariaDbDataProviderSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MariaDbDataProviderSettings
+	if *v == nil {
+		sv = &types.MariaDbDataProviderSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CertificateArn = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServerName = ptr.String(jtv)
+			}
+
+		case "SslMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DmsSslModeValue to be of type string, got %T instead", value)
+				}
+				sv.SslMode = types.DmsSslModeValue(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMicrosoftSqlServerDataProviderSettings(v **types.MicrosoftSqlServerDataProviderSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18671,6 +18862,113 @@ func awsAwsjson11_deserializeDocumentMigrationProjectList(v *[]types.MigrationPr
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMongoDbDataProviderSettings(v **types.MongoDbDataProviderSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MongoDbDataProviderSettings
+	if *v == nil {
+		sv = &types.MongoDbDataProviderSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthMechanism":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthMechanismValue to be of type string, got %T instead", value)
+				}
+				sv.AuthMechanism = types.AuthMechanismValue(jtv)
+			}
+
+		case "AuthSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AuthSource = ptr.String(jtv)
+			}
+
+		case "AuthType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthTypeValue to be of type string, got %T instead", value)
+				}
+				sv.AuthType = types.AuthTypeValue(jtv)
+			}
+
+		case "CertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CertificateArn = ptr.String(jtv)
+			}
+
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServerName = ptr.String(jtv)
+			}
+
+		case "SslMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DmsSslModeValue to be of type string, got %T instead", value)
+				}
+				sv.SslMode = types.DmsSslModeValue(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -21211,6 +21509,68 @@ func awsAwsjson11_deserializeDocumentRedisSettings(v **types.RedisSettings, valu
 					return fmt.Errorf("expected SslSecurityProtocolValue to be of type string, got %T instead", value)
 				}
 				sv.SslSecurityProtocol = types.SslSecurityProtocolValue(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRedshiftDataProviderSettings(v **types.RedshiftDataProviderSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedshiftDataProviderSettings
+	if *v == nil {
+		sv = &types.RedshiftDataProviderSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServerName = ptr.String(jtv)
 			}
 
 		default:

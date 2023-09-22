@@ -1,0 +1,8 @@
+{
+    "id": "f19f62bb-398e-463e-a3bd-bc3f5257ef44",
+    "type": "feature",
+    "description": "Add `EKS_CLUSTER_NAME` to filter and sort key.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

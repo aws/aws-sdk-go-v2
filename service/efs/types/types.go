@@ -254,7 +254,7 @@ type FileSystemDescription struct {
 	// the value in this field.
 	Name *string
 
-	// The amount of provisioned throughput, measured in MiB/s, for the file system.
+	// The amount of provisioned throughput, measured in MiBps, for the file system.
 	// Valid for file systems using ThroughputMode set to provisioned .
 	ProvisionedThroughputInMibps *float64
 
@@ -395,6 +395,7 @@ type PosixUser struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the replication configuration for a specific file system.
 type ReplicationConfigurationDescription struct {
 
 	// Describes when the replication configuration was created.

@@ -18,7 +18,7 @@ import (
 
 // Returns the account preferences settings for the Amazon Web Services account
 // associated with the user making the request, in the current Amazon Web Services
-// Region. For more information, see Managing Amazon EFS resource IDs .
+// Region.
 func (c *Client) DescribeAccountPreferences(ctx context.Context, params *DescribeAccountPreferencesInput, optFns ...func(*Options)) (*DescribeAccountPreferencesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountPreferencesInput{}

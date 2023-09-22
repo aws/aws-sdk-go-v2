@@ -31,9 +31,10 @@ import (
 //     The destination file system configuration consists of the following properties:
 //   - Amazon Web Services Region - The Amazon Web Services Region in which the
 //     destination file system is created. Amazon EFS replication is available in all
-//     Amazon Web Services Regions that Amazon EFS is available in, except Africa (Cape
-//     Town), Asia Pacific (Hong Kong), Asia Pacific (Jakarta), Europe (Milan), and
-//     Middle East (Bahrain).
+//     Amazon Web Services Regions in which EFS is available. To use EFS replication in
+//     a Region that is disabled by default, you must first opt in to the Region. For
+//     more information, see Managing Amazon Web Services Regions (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
+//     in the Amazon Web Services General Reference Reference Guide
 //   - Availability Zone - If you want the destination file system to use EFS One
 //     Zone availability and durability, you must specify the Availability Zone to
 //     create the file system in. For more information about EFS storage classes, see
@@ -59,7 +60,7 @@ import (
 //     are not enabled on the destination file system. After the destination file
 //     system is created, you can enable EFS lifecycle management and EFS
 //     Intelligent-Tiering.
-//   - Automatic backups - Automatic daily backups not enabled on the destination
+//   - Automatic backups - Automatic daily backups are enabled on the destination
 //     file system. After the file system is created, you can change this setting.
 //
 // For more information, see Amazon EFS replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html)
@@ -97,6 +98,7 @@ type CreateReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the replication configuration for a specific file system.
 type CreateReplicationConfigurationOutput struct {
 
 	// Describes when the replication configuration was created.

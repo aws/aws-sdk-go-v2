@@ -50,6 +50,7 @@ const (
 	CoverageFilterCriterionKeyCoverageStatus CoverageFilterCriterionKey = "COVERAGE_STATUS"
 	CoverageFilterCriterionKeyAddonVersion   CoverageFilterCriterionKey = "ADDON_VERSION"
 	CoverageFilterCriterionKeyManagementType CoverageFilterCriterionKey = "MANAGEMENT_TYPE"
+	CoverageFilterCriterionKeyEksClusterName CoverageFilterCriterionKey = "EKS_CLUSTER_NAME"
 )
 
 // Values returns all known values for CoverageFilterCriterionKey. Note that this
@@ -63,6 +64,7 @@ func (CoverageFilterCriterionKey) Values() []CoverageFilterCriterionKey {
 		"COVERAGE_STATUS",
 		"ADDON_VERSION",
 		"MANAGEMENT_TYPE",
+		"EKS_CLUSTER_NAME",
 	}
 }
 
@@ -76,6 +78,7 @@ const (
 	CoverageSortKeyIssue          CoverageSortKey = "ISSUE"
 	CoverageSortKeyAddonVersion   CoverageSortKey = "ADDON_VERSION"
 	CoverageSortKeyUpdatedAt      CoverageSortKey = "UPDATED_AT"
+	CoverageSortKeyEksClusterName CoverageSortKey = "EKS_CLUSTER_NAME"
 )
 
 // Values returns all known values for CoverageSortKey. Note that this can be
@@ -89,6 +92,7 @@ func (CoverageSortKey) Values() []CoverageSortKey {
 		"ISSUE",
 		"ADDON_VERSION",
 		"UPDATED_AT",
+		"EKS_CLUSTER_NAME",
 	}
 }
 

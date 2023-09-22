@@ -201,22 +201,22 @@ type ComputeConfig struct {
 
 	// Specifies the maximum value of the DMS capacity units (DCUs) for which a given
 	// DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with
-	// 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4,
-	// 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can
+	// 1 DCU as the minimum value allowed. The list of valid DCU values includes 1, 2,
+	// 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can
 	// specify for DMS Serverless is 384. The MaxCapacityUnits parameter is the only
 	// DCU parameter you are required to specify.
 	MaxCapacityUnits *int32
 
 	// Specifies the minimum value of the DMS capacity units (DCUs) for which a given
 	// DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with
-	// 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4,
-	// 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can
-	// specify for DMS Serverless is 2. You don't have to specify a value for the
+	// 1 DCU as the minimum value allowed. The list of valid DCU values includes 1, 2,
+	// 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can
+	// specify for DMS Serverless is 1. You don't have to specify a value for the
 	// MinCapacityUnits parameter. If you don't set this value, DMS scans the current
 	// activity of available source tables to identify an optimum setting for this
 	// parameter. If there is no current source activity or DMS can't otherwise
 	// identify a more appropriate value, it sets this parameter to the minimum DCU
-	// value allowed, 2.
+	// value allowed, 1.
 	MinCapacityUnits *int32
 
 	// Specifies whether the DMS Serverless replication is a Multi-AZ deployment. You
@@ -426,13 +426,35 @@ type DataProviderDescriptorDefinition struct {
 //
 // The following types satisfy this interface:
 //
+//	DataProviderSettingsMemberDocDbSettings
+//	DataProviderSettingsMemberMariaDbSettings
 //	DataProviderSettingsMemberMicrosoftSqlServerSettings
+//	DataProviderSettingsMemberMongoDbSettings
 //	DataProviderSettingsMemberMySqlSettings
 //	DataProviderSettingsMemberOracleSettings
 //	DataProviderSettingsMemberPostgreSqlSettings
+//	DataProviderSettingsMemberRedshiftSettings
 type DataProviderSettings interface {
 	isDataProviderSettings()
 }
+
+// Provides information that defines a DocumentDB data provider.
+type DataProviderSettingsMemberDocDbSettings struct {
+	Value DocDbDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberDocDbSettings) isDataProviderSettings() {}
+
+// Provides information that defines a MariaDB data provider.
+type DataProviderSettingsMemberMariaDbSettings struct {
+	Value MariaDbDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberMariaDbSettings) isDataProviderSettings() {}
 
 // Provides information that defines a Microsoft SQL Server data provider.
 type DataProviderSettingsMemberMicrosoftSqlServerSettings struct {
@@ -442,6 +464,15 @@ type DataProviderSettingsMemberMicrosoftSqlServerSettings struct {
 }
 
 func (*DataProviderSettingsMemberMicrosoftSqlServerSettings) isDataProviderSettings() {}
+
+// Provides information that defines a MongoDB data provider.
+type DataProviderSettingsMemberMongoDbSettings struct {
+	Value MongoDbDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberMongoDbSettings) isDataProviderSettings() {}
 
 // Provides information that defines a MySQL data provider.
 type DataProviderSettingsMemberMySqlSettings struct {
@@ -470,6 +501,15 @@ type DataProviderSettingsMemberPostgreSqlSettings struct {
 
 func (*DataProviderSettingsMemberPostgreSqlSettings) isDataProviderSettings() {}
 
+// Provides information that defines an Amazon Redshift data provider.
+type DataProviderSettingsMemberRedshiftSettings struct {
+	Value RedshiftDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberRedshiftSettings) isDataProviderSettings() {}
+
 // Provides error information about a schema conversion operation.
 type DefaultErrorDetails struct {
 
@@ -488,6 +528,28 @@ type DmsTransferSettings struct {
 	// The Amazon Resource Name (ARN) used by the service access IAM role. The role
 	// must allow the iam:PassRole action.
 	ServiceAccessRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a DocumentDB data provider.
+type DocDbDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the DocumentDB data provider.
+	DatabaseName *string
+
+	// The port value for the DocumentDB data provider.
+	Port *int32
+
+	// The name of the source DocumentDB server.
+	ServerName *string
+
+	// The SSL mode used to connect to the DocumentDB data provider. The default value
+	// is none .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }
@@ -1408,6 +1470,25 @@ type Limitation struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that defines a MariaDB data provider.
+type MariaDbDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The port value for the MariaDB data provider
+	Port *int32
+
+	// The name of the MariaDB server.
+	ServerName *string
+
+	// The SSL mode used to connect to the MariaDB data provider. The default value is
+	// none .
+	SslMode DmsSslModeValue
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines a Microsoft SQL Server data provider.
 type MicrosoftSqlServerDataProviderSettings struct {
 
@@ -1508,8 +1589,9 @@ type MicrosoftSQLServerSettings struct {
 	// Indicates the mode used to fetch CDC data.
 	TlogAccessMode TlogAccessMode
 
-	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
-	// data types during migration. The default value is true .
+	// Use the TrimSpaceInChar source endpoint setting to right-trim data on CHAR and
+	// NCHAR data types during migration. Setting TrimSpaceInChar does not left-trim
+	// data. The default value is true .
 	TrimSpaceInChar *bool
 
 	// Use this to attribute to transfer data for full-load operations using BCP. When
@@ -1566,6 +1648,40 @@ type MigrationProject struct {
 	// specify. For example, you can change an object name to lowercase or uppercase,
 	// add or remove a prefix or suffix, or rename objects.
 	TransformationRules *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a MongoDB data provider.
+type MongoDbDataProviderSettings struct {
+
+	// The authentication method for connecting to the data provider. Valid values are
+	// DEFAULT, MONGODB_CR, or SCRAM_SHA_1.
+	AuthMechanism AuthMechanismValue
+
+	// The MongoDB database name. This setting isn't used when AuthType is set to "no"
+	// . The default is "admin" .
+	AuthSource *string
+
+	// The authentication type for the database connection. Valid values are PASSWORD
+	// or NO.
+	AuthType AuthTypeValue
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the MongoDB data provider.
+	DatabaseName *string
+
+	// The port value for the MongoDB data provider.
+	Port *int32
+
+	// The name of the MongoDB server.
+	ServerName *string
+
+	// The SSL mode used to connect to the MongoDB data provider. The default value is
+	// none .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }
@@ -1642,7 +1758,8 @@ type MongoDbSettings struct {
 	// contains the MongoDB endpoint connection details.
 	SecretsManagerSecretId *string
 
-	// The name of the server on the MongoDB source endpoint.
+	// The name of the server on the MongoDB source endpoint. For MongoDB Atlas,
+	// provide the server name for any of the servers in the replication set.
 	ServerName *string
 
 	// If true , DMS retrieves the entire document from the MongoDB source during
@@ -2043,7 +2160,7 @@ type OracleSettings struct {
 	// Oracle ASM of the endpoint. You can specify one of two sets of values for these
 	// permissions. You can specify the values for this setting and
 	// SecretsManagerOracleAsmSecretId . Or you can specify clear-text values for
-	// AsmUserName , AsmPassword , and AsmServerName . You can't specify both. For more
+	// AsmUser , AsmPassword , and AsmServerName . You can't specify both. For more
 	// information on creating this SecretsManagerOracleAsmSecret and the
 	// SecretsManagerOracleAsmAccessRoleArn and SecretsManagerOracleAsmSecretId
 	// required to access it, see Using secrets to access Database Migration Service
@@ -2299,7 +2416,8 @@ type PostgreSQLSettings struct {
 	HeartbeatSchema *string
 
 	// When true, lets PostgreSQL migrate the boolean type as boolean. By default,
-	// PostgreSQL migrates booleans as varchar(5) .
+	// PostgreSQL migrates booleans as varchar(5) . You must set this setting on both
+	// the source and target endpoints for it to take effect.
 	MapBooleanAsBoolean *bool
 
 	// When true, DMS migrates JSONB values as CLOB.
@@ -2604,6 +2722,21 @@ type RedisSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that defines an Amazon Redshift data provider.
+type RedshiftDataProviderSettings struct {
+
+	// The database name on the Amazon Redshift data provider.
+	DatabaseName *string
+
+	// The port value for the Amazon Redshift data provider.
+	Port *int32
+
+	// The name of the Amazon Redshift server.
+	ServerName *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines an Amazon Redshift endpoint.
 type RedshiftSettings struct {
 
@@ -2696,7 +2829,8 @@ type RedshiftSettings struct {
 	LoadTimeout *int32
 
 	// When true, lets Redshift migrate the boolean type as boolean. By default,
-	// Redshift migrates booleans as varchar(1) .
+	// Redshift migrates booleans as varchar(1) . You must set this setting on both the
+	// source and target endpoints for it to take effect.
 	MapBooleanAsBoolean *bool
 
 	// The maximum size (in KB) of any .csv file used to load data on an S3 bucket and
@@ -3191,7 +3325,7 @@ type ReplicationTask struct {
 	// Indicates when you want a change data capture (CDC) operation to stop. The
 	// value can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
+	// --cdc-stop-position “commit_time:2018-02-09T12:12:12“
 	CdcStopPosition *string
 
 	// The last error (failure) message generated for the replication task.
@@ -3649,11 +3783,11 @@ type S3Settings struct {
 
 	// An optional parameter that specifies how DMS treats null values. While handling
 	// the null value, you can use this parameter to pass a user-defined string as null
-	// when writing to the target. For example, when target columns are not nullable,
-	// you can use this option to differentiate between the empty string value and the
-	// null value. So, if you set this parameter value to the empty string ("" or ''),
-	// DMS treats the empty string as the null value instead of NULL . The default
-	// value is NULL . Valid values include any valid string.
+	// when writing to the target. For example, when target columns are nullable, you
+	// can use this option to differentiate between the empty string value and the null
+	// value. So, if you set this parameter value to the empty string ("" or ''), DMS
+	// treats the empty string as the null value instead of NULL . The default value is
+	// NULL . Valid values include any valid string.
 	CsvNullValue *string
 
 	// The delimiter used to separate rows in the .csv file for both source and

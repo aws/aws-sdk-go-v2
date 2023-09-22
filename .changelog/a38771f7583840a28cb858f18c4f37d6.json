@@ -1,0 +1,8 @@
+{
+    "id": "a38771f7-5838-40a2-8cb8-58f18c4f37d6",
+    "type": "documentation",
+    "description": "Documentation updates for Elastic File System",
+    "modules": [
+        "service/efs"
+    ]
+}

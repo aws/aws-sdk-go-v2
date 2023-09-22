@@ -420,7 +420,8 @@ type CoverageFilterCriteria struct {
 // operation.
 type CoverageFilterCriterion struct {
 
-	// An enum value representing possible filter fields.
+	// An enum value representing possible filter fields. Replace the enum value
+	// CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has been deprecated.
 	CriterionKey CoverageFilterCriterionKey
 
 	// Contains information about the condition.
@@ -472,7 +473,8 @@ type CoverageResourceDetails struct {
 // Information about the sorting criteria used in the coverage statistics.
 type CoverageSortCriteria struct {
 
-	// Represents the field name used to sort the coverage details.
+	// Represents the field name used to sort the coverage details. Replace the enum
+	// value CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has been deprecated.
 	AttributeName CoverageSortKey
 
 	// The order in which the sorted findings are to be displayed.
@@ -916,7 +918,8 @@ type FilterCriteria struct {
 type FilterCriterion struct {
 
 	// An enum value representing possible scan properties to match with given scan
-	// entries.
+	// entries. Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME .
+	// CLUSTER_NAME has been deprecated.
 	CriterionKey CriterionKey
 
 	// Contains information about the condition.
@@ -925,7 +928,7 @@ type FilterCriterion struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the finding, which is generated when abnormal or
+// Contains information about the finding that is generated when abnormal or
 // suspicious activity is detected.
 type Finding struct {
 
@@ -1783,9 +1786,9 @@ type OrganizationFeatureConfiguration struct {
 	// The additional information that will be configured for the organization.
 	AdditionalConfiguration []OrganizationAdditionalConfiguration
 
-	// The status of the feature that will be configured for the organization. Use one
-	// of the following values to configure the feature status for the entire
-	// organization:
+	// Describes the status of the feature that is configured for the member accounts
+	// within the organization. One of the following values is the status for the
+	// entire organization:
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have the feature enabled automatically.
 	//   - ALL : Indicates that all accounts in the organization have the feature
@@ -2452,16 +2455,16 @@ type ScanCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Represents key, value pair to be matched against given resource property.
+// Represents the key:value pair to be matched against given resource property.
 type ScanConditionPair struct {
 
-	// Represents key in the map condition.
+	// Represents the key in the map condition.
 	//
 	// This member is required.
 	Key *string
 
-	// Represents optional value in the map condition. If not specified, only key will
-	// be matched.
+	// Represents optional value in the map condition. If not specified, only the key
+	// will be matched.
 	Value *string
 
 	noSmithyDocumentSerde

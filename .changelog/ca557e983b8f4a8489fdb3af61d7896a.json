@@ -1,0 +1,8 @@
+{
+    "id": "ca557e98-3b8f-4a84-89fd-b3af61d7896a",
+    "type": "feature",
+    "description": "new vendors for DMS CSF: MongoDB, MariaDB, DocumentDb and Redshift",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

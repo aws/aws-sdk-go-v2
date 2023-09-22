@@ -40,6 +40,9 @@ type GetJobInput struct {
 	// This member is required.
 	JobArn *string
 
+	// A list of attributes to return information for.
+	AdditionalAttributeNames []types.HybridJobAdditionalAttributeName
+
 	noSmithyDocumentSerde
 }
 
@@ -120,6 +123,10 @@ type GetJobOutput struct {
 	// A list of parameters that specify the name and type of input data and where it
 	// is located.
 	InputDataConfig []types.InputFileConfig
+
+	// Queue information for the requested job. Only returned if QueueInfo is
+	// specified in the additionalAttributeNames" field in the GetJob API request.
+	QueueInfo *types.HybridJobQueueInfo
 
 	// The date and time that the Amazon Braket job was started.
 	StartedAt *time.Time

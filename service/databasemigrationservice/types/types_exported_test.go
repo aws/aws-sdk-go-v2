@@ -11,8 +11,17 @@ func ExampleDataProviderSettings_outputUsage() {
 	var union types.DataProviderSettings
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.DataProviderSettingsMemberDocDbSettings:
+		_ = v.Value // Value is types.DocDbDataProviderSettings
+
+	case *types.DataProviderSettingsMemberMariaDbSettings:
+		_ = v.Value // Value is types.MariaDbDataProviderSettings
+
 	case *types.DataProviderSettingsMemberMicrosoftSqlServerSettings:
 		_ = v.Value // Value is types.MicrosoftSqlServerDataProviderSettings
+
+	case *types.DataProviderSettingsMemberMongoDbSettings:
+		_ = v.Value // Value is types.MongoDbDataProviderSettings
 
 	case *types.DataProviderSettingsMemberMySqlSettings:
 		_ = v.Value // Value is types.MySqlDataProviderSettings
@@ -22,6 +31,9 @@ func ExampleDataProviderSettings_outputUsage() {
 
 	case *types.DataProviderSettingsMemberPostgreSqlSettings:
 		_ = v.Value // Value is types.PostgreSqlDataProviderSettings
+
+	case *types.DataProviderSettingsMemberRedshiftSettings:
+		_ = v.Value // Value is types.RedshiftDataProviderSettings
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -33,8 +45,12 @@ func ExampleDataProviderSettings_outputUsage() {
 }
 
 var _ *types.OracleDataProviderSettings
+var _ *types.DocDbDataProviderSettings
+var _ *types.MariaDbDataProviderSettings
 var _ *types.PostgreSqlDataProviderSettings
+var _ *types.MongoDbDataProviderSettings
 var _ *types.MicrosoftSqlServerDataProviderSettings
+var _ *types.RedshiftDataProviderSettings
 var _ *types.MySqlDataProviderSettings
 
 func ExampleErrorDetails_outputUsage() {

@@ -76,6 +76,23 @@ func (DeviceType) Values() []DeviceType {
 	}
 }
 
+type HybridJobAdditionalAttributeName string
+
+// Enum values for HybridJobAdditionalAttributeName
+const (
+	HybridJobAdditionalAttributeNameQueueInfo HybridJobAdditionalAttributeName = "QueueInfo"
+)
+
+// Values returns all known values for HybridJobAdditionalAttributeName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HybridJobAdditionalAttributeName) Values() []HybridJobAdditionalAttributeName {
+	return []HybridJobAdditionalAttributeName{
+		"QueueInfo",
+	}
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -230,6 +247,23 @@ func (JobPrimaryStatus) Values() []JobPrimaryStatus {
 	}
 }
 
+type QuantumTaskAdditionalAttributeName string
+
+// Enum values for QuantumTaskAdditionalAttributeName
+const (
+	QuantumTaskAdditionalAttributeNameQueueInfo QuantumTaskAdditionalAttributeName = "QueueInfo"
+)
+
+// Values returns all known values for QuantumTaskAdditionalAttributeName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (QuantumTaskAdditionalAttributeName) Values() []QuantumTaskAdditionalAttributeName {
+	return []QuantumTaskAdditionalAttributeName{
+		"QueueInfo",
+	}
+}
+
 type QuantumTaskStatus string
 
 // Enum values for QuantumTaskStatus
@@ -255,6 +289,42 @@ func (QuantumTaskStatus) Values() []QuantumTaskStatus {
 		"FAILED",
 		"CANCELLING",
 		"CANCELLED",
+	}
+}
+
+type QueueName string
+
+// Enum values for QueueName
+const (
+	QueueNameQuantumTasksQueue QueueName = "QUANTUM_TASKS_QUEUE"
+	QueueNameJobsQueue         QueueName = "JOBS_QUEUE"
+)
+
+// Values returns all known values for QueueName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueueName) Values() []QueueName {
+	return []QueueName{
+		"QUANTUM_TASKS_QUEUE",
+		"JOBS_QUEUE",
+	}
+}
+
+type QueuePriority string
+
+// Enum values for QueuePriority
+const (
+	QueuePriorityNormal   QueuePriority = "Normal"
+	QueuePriorityPriority QueuePriority = "Priority"
+)
+
+// Values returns all known values for QueuePriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueuePriority) Values() []QueuePriority {
+	return []QueuePriority{
+		"Normal",
+		"Priority",
 	}
 }
 

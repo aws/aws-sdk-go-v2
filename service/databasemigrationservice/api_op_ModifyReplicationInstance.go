@@ -64,12 +64,6 @@ type ModifyReplicationInstanceInput struct {
 	//   - This parameter is set to true during the maintenance window.
 	//   - A newer minor version is available.
 	//   - DMS has enabled automatic patching for the given engine version.
-	// When AutoMinorVersionUpgrade is enabled, DMS uses the current default engine
-	// version when you modify a replication instance. For example, if you set
-	// EngineVersion to a lower version number than the current default version, DMS
-	// uses the default version. If AutoMinorVersionUpgrade isn’t enabled when you
-	// modify a replication instance, DMS uses the engine version specified by the
-	// EngineVersion parameter.
 	AutoMinorVersionUpgrade *bool
 
 	// The engine version number of the replication instance. When modifying a major
