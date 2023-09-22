@@ -2247,13 +2247,13 @@
                 "MaxCapacityUnits": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless\n         replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed.\n         The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value\n         that you can specify for DMS Serverless is 384. The <code>MaxCapacityUnits</code> parameter is the only\n         DCU parameter you are required to specify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless\n         replication can be provisioned. A single DCU is 2GB of RAM, with 1 DCU as the minimum value allowed.\n         The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value\n         that you can specify for DMS Serverless is 384. The <code>MaxCapacityUnits</code> parameter is the only\n         DCU parameter you are required to specify.</p>"
                     }
                 },
                 "MinCapacityUnits": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS\n         Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value\n         allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU\n         value that you can specify for DMS Serverless is 2. You don't have to specify a value for the\n         <code>MinCapacityUnits</code> parameter. If you don't set this value, DMS scans the current activity\n         of available source tables to identify an optimum setting for this parameter. If there is no current\n         source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to\n         the minimum DCU value allowed, 2.</p>"
+                        "smithy.api#documentation": "<p>Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS\n         Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 1 DCU as the minimum value\n         allowed. The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU\n         value that you can specify for DMS Serverless is 1. You don't have to specify a value for the\n         <code>MinCapacityUnits</code> parameter. If you don't set this value, DMS scans the current activity\n         of available source tables to identify an optimum setting for this parameter. If there is no current\n         source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to\n         the minimum DCU value allowed, 1.</p>"
                     }
                 },
                 "MultiAZ": {
@@ -2358,7 +2358,48 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data provider using the provided settings. A data provider stores \n         a data store type and location information about your database. </p>"
+                "smithy.api#documentation": "<p>Creates a data provider using the provided settings. A data provider stores \n         a data store type and location information about your database. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create Data Provider",
+                        "documentation": "Creates the data provider with the specified parameters.",
+                        "input": {
+                            "DataProviderName": "sqlServer-dev",
+                            "Engine": "sqlserver",
+                            "Description": "description",
+                            "Settings": {
+                                "MicrosoftSqlServerSettings": {
+                                    "ServerName": "ServerName2",
+                                    "Port": 11112,
+                                    "DatabaseName": "DatabaseName",
+                                    "SslMode": "none"
+                                }
+                            },
+                            "Tags": [
+                                {
+                                    "Key": "access",
+                                    "Value": "authorizedusers"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "DataProvider": {
+                                "Engine": "postgres",
+                                "Settings": {
+                                    "PostgreSqlSettings": {
+                                        "SslMode": "none",
+                                        "ServerName": "postrgesql.a1b2c3d4e5f6.us-east-1.rds.amazonaws.com",
+                                        "Port": 5432,
+                                        "DatabaseName": "target"
+                                    }
+                                },
+                                "DataProviderCreationTime": "2023-05-12T10:50:41.988561Z",
+                                "DataProviderName": "my-target-dataprovider",
+                                "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-dataprovider"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#CreateDataProviderMessage": {
@@ -2969,7 +3010,41 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the instance profile using the specified parameters.</p>"
+                "smithy.api#documentation": "<p>Creates the instance profile using the specified parameters.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create Instance Profile",
+                        "documentation": "Creates the instance profile using the specified parameters.",
+                        "input": {
+                            "SubnetGroupIdentifier": "my-subnet-group",
+                            "PubliclyAccessible": true,
+                            "KmsKeyArn": "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
+                            "InstanceProfileName": "my-instance-profile",
+                            "Description": "Description",
+                            "NetworkType": "DUAL",
+                            "Tags": [
+                                {
+                                    "Key": "access",
+                                    "Value": "authorizedusers"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "InstanceProfile": {
+                                "SubnetGroupIdentifier": "public-subnets",
+                                "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
+                                "VpcSecurityGroups": [
+                                    "sg-0123456"
+                                ],
+                                "PubliclyAccessible": true,
+                                "KmsKeyArn": "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
+                                "InstanceProfileCreationTime": "2022-12-16T09:44:43.543246Z",
+                                "InstanceProfileName": "my-instance-profile",
+                                "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#CreateInstanceProfileMessage": {
@@ -3077,7 +3152,72 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the migration project using the specified parameters.</p>\n         <p>You can run this action only after you create an instance profile and data providers  \n         using <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html\">CreateInstanceProfile</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html\">CreateDataProvider</a>.</p>"
+                "smithy.api#documentation": "<p>Creates the migration project using the specified parameters.</p>\n         <p>You can run this action only after you create an instance profile and data providers  \n         using <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html\">CreateInstanceProfile</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html\">CreateDataProvider</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create Migration Project",
+                        "documentation": "Creates the migration project with the specified parameters.",
+                        "input": {
+                            "MigrationProjectName": "my-migration-project",
+                            "SourceDataProviderDescriptors": [
+                                {
+                                    "DataProviderIdentifier": "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                                    "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/example1/ALL.SOURCE.ORACLE_12-A1B2C3",
+                                    "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/myuser-admin-access"
+                                }
+                            ],
+                            "TargetDataProviderDescriptors": [
+                                {
+                                    "DataProviderIdentifier": "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                                    "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/example1/TARGET.postgresql-A1B2C3",
+                                    "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/myuser-admin-access"
+                                }
+                            ],
+                            "InstanceProfileIdentifier": "ip-au-17",
+                            "SchemaConversionApplicationAttributes": {
+                                "S3BucketPath": "arn:aws:s3:::mylogin-bucket",
+                                "S3BucketRoleArn": "arn:aws:iam::012345678901:role/Admin"
+                            },
+                            "Tags": [
+                                {
+                                    "Key": "access",
+                                    "Value": "authorizedusers"
+                                }
+                            ],
+                            "Description": "description",
+                            "TransformationRules": "{\"key0\":\"value0\",\"key1\":\"value1\",\"key2\":\"value2\"}"
+                        },
+                        "output": {
+                            "MigrationProject": {
+                                "SchemaConversionApplicationAttributes": {
+                                    "S3BucketPath": "my-s3-bucket/my_folder",
+                                    "S3BucketRoleArn": "arn:aws:iam::012345678901:role/my-s3role"
+                                },
+                                "SourceDataProviderDescriptors": [
+                                    {
+                                        "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/my-access-role",
+                                        "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/ALL.SOURCE.ORACLE_12-0123456",
+                                        "DataProviderName": "source-oracle-12",
+                                        "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    }
+                                ],
+                                "MigrationProjectCreationTime": "2023-04-19T11:45:15.805253Z",
+                                "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                "MigrationProjectName": "my-migration-project",
+                                "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                "InstanceProfileName": "my-instance-profile",
+                                "TargetDataProviderDescriptors": [
+                                    {
+                                        "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/dmytbon-admin-access",
+                                        "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/TARGET.postgresql-0123456",
+                                        "DataProviderName": "target-dataprovider-3",
+                                        "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#CreateMigrationProjectMessage": {
@@ -3322,7 +3462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the replication instance using the specified parameters.</p>\n         <p>DMS requires that your account have certain roles with appropriate permissions\n         before you can create a replication instance. For information on the required roles, see\n      <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole\">Creating the IAM Roles to Use With the CLI and DMS API</a>. For\n         information on the required permissions, see \n      <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions\">IAM Permissions Needed to Use DMS</a>.</p>",
+                "smithy.api#documentation": "<p>Creates the replication instance using the specified parameters.</p>\n         <p>DMS requires that your account have certain roles with appropriate permissions\n         before you can create a replication instance. For information on the required roles, see\n      <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole\">Creating the IAM Roles to Use With the CLI and DMS API</a>. For\n         information on the required permissions, see \n      <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions\">IAM Permissions Needed to Use DMS</a>.</p>\n         <note>\n            <p>If you don't specify a version when creating a replication instance, DMS will create the instance using the\n         default engine version. For information about the default engine version, see\n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReleaseNotes.html\">Release Notes</a>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Create replication instance",
@@ -3464,7 +3604,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether minor engine upgrades are applied automatically to the\n         replication instance during the maintenance window. This parameter defaults to\n            <code>true</code>.</p>\n         <p>Default: <code>true</code>\n         </p>\n         <p>When <code>AutoMinorVersionUpgrade</code> is enabled, DMS uses the current default\n         engine version when you create a replication instance. For example, if you set\n            <code>EngineVersion</code> to a lower version number than the current default version,\n         DMS uses the default version.</p>\n         <p>If <code>AutoMinorVersionUpgrade</code>\n            <i>isn’t</i> enabled when you create a replication instance, DMS uses the\n         engine version specified by the <code>EngineVersion</code> parameter. </p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether minor engine upgrades are applied automatically to the\n         replication instance during the maintenance window. This parameter defaults to\n            <code>true</code>.</p>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "Tags": {
@@ -3764,7 +3904,7 @@
                 "CdcStopPosition": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“</p>"
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“</p>"
                     }
                 },
                 "Tags": {
@@ -3950,6 +4090,9 @@
         "com.amazonaws.databasemigrationservice#DataProviderSettings": {
             "type": "union",
             "members": {
+                "RedshiftSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#RedshiftDataProviderSettings"
+                },
                 "PostgreSqlSettings": {
                     "target": "com.amazonaws.databasemigrationservice#PostgreSqlDataProviderSettings"
                 },
@@ -3961,6 +4104,21 @@
                 },
                 "MicrosoftSqlServerSettings": {
                     "target": "com.amazonaws.databasemigrationservice#MicrosoftSqlServerDataProviderSettings"
+                },
+                "DocDbSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#DocDbDataProviderSettings"
+                },
+                "MariaDbSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#MariaDbDataProviderSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information that defines a MariaDB data provider.</p>"
+                    }
+                },
+                "MongoDbSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#MongoDbDataProviderSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information that defines a MongoDB data provider.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4370,7 +4528,32 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified data provider.</p>\n         <note>\n            <p>All migration projects associated with the data provider must be deleted or modified \n            before you can delete the data provider.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified data provider.</p>\n         <note>\n            <p>All migration projects associated with the data provider must be deleted or modified \n            before you can delete the data provider.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete Data Provider",
+                        "documentation": "Deletes the specified data provider.",
+                        "input": {
+                            "DataProviderIdentifier": "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                        },
+                        "output": {
+                            "DataProvider": {
+                                "Engine": "postgres",
+                                "Settings": {
+                                    "PostgreSqlSettings": {
+                                        "SslMode": "none",
+                                        "ServerName": "postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com",
+                                        "Port": 5432,
+                                        "DatabaseName": "target"
+                                    }
+                                },
+                                "DataProviderCreationTime": "2023-05-12T10:50:41.988561Z",
+                                "DataProviderName": "my-target-data-provider",
+                                "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteDataProviderMessage": {
@@ -4615,7 +4798,30 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified instance profile.</p>\n         <note>\n            <p>All migration projects associated with the instance profile must be deleted or modified \n            before you can delete the instance profile.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified instance profile.</p>\n         <note>\n            <p>All migration projects associated with the instance profile must be deleted or modified \n            before you can delete the instance profile.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete Instance Profile",
+                        "documentation": "Deletes the specified instance profile.",
+                        "input": {
+                            "InstanceProfileIdentifier": "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                        },
+                        "output": {
+                            "InstanceProfile": {
+                                "SubnetGroupIdentifier": "public-subnets",
+                                "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
+                                "VpcSecurityGroups": [
+                                    "sg-0123456"
+                                ],
+                                "PubliclyAccessible": true,
+                                "KmsKeyArn": "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
+                                "InstanceProfileCreationTime": "2022-12-16T09:44:43.543246Z",
+                                "InstanceProfileName": "my-instance-profile",
+                                "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteInstanceProfileMessage": {
@@ -4667,7 +4873,45 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified migration project.</p>\n         <note>\n            <p>The migration project must be closed before you can delete it.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified migration project.</p>\n         <note>\n            <p>The migration project must be closed before you can delete it.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete Migration Project",
+                        "documentation": "Deletes the specified migration project.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                        },
+                        "output": {
+                            "MigrationProject": {
+                                "SchemaConversionApplicationAttributes": {
+                                    "S3BucketPath": "my-s3-bucket/my_folder",
+                                    "S3BucketRoleArn": "arn:aws:iam::012345678901:role/my-s3role"
+                                },
+                                "SourceDataProviderDescriptors": [
+                                    {
+                                        "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/my-access-role",
+                                        "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/ALL.SOURCE.ORACLE_12-0123456",
+                                        "DataProviderName": "all-source-oracle-12",
+                                        "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    }
+                                ],
+                                "MigrationProjectCreationTime": "2023-04-19T11:45:15.805253Z",
+                                "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                "MigrationProjectName": "my-migration-project",
+                                "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                "InstanceProfileName": "my-instance-profile",
+                                "TargetDataProviderDescriptors": [
+                                    {
+                                        "SecretsManagerAccessRoleArn": "arn:aws:iam::437223687239:role/dmytbon-admin-access",
+                                        "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/TARGET.postgresql-0123456",
+                                        "DataProviderName": "sde-obilyns-dataprovider-3",
+                                        "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteMigrationProjectMessage": {
@@ -5446,7 +5690,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns configuration parameters for a schema conversion project.</p>"
+                "smithy.api#documentation": "<p>Returns configuration parameters for a schema conversion project.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Conversion Configuration",
+                        "documentation": "Returns configuration parameters for a schema conversion project.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                        },
+                        "output": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "ConversionConfiguration": "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\"},\"ORACLE_TO_POSTGRESQL\" : {\"ToTimeZone\":false,\"LastDayBuiltinFunctionOracle\":false,   \"NextDayBuiltinFunctionOracle\":false,\"ConvertProceduresToFunction\":false,\"NvlBuiltinFunctionOracle\":false,\"DbmsAssertBuiltinFunctionOracle\":false}}"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#DescribeConversionConfigurationMessage": {
@@ -5502,6 +5759,43 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of data providers for your account in the current region.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Data Providers",
+                        "documentation": "",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "data-provider-identifier",
+                                    "Values": [
+                                        "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                                    ]
+                                }
+                            ],
+                            "MaxRecords": 20,
+                            "Marker": "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                        },
+                        "output": {
+                            "Marker": "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                            "DataProviders": [
+                                {
+                                    "Engine": "postgres",
+                                    "DataProviderCreationTime": "2023-05-12T10:50:41.988561Z",
+                                    "DataProviderName": "my-target-data-provider",
+                                    "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider",
+                                    "Settings": {
+                                        "PostgreSqlSettings": {
+                                            "SslMode": "none",
+                                            "ServerName": "postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com",
+                                            "Port": 5432,
+                                            "DatabaseName": "target"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6126,6 +6420,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of extension pack associations for the specified migration project.\n         An extension pack is an add-on module \n         that emulates functions present in a source database that are required when converting objects \n         to the target database.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Extension Pack Associations",
+                        "documentation": "Returns a paginated list of extension pack associations for the specified migration project.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "Filters": [
+                                {
+                                    "Name": "instance-profile-identifier",
+                                    "Values": [
+                                        "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                                    ]
+                                }
+                            ],
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "MaxRecords": 20
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "Requests": [
+                                {
+                                    "Status": "SUCCESS",
+                                    "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6538,6 +6861,38 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of instance profiles for your account in the current region.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Instance Profiles",
+                        "documentation": "Returns a paginated list of instance profiles for your account in the current region.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "instance-profile-identifier",
+                                    "Values": [
+                                        "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+                                    ]
+                                }
+                            ],
+                            "MaxRecords": 20,
+                            "Marker": "0123456789abcdefghijklmnopqrs"
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "InstanceProfiles": [
+                                {
+                                    "SubnetGroupIdentifier": "public-subnets",
+                                    "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
+                                    "PubliclyAccessible": true,
+                                    "KmsKeyArn": "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
+                                    "InstanceProfileCreationTime": "2022-12-16T09:44:43.543246Z",
+                                    "InstanceProfileName": "my-instance-profile",
+                                    "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6606,6 +6961,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of metadata model assessments for your account in the current region.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Metadata Model Assessments",
+                        "documentation": "Returns a paginated list of metadata model assessments for your account in the current region.",
+                        "input": {
+                            "MigrationProjectIdentifier": "",
+                            "Filters": [
+                                {
+                                    "Name": "my-migration-project",
+                                    "Values": [
+                                        "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    ]
+                                }
+                            ],
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "MaxRecords": 20
+                        },
+                        "output": {
+                            "Marker": "ASDLKJASDJKHDFHGDNBGDASKJHGFK",
+                            "Requests": [
+                                {
+                                    "Status": "SUCCESS",
+                                    "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6681,6 +7065,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of metadata model conversions for a migration project.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Metadata Model Conversions",
+                        "documentation": "Returns a paginated list of metadata model conversions for a migration project.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                            "Filters": [
+                                {
+                                    "Name": "request-id",
+                                    "Values": [
+                                        "01234567-89ab-cdef-0123-456789abcdef"
+                                    ]
+                                }
+                            ],
+                            "Marker": "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ123456",
+                            "MaxRecords": 123
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "Requests": [
+                                {
+                                    "Status": "SUCCESS",
+                                    "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6756,6 +7169,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of metadata model exports.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Metadata Model Exports As Script",
+                        "documentation": "Returns a paginated list of metadata model exports.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "Filters": [
+                                {
+                                    "Name": "request-id",
+                                    "Values": [
+                                        "01234567-89ab-cdef-0123-456789abcdef"
+                                    ]
+                                }
+                            ],
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "MaxRecords": 20
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "Requests": [
+                                {
+                                    "Status": "SUCCESS",
+                                    "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6831,6 +7273,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of metadata model exports.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Metadata Model Exports To Target",
+                        "documentation": "Returns a paginated list of metadata model exports.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "Filters": [
+                                {
+                                    "Name": "request-id",
+                                    "Values": [
+                                        "01234567-89ab-cdef-0123-456789abcdef"
+                                    ]
+                                }
+                            ],
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "MaxRecords": 20
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "Requests": [
+                                {
+                                    "Status": "SUCCESS",
+                                    "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6906,6 +7377,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of metadata model imports.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Metadata Model Imports",
+                        "documentation": "Returns a paginated list of metadata model imports.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "Filters": [
+                                {
+                                    "Name": "request-id",
+                                    "Values": [
+                                        "01234567-89ab-cdef-0123-456789abcdef"
+                                    ]
+                                }
+                            ],
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "MaxRecords": 20
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "Requests": [
+                                {
+                                    "Status": "SUCCESS",
+                                    "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6984,6 +7484,56 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of migration projects for your account in the current region.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe Migration Projects",
+                        "documentation": "Returns a paginated list of migration projects for your account in the current region.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "migration-project-identifier",
+                                    "Values": [
+                                        "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901"
+                                    ]
+                                }
+                            ],
+                            "MaxRecords": 20,
+                            "Marker": "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ123456"
+                        },
+                        "output": {
+                            "Marker": "0123456789abcdefghijklmnopqrs",
+                            "MigrationProjects": [
+                                {
+                                    "SchemaConversionApplicationAttributes": {
+                                        "S3BucketPath": "my-s3-bucket/my_folder",
+                                        "S3BucketRoleArn": "arn:aws:iam::012345678901:role/my-s3role"
+                                    },
+                                    "SourceDataProviderDescriptors": [
+                                        {
+                                            "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/my-access-role",
+                                            "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/ALL.SOURCE.ORACLE_12-012345",
+                                            "DataProviderName": "all-source-oracle-12",
+                                            "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                        }
+                                    ],
+                                    "MigrationProjectCreationTime": "2023-04-19T11:45:15.805253Z",
+                                    "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                    "MigrationProjectName": "my-migration-project",
+                                    "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                    "InstanceProfileName": "my-instance-profile",
+                                    "TargetDataProviderDescriptors": [
+                                        {
+                                            "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/dmytbon-admin-access",
+                                            "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/TARGET.postgresql-012345",
+                                            "DataProviderName": "my-data-provider",
+                                            "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -8858,6 +9408,44 @@
                 "smithy.api#documentation": "<p> The settings in JSON format for the DMS Transfer type source endpoint. </p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#DocDbDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source DocumentDB server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the DocumentDB data provider.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name on the DocumentDB data provider.</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DmsSslModeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSL mode used to connect to the DocumentDB data provider. \n         The default value is <code>none</code>.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines a DocumentDB data provider.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#DocDbSettings": {
             "type": "structure",
             "members": {
@@ -9634,7 +10222,31 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Saves a copy of a database migration assessment report to your Amazon S3 bucket. DMS can save \n         your assessment report as a comma-separated value (CSV) or a PDF file. </p>"
+                "smithy.api#documentation": "<p>Saves a copy of a database migration assessment report to your Amazon S3 bucket. DMS can save \n         your assessment report as a comma-separated value (CSV) or a PDF file. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Export Metadata Model Assessment",
+                        "documentation": "Saves a copy of a database migration assessment report to your S3 bucket. DMS can save your assessment report as a comma-separated value (CSV) or a PDF file.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "SelectionRules": "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-a1b2c3d4e5f6.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
+                            "FileName": "file",
+                            "AssessmentReportTypes": [
+                                "pdf"
+                            ]
+                        },
+                        "output": {
+                            "PdfReport": {
+                                "S3ObjectKey": "object-name",
+                                "ObjectURL": "url"
+                            },
+                            "CsvReport": {
+                                "S3ObjectKey": "object-name",
+                                "ObjectURL": "url"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#ExportMetadataModelAssessmentMessage": {
@@ -10788,6 +11400,38 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#MariaDbDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MariaDB server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the MariaDB data provider</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DmsSslModeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSL mode used to connect to the MariaDB data provider. \n         The default value is <code>none</code>.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines a MariaDB data provider.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#MessageFormatValue": {
             "type": "enum",
             "members": {
@@ -10895,7 +11539,7 @@
                 "TrimSpaceInChar": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data \n         on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to right-trim data \n         on CHAR and NCHAR data types during migration. Setting <code>TrimSpaceInChar</code>\n         does not left-trim data. The default value is <code>true</code>.</p>"
                     }
                 },
                 "TlogAccessMode": {
@@ -11070,7 +11714,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified schema conversion configuration using the provided parameters. </p>"
+                "smithy.api#documentation": "<p>Modifies the specified schema conversion configuration using the provided parameters. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Modify Conversion Configuration",
+                        "documentation": "Modifies the specified schema conversion configuration using the provided parameters.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "ConversionConfiguration": "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\"},\"ORACLE_TO_POSTGRESQL\" : {\"ToTimeZone\":false,\"LastDayBuiltinFunctionOracle\":false,   \"NextDayBuiltinFunctionOracle\":false,\"ConvertProceduresToFunction\":false,\"NvlBuiltinFunctionOracle\":false,\"DbmsAssertBuiltinFunctionOracle\":false}}"
+                        },
+                        "output": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#ModifyConversionConfigurationMessage": {
@@ -11129,7 +11786,43 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified data provider using the provided settings.</p>\n         <note>\n            <p>You must remove the data provider from all migration projects before you can modify it.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the specified data provider using the provided settings.</p>\n         <note>\n            <p>You must remove the data provider from all migration projects before you can modify it.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Modify Data Provider",
+                        "documentation": "Modifies the specified data provider using the provided settings.",
+                        "input": {
+                            "DataProviderIdentifier": "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                            "DataProviderName": "new-name",
+                            "Engine": "sqlserver",
+                            "Description": "description",
+                            "Settings": {
+                                "MicrosoftSqlServerSettings": {
+                                    "ServerName": "ServerName2",
+                                    "Port": 11112,
+                                    "DatabaseName": "DatabaseName",
+                                    "SslMode": "none"
+                                }
+                            }
+                        },
+                        "output": {
+                            "DataProvider": {
+                                "Engine": "postgres",
+                                "Settings": {
+                                    "PostgreSqlSettings": {
+                                        "SslMode": "none",
+                                        "ServerName": "postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com",
+                                        "Port": 5432,
+                                        "DatabaseName": "target"
+                                    }
+                                },
+                                "DataProviderCreationTime": "2023-05-12T10:50:41.988561Z",
+                                "DataProviderName": "my-target-data-provider",
+                                "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#ModifyDataProviderMessage": {
@@ -11594,7 +12287,38 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified instance profile using the provided parameters.</p>\n         <note>\n            <p>All migration projects associated with the instance profile must be deleted \n            or modified before you can modify the instance profile.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the specified instance profile using the provided parameters.</p>\n         <note>\n            <p>All migration projects associated with the instance profile must be deleted \n            or modified before you can modify the instance profile.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Modify Instance Profile",
+                        "documentation": "Modifies the specified instance profile using the provided parameters.",
+                        "input": {
+                            "InstanceProfileIdentifier": "",
+                            "AvailabilityZone": "",
+                            "KmsKeyArn": "",
+                            "PubliclyAccessible": true,
+                            "NetworkType": "",
+                            "InstanceProfileName": "",
+                            "Description": "",
+                            "SubnetGroupIdentifier": "",
+                            "VpcSecurityGroups": []
+                        },
+                        "output": {
+                            "InstanceProfile": {
+                                "SubnetGroupIdentifier": "public-subnets",
+                                "VpcIdentifier": "vpc-0a1b2c3d4e5f6g7h8",
+                                "VpcSecurityGroups": [
+                                    "sg-0123456"
+                                ],
+                                "PubliclyAccessible": true,
+                                "KmsKeyArn": "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
+                                "InstanceProfileCreationTime": "2022-12-16T09:44:43.543246Z",
+                                "InstanceProfileName": "my-instance-profile",
+                                "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#ModifyInstanceProfileMessage": {
@@ -11700,7 +12424,66 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified migration project using the provided parameters.</p>\n         <note>\n            <p>The migration project must be closed before you can modify it.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the specified migration project using the provided parameters.</p>\n         <note>\n            <p>The migration project must be closed before you can modify it.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Modify Migration Project",
+                        "documentation": "Modifies the specified migration project using the provided parameters.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                            "MigrationProjectName": "new-name",
+                            "SourceDataProviderDescriptors": [
+                                {
+                                    "DataProviderIdentifier": "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                                    "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/myuser/ALL.SOURCE.ORACLE_12-A1B2C3",
+                                    "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/myuser-admin-access"
+                                }
+                            ],
+                            "TargetDataProviderDescriptors": [
+                                {
+                                    "DataProviderIdentifier": "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                                    "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/myuser/TARGET.postgresql-A1B2C3",
+                                    "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/myuser-admin-access"
+                                }
+                            ],
+                            "InstanceProfileIdentifier": "my-instance-profile",
+                            "SchemaConversionApplicationAttributes": {
+                                "S3BucketPath": "arn:aws:s3:::myuser-bucket",
+                                "S3BucketRoleArn": "arn:aws:iam::012345678901:role/Admin"
+                            },
+                            "Description": "description"
+                        },
+                        "output": {
+                            "MigrationProject": {
+                                "SchemaConversionApplicationAttributes": {
+                                    "S3BucketPath": "my-s3-bucket/my_folder",
+                                    "S3BucketRoleArn": "arn:aws:iam::012345678901:role/my-s3role"
+                                },
+                                "SourceDataProviderDescriptors": [
+                                    {
+                                        "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/my-access-role",
+                                        "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/ALL.SOURCE.ORACLE_12-TP5rA9",
+                                        "DataProviderName": "all-source-oracle-12",
+                                        "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    }
+                                ],
+                                "MigrationProjectCreationTime": "2023-04-19T11:45:15.805253Z",
+                                "InstanceProfileArn": "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                "MigrationProjectName": "my-migration-project",
+                                "MigrationProjectArn": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                                "InstanceProfileName": "my-instance-profile",
+                                "TargetDataProviderDescriptors": [
+                                    {
+                                        "SecretsManagerAccessRoleArn": "arn:aws:iam::012345678901:role/my-access-role",
+                                        "SecretsManagerSecretId": "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/TARGET.postgresql-mysecret",
+                                        "DataProviderName": "my-dataprovider",
+                                        "DataProviderArn": "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#ModifyMigrationProjectMessage": {
@@ -12052,7 +12835,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates that minor version upgrades are applied automatically to the\n         replication instance during the maintenance window. Changing this parameter doesn't result\n         in an outage, except in the case described following. The change is asynchronously applied\n         as soon as possible. </p>\n         <p>An outage does result if these factors apply: </p>\n         <ul>\n            <li>\n               <p>This parameter is set to <code>true</code> during the maintenance window.</p>\n            </li>\n            <li>\n               <p>A newer minor version is available. </p>\n            </li>\n            <li>\n               <p>DMS has enabled automatic patching for the given engine version. </p>\n            </li>\n         </ul>\n         <p>When <code>AutoMinorVersionUpgrade</code> is enabled, DMS uses the current default\n         engine version when you modify a replication instance. For example, if you set\n         <code>EngineVersion</code> to a lower version number than the current default version,\n         DMS uses the default version.</p>\n         <p>If <code>AutoMinorVersionUpgrade</code>\n            <i>isn’t</i> enabled when you modify a replication instance, DMS uses the\n         engine version specified by the <code>EngineVersion</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates that minor version upgrades are applied automatically to the\n         replication instance during the maintenance window. Changing this parameter doesn't result\n         in an outage, except in the case described following. The change is asynchronously applied\n         as soon as possible. </p>\n         <p>An outage does result if these factors apply: </p>\n         <ul>\n            <li>\n               <p>This parameter is set to <code>true</code> during the maintenance window.</p>\n            </li>\n            <li>\n               <p>A newer minor version is available. </p>\n            </li>\n            <li>\n               <p>DMS has enabled automatic patching for the given engine version. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ReplicationInstanceIdentifier": {
@@ -12253,7 +13036,7 @@
                 "CdcStopPosition": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“</p>"
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“</p>"
                     }
                 },
                 "TaskData": {
@@ -12283,6 +13066,62 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#MongoDbDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MongoDB server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the MongoDB data provider.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name on the MongoDB data provider.</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DmsSslModeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSL mode used to connect to the MongoDB data provider. \n         The default value is <code>none</code>.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                },
+                "AuthType": {
+                    "target": "com.amazonaws.databasemigrationservice#AuthTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the database connection. Valid values are PASSWORD or NO.</p>"
+                    }
+                },
+                "AuthSource": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The MongoDB database name. This setting isn't used when <code>AuthType</code> is\n         set to <code>\"no\"</code>. </p>\n         <p>The default is <code>\"admin\"</code>.</p>"
+                    }
+                },
+                "AuthMechanism": {
+                    "target": "com.amazonaws.databasemigrationservice#AuthMechanismValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication method for connecting to the data provider. Valid values are DEFAULT, MONGODB_CR, or SCRAM_SHA_1.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines a MongoDB data provider.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#MongoDbSettings": {
             "type": "structure",
             "members": {
@@ -12301,7 +13140,7 @@
                 "ServerName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the server on the MongoDB source endpoint. </p>"
+                        "smithy.api#documentation": "<p> The name of the server on the MongoDB source endpoint. For MongoDB Atlas, provide the \n      server name for any of the servers in the replication set.</p>"
                     }
                 },
                 "Port": {
@@ -12949,7 +13788,7 @@
                 "SecretsManagerOracleAsmAccessRoleArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN\n         of the IAM role that specifies DMS as the trusted entity and grants the required\n         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This\n            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to\n         the Oracle ASM of the endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can\n            specify clear-text values for <code>AsmUserName</code>, <code>AsmPassword</code>, and\n               <code>AsmServerName</code>. You can't specify both. For more information on\n            creating this <code>SecretsManagerOracleAsmSecret</code> and the\n               <code>SecretsManagerOracleAsmAccessRoleArn</code> and\n               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service\n               resources</a> in the <i>Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN\n         of the IAM role that specifies DMS as the trusted entity and grants the required\n         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This\n            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to\n         the Oracle ASM of the endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can\n            specify clear-text values for <code>AsmUser</code>, <code>AsmPassword</code>, and\n               <code>AsmServerName</code>. You can't specify both. For more information on\n            creating this <code>SecretsManagerOracleAsmSecret</code> and the\n               <code>SecretsManagerOracleAsmAccessRoleArn</code> and\n               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service\n               resources</a> in the <i>Database Migration Service User\n               Guide</i>.</p>\n         </note>"
                     }
                 },
                 "SecretsManagerOracleAsmSecretId": {
@@ -13295,7 +14134,7 @@
                 "MapBooleanAsBoolean": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as \n         <code>varchar(5)</code>.</p>"
+                        "smithy.api#documentation": "<p>When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as \n         <code>varchar(5)</code>. You must set this setting on both the source and target endpoints for it to take effect.</p>"
                     }
                 },
                 "MapJsonbAsClob": {
@@ -13772,6 +14611,32 @@
                 "smithy.api#documentation": "<p>Provides information that defines a Redis target endpoint.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#RedshiftDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Redshift server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the Amazon Redshift data provider.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name on the Amazon Redshift data provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines an Amazon Redshift data provider.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#RedshiftSettings": {
             "type": "structure",
             "members": {
@@ -13958,7 +14823,7 @@
                 "MapBooleanAsBoolean": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as \n         <code>varchar(1)</code>.</p>"
+                        "smithy.api#documentation": "<p>When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as \n         <code>varchar(1)</code>. You must set this setting on both the source and target endpoints for it to take effect.</p>"
                     }
                 }
             },
@@ -15048,7 +15913,7 @@
                 "CdcStopPosition": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“</p>"
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“</p>"
                     }
                 },
                 "RecoveryCheckpoint": {
@@ -15728,7 +16593,7 @@
                 "CsvNullValue": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies how DMS treats null\n         values. While handling the null value, you can use this\n         parameter to pass a user-defined string as null when writing to\n         the target. For example, when target columns are not nullable,\n         you can use this option to differentiate between the empty\n         string value and the null value. So, if you set this parameter\n         value to the empty string (\"\" or ''), DMS treats the empty\n         string as the null value instead of <code>NULL</code>.</p>\n         <p>The default value is <code>NULL</code>. Valid values include any valid string.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies how DMS treats null\n         values. While handling the null value, you can use this\n         parameter to pass a user-defined string as null when writing to\n         the target. For example, when target columns are nullable,\n         you can use this option to differentiate between the empty\n         string value and the null value. So, if you set this parameter\n         value to the empty string (\"\" or ''), DMS treats the empty\n         string as the null value instead of <code>NULL</code>.</p>\n         <p>The default value is <code>NULL</code>. Valid values include any valid string.</p>"
                     }
                 },
                 "IgnoreHeaderRows": {
@@ -16096,7 +16961,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies the extension pack to your target database. An extension pack is an add-on \n         module that emulates functions present in a source database that are required when \n         converting objects to the target database. \n      </p>"
+                "smithy.api#documentation": "<p>Applies the extension pack to your target database. An extension pack is an add-on \n         module that emulates functions present in a source database that are required when \n         converting objects to the target database. \n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start Extension Pack Association",
+                        "documentation": "Applies the extension pack to your target database.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+                        },
+                        "output": {
+                            "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#StartExtensionPackAssociationMessage": {
@@ -16163,7 +17040,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a database migration assessment report by assessing the migration complexity for \n         your source database. A database migration assessment report summarizes all of the schema \n         conversion tasks. It also details the action items for database objects that can't be converted \n         to the database engine of your target database instance. </p>"
+                "smithy.api#documentation": "<p>Creates a database migration assessment report by assessing the migration complexity for \n         your source database. A database migration assessment report summarizes all of the schema \n         conversion tasks. It also details the action items for database objects that can't be converted \n         to the database engine of your target database instance. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start Metadata Model Assessment",
+                        "documentation": "Creates a database migration assessment report by assessing the migration complexity for \n         your source database.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "SelectionRules": "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}"
+                        },
+                        "output": {
+                            "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#StartMetadataModelAssessmentMessage": {
@@ -16237,7 +17127,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Converts your source database objects to a format compatible with the target database. </p>"
+                "smithy.api#documentation": "<p>Converts your source database objects to a format compatible with the target database. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start Metadata Model Conversion",
+                        "documentation": "Converts your source database objects to a format compatible with the target database. ",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "SelectionRules": "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}"
+                        },
+                        "output": {
+                            "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#StartMetadataModelConversionMessage": {
@@ -16311,7 +17214,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.</p>"
+                "smithy.api#documentation": "<p>Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start Metadata Model Export As Script",
+                        "documentation": "Saves your converted code to a file as a SQL script, and stores this file on your S3 bucket.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "SelectionRules": "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
+                            "Origin": "SOURCE",
+                            "FileName": "FILE"
+                        },
+                        "output": {
+                            "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#StartMetadataModelExportAsScriptMessage": {
@@ -16398,7 +17316,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies converted database objects to your target database. </p>"
+                "smithy.api#documentation": "<p>Applies converted database objects to your target database. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start Metadata Model Export To Target",
+                        "documentation": "Applies converted database objects to your target database.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+                            "SelectionRules": "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-a1b2c3d4e5f6.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
+                            "OverwriteExtensionPack": true
+                        },
+                        "output": {
+                            "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#StartMetadataModelExportToTargetMessage": {
@@ -16478,7 +17410,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Loads the metadata for all the dependent database objects of the parent object.</p>\n         <p>This operation uses your project's Amazon S3 bucket as a metadata cache to improve performance.</p>"
+                "smithy.api#documentation": "<p>Loads the metadata for all the dependent database objects of the parent object.</p>\n         <p>This operation uses your project's Amazon S3 bucket as a metadata cache to improve performance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start Metadata Model Import",
+                        "documentation": "Loads the metadata for all the dependent database objects of the parent object.",
+                        "input": {
+                            "MigrationProjectIdentifier": "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+                            "SelectionRules": "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
+                            "Origin": "SOURCE",
+                            "Refresh": false
+                        },
+                        "output": {
+                            "RequestIdentifier": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#StartMetadataModelImportMessage": {
@@ -16946,7 +17893,7 @@
                 "CdcStopPosition": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“</p>"
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>\n         <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p>\n         <p>Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“</p>"
                     }
                 }
             },
@@ -17713,7 +18660,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules.\n         By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher.\n         If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you\n         to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the <code>Force</code>\n         option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be\n         available when you use Amazon EventBridge.</p>\n         <p>To call this operation, make sure that you have certain permissions added to your user account.\n         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge\">Migrating event subscriptions to Amazon EventBridge</a>\n            in the <i>Amazon Web Services Database Migration Service User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules.\n         By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.5 or higher.\n         If any replication instances are from versions earlier than 3.4.5, the operation raises an error and tells you\n         to upgrade these instances to version 3.4.5 or higher. To enable migration regardless of version, set the <code>Force</code>\n         option to true. However, if you don't upgrade instances earlier than version 3.4.5, some types of events might not be\n         available when you use Amazon EventBridge.</p>\n         <p>To call this operation, make sure that you have certain permissions added to your user account.\n         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge\">Migrating event subscriptions to Amazon EventBridge</a>\n            in the <i>Amazon Web Services Database Migration Service User Guide</i>.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridgeMessage": {
@@ -17722,7 +18669,7 @@
                 "ForceMove": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to true, this operation migrates DMS subscriptions for Amazon SNS\n         notifications no matter what your replication instance version is. If not set or set to\n         false, this operation runs only when all your replication instances are from DMS\n         version 3.4.6 or higher.\n      </p>"
+                        "smithy.api#documentation": "<p>When set to true, this operation migrates DMS subscriptions for Amazon SNS\n         notifications no matter what your replication instance version is. If not set or set to\n         false, this operation runs only when all your replication instances are from DMS\n         version 3.4.5 or higher.\n      </p>"
                     }
                 }
             },

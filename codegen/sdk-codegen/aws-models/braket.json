@@ -1297,6 +1297,40 @@
                 "smithy.api#httpError": 424
             }
         },
+        "com.amazonaws.braket#DeviceQueueInfo": {
+            "type": "structure",
+            "members": {
+                "queue": {
+                    "target": "com.amazonaws.braket#QueueName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the queue. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queueSize": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of jobs or tasks in the queue for a given device. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queuePriority": {
+                    "target": "com.amazonaws.braket#QueuePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. Specifies the priority of the queue. Tasks in a priority queue\n         are processed before the tasks in a normal queue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about tasks and jobs queued on a device.</p>"
+            }
+        },
+        "com.amazonaws.braket#DeviceQueueInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.braket#DeviceQueueInfo"
+            }
+        },
         "com.amazonaws.braket#DeviceResource": {
             "type": "resource",
             "identifiers": {
@@ -1504,6 +1538,12 @@
                         "smithy.api#documentation": "<p>Details about the capabilities of the device.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "deviceQueueInfo": {
+                    "target": "com.amazonaws.braket#DeviceQueueInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of information about tasks and jobs queued on a device.</p>"
+                    }
                 }
             }
         },
@@ -1550,6 +1590,13 @@
                         "smithy.api#documentation": "<p>The ARN of the job to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "additionalAttributeNames": {
+                    "target": "com.amazonaws.braket#HybridJobAdditionalAttributeNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of attributes to return information for.</p>",
+                        "smithy.api#httpQuery": "additionalAttributeNames"
                     }
                 }
             }
@@ -1686,6 +1733,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata for\n         Amazon Braket resources.</p>"
                     }
+                },
+                "queueInfo": {
+                    "target": "com.amazonaws.braket#HybridJobQueueInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Queue information for the requested job. Only returned if \n         <code>QueueInfo</code> is specified in the <code>additionalAttributeNames\"</code>\n         field in the <code>GetJob</code> API request.</p>"
+                    }
                 }
             }
         },
@@ -1732,6 +1785,13 @@
                         "smithy.api#documentation": "<p>the ARN of the task to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "additionalAttributeNames": {
+                    "target": "com.amazonaws.braket#QuantumTaskAdditionalAttributeNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of attributes to return information for.</p>",
+                        "smithy.api#httpQuery": "additionalAttributeNames"
                     }
                 }
             }
@@ -1820,7 +1880,58 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Amazon Braket job associated with the quantum task.</p>"
                     }
+                },
+                "queueInfo": {
+                    "target": "com.amazonaws.braket#QuantumTaskQueueInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Queue information for the requested quantum task. Only returned if \n         <code>QueueInfo</code> is specified in the <code>additionalAttributeNames\"</code>\n         field in the <code>GetQuantumTask</code> API request.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.braket#HybridJobAdditionalAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QueueInfo",
+                        "name": "QUEUE_INFO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#HybridJobAdditionalAttributeNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.braket#HybridJobAdditionalAttributeName"
+            }
+        },
+        "com.amazonaws.braket#HybridJobQueueInfo": {
+            "type": "structure",
+            "members": {
+                "queue": {
+                    "target": "com.amazonaws.braket#QueueName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "position": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current position of the job in the jobs queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. Provides more information about the queue position. For example,\n         if the job is complete and no longer in the queue, the message field contains\n         that information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the queue for a specified job.</p>"
             }
         },
         "com.amazonaws.braket#HyperParameters": {
@@ -2449,6 +2560,23 @@
                 }
             }
         },
+        "com.amazonaws.braket#QuantumTaskAdditionalAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QueueInfo",
+                        "name": "QUEUE_INFO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#QuantumTaskAdditionalAttributeNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.braket#QuantumTaskAdditionalAttributeName"
+            }
+        },
         "com.amazonaws.braket#QuantumTaskArn": {
             "type": "string",
             "traits": {
@@ -2457,9 +2585,43 @@
                     "resource": "com.amazonaws.braket#QuantumTaskResource"
                 },
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.braket#QuantumTaskQueueInfo": {
+            "type": "structure",
+            "members": {
+                "queue": {
+                    "target": "com.amazonaws.braket#QueueName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the queue. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "position": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current position of the task in the quantum tasks queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queuePriority": {
+                    "target": "com.amazonaws.braket#QueuePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. Specifies the priority of the queue. Quantum tasks in a priority queue\n         are processed before the tasks in a normal queue.</p>"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. Provides more information about the queue position. For example,\n         if the task is complete and no longer in the queue, the message field contains\n         that information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the queue for the specified quantum task.</p>"
             }
         },
         "com.amazonaws.braket#QuantumTaskResource": {
@@ -2598,6 +2760,36 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.braket#QuantumTaskSummary"
+            }
+        },
+        "com.amazonaws.braket#QueueName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QUANTUM_TASKS_QUEUE",
+                        "name": "QUANTUM_TASKS_QUEUE"
+                    },
+                    {
+                        "value": "JOBS_QUEUE",
+                        "name": "JOBS_QUEUE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#QueuePriority": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Normal",
+                        "name": "NORMAL"
+                    },
+                    {
+                        "value": "Priority",
+                        "name": "PRIORITY"
+                    }
+                ]
             }
         },
         "com.amazonaws.braket#ResourceNotFoundException": {

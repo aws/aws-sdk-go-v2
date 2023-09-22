@@ -1187,7 +1187,7 @@
                 "CriterionKey": {
                     "target": "com.amazonaws.guardduty#CoverageFilterCriterionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enum value representing possible filter fields.</p>",
+                        "smithy.api#documentation": "<p>An enum value representing possible filter fields.</p>\n         <note>\n            <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>.\n      <code>CLUSTER_NAME</code> has been deprecated.</p>\n         </note>",
                         "smithy.api#jsonName": "criterionKey"
                     }
                 },
@@ -1240,6 +1240,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MANAGEMENT_TYPE"
+                    }
+                },
+                "EKS_CLUSTER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_CLUSTER_NAME"
                     }
                 }
             }
@@ -1347,7 +1353,7 @@
                 "AttributeName": {
                     "target": "com.amazonaws.guardduty#CoverageSortKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the field name used to sort the coverage details.</p>",
+                        "smithy.api#documentation": "<p>Represents the field name used to sort the coverage details.</p>\n         <note>\n            <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>.\n      <code>CLUSTER_NAME</code> has been deprecated.</p>\n         </note>",
                         "smithy.api#jsonName": "attributeName"
                     }
                 },
@@ -1400,6 +1406,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATED_AT"
+                    }
+                },
+                "EKS_CLUSTER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_CLUSTER_NAME"
                     }
                 }
             }
@@ -3571,7 +3583,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the existing GuardDuty delegated\n      administrator of the organization. Only the organization's management account can run this \n      API operation.</p>",
+                "smithy.api#documentation": "<p>Removes the existing GuardDuty delegated\n    administrator of the organization. Only the organization's management account can run this \n      API operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/admin/disable",
@@ -4179,7 +4191,7 @@
                 "AdminAccountId": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Account ID for the organization account to be enabled as a GuardDuty delegated\n      administrator.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated\n      administrator.</p>",
                         "smithy.api#jsonName": "adminAccountId",
                         "smithy.api#required": {}
                     }
@@ -4349,7 +4361,7 @@
                 "CriterionKey": {
                     "target": "com.amazonaws.guardduty#CriterionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enum value representing possible scan properties to match with given scan\n      entries.</p>",
+                        "smithy.api#documentation": "<p>An enum value representing possible scan properties to match with given scan\n      entries.</p>\n         <note>\n            <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>.\n      <code>CLUSTER_NAME</code> has been deprecated.</p>\n         </note>",
                         "smithy.api#jsonName": "criterionKey"
                     }
                 },
@@ -4537,7 +4549,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the finding, which is generated when abnormal or suspicious\n      activity is detected.</p>"
+                "smithy.api#documentation": "<p>Contains information about the finding that is generated when abnormal or suspicious\n      activity is detected.</p>"
             }
         },
         "com.amazonaws.guardduty#FindingCriteria": {
@@ -7515,7 +7527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account \n      that invokes this API. If you are using organizations to manager your GuardDuty environment, this step is not \n      needed. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html\">Managing accounts with organizations</a>.</p>\n         <p>To invite Amazon Web Services accounts, the first step is \n      to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API\n      to add accounts by invitation. The \n      invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can \n      choose to accept the invitation from only one Amazon Web Services account. For more information, see \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html\">Managing GuardDuty accounts \n      by invitation</a>.</p>\n         <p>After the invite has been accepted and you choose to disassociate a member account \n      (by using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html\">DisassociateMembers</a>) from your account, \n      the details of the member account obtained by invoking <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a>, including the \n      associated email addresses, will be retained. \n      This is done so that you can invoke InviteMembers without the need to invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a> again. To \n      remove the details associated with a member account, you must also invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a>. </p>",
+                "smithy.api#documentation": "<p>Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account \n      that invokes this API. If you are using Amazon Web Services Organizations to manage your GuardDuty environment, this step is not\n      needed. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html\">Managing accounts with organizations</a>.</p>\n         <p>To invite Amazon Web Services accounts, the first step is \n      to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API\n      to add accounts by invitation. The \n      invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can \n      choose to accept the invitation from only one Amazon Web Services account. For more information, see \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html\">Managing GuardDuty accounts \n      by invitation</a>.</p>\n         <p>After the invite has been accepted and you choose to disassociate a member account \n      (by using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html\">DisassociateMembers</a>) from your account, \n      the details of the member account obtained by invoking <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a>, including the \n      associated email addresses, will be retained. \n      This is done so that you can invoke InviteMembers without the need to invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a> again. To \n      remove the details associated with a member account, you must also invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/invite",
@@ -8747,7 +8759,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the accounts configured as GuardDuty delegated administrators. \n      Only the organization's management account can run this \n      API operation.</p>",
+                "smithy.api#documentation": "<p>Lists the accounts designated as GuardDuty delegated administrators. \n    Only the organization's management account can run this \n      API operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/admin",
@@ -8915,7 +8927,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists tags for a resource. Tagging is currently supported for detectors, finding filters,\n      IP sets, threat intel sets, and publishing destination, with a limit of 50 tags per resource. \n      When invoked, this\n      operation returns all assigned tags for a given resource.</p>",
+                "smithy.api#documentation": "<p>Lists tags for a resource. Tagging is currently supported for detectors, finding filters,\n       IP sets, threat intel sets, and publishing destination, with a limit of 50 tags per resource. \n      When invoked, this\n      operation returns all assigned tags for a given resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -9999,7 +10011,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#OrgFeatureStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the feature that will be configured for the organization. Use one of the following \n    values to configure the feature status for the entire organization:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have the feature enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have the feature\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n               <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that the feature will not be automatically enabled for any\n          account in the organization. The administrator must manage the feature for each account \n          individually.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Describes the status of the feature that is configured for the\n      member accounts within the organization. One of the following \n      values is the status for the entire organization:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have the feature enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have the feature\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n               <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that the feature will not be \n          automatically enabled for any\n          account in the organization. The administrator must manage the feature\n          for each account individually.</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "autoEnable"
                     }
                 },
@@ -11278,7 +11290,7 @@
                 "Key": {
                     "target": "com.amazonaws.guardduty#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents <i>key</i>\n            <b></b> in the map condition.</p>",
+                        "smithy.api#documentation": "<p>Represents the <b>key</b> in the map condition.</p>",
                         "smithy.api#jsonName": "key",
                         "smithy.api#required": {}
                     }
@@ -11286,13 +11298,13 @@
                 "Value": {
                     "target": "com.amazonaws.guardduty#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents optional <i>value</i>\n            <b></b> in the map\n      condition. If not specified, only <i>key</i>\n            <b></b> will be\n      matched.</p>",
+                        "smithy.api#documentation": "<p>Represents optional <b>value</b> in the map\n      condition. If not specified, only the <b>key</b> will be\n      matched.</p>",
                         "smithy.api#jsonName": "value"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents key, value pair to be matched against given resource property.</p>"
+                "smithy.api#documentation": "<p>Represents the <code>key:value</code> pair to be matched against given resource property.</p>"
             }
         },
         "com.amazonaws.guardduty#ScanCriterion": {
@@ -13061,7 +13073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures the delegated administrator account with the provided values. You must provide\n      a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>, but not \n      both. </p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Configures the delegated administrator account with the provided values. You must provide\n      a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>, but not both. </p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/admin",
@@ -13088,7 +13100,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use AutoEnableOrganizationMembers instead"
                         },
-                        "smithy.api#documentation": "<p>Indicates whether to automatically enable member accounts in the organization.</p>\n         <p>Even though this is still supported, we recommend using\n        <code>AutoEnableOrganizationMembers</code> to achieve the similar results. You must provide the \n    value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>.</p>",
+                        "smithy.api#documentation": "<p>Represents whether or not to automatically enable member accounts in the organization.</p>\n         <p>Even though this is still supported, we recommend using\n   <code>AutoEnableOrganizationMembers</code> to achieve the similar results. You must provide a \n    value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>.</p>",
                         "smithy.api#jsonName": "autoEnable"
                     }
                 },
@@ -13112,7 +13124,7 @@
                 "AutoEnableOrganizationMembers": {
                     "target": "com.amazonaws.guardduty#AutoEnableMembers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the\n      organization. You must provide a \n      value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>. </p>\n         <p>Use one of the \n    following configuration values for <code>autoEnableOrganizationMembers</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have GuardDuty enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n               <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any\n          account in the organization. The administrator must manage GuardDuty for each account in the organization\n          individually.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the\n      organization. You must provide a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>. </p>\n         <p>Use one of the \n    following configuration values for <code>autoEnableOrganizationMembers</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have GuardDuty enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n               <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any\n          account in the organization. The administrator must manage GuardDuty for each account in the organization individually.</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "autoEnableOrganizationMembers"
                     }
                 }

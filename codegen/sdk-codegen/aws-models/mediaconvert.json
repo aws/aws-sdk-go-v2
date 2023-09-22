@@ -4464,10 +4464,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
                     }
+                },
+                "AUDIO_ONLY_VARIANT_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO_ONLY_VARIANT_STREAM"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting."
+                "smithy.api#documentation": "Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. Choose Audio-only variant stream (AUDIO_ONLY_VARIANT_STREAM) for any variant that you want to prohibit the client from playing with video. This causes MediaConvert to represent the variant as an EXT-X-STREAM-INF in the HLS manifest. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting."
             }
         },
         "com.amazonaws.mediaconvert#CmfcDescriptiveVideoServiceFlag": {
@@ -4617,7 +4623,7 @@
                 "AudioTrackType": {
                     "target": "com.amazonaws.mediaconvert#CmfcAudioTrackType",
                     "traits": {
-                        "smithy.api#documentation": "Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.",
+                        "smithy.api#documentation": "Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. Choose Audio-only variant stream (AUDIO_ONLY_VARIANT_STREAM) for any variant that you want to prohibit the client from playing with video. This causes MediaConvert to represent the variant as an EXT-X-STREAM-INF in the HLS manifest. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.",
                         "smithy.api#jsonName": "audioTrackType"
                     }
                 },
@@ -13649,6 +13655,13 @@
                         "smithy.api#jsonName": "extendedDataServices"
                     }
                 },
+                "FollowInputIndex": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max149",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies which input metadata to use for the default \"Follow input\" option for the following settings: resolution, frame rate, and pixel aspect ratio. In the simplest case, specify which input is used based on its index in the job. For example if you specify 3, then the fourth input will be used from each input. If the job does not have a fourth input, then the first input will be used. If no followInputIndex is specified, then 0 will be chosen automatically.",
+                        "smithy.api#jsonName": "followInputIndex"
+                    }
+                },
                 "Inputs": {
                     "target": "com.amazonaws.mediaconvert#__listOfInput",
                     "traits": {
@@ -13904,6 +13917,13 @@
                     "traits": {
                         "smithy.api#documentation": "If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.",
                         "smithy.api#jsonName": "extendedDataServices"
+                    }
+                },
+                "FollowInputIndex": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max149",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies which input metadata to use for the default \"Follow input\" option for the following settings: resolution, frame rate, and pixel aspect ratio. In the simplest case, specify which input is used based on its index in the job. For example if you specify 3, then the fourth input will be used from each input. If the job does not have a fourth input, then the first input will be used. If no followInputIndex is specified, then 0 will be chosen automatically.",
+                        "smithy.api#jsonName": "followInputIndex"
                     }
                 },
                 "Inputs": {
@@ -21336,7 +21356,7 @@
                 "StorageClass": {
                     "target": "com.amazonaws.mediaconvert#S3StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "Specify the S3 storage class to use for this destination.",
+                        "smithy.api#documentation": "Specify the S3 storage class to use for this output. To use your destination's default storage class: Keep the default value, Not set. For more information about S3 storage classes, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
                         "smithy.api#jsonName": "storageClass"
                     }
                 }
@@ -21473,7 +21493,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify the S3 storage class to use for this destination."
+                "smithy.api#documentation": "Specify the S3 storage class to use for this output. To use your destination's default storage class: Keep the default value, Not set. For more information about S3 storage classes, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
             }
         },
         "com.amazonaws.mediaconvert#SampleRangeConversion": {
@@ -21620,7 +21640,7 @@
                     }
                 },
                 "Url": {
-                    "target": "com.amazonaws.mediaconvert#__stringPatternHttps",
+                    "target": "com.amazonaws.mediaconvert#__stringPatternHttpsD",
                     "traits": {
                         "smithy.api#documentation": "Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.",
                         "smithy.api#jsonName": "url"
@@ -21663,7 +21683,7 @@
                     }
                 },
                 "Url": {
-                    "target": "com.amazonaws.mediaconvert#__stringPatternHttps",
+                    "target": "com.amazonaws.mediaconvert#__stringPatternHttpsD",
                     "traits": {
                         "smithy.api#documentation": "Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.",
                         "smithy.api#jsonName": "url"
@@ -24960,6 +24980,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin0Max149": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 149
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin0Max15": {
             "type": "integer",
             "traits": {
@@ -26341,6 +26370,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^https:\\/\\/$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringPatternHttpsD": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^https:\\/\\/[^:@\\/]*(:\\d*)?(\\/.*)?$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmedia": {

@@ -1652,6 +1652,17 @@
                 "smithy.api#pattern": "^[ \\t]*[^\\x00-\\x1F:\\x7F]+([ \\t]+[^\\x00-\\x1F:\\x7F]+)*[ \\t]*$"
             }
         },
+        "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[ \\t]*[^\\x00-\\x1F:\\x7F]+([ \\t]+[^\\x00-\\x1F:\\x7F]+)*[ \\t]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.cloudwatchevents#AwsVpcConfiguration": {
             "type": "structure",
             "members": {
@@ -2086,7 +2097,7 @@
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.cloudwatchevents#String",
+                    "target": "com.amazonaws.cloudwatchevents#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The value associated with the key.</p>"
                     }
@@ -2135,7 +2146,7 @@
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.cloudwatchevents#HeaderValue",
+                    "target": "com.amazonaws.cloudwatchevents#HeaderValueSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The value associated with the key.</p>"
                     }
@@ -2279,7 +2290,7 @@
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.cloudwatchevents#QueryStringValue",
+                    "target": "com.amazonaws.cloudwatchevents#QueryStringValueSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The value associated with the key for the query string parameter.</p>"
                     }
@@ -2615,7 +2626,7 @@
                     }
                 },
                 "ApiKeyValue": {
-                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
+                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The value for the API key to use for authorization.</p>",
                         "smithy.api#required": {}
@@ -2669,7 +2680,7 @@
                     }
                 },
                 "Password": {
-                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
+                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The password associated with the user name to use for Basic authorization.</p>",
                         "smithy.api#required": {}
@@ -2691,7 +2702,7 @@
                     }
                 },
                 "ClientSecret": {
-                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
+                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The client secret associated with the client ID to use for OAuth authorization for the\n      connection.</p>",
                         "smithy.api#required": {}
@@ -4541,6 +4552,17 @@
                     "max": 512
                 },
                 "smithy.api#pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#HeaderValueSensitive": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloudwatchevents#HttpParameters": {
@@ -6499,6 +6521,17 @@
                 "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$"
             }
         },
+        "com.amazonaws.cloudwatchevents#QueryStringValueSensitive": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.cloudwatchevents#RedshiftDataParameters": {
             "type": "structure",
             "members": {
@@ -7261,6 +7294,12 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:[\\/_+=\\.@\\-A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloudwatchevents#Sql": {
@@ -8088,7 +8127,7 @@
                     }
                 },
                 "ApiKeyValue": {
-                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
+                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The value associated with teh API key to use for authorization.</p>"
                     }
@@ -8140,7 +8179,7 @@
                     }
                 },
                 "Password": {
-                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
+                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The password associated with the user name to use for Basic authorization.</p>"
                     }
@@ -8160,7 +8199,7 @@
                     }
                 },
                 "ClientSecret": {
-                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
+                    "target": "com.amazonaws.cloudwatchevents#AuthHeaderParametersSensitive",
                     "traits": {
                         "smithy.api#documentation": "<p>The client secret assciated with the client ID to use for OAuth authorization.</p>"
                     }
