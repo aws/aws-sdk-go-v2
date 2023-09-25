@@ -53,6 +53,10 @@ type PutBandwidthRateLimitScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBandwidthRateLimitScheduleInput) operationName() string {
+	return "PutBandwidthRateLimitSchedule"
+}
+
 type PutBandwidthRateLimitScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)

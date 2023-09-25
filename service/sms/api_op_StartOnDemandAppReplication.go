@@ -44,6 +44,10 @@ type StartOnDemandAppReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartOnDemandAppReplicationInput) operationName() string {
+	return "StartOnDemandAppReplication"
+}
+
 type StartOnDemandAppReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

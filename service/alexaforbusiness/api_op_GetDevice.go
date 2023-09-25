@@ -42,6 +42,10 @@ type GetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceInput) operationName() string {
+	return "GetDevice"
+}
+
 type GetDeviceOutput struct {
 
 	// The details of the device requested. Required.

@@ -52,6 +52,10 @@ type ListAttendeeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttendeeTagsInput) operationName() string {
+	return "ListAttendeeTags"
+}
+
 type ListAttendeeTagsOutput struct {
 
 	// A list of tag key-value pairs.

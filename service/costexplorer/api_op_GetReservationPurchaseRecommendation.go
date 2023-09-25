@@ -142,6 +142,10 @@ type GetReservationPurchaseRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReservationPurchaseRecommendationInput) operationName() string {
+	return "GetReservationPurchaseRecommendation"
+}
+
 type GetReservationPurchaseRecommendationOutput struct {
 
 	// Information about this specific recommendation call, such as the time stamp for

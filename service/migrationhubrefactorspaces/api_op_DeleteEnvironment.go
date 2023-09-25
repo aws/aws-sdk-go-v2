@@ -45,6 +45,10 @@ type DeleteEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEnvironmentInput) operationName() string {
+	return "DeleteEnvironment"
+}
+
 type DeleteEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the environment.

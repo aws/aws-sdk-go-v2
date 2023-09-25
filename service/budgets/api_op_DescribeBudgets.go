@@ -53,6 +53,10 @@ type DescribeBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBudgetsInput) operationName() string {
+	return "DescribeBudgets"
+}
+
 // Response of DescribeBudgets
 type DescribeBudgetsOutput struct {
 

@@ -52,6 +52,10 @@ type GetCoreDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoreDefinitionVersionInput) operationName() string {
+	return "GetCoreDefinitionVersion"
+}
+
 type GetCoreDefinitionVersionOutput struct {
 
 	// The ARN of the core definition version.

@@ -59,6 +59,10 @@ type DescribeAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInput) operationName() string {
+	return "DescribeApp"
+}
+
 type DescribeAppOutput struct {
 
 	// The Amazon Resource Name (ARN) of the app.

@@ -74,6 +74,10 @@ type CreateSoftwareUpdateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSoftwareUpdateJobInput) operationName() string {
+	return "CreateSoftwareUpdateJob"
+}
+
 type CreateSoftwareUpdateJobOutput struct {
 
 	// The IoT Job ARN corresponding to this update.

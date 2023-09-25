@@ -68,6 +68,10 @@ type DeleteBucketMetricsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketMetricsConfigurationInput) operationName() string {
+	return "DeleteBucketMetricsConfiguration"
+}
+
 type DeleteBucketMetricsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

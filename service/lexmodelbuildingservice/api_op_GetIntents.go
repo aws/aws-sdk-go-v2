@@ -57,6 +57,10 @@ type GetIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntentsInput) operationName() string {
+	return "GetIntents"
+}
+
 type GetIntentsOutput struct {
 
 	// An array of Intent objects. For more information, see PutBot .

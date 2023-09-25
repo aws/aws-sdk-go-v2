@@ -77,6 +77,10 @@ type CreateCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCallAnalyticsCategoryInput) operationName() string {
+	return "CreateCallAnalyticsCategory"
+}
+
 type CreateCallAnalyticsCategoryOutput struct {
 
 	// Provides you with the properties of your new category, including its associated

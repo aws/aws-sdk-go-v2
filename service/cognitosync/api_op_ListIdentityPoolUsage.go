@@ -67,6 +67,10 @@ type ListIdentityPoolUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityPoolUsageInput) operationName() string {
+	return "ListIdentityPoolUsage"
+}
+
 // Returned for a successful ListIdentityPoolUsage request.
 type ListIdentityPoolUsageOutput struct {
 

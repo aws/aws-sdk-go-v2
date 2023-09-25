@@ -49,6 +49,10 @@ type DescribeLanguageModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLanguageModelInput) operationName() string {
+	return "DescribeLanguageModel"
+}
+
 type DescribeLanguageModelOutput struct {
 
 	// Provides information about the specified custom language model. This parameter

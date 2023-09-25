@@ -54,6 +54,10 @@ type DescribeSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSessionsInput) operationName() string {
+	return "DescribeSessions"
+}
+
 type DescribeSessionsOutput struct {
 
 	// The token for the next set of items to return. (You received this token from a

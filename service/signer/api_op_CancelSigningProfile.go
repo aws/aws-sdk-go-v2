@@ -43,6 +43,10 @@ type CancelSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelSigningProfileInput) operationName() string {
+	return "CancelSigningProfile"
+}
+
 type CancelSigningProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -99,6 +99,10 @@ type CreateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFlowInput) operationName() string {
+	return "CreateFlow"
+}
+
 type CreateFlowOutput struct {
 
 	// The flow's Amazon Resource Name (ARN).

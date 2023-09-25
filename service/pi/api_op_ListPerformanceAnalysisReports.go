@@ -67,6 +67,10 @@ type ListPerformanceAnalysisReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPerformanceAnalysisReportsInput) operationName() string {
+	return "ListPerformanceAnalysisReports"
+}
+
 type ListPerformanceAnalysisReportsOutput struct {
 
 	// List of reports including the report identifier, start and end time, creation

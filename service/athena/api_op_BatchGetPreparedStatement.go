@@ -51,6 +51,10 @@ type BatchGetPreparedStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetPreparedStatementInput) operationName() string {
+	return "BatchGetPreparedStatement"
+}
+
 type BatchGetPreparedStatementOutput struct {
 
 	// The list of prepared statements returned.

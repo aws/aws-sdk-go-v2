@@ -42,6 +42,10 @@ type GetLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLicenseConfigurationInput) operationName() string {
+	return "GetLicenseConfiguration"
+}
+
 type GetLicenseConfigurationOutput struct {
 
 	// Automated discovery information.

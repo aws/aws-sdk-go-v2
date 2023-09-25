@@ -56,6 +56,10 @@ type BatchGetPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetPartitionInput) operationName() string {
+	return "BatchGetPartition"
+}
+
 type BatchGetPartitionOutput struct {
 
 	// A list of the requested partitions.

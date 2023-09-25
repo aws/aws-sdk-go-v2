@@ -46,6 +46,10 @@ type DeleteTLSInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTLSInspectionConfigurationInput) operationName() string {
+	return "DeleteTLSInspectionConfiguration"
+}
+
 type DeleteTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with

@@ -55,6 +55,10 @@ type ReloadTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReloadTablesInput) operationName() string {
+	return "ReloadTables"
+}
+
 type ReloadTablesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replication task.

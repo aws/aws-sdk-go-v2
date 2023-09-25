@@ -73,6 +73,10 @@ type SearchPlaceIndexForPositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchPlaceIndexForPositionInput) operationName() string {
+	return "SearchPlaceIndexForPosition"
+}
+
 type SearchPlaceIndexForPositionOutput struct {
 
 	// Returns a list of Places closest to the specified position. Each result

@@ -44,6 +44,10 @@ type ListStorageSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStorageSystemsInput) operationName() string {
+	return "ListStorageSystems"
+}
+
 type ListStorageSystemsOutput struct {
 
 	// The opaque string that indicates the position to begin the next list of results

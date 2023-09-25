@@ -63,6 +63,10 @@ type DescribeMatchmakingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMatchmakingConfigurationsInput) operationName() string {
+	return "DescribeMatchmakingConfigurations"
+}
+
 type DescribeMatchmakingConfigurationsOutput struct {
 
 	// A collection of requested matchmaking configurations.

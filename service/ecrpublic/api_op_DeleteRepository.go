@@ -54,6 +54,10 @@ type DeleteRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRepositoryInput) operationName() string {
+	return "DeleteRepository"
+}
+
 type DeleteRepositoryOutput struct {
 
 	// The repository that was deleted.

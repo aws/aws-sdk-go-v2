@@ -63,6 +63,10 @@ type DescribeWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkflowExecutionInput) operationName() string {
+	return "DescribeWorkflowExecution"
+}
+
 // Contains details about a workflow execution.
 type DescribeWorkflowExecutionOutput struct {
 

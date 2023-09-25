@@ -63,6 +63,10 @@ type BatchEvaluateGeofencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchEvaluateGeofencesInput) operationName() string {
+	return "BatchEvaluateGeofences"
+}
+
 type BatchEvaluateGeofencesOutput struct {
 
 	// Contains error details for each device that failed to evaluate its position

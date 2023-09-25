@@ -41,6 +41,10 @@ type DeleteModelBiasJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteModelBiasJobDefinitionInput) operationName() string {
+	return "DeleteModelBiasJobDefinition"
+}
+
 type DeleteModelBiasJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

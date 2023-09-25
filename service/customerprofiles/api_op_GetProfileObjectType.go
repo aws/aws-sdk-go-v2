@@ -48,6 +48,10 @@ type GetProfileObjectTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProfileObjectTypeInput) operationName() string {
+	return "GetProfileObjectType"
+}
+
 type GetProfileObjectTypeOutput struct {
 
 	// The description of the profile object type.

@@ -57,6 +57,10 @@ type SearchTablesByLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchTablesByLFTagsInput) operationName() string {
+	return "SearchTablesByLFTags"
+}
+
 type SearchTablesByLFTagsOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.

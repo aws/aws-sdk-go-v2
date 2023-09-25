@@ -81,6 +81,10 @@ type DisassociateVPCFromHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateVPCFromHostedZoneInput) operationName() string {
+	return "DisassociateVPCFromHostedZone"
+}
+
 // A complex type that contains the response information for the disassociate
 // request.
 type DisassociateVPCFromHostedZoneOutput struct {

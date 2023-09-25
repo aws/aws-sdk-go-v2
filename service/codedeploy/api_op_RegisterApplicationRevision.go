@@ -53,6 +53,10 @@ type RegisterApplicationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterApplicationRevisionInput) operationName() string {
+	return "RegisterApplicationRevision"
+}
+
 type RegisterApplicationRevisionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

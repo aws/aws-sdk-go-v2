@@ -54,6 +54,10 @@ type RemoveTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveTagsInput) operationName() string {
+	return "RemoveTags"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type RemoveTagsOutput struct {

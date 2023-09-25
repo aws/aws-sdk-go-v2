@@ -112,6 +112,10 @@ type GetImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImagesInput) operationName() string {
+	return "GetImages"
+}
+
 type GetImagesOutput struct {
 
 	// The list of images generated from the video stream. If there is no media

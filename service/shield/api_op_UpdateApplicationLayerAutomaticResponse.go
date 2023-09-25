@@ -53,6 +53,10 @@ type UpdateApplicationLayerAutomaticResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationLayerAutomaticResponseInput) operationName() string {
+	return "UpdateApplicationLayerAutomaticResponse"
+}
+
 type UpdateApplicationLayerAutomaticResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

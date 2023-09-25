@@ -51,6 +51,10 @@ type ExportComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportComponentsInput) operationName() string {
+	return "ExportComponents"
+}
+
 type ExportComponentsOutput struct {
 
 	// Represents the configuration of the exported components.

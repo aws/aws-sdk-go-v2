@@ -46,6 +46,10 @@ type ListAllowedNodeTypeUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAllowedNodeTypeUpdatesInput) operationName() string {
+	return "ListAllowedNodeTypeUpdates"
+}
+
 type ListAllowedNodeTypeUpdatesOutput struct {
 
 	// A list node types which you can use to scale down your cluster.

@@ -61,6 +61,10 @@ type CreateMitigationActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMitigationActionInput) operationName() string {
+	return "CreateMitigationAction"
+}
+
 type CreateMitigationActionOutput struct {
 
 	// The ARN for the new mitigation action.

@@ -43,6 +43,10 @@ type GetTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTrailInput) operationName() string {
+	return "GetTrail"
+}
+
 type GetTrailOutput struct {
 
 	// The settings for a trail.

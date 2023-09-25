@@ -64,6 +64,10 @@ type CreateProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProvisioningArtifactInput) operationName() string {
+	return "CreateProvisioningArtifact"
+}
+
 type CreateProvisioningArtifactOutput struct {
 
 	// Specify the template source with one of the following options, but not both.

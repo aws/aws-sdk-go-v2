@@ -67,6 +67,10 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEmailIdentityDkimSigningAttributesInput) operationName() string {
+	return "PutEmailIdentityDkimSigningAttributes"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response. The
 // following data is returned in JSON format by the service.
 type PutEmailIdentityDkimSigningAttributesOutput struct {

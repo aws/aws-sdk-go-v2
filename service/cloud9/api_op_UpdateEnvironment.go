@@ -59,6 +59,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 type UpdateEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

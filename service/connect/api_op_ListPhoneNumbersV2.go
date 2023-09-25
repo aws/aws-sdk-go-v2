@@ -69,6 +69,10 @@ type ListPhoneNumbersV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPhoneNumbersV2Input) operationName() string {
+	return "ListPhoneNumbersV2"
+}
+
 type ListPhoneNumbersV2Output struct {
 
 	// Information about phone numbers that have been claimed to your Amazon Connect

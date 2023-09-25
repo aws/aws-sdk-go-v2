@@ -75,6 +75,10 @@ type TagMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagMFADeviceInput) operationName() string {
+	return "TagMFADevice"
+}
+
 type TagMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

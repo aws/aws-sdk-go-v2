@@ -43,6 +43,10 @@ type DeleteProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProjectInput) operationName() string {
+	return "DeleteProject"
+}
+
 // Represents the result of a delete project request.
 type DeleteProjectOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -42,6 +42,10 @@ type DeleteRealtimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRealtimeEndpointInput) operationName() string {
+	return "DeleteRealtimeEndpoint"
+}
+
 // Represents the output of an DeleteRealtimeEndpoint operation. The result
 // contains the MLModelId and the endpoint information for the MLModel .
 type DeleteRealtimeEndpointOutput struct {

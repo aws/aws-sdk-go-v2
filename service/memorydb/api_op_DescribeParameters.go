@@ -54,6 +54,10 @@ type DescribeParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeParametersInput) operationName() string {
+	return "DescribeParameters"
+}
+
 type DescribeParametersOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the

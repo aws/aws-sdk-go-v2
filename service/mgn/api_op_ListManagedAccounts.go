@@ -44,6 +44,10 @@ type ListManagedAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedAccountsInput) operationName() string {
+	return "ListManagedAccounts"
+}
+
 // List managed accounts response.
 type ListManagedAccountsOutput struct {
 

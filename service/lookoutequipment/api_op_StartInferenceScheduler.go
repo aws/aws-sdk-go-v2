@@ -42,6 +42,10 @@ type StartInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInferenceSchedulerInput) operationName() string {
+	return "StartInferenceScheduler"
+}
+
 type StartInferenceSchedulerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the inference scheduler being started.

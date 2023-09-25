@@ -62,6 +62,10 @@ type StopPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopPipelineExecutionInput) operationName() string {
+	return "StopPipelineExecution"
+}
+
 type StopPipelineExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.

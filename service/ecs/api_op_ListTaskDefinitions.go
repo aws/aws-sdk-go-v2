@@ -77,6 +77,10 @@ type ListTaskDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTaskDefinitionsInput) operationName() string {
+	return "ListTaskDefinitions"
+}
+
 type ListTaskDefinitionsOutput struct {
 
 	// The nextToken value to include in a future ListTaskDefinitions request. When

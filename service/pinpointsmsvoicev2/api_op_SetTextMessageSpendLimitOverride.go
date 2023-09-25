@@ -43,6 +43,10 @@ type SetTextMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTextMessageSpendLimitOverrideInput) operationName() string {
+	return "SetTextMessageSpendLimitOverride"
+}
+
 type SetTextMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit to enforce on sending text messages.

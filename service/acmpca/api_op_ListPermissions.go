@@ -74,6 +74,10 @@ type ListPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionsInput) operationName() string {
+	return "ListPermissions"
+}
+
 type ListPermissionsOutput struct {
 
 	// When the list is truncated, this value is present and should be used for the

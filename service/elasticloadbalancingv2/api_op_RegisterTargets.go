@@ -56,6 +56,10 @@ type RegisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterTargetsInput) operationName() string {
+	return "RegisterTargets"
+}
+
 type RegisterTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

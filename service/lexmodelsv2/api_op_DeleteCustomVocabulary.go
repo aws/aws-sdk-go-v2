@@ -53,6 +53,10 @@ type DeleteCustomVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomVocabularyInput) operationName() string {
+	return "DeleteCustomVocabulary"
+}
+
 type DeleteCustomVocabularyOutput struct {
 
 	// The identifier of the bot that the custom vocabulary was removed from.

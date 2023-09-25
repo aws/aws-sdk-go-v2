@@ -43,6 +43,10 @@ type GetCrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCrlInput) operationName() string {
+	return "GetCrl"
+}
+
 type GetCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write

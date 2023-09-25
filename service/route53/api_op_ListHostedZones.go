@@ -62,6 +62,10 @@ type ListHostedZonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHostedZonesInput) operationName() string {
+	return "ListHostedZones"
+}
+
 type ListHostedZonesOutput struct {
 
 	// A complex type that contains general information about the hosted zone.

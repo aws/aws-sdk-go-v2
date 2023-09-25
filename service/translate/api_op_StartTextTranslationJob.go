@@ -120,6 +120,10 @@ type StartTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTextTranslationJobInput) operationName() string {
+	return "StartTextTranslationJob"
+}
+
 type StartTextTranslationJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this ID

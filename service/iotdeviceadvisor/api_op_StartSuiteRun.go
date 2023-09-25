@@ -56,6 +56,10 @@ type StartSuiteRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSuiteRunInput) operationName() string {
+	return "StartSuiteRun"
+}
+
 type StartSuiteRunOutput struct {
 
 	// Starts a Device Advisor test suite run based on suite create time.

@@ -54,6 +54,10 @@ type DescribeInboundConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInboundConnectionsInput) operationName() string {
+	return "DescribeInboundConnections"
+}
+
 // Contains a list of connections matching the filter criteria.
 type DescribeInboundConnectionsOutput struct {
 

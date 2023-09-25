@@ -48,6 +48,10 @@ type DescribePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePolicyInput) operationName() string {
+	return "DescribePolicy"
+}
+
 type DescribePolicyOutput struct {
 
 	// A structure that contains details about the specified policy.

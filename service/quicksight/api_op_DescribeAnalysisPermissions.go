@@ -50,6 +50,10 @@ type DescribeAnalysisPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnalysisPermissionsInput) operationName() string {
+	return "DescribeAnalysisPermissions"
+}
+
 type DescribeAnalysisPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the analysis whose permissions you're

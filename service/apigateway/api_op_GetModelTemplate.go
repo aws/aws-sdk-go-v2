@@ -48,6 +48,10 @@ type GetModelTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelTemplateInput) operationName() string {
+	return "GetModelTemplate"
+}
+
 // Represents a mapping template used to transform a payload.
 type GetModelTemplateOutput struct {
 

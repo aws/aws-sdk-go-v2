@@ -90,6 +90,10 @@ type StartDocumentClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDocumentClassificationJobInput) operationName() string {
+	return "StartDocumentClassificationJob"
+}
+
 type StartDocumentClassificationJobOutput struct {
 
 	// The ARN of the custom classification model.

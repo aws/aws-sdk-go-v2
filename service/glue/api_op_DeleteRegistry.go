@@ -47,6 +47,10 @@ type DeleteRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRegistryInput) operationName() string {
+	return "DeleteRegistry"
+}
+
 type DeleteRegistryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registry being deleted.

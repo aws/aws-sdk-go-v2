@@ -53,6 +53,10 @@ type UpdateSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSipRuleInput) operationName() string {
+	return "UpdateSipRule"
+}
+
 type UpdateSipRuleOutput struct {
 
 	// The updated SIP rule details.

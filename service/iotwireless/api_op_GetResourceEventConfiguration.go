@@ -50,6 +50,10 @@ type GetResourceEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceEventConfigurationInput) operationName() string {
+	return "GetResourceEventConfiguration"
+}
+
 type GetResourceEventConfigurationOutput struct {
 
 	// Event configuration for the connection status event.

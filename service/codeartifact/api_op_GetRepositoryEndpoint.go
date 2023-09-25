@@ -62,6 +62,10 @@ type GetRepositoryEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositoryEndpointInput) operationName() string {
+	return "GetRepositoryEndpoint"
+}
+
 type GetRepositoryEndpointOutput struct {
 
 	// A string that specifies the URL of the returned endpoint.

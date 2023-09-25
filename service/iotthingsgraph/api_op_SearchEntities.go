@@ -64,6 +64,10 @@ type SearchEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchEntitiesInput) operationName() string {
+	return "SearchEntities"
+}
+
 type SearchEntitiesOutput struct {
 
 	// An array of descriptions for each entity returned in the search result.

@@ -46,6 +46,10 @@ type GetPipelineChangeProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPipelineChangeProgressInput) operationName() string {
+	return "GetPipelineChangeProgress"
+}
+
 type GetPipelineChangeProgressOutput struct {
 
 	// The current status of the change happening on the pipeline.

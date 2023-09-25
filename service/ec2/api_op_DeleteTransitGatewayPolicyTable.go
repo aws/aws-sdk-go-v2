@@ -48,6 +48,10 @@ type DeleteTransitGatewayPolicyTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayPolicyTableInput) operationName() string {
+	return "DeleteTransitGatewayPolicyTable"
+}
+
 type DeleteTransitGatewayPolicyTableOutput struct {
 
 	// Provides details about the deleted transit gateway policy table.

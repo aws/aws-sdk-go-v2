@@ -38,6 +38,10 @@ type DownloadDefaultKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DownloadDefaultKeyPairInput) operationName() string {
+	return "DownloadDefaultKeyPair"
+}
+
 type DownloadDefaultKeyPairOutput struct {
 
 	// The timestamp when the default key pair was created.

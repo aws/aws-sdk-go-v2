@@ -52,6 +52,10 @@ type DeregisterGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterGameServerInput) operationName() string {
+	return "DeregisterGameServer"
+}
+
 type DeregisterGameServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

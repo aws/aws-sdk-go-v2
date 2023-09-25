@@ -51,6 +51,10 @@ type DescribeExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExperienceInput) operationName() string {
+	return "DescribeExperience"
+}
+
 type DescribeExperienceOutput struct {
 
 	// Shows the configuration information for your Amazon Kendra experience. This

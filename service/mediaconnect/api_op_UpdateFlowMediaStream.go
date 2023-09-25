@@ -65,6 +65,10 @@ type UpdateFlowMediaStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowMediaStreamInput) operationName() string {
+	return "UpdateFlowMediaStream"
+}
+
 type UpdateFlowMediaStreamOutput struct {
 
 	// The ARN of the flow that is associated with the media stream that you updated.

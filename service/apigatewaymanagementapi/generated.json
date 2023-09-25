@@ -12,6 +12,7 @@
         "api_op_DeleteConnection.go",
         "api_op_GetConnection.go",
         "api_op_PostToConnection.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

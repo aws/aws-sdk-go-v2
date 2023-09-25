@@ -65,6 +65,10 @@ type UpdateViewContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateViewContentInput) operationName() string {
+	return "UpdateViewContent"
+}
+
 type UpdateViewContentOutput struct {
 
 	// A view resource object. Contains metadata and content necessary to render the

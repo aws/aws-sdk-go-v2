@@ -44,6 +44,10 @@ type GetCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCallAnalyticsCategoryInput) operationName() string {
+	return "GetCallAnalyticsCategory"
+}
+
 type GetCallAnalyticsCategoryOutput struct {
 
 	// Provides you with the properties of the Call Analytics category you specified

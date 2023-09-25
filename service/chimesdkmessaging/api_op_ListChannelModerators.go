@@ -56,6 +56,10 @@ type ListChannelModeratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelModeratorsInput) operationName() string {
+	return "ListChannelModerators"
+}
+
 type ListChannelModeratorsOutput struct {
 
 	// The ARN of the channel.

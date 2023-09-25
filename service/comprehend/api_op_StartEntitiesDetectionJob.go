@@ -104,6 +104,10 @@ type StartEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartEntitiesDetectionJobInput) operationName() string {
+	return "StartEntitiesDetectionJob"
+}
+
 type StartEntitiesDetectionJobOutput struct {
 
 	// The ARN of the custom entity recognition model.

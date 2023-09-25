@@ -45,6 +45,10 @@ type ResumeSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeSessionInput) operationName() string {
+	return "ResumeSession"
+}
+
 type ResumeSessionOutput struct {
 
 	// The ID of the session.

@@ -58,6 +58,10 @@ type UpdateFeatureMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFeatureMetadataInput) operationName() string {
+	return "UpdateFeatureMetadata"
+}
+
 type UpdateFeatureMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

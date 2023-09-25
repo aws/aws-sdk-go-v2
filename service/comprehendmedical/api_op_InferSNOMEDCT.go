@@ -44,6 +44,10 @@ type InferSNOMEDCTInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InferSNOMEDCTInput) operationName() string {
+	return "InferSNOMEDCT"
+}
+
 type InferSNOMEDCTOutput struct {
 
 	// The collection of medical concept entities extracted from the input text and

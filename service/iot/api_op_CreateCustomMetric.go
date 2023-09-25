@@ -69,6 +69,10 @@ type CreateCustomMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomMetricInput) operationName() string {
+	return "CreateCustomMetric"
+}
+
 type CreateCustomMetricOutput struct {
 
 	// The Amazon Resource Number (ARN) of the custom metric. For example,

@@ -47,6 +47,10 @@ type DeleteOrganizationConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOrganizationConfigRuleInput) operationName() string {
+	return "DeleteOrganizationConfigRule"
+}
+
 type DeleteOrganizationConfigRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

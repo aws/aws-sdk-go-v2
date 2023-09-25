@@ -43,6 +43,10 @@ type GetDelegationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDelegationsInput) operationName() string {
+	return "GetDelegations"
+}
+
 type GetDelegationsOutput struct {
 
 	// The list of delegations that the GetDelegations API returned.

@@ -76,6 +76,10 @@ type TransferContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TransferContactInput) operationName() string {
+	return "TransferContact"
+}
+
 type TransferContactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the contact.

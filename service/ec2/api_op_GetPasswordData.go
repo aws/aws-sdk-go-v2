@@ -64,6 +64,10 @@ type GetPasswordDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPasswordDataInput) operationName() string {
+	return "GetPasswordData"
+}
+
 type GetPasswordDataOutput struct {
 
 	// The ID of the Windows instance.

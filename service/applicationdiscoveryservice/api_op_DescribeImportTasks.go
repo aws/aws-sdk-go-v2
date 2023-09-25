@@ -49,6 +49,10 @@ type DescribeImportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImportTasksInput) operationName() string {
+	return "DescribeImportTasks"
+}
+
 type DescribeImportTasksOutput struct {
 
 	// The token to request the next page of results.

@@ -45,6 +45,10 @@ type ApproveSkillInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApproveSkillInput) operationName() string {
+	return "ApproveSkill"
+}
+
 type ApproveSkillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

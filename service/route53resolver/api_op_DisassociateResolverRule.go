@@ -50,6 +50,10 @@ type DisassociateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateResolverRuleInput) operationName() string {
+	return "DisassociateResolverRule"
+}
+
 type DisassociateResolverRuleOutput struct {
 
 	// Information about the DisassociateResolverRule request, including the status of

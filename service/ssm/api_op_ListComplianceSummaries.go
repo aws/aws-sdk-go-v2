@@ -52,6 +52,10 @@ type ListComplianceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComplianceSummariesInput) operationName() string {
+	return "ListComplianceSummaries"
+}
+
 type ListComplianceSummariesOutput struct {
 
 	// A list of compliant and non-compliant summary counts based on compliance types.

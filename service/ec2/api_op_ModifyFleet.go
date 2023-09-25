@@ -84,6 +84,10 @@ type ModifyFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyFleetInput) operationName() string {
+	return "ModifyFleet"
+}
+
 type ModifyFleetOutput struct {
 
 	// If the request succeeds, the response returns true . If the request fails, no

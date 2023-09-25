@@ -44,6 +44,10 @@ type StopMultiplexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopMultiplexInput) operationName() string {
+	return "StopMultiplex"
+}
+
 // Placeholder documentation for StopMultiplexResponse
 type StopMultiplexOutput struct {
 

@@ -57,6 +57,10 @@ type ListDistributionsByWebACLIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionsByWebACLIdInput) operationName() string {
+	return "ListDistributionsByWebACLId"
+}
+
 // The response to a request to list the distributions that are associated with a
 // specified WAF web ACL.
 type ListDistributionsByWebACLIdOutput struct {

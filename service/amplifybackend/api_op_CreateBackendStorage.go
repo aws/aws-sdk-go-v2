@@ -58,6 +58,10 @@ type CreateBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBackendStorageInput) operationName() string {
+	return "CreateBackendStorage"
+}
+
 type CreateBackendStorageOutput struct {
 
 	// The app ID.

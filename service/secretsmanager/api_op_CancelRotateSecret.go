@@ -59,6 +59,10 @@ type CancelRotateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelRotateSecretInput) operationName() string {
+	return "CancelRotateSecret"
+}
+
 type CancelRotateSecretOutput struct {
 
 	// The ARN of the secret.

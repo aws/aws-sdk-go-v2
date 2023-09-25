@@ -54,6 +54,10 @@ type ListSecurityConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecurityConfigsInput) operationName() string {
+	return "ListSecurityConfigs"
+}
+
 type ListSecurityConfigsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of

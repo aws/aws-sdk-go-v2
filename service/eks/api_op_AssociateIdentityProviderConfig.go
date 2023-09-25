@@ -62,6 +62,10 @@ type AssociateIdentityProviderConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateIdentityProviderConfigInput) operationName() string {
+	return "AssociateIdentityProviderConfig"
+}
+
 type AssociateIdentityProviderConfigOutput struct {
 
 	// The tags for the resource.

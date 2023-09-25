@@ -44,6 +44,10 @@ type RebootWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootWorkspacesInput) operationName() string {
+	return "RebootWorkspaces"
+}
+
 type RebootWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be rebooted.

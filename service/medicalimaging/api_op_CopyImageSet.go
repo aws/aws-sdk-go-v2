@@ -52,6 +52,10 @@ type CopyImageSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyImageSetInput) operationName() string {
+	return "CopyImageSet"
+}
+
 type CopyImageSetOutput struct {
 
 	// The data store identifier.

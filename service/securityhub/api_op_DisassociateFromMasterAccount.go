@@ -48,6 +48,10 @@ type DisassociateFromMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateFromMasterAccountInput) operationName() string {
+	return "DisassociateFromMasterAccount"
+}
+
 type DisassociateFromMasterAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

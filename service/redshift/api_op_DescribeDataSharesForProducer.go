@@ -61,6 +61,10 @@ type DescribeDataSharesForProducerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSharesForProducerInput) operationName() string {
+	return "DescribeDataSharesForProducer"
+}
+
 type DescribeDataSharesForProducerOutput struct {
 
 	// Shows the results of datashares available for producers.

@@ -54,6 +54,10 @@ type DeleteFirewallManagerRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFirewallManagerRuleGroupsInput) operationName() string {
+	return "DeleteFirewallManagerRuleGroups"
+}
+
 type DeleteFirewallManagerRuleGroupsOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

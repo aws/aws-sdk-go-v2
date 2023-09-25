@@ -43,6 +43,10 @@ type GetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupInput) operationName() string {
+	return "GetGroup"
+}
+
 type GetGroupOutput struct {
 
 	// The group that was requested. Contains the name of the group, the ARN of the

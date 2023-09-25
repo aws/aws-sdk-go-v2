@@ -56,6 +56,10 @@ type ListFunctionEventInvokeConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFunctionEventInvokeConfigsInput) operationName() string {
+	return "ListFunctionEventInvokeConfigs"
+}
+
 type ListFunctionEventInvokeConfigsOutput struct {
 
 	// A list of configurations.

@@ -44,6 +44,10 @@ type DeletePermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePermissionGroupInput) operationName() string {
+	return "DeletePermissionGroup"
+}
+
 type DeletePermissionGroupOutput struct {
 
 	// The unique identifier for the deleted permission group.

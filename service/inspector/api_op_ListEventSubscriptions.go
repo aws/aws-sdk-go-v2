@@ -53,6 +53,10 @@ type ListEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventSubscriptionsInput) operationName() string {
+	return "ListEventSubscriptions"
+}
+
 type ListEventSubscriptionsOutput struct {
 
 	// Details of the returned event subscriptions.

@@ -75,6 +75,10 @@ type UpdateJobQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateJobQueueInput) operationName() string {
+	return "UpdateJobQueue"
+}
+
 type UpdateJobQueueOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job queue.

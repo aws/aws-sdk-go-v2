@@ -47,6 +47,10 @@ type CreateExtendedSourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExtendedSourceServerInput) operationName() string {
+	return "CreateExtendedSourceServer"
+}
+
 type CreateExtendedSourceServerOutput struct {
 
 	// Created extended source server.

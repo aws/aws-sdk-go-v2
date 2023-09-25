@@ -55,6 +55,10 @@ type GetLinkAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLinkAssociationsInput) operationName() string {
+	return "GetLinkAssociations"
+}
+
 type GetLinkAssociationsOutput struct {
 
 	// The link associations.

@@ -50,6 +50,10 @@ type CancelJournalKinesisStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelJournalKinesisStreamInput) operationName() string {
+	return "CancelJournalKinesisStream"
+}
+
 type CancelJournalKinesisStreamOutput struct {
 
 	// The UUID (Base62-encoded text) of the canceled QLDB journal stream.

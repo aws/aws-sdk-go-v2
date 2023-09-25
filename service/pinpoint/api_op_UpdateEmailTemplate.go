@@ -78,6 +78,10 @@ type UpdateEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEmailTemplateInput) operationName() string {
+	return "UpdateEmailTemplate"
+}
+
 type UpdateEmailTemplateOutput struct {
 
 	// Provides information about an API request or response.

@@ -63,6 +63,10 @@ type GetJourneyExecutionActivityMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJourneyExecutionActivityMetricsInput) operationName() string {
+	return "GetJourneyExecutionActivityMetrics"
+}
+
 type GetJourneyExecutionActivityMetricsOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard

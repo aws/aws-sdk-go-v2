@@ -53,6 +53,10 @@ type CancelServicePipelineDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelServicePipelineDeploymentInput) operationName() string {
+	return "CancelServicePipelineDeployment"
+}
+
 type CancelServicePipelineDeploymentOutput struct {
 
 	// The service pipeline detail data that's returned by Proton.

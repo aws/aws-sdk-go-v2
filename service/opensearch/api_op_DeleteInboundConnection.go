@@ -46,6 +46,10 @@ type DeleteInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInboundConnectionInput) operationName() string {
+	return "DeleteInboundConnection"
+}
+
 // The results of a DeleteInboundConnection operation. Contains details about the
 // deleted inbound connection.
 type DeleteInboundConnectionOutput struct {

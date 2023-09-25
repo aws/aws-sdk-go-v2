@@ -48,6 +48,10 @@ type DescribeMailboxExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMailboxExportJobInput) operationName() string {
+	return "DescribeMailboxExportJob"
+}
+
 type DescribeMailboxExportJobOutput struct {
 
 	// The mailbox export job description.

@@ -55,6 +55,10 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomVerificationEmailTemplatesInput) operationName() string {
+	return "ListCustomVerificationEmailTemplates"
+}
+
 // A paginated list of custom verification email templates.
 type ListCustomVerificationEmailTemplatesOutput struct {
 

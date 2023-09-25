@@ -36,6 +36,10 @@ type DescribeMetricCollectionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetricCollectionTypesInput) operationName() string {
+	return "DescribeMetricCollectionTypes"
+}
+
 type DescribeMetricCollectionTypesOutput struct {
 
 	// The granularities for the metrics.

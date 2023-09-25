@@ -55,6 +55,10 @@ type DeleteFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFirewallInput) operationName() string {
+	return "DeleteFirewall"
+}
+
 type DeleteFirewallOutput struct {
 
 	// The firewall defines the configuration settings for an Network Firewall

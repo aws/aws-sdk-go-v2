@@ -60,6 +60,10 @@ type ListAuditMitigationActionsExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAuditMitigationActionsExecutionsInput) operationName() string {
+	return "ListAuditMitigationActionsExecutions"
+}
+
 type ListAuditMitigationActionsExecutionsOutput struct {
 
 	// A set of task execution results based on the input parameters. Details include

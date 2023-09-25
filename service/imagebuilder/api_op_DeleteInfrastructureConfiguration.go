@@ -41,6 +41,10 @@ type DeleteInfrastructureConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInfrastructureConfigurationInput) operationName() string {
+	return "DeleteInfrastructureConfiguration"
+}
+
 type DeleteInfrastructureConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that was

@@ -50,6 +50,10 @@ type ListReceiptRuleSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReceiptRuleSetsInput) operationName() string {
+	return "ListReceiptRuleSets"
+}
+
 // A list of receipt rule sets that exist under your Amazon Web Services account.
 type ListReceiptRuleSetsOutput struct {
 

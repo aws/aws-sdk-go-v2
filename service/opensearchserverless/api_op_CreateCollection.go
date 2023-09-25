@@ -57,6 +57,10 @@ type CreateCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCollectionInput) operationName() string {
+	return "CreateCollection"
+}
+
 type CreateCollectionOutput struct {
 
 	// Details about the collection.

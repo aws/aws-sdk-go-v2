@@ -54,6 +54,10 @@ type DeleteCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCapacityProviderInput) operationName() string {
+	return "DeleteCapacityProvider"
+}
+
 type DeleteCapacityProviderOutput struct {
 
 	// The details of the capacity provider.

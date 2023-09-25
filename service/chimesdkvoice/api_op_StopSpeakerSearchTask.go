@@ -46,6 +46,10 @@ type StopSpeakerSearchTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSpeakerSearchTaskInput) operationName() string {
+	return "StopSpeakerSearchTask"
+}
+
 type StopSpeakerSearchTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

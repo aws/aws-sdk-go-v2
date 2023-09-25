@@ -65,6 +65,10 @@ type DescribeWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspacesInput) operationName() string {
+	return "DescribeWorkspaces"
+}
+
 type DescribeWorkspacesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

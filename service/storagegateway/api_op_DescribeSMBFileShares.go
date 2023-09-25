@@ -45,6 +45,10 @@ type DescribeSMBFileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSMBFileSharesInput) operationName() string {
+	return "DescribeSMBFileShares"
+}
+
 // DescribeSMBFileSharesOutput
 type DescribeSMBFileSharesOutput struct {
 

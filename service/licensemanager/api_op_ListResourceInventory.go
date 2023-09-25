@@ -60,6 +60,10 @@ type ListResourceInventoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceInventoryInput) operationName() string {
+	return "ListResourceInventory"
+}
+
 type ListResourceInventoryOutput struct {
 
 	// Token for the next set of results.

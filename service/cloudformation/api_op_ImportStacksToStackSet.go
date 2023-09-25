@@ -73,6 +73,10 @@ type ImportStacksToStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportStacksToStackSetInput) operationName() string {
+	return "ImportStacksToStackSet"
+}
+
 type ImportStacksToStackSetOutput struct {
 
 	// The unique identifier for the stack set operation.

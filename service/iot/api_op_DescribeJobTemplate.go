@@ -43,6 +43,10 @@ type DescribeJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobTemplateInput) operationName() string {
+	return "DescribeJobTemplate"
+}
+
 type DescribeJobTemplateOutput struct {
 
 	// The criteria that determine when and how a job abort takes place.

@@ -41,6 +41,10 @@ type DeleteTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrustStoreInput) operationName() string {
+	return "DeleteTrustStore"
+}
+
 type DeleteTrustStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

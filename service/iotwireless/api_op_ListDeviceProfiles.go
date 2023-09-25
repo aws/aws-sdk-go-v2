@@ -48,6 +48,10 @@ type ListDeviceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceProfilesInput) operationName() string {
+	return "ListDeviceProfiles"
+}
+
 type ListDeviceProfilesOutput struct {
 
 	// The list of device profiles.

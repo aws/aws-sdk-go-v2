@@ -42,6 +42,10 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceInput) operationName() string {
+	return "GetService"
+}
+
 type GetServiceOutput struct {
 
 	// A complex type that contains information about the service.

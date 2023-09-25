@@ -56,6 +56,10 @@ type BatchDeletePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeletePartitionInput) operationName() string {
+	return "BatchDeletePartition"
+}
+
 type BatchDeletePartitionOutput struct {
 
 	// The errors encountered when trying to delete the requested partitions.

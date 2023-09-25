@@ -73,6 +73,10 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrderableDBInstanceOptionsInput) operationName() string {
+	return "DescribeOrderableDBInstanceOptions"
+}
+
 type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An optional pagination token provided by a previous OrderableDBInstanceOptions

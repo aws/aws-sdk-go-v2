@@ -78,6 +78,10 @@ type PutMailboxPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMailboxPermissionsInput) operationName() string {
+	return "PutMailboxPermissions"
+}
+
 type PutMailboxPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

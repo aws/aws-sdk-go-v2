@@ -54,6 +54,10 @@ type AssociateHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateHealthCheckInput) operationName() string {
+	return "AssociateHealthCheck"
+}
+
 type AssociateHealthCheckOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

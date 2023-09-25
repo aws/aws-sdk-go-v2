@@ -62,6 +62,10 @@ type UpdateThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThingInput) operationName() string {
+	return "UpdateThing"
+}
+
 // The output from the UpdateThing operation.
 type UpdateThingOutput struct {
 	// Metadata pertaining to the operation's result.

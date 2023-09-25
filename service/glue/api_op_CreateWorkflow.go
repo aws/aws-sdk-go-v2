@@ -57,6 +57,10 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkflowInput) operationName() string {
+	return "CreateWorkflow"
+}
+
 type CreateWorkflowOutput struct {
 
 	// The name of the workflow which was provided as part of the request.

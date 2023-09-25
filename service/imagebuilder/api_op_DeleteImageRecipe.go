@@ -41,6 +41,10 @@ type DeleteImageRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImageRecipeInput) operationName() string {
+	return "DeleteImageRecipe"
+}
+
 type DeleteImageRecipeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image recipe that was deleted.

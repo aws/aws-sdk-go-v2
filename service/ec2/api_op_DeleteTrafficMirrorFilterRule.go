@@ -47,6 +47,10 @@ type DeleteTrafficMirrorFilterRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrafficMirrorFilterRuleInput) operationName() string {
+	return "DeleteTrafficMirrorFilterRule"
+}
+
 type DeleteTrafficMirrorFilterRuleOutput struct {
 
 	// The ID of the deleted Traffic Mirror rule.

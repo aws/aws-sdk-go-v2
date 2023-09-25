@@ -64,6 +64,10 @@ type ListDataSourceSyncJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataSourceSyncJobsInput) operationName() string {
+	return "ListDataSourceSyncJobs"
+}
+
 type ListDataSourceSyncJobsOutput struct {
 
 	// A history of synchronization jobs for the data source connector.

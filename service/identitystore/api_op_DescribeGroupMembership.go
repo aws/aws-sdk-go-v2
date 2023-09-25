@@ -50,6 +50,10 @@ type DescribeGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGroupMembershipInput) operationName() string {
+	return "DescribeGroupMembership"
+}
+
 type DescribeGroupMembershipOutput struct {
 
 	// The identifier for a group in the identity store.

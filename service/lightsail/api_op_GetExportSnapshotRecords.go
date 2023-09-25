@@ -46,6 +46,10 @@ type GetExportSnapshotRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExportSnapshotRecordsInput) operationName() string {
+	return "GetExportSnapshotRecords"
+}
+
 type GetExportSnapshotRecordsOutput struct {
 
 	// A list of objects describing the export snapshot records.

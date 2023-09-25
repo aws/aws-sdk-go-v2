@@ -69,6 +69,10 @@ type ListComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentsInput) operationName() string {
+	return "ListComponents"
+}
+
 type ListComponentsOutput struct {
 
 	// The list of component semantic versions. The semantic version has four nodes:

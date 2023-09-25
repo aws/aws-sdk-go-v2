@@ -60,6 +60,10 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountSettingsInput) operationName() string {
+	return "UpdateAccountSettings"
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

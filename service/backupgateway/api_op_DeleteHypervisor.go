@@ -41,6 +41,10 @@ type DeleteHypervisorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHypervisorInput) operationName() string {
+	return "DeleteHypervisor"
+}
+
 type DeleteHypervisorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor you deleted.

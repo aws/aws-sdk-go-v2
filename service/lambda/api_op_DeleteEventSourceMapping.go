@@ -46,6 +46,10 @@ type DeleteEventSourceMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventSourceMappingInput) operationName() string {
+	return "DeleteEventSourceMapping"
+}
+
 // A mapping between an Amazon Web Services resource and a Lambda function. For
 // details, see CreateEventSourceMapping .
 type DeleteEventSourceMappingOutput struct {

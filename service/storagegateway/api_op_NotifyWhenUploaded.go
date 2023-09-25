@@ -51,6 +51,10 @@ type NotifyWhenUploadedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyWhenUploadedInput) operationName() string {
+	return "NotifyWhenUploaded"
+}
+
 type NotifyWhenUploadedOutput struct {
 
 	// The Amazon Resource Name (ARN) of the file share.

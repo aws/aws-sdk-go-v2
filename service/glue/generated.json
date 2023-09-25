@@ -211,6 +211,7 @@
         "api_op_UpdateTrigger.go",
         "api_op_UpdateUserDefinedFunction.go",
         "api_op_UpdateWorkflow.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

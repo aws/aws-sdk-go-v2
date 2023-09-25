@@ -47,6 +47,10 @@ type DescribeConfigurationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationRevisionInput) operationName() string {
+	return "DescribeConfigurationRevision"
+}
+
 type DescribeConfigurationRevisionOutput struct {
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.

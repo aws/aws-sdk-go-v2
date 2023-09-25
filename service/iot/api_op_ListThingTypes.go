@@ -49,6 +49,10 @@ type ListThingTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThingTypesInput) operationName() string {
+	return "ListThingTypes"
+}
+
 // The output for the ListThingTypes operation.
 type ListThingTypesOutput struct {
 

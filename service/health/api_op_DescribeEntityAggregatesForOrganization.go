@@ -49,6 +49,10 @@ type DescribeEntityAggregatesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntityAggregatesForOrganizationInput) operationName() string {
+	return "DescribeEntityAggregatesForOrganization"
+}
+
 type DescribeEntityAggregatesForOrganizationOutput struct {
 
 	// The list of entity aggregates for each of the specified accounts that are

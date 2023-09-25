@@ -91,6 +91,10 @@ type ExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteStatementInput) operationName() string {
+	return "ExecuteStatement"
+}
+
 type ExecuteStatementOutput struct {
 
 	// The capacity units consumed by an operation. The data returned includes the

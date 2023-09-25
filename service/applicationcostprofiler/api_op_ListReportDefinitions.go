@@ -44,6 +44,10 @@ type ListReportDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReportDefinitionsInput) operationName() string {
+	return "ListReportDefinitions"
+}
+
 type ListReportDefinitionsOutput struct {
 
 	// The value of the next token, if it exists. Null if there are no more results.

@@ -62,6 +62,10 @@ type UpdateGameSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGameSessionInput) operationName() string {
+	return "UpdateGameSession"
+}
+
 type UpdateGameSessionOutput struct {
 
 	// The updated game session properties.

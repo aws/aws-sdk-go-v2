@@ -51,6 +51,10 @@ type RemoveSourceIdentifierFromSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveSourceIdentifierFromSubscriptionInput) operationName() string {
+	return "RemoveSourceIdentifierFromSubscription"
+}
+
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
 
 	// Detailed information about an event to which you have subscribed.

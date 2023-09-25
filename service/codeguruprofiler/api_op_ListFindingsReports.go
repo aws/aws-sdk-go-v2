@@ -81,6 +81,10 @@ type ListFindingsReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsReportsInput) operationName() string {
+	return "ListFindingsReports"
+}
+
 // The structure representing the ListFindingsReportsResponse.
 type ListFindingsReportsOutput struct {
 

@@ -47,6 +47,10 @@ type RegenerateSecurityTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegenerateSecurityTokenInput) operationName() string {
+	return "RegenerateSecurityToken"
+}
+
 type RegenerateSecurityTokenOutput struct {
 
 	// A resource that allows Enterprise account administrators to configure an

@@ -49,6 +49,10 @@ type ListVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcEndpointAccessInput) operationName() string {
+	return "ListVpcEndpointAccess"
+}
+
 type ListVpcEndpointAccessOutput struct {
 
 	// A list of IAM principals (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)

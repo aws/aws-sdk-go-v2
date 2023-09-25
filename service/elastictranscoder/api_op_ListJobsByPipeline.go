@@ -55,6 +55,10 @@ type ListJobsByPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobsByPipelineInput) operationName() string {
+	return "ListJobsByPipeline"
+}
+
 // The ListJobsByPipelineResponse structure.
 type ListJobsByPipelineOutput struct {
 

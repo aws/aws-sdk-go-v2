@@ -42,6 +42,10 @@ type ListWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkflowsInput) operationName() string {
+	return "ListWorkflows"
+}
+
 type ListWorkflowsOutput struct {
 
 	// A continuation token, if not all workflow names have been returned.

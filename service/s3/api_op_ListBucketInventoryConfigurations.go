@@ -73,6 +73,10 @@ type ListBucketInventoryConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBucketInventoryConfigurationsInput) operationName() string {
+	return "ListBucketInventoryConfigurations"
+}
+
 type ListBucketInventoryConfigurationsOutput struct {
 
 	// If sent in the request, the marker that is used as a starting point for this

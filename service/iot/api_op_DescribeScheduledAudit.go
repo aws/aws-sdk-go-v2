@@ -44,6 +44,10 @@ type DescribeScheduledAuditInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledAuditInput) operationName() string {
+	return "DescribeScheduledAudit"
+}
+
 type DescribeScheduledAuditOutput struct {
 
 	// The day of the month on which the scheduled audit takes place. This is will be 1

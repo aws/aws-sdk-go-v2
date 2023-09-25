@@ -44,6 +44,10 @@ type DescribeProtectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProtectionGroupInput) operationName() string {
+	return "DescribeProtectionGroup"
+}
+
 type DescribeProtectionGroupOutput struct {
 
 	// A grouping of protected resources that you and Shield Advanced can monitor as a

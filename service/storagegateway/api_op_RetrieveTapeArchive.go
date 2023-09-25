@@ -58,6 +58,10 @@ type RetrieveTapeArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetrieveTapeArchiveInput) operationName() string {
+	return "RetrieveTapeArchive"
+}
+
 // RetrieveTapeArchiveOutput
 type RetrieveTapeArchiveOutput struct {
 

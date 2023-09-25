@@ -58,6 +58,10 @@ type UpdatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePortalInput) operationName() string {
+	return "UpdatePortal"
+}
+
 type UpdatePortalOutput struct {
 
 	// The web portal.

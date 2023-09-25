@@ -56,6 +56,10 @@ type DescribeVerifiedAccessInstanceLoggingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVerifiedAccessInstanceLoggingConfigurationsInput) operationName() string {
+	return "DescribeVerifiedAccessInstanceLoggingConfigurations"
+}
+
 type DescribeVerifiedAccessInstanceLoggingConfigurationsOutput struct {
 
 	// The current logging configuration for the Verified Access instances.

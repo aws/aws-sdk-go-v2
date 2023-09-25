@@ -70,6 +70,10 @@ type ChangeCidrCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangeCidrCollectionInput) operationName() string {
+	return "ChangeCidrCollection"
+}
+
 type ChangeCidrCollectionOutput struct {
 
 	// The ID that is returned by ChangeCidrCollection . You can use it as input to

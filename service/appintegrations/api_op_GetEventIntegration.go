@@ -42,6 +42,10 @@ type GetEventIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventIntegrationInput) operationName() string {
+	return "GetEventIntegration"
+}
+
 type GetEventIntegrationOutput struct {
 
 	// The description of the event integration.

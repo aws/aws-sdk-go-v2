@@ -46,6 +46,10 @@ type DeleteServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceInput) operationName() string {
+	return "DeleteService"
+}
+
 type DeleteServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can

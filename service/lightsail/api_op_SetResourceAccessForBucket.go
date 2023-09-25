@@ -58,6 +58,10 @@ type SetResourceAccessForBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetResourceAccessForBucketInput) operationName() string {
+	return "SetResourceAccessForBucket"
+}
+
 type SetResourceAccessForBucketOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

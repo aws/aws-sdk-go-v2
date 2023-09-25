@@ -43,6 +43,10 @@ type GetDigestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDigestInput) operationName() string {
+	return "GetDigest"
+}
+
 type GetDigestOutput struct {
 
 	// The 256-bit hash value representing the digest returned by a GetDigest request.

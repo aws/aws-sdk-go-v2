@@ -53,6 +53,10 @@ type AcceptVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptVpcPeeringConnectionInput) operationName() string {
+	return "AcceptVpcPeeringConnection"
+}
+
 type AcceptVpcPeeringConnectionOutput struct {
 
 	// Information about the VPC peering connection.

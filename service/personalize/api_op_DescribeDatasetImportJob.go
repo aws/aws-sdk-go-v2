@@ -43,6 +43,10 @@ type DescribeDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetImportJobInput) operationName() string {
+	return "DescribeDatasetImportJob"
+}
+
 type DescribeDatasetImportJobOutput struct {
 
 	// Information about the dataset import job, including the status. The status is

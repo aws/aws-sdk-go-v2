@@ -46,6 +46,10 @@ type DeleteWorkspaceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkspaceApiKeyInput) operationName() string {
+	return "DeleteWorkspaceApiKey"
+}
+
 type DeleteWorkspaceApiKeyOutput struct {
 
 	// The name of the key that was deleted.

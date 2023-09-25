@@ -53,6 +53,10 @@ type CreateCloudFrontOriginAccessIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCloudFrontOriginAccessIdentityInput) operationName() string {
+	return "CreateCloudFrontOriginAccessIdentity"
+}
+
 // The returned result of the corresponding request.
 type CreateCloudFrontOriginAccessIdentityOutput struct {
 

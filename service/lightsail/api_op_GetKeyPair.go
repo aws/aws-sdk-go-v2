@@ -42,6 +42,10 @@ type GetKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyPairInput) operationName() string {
+	return "GetKeyPair"
+}
+
 type GetKeyPairOutput struct {
 
 	// An array of key-value pairs containing information about the key pair.

@@ -42,6 +42,10 @@ type DeleteVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVoiceProfileDomainInput) operationName() string {
+	return "DeleteVoiceProfileDomain"
+}
+
 type DeleteVoiceProfileDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

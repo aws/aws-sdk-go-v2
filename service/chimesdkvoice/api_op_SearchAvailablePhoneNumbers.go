@@ -65,6 +65,10 @@ type SearchAvailablePhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchAvailablePhoneNumbersInput) operationName() string {
+	return "SearchAvailablePhoneNumbers"
+}
+
 type SearchAvailablePhoneNumbersOutput struct {
 
 	// Confines a search to just the phone numbers in the E.164 format.

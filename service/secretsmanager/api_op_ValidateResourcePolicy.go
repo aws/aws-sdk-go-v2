@@ -65,6 +65,10 @@ type ValidateResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateResourcePolicyInput) operationName() string {
+	return "ValidateResourcePolicy"
+}
+
 type ValidateResourcePolicyOutput struct {
 
 	// True if your policy passes validation, otherwise false.

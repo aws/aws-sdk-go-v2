@@ -126,6 +126,10 @@ type CreateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCampaignInput) operationName() string {
+	return "CreateCampaign"
+}
+
 type CreateCampaignOutput struct {
 
 	// The ARN of the created campaign.

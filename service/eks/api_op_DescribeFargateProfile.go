@@ -51,6 +51,10 @@ type DescribeFargateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFargateProfileInput) operationName() string {
+	return "DescribeFargateProfile"
+}
+
 type DescribeFargateProfileOutput struct {
 
 	// The full description of your Fargate profile.

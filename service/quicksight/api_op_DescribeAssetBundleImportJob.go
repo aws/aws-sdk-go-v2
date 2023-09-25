@@ -51,6 +51,10 @@ type DescribeAssetBundleImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssetBundleImportJobInput) operationName() string {
+	return "DescribeAssetBundleImportJob"
+}
+
 type DescribeAssetBundleImportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the import job.

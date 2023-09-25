@@ -91,6 +91,10 @@ type CreateAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessPointInput) operationName() string {
+	return "CreateAccessPoint"
+}
+
 type CreateAccessPointOutput struct {
 
 	// The ARN of the access point. This is only supported by Amazon S3 on Outposts.

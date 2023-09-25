@@ -65,6 +65,10 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSchemaInput) operationName() string {
+	return "UpdateSchema"
+}
+
 type UpdateSchemaOutput struct {
 
 	// The name of the registry that contains the schema.

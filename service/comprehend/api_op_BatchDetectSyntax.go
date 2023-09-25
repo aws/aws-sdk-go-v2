@@ -54,6 +54,10 @@ type BatchDetectSyntaxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDetectSyntaxInput) operationName() string {
+	return "BatchDetectSyntax"
+}
+
 type BatchDetectSyntaxOutput struct {
 
 	// A list containing one object for each document that contained an error. The

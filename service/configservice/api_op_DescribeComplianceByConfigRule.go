@@ -62,6 +62,10 @@ type DescribeComplianceByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComplianceByConfigRuleInput) operationName() string {
+	return "DescribeComplianceByConfigRule"
+}
+
 type DescribeComplianceByConfigRuleOutput struct {
 
 	// Indicates whether each of the specified Config rules is compliant.

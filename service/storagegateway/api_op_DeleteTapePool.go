@@ -43,6 +43,10 @@ type DeleteTapePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTapePoolInput) operationName() string {
+	return "DeleteTapePool"
+}
+
 type DeleteTapePoolOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom tape pool being deleted.

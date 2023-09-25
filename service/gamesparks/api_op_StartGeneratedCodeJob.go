@@ -54,6 +54,10 @@ type StartGeneratedCodeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartGeneratedCodeJobInput) operationName() string {
+	return "StartGeneratedCodeJob"
+}
+
 type StartGeneratedCodeJobOutput struct {
 
 	// The identifier of the code generation job. You can use this identifier in the

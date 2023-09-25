@@ -51,6 +51,10 @@ type AssociateApplicationToEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateApplicationToEntitlementInput) operationName() string {
+	return "AssociateApplicationToEntitlement"
+}
+
 type AssociateApplicationToEntitlementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

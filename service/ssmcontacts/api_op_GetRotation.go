@@ -44,6 +44,10 @@ type GetRotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRotationInput) operationName() string {
+	return "GetRotation"
+}
+
 type GetRotationOutput struct {
 
 	// The Amazon Resource Names (ARNs) of the contacts assigned to the on-call

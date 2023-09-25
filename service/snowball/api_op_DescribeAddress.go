@@ -43,6 +43,10 @@ type DescribeAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddressInput) operationName() string {
+	return "DescribeAddress"
+}
+
 type DescribeAddressOutput struct {
 
 	// The address that you want the Snow device(s) associated with a specific job to

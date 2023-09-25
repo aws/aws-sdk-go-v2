@@ -70,6 +70,10 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallPolicyChangeProtectionInput) operationName() string {
+	return "UpdateFirewallPolicyChangeProtection"
+}
+
 type UpdateFirewallPolicyChangeProtectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.

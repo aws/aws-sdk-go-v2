@@ -63,6 +63,10 @@ type DescribeMovingAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMovingAddressesInput) operationName() string {
+	return "DescribeMovingAddresses"
+}
+
 type DescribeMovingAddressesOutput struct {
 
 	// The status for each Elastic IP address.

@@ -51,6 +51,10 @@ type UpdateDeletionProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeletionProtectionInput) operationName() string {
+	return "UpdateDeletionProtection"
+}
+
 type UpdateDeletionProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

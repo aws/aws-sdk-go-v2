@@ -57,6 +57,10 @@ type UpdateSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSystemTemplateInput) operationName() string {
+	return "UpdateSystemTemplate"
+}
+
 type UpdateSystemTemplateOutput struct {
 
 	// An object containing summary information about the updated system.

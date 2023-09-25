@@ -55,6 +55,10 @@ type ListPolicyStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPolicyStoresInput) operationName() string {
+	return "ListPolicyStores"
+}
+
 type ListPolicyStoresOutput struct {
 
 	// The list of policy stores in the account.

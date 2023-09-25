@@ -77,6 +77,10 @@ type UpdateAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnswerInput) operationName() string {
+	return "UpdateAnswer"
+}
+
 // Output of a update answer call.
 type UpdateAnswerOutput struct {
 

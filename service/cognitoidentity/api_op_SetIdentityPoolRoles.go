@@ -58,6 +58,10 @@ type SetIdentityPoolRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetIdentityPoolRolesInput) operationName() string {
+	return "SetIdentityPoolRoles"
+}
+
 type SetIdentityPoolRolesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

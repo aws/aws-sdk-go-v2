@@ -51,6 +51,10 @@ type UpdateImageGenerationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateImageGenerationConfigurationInput) operationName() string {
+	return "UpdateImageGenerationConfiguration"
+}
+
 type UpdateImageGenerationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

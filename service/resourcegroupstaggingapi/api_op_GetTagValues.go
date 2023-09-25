@@ -55,6 +55,10 @@ type GetTagValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTagValuesInput) operationName() string {
+	return "GetTagValues"
+}
+
 type GetTagValuesOutput struct {
 
 	// A string that indicates that there is more data available than this response

@@ -68,6 +68,10 @@ type CreateLocationFsxOpenZfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationFsxOpenZfsInput) operationName() string {
+	return "CreateLocationFsxOpenZfs"
+}
+
 type CreateLocationFsxOpenZfsOutput struct {
 
 	// The ARN of the FSx for OpenZFS file system location that you created.

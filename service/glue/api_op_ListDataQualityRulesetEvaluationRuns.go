@@ -47,6 +47,10 @@ type ListDataQualityRulesetEvaluationRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataQualityRulesetEvaluationRunsInput) operationName() string {
+	return "ListDataQualityRulesetEvaluationRuns"
+}
+
 type ListDataQualityRulesetEvaluationRunsOutput struct {
 
 	// A pagination token, if more results are available.

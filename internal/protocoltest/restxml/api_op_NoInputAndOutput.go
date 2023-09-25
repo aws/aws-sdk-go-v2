@@ -31,6 +31,10 @@ type NoInputAndOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NoInputAndOutputInput) operationName() string {
+	return "NoInputAndOutput"
+}
+
 type NoInputAndOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

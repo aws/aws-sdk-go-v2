@@ -53,6 +53,10 @@ type ListDataIntegrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataIntegrationAssociationsInput) operationName() string {
+	return "ListDataIntegrationAssociations"
+}
+
 type ListDataIntegrationAssociationsOutput struct {
 
 	// The Amazon Resource Name (ARN) and unique ID of the DataIntegration association.

@@ -49,6 +49,10 @@ type ListVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVersionsInput) operationName() string {
+	return "ListVersions"
+}
+
 type ListVersionsOutput struct {
 
 	// The Grafana versions available to create. If a workspace ID is included in the

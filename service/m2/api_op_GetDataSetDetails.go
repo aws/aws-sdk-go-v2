@@ -48,6 +48,10 @@ type GetDataSetDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataSetDetailsInput) operationName() string {
+	return "GetDataSetDetails"
+}
+
 type GetDataSetDetailsOutput struct {
 
 	// The name of the data set.

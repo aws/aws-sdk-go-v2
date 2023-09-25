@@ -68,6 +68,10 @@ type DeprecateWorkflowTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprecateWorkflowTypeInput) operationName() string {
+	return "DeprecateWorkflowType"
+}
+
 type DeprecateWorkflowTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

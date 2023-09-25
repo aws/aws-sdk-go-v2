@@ -68,6 +68,10 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterInput) operationName() string {
+	return "UpdateCluster"
+}
+
 type UpdateClusterOutput struct {
 
 	// A description of the DAX cluster, after it has been modified.

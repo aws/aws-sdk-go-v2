@@ -79,6 +79,10 @@ type EnableMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableMFADeviceInput) operationName() string {
+	return "EnableMFADevice"
+}
+
 type EnableMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

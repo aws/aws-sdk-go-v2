@@ -69,6 +69,10 @@ type ListAppAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppAssessmentsInput) operationName() string {
+	return "ListAppAssessments"
+}
+
 type ListAppAssessmentsOutput struct {
 
 	// The summaries for the specified assessments, returned as an object. This object

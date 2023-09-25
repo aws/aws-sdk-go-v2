@@ -164,6 +164,10 @@ type GetMetricStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricStatisticsInput) operationName() string {
+	return "GetMetricStatistics"
+}
+
 type GetMetricStatisticsOutput struct {
 
 	// The data points for the specified metric.

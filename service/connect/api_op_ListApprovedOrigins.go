@@ -50,6 +50,10 @@ type ListApprovedOriginsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApprovedOriginsInput) operationName() string {
+	return "ListApprovedOrigins"
+}
+
 type ListApprovedOriginsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

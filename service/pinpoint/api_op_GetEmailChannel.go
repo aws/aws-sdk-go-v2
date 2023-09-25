@@ -44,6 +44,10 @@ type GetEmailChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEmailChannelInput) operationName() string {
+	return "GetEmailChannel"
+}
+
 type GetEmailChannelOutput struct {
 
 	// Provides information about the status and settings of the email channel for an

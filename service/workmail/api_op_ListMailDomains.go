@@ -49,6 +49,10 @@ type ListMailDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMailDomainsInput) operationName() string {
+	return "ListMailDomains"
+}
+
 type ListMailDomainsOutput struct {
 
 	// The list of mail domain summaries, specifying domains that exist in the

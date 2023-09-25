@@ -78,6 +78,10 @@ type StartFraudsterRegistrationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFraudsterRegistrationJobInput) operationName() string {
+	return "StartFraudsterRegistrationJob"
+}
+
 type StartFraudsterRegistrationJobOutput struct {
 
 	// Details about the started fraudster registration job.

@@ -55,6 +55,10 @@ type DisableAvailabilityZonesForLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableAvailabilityZonesForLoadBalancerInput) operationName() string {
+	return "DisableAvailabilityZonesForLoadBalancer"
+}
+
 // Contains the output for DisableAvailabilityZonesForLoadBalancer.
 type DisableAvailabilityZonesForLoadBalancerOutput struct {
 

@@ -101,6 +101,10 @@ type ListOpenWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpenWorkflowExecutionsInput) operationName() string {
+	return "ListOpenWorkflowExecutions"
+}
+
 // Contains a paginated list of information about workflow executions.
 type ListOpenWorkflowExecutionsOutput struct {
 

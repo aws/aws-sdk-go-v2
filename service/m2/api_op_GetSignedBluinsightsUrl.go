@@ -35,6 +35,10 @@ type GetSignedBluinsightsUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSignedBluinsightsUrlInput) operationName() string {
+	return "GetSignedBluinsightsUrl"
+}
+
 type GetSignedBluinsightsUrlOutput struct {
 
 	// Single sign-on AWS Blu Insights URL.

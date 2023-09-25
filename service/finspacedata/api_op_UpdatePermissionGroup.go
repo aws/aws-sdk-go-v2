@@ -70,6 +70,10 @@ type UpdatePermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePermissionGroupInput) operationName() string {
+	return "UpdatePermissionGroup"
+}
+
 type UpdatePermissionGroupOutput struct {
 
 	// The unique identifier for the updated permission group.

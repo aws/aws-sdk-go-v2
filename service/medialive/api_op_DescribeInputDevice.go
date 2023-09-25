@@ -43,6 +43,10 @@ type DescribeInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInputDeviceInput) operationName() string {
+	return "DescribeInputDevice"
+}
+
 // Placeholder documentation for DescribeInputDeviceResponse
 type DescribeInputDeviceOutput struct {
 

@@ -85,6 +85,10 @@ type UpdateServiceSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceSettingInput) operationName() string {
+	return "UpdateServiceSetting"
+}
+
 // The result body of the UpdateServiceSetting API operation.
 type UpdateServiceSettingOutput struct {
 	// Metadata pertaining to the operation's result.

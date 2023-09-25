@@ -59,6 +59,10 @@ type GetChannelScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelScheduleInput) operationName() string {
+	return "GetChannelSchedule"
+}
+
 type GetChannelScheduleOutput struct {
 
 	// A list of schedule entries for the channel.

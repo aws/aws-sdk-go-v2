@@ -58,6 +58,10 @@ type PutVoiceConnectorLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorLoggingConfigurationInput) operationName() string {
+	return "PutVoiceConnectorLoggingConfiguration"
+}
+
 type PutVoiceConnectorLoggingConfigurationOutput struct {
 
 	// The updated logging configuration details.

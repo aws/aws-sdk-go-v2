@@ -54,6 +54,10 @@ type DeleteFileCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFileCacheInput) operationName() string {
+	return "DeleteFileCache"
+}
+
 type DeleteFileCacheOutput struct {
 
 	// The ID of the cache that's being deleted.

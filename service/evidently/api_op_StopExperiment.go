@@ -56,6 +56,10 @@ type StopExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopExperimentInput) operationName() string {
+	return "StopExperiment"
+}
+
 type StopExperimentOutput struct {
 
 	// The date and time that the experiment stopped.

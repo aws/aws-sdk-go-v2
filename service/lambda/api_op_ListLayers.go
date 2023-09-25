@@ -58,6 +58,10 @@ type ListLayersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLayersInput) operationName() string {
+	return "ListLayers"
+}
+
 type ListLayersOutput struct {
 
 	// A list of function layers.

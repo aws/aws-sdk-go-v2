@@ -42,6 +42,10 @@ type GetMediaPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMediaPipelineInput) operationName() string {
+	return "GetMediaPipeline"
+}
+
 type GetMediaPipelineOutput struct {
 
 	// The media pipeline object.

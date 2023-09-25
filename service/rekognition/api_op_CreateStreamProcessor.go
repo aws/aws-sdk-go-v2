@@ -140,6 +140,10 @@ type CreateStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamProcessorInput) operationName() string {
+	return "CreateStreamProcessor"
+}
+
 type CreateStreamProcessorOutput struct {
 
 	// Amazon Resource Number for the newly created stream processor.

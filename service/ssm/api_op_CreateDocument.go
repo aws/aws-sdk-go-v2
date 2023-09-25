@@ -113,6 +113,10 @@ type CreateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDocumentInput) operationName() string {
+	return "CreateDocument"
+}
+
 type CreateDocumentOutput struct {
 
 	// Information about the SSM document.

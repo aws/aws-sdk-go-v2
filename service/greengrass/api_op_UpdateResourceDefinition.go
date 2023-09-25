@@ -44,6 +44,10 @@ type UpdateResourceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceDefinitionInput) operationName() string {
+	return "UpdateResourceDefinition"
+}
+
 type UpdateResourceDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

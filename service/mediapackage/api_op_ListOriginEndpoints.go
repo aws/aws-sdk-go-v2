@@ -47,6 +47,10 @@ type ListOriginEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOriginEndpointsInput) operationName() string {
+	return "ListOriginEndpoints"
+}
+
 type ListOriginEndpointsOutput struct {
 
 	// A token that can be used to resume pagination from the end of the collection.

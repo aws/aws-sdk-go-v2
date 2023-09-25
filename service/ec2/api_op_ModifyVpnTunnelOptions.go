@@ -66,6 +66,10 @@ type ModifyVpnTunnelOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpnTunnelOptionsInput) operationName() string {
+	return "ModifyVpnTunnelOptions"
+}
+
 type ModifyVpnTunnelOptionsOutput struct {
 
 	// Information about the VPN connection.

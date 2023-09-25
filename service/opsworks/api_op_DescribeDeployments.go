@@ -59,6 +59,10 @@ type DescribeDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeploymentsInput) operationName() string {
+	return "DescribeDeployments"
+}
+
 // Contains the response to a DescribeDeployments request.
 type DescribeDeploymentsOutput struct {
 

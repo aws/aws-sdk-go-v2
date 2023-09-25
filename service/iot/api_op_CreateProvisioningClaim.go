@@ -45,6 +45,10 @@ type CreateProvisioningClaimInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProvisioningClaimInput) operationName() string {
+	return "CreateProvisioningClaim"
+}
+
 type CreateProvisioningClaimOutput struct {
 
 	// The ID of the certificate.

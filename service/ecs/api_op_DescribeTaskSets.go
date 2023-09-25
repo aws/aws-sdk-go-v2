@@ -60,6 +60,10 @@ type DescribeTaskSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTaskSetsInput) operationName() string {
+	return "DescribeTaskSets"
+}
+
 type DescribeTaskSetsOutput struct {
 
 	// Any failures associated with the call.

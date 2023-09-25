@@ -50,6 +50,10 @@ type DescribePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePhoneNumberInput) operationName() string {
+	return "DescribePhoneNumber"
+}
+
 type DescribePhoneNumberOutput struct {
 
 	// Information about a phone number that's been claimed to your Amazon Connect

@@ -51,6 +51,10 @@ type CancelHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelHandshakeInput) operationName() string {
+	return "CancelHandshake"
+}
+
 type CancelHandshakeOutput struct {
 
 	// A structure that contains details about the handshake that you canceled.

@@ -54,6 +54,10 @@ type ListComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentsInput) operationName() string {
+	return "ListComponents"
+}
+
 type ListComponentsOutput struct {
 
 	// The list of components for the Amplify app.

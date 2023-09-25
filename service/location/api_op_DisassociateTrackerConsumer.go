@@ -52,6 +52,10 @@ type DisassociateTrackerConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTrackerConsumerInput) operationName() string {
+	return "DisassociateTrackerConsumer"
+}
+
 type DisassociateTrackerConsumerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -95,6 +95,10 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComponentInput) operationName() string {
+	return "CreateComponent"
+}
+
 type CreateComponentOutput struct {
 
 	// The detailed data of the created component.

@@ -46,6 +46,10 @@ type GetCertificateAuthorityCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCertificateAuthorityCertificateInput) operationName() string {
+	return "GetCertificateAuthorityCertificate"
+}
+
 type GetCertificateAuthorityCertificateOutput struct {
 
 	// Base64-encoded certificate authority (CA) certificate.

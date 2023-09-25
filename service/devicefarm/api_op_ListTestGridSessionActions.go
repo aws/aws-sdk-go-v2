@@ -48,6 +48,10 @@ type ListTestGridSessionActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestGridSessionActionsInput) operationName() string {
+	return "ListTestGridSessionActions"
+}
+
 type ListTestGridSessionActionsOutput struct {
 
 	// The action taken by the session.

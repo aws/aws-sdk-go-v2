@@ -41,6 +41,10 @@ type GetConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectionInput) operationName() string {
+	return "GetConnection"
+}
+
 type GetConnectionOutput struct {
 
 	// The time in ISO 8601 format for when the connection was established.

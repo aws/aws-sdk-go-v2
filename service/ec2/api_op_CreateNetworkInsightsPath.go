@@ -90,6 +90,10 @@ type CreateNetworkInsightsPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkInsightsPathInput) operationName() string {
+	return "CreateNetworkInsightsPath"
+}
+
 type CreateNetworkInsightsPathOutput struct {
 
 	// Information about the path.

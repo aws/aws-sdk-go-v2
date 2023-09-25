@@ -48,6 +48,10 @@ type ListVolumeRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVolumeRecoveryPointsInput) operationName() string {
+	return "ListVolumeRecoveryPoints"
+}
+
 type ListVolumeRecoveryPointsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

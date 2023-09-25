@@ -54,6 +54,10 @@ type DescribeExportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportTasksInput) operationName() string {
+	return "DescribeExportTasks"
+}
+
 type DescribeExportTasksOutput struct {
 
 	// The export tasks.

@@ -49,6 +49,10 @@ type CreateDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatabaseInput) operationName() string {
+	return "CreateDatabase"
+}
+
 type CreateDatabaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

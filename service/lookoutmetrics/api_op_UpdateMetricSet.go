@@ -72,6 +72,10 @@ type UpdateMetricSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMetricSetInput) operationName() string {
+	return "UpdateMetricSet"
+}
+
 type UpdateMetricSetOutput struct {
 
 	// The ARN of the dataset.

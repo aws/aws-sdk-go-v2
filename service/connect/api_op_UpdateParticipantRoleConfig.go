@@ -63,6 +63,10 @@ type UpdateParticipantRoleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateParticipantRoleConfigInput) operationName() string {
+	return "UpdateParticipantRoleConfig"
+}
+
 type UpdateParticipantRoleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type ListSipMediaApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSipMediaApplicationsInput) operationName() string {
+	return "ListSipMediaApplications"
+}
+
 type ListSipMediaApplicationsOutput struct {
 
 	// The token used to return the next page of results.

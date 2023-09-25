@@ -42,6 +42,10 @@ type ReleaseStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleaseStaticIpInput) operationName() string {
+	return "ReleaseStaticIp"
+}
+
 type ReleaseStaticIpOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

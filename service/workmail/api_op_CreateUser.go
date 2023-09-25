@@ -71,6 +71,10 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserInput) operationName() string {
+	return "CreateUser"
+}
+
 type CreateUserOutput struct {
 
 	// The identifier for the new user.

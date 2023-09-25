@@ -43,6 +43,10 @@ type StopImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopImportInput) operationName() string {
+	return "StopImport"
+}
+
 type StopImportOutput struct {
 
 	// The timestamp of the import's creation.

@@ -65,6 +65,10 @@ type UpdateRotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRotationInput) operationName() string {
+	return "UpdateRotation"
+}
+
 type UpdateRotationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

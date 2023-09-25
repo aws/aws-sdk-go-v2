@@ -48,6 +48,10 @@ type UpdateCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCommentInput) operationName() string {
+	return "UpdateComment"
+}
+
 type UpdateCommentOutput struct {
 
 	// Information about the updated comment.

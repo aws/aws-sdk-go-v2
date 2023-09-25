@@ -62,6 +62,10 @@ type DeleteStudioSessionMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStudioSessionMappingInput) operationName() string {
+	return "DeleteStudioSessionMapping"
+}
+
 type DeleteStudioSessionMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

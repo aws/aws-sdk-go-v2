@@ -73,6 +73,10 @@ type CreateVariableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVariableInput) operationName() string {
+	return "CreateVariable"
+}
+
 type CreateVariableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

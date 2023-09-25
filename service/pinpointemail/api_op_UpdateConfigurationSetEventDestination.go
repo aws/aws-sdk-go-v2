@@ -61,6 +61,10 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationSetEventDestinationInput) operationName() string {
+	return "UpdateConfigurationSetEventDestination"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type UpdateConfigurationSetEventDestinationOutput struct {

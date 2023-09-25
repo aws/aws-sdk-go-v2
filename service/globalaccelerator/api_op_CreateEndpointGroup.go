@@ -100,6 +100,10 @@ type CreateEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEndpointGroupInput) operationName() string {
+	return "CreateEndpointGroup"
+}
+
 type CreateEndpointGroupOutput struct {
 
 	// The information about the endpoint group that was created.

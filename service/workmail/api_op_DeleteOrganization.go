@@ -56,6 +56,10 @@ type DeleteOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOrganizationInput) operationName() string {
+	return "DeleteOrganization"
+}
+
 type DeleteOrganizationOutput struct {
 
 	// The organization ID.

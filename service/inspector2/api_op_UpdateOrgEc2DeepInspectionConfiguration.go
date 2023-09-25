@@ -44,6 +44,10 @@ type UpdateOrgEc2DeepInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOrgEc2DeepInspectionConfigurationInput) operationName() string {
+	return "UpdateOrgEc2DeepInspectionConfiguration"
+}
+
 type UpdateOrgEc2DeepInspectionConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

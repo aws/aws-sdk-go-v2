@@ -61,6 +61,10 @@ type DescribeParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeParametersInput) operationName() string {
+	return "DescribeParameters"
+}
+
 type DescribeParametersOutput struct {
 
 	// The token to use when requesting the next set of items.

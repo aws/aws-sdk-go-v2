@@ -64,6 +64,10 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointServicePermissionsInput) operationName() string {
+	return "DescribeVpcEndpointServicePermissions"
+}
+
 type DescribeVpcEndpointServicePermissionsOutput struct {
 
 	// Information about the allowed principals.

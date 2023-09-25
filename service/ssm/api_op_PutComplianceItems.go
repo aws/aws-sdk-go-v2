@@ -106,6 +106,10 @@ type PutComplianceItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutComplianceItemsInput) operationName() string {
+	return "PutComplianceItems"
+}
+
 type PutComplianceItemsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

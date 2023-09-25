@@ -42,6 +42,10 @@ type DescribePackagingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackagingConfigurationInput) operationName() string {
+	return "DescribePackagingConfiguration"
+}
+
 type DescribePackagingConfigurationOutput struct {
 
 	// The ARN of the PackagingConfiguration.

@@ -44,6 +44,10 @@ type RejectInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectInboundConnectionInput) operationName() string {
+	return "RejectInboundConnection"
+}
+
 // Represents the output of a RejectInboundConnection operation.
 type RejectInboundConnectionOutput struct {
 

@@ -61,6 +61,10 @@ type ActivatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivatePipelineInput) operationName() string {
+	return "ActivatePipeline"
+}
+
 // Contains the output of ActivatePipeline.
 type ActivatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.

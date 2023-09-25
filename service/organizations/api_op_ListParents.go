@@ -75,6 +75,10 @@ type ListParentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListParentsInput) operationName() string {
+	return "ListParents"
+}
+
 type ListParentsOutput struct {
 
 	// If present, indicates that more output is available than is included in the

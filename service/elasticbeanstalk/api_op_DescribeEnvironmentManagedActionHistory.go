@@ -50,6 +50,10 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEnvironmentManagedActionHistoryInput) operationName() string {
+	return "DescribeEnvironmentManagedActionHistory"
+}
+
 // A result message containing a list of completed and failed managed actions.
 type DescribeEnvironmentManagedActionHistoryOutput struct {
 

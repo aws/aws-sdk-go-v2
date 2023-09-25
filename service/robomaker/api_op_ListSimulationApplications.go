@@ -62,6 +62,10 @@ type ListSimulationApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSimulationApplicationsInput) operationName() string {
+	return "ListSimulationApplications"
+}
+
 type ListSimulationApplicationsOutput struct {
 
 	// If the previous paginated request did not return all of the remaining results,

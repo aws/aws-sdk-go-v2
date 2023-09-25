@@ -18,6 +18,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateRescoreExecutionPlan.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

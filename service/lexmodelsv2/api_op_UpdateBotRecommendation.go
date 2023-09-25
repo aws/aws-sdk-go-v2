@@ -68,6 +68,10 @@ type UpdateBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBotRecommendationInput) operationName() string {
+	return "UpdateBotRecommendation"
+}
+
 type UpdateBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation that has

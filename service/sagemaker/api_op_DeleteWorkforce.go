@@ -48,6 +48,10 @@ type DeleteWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkforceInput) operationName() string {
+	return "DeleteWorkforce"
+}
+
 type DeleteWorkforceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

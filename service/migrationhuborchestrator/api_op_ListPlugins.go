@@ -43,6 +43,10 @@ type ListPluginsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPluginsInput) operationName() string {
+	return "ListPlugins"
+}
+
 type ListPluginsOutput struct {
 
 	// The pagination token.

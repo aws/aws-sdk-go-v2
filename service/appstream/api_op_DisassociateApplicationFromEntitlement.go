@@ -51,6 +51,10 @@ type DisassociateApplicationFromEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateApplicationFromEntitlementInput) operationName() string {
+	return "DisassociateApplicationFromEntitlement"
+}
+
 type DisassociateApplicationFromEntitlementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

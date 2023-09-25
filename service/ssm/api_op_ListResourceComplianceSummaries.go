@@ -49,6 +49,10 @@ type ListResourceComplianceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceComplianceSummariesInput) operationName() string {
+	return "ListResourceComplianceSummaries"
+}
+
 type ListResourceComplianceSummariesOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

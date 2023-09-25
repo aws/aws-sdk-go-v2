@@ -47,6 +47,10 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplatesInput) operationName() string {
+	return "ListTemplates"
+}
+
 type ListTemplatesOutput struct {
 
 	// The summary of the template.

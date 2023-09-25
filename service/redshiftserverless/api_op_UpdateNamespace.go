@@ -70,6 +70,10 @@ type UpdateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNamespaceInput) operationName() string {
+	return "UpdateNamespace"
+}
+
 type UpdateNamespaceOutput struct {
 
 	// A list of tag instances.

@@ -55,6 +55,10 @@ type DeleteFleetLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFleetLocationsInput) operationName() string {
+	return "DeleteFleetLocations"
+}
+
 type DeleteFleetLocationsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

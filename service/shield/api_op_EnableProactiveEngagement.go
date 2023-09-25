@@ -37,6 +37,10 @@ type EnableProactiveEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableProactiveEngagementInput) operationName() string {
+	return "EnableProactiveEngagement"
+}
+
 type EnableProactiveEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

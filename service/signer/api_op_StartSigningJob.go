@@ -80,6 +80,10 @@ type StartSigningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSigningJobInput) operationName() string {
+	return "StartSigningJob"
+}
+
 type StartSigningJobOutput struct {
 
 	// The ID of your signing job.

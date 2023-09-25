@@ -60,6 +60,10 @@ type CreateAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnalyzerInput) operationName() string {
+	return "CreateAnalyzer"
+}
+
 // The response to the request to create an analyzer.
 type CreateAnalyzerOutput struct {
 

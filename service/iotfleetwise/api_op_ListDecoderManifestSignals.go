@@ -54,6 +54,10 @@ type ListDecoderManifestSignalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDecoderManifestSignalsInput) operationName() string {
+	return "ListDecoderManifestSignals"
+}
+
 type ListDecoderManifestSignalsOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

@@ -43,6 +43,10 @@ type DescribeStudioLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStudioLifecycleConfigInput) operationName() string {
+	return "DescribeStudioLifecycleConfig"
+}
+
 type DescribeStudioLifecycleConfigOutput struct {
 
 	// The creation time of the Studio Lifecycle Configuration.

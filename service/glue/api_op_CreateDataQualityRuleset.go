@@ -63,6 +63,10 @@ type CreateDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataQualityRulesetInput) operationName() string {
+	return "CreateDataQualityRuleset"
+}
+
 type CreateDataQualityRulesetOutput struct {
 
 	// A unique name for the data quality ruleset.

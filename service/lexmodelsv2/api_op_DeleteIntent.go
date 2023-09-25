@@ -60,6 +60,10 @@ type DeleteIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIntentInput) operationName() string {
+	return "DeleteIntent"
+}
+
 type DeleteIntentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

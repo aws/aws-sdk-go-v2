@@ -58,6 +58,10 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventSubscriptionsInput) operationName() string {
+	return "DescribeEventSubscriptions"
+}
+
 // Data returned by the DescribeEventSubscriptions action.
 type DescribeEventSubscriptionsOutput struct {
 

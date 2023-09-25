@@ -52,6 +52,10 @@ type UpdateUserRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserRoutingProfileInput) operationName() string {
+	return "UpdateUserRoutingProfile"
+}
+
 type UpdateUserRoutingProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

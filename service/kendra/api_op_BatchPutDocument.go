@@ -76,6 +76,10 @@ type BatchPutDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutDocumentInput) operationName() string {
+	return "BatchPutDocument"
+}
+
 type BatchPutDocumentOutput struct {
 
 	// A list of documents that were not added to the index because the document

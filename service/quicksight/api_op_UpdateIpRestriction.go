@@ -49,6 +49,10 @@ type UpdateIpRestrictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIpRestrictionInput) operationName() string {
+	return "UpdateIpRestriction"
+}
+
 type UpdateIpRestrictionOutput struct {
 
 	// The ID of the Amazon Web Services account that contains the IP rules.

@@ -48,6 +48,10 @@ type GetPatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPatchBaselineInput) operationName() string {
+	return "GetPatchBaseline"
+}
+
 type GetPatchBaselineOutput struct {
 
 	// A set of rules used to include patches in the baseline.

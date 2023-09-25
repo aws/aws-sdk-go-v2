@@ -102,6 +102,10 @@ type CreateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIdentityProviderInput) operationName() string {
+	return "CreateIdentityProvider"
+}
+
 type CreateIdentityProviderOutput struct {
 
 	// The newly created IdP object.

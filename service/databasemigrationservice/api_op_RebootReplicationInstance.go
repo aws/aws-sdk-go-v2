@@ -55,6 +55,10 @@ type RebootReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootReplicationInstanceInput) operationName() string {
+	return "RebootReplicationInstance"
+}
+
 type RebootReplicationInstanceOutput struct {
 
 	// The replication instance that is being rebooted.

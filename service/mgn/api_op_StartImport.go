@@ -46,6 +46,10 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImportInput) operationName() string {
+	return "StartImport"
+}
+
 // Start import response.
 type StartImportOutput struct {
 

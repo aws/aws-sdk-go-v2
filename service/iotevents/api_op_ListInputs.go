@@ -43,6 +43,10 @@ type ListInputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInputsInput) operationName() string {
+	return "ListInputs"
+}
+
 type ListInputsOutput struct {
 
 	// Summary information about the inputs.

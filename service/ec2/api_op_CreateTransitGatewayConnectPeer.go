@@ -79,6 +79,10 @@ type CreateTransitGatewayConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayConnectPeerInput) operationName() string {
+	return "CreateTransitGatewayConnectPeer"
+}
+
 type CreateTransitGatewayConnectPeerOutput struct {
 
 	// Information about the Connect peer.

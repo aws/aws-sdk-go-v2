@@ -41,6 +41,10 @@ type StopNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopNotebookExecutionInput) operationName() string {
+	return "StopNotebookExecution"
+}
+
 type StopNotebookExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

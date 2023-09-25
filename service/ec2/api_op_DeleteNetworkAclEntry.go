@@ -58,6 +58,10 @@ type DeleteNetworkAclEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkAclEntryInput) operationName() string {
+	return "DeleteNetworkAclEntry"
+}
+
 type DeleteNetworkAclEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,6 +47,10 @@ type GetDeploymentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentStatusInput) operationName() string {
+	return "GetDeploymentStatus"
+}
+
 type GetDeploymentStatusOutput struct {
 
 	// The status of the deployment: ''InProgress'', ''Building'', ''Success'', or

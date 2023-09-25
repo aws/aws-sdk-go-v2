@@ -49,6 +49,10 @@ type ListAccessPreviewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessPreviewsInput) operationName() string {
+	return "ListAccessPreviews"
+}
+
 type ListAccessPreviewsOutput struct {
 
 	// A list of access previews retrieved for the analyzer.

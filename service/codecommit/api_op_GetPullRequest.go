@@ -43,6 +43,10 @@ type GetPullRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPullRequestInput) operationName() string {
+	return "GetPullRequest"
+}
+
 type GetPullRequestOutput struct {
 
 	// Information about the specified pull request.

@@ -55,6 +55,10 @@ type DescribeDataProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataProvidersInput) operationName() string {
+	return "DescribeDataProviders"
+}
+
 type DescribeDataProvidersOutput struct {
 
 	// A description of data providers.

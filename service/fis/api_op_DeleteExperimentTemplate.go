@@ -42,6 +42,10 @@ type DeleteExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExperimentTemplateInput) operationName() string {
+	return "DeleteExperimentTemplate"
+}
+
 type DeleteExperimentTemplateOutput struct {
 
 	// Information about the experiment template.

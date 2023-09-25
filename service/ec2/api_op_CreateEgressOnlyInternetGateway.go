@@ -59,6 +59,10 @@ type CreateEgressOnlyInternetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEgressOnlyInternetGatewayInput) operationName() string {
+	return "CreateEgressOnlyInternetGateway"
+}
+
 type CreateEgressOnlyInternetGatewayOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

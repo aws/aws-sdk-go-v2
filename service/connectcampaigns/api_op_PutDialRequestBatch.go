@@ -49,6 +49,10 @@ type PutDialRequestBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDialRequestBatchInput) operationName() string {
+	return "PutDialRequestBatch"
+}
+
 // PutDialRequestBatchResponse
 type PutDialRequestBatchOutput struct {
 

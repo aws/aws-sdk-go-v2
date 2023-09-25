@@ -96,6 +96,10 @@ type CreateLicenseVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLicenseVersionInput) operationName() string {
+	return "CreateLicenseVersion"
+}
+
 type CreateLicenseVersionOutput struct {
 
 	// License ARN.

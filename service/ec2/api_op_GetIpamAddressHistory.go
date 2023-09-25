@@ -76,6 +76,10 @@ type GetIpamAddressHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIpamAddressHistoryInput) operationName() string {
+	return "GetIpamAddressHistory"
+}
+
 type GetIpamAddressHistoryOutput struct {
 
 	// A historical record for a CIDR within an IPAM scope. If the CIDR is associated

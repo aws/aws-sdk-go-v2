@@ -52,6 +52,10 @@ type AssociateAwsAccountWithPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAwsAccountWithPartnerAccountInput) operationName() string {
+	return "AssociateAwsAccountWithPartnerAccount"
+}
+
 type AssociateAwsAccountWithPartnerAccountOutput struct {
 
 	// The Amazon Resource Name of the resource.

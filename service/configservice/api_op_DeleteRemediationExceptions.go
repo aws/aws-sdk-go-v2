@@ -53,6 +53,10 @@ type DeleteRemediationExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRemediationExceptionsInput) operationName() string {
+	return "DeleteRemediationExceptions"
+}
+
 type DeleteRemediationExceptionsOutput struct {
 
 	// Returns a list of failed delete remediation exceptions batch objects. Each

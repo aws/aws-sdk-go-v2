@@ -47,6 +47,10 @@ type DisassociatePhoneNumberFromUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociatePhoneNumberFromUserInput) operationName() string {
+	return "DisassociatePhoneNumberFromUser"
+}
+
 type DisassociatePhoneNumberFromUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

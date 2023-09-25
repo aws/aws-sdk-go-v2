@@ -34,6 +34,7 @@
         "api_op_UpdateConnectorProfile.go",
         "api_op_UpdateConnectorRegistration.go",
         "api_op_UpdateFlow.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

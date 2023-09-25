@@ -54,6 +54,10 @@ type ListStackResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStackResourcesInput) operationName() string {
+	return "ListStackResources"
+}
+
 // The output for a ListStackResources action.
 type ListStackResourcesOutput struct {
 

@@ -42,6 +42,10 @@ type GetAppValidationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppValidationConfigurationInput) operationName() string {
+	return "GetAppValidationConfiguration"
+}
+
 type GetAppValidationConfigurationOutput struct {
 
 	// The configuration for application validation.

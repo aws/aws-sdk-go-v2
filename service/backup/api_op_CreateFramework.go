@@ -66,6 +66,10 @@ type CreateFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFrameworkInput) operationName() string {
+	return "CreateFramework"
+}
+
 type CreateFrameworkOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format

@@ -49,6 +49,10 @@ type StartQueryPlanningInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartQueryPlanningInput) operationName() string {
+	return "StartQueryPlanning"
+}
+
 // A structure for the output.
 type StartQueryPlanningOutput struct {
 

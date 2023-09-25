@@ -42,6 +42,10 @@ type BatchGetCustomEntityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCustomEntityTypesInput) operationName() string {
+	return "BatchGetCustomEntityTypes"
+}
+
 type BatchGetCustomEntityTypesOutput struct {
 
 	// A list of CustomEntityType objects representing the custom patterns that have

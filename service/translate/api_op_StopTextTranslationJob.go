@@ -48,6 +48,10 @@ type StopTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopTextTranslationJobInput) operationName() string {
+	return "StopTextTranslationJob"
+}
+
 type StopTextTranslationJobOutput struct {
 
 	// The job ID of the stopped batch translation job.

@@ -61,6 +61,10 @@ type ResetDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetDBClusterParameterGroupInput) operationName() string {
+	return "ResetDBClusterParameterGroup"
+}
+
 type ResetDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group. Constraints:

@@ -52,6 +52,10 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationsInput) operationName() string {
+	return "ListApplications"
+}
+
 type ListApplicationsOutput struct {
 
 	// Returns a list of summary details for all the applications in a runtime

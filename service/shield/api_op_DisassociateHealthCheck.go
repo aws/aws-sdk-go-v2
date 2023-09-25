@@ -54,6 +54,10 @@ type DisassociateHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateHealthCheckInput) operationName() string {
+	return "DisassociateHealthCheck"
+}
+
 type DisassociateHealthCheckOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

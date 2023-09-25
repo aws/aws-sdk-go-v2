@@ -42,6 +42,10 @@ type GetConnectAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectAttachmentInput) operationName() string {
+	return "GetConnectAttachment"
+}
+
 type GetConnectAttachmentOutput struct {
 
 	// Details about the Connect attachment.

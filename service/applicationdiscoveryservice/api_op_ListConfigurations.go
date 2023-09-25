@@ -66,6 +66,10 @@ type ListConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationsInput) operationName() string {
+	return "ListConfigurations"
+}
+
 type ListConfigurationsOutput struct {
 
 	// Returns configuration details, including the configuration ID, attribute names,

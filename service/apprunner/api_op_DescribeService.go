@@ -43,6 +43,10 @@ type DescribeServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceInput) operationName() string {
+	return "DescribeService"
+}
+
 type DescribeServiceOutput struct {
 
 	// A full description of the App Runner service that you specified in this request.

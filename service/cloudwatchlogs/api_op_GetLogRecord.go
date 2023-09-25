@@ -52,6 +52,10 @@ type GetLogRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLogRecordInput) operationName() string {
+	return "GetLogRecord"
+}
+
 type GetLogRecordOutput struct {
 
 	// The requested log event, as a JSON string.

@@ -106,6 +106,10 @@ type GetSessionTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSessionTokenInput) operationName() string {
+	return "GetSessionToken"
+}
+
 // Contains the response to a successful GetSessionToken request, including
 // temporary Amazon Web Services credentials that can be used to make Amazon Web
 // Services requests.

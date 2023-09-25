@@ -113,6 +113,10 @@ type ListShardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListShardsInput) operationName() string {
+	return "ListShards"
+}
+
 type ListShardsOutput struct {
 
 	// When the number of shards in the data stream is greater than the default value

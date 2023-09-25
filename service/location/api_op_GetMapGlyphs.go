@@ -92,6 +92,10 @@ type GetMapGlyphsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMapGlyphsInput) operationName() string {
+	return "GetMapGlyphs"
+}
+
 type GetMapGlyphsOutput struct {
 
 	// The glyph, as binary blob.

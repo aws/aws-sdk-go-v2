@@ -48,6 +48,10 @@ type DescribeFaqInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFaqInput) operationName() string {
+	return "DescribeFaq"
+}
+
 type DescribeFaqOutput struct {
 
 	// The Unix timestamp when the FAQ was created.

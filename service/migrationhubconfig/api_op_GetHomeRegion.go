@@ -39,6 +39,10 @@ type GetHomeRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHomeRegionInput) operationName() string {
+	return "GetHomeRegion"
+}
+
 type GetHomeRegionOutput struct {
 
 	// The name of the home region of the calling account.

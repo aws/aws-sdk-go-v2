@@ -57,6 +57,10 @@ type BatchCheckLayerAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCheckLayerAvailabilityInput) operationName() string {
+	return "BatchCheckLayerAvailability"
+}
+
 type BatchCheckLayerAvailabilityOutput struct {
 
 	// Any failures associated with the call.

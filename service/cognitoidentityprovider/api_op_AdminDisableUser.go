@@ -54,6 +54,10 @@ type AdminDisableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminDisableUserInput) operationName() string {
+	return "AdminDisableUser"
+}
+
 // Represents the response received from the server to disable the user as an
 // administrator.
 type AdminDisableUserOutput struct {

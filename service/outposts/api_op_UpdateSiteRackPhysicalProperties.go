@@ -109,6 +109,10 @@ type UpdateSiteRackPhysicalPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSiteRackPhysicalPropertiesInput) operationName() string {
+	return "UpdateSiteRackPhysicalProperties"
+}
+
 type UpdateSiteRackPhysicalPropertiesOutput struct {
 
 	// Information about a site.

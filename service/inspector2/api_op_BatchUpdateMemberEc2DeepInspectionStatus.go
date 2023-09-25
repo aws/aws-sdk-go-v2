@@ -45,6 +45,10 @@ type BatchUpdateMemberEc2DeepInspectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateMemberEc2DeepInspectionStatusInput) operationName() string {
+	return "BatchUpdateMemberEc2DeepInspectionStatus"
+}
+
 type BatchUpdateMemberEc2DeepInspectionStatusOutput struct {
 
 	// An array of objects that provide details for each of the accounts that Amazon

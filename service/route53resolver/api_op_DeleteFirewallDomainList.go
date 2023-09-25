@@ -42,6 +42,10 @@ type DeleteFirewallDomainListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFirewallDomainListInput) operationName() string {
+	return "DeleteFirewallDomainList"
+}
+
 type DeleteFirewallDomainListOutput struct {
 
 	// The domain list that you just deleted.

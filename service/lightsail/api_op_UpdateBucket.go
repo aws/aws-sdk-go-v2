@@ -62,6 +62,10 @@ type UpdateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBucketInput) operationName() string {
+	return "UpdateBucket"
+}
+
 type UpdateBucketOutput struct {
 
 	// An object that describes the bucket that is updated.

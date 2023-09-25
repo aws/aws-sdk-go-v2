@@ -48,6 +48,10 @@ type GetSpeakerSearchTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSpeakerSearchTaskInput) operationName() string {
+	return "GetSpeakerSearchTask"
+}
+
 type GetSpeakerSearchTaskOutput struct {
 
 	// The details of the speaker search task.

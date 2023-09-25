@@ -58,6 +58,10 @@ type AssociateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateResolverRuleInput) operationName() string {
+	return "AssociateResolverRule"
+}
+
 type AssociateResolverRuleOutput struct {
 
 	// Information about the AssociateResolverRule request, including the status of

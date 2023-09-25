@@ -43,6 +43,10 @@ type GetSecurityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSecurityConfigurationsInput) operationName() string {
+	return "GetSecurityConfigurations"
+}
+
 type GetSecurityConfigurationsOutput struct {
 
 	// A continuation token, if there are more security configurations to return.

@@ -47,6 +47,10 @@ type DescribeAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInstanceUserEndpointInput) operationName() string {
+	return "DescribeAppInstanceUserEndpoint"
+}
+
 type DescribeAppInstanceUserEndpointOutput struct {
 
 	// The full details of an AppInstanceUserEndpoint : the AppInstanceUserArn , ID,

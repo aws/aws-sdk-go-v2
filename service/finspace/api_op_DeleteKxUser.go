@@ -46,6 +46,10 @@ type DeleteKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKxUserInput) operationName() string {
+	return "DeleteKxUser"
+}
+
 type DeleteKxUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -98,6 +98,10 @@ type CreateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIPSetInput) operationName() string {
+	return "CreateIPSet"
+}
+
 type CreateIPSetOutput struct {
 
 	// High-level information about an IPSet , returned by operations like create and

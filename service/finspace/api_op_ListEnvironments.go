@@ -45,6 +45,10 @@ type ListEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentsInput) operationName() string {
+	return "ListEnvironments"
+}
+
 type ListEnvironmentsOutput struct {
 
 	// A list of all of your FinSpace environments.

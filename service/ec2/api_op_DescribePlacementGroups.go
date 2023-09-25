@@ -68,6 +68,10 @@ type DescribePlacementGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePlacementGroupsInput) operationName() string {
+	return "DescribePlacementGroups"
+}
+
 type DescribePlacementGroupsOutput struct {
 
 	// Information about the placement groups.

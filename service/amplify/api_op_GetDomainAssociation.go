@@ -48,6 +48,10 @@ type GetDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainAssociationInput) operationName() string {
+	return "GetDomainAssociation"
+}
+
 // The result structure for the get domain association request.
 type GetDomainAssociationOutput struct {
 

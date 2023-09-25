@@ -78,6 +78,10 @@ type UpdateStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStageInput) operationName() string {
+	return "UpdateStage"
+}
+
 type UpdateStageOutput struct {
 
 	// Settings for logging access in this stage.

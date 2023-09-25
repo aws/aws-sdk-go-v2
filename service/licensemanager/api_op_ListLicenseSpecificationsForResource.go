@@ -49,6 +49,10 @@ type ListLicenseSpecificationsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLicenseSpecificationsForResourceInput) operationName() string {
+	return "ListLicenseSpecificationsForResource"
+}
+
 type ListLicenseSpecificationsForResourceOutput struct {
 
 	// License configurations associated with a resource.

@@ -50,6 +50,10 @@ type DescribeSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSchemaInput) operationName() string {
+	return "DescribeSchema"
+}
+
 type DescribeSchemaOutput struct {
 
 	// The source of the schema definition.

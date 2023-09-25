@@ -48,6 +48,10 @@ type GetDataSetImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataSetImportTaskInput) operationName() string {
+	return "GetDataSetImportTask"
+}
+
 type GetDataSetImportTaskOutput struct {
 
 	// The status of the task.

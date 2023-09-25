@@ -61,6 +61,10 @@ type PurchaseReservedCacheNodesOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseReservedCacheNodesOfferingInput) operationName() string {
+	return "PurchaseReservedCacheNodesOffering"
+}
+
 type PurchaseReservedCacheNodesOfferingOutput struct {
 
 	// Represents the output of a PurchaseReservedCacheNodesOffering operation.

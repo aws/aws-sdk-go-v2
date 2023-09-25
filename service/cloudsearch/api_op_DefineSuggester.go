@@ -59,6 +59,10 @@ type DefineSuggesterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DefineSuggesterInput) operationName() string {
+	return "DefineSuggester"
+}
+
 // The result of a DefineSuggester request. Contains the status of the
 // newly-configured suggester.
 type DefineSuggesterOutput struct {

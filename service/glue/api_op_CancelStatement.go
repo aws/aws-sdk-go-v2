@@ -49,6 +49,10 @@ type CancelStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelStatementInput) operationName() string {
+	return "CancelStatement"
+}
+
 type CancelStatementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

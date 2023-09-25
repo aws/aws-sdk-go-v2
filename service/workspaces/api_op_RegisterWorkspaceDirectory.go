@@ -81,6 +81,10 @@ type RegisterWorkspaceDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterWorkspaceDirectoryInput) operationName() string {
+	return "RegisterWorkspaceDirectory"
+}
+
 type RegisterWorkspaceDirectoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

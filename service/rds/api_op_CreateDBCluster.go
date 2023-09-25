@@ -500,6 +500,10 @@ type CreateDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterInput) operationName() string {
+	return "CreateDBCluster"
+}
+
 type CreateDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

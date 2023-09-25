@@ -43,6 +43,10 @@ type DescribeTestSetDiscrepancyReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTestSetDiscrepancyReportInput) operationName() string {
+	return "DescribeTestSetDiscrepancyReport"
+}
+
 type DescribeTestSetDiscrepancyReportOutput struct {
 
 	// The time and date of creation for the test set discrepancy report.

@@ -46,6 +46,10 @@ type PauseServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PauseServiceInput) operationName() string {
+	return "PauseService"
+}
+
 type PauseServiceOutput struct {
 
 	// A description of the App Runner service that this request just paused.

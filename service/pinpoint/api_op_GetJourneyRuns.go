@@ -56,6 +56,10 @@ type GetJourneyRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJourneyRunsInput) operationName() string {
+	return "GetJourneyRuns"
+}
+
 type GetJourneyRunsOutput struct {
 
 	// Provides information from all runs of a journey.

@@ -142,6 +142,10 @@ type CalculateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CalculateRouteInput) operationName() string {
+	return "CalculateRoute"
+}
+
 // Returns the result of the route calculation. Metadata includes legs and route
 // summary.
 type CalculateRouteOutput struct {

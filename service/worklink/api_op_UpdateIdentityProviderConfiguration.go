@@ -54,6 +54,10 @@ type UpdateIdentityProviderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIdentityProviderConfigurationInput) operationName() string {
+	return "UpdateIdentityProviderConfiguration"
+}
+
 type UpdateIdentityProviderConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

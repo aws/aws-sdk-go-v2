@@ -48,6 +48,10 @@ type GetChunkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChunkInput) operationName() string {
+	return "GetChunk"
+}
+
 type GetChunkOutput struct {
 
 	// Data checksum

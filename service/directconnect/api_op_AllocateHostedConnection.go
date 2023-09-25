@@ -75,6 +75,10 @@ type AllocateHostedConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateHostedConnectionInput) operationName() string {
+	return "AllocateHostedConnection"
+}
+
 // Information about an Direct Connect connection.
 type AllocateHostedConnectionOutput struct {
 

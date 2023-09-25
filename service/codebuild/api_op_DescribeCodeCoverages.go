@@ -64,6 +64,10 @@ type DescribeCodeCoveragesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCodeCoveragesInput) operationName() string {
+	return "DescribeCodeCoverages"
+}
+
 type DescribeCodeCoveragesOutput struct {
 
 	// An array of CodeCoverage objects that contain the results.

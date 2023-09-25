@@ -41,6 +41,10 @@ type DeletePatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePatchBaselineInput) operationName() string {
+	return "DeletePatchBaseline"
+}
+
 type DeletePatchBaselineOutput struct {
 
 	// The ID of the deleted patch baseline.

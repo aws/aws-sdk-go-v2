@@ -49,6 +49,10 @@ type ListAssociationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociationVersionsInput) operationName() string {
+	return "ListAssociationVersions"
+}
+
 type ListAssociationVersionsOutput struct {
 
 	// Information about all versions of the association for the specified association

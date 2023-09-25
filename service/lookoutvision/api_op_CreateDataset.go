@@ -77,6 +77,10 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetInput) operationName() string {
+	return "CreateDataset"
+}
+
 type CreateDatasetOutput struct {
 
 	// Information about the dataset.

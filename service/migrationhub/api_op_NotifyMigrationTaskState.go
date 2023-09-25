@@ -76,6 +76,10 @@ type NotifyMigrationTaskStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyMigrationTaskStateInput) operationName() string {
+	return "NotifyMigrationTaskState"
+}
+
 type NotifyMigrationTaskStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type DeleteAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccessorInput) operationName() string {
+	return "DeleteAccessor"
+}
+
 type DeleteAccessorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

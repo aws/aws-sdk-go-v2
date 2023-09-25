@@ -39,6 +39,10 @@ type LaunchAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LaunchAppInput) operationName() string {
+	return "LaunchApp"
+}
+
 type LaunchAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

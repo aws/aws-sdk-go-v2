@@ -62,6 +62,10 @@ type ModifyIpamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyIpamInput) operationName() string {
+	return "ModifyIpam"
+}
+
 type ModifyIpamOutput struct {
 
 	// The results of the modification.

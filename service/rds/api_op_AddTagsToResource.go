@@ -54,6 +54,10 @@ type AddTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsToResourceInput) operationName() string {
+	return "AddTagsToResource"
+}
+
 type AddTagsToResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,6 +41,10 @@ type ResumeBatchLoadTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeBatchLoadTaskInput) operationName() string {
+	return "ResumeBatchLoadTask"
+}
+
 type ResumeBatchLoadTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

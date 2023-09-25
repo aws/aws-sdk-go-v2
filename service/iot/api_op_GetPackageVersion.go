@@ -50,6 +50,10 @@ type GetPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPackageVersionInput) operationName() string {
+	return "GetPackageVersion"
+}
+
 type GetPackageVersionOutput struct {
 
 	// Metadata that were added to the package version that can be used to define a

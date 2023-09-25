@@ -55,6 +55,10 @@ type GetBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBundlesInput) operationName() string {
+	return "GetBundles"
+}
+
 type GetBundlesOutput struct {
 
 	// An array of key-value pairs that contains information about the available

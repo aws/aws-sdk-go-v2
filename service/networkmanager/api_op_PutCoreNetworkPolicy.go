@@ -60,6 +60,10 @@ type PutCoreNetworkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCoreNetworkPolicyInput) operationName() string {
+	return "PutCoreNetworkPolicy"
+}
+
 type PutCoreNetworkPolicyOutput struct {
 
 	// Describes the changed core network policy.

@@ -40,6 +40,10 @@ type DescribeConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectionsInput) operationName() string {
+	return "DescribeConnections"
+}
+
 type DescribeConnectionsOutput struct {
 
 	// The connections.

@@ -41,6 +41,10 @@ type DeleteSubscriptionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSubscriptionDefinitionInput) operationName() string {
+	return "DeleteSubscriptionDefinition"
+}
+
 type DeleteSubscriptionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

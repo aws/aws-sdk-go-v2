@@ -107,6 +107,10 @@ type PublishPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishPackageVersionInput) operationName() string {
+	return "PublishPackageVersion"
+}
+
 type PublishPackageVersionOutput struct {
 
 	// An AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)

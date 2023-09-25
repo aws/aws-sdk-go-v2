@@ -100,6 +100,10 @@ type UpdateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDashboardInput) operationName() string {
+	return "UpdateDashboard"
+}
+
 type UpdateDashboardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource.

@@ -114,6 +114,10 @@ type PutBucketWebsiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketWebsiteInput) operationName() string {
+	return "PutBucketWebsite"
+}
+
 type PutBucketWebsiteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

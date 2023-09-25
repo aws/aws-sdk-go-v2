@@ -54,6 +54,10 @@ type DeleteBucketOwnershipControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketOwnershipControlsInput) operationName() string {
+	return "DeleteBucketOwnershipControls"
+}
+
 type DeleteBucketOwnershipControlsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

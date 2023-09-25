@@ -49,6 +49,10 @@ type DescribeAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnalysisInput) operationName() string {
+	return "DescribeAnalysis"
+}
+
 type DescribeAnalysisOutput struct {
 
 	// A metadata structure that contains summary information for the analysis that

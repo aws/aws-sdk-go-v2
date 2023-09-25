@@ -54,6 +54,10 @@ type ListTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTriggersInput) operationName() string {
+	return "ListTriggers"
+}
+
 type ListTriggersOutput struct {
 
 	// A continuation token, if the returned list does not contain the last metric

@@ -48,6 +48,10 @@ type GetDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDistributionInput) operationName() string {
+	return "GetDistribution"
+}
+
 // The returned result of the corresponding request.
 type GetDistributionOutput struct {
 

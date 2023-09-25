@@ -51,6 +51,10 @@ type GetEntityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEntityTypesInput) operationName() string {
+	return "GetEntityTypes"
+}
+
 type GetEntityTypesOutput struct {
 
 	// An array of entity types.

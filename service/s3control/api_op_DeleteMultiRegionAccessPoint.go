@@ -71,6 +71,10 @@ type DeleteMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMultiRegionAccessPointInput) operationName() string {
+	return "DeleteMultiRegionAccessPoint"
+}
+
 type DeleteMultiRegionAccessPointOutput struct {
 
 	// The request token associated with the request. You can use this token with

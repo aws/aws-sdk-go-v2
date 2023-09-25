@@ -50,6 +50,10 @@ type ListComponentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentVersionsInput) operationName() string {
+	return "ListComponentVersions"
+}
+
 type ListComponentVersionsOutput struct {
 
 	// A list of versions that exist for the component.

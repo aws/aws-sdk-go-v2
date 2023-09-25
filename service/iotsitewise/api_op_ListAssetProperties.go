@@ -59,6 +59,10 @@ type ListAssetPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssetPropertiesInput) operationName() string {
+	return "ListAssetProperties"
+}
+
 type ListAssetPropertiesOutput struct {
 
 	// A list that summarizes the properties associated with the specified asset.

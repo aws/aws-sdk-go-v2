@@ -53,6 +53,10 @@ type GetAssociatedEnclaveCertificateIamRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssociatedEnclaveCertificateIamRolesInput) operationName() string {
+	return "GetAssociatedEnclaveCertificateIamRoles"
+}
+
 type GetAssociatedEnclaveCertificateIamRolesOutput struct {
 
 	// Information about the associated IAM roles.

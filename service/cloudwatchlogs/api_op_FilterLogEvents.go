@@ -113,6 +113,10 @@ type FilterLogEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FilterLogEventsInput) operationName() string {
+	return "FilterLogEvents"
+}
+
 type FilterLogEventsOutput struct {
 
 	// The matched events.

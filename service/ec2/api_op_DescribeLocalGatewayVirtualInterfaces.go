@@ -66,6 +66,10 @@ type DescribeLocalGatewayVirtualInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocalGatewayVirtualInterfacesInput) operationName() string {
+	return "DescribeLocalGatewayVirtualInterfaces"
+}
+
 type DescribeLocalGatewayVirtualInterfacesOutput struct {
 
 	// Information about the virtual interfaces.

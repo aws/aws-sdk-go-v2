@@ -268,6 +268,10 @@ type RegisterTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterTaskDefinitionInput) operationName() string {
+	return "RegisterTaskDefinition"
+}
+
 type RegisterTaskDefinitionOutput struct {
 
 	// The list of tags associated with the task definition.

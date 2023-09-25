@@ -220,6 +220,10 @@ type PutBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBotInput) operationName() string {
+	return "PutBot"
+}
+
 type PutBotOutput struct {
 
 	// The message that Amazon Lex uses to cancel a conversation. For more

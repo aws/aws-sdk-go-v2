@@ -60,6 +60,10 @@ type AssociateInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateInstanceStorageConfigInput) operationName() string {
+	return "AssociateInstanceStorageConfig"
+}
+
 type AssociateInstanceStorageConfigOutput struct {
 
 	// The existing association identifier that uniquely identifies the resource type

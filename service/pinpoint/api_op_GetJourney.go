@@ -49,6 +49,10 @@ type GetJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJourneyInput) operationName() string {
+	return "GetJourney"
+}
+
 type GetJourneyOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a

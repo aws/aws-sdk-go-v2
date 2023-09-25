@@ -65,6 +65,10 @@ type ReleaseIpamPoolAllocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleaseIpamPoolAllocationInput) operationName() string {
+	return "ReleaseIpamPoolAllocation"
+}
+
 type ReleaseIpamPoolAllocationOutput struct {
 
 	// Indicates if the release was successful.

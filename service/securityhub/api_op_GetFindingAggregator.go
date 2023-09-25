@@ -42,6 +42,10 @@ type GetFindingAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingAggregatorInput) operationName() string {
+	return "GetFindingAggregator"
+}
+
 type GetFindingAggregatorOutput struct {
 
 	// The aggregation Region.

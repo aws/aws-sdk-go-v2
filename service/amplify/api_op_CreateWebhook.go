@@ -51,6 +51,10 @@ type CreateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWebhookInput) operationName() string {
+	return "CreateWebhook"
+}
+
 // The result structure for the create webhook request.
 type CreateWebhookOutput struct {
 

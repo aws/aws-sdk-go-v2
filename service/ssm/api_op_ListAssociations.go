@@ -55,6 +55,10 @@ type ListAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociationsInput) operationName() string {
+	return "ListAssociations"
+}
+
 type ListAssociationsOutput struct {
 
 	// The associations.

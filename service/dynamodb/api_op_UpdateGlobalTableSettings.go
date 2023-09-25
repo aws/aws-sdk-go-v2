@@ -76,6 +76,10 @@ type UpdateGlobalTableSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGlobalTableSettingsInput) operationName() string {
+	return "UpdateGlobalTableSettings"
+}
+
 type UpdateGlobalTableSettingsOutput struct {
 
 	// The name of the global table.

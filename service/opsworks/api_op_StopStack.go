@@ -45,6 +45,10 @@ type StopStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopStackInput) operationName() string {
+	return "StopStack"
+}
+
 type StopStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

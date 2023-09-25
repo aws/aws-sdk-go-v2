@@ -47,6 +47,10 @@ type GetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigInput) operationName() string {
+	return "GetConfig"
+}
+
 type GetConfigOutput struct {
 
 	// ARN of a Config

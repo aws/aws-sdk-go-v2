@@ -59,6 +59,10 @@ type ListFargateProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFargateProfilesInput) operationName() string {
+	return "ListFargateProfiles"
+}
+
 type ListFargateProfilesOutput struct {
 
 	// A list of all of the Fargate profiles associated with the specified cluster.

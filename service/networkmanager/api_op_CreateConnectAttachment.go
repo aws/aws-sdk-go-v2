@@ -67,6 +67,10 @@ type CreateConnectAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectAttachmentInput) operationName() string {
+	return "CreateConnectAttachment"
+}
+
 type CreateConnectAttachmentOutput struct {
 
 	// The response to a Connect attachment request.

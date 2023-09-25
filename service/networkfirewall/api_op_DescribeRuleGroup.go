@@ -52,6 +52,10 @@ type DescribeRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRuleGroupInput) operationName() string {
+	return "DescribeRuleGroup"
+}
+
 type DescribeRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup ,

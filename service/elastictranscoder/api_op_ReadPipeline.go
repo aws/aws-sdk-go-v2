@@ -43,6 +43,10 @@ type ReadPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReadPipelineInput) operationName() string {
+	return "ReadPipeline"
+}
+
 // The ReadPipelineResponse structure.
 type ReadPipelineOutput struct {
 

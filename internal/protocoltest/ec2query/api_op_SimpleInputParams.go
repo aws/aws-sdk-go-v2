@@ -52,6 +52,10 @@ type SimpleInputParamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SimpleInputParamsInput) operationName() string {
+	return "SimpleInputParams"
+}
+
 type SimpleInputParamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

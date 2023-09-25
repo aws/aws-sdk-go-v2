@@ -79,6 +79,10 @@ type ListHubContentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHubContentVersionsInput) operationName() string {
+	return "ListHubContentVersions"
+}
+
 type ListHubContentVersionsOutput struct {
 
 	// The summaries of the listed hub content versions.

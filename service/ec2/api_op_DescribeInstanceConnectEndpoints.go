@@ -77,6 +77,10 @@ type DescribeInstanceConnectEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceConnectEndpointsInput) operationName() string {
+	return "DescribeInstanceConnectEndpoints"
+}
+
 type DescribeInstanceConnectEndpointsOutput struct {
 
 	// Information about the EC2 Instance Connect Endpoints.

@@ -89,6 +89,10 @@ type PutSourceServerActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSourceServerActionInput) operationName() string {
+	return "PutSourceServerAction"
+}
+
 type PutSourceServerActionOutput struct {
 
 	// Source server post migration custom action ID.

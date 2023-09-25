@@ -42,6 +42,10 @@ type GetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOperationInput) operationName() string {
+	return "GetOperation"
+}
+
 type GetOperationOutput struct {
 
 	// Returns the details of an operation.

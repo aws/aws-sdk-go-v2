@@ -89,6 +89,10 @@ type GetPackageVersionAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPackageVersionAssetInput) operationName() string {
+	return "GetPackageVersionAsset"
+}
+
 type GetPackageVersionAssetOutput struct {
 
 	// The binary file, or asset, that is downloaded.

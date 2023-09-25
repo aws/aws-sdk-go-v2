@@ -50,6 +50,10 @@ type DescribeAppBlockBuilderAppBlockAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppBlockBuilderAppBlockAssociationsInput) operationName() string {
+	return "DescribeAppBlockBuilderAppBlockAssociations"
+}
+
 type DescribeAppBlockBuilderAppBlockAssociationsOutput struct {
 
 	// This list of app block builders associated with app blocks.

@@ -44,6 +44,10 @@ type ListPartnerAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPartnerAccountsInput) operationName() string {
+	return "ListPartnerAccounts"
+}
+
 type ListPartnerAccountsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

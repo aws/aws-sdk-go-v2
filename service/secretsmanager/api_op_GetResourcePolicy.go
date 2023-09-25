@@ -53,6 +53,10 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcePolicyInput) operationName() string {
+	return "GetResourcePolicy"
+}
+
 type GetResourcePolicyOutput struct {
 
 	// The ARN of the secret that the resource-based policy was retrieved for.

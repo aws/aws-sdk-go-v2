@@ -40,6 +40,10 @@ type GetAccountBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountBalanceInput) operationName() string {
+	return "GetAccountBalance"
+}
+
 type GetAccountBalanceOutput struct {
 
 	// A string representing a currency amount.

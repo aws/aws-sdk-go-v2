@@ -59,6 +59,10 @@ type CreateDataProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataProviderInput) operationName() string {
+	return "CreateDataProvider"
+}
+
 type CreateDataProviderOutput struct {
 
 	// The data provider that was created.

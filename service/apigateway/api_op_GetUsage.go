@@ -63,6 +63,10 @@ type GetUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsageInput) operationName() string {
+	return "GetUsage"
+}
+
 // Represents the usage data of a usage plan.
 type GetUsageOutput struct {
 

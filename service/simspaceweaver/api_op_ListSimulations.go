@@ -49,6 +49,10 @@ type ListSimulationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSimulationsInput) operationName() string {
+	return "ListSimulations"
+}
+
 type ListSimulationsOutput struct {
 
 	// If SimSpace Weaver returns nextToken , then there are more results available.

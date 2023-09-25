@@ -52,6 +52,10 @@ type DescribeCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCertificateInput) operationName() string {
+	return "DescribeCertificate"
+}
+
 type DescribeCertificateOutput struct {
 
 	// Metadata about an ACM certificate.

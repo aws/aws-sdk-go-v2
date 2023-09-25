@@ -59,6 +59,10 @@ type AdminListGroupsForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminListGroupsForUserInput) operationName() string {
+	return "AdminListGroupsForUser"
+}
+
 type AdminListGroupsForUserOutput struct {
 
 	// The groups that the user belongs to.

@@ -47,6 +47,10 @@ type DescribeIpGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIpGroupsInput) operationName() string {
+	return "DescribeIpGroups"
+}
+
 type DescribeIpGroupsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

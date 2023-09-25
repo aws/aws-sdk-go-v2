@@ -43,6 +43,10 @@ type ForgetSmartHomeAppliancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ForgetSmartHomeAppliancesInput) operationName() string {
+	return "ForgetSmartHomeAppliances"
+}
+
 type ForgetSmartHomeAppliancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

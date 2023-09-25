@@ -46,6 +46,10 @@ type StartProjectSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartProjectSessionInput) operationName() string {
+	return "StartProjectSession"
+}
+
 type StartProjectSessionOutput struct {
 
 	// The name of the project to be acted upon.

@@ -96,6 +96,10 @@ type SendBulkEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendBulkEmailInput) operationName() string {
+	return "SendBulkEmail"
+}
+
 // The following data is returned in JSON format by the service.
 type SendBulkEmailOutput struct {
 

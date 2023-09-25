@@ -64,6 +64,10 @@ type ExecuteProvisionedProductServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteProvisionedProductServiceActionInput) operationName() string {
+	return "ExecuteProvisionedProductServiceAction"
+}
+
 type ExecuteProvisionedProductServiceActionOutput struct {
 
 	// An object containing detailed information about the result of provisioning the

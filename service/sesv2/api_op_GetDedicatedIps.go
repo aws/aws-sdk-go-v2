@@ -52,6 +52,10 @@ type GetDedicatedIpsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDedicatedIpsInput) operationName() string {
+	return "GetDedicatedIps"
+}
+
 // Information about the dedicated IP addresses that are associated with your
 // Amazon Web Services account.
 type GetDedicatedIpsOutput struct {

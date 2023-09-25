@@ -44,6 +44,10 @@ type StopMetricStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopMetricStreamsInput) operationName() string {
+	return "StopMetricStreams"
+}
+
 type StopMetricStreamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type DeleteBackendEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackendEnvironmentInput) operationName() string {
+	return "DeleteBackendEnvironment"
+}
+
 // The result structure of the delete backend environment result.
 type DeleteBackendEnvironmentOutput struct {
 

@@ -47,6 +47,10 @@ type CreateRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRegistryInput) operationName() string {
+	return "CreateRegistry"
+}
+
 type CreateRegistryOutput struct {
 
 	// The description of the registry.

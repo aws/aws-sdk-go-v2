@@ -54,6 +54,10 @@ type SearchImageSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchImageSetsInput) operationName() string {
+	return "SearchImageSets"
+}
+
 type SearchImageSetsOutput struct {
 
 	// The model containing the image set results.

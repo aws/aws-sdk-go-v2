@@ -59,6 +59,10 @@ type DescribeUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUpdateInput) operationName() string {
+	return "DescribeUpdate"
+}
+
 type DescribeUpdateOutput struct {
 
 	// The full description of the specified update.

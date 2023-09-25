@@ -66,6 +66,10 @@ type ReportTaskRunnerHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReportTaskRunnerHeartbeatInput) operationName() string {
+	return "ReportTaskRunnerHeartbeat"
+}
+
 // Contains the output of ReportTaskRunnerHeartbeat.
 type ReportTaskRunnerHeartbeatOutput struct {
 

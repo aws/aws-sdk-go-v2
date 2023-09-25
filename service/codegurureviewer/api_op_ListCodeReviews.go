@@ -68,6 +68,10 @@ type ListCodeReviewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCodeReviewsInput) operationName() string {
+	return "ListCodeReviews"
+}
+
 type ListCodeReviewsOutput struct {
 
 	// A list of code reviews that meet the criteria of the request.

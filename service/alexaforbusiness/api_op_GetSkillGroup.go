@@ -42,6 +42,10 @@ type GetSkillGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSkillGroupInput) operationName() string {
+	return "GetSkillGroup"
+}
+
 type GetSkillGroupOutput struct {
 
 	// The details of the skill group requested. Required.

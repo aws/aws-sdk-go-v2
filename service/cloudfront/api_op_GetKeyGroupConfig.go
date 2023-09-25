@@ -47,6 +47,10 @@ type GetKeyGroupConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyGroupConfigInput) operationName() string {
+	return "GetKeyGroupConfig"
+}
+
 type GetKeyGroupConfigOutput struct {
 
 	// The identifier for this version of the key group.

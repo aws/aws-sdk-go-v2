@@ -64,6 +64,10 @@ type ImportSourceCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportSourceCredentialsInput) operationName() string {
+	return "ImportSourceCredentials"
+}
+
 type ImportSourceCredentialsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the token.

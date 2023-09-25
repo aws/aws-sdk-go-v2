@@ -49,6 +49,10 @@ type RemoveFlowOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveFlowOutputInput) operationName() string {
+	return "RemoveFlowOutput"
+}
+
 type RemoveFlowOutputOutput struct {
 
 	// The ARN of the flow that is associated with the output you removed.

@@ -47,6 +47,10 @@ type UpdateGlobalNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGlobalNetworkInput) operationName() string {
+	return "UpdateGlobalNetwork"
+}
+
 type UpdateGlobalNetworkOutput struct {
 
 	// Information about the global network object.

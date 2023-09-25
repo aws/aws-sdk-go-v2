@@ -47,6 +47,10 @@ type ListEnvironmentProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentProvisionedResourcesInput) operationName() string {
+	return "ListEnvironmentProvisionedResources"
+}
+
 type ListEnvironmentProvisionedResourcesOutput struct {
 
 	// An array of environment provisioned resources.

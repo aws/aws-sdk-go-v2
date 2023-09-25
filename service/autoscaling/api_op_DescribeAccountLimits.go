@@ -40,6 +40,10 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountLimitsInput) operationName() string {
+	return "DescribeAccountLimits"
+}
+
 type DescribeAccountLimitsOutput struct {
 
 	// The maximum number of groups allowed for your account. The default is 200

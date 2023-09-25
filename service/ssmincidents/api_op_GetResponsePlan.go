@@ -42,6 +42,10 @@ type GetResponsePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResponsePlanInput) operationName() string {
+	return "GetResponsePlan"
+}
+
 type GetResponsePlanOutput struct {
 
 	// The ARN of the response plan.

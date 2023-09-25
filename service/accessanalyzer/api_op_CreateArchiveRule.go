@@ -60,6 +60,10 @@ type CreateArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateArchiveRuleInput) operationName() string {
+	return "CreateArchiveRule"
+}
+
 type CreateArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

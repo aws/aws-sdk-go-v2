@@ -39,6 +39,7 @@
         "api_op_SetLoadBalancerListenerSSLCertificate.go",
         "api_op_SetLoadBalancerPoliciesForBackendServer.go",
         "api_op_SetLoadBalancerPoliciesOfListener.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

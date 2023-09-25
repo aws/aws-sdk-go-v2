@@ -45,6 +45,10 @@ type ListTagsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForDomainInput) operationName() string {
+	return "ListTagsForDomain"
+}
+
 // The ListTagsForDomain response includes the following elements.
 type ListTagsForDomainOutput struct {
 

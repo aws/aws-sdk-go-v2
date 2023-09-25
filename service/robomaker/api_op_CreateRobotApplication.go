@@ -59,6 +59,10 @@ type CreateRobotApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRobotApplicationInput) operationName() string {
+	return "CreateRobotApplication"
+}
+
 type CreateRobotApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the robot application.

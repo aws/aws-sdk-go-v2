@@ -43,6 +43,10 @@ type DisableProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableProfileInput) operationName() string {
+	return "DisableProfile"
+}
+
 type DisableProfileOutput struct {
 
 	// The state of the profile after a read or write operation.

@@ -213,6 +213,10 @@ type PutObjectAclInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectAclInput) operationName() string {
+	return "PutObjectAcl"
+}
+
 type PutObjectAclOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

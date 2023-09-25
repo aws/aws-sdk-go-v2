@@ -62,6 +62,10 @@ type ListFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFunctionsInput) operationName() string {
+	return "ListFunctions"
+}
+
 // A list of Lambda functions.
 type ListFunctionsOutput struct {
 

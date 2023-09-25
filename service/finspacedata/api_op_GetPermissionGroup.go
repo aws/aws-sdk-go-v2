@@ -42,6 +42,10 @@ type GetPermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPermissionGroupInput) operationName() string {
+	return "GetPermissionGroup"
+}
+
 type GetPermissionGroupOutput struct {
 
 	// The structure for a permission group.

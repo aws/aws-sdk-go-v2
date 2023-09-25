@@ -74,6 +74,10 @@ type DeleteFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFleetsInput) operationName() string {
+	return "DeleteFleets"
+}
+
 type DeleteFleetsOutput struct {
 
 	// Information about the EC2 Fleets that are successfully deleted.

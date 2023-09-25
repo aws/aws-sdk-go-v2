@@ -44,6 +44,10 @@ type GetWorkflowStepExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowStepExecutionInput) operationName() string {
+	return "GetWorkflowStepExecution"
+}
+
 type GetWorkflowStepExecutionOutput struct {
 
 	// The name of the action that the specified step performs.

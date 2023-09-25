@@ -70,6 +70,10 @@ type ListGatewayRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGatewayRoutesInput) operationName() string {
+	return "ListGatewayRoutes"
+}
+
 type ListGatewayRoutesOutput struct {
 
 	// The list of existing gateway routes for the specified service mesh and virtual

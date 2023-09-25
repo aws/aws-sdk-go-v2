@@ -47,6 +47,10 @@ type DeleteDocumentationPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDocumentationPartInput) operationName() string {
+	return "DeleteDocumentationPart"
+}
+
 type DeleteDocumentationPartOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

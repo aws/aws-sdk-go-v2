@@ -41,6 +41,10 @@ type DeleteUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserSettingsInput) operationName() string {
+	return "DeleteUserSettings"
+}
+
 type DeleteUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

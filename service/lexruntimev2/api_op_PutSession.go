@@ -82,6 +82,10 @@ type PutSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSessionInput) operationName() string {
+	return "PutSession"
+}
+
 type PutSessionOutput struct {
 
 	// If the requested content type was audio, the audio version of the message to

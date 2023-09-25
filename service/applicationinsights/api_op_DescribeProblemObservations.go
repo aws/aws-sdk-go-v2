@@ -45,6 +45,10 @@ type DescribeProblemObservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProblemObservationsInput) operationName() string {
+	return "DescribeProblemObservations"
+}
+
 type DescribeProblemObservationsOutput struct {
 
 	// Observations related to the problem.

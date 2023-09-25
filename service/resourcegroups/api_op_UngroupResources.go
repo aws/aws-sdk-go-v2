@@ -52,6 +52,10 @@ type UngroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UngroupResourcesInput) operationName() string {
+	return "UngroupResources"
+}
+
 type UngroupResourcesOutput struct {
 
 	// A list of any resources that failed to be removed from the group by this

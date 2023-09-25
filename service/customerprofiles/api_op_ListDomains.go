@@ -43,6 +43,10 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainsInput) operationName() string {
+	return "ListDomains"
+}
+
 type ListDomainsOutput struct {
 
 	// The list of ListDomains instances.

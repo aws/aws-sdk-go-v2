@@ -54,6 +54,10 @@ type ListArchivesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListArchivesInput) operationName() string {
+	return "ListArchives"
+}
+
 type ListArchivesOutput struct {
 
 	// An array of Archive objects that include details about an archive.

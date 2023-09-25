@@ -60,6 +60,10 @@ type CreateIpamResourceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIpamResourceDiscoveryInput) operationName() string {
+	return "CreateIpamResourceDiscovery"
+}
+
 type CreateIpamResourceDiscoveryOutput struct {
 
 	// An IPAM resource discovery.

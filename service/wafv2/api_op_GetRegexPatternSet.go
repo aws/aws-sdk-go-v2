@@ -61,6 +61,10 @@ type GetRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegexPatternSetInput) operationName() string {
+	return "GetRegexPatternSet"
+}
+
 type GetRegexPatternSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

@@ -100,6 +100,10 @@ type CreateFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFirewallInput) operationName() string {
+	return "CreateFirewall"
+}
+
 type CreateFirewallOutput struct {
 
 	// The configuration settings for the firewall. These settings include the

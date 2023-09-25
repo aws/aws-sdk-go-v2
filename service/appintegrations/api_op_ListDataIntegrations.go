@@ -48,6 +48,10 @@ type ListDataIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataIntegrationsInput) operationName() string {
+	return "ListDataIntegrations"
+}
+
 type ListDataIntegrationsOutput struct {
 
 	// The DataIntegrations associated with this account.

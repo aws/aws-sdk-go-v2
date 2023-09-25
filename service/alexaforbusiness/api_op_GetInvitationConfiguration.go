@@ -38,6 +38,10 @@ type GetInvitationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInvitationConfigurationInput) operationName() string {
+	return "GetInvitationConfiguration"
+}
+
 type GetInvitationConfigurationOutput struct {
 
 	// The email ID of the organization or individual contact that the enrolled user

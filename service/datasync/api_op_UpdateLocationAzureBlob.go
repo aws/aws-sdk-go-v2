@@ -75,6 +75,10 @@ type UpdateLocationAzureBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLocationAzureBlobInput) operationName() string {
+	return "UpdateLocationAzureBlob"
+}
+
 type UpdateLocationAzureBlobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,6 +53,10 @@ type DeregisterWorkspaceDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterWorkspaceDirectoryInput) operationName() string {
+	return "DeregisterWorkspaceDirectory"
+}
+
 type DeregisterWorkspaceDirectoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

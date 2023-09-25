@@ -51,6 +51,10 @@ type DescribeReplayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplayInput) operationName() string {
+	return "DescribeReplay"
+}
+
 type DescribeReplayOutput struct {
 
 	// The description of the replay.

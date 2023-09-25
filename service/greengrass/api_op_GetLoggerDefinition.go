@@ -41,6 +41,10 @@ type GetLoggerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoggerDefinitionInput) operationName() string {
+	return "GetLoggerDefinition"
+}
+
 type GetLoggerDefinitionOutput struct {
 
 	// The ARN of the definition.

@@ -58,6 +58,10 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProjectInput) operationName() string {
+	return "CreateProject"
+}
+
 type CreateProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,6 +60,10 @@ type UpdateSMBSecurityStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSMBSecurityStrategyInput) operationName() string {
+	return "UpdateSMBSecurityStrategy"
+}
+
 type UpdateSMBSecurityStrategyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

@@ -53,6 +53,10 @@ type DeleteVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcPeeringConnectionInput) operationName() string {
+	return "DeleteVpcPeeringConnection"
+}
+
 type DeleteVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

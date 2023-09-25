@@ -49,6 +49,10 @@ type UpdateVoiceChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceChannelInput) operationName() string {
+	return "UpdateVoiceChannel"
+}
+
 type UpdateVoiceChannelOutput struct {
 
 	// Provides information about the status and settings of the voice channel for an

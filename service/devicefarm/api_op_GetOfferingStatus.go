@@ -48,6 +48,10 @@ type GetOfferingStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOfferingStatusInput) operationName() string {
+	return "GetOfferingStatus"
+}
+
 // Returns the status result for a device offering.
 type GetOfferingStatusOutput struct {
 

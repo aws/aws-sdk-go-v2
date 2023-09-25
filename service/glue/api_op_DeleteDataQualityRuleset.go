@@ -41,6 +41,10 @@ type DeleteDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataQualityRulesetInput) operationName() string {
+	return "DeleteDataQualityRuleset"
+}
+
 type DeleteDataQualityRulesetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

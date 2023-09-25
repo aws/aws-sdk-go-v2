@@ -183,6 +183,10 @@ type UpdateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIntegrationInput) operationName() string {
+	return "UpdateIntegration"
+}
+
 type UpdateIntegrationOutput struct {
 
 	// Specifies whether an integration is managed by API Gateway. If you created an

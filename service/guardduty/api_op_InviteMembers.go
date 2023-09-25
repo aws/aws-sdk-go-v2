@@ -77,6 +77,10 @@ type InviteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InviteMembersInput) operationName() string {
+	return "InviteMembers"
+}
+
 type InviteMembersOutput struct {
 
 	// A list of objects that contain the unprocessed account and a result string that

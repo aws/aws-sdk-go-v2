@@ -57,6 +57,10 @@ type CreateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTaskInput) operationName() string {
+	return "CreateTask"
+}
+
 type CreateTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of the task that you created.

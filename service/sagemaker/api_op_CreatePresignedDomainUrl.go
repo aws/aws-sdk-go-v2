@@ -71,6 +71,10 @@ type CreatePresignedDomainUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePresignedDomainUrlInput) operationName() string {
+	return "CreatePresignedDomainUrl"
+}
+
 type CreatePresignedDomainUrlOutput struct {
 
 	// The presigned URL.

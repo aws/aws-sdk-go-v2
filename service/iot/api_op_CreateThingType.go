@@ -52,6 +52,10 @@ type CreateThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThingTypeInput) operationName() string {
+	return "CreateThingType"
+}
+
 // The output of the CreateThingType operation.
 type CreateThingTypeOutput struct {
 

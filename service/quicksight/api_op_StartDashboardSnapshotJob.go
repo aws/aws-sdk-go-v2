@@ -76,6 +76,10 @@ type StartDashboardSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDashboardSnapshotJobInput) operationName() string {
+	return "StartDashboardSnapshotJob"
+}
+
 type StartDashboardSnapshotJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the dashboard snapshot job.

@@ -44,6 +44,10 @@ type GetInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstancesInput) operationName() string {
+	return "GetInstances"
+}
+
 type GetInstancesOutput struct {
 
 	// An array of key-value pairs containing information about your instances.

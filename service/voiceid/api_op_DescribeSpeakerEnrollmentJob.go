@@ -47,6 +47,10 @@ type DescribeSpeakerEnrollmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpeakerEnrollmentJobInput) operationName() string {
+	return "DescribeSpeakerEnrollmentJob"
+}
+
 type DescribeSpeakerEnrollmentJobOutput struct {
 
 	// Contains details about the specified speaker enrollment job.

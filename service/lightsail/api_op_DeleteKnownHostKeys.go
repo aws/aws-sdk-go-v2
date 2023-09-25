@@ -51,6 +51,10 @@ type DeleteKnownHostKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKnownHostKeysInput) operationName() string {
+	return "DeleteKnownHostKeys"
+}
+
 type DeleteKnownHostKeysOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

@@ -49,6 +49,10 @@ type ListFeaturesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFeaturesInput) operationName() string {
+	return "ListFeatures"
+}
+
 type ListFeaturesOutput struct {
 
 	// An array of structures that contain the configuration details of the features

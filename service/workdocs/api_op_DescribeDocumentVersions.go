@@ -62,6 +62,10 @@ type DescribeDocumentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDocumentVersionsInput) operationName() string {
+	return "DescribeDocumentVersions"
+}
+
 type DescribeDocumentVersionsOutput struct {
 
 	// The document versions.

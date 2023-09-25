@@ -64,6 +64,10 @@ type GetExclusionsPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExclusionsPreviewInput) operationName() string {
+	return "GetExclusionsPreview"
+}
+
 type GetExclusionsPreviewOutput struct {
 
 	// Specifies the status of the request to generate an exclusions preview.

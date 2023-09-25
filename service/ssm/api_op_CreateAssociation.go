@@ -191,6 +191,10 @@ type CreateAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssociationInput) operationName() string {
+	return "CreateAssociation"
+}
+
 type CreateAssociationOutput struct {
 
 	// Information about the association.

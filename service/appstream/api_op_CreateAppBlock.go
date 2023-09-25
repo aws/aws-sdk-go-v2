@@ -72,6 +72,10 @@ type CreateAppBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppBlockInput) operationName() string {
+	return "CreateAppBlock"
+}
+
 type CreateAppBlockOutput struct {
 
 	// The app block.

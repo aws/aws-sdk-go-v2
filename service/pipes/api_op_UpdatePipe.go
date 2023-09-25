@@ -78,6 +78,10 @@ type UpdatePipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePipeInput) operationName() string {
+	return "UpdatePipe"
+}
+
 type UpdatePipeOutput struct {
 
 	// The ARN of the pipe.

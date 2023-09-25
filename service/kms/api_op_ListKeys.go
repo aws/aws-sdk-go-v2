@@ -56,6 +56,10 @@ type ListKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeysInput) operationName() string {
+	return "ListKeys"
+}
+
 type ListKeysOutput struct {
 
 	// A list of KMS keys.

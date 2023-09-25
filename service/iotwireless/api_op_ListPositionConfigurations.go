@@ -52,6 +52,10 @@ type ListPositionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPositionConfigurationsInput) operationName() string {
+	return "ListPositionConfigurations"
+}
+
 type ListPositionConfigurationsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

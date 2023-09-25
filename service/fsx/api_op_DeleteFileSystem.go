@@ -89,6 +89,10 @@ type DeleteFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFileSystemInput) operationName() string {
+	return "DeleteFileSystem"
+}
+
 // The response object for the DeleteFileSystem operation.
 type DeleteFileSystemOutput struct {
 

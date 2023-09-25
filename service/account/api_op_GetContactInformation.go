@@ -57,6 +57,10 @@ type GetContactInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactInformationInput) operationName() string {
+	return "GetContactInformation"
+}
+
 type GetContactInformationOutput struct {
 
 	// Contains the details of the primary contact information associated with an

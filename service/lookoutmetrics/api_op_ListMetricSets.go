@@ -51,6 +51,10 @@ type ListMetricSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMetricSetsInput) operationName() string {
+	return "ListMetricSets"
+}
+
 type ListMetricSetsOutput struct {
 
 	// A list of the datasets in the AWS Region, with configuration details for each.

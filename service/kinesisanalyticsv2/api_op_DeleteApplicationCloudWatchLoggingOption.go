@@ -64,6 +64,10 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationCloudWatchLoggingOptionInput) operationName() string {
+	return "DeleteApplicationCloudWatchLoggingOption"
+}
+
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The application's Amazon Resource Name (ARN).

@@ -100,6 +100,10 @@ type CreateTrafficMirrorSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrafficMirrorSessionInput) operationName() string {
+	return "CreateTrafficMirrorSession"
+}
+
 type CreateTrafficMirrorSessionOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

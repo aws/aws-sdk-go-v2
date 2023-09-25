@@ -47,6 +47,10 @@ type GetGeoMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGeoMatchSetInput) operationName() string {
+	return "GetGeoMatchSet"
+}
+
 type GetGeoMatchSetOutput struct {
 
 	// Information about the GeoMatchSet that you specified in the GetGeoMatchSet

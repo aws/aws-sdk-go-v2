@@ -46,6 +46,10 @@ type DescribeNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNodeInput) operationName() string {
+	return "DescribeNode"
+}
+
 type DescribeNodeOutput struct {
 
 	// The node's category.

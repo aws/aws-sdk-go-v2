@@ -52,6 +52,10 @@ type DeleteHostedConfigurationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHostedConfigurationVersionInput) operationName() string {
+	return "DeleteHostedConfigurationVersion"
+}
+
 type DeleteHostedConfigurationVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

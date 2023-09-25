@@ -51,6 +51,10 @@ type DetectSyntaxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectSyntaxInput) operationName() string {
+	return "DetectSyntax"
+}
+
 type DetectSyntaxOutput struct {
 
 	// A collection of syntax tokens describing the text. For each token, the response

@@ -84,6 +84,10 @@ type DescribeScheduledInstanceAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledInstanceAvailabilityInput) operationName() string {
+	return "DescribeScheduledInstanceAvailability"
+}
+
 // Contains the output of DescribeScheduledInstanceAvailability.
 type DescribeScheduledInstanceAvailabilityOutput struct {
 

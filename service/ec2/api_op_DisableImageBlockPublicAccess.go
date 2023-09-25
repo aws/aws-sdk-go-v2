@@ -52,6 +52,10 @@ type DisableImageBlockPublicAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableImageBlockPublicAccessInput) operationName() string {
+	return "DisableImageBlockPublicAccess"
+}
+
 type DisableImageBlockPublicAccessOutput struct {
 
 	// Returns unblocked if the request succeeds; otherwise, it returns an error.

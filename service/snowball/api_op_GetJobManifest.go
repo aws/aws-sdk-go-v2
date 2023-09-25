@@ -56,6 +56,10 @@ type GetJobManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobManifestInput) operationName() string {
+	return "GetJobManifest"
+}
+
 type GetJobManifestOutput struct {
 
 	// The Amazon S3 presigned URL for the manifest file associated with the specified

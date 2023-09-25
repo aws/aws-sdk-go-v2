@@ -58,6 +58,10 @@ type SearchIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchIndexInput) operationName() string {
+	return "SearchIndex"
+}
+
 type SearchIndexOutput struct {
 
 	// The token used to get the next set of results, or null if there are no

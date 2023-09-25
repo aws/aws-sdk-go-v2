@@ -84,6 +84,10 @@ type AddStorageSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddStorageSystemInput) operationName() string {
+	return "AddStorageSystem"
+}
+
 type AddStorageSystemOutput struct {
 
 	// The ARN of the on-premises storage system that you can use with DataSync

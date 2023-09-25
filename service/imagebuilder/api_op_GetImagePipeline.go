@@ -42,6 +42,10 @@ type GetImagePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImagePipelineInput) operationName() string {
+	return "GetImagePipeline"
+}
+
 type GetImagePipelineOutput struct {
 
 	// The image pipeline object.

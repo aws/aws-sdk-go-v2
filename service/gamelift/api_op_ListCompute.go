@@ -60,6 +60,10 @@ type ListComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComputeInput) operationName() string {
+	return "ListCompute"
+}
+
 type ListComputeOutput struct {
 
 	// A list of compute resources in the specified fleet.

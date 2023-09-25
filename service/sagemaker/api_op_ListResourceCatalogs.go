@@ -63,6 +63,10 @@ type ListResourceCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceCatalogsInput) operationName() string {
+	return "ListResourceCatalogs"
+}
+
 type ListResourceCatalogsOutput struct {
 
 	// A token to resume pagination of ListResourceCatalogs results.

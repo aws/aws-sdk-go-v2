@@ -49,6 +49,10 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplatesInput) operationName() string {
+	return "ListTemplates"
+}
+
 type ListTemplatesOutput struct {
 
 	// A token indicating that there are additional email templates available to be

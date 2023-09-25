@@ -56,6 +56,10 @@ type StartRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRecommendationsInput) operationName() string {
+	return "StartRecommendations"
+}
+
 type StartRecommendationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

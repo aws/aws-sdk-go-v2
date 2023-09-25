@@ -52,6 +52,10 @@ type ListCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCertificatesInput) operationName() string {
+	return "ListCertificates"
+}
+
 // The output of the ListCertificates operation.
 type ListCertificatesOutput struct {
 

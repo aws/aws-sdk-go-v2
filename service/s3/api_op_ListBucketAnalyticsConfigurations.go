@@ -72,6 +72,10 @@ type ListBucketAnalyticsConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBucketAnalyticsConfigurationsInput) operationName() string {
+	return "ListBucketAnalyticsConfigurations"
+}
+
 type ListBucketAnalyticsConfigurationsOutput struct {
 
 	// The list of analytics configurations for a bucket.

@@ -48,6 +48,10 @@ type SetV2LoggingLevelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetV2LoggingLevelInput) operationName() string {
+	return "SetV2LoggingLevel"
+}
+
 type SetV2LoggingLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

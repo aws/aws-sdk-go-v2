@@ -44,6 +44,10 @@ type DeletePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePhoneNumberInput) operationName() string {
+	return "DeletePhoneNumber"
+}
+
 type DeletePhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -87,6 +87,10 @@ type CreateAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAcceleratorInput) operationName() string {
+	return "CreateAccelerator"
+}
+
 type CreateAcceleratorOutput struct {
 
 	// The accelerator that is created by specifying a listener and the supported IP

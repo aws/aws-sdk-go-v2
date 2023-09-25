@@ -44,6 +44,10 @@ type CancelReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelReplicationTaskAssessmentRunInput) operationName() string {
+	return "CancelReplicationTaskAssessmentRun"
+}
+
 type CancelReplicationTaskAssessmentRunOutput struct {
 
 	// The ReplicationTaskAssessmentRun object for the canceled assessment run.

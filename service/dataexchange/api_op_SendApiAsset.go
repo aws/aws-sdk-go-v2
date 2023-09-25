@@ -73,6 +73,10 @@ type SendApiAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendApiAssetInput) operationName() string {
+	return "SendApiAsset"
+}
+
 type SendApiAssetOutput struct {
 
 	// The response body from the underlying API tracked by the API asset.

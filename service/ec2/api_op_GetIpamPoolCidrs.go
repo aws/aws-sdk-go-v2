@@ -59,6 +59,10 @@ type GetIpamPoolCidrsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIpamPoolCidrsInput) operationName() string {
+	return "GetIpamPoolCidrs"
+}
+
 type GetIpamPoolCidrsOutput struct {
 
 	// Information about the CIDRs provisioned to an IPAM pool.

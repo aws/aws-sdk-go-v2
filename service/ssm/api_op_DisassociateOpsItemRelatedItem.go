@@ -50,6 +50,10 @@ type DisassociateOpsItemRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateOpsItemRelatedItemInput) operationName() string {
+	return "DisassociateOpsItemRelatedItem"
+}
+
 type DisassociateOpsItemRelatedItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

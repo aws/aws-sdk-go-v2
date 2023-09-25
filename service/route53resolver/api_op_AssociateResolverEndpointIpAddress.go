@@ -53,6 +53,10 @@ type AssociateResolverEndpointIpAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateResolverEndpointIpAddressInput) operationName() string {
+	return "AssociateResolverEndpointIpAddress"
+}
+
 type AssociateResolverEndpointIpAddressOutput struct {
 
 	// The response to an AssociateResolverEndpointIpAddress request.

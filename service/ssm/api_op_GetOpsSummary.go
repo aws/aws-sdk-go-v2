@@ -61,6 +61,10 @@ type GetOpsSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOpsSummaryInput) operationName() string {
+	return "GetOpsSummary"
+}
+
 type GetOpsSummaryOutput struct {
 
 	// The list of aggregated details and filtered OpsData.

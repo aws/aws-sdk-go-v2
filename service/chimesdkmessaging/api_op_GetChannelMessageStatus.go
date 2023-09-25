@@ -67,6 +67,10 @@ type GetChannelMessageStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelMessageStatusInput) operationName() string {
+	return "GetChannelMessageStatus"
+}
+
 type GetChannelMessageStatusOutput struct {
 
 	// The message status and details.

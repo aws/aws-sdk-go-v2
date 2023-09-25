@@ -39,6 +39,10 @@ type GetLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoggingOptionsInput) operationName() string {
+	return "GetLoggingOptions"
+}
+
 // The output from the GetLoggingOptions operation.
 type GetLoggingOptionsOutput struct {
 

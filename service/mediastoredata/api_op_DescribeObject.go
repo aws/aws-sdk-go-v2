@@ -43,6 +43,10 @@ type DescribeObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeObjectInput) operationName() string {
+	return "DescribeObject"
+}
+
 type DescribeObjectOutput struct {
 
 	// An optional CacheControl header that allows the caller to control the object's

@@ -83,6 +83,10 @@ type CreateModelBiasJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelBiasJobDefinitionInput) operationName() string {
+	return "CreateModelBiasJobDefinition"
+}
+
 type CreateModelBiasJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model bias job.

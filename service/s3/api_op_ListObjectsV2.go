@@ -120,6 +120,10 @@ type ListObjectsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectsV2Input) operationName() string {
+	return "ListObjectsV2"
+}
+
 type ListObjectsV2Output struct {
 
 	// All of the keys (up to 1,000) rolled up into a common prefix count as a single

@@ -87,6 +87,10 @@ type StartSegmentDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSegmentDetectionInput) operationName() string {
+	return "StartSegmentDetection"
+}
+
 type StartSegmentDetectionOutput struct {
 
 	// Unique identifier for the segment detection job. The JobId is returned from

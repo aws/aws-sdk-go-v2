@@ -48,6 +48,10 @@ type StopSuiteRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSuiteRunInput) operationName() string {
+	return "StopSuiteRun"
+}
+
 type StopSuiteRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

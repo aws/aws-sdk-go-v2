@@ -58,6 +58,10 @@ type DeregisterTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterTaskDefinitionInput) operationName() string {
+	return "DeregisterTaskDefinition"
+}
+
 type DeregisterTaskDefinitionOutput struct {
 
 	// The full description of the deregistered task.

@@ -68,6 +68,10 @@ type PutVoiceConnectorProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorProxyInput) operationName() string {
+	return "PutVoiceConnectorProxy"
+}
+
 type PutVoiceConnectorProxyOutput struct {
 
 	// The proxy configuration details.

@@ -59,6 +59,10 @@ type ListUserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserProfilesInput) operationName() string {
+	return "ListUserProfiles"
+}
+
 type ListUserProfilesOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in

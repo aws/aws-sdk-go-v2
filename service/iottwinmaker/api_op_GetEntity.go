@@ -48,6 +48,10 @@ type GetEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEntityInput) operationName() string {
+	return "GetEntity"
+}
+
 type GetEntityOutput struct {
 
 	// The ARN of the entity.

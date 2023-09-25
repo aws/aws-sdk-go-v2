@@ -59,6 +59,10 @@ type GetAppMonitorDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppMonitorDataInput) operationName() string {
+	return "GetAppMonitorData"
+}
+
 type GetAppMonitorDataOutput struct {
 
 	// The events that RUM collected that match your request.

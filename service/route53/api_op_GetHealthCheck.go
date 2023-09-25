@@ -45,6 +45,10 @@ type GetHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHealthCheckInput) operationName() string {
+	return "GetHealthCheck"
+}
+
 // A complex type that contains the response to a GetHealthCheck request.
 type GetHealthCheckOutput struct {
 

@@ -70,6 +70,10 @@ type ListParticipantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListParticipantsInput) operationName() string {
+	return "ListParticipants"
+}
+
 type ListParticipantsOutput struct {
 
 	// List of the matching participants (summary information only).

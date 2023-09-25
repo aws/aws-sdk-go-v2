@@ -90,6 +90,10 @@ type AllocateIpamPoolCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateIpamPoolCidrInput) operationName() string {
+	return "AllocateIpamPoolCidr"
+}
+
 type AllocateIpamPoolCidrOutput struct {
 
 	// Information about the allocation created.

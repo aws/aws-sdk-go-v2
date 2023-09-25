@@ -60,6 +60,10 @@ type PutResolverRulePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResolverRulePolicyInput) operationName() string {
+	return "PutResolverRulePolicy"
+}
+
 // The response to a PutResolverRulePolicy request.
 type PutResolverRulePolicyOutput struct {
 

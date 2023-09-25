@@ -41,6 +41,10 @@ type DeleteMetricAttributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMetricAttributionInput) operationName() string {
+	return "DeleteMetricAttribution"
+}
+
 type DeleteMetricAttributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,6 +58,10 @@ type CreateBasePathMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBasePathMappingInput) operationName() string {
+	return "CreateBasePathMapping"
+}
+
 // Represents the base path that callers of the API must provide as part of the
 // URL after the domain name.
 type CreateBasePathMappingOutput struct {

@@ -45,6 +45,10 @@ type DescribeSourceLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSourceLocationInput) operationName() string {
+	return "DescribeSourceLocation"
+}
+
 type DescribeSourceLocationOutput struct {
 
 	// The access configuration for the source location.

@@ -42,6 +42,10 @@ type RegisterOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterOrganizationAdminAccountInput) operationName() string {
+	return "RegisterOrganizationAdminAccount"
+}
+
 type RegisterOrganizationAdminAccountOutput struct {
 
 	// The identifier for the delegated administrator account.

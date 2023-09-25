@@ -51,6 +51,10 @@ type DescribeMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMonitorInput) operationName() string {
+	return "DescribeMonitor"
+}
+
 type DescribeMonitorOutput struct {
 
 	// Metrics you can use as a baseline for comparison purposes. Use these values you

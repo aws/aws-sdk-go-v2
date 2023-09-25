@@ -52,6 +52,10 @@ type PutComponentPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutComponentPolicyInput) operationName() string {
+	return "PutComponentPolicy"
+}
+
 type PutComponentPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the component that this policy was applied to.

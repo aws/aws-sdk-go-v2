@@ -55,6 +55,10 @@ type DescribeDataSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSharesInput) operationName() string {
+	return "DescribeDataShares"
+}
+
 type DescribeDataSharesOutput struct {
 
 	// The results returned from describing datashares.

@@ -43,6 +43,10 @@ type DescribeMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMapInput) operationName() string {
+	return "DescribeMap"
+}
+
 type DescribeMapOutput struct {
 
 	// Specifies the map tile style selected from a partner data provider.

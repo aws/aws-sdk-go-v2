@@ -88,6 +88,10 @@ type UpdateMobileDeviceAccessRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMobileDeviceAccessRuleInput) operationName() string {
+	return "UpdateMobileDeviceAccessRule"
+}
+
 type UpdateMobileDeviceAccessRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

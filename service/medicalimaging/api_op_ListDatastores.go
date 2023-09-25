@@ -46,6 +46,10 @@ type ListDatastoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatastoresInput) operationName() string {
+	return "ListDatastores"
+}
+
 type ListDatastoresOutput struct {
 
 	// The list of summaries of data stores.

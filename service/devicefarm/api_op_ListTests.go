@@ -47,6 +47,10 @@ type ListTestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestsInput) operationName() string {
+	return "ListTests"
+}
+
 // Represents the result of a list tests request.
 type ListTestsOutput struct {
 

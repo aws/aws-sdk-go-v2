@@ -46,6 +46,10 @@ type RetryBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetryBuildInput) operationName() string {
+	return "RetryBuild"
+}
+
 type RetryBuildOutput struct {
 
 	// Information about a build.

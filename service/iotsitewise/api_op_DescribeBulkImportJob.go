@@ -45,6 +45,10 @@ type DescribeBulkImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBulkImportJobInput) operationName() string {
+	return "DescribeBulkImportJob"
+}
+
 type DescribeBulkImportJobOutput struct {
 
 	// The Amazon S3 destination where errors associated with the job creation request

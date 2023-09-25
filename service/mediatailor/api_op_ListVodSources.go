@@ -52,6 +52,10 @@ type ListVodSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVodSourcesInput) operationName() string {
+	return "ListVodSources"
+}
+
 type ListVodSourcesOutput struct {
 
 	// Lists the VOD sources.

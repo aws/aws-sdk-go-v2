@@ -61,6 +61,10 @@ type ListIngestionDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIngestionDestinationsInput) operationName() string {
+	return "ListIngestionDestinations"
+}
+
 type ListIngestionDestinationsOutput struct {
 
 	// Contains a list of ingestion destination summaries.

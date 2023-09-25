@@ -56,6 +56,10 @@ type DescribeFleetLocationUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetLocationUtilizationInput) operationName() string {
+	return "DescribeFleetLocationUtilization"
+}
+
 type DescribeFleetLocationUtilizationOutput struct {
 
 	// Utilization information for the requested fleet location. Utilization objects

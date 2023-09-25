@@ -68,6 +68,10 @@ type DescribeHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHostsInput) operationName() string {
+	return "DescribeHosts"
+}
+
 type DescribeHostsOutput struct {
 
 	// Information about the Dedicated Hosts.

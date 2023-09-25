@@ -52,6 +52,10 @@ type GetOpenIdTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOpenIdTokenInput) operationName() string {
+	return "GetOpenIdToken"
+}
+
 // Returned in response to a successful GetOpenIdToken request.
 type GetOpenIdTokenOutput struct {
 

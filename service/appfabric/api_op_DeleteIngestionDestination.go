@@ -58,6 +58,10 @@ type DeleteIngestionDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIngestionDestinationInput) operationName() string {
+	return "DeleteIngestionDestination"
+}
+
 type DeleteIngestionDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

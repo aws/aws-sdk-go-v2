@@ -52,6 +52,10 @@ type CreateFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFlowTemplateInput) operationName() string {
+	return "CreateFlowTemplate"
+}
+
 type CreateFlowTemplateOutput struct {
 
 	// The summary object that describes the created workflow.

@@ -55,6 +55,10 @@ type CreateWorldTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorldTemplateInput) operationName() string {
+	return "CreateWorldTemplate"
+}
+
 type CreateWorldTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world template.

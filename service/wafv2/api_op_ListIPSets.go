@@ -61,6 +61,10 @@ type ListIPSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIPSetsInput) operationName() string {
+	return "ListIPSets"
+}
+
 type ListIPSetsOutput struct {
 
 	// Array of IPSets. If you specified a Limit in your request, this might not be

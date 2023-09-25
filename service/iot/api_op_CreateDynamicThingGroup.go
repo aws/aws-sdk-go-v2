@@ -65,6 +65,10 @@ type CreateDynamicThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDynamicThingGroupInput) operationName() string {
+	return "CreateDynamicThingGroup"
+}
+
 type CreateDynamicThingGroupOutput struct {
 
 	// The dynamic thing group index name.

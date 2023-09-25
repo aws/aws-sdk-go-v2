@@ -48,6 +48,10 @@ type ModifyCustomDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCustomDomainAssociationInput) operationName() string {
+	return "ModifyCustomDomainAssociation"
+}
+
 type ModifyCustomDomainAssociationOutput struct {
 
 	// The identifier of the cluster associated with the result for the changed custom

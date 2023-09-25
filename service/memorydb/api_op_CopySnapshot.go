@@ -64,6 +64,10 @@ type CopySnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopySnapshotInput) operationName() string {
+	return "CopySnapshot"
+}
+
 type CopySnapshotOutput struct {
 
 	// Represents a copy of an entire cluster as of the time when the snapshot was

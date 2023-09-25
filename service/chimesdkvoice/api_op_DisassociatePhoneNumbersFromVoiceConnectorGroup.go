@@ -48,6 +48,10 @@ type DisassociatePhoneNumbersFromVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociatePhoneNumbersFromVoiceConnectorGroupInput) operationName() string {
+	return "DisassociatePhoneNumbersFromVoiceConnectorGroup"
+}
+
 type DisassociatePhoneNumbersFromVoiceConnectorGroupOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list

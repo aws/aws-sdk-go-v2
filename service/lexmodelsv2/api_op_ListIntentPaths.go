@@ -77,6 +77,10 @@ type ListIntentPathsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIntentPathsInput) operationName() string {
+	return "ListIntentPaths"
+}
+
 type ListIntentPathsOutput struct {
 
 	// A list of objects, each of which contains information about a node in the

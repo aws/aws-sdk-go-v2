@@ -48,6 +48,10 @@ type StartLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartLaunchInput) operationName() string {
+	return "StartLaunch"
+}
+
 type StartLaunchOutput struct {
 
 	// A structure that contains information about the launch that was started.

@@ -52,6 +52,10 @@ type GetInsightEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightEventsInput) operationName() string {
+	return "GetInsightEvents"
+}
+
 type GetInsightEventsOutput struct {
 
 	// A detailed description of the event. This includes the time of the event,

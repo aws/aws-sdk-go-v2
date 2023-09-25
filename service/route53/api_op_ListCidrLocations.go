@@ -51,6 +51,10 @@ type ListCidrLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCidrLocationsInput) operationName() string {
+	return "ListCidrLocations"
+}
+
 type ListCidrLocationsOutput struct {
 
 	// A complex type that contains information about the list of CIDR locations.

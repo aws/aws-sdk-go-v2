@@ -46,6 +46,10 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChannelInput) operationName() string {
+	return "UpdateChannel"
+}
+
 type UpdateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.

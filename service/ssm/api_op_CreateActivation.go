@@ -100,6 +100,10 @@ type CreateActivationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateActivationInput) operationName() string {
+	return "CreateActivation"
+}
+
 type CreateActivationOutput struct {
 
 	// The code the system generates when it processes the activation. The activation

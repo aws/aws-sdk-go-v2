@@ -55,6 +55,10 @@ type ListCustomerManagedPolicyReferencesInPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomerManagedPolicyReferencesInPermissionSetInput) operationName() string {
+	return "ListCustomerManagedPolicyReferencesInPermissionSet"
+}
+
 type ListCustomerManagedPolicyReferencesInPermissionSetOutput struct {
 
 	// Specifies the names and paths of the customer managed policies that you have

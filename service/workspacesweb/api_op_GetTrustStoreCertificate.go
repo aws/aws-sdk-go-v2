@@ -47,6 +47,10 @@ type GetTrustStoreCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTrustStoreCertificateInput) operationName() string {
+	return "GetTrustStoreCertificate"
+}
+
 type GetTrustStoreCertificateOutput struct {
 
 	// The ARN of the trust store certificate.

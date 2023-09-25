@@ -35,6 +35,10 @@ type VerifySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifySessionInput) operationName() string {
+	return "VerifySession"
+}
+
 type VerifySessionOutput struct {
 
 	// The system-generated unique ID of the user in Amazon CodeCatalyst.

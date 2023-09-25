@@ -48,6 +48,10 @@ type ListInputRoutingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInputRoutingsInput) operationName() string {
+	return "ListInputRoutings"
+}
+
 type ListInputRoutingsOutput struct {
 
 	// The token that you can use to return the next set of results, or null if there

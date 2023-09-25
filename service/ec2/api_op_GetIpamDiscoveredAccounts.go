@@ -67,6 +67,10 @@ type GetIpamDiscoveredAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIpamDiscoveredAccountsInput) operationName() string {
+	return "GetIpamDiscoveredAccounts"
+}
+
 type GetIpamDiscoveredAccountsOutput struct {
 
 	// Discovered accounts.

@@ -44,6 +44,10 @@ type StartInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInputDeviceInput) operationName() string {
+	return "StartInputDevice"
+}
+
 // Placeholder documentation for StartInputDeviceResponse
 type StartInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -60,6 +60,10 @@ type CreateKeyspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeyspaceInput) operationName() string {
+	return "CreateKeyspace"
+}
+
 type CreateKeyspaceOutput struct {
 
 	// The unique identifier of the keyspace in the format of an Amazon Resource Name

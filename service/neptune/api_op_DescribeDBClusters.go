@@ -66,6 +66,10 @@ type DescribeDBClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClustersInput) operationName() string {
+	return "DescribeDBClusters"
+}
+
 type DescribeDBClustersOutput struct {
 
 	// Contains a list of DB clusters for the user.

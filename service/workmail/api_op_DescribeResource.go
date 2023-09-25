@@ -54,6 +54,10 @@ type DescribeResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourceInput) operationName() string {
+	return "DescribeResource"
+}
+
 type DescribeResourceOutput struct {
 
 	// The booking options for the described resource.

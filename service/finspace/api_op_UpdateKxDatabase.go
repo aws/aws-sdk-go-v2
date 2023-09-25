@@ -55,6 +55,10 @@ type UpdateKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKxDatabaseInput) operationName() string {
+	return "UpdateKxDatabase"
+}
+
 type UpdateKxDatabaseOutput struct {
 
 	// The name of the kdb database.

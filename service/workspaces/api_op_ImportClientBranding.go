@@ -74,6 +74,10 @@ type ImportClientBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportClientBrandingInput) operationName() string {
+	return "ImportClientBranding"
+}
+
 type ImportClientBrandingOutput struct {
 
 	// The branding information configured for Android devices.

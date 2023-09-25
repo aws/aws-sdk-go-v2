@@ -72,6 +72,10 @@ type DescribeIdentityUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityUsageInput) operationName() string {
+	return "DescribeIdentityUsage"
+}
+
 // The response to a successful DescribeIdentityUsage request.
 type DescribeIdentityUsageOutput struct {
 

@@ -49,6 +49,10 @@ type GetIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIngestionInput) operationName() string {
+	return "GetIngestion"
+}
+
 type GetIngestionOutput struct {
 
 	// Contains information about an ingestion.

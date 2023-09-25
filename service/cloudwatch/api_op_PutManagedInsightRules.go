@@ -49,6 +49,10 @@ type PutManagedInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutManagedInsightRulesInput) operationName() string {
+	return "PutManagedInsightRules"
+}
+
 type PutManagedInsightRulesOutput struct {
 
 	// An array that lists the rules that could not be enabled.

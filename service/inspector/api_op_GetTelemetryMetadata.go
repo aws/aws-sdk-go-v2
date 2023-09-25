@@ -43,6 +43,10 @@ type GetTelemetryMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTelemetryMetadataInput) operationName() string {
+	return "GetTelemetryMetadata"
+}
+
 type GetTelemetryMetadataOutput struct {
 
 	// Telemetry details.

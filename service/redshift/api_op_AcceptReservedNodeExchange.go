@@ -51,6 +51,10 @@ type AcceptReservedNodeExchangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptReservedNodeExchangeInput) operationName() string {
+	return "AcceptReservedNodeExchange"
+}
+
 type AcceptReservedNodeExchangeOutput struct {
 
 	//

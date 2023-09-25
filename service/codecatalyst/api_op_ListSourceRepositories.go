@@ -55,6 +55,10 @@ type ListSourceRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSourceRepositoriesInput) operationName() string {
+	return "ListSourceRepositories"
+}
+
 type ListSourceRepositoriesOutput struct {
 
 	// Information about the source repositories.

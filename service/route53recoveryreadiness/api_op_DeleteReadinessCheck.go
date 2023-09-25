@@ -41,6 +41,10 @@ type DeleteReadinessCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReadinessCheckInput) operationName() string {
+	return "DeleteReadinessCheck"
+}
+
 type DeleteReadinessCheckOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

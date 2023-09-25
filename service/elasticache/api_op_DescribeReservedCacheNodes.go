@@ -126,6 +126,10 @@ type DescribeReservedCacheNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedCacheNodesInput) operationName() string {
+	return "DescribeReservedCacheNodes"
+}
+
 // Represents the output of a DescribeReservedCacheNodes operation.
 type DescribeReservedCacheNodesOutput struct {
 

@@ -44,6 +44,10 @@ type DisassociateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateRepositoryInput) operationName() string {
+	return "DisassociateRepository"
+}
+
 type DisassociateRepositoryOutput struct {
 
 	// Information about the disassociated repository.

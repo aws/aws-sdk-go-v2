@@ -132,6 +132,10 @@ type CreateDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeploymentGroupInput) operationName() string {
+	return "CreateDeploymentGroup"
+}
+
 // Represents the output of a CreateDeploymentGroup operation.
 type CreateDeploymentGroupOutput struct {
 

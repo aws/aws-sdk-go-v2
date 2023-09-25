@@ -57,6 +57,10 @@ type ListJournalS3ExportsForLedgerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJournalS3ExportsForLedgerInput) operationName() string {
+	return "ListJournalS3ExportsForLedger"
+}
+
 type ListJournalS3ExportsForLedgerOutput struct {
 
 	// The journal export jobs that are currently associated with the specified ledger.

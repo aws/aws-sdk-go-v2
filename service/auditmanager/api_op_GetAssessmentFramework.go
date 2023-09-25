@@ -42,6 +42,10 @@ type GetAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssessmentFrameworkInput) operationName() string {
+	return "GetAssessmentFramework"
+}
+
 type GetAssessmentFrameworkOutput struct {
 
 	// The framework that the GetAssessmentFramework API returned.

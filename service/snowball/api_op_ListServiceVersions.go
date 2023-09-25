@@ -53,6 +53,10 @@ type ListServiceVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceVersionsInput) operationName() string {
+	return "ListServiceVersions"
+}
+
 type ListServiceVersionsOutput struct {
 
 	// The name of the service for which the system provided supported versions.

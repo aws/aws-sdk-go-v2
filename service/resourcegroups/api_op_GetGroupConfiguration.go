@@ -46,6 +46,10 @@ type GetGroupConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupConfigurationInput) operationName() string {
+	return "GetGroupConfiguration"
+}
+
 type GetGroupConfigurationOutput struct {
 
 	// A structure that describes the service configuration attached with the

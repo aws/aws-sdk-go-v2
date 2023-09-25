@@ -43,6 +43,10 @@ type GetAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnalyzerInput) operationName() string {
+	return "GetAnalyzer"
+}
+
 // The response to the request.
 type GetAnalyzerOutput struct {
 

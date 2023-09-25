@@ -74,6 +74,10 @@ type AbortMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AbortMultipartUploadInput) operationName() string {
+	return "AbortMultipartUpload"
+}
+
 type AbortMultipartUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

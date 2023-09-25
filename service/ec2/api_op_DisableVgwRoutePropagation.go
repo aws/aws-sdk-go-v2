@@ -54,6 +54,10 @@ type DisableVgwRoutePropagationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableVgwRoutePropagationInput) operationName() string {
+	return "DisableVgwRoutePropagation"
+}
+
 type DisableVgwRoutePropagationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

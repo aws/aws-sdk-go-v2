@@ -65,6 +65,10 @@ type GetSchemaVersionsDiffInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaVersionsDiffInput) operationName() string {
+	return "GetSchemaVersionsDiff"
+}
+
 type GetSchemaVersionsDiffOutput struct {
 
 	// The difference between schemas as a string in JsonPatch format.

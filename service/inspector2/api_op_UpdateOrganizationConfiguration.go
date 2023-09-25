@@ -43,6 +43,10 @@ type UpdateOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOrganizationConfigurationInput) operationName() string {
+	return "UpdateOrganizationConfiguration"
+}
+
 type UpdateOrganizationConfigurationOutput struct {
 
 	// The updated status of scan types automatically enabled for new members of your

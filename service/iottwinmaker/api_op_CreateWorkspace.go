@@ -59,6 +59,10 @@ type CreateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkspaceInput) operationName() string {
+	return "CreateWorkspace"
+}
+
 type CreateWorkspaceOutput struct {
 
 	// The ARN of the workspace.

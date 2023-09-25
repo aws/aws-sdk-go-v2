@@ -57,6 +57,10 @@ type CreateSourceRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSourceRepositoryInput) operationName() string {
+	return "CreateSourceRepository"
+}
+
 type CreateSourceRepositoryOutput struct {
 
 	// The name of the source repository.

@@ -51,6 +51,10 @@ type StopReplicationToReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopReplicationToReplicaInput) operationName() string {
+	return "StopReplicationToReplica"
+}
+
 type StopReplicationToReplicaOutput struct {
 
 	// The ARN of the promoted secret. The ARN is the same as the original primary

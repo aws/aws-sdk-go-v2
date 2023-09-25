@@ -69,6 +69,10 @@ type SignalResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SignalResourceInput) operationName() string {
+	return "SignalResource"
+}
+
 type SignalResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

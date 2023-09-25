@@ -50,6 +50,10 @@ type AssociateUserToPermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateUserToPermissionGroupInput) operationName() string {
+	return "AssociateUserToPermissionGroup"
+}
+
 type AssociateUserToPermissionGroupOutput struct {
 
 	// The returned status code of the response.

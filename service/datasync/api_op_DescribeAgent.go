@@ -45,6 +45,10 @@ type DescribeAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAgentInput) operationName() string {
+	return "DescribeAgent"
+}
+
 // DescribeAgentResponse
 type DescribeAgentOutput struct {
 

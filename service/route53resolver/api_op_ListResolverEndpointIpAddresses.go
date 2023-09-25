@@ -54,6 +54,10 @@ type ListResolverEndpointIpAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolverEndpointIpAddressesInput) operationName() string {
+	return "ListResolverEndpointIpAddresses"
+}
+
 type ListResolverEndpointIpAddressesOutput struct {
 
 	// Information about the IP addresses in your VPC that DNS queries originate from

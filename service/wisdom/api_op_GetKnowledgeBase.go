@@ -43,6 +43,10 @@ type GetKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKnowledgeBaseInput) operationName() string {
+	return "GetKnowledgeBase"
+}
+
 type GetKnowledgeBaseOutput struct {
 
 	// The knowledge base.

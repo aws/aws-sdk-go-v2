@@ -42,6 +42,10 @@ type DeleteApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApiCacheInput) operationName() string {
+	return "DeleteApiCache"
+}
+
 // Represents the output of a DeleteApiCache operation.
 type DeleteApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.

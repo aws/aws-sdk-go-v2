@@ -43,6 +43,10 @@ type DeleteInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInferenceExperimentInput) operationName() string {
+	return "DeleteInferenceExperiment"
+}
+
 type DeleteInferenceExperimentOutput struct {
 
 	// The ARN of the deleted inference experiment.

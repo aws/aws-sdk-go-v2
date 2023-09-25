@@ -56,6 +56,10 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTagsInput) operationName() string {
+	return "DescribeTags"
+}
+
 type DescribeTagsOutput struct {
 
 	// A string that indicates that the response contains more items than can be

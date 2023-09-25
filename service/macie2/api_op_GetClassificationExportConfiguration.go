@@ -36,6 +36,10 @@ type GetClassificationExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClassificationExportConfigurationInput) operationName() string {
+	return "GetClassificationExportConfiguration"
+}
+
 type GetClassificationExportConfigurationOutput struct {
 
 	// The location where data classification results are stored, and the encryption

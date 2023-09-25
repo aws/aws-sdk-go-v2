@@ -47,6 +47,10 @@ type PutRegistryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRegistryPolicyInput) operationName() string {
+	return "PutRegistryPolicy"
+}
+
 type PutRegistryPolicyOutput struct {
 
 	// The JSON policy text for your registry.

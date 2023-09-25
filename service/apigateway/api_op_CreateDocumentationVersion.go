@@ -54,6 +54,10 @@ type CreateDocumentationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDocumentationVersionInput) operationName() string {
+	return "CreateDocumentationVersion"
+}
+
 // A snapshot of the documentation of an API.
 type CreateDocumentationVersionOutput struct {
 

@@ -148,6 +148,10 @@ type DetectLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectLabelsInput) operationName() string {
+	return "DetectLabels"
+}
+
 type DetectLabelsOutput struct {
 
 	// Information about the properties of the input image, such as brightness,

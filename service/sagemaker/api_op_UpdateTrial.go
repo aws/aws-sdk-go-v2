@@ -45,6 +45,10 @@ type UpdateTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrialInput) operationName() string {
+	return "UpdateTrial"
+}
+
 type UpdateTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.

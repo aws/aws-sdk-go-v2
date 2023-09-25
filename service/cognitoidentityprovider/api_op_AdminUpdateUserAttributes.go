@@ -111,6 +111,10 @@ type AdminUpdateUserAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminUpdateUserAttributesInput) operationName() string {
+	return "AdminUpdateUserAttributes"
+}
+
 // Represents the response from the server for the request to update user
 // attributes as an administrator.
 type AdminUpdateUserAttributesOutput struct {

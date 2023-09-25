@@ -43,6 +43,10 @@ type DisassociateGatewayFromServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateGatewayFromServerInput) operationName() string {
+	return "DisassociateGatewayFromServer"
+}
+
 type DisassociateGatewayFromServerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you disassociated.

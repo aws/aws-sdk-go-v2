@@ -279,6 +279,10 @@ type StartTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTranscriptionJobInput) operationName() string {
+	return "StartTranscriptionJob"
+}
+
 type StartTranscriptionJobOutput struct {
 
 	// Provides detailed information about the current transcription job, including

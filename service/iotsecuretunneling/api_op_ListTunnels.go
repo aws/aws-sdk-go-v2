@@ -50,6 +50,10 @@ type ListTunnelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTunnelsInput) operationName() string {
+	return "ListTunnels"
+}
+
 type ListTunnelsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

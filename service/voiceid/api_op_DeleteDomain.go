@@ -41,6 +41,10 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainInput) operationName() string {
+	return "DeleteDomain"
+}
+
 type DeleteDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

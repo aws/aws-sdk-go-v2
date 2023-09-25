@@ -53,6 +53,10 @@ type ListHsmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHsmsInput) operationName() string {
+	return "ListHsms"
+}
+
 // Contains the output of the ListHsms operation.
 type ListHsmsOutput struct {
 

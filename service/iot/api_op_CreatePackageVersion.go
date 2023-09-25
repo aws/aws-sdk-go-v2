@@ -68,6 +68,10 @@ type CreatePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePackageVersionInput) operationName() string {
+	return "CreatePackageVersion"
+}
+
 type CreatePackageVersionOutput struct {
 
 	// Metadata that were added to the package version that can be used to define a

@@ -45,6 +45,10 @@ type ListProvisioningTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProvisioningTemplatesInput) operationName() string {
+	return "ListProvisioningTemplates"
+}
+
 type ListProvisioningTemplatesOutput struct {
 
 	// A token to retrieve the next set of results.

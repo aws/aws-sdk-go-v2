@@ -51,6 +51,10 @@ type ListSavingsPlansPurchaseRecommendationGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSavingsPlansPurchaseRecommendationGenerationInput) operationName() string {
+	return "ListSavingsPlansPurchaseRecommendationGeneration"
+}
+
 type ListSavingsPlansPurchaseRecommendationGenerationOutput struct {
 
 	// The list of historical recommendation generations.

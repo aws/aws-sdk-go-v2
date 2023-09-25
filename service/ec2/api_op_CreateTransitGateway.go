@@ -67,6 +67,10 @@ type CreateTransitGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayInput) operationName() string {
+	return "CreateTransitGateway"
+}
+
 type CreateTransitGatewayOutput struct {
 
 	// Information about the transit gateway.

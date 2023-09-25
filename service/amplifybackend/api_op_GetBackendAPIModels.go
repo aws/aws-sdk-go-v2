@@ -53,6 +53,10 @@ type GetBackendAPIModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendAPIModelsInput) operationName() string {
+	return "GetBackendAPIModels"
+}
+
 type GetBackendAPIModelsOutput struct {
 
 	// Stringified JSON of the model introspection schema for an existing backend API

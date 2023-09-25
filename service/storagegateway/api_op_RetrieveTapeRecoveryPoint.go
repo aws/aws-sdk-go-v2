@@ -55,6 +55,10 @@ type RetrieveTapeRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetrieveTapeRecoveryPointInput) operationName() string {
+	return "RetrieveTapeRecoveryPoint"
+}
+
 // RetrieveTapeRecoveryPointOutput
 type RetrieveTapeRecoveryPointOutput struct {
 

@@ -43,6 +43,10 @@ type GetStaticIpsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStaticIpsInput) operationName() string {
+	return "GetStaticIps"
+}
+
 type GetStaticIpsOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

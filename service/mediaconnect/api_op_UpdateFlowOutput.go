@@ -107,6 +107,10 @@ type UpdateFlowOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowOutputInput) operationName() string {
+	return "UpdateFlowOutput"
+}
+
 type UpdateFlowOutputOutput struct {
 
 	// The ARN of the flow that is associated with the updated output.

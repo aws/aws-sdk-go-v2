@@ -61,6 +61,10 @@ type DisassociateAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateAssetsInput) operationName() string {
+	return "DisassociateAssets"
+}
+
 type DisassociateAssetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,6 +58,10 @@ type SearchContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchContactsInput) operationName() string {
+	return "SearchContacts"
+}
+
 type SearchContactsOutput struct {
 
 	// The contacts that meet the specified set of filter criteria, in sort order.

@@ -77,6 +77,10 @@ type UpdateConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConstraintInput) operationName() string {
+	return "UpdateConstraint"
+}
+
 type UpdateConstraintOutput struct {
 
 	// Information about the constraint.

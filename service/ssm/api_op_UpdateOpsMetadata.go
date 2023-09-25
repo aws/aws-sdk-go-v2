@@ -49,6 +49,10 @@ type UpdateOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOpsMetadataInput) operationName() string {
+	return "UpdateOpsMetadata"
+}
+
 type UpdateOpsMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.

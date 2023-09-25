@@ -53,6 +53,10 @@ type ListRetrainingSchedulersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRetrainingSchedulersInput) operationName() string {
+	return "ListRetrainingSchedulers"
+}
+
 type ListRetrainingSchedulersOutput struct {
 
 	// If the number of results exceeds the maximum, this pagination token is

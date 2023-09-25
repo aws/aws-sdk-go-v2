@@ -44,6 +44,10 @@ type ListDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetsInput) operationName() string {
+	return "ListDatasets"
+}
+
 // Response for the ListDatasets operation
 type ListDatasetsOutput struct {
 

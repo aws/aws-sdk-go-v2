@@ -44,6 +44,10 @@ type DescribeDetectMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDetectMitigationActionsTaskInput) operationName() string {
+	return "DescribeDetectMitigationActionsTask"
+}
+
 type DescribeDetectMitigationActionsTaskOutput struct {
 
 	// The description of a task.

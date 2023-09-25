@@ -70,6 +70,10 @@ type CreateObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateObservabilityConfigurationInput) operationName() string {
+	return "CreateObservabilityConfiguration"
+}
+
 type CreateObservabilityConfigurationOutput struct {
 
 	// A description of the App Runner observability configuration that's created by

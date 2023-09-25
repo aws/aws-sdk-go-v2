@@ -51,6 +51,10 @@ type GetTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableInput) operationName() string {
+	return "GetTable"
+}
+
 type GetTableOutput struct {
 
 	// The name of the keyspace that the specified table is stored in.

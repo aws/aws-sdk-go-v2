@@ -49,6 +49,10 @@ type DescribeSpendLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpendLimitsInput) operationName() string {
+	return "DescribeSpendLimits"
+}
+
 type DescribeSpendLimitsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is

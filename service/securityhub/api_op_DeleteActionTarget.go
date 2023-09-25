@@ -43,6 +43,10 @@ type DeleteActionTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteActionTargetInput) operationName() string {
+	return "DeleteActionTarget"
+}
+
 type DeleteActionTargetOutput struct {
 
 	// The ARN of the custom action target that was deleted.

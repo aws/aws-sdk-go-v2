@@ -85,6 +85,10 @@ type CreateFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFunctionInput) operationName() string {
+	return "CreateFunction"
+}
+
 type CreateFunctionOutput struct {
 
 	// The Function object.

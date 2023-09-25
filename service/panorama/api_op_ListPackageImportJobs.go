@@ -44,6 +44,10 @@ type ListPackageImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackageImportJobsInput) operationName() string {
+	return "ListPackageImportJobs"
+}
+
 type ListPackageImportJobsOutput struct {
 
 	// A list of package import jobs.

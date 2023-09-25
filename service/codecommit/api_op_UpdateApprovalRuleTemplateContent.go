@@ -55,6 +55,10 @@ type UpdateApprovalRuleTemplateContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApprovalRuleTemplateContentInput) operationName() string {
+	return "UpdateApprovalRuleTemplateContent"
+}
+
 type UpdateApprovalRuleTemplateContentOutput struct {
 
 	// Returns information about an approval rule template.

@@ -94,6 +94,10 @@ type CreateUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUploadInput) operationName() string {
+	return "CreateUpload"
+}
+
 // Represents the result of a create upload request.
 type CreateUploadOutput struct {
 

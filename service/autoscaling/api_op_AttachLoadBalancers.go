@@ -59,6 +59,10 @@ type AttachLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachLoadBalancersInput) operationName() string {
+	return "AttachLoadBalancers"
+}
+
 type AttachLoadBalancersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

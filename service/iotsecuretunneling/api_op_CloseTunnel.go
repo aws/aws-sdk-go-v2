@@ -48,6 +48,10 @@ type CloseTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CloseTunnelInput) operationName() string {
+	return "CloseTunnel"
+}
+
 type CloseTunnelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

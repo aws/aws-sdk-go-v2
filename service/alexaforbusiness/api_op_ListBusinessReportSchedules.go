@@ -47,6 +47,10 @@ type ListBusinessReportSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBusinessReportSchedulesInput) operationName() string {
+	return "ListBusinessReportSchedules"
+}
+
 type ListBusinessReportSchedulesOutput struct {
 
 	// The schedule of the reports.

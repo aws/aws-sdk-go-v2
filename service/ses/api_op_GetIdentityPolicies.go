@@ -64,6 +64,10 @@ type GetIdentityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityPoliciesInput) operationName() string {
+	return "GetIdentityPolicies"
+}
+
 // Represents the requested sending authorization policies.
 type GetIdentityPoliciesOutput struct {
 

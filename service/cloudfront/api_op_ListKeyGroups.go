@@ -51,6 +51,10 @@ type ListKeyGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeyGroupsInput) operationName() string {
+	return "ListKeyGroups"
+}
+
 type ListKeyGroupsOutput struct {
 
 	// A list of key groups.

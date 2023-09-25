@@ -50,6 +50,10 @@ type DescribePredictorBacktestExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePredictorBacktestExportJobInput) operationName() string {
+	return "DescribePredictorBacktestExportJob"
+}
+
 type DescribePredictorBacktestExportJobOutput struct {
 
 	// When the predictor backtest export job was created.

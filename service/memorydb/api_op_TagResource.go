@@ -58,6 +58,10 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagResourceInput) operationName() string {
+	return "TagResource"
+}
+
 type TagResourceOutput struct {
 
 	// A list of tags as key-value pairs.

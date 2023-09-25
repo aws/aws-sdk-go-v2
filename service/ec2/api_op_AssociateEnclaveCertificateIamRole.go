@@ -68,6 +68,10 @@ type AssociateEnclaveCertificateIamRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateEnclaveCertificateIamRoleInput) operationName() string {
+	return "AssociateEnclaveCertificateIamRole"
+}
+
 type AssociateEnclaveCertificateIamRoleOutput struct {
 
 	// The name of the Amazon S3 bucket to which the certificate was uploaded.

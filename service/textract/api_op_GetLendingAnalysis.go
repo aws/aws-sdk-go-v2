@@ -61,6 +61,10 @@ type GetLendingAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLendingAnalysisInput) operationName() string {
+	return "GetLendingAnalysis"
+}
+
 type GetLendingAnalysisOutput struct {
 
 	// The current model version of the Analyze Lending API.

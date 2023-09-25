@@ -47,6 +47,10 @@ type DeleteAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAgentInput) operationName() string {
+	return "DeleteAgent"
+}
+
 type DeleteAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

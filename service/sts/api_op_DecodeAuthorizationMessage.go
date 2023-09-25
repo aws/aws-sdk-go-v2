@@ -63,6 +63,10 @@ type DecodeAuthorizationMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecodeAuthorizationMessageInput) operationName() string {
+	return "DecodeAuthorizationMessage"
+}
+
 // A document that contains additional information about the authorization status
 // of a request from an encoded message that is returned in response to an Amazon
 // Web Services request.

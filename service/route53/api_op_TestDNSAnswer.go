@@ -84,6 +84,10 @@ type TestDNSAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestDNSAnswerInput) operationName() string {
+	return "TestDNSAnswer"
+}
+
 // A complex type that contains the response to a TestDNSAnswer request.
 type TestDNSAnswerOutput struct {
 

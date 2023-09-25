@@ -66,6 +66,10 @@ type ListRelatedResourcesForAuditFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRelatedResourcesForAuditFindingInput) operationName() string {
+	return "ListRelatedResourcesForAuditFinding"
+}
+
 type ListRelatedResourcesForAuditFindingOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null for the

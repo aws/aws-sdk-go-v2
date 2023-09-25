@@ -94,6 +94,10 @@ type CreateOriginEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOriginEndpointInput) operationName() string {
+	return "CreateOriginEndpoint"
+}
+
 type CreateOriginEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.

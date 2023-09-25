@@ -51,6 +51,10 @@ type StartBulkDisassociateWirelessDeviceFromMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBulkDisassociateWirelessDeviceFromMulticastGroupInput) operationName() string {
+	return "StartBulkDisassociateWirelessDeviceFromMulticastGroup"
+}
+
 type StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

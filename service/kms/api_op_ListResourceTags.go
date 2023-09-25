@@ -71,6 +71,10 @@ type ListResourceTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceTagsInput) operationName() string {
+	return "ListResourceTags"
+}
+
 type ListResourceTagsOutput struct {
 
 	// When Truncated is true, this element is present and contains the value to use

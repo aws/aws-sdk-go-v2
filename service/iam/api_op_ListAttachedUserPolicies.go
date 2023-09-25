@@ -78,6 +78,10 @@ type ListAttachedUserPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttachedUserPoliciesInput) operationName() string {
+	return "ListAttachedUserPolicies"
+}
+
 // Contains the response to a successful ListAttachedUserPolicies request.
 type ListAttachedUserPoliciesOutput struct {
 

@@ -70,6 +70,10 @@ type CreateDBProxyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBProxyEndpointInput) operationName() string {
+	return "CreateDBProxyEndpoint"
+}
+
 type CreateDBProxyEndpointOutput struct {
 
 	// The DBProxyEndpoint object that is created by the API operation. The DB proxy

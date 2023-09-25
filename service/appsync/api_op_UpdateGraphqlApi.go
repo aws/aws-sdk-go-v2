@@ -78,6 +78,10 @@ type UpdateGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGraphqlApiInput) operationName() string {
+	return "UpdateGraphqlApi"
+}
+
 type UpdateGraphqlApiOutput struct {
 
 	// The updated GraphqlApi object.

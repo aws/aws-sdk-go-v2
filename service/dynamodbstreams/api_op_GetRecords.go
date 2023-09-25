@@ -54,6 +54,10 @@ type GetRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecordsInput) operationName() string {
+	return "GetRecords"
+}
+
 // Represents the output of a GetRecords operation.
 type GetRecordsOutput struct {
 

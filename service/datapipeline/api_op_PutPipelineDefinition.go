@@ -102,6 +102,10 @@ type PutPipelineDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPipelineDefinitionInput) operationName() string {
+	return "PutPipelineDefinition"
+}
+
 // Contains the output of PutPipelineDefinition.
 type PutPipelineDefinitionOutput struct {
 

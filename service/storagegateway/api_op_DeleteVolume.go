@@ -54,6 +54,10 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVolumeInput) operationName() string {
+	return "DeleteVolume"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the storage volume
 // that was deleted.
 type DeleteVolumeOutput struct {

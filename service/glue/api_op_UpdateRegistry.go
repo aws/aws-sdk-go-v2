@@ -51,6 +51,10 @@ type UpdateRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRegistryInput) operationName() string {
+	return "UpdateRegistry"
+}
+
 type UpdateRegistryOutput struct {
 
 	// The Amazon Resource name (ARN) of the updated registry.

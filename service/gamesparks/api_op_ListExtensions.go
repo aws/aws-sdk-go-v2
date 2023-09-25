@@ -47,6 +47,10 @@ type ListExtensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExtensionsInput) operationName() string {
+	return "ListExtensions"
+}
+
 type ListExtensionsOutput struct {
 
 	// The list of extensions.

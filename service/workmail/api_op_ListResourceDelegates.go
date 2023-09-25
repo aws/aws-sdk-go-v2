@@ -60,6 +60,10 @@ type ListResourceDelegatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceDelegatesInput) operationName() string {
+	return "ListResourceDelegates"
+}
+
 type ListResourceDelegatesOutput struct {
 
 	// One page of the resource's delegates.

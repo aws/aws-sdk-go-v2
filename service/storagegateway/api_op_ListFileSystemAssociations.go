@@ -52,6 +52,10 @@ type ListFileSystemAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFileSystemAssociationsInput) operationName() string {
+	return "ListFileSystemAssociations"
+}
+
 type ListFileSystemAssociationsOutput struct {
 
 	// An array of information about the Amazon FSx gateway's file system associations.

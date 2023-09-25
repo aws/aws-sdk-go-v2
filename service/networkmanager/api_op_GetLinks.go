@@ -62,6 +62,10 @@ type GetLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLinksInput) operationName() string {
+	return "GetLinks"
+}
+
 type GetLinksOutput struct {
 
 	// The links.

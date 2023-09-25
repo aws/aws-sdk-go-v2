@@ -48,6 +48,10 @@ type DescribeWorkspaceDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceDirectoriesInput) operationName() string {
+	return "DescribeWorkspaceDirectories"
+}
+
 type DescribeWorkspaceDirectoriesOutput struct {
 
 	// Information about the directories.

@@ -51,6 +51,10 @@ type PutEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEventStreamInput) operationName() string {
+	return "PutEventStream"
+}
+
 type PutEventStreamOutput struct {
 
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream

@@ -47,6 +47,10 @@ type GetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaInput) operationName() string {
+	return "GetSchema"
+}
+
 type GetSchemaOutput struct {
 
 	// The compatibility mode of the schema.

@@ -50,6 +50,10 @@ type CheckSchemaVersionValidityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckSchemaVersionValidityInput) operationName() string {
+	return "CheckSchemaVersionValidity"
+}
+
 type CheckSchemaVersionValidityOutput struct {
 
 	// A validation failure error message.

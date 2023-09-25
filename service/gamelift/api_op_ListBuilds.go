@@ -62,6 +62,10 @@ type ListBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBuildsInput) operationName() string {
+	return "ListBuilds"
+}
+
 type ListBuildsOutput struct {
 
 	// A collection of build resources that match the request.

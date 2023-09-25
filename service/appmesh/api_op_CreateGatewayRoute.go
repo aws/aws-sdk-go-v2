@@ -80,6 +80,10 @@ type CreateGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGatewayRouteInput) operationName() string {
+	return "CreateGatewayRoute"
+}
+
 type CreateGatewayRouteOutput struct {
 
 	// The full description of your gateway route following the create call.

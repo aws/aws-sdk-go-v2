@@ -76,6 +76,10 @@ type GetSecretValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSecretValueInput) operationName() string {
+	return "GetSecretValue"
+}
+
 type GetSecretValueOutput struct {
 
 	// The ARN of the secret.

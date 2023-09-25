@@ -48,6 +48,10 @@ type ModifyAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyAccountInput) operationName() string {
+	return "ModifyAccount"
+}
+
 type ModifyAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

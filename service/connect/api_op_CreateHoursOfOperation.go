@@ -67,6 +67,10 @@ type CreateHoursOfOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHoursOfOperationInput) operationName() string {
+	return "CreateHoursOfOperation"
+}
+
 type CreateHoursOfOperationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the hours of operation.

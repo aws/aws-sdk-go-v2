@@ -43,6 +43,10 @@ type DescribeCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCampaignInput) operationName() string {
+	return "DescribeCampaign"
+}
+
 // DescribeCampaignResponse
 type DescribeCampaignOutput struct {
 

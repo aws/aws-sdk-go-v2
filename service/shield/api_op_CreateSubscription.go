@@ -40,6 +40,10 @@ type CreateSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubscriptionInput) operationName() string {
+	return "CreateSubscription"
+}
+
 type CreateSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

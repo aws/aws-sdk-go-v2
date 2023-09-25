@@ -46,6 +46,10 @@ type GetTaskProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTaskProtectionInput) operationName() string {
+	return "GetTaskProtection"
+}
+
 type GetTaskProtectionOutput struct {
 
 	// Any failures associated with the call.

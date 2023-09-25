@@ -73,6 +73,10 @@ type UpdateQueueOutboundCallerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQueueOutboundCallerConfigInput) operationName() string {
+	return "UpdateQueueOutboundCallerConfig"
+}
+
 type UpdateQueueOutboundCallerConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

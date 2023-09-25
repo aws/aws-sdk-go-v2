@@ -88,6 +88,10 @@ type TerminateInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateInstancesInput) operationName() string {
+	return "TerminateInstances"
+}
+
 type TerminateInstancesOutput struct {
 
 	// Information about the terminated instances.

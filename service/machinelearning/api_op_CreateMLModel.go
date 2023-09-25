@@ -109,6 +109,10 @@ type CreateMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMLModelInput) operationName() string {
+	return "CreateMLModel"
+}
+
 // Represents the output of a CreateMLModel operation, and is an acknowledgement
 // that Amazon ML received the request. The CreateMLModel operation is
 // asynchronous. You can poll for status updates by using the GetMLModel operation

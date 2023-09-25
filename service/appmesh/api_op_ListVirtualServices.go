@@ -64,6 +64,10 @@ type ListVirtualServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVirtualServicesInput) operationName() string {
+	return "ListVirtualServices"
+}
+
 type ListVirtualServicesOutput struct {
 
 	// The list of existing virtual services for the specified service mesh.

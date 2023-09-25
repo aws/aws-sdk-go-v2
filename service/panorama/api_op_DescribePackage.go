@@ -43,6 +43,10 @@ type DescribePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackageInput) operationName() string {
+	return "DescribePackage"
+}
+
 type DescribePackageOutput struct {
 
 	// The package's ARN.

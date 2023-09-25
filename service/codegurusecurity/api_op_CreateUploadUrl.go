@@ -46,6 +46,10 @@ type CreateUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUploadUrlInput) operationName() string {
+	return "CreateUploadUrl"
+}
+
 type CreateUploadUrlOutput struct {
 
 	// The identifier for the uploaded code resource.

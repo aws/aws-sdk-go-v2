@@ -44,6 +44,10 @@ type BatchEnableAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchEnableAlarmInput) operationName() string {
+	return "BatchEnableAlarm"
+}
+
 type BatchEnableAlarmOutput struct {
 
 	// A list of errors associated with the request, or null if there are no errors.

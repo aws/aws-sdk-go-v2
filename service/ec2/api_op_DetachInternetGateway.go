@@ -54,6 +54,10 @@ type DetachInternetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachInternetGatewayInput) operationName() string {
+	return "DetachInternetGateway"
+}
+
 type DetachInternetGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

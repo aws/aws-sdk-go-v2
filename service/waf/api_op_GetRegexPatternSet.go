@@ -48,6 +48,10 @@ type GetRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegexPatternSetInput) operationName() string {
+	return "GetRegexPatternSet"
+}
+
 type GetRegexPatternSetOutput struct {
 
 	// Information about the RegexPatternSet that you specified in the

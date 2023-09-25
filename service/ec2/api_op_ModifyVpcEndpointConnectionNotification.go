@@ -56,6 +56,10 @@ type ModifyVpcEndpointConnectionNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcEndpointConnectionNotificationInput) operationName() string {
+	return "ModifyVpcEndpointConnectionNotification"
+}
+
 type ModifyVpcEndpointConnectionNotificationOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

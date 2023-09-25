@@ -43,6 +43,10 @@ type GetDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDecoderManifestInput) operationName() string {
+	return "GetDecoderManifest"
+}
+
 type GetDecoderManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the decoder manifest.

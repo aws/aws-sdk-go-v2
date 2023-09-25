@@ -46,6 +46,10 @@ type DeleteCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomLineItemInput) operationName() string {
+	return "DeleteCustomLineItem"
+}
+
 type DeleteCustomLineItemOutput struct {
 
 	// Then ARN of the deleted custom line item.

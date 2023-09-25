@@ -57,6 +57,10 @@ type PutMetadataFlagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMetadataFlagInput) operationName() string {
+	return "PutMetadataFlag"
+}
+
 type PutMetadataFlagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

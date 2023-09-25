@@ -55,6 +55,10 @@ type DescribeLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLogPatternInput) operationName() string {
+	return "DescribeLogPattern"
+}
+
 type DescribeLogPatternOutput struct {
 
 	// The AWS account ID for the resource group owner.

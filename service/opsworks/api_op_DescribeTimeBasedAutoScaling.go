@@ -47,6 +47,10 @@ type DescribeTimeBasedAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTimeBasedAutoScalingInput) operationName() string {
+	return "DescribeTimeBasedAutoScaling"
+}
+
 // Contains the response to a DescribeTimeBasedAutoScaling request.
 type DescribeTimeBasedAutoScalingOutput struct {
 

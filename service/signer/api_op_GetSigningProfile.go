@@ -45,6 +45,10 @@ type GetSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSigningProfileInput) operationName() string {
+	return "GetSigningProfile"
+}
+
 type GetSigningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) for the signing profile.

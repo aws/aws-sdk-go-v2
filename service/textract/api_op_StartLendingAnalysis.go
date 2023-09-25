@@ -106,6 +106,10 @@ type StartLendingAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartLendingAnalysisInput) operationName() string {
+	return "StartLendingAnalysis"
+}
+
 type StartLendingAnalysisOutput struct {
 
 	// A unique identifier for the lending or text-detection job. The JobId is

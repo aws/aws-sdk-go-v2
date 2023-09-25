@@ -79,6 +79,10 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupInput) operationName() string {
+	return "CreateGroup"
+}
+
 type CreateGroupOutput struct {
 
 	// The description of the resource group.

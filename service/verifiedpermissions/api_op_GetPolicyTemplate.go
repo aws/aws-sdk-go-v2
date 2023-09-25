@@ -49,6 +49,10 @@ type GetPolicyTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyTemplateInput) operationName() string {
+	return "GetPolicyTemplate"
+}
+
 type GetPolicyTemplateOutput struct {
 
 	// The date and time that the policy template was originally created.

@@ -49,6 +49,10 @@ type DeleteMobileDeviceAccessRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMobileDeviceAccessRuleInput) operationName() string {
+	return "DeleteMobileDeviceAccessRule"
+}
+
 type DeleteMobileDeviceAccessRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,6 +60,10 @@ type ListOriginRequestPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOriginRequestPoliciesInput) operationName() string {
+	return "ListOriginRequestPolicies"
+}
+
 type ListOriginRequestPoliciesOutput struct {
 
 	// A list of origin request policies.

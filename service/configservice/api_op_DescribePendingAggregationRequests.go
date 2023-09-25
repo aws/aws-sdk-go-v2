@@ -45,6 +45,10 @@ type DescribePendingAggregationRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePendingAggregationRequestsInput) operationName() string {
+	return "DescribePendingAggregationRequests"
+}
+
 type DescribePendingAggregationRequestsOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next

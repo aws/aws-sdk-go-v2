@@ -46,6 +46,10 @@ type DeregisterPatchBaselineForPatchGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterPatchBaselineForPatchGroupInput) operationName() string {
+	return "DeregisterPatchBaselineForPatchGroup"
+}
+
 type DeregisterPatchBaselineForPatchGroupOutput struct {
 
 	// The ID of the patch baseline the patch group was deregistered from.

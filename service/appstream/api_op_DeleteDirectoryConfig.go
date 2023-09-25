@@ -43,6 +43,10 @@ type DeleteDirectoryConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDirectoryConfigInput) operationName() string {
+	return "DeleteDirectoryConfig"
+}
+
 type DeleteDirectoryConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

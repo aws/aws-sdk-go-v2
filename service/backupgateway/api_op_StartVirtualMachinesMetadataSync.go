@@ -42,6 +42,10 @@ type StartVirtualMachinesMetadataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartVirtualMachinesMetadataSyncInput) operationName() string {
+	return "StartVirtualMachinesMetadataSync"
+}
+
 type StartVirtualMachinesMetadataSyncOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor.

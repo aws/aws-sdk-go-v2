@@ -49,6 +49,10 @@ type AssociateSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSourceServersInput) operationName() string {
+	return "AssociateSourceServers"
+}
+
 type AssociateSourceServersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

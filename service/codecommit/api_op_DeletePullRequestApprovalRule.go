@@ -52,6 +52,10 @@ type DeletePullRequestApprovalRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePullRequestApprovalRuleInput) operationName() string {
+	return "DeletePullRequestApprovalRule"
+}
+
 type DeletePullRequestApprovalRuleOutput struct {
 
 	// The ID of the deleted approval rule. If the approval rule was deleted in an

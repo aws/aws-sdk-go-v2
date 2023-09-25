@@ -42,6 +42,10 @@ type DeleteVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualInterfaceInput) operationName() string {
+	return "DeleteVirtualInterface"
+}
+
 type DeleteVirtualInterfaceOutput struct {
 
 	// The state of the virtual interface. The following are the possible values:

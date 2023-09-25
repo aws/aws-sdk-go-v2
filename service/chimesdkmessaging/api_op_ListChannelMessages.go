@@ -75,6 +75,10 @@ type ListChannelMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelMessagesInput) operationName() string {
+	return "ListChannelMessages"
+}
+
 type ListChannelMessagesOutput struct {
 
 	// The ARN of the channel containing the requested messages.

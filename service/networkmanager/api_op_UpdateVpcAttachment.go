@@ -51,6 +51,10 @@ type UpdateVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVpcAttachmentInput) operationName() string {
+	return "UpdateVpcAttachment"
+}
+
 type UpdateVpcAttachmentOutput struct {
 
 	// Describes the updated VPC attachment.

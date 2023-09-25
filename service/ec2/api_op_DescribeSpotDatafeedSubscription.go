@@ -46,6 +46,10 @@ type DescribeSpotDatafeedSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpotDatafeedSubscriptionInput) operationName() string {
+	return "DescribeSpotDatafeedSubscription"
+}
+
 // Contains the output of DescribeSpotDatafeedSubscription.
 type DescribeSpotDatafeedSubscriptionOutput struct {
 

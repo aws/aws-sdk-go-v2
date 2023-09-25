@@ -53,6 +53,10 @@ type CreateSkillGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSkillGroupInput) operationName() string {
+	return "CreateSkillGroup"
+}
+
 type CreateSkillGroupOutput struct {
 
 	// The ARN of the newly created skill group in the response.

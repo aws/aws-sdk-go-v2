@@ -121,6 +121,10 @@ type CreateHyperParameterTuningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHyperParameterTuningJobInput) operationName() string {
+	return "CreateHyperParameterTuningJob"
+}
+
 type CreateHyperParameterTuningJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to a

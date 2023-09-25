@@ -45,6 +45,10 @@ type ListTagsLogGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsLogGroupInput) operationName() string {
+	return "ListTagsLogGroup"
+}
+
 type ListTagsLogGroupOutput struct {
 
 	// The tags for the log group.

@@ -59,6 +59,10 @@ type AddCustomRoutingEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddCustomRoutingEndpointsInput) operationName() string {
+	return "AddCustomRoutingEndpoints"
+}
+
 type AddCustomRoutingEndpointsOutput struct {
 
 	// The endpoint objects added to the custom routing accelerator.

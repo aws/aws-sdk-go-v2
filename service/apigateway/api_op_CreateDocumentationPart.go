@@ -55,6 +55,10 @@ type CreateDocumentationPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDocumentationPartInput) operationName() string {
+	return "CreateDocumentationPart"
+}
+
 // A documentation part for a targeted API entity.
 type CreateDocumentationPartOutput struct {
 

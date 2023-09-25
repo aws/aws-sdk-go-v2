@@ -49,6 +49,10 @@ type BatchRevokePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchRevokePermissionsInput) operationName() string {
+	return "BatchRevokePermissions"
+}
+
 type BatchRevokePermissionsOutput struct {
 
 	// A list of failures to revoke permissions to the resources.

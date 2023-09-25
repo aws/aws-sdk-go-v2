@@ -77,6 +77,10 @@ type CreateBatchLoadTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBatchLoadTaskInput) operationName() string {
+	return "CreateBatchLoadTask"
+}
+
 type CreateBatchLoadTaskOutput struct {
 
 	// The ID of the batch load task.

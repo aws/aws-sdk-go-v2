@@ -51,6 +51,10 @@ type ListAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAlertsInput) operationName() string {
+	return "ListAlerts"
+}
+
 type ListAlertsOutput struct {
 
 	// Contains information about an alert.

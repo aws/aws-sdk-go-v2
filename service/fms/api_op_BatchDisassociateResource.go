@@ -50,6 +50,10 @@ type BatchDisassociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateResourceInput) operationName() string {
+	return "BatchDisassociateResource"
+}
+
 type BatchDisassociateResourceOutput struct {
 
 	// The resources that failed to disassociate from the resource set.

@@ -104,6 +104,10 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUnfilteredPartitionsMetadataInput) operationName() string {
+	return "GetUnfilteredPartitionsMetadata"
+}
+
 type GetUnfilteredPartitionsMetadataOutput struct {
 
 	// A continuation token, if the returned list of partitions does not include the

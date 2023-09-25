@@ -63,6 +63,10 @@ type GetBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketEncryptionInput) operationName() string {
+	return "GetBucketEncryption"
+}
+
 type GetBucketEncryptionOutput struct {
 
 	// Specifies the default server-side-encryption configuration.

@@ -230,6 +230,10 @@ type AssumeRoleWithWebIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssumeRoleWithWebIdentityInput) operationName() string {
+	return "AssumeRoleWithWebIdentity"
+}
+
 // Contains the response to a successful AssumeRoleWithWebIdentity request,
 // including temporary Amazon Web Services credentials that can be used to make
 // Amazon Web Services requests.

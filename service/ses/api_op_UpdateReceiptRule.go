@@ -52,6 +52,10 @@ type UpdateReceiptRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReceiptRuleInput) operationName() string {
+	return "UpdateReceiptRule"
+}
+
 // An empty element returned on a successful request.
 type UpdateReceiptRuleOutput struct {
 	// Metadata pertaining to the operation's result.

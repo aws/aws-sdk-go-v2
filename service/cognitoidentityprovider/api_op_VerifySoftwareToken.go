@@ -62,6 +62,10 @@ type VerifySoftwareTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifySoftwareTokenInput) operationName() string {
+	return "VerifySoftwareToken"
+}
+
 type VerifySoftwareTokenOutput struct {
 
 	// The session that should be passed both ways in challenge-response calls to the

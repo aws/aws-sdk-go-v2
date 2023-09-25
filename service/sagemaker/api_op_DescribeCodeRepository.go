@@ -43,6 +43,10 @@ type DescribeCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCodeRepositoryInput) operationName() string {
+	return "DescribeCodeRepository"
+}
+
 type DescribeCodeRepositoryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Git repository.

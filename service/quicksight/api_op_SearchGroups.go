@@ -61,6 +61,10 @@ type SearchGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchGroupsInput) operationName() string {
+	return "SearchGroups"
+}
+
 type SearchGroupsOutput struct {
 
 	// A list of groups in a specified namespace that match the filters you set in

@@ -77,6 +77,10 @@ type RevokeCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeCertificateInput) operationName() string {
+	return "RevokeCertificate"
+}
+
 type RevokeCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,6 +65,10 @@ type CreateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIpAccessSettingsInput) operationName() string {
+	return "CreateIpAccessSettings"
+}
+
 type CreateIpAccessSettingsOutput struct {
 
 	// The ARN of the IP access settings resource.

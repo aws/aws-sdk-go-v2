@@ -55,6 +55,10 @@ type PutAggregationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAggregationAuthorizationInput) operationName() string {
+	return "PutAggregationAuthorization"
+}
+
 type PutAggregationAuthorizationOutput struct {
 
 	// Returns an AggregationAuthorization object.

@@ -50,6 +50,10 @@ type DeleteFunctionUrlConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFunctionUrlConfigInput) operationName() string {
+	return "DeleteFunctionUrlConfig"
+}
+
 type DeleteFunctionUrlConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

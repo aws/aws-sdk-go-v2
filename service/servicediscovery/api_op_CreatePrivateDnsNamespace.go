@@ -74,6 +74,10 @@ type CreatePrivateDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePrivateDnsNamespaceInput) operationName() string {
+	return "CreatePrivateDnsNamespace"
+}
+
 type CreatePrivateDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed

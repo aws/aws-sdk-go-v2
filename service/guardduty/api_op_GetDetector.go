@@ -46,6 +46,10 @@ type GetDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDetectorInput) operationName() string {
+	return "GetDetector"
+}
+
 type GetDetectorOutput struct {
 
 	// The GuardDuty service role.

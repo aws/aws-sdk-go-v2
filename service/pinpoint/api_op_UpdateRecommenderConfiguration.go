@@ -49,6 +49,10 @@ type UpdateRecommenderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRecommenderConfigurationInput) operationName() string {
+	return "UpdateRecommenderConfiguration"
+}
+
 type UpdateRecommenderConfigurationOutput struct {
 
 	// Provides information about Amazon Pinpoint configuration settings for

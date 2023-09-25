@@ -50,6 +50,10 @@ type ListAssociatedApprovalRuleTemplatesForRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedApprovalRuleTemplatesForRepositoryInput) operationName() string {
+	return "ListAssociatedApprovalRuleTemplatesForRepository"
+}
+
 type ListAssociatedApprovalRuleTemplatesForRepositoryOutput struct {
 
 	// The names of all approval rule templates associated with the repository.

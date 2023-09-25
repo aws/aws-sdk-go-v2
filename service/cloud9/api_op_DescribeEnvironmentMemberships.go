@@ -66,6 +66,10 @@ type DescribeEnvironmentMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEnvironmentMembershipsInput) operationName() string {
+	return "DescribeEnvironmentMemberships"
+}
+
 type DescribeEnvironmentMembershipsOutput struct {
 
 	// Information about the environment members for the environment.

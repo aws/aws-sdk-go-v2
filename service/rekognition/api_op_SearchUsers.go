@@ -61,6 +61,10 @@ type SearchUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchUsersInput) operationName() string {
+	return "SearchUsers"
+}
+
 type SearchUsersOutput struct {
 
 	// Version number of the face detection model associated with the input

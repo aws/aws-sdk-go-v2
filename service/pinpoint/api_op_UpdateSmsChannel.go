@@ -49,6 +49,10 @@ type UpdateSmsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSmsChannelInput) operationName() string {
+	return "UpdateSmsChannel"
+}
+
 type UpdateSmsChannelOutput struct {
 
 	// Provides information about the status and settings of the SMS channel for an

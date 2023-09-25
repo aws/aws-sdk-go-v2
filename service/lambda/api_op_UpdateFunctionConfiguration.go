@@ -146,6 +146,10 @@ type UpdateFunctionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFunctionConfigurationInput) operationName() string {
+	return "UpdateFunctionConfiguration"
+}
+
 // Details about a function's configuration.
 type UpdateFunctionConfigurationOutput struct {
 

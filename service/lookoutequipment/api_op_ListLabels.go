@@ -63,6 +63,10 @@ type ListLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLabelsInput) operationName() string {
+	return "ListLabels"
+}
+
 type ListLabelsOutput struct {
 
 	// A summary of the items in the label group.

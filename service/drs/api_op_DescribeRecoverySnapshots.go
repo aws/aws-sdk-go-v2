@@ -54,6 +54,10 @@ type DescribeRecoverySnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecoverySnapshotsInput) operationName() string {
+	return "DescribeRecoverySnapshots"
+}
+
 type DescribeRecoverySnapshotsOutput struct {
 
 	// An array of Recovery Snapshots.

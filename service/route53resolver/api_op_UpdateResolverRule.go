@@ -49,6 +49,10 @@ type UpdateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResolverRuleInput) operationName() string {
+	return "UpdateResolverRule"
+}
+
 type UpdateResolverRuleOutput struct {
 
 	// The response to an UpdateResolverRule request.

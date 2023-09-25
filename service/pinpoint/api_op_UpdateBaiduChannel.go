@@ -50,6 +50,10 @@ type UpdateBaiduChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBaiduChannelInput) operationName() string {
+	return "UpdateBaiduChannel"
+}
+
 type UpdateBaiduChannelOutput struct {
 
 	// Provides information about the status and settings of the Baidu (Baidu Cloud

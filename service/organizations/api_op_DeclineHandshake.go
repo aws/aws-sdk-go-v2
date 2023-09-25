@@ -51,6 +51,10 @@ type DeclineHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeclineHandshakeInput) operationName() string {
+	return "DeclineHandshake"
+}
+
 type DeclineHandshakeOutput struct {
 
 	// A structure that contains details about the declined handshake. The state is

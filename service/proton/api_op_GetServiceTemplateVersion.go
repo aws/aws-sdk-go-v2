@@ -57,6 +57,10 @@ type GetServiceTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceTemplateVersionInput) operationName() string {
+	return "GetServiceTemplateVersion"
+}
+
 type GetServiceTemplateVersionOutput struct {
 
 	// The detailed data of the requested service template version.

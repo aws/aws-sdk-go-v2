@@ -56,6 +56,10 @@ type DescribeSnapshotAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotAttributeInput) operationName() string {
+	return "DescribeSnapshotAttribute"
+}
+
 type DescribeSnapshotAttributeOutput struct {
 
 	// The users and groups that have the permissions for creating volumes from the

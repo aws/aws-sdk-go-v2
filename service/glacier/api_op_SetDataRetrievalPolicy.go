@@ -58,6 +58,10 @@ type SetDataRetrievalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDataRetrievalPolicyInput) operationName() string {
+	return "SetDataRetrievalPolicy"
+}
+
 type SetDataRetrievalPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type GetSinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSinkInput) operationName() string {
+	return "GetSink"
+}
+
 type GetSinkOutput struct {
 
 	// The ARN of the sink.

@@ -59,6 +59,10 @@ type BundleInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BundleInstanceInput) operationName() string {
+	return "BundleInstance"
+}
+
 // Contains the output of BundleInstance.
 type BundleInstanceOutput struct {
 

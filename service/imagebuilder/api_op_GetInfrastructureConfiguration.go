@@ -44,6 +44,10 @@ type GetInfrastructureConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInfrastructureConfigurationInput) operationName() string {
+	return "GetInfrastructureConfiguration"
+}
+
 // GetInfrastructureConfiguration response object.
 type GetInfrastructureConfigurationOutput struct {
 

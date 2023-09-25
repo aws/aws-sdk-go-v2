@@ -47,6 +47,10 @@ type DescribeFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFolderInput) operationName() string {
+	return "DescribeFolder"
+}
+
 type DescribeFolderOutput struct {
 
 	// Information about the folder.

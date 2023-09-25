@@ -50,6 +50,10 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataSourcesInput) operationName() string {
+	return "ListDataSources"
+}
+
 type ListDataSourcesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use

@@ -63,6 +63,10 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAliasesInput) operationName() string {
+	return "ListAliases"
+}
+
 type ListAliasesOutput struct {
 
 	// The list of aliases. Each alias describes the KeyArn contained within.

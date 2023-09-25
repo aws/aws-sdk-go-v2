@@ -58,6 +58,10 @@ type AssociateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDomainInput) operationName() string {
+	return "AssociateDomain"
+}
+
 type AssociateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,6 +77,10 @@ type CreateBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBatchPredictionInput) operationName() string {
+	return "CreateBatchPrediction"
+}
+
 // Represents the output of a CreateBatchPrediction operation, and is an
 // acknowledgement that Amazon ML received the request. The CreateBatchPrediction
 // operation is asynchronous. You can poll for status updates by using the

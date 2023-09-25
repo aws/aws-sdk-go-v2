@@ -42,6 +42,10 @@ type GetWirelessDeviceStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWirelessDeviceStatisticsInput) operationName() string {
+	return "GetWirelessDeviceStatistics"
+}
+
 type GetWirelessDeviceStatisticsOutput struct {
 
 	// The date and time when the most recent uplink was received. This value is only

@@ -50,6 +50,10 @@ type DescribeRoutingControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRoutingControlInput) operationName() string {
+	return "DescribeRoutingControl"
+}
+
 type DescribeRoutingControlOutput struct {
 
 	// Information about the routing control.

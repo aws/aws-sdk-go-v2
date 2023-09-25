@@ -43,6 +43,10 @@ type DescribeEmailMonitoringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEmailMonitoringConfigurationInput) operationName() string {
+	return "DescribeEmailMonitoringConfiguration"
+}
+
 type DescribeEmailMonitoringConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the

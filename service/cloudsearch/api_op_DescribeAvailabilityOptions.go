@@ -53,6 +53,10 @@ type DescribeAvailabilityOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAvailabilityOptionsInput) operationName() string {
+	return "DescribeAvailabilityOptions"
+}
+
 // The result of a DescribeAvailabilityOptions request. Indicates whether or not
 // the Multi-AZ option is enabled for the domain specified in the request.
 type DescribeAvailabilityOptionsOutput struct {

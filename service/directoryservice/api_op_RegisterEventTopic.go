@@ -53,6 +53,10 @@ type RegisterEventTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterEventTopicInput) operationName() string {
+	return "RegisterEventTopic"
+}
+
 // The result of a RegisterEventTopic request.
 type RegisterEventTopicOutput struct {
 	// Metadata pertaining to the operation's result.

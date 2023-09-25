@@ -48,6 +48,10 @@ type GetAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAggregateResourceConfigInput) operationName() string {
+	return "GetAggregateResourceConfig"
+}
+
 type GetAggregateResourceConfigOutput struct {
 
 	// Returns a ConfigurationItem object.

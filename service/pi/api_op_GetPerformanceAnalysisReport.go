@@ -68,6 +68,10 @@ type GetPerformanceAnalysisReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPerformanceAnalysisReportInput) operationName() string {
+	return "GetPerformanceAnalysisReport"
+}
+
 type GetPerformanceAnalysisReportOutput struct {
 
 	// The summary of the performance analysis report created for a time period.

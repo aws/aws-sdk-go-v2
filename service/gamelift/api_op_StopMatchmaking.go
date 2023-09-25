@@ -50,6 +50,10 @@ type StopMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopMatchmakingInput) operationName() string {
+	return "StopMatchmaking"
+}
+
 type StopMatchmakingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type RegisterDelegatedAdministratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterDelegatedAdministratorInput) operationName() string {
+	return "RegisterDelegatedAdministrator"
+}
+
 type RegisterDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

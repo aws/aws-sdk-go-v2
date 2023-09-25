@@ -93,6 +93,10 @@ type ListPrincipalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPrincipalsInput) operationName() string {
+	return "ListPrincipals"
+}
+
 type ListPrincipalsOutput struct {
 
 	// If present, this value indicates that more output is available than is included

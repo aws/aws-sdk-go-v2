@@ -44,6 +44,10 @@ type DeleteEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventSubscriptionInput) operationName() string {
+	return "DeleteEventSubscription"
+}
+
 type DeleteEventSubscriptionOutput struct {
 
 	// Detailed information about an event to which you have subscribed.

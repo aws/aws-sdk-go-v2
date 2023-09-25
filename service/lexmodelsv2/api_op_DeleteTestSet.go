@@ -41,6 +41,10 @@ type DeleteTestSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTestSetInput) operationName() string {
+	return "DeleteTestSet"
+}
+
 type DeleteTestSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

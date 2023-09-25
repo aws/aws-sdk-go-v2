@@ -106,6 +106,10 @@ type StartOutboundVoiceContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartOutboundVoiceContactInput) operationName() string {
+	return "StartOutboundVoiceContact"
+}
+
 type StartOutboundVoiceContactOutput struct {
 
 	// The identifier of this contact within the Amazon Connect instance.

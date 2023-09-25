@@ -61,6 +61,10 @@ type SendProjectSessionActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendProjectSessionActionInput) operationName() string {
+	return "SendProjectSessionAction"
+}
+
 type SendProjectSessionActionOutput struct {
 
 	// The name of the project that was affected by the action.

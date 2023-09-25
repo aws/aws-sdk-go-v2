@@ -56,6 +56,10 @@ type DescribeReplicationTableStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationTableStatisticsInput) operationName() string {
+	return "DescribeReplicationTableStatistics"
+}
+
 type DescribeReplicationTableStatisticsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

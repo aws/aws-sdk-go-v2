@@ -67,6 +67,10 @@ type CreateSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSiteInput) operationName() string {
+	return "CreateSite"
+}
+
 type CreateSiteOutput struct {
 
 	// Information about a site.

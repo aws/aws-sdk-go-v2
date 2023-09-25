@@ -42,6 +42,10 @@ type GetMetricPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricPolicyInput) operationName() string {
+	return "GetMetricPolicy"
+}
+
 type GetMetricPolicyOutput struct {
 
 	// The metric policy that is associated with the specific container.

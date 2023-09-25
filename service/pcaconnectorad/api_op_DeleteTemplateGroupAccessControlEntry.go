@@ -48,6 +48,10 @@ type DeleteTemplateGroupAccessControlEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTemplateGroupAccessControlEntryInput) operationName() string {
+	return "DeleteTemplateGroupAccessControlEntry"
+}
+
 type DeleteTemplateGroupAccessControlEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

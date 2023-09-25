@@ -133,6 +133,10 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateDataKeyWithoutPlaintextInput) operationName() string {
+	return "GenerateDataKeyWithoutPlaintext"
+}
+
 type GenerateDataKeyWithoutPlaintextOutput struct {
 
 	// The encrypted data key. When you use the HTTP API or the Amazon Web Services

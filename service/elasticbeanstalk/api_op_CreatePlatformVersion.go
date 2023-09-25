@@ -64,6 +64,10 @@ type CreatePlatformVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePlatformVersionInput) operationName() string {
+	return "CreatePlatformVersion"
+}
+
 type CreatePlatformVersionOutput struct {
 
 	// The builder used to create the custom platform.

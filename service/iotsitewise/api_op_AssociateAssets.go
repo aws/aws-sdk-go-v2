@@ -62,6 +62,10 @@ type AssociateAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAssetsInput) operationName() string {
+	return "AssociateAssets"
+}
+
 type AssociateAssetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

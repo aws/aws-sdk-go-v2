@@ -43,6 +43,10 @@ type GetAppBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppBundleInput) operationName() string {
+	return "GetAppBundle"
+}
+
 type GetAppBundleOutput struct {
 
 	// Contains information about an app bundle.

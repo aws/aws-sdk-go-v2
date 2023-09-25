@@ -60,6 +60,10 @@ type UpdateConferenceProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConferenceProviderInput) operationName() string {
+	return "UpdateConferenceProvider"
+}
+
 type UpdateConferenceProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

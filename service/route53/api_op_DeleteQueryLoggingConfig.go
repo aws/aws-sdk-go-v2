@@ -45,6 +45,10 @@ type DeleteQueryLoggingConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQueryLoggingConfigInput) operationName() string {
+	return "DeleteQueryLoggingConfig"
+}
+
 type DeleteQueryLoggingConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

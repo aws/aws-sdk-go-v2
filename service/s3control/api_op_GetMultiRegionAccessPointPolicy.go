@@ -63,6 +63,10 @@ type GetMultiRegionAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMultiRegionAccessPointPolicyInput) operationName() string {
+	return "GetMultiRegionAccessPointPolicy"
+}
+
 type GetMultiRegionAccessPointPolicyOutput struct {
 
 	// The policy associated with the specified Multi-Region Access Point.

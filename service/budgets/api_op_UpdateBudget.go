@@ -55,6 +55,10 @@ type UpdateBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBudgetInput) operationName() string {
+	return "UpdateBudget"
+}
+
 // Response of UpdateBudget
 type UpdateBudgetOutput struct {
 	// Metadata pertaining to the operation's result.

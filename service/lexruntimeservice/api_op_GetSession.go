@@ -58,6 +58,10 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSessionInput) operationName() string {
+	return "GetSession"
+}
+
 type GetSessionOutput struct {
 
 	// A list of active contexts for the session. A context can be set when an intent

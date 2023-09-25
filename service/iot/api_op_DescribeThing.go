@@ -44,6 +44,10 @@ type DescribeThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThingInput) operationName() string {
+	return "DescribeThing"
+}
+
 // The output from the DescribeThing operation.
 type DescribeThingOutput struct {
 

@@ -78,6 +78,10 @@ type GetDiscoveredResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDiscoveredResourceCountsInput) operationName() string {
+	return "GetDiscoveredResourceCounts"
+}
+
 type GetDiscoveredResourceCountsOutput struct {
 
 	// The string that you use in a subsequent request to get the next page of results

@@ -57,6 +57,10 @@ type RotateTunnelAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RotateTunnelAccessTokenInput) operationName() string {
+	return "RotateTunnelAccessToken"
+}
+
 type RotateTunnelAccessTokenOutput struct {
 
 	// The client access token that the destination local proxy uses to connect to IoT

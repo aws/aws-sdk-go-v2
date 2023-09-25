@@ -47,6 +47,10 @@ type DescribeDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatastoreInput) operationName() string {
+	return "DescribeDatastore"
+}
+
 type DescribeDatastoreOutput struct {
 
 	// Information about the data store.

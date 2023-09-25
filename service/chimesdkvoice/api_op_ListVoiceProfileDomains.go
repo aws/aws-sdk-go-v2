@@ -43,6 +43,10 @@ type ListVoiceProfileDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVoiceProfileDomainsInput) operationName() string {
+	return "ListVoiceProfileDomains"
+}
+
 type ListVoiceProfileDomainsOutput struct {
 
 	// The token used to return the next page of results.

@@ -57,6 +57,10 @@ type RescoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RescoreInput) operationName() string {
+	return "Rescore"
+}
+
 type RescoreOutput struct {
 
 	// The identifier associated with the scores that Amazon Kendra Intelligent

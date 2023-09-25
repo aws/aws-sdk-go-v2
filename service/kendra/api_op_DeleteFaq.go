@@ -46,6 +46,10 @@ type DeleteFaqInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFaqInput) operationName() string {
+	return "DeleteFaq"
+}
+
 type DeleteFaqOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

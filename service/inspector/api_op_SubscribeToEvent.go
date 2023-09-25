@@ -54,6 +54,10 @@ type SubscribeToEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubscribeToEventInput) operationName() string {
+	return "SubscribeToEvent"
+}
+
 type SubscribeToEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

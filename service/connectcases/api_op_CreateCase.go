@@ -66,6 +66,10 @@ type CreateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCaseInput) operationName() string {
+	return "CreateCase"
+}
+
 type CreateCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) of the case.

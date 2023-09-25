@@ -54,6 +54,10 @@ type DetachInstancesFromLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachInstancesFromLoadBalancerInput) operationName() string {
+	return "DetachInstancesFromLoadBalancer"
+}
+
 type DetachInstancesFromLoadBalancerOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

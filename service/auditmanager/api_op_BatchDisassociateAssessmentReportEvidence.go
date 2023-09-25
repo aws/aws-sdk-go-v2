@@ -52,6 +52,10 @@ type BatchDisassociateAssessmentReportEvidenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateAssessmentReportEvidenceInput) operationName() string {
+	return "BatchDisassociateAssessmentReportEvidence"
+}
+
 type BatchDisassociateAssessmentReportEvidenceOutput struct {
 
 	// A list of errors that the BatchDisassociateAssessmentReportEvidence API

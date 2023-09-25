@@ -60,6 +60,10 @@ type CreateVPCAssociationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVPCAssociationAuthorizationInput) operationName() string {
+	return "CreateVPCAssociationAuthorization"
+}
+
 // A complex type that contains the response information from a
 // CreateVPCAssociationAuthorization request.
 type CreateVPCAssociationAuthorizationOutput struct {

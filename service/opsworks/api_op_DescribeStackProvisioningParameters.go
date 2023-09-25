@@ -46,6 +46,10 @@ type DescribeStackProvisioningParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackProvisioningParametersInput) operationName() string {
+	return "DescribeStackProvisioningParameters"
+}
+
 // Contains the response to a DescribeStackProvisioningParameters request.
 type DescribeStackProvisioningParametersOutput struct {
 

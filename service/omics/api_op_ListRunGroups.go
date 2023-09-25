@@ -47,6 +47,10 @@ type ListRunGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRunGroupsInput) operationName() string {
+	return "ListRunGroups"
+}
+
 type ListRunGroupsOutput struct {
 
 	// A list of groups.

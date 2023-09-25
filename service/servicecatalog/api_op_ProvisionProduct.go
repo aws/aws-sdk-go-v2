@@ -102,6 +102,10 @@ type ProvisionProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ProvisionProductInput) operationName() string {
+	return "ProvisionProduct"
+}
+
 type ProvisionProductOutput struct {
 
 	// Information about the result of provisioning the product.

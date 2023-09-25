@@ -42,6 +42,10 @@ type DescribeEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointGroupInput) operationName() string {
+	return "DescribeEndpointGroup"
+}
+
 type DescribeEndpointGroupOutput struct {
 
 	// The description of an endpoint group.

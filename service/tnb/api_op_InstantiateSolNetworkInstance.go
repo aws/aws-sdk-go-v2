@@ -62,6 +62,10 @@ type InstantiateSolNetworkInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InstantiateSolNetworkInstanceInput) operationName() string {
+	return "InstantiateSolNetworkInstance"
+}
+
 type InstantiateSolNetworkInstanceOutput struct {
 
 	// The identifier of the network operation.

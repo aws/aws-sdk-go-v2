@@ -44,6 +44,10 @@ type PutClassificationExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutClassificationExportConfigurationInput) operationName() string {
+	return "PutClassificationExportConfiguration"
+}
+
 type PutClassificationExportConfigurationOutput struct {
 
 	// The location where the data classification results are stored, and the

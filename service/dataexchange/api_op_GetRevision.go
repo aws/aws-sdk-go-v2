@@ -47,6 +47,10 @@ type GetRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRevisionInput) operationName() string {
+	return "GetRevision"
+}
+
 type GetRevisionOutput struct {
 
 	// The ARN for the revision.

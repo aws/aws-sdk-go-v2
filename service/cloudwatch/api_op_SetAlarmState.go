@@ -71,6 +71,10 @@ type SetAlarmStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetAlarmStateInput) operationName() string {
+	return "SetAlarmState"
+}
+
 type SetAlarmStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

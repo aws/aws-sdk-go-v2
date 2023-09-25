@@ -66,6 +66,10 @@ type PurchaseOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseOfferingInput) operationName() string {
+	return "PurchaseOffering"
+}
+
 // Placeholder documentation for PurchaseOfferingResponse
 type PurchaseOfferingOutput struct {
 

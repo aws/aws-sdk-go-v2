@@ -63,6 +63,10 @@ type ListJobRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobRunsInput) operationName() string {
+	return "ListJobRuns"
+}
+
 type ListJobRunsOutput struct {
 
 	// This output lists information about the specified job runs.

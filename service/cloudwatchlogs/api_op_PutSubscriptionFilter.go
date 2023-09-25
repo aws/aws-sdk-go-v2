@@ -103,6 +103,10 @@ type PutSubscriptionFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSubscriptionFilterInput) operationName() string {
+	return "PutSubscriptionFilter"
+}
+
 type PutSubscriptionFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

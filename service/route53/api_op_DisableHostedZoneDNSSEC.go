@@ -43,6 +43,10 @@ type DisableHostedZoneDNSSECInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableHostedZoneDNSSECInput) operationName() string {
+	return "DisableHostedZoneDNSSEC"
+}
+
 type DisableHostedZoneDNSSECOutput struct {
 
 	// A complex type that describes change information about changes made to your

@@ -44,6 +44,10 @@ type StartWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartWorkflowRunInput) operationName() string {
+	return "StartWorkflowRun"
+}
+
 type StartWorkflowRunOutput struct {
 
 	// An Id for the new run.

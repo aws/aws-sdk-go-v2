@@ -263,6 +263,10 @@ type CreateCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCacheClusterInput) operationName() string {
+	return "CreateCacheCluster"
+}
+
 type CreateCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.

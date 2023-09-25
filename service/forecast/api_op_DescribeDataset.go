@@ -48,6 +48,10 @@ type DescribeDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetInput) operationName() string {
+	return "DescribeDataset"
+}
+
 type DescribeDatasetOutput struct {
 
 	// When the dataset was created.

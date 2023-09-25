@@ -56,6 +56,10 @@ type SearchFoldersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchFoldersInput) operationName() string {
+	return "SearchFolders"
+}
+
 type SearchFoldersOutput struct {
 
 	// A structure that contains all of the folders in the Amazon Web Services

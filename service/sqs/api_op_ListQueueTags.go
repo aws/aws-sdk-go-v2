@@ -46,6 +46,10 @@ type ListQueueTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQueueTagsInput) operationName() string {
+	return "ListQueueTags"
+}
+
 type ListQueueTagsOutput struct {
 
 	// The list of all tags added to the specified queue.

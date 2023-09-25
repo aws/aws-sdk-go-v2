@@ -63,6 +63,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The unique identifier of the runtime environment that was updated.

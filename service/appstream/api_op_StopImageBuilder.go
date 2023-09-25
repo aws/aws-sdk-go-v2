@@ -42,6 +42,10 @@ type StopImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopImageBuilderInput) operationName() string {
+	return "StopImageBuilder"
+}
+
 type StopImageBuilderOutput struct {
 
 	// Information about the image builder.

@@ -51,6 +51,10 @@ type UpdateLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLoggingConfigurationInput) operationName() string {
+	return "UpdateLoggingConfiguration"
+}
+
 type UpdateLoggingConfigurationOutput struct {
 
 	// Logging-configuration ARN, from the request (if identifier was an ARN).

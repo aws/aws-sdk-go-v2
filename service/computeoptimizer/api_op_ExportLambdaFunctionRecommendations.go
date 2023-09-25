@@ -94,6 +94,10 @@ type ExportLambdaFunctionRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportLambdaFunctionRecommendationsInput) operationName() string {
+	return "ExportLambdaFunctionRecommendations"
+}
+
 type ExportLambdaFunctionRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the

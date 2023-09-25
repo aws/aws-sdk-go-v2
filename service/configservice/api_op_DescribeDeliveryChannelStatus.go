@@ -44,6 +44,10 @@ type DescribeDeliveryChannelStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeliveryChannelStatusInput) operationName() string {
+	return "DescribeDeliveryChannelStatus"
+}
+
 // The output for the DescribeDeliveryChannelStatus action.
 type DescribeDeliveryChannelStatusOutput struct {
 

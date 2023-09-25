@@ -51,6 +51,10 @@ type GetCalculatedAttributeForProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCalculatedAttributeForProfileInput) operationName() string {
+	return "GetCalculatedAttributeForProfile"
+}
+
 type GetCalculatedAttributeForProfileOutput struct {
 
 	// The unique name of the calculated attribute.

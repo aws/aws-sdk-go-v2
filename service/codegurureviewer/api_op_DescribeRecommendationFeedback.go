@@ -56,6 +56,10 @@ type DescribeRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecommendationFeedbackInput) operationName() string {
+	return "DescribeRecommendationFeedback"
+}
+
 type DescribeRecommendationFeedbackOutput struct {
 
 	// The recommendation feedback given by the user.

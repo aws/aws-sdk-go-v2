@@ -49,6 +49,10 @@ type GetRelationalDatabaseBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseBundlesInput) operationName() string {
+	return "GetRelationalDatabaseBundles"
+}
+
 type GetRelationalDatabaseBundlesOutput struct {
 
 	// An object describing the result of your get relational database bundles request.

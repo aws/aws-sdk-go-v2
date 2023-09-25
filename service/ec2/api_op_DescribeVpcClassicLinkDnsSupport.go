@@ -54,6 +54,10 @@ type DescribeVpcClassicLinkDnsSupportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcClassicLinkDnsSupportInput) operationName() string {
+	return "DescribeVpcClassicLinkDnsSupport"
+}
+
 type DescribeVpcClassicLinkDnsSupportOutput struct {
 
 	// The token to include in another request to get the next page of items. This

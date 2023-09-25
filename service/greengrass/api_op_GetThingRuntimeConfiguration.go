@@ -42,6 +42,10 @@ type GetThingRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetThingRuntimeConfigurationInput) operationName() string {
+	return "GetThingRuntimeConfiguration"
+}
+
 type GetThingRuntimeConfigurationOutput struct {
 
 	// Runtime configuration for a thing.

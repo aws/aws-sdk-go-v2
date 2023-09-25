@@ -55,6 +55,10 @@ type TagMeetingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagMeetingInput) operationName() string {
+	return "TagMeeting"
+}
+
 type TagMeetingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -114,6 +114,10 @@ type AuthorizeSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeSecurityGroupIngressInput) operationName() string {
+	return "AuthorizeSecurityGroupIngress"
+}
+
 type AuthorizeSecurityGroupIngressOutput struct {
 
 	// Returns true if the request succeeds; otherwise, returns an error.

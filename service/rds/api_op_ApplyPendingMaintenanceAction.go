@@ -62,6 +62,10 @@ type ApplyPendingMaintenanceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplyPendingMaintenanceActionInput) operationName() string {
+	return "ApplyPendingMaintenanceAction"
+}
+
 type ApplyPendingMaintenanceActionOutput struct {
 
 	// Describes the pending maintenance actions for a resource.

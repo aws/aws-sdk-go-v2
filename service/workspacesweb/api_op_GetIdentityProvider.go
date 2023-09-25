@@ -42,6 +42,10 @@ type GetIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityProviderInput) operationName() string {
+	return "GetIdentityProvider"
+}
+
 type GetIdentityProviderOutput struct {
 
 	// The identity provider.

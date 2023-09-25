@@ -53,6 +53,10 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsersInput) operationName() string {
+	return "ListUsers"
+}
+
 type ListUsersOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is `null`

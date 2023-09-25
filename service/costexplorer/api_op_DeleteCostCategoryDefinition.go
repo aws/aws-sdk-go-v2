@@ -42,6 +42,10 @@ type DeleteCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCostCategoryDefinitionInput) operationName() string {
+	return "DeleteCostCategoryDefinition"
+}
+
 type DeleteCostCategoryDefinitionOutput struct {
 
 	// The unique identifier for your Cost Category.

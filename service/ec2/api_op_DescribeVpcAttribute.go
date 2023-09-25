@@ -54,6 +54,10 @@ type DescribeVpcAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcAttributeInput) operationName() string {
+	return "DescribeVpcAttribute"
+}
+
 type DescribeVpcAttributeOutput struct {
 
 	// Indicates whether the instances launched in the VPC get DNS hostnames. If this

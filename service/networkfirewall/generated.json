@@ -45,6 +45,7 @@
         "api_op_UpdateRuleGroup.go",
         "api_op_UpdateSubnetChangeProtection.go",
         "api_op_UpdateTLSInspectionConfiguration.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

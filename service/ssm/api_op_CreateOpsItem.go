@@ -141,6 +141,10 @@ type CreateOpsItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOpsItemInput) operationName() string {
+	return "CreateOpsItem"
+}
+
 type CreateOpsItemOutput struct {
 
 	// The OpsItem Amazon Resource Name (ARN).

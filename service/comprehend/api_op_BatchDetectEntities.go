@@ -52,6 +52,10 @@ type BatchDetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDetectEntitiesInput) operationName() string {
+	return "BatchDetectEntities"
+}
+
 type BatchDetectEntitiesOutput struct {
 
 	// A list containing one object for each document that contained an error. The

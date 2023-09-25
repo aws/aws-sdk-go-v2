@@ -38,6 +38,10 @@ type DeleteAccountAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccountAliasInput) operationName() string {
+	return "DeleteAccountAlias"
+}
+
 type DeleteAccountAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,6 +46,10 @@ type DeleteCustomLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomLogSourceInput) operationName() string {
+	return "DeleteCustomLogSource"
+}
+
 type DeleteCustomLogSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

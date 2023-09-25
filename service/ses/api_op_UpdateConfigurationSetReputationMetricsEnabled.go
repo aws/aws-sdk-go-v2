@@ -54,6 +54,10 @@ type UpdateConfigurationSetReputationMetricsEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationSetReputationMetricsEnabledInput) operationName() string {
+	return "UpdateConfigurationSetReputationMetricsEnabled"
+}
+
 type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type ResolveAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResolveAliasInput) operationName() string {
+	return "ResolveAlias"
+}
+
 type ResolveAliasOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

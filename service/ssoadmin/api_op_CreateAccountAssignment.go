@@ -85,6 +85,10 @@ type CreateAccountAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccountAssignmentInput) operationName() string {
+	return "CreateAccountAssignment"
+}
+
 type CreateAccountAssignmentOutput struct {
 
 	// The status object for the account assignment creation operation.

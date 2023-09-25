@@ -89,6 +89,10 @@ type UpdateIndexTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIndexTypeInput) operationName() string {
+	return "UpdateIndexType"
+}
+
 type UpdateIndexTypeOutput struct {
 
 	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

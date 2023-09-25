@@ -67,6 +67,10 @@ type GetTemporaryGluePartitionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemporaryGluePartitionCredentialsInput) operationName() string {
+	return "GetTemporaryGluePartitionCredentials"
+}
+
 type GetTemporaryGluePartitionCredentialsOutput struct {
 
 	// The access key ID for the temporary credentials.

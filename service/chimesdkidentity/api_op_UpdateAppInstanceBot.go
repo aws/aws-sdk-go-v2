@@ -55,6 +55,10 @@ type UpdateAppInstanceBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppInstanceBotInput) operationName() string {
+	return "UpdateAppInstanceBot"
+}
+
 type UpdateAppInstanceBotOutput struct {
 
 	// The ARN of the AppInstanceBot .

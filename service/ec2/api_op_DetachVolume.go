@@ -75,6 +75,10 @@ type DetachVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachVolumeInput) operationName() string {
+	return "DetachVolume"
+}
+
 // Describes volume attachment details.
 type DetachVolumeOutput struct {
 

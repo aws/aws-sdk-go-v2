@@ -41,6 +41,10 @@ type DisassociateNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateNetworkSettingsInput) operationName() string {
+	return "DisassociateNetworkSettings"
+}
+
 type DisassociateNetworkSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

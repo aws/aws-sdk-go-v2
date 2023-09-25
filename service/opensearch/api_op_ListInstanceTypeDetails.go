@@ -62,6 +62,10 @@ type ListInstanceTypeDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceTypeDetailsInput) operationName() string {
+	return "ListInstanceTypeDetails"
+}
+
 type ListInstanceTypeDetailsOutput struct {
 
 	// Lists all supported instance types and features for the given OpenSearch or

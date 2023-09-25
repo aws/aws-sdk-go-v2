@@ -42,6 +42,10 @@ type DescribeTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransactionInput) operationName() string {
+	return "DescribeTransaction"
+}
+
 type DescribeTransactionOutput struct {
 
 	// Returns a TransactionDescription object containing information about the

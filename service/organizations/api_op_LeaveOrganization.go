@@ -75,6 +75,10 @@ type LeaveOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LeaveOrganizationInput) operationName() string {
+	return "LeaveOrganization"
+}
+
 type LeaveOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

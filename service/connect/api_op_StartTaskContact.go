@@ -96,6 +96,10 @@ type StartTaskContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTaskContactInput) operationName() string {
+	return "StartTaskContact"
+}
+
 type StartTaskContactOutput struct {
 
 	// The identifier of this contact within the Amazon Connect instance.

@@ -45,6 +45,10 @@ type InferICD10CMInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InferICD10CMInput) operationName() string {
+	return "InferICD10CM"
+}
+
 type InferICD10CMOutput struct {
 
 	// The medical conditions detected in the text linked to ICD-10-CM concepts. If

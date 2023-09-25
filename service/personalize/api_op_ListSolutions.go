@@ -52,6 +52,10 @@ type ListSolutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSolutionsInput) operationName() string {
+	return "ListSolutions"
+}
+
 type ListSolutionsOutput struct {
 
 	// A token for getting the next set of solutions (if they exist).

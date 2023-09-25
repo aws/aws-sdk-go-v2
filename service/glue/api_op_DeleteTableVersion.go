@@ -57,6 +57,10 @@ type DeleteTableVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTableVersionInput) operationName() string {
+	return "DeleteTableVersion"
+}
+
 type DeleteTableVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

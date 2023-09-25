@@ -61,6 +61,10 @@ type ListMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMembersInput) operationName() string {
+	return "ListMembers"
+}
+
 type ListMembersOutput struct {
 
 	// An array of MemberSummary objects. Each object contains details about a network

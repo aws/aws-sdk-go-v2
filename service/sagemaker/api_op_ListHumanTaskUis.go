@@ -58,6 +58,10 @@ type ListHumanTaskUisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHumanTaskUisInput) operationName() string {
+	return "ListHumanTaskUis"
+}
+
 type ListHumanTaskUisOutput struct {
 
 	// An array of objects describing the human task user interfaces.

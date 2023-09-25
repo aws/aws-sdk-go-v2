@@ -47,6 +47,10 @@ type CreateAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAuthenticationProfileInput) operationName() string {
+	return "CreateAuthenticationProfile"
+}
+
 type CreateAuthenticationProfileOutput struct {
 
 	// The content of the authentication profile in JSON format.

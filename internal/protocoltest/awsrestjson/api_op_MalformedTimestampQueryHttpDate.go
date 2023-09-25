@@ -33,6 +33,10 @@ type MalformedTimestampQueryHttpDateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedTimestampQueryHttpDateInput) operationName() string {
+	return "MalformedTimestampQueryHttpDate"
+}
+
 type MalformedTimestampQueryHttpDateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

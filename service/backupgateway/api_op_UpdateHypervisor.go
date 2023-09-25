@@ -60,6 +60,10 @@ type UpdateHypervisorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHypervisorInput) operationName() string {
+	return "UpdateHypervisor"
+}
+
 type UpdateHypervisorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor you updated.

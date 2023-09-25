@@ -46,6 +46,10 @@ type GetVariantImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVariantImportJobInput) operationName() string {
+	return "GetVariantImportJob"
+}
+
 type GetVariantImportJobOutput struct {
 
 	// When the job was created.

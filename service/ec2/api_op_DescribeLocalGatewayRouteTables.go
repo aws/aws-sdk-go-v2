@@ -65,6 +65,10 @@ type DescribeLocalGatewayRouteTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocalGatewayRouteTablesInput) operationName() string {
+	return "DescribeLocalGatewayRouteTables"
+}
+
 type DescribeLocalGatewayRouteTablesOutput struct {
 
 	// Information about the local gateway route tables.

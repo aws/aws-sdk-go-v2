@@ -47,6 +47,10 @@ type DeletePreparedStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePreparedStatementInput) operationName() string {
+	return "DeletePreparedStatement"
+}
+
 type DeletePreparedStatementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

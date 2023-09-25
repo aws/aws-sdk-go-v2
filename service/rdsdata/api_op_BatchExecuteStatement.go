@@ -93,6 +93,10 @@ type BatchExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchExecuteStatementInput) operationName() string {
+	return "BatchExecuteStatement"
+}
+
 // The response elements represent the output of a SQL statement over an array of
 // data.
 type BatchExecuteStatementOutput struct {

@@ -31,6 +31,7 @@
         "api_op_UpdateCampaignDialerConfig.go",
         "api_op_UpdateCampaignName.go",
         "api_op_UpdateCampaignOutboundCallConfig.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

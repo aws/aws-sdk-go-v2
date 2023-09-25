@@ -59,6 +59,10 @@ type UpdateInstanceCustomHealthStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInstanceCustomHealthStatusInput) operationName() string {
+	return "UpdateInstanceCustomHealthStatus"
+}
+
 type UpdateInstanceCustomHealthStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

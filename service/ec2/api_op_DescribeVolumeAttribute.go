@@ -56,6 +56,10 @@ type DescribeVolumeAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVolumeAttributeInput) operationName() string {
+	return "DescribeVolumeAttribute"
+}
+
 type DescribeVolumeAttributeOutput struct {
 
 	// The state of autoEnableIO attribute.

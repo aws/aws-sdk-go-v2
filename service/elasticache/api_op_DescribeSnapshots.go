@@ -75,6 +75,10 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotsInput) operationName() string {
+	return "DescribeSnapshots"
+}
+
 // Represents the output of a DescribeSnapshots operation.
 type DescribeSnapshotsOutput struct {
 

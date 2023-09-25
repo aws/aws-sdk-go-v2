@@ -106,6 +106,10 @@ type PutSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSessionInput) operationName() string {
+	return "PutSession"
+}
+
 type PutSessionOutput struct {
 
 	// A list of active contexts for the session.

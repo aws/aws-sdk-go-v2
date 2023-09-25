@@ -63,6 +63,10 @@ type UpdateKxClusterDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKxClusterDatabasesInput) operationName() string {
+	return "UpdateKxClusterDatabases"
+}
+
 type UpdateKxClusterDatabasesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

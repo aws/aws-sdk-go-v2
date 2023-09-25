@@ -45,6 +45,10 @@ type DeleteServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceInput) operationName() string {
+	return "DeleteService"
+}
+
 type DeleteServiceOutput struct {
 
 	// The detailed data of the service being deleted.

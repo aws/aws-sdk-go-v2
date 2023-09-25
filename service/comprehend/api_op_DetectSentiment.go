@@ -50,6 +50,10 @@ type DetectSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectSentimentInput) operationName() string {
+	return "DetectSentiment"
+}
+
 type DetectSentimentOutput struct {
 
 	// The inferred sentiment that Amazon Comprehend has the highest level of

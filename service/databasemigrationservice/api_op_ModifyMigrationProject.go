@@ -72,6 +72,10 @@ type ModifyMigrationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyMigrationProjectInput) operationName() string {
+	return "ModifyMigrationProject"
+}
+
 type ModifyMigrationProjectOutput struct {
 
 	// The migration project that was modified.

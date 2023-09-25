@@ -73,6 +73,10 @@ type ListCoreDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCoreDevicesInput) operationName() string {
+	return "ListCoreDevices"
+}
+
 type ListCoreDevicesOutput struct {
 
 	// A list that summarizes each core device.

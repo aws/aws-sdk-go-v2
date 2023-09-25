@@ -72,6 +72,10 @@ type StartAttachmentUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAttachmentUploadInput) operationName() string {
+	return "StartAttachmentUpload"
+}
+
 type StartAttachmentUploadOutput struct {
 
 	// A unique identifier for the attachment.

@@ -68,6 +68,10 @@ type ListRecommendedIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecommendedIntentsInput) operationName() string {
+	return "ListRecommendedIntents"
+}
+
 type ListRecommendedIntentsOutput struct {
 
 	// The unique identifier of the bot associated with the recommended intent.

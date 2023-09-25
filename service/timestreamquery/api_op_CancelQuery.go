@@ -48,6 +48,10 @@ type CancelQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelQueryInput) operationName() string {
+	return "CancelQuery"
+}
+
 type CancelQueryOutput struct {
 
 	// A CancellationMessage is returned when a CancelQuery request for the query

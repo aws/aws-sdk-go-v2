@@ -52,6 +52,10 @@ type GetEnrollmentStatusesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnrollmentStatusesForOrganizationInput) operationName() string {
+	return "GetEnrollmentStatusesForOrganization"
+}
+
 type GetEnrollmentStatusesForOrganizationOutput struct {
 
 	// An array of objects that describe the enrollment statuses of organization

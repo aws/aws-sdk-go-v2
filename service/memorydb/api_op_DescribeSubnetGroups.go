@@ -53,6 +53,10 @@ type DescribeSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSubnetGroupsInput) operationName() string {
+	return "DescribeSubnetGroups"
+}
+
 type DescribeSubnetGroupsOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the

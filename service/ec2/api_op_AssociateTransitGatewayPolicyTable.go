@@ -55,6 +55,10 @@ type AssociateTransitGatewayPolicyTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTransitGatewayPolicyTableInput) operationName() string {
+	return "AssociateTransitGatewayPolicyTable"
+}
+
 type AssociateTransitGatewayPolicyTableOutput struct {
 
 	// Describes the association of a transit gateway and a transit gateway policy

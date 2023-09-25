@@ -44,6 +44,10 @@ type DescribeDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeviceInput) operationName() string {
+	return "DescribeDevice"
+}
+
 type DescribeDeviceOutput struct {
 
 	// The ID of the job used when ordering the device.

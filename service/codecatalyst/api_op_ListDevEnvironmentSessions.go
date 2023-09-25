@@ -60,6 +60,10 @@ type ListDevEnvironmentSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevEnvironmentSessionsInput) operationName() string {
+	return "ListDevEnvironmentSessions"
+}
+
 type ListDevEnvironmentSessionsOutput struct {
 
 	// Information about each session retrieved in the list.

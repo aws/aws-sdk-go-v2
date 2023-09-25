@@ -66,6 +66,10 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCustomVerificationEmailTemplateInput) operationName() string {
+	return "UpdateCustomVerificationEmailTemplate"
+}
+
 type UpdateCustomVerificationEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

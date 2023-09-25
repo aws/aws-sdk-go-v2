@@ -72,6 +72,10 @@ type AddTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsInput) operationName() string {
+	return "AddTags"
+}
+
 type AddTagsOutput struct {
 
 	// A list of tags associated with the SageMaker resource.

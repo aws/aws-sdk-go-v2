@@ -41,6 +41,10 @@ type CancelOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelOrderInput) operationName() string {
+	return "CancelOrder"
+}
+
 type CancelOrderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

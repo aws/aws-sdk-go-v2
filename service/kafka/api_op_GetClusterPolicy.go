@@ -42,6 +42,10 @@ type GetClusterPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClusterPolicyInput) operationName() string {
+	return "GetClusterPolicy"
+}
+
 type GetClusterPolicyOutput struct {
 
 	// The version of cluster policy.

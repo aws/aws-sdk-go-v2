@@ -52,6 +52,10 @@ type ModifyCacheParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCacheParameterGroupInput) operationName() string {
+	return "ModifyCacheParameterGroup"
+}
+
 // Represents the output of one of the following operations:
 //   - ModifyCacheParameterGroup
 //   - ResetCacheParameterGroup

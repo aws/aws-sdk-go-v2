@@ -47,6 +47,10 @@ type BatchStopJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchStopJobRunInput) operationName() string {
+	return "BatchStopJobRun"
+}
+
 type BatchStopJobRunOutput struct {
 
 	// A list of the errors that were encountered in trying to stop JobRuns , including

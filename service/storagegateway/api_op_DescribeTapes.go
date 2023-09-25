@@ -63,6 +63,10 @@ type DescribeTapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTapesInput) operationName() string {
+	return "DescribeTapes"
+}
+
 // DescribeTapesOutput
 type DescribeTapesOutput struct {
 

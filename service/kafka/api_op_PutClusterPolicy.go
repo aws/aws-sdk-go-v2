@@ -50,6 +50,10 @@ type PutClusterPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutClusterPolicyInput) operationName() string {
+	return "PutClusterPolicy"
+}
+
 type PutClusterPolicyOutput struct {
 
 	// The policy version.

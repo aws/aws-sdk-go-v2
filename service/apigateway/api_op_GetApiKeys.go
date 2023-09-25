@@ -56,6 +56,10 @@ type GetApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApiKeysInput) operationName() string {
+	return "GetApiKeys"
+}
+
 // Represents a collection of API keys as represented by an ApiKeys resource.
 type GetApiKeysOutput struct {
 

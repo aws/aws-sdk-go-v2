@@ -41,6 +41,10 @@ type DeleteIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIpAccessSettingsInput) operationName() string {
+	return "DeleteIpAccessSettings"
+}
+
 type DeleteIpAccessSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

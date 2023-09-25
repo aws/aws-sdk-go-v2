@@ -51,6 +51,10 @@ type CreateReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationSetInput) operationName() string {
+	return "CreateReplicationSet"
+}
+
 type CreateReplicationSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replication set.

@@ -42,6 +42,10 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterInput) operationName() string {
+	return "DeleteCluster"
+}
+
 type DeleteClusterOutput struct {
 
 	// Returns information about the newly deleted Elastic DocumentDB cluster.

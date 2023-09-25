@@ -47,6 +47,10 @@ type DeleteContactFlowModuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteContactFlowModuleInput) operationName() string {
+	return "DeleteContactFlowModule"
+}
+
 type DeleteContactFlowModuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

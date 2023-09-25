@@ -64,6 +64,10 @@ type DescribeImageTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageTagsInput) operationName() string {
+	return "DescribeImageTags"
+}
+
 type DescribeImageTagsOutput struct {
 
 	// The image tag details for the images in the requested repository.

@@ -56,6 +56,10 @@ type ListGeneratedCodeJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGeneratedCodeJobsInput) operationName() string {
+	return "ListGeneratedCodeJobs"
+}
+
 type ListGeneratedCodeJobsOutput struct {
 
 	// The list of generated code jobs.

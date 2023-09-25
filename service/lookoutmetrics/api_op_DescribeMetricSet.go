@@ -45,6 +45,10 @@ type DescribeMetricSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetricSetInput) operationName() string {
+	return "DescribeMetricSet"
+}
+
 type DescribeMetricSetOutput struct {
 
 	// The ARN of the detector that contains the dataset.

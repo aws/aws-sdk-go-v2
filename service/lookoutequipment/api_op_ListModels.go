@@ -55,6 +55,10 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelsInput) operationName() string {
+	return "ListModels"
+}
+
 type ListModelsOutput struct {
 
 	// Provides information on the specified model, including created time, model and

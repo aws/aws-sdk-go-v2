@@ -48,6 +48,10 @@ type GetKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyInput) operationName() string {
+	return "GetKey"
+}
+
 type GetKeyOutput struct {
 
 	// The key material, including the immutable and mutable data for the key.

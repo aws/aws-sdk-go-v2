@@ -66,6 +66,10 @@ type AssociateClientVpnTargetNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateClientVpnTargetNetworkInput) operationName() string {
+	return "AssociateClientVpnTargetNetwork"
+}
+
 type AssociateClientVpnTargetNetworkOutput struct {
 
 	// The unique ID of the target network association.

@@ -92,6 +92,10 @@ type GenerateServiceLastAccessedDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateServiceLastAccessedDetailsInput) operationName() string {
+	return "GenerateServiceLastAccessedDetails"
+}
+
 type GenerateServiceLastAccessedDetailsOutput struct {
 
 	// The JobId that you can use in the GetServiceLastAccessedDetails or

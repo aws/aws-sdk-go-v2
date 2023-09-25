@@ -59,6 +59,10 @@ type CreateControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateControlPanelInput) operationName() string {
+	return "CreateControlPanel"
+}
+
 type CreateControlPanelOutput struct {
 
 	// Information about a control panel.

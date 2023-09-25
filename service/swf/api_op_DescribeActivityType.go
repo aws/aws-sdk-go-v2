@@ -66,6 +66,10 @@ type DescribeActivityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActivityTypeInput) operationName() string {
+	return "DescribeActivityType"
+}
+
 // Detailed information about an activity type.
 type DescribeActivityTypeOutput struct {
 

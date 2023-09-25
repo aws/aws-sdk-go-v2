@@ -47,6 +47,10 @@ type ListOrganizationAdminAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationAdminAccountsInput) operationName() string {
+	return "ListOrganizationAdminAccounts"
+}
+
 type ListOrganizationAdminAccountsOutput struct {
 
 	// A list of accounts configured as GuardDuty delegated administrators.

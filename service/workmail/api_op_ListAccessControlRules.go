@@ -42,6 +42,10 @@ type ListAccessControlRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessControlRulesInput) operationName() string {
+	return "ListAccessControlRules"
+}
+
 type ListAccessControlRulesOutput struct {
 
 	// The access control rules.

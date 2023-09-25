@@ -45,6 +45,10 @@ type GetBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendInput) operationName() string {
+	return "GetBackend"
+}
+
 type GetBackendOutput struct {
 
 	// A stringified version of the cli.json file for your Amplify project.

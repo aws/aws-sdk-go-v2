@@ -91,6 +91,10 @@ type UpdateProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProvisionedProductInput) operationName() string {
+	return "UpdateProvisionedProduct"
+}
+
 type UpdateProvisionedProductOutput struct {
 
 	// Information about the result of the request.

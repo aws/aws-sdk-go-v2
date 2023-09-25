@@ -41,6 +41,10 @@ type ListS3BucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListS3BucketsInput) operationName() string {
+	return "ListS3Buckets"
+}
+
 type ListS3BucketsOutput struct {
 
 	// The list of S3 buckets.

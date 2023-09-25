@@ -83,6 +83,10 @@ type CreateIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIngestionInput) operationName() string {
+	return "CreateIngestion"
+}
+
 type CreateIngestionOutput struct {
 
 	// Contains information about an ingestion.

@@ -50,6 +50,10 @@ type StartDataSourceSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDataSourceSyncJobInput) operationName() string {
+	return "StartDataSourceSyncJob"
+}
+
 type StartDataSourceSyncJobOutput struct {
 
 	// Identifies a particular synchronization job.

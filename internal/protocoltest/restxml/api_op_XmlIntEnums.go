@@ -42,6 +42,10 @@ type XmlIntEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*XmlIntEnumsInput) operationName() string {
+	return "XmlIntEnums"
+}
+
 type XmlIntEnumsOutput struct {
 	IntEnum1 types.IntegerEnum
 

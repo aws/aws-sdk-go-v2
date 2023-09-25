@@ -63,6 +63,10 @@ type GetVoiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceTemplateInput) operationName() string {
+	return "GetVoiceTemplate"
+}
+
 type GetVoiceTemplateOutput struct {
 
 	// Provides information about the content and settings for a message template that

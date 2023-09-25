@@ -60,6 +60,10 @@ type ListIAMPolicyAssignmentsForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIAMPolicyAssignmentsForUserInput) operationName() string {
+	return "ListIAMPolicyAssignmentsForUser"
+}
+
 type ListIAMPolicyAssignmentsForUserOutput struct {
 
 	// The active assignments for this user.

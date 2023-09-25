@@ -56,6 +56,10 @@ type GetAssociatedIpv6PoolCidrsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssociatedIpv6PoolCidrsInput) operationName() string {
+	return "GetAssociatedIpv6PoolCidrs"
+}
+
 type GetAssociatedIpv6PoolCidrsOutput struct {
 
 	// Information about the IPv6 CIDR block associations.

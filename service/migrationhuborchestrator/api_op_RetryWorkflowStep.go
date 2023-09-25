@@ -52,6 +52,10 @@ type RetryWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetryWorkflowStepInput) operationName() string {
+	return "RetryWorkflowStep"
+}
+
 type RetryWorkflowStepOutput struct {
 
 	// The ID of the step.

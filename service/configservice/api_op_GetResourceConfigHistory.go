@@ -82,6 +82,10 @@ type GetResourceConfigHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceConfigHistoryInput) operationName() string {
+	return "GetResourceConfigHistory"
+}
+
 // The output for the GetResourceConfigHistory action.
 type GetResourceConfigHistoryOutput struct {
 

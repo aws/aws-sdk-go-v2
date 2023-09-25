@@ -55,6 +55,10 @@ type GetWebACLForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWebACLForResourceInput) operationName() string {
+	return "GetWebACLForResource"
+}
+
 type GetWebACLForResourceOutput struct {
 
 	// Information about the web ACL that you specified in the GetWebACLForResource

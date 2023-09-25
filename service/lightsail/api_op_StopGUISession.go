@@ -44,6 +44,10 @@ type StopGUISessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopGUISessionInput) operationName() string {
+	return "StopGUISession"
+}
+
 type StopGUISessionOutput struct {
 
 	// The available API operations.

@@ -58,6 +58,10 @@ type UpdateMailboxQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMailboxQuotaInput) operationName() string {
+	return "UpdateMailboxQuota"
+}
+
 type UpdateMailboxQuotaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

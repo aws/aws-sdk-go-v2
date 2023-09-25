@@ -57,6 +57,10 @@ type CancelUpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelUpdateStackInput) operationName() string {
+	return "CancelUpdateStack"
+}
+
 type CancelUpdateStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

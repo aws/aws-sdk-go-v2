@@ -51,6 +51,10 @@ type DescribeGlobalTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGlobalTableInput) operationName() string {
+	return "DescribeGlobalTable"
+}
+
 type DescribeGlobalTableOutput struct {
 
 	// Contains the details of the global table.

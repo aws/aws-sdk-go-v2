@@ -45,6 +45,10 @@ type ListLoggingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLoggingConfigurationsInput) operationName() string {
+	return "ListLoggingConfigurations"
+}
+
 type ListLoggingConfigurationsOutput struct {
 
 	// List of the matching logging configurations (summary information only). There

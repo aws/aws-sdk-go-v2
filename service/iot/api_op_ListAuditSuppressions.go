@@ -58,6 +58,10 @@ type ListAuditSuppressionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAuditSuppressionsInput) operationName() string {
+	return "ListAuditSuppressions"
+}
+
 type ListAuditSuppressionsOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there

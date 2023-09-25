@@ -85,6 +85,10 @@ type AssociateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFileSystemInput) operationName() string {
+	return "AssociateFileSystem"
+}
+
 type AssociateFileSystemOutput struct {
 
 	// The ARN of the newly created file system association.

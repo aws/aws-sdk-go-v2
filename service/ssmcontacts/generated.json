@@ -48,6 +48,7 @@
         "api_op_UpdateContact.go",
         "api_op_UpdateContactChannel.go",
         "api_op_UpdateRotation.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

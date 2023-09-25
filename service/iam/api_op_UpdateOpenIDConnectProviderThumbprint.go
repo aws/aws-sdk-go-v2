@@ -67,6 +67,10 @@ type UpdateOpenIDConnectProviderThumbprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOpenIDConnectProviderThumbprintInput) operationName() string {
+	return "UpdateOpenIDConnectProviderThumbprint"
+}
+
 type UpdateOpenIDConnectProviderThumbprintOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

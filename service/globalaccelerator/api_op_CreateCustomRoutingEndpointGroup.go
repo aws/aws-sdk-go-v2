@@ -62,6 +62,10 @@ type CreateCustomRoutingEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomRoutingEndpointGroupInput) operationName() string {
+	return "CreateCustomRoutingEndpointGroup"
+}
+
 type CreateCustomRoutingEndpointGroupOutput struct {
 
 	// The information about the endpoint group created for a custom routing

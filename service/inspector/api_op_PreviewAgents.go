@@ -53,6 +53,10 @@ type PreviewAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PreviewAgentsInput) operationName() string {
+	return "PreviewAgents"
+}
+
 type PreviewAgentsOutput struct {
 
 	// The resulting list of agents.

@@ -70,6 +70,10 @@ type DescribeDBInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBInstancesInput) operationName() string {
+	return "DescribeDBInstances"
+}
+
 // Represents the output of DescribeDBInstances .
 type DescribeDBInstancesOutput struct {
 

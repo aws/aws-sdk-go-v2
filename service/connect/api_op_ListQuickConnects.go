@@ -57,6 +57,10 @@ type ListQuickConnectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQuickConnectsInput) operationName() string {
+	return "ListQuickConnects"
+}
+
 type ListQuickConnectsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

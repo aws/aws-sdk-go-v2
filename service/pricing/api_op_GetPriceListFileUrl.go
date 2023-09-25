@@ -56,6 +56,10 @@ type GetPriceListFileUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPriceListFileUrlInput) operationName() string {
+	return "GetPriceListFileUrl"
+}
+
 type GetPriceListFileUrlOutput struct {
 
 	// The URL to download your Price List file from.

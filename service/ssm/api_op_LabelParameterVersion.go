@@ -70,6 +70,10 @@ type LabelParameterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LabelParameterVersionInput) operationName() string {
+	return "LabelParameterVersion"
+}
+
 type LabelParameterVersionOutput struct {
 
 	// The label doesn't meet the requirements. For information about parameter label

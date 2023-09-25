@@ -49,6 +49,10 @@ type GetAnomalyMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnomalyMonitorsInput) operationName() string {
+	return "GetAnomalyMonitors"
+}
+
 type GetAnomalyMonitorsOutput struct {
 
 	// A list of cost anomaly monitors that includes the detailed metadata for each

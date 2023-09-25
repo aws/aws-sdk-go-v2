@@ -60,6 +60,10 @@ type DescribeTransitGatewayConnectPeersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransitGatewayConnectPeersInput) operationName() string {
+	return "DescribeTransitGatewayConnectPeers"
+}
+
 type DescribeTransitGatewayConnectPeersOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

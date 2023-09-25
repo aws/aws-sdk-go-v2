@@ -81,6 +81,10 @@ type PutBucketMetricsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketMetricsConfigurationInput) operationName() string {
+	return "PutBucketMetricsConfiguration"
+}
+
 type PutBucketMetricsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

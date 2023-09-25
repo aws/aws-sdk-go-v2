@@ -62,6 +62,10 @@ type AssociateMergedGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateMergedGraphqlApiInput) operationName() string {
+	return "AssociateMergedGraphqlApi"
+}
+
 type AssociateMergedGraphqlApiOutput struct {
 
 	// The SourceApiAssociation object data.

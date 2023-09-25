@@ -59,6 +59,10 @@ type ListExplainabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExplainabilitiesInput) operationName() string {
+	return "ListExplainabilities"
+}
+
 type ListExplainabilitiesOutput struct {
 
 	// An array of objects that summarize the properties of each Explainability

@@ -48,6 +48,10 @@ type DeleteLocalGatewayRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLocalGatewayRouteTableInput) operationName() string {
+	return "DeleteLocalGatewayRouteTable"
+}
+
 type DeleteLocalGatewayRouteTableOutput struct {
 
 	// Information about the local gateway route table.

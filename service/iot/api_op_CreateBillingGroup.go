@@ -49,6 +49,10 @@ type CreateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBillingGroupInput) operationName() string {
+	return "CreateBillingGroup"
+}
+
 type CreateBillingGroupOutput struct {
 
 	// The ARN of the billing group.

@@ -46,6 +46,10 @@ type CancelPipelineReprocessingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelPipelineReprocessingInput) operationName() string {
+	return "CancelPipelineReprocessing"
+}
+
 type CancelPipelineReprocessingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

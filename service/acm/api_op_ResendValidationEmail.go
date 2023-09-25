@@ -77,6 +77,10 @@ type ResendValidationEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResendValidationEmailInput) operationName() string {
+	return "ResendValidationEmail"
+}
+
 type ResendValidationEmailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

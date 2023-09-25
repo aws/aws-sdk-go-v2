@@ -53,6 +53,10 @@ type CreateResponseHeadersPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResponseHeadersPolicyInput) operationName() string {
+	return "CreateResponseHeadersPolicy"
+}
+
 type CreateResponseHeadersPolicyOutput struct {
 
 	// The version identifier for the current version of the response headers policy.

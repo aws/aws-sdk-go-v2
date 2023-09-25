@@ -51,6 +51,10 @@ type GetServicePrincipalNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServicePrincipalNameInput) operationName() string {
+	return "GetServicePrincipalName"
+}
+
 type GetServicePrincipalNameOutput struct {
 
 	// The service principal name that the connector uses to authenticate with Active

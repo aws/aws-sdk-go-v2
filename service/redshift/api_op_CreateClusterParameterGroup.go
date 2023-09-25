@@ -75,6 +75,10 @@ type CreateClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterParameterGroupInput) operationName() string {
+	return "CreateClusterParameterGroup"
+}
+
 type CreateClusterParameterGroupOutput struct {
 
 	// Describes a parameter group.

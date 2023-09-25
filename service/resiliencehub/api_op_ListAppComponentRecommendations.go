@@ -53,6 +53,10 @@ type ListAppComponentRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppComponentRecommendationsInput) operationName() string {
+	return "ListAppComponentRecommendations"
+}
+
 type ListAppComponentRecommendationsOutput struct {
 
 	// The recommendations for an Resilience Hub Application Component, returned as an

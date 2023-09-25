@@ -75,6 +75,10 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePolicyInput) operationName() string {
+	return "CreatePolicy"
+}
+
 type CreatePolicyOutput struct {
 
 	// The date and time the policy was originally created.

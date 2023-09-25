@@ -55,6 +55,10 @@ type GetFlowTemplateRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFlowTemplateRevisionsInput) operationName() string {
+	return "GetFlowTemplateRevisions"
+}
+
 type GetFlowTemplateRevisionsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.

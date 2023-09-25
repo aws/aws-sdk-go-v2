@@ -52,6 +52,10 @@ type GetMobileSdkReleaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMobileSdkReleaseInput) operationName() string {
+	return "GetMobileSdkRelease"
+}
+
 type GetMobileSdkReleaseOutput struct {
 
 	// Information for a specified SDK release, including release notes and tags.

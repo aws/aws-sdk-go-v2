@@ -46,6 +46,10 @@ type StartEdgeDeploymentStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartEdgeDeploymentStageInput) operationName() string {
+	return "StartEdgeDeploymentStage"
+}
+
 type StartEdgeDeploymentStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

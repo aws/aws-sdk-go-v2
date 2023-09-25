@@ -59,6 +59,10 @@ type PutLifecycleEventHookExecutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLifecycleEventHookExecutionStatusInput) operationName() string {
+	return "PutLifecycleEventHookExecutionStatus"
+}
+
 type PutLifecycleEventHookExecutionStatusOutput struct {
 
 	// The execution ID of the lifecycle event hook. A hook is specified in the hooks

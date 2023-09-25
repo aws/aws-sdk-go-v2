@@ -97,6 +97,10 @@ type CreateUnreferencedMergeCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUnreferencedMergeCommitInput) operationName() string {
+	return "CreateUnreferencedMergeCommit"
+}
+
 type CreateUnreferencedMergeCommitOutput struct {
 
 	// The full commit ID of the commit that contains your merge results.

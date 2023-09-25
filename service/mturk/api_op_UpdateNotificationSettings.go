@@ -61,6 +61,10 @@ type UpdateNotificationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNotificationSettingsInput) operationName() string {
+	return "UpdateNotificationSettings"
+}
+
 type UpdateNotificationSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

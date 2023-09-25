@@ -52,6 +52,10 @@ type ReplaceTopicRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceTopicRuleInput) operationName() string {
+	return "ReplaceTopicRule"
+}
+
 type ReplaceTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

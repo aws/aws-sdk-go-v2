@@ -57,6 +57,10 @@ type GetBotChannelAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotChannelAssociationInput) operationName() string {
+	return "GetBotChannelAssociation"
+}
+
 type GetBotChannelAssociationOutput struct {
 
 	// An alias pointing to the specific version of the Amazon Lex bot to which this

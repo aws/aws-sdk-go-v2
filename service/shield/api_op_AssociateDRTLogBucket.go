@@ -48,6 +48,10 @@ type AssociateDRTLogBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDRTLogBucketInput) operationName() string {
+	return "AssociateDRTLogBucket"
+}
+
 type AssociateDRTLogBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

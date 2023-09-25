@@ -29,6 +29,7 @@
         "api_op_ModifyHsm.go",
         "api_op_ModifyLunaClient.go",
         "api_op_RemoveTagsFromResource.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

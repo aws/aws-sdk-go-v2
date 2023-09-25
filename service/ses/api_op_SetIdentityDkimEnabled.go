@@ -62,6 +62,10 @@ type SetIdentityDkimEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetIdentityDkimEnabledInput) operationName() string {
+	return "SetIdentityDkimEnabled"
+}
+
 // An empty element returned on a successful request.
 type SetIdentityDkimEnabledOutput struct {
 	// Metadata pertaining to the operation's result.

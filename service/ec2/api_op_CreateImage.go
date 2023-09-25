@@ -95,6 +95,10 @@ type CreateImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImageInput) operationName() string {
+	return "CreateImage"
+}
+
 type CreateImageOutput struct {
 
 	// The ID of the new AMI.

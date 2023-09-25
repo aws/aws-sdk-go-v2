@@ -60,6 +60,10 @@ type CreateEdgeDeploymentPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEdgeDeploymentPlanInput) operationName() string {
+	return "CreateEdgeDeploymentPlan"
+}
+
 type CreateEdgeDeploymentPlanOutput struct {
 
 	// The ARN of the edge deployment plan.

@@ -207,6 +207,10 @@ type UpdateAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAutoScalingGroupInput) operationName() string {
+	return "UpdateAutoScalingGroup"
+}
+
 type UpdateAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

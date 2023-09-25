@@ -44,6 +44,10 @@ type DeleteDBSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBSubnetGroupInput) operationName() string {
+	return "DeleteDBSubnetGroup"
+}
+
 type DeleteDBSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

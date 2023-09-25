@@ -63,6 +63,10 @@ type DisableEnhancedMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableEnhancedMonitoringInput) operationName() string {
+	return "DisableEnhancedMonitoring"
+}
+
 // Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring
 // .
 type DisableEnhancedMonitoringOutput struct {

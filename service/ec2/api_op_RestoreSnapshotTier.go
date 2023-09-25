@@ -65,6 +65,10 @@ type RestoreSnapshotTierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreSnapshotTierInput) operationName() string {
+	return "RestoreSnapshotTier"
+}
+
 type RestoreSnapshotTierOutput struct {
 
 	// Indicates whether the snapshot is permanently restored. true indicates a

@@ -47,6 +47,10 @@ type GetByteMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetByteMatchSetInput) operationName() string {
+	return "GetByteMatchSet"
+}
+
 type GetByteMatchSetOutput struct {
 
 	// Information about the ByteMatchSet that you specified in the GetByteMatchSet

@@ -60,6 +60,10 @@ type SendCustomVerificationEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendCustomVerificationEmailInput) operationName() string {
+	return "SendCustomVerificationEmail"
+}
+
 // The response received when attempting to send the custom verification email.
 type SendCustomVerificationEmailOutput struct {
 

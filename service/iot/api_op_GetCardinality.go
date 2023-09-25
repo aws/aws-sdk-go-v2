@@ -52,6 +52,10 @@ type GetCardinalityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCardinalityInput) operationName() string {
+	return "GetCardinality"
+}
+
 type GetCardinalityOutput struct {
 
 	// The approximate count of unique values that match the query.

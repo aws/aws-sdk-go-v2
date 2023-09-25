@@ -83,6 +83,10 @@ type GetCampaignDateRangeKpiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignDateRangeKpiInput) operationName() string {
+	return "GetCampaignDateRangeKpi"
+}
+
 type GetCampaignDateRangeKpiOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard metric

@@ -53,6 +53,10 @@ type CreateSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSignalCatalogInput) operationName() string {
+	return "CreateSignalCatalog"
+}
+
 type CreateSignalCatalogOutput struct {
 
 	// The ARN of the created signal catalog.

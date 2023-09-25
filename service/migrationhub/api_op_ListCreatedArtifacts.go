@@ -61,6 +61,10 @@ type ListCreatedArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCreatedArtifactsInput) operationName() string {
+	return "ListCreatedArtifacts"
+}
+
 type ListCreatedArtifactsOutput struct {
 
 	// List of created artifacts up to the maximum number of results specified in the

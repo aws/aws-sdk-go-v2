@@ -56,6 +56,10 @@ type ListAttachedIndicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttachedIndicesInput) operationName() string {
+	return "ListAttachedIndices"
+}
+
 type ListAttachedIndicesOutput struct {
 
 	// The indices attached to the specified object.

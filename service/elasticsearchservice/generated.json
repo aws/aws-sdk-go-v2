@@ -59,6 +59,7 @@
         "api_op_UpdatePackage.go",
         "api_op_UpdateVpcEndpoint.go",
         "api_op_UpgradeElasticsearchDomain.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

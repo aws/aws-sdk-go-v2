@@ -43,6 +43,10 @@ type DeleteDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDimensionInput) operationName() string {
+	return "DeleteDimension"
+}
+
 type DeleteDimensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

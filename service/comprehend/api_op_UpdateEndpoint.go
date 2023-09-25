@@ -58,6 +58,10 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointInput) operationName() string {
+	return "UpdateEndpoint"
+}
+
 type UpdateEndpointOutput struct {
 
 	// The Amazon Resource Number (ARN) of the new model.

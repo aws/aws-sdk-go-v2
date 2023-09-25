@@ -51,6 +51,10 @@ type GetWorkflowRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowRunsInput) operationName() string {
+	return "GetWorkflowRuns"
+}
+
 type GetWorkflowRunsOutput struct {
 
 	// A continuation token, if not all requested workflow runs have been returned.

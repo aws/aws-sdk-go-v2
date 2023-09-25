@@ -46,6 +46,10 @@ type GetOperationDetailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOperationDetailInput) operationName() string {
+	return "GetOperationDetail"
+}
+
 // The GetOperationDetail response includes the following elements.
 type GetOperationDetailOutput struct {
 

@@ -58,6 +58,10 @@ type UpdateParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateParallelDataInput) operationName() string {
+	return "UpdateParallelData"
+}
+
 type UpdateParallelDataOutput struct {
 
 	// The time that the most recent update was attempted.

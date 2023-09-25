@@ -45,6 +45,10 @@ type ListSkillsStoreCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSkillsStoreCategoriesInput) operationName() string {
+	return "ListSkillsStoreCategories"
+}
+
 type ListSkillsStoreCategoriesOutput struct {
 
 	// The list of categories.

@@ -84,6 +84,10 @@ type ListPriceListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPriceListsInput) operationName() string {
+	return "ListPriceLists"
+}
+
 type ListPriceListsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.

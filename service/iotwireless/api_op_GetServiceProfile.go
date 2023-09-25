@@ -42,6 +42,10 @@ type GetServiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceProfileInput) operationName() string {
+	return "GetServiceProfile"
+}
+
 type GetServiceProfileOutput struct {
 
 	// The Amazon Resource Name of the resource.

@@ -42,6 +42,10 @@ type GetClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClusterSnapshotInput) operationName() string {
+	return "GetClusterSnapshot"
+}
+
 type GetClusterSnapshotOutput struct {
 
 	// Returns information about a specific Elastic DocumentDB snapshot.

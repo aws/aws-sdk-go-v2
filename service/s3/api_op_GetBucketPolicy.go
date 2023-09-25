@@ -78,6 +78,10 @@ type GetBucketPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketPolicyInput) operationName() string {
+	return "GetBucketPolicy"
+}
+
 type GetBucketPolicyOutput struct {
 
 	// The bucket policy as a JSON document.

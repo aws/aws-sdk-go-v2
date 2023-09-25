@@ -35,6 +35,10 @@ type GetServiceRoleForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceRoleForAccountInput) operationName() string {
+	return "GetServiceRoleForAccount"
+}
+
 type GetServiceRoleForAccountOutput struct {
 
 	// The time when the service role was associated with the account.

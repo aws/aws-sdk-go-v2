@@ -82,6 +82,10 @@ type CreateNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkProfileInput) operationName() string {
+	return "CreateNetworkProfile"
+}
+
 type CreateNetworkProfileOutput struct {
 
 	// The network profile that is returned by the create network profile request.

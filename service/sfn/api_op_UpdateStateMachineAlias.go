@@ -64,6 +64,10 @@ type UpdateStateMachineAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStateMachineAliasInput) operationName() string {
+	return "UpdateStateMachineAlias"
+}
+
 type UpdateStateMachineAliasOutput struct {
 
 	// The date and time the state machine alias was updated.

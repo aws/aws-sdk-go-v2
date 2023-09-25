@@ -42,6 +42,10 @@ type GetTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTriggerInput) operationName() string {
+	return "GetTrigger"
+}
+
 type GetTriggerOutput struct {
 
 	// The requested trigger definition.

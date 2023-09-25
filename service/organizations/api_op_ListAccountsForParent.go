@@ -70,6 +70,10 @@ type ListAccountsForParentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountsForParentInput) operationName() string {
+	return "ListAccountsForParent"
+}
+
 type ListAccountsForParentOutput struct {
 
 	// A list of the accounts in the specified root or OU.

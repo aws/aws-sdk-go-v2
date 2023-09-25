@@ -55,6 +55,10 @@ type DescribeChangeSetHooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChangeSetHooksInput) operationName() string {
+	return "DescribeChangeSetHooks"
+}
+
 type DescribeChangeSetHooksOutput struct {
 
 	// The change set identifier (stack ID).

@@ -45,6 +45,10 @@ type DeleteChannelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChannelGroupInput) operationName() string {
+	return "DeleteChannelGroup"
+}
+
 type DeleteChannelGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

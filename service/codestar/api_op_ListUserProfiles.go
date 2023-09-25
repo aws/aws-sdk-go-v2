@@ -44,6 +44,10 @@ type ListUserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserProfilesInput) operationName() string {
+	return "ListUserProfiles"
+}
+
 type ListUserProfilesOutput struct {
 
 	// All the user profiles configured in AWS CodeStar for an AWS account.

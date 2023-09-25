@@ -65,6 +65,10 @@ type CreateAnnotationStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnnotationStoreInput) operationName() string {
+	return "CreateAnnotationStore"
+}
+
 type CreateAnnotationStoreOutput struct {
 
 	// When the store was created.

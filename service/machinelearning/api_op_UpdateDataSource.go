@@ -48,6 +48,10 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataSourceInput) operationName() string {
+	return "UpdateDataSource"
+}
+
 // Represents the output of an UpdateDataSource operation. You can see the updated
 // content by using the GetBatchPrediction operation.
 type UpdateDataSourceOutput struct {

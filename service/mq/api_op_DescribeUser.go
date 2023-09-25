@@ -49,6 +49,10 @@ type DescribeUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserInput) operationName() string {
+	return "DescribeUser"
+}
+
 type DescribeUserOutput struct {
 
 	// Required. The unique ID that Amazon MQ generates for the broker.

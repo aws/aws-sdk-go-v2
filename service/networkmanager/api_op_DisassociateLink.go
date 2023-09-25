@@ -53,6 +53,10 @@ type DisassociateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateLinkInput) operationName() string {
+	return "DisassociateLink"
+}
+
 type DisassociateLinkOutput struct {
 
 	// Information about the link association.

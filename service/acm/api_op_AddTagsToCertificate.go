@@ -65,6 +65,10 @@ type AddTagsToCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsToCertificateInput) operationName() string {
+	return "AddTagsToCertificate"
+}
+
 type AddTagsToCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

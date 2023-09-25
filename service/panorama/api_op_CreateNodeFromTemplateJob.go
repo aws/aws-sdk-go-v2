@@ -68,6 +68,10 @@ type CreateNodeFromTemplateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNodeFromTemplateJobInput) operationName() string {
+	return "CreateNodeFromTemplateJob"
+}
+
 type CreateNodeFromTemplateJobOutput struct {
 
 	// The job's ID.

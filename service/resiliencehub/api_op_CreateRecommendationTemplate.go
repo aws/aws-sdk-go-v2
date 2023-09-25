@@ -74,6 +74,10 @@ type CreateRecommendationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRecommendationTemplateInput) operationName() string {
+	return "CreateRecommendationTemplate"
+}
+
 type CreateRecommendationTemplateOutput struct {
 
 	// The newly created recommendation template, returned as an object. This object

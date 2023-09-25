@@ -42,6 +42,10 @@ type DeleteTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTriggerInput) operationName() string {
+	return "DeleteTrigger"
+}
+
 type DeleteTriggerOutput struct {
 
 	// The name of the trigger that was deleted.

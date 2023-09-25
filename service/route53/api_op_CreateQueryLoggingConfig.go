@@ -130,6 +130,10 @@ type CreateQueryLoggingConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQueryLoggingConfigInput) operationName() string {
+	return "CreateQueryLoggingConfig"
+}
+
 type CreateQueryLoggingConfigOutput struct {
 
 	// The unique URL representing the new query logging configuration.

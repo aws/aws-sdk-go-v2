@@ -47,6 +47,10 @@ type PutConfigurationSetVdmOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationSetVdmOptionsInput) operationName() string {
+	return "PutConfigurationSetVdmOptions"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetVdmOptionsOutput struct {

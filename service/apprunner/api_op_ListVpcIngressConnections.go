@@ -53,6 +53,10 @@ type ListVpcIngressConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcIngressConnectionsInput) operationName() string {
+	return "ListVpcIngressConnections"
+}
+
 type ListVpcIngressConnectionsOutput struct {
 
 	// A list of summary information records for VPC Ingress Connections. In a

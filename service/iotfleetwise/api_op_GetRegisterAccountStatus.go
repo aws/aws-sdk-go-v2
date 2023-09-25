@@ -42,6 +42,10 @@ type GetRegisterAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegisterAccountStatusInput) operationName() string {
+	return "GetRegisterAccountStatus"
+}
+
 type GetRegisterAccountStatusOutput struct {
 
 	// The status of registering your account and resources. The status can be one of:

@@ -54,6 +54,10 @@ type DescribeReplicationTaskIndividualAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationTaskIndividualAssessmentsInput) operationName() string {
+	return "DescribeReplicationTaskIndividualAssessments"
+}
+
 type DescribeReplicationTaskIndividualAssessmentsOutput struct {
 
 	// A pagination token returned for you to pass to a subsequent request. If you

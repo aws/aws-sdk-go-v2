@@ -78,6 +78,10 @@ type GetSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSnapshotsInput) operationName() string {
+	return "GetSnapshots"
+}
+
 type GetSnapshotsOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token, which you can

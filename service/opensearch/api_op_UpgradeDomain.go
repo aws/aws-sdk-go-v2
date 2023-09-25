@@ -61,6 +61,10 @@ type UpgradeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpgradeDomainInput) operationName() string {
+	return "UpgradeDomain"
+}
+
 // Container for the response returned by UpgradeDomain operation.
 type UpgradeDomainOutput struct {
 

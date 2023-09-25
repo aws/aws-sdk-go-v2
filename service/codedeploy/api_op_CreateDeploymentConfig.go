@@ -63,6 +63,10 @@ type CreateDeploymentConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeploymentConfigInput) operationName() string {
+	return "CreateDeploymentConfig"
+}
+
 // Represents the output of a CreateDeploymentConfig operation.
 type CreateDeploymentConfigOutput struct {
 

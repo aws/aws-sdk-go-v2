@@ -52,6 +52,10 @@ type CreateHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHapgInput) operationName() string {
+	return "CreateHapg"
+}
+
 // Contains the output of the CreateHAPartitionGroup action.
 type CreateHapgOutput struct {
 

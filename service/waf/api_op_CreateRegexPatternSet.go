@@ -67,6 +67,10 @@ type CreateRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRegexPatternSetInput) operationName() string {
+	return "CreateRegexPatternSet"
+}
+
 type CreateRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRegexPatternSet request. You

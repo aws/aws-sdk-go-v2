@@ -93,6 +93,10 @@ type UpdateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataSetInput) operationName() string {
+	return "UpdateDataSet"
+}
+
 type UpdateDataSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.

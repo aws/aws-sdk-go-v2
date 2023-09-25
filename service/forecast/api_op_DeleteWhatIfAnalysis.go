@@ -45,6 +45,10 @@ type DeleteWhatIfAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWhatIfAnalysisInput) operationName() string {
+	return "DeleteWhatIfAnalysis"
+}
+
 type DeleteWhatIfAnalysisOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

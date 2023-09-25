@@ -63,6 +63,10 @@ type GetInsightImpactGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightImpactGraphInput) operationName() string {
+	return "GetInsightImpactGraph"
+}
+
 type GetInsightImpactGraphOutput struct {
 
 	// The provided end time.

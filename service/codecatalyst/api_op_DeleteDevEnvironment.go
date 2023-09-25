@@ -51,6 +51,10 @@ type DeleteDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDevEnvironmentInput) operationName() string {
+	return "DeleteDevEnvironment"
+}
+
 type DeleteDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the deleted Dev Environment.

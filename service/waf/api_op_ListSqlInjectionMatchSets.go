@@ -57,6 +57,10 @@ type ListSqlInjectionMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSqlInjectionMatchSetsInput) operationName() string {
+	return "ListSqlInjectionMatchSets"
+}
+
 // The response to a ListSqlInjectionMatchSets request.
 type ListSqlInjectionMatchSetsOutput struct {
 

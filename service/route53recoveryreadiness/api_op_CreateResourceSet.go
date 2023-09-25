@@ -66,6 +66,10 @@ type CreateResourceSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceSetInput) operationName() string {
+	return "CreateResourceSet"
+}
+
 type CreateResourceSetOutput struct {
 
 	// The Amazon Resource Name (ARN) for the resource set.

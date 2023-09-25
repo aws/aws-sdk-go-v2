@@ -53,6 +53,10 @@ type UpdateFolderPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFolderPermissionsInput) operationName() string {
+	return "UpdateFolderPermissions"
+}
+
 type UpdateFolderPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the folder.

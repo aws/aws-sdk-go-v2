@@ -49,6 +49,10 @@ type GetTypedLinkFacetInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTypedLinkFacetInformationInput) operationName() string {
+	return "GetTypedLinkFacetInformation"
+}
+
 type GetTypedLinkFacetInformationOutput struct {
 
 	// The order of identity attributes for the facet, from most significant to least

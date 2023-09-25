@@ -78,6 +78,10 @@ type CreateLogGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLogGroupInput) operationName() string {
+	return "CreateLogGroup"
+}
+
 type CreateLogGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

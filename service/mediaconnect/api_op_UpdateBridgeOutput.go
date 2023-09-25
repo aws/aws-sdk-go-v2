@@ -51,6 +51,10 @@ type UpdateBridgeOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBridgeOutputInput) operationName() string {
+	return "UpdateBridgeOutput"
+}
+
 type UpdateBridgeOutputOutput struct {
 
 	// The Amazon Resource Number (ARN) of the bridge.

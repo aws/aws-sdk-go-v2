@@ -63,6 +63,10 @@ type GetTransitGatewayRouteTablePropagationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransitGatewayRouteTablePropagationsInput) operationName() string {
+	return "GetTransitGatewayRouteTablePropagations"
+}
+
 type GetTransitGatewayRouteTablePropagationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

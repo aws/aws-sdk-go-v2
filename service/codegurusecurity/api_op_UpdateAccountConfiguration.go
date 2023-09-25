@@ -43,6 +43,10 @@ type UpdateAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountConfigurationInput) operationName() string {
+	return "UpdateAccountConfiguration"
+}
+
 type UpdateAccountConfigurationOutput struct {
 
 	// An EncryptionConfig object that contains the KMS key ARN to use for encryption.

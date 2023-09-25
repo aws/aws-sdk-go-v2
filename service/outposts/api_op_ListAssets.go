@@ -58,6 +58,10 @@ type ListAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssetsInput) operationName() string {
+	return "ListAssets"
+}
+
 type ListAssetsOutput struct {
 
 	// Information about the hardware assets.

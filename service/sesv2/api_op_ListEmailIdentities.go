@@ -56,6 +56,10 @@ type ListEmailIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEmailIdentitiesInput) operationName() string {
+	return "ListEmailIdentities"
+}
+
 // A list of all of the identities that you've attempted to verify, regardless of
 // whether or not those identities were successfully verified.
 type ListEmailIdentitiesOutput struct {

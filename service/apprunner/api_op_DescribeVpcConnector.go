@@ -43,6 +43,10 @@ type DescribeVpcConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcConnectorInput) operationName() string {
+	return "DescribeVpcConnector"
+}
+
 type DescribeVpcConnectorOutput struct {
 
 	// A description of the App Runner VPC connector that you specified in this

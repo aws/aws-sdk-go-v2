@@ -48,6 +48,10 @@ type UpdateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkspaceInput) operationName() string {
+	return "UpdateWorkspace"
+}
+
 type UpdateWorkspaceOutput struct {
 
 	// The date and time of the current update.

@@ -43,6 +43,10 @@ type GetJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobsInput) operationName() string {
+	return "GetJobs"
+}
+
 type GetJobsOutput struct {
 
 	// A list of job definitions.

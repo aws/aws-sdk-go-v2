@@ -47,6 +47,10 @@ type DescribeCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCodeReviewInput) operationName() string {
+	return "DescribeCodeReview"
+}
+
 type DescribeCodeReviewOutput struct {
 
 	// Information about the code review.

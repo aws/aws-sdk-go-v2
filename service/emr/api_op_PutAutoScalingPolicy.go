@@ -57,6 +57,10 @@ type PutAutoScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAutoScalingPolicyInput) operationName() string {
+	return "PutAutoScalingPolicy"
+}
+
 type PutAutoScalingPolicyOutput struct {
 
 	// The automatic scaling policy definition.

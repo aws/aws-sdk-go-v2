@@ -61,6 +61,10 @@ type UpdateBucketBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBucketBundleInput) operationName() string {
+	return "UpdateBucketBundle"
+}
+
 type UpdateBucketBundleOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

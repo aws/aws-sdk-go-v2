@@ -47,6 +47,10 @@ type ListRoleAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoleAliasesInput) operationName() string {
+	return "ListRoleAliases"
+}
+
 type ListRoleAliasesOutput struct {
 
 	// A marker used to get the next set of results.

@@ -52,6 +52,10 @@ type CreateLoadBalancerListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoadBalancerListenersInput) operationName() string {
+	return "CreateLoadBalancerListeners"
+}
+
 // Contains the parameters for CreateLoadBalancerListener.
 type CreateLoadBalancerListenersOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -50,6 +50,10 @@ type CreateLoggerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoggerDefinitionInput) operationName() string {
+	return "CreateLoggerDefinition"
+}
+
 type CreateLoggerDefinitionOutput struct {
 
 	// The ARN of the definition.

@@ -106,6 +106,10 @@ type ModifyVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVolumeInput) operationName() string {
+	return "ModifyVolume"
+}
+
 type ModifyVolumeOutput struct {
 
 	// Information about the volume modification.

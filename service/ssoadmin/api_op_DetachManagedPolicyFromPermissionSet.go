@@ -55,6 +55,10 @@ type DetachManagedPolicyFromPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachManagedPolicyFromPermissionSetInput) operationName() string {
+	return "DetachManagedPolicyFromPermissionSet"
+}
+
 type DetachManagedPolicyFromPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

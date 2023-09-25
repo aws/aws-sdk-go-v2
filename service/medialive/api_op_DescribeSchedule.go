@@ -49,6 +49,10 @@ type DescribeScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduleInput) operationName() string {
+	return "DescribeSchedule"
+}
+
 // Placeholder documentation for DescribeScheduleResponse
 type DescribeScheduleOutput struct {
 

@@ -55,6 +55,10 @@ type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetAdvisorSchemaObjectSummaryInput) operationName() string {
+	return "DescribeFleetAdvisorSchemaObjectSummary"
+}
+
 type DescribeFleetAdvisorSchemaObjectSummaryOutput struct {
 
 	// A collection of FleetAdvisorSchemaObjectResponse objects.

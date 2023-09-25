@@ -56,6 +56,10 @@ type ListQuerySuggestionsBlockListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQuerySuggestionsBlockListsInput) operationName() string {
+	return "ListQuerySuggestionsBlockLists"
+}
+
 type ListQuerySuggestionsBlockListsOutput struct {
 
 	// Summary items for a block list. This includes summary items on the block list

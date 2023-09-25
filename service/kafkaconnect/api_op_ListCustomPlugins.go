@@ -45,6 +45,10 @@ type ListCustomPluginsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomPluginsInput) operationName() string {
+	return "ListCustomPlugins"
+}
+
 type ListCustomPluginsOutput struct {
 
 	// An array of custom plugin descriptions.

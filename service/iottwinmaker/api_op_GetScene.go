@@ -48,6 +48,10 @@ type GetSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSceneInput) operationName() string {
+	return "GetScene"
+}
+
 type GetSceneOutput struct {
 
 	// The ARN of the scene.

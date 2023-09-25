@@ -111,6 +111,10 @@ type CreateStorediSCSIVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStorediSCSIVolumeInput) operationName() string {
+	return "CreateStorediSCSIVolume"
+}
+
 // A JSON object containing the following fields:
 type CreateStorediSCSIVolumeOutput struct {
 

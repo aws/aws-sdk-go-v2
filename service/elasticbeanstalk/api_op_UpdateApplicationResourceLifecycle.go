@@ -47,6 +47,10 @@ type UpdateApplicationResourceLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationResourceLifecycleInput) operationName() string {
+	return "UpdateApplicationResourceLifecycle"
+}
+
 type UpdateApplicationResourceLifecycleOutput struct {
 
 	// The name of the application.

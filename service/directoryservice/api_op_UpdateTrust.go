@@ -46,6 +46,10 @@ type UpdateTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrustInput) operationName() string {
+	return "UpdateTrust"
+}
+
 type UpdateTrustOutput struct {
 
 	// The Amazon Web Services request identifier.

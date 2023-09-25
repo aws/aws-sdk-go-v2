@@ -65,6 +65,10 @@ type UploadReadSetPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadReadSetPartInput) operationName() string {
+	return "UploadReadSetPart"
+}
+
 type UploadReadSetPartOutput struct {
 
 	// An identifier used to confirm that parts are being added to the intended upload.

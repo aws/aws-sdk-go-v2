@@ -73,6 +73,10 @@ type AddApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationReferenceDataSourceInput) operationName() string {
+	return "AddApplicationReferenceDataSource"
+}
+
 type AddApplicationReferenceDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

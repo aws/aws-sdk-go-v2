@@ -42,6 +42,10 @@ type DescribeSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSafetyRuleInput) operationName() string {
+	return "DescribeSafetyRule"
+}
+
 type DescribeSafetyRuleOutput struct {
 
 	// The assertion rule in the response.

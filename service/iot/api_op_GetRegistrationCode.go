@@ -38,6 +38,10 @@ type GetRegistrationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegistrationCodeInput) operationName() string {
+	return "GetRegistrationCode"
+}
+
 // The output from the GetRegistrationCode operation.
 type GetRegistrationCodeOutput struct {
 

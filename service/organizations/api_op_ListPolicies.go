@@ -71,6 +71,10 @@ type ListPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPoliciesInput) operationName() string {
+	return "ListPolicies"
+}
+
 type ListPoliciesOutput struct {
 
 	// If present, indicates that more output is available than is included in the

@@ -49,6 +49,10 @@ type RevokeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeVpcEndpointAccessInput) operationName() string {
+	return "RevokeVpcEndpointAccess"
+}
+
 // Container for response parameters to the RevokeVpcEndpointAccess operation. The
 // response body for this operation is empty.
 type RevokeVpcEndpointAccessOutput struct {

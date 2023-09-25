@@ -52,6 +52,10 @@ type DescribeDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetImportJobInput) operationName() string {
+	return "DescribeDatasetImportJob"
+}
+
 type DescribeDatasetImportJobOutput struct {
 
 	// When the dataset import job was created.

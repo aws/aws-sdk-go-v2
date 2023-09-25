@@ -57,6 +57,10 @@ type UpdatePricingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePricingRuleInput) operationName() string {
+	return "UpdatePricingRule"
+}
+
 type UpdatePricingRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the successfully updated pricing rule.

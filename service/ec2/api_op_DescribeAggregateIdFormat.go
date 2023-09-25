@@ -54,6 +54,10 @@ type DescribeAggregateIdFormatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAggregateIdFormatInput) operationName() string {
+	return "DescribeAggregateIdFormat"
+}
+
 type DescribeAggregateIdFormatOutput struct {
 
 	// Information about each resource's ID format.

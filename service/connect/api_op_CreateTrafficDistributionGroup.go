@@ -69,6 +69,10 @@ type CreateTrafficDistributionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrafficDistributionGroupInput) operationName() string {
+	return "CreateTrafficDistributionGroup"
+}
+
 type CreateTrafficDistributionGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the traffic distribution group.

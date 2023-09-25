@@ -48,6 +48,10 @@ type DeleteProvisioningTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProvisioningTemplateVersionInput) operationName() string {
+	return "DeleteProvisioningTemplateVersion"
+}
+
 type DeleteProvisioningTemplateVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

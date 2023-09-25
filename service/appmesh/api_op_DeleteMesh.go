@@ -44,6 +44,10 @@ type DeleteMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMeshInput) operationName() string {
+	return "DeleteMesh"
+}
+
 type DeleteMeshOutput struct {
 
 	// The service mesh that was deleted.

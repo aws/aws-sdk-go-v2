@@ -62,6 +62,10 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationCloudWatchLoggingOptionInput) operationName() string {
+	return "AddApplicationCloudWatchLoggingOption"
+}
+
 type AddApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The application's ARN.

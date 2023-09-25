@@ -64,6 +64,10 @@ type CreateAdditionalAssignmentsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAdditionalAssignmentsForHITInput) operationName() string {
+	return "CreateAdditionalAssignmentsForHIT"
+}
+
 type CreateAdditionalAssignmentsForHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

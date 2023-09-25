@@ -49,6 +49,10 @@ type ListMulticastGroupsByFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMulticastGroupsByFuotaTaskInput) operationName() string {
+	return "ListMulticastGroupsByFuotaTask"
+}
+
 type ListMulticastGroupsByFuotaTaskOutput struct {
 
 	// List of multicast groups associated with a FUOTA task.

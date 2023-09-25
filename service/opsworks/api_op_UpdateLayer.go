@@ -116,6 +116,10 @@ type UpdateLayerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLayerInput) operationName() string {
+	return "UpdateLayer"
+}
+
 type UpdateLayerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

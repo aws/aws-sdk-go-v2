@@ -42,6 +42,10 @@ type GetUserPoolMfaConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserPoolMfaConfigInput) operationName() string {
+	return "GetUserPoolMfaConfig"
+}
+
 type GetUserPoolMfaConfigOutput struct {
 
 	// The multi-factor authentication (MFA) configuration. Valid values include:

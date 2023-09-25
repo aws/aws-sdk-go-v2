@@ -62,6 +62,10 @@ type UpdateResourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceServerInput) operationName() string {
+	return "UpdateResourceServer"
+}
+
 type UpdateResourceServerOutput struct {
 
 	// The resource server.

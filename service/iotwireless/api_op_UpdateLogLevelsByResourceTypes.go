@@ -50,6 +50,10 @@ type UpdateLogLevelsByResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLogLevelsByResourceTypesInput) operationName() string {
+	return "UpdateLogLevelsByResourceTypes"
+}
+
 type UpdateLogLevelsByResourceTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

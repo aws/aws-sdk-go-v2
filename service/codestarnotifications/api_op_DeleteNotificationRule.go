@@ -41,6 +41,10 @@ type DeleteNotificationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNotificationRuleInput) operationName() string {
+	return "DeleteNotificationRule"
+}
+
 type DeleteNotificationRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted notification rule.

@@ -64,6 +64,10 @@ type DescribeNetworkInterfacePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkInterfacePermissionsInput) operationName() string {
+	return "DescribeNetworkInterfacePermissions"
+}
+
 // Contains the output for DescribeNetworkInterfacePermissions.
 type DescribeNetworkInterfacePermissionsOutput struct {
 

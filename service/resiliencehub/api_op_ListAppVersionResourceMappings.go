@@ -60,6 +60,10 @@ type ListAppVersionResourceMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppVersionResourceMappingsInput) operationName() string {
+	return "ListAppVersionResourceMappings"
+}
+
 type ListAppVersionResourceMappingsOutput struct {
 
 	// Mappings used to map logical resources from the template to physical resources.

@@ -49,6 +49,10 @@ type ListEngagementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEngagementsInput) operationName() string {
+	return "ListEngagements"
+}
+
 type ListEngagementsOutput struct {
 
 	// A list of each engagement that occurred during the specified time range of an

@@ -53,6 +53,10 @@ type RegisterEcsClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterEcsClusterInput) operationName() string {
+	return "RegisterEcsCluster"
+}
+
 // Contains the response to a RegisterEcsCluster request.
 type RegisterEcsClusterOutput struct {
 

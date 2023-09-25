@@ -51,6 +51,10 @@ type ListApplicationStatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationStatesInput) operationName() string {
+	return "ListApplicationStates"
+}
+
 type ListApplicationStatesOutput struct {
 
 	// A list of Applications that exist in Application Discovery Service.

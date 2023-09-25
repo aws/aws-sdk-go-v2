@@ -51,6 +51,10 @@ type ExportFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportFormsInput) operationName() string {
+	return "ExportForms"
+}
+
 type ExportFormsOutput struct {
 
 	// Represents the configuration of the exported forms.

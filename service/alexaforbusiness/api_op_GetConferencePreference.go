@@ -38,6 +38,10 @@ type GetConferencePreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConferencePreferenceInput) operationName() string {
+	return "GetConferencePreference"
+}
+
 type GetConferencePreferenceOutput struct {
 
 	// The conference preference.

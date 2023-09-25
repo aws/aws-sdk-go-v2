@@ -52,6 +52,10 @@ type DescribeSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSubnetGroupsInput) operationName() string {
+	return "DescribeSubnetGroups"
+}
+
 type DescribeSubnetGroupsOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.

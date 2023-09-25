@@ -50,6 +50,10 @@ type CreateDeviceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeviceDefinitionInput) operationName() string {
+	return "CreateDeviceDefinition"
+}
+
 type CreateDeviceDefinitionOutput struct {
 
 	// The ARN of the definition.

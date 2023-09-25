@@ -85,6 +85,10 @@ type CreateDhcpOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDhcpOptionsInput) operationName() string {
+	return "CreateDhcpOptions"
+}
+
 type CreateDhcpOptionsOutput struct {
 
 	// A set of DHCP options.

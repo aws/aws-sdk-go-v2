@@ -71,6 +71,10 @@ type CreateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVehicleInput) operationName() string {
+	return "CreateVehicle"
+}
+
 type CreateVehicleOutput struct {
 
 	// The ARN of the created vehicle.

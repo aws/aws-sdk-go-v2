@@ -51,6 +51,10 @@ type DisassociateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateBotInput) operationName() string {
+	return "DisassociateBot"
+}
+
 type DisassociateBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

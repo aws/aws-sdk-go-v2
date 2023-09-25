@@ -50,6 +50,10 @@ type DeleteGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGrantInput) operationName() string {
+	return "DeleteGrant"
+}
+
 type DeleteGrantOutput struct {
 
 	// Grant ARN.

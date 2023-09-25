@@ -49,6 +49,10 @@ type ModifyClusterSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterSnapshotScheduleInput) operationName() string {
+	return "ModifyClusterSnapshotSchedule"
+}
+
 type ModifyClusterSnapshotScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

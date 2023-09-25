@@ -55,6 +55,10 @@ type CreateGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupMembershipInput) operationName() string {
+	return "CreateGroupMembership"
+}
+
 type CreateGroupMembershipOutput struct {
 
 	// The globally unique identifier for the identity store.

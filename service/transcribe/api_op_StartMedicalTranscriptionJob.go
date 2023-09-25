@@ -198,6 +198,10 @@ type StartMedicalTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMedicalTranscriptionJobInput) operationName() string {
+	return "StartMedicalTranscriptionJob"
+}
+
 type StartMedicalTranscriptionJobOutput struct {
 
 	// Provides detailed information about the current medical transcription job,

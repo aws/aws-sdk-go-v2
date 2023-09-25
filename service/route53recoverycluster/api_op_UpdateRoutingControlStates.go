@@ -70,6 +70,10 @@ type UpdateRoutingControlStatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoutingControlStatesInput) operationName() string {
+	return "UpdateRoutingControlStates"
+}
+
 type UpdateRoutingControlStatesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

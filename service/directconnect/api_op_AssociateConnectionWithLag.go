@@ -61,6 +61,10 @@ type AssociateConnectionWithLagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateConnectionWithLagInput) operationName() string {
+	return "AssociateConnectionWithLag"
+}
+
 // Information about an Direct Connect connection.
 type AssociateConnectionWithLagOutput struct {
 

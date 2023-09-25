@@ -80,6 +80,10 @@ type CreateThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThemeInput) operationName() string {
+	return "CreateTheme"
+}
+
 type CreateThemeOutput struct {
 
 	// The Amazon Resource Name (ARN) for the theme.

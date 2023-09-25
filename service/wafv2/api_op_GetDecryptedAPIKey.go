@@ -62,6 +62,10 @@ type GetDecryptedAPIKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDecryptedAPIKeyInput) operationName() string {
+	return "GetDecryptedAPIKey"
+}
+
 type GetDecryptedAPIKeyOutput struct {
 
 	// The date and time that the key was created.

@@ -53,6 +53,10 @@ type ListFacetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFacetAttributesInput) operationName() string {
+	return "ListFacetAttributes"
+}
+
 type ListFacetAttributesOutput struct {
 
 	// The attributes attached to the facet.

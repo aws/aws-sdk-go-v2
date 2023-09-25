@@ -90,6 +90,10 @@ type GetContainerLogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerLogInput) operationName() string {
+	return "GetContainerLog"
+}
+
 type GetContainerLogOutput struct {
 
 	// An array of objects that describe the log events of a container.

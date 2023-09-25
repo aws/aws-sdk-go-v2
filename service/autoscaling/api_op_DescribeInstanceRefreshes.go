@@ -63,6 +63,10 @@ type DescribeInstanceRefreshesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceRefreshesInput) operationName() string {
+	return "DescribeInstanceRefreshes"
+}
+
 type DescribeInstanceRefreshesOutput struct {
 
 	// The instance refreshes for the specified group, sorted by creation timestamp in

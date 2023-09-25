@@ -56,6 +56,10 @@ type CopyImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyImageInput) operationName() string {
+	return "CopyImage"
+}
+
 type CopyImageOutput struct {
 
 	// The name of the destination image.

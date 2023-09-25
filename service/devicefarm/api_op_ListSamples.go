@@ -47,6 +47,10 @@ type ListSamplesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSamplesInput) operationName() string {
+	return "ListSamples"
+}
+
 // Represents the result of a list samples request.
 type ListSamplesOutput struct {
 

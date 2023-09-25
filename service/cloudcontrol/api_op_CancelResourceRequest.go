@@ -46,6 +46,10 @@ type CancelResourceRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelResourceRequestInput) operationName() string {
+	return "CancelResourceRequest"
+}
+
 type CancelResourceRequestOutput struct {
 
 	// Represents the current status of a resource operation request. For more

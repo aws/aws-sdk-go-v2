@@ -50,6 +50,10 @@ type GetParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParameterInput) operationName() string {
+	return "GetParameter"
+}
+
 type GetParameterOutput struct {
 
 	// Information about a parameter.

@@ -43,6 +43,10 @@ type DescribeEdgePackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEdgePackagingJobInput) operationName() string {
+	return "DescribeEdgePackagingJob"
+}
+
 type DescribeEdgePackagingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the edge packaging job.

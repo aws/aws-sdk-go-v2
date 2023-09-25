@@ -55,6 +55,10 @@ type ListPeeringsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPeeringsInput) operationName() string {
+	return "ListPeerings"
+}
+
 type ListPeeringsOutput struct {
 
 	// The token for the next page of results.

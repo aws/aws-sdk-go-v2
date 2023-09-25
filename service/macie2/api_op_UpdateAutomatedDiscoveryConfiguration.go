@@ -51,6 +51,10 @@ type UpdateAutomatedDiscoveryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAutomatedDiscoveryConfigurationInput) operationName() string {
+	return "UpdateAutomatedDiscoveryConfiguration"
+}
+
 type UpdateAutomatedDiscoveryConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

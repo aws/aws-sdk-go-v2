@@ -43,6 +43,10 @@ type GetCampaignStateBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignStateBatchInput) operationName() string {
+	return "GetCampaignStateBatch"
+}
+
 // GetCampaignStateBatchResponse
 type GetCampaignStateBatchOutput struct {
 

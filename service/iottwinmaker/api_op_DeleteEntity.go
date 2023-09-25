@@ -50,6 +50,10 @@ type DeleteEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEntityInput) operationName() string {
+	return "DeleteEntity"
+}
+
 type DeleteEntityOutput struct {
 
 	// The current state of the deleted entity.

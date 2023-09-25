@@ -59,6 +59,10 @@ type CreateBackupPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBackupPlanInput) operationName() string {
+	return "CreateBackupPlan"
+}
+
 type CreateBackupPlanOutput struct {
 
 	// A list of BackupOptions settings for a resource type. This option is only

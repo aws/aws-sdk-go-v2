@@ -63,6 +63,10 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetInput) operationName() string {
+	return "CreateDataset"
+}
+
 type CreateDatasetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset being created.

@@ -68,6 +68,10 @@ type BatchUpdateAttendeeCapabilitiesExceptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateAttendeeCapabilitiesExceptInput) operationName() string {
+	return "BatchUpdateAttendeeCapabilitiesExcept"
+}
+
 type BatchUpdateAttendeeCapabilitiesExceptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,6 +65,10 @@ type CreateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNamespaceInput) operationName() string {
+	return "CreateNamespace"
+}
+
 type CreateNamespaceOutput struct {
 
 	// The ARN of the Amazon QuickSight namespace you created.

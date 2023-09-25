@@ -42,6 +42,10 @@ type GetStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStreamKeyInput) operationName() string {
+	return "GetStreamKey"
+}
+
 type GetStreamKeyOutput struct {
 
 	//

@@ -52,6 +52,10 @@ type DescribeSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSchemasInput) operationName() string {
+	return "DescribeSchemas"
+}
+
 type DescribeSchemasOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

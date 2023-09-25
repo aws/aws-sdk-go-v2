@@ -41,6 +41,10 @@ type DeleteApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApiInput) operationName() string {
+	return "DeleteApi"
+}
+
 type DeleteApiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

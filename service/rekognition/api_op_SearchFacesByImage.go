@@ -100,6 +100,10 @@ type SearchFacesByImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchFacesByImageInput) operationName() string {
+	return "SearchFacesByImage"
+}
+
 type SearchFacesByImageOutput struct {
 
 	// An array of faces that match the input face, along with the confidence in the

@@ -65,6 +65,10 @@ type ListRobotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRobotsInput) operationName() string {
+	return "ListRobots"
+}
+
 type ListRobotsOutput struct {
 
 	// If the previous paginated request did not return all of the remaining results,

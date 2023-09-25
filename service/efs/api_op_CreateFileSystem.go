@@ -160,6 +160,10 @@ type CreateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFileSystemInput) operationName() string {
+	return "CreateFileSystem"
+}
+
 // A description of the file system.
 type CreateFileSystemOutput struct {
 

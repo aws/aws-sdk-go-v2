@@ -51,6 +51,10 @@ type DeleteThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteThemeInput) operationName() string {
+	return "DeleteTheme"
+}
+
 type DeleteThemeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

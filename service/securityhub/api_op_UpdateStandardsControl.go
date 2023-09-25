@@ -50,6 +50,10 @@ type UpdateStandardsControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStandardsControlInput) operationName() string {
+	return "UpdateStandardsControl"
+}
+
 type UpdateStandardsControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

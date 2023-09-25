@@ -65,6 +65,10 @@ type DescribeSlotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSlotInput) operationName() string {
+	return "DescribeSlot"
+}
+
 type DescribeSlotOutput struct {
 
 	// The identifier of the bot associated with the slot.

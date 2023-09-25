@@ -57,6 +57,10 @@ type BatchDeleteDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteDocumentInput) operationName() string {
+	return "BatchDeleteDocument"
+}
+
 type BatchDeleteDocumentOutput struct {
 
 	// A list of documents that could not be removed from the index. Each entry

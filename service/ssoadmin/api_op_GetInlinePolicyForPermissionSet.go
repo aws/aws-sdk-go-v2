@@ -49,6 +49,10 @@ type GetInlinePolicyForPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInlinePolicyForPermissionSetInput) operationName() string {
+	return "GetInlinePolicyForPermissionSet"
+}
+
 type GetInlinePolicyForPermissionSetOutput struct {
 
 	// The inline policy that is attached to the permission set. For Length Constraints

@@ -48,6 +48,10 @@ type RebalanceSlotsInGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebalanceSlotsInGlobalReplicationGroupInput) operationName() string {
+	return "RebalanceSlotsInGlobalReplicationGroup"
+}
+
 type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary

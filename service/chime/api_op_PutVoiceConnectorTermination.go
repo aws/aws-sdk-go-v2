@@ -58,6 +58,10 @@ type PutVoiceConnectorTerminationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorTerminationInput) operationName() string {
+	return "PutVoiceConnectorTermination"
+}
+
 type PutVoiceConnectorTerminationOutput struct {
 
 	// The updated termination setting details.

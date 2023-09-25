@@ -36,6 +36,10 @@ type EnableSagemakerServicecatalogPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableSagemakerServicecatalogPortfolioInput) operationName() string {
+	return "EnableSagemakerServicecatalogPortfolio"
+}
+
 type EnableSagemakerServicecatalogPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

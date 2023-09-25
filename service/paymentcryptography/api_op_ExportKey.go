@@ -87,6 +87,10 @@ type ExportKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportKeyInput) operationName() string {
+	return "ExportKey"
+}
+
 type ExportKeyOutput struct {
 
 	// The key material under export as a TR-34 or TR-31 wrapped key block.

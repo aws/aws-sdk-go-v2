@@ -50,6 +50,10 @@ type DescribePatchGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePatchGroupsInput) operationName() string {
+	return "DescribePatchGroups"
+}
+
 type DescribePatchGroupsOutput struct {
 
 	// Each entry in the array contains:

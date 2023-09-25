@@ -72,6 +72,10 @@ type UpdateRumMetricDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRumMetricDefinitionInput) operationName() string {
+	return "UpdateRumMetricDefinition"
+}
+
 type UpdateRumMetricDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

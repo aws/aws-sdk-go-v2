@@ -46,6 +46,10 @@ type AssociateTagOptionWithResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTagOptionWithResourceInput) operationName() string {
+	return "AssociateTagOptionWithResource"
+}
+
 type AssociateTagOptionWithResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

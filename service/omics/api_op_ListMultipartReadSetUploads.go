@@ -49,6 +49,10 @@ type ListMultipartReadSetUploadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMultipartReadSetUploadsInput) operationName() string {
+	return "ListMultipartReadSetUploads"
+}
+
 type ListMultipartReadSetUploadsOutput struct {
 
 	// Next token returned in the response of a previous ListMultipartReadSetUploads

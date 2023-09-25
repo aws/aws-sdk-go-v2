@@ -54,6 +54,10 @@ type DescribePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackageVersionInput) operationName() string {
+	return "DescribePackageVersion"
+}
+
 type DescribePackageVersionOutput struct {
 
 	// Whether the version is the latest available.

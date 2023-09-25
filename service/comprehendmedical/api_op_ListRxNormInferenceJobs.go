@@ -48,6 +48,10 @@ type ListRxNormInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRxNormInferenceJobsInput) operationName() string {
+	return "ListRxNormInferenceJobs"
+}
+
 type ListRxNormInferenceJobsOutput struct {
 
 	// The maximum number of results to return in each page. The default is 100.

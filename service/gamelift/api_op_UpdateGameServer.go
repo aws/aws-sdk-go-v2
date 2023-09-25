@@ -81,6 +81,10 @@ type UpdateGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGameServerInput) operationName() string {
+	return "UpdateGameServer"
+}
+
 type UpdateGameServerOutput struct {
 
 	// Object that describes the newly updated game server.

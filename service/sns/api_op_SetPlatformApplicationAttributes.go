@@ -89,6 +89,10 @@ type SetPlatformApplicationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetPlatformApplicationAttributesInput) operationName() string {
+	return "SetPlatformApplicationAttributes"
+}
+
 type SetPlatformApplicationAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

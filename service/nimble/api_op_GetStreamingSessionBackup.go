@@ -48,6 +48,10 @@ type GetStreamingSessionBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStreamingSessionBackupInput) operationName() string {
+	return "GetStreamingSessionBackup"
+}
+
 type GetStreamingSessionBackupOutput struct {
 
 	// Information about the streaming session backup.

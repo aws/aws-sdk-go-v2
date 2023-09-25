@@ -62,6 +62,10 @@ type ListRegionalBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRegionalBucketsInput) operationName() string {
+	return "ListRegionalBuckets"
+}
+
 type ListRegionalBucketsOutput struct {
 
 	// NextToken is sent when isTruncated is true, which means there are more buckets

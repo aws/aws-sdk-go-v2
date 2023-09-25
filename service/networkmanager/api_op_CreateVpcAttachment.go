@@ -61,6 +61,10 @@ type CreateVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcAttachmentInput) operationName() string {
+	return "CreateVpcAttachment"
+}
+
 type CreateVpcAttachmentOutput struct {
 
 	// Provides details about the VPC attachment.

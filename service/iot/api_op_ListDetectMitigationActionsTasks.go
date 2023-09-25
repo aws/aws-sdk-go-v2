@@ -58,6 +58,10 @@ type ListDetectMitigationActionsTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDetectMitigationActionsTasksInput) operationName() string {
+	return "ListDetectMitigationActionsTasks"
+}
+
 type ListDetectMitigationActionsTasksOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there

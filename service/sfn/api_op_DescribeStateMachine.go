@@ -67,6 +67,10 @@ type DescribeStateMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStateMachineInput) operationName() string {
+	return "DescribeStateMachine"
+}
+
 type DescribeStateMachineOutput struct {
 
 	// The date the state machine is created. For a state machine version, creationDate

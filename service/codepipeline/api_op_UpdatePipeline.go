@@ -46,6 +46,10 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePipelineInput) operationName() string {
+	return "UpdatePipeline"
+}
+
 // Represents the output of an UpdatePipeline action.
 type UpdatePipelineOutput struct {
 

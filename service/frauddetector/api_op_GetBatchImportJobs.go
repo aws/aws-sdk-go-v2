@@ -51,6 +51,10 @@ type GetBatchImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBatchImportJobsInput) operationName() string {
+	return "GetBatchImportJobs"
+}
+
 type GetBatchImportJobsOutput struct {
 
 	// An array containing the details of each batch import job.

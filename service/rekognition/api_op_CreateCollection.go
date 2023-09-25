@@ -53,6 +53,10 @@ type CreateCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCollectionInput) operationName() string {
+	return "CreateCollection"
+}
+
 type CreateCollectionOutput struct {
 
 	// Amazon Resource Name (ARN) of the collection. You can use this to manage

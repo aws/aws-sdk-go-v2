@@ -36,6 +36,10 @@ type TestBodyStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestBodyStructureInput) operationName() string {
+	return "TestBodyStructure"
+}
+
 type TestBodyStructureOutput struct {
 	TestConfig *types.TestConfig
 

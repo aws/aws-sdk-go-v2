@@ -48,6 +48,10 @@ type DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput) operationName() string {
+	return "DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+}
+
 type DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput struct {
 
 	// Information about the association.

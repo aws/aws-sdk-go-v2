@@ -59,6 +59,10 @@ type UpdateStreamingImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStreamingImageInput) operationName() string {
+	return "UpdateStreamingImage"
+}
+
 type UpdateStreamingImageOutput struct {
 
 	// Represents a streaming image resource. Streaming images are used by studio

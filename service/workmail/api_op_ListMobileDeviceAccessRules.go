@@ -42,6 +42,10 @@ type ListMobileDeviceAccessRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMobileDeviceAccessRulesInput) operationName() string {
+	return "ListMobileDeviceAccessRules"
+}
+
 type ListMobileDeviceAccessRulesOutput struct {
 
 	// The list of mobile device access rules that exist under the specified WorkMail

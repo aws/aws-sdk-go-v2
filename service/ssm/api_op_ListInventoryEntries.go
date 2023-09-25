@@ -58,6 +58,10 @@ type ListInventoryEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInventoryEntriesInput) operationName() string {
+	return "ListInventoryEntries"
+}
+
 type ListInventoryEntriesOutput struct {
 
 	// The time that inventory information was collected for the managed node(s).

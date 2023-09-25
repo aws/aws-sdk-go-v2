@@ -46,6 +46,10 @@ type DisassociateVpcCidrBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateVpcCidrBlockInput) operationName() string {
+	return "DisassociateVpcCidrBlock"
+}
+
 type DisassociateVpcCidrBlockOutput struct {
 
 	// Information about the IPv4 CIDR block association.

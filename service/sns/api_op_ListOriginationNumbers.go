@@ -46,6 +46,10 @@ type ListOriginationNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOriginationNumbersInput) operationName() string {
+	return "ListOriginationNumbers"
+}
+
 type ListOriginationNumbersOutput struct {
 
 	// A NextToken string is returned when you call the ListOriginationNumbers

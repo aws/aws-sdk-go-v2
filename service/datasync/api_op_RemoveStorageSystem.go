@@ -43,6 +43,10 @@ type RemoveStorageSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveStorageSystemInput) operationName() string {
+	return "RemoveStorageSystem"
+}
+
 type RemoveStorageSystemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

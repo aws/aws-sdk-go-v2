@@ -79,6 +79,10 @@ type ListStudioLifecycleConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStudioLifecycleConfigsInput) operationName() string {
+	return "ListStudioLifecycleConfigs"
+}
+
 type ListStudioLifecycleConfigsOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in

@@ -62,6 +62,10 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointInput) operationName() string {
+	return "UpdateEndpoint"
+}
+
 type UpdateEndpointOutput struct {
 
 	// The ARN of the endpoint you updated in this request.

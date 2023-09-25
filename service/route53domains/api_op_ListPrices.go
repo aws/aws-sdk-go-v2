@@ -60,6 +60,10 @@ type ListPricesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPricesInput) operationName() string {
+	return "ListPrices"
+}
+
 type ListPricesOutput struct {
 
 	// If there are more prices than you specified for MaxItems in the request, submit

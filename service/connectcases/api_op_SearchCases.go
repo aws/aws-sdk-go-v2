@@ -66,6 +66,10 @@ type SearchCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchCasesInput) operationName() string {
+	return "SearchCases"
+}
+
 type SearchCasesOutput struct {
 
 	// A list of case documents where each case contains the properties CaseId and

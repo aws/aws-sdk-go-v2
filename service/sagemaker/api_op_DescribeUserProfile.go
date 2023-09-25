@@ -48,6 +48,10 @@ type DescribeUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserProfileInput) operationName() string {
+	return "DescribeUserProfile"
+}
+
 type DescribeUserProfileOutput struct {
 
 	// The creation time.

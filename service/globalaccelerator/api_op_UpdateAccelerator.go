@@ -71,6 +71,10 @@ type UpdateAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAcceleratorInput) operationName() string {
+	return "UpdateAccelerator"
+}
+
 type UpdateAcceleratorOutput struct {
 
 	// Information about the updated accelerator.

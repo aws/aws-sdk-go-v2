@@ -94,6 +94,10 @@ type CreateDatasetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetGroupInput) operationName() string {
+	return "CreateDatasetGroup"
+}
+
 type CreateDatasetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new dataset group.

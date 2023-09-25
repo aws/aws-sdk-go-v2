@@ -61,6 +61,10 @@ type DescribeChannelMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelMembershipInput) operationName() string {
+	return "DescribeChannelMembership"
+}
+
 type DescribeChannelMembershipOutput struct {
 
 	// The details of the membership.

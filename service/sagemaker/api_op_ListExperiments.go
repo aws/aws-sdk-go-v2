@@ -60,6 +60,10 @@ type ListExperimentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExperimentsInput) operationName() string {
+	return "ListExperiments"
+}
+
 type ListExperimentsOutput struct {
 
 	// A list of the summaries of your experiments.

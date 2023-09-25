@@ -53,6 +53,10 @@ type GetAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAliasInput) operationName() string {
+	return "GetAlias"
+}
+
 // Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
 // .
 type GetAliasOutput struct {

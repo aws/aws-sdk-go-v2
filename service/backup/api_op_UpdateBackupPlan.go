@@ -50,6 +50,10 @@ type UpdateBackupPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBackupPlanInput) operationName() string {
+	return "UpdateBackupPlan"
+}
+
 type UpdateBackupPlanOutput struct {
 
 	// Contains a list of BackupOptions for each resource type.

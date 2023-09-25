@@ -60,6 +60,10 @@ type UpdateWorkflowStepGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkflowStepGroupInput) operationName() string {
+	return "UpdateWorkflowStepGroup"
+}
+
 type UpdateWorkflowStepGroupOutput struct {
 
 	// The description of the step group.

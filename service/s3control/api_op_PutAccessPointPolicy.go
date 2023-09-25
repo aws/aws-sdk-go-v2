@@ -79,6 +79,10 @@ type PutAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccessPointPolicyInput) operationName() string {
+	return "PutAccessPointPolicy"
+}
+
 type PutAccessPointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

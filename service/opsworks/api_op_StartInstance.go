@@ -47,6 +47,10 @@ type StartInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInstanceInput) operationName() string {
+	return "StartInstance"
+}
+
 type StartInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

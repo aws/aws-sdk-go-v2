@@ -44,6 +44,10 @@ type GetDataProtectionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataProtectionPolicyInput) operationName() string {
+	return "GetDataProtectionPolicy"
+}
+
 type GetDataProtectionPolicyOutput struct {
 
 	// Retrieves the DataProtectionPolicy in JSON string format.

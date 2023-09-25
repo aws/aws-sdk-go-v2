@@ -64,6 +64,10 @@ type CreateVpcLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcLinkInput) operationName() string {
+	return "CreateVpcLink"
+}
+
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
 // Private Cloud (VPC).
 type CreateVpcLinkOutput struct {

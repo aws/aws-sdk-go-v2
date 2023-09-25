@@ -84,6 +84,10 @@ type CreateAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessControlConfigurationInput) operationName() string {
+	return "CreateAccessControlConfiguration"
+}
+
 type CreateAccessControlConfigurationOutput struct {
 
 	// The identifier of the access control configuration for your documents in an

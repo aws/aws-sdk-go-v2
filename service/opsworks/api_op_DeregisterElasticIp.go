@@ -47,6 +47,10 @@ type DeregisterElasticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterElasticIpInput) operationName() string {
+	return "DeregisterElasticIp"
+}
+
 type DeregisterElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type ListContinuousDeploymentPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContinuousDeploymentPoliciesInput) operationName() string {
+	return "ListContinuousDeploymentPolicies"
+}
+
 type ListContinuousDeploymentPoliciesOutput struct {
 
 	// A list of continuous deployment policies.

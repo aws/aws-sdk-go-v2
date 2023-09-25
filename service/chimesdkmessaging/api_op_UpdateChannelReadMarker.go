@@ -49,6 +49,10 @@ type UpdateChannelReadMarkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChannelReadMarkerInput) operationName() string {
+	return "UpdateChannelReadMarker"
+}
+
 type UpdateChannelReadMarkerOutput struct {
 
 	// The ARN of the channel.

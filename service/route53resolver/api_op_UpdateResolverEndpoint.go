@@ -56,6 +56,10 @@ type UpdateResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResolverEndpointInput) operationName() string {
+	return "UpdateResolverEndpoint"
+}
+
 type UpdateResolverEndpointOutput struct {
 
 	// The response to an UpdateResolverEndpoint request.

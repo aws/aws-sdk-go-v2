@@ -77,6 +77,10 @@ type AttachVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachVolumeInput) operationName() string {
+	return "AttachVolume"
+}
+
 // Describes volume attachment details.
 type AttachVolumeOutput struct {
 

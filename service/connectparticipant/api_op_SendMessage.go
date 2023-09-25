@@ -69,6 +69,10 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendMessageInput) operationName() string {
+	return "SendMessage"
+}
+
 type SendMessageOutput struct {
 
 	// The time when the message was sent. It's specified in ISO 8601 format:

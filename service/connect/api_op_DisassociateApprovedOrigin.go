@@ -48,6 +48,10 @@ type DisassociateApprovedOriginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateApprovedOriginInput) operationName() string {
+	return "DisassociateApprovedOrigin"
+}
+
 type DisassociateApprovedOriginOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

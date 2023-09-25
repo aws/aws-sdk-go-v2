@@ -74,6 +74,10 @@ type GetNetworkRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkRoutesInput) operationName() string {
+	return "GetNetworkRoutes"
+}
+
 type GetNetworkRoutesOutput struct {
 
 	// Describes a core network segment edge.

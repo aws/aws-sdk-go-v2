@@ -57,6 +57,10 @@ type ListSnapshotsInRecycleBinInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSnapshotsInRecycleBinInput) operationName() string {
+	return "ListSnapshotsInRecycleBin"
+}
+
 type ListSnapshotsInRecycleBinOutput struct {
 
 	// The token to include in another request to get the next page of items. This

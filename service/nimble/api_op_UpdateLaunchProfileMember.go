@@ -63,6 +63,10 @@ type UpdateLaunchProfileMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLaunchProfileMemberInput) operationName() string {
+	return "UpdateLaunchProfileMember"
+}
+
 type UpdateLaunchProfileMemberOutput struct {
 
 	// The updated member.

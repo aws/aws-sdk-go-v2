@@ -131,6 +131,7 @@
         "api_op_UpdateVoiceChannel.go",
         "api_op_UpdateVoiceTemplate.go",
         "api_op_VerifyOTPMessage.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -78,6 +78,10 @@ type ModifyHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyHostsInput) operationName() string {
+	return "ModifyHosts"
+}
+
 type ModifyHostsOutput struct {
 
 	// The IDs of the Dedicated Hosts that were successfully modified.

@@ -46,6 +46,10 @@ type CreateImageBuilderStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImageBuilderStreamingURLInput) operationName() string {
+	return "CreateImageBuilderStreamingURL"
+}
+
 type CreateImageBuilderStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.

@@ -52,6 +52,10 @@ type AssociateS3ResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateS3ResourcesInput) operationName() string {
+	return "AssociateS3Resources"
+}
+
 type AssociateS3ResourcesOutput struct {
 
 	// (Discontinued) S3 resources that couldn't be associated with Amazon Macie

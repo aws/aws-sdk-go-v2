@@ -51,6 +51,10 @@ type RegisterIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterIdentityProviderInput) operationName() string {
+	return "RegisterIdentityProvider"
+}
+
 type RegisterIdentityProviderOutput struct {
 
 	// Metadata that describes the results of an identity provider operation.

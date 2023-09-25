@@ -50,6 +50,10 @@ type DeleteVPCConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVPCConnectionInput) operationName() string {
+	return "DeleteVPCConnection"
+}
+
 type DeleteVPCConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted VPC connection.

@@ -49,6 +49,10 @@ type PutFirewallRuleGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutFirewallRuleGroupPolicyInput) operationName() string {
+	return "PutFirewallRuleGroupPolicy"
+}
+
 type PutFirewallRuleGroupPolicyOutput struct {
 
 	//

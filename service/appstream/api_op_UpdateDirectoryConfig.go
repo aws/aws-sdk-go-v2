@@ -62,6 +62,10 @@ type UpdateDirectoryConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDirectoryConfigInput) operationName() string {
+	return "UpdateDirectoryConfig"
+}
+
 type UpdateDirectoryConfigOutput struct {
 
 	// Information about the Directory Config object.

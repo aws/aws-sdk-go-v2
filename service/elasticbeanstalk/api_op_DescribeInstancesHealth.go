@@ -55,6 +55,10 @@ type DescribeInstancesHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstancesHealthInput) operationName() string {
+	return "DescribeInstancesHealth"
+}
+
 // Detailed health information about the Amazon EC2 instances in an AWS Elastic
 // Beanstalk environment.
 type DescribeInstancesHealthOutput struct {

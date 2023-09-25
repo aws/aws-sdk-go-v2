@@ -64,6 +64,10 @@ type ConfigureAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureAccessPointInput) operationName() string {
+	return "ConfigureAccessPoint"
+}
+
 type ConfigureAccessPointOutput struct {
 
 	// Information about the network resource.

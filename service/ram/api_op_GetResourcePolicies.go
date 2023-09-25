@@ -63,6 +63,10 @@ type GetResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcePoliciesInput) operationName() string {
+	return "GetResourcePolicies"
+}
+
 type GetResourcePoliciesOutput struct {
 
 	// If present, this value indicates that more output is available than is included

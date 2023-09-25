@@ -55,6 +55,10 @@ type DescribeReservedNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedNodesInput) operationName() string {
+	return "DescribeReservedNodes"
+}
+
 type DescribeReservedNodesOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

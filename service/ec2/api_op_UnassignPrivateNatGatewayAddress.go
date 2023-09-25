@@ -67,6 +67,10 @@ type UnassignPrivateNatGatewayAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnassignPrivateNatGatewayAddressInput) operationName() string {
+	return "UnassignPrivateNatGatewayAddress"
+}
+
 type UnassignPrivateNatGatewayAddressOutput struct {
 
 	// Information about the NAT gateway IP addresses.

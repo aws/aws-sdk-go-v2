@@ -46,6 +46,10 @@ type ListEnabledProductsForImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnabledProductsForImportInput) operationName() string {
+	return "ListEnabledProductsForImport"
+}
+
 type ListEnabledProductsForImportOutput struct {
 
 	// The pagination token to use to request the next page of results.

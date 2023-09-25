@@ -43,6 +43,10 @@ type DeleteProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProjectInput) operationName() string {
+	return "DeleteProject"
+}
+
 // Result structure used in response to request to delete a project.
 type DeleteProjectOutput struct {
 

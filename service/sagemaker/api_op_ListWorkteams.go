@@ -57,6 +57,10 @@ type ListWorkteamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkteamsInput) operationName() string {
+	return "ListWorkteams"
+}
+
 type ListWorkteamsOutput struct {
 
 	// An array of Workteam objects, each describing a work team.

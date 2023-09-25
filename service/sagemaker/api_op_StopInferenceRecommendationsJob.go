@@ -41,6 +41,10 @@ type StopInferenceRecommendationsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopInferenceRecommendationsJobInput) operationName() string {
+	return "StopInferenceRecommendationsJob"
+}
+
 type StopInferenceRecommendationsJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

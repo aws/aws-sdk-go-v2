@@ -36,6 +36,10 @@ type DisableMacieInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableMacieInput) operationName() string {
+	return "DisableMacie"
+}
+
 type DisableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,6 +45,10 @@ type DeleteDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBInstanceInput) operationName() string {
+	return "DeleteDBInstance"
+}
+
 type DeleteDBInstanceOutput struct {
 
 	// Detailed information about an instance.

@@ -86,6 +86,10 @@ type CreateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrialComponentInput) operationName() string {
+	return "CreateTrialComponent"
+}
+
 type CreateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial component.

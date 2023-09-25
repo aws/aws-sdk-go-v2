@@ -53,6 +53,10 @@ type ListImageScanFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImageScanFindingsInput) operationName() string {
+	return "ListImageScanFindings"
+}
+
 type ListImageScanFindingsOutput struct {
 
 	// The image scan findings for your account that meet your request filter criteria.

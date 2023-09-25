@@ -69,6 +69,10 @@ type DescribeElasticGpusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeElasticGpusInput) operationName() string {
+	return "DescribeElasticGpus"
+}
+
 type DescribeElasticGpusOutput struct {
 
 	// Information about the Elastic Graphics accelerators.

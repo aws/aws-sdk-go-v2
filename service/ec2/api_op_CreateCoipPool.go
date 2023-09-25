@@ -51,6 +51,10 @@ type CreateCoipPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCoipPoolInput) operationName() string {
+	return "CreateCoipPool"
+}
+
 type CreateCoipPoolOutput struct {
 
 	// Information about the CoIP address pool.

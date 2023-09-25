@@ -41,6 +41,10 @@ type DeleteCustomDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomDomainAssociationInput) operationName() string {
+	return "DeleteCustomDomainAssociation"
+}
+
 type DeleteCustomDomainAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

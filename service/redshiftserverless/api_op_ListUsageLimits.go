@@ -53,6 +53,10 @@ type ListUsageLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsageLimitsInput) operationName() string {
+	return "ListUsageLimits"
+}
+
 type ListUsageLimitsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of

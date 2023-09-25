@@ -76,6 +76,10 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProjectInput) operationName() string {
+	return "CreateProject"
+}
+
 type CreateProjectOutput struct {
 
 	// A structure that contains information about the created project.

@@ -48,6 +48,10 @@ type GetAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAliasInput) operationName() string {
+	return "GetAlias"
+}
+
 type GetAliasOutput struct {
 
 	// The alias of the Amazon Web Services Payment Cryptography key.

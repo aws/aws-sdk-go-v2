@@ -56,6 +56,10 @@ type AttachInstancesToLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachInstancesToLoadBalancerInput) operationName() string {
+	return "AttachInstancesToLoadBalancer"
+}
+
 type AttachInstancesToLoadBalancerOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

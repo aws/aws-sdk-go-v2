@@ -49,6 +49,10 @@ type ListAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnalysesInput) operationName() string {
+	return "ListAnalyses"
+}
+
 type ListAnalysesOutput struct {
 
 	// Metadata describing each of the analyses that are listed.

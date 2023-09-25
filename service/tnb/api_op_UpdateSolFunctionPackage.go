@@ -51,6 +51,10 @@ type UpdateSolFunctionPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSolFunctionPackageInput) operationName() string {
+	return "UpdateSolFunctionPackage"
+}
+
 type UpdateSolFunctionPackageOutput struct {
 
 	// Operational state of the function package.

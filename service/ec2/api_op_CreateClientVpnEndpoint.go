@@ -130,6 +130,10 @@ type CreateClientVpnEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClientVpnEndpointInput) operationName() string {
+	return "CreateClientVpnEndpoint"
+}
+
 type CreateClientVpnEndpointOutput struct {
 
 	// The ID of the Client VPN endpoint.

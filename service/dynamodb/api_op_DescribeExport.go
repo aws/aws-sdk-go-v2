@@ -42,6 +42,10 @@ type DescribeExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportInput) operationName() string {
+	return "DescribeExport"
+}
+
 type DescribeExportOutput struct {
 
 	// Represents the properties of the export.

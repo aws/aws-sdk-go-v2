@@ -195,6 +195,10 @@ type UpdateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServerInput) operationName() string {
+	return "UpdateServer"
+}
+
 type UpdateServerOutput struct {
 
 	// A system-assigned unique identifier for a server that the Transfer Family user

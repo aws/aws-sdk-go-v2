@@ -63,6 +63,10 @@ type CountPendingActivityTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CountPendingActivityTasksInput) operationName() string {
+	return "CountPendingActivityTasks"
+}
+
 // Contains the count of tasks in a task list.
 type CountPendingActivityTasksOutput struct {
 

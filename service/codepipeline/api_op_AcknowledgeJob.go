@@ -51,6 +51,10 @@ type AcknowledgeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcknowledgeJobInput) operationName() string {
+	return "AcknowledgeJob"
+}
+
 // Represents the output of an AcknowledgeJob action.
 type AcknowledgeJobOutput struct {
 

@@ -54,6 +54,10 @@ type DetachThingPrincipalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachThingPrincipalInput) operationName() string {
+	return "DetachThingPrincipal"
+}
+
 // The output from the DetachThingPrincipal operation.
 type DetachThingPrincipalOutput struct {
 	// Metadata pertaining to the operation's result.

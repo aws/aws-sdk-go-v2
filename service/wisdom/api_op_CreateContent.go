@@ -81,6 +81,10 @@ type CreateContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContentInput) operationName() string {
+	return "CreateContent"
+}
+
 type CreateContentOutput struct {
 
 	// The content.

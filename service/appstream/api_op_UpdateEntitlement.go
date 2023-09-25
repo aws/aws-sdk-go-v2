@@ -56,6 +56,10 @@ type UpdateEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEntitlementInput) operationName() string {
+	return "UpdateEntitlement"
+}
+
 type UpdateEntitlementOutput struct {
 
 	// The entitlement.

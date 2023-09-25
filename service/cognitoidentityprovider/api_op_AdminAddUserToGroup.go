@@ -57,6 +57,10 @@ type AdminAddUserToGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminAddUserToGroupInput) operationName() string {
+	return "AdminAddUserToGroup"
+}
+
 type AdminAddUserToGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

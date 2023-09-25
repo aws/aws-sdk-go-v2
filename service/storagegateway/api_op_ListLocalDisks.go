@@ -51,6 +51,10 @@ type ListLocalDisksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLocalDisksInput) operationName() string {
+	return "ListLocalDisks"
+}
+
 type ListLocalDisksOutput struct {
 
 	// A JSON object containing the following fields:

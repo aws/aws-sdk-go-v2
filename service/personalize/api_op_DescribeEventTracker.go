@@ -45,6 +45,10 @@ type DescribeEventTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventTrackerInput) operationName() string {
+	return "DescribeEventTracker"
+}
+
 type DescribeEventTrackerOutput struct {
 
 	// An object that describes the event tracker.

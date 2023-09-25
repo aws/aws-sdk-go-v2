@@ -40,6 +40,10 @@ type StartAppReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAppReplicationInput) operationName() string {
+	return "StartAppReplication"
+}
+
 type StartAppReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

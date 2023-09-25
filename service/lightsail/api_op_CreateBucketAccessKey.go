@@ -54,6 +54,10 @@ type CreateBucketAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBucketAccessKeyInput) operationName() string {
+	return "CreateBucketAccessKey"
+}
+
 type CreateBucketAccessKeyOutput struct {
 
 	// An object that describes the access key that is created.

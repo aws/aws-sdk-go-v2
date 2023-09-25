@@ -68,6 +68,10 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsersInput) operationName() string {
+	return "ListUsers"
+}
+
 type ListUsersOutput struct {
 
 	// A list of User objects in the identity store.

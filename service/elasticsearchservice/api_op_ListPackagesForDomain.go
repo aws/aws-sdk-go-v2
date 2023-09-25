@@ -50,6 +50,10 @@ type ListPackagesForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackagesForDomainInput) operationName() string {
+	return "ListPackagesForDomain"
+}
+
 // Container for response parameters to ListPackagesForDomain operation.
 type ListPackagesForDomainOutput struct {
 

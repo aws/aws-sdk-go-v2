@@ -47,6 +47,10 @@ type ListLicenseManagerReportGeneratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLicenseManagerReportGeneratorsInput) operationName() string {
+	return "ListLicenseManagerReportGenerators"
+}
+
 type ListLicenseManagerReportGeneratorsOutput struct {
 
 	// Token for the next set of results.

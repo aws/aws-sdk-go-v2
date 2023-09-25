@@ -58,6 +58,10 @@ type DescribeClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClustersInput) operationName() string {
+	return "DescribeClusters"
+}
+
 type DescribeClustersOutput struct {
 
 	// A list of clusters.

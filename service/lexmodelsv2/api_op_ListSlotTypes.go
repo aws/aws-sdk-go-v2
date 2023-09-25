@@ -74,6 +74,10 @@ type ListSlotTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSlotTypesInput) operationName() string {
+	return "ListSlotTypes"
+}
+
 type ListSlotTypesOutput struct {
 
 	// The identifier of the bot that contains the slot types.

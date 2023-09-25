@@ -68,6 +68,10 @@ type GetQuerySuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQuerySuggestionsInput) operationName() string {
+	return "GetQuerySuggestions"
+}
+
 type GetQuerySuggestionsOutput struct {
 
 	// The identifier for a list of query suggestions for an index.

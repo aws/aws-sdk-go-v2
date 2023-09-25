@@ -47,6 +47,10 @@ type DisassociateSigninDelegateGroupsFromAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateSigninDelegateGroupsFromAccountInput) operationName() string {
+	return "DisassociateSigninDelegateGroupsFromAccount"
+}
+
 type DisassociateSigninDelegateGroupsFromAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

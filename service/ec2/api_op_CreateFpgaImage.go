@@ -71,6 +71,10 @@ type CreateFpgaImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFpgaImageInput) operationName() string {
+	return "CreateFpgaImage"
+}
+
 type CreateFpgaImageOutput struct {
 
 	// The global FPGA image identifier (AGFI ID).

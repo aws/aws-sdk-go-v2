@@ -43,6 +43,10 @@ type DescribeFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFrameworkInput) operationName() string {
+	return "DescribeFramework"
+}
+
 type DescribeFrameworkOutput struct {
 
 	// The date and time that a framework is created, in ISO 8601 representation. The

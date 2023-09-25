@@ -44,6 +44,10 @@ type GetDisksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDisksInput) operationName() string {
+	return "GetDisks"
+}
+
 type GetDisksOutput struct {
 
 	// An array of objects containing information about all block storage disks.

@@ -218,6 +218,10 @@ type CreateChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChangeSetInput) operationName() string {
+	return "CreateChangeSet"
+}
+
 // The output for the CreateChangeSet action.
 type CreateChangeSetOutput struct {
 

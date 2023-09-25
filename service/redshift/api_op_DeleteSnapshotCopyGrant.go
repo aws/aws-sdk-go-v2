@@ -42,6 +42,10 @@ type DeleteSnapshotCopyGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSnapshotCopyGrantInput) operationName() string {
+	return "DeleteSnapshotCopyGrant"
+}
+
 type DeleteSnapshotCopyGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,6 +46,10 @@ type BatchGetJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetJobsInput) operationName() string {
+	return "BatchGetJobs"
+}
+
 type BatchGetJobsOutput struct {
 
 	// A list of job definitions.

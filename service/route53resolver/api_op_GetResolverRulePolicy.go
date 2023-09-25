@@ -44,6 +44,10 @@ type GetResolverRulePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverRulePolicyInput) operationName() string {
+	return "GetResolverRulePolicy"
+}
+
 type GetResolverRulePolicyOutput struct {
 
 	// The Resolver rule policy for the rule that you specified in a

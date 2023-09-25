@@ -48,6 +48,10 @@ type DescribeRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRoutingProfileInput) operationName() string {
+	return "DescribeRoutingProfile"
+}
+
 type DescribeRoutingProfileOutput struct {
 
 	// The routing profile.

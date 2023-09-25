@@ -45,6 +45,10 @@ type GetSuppressedDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSuppressedDestinationInput) operationName() string {
+	return "GetSuppressedDestination"
+}
+
 // Information about the suppressed email address.
 type GetSuppressedDestinationOutput struct {
 

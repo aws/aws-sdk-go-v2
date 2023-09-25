@@ -46,6 +46,10 @@ type GetRemainingFreeTrialDaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRemainingFreeTrialDaysInput) operationName() string {
+	return "GetRemainingFreeTrialDays"
+}
+
 type GetRemainingFreeTrialDaysOutput struct {
 
 	// The member accounts which were included in a request and were processed

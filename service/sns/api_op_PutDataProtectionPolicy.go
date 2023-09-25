@@ -51,6 +51,10 @@ type PutDataProtectionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDataProtectionPolicyInput) operationName() string {
+	return "PutDataProtectionPolicy"
+}
+
 type PutDataProtectionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

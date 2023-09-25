@@ -44,6 +44,10 @@ type ListEventDataStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventDataStoresInput) operationName() string {
+	return "ListEventDataStores"
+}
+
 type ListEventDataStoresOutput struct {
 
 	// Contains information about event data stores in the account, in the current

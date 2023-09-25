@@ -58,6 +58,10 @@ type ModifyTransitGatewayVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTransitGatewayVpcAttachmentInput) operationName() string {
+	return "ModifyTransitGatewayVpcAttachment"
+}
+
 type ModifyTransitGatewayVpcAttachmentOutput struct {
 
 	// Information about the modified attachment.

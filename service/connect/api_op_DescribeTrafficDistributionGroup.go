@@ -44,6 +44,10 @@ type DescribeTrafficDistributionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrafficDistributionGroupInput) operationName() string {
+	return "DescribeTrafficDistributionGroup"
+}
+
 type DescribeTrafficDistributionGroupOutput struct {
 
 	// Information about the traffic distribution group.

@@ -70,6 +70,10 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfileInput) operationName() string {
+	return "CreateProfile"
+}
+
 type CreateProfileOutput struct {
 
 	// The state of the profile after a read or write operation.

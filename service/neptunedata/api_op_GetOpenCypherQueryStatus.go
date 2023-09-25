@@ -42,6 +42,10 @@ type GetOpenCypherQueryStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOpenCypherQueryStatusInput) operationName() string {
+	return "GetOpenCypherQueryStatus"
+}
+
 type GetOpenCypherQueryStatusOutput struct {
 
 	// The openCypher query evaluation status.

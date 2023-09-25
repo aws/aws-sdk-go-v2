@@ -56,6 +56,10 @@ type SetTypeDefaultVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTypeDefaultVersionInput) operationName() string {
+	return "SetTypeDefaultVersion"
+}
+
 type SetTypeDefaultVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

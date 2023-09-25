@@ -56,6 +56,10 @@ type PutEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEvaluationsInput) operationName() string {
+	return "PutEvaluations"
+}
+
 type PutEvaluationsOutput struct {
 
 	// Requests that failed because of a client or server error.

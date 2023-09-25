@@ -43,6 +43,10 @@ type GetTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTargetGroupInput) operationName() string {
+	return "GetTargetGroup"
+}
+
 type GetTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.

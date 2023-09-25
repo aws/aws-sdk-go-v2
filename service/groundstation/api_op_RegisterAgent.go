@@ -48,6 +48,10 @@ type RegisterAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterAgentInput) operationName() string {
+	return "RegisterAgent"
+}
+
 type RegisterAgentOutput struct {
 
 	// UUID of registered agent.

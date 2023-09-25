@@ -57,6 +57,10 @@ type BatchSuspendUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchSuspendUserInput) operationName() string {
+	return "BatchSuspendUser"
+}
+
 type BatchSuspendUserOutput struct {
 
 	// If the BatchSuspendUser action fails for one or more of the user IDs in the

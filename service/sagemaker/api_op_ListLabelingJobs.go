@@ -75,6 +75,10 @@ type ListLabelingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLabelingJobsInput) operationName() string {
+	return "ListLabelingJobs"
+}
+
 type ListLabelingJobsOutput struct {
 
 	// An array of LabelingJobSummary objects, each describing a labeling job.

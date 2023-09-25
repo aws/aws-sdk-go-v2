@@ -61,6 +61,10 @@ type ListChangeSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChangeSetsInput) operationName() string {
+	return "ListChangeSets"
+}
+
 type ListChangeSetsOutput struct {
 
 	// Array of ChangeSetSummaryListItem objects.

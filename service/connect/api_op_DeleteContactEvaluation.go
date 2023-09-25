@@ -47,6 +47,10 @@ type DeleteContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteContactEvaluationInput) operationName() string {
+	return "DeleteContactEvaluation"
+}
+
 type DeleteContactEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

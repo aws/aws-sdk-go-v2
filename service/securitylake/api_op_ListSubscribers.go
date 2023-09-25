@@ -46,6 +46,10 @@ type ListSubscribersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubscribersInput) operationName() string {
+	return "ListSubscribers"
+}
+
 type ListSubscribersOutput struct {
 
 	// If nextToken is returned, there are more results available. You can repeat the

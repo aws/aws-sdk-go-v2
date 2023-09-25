@@ -46,6 +46,10 @@ type ListWorkgroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkgroupsInput) operationName() string {
+	return "ListWorkgroups"
+}
+
 type ListWorkgroupsOutput struct {
 
 	// The returned array of workgroups.

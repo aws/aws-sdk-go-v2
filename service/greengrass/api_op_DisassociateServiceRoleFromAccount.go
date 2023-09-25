@@ -36,6 +36,10 @@ type DisassociateServiceRoleFromAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateServiceRoleFromAccountInput) operationName() string {
+	return "DisassociateServiceRoleFromAccount"
+}
+
 type DisassociateServiceRoleFromAccountOutput struct {
 
 	// The time when the service role was disassociated from the account.

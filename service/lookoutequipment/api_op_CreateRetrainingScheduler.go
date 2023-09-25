@@ -77,6 +77,10 @@ type CreateRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRetrainingSchedulerInput) operationName() string {
+	return "CreateRetrainingScheduler"
+}
+
 type CreateRetrainingSchedulerOutput struct {
 
 	// The ARN of the model that you added the retraining scheduler to.

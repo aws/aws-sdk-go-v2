@@ -57,6 +57,10 @@ type DescribeFleetLocationCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetLocationCapacityInput) operationName() string {
+	return "DescribeFleetLocationCapacity"
+}
+
 type DescribeFleetLocationCapacityOutput struct {
 
 	// Resource capacity information for the requested fleet location. Capacity

@@ -47,6 +47,10 @@ type StartImagePipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImagePipelineExecutionInput) operationName() string {
+	return "StartImagePipelineExecution"
+}
+
 type StartImagePipelineExecutionOutput struct {
 
 	// The idempotency token used to make this request idempotent.

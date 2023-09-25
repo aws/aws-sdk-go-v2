@@ -46,6 +46,10 @@ type DescribeSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSecurityPolicyInput) operationName() string {
+	return "DescribeSecurityPolicy"
+}
+
 type DescribeSecurityPolicyOutput struct {
 
 	// An array containing the properties of the security policy.

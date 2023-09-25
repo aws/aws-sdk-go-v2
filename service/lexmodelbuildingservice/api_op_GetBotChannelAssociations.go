@@ -65,6 +65,10 @@ type GetBotChannelAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotChannelAssociationsInput) operationName() string {
+	return "GetBotChannelAssociations"
+}
+
 type GetBotChannelAssociationsOutput struct {
 
 	// An array of objects, one for each association, that provides information about

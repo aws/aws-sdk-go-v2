@@ -51,6 +51,10 @@ type DeleteAnnotationStoreVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnnotationStoreVersionsInput) operationName() string {
+	return "DeleteAnnotationStoreVersions"
+}
+
 type DeleteAnnotationStoreVersionsOutput struct {
 
 	// Any errors that occur when attempting to delete an annotation store version.

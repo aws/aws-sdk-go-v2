@@ -79,6 +79,10 @@ type GetLifecyclePolicyPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLifecyclePolicyPreviewInput) operationName() string {
+	return "GetLifecyclePolicyPreview"
+}
+
 type GetLifecyclePolicyPreviewOutput struct {
 
 	// The JSON lifecycle policy text.

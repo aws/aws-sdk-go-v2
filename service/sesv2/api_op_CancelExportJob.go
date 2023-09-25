@@ -42,6 +42,10 @@ type CancelExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelExportJobInput) operationName() string {
+	return "CancelExportJob"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CancelExportJobOutput struct {

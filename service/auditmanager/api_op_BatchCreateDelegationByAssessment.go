@@ -47,6 +47,10 @@ type BatchCreateDelegationByAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateDelegationByAssessmentInput) operationName() string {
+	return "BatchCreateDelegationByAssessment"
+}
+
 type BatchCreateDelegationByAssessmentOutput struct {
 
 	// The delegations that are associated with the assessment.

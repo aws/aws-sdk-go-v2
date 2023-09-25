@@ -45,6 +45,10 @@ type DeleteGameSessionQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGameSessionQueueInput) operationName() string {
+	return "DeleteGameSessionQueue"
+}
+
 type DeleteGameSessionQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,6 +44,10 @@ type DeleteEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEntityTypeInput) operationName() string {
+	return "DeleteEntityType"
+}
+
 type DeleteEntityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

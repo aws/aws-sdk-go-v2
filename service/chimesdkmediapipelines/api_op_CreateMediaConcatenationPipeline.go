@@ -54,6 +54,10 @@ type CreateMediaConcatenationPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMediaConcatenationPipelineInput) operationName() string {
+	return "CreateMediaConcatenationPipeline"
+}
+
 type CreateMediaConcatenationPipelineOutput struct {
 
 	// A media concatenation pipeline object, the ID, source type, MediaPipelineARN ,

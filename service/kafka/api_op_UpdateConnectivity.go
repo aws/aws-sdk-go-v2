@@ -55,6 +55,10 @@ type UpdateConnectivityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectivityInput) operationName() string {
+	return "UpdateConnectivity"
+}
+
 type UpdateConnectivityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

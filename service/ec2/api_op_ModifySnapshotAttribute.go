@@ -73,6 +73,10 @@ type ModifySnapshotAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySnapshotAttributeInput) operationName() string {
+	return "ModifySnapshotAttribute"
+}
+
 type ModifySnapshotAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

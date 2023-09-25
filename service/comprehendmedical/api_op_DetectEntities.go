@@ -47,6 +47,10 @@ type DetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectEntitiesInput) operationName() string {
+	return "DetectEntities"
+}
+
 type DetectEntitiesOutput struct {
 
 	// The collection of medical entities extracted from the input text and their

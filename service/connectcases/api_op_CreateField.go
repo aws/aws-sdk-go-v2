@@ -58,6 +58,10 @@ type CreateFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFieldInput) operationName() string {
+	return "CreateField"
+}
+
 type CreateFieldOutput struct {
 
 	// The Amazon Resource Name (ARN) of the field.

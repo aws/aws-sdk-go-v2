@@ -63,6 +63,10 @@ type UpdateRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuntimeConfigurationInput) operationName() string {
+	return "UpdateRuntimeConfiguration"
+}
+
 type UpdateRuntimeConfigurationOutput struct {
 
 	// The runtime configuration currently in use by all instances in the fleet. If

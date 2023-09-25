@@ -57,6 +57,10 @@ type RemoveTagsFromCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveTagsFromCertificateInput) operationName() string {
+	return "RemoveTagsFromCertificate"
+}
+
 type RemoveTagsFromCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

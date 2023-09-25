@@ -46,6 +46,10 @@ type GetLoadBalancerTlsPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoadBalancerTlsPoliciesInput) operationName() string {
+	return "GetLoadBalancerTlsPolicies"
+}
+
 type GetLoadBalancerTlsPoliciesOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

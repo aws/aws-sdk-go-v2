@@ -64,6 +64,10 @@ type UpdateContainerAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContainerAgentInput) operationName() string {
+	return "UpdateContainerAgent"
+}
+
 type UpdateContainerAgentOutput struct {
 
 	// The container instance that the container agent was updated for.

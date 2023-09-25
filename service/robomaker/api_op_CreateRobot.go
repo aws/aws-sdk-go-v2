@@ -61,6 +61,10 @@ type CreateRobotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRobotInput) operationName() string {
+	return "CreateRobot"
+}
+
 type CreateRobotOutput struct {
 
 	// The target architecture of the robot.

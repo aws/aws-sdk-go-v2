@@ -51,6 +51,10 @@ type AuthorizeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeVpcEndpointAccessInput) operationName() string {
+	return "AuthorizeVpcEndpointAccess"
+}
+
 // Container for response parameters to the AuthorizeVpcEndpointAccess operation.
 // Contains the account ID and the type of the account being authorized to access
 // the VPC endpoint.

@@ -61,6 +61,10 @@ type ListProfilingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfilingGroupsInput) operationName() string {
+	return "ListProfilingGroups"
+}
+
 // The structure representing the listProfilingGroupsResponse.
 type ListProfilingGroupsOutput struct {
 

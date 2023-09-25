@@ -94,6 +94,10 @@ type GenerateMacInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateMacInput) operationName() string {
+	return "GenerateMac"
+}
+
 type GenerateMacOutput struct {
 
 	// The HMAC KMS key used in the operation.

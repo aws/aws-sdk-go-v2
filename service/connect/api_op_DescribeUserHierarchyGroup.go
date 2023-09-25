@@ -48,6 +48,10 @@ type DescribeUserHierarchyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserHierarchyGroupInput) operationName() string {
+	return "DescribeUserHierarchyGroup"
+}
+
 type DescribeUserHierarchyGroupOutput struct {
 
 	// Information about the hierarchy group.

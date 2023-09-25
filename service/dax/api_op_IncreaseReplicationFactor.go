@@ -52,6 +52,10 @@ type IncreaseReplicationFactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IncreaseReplicationFactorInput) operationName() string {
+	return "IncreaseReplicationFactor"
+}
+
 type IncreaseReplicationFactorOutput struct {
 
 	// A description of the DAX cluster. with its new replication factor.

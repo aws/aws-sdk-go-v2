@@ -49,6 +49,10 @@ type GetFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingInput) operationName() string {
+	return "GetFinding"
+}
+
 // The response to the request.
 type GetFindingOutput struct {
 

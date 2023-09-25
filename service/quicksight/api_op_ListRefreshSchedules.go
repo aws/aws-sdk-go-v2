@@ -48,6 +48,10 @@ type ListRefreshSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRefreshSchedulesInput) operationName() string {
+	return "ListRefreshSchedules"
+}
+
 type ListRefreshSchedulesOutput struct {
 
 	// The list of refresh schedules for the dataset.

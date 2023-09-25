@@ -43,6 +43,10 @@ type DescribeDeviceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeviceJobInput) operationName() string {
+	return "DescribeDeviceJob"
+}
+
 type DescribeDeviceJobOutput struct {
 
 	// When the job was created.

@@ -40,6 +40,10 @@ type GetServicesInScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServicesInScopeInput) operationName() string {
+	return "GetServicesInScope"
+}
+
 type GetServicesInScopeOutput struct {
 
 	// The metadata that's associated with the Amazon Web Service.

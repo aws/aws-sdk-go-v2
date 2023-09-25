@@ -49,6 +49,10 @@ type CreateConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigurationSetInput) operationName() string {
+	return "CreateConfigurationSet"
+}
+
 // An empty element returned on a successful request.
 type CreateConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.

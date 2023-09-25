@@ -56,6 +56,10 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePackageInput) operationName() string {
+	return "CreatePackage"
+}
+
 type CreatePackageOutput struct {
 
 	// The package description.

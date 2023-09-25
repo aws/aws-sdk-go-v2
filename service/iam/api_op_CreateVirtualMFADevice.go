@@ -74,6 +74,10 @@ type CreateVirtualMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVirtualMFADeviceInput) operationName() string {
+	return "CreateVirtualMFADevice"
+}
+
 // Contains the response to a successful CreateVirtualMFADevice request.
 type CreateVirtualMFADeviceOutput struct {
 

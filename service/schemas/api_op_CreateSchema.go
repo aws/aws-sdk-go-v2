@@ -64,6 +64,10 @@ type CreateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSchemaInput) operationName() string {
+	return "CreateSchema"
+}
+
 type CreateSchemaOutput struct {
 
 	// The description of the schema.

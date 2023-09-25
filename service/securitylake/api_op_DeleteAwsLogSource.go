@@ -50,6 +50,10 @@ type DeleteAwsLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAwsLogSourceInput) operationName() string {
+	return "DeleteAwsLogSource"
+}
+
 type DeleteAwsLogSourceOutput struct {
 
 	// Deletion of the Amazon Web Services sources failed as the account is not a part

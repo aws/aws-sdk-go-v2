@@ -51,6 +51,10 @@ type CancelArchivalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelArchivalInput) operationName() string {
+	return "CancelArchival"
+}
+
 // CancelArchivalOutput
 type CancelArchivalOutput struct {
 

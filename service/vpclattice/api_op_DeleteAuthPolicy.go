@@ -45,6 +45,10 @@ type DeleteAuthPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAuthPolicyInput) operationName() string {
+	return "DeleteAuthPolicy"
+}
+
 type DeleteAuthPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

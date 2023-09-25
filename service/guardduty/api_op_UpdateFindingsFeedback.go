@@ -55,6 +55,10 @@ type UpdateFindingsFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFindingsFeedbackInput) operationName() string {
+	return "UpdateFindingsFeedback"
+}
+
 type UpdateFindingsFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

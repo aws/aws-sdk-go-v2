@@ -42,6 +42,10 @@ type GetContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerRecipeInput) operationName() string {
+	return "GetContainerRecipe"
+}
+
 type GetContainerRecipeOutput struct {
 
 	// The container recipe object that is returned.

@@ -36,6 +36,10 @@ type DescribeSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSubscriptionInput) operationName() string {
+	return "DescribeSubscription"
+}
+
 type DescribeSubscriptionOutput struct {
 
 	// The Shield Advanced subscription details for an account.

@@ -52,6 +52,10 @@ type DescribeReplicationSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationSubnetGroupsInput) operationName() string {
+	return "DescribeReplicationSubnetGroups"
+}
+
 type DescribeReplicationSubnetGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

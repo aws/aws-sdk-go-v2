@@ -71,6 +71,10 @@ type CreateWebACLMigrationStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWebACLMigrationStackInput) operationName() string {
+	return "CreateWebACLMigrationStack"
+}
+
 type CreateWebACLMigrationStackOutput struct {
 
 	// The URL of the template created in Amazon S3.

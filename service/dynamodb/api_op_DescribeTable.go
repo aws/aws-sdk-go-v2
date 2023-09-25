@@ -55,6 +55,10 @@ type DescribeTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTableInput) operationName() string {
+	return "DescribeTable"
+}
+
 // Represents the output of a DescribeTable operation.
 type DescribeTableOutput struct {
 

@@ -240,6 +240,10 @@ type CloneStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CloneStackInput) operationName() string {
+	return "CloneStack"
+}
+
 // Contains the response to a CloneStack request.
 type CloneStackOutput struct {
 

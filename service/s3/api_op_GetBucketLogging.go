@@ -53,6 +53,10 @@ type GetBucketLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketLoggingInput) operationName() string {
+	return "GetBucketLogging"
+}
+
 type GetBucketLoggingOutput struct {
 
 	// Describes where logs are stored and the prefix that Amazon S3 assigns to all

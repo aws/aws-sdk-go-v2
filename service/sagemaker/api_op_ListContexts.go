@@ -64,6 +64,10 @@ type ListContextsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContextsInput) operationName() string {
+	return "ListContexts"
+}
+
 type ListContextsOutput struct {
 
 	// A list of contexts and their properties.

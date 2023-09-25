@@ -62,6 +62,10 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainInput) operationName() string {
+	return "UpdateDomain"
+}
+
 type UpdateDomainOutput struct {
 
 	// Details about the updated domain

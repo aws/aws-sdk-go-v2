@@ -42,6 +42,10 @@ type GetMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMembershipInput) operationName() string {
+	return "GetMembership"
+}
+
 type GetMembershipOutput struct {
 
 	// The membership retrieved for the provided identifier.

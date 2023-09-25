@@ -53,6 +53,10 @@ type AssociateAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAdminAccountInput) operationName() string {
+	return "AssociateAdminAccount"
+}
+
 type AssociateAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type UpdateNetworkSitePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkSitePlanInput) operationName() string {
+	return "UpdateNetworkSitePlan"
+}
+
 type UpdateNetworkSitePlanOutput struct {
 
 	// Information about the network site.

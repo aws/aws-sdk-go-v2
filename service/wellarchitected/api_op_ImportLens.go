@@ -78,6 +78,10 @@ type ImportLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportLensInput) operationName() string {
+	return "ImportLens"
+}
+
 type ImportLensOutput struct {
 
 	// The ARN for the lens that was created or updated.

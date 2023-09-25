@@ -46,6 +46,10 @@ type DeleteSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSystemTemplateInput) operationName() string {
+	return "DeleteSystemTemplate"
+}
+
 type DeleteSystemTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

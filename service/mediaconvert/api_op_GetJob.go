@@ -42,6 +42,10 @@ type GetJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobInput) operationName() string {
+	return "GetJob"
+}
+
 type GetJobOutput struct {
 
 	// Each job converts an input file into an output file or files. For more

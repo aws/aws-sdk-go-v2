@@ -95,6 +95,10 @@ type PutScheduledUpdateGroupActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutScheduledUpdateGroupActionInput) operationName() string {
+	return "PutScheduledUpdateGroupAction"
+}
+
 type PutScheduledUpdateGroupActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

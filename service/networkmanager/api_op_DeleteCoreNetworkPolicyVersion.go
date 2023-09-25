@@ -48,6 +48,10 @@ type DeleteCoreNetworkPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCoreNetworkPolicyVersionInput) operationName() string {
+	return "DeleteCoreNetworkPolicyVersion"
+}
+
 type DeleteCoreNetworkPolicyVersionOutput struct {
 
 	// Returns information about the deleted policy version.

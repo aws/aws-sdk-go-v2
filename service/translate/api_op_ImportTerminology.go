@@ -73,6 +73,10 @@ type ImportTerminologyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportTerminologyInput) operationName() string {
+	return "ImportTerminology"
+}
+
 type ImportTerminologyOutput struct {
 
 	// The Amazon S3 location of a file that provides any errors or warnings that were

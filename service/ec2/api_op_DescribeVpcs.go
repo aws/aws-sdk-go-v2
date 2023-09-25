@@ -92,6 +92,10 @@ type DescribeVpcsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcsInput) operationName() string {
+	return "DescribeVpcs"
+}
+
 type DescribeVpcsOutput struct {
 
 	// The token to include in another request to get the next page of items. This

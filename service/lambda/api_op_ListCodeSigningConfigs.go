@@ -46,6 +46,10 @@ type ListCodeSigningConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCodeSigningConfigsInput) operationName() string {
+	return "ListCodeSigningConfigs"
+}
+
 type ListCodeSigningConfigsOutput struct {
 
 	// The code signing configurations

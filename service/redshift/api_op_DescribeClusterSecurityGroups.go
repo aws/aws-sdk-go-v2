@@ -84,6 +84,10 @@ type DescribeClusterSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterSecurityGroupsInput) operationName() string {
+	return "DescribeClusterSecurityGroups"
+}
+
 type DescribeClusterSecurityGroupsOutput struct {
 
 	// A list of ClusterSecurityGroup instances.

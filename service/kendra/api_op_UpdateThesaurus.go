@@ -60,6 +60,10 @@ type UpdateThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThesaurusInput) operationName() string {
+	return "UpdateThesaurus"
+}
+
 type UpdateThesaurusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

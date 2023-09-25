@@ -47,6 +47,10 @@ type DescribeAppBlockBuildersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppBlockBuildersInput) operationName() string {
+	return "DescribeAppBlockBuilders"
+}
+
 type DescribeAppBlockBuildersOutput struct {
 
 	// The list that describes one or more app block builders.

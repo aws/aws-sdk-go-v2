@@ -138,6 +138,10 @@ type TransferDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TransferDomainInput) operationName() string {
+	return "TransferDomain"
+}
+
 // The TransferDomain response includes the following element.
 type TransferDomainOutput struct {
 

@@ -52,6 +52,10 @@ type WithdrawByoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*WithdrawByoipCidrInput) operationName() string {
+	return "WithdrawByoipCidr"
+}
+
 type WithdrawByoipCidrOutput struct {
 
 	// Information about the address pool.

@@ -49,6 +49,10 @@ type CreateInternetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInternetGatewayInput) operationName() string {
+	return "CreateInternetGateway"
+}
+
 type CreateInternetGatewayOutput struct {
 
 	// Information about the internet gateway.

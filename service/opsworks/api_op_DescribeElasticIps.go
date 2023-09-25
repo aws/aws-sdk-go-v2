@@ -57,6 +57,10 @@ type DescribeElasticIpsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeElasticIpsInput) operationName() string {
+	return "DescribeElasticIps"
+}
+
 // Contains the response to a DescribeElasticIps request.
 type DescribeElasticIpsOutput struct {
 

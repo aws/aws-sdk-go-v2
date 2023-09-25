@@ -58,6 +58,10 @@ type ListAccessPreviewFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessPreviewFindingsInput) operationName() string {
+	return "ListAccessPreviewFindings"
+}
+
 type ListAccessPreviewFindingsOutput struct {
 
 	// A list of access preview findings that match the specified filter criteria.

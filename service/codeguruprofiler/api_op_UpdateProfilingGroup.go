@@ -48,6 +48,10 @@ type UpdateProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProfilingGroupInput) operationName() string {
+	return "UpdateProfilingGroup"
+}
+
 // The structure representing the updateProfilingGroupResponse.
 type UpdateProfilingGroupOutput struct {
 

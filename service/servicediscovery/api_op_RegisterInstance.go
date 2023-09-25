@@ -153,6 +153,10 @@ type RegisterInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterInstanceInput) operationName() string {
+	return "RegisterInstance"
+}
+
 type RegisterInstanceOutput struct {
 
 	// A value that you can use to determine whether the request completed

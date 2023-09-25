@@ -56,6 +56,10 @@ type GenerateAccessLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateAccessLogsInput) operationName() string {
+	return "GenerateAccessLogs"
+}
+
 // The result structure for the generate access logs request.
 type GenerateAccessLogsOutput struct {
 

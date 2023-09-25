@@ -51,6 +51,10 @@ type DeleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSnapshotInput) operationName() string {
+	return "DeleteSnapshot"
+}
+
 type DeleteSnapshotOutput struct {
 
 	// The lifecycle status of the snapshot. If the DeleteSnapshot operation is

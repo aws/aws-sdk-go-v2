@@ -47,6 +47,10 @@ type RebuildWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebuildWorkspacesInput) operationName() string {
+	return "RebuildWorkspaces"
+}
+
 type RebuildWorkspacesOutput struct {
 
 	// Information about the WorkSpace that could not be rebuilt.

@@ -59,6 +59,10 @@ type CreateSecurityConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSecurityConfigInput) operationName() string {
+	return "CreateSecurityConfig"
+}
+
 type CreateSecurityConfigOutput struct {
 
 	// Details about the created security configuration.

@@ -51,6 +51,10 @@ type DeleteConnectionAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectionAliasInput) operationName() string {
+	return "DeleteConnectionAlias"
+}
+
 type DeleteConnectionAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

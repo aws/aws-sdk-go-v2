@@ -45,6 +45,10 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectsInput) operationName() string {
+	return "ListProjects"
+}
+
 type ListProjectsOutput struct {
 
 	// The token to use in a subsequent ListProjects operation to return the next set

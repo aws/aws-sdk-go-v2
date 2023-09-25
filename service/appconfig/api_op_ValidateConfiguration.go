@@ -51,6 +51,10 @@ type ValidateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateConfigurationInput) operationName() string {
+	return "ValidateConfiguration"
+}
+
 type ValidateConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

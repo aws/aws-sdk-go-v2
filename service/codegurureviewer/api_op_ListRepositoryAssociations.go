@@ -95,6 +95,10 @@ type ListRepositoryAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRepositoryAssociationsInput) operationName() string {
+	return "ListRepositoryAssociations"
+}
+
 type ListRepositoryAssociationsOutput struct {
 
 	// The nextToken value to include in a future ListRecommendations request. When

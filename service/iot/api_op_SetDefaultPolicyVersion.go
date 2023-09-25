@@ -52,6 +52,10 @@ type SetDefaultPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDefaultPolicyVersionInput) operationName() string {
+	return "SetDefaultPolicyVersion"
+}
+
 type SetDefaultPolicyVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

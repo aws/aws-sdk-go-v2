@@ -68,6 +68,10 @@ type GetTranscriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTranscriptInput) operationName() string {
+	return "GetTranscript"
+}
+
 type GetTranscriptOutput struct {
 
 	// The initial contact ID for the contact.

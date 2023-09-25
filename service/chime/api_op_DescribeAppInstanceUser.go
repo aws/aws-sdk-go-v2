@@ -51,6 +51,10 @@ type DescribeAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInstanceUserInput) operationName() string {
+	return "DescribeAppInstanceUser"
+}
+
 type DescribeAppInstanceUserOutput struct {
 
 	// The name of the AppInstanceUser .

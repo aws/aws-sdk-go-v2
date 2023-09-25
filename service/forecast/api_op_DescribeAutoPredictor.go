@@ -43,6 +43,10 @@ type DescribeAutoPredictorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoPredictorInput) operationName() string {
+	return "DescribeAutoPredictor"
+}
+
 type DescribeAutoPredictorOutput struct {
 
 	// The timestamp of the CreateAutoPredictor request.

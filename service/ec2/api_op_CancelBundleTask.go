@@ -49,6 +49,10 @@ type CancelBundleTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelBundleTaskInput) operationName() string {
+	return "CancelBundleTask"
+}
+
 // Contains the output of CancelBundleTask.
 type CancelBundleTaskOutput struct {
 

@@ -88,6 +88,10 @@ type PutObjectLockConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectLockConfigurationInput) operationName() string {
+	return "PutObjectLockConfiguration"
+}
+
 type PutObjectLockConfigurationOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

@@ -46,6 +46,10 @@ type ListRescoreExecutionPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRescoreExecutionPlansInput) operationName() string {
+	return "ListRescoreExecutionPlans"
+}
+
 type ListRescoreExecutionPlansOutput struct {
 
 	// If the response is truncated, Amazon Kendra Intelligent Ranking returns a

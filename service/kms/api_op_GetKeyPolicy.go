@@ -55,6 +55,10 @@ type GetKeyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyPolicyInput) operationName() string {
+	return "GetKeyPolicy"
+}
+
 type GetKeyPolicyOutput struct {
 
 	// A key policy document in JSON format.

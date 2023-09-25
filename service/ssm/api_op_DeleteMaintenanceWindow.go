@@ -41,6 +41,10 @@ type DeleteMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMaintenanceWindowInput) operationName() string {
+	return "DeleteMaintenanceWindow"
+}
+
 type DeleteMaintenanceWindowOutput struct {
 
 	// The ID of the deleted maintenance window.

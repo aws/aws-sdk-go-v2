@@ -57,6 +57,10 @@ type ModifyLoadBalancerAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyLoadBalancerAttributesInput) operationName() string {
+	return "ModifyLoadBalancerAttributes"
+}
+
 // Contains the output of ModifyLoadBalancerAttributes.
 type ModifyLoadBalancerAttributesOutput struct {
 

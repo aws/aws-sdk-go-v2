@@ -45,6 +45,10 @@ type GetEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnvironmentAccountConnectionInput) operationName() string {
+	return "GetEnvironmentAccountConnection"
+}
+
 type GetEnvironmentAccountConnectionOutput struct {
 
 	// The detailed data of the requested environment account connection.

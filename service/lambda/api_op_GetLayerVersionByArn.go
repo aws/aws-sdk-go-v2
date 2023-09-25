@@ -43,6 +43,10 @@ type GetLayerVersionByArnInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLayerVersionByArnInput) operationName() string {
+	return "GetLayerVersionByArn"
+}
+
 type GetLayerVersionByArnOutput struct {
 
 	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)

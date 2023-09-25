@@ -50,6 +50,10 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClustersInput) operationName() string {
+	return "ListClusters"
+}
+
 type ListClustersOutput struct {
 
 	// Information on each of the MSK clusters in the response.

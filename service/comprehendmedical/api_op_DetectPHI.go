@@ -45,6 +45,10 @@ type DetectPHIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectPHIInput) operationName() string {
+	return "DetectPHI"
+}
+
 type DetectPHIOutput struct {
 
 	// The collection of PHI entities extracted from the input text and their

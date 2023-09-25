@@ -49,6 +49,10 @@ type DeleteSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSipRuleInput) operationName() string {
+	return "DeleteSipRule"
+}
+
 type DeleteSipRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

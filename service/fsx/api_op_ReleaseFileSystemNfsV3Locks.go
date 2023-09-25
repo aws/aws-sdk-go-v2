@@ -47,6 +47,10 @@ type ReleaseFileSystemNfsV3LocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleaseFileSystemNfsV3LocksInput) operationName() string {
+	return "ReleaseFileSystemNfsV3Locks"
+}
+
 type ReleaseFileSystemNfsV3LocksOutput struct {
 
 	// A description of a specific Amazon FSx file system.

@@ -52,6 +52,10 @@ type ListExclusionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExclusionsInput) operationName() string {
+	return "ListExclusions"
+}
+
 type ListExclusionsOutput struct {
 
 	// A list of exclusions' ARNs returned by the action.

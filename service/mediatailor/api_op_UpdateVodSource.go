@@ -53,6 +53,10 @@ type UpdateVodSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVodSourceInput) operationName() string {
+	return "UpdateVodSource"
+}
+
 type UpdateVodSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the VOD source.

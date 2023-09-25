@@ -63,6 +63,10 @@ type UpdateDomainNameserversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainNameserversInput) operationName() string {
+	return "UpdateDomainNameservers"
+}
+
 // The UpdateDomainNameservers response includes the following element.
 type UpdateDomainNameserversOutput struct {
 

@@ -129,6 +129,10 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTagsInput) operationName() string {
+	return "GetTags"
+}
+
 type GetTagsOutput struct {
 
 	// The number of query results that Amazon Web Services returns at a time.

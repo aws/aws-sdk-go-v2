@@ -57,6 +57,10 @@ type ListMLTransformsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMLTransformsInput) operationName() string {
+	return "ListMLTransforms"
+}
+
 type ListMLTransformsOutput struct {
 
 	// The identifiers of all the machine learning transforms in the account, or the

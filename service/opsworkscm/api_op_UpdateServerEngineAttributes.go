@@ -57,6 +57,10 @@ type UpdateServerEngineAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServerEngineAttributesInput) operationName() string {
+	return "UpdateServerEngineAttributes"
+}
+
 type UpdateServerEngineAttributesOutput struct {
 
 	// Contains the response to an UpdateServerEngineAttributes request.

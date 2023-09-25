@@ -42,6 +42,10 @@ type ListStudiosInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStudiosInput) operationName() string {
+	return "ListStudios"
+}
+
 type ListStudiosOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.

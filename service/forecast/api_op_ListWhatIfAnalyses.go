@@ -66,6 +66,10 @@ type ListWhatIfAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWhatIfAnalysesInput) operationName() string {
+	return "ListWhatIfAnalyses"
+}
+
 type ListWhatIfAnalysesOutput struct {
 
 	// If the response is truncated, Forecast returns this token. To retrieve the next

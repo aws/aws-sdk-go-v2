@@ -55,6 +55,10 @@ type PutChannelExpirationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutChannelExpirationSettingsInput) operationName() string {
+	return "PutChannelExpirationSettings"
+}
+
 type PutChannelExpirationSettingsOutput struct {
 
 	// The channel ARN.

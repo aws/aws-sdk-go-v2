@@ -56,6 +56,10 @@ type CreateAccessPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessPreviewInput) operationName() string {
+	return "CreateAccessPreview"
+}
+
 type CreateAccessPreviewOutput struct {
 
 	// The unique ID for the access preview.

@@ -70,6 +70,10 @@ type CompleteVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteVaultLockInput) operationName() string {
+	return "CompleteVaultLock"
+}
+
 type CompleteVaultLockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

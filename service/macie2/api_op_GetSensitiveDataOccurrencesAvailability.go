@@ -42,6 +42,10 @@ type GetSensitiveDataOccurrencesAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSensitiveDataOccurrencesAvailabilityInput) operationName() string {
+	return "GetSensitiveDataOccurrencesAvailability"
+}
+
 type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 
 	// Specifies whether occurrences of sensitive data can be retrieved for the

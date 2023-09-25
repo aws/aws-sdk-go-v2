@@ -43,6 +43,10 @@ type DescribeModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelInput) operationName() string {
+	return "DescribeModel"
+}
+
 type DescribeModelOutput struct {
 
 	// A timestamp that shows when the model was created.

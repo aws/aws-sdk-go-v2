@@ -54,6 +54,10 @@ type DescribePredictorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePredictorInput) operationName() string {
+	return "DescribePredictor"
+}
+
 type DescribePredictorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the algorithm used for model training.

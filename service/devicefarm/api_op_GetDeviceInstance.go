@@ -44,6 +44,10 @@ type GetDeviceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceInstanceInput) operationName() string {
+	return "GetDeviceInstance"
+}
+
 type GetDeviceInstanceOutput struct {
 
 	// An object that contains information about your device instance.

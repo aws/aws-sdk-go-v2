@@ -58,6 +58,10 @@ type TransferCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TransferCertificateInput) operationName() string {
+	return "TransferCertificate"
+}
+
 // The output from the TransferCertificate operation.
 type TransferCertificateOutput struct {
 

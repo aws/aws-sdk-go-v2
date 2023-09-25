@@ -41,6 +41,10 @@ type DeleteCorsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCorsConfigurationInput) operationName() string {
+	return "DeleteCorsConfiguration"
+}
+
 type DeleteCorsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

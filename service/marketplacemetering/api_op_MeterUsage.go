@@ -79,6 +79,10 @@ type MeterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MeterUsageInput) operationName() string {
+	return "MeterUsage"
+}
+
 type MeterUsageOutput struct {
 
 	// Metering record id.

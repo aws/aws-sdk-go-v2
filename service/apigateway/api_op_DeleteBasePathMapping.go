@@ -48,6 +48,10 @@ type DeleteBasePathMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBasePathMappingInput) operationName() string {
+	return "DeleteBasePathMapping"
+}
+
 type DeleteBasePathMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

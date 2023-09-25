@@ -49,6 +49,10 @@ type DisassociateLambdaFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateLambdaFunctionInput) operationName() string {
+	return "DisassociateLambdaFunction"
+}
+
 type DisassociateLambdaFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

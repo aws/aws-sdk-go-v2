@@ -62,6 +62,10 @@ type CreatePullRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePullRequestInput) operationName() string {
+	return "CreatePullRequest"
+}
+
 type CreatePullRequestOutput struct {
 
 	// Information about the newly created pull request.

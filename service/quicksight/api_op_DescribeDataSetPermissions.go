@@ -49,6 +49,10 @@ type DescribeDataSetPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSetPermissionsInput) operationName() string {
+	return "DescribeDataSetPermissions"
+}
+
 type DescribeDataSetPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.

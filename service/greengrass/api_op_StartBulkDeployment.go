@@ -65,6 +65,10 @@ type StartBulkDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBulkDeploymentInput) operationName() string {
+	return "StartBulkDeployment"
+}
+
 type StartBulkDeploymentOutput struct {
 
 	// The ARN of the bulk deployment.

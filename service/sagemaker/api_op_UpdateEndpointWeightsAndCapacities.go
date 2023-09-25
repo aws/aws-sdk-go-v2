@@ -52,6 +52,10 @@ type UpdateEndpointWeightsAndCapacitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointWeightsAndCapacitiesInput) operationName() string {
+	return "UpdateEndpointWeightsAndCapacities"
+}
+
 type UpdateEndpointWeightsAndCapacitiesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated endpoint.

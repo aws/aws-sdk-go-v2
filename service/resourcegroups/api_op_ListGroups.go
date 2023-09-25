@@ -69,6 +69,10 @@ type ListGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupsInput) operationName() string {
+	return "ListGroups"
+}
+
 type ListGroupsOutput struct {
 
 	// A list of GroupIdentifier objects. Each identifier is an object that contains

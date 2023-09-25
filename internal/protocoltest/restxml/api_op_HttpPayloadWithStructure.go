@@ -33,6 +33,10 @@ type HttpPayloadWithStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpPayloadWithStructureInput) operationName() string {
+	return "HttpPayloadWithStructure"
+}
+
 type HttpPayloadWithStructureOutput struct {
 	Nested *types.NestedPayload
 

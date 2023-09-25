@@ -49,6 +49,10 @@ type UpdateCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCodeRepositoryInput) operationName() string {
+	return "UpdateCodeRepository"
+}
+
 type UpdateCodeRepositoryOutput struct {
 
 	// The ARN of the Git repository.

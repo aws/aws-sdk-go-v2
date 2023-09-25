@@ -46,6 +46,10 @@ type ListLoaderJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLoaderJobsInput) operationName() string {
+	return "ListLoaderJobs"
+}
+
 type ListLoaderJobsOutput struct {
 
 	// The requested list of job IDs.

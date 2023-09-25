@@ -45,6 +45,10 @@ type EnableSharingWithAwsOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableSharingWithAwsOrganizationInput) operationName() string {
+	return "EnableSharingWithAwsOrganization"
+}
+
 type EnableSharingWithAwsOrganizationOutput struct {
 
 	// A return value of true indicates that the request succeeded. A value of false

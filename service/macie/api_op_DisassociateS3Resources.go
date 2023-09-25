@@ -51,6 +51,10 @@ type DisassociateS3ResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateS3ResourcesInput) operationName() string {
+	return "DisassociateS3Resources"
+}
+
 type DisassociateS3ResourcesOutput struct {
 
 	// (Discontinued) S3 resources that couldn't be removed from being monitored and

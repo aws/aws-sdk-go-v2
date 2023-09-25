@@ -66,6 +66,10 @@ type GetTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTablesInput) operationName() string {
+	return "GetTables"
+}
+
 type GetTablesOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.

@@ -37,6 +37,10 @@ type ImportServerCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportServerCatalogInput) operationName() string {
+	return "ImportServerCatalog"
+}
+
 type ImportServerCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

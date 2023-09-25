@@ -56,6 +56,10 @@ type ResolveComponentCandidatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResolveComponentCandidatesInput) operationName() string {
+	return "ResolveComponentCandidates"
+}
+
 type ResolveComponentCandidatesOutput struct {
 
 	// A list of components that meet the requirements that you specify in the

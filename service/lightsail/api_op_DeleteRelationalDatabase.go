@@ -61,6 +61,10 @@ type DeleteRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRelationalDatabaseInput) operationName() string {
+	return "DeleteRelationalDatabase"
+}
+
 type DeleteRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

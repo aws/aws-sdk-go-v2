@@ -56,6 +56,10 @@ type StartPolicyGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPolicyGenerationInput) operationName() string {
+	return "StartPolicyGeneration"
+}
+
 type StartPolicyGenerationOutput struct {
 
 	// The JobId that is returned by the StartPolicyGeneration operation. The JobId

@@ -38,6 +38,10 @@ type GetAccountAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountAliasInput) operationName() string {
+	return "GetAccountAlias"
+}
+
 type GetAccountAliasOutput struct {
 
 	// An alias or short name for an Amazon Web Services account.

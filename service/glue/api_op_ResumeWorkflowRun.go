@@ -54,6 +54,10 @@ type ResumeWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeWorkflowRunInput) operationName() string {
+	return "ResumeWorkflowRun"
+}
+
 type ResumeWorkflowRunOutput struct {
 
 	// A list of the node IDs for the nodes that were actually restarted.

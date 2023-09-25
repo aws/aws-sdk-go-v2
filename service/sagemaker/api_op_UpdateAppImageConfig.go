@@ -45,6 +45,10 @@ type UpdateAppImageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppImageConfigInput) operationName() string {
+	return "UpdateAppImageConfig"
+}
+
 type UpdateAppImageConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) for the AppImageConfig.

@@ -56,6 +56,10 @@ type GetReadSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReadSetInput) operationName() string {
+	return "GetReadSet"
+}
+
 type GetReadSetOutput struct {
 
 	// The read set file payload.

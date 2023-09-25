@@ -61,6 +61,10 @@ type ListResponseHeadersPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResponseHeadersPoliciesInput) operationName() string {
+	return "ListResponseHeadersPolicies"
+}
+
 type ListResponseHeadersPoliciesOutput struct {
 
 	// A list of response headers policies.

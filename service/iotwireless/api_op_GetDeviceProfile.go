@@ -42,6 +42,10 @@ type GetDeviceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceProfileInput) operationName() string {
+	return "GetDeviceProfile"
+}
+
 type GetDeviceProfileOutput struct {
 
 	// The Amazon Resource Name of the resource.

@@ -55,6 +55,10 @@ type AssociateDefaultVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDefaultVocabularyInput) operationName() string {
+	return "AssociateDefaultVocabulary"
+}
+
 type AssociateDefaultVocabularyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

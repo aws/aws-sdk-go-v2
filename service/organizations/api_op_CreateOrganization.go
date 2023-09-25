@@ -60,6 +60,10 @@ type CreateOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOrganizationInput) operationName() string {
+	return "CreateOrganization"
+}
+
 type CreateOrganizationOutput struct {
 
 	// A structure that contains details about the newly created organization.

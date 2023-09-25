@@ -43,6 +43,10 @@ type DisableTopicRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableTopicRuleInput) operationName() string {
+	return "DisableTopicRule"
+}
+
 type DisableTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

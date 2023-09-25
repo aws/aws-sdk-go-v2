@@ -49,6 +49,10 @@ type GetApiMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApiMappingsInput) operationName() string {
+	return "GetApiMappings"
+}
+
 type GetApiMappingsOutput struct {
 
 	// The elements from this collection.

@@ -78,6 +78,10 @@ type CreateInterconnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInterconnectInput) operationName() string {
+	return "CreateInterconnect"
+}
+
 // Information about an interconnect.
 type CreateInterconnectOutput struct {
 

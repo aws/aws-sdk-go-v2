@@ -74,6 +74,10 @@ type PutObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectInput) operationName() string {
+	return "PutObject"
+}
+
 type PutObjectOutput struct {
 
 	// Inline chunk checksum

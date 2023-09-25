@@ -70,6 +70,10 @@ type CreateDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterParameterGroupInput) operationName() string {
+	return "CreateDBClusterParameterGroup"
+}
+
 type CreateDBClusterParameterGroupOutput struct {
 
 	// Detailed information about a cluster parameter group.

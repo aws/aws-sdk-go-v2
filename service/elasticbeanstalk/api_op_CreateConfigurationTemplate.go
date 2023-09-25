@@ -105,6 +105,10 @@ type CreateConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigurationTemplateInput) operationName() string {
+	return "CreateConfigurationTemplate"
+}
+
 // Describes the settings for a configuration set.
 type CreateConfigurationTemplateOutput struct {
 

@@ -49,6 +49,10 @@ type DescribeVirtualInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualInterfacesInput) operationName() string {
+	return "DescribeVirtualInterfaces"
+}
+
 type DescribeVirtualInterfacesOutput struct {
 
 	// The virtual interfaces

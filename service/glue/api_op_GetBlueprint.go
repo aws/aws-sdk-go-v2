@@ -48,6 +48,10 @@ type GetBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlueprintInput) operationName() string {
+	return "GetBlueprint"
+}
+
 type GetBlueprintOutput struct {
 
 	// Returns a Blueprint object.

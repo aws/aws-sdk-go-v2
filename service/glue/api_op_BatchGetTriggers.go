@@ -46,6 +46,10 @@ type BatchGetTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetTriggersInput) operationName() string {
+	return "BatchGetTriggers"
+}
+
 type BatchGetTriggersOutput struct {
 
 	// A list of trigger definitions.

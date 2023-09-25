@@ -59,6 +59,10 @@ type GetReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReferenceInput) operationName() string {
+	return "GetReference"
+}
+
 type GetReferenceOutput struct {
 
 	// The reference file payload.

@@ -45,6 +45,10 @@ type DeclineInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeclineInvitationsInput) operationName() string {
+	return "DeclineInvitations"
+}
+
 type DeclineInvitationsOutput struct {
 
 	// The list of Amazon Web Services accounts that were not processed. For each

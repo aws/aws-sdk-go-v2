@@ -46,6 +46,10 @@ type DeleteSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSAMLProviderInput) operationName() string {
+	return "DeleteSAMLProvider"
+}
+
 type DeleteSAMLProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

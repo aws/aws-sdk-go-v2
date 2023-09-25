@@ -46,6 +46,10 @@ type GetSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSnapshotInput) operationName() string {
+	return "GetSnapshot"
+}
+
 type GetSnapshotOutput struct {
 
 	// The returned snapshot object.

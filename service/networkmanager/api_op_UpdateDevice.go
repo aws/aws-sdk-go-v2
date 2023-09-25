@@ -73,6 +73,10 @@ type UpdateDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeviceInput) operationName() string {
+	return "UpdateDevice"
+}
+
 type UpdateDeviceOutput struct {
 
 	// Information about the device.

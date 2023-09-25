@@ -43,6 +43,10 @@ type DescribeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainInput) operationName() string {
+	return "DescribeDomain"
+}
+
 type DescribeDomainOutput struct {
 
 	// Specifies the VPC used for non-EFS traffic. The default value is

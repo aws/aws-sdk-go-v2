@@ -42,6 +42,10 @@ type GetTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTrustStoreInput) operationName() string {
+	return "GetTrustStore"
+}
+
 type GetTrustStoreOutput struct {
 
 	// The trust store.

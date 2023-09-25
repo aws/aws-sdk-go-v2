@@ -42,6 +42,10 @@ type DescribeLabelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLabelGroupInput) operationName() string {
+	return "DescribeLabelGroup"
+}
+
 type DescribeLabelGroupOutput struct {
 
 	// The time at which the label group was created.

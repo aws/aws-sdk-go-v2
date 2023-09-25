@@ -51,6 +51,10 @@ type GetSolFunctionPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSolFunctionPackageContentInput) operationName() string {
+	return "GetSolFunctionPackageContent"
+}
+
 type GetSolFunctionPackageContentOutput struct {
 
 	// Indicates the media type of the resource.

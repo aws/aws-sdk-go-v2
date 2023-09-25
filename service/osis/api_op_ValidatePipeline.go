@@ -47,6 +47,10 @@ type ValidatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidatePipelineInput) operationName() string {
+	return "ValidatePipeline"
+}
+
 type ValidatePipelineOutput struct {
 
 	// A list of errors if the configuration is invalid.

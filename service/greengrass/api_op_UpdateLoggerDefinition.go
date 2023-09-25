@@ -44,6 +44,10 @@ type UpdateLoggerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLoggerDefinitionInput) operationName() string {
+	return "UpdateLoggerDefinition"
+}
+
 type UpdateLoggerDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

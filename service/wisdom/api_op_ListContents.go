@@ -50,6 +50,10 @@ type ListContentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContentsInput) operationName() string {
+	return "ListContents"
+}
+
 type ListContentsOutput struct {
 
 	// Information about the content.

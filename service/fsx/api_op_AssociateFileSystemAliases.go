@@ -74,6 +74,10 @@ type AssociateFileSystemAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFileSystemAliasesInput) operationName() string {
+	return "AssociateFileSystemAliases"
+}
+
 // The system generated response showing the DNS aliases that Amazon FSx is
 // attempting to associate with the file system. Use the API operation to monitor
 // the status of the aliases Amazon FSx is associating with the file system. It can

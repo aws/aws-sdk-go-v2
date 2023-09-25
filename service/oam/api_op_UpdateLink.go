@@ -53,6 +53,10 @@ type UpdateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLinkInput) operationName() string {
+	return "UpdateLink"
+}
+
 type UpdateLinkOutput struct {
 
 	// The ARN of the link that you have updated.

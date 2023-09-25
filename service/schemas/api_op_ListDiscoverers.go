@@ -52,6 +52,10 @@ type ListDiscoverersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDiscoverersInput) operationName() string {
+	return "ListDiscoverers"
+}
+
 type ListDiscoverersOutput struct {
 
 	// An array of DiscovererSummary information.

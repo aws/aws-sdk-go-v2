@@ -53,6 +53,10 @@ type CreateHsmClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHsmClientCertificateInput) operationName() string {
+	return "CreateHsmClientCertificate"
+}
+
 type CreateHsmClientCertificateOutput struct {
 
 	// Returns information about an HSM client certificate. The certificate is stored

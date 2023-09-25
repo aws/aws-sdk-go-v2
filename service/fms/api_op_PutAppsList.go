@@ -45,6 +45,10 @@ type PutAppsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppsListInput) operationName() string {
+	return "PutAppsList"
+}
+
 type PutAppsListOutput struct {
 
 	// The details of the Firewall Manager applications list.

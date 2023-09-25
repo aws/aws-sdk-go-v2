@@ -42,6 +42,10 @@ type GetSchemaCreationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaCreationStatusInput) operationName() string {
+	return "GetSchemaCreationStatus"
+}
+
 type GetSchemaCreationStatusOutput struct {
 
 	// Detailed information about the status of the schema creation operation.

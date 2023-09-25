@@ -42,6 +42,10 @@ type GetDefaultRetentionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDefaultRetentionPolicyInput) operationName() string {
+	return "GetDefaultRetentionPolicy"
+}
+
 type GetDefaultRetentionPolicyOutput struct {
 
 	// The retention policy description.

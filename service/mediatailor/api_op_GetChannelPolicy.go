@@ -42,6 +42,10 @@ type GetChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelPolicyInput) operationName() string {
+	return "GetChannelPolicy"
+}
+
 type GetChannelPolicyOutput struct {
 
 	// The IAM policy for the channel. IAM policies are used to control access to your

@@ -76,6 +76,10 @@ type TagResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagResourcesInput) operationName() string {
+	return "TagResources"
+}
+
 type TagResourcesOutput struct {
 
 	// A map containing a key-value pair for each failed item that couldn't be tagged.

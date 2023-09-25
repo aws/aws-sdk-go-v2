@@ -85,6 +85,10 @@ type PutClusterCapacityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutClusterCapacityProvidersInput) operationName() string {
+	return "PutClusterCapacityProviders"
+}
+
 type PutClusterCapacityProvidersOutput struct {
 
 	// Details about the cluster.

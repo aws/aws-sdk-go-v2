@@ -75,6 +75,10 @@ type ExportImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportImageInput) operationName() string {
+	return "ExportImage"
+}
+
 type ExportImageOutput struct {
 
 	// A description of the image being exported.

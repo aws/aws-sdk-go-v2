@@ -51,6 +51,10 @@ type GetImageSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImageSetInput) operationName() string {
+	return "GetImageSet"
+}
+
 type GetImageSetOutput struct {
 
 	// The data store identifier.

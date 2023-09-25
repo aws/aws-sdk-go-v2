@@ -50,6 +50,10 @@ type GetParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParametersInput) operationName() string {
+	return "GetParameters"
+}
+
 type GetParametersOutput struct {
 
 	// A list of parameters that aren't formatted correctly or don't run during an

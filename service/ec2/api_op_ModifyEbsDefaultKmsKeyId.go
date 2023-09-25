@@ -69,6 +69,10 @@ type ModifyEbsDefaultKmsKeyIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyEbsDefaultKmsKeyIdInput) operationName() string {
+	return "ModifyEbsDefaultKmsKeyId"
+}
+
 type ModifyEbsDefaultKmsKeyIdOutput struct {
 
 	// The Amazon Resource Name (ARN) of the default KMS key for encryption by default.

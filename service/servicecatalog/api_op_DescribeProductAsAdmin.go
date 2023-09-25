@@ -57,6 +57,10 @@ type DescribeProductAsAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProductAsAdminInput) operationName() string {
+	return "DescribeProductAsAdmin"
+}
+
 type DescribeProductAsAdminOutput struct {
 
 	// Information about the associated budgets.

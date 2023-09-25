@@ -46,6 +46,10 @@ type DeleteConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetEventDestinationInput) operationName() string {
+	return "DeleteConfigurationSetEventDestination"
+}
+
 // An empty object that indicates that the event destination was deleted
 // successfully.
 type DeleteConfigurationSetEventDestinationOutput struct {

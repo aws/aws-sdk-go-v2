@@ -44,6 +44,10 @@ type DeleteDBClusterAutomatedBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterAutomatedBackupInput) operationName() string {
+	return "DeleteDBClusterAutomatedBackup"
+}
+
 type DeleteDBClusterAutomatedBackupOutput struct {
 
 	// An automated backup of a DB cluster. It consists of system backups, transaction

@@ -58,6 +58,10 @@ type CreateStudioLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStudioLifecycleConfigInput) operationName() string {
+	return "CreateStudioLifecycleConfig"
+}
+
 type CreateStudioLifecycleConfigOutput struct {
 
 	// The ARN of your created Lifecycle Configuration.

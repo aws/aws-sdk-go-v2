@@ -44,6 +44,10 @@ type StopBackupJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopBackupJobInput) operationName() string {
+	return "StopBackupJob"
+}
+
 type StopBackupJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

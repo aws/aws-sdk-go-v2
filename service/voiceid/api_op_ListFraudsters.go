@@ -57,6 +57,10 @@ type ListFraudstersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFraudstersInput) operationName() string {
+	return "ListFraudsters"
+}
+
 type ListFraudstersOutput struct {
 
 	// A list that contains details about each fraudster in the Amazon Web Services

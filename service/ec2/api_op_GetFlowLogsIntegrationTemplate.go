@@ -71,6 +71,10 @@ type GetFlowLogsIntegrationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFlowLogsIntegrationTemplateInput) operationName() string {
+	return "GetFlowLogsIntegrationTemplate"
+}
+
 type GetFlowLogsIntegrationTemplateOutput struct {
 
 	// The generated CloudFormation template.

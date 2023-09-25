@@ -59,6 +59,10 @@ type CreateDBSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBSubnetGroupInput) operationName() string {
+	return "CreateDBSubnetGroup"
+}
+
 type CreateDBSubnetGroupOutput struct {
 
 	// Detailed information about a subnet group.

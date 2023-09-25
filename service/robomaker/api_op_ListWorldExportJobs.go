@@ -55,6 +55,10 @@ type ListWorldExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorldExportJobsInput) operationName() string {
+	return "ListWorldExportJobs"
+}
+
 type ListWorldExportJobsOutput struct {
 
 	// Summary information for world export jobs.

@@ -43,6 +43,10 @@ type GetMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMulticastGroupInput) operationName() string {
+	return "GetMulticastGroup"
+}
+
 type GetMulticastGroupOutput struct {
 
 	// The arn of the multicast group.

@@ -60,6 +60,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsInput) operationName() string {
+	return "DescribeEvents"
+}
+
 type DescribeEventsOutput struct {
 
 	// NextToken is a string that is returned in some command responses. It indicates

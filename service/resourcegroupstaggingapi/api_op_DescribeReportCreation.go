@@ -37,6 +37,10 @@ type DescribeReportCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReportCreationInput) operationName() string {
+	return "DescribeReportCreation"
+}
+
 type DescribeReportCreationOutput struct {
 
 	// Details of the common errors that all operations return.

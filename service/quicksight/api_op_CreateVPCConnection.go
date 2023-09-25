@@ -77,6 +77,10 @@ type CreateVPCConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVPCConnectionInput) operationName() string {
+	return "CreateVPCConnection"
+}
+
 type CreateVPCConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the VPC connection.

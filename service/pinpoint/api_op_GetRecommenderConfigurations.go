@@ -46,6 +46,10 @@ type GetRecommenderConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecommenderConfigurationsInput) operationName() string {
+	return "GetRecommenderConfigurations"
+}
+
 type GetRecommenderConfigurationsOutput struct {
 
 	// Provides information about all the recommender model configurations that are

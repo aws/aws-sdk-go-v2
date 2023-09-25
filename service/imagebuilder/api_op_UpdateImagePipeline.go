@@ -88,6 +88,10 @@ type UpdateImagePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateImagePipelineInput) operationName() string {
+	return "UpdateImagePipeline"
+}
+
 type UpdateImagePipelineOutput struct {
 
 	// The idempotency token used to make this request idempotent.

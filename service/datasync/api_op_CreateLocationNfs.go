@@ -75,6 +75,10 @@ type CreateLocationNfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationNfsInput) operationName() string {
+	return "CreateLocationNfs"
+}
+
 // CreateLocationNfsResponse
 type CreateLocationNfsOutput struct {
 

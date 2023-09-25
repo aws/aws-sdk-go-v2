@@ -52,6 +52,10 @@ type ListDeviceResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceResourcesInput) operationName() string {
+	return "ListDeviceResources"
+}
+
 type ListDeviceResourcesOutput struct {
 
 	// A pagination token to continue to the next page of results.

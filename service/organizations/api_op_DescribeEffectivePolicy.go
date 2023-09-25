@@ -58,6 +58,10 @@ type DescribeEffectivePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEffectivePolicyInput) operationName() string {
+	return "DescribeEffectivePolicy"
+}
+
 type DescribeEffectivePolicyOutput struct {
 
 	// The contents of the effective policy.

@@ -49,6 +49,10 @@ type DescribeJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobRunInput) operationName() string {
+	return "DescribeJobRun"
+}
+
 type DescribeJobRunOutput struct {
 
 	// The output displays information about a job run.

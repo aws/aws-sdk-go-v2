@@ -48,6 +48,10 @@ type ListScenesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScenesInput) operationName() string {
+	return "ListScenes"
+}
+
 type ListScenesOutput struct {
 
 	// The string that specifies the next page of results.

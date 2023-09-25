@@ -47,6 +47,10 @@ type DescribeServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceActionInput) operationName() string {
+	return "DescribeServiceAction"
+}
+
 type DescribeServiceActionOutput struct {
 
 	// Detailed information about the self-service action.

@@ -80,6 +80,10 @@ type PromotePermissionCreatedFromPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PromotePermissionCreatedFromPolicyInput) operationName() string {
+	return "PromotePermissionCreatedFromPolicy"
+}
+
 type PromotePermissionCreatedFromPolicyOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

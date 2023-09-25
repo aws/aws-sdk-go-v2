@@ -54,6 +54,10 @@ type ListServiceInstanceOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceInstanceOutputsInput) operationName() string {
+	return "ListServiceInstanceOutputs"
+}
+
 type ListServiceInstanceOutputsOutput struct {
 
 	// An array of service instance Infrastructure as Code (IaC) outputs.

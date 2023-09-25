@@ -54,6 +54,10 @@ type CreateGameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGameInput) operationName() string {
+	return "CreateGame"
+}
+
 type CreateGameOutput struct {
 
 	// Details about the game that was created.

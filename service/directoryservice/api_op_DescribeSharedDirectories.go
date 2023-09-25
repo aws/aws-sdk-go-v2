@@ -52,6 +52,10 @@ type DescribeSharedDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSharedDirectoriesInput) operationName() string {
+	return "DescribeSharedDirectories"
+}
+
 type DescribeSharedDirectoriesOutput struct {
 
 	// If not null, token that indicates that more results are available. Pass this

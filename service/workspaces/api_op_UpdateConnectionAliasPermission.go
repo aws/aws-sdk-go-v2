@@ -61,6 +61,10 @@ type UpdateConnectionAliasPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectionAliasPermissionInput) operationName() string {
+	return "UpdateConnectionAliasPermission"
+}
+
 type UpdateConnectionAliasPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,6 +49,10 @@ type ListBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBotsInput) operationName() string {
+	return "ListBots"
+}
+
 type ListBotsOutput struct {
 
 	// List of bots and bot details.

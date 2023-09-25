@@ -54,6 +54,10 @@ type RejectResourceShareInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectResourceShareInvitationInput) operationName() string {
+	return "RejectResourceShareInvitation"
+}
+
 type RejectResourceShareInvitationOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

@@ -66,6 +66,10 @@ type ListBatchJobExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBatchJobExecutionsInput) operationName() string {
+	return "ListBatchJobExecutions"
+}
+
 type ListBatchJobExecutionsOutput struct {
 
 	// Returns a list of batch job executions for an application.

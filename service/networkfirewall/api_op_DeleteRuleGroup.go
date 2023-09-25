@@ -52,6 +52,10 @@ type DeleteRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRuleGroupInput) operationName() string {
+	return "DeleteRuleGroup"
+}
+
 type DeleteRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup ,

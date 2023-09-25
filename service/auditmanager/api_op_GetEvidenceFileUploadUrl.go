@@ -55,6 +55,10 @@ type GetEvidenceFileUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEvidenceFileUploadUrlInput) operationName() string {
+	return "GetEvidenceFileUploadUrl"
+}
+
 type GetEvidenceFileUploadUrlOutput struct {
 
 	// The name of the uploaded manual evidence file that the presigned URL was

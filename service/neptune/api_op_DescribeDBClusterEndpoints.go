@@ -69,6 +69,10 @@ type DescribeDBClusterEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterEndpointsInput) operationName() string {
+	return "DescribeDBClusterEndpoints"
+}
+
 type DescribeDBClusterEndpointsOutput struct {
 
 	// Contains the details of the endpoints associated with the cluster and matching

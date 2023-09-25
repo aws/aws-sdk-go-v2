@@ -47,6 +47,10 @@ type DescribeReplicationConfigurationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationConfigurationTemplatesInput) operationName() string {
+	return "DescribeReplicationConfigurationTemplates"
+}
+
 type DescribeReplicationConfigurationTemplatesOutput struct {
 
 	// An array of Replication Configuration Templates.

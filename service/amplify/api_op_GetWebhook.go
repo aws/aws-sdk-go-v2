@@ -43,6 +43,10 @@ type GetWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWebhookInput) operationName() string {
+	return "GetWebhook"
+}
+
 // The result structure for the get webhook request.
 type GetWebhookOutput struct {
 

@@ -44,6 +44,10 @@ type DeleteStudioLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStudioLifecycleConfigInput) operationName() string {
+	return "DeleteStudioLifecycleConfig"
+}
+
 type DeleteStudioLifecycleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

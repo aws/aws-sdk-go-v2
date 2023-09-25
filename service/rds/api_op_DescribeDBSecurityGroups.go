@@ -62,6 +62,10 @@ type DescribeDBSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBSecurityGroupsInput) operationName() string {
+	return "DescribeDBSecurityGroups"
+}
+
 // Contains the result of a successful invocation of the DescribeDBSecurityGroups
 // action.
 type DescribeDBSecurityGroupsOutput struct {

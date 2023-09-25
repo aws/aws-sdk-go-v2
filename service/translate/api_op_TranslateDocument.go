@@ -80,6 +80,10 @@ type TranslateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TranslateDocumentInput) operationName() string {
+	return "TranslateDocument"
+}
+
 type TranslateDocumentOutput struct {
 
 	// The language code of the source document.

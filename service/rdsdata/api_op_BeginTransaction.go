@@ -60,6 +60,10 @@ type BeginTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BeginTransactionInput) operationName() string {
+	return "BeginTransaction"
+}
+
 // The response elements represent the output of a request to start a SQL
 // transaction.
 type BeginTransactionOutput struct {

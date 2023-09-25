@@ -94,6 +94,7 @@
         "api_op_UpdateNetworkResourceMetadata.go",
         "api_op_UpdateSite.go",
         "api_op_UpdateVpcAttachment.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

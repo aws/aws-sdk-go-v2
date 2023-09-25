@@ -55,6 +55,10 @@ type GetDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevEnvironmentInput) operationName() string {
+	return "GetDevEnvironment"
+}
+
 type GetDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the user who created the Dev Environment.

@@ -44,6 +44,10 @@ type DeleteBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackupInput) operationName() string {
+	return "DeleteBackup"
+}
+
 type DeleteBackupOutput struct {
 
 	// Contains the description of the backup created for the table.

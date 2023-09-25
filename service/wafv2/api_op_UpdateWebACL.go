@@ -160,6 +160,10 @@ type UpdateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWebACLInput) operationName() string {
+	return "UpdateWebACL"
+}
+
 type UpdateWebACLOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update

@@ -74,6 +74,10 @@ type VerifyMacInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyMacInput) operationName() string {
+	return "VerifyMac"
+}
+
 type VerifyMacOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography

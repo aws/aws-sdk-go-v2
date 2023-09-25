@@ -60,6 +60,10 @@ type UpdateBandwidthRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBandwidthRateLimitInput) operationName() string {
+	return "UpdateBandwidthRateLimit"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // throttle information was updated.
 type UpdateBandwidthRateLimitOutput struct {

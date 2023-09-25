@@ -67,6 +67,10 @@ type StartBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBotRecommendationInput) operationName() string {
+	return "StartBotRecommendation"
+}
+
 type StartBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation.

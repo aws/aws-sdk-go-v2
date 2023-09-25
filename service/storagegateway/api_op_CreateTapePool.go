@@ -69,6 +69,10 @@ type CreateTapePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTapePoolInput) operationName() string {
+	return "CreateTapePool"
+}
+
 type CreateTapePoolOutput struct {
 
 	// The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use

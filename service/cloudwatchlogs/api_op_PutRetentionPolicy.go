@@ -66,6 +66,10 @@ type PutRetentionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRetentionPolicyInput) operationName() string {
+	return "PutRetentionPolicy"
+}
+
 type PutRetentionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

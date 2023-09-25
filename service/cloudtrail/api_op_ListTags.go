@@ -53,6 +53,10 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsInput) operationName() string {
+	return "ListTags"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type ListTagsOutput struct {

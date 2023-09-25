@@ -64,6 +64,10 @@ type CreateArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateArtifactInput) operationName() string {
+	return "CreateArtifact"
+}
+
 type CreateArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.

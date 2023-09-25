@@ -45,6 +45,10 @@ type DeleteEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEmailTemplateInput) operationName() string {
+	return "DeleteEmailTemplate"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type DeleteEmailTemplateOutput struct {

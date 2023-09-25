@@ -79,6 +79,10 @@ type StartQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartQueryExecutionInput) operationName() string {
+	return "StartQueryExecution"
+}
+
 type StartQueryExecutionOutput struct {
 
 	// The unique ID of the query that ran as a result of this request.

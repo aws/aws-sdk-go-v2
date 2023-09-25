@@ -57,6 +57,10 @@ type GetServiceQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceQuotaInput) operationName() string {
+	return "GetServiceQuota"
+}
+
 type GetServiceQuotaOutput struct {
 
 	// Information about the quota.

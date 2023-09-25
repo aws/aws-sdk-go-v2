@@ -62,6 +62,10 @@ type EvaluateExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EvaluateExpressionInput) operationName() string {
+	return "EvaluateExpression"
+}
+
 // Contains the output of EvaluateExpression.
 type EvaluateExpressionOutput struct {
 

@@ -46,6 +46,10 @@ type EnableDelegatedAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableDelegatedAdminAccountInput) operationName() string {
+	return "EnableDelegatedAdminAccount"
+}
+
 type EnableDelegatedAdminAccountOutput struct {
 
 	// The Amazon Web Services account ID of the successfully Amazon Inspector

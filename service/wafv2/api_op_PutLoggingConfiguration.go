@@ -70,6 +70,10 @@ type PutLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLoggingConfigurationInput) operationName() string {
+	return "PutLoggingConfiguration"
+}
+
 type PutLoggingConfigurationOutput struct {
 
 	//

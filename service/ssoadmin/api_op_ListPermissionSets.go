@@ -51,6 +51,10 @@ type ListPermissionSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionSetsInput) operationName() string {
+	return "ListPermissionSets"
+}
+
 type ListPermissionSetsOutput struct {
 
 	// The pagination token for the list API. Initially the value is null. Use the

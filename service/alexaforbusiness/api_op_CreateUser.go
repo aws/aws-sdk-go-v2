@@ -59,6 +59,10 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserInput) operationName() string {
+	return "CreateUser"
+}
+
 type CreateUserOutput struct {
 
 	// The ARN of the newly created user in the response.

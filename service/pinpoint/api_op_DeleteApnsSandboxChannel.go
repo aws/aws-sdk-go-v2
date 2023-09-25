@@ -44,6 +44,10 @@ type DeleteApnsSandboxChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApnsSandboxChannelInput) operationName() string {
+	return "DeleteApnsSandboxChannel"
+}
+
 type DeleteApnsSandboxChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push

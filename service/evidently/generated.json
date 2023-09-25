@@ -47,6 +47,7 @@
         "api_op_UpdateLaunch.go",
         "api_op_UpdateProject.go",
         "api_op_UpdateProjectDataDelivery.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

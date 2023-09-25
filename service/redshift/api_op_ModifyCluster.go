@@ -213,6 +213,10 @@ type ModifyClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterInput) operationName() string {
+	return "ModifyCluster"
+}
+
 type ModifyClusterOutput struct {
 
 	// Describes a cluster.

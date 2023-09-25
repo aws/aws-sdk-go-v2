@@ -57,6 +57,10 @@ type SearchProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchProfilesInput) operationName() string {
+	return "SearchProfiles"
+}
+
 type SearchProfilesOutput struct {
 
 	// The token returned to indicate that there is more data available.

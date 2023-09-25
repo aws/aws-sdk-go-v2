@@ -56,6 +56,10 @@ type GetBuiltinIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBuiltinIntentsInput) operationName() string {
+	return "GetBuiltinIntents"
+}
+
 type GetBuiltinIntentsOutput struct {
 
 	// An array of builtinIntentMetadata objects, one for each intent in the response.

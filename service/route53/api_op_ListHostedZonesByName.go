@@ -97,6 +97,10 @@ type ListHostedZonesByNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHostedZonesByNameInput) operationName() string {
+	return "ListHostedZonesByName"
+}
+
 // A complex type that contains the response information for the request.
 type ListHostedZonesByNameOutput struct {
 

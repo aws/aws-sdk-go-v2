@@ -60,6 +60,10 @@ type CreateAppInstanceAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInstanceAdminInput) operationName() string {
+	return "CreateAppInstanceAdmin"
+}
+
 type CreateAppInstanceAdminOutput struct {
 
 	// The name and ARN of the admin for the AppInstance .

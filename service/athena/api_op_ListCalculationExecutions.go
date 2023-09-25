@@ -62,6 +62,10 @@ type ListCalculationExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCalculationExecutionsInput) operationName() string {
+	return "ListCalculationExecutions"
+}
+
 type ListCalculationExecutionsOutput struct {
 
 	// A list of CalculationSummary objects.

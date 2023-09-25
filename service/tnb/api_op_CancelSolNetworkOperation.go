@@ -42,6 +42,10 @@ type CancelSolNetworkOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelSolNetworkOperationInput) operationName() string {
+	return "CancelSolNetworkOperation"
+}
+
 type CancelSolNetworkOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

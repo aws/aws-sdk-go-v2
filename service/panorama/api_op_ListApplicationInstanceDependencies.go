@@ -50,6 +50,10 @@ type ListApplicationInstanceDependenciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationInstanceDependenciesInput) operationName() string {
+	return "ListApplicationInstanceDependencies"
+}
+
 type ListApplicationInstanceDependenciesOutput struct {
 
 	// A pagination token that's included if more results are available.

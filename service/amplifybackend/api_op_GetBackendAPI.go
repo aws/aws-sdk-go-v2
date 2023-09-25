@@ -56,6 +56,10 @@ type GetBackendAPIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendAPIInput) operationName() string {
+	return "GetBackendAPI"
+}
+
 type GetBackendAPIOutput struct {
 
 	// The app ID.

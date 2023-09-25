@@ -44,6 +44,10 @@ type GenerateChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateChangeSetInput) operationName() string {
+	return "GenerateChangeSet"
+}
+
 type GenerateChangeSetOutput struct {
 
 	// The location of the Amazon S3 object.

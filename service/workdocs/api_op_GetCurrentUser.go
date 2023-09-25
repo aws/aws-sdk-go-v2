@@ -47,6 +47,10 @@ type GetCurrentUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCurrentUserInput) operationName() string {
+	return "GetCurrentUser"
+}
+
 type GetCurrentUserOutput struct {
 
 	// Metadata of the user.

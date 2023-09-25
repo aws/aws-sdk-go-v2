@@ -53,6 +53,10 @@ type DescribeAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddonInput) operationName() string {
+	return "DescribeAddon"
+}
+
 type DescribeAddonOutput struct {
 
 	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)

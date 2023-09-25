@@ -94,6 +94,10 @@ type GetServiceLastAccessedDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceLastAccessedDetailsInput) operationName() string {
+	return "GetServiceLastAccessedDetails"
+}
+
 type GetServiceLastAccessedDetailsOutput struct {
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)

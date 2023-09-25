@@ -57,6 +57,10 @@ type DescribeUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUsersInput) operationName() string {
+	return "DescribeUsers"
+}
+
 type DescribeUsersOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for

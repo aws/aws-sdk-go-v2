@@ -99,6 +99,10 @@ type ListDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatabasesInput) operationName() string {
+	return "ListDatabases"
+}
+
 type ListDatabasesOutput struct {
 
 	// The names of databases.

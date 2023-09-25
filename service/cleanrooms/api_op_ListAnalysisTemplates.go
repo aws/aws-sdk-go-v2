@@ -49,6 +49,10 @@ type ListAnalysisTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnalysisTemplatesInput) operationName() string {
+	return "ListAnalysisTemplates"
+}
+
 type ListAnalysisTemplatesOutput struct {
 
 	// Lists analysis template metadata.

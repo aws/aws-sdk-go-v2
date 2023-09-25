@@ -53,6 +53,10 @@ type ListJobTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobTemplatesInput) operationName() string {
+	return "ListJobTemplates"
+}
+
 type ListJobTemplatesOutput struct {
 
 	// This output displays the token for the next set of job templates.

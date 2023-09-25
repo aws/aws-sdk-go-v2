@@ -59,6 +59,10 @@ type ListEnvironmentAccountConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentAccountConnectionsInput) operationName() string {
+	return "ListEnvironmentAccountConnections"
+}
+
 type ListEnvironmentAccountConnectionsOutput struct {
 
 	// An array of environment account connections with details that's returned by

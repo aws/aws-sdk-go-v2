@@ -86,6 +86,10 @@ type DeleteWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWebACLInput) operationName() string {
+	return "DeleteWebACL"
+}
+
 type DeleteWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

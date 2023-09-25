@@ -86,6 +86,10 @@ type CreateAlarmModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAlarmModelInput) operationName() string {
+	return "CreateAlarmModel"
+}
+
 type CreateAlarmModelOutput struct {
 
 	// The ARN of the alarm model. For more information, see Amazon Resource Names

@@ -88,6 +88,10 @@ type UpdateVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVocabularyInput) operationName() string {
+	return "UpdateVocabulary"
+}
+
 type UpdateVocabularyOutput struct {
 
 	// The language code you selected for your custom vocabulary.

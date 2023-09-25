@@ -49,6 +49,10 @@ type ListAppBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppBundlesInput) operationName() string {
+	return "ListAppBundles"
+}
+
 type ListAppBundlesOutput struct {
 
 	// Contains a list of app bundle summaries.

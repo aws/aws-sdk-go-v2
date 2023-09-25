@@ -61,6 +61,10 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTagsInput) operationName() string {
+	return "DescribeTags"
+}
+
 type DescribeTagsOutput struct {
 
 	// Returns tags associated with the file system as an array of Tag objects.

@@ -37,6 +37,10 @@ type ActivateOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateOrganizationsAccessInput) operationName() string {
+	return "ActivateOrganizationsAccess"
+}
+
 type ActivateOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

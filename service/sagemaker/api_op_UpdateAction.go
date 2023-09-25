@@ -54,6 +54,10 @@ type UpdateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateActionInput) operationName() string {
+	return "UpdateAction"
+}
+
 type UpdateActionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the action.

@@ -63,6 +63,10 @@ type GetSmsTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSmsTemplateInput) operationName() string {
+	return "GetSmsTemplate"
+}
+
 type GetSmsTemplateOutput struct {
 
 	// Provides information about the content and settings for a message template that

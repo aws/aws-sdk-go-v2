@@ -56,6 +56,10 @@ type ListDatasetLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetLabelsInput) operationName() string {
+	return "ListDatasetLabels"
+}
+
 type ListDatasetLabelsOutput struct {
 
 	// A list of the labels in the dataset.

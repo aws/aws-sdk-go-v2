@@ -48,6 +48,10 @@ type ListDocumentClassificationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDocumentClassificationJobsInput) operationName() string {
+	return "ListDocumentClassificationJobs"
+}
+
 type ListDocumentClassificationJobsOutput struct {
 
 	// A list containing the properties of each job returned.

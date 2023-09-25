@@ -94,6 +94,10 @@ type CreateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeyInput) operationName() string {
+	return "CreateKey"
+}
+
 type CreateKeyOutput struct {
 
 	// The key material that contains all the key attributes.

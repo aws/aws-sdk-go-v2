@@ -48,6 +48,10 @@ type DeleteThingShadowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteThingShadowInput) operationName() string {
+	return "DeleteThingShadow"
+}
+
 // The output from the DeleteThingShadow operation.
 type DeleteThingShadowOutput struct {
 

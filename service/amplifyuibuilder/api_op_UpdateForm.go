@@ -60,6 +60,10 @@ type UpdateFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFormInput) operationName() string {
+	return "UpdateForm"
+}
+
 type UpdateFormOutput struct {
 
 	// Describes the configuration of the updated form.

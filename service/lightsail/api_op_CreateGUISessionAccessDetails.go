@@ -46,6 +46,10 @@ type CreateGUISessionAccessDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGUISessionAccessDetailsInput) operationName() string {
+	return "CreateGUISessionAccessDetails"
+}
+
 type CreateGUISessionAccessDetailsOutput struct {
 
 	// The reason the operation failed.

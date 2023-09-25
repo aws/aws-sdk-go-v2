@@ -59,6 +59,10 @@ type SearchQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchQueuesInput) operationName() string {
+	return "SearchQueues"
+}
+
 type SearchQueuesOutput struct {
 
 	// The total number of queues which matched your search query.

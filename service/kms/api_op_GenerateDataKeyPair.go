@@ -170,6 +170,10 @@ type GenerateDataKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateDataKeyPairInput) operationName() string {
+	return "GenerateDataKeyPair"
+}
+
 type GenerateDataKeyPairOutput struct {
 
 	// The plaintext private data key encrypted with the public key from the Nitro

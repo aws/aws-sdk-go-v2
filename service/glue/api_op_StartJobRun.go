@@ -150,6 +150,10 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartJobRunInput) operationName() string {
+	return "StartJobRun"
+}
+
 type StartJobRunOutput struct {
 
 	// The ID assigned to this job run.

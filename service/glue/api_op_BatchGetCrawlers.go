@@ -46,6 +46,10 @@ type BatchGetCrawlersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCrawlersInput) operationName() string {
+	return "BatchGetCrawlers"
+}
+
 type BatchGetCrawlersOutput struct {
 
 	// A list of crawler definitions.

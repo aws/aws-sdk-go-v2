@@ -42,6 +42,10 @@ type GetParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParallelDataInput) operationName() string {
+	return "GetParallelData"
+}
+
 type GetParallelDataOutput struct {
 
 	// The Amazon S3 location of a file that provides any errors or warnings that were

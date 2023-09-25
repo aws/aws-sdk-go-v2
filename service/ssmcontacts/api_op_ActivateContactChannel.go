@@ -47,6 +47,10 @@ type ActivateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateContactChannelInput) operationName() string {
+	return "ActivateContactChannel"
+}
+
 type ActivateContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

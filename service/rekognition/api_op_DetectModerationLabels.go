@@ -65,6 +65,10 @@ type DetectModerationLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectModerationLabelsInput) operationName() string {
+	return "DetectModerationLabels"
+}
+
 type DetectModerationLabelsOutput struct {
 
 	// Shows the results of the human in the loop evaluation.

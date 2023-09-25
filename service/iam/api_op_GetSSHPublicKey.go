@@ -64,6 +64,10 @@ type GetSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSSHPublicKeyInput) operationName() string {
+	return "GetSSHPublicKey"
+}
+
 // Contains the response to a successful GetSSHPublicKey request.
 type GetSSHPublicKeyOutput struct {
 

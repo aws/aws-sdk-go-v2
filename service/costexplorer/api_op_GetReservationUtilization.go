@@ -111,6 +111,10 @@ type GetReservationUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReservationUtilizationInput) operationName() string {
+	return "GetReservationUtilization"
+}
+
 type GetReservationUtilizationOutput struct {
 
 	// The amount of time that you used your Reserved Instances (RIs).

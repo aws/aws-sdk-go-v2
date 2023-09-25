@@ -35,6 +35,10 @@ type IsVpcPeeredInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IsVpcPeeredInput) operationName() string {
+	return "IsVpcPeered"
+}
+
 type IsVpcPeeredOutput struct {
 
 	// Returns true if the Lightsail VPC is peered; otherwise, false .

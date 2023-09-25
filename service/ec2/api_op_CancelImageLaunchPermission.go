@@ -50,6 +50,10 @@ type CancelImageLaunchPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelImageLaunchPermissionInput) operationName() string {
+	return "CancelImageLaunchPermission"
+}
+
 type CancelImageLaunchPermissionOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

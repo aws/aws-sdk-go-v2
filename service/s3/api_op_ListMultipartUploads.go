@@ -137,6 +137,10 @@ type ListMultipartUploadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMultipartUploadsInput) operationName() string {
+	return "ListMultipartUploads"
+}
+
 type ListMultipartUploadsOutput struct {
 
 	// The name of the bucket to which the multipart upload was initiated. Does not

@@ -46,6 +46,10 @@ type AssociateBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateBrowserSettingsInput) operationName() string {
+	return "AssociateBrowserSettings"
+}
+
 type AssociateBrowserSettingsOutput struct {
 
 	// The ARN of the browser settings.

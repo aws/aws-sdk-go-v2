@@ -241,6 +241,10 @@ type RunJobFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunJobFlowInput) operationName() string {
+	return "RunJobFlow"
+}
+
 // The result of the RunJobFlow operation.
 type RunJobFlowOutput struct {
 

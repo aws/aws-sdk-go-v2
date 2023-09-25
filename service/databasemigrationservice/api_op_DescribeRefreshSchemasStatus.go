@@ -42,6 +42,10 @@ type DescribeRefreshSchemasStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRefreshSchemasStatusInput) operationName() string {
+	return "DescribeRefreshSchemasStatus"
+}
+
 type DescribeRefreshSchemasStatusOutput struct {
 
 	// The status of the schema.

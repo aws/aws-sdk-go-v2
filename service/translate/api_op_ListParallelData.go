@@ -44,6 +44,10 @@ type ListParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListParallelDataInput) operationName() string {
+	return "ListParallelData"
+}
+
 type ListParallelDataOutput struct {
 
 	// The string to use in a subsequent request to get the next page of results in a

@@ -73,6 +73,10 @@ type DeleteIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIPSetInput) operationName() string {
+	return "DeleteIPSet"
+}
+
 type DeleteIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

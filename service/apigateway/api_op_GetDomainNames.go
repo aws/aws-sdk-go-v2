@@ -45,6 +45,10 @@ type GetDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainNamesInput) operationName() string {
+	return "GetDomainNames"
+}
+
 // Represents a collection of DomainName resources.
 type GetDomainNamesOutput struct {
 

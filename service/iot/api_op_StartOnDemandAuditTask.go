@@ -47,6 +47,10 @@ type StartOnDemandAuditTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartOnDemandAuditTaskInput) operationName() string {
+	return "StartOnDemandAuditTask"
+}
+
 type StartOnDemandAuditTaskOutput struct {
 
 	// The ID of the on-demand audit you started.

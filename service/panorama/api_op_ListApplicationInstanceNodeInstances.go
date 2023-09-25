@@ -49,6 +49,10 @@ type ListApplicationInstanceNodeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationInstanceNodeInstancesInput) operationName() string {
+	return "ListApplicationInstanceNodeInstances"
+}
+
 type ListApplicationInstanceNodeInstancesOutput struct {
 
 	// A pagination token that's included if more results are available.

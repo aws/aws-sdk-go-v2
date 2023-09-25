@@ -73,6 +73,10 @@ type DescribeImageScanFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageScanFindingsInput) operationName() string {
+	return "DescribeImageScanFindings"
+}
+
 type DescribeImageScanFindingsOutput struct {
 
 	// An object with identifying information for an image in an Amazon ECR repository.

@@ -41,6 +41,10 @@ type DeleteFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFilterInput) operationName() string {
+	return "DeleteFilter"
+}
+
 type DeleteFilterOutput struct {
 
 	// The Amazon Resource Number (ARN) of the filter that has been deleted.

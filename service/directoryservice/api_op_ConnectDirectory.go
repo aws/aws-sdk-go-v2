@@ -74,6 +74,10 @@ type ConnectDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConnectDirectoryInput) operationName() string {
+	return "ConnectDirectory"
+}
+
 // Contains the results of the ConnectDirectory operation.
 type ConnectDirectoryOutput struct {
 

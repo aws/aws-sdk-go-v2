@@ -41,6 +41,10 @@ type DescribeFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFeedbackInput) operationName() string {
+	return "DescribeFeedback"
+}
+
 type DescribeFeedbackOutput struct {
 
 	// Information about insight feedback received from a customer.

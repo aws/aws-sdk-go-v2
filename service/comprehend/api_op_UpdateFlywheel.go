@@ -52,6 +52,10 @@ type UpdateFlywheelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlywheelInput) operationName() string {
+	return "UpdateFlywheel"
+}
+
 type UpdateFlywheelOutput struct {
 
 	// The flywheel properties.

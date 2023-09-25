@@ -74,6 +74,10 @@ type UpdateCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCertificateAuthorityInput) operationName() string {
+	return "UpdateCertificateAuthority"
+}
+
 type UpdateCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

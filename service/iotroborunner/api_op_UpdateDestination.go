@@ -52,6 +52,10 @@ type UpdateDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDestinationInput) operationName() string {
+	return "UpdateDestination"
+}
+
 type UpdateDestinationOutput struct {
 
 	// Destination ARN.

@@ -42,6 +42,10 @@ type GetSensitivityInspectionTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSensitivityInspectionTemplateInput) operationName() string {
+	return "GetSensitivityInspectionTemplate"
+}
+
 type GetSensitivityInspectionTemplateOutput struct {
 
 	// The custom description of the template.

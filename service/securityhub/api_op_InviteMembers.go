@@ -50,6 +50,10 @@ type InviteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InviteMembersInput) operationName() string {
+	return "InviteMembers"
+}
+
 type InviteMembersOutput struct {
 
 	// The list of Amazon Web Services accounts that could not be processed. For each

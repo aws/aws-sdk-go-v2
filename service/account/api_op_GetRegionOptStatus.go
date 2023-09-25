@@ -61,6 +61,10 @@ type GetRegionOptStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegionOptStatusInput) operationName() string {
+	return "GetRegionOptStatus"
+}
+
 type GetRegionOptStatusOutput struct {
 
 	// The Region code that was passed in.

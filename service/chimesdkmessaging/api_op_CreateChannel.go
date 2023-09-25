@@ -93,6 +93,10 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChannelInput) operationName() string {
+	return "CreateChannel"
+}
+
 type CreateChannelOutput struct {
 
 	// The ARN of the channel.

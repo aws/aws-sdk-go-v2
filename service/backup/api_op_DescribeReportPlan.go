@@ -43,6 +43,10 @@ type DescribeReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReportPlanInput) operationName() string {
+	return "DescribeReportPlan"
+}
+
 type DescribeReportPlanOutput struct {
 
 	// Returns details about the report plan that is specified by its name. These

@@ -44,6 +44,10 @@ type GenerateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateTemplateInput) operationName() string {
+	return "GenerateTemplate"
+}
+
 type GenerateTemplateOutput struct {
 
 	// The location of the Amazon S3 object.

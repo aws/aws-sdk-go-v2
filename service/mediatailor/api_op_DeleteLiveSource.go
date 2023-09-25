@@ -46,6 +46,10 @@ type DeleteLiveSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLiveSourceInput) operationName() string {
+	return "DeleteLiveSource"
+}
+
 type DeleteLiveSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

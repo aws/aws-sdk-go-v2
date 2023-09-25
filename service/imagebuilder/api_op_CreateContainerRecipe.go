@@ -112,6 +112,10 @@ type CreateContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContainerRecipeInput) operationName() string {
+	return "CreateContainerRecipe"
+}
+
 type CreateContainerRecipeOutput struct {
 
 	// The client token used to make this request idempotent.

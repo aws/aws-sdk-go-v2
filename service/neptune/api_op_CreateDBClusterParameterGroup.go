@@ -79,6 +79,10 @@ type CreateDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterParameterGroupInput) operationName() string {
+	return "CreateDBClusterParameterGroup"
+}
+
 type CreateDBClusterParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster parameter group. This data

@@ -68,6 +68,10 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectionInput) operationName() string {
+	return "CreateConnection"
+}
+
 type CreateConnectionOutput struct {
 
 	// Information about the connection.

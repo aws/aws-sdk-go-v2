@@ -48,6 +48,10 @@ type UpdateCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCapacityProviderInput) operationName() string {
+	return "UpdateCapacityProvider"
+}
+
 type UpdateCapacityProviderOutput struct {
 
 	// Details about the capacity provider.

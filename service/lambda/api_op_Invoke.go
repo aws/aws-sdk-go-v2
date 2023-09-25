@@ -107,6 +107,10 @@ type InvokeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeInput) operationName() string {
+	return "Invoke"
+}
+
 type InvokeOutput struct {
 
 	// The version of the function that executed. When you invoke a function with an

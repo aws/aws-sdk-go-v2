@@ -41,6 +41,10 @@ type CancelContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelContactInput) operationName() string {
+	return "CancelContact"
+}
+
 type CancelContactOutput struct {
 
 	// UUID of a contact.

@@ -45,6 +45,10 @@ type PutProtocolsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutProtocolsListInput) operationName() string {
+	return "PutProtocolsList"
+}
+
 type PutProtocolsListOutput struct {
 
 	// The details of the Firewall Manager protocols list.

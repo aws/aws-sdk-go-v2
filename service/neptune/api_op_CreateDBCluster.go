@@ -193,6 +193,10 @@ type CreateDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterInput) operationName() string {
+	return "CreateDBCluster"
+}
+
 type CreateDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as

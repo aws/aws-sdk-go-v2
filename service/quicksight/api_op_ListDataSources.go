@@ -49,6 +49,10 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataSourcesInput) operationName() string {
+	return "ListDataSources"
+}
+
 type ListDataSourcesOutput struct {
 
 	// A list of data sources.

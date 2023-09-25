@@ -129,6 +129,7 @@
         "api_op_UpdateUsage.go",
         "api_op_UpdateUsagePlan.go",
         "api_op_UpdateVpcLink.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

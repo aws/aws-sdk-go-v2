@@ -49,6 +49,10 @@ type DescribeBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBackupVaultInput) operationName() string {
+	return "DescribeBackupVault"
+}
+
 type DescribeBackupVaultOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for

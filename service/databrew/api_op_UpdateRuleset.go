@@ -51,6 +51,10 @@ type UpdateRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRulesetInput) operationName() string {
+	return "UpdateRuleset"
+}
+
 type UpdateRulesetOutput struct {
 
 	// The name of the updated ruleset.

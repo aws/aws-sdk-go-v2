@@ -63,6 +63,10 @@ type GetCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCertificateInput) operationName() string {
+	return "GetCertificate"
+}
+
 type GetCertificateOutput struct {
 
 	// The base64 PEM-encoded certificate specified by the CertificateArn parameter.

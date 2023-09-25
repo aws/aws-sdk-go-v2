@@ -44,6 +44,10 @@ type ListSubscriptionDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubscriptionDefinitionsInput) operationName() string {
+	return "ListSubscriptionDefinitions"
+}
+
 type ListSubscriptionDefinitionsOutput struct {
 
 	// Information about a definition.

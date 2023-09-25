@@ -51,6 +51,10 @@ type UpdateDomainEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainEntryInput) operationName() string {
+	return "UpdateDomainEntry"
+}
+
 type UpdateDomainEntryOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

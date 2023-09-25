@@ -65,6 +65,10 @@ type ListSAMLProviderTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSAMLProviderTagsInput) operationName() string {
+	return "ListSAMLProviderTags"
+}
+
 type ListSAMLProviderTagsOutput struct {
 
 	// The list of tags that are currently attached to the Security Assertion Markup

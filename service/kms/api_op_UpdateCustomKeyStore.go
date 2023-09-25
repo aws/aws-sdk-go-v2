@@ -183,6 +183,10 @@ type UpdateCustomKeyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCustomKeyStoreInput) operationName() string {
+	return "UpdateCustomKeyStore"
+}
+
 type UpdateCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

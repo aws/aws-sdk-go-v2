@@ -51,6 +51,10 @@ type DeleteLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLabelsInput) operationName() string {
+	return "DeleteLabels"
+}
+
 type DeleteLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

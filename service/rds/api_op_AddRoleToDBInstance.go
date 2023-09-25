@@ -56,6 +56,10 @@ type AddRoleToDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddRoleToDBInstanceInput) operationName() string {
+	return "AddRoleToDBInstance"
+}
+
 type AddRoleToDBInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

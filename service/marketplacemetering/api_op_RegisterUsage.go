@@ -82,6 +82,10 @@ type RegisterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterUsageInput) operationName() string {
+	return "RegisterUsage"
+}
+
 type RegisterUsageOutput struct {
 
 	// (Optional) Only included when public key version has expired

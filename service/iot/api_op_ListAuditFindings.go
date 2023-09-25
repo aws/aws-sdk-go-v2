@@ -70,6 +70,10 @@ type ListAuditFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAuditFindingsInput) operationName() string {
+	return "ListAuditFindings"
+}
+
 type ListAuditFindingsOutput struct {
 
 	// The findings (results) of the audit.

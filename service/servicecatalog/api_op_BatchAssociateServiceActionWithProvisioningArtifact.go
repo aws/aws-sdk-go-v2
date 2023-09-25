@@ -48,6 +48,10 @@ type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchAssociateServiceActionWithProvisioningArtifactInput) operationName() string {
+	return "BatchAssociateServiceActionWithProvisioningArtifact"
+}
+
 type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
 
 	// An object that contains a list of errors, along with information to help you

@@ -51,6 +51,10 @@ type DescribeHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHandshakeInput) operationName() string {
+	return "DescribeHandshake"
+}
+
 type DescribeHandshakeOutput struct {
 
 	// A structure that contains information about the specified handshake.

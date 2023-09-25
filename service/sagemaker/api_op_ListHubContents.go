@@ -74,6 +74,10 @@ type ListHubContentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHubContentsInput) operationName() string {
+	return "ListHubContents"
+}
+
 type ListHubContentsOutput struct {
 
 	// The summaries of the listed hub content.

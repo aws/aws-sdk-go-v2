@@ -45,6 +45,10 @@ type DeleteFieldLevelEncryptionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFieldLevelEncryptionProfileInput) operationName() string {
+	return "DeleteFieldLevelEncryptionProfile"
+}
+
 type DeleteFieldLevelEncryptionProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

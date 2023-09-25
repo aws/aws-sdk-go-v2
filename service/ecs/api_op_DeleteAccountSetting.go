@@ -56,6 +56,10 @@ type DeleteAccountSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccountSettingInput) operationName() string {
+	return "DeleteAccountSetting"
+}
+
 type DeleteAccountSettingOutput struct {
 
 	// The account setting for the specified principal ARN.

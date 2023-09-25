@@ -62,6 +62,10 @@ type CreateOutpostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOutpostInput) operationName() string {
+	return "CreateOutpost"
+}
+
 type CreateOutpostOutput struct {
 
 	// Information about an Outpost.

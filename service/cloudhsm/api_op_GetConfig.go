@@ -63,6 +63,10 @@ type GetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigInput) operationName() string {
+	return "GetConfig"
+}
+
 type GetConfigOutput struct {
 
 	// The certificate file containing the server.pem files of the HSMs.

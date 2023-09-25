@@ -57,6 +57,10 @@ type ListSitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSitesInput) operationName() string {
+	return "ListSites"
+}
+
 type ListSitesOutput struct {
 
 	// The pagination token.

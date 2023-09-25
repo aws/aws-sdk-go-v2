@@ -58,6 +58,10 @@ type DescribeCacheParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCacheParametersInput) operationName() string {
+	return "DescribeCacheParameters"
+}
+
 // Represents the output of a DescribeCacheParameters operation.
 type DescribeCacheParametersOutput struct {
 

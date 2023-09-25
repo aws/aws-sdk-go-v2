@@ -43,6 +43,10 @@ type ListFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFlowsInput) operationName() string {
+	return "ListFlows"
+}
+
 type ListFlowsOutput struct {
 
 	// The list of flows associated with your account.

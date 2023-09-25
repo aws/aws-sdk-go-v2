@@ -88,6 +88,10 @@ type ListMonitoringExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitoringExecutionsInput) operationName() string {
+	return "ListMonitoringExecutions"
+}
+
 type ListMonitoringExecutionsOutput struct {
 
 	// A JSON array in which each element is a summary for a monitoring execution.

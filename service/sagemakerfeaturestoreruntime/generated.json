@@ -13,6 +13,7 @@
         "api_op_DeleteRecord.go",
         "api_op_GetRecord.go",
         "api_op_PutRecord.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

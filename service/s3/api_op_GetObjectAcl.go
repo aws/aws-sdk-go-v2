@@ -89,6 +89,10 @@ type GetObjectAclInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectAclInput) operationName() string {
+	return "GetObjectAcl"
+}
+
 type GetObjectAclOutput struct {
 
 	// A list of grants.

@@ -57,6 +57,10 @@ type GetMapSpritesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMapSpritesInput) operationName() string {
+	return "GetMapSprites"
+}
+
 type GetMapSpritesOutput struct {
 
 	// Contains the body of the sprite sheet or JSON offset ﬁle.

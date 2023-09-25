@@ -63,6 +63,10 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelsInput) operationName() string {
+	return "ListModels"
+}
+
 type ListModelsOutput struct {
 
 	// An array of ModelSummary objects, each of which lists a model.

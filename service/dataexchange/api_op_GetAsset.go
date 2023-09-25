@@ -53,6 +53,10 @@ type GetAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssetInput) operationName() string {
+	return "GetAsset"
+}
+
 type GetAssetOutput struct {
 
 	// The ARN for the asset.

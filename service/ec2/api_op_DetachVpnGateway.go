@@ -59,6 +59,10 @@ type DetachVpnGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachVpnGatewayInput) operationName() string {
+	return "DetachVpnGateway"
+}
+
 type DetachVpnGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

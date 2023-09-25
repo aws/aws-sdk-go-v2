@@ -51,6 +51,10 @@ type DeleteDiskSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDiskSnapshotInput) operationName() string {
+	return "DeleteDiskSnapshot"
+}
+
 type DeleteDiskSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

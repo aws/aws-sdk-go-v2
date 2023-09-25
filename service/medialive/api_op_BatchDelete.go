@@ -50,6 +50,10 @@ type BatchDeleteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteInput) operationName() string {
+	return "BatchDelete"
+}
+
 // Placeholder documentation for BatchDeleteResponse
 type BatchDeleteOutput struct {
 

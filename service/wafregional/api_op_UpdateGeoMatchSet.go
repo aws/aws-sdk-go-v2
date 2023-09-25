@@ -83,6 +83,10 @@ type UpdateGeoMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGeoMatchSetInput) operationName() string {
+	return "UpdateGeoMatchSet"
+}
+
 type UpdateGeoMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateGeoMatchSet request. You can

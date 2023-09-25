@@ -58,6 +58,10 @@ type DescribeIpamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIpamsInput) operationName() string {
+	return "DescribeIpams"
+}
+
 type DescribeIpamsOutput struct {
 
 	// Information about the IPAMs.

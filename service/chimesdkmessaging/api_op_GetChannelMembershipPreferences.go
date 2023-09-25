@@ -59,6 +59,10 @@ type GetChannelMembershipPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelMembershipPreferencesInput) operationName() string {
+	return "GetChannelMembershipPreferences"
+}
+
 type GetChannelMembershipPreferencesOutput struct {
 
 	// The ARN of the channel.

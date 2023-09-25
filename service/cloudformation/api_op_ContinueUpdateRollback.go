@@ -102,6 +102,10 @@ type ContinueUpdateRollbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ContinueUpdateRollbackInput) operationName() string {
+	return "ContinueUpdateRollback"
+}
+
 // The output for a ContinueUpdateRollback operation.
 type ContinueUpdateRollbackOutput struct {
 	// Metadata pertaining to the operation's result.

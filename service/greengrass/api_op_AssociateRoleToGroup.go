@@ -49,6 +49,10 @@ type AssociateRoleToGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateRoleToGroupInput) operationName() string {
+	return "AssociateRoleToGroup"
+}
+
 type AssociateRoleToGroupOutput struct {
 
 	// The time, in milliseconds since the epoch, when the role ARN was associated

@@ -50,6 +50,10 @@ type GetGroupQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupQueryInput) operationName() string {
+	return "GetGroupQuery"
+}
+
 type GetGroupQueryOutput struct {
 
 	// The resource query associated with the specified group. For more information

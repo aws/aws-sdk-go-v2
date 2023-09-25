@@ -58,6 +58,10 @@ type BatchGetDocumentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetDocumentStatusInput) operationName() string {
+	return "BatchGetDocumentStatus"
+}
+
 type BatchGetDocumentStatusOutput struct {
 
 	// The status of documents. The status indicates if the document is waiting to be

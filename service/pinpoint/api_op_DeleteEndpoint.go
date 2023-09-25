@@ -48,6 +48,10 @@ type DeleteEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEndpointInput) operationName() string {
+	return "DeleteEndpoint"
+}
+
 type DeleteEndpointOutput struct {
 
 	// Provides information about the channel type and other settings for an endpoint.

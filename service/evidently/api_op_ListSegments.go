@@ -46,6 +46,10 @@ type ListSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSegmentsInput) operationName() string {
+	return "ListSegments"
+}
+
 type ListSegmentsOutput struct {
 
 	// The token to use in a subsequent ListSegments operation to return the next set

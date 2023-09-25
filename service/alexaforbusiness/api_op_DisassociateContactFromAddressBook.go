@@ -48,6 +48,10 @@ type DisassociateContactFromAddressBookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateContactFromAddressBookInput) operationName() string {
+	return "DisassociateContactFromAddressBook"
+}
+
 type DisassociateContactFromAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

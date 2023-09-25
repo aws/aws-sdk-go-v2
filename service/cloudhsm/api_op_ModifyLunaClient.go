@@ -56,6 +56,10 @@ type ModifyLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyLunaClientInput) operationName() string {
+	return "ModifyLunaClient"
+}
+
 type ModifyLunaClientOutput struct {
 
 	// The ARN of the client.

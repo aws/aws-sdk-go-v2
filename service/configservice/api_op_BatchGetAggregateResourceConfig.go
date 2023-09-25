@@ -52,6 +52,10 @@ type BatchGetAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetAggregateResourceConfigInput) operationName() string {
+	return "BatchGetAggregateResourceConfig"
+}
+
 type BatchGetAggregateResourceConfigOutput struct {
 
 	// A list that contains the current configuration of one or more resources.

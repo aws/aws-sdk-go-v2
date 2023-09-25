@@ -41,6 +41,10 @@ type DeleteEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEphemerisInput) operationName() string {
+	return "DeleteEphemeris"
+}
+
 type DeleteEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.

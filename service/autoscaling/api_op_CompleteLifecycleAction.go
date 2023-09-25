@@ -79,6 +79,10 @@ type CompleteLifecycleActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteLifecycleActionInput) operationName() string {
+	return "CompleteLifecycleAction"
+}
+
 type CompleteLifecycleActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

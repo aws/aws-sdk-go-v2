@@ -50,6 +50,10 @@ type EnableIpamOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableIpamOrganizationAdminAccountInput) operationName() string {
+	return "EnableIpamOrganizationAdminAccount"
+}
+
 type EnableIpamOrganizationAdminAccountOutput struct {
 
 	// The result of enabling the IPAM account.

@@ -58,6 +58,10 @@ type CreatePublishingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePublishingDestinationInput) operationName() string {
+	return "CreatePublishingDestination"
+}
+
 type CreatePublishingDestinationOutput struct {
 
 	// The ID of the publishing destination that is created.

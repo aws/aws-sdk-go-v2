@@ -44,6 +44,10 @@ type DescribeEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntitiesDetectionV2JobInput) operationName() string {
+	return "DescribeEntitiesDetectionV2Job"
+}
+
 type DescribeEntitiesDetectionV2JobOutput struct {
 
 	// An object that contains the properties associated with a detection job.

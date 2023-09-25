@@ -45,6 +45,10 @@ type ListVolumeInitiatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVolumeInitiatorsInput) operationName() string {
+	return "ListVolumeInitiators"
+}
+
 // ListVolumeInitiatorsOutput
 type ListVolumeInitiatorsOutput struct {
 

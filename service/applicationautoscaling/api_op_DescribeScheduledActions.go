@@ -162,6 +162,10 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledActionsInput) operationName() string {
+	return "DescribeScheduledActions"
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// The token required to get the next set of results. This value is null if there

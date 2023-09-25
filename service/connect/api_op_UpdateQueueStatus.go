@@ -54,6 +54,10 @@ type UpdateQueueStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQueueStatusInput) operationName() string {
+	return "UpdateQueueStatus"
+}
+
 type UpdateQueueStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

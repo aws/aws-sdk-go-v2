@@ -42,6 +42,10 @@ type ListManagedDataIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedDataIdentifiersInput) operationName() string {
+	return "ListManagedDataIdentifiers"
+}
+
 type ListManagedDataIdentifiersOutput struct {
 
 	// An array of objects, one for each managed data identifier.

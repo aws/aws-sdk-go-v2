@@ -50,6 +50,10 @@ type GetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelsInput) operationName() string {
+	return "GetModels"
+}
+
 // Represents a collection of Model resources.
 type GetModelsOutput struct {
 

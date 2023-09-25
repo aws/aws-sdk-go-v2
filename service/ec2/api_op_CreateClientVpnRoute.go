@@ -77,6 +77,10 @@ type CreateClientVpnRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClientVpnRouteInput) operationName() string {
+	return "CreateClientVpnRoute"
+}
+
 type CreateClientVpnRouteOutput struct {
 
 	// The current state of the route.

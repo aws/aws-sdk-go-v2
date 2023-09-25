@@ -55,6 +55,10 @@ type CreateGatewayGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGatewayGroupInput) operationName() string {
+	return "CreateGatewayGroup"
+}
+
 type CreateGatewayGroupOutput struct {
 
 	// The ARN of the created gateway group.

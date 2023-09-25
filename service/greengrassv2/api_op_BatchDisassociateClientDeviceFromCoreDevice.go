@@ -48,6 +48,10 @@ type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateClientDeviceFromCoreDeviceInput) operationName() string {
+	return "BatchDisassociateClientDeviceFromCoreDevice"
+}
+
 type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 
 	// The list of any errors for the entries in the request. Each error entry

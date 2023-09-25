@@ -52,6 +52,10 @@ type DescribeRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecommenderInput) operationName() string {
+	return "DescribeRecommender"
+}
+
 type DescribeRecommenderOutput struct {
 
 	// The properties of the recommender.

@@ -43,6 +43,10 @@ type DeleteRecommenderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRecommenderConfigurationInput) operationName() string {
+	return "DeleteRecommenderConfiguration"
+}
+
 type DeleteRecommenderConfigurationOutput struct {
 
 	// Provides information about Amazon Pinpoint configuration settings for

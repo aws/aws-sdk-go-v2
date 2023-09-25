@@ -43,6 +43,10 @@ type DescribeLabelingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLabelingJobInput) operationName() string {
+	return "DescribeLabelingJob"
+}
+
 type DescribeLabelingJobOutput struct {
 
 	// The date and time that the labeling job was created.

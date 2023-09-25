@@ -50,6 +50,10 @@ type GetSuiteRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSuiteRunInput) operationName() string {
+	return "GetSuiteRun"
+}
+
 type GetSuiteRunOutput struct {
 
 	// Date (in Unix epoch time) when the test suite run ended.

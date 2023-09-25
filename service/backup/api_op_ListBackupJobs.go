@@ -99,6 +99,10 @@ type ListBackupJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupJobsInput) operationName() string {
+	return "ListBackupJobs"
+}
+
 type ListBackupJobsOutput struct {
 
 	// An array of structures containing metadata about your backup jobs returned in

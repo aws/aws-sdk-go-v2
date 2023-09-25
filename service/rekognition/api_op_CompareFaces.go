@@ -109,6 +109,10 @@ type CompareFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompareFacesInput) operationName() string {
+	return "CompareFaces"
+}
+
 type CompareFacesOutput struct {
 
 	// An array of faces in the target image that match the source image face. Each

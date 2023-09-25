@@ -50,6 +50,10 @@ type EnableClientAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableClientAuthenticationInput) operationName() string {
+	return "EnableClientAuthentication"
+}
+
 type EnableClientAuthenticationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

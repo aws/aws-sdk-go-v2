@@ -55,6 +55,10 @@ type DescribeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainInput) operationName() string {
+	return "DescribeDomain"
+}
+
 // Contains details of a domain.
 type DescribeDomainOutput struct {
 

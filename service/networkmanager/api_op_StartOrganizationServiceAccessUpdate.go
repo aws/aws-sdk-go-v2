@@ -43,6 +43,10 @@ type StartOrganizationServiceAccessUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartOrganizationServiceAccessUpdateInput) operationName() string {
+	return "StartOrganizationServiceAccessUpdate"
+}
+
 type StartOrganizationServiceAccessUpdateOutput struct {
 
 	// The status of the service access update request for an Amazon Web Services

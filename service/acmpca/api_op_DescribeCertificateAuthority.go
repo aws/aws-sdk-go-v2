@@ -63,6 +63,10 @@ type DescribeCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCertificateAuthorityInput) operationName() string {
+	return "DescribeCertificateAuthority"
+}
+
 type DescribeCertificateAuthorityOutput struct {
 
 	// A CertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CertificateAuthority.html)

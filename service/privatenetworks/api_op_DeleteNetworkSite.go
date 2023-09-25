@@ -50,6 +50,10 @@ type DeleteNetworkSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkSiteInput) operationName() string {
+	return "DeleteNetworkSite"
+}
+
 type DeleteNetworkSiteOutput struct {
 
 	// Information about the network site.

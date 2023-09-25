@@ -56,6 +56,10 @@ type DeleteColumnStatisticsForTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteColumnStatisticsForTableInput) operationName() string {
+	return "DeleteColumnStatisticsForTable"
+}
+
 type DeleteColumnStatisticsForTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

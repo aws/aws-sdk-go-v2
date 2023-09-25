@@ -52,6 +52,10 @@ type GetDataRetrievalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataRetrievalPolicyInput) operationName() string {
+	return "GetDataRetrievalPolicy"
+}
+
 // Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy request.
 type GetDataRetrievalPolicyOutput struct {
 

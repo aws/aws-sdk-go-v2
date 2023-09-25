@@ -53,6 +53,10 @@ type AddUploadBufferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddUploadBufferInput) operationName() string {
+	return "AddUploadBuffer"
+}
+
 type AddUploadBufferOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

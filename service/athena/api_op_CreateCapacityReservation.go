@@ -51,6 +51,10 @@ type CreateCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCapacityReservationInput) operationName() string {
+	return "CreateCapacityReservation"
+}
+
 type CreateCapacityReservationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

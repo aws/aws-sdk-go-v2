@@ -71,6 +71,10 @@ type DescribeCustomerGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomerGatewaysInput) operationName() string {
+	return "DescribeCustomerGateways"
+}
+
 // Contains the output of DescribeCustomerGateways.
 type DescribeCustomerGatewaysOutput struct {
 

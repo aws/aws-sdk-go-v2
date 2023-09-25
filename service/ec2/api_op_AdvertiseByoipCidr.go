@@ -60,6 +60,10 @@ type AdvertiseByoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdvertiseByoipCidrInput) operationName() string {
+	return "AdvertiseByoipCidr"
+}
+
 type AdvertiseByoipCidrOutput struct {
 
 	// Information about the address range.

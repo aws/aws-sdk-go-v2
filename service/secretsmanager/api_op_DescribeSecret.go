@@ -53,6 +53,10 @@ type DescribeSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSecretInput) operationName() string {
+	return "DescribeSecret"
+}
+
 type DescribeSecretOutput struct {
 
 	// The ARN of the secret.

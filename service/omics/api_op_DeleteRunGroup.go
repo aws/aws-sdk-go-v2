@@ -41,6 +41,10 @@ type DeleteRunGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRunGroupInput) operationName() string {
+	return "DeleteRunGroup"
+}
+
 type DeleteRunGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,6 +44,10 @@ type DescribeDevicePolicyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDevicePolicyConfigurationInput) operationName() string {
+	return "DescribeDevicePolicyConfiguration"
+}
+
 type DescribeDevicePolicyConfigurationOutput struct {
 
 	// The certificate chain, including intermediate certificates and the root

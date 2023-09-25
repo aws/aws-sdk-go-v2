@@ -52,6 +52,10 @@ type ListSharedEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSharedEndpointsInput) operationName() string {
+	return "ListSharedEndpoints"
+}
+
 type ListSharedEndpointsOutput struct {
 
 	// The list of endpoints associated with the specified Outpost that have been

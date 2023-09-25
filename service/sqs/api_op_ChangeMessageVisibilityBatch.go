@@ -55,6 +55,10 @@ type ChangeMessageVisibilityBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangeMessageVisibilityBatchInput) operationName() string {
+	return "ChangeMessageVisibilityBatch"
+}
+
 // For each message in the batch, the response contains a
 // ChangeMessageVisibilityBatchResultEntry tag if the message succeeds or a
 // BatchResultErrorEntry tag if the message fails.

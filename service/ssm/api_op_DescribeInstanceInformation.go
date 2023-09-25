@@ -67,6 +67,10 @@ type DescribeInstanceInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceInformationInput) operationName() string {
+	return "DescribeInstanceInformation"
+}
+
 type DescribeInstanceInformationOutput struct {
 
 	// The managed node information list.

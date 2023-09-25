@@ -52,6 +52,10 @@ type DeleteWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkflowStepInput) operationName() string {
+	return "DeleteWorkflowStep"
+}
+
 type DeleteWorkflowStepOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

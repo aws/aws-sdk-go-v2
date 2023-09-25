@@ -48,6 +48,10 @@ type UpdateScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScheduledQueryInput) operationName() string {
+	return "UpdateScheduledQuery"
+}
+
 type UpdateScheduledQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

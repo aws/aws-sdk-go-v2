@@ -44,6 +44,10 @@ type DescribeUsageReportSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUsageReportSubscriptionsInput) operationName() string {
+	return "DescribeUsageReportSubscriptions"
+}
+
 type DescribeUsageReportSubscriptionsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

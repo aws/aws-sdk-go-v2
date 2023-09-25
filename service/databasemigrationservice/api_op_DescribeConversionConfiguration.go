@@ -42,6 +42,10 @@ type DescribeConversionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConversionConfigurationInput) operationName() string {
+	return "DescribeConversionConfiguration"
+}
+
 type DescribeConversionConfigurationOutput struct {
 
 	// The configuration parameters for the schema conversion project.

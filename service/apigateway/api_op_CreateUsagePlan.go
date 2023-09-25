@@ -63,6 +63,10 @@ type CreateUsagePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUsagePlanInput) operationName() string {
+	return "CreateUsagePlan"
+}
+
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to

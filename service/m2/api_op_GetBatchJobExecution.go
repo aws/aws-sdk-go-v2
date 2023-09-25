@@ -48,6 +48,10 @@ type GetBatchJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBatchJobExecutionInput) operationName() string {
+	return "GetBatchJobExecution"
+}
+
 type GetBatchJobExecutionOutput struct {
 
 	// The identifier of the application.

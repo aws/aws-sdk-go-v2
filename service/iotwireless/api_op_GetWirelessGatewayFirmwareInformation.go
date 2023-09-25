@@ -42,6 +42,10 @@ type GetWirelessGatewayFirmwareInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWirelessGatewayFirmwareInformationInput) operationName() string {
+	return "GetWirelessGatewayFirmwareInformation"
+}
+
 type GetWirelessGatewayFirmwareInformationOutput struct {
 
 	// Information about the wireless gateway's firmware.

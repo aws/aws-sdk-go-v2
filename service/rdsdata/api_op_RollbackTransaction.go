@@ -54,6 +54,10 @@ type RollbackTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RollbackTransactionInput) operationName() string {
+	return "RollbackTransaction"
+}
+
 // The response elements represent the output of a request to perform a rollback
 // of a transaction.
 type RollbackTransactionOutput struct {

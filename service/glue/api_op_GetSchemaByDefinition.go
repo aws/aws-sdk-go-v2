@@ -57,6 +57,10 @@ type GetSchemaByDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaByDefinitionInput) operationName() string {
+	return "GetSchemaByDefinition"
+}
+
 type GetSchemaByDefinitionOutput struct {
 
 	// The date and time the schema was created.

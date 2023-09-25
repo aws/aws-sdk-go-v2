@@ -70,6 +70,10 @@ type CreateTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrialInput) operationName() string {
+	return "CreateTrial"
+}
+
 type CreateTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.

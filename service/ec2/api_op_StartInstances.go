@@ -67,6 +67,10 @@ type StartInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInstancesInput) operationName() string {
+	return "StartInstances"
+}
+
 type StartInstancesOutput struct {
 
 	// Information about the started instances.

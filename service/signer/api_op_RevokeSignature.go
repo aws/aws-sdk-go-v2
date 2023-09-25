@@ -50,6 +50,10 @@ type RevokeSignatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeSignatureInput) operationName() string {
+	return "RevokeSignature"
+}
+
 type RevokeSignatureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

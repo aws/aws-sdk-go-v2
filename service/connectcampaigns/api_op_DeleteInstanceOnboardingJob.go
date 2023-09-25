@@ -43,6 +43,10 @@ type DeleteInstanceOnboardingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceOnboardingJobInput) operationName() string {
+	return "DeleteInstanceOnboardingJob"
+}
+
 type DeleteInstanceOnboardingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

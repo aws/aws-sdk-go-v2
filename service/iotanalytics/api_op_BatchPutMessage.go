@@ -60,6 +60,10 @@ type BatchPutMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutMessageInput) operationName() string {
+	return "BatchPutMessage"
+}
+
 type BatchPutMessageOutput struct {
 
 	// A list of any errors encountered when sending the messages to the channel.

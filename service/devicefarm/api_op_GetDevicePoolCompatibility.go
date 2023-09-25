@@ -75,6 +75,10 @@ type GetDevicePoolCompatibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevicePoolCompatibilityInput) operationName() string {
+	return "GetDevicePoolCompatibility"
+}
+
 // Represents the result of describe device pool compatibility request.
 type GetDevicePoolCompatibilityOutput struct {
 

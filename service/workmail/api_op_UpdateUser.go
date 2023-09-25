@@ -99,6 +99,10 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserInput) operationName() string {
+	return "UpdateUser"
+}
+
 type UpdateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateApprovalRuleTemplateFromRepositoriesInput) operationName() string {
+	return "BatchDisassociateApprovalRuleTemplateFromRepositories"
+}
+
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 
 	// A list of repository names that have had their association with the template

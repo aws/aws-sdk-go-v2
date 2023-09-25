@@ -103,6 +103,10 @@ type UpdateEventDataStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEventDataStoreInput) operationName() string {
+	return "UpdateEventDataStore"
+}
+
 type UpdateEventDataStoreOutput struct {
 
 	// The advanced event selectors that are applied to the event data store.

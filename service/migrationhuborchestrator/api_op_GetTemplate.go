@@ -43,6 +43,10 @@ type GetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateInput) operationName() string {
+	return "GetTemplate"
+}
+
 type GetTemplateOutput struct {
 
 	// The time at which the template was last created.

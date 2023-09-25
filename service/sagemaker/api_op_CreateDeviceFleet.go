@@ -63,6 +63,10 @@ type CreateDeviceFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeviceFleetInput) operationName() string {
+	return "CreateDeviceFleet"
+}
+
 type CreateDeviceFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

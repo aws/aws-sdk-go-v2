@@ -43,6 +43,10 @@ type GetMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMemberInput) operationName() string {
+	return "GetMember"
+}
+
 type GetMemberOutput struct {
 
 	// Details of the retrieved member account.

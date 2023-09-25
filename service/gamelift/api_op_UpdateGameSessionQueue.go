@@ -89,6 +89,10 @@ type UpdateGameSessionQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGameSessionQueueInput) operationName() string {
+	return "UpdateGameSessionQueue"
+}
+
 type UpdateGameSessionQueueOutput struct {
 
 	// An object that describes the newly updated game session queue.

@@ -51,6 +51,10 @@ type GetRunTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRunTaskInput) operationName() string {
+	return "GetRunTask"
+}
+
 type GetRunTaskOutput struct {
 
 	// The task's CPU usage.

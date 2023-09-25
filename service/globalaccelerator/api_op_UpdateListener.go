@@ -66,6 +66,10 @@ type UpdateListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateListenerInput) operationName() string {
+	return "UpdateListener"
+}
+
 type UpdateListenerOutput struct {
 
 	// Information for the updated listener.

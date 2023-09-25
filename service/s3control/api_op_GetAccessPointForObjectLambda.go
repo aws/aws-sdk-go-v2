@@ -57,6 +57,10 @@ type GetAccessPointForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointForObjectLambdaInput) operationName() string {
+	return "GetAccessPointForObjectLambda"
+}
+
 type GetAccessPointForObjectLambdaOutput struct {
 
 	// The alias of the Object Lambda Access Point.

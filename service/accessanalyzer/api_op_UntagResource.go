@@ -47,6 +47,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 // The response to the request.
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.

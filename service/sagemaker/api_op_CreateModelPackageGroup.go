@@ -50,6 +50,10 @@ type CreateModelPackageGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelPackageGroupInput) operationName() string {
+	return "CreateModelPackageGroup"
+}
+
 type CreateModelPackageGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model group.

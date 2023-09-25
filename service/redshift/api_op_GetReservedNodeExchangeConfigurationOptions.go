@@ -67,6 +67,10 @@ type GetReservedNodeExchangeConfigurationOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReservedNodeExchangeConfigurationOptionsInput) operationName() string {
+	return "GetReservedNodeExchangeConfigurationOptions"
+}
+
 type GetReservedNodeExchangeConfigurationOptionsOutput struct {
 
 	// A pagination token provided by a previous

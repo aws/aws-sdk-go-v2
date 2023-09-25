@@ -41,6 +41,10 @@ type ExpireSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExpireSessionInput) operationName() string {
+	return "ExpireSession"
+}
+
 type ExpireSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

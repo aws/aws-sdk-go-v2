@@ -82,6 +82,10 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTokenInput) operationName() string {
+	return "CreateToken"
+}
+
 type CreateTokenOutput struct {
 
 	// An opaque token to access IAM Identity Center resources assigned to a user.

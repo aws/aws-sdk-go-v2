@@ -47,6 +47,10 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProfileInput) operationName() string {
+	return "UpdateProfile"
+}
+
 type UpdateProfileOutput struct {
 
 	// Returns the identifier for the profile that's being updated.

@@ -51,6 +51,10 @@ type RemoveTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveTagsFromResourceInput) operationName() string {
+	return "RemoveTagsFromResource"
+}
+
 type RemoveTagsFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,6 +77,10 @@ type MergeProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergeProfilesInput) operationName() string {
+	return "MergeProfiles"
+}
+
 type MergeProfilesOutput struct {
 
 	// A message that indicates the merge request is complete.

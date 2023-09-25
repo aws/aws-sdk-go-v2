@@ -108,6 +108,10 @@ type CreateLocationHdfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationHdfsInput) operationName() string {
+	return "CreateLocationHdfs"
+}
+
 type CreateLocationHdfsOutput struct {
 
 	// The ARN of the source HDFS cluster location that's created.

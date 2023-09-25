@@ -97,6 +97,10 @@ type ListStackInstanceResourceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStackInstanceResourceDriftsInput) operationName() string {
+	return "ListStackInstanceResourceDrifts"
+}
+
 type ListStackInstanceResourceDriftsOutput struct {
 
 	// If the previous paginated request didn't return all of the remaining results,

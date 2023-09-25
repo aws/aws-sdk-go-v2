@@ -49,6 +49,10 @@ type DeleteManagedPrefixListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteManagedPrefixListInput) operationName() string {
+	return "DeleteManagedPrefixList"
+}
+
 type DeleteManagedPrefixListOutput struct {
 
 	// Information about the prefix list.

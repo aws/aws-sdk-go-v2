@@ -50,6 +50,10 @@ type DisassociateDelegationSignerFromDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDelegationSignerFromDomainInput) operationName() string {
+	return "DisassociateDelegationSignerFromDomain"
+}
+
 type DisassociateDelegationSignerFromDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation

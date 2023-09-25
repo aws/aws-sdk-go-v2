@@ -44,6 +44,10 @@ type DeleteIdentityPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIdentityPoolInput) operationName() string {
+	return "DeleteIdentityPool"
+}
+
 type DeleteIdentityPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type DeleteResourcePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourcePermissionInput) operationName() string {
+	return "DeleteResourcePermission"
+}
+
 type DeleteResourcePermissionOutput struct {
 
 	// The policy that removes permissions on the target database.

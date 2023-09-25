@@ -51,6 +51,10 @@ type UpdateCrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCrlInput) operationName() string {
+	return "UpdateCrl"
+}
+
 type UpdateCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write

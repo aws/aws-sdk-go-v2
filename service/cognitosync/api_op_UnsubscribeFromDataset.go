@@ -77,6 +77,10 @@ type UnsubscribeFromDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnsubscribeFromDatasetInput) operationName() string {
+	return "UnsubscribeFromDataset"
+}
+
 // Response to an UnsubscribeFromDataset request.
 type UnsubscribeFromDatasetOutput struct {
 	// Metadata pertaining to the operation's result.

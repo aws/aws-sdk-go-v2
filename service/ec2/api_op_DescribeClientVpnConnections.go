@@ -63,6 +63,10 @@ type DescribeClientVpnConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientVpnConnectionsInput) operationName() string {
+	return "DescribeClientVpnConnections"
+}
+
 type DescribeClientVpnConnectionsOutput struct {
 
 	// Information about the active and terminated client connections.

@@ -45,6 +45,10 @@ type StopEventDataStoreIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopEventDataStoreIngestionInput) operationName() string {
+	return "StopEventDataStoreIngestion"
+}
+
 type StopEventDataStoreIngestionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

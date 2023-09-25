@@ -46,6 +46,10 @@ type DisassociateConfigurationItemsFromApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateConfigurationItemsFromApplicationInput) operationName() string {
+	return "DisassociateConfigurationItemsFromApplication"
+}
+
 type DisassociateConfigurationItemsFromApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

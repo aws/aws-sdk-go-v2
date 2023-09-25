@@ -54,6 +54,10 @@ type DescribeTopicRefreshScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTopicRefreshScheduleInput) operationName() string {
+	return "DescribeTopicRefreshSchedule"
+}
+
 type DescribeTopicRefreshScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.

@@ -70,6 +70,10 @@ type CreateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBillingGroupInput) operationName() string {
+	return "CreateBillingGroup"
+}
+
 type CreateBillingGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created billing group.

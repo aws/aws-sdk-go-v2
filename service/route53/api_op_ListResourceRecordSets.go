@@ -111,6 +111,10 @@ type ListResourceRecordSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceRecordSetsInput) operationName() string {
+	return "ListResourceRecordSets"
+}
+
 // A complex type that contains list information for the resource record set.
 type ListResourceRecordSetsOutput struct {
 

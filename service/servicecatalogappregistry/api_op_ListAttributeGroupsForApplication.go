@@ -50,6 +50,10 @@ type ListAttributeGroupsForApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttributeGroupsForApplicationInput) operationName() string {
+	return "ListAttributeGroupsForApplication"
+}
+
 type ListAttributeGroupsForApplicationOutput struct {
 
 	// The details related to a specific attribute group.

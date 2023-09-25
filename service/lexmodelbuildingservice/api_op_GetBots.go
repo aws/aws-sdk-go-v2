@@ -56,6 +56,10 @@ type GetBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotsInput) operationName() string {
+	return "GetBots"
+}
+
 type GetBotsOutput struct {
 
 	// An array of botMetadata objects, with one entry for each bot.

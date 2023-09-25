@@ -49,6 +49,10 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagResourceInput) operationName() string {
+	return "TagResource"
+}
+
 // The response object for the TagResource operation.
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.

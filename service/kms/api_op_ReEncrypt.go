@@ -199,6 +199,10 @@ type ReEncryptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReEncryptInput) operationName() string {
+	return "ReEncrypt"
+}
+
 type ReEncryptOutput struct {
 
 	// The reencrypted data. When you use the HTTP API or the Amazon Web Services CLI,

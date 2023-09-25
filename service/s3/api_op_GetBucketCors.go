@@ -69,6 +69,10 @@ type GetBucketCorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketCorsInput) operationName() string {
+	return "GetBucketCors"
+}
+
 type GetBucketCorsOutput struct {
 
 	// A set of origins and methods (cross-origin access that you want to allow). You

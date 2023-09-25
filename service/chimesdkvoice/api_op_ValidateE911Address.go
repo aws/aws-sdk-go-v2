@@ -75,6 +75,10 @@ type ValidateE911AddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateE911AddressInput) operationName() string {
+	return "ValidateE911Address"
+}
+
 type ValidateE911AddressOutput struct {
 
 	// The validated address.

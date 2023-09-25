@@ -50,6 +50,10 @@ type ListChangeSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChangeSetsInput) operationName() string {
+	return "ListChangeSets"
+}
+
 // The output for the ListChangeSets action.
 type ListChangeSetsOutput struct {
 

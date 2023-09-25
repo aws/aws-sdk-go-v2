@@ -44,6 +44,10 @@ type CreateTopicRuleDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTopicRuleDestinationInput) operationName() string {
+	return "CreateTopicRuleDestination"
+}
+
 type CreateTopicRuleDestinationOutput struct {
 
 	// The topic rule destination.

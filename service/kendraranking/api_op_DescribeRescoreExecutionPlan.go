@@ -46,6 +46,10 @@ type DescribeRescoreExecutionPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRescoreExecutionPlanInput) operationName() string {
+	return "DescribeRescoreExecutionPlan"
+}
+
 type DescribeRescoreExecutionPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the rescore execution plan.

@@ -45,6 +45,10 @@ type PutEmailIdentityConfigurationSetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEmailIdentityConfigurationSetAttributesInput) operationName() string {
+	return "PutEmailIdentityConfigurationSetAttributes"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type PutEmailIdentityConfigurationSetAttributesOutput struct {

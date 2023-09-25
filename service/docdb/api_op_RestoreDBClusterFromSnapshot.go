@@ -122,6 +122,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBClusterFromSnapshotInput) operationName() string {
+	return "RestoreDBClusterFromSnapshot"
+}
+
 type RestoreDBClusterFromSnapshotOutput struct {
 
 	// Detailed information about a cluster.

@@ -48,6 +48,10 @@ type DeletePullThroughCacheRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePullThroughCacheRuleInput) operationName() string {
+	return "DeletePullThroughCacheRule"
+}
+
 type DeletePullThroughCacheRuleOutput struct {
 
 	// The timestamp associated with the pull through cache rule.

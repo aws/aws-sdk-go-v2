@@ -63,6 +63,10 @@ type CreateIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIngestionInput) operationName() string {
+	return "CreateIngestion"
+}
+
 type CreateIngestionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the data ingestion.

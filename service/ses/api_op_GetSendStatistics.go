@@ -39,6 +39,10 @@ type GetSendStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSendStatisticsInput) operationName() string {
+	return "GetSendStatistics"
+}
+
 // Represents a list of data points. This list contains aggregated data from the
 // previous two weeks of your sending activity with Amazon SES.
 type GetSendStatisticsOutput struct {

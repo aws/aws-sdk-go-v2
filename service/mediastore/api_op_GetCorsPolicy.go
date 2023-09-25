@@ -45,6 +45,10 @@ type GetCorsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCorsPolicyInput) operationName() string {
+	return "GetCorsPolicy"
+}
+
 type GetCorsPolicyOutput struct {
 
 	// The CORS policy assigned to the container.

@@ -74,6 +74,10 @@ type AdminConfirmSignUpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminConfirmSignUpInput) operationName() string {
+	return "AdminConfirmSignUp"
+}
+
 // Represents the response from the server for the request to confirm registration.
 type AdminConfirmSignUpOutput struct {
 	// Metadata pertaining to the operation's result.

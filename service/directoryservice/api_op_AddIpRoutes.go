@@ -83,6 +83,10 @@ type AddIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddIpRoutesInput) operationName() string {
+	return "AddIpRoutes"
+}
+
 type AddIpRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

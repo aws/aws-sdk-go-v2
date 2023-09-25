@@ -61,6 +61,10 @@ type ListDeviceIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceIdentifiersInput) operationName() string {
+	return "ListDeviceIdentifiers"
+}
+
 type ListDeviceIdentifiersOutput struct {
 
 	// Information about the device identifiers.

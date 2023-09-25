@@ -92,6 +92,10 @@ type CreateLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoadBalancerInput) operationName() string {
+	return "CreateLoadBalancer"
+}
+
 type CreateLoadBalancerOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

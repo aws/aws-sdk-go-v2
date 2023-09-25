@@ -58,6 +58,10 @@ type GetDocumentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentVersionInput) operationName() string {
+	return "GetDocumentVersion"
+}
+
 type GetDocumentVersionOutput struct {
 
 	// The custom metadata on the document version.

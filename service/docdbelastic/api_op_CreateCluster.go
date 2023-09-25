@@ -108,6 +108,10 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterInput) operationName() string {
+	return "CreateCluster"
+}
+
 type CreateClusterOutput struct {
 
 	// The new Elastic DocumentDB cluster that has been created.

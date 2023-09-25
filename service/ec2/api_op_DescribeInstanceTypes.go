@@ -152,6 +152,10 @@ type DescribeInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceTypesInput) operationName() string {
+	return "DescribeInstanceTypes"
+}
+
 type DescribeInstanceTypesOutput struct {
 
 	// The instance type. For more information, see Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)

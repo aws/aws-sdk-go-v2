@@ -42,6 +42,10 @@ type ResumeCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeCampaignInput) operationName() string {
+	return "ResumeCampaign"
+}
+
 type ResumeCampaignOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

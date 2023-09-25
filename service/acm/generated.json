@@ -25,6 +25,7 @@
         "api_op_RequestCertificate.go",
         "api_op_ResendValidationEmail.go",
         "api_op_UpdateCertificateOptions.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

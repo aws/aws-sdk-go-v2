@@ -61,6 +61,10 @@ type DeleteSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSizeConstraintSetInput) operationName() string {
+	return "DeleteSizeConstraintSet"
+}
+
 type DeleteSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request.

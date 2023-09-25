@@ -51,6 +51,10 @@ type GetExternalDataViewAccessDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExternalDataViewAccessDetailsInput) operationName() string {
+	return "GetExternalDataViewAccessDetails"
+}
+
 type GetExternalDataViewAccessDetailsOutput struct {
 
 	// The credentials required to access the external Dataview from the S3 location.

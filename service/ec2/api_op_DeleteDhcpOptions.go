@@ -50,6 +50,10 @@ type DeleteDhcpOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDhcpOptionsInput) operationName() string {
+	return "DeleteDhcpOptions"
+}
+
 type DeleteDhcpOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

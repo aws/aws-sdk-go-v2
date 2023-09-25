@@ -51,6 +51,10 @@ type ListInstanceAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceAttributesInput) operationName() string {
+	return "ListInstanceAttributes"
+}
+
 type ListInstanceAttributesOutput struct {
 
 	// The attribute types.

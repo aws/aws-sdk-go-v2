@@ -41,6 +41,10 @@ type StartFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFleetInput) operationName() string {
+	return "StartFleet"
+}
+
 type StartFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

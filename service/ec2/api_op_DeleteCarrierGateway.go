@@ -51,6 +51,10 @@ type DeleteCarrierGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCarrierGatewayInput) operationName() string {
+	return "DeleteCarrierGateway"
+}
+
 type DeleteCarrierGatewayOutput struct {
 
 	// Information about the carrier gateway.

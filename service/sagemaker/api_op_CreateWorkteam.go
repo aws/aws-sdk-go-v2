@@ -80,6 +80,10 @@ type CreateWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkteamInput) operationName() string {
+	return "CreateWorkteam"
+}
+
 type CreateWorkteamOutput struct {
 
 	// The Amazon Resource Name (ARN) of the work team. You can use this ARN to

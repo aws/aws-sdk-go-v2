@@ -211,6 +211,10 @@ type CreateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFleetInput) operationName() string {
+	return "CreateFleet"
+}
+
 type CreateFleetOutput struct {
 
 	// The properties for the new fleet, including the current status. All fleets are

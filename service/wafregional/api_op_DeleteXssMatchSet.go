@@ -61,6 +61,10 @@ type DeleteXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteXssMatchSetInput) operationName() string {
+	return "DeleteXssMatchSet"
+}
+
 // The response to a request to delete an XssMatchSet from AWS WAF.
 type DeleteXssMatchSetOutput struct {
 

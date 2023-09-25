@@ -59,6 +59,10 @@ type CreateCacheSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCacheSecurityGroupInput) operationName() string {
+	return "CreateCacheSecurityGroup"
+}
+
 type CreateCacheSecurityGroupOutput struct {
 
 	// Represents the output of one of the following operations:

@@ -88,6 +88,10 @@ type UpdateXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateXssMatchSetInput) operationName() string {
+	return "UpdateXssMatchSet"
+}
+
 // The response to an UpdateXssMatchSets request.
 type UpdateXssMatchSetOutput struct {
 

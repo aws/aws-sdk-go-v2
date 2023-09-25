@@ -38,6 +38,10 @@ type DescribeGlobalSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGlobalSettingsInput) operationName() string {
+	return "DescribeGlobalSettings"
+}
+
 type DescribeGlobalSettingsOutput struct {
 
 	// The status of the flag isCrossAccountBackupEnabled .

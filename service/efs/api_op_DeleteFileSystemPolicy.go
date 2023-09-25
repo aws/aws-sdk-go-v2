@@ -46,6 +46,10 @@ type DeleteFileSystemPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFileSystemPolicyInput) operationName() string {
+	return "DeleteFileSystemPolicy"
+}
+
 type DeleteFileSystemPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

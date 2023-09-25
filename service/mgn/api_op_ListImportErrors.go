@@ -49,6 +49,10 @@ type ListImportErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportErrorsInput) operationName() string {
+	return "ListImportErrors"
+}
+
 // List imports errors response.
 type ListImportErrorsOutput struct {
 

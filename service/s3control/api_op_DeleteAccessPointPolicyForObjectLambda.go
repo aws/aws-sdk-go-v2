@@ -54,6 +54,10 @@ type DeleteAccessPointPolicyForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccessPointPolicyForObjectLambdaInput) operationName() string {
+	return "DeleteAccessPointPolicyForObjectLambda"
+}
+
 type DeleteAccessPointPolicyForObjectLambdaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

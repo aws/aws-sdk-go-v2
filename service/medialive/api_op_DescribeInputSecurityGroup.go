@@ -43,6 +43,10 @@ type DescribeInputSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInputSecurityGroupInput) operationName() string {
+	return "DescribeInputSecurityGroup"
+}
+
 // Placeholder documentation for DescribeInputSecurityGroupResponse
 type DescribeInputSecurityGroupOutput struct {
 

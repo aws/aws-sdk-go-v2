@@ -52,6 +52,10 @@ type UpdateNumberOfDomainControllersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNumberOfDomainControllersInput) operationName() string {
+	return "UpdateNumberOfDomainControllers"
+}
+
 type UpdateNumberOfDomainControllersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,10 @@ type AttachVerifiedAccessTrustProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachVerifiedAccessTrustProviderInput) operationName() string {
+	return "AttachVerifiedAccessTrustProvider"
+}
+
 type AttachVerifiedAccessTrustProviderOutput struct {
 
 	// The ID of the Verified Access instance.

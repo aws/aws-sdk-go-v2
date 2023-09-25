@@ -82,6 +82,10 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelInput) operationName() string {
+	return "CreateModel"
+}
+
 type CreateModelOutput struct {
 
 	// The response from a call to CreateModel .

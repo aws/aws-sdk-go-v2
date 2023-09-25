@@ -64,6 +64,10 @@ type GetIceServerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIceServerConfigInput) operationName() string {
+	return "GetIceServerConfig"
+}
+
 type GetIceServerConfigOutput struct {
 
 	// The list of ICE server information objects.

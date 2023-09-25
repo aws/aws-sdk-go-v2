@@ -59,6 +59,10 @@ type GetRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRuleGroupInput) operationName() string {
+	return "GetRuleGroup"
+}
+
 type GetRuleGroupOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

@@ -51,6 +51,10 @@ type UpdateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectionInput) operationName() string {
+	return "UpdateConnection"
+}
+
 type UpdateConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

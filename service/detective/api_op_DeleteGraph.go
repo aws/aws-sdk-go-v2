@@ -44,6 +44,10 @@ type DeleteGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGraphInput) operationName() string {
+	return "DeleteGraph"
+}
+
 type DeleteGraphOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

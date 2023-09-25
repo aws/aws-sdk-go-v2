@@ -47,6 +47,10 @@ type LockRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LockRuleInput) operationName() string {
+	return "LockRule"
+}
+
 type LockRuleOutput struct {
 
 	// The retention rule description.

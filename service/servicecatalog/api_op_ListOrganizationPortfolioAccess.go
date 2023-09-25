@@ -66,6 +66,10 @@ type ListOrganizationPortfolioAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationPortfolioAccessInput) operationName() string {
+	return "ListOrganizationPortfolioAccess"
+}
+
 type ListOrganizationPortfolioAccessOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

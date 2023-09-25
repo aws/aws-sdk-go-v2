@@ -47,6 +47,10 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTagsInput) operationName() string {
+	return "DescribeTags"
+}
+
 // Amazon ML returns the following elements.
 type DescribeTagsOutput struct {
 

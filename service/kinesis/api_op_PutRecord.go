@@ -109,6 +109,10 @@ type PutRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRecordInput) operationName() string {
+	return "PutRecord"
+}
+
 // Represents the output for PutRecord .
 type PutRecordOutput struct {
 

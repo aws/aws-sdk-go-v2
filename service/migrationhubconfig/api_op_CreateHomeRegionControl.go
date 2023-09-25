@@ -52,6 +52,10 @@ type CreateHomeRegionControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHomeRegionControlInput) operationName() string {
+	return "CreateHomeRegionControl"
+}
+
 type CreateHomeRegionControlOutput struct {
 
 	// This object is the HomeRegionControl object that's returned by a successful

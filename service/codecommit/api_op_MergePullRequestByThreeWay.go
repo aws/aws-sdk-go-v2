@@ -88,6 +88,10 @@ type MergePullRequestByThreeWayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergePullRequestByThreeWayInput) operationName() string {
+	return "MergePullRequestByThreeWay"
+}
+
 type MergePullRequestByThreeWayOutput struct {
 
 	// Returns information about a pull request.

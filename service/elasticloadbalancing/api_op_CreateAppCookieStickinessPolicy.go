@@ -65,6 +65,10 @@ type CreateAppCookieStickinessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppCookieStickinessPolicyInput) operationName() string {
+	return "CreateAppCookieStickinessPolicy"
+}
+
 // Contains the output for CreateAppCookieStickinessPolicy.
 type CreateAppCookieStickinessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.

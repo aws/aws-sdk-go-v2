@@ -51,6 +51,10 @@ type DescribeComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComponentInput) operationName() string {
+	return "DescribeComponent"
+}
+
 type DescribeComponentOutput struct {
 
 	// Describes a standalone resource or similarly grouped resources that the

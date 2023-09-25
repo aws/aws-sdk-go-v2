@@ -47,6 +47,10 @@ type DeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectionInput) operationName() string {
+	return "DeleteConnection"
+}
+
 type DeleteConnectionOutput struct {
 
 	// Information about the connection.

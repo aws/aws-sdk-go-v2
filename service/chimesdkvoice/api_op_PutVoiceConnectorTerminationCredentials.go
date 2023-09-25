@@ -45,6 +45,10 @@ type PutVoiceConnectorTerminationCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorTerminationCredentialsInput) operationName() string {
+	return "PutVoiceConnectorTerminationCredentials"
+}
+
 type PutVoiceConnectorTerminationCredentialsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

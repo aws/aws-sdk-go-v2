@@ -69,6 +69,10 @@ type CopyDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDBClusterParameterGroupInput) operationName() string {
+	return "CopyDBClusterParameterGroup"
+}
+
 type CopyDBClusterParameterGroupOutput struct {
 
 	// Detailed information about a cluster parameter group.

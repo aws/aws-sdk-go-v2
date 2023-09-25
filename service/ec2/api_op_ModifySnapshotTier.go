@@ -56,6 +56,10 @@ type ModifySnapshotTierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySnapshotTierInput) operationName() string {
+	return "ModifySnapshotTier"
+}
+
 type ModifySnapshotTierOutput struct {
 
 	// The ID of the snapshot.

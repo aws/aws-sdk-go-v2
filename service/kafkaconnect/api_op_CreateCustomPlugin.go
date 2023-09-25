@@ -55,6 +55,10 @@ type CreateCustomPluginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomPluginInput) operationName() string {
+	return "CreateCustomPlugin"
+}
+
 type CreateCustomPluginOutput struct {
 
 	// The Amazon Resource Name (ARN) that Amazon assigned to the custom plugin.

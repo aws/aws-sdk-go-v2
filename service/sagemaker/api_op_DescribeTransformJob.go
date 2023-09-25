@@ -47,6 +47,10 @@ type DescribeTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransformJobInput) operationName() string {
+	return "DescribeTransformJob"
+}
+
 type DescribeTransformJobOutput struct {
 
 	// A timestamp that shows when the transform Job was created.

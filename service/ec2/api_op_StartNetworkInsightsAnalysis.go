@@ -65,6 +65,10 @@ type StartNetworkInsightsAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartNetworkInsightsAnalysisInput) operationName() string {
+	return "StartNetworkInsightsAnalysis"
+}
+
 type StartNetworkInsightsAnalysisOutput struct {
 
 	// Information about the network insights analysis.

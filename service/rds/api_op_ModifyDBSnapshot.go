@@ -67,6 +67,10 @@ type ModifyDBSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBSnapshotInput) operationName() string {
+	return "ModifyDBSnapshot"
+}
+
 type ModifyDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a

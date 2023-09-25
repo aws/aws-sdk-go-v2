@@ -42,6 +42,10 @@ type BatchGetReportGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetReportGroupsInput) operationName() string {
+	return "BatchGetReportGroups"
+}
+
 type BatchGetReportGroupsOutput struct {
 
 	// The array of report groups returned by BatchGetReportGroups .

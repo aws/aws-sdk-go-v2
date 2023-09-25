@@ -50,6 +50,10 @@ type ListConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectorsInput) operationName() string {
+	return "ListConnectors"
+}
+
 type ListConnectorsOutput struct {
 
 	// Summary information about each connector you have created.

@@ -47,6 +47,10 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemasInput) operationName() string {
+	return "ListSchemas"
+}
+
 type ListSchemasOutput struct {
 
 	// A token used to get the next set of schemas (if they exist).

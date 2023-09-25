@@ -102,6 +102,10 @@ type CreateRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRecommenderInput) operationName() string {
+	return "CreateRecommender"
+}
+
 type CreateRecommenderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the recommender.

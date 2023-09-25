@@ -42,6 +42,10 @@ type BatchDisassociateUserStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateUserStackInput) operationName() string {
+	return "BatchDisassociateUserStack"
+}
+
 type BatchDisassociateUserStackOutput struct {
 
 	// The list of UserStackAssociationError objects.

@@ -63,6 +63,10 @@ type UpdateResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResiliencyPolicyInput) operationName() string {
+	return "UpdateResiliencyPolicy"
+}
+
 type UpdateResiliencyPolicyOutput struct {
 
 	// The type of resiliency policy that was updated, including the recovery time

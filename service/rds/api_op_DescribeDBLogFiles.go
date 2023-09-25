@@ -69,6 +69,10 @@ type DescribeDBLogFilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBLogFilesInput) operationName() string {
+	return "DescribeDBLogFiles"
+}
+
 // The response from a call to DescribeDBLogFiles .
 type DescribeDBLogFilesOutput struct {
 

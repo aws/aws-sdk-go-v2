@@ -42,6 +42,10 @@ type DeleteMatchingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMatchingWorkflowInput) operationName() string {
+	return "DeleteMatchingWorkflow"
+}
+
 type DeleteMatchingWorkflowOutput struct {
 
 	// A successful operation message.

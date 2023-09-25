@@ -72,6 +72,10 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSessionInput) operationName() string {
+	return "StartSession"
+}
+
 type StartSessionOutput struct {
 
 	// The session ID.

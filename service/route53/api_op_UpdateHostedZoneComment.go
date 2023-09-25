@@ -47,6 +47,10 @@ type UpdateHostedZoneCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHostedZoneCommentInput) operationName() string {
+	return "UpdateHostedZoneComment"
+}
+
 // A complex type that contains the response to the UpdateHostedZoneComment
 // request.
 type UpdateHostedZoneCommentOutput struct {

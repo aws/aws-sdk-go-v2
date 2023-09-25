@@ -56,6 +56,10 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIamInstanceProfileAssociationsInput) operationName() string {
+	return "DescribeIamInstanceProfileAssociations"
+}
+
 type DescribeIamInstanceProfileAssociationsOutput struct {
 
 	// Information about the IAM instance profile associations.

@@ -47,6 +47,10 @@ type UpdateCampaignNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCampaignNameInput) operationName() string {
+	return "UpdateCampaignName"
+}
+
 type UpdateCampaignNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

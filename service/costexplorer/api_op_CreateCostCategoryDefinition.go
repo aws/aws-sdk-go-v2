@@ -84,6 +84,10 @@ type CreateCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCostCategoryDefinitionInput) operationName() string {
+	return "CreateCostCategoryDefinition"
+}
+
 type CreateCostCategoryDefinitionOutput struct {
 
 	// The unique identifier for your newly created Cost Category.

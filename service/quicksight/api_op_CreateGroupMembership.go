@@ -59,6 +59,10 @@ type CreateGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupMembershipInput) operationName() string {
+	return "CreateGroupMembership"
+}
+
 type CreateGroupMembershipOutput struct {
 
 	// The group member.

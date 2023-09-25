@@ -56,6 +56,10 @@ type UpdatePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePromptInput) operationName() string {
+	return "UpdatePrompt"
+}
+
 type UpdatePromptOutput struct {
 
 	// The Amazon Resource Name (ARN) of the prompt.

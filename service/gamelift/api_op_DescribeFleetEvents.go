@@ -71,6 +71,10 @@ type DescribeFleetEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetEventsInput) operationName() string {
+	return "DescribeFleetEvents"
+}
+
 type DescribeFleetEventsOutput struct {
 
 	// A collection of objects containing event log entries for the specified fleet.

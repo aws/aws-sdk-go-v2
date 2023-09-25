@@ -77,6 +77,10 @@ type SignalWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SignalWorkflowExecutionInput) operationName() string {
+	return "SignalWorkflowExecution"
+}
+
 type SignalWorkflowExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

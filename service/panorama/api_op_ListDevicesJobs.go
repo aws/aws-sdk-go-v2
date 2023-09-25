@@ -47,6 +47,10 @@ type ListDevicesJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevicesJobsInput) operationName() string {
+	return "ListDevicesJobs"
+}
+
 type ListDevicesJobsOutput struct {
 
 	// A list of jobs.

@@ -100,6 +100,10 @@ type CreateProvisionedProductPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProvisionedProductPlanInput) operationName() string {
+	return "CreateProvisionedProductPlan"
+}
+
 type CreateProvisionedProductPlanOutput struct {
 
 	// The plan identifier.

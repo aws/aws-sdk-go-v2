@@ -51,6 +51,10 @@ type ListComponentOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentOutputsInput) operationName() string {
+	return "ListComponentOutputs"
+}
+
 type ListComponentOutputsOutput struct {
 
 	// An array of component Infrastructure as Code (IaC) outputs.

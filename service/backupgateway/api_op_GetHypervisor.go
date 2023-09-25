@@ -44,6 +44,10 @@ type GetHypervisorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHypervisorInput) operationName() string {
+	return "GetHypervisor"
+}
+
 type GetHypervisorOutput struct {
 
 	// Details about the requested hypervisor.

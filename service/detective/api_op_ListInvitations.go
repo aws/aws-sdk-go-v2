@@ -52,6 +52,10 @@ type ListInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInvitationsInput) operationName() string {
+	return "ListInvitations"
+}
+
 type ListInvitationsOutput struct {
 
 	// The list of behavior graphs for which the member account has open or accepted

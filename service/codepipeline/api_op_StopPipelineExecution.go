@@ -60,6 +60,10 @@ type StopPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopPipelineExecutionInput) operationName() string {
+	return "StopPipelineExecution"
+}
+
 type StopPipelineExecutionOutput struct {
 
 	// The unique system-generated ID of the pipeline execution that was stopped.

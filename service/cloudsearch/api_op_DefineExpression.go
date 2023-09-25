@@ -57,6 +57,10 @@ type DefineExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DefineExpressionInput) operationName() string {
+	return "DefineExpression"
+}
+
 // The result of a DefineExpression request. Contains the status of the
 // newly-configured expression.
 type DefineExpressionOutput struct {

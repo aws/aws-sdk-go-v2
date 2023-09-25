@@ -45,6 +45,10 @@ type DeleteWhatIfForecastExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWhatIfForecastExportInput) operationName() string {
+	return "DeleteWhatIfForecastExport"
+}
+
 type DeleteWhatIfForecastExportOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

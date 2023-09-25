@@ -58,6 +58,10 @@ type DescribeEventDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventDetailsInput) operationName() string {
+	return "DescribeEventDetails"
+}
+
 type DescribeEventDetailsOutput struct {
 
 	// Error messages for any events that could not be retrieved.

@@ -53,6 +53,10 @@ type StartResourceScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartResourceScanInput) operationName() string {
+	return "StartResourceScan"
+}
+
 type StartResourceScanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

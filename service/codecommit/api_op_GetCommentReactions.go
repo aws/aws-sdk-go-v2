@@ -55,6 +55,10 @@ type GetCommentReactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCommentReactionsInput) operationName() string {
+	return "GetCommentReactions"
+}
+
 type GetCommentReactionsOutput struct {
 
 	// An array of reactions to the specified comment.

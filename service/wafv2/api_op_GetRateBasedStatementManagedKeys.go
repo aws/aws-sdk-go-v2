@@ -88,6 +88,10 @@ type GetRateBasedStatementManagedKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRateBasedStatementManagedKeysInput) operationName() string {
+	return "GetRateBasedStatementManagedKeys"
+}
+
 type GetRateBasedStatementManagedKeysOutput struct {
 
 	// The keys that are of Internet Protocol version 4 (IPv4).

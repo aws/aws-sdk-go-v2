@@ -50,6 +50,10 @@ type UpdateVTLDeviceTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVTLDeviceTypeInput) operationName() string {
+	return "UpdateVTLDeviceType"
+}
+
 // UpdateVTLDeviceTypeOutput
 type UpdateVTLDeviceTypeOutput struct {
 

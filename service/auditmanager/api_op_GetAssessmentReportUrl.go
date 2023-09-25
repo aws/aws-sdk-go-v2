@@ -47,6 +47,10 @@ type GetAssessmentReportUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssessmentReportUrlInput) operationName() string {
+	return "GetAssessmentReportUrl"
+}
+
 type GetAssessmentReportUrlOutput struct {
 
 	// Short for uniform resource locator. A URL is used as a unique identifier to

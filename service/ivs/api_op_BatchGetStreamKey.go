@@ -42,6 +42,10 @@ type BatchGetStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetStreamKeyInput) operationName() string {
+	return "BatchGetStreamKey"
+}
+
 type BatchGetStreamKeyOutput struct {
 
 	//

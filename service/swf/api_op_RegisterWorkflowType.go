@@ -137,6 +137,10 @@ type RegisterWorkflowTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterWorkflowTypeInput) operationName() string {
+	return "RegisterWorkflowType"
+}
+
 type RegisterWorkflowTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

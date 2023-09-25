@@ -103,6 +103,10 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTagsInput) operationName() string {
+	return "DescribeTags"
+}
+
 type DescribeTagsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

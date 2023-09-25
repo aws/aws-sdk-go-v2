@@ -41,6 +41,10 @@ type DisassociateRoleFromGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateRoleFromGroupInput) operationName() string {
+	return "DisassociateRoleFromGroup"
+}
+
 type DisassociateRoleFromGroupOutput struct {
 
 	// The time, in milliseconds since the epoch, when the role was disassociated from

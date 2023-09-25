@@ -61,6 +61,10 @@ type DescribeTemplateDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTemplateDefinitionInput) operationName() string {
+	return "DescribeTemplateDefinition"
+}
+
 type DescribeTemplateDefinitionOutput struct {
 
 	// The definition of the template. A definition is the data model of all features

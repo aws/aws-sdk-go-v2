@@ -53,6 +53,10 @@ type AbortDocumentVersionUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AbortDocumentVersionUploadInput) operationName() string {
+	return "AbortDocumentVersionUpload"
+}
+
 type AbortDocumentVersionUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

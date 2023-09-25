@@ -43,6 +43,10 @@ type DescribeVpcConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcConnectionInput) operationName() string {
+	return "DescribeVpcConnection"
+}
+
 type DescribeVpcConnectionOutput struct {
 
 	// The authentication type of VPC connection.

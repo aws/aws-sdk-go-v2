@@ -51,6 +51,10 @@ type SetCognitoEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetCognitoEventsInput) operationName() string {
+	return "SetCognitoEvents"
+}
+
 type SetCognitoEventsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

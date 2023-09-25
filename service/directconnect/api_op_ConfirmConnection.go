@@ -45,6 +45,10 @@ type ConfirmConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmConnectionInput) operationName() string {
+	return "ConfirmConnection"
+}
+
 type ConfirmConnectionOutput struct {
 
 	// The state of the connection. The following are the possible values:

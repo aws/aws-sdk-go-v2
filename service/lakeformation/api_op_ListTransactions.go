@@ -54,6 +54,10 @@ type ListTransactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTransactionsInput) operationName() string {
+	return "ListTransactions"
+}
+
 type ListTransactionsOutput struct {
 
 	// A continuation token indicating whether additional data is available.

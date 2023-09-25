@@ -43,6 +43,10 @@ type CreateRecommenderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRecommenderConfigurationInput) operationName() string {
+	return "CreateRecommenderConfiguration"
+}
+
 type CreateRecommenderConfigurationOutput struct {
 
 	// Provides information about Amazon Pinpoint configuration settings for

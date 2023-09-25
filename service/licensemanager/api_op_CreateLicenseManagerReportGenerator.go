@@ -74,6 +74,10 @@ type CreateLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLicenseManagerReportGeneratorInput) operationName() string {
+	return "CreateLicenseManagerReportGenerator"
+}
+
 type CreateLicenseManagerReportGeneratorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new report generator.

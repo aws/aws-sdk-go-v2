@@ -48,6 +48,10 @@ type GetHealthCheckLastFailureReasonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHealthCheckLastFailureReasonInput) operationName() string {
+	return "GetHealthCheckLastFailureReason"
+}
+
 // A complex type that contains the response to a GetHealthCheckLastFailureReason
 // request.
 type GetHealthCheckLastFailureReasonOutput struct {

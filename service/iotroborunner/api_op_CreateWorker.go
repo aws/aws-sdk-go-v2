@@ -69,6 +69,10 @@ type CreateWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkerInput) operationName() string {
+	return "CreateWorker"
+}
+
 type CreateWorkerOutput struct {
 
 	// Full ARN of the worker.

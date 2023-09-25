@@ -54,6 +54,10 @@ type UpdateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectionInput) operationName() string {
+	return "UpdateConnection"
+}
+
 // Information about an Direct Connect connection.
 type UpdateConnectionOutput struct {
 

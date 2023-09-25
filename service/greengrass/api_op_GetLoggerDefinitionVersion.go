@@ -56,6 +56,10 @@ type GetLoggerDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoggerDefinitionVersionInput) operationName() string {
+	return "GetLoggerDefinitionVersion"
+}
+
 type GetLoggerDefinitionVersionOutput struct {
 
 	// The ARN of the logger definition version.

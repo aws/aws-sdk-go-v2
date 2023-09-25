@@ -64,6 +64,10 @@ type UpdateAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAgentStatusInput) operationName() string {
+	return "UpdateAgentStatus"
+}
+
 type UpdateAgentStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type ListReadSetImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReadSetImportJobsInput) operationName() string {
+	return "ListReadSetImportJobs"
+}
+
 type ListReadSetImportJobsOutput struct {
 
 	// A list of jobs.

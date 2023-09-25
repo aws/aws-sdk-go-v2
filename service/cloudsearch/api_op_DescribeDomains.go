@@ -48,6 +48,10 @@ type DescribeDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainsInput) operationName() string {
+	return "DescribeDomains"
+}
+
 // The result of a DescribeDomains request. Contains the status of the domains
 // specified in the request or all domains owned by the account.
 type DescribeDomainsOutput struct {

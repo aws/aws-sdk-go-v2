@@ -48,6 +48,10 @@ type DeleteOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOpenIDConnectProviderInput) operationName() string {
+	return "DeleteOpenIDConnectProvider"
+}
+
 type DeleteOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

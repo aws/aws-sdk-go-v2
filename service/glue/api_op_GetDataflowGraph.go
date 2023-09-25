@@ -40,6 +40,10 @@ type GetDataflowGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataflowGraphInput) operationName() string {
+	return "GetDataflowGraph"
+}
+
 type GetDataflowGraphOutput struct {
 
 	// A list of the edges in the resulting DAG.

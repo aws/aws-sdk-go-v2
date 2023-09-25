@@ -66,6 +66,10 @@ type GetSubnetCidrReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubnetCidrReservationsInput) operationName() string {
+	return "GetSubnetCidrReservations"
+}
+
 type GetSubnetCidrReservationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

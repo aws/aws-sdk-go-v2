@@ -54,6 +54,10 @@ type BatchUpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateRuleInput) operationName() string {
+	return "BatchUpdateRule"
+}
+
 type BatchUpdateRuleOutput struct {
 
 	// The rules that were successfully updated.

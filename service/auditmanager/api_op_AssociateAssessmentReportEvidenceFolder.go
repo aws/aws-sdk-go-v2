@@ -47,6 +47,10 @@ type AssociateAssessmentReportEvidenceFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAssessmentReportEvidenceFolderInput) operationName() string {
+	return "AssociateAssessmentReportEvidenceFolder"
+}
+
 type AssociateAssessmentReportEvidenceFolderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

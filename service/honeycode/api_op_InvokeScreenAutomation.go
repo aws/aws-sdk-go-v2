@@ -80,6 +80,10 @@ type InvokeScreenAutomationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeScreenAutomationInput) operationName() string {
+	return "InvokeScreenAutomation"
+}
+
 type InvokeScreenAutomationOutput struct {
 
 	// The updated workbook cursor after performing the automation action.

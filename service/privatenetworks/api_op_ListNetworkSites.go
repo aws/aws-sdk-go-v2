@@ -58,6 +58,10 @@ type ListNetworkSitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNetworkSitesInput) operationName() string {
+	return "ListNetworkSites"
+}
+
 type ListNetworkSitesOutput struct {
 
 	// Information about the network sites.

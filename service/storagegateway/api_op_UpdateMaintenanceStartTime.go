@@ -71,6 +71,10 @@ type UpdateMaintenanceStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMaintenanceStartTimeInput) operationName() string {
+	return "UpdateMaintenanceStartTime"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // maintenance start time is updated.
 type UpdateMaintenanceStartTimeOutput struct {

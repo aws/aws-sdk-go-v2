@@ -80,6 +80,10 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchInput) operationName() string {
+	return "Search"
+}
+
 type SearchOutput struct {
 
 	// If the result of the previous Search request was truncated, the response

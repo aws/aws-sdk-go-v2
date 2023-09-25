@@ -75,6 +75,10 @@ type ListBucketMetricsConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBucketMetricsConfigurationsInput) operationName() string {
+	return "ListBucketMetricsConfigurations"
+}
+
 type ListBucketMetricsConfigurationsOutput struct {
 
 	// The marker that is used as a starting point for this metrics configuration list

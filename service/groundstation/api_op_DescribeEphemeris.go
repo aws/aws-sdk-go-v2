@@ -43,6 +43,10 @@ type DescribeEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEphemerisInput) operationName() string {
+	return "DescribeEphemeris"
+}
+
 type DescribeEphemerisOutput struct {
 
 	// The time the ephemeris was uploaded in UTC.

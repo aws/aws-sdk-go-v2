@@ -56,6 +56,10 @@ type ListPartnerEventSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPartnerEventSourcesInput) operationName() string {
+	return "ListPartnerEventSources"
+}
+
 type ListPartnerEventSourcesOutput struct {
 
 	// A token you can use in a subsequent operation to retrieve the next set of

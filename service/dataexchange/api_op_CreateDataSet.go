@@ -59,6 +59,10 @@ type CreateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataSetInput) operationName() string {
+	return "CreateDataSet"
+}
+
 type CreateDataSetOutput struct {
 
 	// The ARN for the data set.

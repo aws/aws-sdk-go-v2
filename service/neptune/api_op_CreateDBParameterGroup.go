@@ -78,6 +78,10 @@ type CreateDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBParameterGroupInput) operationName() string {
+	return "CreateDBParameterGroup"
+}
+
 type CreateDBParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB parameter group. This data type is

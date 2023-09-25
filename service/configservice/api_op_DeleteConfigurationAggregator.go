@@ -42,6 +42,10 @@ type DeleteConfigurationAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationAggregatorInput) operationName() string {
+	return "DeleteConfigurationAggregator"
+}
+
 type DeleteConfigurationAggregatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

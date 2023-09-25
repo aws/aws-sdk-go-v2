@@ -88,6 +88,10 @@ type PutLaunchActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLaunchActionInput) operationName() string {
+	return "PutLaunchAction"
+}
+
 type PutLaunchActionOutput struct {
 
 	// Launch action code.

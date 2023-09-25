@@ -65,6 +65,10 @@ type ReserveContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReserveContactInput) operationName() string {
+	return "ReserveContact"
+}
+
 type ReserveContactOutput struct {
 
 	// UUID of a contact.

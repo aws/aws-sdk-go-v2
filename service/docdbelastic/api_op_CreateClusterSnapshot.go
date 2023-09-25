@@ -50,6 +50,10 @@ type CreateClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterSnapshotInput) operationName() string {
+	return "CreateClusterSnapshot"
+}
+
 type CreateClusterSnapshotOutput struct {
 
 	// Returns information about the new Elastic DocumentDB snapshot.

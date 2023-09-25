@@ -59,6 +59,10 @@ type StopStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopStreamingSessionInput) operationName() string {
+	return "StopStreamingSession"
+}
+
 type StopStreamingSessionOutput struct {
 
 	// A streaming session is a virtual workstation created using a particular launch

@@ -105,6 +105,10 @@ type PutSlotTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSlotTypeInput) operationName() string {
+	return "PutSlotType"
+}
+
 type PutSlotTypeOutput struct {
 
 	// Checksum of the $LATEST version of the slot type.

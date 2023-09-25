@@ -42,6 +42,10 @@ type DeleteReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReportDefinitionInput) operationName() string {
+	return "DeleteReportDefinition"
+}
+
 type DeleteReportDefinitionOutput struct {
 
 	// ID of the report that was deleted.

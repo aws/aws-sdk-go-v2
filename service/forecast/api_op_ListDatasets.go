@@ -49,6 +49,10 @@ type ListDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetsInput) operationName() string {
+	return "ListDatasets"
+}
+
 type ListDatasetsOutput struct {
 
 	// An array of objects that summarize each dataset's properties.

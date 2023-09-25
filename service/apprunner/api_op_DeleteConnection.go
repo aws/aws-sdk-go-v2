@@ -45,6 +45,10 @@ type DeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectionInput) operationName() string {
+	return "DeleteConnection"
+}
+
 type DeleteConnectionOutput struct {
 
 	// A description of the App Runner connection that this request just deleted.

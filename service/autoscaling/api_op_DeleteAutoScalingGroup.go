@@ -59,6 +59,10 @@ type DeleteAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAutoScalingGroupInput) operationName() string {
+	return "DeleteAutoScalingGroup"
+}
+
 type DeleteAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

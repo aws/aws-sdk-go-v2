@@ -55,6 +55,10 @@ type SendTaskHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendTaskHeartbeatInput) operationName() string {
+	return "SendTaskHeartbeat"
+}
+
 type SendTaskHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,6 +67,10 @@ type CreateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubscriberInput) operationName() string {
+	return "CreateSubscriber"
+}
+
 type CreateSubscriberOutput struct {
 
 	// Retrieve information about the subscriber created using the CreateSubscriber

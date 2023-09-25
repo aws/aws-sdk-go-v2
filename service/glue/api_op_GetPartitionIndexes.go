@@ -55,6 +55,10 @@ type GetPartitionIndexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPartitionIndexesInput) operationName() string {
+	return "GetPartitionIndexes"
+}
+
 type GetPartitionIndexesOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.

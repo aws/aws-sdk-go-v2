@@ -43,6 +43,10 @@ type GetApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApiCacheInput) operationName() string {
+	return "GetApiCache"
+}
+
 // Represents the output of a GetApiCache operation.
 type GetApiCacheOutput struct {
 

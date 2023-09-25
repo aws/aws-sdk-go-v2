@@ -55,6 +55,10 @@ type CreatePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePricingPlanInput) operationName() string {
+	return "CreatePricingPlan"
+}
+
 type CreatePricingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created pricing plan.

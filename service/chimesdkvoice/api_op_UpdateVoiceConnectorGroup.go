@@ -52,6 +52,10 @@ type UpdateVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceConnectorGroupInput) operationName() string {
+	return "UpdateVoiceConnectorGroup"
+}
+
 type UpdateVoiceConnectorGroupOutput struct {
 
 	// The updated Voice Connector group.

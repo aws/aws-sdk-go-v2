@@ -46,6 +46,10 @@ type CreateScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScriptInput) operationName() string {
+	return "CreateScript"
+}
+
 type CreateScriptOutput struct {
 
 	// The Python script generated from the DAG.

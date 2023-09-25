@@ -43,6 +43,10 @@ type DescribeChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelFlowInput) operationName() string {
+	return "DescribeChannelFlow"
+}
+
 type DescribeChannelFlowOutput struct {
 
 	// The channel flow details.

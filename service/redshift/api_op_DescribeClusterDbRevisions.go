@@ -58,6 +58,10 @@ type DescribeClusterDbRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterDbRevisionsInput) operationName() string {
+	return "DescribeClusterDbRevisions"
+}
+
 type DescribeClusterDbRevisionsOutput struct {
 
 	// A list of revisions.

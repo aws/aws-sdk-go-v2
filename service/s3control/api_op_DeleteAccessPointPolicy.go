@@ -68,6 +68,10 @@ type DeleteAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccessPointPolicyInput) operationName() string {
+	return "DeleteAccessPointPolicy"
+}
+
 type DeleteAccessPointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,6 +44,7 @@
         "api_op_TerminateApp.go",
         "api_op_UpdateApp.go",
         "api_op_UpdateReplicationJob.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

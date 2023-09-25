@@ -61,6 +61,10 @@ type CancelFlowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelFlowExecutionsInput) operationName() string {
+	return "CancelFlowExecutions"
+}
+
 type CancelFlowExecutionsOutput struct {
 
 	// The IDs of runs that Amazon AppFlow couldn't cancel. These runs might be

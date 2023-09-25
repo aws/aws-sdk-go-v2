@@ -47,6 +47,10 @@ type ModifyAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyAuthenticationProfileInput) operationName() string {
+	return "ModifyAuthenticationProfile"
+}
+
 type ModifyAuthenticationProfileOutput struct {
 
 	// The updated content of the authentication profile in JSON format.

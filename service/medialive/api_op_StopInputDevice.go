@@ -44,6 +44,10 @@ type StopInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopInputDeviceInput) operationName() string {
+	return "StopInputDevice"
+}
+
 // Placeholder documentation for StopInputDeviceResponse
 type StopInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.

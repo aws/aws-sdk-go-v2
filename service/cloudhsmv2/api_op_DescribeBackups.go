@@ -67,6 +67,10 @@ type DescribeBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBackupsInput) operationName() string {
+	return "DescribeBackups"
+}
+
 type DescribeBackupsOutput struct {
 
 	// A list of backups.

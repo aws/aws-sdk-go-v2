@@ -45,6 +45,10 @@ type DescribeLocationAzureBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationAzureBlobInput) operationName() string {
+	return "DescribeLocationAzureBlob"
+}
+
 type DescribeLocationAzureBlobOutput struct {
 
 	// The access tier that you want your objects or files transferred into. This only

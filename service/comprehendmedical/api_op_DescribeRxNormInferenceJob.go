@@ -44,6 +44,10 @@ type DescribeRxNormInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRxNormInferenceJobInput) operationName() string {
+	return "DescribeRxNormInferenceJob"
+}
+
 type DescribeRxNormInferenceJobOutput struct {
 
 	// An object that contains the properties associated with a detection job.

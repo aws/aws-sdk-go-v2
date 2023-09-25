@@ -48,6 +48,10 @@ type GetApplicationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationRevisionInput) operationName() string {
+	return "GetApplicationRevision"
+}
+
 // Represents the output of a GetApplicationRevision operation.
 type GetApplicationRevisionOutput struct {
 

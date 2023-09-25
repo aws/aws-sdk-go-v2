@@ -58,6 +58,10 @@ type SearchUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchUsersInput) operationName() string {
+	return "SearchUsers"
+}
+
 type SearchUsersOutput struct {
 
 	// The total number of users who matched your search query.

@@ -68,6 +68,10 @@ type CreateIpamScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIpamScopeInput) operationName() string {
+	return "CreateIpamScope"
+}
+
 type CreateIpamScopeOutput struct {
 
 	// Information about the created scope.

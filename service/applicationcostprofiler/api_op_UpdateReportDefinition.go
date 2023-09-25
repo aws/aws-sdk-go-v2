@@ -63,6 +63,10 @@ type UpdateReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReportDefinitionInput) operationName() string {
+	return "UpdateReportDefinition"
+}
+
 type UpdateReportDefinitionOutput struct {
 
 	// ID of the report.

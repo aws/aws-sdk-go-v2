@@ -53,6 +53,10 @@ type ListTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTargetsInput) operationName() string {
+	return "ListTargets"
+}
+
 type ListTargetsOutput struct {
 
 	// Information about the targets.

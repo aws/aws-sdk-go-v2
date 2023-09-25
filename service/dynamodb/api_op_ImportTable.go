@@ -69,6 +69,10 @@ type ImportTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportTableInput) operationName() string {
+	return "ImportTable"
+}
+
 type ImportTableOutput struct {
 
 	// Represents the properties of the table created for the import, and parameters

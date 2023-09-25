@@ -49,6 +49,10 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplatesInput) operationName() string {
+	return "ListTemplates"
+}
+
 type ListTemplatesOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

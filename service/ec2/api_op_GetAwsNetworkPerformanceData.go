@@ -62,6 +62,10 @@ type GetAwsNetworkPerformanceDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAwsNetworkPerformanceDataInput) operationName() string {
+	return "GetAwsNetworkPerformanceData"
+}
+
 type GetAwsNetworkPerformanceDataOutput struct {
 
 	// The list of data responses.

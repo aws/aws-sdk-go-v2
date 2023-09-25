@@ -53,6 +53,10 @@ type DeleteBlueGreenDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBlueGreenDeploymentInput) operationName() string {
+	return "DeleteBlueGreenDeployment"
+}
+
 type DeleteBlueGreenDeploymentOutput struct {
 
 	// Details about a blue/green deployment. For more information, see Using Amazon

@@ -55,6 +55,10 @@ type AttachCustomerManagedPolicyReferenceToPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachCustomerManagedPolicyReferenceToPermissionSetInput) operationName() string {
+	return "AttachCustomerManagedPolicyReferenceToPermissionSet"
+}
+
 type AttachCustomerManagedPolicyReferenceToPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,6 +44,10 @@ type DescribePiiEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePiiEntitiesDetectionJobInput) operationName() string {
+	return "DescribePiiEntitiesDetectionJob"
+}
+
 type DescribePiiEntitiesDetectionJobOutput struct {
 
 	// Provides information about a PII entities detection job.

@@ -43,6 +43,10 @@ type DescribeVcenterClientsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVcenterClientsInput) operationName() string {
+	return "DescribeVcenterClients"
+}
+
 type DescribeVcenterClientsOutput struct {
 
 	// List of items returned by DescribeVcenterClients.

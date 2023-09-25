@@ -42,6 +42,10 @@ type DeletePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePricingPlanInput) operationName() string {
+	return "DeletePricingPlan"
+}
+
 type DeletePricingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted pricing plan.

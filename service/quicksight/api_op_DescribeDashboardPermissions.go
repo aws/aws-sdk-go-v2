@@ -48,6 +48,10 @@ type DescribeDashboardPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDashboardPermissionsInput) operationName() string {
+	return "DescribeDashboardPermissions"
+}
+
 type DescribeDashboardPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.

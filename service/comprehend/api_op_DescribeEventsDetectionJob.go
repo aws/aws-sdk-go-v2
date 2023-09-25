@@ -42,6 +42,10 @@ type DescribeEventsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsDetectionJobInput) operationName() string {
+	return "DescribeEventsDetectionJob"
+}
+
 type DescribeEventsDetectionJobOutput struct {
 
 	// An object that contains the properties associated with an event detection job.

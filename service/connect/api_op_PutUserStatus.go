@@ -56,6 +56,10 @@ type PutUserStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutUserStatusInput) operationName() string {
+	return "PutUserStatus"
+}
+
 type PutUserStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

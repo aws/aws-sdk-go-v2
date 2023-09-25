@@ -48,6 +48,10 @@ type ListKxDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKxDatabasesInput) operationName() string {
+	return "ListKxDatabases"
+}
+
 type ListKxDatabasesOutput struct {
 
 	// A list of databases in the kdb environment.

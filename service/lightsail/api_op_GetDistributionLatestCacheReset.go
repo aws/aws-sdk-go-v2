@@ -44,6 +44,10 @@ type GetDistributionLatestCacheResetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDistributionLatestCacheResetInput) operationName() string {
+	return "GetDistributionLatestCacheReset"
+}
+
 type GetDistributionLatestCacheResetOutput struct {
 
 	// The timestamp of the last cache reset (e.g., 1479734909.17 ) in Unix time format.

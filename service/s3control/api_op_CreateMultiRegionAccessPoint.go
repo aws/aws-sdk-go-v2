@@ -73,6 +73,10 @@ type CreateMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMultiRegionAccessPointInput) operationName() string {
+	return "CreateMultiRegionAccessPoint"
+}
+
 type CreateMultiRegionAccessPointOutput struct {
 
 	// The request token associated with the request. You can use this token with

@@ -52,6 +52,10 @@ type DescribeConnectionAliasPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectionAliasPermissionsInput) operationName() string {
+	return "DescribeConnectionAliasPermissions"
+}
+
 type DescribeConnectionAliasPermissionsOutput struct {
 
 	// The identifier of the connection alias.

@@ -48,6 +48,10 @@ type DeleteTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTopicInput) operationName() string {
+	return "DeleteTopic"
+}
+
 type DeleteTopicOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topic.

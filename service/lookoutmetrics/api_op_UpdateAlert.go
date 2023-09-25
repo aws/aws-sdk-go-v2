@@ -55,6 +55,10 @@ type UpdateAlertInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAlertInput) operationName() string {
+	return "UpdateAlert"
+}
+
 type UpdateAlertOutput struct {
 
 	// The ARN of the updated alert.

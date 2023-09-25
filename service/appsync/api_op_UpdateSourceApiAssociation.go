@@ -58,6 +58,10 @@ type UpdateSourceApiAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSourceApiAssociationInput) operationName() string {
+	return "UpdateSourceApiAssociation"
+}
+
 type UpdateSourceApiAssociationOutput struct {
 
 	// The SourceApiAssociation object data.

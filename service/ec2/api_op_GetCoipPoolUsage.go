@@ -64,6 +64,10 @@ type GetCoipPoolUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoipPoolUsageInput) operationName() string {
+	return "GetCoipPoolUsage"
+}
+
 type GetCoipPoolUsageOutput struct {
 
 	// Information about the address usage.

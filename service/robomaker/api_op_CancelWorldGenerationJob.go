@@ -41,6 +41,10 @@ type CancelWorldGenerationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelWorldGenerationJobInput) operationName() string {
+	return "CancelWorldGenerationJob"
+}
+
 type CancelWorldGenerationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

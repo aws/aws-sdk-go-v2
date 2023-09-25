@@ -52,6 +52,10 @@ type CreateKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeyPairInput) operationName() string {
+	return "CreateKeyPair"
+}
+
 type CreateKeyPairOutput struct {
 
 	// An array of key-value pairs containing information about the new key pair you

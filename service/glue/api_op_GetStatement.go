@@ -50,6 +50,10 @@ type GetStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStatementInput) operationName() string {
+	return "GetStatement"
+}
+
 type GetStatementOutput struct {
 
 	// Returns the statement.

@@ -44,6 +44,10 @@ type DeleteCommentContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCommentContentInput) operationName() string {
+	return "DeleteCommentContent"
+}
+
 type DeleteCommentContentOutput struct {
 
 	// Information about the comment you just deleted.

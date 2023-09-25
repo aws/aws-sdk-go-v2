@@ -42,6 +42,10 @@ type DescribeChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelInput) operationName() string {
+	return "DescribeChannel"
+}
+
 type DescribeChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.

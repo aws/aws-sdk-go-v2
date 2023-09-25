@@ -43,6 +43,10 @@ type DisableDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableDirectoryInput) operationName() string {
+	return "DisableDirectory"
+}
+
 type DisableDirectoryOutput struct {
 
 	// The ARN of the directory that has been disabled.

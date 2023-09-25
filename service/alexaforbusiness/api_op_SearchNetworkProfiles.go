@@ -58,6 +58,10 @@ type SearchNetworkProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchNetworkProfilesInput) operationName() string {
+	return "SearchNetworkProfiles"
+}
+
 type SearchNetworkProfilesOutput struct {
 
 	// The network profiles that meet the specified set of filter criteria, in sort

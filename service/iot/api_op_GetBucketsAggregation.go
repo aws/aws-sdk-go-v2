@@ -61,6 +61,10 @@ type GetBucketsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketsAggregationInput) operationName() string {
+	return "GetBucketsAggregation"
+}
+
 type GetBucketsAggregationOutput struct {
 
 	// The main part of the response with a list of buckets. Each bucket contains a

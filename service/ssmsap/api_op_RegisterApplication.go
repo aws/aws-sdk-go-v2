@@ -71,6 +71,10 @@ type RegisterApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterApplicationInput) operationName() string {
+	return "RegisterApplication"
+}
+
 type RegisterApplicationOutput struct {
 
 	// The application registered with AWS Systems Manager for SAP.

@@ -56,6 +56,10 @@ type AssociateResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateResolverQueryLogConfigInput) operationName() string {
+	return "AssociateResolverQueryLogConfig"
+}
+
 type AssociateResolverQueryLogConfigOutput struct {
 
 	// A complex type that contains settings for a specified association between an

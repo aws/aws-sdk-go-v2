@@ -61,6 +61,10 @@ type UpdateDomainContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainContactInput) operationName() string {
+	return "UpdateDomainContact"
+}
+
 // The UpdateDomainContact response includes the following element.
 type UpdateDomainContactOutput struct {
 

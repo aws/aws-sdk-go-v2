@@ -58,6 +58,10 @@ type GetInsightSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightSelectorsInput) operationName() string {
+	return "GetInsightSelectors"
+}
+
 type GetInsightSelectorsOutput struct {
 
 	// A JSON string that contains the insight types you want to log on a trail. In

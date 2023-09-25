@@ -77,6 +77,10 @@ type CreateSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSecurityGroupInput) operationName() string {
+	return "CreateSecurityGroup"
+}
+
 type CreateSecurityGroupOutput struct {
 
 	// The ID of the security group.

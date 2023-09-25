@@ -49,6 +49,10 @@ type ExportClientVpnClientCertificateRevocationListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportClientVpnClientCertificateRevocationListInput) operationName() string {
+	return "ExportClientVpnClientCertificateRevocationList"
+}
+
 type ExportClientVpnClientCertificateRevocationListOutput struct {
 
 	// Information about the client certificate revocation list.

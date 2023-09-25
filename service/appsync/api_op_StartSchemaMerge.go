@@ -52,6 +52,10 @@ type StartSchemaMergeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSchemaMergeInput) operationName() string {
+	return "StartSchemaMerge"
+}
+
 type StartSchemaMergeOutput struct {
 
 	// The state of the source API association.

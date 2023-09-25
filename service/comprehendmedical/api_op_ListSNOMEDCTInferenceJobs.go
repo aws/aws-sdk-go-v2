@@ -46,6 +46,10 @@ type ListSNOMEDCTInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSNOMEDCTInferenceJobsInput) operationName() string {
+	return "ListSNOMEDCTInferenceJobs"
+}
+
 type ListSNOMEDCTInferenceJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.

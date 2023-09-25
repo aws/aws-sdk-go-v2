@@ -44,6 +44,10 @@ type ListDataflowEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataflowEndpointGroupsInput) operationName() string {
+	return "ListDataflowEndpointGroups"
+}
+
 type ListDataflowEndpointGroupsOutput struct {
 
 	// A list of dataflow endpoint groups.

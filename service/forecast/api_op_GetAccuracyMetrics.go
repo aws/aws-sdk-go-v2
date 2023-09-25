@@ -56,6 +56,10 @@ type GetAccuracyMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccuracyMetricsInput) operationName() string {
+	return "GetAccuracyMetrics"
+}
+
 type GetAccuracyMetricsOutput struct {
 
 	// The LatencyOptimized AutoML override strategy is only available in private

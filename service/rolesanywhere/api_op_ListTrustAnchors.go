@@ -46,6 +46,10 @@ type ListTrustAnchorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrustAnchorsInput) operationName() string {
+	return "ListTrustAnchors"
+}
+
 type ListTrustAnchorsOutput struct {
 
 	// A token that indicates where the output should continue from, if a previous

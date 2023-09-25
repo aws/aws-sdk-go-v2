@@ -49,6 +49,10 @@ type CreateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTemplateInput) operationName() string {
+	return "CreateTemplate"
+}
+
 type CreateTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

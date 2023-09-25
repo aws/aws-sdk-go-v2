@@ -81,6 +81,10 @@ type ResizeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResizeClusterInput) operationName() string {
+	return "ResizeCluster"
+}
+
 type ResizeClusterOutput struct {
 
 	// Describes a cluster.

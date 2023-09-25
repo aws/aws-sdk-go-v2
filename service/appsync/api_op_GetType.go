@@ -52,6 +52,10 @@ type GetTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTypeInput) operationName() string {
+	return "GetType"
+}
+
 type GetTypeOutput struct {
 
 	// The Type object.

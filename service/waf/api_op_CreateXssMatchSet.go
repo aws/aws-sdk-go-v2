@@ -68,6 +68,10 @@ type CreateXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateXssMatchSetInput) operationName() string {
+	return "CreateXssMatchSet"
+}
+
 // The response to a CreateXssMatchSet request.
 type CreateXssMatchSetOutput struct {
 

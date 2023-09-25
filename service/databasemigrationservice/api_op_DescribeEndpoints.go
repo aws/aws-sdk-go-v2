@@ -56,6 +56,10 @@ type DescribeEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointsInput) operationName() string {
+	return "DescribeEndpoints"
+}
+
 type DescribeEndpointsOutput struct {
 
 	// Endpoint description.

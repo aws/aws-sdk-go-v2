@@ -46,6 +46,10 @@ type DeleteWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkspaceInput) operationName() string {
+	return "DeleteWorkspace"
+}
+
 type DeleteWorkspaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

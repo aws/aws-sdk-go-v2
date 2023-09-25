@@ -52,6 +52,10 @@ type CreateTransitGatewayPolicyTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayPolicyTableInput) operationName() string {
+	return "CreateTransitGatewayPolicyTable"
+}
+
 type CreateTransitGatewayPolicyTableOutput struct {
 
 	// Describes the created transit gateway policy table.

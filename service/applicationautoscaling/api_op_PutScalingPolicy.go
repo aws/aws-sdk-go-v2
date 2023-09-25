@@ -196,6 +196,10 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutScalingPolicyInput) operationName() string {
+	return "PutScalingPolicy"
+}
+
 type PutScalingPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resulting scaling policy.

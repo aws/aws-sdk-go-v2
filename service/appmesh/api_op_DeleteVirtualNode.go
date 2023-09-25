@@ -57,6 +57,10 @@ type DeleteVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualNodeInput) operationName() string {
+	return "DeleteVirtualNode"
+}
+
 type DeleteVirtualNodeOutput struct {
 
 	// The virtual node that was deleted.

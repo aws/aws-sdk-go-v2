@@ -53,6 +53,10 @@ type GetRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRouteInput) operationName() string {
+	return "GetRoute"
+}
+
 type GetRouteOutput struct {
 
 	// If set to true , this option appends the source path to the service URL endpoint.

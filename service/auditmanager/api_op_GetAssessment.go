@@ -42,6 +42,10 @@ type GetAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssessmentInput) operationName() string {
+	return "GetAssessment"
+}
+
 type GetAssessmentOutput struct {
 
 	// An entity that defines the scope of audit evidence collected by Audit Manager.

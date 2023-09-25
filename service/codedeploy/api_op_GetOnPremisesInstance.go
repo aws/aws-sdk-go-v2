@@ -43,6 +43,10 @@ type GetOnPremisesInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOnPremisesInstanceInput) operationName() string {
+	return "GetOnPremisesInstance"
+}
+
 // Represents the output of a GetOnPremisesInstance operation.
 type GetOnPremisesInstanceOutput struct {
 

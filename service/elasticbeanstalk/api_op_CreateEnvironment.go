@@ -118,6 +118,10 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEnvironmentInput) operationName() string {
+	return "CreateEnvironment"
+}
+
 // Describes the properties of an environment.
 type CreateEnvironmentOutput struct {
 

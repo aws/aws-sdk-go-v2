@@ -58,6 +58,10 @@ type UpdateAccountCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountCustomizationInput) operationName() string {
+	return "UpdateAccountCustomization"
+}
+
 type UpdateAccountCustomizationOutput struct {
 
 	// The Amazon QuickSight customizations you're updating in the current Amazon Web

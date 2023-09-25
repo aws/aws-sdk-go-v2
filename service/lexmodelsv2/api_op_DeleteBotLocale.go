@@ -55,6 +55,10 @@ type DeleteBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBotLocaleInput) operationName() string {
+	return "DeleteBotLocale"
+}
+
 type DeleteBotLocaleOutput struct {
 
 	// The identifier of the bot that contained the deleted locale.

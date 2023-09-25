@@ -76,6 +76,10 @@ type PostCommentForPullRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostCommentForPullRequestInput) operationName() string {
+	return "PostCommentForPullRequest"
+}
+
 type PostCommentForPullRequestOutput struct {
 
 	// In the directionality of the pull request, the blob ID of the after blob.

@@ -49,6 +49,10 @@ type AssociateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTrialComponentInput) operationName() string {
+	return "AssociateTrialComponent"
+}
+
 type AssociateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.

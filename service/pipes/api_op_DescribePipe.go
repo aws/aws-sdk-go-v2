@@ -45,6 +45,10 @@ type DescribePipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePipeInput) operationName() string {
+	return "DescribePipe"
+}
+
 type DescribePipeOutput struct {
 
 	// The ARN of the pipe.

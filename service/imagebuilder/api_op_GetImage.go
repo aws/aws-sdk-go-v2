@@ -42,6 +42,10 @@ type GetImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImageInput) operationName() string {
+	return "GetImage"
+}
+
 type GetImageOutput struct {
 
 	// The image object.

@@ -48,6 +48,10 @@ type BatchGetAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetAssetPropertyValueInput) operationName() string {
+	return "BatchGetAssetPropertyValue"
+}
+
 type BatchGetAssetPropertyValueOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error

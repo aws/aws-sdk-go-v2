@@ -58,6 +58,10 @@ type AssociateConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateConnectPeerInput) operationName() string {
+	return "AssociateConnectPeer"
+}
+
 type AssociateConnectPeerOutput struct {
 
 	// The response to the Connect peer request.

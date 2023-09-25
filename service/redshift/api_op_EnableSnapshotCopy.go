@@ -68,6 +68,10 @@ type EnableSnapshotCopyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableSnapshotCopyInput) operationName() string {
+	return "EnableSnapshotCopy"
+}
+
 type EnableSnapshotCopyOutput struct {
 
 	// Describes a cluster.

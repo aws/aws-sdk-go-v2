@@ -71,6 +71,10 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoadBalancerTlsCertificateInput) operationName() string {
+	return "CreateLoadBalancerTlsCertificate"
+}
+
 type CreateLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

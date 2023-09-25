@@ -54,6 +54,10 @@ type ListEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventsInput) operationName() string {
+	return "ListEvents"
+}
+
 type ListEventsOutput struct {
 
 	// A list of the requested events.

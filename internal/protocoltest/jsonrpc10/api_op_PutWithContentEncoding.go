@@ -32,6 +32,10 @@ type PutWithContentEncodingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutWithContentEncodingInput) operationName() string {
+	return "PutWithContentEncoding"
+}
+
 type PutWithContentEncodingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

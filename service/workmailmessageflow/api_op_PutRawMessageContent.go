@@ -55,6 +55,10 @@ type PutRawMessageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRawMessageContentInput) operationName() string {
+	return "PutRawMessageContent"
+}
+
 type PutRawMessageContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,6 +42,10 @@ type DeleteDBProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBProxyInput) operationName() string {
+	return "DeleteDBProxy"
+}
+
 type DeleteDBProxyOutput struct {
 
 	// The data structure representing the details of the DB proxy that you delete.

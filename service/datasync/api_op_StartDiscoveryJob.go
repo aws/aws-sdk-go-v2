@@ -65,6 +65,10 @@ type StartDiscoveryJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDiscoveryJobInput) operationName() string {
+	return "StartDiscoveryJob"
+}
+
 type StartDiscoveryJobOutput struct {
 
 	// The ARN of the discovery job that you started.

@@ -69,6 +69,10 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProjectInput) operationName() string {
+	return "CreateProject"
+}
+
 type CreateProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created project.

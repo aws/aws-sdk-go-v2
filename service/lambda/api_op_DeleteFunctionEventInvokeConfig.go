@@ -52,6 +52,10 @@ type DeleteFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFunctionEventInvokeConfigInput) operationName() string {
+	return "DeleteFunctionEventInvokeConfig"
+}
+
 type DeleteFunctionEventInvokeConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

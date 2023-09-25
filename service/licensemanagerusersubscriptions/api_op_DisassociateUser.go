@@ -55,6 +55,10 @@ type DisassociateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateUserInput) operationName() string {
+	return "DisassociateUser"
+}
+
 type DisassociateUserOutput struct {
 
 	// Metadata that describes the associate user operation.

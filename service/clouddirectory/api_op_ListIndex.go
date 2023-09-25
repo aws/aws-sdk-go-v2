@@ -61,6 +61,10 @@ type ListIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIndexInput) operationName() string {
+	return "ListIndex"
+}
+
 type ListIndexOutput struct {
 
 	// The objects and indexed values attached to the index.

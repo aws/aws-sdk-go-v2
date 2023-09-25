@@ -54,6 +54,10 @@ type UpdateApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApiKeyInput) operationName() string {
+	return "UpdateApiKey"
+}
+
 type UpdateApiKeyOutput struct {
 
 	// The API key.

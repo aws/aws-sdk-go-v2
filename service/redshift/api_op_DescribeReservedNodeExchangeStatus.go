@@ -58,6 +58,10 @@ type DescribeReservedNodeExchangeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedNodeExchangeStatusInput) operationName() string {
+	return "DescribeReservedNodeExchangeStatus"
+}
+
 type DescribeReservedNodeExchangeStatusOutput struct {
 
 	// A pagination token provided by a previous DescribeReservedNodeExchangeStatus

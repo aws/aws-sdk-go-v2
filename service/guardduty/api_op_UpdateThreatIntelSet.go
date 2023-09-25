@@ -57,6 +57,10 @@ type UpdateThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThreatIntelSetInput) operationName() string {
+	return "UpdateThreatIntelSet"
+}
+
 type UpdateThreatIntelSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

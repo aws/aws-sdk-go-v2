@@ -57,6 +57,10 @@ type DeletePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePortfolioShareInput) operationName() string {
+	return "DeletePortfolioShare"
+}
+
 type DeletePortfolioShareOutput struct {
 
 	// The portfolio share unique identifier. This will only be returned if delete is

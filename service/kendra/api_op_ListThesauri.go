@@ -51,6 +51,10 @@ type ListThesauriInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThesauriInput) operationName() string {
+	return "ListThesauri"
+}
+
 type ListThesauriOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use

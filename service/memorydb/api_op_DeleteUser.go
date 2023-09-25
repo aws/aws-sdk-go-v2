@@ -43,6 +43,10 @@ type DeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserInput) operationName() string {
+	return "DeleteUser"
+}
+
 type DeleteUserOutput struct {
 
 	// The user object that has been deleted.

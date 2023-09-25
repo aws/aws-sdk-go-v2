@@ -49,6 +49,10 @@ type DisassociateWebsiteCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateWebsiteCertificateAuthorityInput) operationName() string {
+	return "DisassociateWebsiteCertificateAuthority"
+}
+
 type DisassociateWebsiteCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

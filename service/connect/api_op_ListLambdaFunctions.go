@@ -51,6 +51,10 @@ type ListLambdaFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLambdaFunctionsInput) operationName() string {
+	return "ListLambdaFunctions"
+}
+
 type ListLambdaFunctionsOutput struct {
 
 	// The Lambdafunction ARNs associated with the specified instance.

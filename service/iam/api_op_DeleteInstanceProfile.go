@@ -50,6 +50,10 @@ type DeleteInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceProfileInput) operationName() string {
+	return "DeleteInstanceProfile"
+}
+
 type DeleteInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

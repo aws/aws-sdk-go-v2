@@ -56,6 +56,10 @@ type DeleteIndexFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIndexFieldInput) operationName() string {
+	return "DeleteIndexField"
+}
+
 // The result of a DeleteIndexField request.
 type DeleteIndexFieldOutput struct {
 

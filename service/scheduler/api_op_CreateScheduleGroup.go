@@ -50,6 +50,10 @@ type CreateScheduleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScheduleGroupInput) operationName() string {
+	return "CreateScheduleGroup"
+}
+
 type CreateScheduleGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schedule group.

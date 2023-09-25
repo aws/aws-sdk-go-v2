@@ -57,6 +57,10 @@ type DescribeExportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportTasksInput) operationName() string {
+	return "DescribeExportTasks"
+}
+
 type DescribeExportTasksOutput struct {
 
 	// Contains one or more sets of export request details. When the status of a

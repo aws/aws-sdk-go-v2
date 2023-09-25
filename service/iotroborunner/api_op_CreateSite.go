@@ -55,6 +55,10 @@ type CreateSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSiteInput) operationName() string {
+	return "CreateSite"
+}
+
 type CreateSiteOutput struct {
 
 	// Site ARN.

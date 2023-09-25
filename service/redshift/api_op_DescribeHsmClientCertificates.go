@@ -82,6 +82,10 @@ type DescribeHsmClientCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHsmClientCertificatesInput) operationName() string {
+	return "DescribeHsmClientCertificates"
+}
+
 type DescribeHsmClientCertificatesOutput struct {
 
 	// A list of the identifiers for one or more HSM client certificates used by

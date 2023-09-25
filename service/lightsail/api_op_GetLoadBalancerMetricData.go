@@ -150,6 +150,10 @@ type GetLoadBalancerMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoadBalancerMetricDataInput) operationName() string {
+	return "GetLoadBalancerMetricData"
+}
+
 type GetLoadBalancerMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.

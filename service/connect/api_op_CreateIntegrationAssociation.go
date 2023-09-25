@@ -72,6 +72,10 @@ type CreateIntegrationAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIntegrationAssociationInput) operationName() string {
+	return "CreateIntegrationAssociation"
+}
+
 type CreateIntegrationAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the association.

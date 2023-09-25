@@ -33,6 +33,7 @@
         "api_op_UpdateComputeEnvironment.go",
         "api_op_UpdateJobQueue.go",
         "api_op_UpdateSchedulingPolicy.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

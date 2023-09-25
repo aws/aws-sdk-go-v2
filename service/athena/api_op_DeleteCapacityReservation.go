@@ -45,6 +45,10 @@ type DeleteCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCapacityReservationInput) operationName() string {
+	return "DeleteCapacityReservation"
+}
+
 type DeleteCapacityReservationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

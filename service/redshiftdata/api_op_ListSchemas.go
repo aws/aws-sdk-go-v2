@@ -109,6 +109,10 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemasInput) operationName() string {
+	return "ListSchemas"
+}
+
 type ListSchemasOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

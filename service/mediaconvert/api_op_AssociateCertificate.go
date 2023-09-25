@@ -43,6 +43,10 @@ type AssociateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateCertificateInput) operationName() string {
+	return "AssociateCertificate"
+}
+
 type AssociateCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

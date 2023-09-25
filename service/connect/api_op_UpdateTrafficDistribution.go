@@ -61,6 +61,10 @@ type UpdateTrafficDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrafficDistributionInput) operationName() string {
+	return "UpdateTrafficDistribution"
+}
+
 type UpdateTrafficDistributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

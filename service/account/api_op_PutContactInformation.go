@@ -63,6 +63,10 @@ type PutContactInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutContactInformationInput) operationName() string {
+	return "PutContactInformation"
+}
+
 type PutContactInformationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

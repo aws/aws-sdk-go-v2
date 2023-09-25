@@ -56,6 +56,10 @@ type UpdateConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfiguredTableAssociationInput) operationName() string {
+	return "UpdateConfiguredTableAssociation"
+}
+
 type UpdateConfiguredTableAssociationOutput struct {
 
 	// The entire updated configured table association.

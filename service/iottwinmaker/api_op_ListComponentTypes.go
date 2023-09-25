@@ -52,6 +52,10 @@ type ListComponentTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentTypesInput) operationName() string {
+	return "ListComponentTypes"
+}
+
 type ListComponentTypesOutput struct {
 
 	// A list of objects that contain information about the component types.

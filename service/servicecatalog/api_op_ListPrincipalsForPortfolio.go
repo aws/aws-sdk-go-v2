@@ -55,6 +55,10 @@ type ListPrincipalsForPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPrincipalsForPortfolioInput) operationName() string {
+	return "ListPrincipalsForPortfolio"
+}
+
 type ListPrincipalsForPortfolioOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

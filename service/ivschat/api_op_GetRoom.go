@@ -44,6 +44,10 @@ type GetRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRoomInput) operationName() string {
+	return "GetRoom"
+}
+
 type GetRoomOutput struct {
 
 	// Room ARN, from the request (if identifier was an ARN).

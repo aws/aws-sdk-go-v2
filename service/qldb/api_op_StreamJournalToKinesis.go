@@ -90,6 +90,10 @@ type StreamJournalToKinesisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StreamJournalToKinesisInput) operationName() string {
+	return "StreamJournalToKinesis"
+}
+
 type StreamJournalToKinesisOutput struct {
 
 	// The UUID (represented in Base62-encoded text) that QLDB assigns to each QLDB

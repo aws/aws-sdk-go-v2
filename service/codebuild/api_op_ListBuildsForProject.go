@@ -61,6 +61,10 @@ type ListBuildsForProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBuildsForProjectInput) operationName() string {
+	return "ListBuildsForProject"
+}
+
 type ListBuildsForProjectOutput struct {
 
 	// A list of build identifiers for the specified build project, with each build ID

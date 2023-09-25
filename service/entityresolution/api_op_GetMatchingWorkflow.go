@@ -43,6 +43,10 @@ type GetMatchingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMatchingWorkflowInput) operationName() string {
+	return "GetMatchingWorkflow"
+}
+
 type GetMatchingWorkflowOutput struct {
 
 	// The timestamp of when the workflow was created.

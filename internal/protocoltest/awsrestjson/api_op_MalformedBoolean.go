@@ -38,6 +38,10 @@ type MalformedBooleanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedBooleanInput) operationName() string {
+	return "MalformedBoolean"
+}
+
 type MalformedBooleanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

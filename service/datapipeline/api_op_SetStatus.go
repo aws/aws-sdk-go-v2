@@ -66,6 +66,10 @@ type SetStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetStatusInput) operationName() string {
+	return "SetStatus"
+}
+
 type SetStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

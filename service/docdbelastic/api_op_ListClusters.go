@@ -43,6 +43,10 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClustersInput) operationName() string {
+	return "ListClusters"
+}
+
 type ListClustersOutput struct {
 
 	// A list of Elastic DocumentDB cluster.

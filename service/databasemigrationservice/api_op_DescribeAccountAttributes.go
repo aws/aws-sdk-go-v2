@@ -43,6 +43,10 @@ type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountAttributesInput) operationName() string {
+	return "DescribeAccountAttributes"
+}
+
 type DescribeAccountAttributesOutput struct {
 
 	// Account quota information.

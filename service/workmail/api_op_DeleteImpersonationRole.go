@@ -46,6 +46,10 @@ type DeleteImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImpersonationRoleInput) operationName() string {
+	return "DeleteImpersonationRole"
+}
+
 type DeleteImpersonationRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

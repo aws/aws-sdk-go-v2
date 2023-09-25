@@ -46,6 +46,10 @@ type DescribeAggregationAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAggregationAuthorizationsInput) operationName() string {
+	return "DescribeAggregationAuthorizations"
+}
+
 type DescribeAggregationAuthorizationsOutput struct {
 
 	// Returns a list of authorizations granted to various aggregator accounts and

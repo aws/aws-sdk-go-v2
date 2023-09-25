@@ -63,6 +63,10 @@ type CreateAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssistantInput) operationName() string {
+	return "CreateAssistant"
+}
+
 type CreateAssistantOutput struct {
 
 	// Information about the assistant.

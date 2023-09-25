@@ -51,6 +51,10 @@ type UpdateMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMultiplexProgramInput) operationName() string {
+	return "UpdateMultiplexProgram"
+}
+
 // Placeholder documentation for UpdateMultiplexProgramResponse
 type UpdateMultiplexProgramOutput struct {
 

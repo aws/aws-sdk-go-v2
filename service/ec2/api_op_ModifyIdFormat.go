@@ -73,6 +73,10 @@ type ModifyIdFormatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyIdFormatInput) operationName() string {
+	return "ModifyIdFormat"
+}
+
 type ModifyIdFormatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

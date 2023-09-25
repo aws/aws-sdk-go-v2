@@ -50,6 +50,10 @@ type DeleteImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImageInput) operationName() string {
+	return "DeleteImage"
+}
+
 type DeleteImageOutput struct {
 
 	// The ARN of the Image Builder image resource that this request deleted.

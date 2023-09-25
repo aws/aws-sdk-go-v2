@@ -51,6 +51,10 @@ type GetLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLensInput) operationName() string {
+	return "GetLens"
+}
+
 type GetLensOutput struct {
 
 	// A lens return object.

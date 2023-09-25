@@ -48,6 +48,10 @@ type DeleteDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDeviceInput) operationName() string {
+	return "DeleteDevice"
+}
+
 type DeleteDeviceOutput struct {
 
 	// Information about the device.

@@ -48,6 +48,10 @@ type DescribeExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExecutionInput) operationName() string {
+	return "DescribeExecution"
+}
+
 type DescribeExecutionOutput struct {
 
 	// The ID of the execution.

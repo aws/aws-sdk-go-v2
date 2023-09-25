@@ -50,6 +50,10 @@ type DisassociateApprovalRuleTemplateFromRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateApprovalRuleTemplateFromRepositoryInput) operationName() string {
+	return "DisassociateApprovalRuleTemplateFromRepository"
+}
+
 type DisassociateApprovalRuleTemplateFromRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

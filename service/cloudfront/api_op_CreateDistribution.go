@@ -43,6 +43,10 @@ type CreateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDistributionInput) operationName() string {
+	return "CreateDistribution"
+}
+
 // The returned result of the corresponding request.
 type CreateDistributionOutput struct {
 

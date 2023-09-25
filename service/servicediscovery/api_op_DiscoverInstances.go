@@ -77,6 +77,10 @@ type DiscoverInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DiscoverInstancesInput) operationName() string {
+	return "DiscoverInstances"
+}
+
 type DiscoverInstancesOutput struct {
 
 	// A complex type that contains one HttpInstanceSummary for each registered

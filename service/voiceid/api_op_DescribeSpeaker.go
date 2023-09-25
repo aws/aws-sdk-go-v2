@@ -47,6 +47,10 @@ type DescribeSpeakerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpeakerInput) operationName() string {
+	return "DescribeSpeaker"
+}
+
 type DescribeSpeakerOutput struct {
 
 	// Information about the specified speaker.

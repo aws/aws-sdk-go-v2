@@ -47,6 +47,10 @@ type CreateWirelessGatewayTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWirelessGatewayTaskInput) operationName() string {
+	return "CreateWirelessGatewayTask"
+}
+
 type CreateWirelessGatewayTaskOutput struct {
 
 	// The status of the request.
