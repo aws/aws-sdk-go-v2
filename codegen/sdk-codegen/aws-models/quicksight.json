@@ -30287,6 +30287,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DATASET"
                     }
+                },
+                "TOPIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPIC"
+                    }
                 }
             }
         },
@@ -36380,6 +36386,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identity ID for a user in the external login provider.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the user.</p>"
+                    }
                 }
             },
             "traits": {
@@ -42341,7 +42353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to\n\t\t\tscope user permissions, by granting a user permission to access or change only resources\n\t\t\twith certain tag values. You can use the <code>TagResource</code> operation with a\n\t\t\tresource that already has tags. If you specify a new tag key for the resource, this tag\n\t\t\tis appended to the list of tags associated with the resource. If you specify a tag key\n\t\t\tthat is already associated with the resource, the new tag value that you specify\n\t\t\treplaces the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data\n\t\t\tset, data source, dashboard, template, and topic. </p>\n         <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for\n\t\t\tthe following:</p>\n         <ul>\n            <li>\n               <p>You can't use tags to track costs for Amazon QuickSight. This isn't\n\t\t\t\tpossible because you can't tag the resources that Amazon QuickSight costs are based \n\t\t\t\ton, for example Amazon QuickSight storage capacity (SPICE), number of users, type \n\t\t\t\tof users, and usage metrics.</p>\n            </li>\n            <li>\n               <p>Amazon QuickSight doesn't currently support the tag editor for Resource Groups.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to\n\t\t\tscope user permissions, by granting a user permission to access or change only resources\n\t\t\twith certain tag values. You can use the <code>TagResource</code> operation with a\n\t\t\tresource that already has tags. If you specify a new tag key for the resource, this tag\n\t\t\tis appended to the list of tags associated with the resource. If you specify a tag key\n\t\t\tthat is already associated with the resource, the new tag value that you specify\n\t\t\treplaces the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data\n\t\t\tset, data source, dashboard, template, topic, and user. </p>\n         <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for\n\t\t\tthe following:</p>\n         <ul>\n            <li>\n               <p>Tags are used to track costs for users in Amazon QuickSight. You can't tag other resources that Amazon QuickSight costs are based on, such as storage capacoty (SPICE), session usage, alert consumption, or reporting units.</p>\n            </li>\n            <li>\n               <p>Amazon QuickSight doesn't currently support the tag editor for Resource Groups.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resources/{ResourceArn}/tags",

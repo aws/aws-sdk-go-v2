@@ -827,7 +827,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the capabilities that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/systems-manager-capabilities.html\">Systems Manager capabilities</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a capability of Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the capabilities that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html#systems-manager-capabilities\">Systems Manager capabilities</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a capability of Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -5566,13 +5566,13 @@
                 "CONNECTED": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Connected"
+                        "smithy.api#enumValue": "connected"
                     }
                 },
                 "NOT_CONNECTED": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "NotConnected"
+                        "smithy.api#enumValue": "notconnected"
                     }
                 }
             }
@@ -6369,14 +6369,14 @@
                 "Description": {
                     "target": "com.amazonaws.ssm#OpsItemDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the OpsItem. </p>",
+                        "smithy.api#documentation": "<p>User-defined text that contains information about the OpsItem, in Markdown format.\n  </p>\n         <note>\n            <p>Provide enough information so that users viewing this OpsItem for the first time \n    understand the issue. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "OpsItemType": {
                     "target": "com.amazonaws.ssm#OpsItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of OpsItem to create. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insights</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of OpsItem to create. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "OperationalData": {
@@ -20113,7 +20113,7 @@
                 "OpsItemType": {
                     "target": "com.amazonaws.ssm#OpsItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of OpsItem. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insights</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of OpsItem. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreatedTime": {
@@ -21313,7 +21313,7 @@
                 "OpsItemType": {
                     "target": "com.amazonaws.ssm#OpsItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of OpsItem. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insights</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of OpsItem. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ActualStartTime": {
@@ -25409,12 +25409,6 @@
                         "smithy.api#enumValue": "ManagedInstance"
                     }
                 },
-                "DOCUMENT": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Document"
-                    }
-                },
                 "EC2_INSTANCE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -29188,7 +29182,7 @@
                 "Description": {
                     "target": "com.amazonaws.ssm#OpsItemDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update the information about the OpsItem. Provide enough information so that users reading\n   this OpsItem for the first time understand the issue. </p>"
+                        "smithy.api#documentation": "<p>User-defined text that contains information about the OpsItem, in Markdown format. </p>"
                     }
                 },
                 "OperationalData": {

@@ -956,7 +956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a user account to a permission group to grant permissions for actions a user can perform in FinSpace.</p>",
+                "smithy.api#documentation": "<p>Adds a user to a permission group to grant permissions for actions a user can perform in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/permission-group/{permissionGroupId}/users/{userId}",
@@ -1041,7 +1041,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The credentials required to access the external Dataview from the S3 location.</p>"
+                "smithy.api#documentation": "<p> The credentials required to access the external Dataview from the S3 location.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspacedata#Boolean": {
@@ -1873,7 +1874,7 @@
                         "smithy.api#documentation": "<p>The last name of the user that you want to register.</p>"
                     }
                 },
-                "ApiAccess": {
+                "apiAccess": {
                     "target": "com.amazonaws.finspacedata#ApiAccess",
                     "traits": {
                         "smithy.api#documentation": "<p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user has permissions to use the APIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user does not have permissions to use any APIs.</p>\n            </li>\n         </ul>"
@@ -1934,7 +1935,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Short term API credentials.</p>"
+                "smithy.api#documentation": "<p>Short term API credentials.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspacedata#DataViewArn": {
@@ -2551,7 +2553,7 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the user account that you want to disable.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the user that you want to deactivate.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2574,7 +2576,7 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the disabled user account.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the deactivated user.</p>"
                     }
                 }
             },
@@ -2611,7 +2613,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a user account from a permission group.</p>",
+                "smithy.api#documentation": "<p>Removes a user from a permission group.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/permission-group/{permissionGroupId}/users/{userId}",
@@ -2724,7 +2726,7 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the user account that you want to enable.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the user that you want to activate.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2747,7 +2749,7 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the enabled user account.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the active user.</p>"
                     }
                 }
             },
@@ -3450,7 +3452,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Request programmatic credentials to use with FinSpace SDK.</p>",
+                "smithy.api#documentation": "<p>Request programmatic credentials to use with FinSpace SDK. For more information, see <a href=\"https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#accessing-credentials\">Step 2. Access credentials programmatically using IAM access key id and secret access key</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/credentials/programmatic",
@@ -3561,13 +3563,13 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the user account that is retrieved.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the user that is retrieved.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.finspacedata#UserStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the user account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user account creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user account is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user account is currently inactive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the user. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user is currently inactive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "firstName": {
@@ -3610,28 +3612,28 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. </p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the user was created in FinSpace. The value is determined as epoch time in milliseconds. </p>"
                     }
                 },
                 "lastEnabledTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.</p>"
+                        "smithy.api#documentation": "<p>Describes the last time the user was activated. The value is determined as epoch time in milliseconds.</p>"
                     }
                 },
                 "lastDisabledTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.</p>"
+                        "smithy.api#documentation": "<p>Describes the last time the user was deactivated. The value is determined as epoch time in milliseconds.</p>"
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.</p>"
+                        "smithy.api#documentation": "<p>Describes the last time the user details were updated. The value is determined as epoch time in milliseconds.</p>"
                     }
                 },
                 "lastLoginTime": {
@@ -4137,7 +4139,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the permission groups that are associated with a specific user account.</p>",
+                "smithy.api#documentation": "<p>Lists all the permission groups that are associated with a specific user.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/user/{userId}/permission-groups",
@@ -4264,7 +4266,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all available user accounts in FinSpace.</p>",
+                "smithy.api#documentation": "<p>Lists all available users in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/user",
@@ -4394,7 +4396,7 @@
                 "users": {
                     "target": "com.amazonaws.finspacedata#UserList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of all the user accounts.</p>"
+                        "smithy.api#documentation": "<p>A list of all the users.</p>"
                     }
                 },
                 "nextToken": {
@@ -4486,7 +4488,7 @@
                 "membershipStatus": {
                     "target": "com.amazonaws.finspacedata#PermissionGroupMembershipStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of the user account within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of the user within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4512,12 +4514,12 @@
                 "membershipStatus": {
                     "target": "com.amazonaws.finspacedata#PermissionGroupMembershipStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of the user account within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of the user within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The structure of a permission group associated with a user account.</p>"
+                "smithy.api#documentation": "<p>The structure of a permission group associated with a user.</p>"
             }
         },
         "com.amazonaws.finspacedata#PermissionGroupByUserList": {
@@ -4690,7 +4692,7 @@
                 "temporaryPassword": {
                     "target": "com.amazonaws.finspacedata#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>A randomly generated temporary password for the requested user account. This password expires in 7 days.</p>"
+                        "smithy.api#documentation": "<p>A randomly generated temporary password for the requested user. This password expires in 7 days.</p>"
                     }
                 }
             },
@@ -4858,8 +4860,8 @@
             "traits": {
                 "smithy.api#default": 0,
                 "smithy.api#range": {
-                    "min": 60,
-                    "max": 720
+                    "min": 1,
+                    "max": 60
                 }
             }
         },
@@ -5301,7 +5303,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the details of the specified user account. You cannot update the <code>userId</code> for a user.</p>",
+                "smithy.api#documentation": "<p>Modifies the details of the specified user. You cannot update the <code>userId</code> for a user.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/user/{userId}",
@@ -5315,7 +5317,7 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the user account to update.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the user that you want to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5368,7 +5370,7 @@
                 "userId": {
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the updated user account.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the updated user.</p>"
                     }
                 }
             },
@@ -5388,7 +5390,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#UserStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the user account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user account creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user account is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user account is currently inactive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the user. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user is currently inactive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "firstName": {
@@ -5431,28 +5433,28 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. </p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the user was created in FinSpace. The value is determined as epoch time in milliseconds. </p>"
                     }
                 },
                 "lastEnabledTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.\n    </p>"
+                        "smithy.api#documentation": "<p> Describes the last time the user was activated. The value is determined as epoch time in milliseconds.\n    </p>"
                     }
                 },
                 "lastDisabledTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.</p>"
+                        "smithy.api#documentation": "<p>Describes the last time the user was deactivated. The value is determined as epoch time in milliseconds.</p>"
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.\n    </p>"
+                        "smithy.api#documentation": "<p>Describes the last time the user was updated. The value is determined as epoch time in milliseconds.\n    </p>"
                     }
                 },
                 "lastLoginTime": {
@@ -5464,7 +5466,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of the user account.</p>"
+                "smithy.api#documentation": "<p>The details of the user.</p>"
             }
         },
         "com.amazonaws.finspacedata#UserByPermissionGroup": {
@@ -5479,7 +5481,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#UserStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the user account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user account creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user account is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user account is currently inactive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the user. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user is currently inactive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "firstName": {
@@ -5521,12 +5523,12 @@
                 "membershipStatus": {
                     "target": "com.amazonaws.finspacedata#PermissionGroupMembershipStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of the user account within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of the user within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The structure of a user account associated with a permission group.</p>"
+                "smithy.api#documentation": "<p>The structure of a user associated with a permission group.</p>"
             }
         },
         "com.amazonaws.finspacedata#UserByPermissionGroupList": {
