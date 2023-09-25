@@ -1,3 +1,21 @@
+# Release (2023-09-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.13.0](service/amplifyuibuilder/CHANGELOG.md#v1130-2023-09-25)
+  * **Feature**: Support for generating code that is compatible with future versions of amplify project dependencies.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.9.0](service/chimesdkmediapipelines/CHANGELOG.md#v190-2023-09-25)
+  * **Feature**: Adds support for sending WebRTC audio to Amazon Kineses Video Streams.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.11.0](service/emrserverless/CHANGELOG.md#v1110-2023-09-25)
+  * **Feature**: This release adds support for application-wide default job configurations.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.17.0](service/finspacedata/CHANGELOG.md#v1170-2023-09-25)
+  * **Feature**: Adding sensitive trait to attributes. Change max SessionDuration from 720 to 60. Correct "ApiAccess" attribute to "apiAccess" to maintain consistency between APIs.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.44.0](service/quicksight/CHANGELOG.md#v1440-2023-09-25)
+  * **Feature**: Added ability to tag users upon creation.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.38.0](service/ssm/CHANGELOG.md#v1380-2023-09-25)
+  * **Feature**: This release updates the enum values for ResourceType in SSM DescribeInstanceInformation input and ConnectionStatus in GetConnectionStatus output.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.39.0](service/wafv2/CHANGELOG.md#v1390-2023-09-25)
+  * **Feature**: You can now perform an exact match against the web request's JA3 fingerprint.
+
 # Release (2023-09-22)
 
 ## General Highlights

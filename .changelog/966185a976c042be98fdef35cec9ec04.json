@@ -1,8 +1,0 @@
-{
-    "id": "966185a9-76c0-42be-98fd-ef35cec9ec04",
-    "type": "feature",
-    "description": "Support for generating code that is compatible with future versions of amplify project dependencies.",
-    "modules": [
-        "service/amplifyuibuilder"
-    ]
-}

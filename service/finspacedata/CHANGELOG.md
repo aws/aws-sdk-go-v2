@@ -1,3 +1,7 @@
+# v1.17.0 (2023-09-25)
+
+* **Feature**: Adding sensitive trait to attributes. Change max SessionDuration from 720 to 60. Correct "ApiAccess" attribute to "apiAccess" to maintain consistency between APIs.
+
 # v1.16.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

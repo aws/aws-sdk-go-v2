@@ -1,8 +1,0 @@
-{
-    "id": "3d5e04fc-33d5-49b0-865b-9dfb20e2d422",
-    "type": "feature",
-    "description": "This release updates the enum values for ResourceType in SSM DescribeInstanceInformation input and ConnectionStatus in GetConnectionStatus output.",
-    "modules": [
-        "service/ssm"
-    ]
-}

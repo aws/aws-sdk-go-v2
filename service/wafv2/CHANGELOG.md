@@ -1,3 +1,7 @@
+# v1.39.0 (2023-09-25)
+
+* **Feature**: You can now perform an exact match against the web request's JA3 fingerprint.
+
 # v1.38.0 (2023-09-06)
 
 * **Feature**: The targeted protection level of the Bot Control managed rule group now provides optional, machine-learning analysis of traffic statistics to detect some bot-related activity. You can enable or disable the machine learning functionality through the API.

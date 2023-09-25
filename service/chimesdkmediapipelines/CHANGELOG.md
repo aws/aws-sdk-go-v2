@@ -1,3 +1,7 @@
+# v1.9.0 (2023-09-25)
+
+* **Feature**: Adds support for sending WebRTC audio to Amazon Kineses Video Streams.
+
 # v1.8.0 (2023-09-01)
 
 * **Feature**: This release adds support for the Voice Analytics feature for customer-owned KVS streams as part of the Amazon Chime SDK call analytics.

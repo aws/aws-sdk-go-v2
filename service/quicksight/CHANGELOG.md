@@ -1,3 +1,7 @@
+# v1.44.0 (2023-09-25)
+
+* **Feature**: Added ability to tag users upon creation.
+
 # v1.43.0 (2023-09-11)
 
 * **Feature**: This release launches new updates to QuickSight KPI visuals - support for sparklines, new templated layout and new targets for conditional formatting rules.

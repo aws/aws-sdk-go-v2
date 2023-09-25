@@ -1,8 +1,0 @@
-{
-    "id": "66bf8946-56d1-4a76-adfe-bb22cf2bcf1e",
-    "type": "feature",
-    "description": "You can now perform an exact match against the web request's JA3 fingerprint.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

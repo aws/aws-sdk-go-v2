@@ -1,8 +1,0 @@
-{
-    "id": "b3b8eb84-5c4b-4e98-bc97-f1bfe72e0c5b",
-    "type": "feature",
-    "description": "Adding sensitive trait to attributes. Change max SessionDuration from 720 to 60. Correct \"ApiAccess\" attribute to \"apiAccess\" to maintain consistency between APIs.",
-    "modules": [
-        "service/finspacedata"
-    ]
-}

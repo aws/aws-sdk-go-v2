@@ -1,3 +1,7 @@
+# v1.11.0 (2023-09-25)
+
+* **Feature**: This release adds support for application-wide default job configurations.
+
 # v1.10.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

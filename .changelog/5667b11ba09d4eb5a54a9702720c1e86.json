@@ -1,8 +1,0 @@
-{
-    "id": "5667b11b-a09d-4eb5-a54a-9702720c1e86",
-    "type": "feature",
-    "description": "This release adds support for application-wide default job configurations.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

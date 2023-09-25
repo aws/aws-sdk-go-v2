@@ -76,14 +76,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.24.5
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.37.5
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.38.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.30.0
 	github.com/aws/smithy-go v1.14.2
 	github.com/google/go-cmp v0.5.8

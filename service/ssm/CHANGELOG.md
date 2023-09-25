@@ -1,3 +1,7 @@
+# v1.38.0 (2023-09-25)
+
+* **Feature**: This release updates the enum values for ResourceType in SSM DescribeInstanceInformation input and ConnectionStatus in GetConnectionStatus output.
+
 # v1.37.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
