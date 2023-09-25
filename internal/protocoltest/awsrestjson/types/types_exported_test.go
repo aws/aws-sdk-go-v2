@@ -102,6 +102,24 @@ func ExampleSimpleUnion_outputUsage() {
 var _ *string
 var _ *int32
 
+func ExampleUnionPayload_outputUsage() {
+	var union types.UnionPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UnionPayloadMemberGreeting:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleUnionWithJsonName_outputUsage() {
 	var union types.UnionWithJsonName
 	// type switches can be used to check the union value

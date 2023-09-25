@@ -197,6 +197,21 @@ type TestConfig struct {
 
 // The following types satisfy this interface:
 //
+//	UnionPayloadMemberGreeting
+type UnionPayload interface {
+	isUnionPayload()
+}
+
+type UnionPayloadMemberGreeting struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UnionPayloadMemberGreeting) isUnionPayload() {}
+
+// The following types satisfy this interface:
+//
 //	UnionWithJsonNameMemberBar
 //	UnionWithJsonNameMemberBaz
 //	UnionWithJsonNameMemberFoo
@@ -258,4 +273,5 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isMyUnion()           {}
 func (*UnknownUnionMember) isPlayerAction()      {}
 func (*UnknownUnionMember) isSimpleUnion()       {}
+func (*UnknownUnionMember) isUnionPayload()      {}
 func (*UnknownUnionMember) isUnionWithJsonName() {}

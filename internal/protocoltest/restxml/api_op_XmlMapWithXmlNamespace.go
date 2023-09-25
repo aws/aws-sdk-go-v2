@@ -5,36 +5,34 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example serializes a structure in the payload. Note that serializing a
-// structure changes the wrapper element name to match the targeted structure.
-func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPayloadWithStructureInput, optFns ...func(*Options)) (*HttpPayloadWithStructureOutput, error) {
+// Maps with @xmlNamespace and @xmlName
+func (c *Client) XmlMapWithXmlNamespace(ctx context.Context, params *XmlMapWithXmlNamespaceInput, optFns ...func(*Options)) (*XmlMapWithXmlNamespaceOutput, error) {
 	if params == nil {
-		params = &HttpPayloadWithStructureInput{}
+		params = &XmlMapWithXmlNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithStructure", params, optFns, c.addOperationHttpPayloadWithStructureMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlMapWithXmlNamespace", params, optFns, c.addOperationXmlMapWithXmlNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*HttpPayloadWithStructureOutput)
+	out := result.(*XmlMapWithXmlNamespaceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type HttpPayloadWithStructureInput struct {
-	Nested *types.NestedPayload
+type XmlMapWithXmlNamespaceInput struct {
+	MyMap map[string]string
 
 	noSmithyDocumentSerde
 }
 
-type HttpPayloadWithStructureOutput struct {
-	Nested *types.NestedPayload
+type XmlMapWithXmlNamespaceOutput struct {
+	MyMap map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,12 +40,12 @@ type HttpPayloadWithStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithStructure{}, middleware.After)
+func (c *Client) addOperationXmlMapWithXmlNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlMapWithXmlNamespace{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadWithStructure{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlMapWithXmlNamespace{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -84,7 +82,7 @@ func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithStructure(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlMapWithXmlNamespace(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -105,10 +103,10 @@ func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middlewa
 	return nil
 }
 
-func newServiceMetadataMiddleware_opHttpPayloadWithStructure(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opXmlMapWithXmlNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "HttpPayloadWithStructure",
+		OperationName: "XmlMapWithXmlNamespace",
 	}
 }

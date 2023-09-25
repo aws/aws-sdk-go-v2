@@ -488,9 +488,34 @@ func TestClient_JsonUnions_awsRestjson1Deserialize(t *testing.T) {
 				}},
 			},
 		},
+		// Ignores an unrecognized __type property
+		"RestJsonDeserializeIgnoreType": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "__type": "aws.protocoltests.json10#MyUnion",
+			        "structureValue": {
+			            "hi": "hello"
+			        }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
+					Hi: ptr.String("hello"),
+				}},
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RestJsonDeserializeIgnoreType" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#JsonUnions")
+			}
+
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {

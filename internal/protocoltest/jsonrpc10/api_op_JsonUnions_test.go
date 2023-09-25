@@ -508,9 +508,34 @@ func TestClient_JsonUnions_awsAwsjson10Deserialize(t *testing.T) {
 				}},
 			},
 		},
+		// Ignores an unrecognized __type property
+		"AwsJson10DeserializeIgnoreType": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "__type": "aws.protocoltests.json10#MyUnion",
+			        "structureValue": {
+			            "hi": "hello"
+			        }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
+					Hi: ptr.String("hello"),
+				}},
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "AwsJson10DeserializeIgnoreType" {
+				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#JsonUnions")
+			}
+
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
