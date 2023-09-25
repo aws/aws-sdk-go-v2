@@ -3549,6 +3549,13 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 		}
 	}
 
+	if v.JA3Fingerprint != nil {
+		ok := object.Key("JA3Fingerprint")
+		if err := awsAwsjson11_serializeDocumentJA3Fingerprint(v.JA3Fingerprint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JsonBody != nil {
 		ok := object.Key("JsonBody")
 		if err := awsAwsjson11_serializeDocumentJsonBody(v.JsonBody, ok); err != nil {
@@ -3803,6 +3810,18 @@ func awsAwsjson11_serializeDocumentIPSetReferenceStatement(v *types.IPSetReferen
 		if err := awsAwsjson11_serializeDocumentIPSetForwardedIPConfig(v.IPSetForwardedIPConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJA3Fingerprint(v *types.JA3Fingerprint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FallbackBehavior) > 0 {
+		ok := object.Key("FallbackBehavior")
+		ok.String(string(v.FallbackBehavior))
 	}
 
 	return nil

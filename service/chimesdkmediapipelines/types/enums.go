@@ -385,6 +385,31 @@ func (HorizontalTilePosition) Values() []HorizontalTilePosition {
 	}
 }
 
+type KinesisVideoStreamPoolStatus string
+
+// Enum values for KinesisVideoStreamPoolStatus
+const (
+	KinesisVideoStreamPoolStatusCreating KinesisVideoStreamPoolStatus = "CREATING"
+	KinesisVideoStreamPoolStatusActive   KinesisVideoStreamPoolStatus = "ACTIVE"
+	KinesisVideoStreamPoolStatusUpdating KinesisVideoStreamPoolStatus = "UPDATING"
+	KinesisVideoStreamPoolStatusDeleting KinesisVideoStreamPoolStatus = "DELETING"
+	KinesisVideoStreamPoolStatusFailed   KinesisVideoStreamPoolStatus = "FAILED"
+)
+
+// Values returns all known values for KinesisVideoStreamPoolStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (KinesisVideoStreamPoolStatus) Values() []KinesisVideoStreamPoolStatus {
+	return []KinesisVideoStreamPoolStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type LayoutOption string
 
 // Enum values for LayoutOption
@@ -631,6 +656,40 @@ func (MediaPipelineTaskStatus) Values() []MediaPipelineTaskStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type MediaStreamPipelineSinkType string
+
+// Enum values for MediaStreamPipelineSinkType
+const (
+	MediaStreamPipelineSinkTypeKinesisVideoStreamPool MediaStreamPipelineSinkType = "KinesisVideoStreamPool"
+)
+
+// Values returns all known values for MediaStreamPipelineSinkType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaStreamPipelineSinkType) Values() []MediaStreamPipelineSinkType {
+	return []MediaStreamPipelineSinkType{
+		"KinesisVideoStreamPool",
+	}
+}
+
+type MediaStreamType string
+
+// Enum values for MediaStreamType
+const (
+	MediaStreamTypeMixedAudio      MediaStreamType = "MixedAudio"
+	MediaStreamTypeIndividualAudio MediaStreamType = "IndividualAudio"
+)
+
+// Values returns all known values for MediaStreamType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaStreamType) Values() []MediaStreamType {
+	return []MediaStreamType{
+		"MixedAudio",
+		"IndividualAudio",
 	}
 }
 

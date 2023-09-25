@@ -91,9 +91,9 @@ type CreateRuleGroupInput struct {
 	// A description of the rule group that helps with identification.
 	Description *string
 
-	// The Rule statements used to identify the web requests that you want to allow,
-	// block, or count. Each rule includes one top-level statement that WAF uses to
-	// identify matching web requests, and parameters that govern how WAF handles them.
+	// The Rule statements used to identify the web requests that you want to manage.
+	// Each rule includes one top-level statement that WAF uses to identify matching
+	// web requests, and parameters that govern how WAF handles them.
 	Rules []types.Rule
 
 	// An array of key:value pairs to associate with the resource.

@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a user account from a permission group.
+// Removes a user from a permission group.
 func (c *Client) DisassociateUserFromPermissionGroup(ctx context.Context, params *DisassociateUserFromPermissionGroupInput, optFns ...func(*Options)) (*DisassociateUserFromPermissionGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateUserFromPermissionGroupInput{}

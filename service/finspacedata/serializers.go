@@ -613,7 +613,7 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	defer object.Close()
 
 	if len(v.ApiAccess) > 0 {
-		ok := object.Key("ApiAccess")
+		ok := object.Key("apiAccess")
 		ok.String(string(v.ApiAccess))
 	}
 

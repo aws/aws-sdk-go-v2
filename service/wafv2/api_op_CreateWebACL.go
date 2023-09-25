@@ -17,16 +17,16 @@ import (
 )
 
 // Creates a WebACL per the specifications provided. A web ACL defines a
-// collection of rules to use to inspect and control web requests. Each rule has an
-// action defined (allow, block, or count) for requests that match the statement of
-// the rule. In the web ACL, you assign a default action to take (allow, block) for
-// any request that does not match any of the rules. The rules in a web ACL can be
-// a combination of the types Rule , RuleGroup , and managed rule group. You can
-// associate a web ACL with one or more Amazon Web Services resources to protect.
-// The resources can be an Amazon CloudFront distribution, an Amazon API Gateway
-// REST API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
-// Cognito user pool, an App Runner service, or an Amazon Web Services Verified
-// Access instance.
+// collection of rules to use to inspect and control web requests. Each rule has a
+// statement that defines what to look for in web requests and an action that WAF
+// applies to requests that match the statement. In the web ACL, you assign a
+// default action to take (allow, block) for any request that does not match any of
+// the rules. The rules in a web ACL can be a combination of the types Rule ,
+// RuleGroup , and managed rule group. You can associate a web ACL with one or more
+// Amazon Web Services resources to protect. The resources can be an Amazon
+// CloudFront distribution, an Amazon API Gateway REST API, an Application Load
+// Balancer, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+// service, or an Amazon Web Services Verified Access instance.
 func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, optFns ...func(*Options)) (*CreateWebACLOutput, error) {
 	if params == nil {
 		params = &CreateWebACLInput{}
@@ -104,9 +104,9 @@ type CreateWebACLInput struct {
 	// A description of the web ACL that helps with identification.
 	Description *string
 
-	// The Rule statements used to identify the web requests that you want to allow,
-	// block, or count. Each rule includes one top-level statement that WAF uses to
-	// identify matching web requests, and parameters that govern how WAF handles them.
+	// The Rule statements used to identify the web requests that you want to manage.
+	// Each rule includes one top-level statement that WAF uses to identify matching
+	// web requests, and parameters that govern how WAF handles them.
 	Rules []types.Rule
 
 	// An array of key:value pairs to associate with the resource.

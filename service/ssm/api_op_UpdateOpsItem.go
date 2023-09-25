@@ -59,8 +59,8 @@ type UpdateOpsItemInput struct {
 	// Specify a new category for an OpsItem.
 	Category *string
 
-	// Update the information about the OpsItem. Provide enough information so that
-	// users reading this OpsItem for the first time understand the issue.
+	// User-defined text that contains information about the OpsItem, in Markdown
+	// format.
 	Description *string
 
 	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent

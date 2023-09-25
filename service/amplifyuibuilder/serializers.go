@@ -4053,6 +4053,17 @@ func awsRestjson1_serializeDocumentPutMetadataFlagBody(v *types.PutMetadataFlagB
 	return nil
 }
 
+func awsRestjson1_serializeDocumentReactCodegenDependencies(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentReactStartCodegenJobData(v *types.ReactStartCodegenJobData, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4060,6 +4071,13 @@ func awsRestjson1_serializeDocumentReactStartCodegenJobData(v *types.ReactStartC
 	if v.ApiConfiguration != nil {
 		ok := object.Key("apiConfiguration")
 		if err := awsRestjson1_serializeDocumentApiConfiguration(v.ApiConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Dependencies != nil {
+		ok := object.Key("dependencies")
+		if err := awsRestjson1_serializeDocumentReactCodegenDependencies(v.Dependencies, ok); err != nil {
 			return err
 		}
 	}

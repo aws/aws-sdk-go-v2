@@ -15,8 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a user account to a permission group to grant permissions for actions a
-// user can perform in FinSpace.
+// Adds a user to a permission group to grant permissions for actions a user can
+// perform in FinSpace.
 func (c *Client) AssociateUserToPermissionGroup(ctx context.Context, params *AssociateUserToPermissionGroupInput, optFns ...func(*Options)) (*AssociateUserToPermissionGroupOutput, error) {
 	if params == nil {
 		params = &AssociateUserToPermissionGroupInput{}

@@ -16,7 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exchanges an access code for a token.
+// This is for internal use. Amplify uses this action to exchange an access code
+// for a token.
 func (c *Client) ExchangeCodeForToken(ctx context.Context, params *ExchangeCodeForTokenInput, optFns ...func(*Options)) (*ExchangeCodeForTokenOutput, error) {
 	if params == nil {
 		params = &ExchangeCodeForTokenInput{}

@@ -40,7 +40,7 @@ type GetVoiceToneAnalysisTaskInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The ID of the voice tone anlysis task.
+	// The ID of the voice tone analysis task.
 	//
 	// This member is required.
 	VoiceToneAnalysisTaskId *string

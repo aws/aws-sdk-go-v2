@@ -16,8 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the permission groups that are associated with a specific user
-// account.
+// Lists all the permission groups that are associated with a specific user.
 func (c *Client) ListPermissionGroupsByUser(ctx context.Context, params *ListPermissionGroupsByUserInput, optFns ...func(*Options)) (*ListPermissionGroupsByUserOutput, error) {
 	if params == nil {
 		params = &ListPermissionGroupsByUserInput{}

@@ -56,7 +56,7 @@ type GetUserOutput struct {
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
 	ApiAccessPrincipalArn *string
 
-	// The timestamp at which the user account was created in FinSpace. The value is
+	// The timestamp at which the user was created in FinSpace. The value is
 	// determined as epoch time in milliseconds.
 	CreateTime int64
 
@@ -66,29 +66,29 @@ type GetUserOutput struct {
 	// The first name of the user.
 	FirstName *string
 
-	// Describes the last time the user account was disabled. The value is determined
-	// as epoch time in milliseconds.
+	// Describes the last time the user was deactivated. The value is determined as
+	// epoch time in milliseconds.
 	LastDisabledTime int64
 
-	// Describes the last time the user account was enabled. The value is determined
-	// as epoch time in milliseconds.
+	// Describes the last time the user was activated. The value is determined as
+	// epoch time in milliseconds.
 	LastEnabledTime int64
 
 	// Describes the last time that the user logged into their account. The value is
 	// determined as epoch time in milliseconds.
 	LastLoginTime int64
 
-	// Describes the last time the user account was updated. The value is determined
+	// Describes the last time the user details were updated. The value is determined
 	// as epoch time in milliseconds.
 	LastModifiedTime int64
 
 	// The last name of the user.
 	LastName *string
 
-	// The current status of the user account.
-	//   - CREATING – The user account creation is in progress.
-	//   - ENABLED – The user account is created and is currently active.
-	//   - DISABLED – The user account is currently inactive.
+	// The current status of the user.
+	//   - CREATING – The creation is in progress.
+	//   - ENABLED – The user is created and is currently active.
+	//   - DISABLED – The user is currently inactive.
 	Status types.UserStatus
 
 	// Indicates the type of user.
@@ -99,7 +99,7 @@ type GetUserOutput struct {
 	//   assigned permissions by adding them to a permission group.
 	Type types.UserType
 
-	// The unique identifier for the user account that is retrieved.
+	// The unique identifier for the user that is retrieved.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

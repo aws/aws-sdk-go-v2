@@ -201,6 +201,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if v.MonitoringConfiguration != nil {
+		ok := object.Key("monitoringConfiguration")
+		if err := awsRestjson1_serializeDocumentMonitoringConfiguration(v.MonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -216,6 +223,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	if v.ReleaseLabel != nil {
 		ok := object.Key("releaseLabel")
 		ok.String(*v.ReleaseLabel)
+	}
+
+	if v.RuntimeConfiguration != nil {
+		ok := object.Key("runtimeConfiguration")
+		if err := awsRestjson1_serializeDocumentConfigurationList(v.RuntimeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -1280,6 +1294,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.MonitoringConfiguration != nil {
+		ok := object.Key("monitoringConfiguration")
+		if err := awsRestjson1_serializeDocumentMonitoringConfiguration(v.MonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkConfiguration != nil {
 		ok := object.Key("networkConfiguration")
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
@@ -1290,6 +1311,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	if v.ReleaseLabel != nil {
 		ok := object.Key("releaseLabel")
 		ok.String(*v.ReleaseLabel)
+	}
+
+	if v.RuntimeConfiguration != nil {
+		ok := object.Key("runtimeConfiguration")
+		if err := awsRestjson1_serializeDocumentConfigurationList(v.RuntimeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.WorkerTypeSpecifications != nil {

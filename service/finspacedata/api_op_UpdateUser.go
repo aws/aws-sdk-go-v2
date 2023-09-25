@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the details of the specified user account. You cannot update the userId
-// for a user.
+// Modifies the details of the specified user. You cannot update the userId for a
+// user.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -35,7 +35,7 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 
 type UpdateUserInput struct {
 
-	// The unique identifier for the user account to update.
+	// The unique identifier for the user that you want to update.
 	//
 	// This member is required.
 	UserId *string
@@ -73,7 +73,7 @@ type UpdateUserInput struct {
 
 type UpdateUserOutput struct {
 
-	// The unique identifier of the updated user account.
+	// The unique identifier of the updated user.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

@@ -73,11 +73,20 @@ type CreateApplicationInput struct {
 	// defined limits is hit.
 	MaximumCapacity *types.MaximumAllowedResources
 
+	// The configuration setting for monitoring.
+	MonitoringConfiguration *types.MonitoringConfiguration
+
 	// The name of the application.
 	Name *string
 
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *types.NetworkConfiguration
+
+	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
+	// specifications to use when creating an application. Each configuration consists
+	// of a classification and properties. This configuration is applied to all the job
+	// runs submitted under the application.
+	RuntimeConfiguration []types.Configuration
 
 	// The tags assigned to the application.
 	Tags map[string]string

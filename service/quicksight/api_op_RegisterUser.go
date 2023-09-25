@@ -135,6 +135,9 @@ type RegisterUserInput struct {
 	// in the CLI Reference.
 	SessionName *string
 
+	// The tags to associate with the user.
+	Tags []types.Tag
+
 	// The Amazon QuickSight user name that you want to create for the user you are
 	// registering.
 	UserName *string

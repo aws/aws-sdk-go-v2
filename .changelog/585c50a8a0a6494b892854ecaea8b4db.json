@@ -1,0 +1,8 @@
+{
+    "id": "585c50a8-a0a6-494b-8928-54ecaea8b4db",
+    "type": "feature",
+    "description": "Adds support for sending WebRTC audio to Amazon Kineses Video Streams.",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}

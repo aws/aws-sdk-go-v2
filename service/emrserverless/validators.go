@@ -604,6 +604,16 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 			invalidParams.AddNested("MaximumCapacity", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RuntimeConfiguration != nil {
+		if err := validateConfigurationList(v.RuntimeConfiguration); err != nil {
+			invalidParams.AddNested("RuntimeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -823,6 +833,16 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	if v.MaximumCapacity != nil {
 		if err := validateMaximumAllowedResources(v.MaximumCapacity); err != nil {
 			invalidParams.AddNested("MaximumCapacity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuntimeConfiguration != nil {
+		if err := validateConfigurationList(v.RuntimeConfiguration); err != nil {
+			invalidParams.AddNested("RuntimeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

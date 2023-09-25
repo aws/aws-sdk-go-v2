@@ -67,11 +67,22 @@ type Application struct {
 	// new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumAllowedResources
 
+	// The configuration setting for monitoring.
+	MonitoringConfiguration *MonitoringConfiguration
+
 	// The name of the application.
 	Name *string
 
 	// The network configuration for customer VPC connectivity for the application.
 	NetworkConfiguration *NetworkConfiguration
+
+	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
+	// specifications of an application. Each configuration consists of a
+	// classification and properties. You use this parameter when creating or updating
+	// an application. To see the runtimeConfiguration object of an application, run
+	// the GetApplication (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html)
+	// API operation.
+	RuntimeConfiguration []Configuration
 
 	// The state details of the application.
 	StateDetails *string

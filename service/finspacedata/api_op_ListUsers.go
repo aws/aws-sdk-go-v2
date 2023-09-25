@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all available user accounts in FinSpace.
+// Lists all available users in FinSpace.
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
@@ -50,7 +50,7 @@ type ListUsersOutput struct {
 	// A token that indicates where a results page should begin.
 	NextToken *string
 
-	// A list of all the user accounts.
+	// A list of all the users.
 	Users []types.User
 
 	// Metadata pertaining to the operation's result.

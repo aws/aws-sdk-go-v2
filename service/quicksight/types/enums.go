@@ -2382,6 +2382,7 @@ const (
 	MemberTypeDashboard MemberType = "DASHBOARD"
 	MemberTypeAnalysis  MemberType = "ANALYSIS"
 	MemberTypeDataset   MemberType = "DATASET"
+	MemberTypeTopic     MemberType = "TOPIC"
 )
 
 // Values returns all known values for MemberType. Note that this can be expanded
@@ -2392,6 +2393,7 @@ func (MemberType) Values() []MemberType {
 		"DASHBOARD",
 		"ANALYSIS",
 		"DATASET",
+		"TOPIC",
 	}
 }
 

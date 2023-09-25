@@ -10433,6 +10433,13 @@ func awsRestjson1_serializeOpDocumentRegisterUserInput(v *RegisterUserInput, val
 		ok.String(*v.SessionName)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserName != nil {
 		ok := object.Key("UserName")
 		ok.String(*v.UserName)

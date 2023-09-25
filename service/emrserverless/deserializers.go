@@ -2347,6 +2347,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				return err
 			}
 
+		case "monitoringConfiguration":
+			if err := awsRestjson1_deserializeDocumentMonitoringConfiguration(&sv.MonitoringConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2368,6 +2373,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 					return fmt.Errorf("expected ReleaseLabel to be of type string, got %T instead", value)
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
+			}
+
+		case "runtimeConfiguration":
+			if err := awsRestjson1_deserializeDocumentConfigurationList(&sv.RuntimeConfiguration, value); err != nil {
+				return err
 			}
 
 		case "state":

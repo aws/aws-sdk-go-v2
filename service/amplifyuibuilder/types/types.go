@@ -87,6 +87,25 @@ type ApiConfigurationMemberNoApiConfig struct {
 
 func (*ApiConfigurationMemberNoApiConfig) isApiConfiguration() {}
 
+// Dependency package that may be required for the project code to run.
+type CodegenDependency struct {
+
+	// Determines if the dependency package is using Semantic versioning. If set to
+	// true, it indicates that the dependency package uses Semantic versioning.
+	IsSemVer *bool
+
+	// Name of the dependency package.
+	Name *string
+
+	// Indicates the reason to include the dependency package in your project code.
+	Reason *string
+
+	// Indicates the version of the supported dependency package.
+	SupportedVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the feature flags that you can specify for a code generation job.
 type CodegenFeatureFlags struct {
 
@@ -239,6 +258,9 @@ type CodegenJob struct {
 
 	// The time that the code generation job was created.
 	CreatedAt *time.Time
+
+	// Lists the dependency packages that may be required for the project code to run.
+	Dependencies []CodegenDependency
 
 	// Describes the feature flags that you can specify for a code generation job.
 	Features *CodegenFeatureFlags
@@ -1418,6 +1440,9 @@ type ReactStartCodegenJobData struct {
 
 	// The API configuration for the code generation job.
 	ApiConfiguration ApiConfiguration
+
+	// Lists the dependency packages that may be required for the project code to run.
+	Dependencies map[string]string
 
 	// Specifies whether the code generation job should render inline source maps.
 	InlineSourceMap bool

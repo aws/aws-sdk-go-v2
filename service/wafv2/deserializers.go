@@ -8990,6 +8990,11 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 				return err
 			}
 
+		case "JA3Fingerprint":
+			if err := awsAwsjson11_deserializeDocumentJA3Fingerprint(&sv.JA3Fingerprint, value); err != nil {
+				return err
+			}
+
 		case "JsonBody":
 			if err := awsAwsjson11_deserializeDocumentJsonBody(&sv.JsonBody, value); err != nil {
 				return err
@@ -10053,6 +10058,46 @@ func awsAwsjson11_deserializeDocumentIPSetSummary(v **types.IPSetSummary, value 
 					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJA3Fingerprint(v **types.JA3Fingerprint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JA3Fingerprint
+	if *v == nil {
+		sv = &types.JA3Fingerprint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FallbackBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FallbackBehavior to be of type string, got %T instead", value)
+				}
+				sv.FallbackBehavior = types.FallbackBehavior(jtv)
 			}
 
 		default:

@@ -48,8 +48,8 @@ type ResetUserPasswordInput struct {
 
 type ResetUserPasswordOutput struct {
 
-	// A randomly generated temporary password for the requested user account. This
-	// password expires in 7 days.
+	// A randomly generated temporary password for the requested user. This password
+	// expires in 7 days.
 	TemporaryPassword *string
 
 	// The unique identifier of the user that a new password is generated for.

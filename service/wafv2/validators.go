@@ -1836,6 +1836,11 @@ func validateFieldToMatch(v *types.FieldToMatch) error {
 			invalidParams.AddNested("HeaderOrder", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JA3Fingerprint != nil {
+		if err := validateJA3Fingerprint(v.JA3Fingerprint); err != nil {
+			invalidParams.AddNested("JA3Fingerprint", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2004,6 +2009,21 @@ func validateIPSetReferenceStatement(v *types.IPSetReferenceStatement) error {
 		if err := validateIPSetForwardedIPConfig(v.IPSetForwardedIPConfig); err != nil {
 			invalidParams.AddNested("IPSetForwardedIPConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJA3Fingerprint(v *types.JA3Fingerprint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JA3Fingerprint"}
+	if len(v.FallbackBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FallbackBehavior"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

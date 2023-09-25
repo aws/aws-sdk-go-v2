@@ -25,13 +25,12 @@ import (
 // resource. If you specify a tag key that is already associated with the resource,
 // the new tag value that you specify replaces the previous value for that tag. You
 // can associate as many as 50 tags with a resource. Amazon QuickSight supports
-// tagging on data set, data source, dashboard, template, and topic. Tagging for
-// Amazon QuickSight works in a similar way to tagging for other Amazon Web
+// tagging on data set, data source, dashboard, template, topic, and user. Tagging
+// for Amazon QuickSight works in a similar way to tagging for other Amazon Web
 // Services services, except for the following:
-//   - You can't use tags to track costs for Amazon QuickSight. This isn't
-//     possible because you can't tag the resources that Amazon QuickSight costs are
-//     based on, for example Amazon QuickSight storage capacity (SPICE), number of
-//     users, type of users, and usage metrics.
+//   - Tags are used to track costs for users in Amazon QuickSight. You can't tag
+//     other resources that Amazon QuickSight costs are based on, such as storage
+//     capacoty (SPICE), session usage, alert consumption, or reporting units.
 //   - Amazon QuickSight doesn't currently support the tag editor for Resource
 //     Groups.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {

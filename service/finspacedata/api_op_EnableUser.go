@@ -33,7 +33,7 @@ func (c *Client) EnableUser(ctx context.Context, params *EnableUserInput, optFns
 
 type EnableUserInput struct {
 
-	// The unique identifier for the user account that you want to enable.
+	// The unique identifier for the user that you want to activate.
 	//
 	// This member is required.
 	UserId *string
@@ -46,7 +46,7 @@ type EnableUserInput struct {
 
 type EnableUserOutput struct {
 
-	// The unique identifier for the enabled user account.
+	// The unique identifier for the active user.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

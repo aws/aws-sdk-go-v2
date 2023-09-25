@@ -526,7 +526,7 @@ type GridViewConfiguration struct {
 // Defines the configuration settings for the horizontal layout.
 type HorizontalLayoutConfiguration struct {
 
-	// Sets the aspect ratio of the video tiles, such as 16:9.
+	// Specifies the aspect ratio of all video tiles.
 	TileAspectRatio *string
 
 	// The maximum number of video tiles to display.
@@ -580,6 +580,74 @@ type KinesisDataStreamSinkConfiguration struct {
 
 	// The ARN of the sink.
 	InsightsTarget *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an Kinesis video stream.
+type KinesisVideoStreamConfiguration struct {
+
+	// The Amazon Web Services Region of the video stream.
+	//
+	// This member is required.
+	Region *string
+
+	// The amount of time that data is retained.
+	DataRetentionInHours *int32
+
+	noSmithyDocumentSerde
+}
+
+// The updated Kinesis video stream configuration object.
+type KinesisVideoStreamConfigurationUpdate struct {
+
+	// The updated time that data is retained.
+	DataRetentionInHours *int32
+
+	noSmithyDocumentSerde
+}
+
+// The video stream pool configuration object.
+type KinesisVideoStreamPoolConfiguration struct {
+
+	// The time at which the configuration was created.
+	CreatedTimestamp *time.Time
+
+	// The ARN of the video stream pool configuration.
+	PoolArn *string
+
+	// The ID of the video stream pool in the configuration.
+	PoolId *string
+
+	// The name of the video stream pool configuration.
+	PoolName *string
+
+	// The size of the video stream pool in the configuration.
+	PoolSize *int32
+
+	// The status of the video stream pool in the configuration.
+	PoolStatus KinesisVideoStreamPoolStatus
+
+	// The Kinesis video stream pool configuration object.
+	StreamConfiguration *KinesisVideoStreamConfiguration
+
+	// The time at which the configuration was updated.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the Kinesis video stream pool.
+type KinesisVideoStreamPoolSummary struct {
+
+	// The ARN of the video stream pool.
+	PoolArn *string
+
+	// The ID of the video stream pool.
+	PoolId *string
+
+	// The name of the video stream pool.
+	PoolName *string
 
 	noSmithyDocumentSerde
 }
@@ -992,6 +1060,9 @@ type MediaPipeline struct {
 	// The connector pipeline of the media pipeline.
 	MediaLiveConnectorPipeline *MediaLiveConnectorPipeline
 
+	// Designates a media pipeline as a media stream pipeline.
+	MediaStreamPipeline *MediaStreamPipeline
+
 	noSmithyDocumentSerde
 }
 
@@ -1003,6 +1074,75 @@ type MediaPipelineSummary struct {
 
 	// The ID of the media pipeline in the summary.
 	MediaPipelineId *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure that contains the settings for a media stream pipeline.
+type MediaStreamPipeline struct {
+
+	// The time at which the media stream pipeline was created.
+	CreatedTimestamp *time.Time
+
+	// The ARN of the media stream pipeline.
+	MediaPipelineArn *string
+
+	// The ID of the media stream pipeline
+	MediaPipelineId *string
+
+	// The media stream pipeline's data sinks.
+	Sinks []MediaStreamSink
+
+	// The media stream pipeline's data sources.
+	Sources []MediaStreamSource
+
+	// The status of the media stream pipeline.
+	Status MediaPipelineStatus
+
+	// The time at which the media stream pipeline was updated.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Structure that contains the settings for a media stream sink.
+type MediaStreamSink struct {
+
+	// The media stream sink's media stream type.
+	//
+	// This member is required.
+	MediaStreamType MediaStreamType
+
+	// Specifies the number of streams that the sink can accept.
+	//
+	// This member is required.
+	ReservedStreamCapacity *int32
+
+	// The ARN of the media stream sink.
+	//
+	// This member is required.
+	SinkArn *string
+
+	// The media stream sink's type.
+	//
+	// This member is required.
+	SinkType MediaStreamPipelineSinkType
+
+	noSmithyDocumentSerde
+}
+
+// Structure that contains the settings for media stream sources.
+type MediaStreamSource struct {
+
+	// The ARN of the media stream source.
+	//
+	// This member is required.
+	SourceArn *string
+
+	// The type of media stream source.
+	//
+	// This member is required.
+	SourceType MediaPipelineSourceType
 
 	noSmithyDocumentSerde
 }

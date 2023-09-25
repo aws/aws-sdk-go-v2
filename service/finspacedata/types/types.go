@@ -335,11 +335,10 @@ type PermissionGroup struct {
 	// determined as epoch time in milliseconds.
 	LastModifiedTime int64
 
-	// Indicates the status of the user account within a permission group.
-	//   - ADDITION_IN_PROGRESS – The user account is currently being added to the
-	//   permission group.
-	//   - ADDITION_SUCCESS – The user account is successfully added to the permission
+	// Indicates the status of the user within a permission group.
+	//   - ADDITION_IN_PROGRESS – The user is currently being added to the permission
 	//   group.
+	//   - ADDITION_SUCCESS – The user is successfully added to the permission group.
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
 	MembershipStatus PermissionGroupMembershipStatus
@@ -353,14 +352,13 @@ type PermissionGroup struct {
 	noSmithyDocumentSerde
 }
 
-// The structure of a permission group associated with a user account.
+// The structure of a permission group associated with a user.
 type PermissionGroupByUser struct {
 
-	// Indicates the status of the user account within a permission group.
-	//   - ADDITION_IN_PROGRESS – The user account is currently being added to the
-	//   permission group.
-	//   - ADDITION_SUCCESS – The user account is successfully added to the permission
+	// Indicates the status of the user within a permission group.
+	//   - ADDITION_IN_PROGRESS – The user is currently being added to the permission
 	//   group.
+	//   - ADDITION_SUCCESS – The user is successfully added to the permission group.
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
 	MembershipStatus PermissionGroupMembershipStatus
@@ -450,7 +448,7 @@ type SchemaUnion struct {
 	noSmithyDocumentSerde
 }
 
-// The details of the user account.
+// The details of the user.
 type User struct {
 
 	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to
@@ -465,7 +463,7 @@ type User struct {
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
 	ApiAccessPrincipalArn *string
 
-	// The timestamp at which the user account was created in FinSpace. The value is
+	// The timestamp at which the user was created in FinSpace. The value is
 	// determined as epoch time in milliseconds.
 	CreateTime int64
 
@@ -476,29 +474,29 @@ type User struct {
 	// The first name of the user.
 	FirstName *string
 
-	// Describes the last time the user account was disabled. The value is determined
-	// as epoch time in milliseconds.
+	// Describes the last time the user was deactivated. The value is determined as
+	// epoch time in milliseconds.
 	LastDisabledTime int64
 
-	// Describes the last time the user account was enabled. The value is determined
-	// as epoch time in milliseconds.
+	// Describes the last time the user was activated. The value is determined as
+	// epoch time in milliseconds.
 	LastEnabledTime int64
 
 	// Describes the last time that the user logged into their account. The value is
 	// determined as epoch time in milliseconds.
 	LastLoginTime int64
 
-	// Describes the last time the user account was updated. The value is determined
-	// as epoch time in milliseconds.
+	// Describes the last time the user was updated. The value is determined as epoch
+	// time in milliseconds.
 	LastModifiedTime int64
 
 	// The last name of the user.
 	LastName *string
 
-	// The current status of the user account.
-	//   - CREATING – The user account creation is in progress.
-	//   - ENABLED – The user account is created and is currently active.
-	//   - DISABLED – The user account is currently inactive.
+	// The current status of the user.
+	//   - CREATING – The user creation is in progress.
+	//   - ENABLED – The user is created and is currently active.
+	//   - DISABLED – The user is currently inactive.
 	Status UserStatus
 
 	// Indicates the type of user.
@@ -514,7 +512,7 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
-// The structure of a user account associated with a permission group.
+// The structure of a user associated with a permission group.
 type UserByPermissionGroup struct {
 
 	// Indicates whether the user can access FinSpace API operations.
@@ -535,19 +533,18 @@ type UserByPermissionGroup struct {
 	// The last name of the user.
 	LastName *string
 
-	// Indicates the status of the user account within a permission group.
-	//   - ADDITION_IN_PROGRESS – The user account is currently being added to the
-	//   permission group.
-	//   - ADDITION_SUCCESS – The user account is successfully added to the permission
+	// Indicates the status of the user within a permission group.
+	//   - ADDITION_IN_PROGRESS – The user is currently being added to the permission
 	//   group.
+	//   - ADDITION_SUCCESS – The user is successfully added to the permission group.
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
 	MembershipStatus PermissionGroupMembershipStatus
 
-	// The current status of the user account.
-	//   - CREATING – The user account creation is in progress.
-	//   - ENABLED – The user account is created and is currently active.
-	//   - DISABLED – The user account is currently inactive.
+	// The current status of the user.
+	//   - CREATING – The user creation is in progress.
+	//   - ENABLED – The user is created and is currently active.
+	//   - DISABLED – The user is currently inactive.
 	Status UserStatus
 
 	// Indicates the type of user.

@@ -1,0 +1,8 @@
+{
+    "id": "ecd6cf8f-6c21-400b-8ad5-3540fe9cfc61",
+    "type": "feature",
+    "description": "Added ability to tag users upon creation.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

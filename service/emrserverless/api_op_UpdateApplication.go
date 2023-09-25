@@ -70,12 +70,21 @@ type UpdateApplicationInput struct {
 	// limits is hit.
 	MaximumCapacity *types.MaximumAllowedResources
 
+	// The configuration setting for monitoring.
+	MonitoringConfiguration *types.MonitoringConfiguration
+
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *types.NetworkConfiguration
 
 	// The Amazon EMR release label for the application. You can change the release
 	// label to use a different release of Amazon EMR.
 	ReleaseLabel *string
+
+	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
+	// specifications to use when updating an application. Each configuration consists
+	// of a classification and properties. This configuration is applied across all the
+	// job runs submitted under the application.
+	RuntimeConfiguration []types.Configuration
 
 	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput .
 	// This parameter must contain all valid worker types for a Spark or Hive

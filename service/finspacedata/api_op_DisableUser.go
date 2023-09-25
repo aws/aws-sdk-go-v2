@@ -33,7 +33,7 @@ func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optF
 
 type DisableUserInput struct {
 
-	// The unique identifier for the user account that you want to disable.
+	// The unique identifier for the user that you want to deactivate.
 	//
 	// This member is required.
 	UserId *string
@@ -46,7 +46,7 @@ type DisableUserInput struct {
 
 type DisableUserOutput struct {
 
-	// The unique identifier for the disabled user account.
+	// The unique identifier for the deactivated user.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.
