@@ -45,11 +45,11 @@ jobs:
       run: ./ci-find-smithy-go.sh
 
     - name: Build and publish smithy-go
-      working-directory: tmp-smithy-go
+      working-directory: ${{ runner.temp }}/smithy-go
       run: make smithy-publish-local
 
     - name: Cleanup smithy-go
-      run: rm -rf tmp-smithy-go
+      run: rm -rf ${{ runner.temp }}/smithy-go
 
     - name: SDK Codegen
       run: make smithy-generate
