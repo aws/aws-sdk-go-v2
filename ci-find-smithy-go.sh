@@ -55,3 +55,4 @@ fi
 
 git clone -b "$matched_branch" "$repository" "$RUNNER_TMPDIR"/smithy-go
 SMITHY_GO_SRC=$RUNNER_TMPDIR/smithy-go make gen-mod-replace-smithy-.
+echo $SMITHY_GO_SRC
