@@ -38,13 +38,13 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
 
-    - uses: actions/checkout@v2
-      with:
-        repository: aws/smithy-go
-        path: tmp-smithy-go
+    - name: Find smithy-go
+      env:
+        RUNNER_TMPDIR: ${{ runner.temp }}
+      run: ./ci-find-smithy-go.sh
 
     - name: Build and publish smithy-go
-      working-directory: tmp-smithy-go
+      working-directory: ${{ runner.temp }}/smithy-go
       run: make smithy-publish-local
 
     - name: Cleanup smithy-go
