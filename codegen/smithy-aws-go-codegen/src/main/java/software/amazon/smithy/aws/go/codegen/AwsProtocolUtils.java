@@ -18,8 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Set;
 import java.util.TreeSet;
 
-import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
-import software.amazon.smithy.codegen.core.Symbol;
+gimport software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
@@ -31,7 +30,6 @@ import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRespons
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
-import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.utils.SetUtils;
 
