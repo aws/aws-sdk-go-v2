@@ -47,6 +47,9 @@
             "version": "2020-07-29",
             "operations": [
                 {
+                    "target": "com.amazonaws.appintegrations#CreateApplication"
+                },
+                {
                     "target": "com.amazonaws.appintegrations#CreateDataIntegration"
                 },
                 {
@@ -59,10 +62,16 @@
                     "target": "com.amazonaws.appintegrations#DeleteEventIntegration"
                 },
                 {
+                    "target": "com.amazonaws.appintegrations#GetApplication"
+                },
+                {
                     "target": "com.amazonaws.appintegrations#GetDataIntegration"
                 },
                 {
                     "target": "com.amazonaws.appintegrations#GetEventIntegration"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ListApplications"
                 },
                 {
                     "target": "com.amazonaws.appintegrations#ListDataIntegrationAssociations"
@@ -84,6 +93,9 @@
                 },
                 {
                     "target": "com.amazonaws.appintegrations#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#UpdateApplication"
                 },
                 {
                     "target": "com.amazonaws.appintegrations#UpdateDataIntegration"
@@ -853,6 +865,118 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#ApplicationApprovedOrigins": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#ApplicationTrustedSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._ \\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationSourceConfig": {
+            "type": "structure",
+            "members": {
+                "ExternalUrlConfig": {
+                    "target": "com.amazonaws.appintegrations#ExternalUrlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external URL source for the application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for where the application should be loaded from.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.appintegrations#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the Application.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#ApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application.</p>"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.appintegrations#ApplicationNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the application.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appintegrations#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the application was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.appintegrations#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the application was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about the Application.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationTrustedSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^\\w+\\:\\/\\/.*$"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#ApplicationSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.appintegrations#Arn": {
             "type": "string",
             "traits": {
@@ -861,6 +985,16 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.appintegrations#ArnOrUUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(:[\\w\\$]+)?$"
             }
         },
         "com.amazonaws.appintegrations#ClientAssociationMetadata": {
@@ -880,6 +1014,143 @@
                     "max": 255
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#CreateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#CreateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#CreateApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Creates and persists an Application resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an application",
+                        "documentation": "The following creates an application named My Application with access url https://example.com.",
+                        "input": {
+                            "Name": "My Application",
+                            "Namespace": "myapplication",
+                            "Description": "My first application.",
+                            "ApplicationSourceConfig": {
+                                "ExternalUrlConfig": {
+                                    "AccessUrl": "https://example.com"
+                                }
+                            }
+                        },
+                        "output": {
+                            "Id": "98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+                            "Arn": "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/applications",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#CreateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#ApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.appintegrations#ApplicationNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application.</p>"
+                    }
+                },
+                "ApplicationSourceConfig": {
+                    "target": "com.amazonaws.appintegrations#ApplicationSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for where the application should be loaded from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subscriptions": {
+                    "target": "com.amazonaws.appintegrations#SubscriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The events that the application subscribes.</p>"
+                    }
+                },
+                "Publications": {
+                    "target": "com.amazonaws.appintegrations#PublicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The events that the application publishes.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.appintegrations#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#CreateApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.appintegrations#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the Application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#CreateDataIntegration": {
@@ -1392,6 +1663,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+$"
             }
         },
+        "com.amazonaws.appintegrations#EventDefinitionSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10240
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
         "com.amazonaws.appintegrations#EventFilter": {
             "type": "structure",
             "members": {
@@ -1519,6 +1800,37 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#EventName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+::[a-zA-Z0-9\\/\\._\\-]+(?:\\*)?$"
+            }
+        },
+        "com.amazonaws.appintegrations#ExternalUrlConfig": {
+            "type": "structure",
+            "members": {
+                "AccessUrl": {
+                    "target": "com.amazonaws.appintegrations#URL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to access the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApprovedOrigins": {
+                    "target": "com.amazonaws.appintegrations#ApplicationApprovedOrigins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional URLs to allow list if different than the access URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The external URL source for the application.</p>"
+            }
+        },
         "com.amazonaws.appintegrations#Fields": {
             "type": "string",
             "traits": {
@@ -1581,6 +1893,149 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.appintegrations#GetApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#GetApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#GetApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Get an Application resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get an application",
+                        "documentation": "The following retrives an application.",
+                        "input": {
+                            "Arn": "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e"
+                        },
+                        "output": {
+                            "Name": "My Application",
+                            "Namespace": "myapplication",
+                            "Description": "My first application.",
+                            "ApplicationSourceConfig": {
+                                "ExternalUrlConfig": {
+                                    "AccessUrl": "https://example.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{Arn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#GetApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appintegrations#ArnOrUUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#GetApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.appintegrations#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the Application.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#ApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application.</p>"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.appintegrations#ApplicationNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the application.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application.</p>"
+                    }
+                },
+                "ApplicationSourceConfig": {
+                    "target": "com.amazonaws.appintegrations#ApplicationSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for where the application should be loaded from.</p>"
+                    }
+                },
+                "Subscriptions": {
+                    "target": "com.amazonaws.appintegrations#SubscriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The events that the application subscribes.</p>"
+                    }
+                },
+                "Publications": {
+                    "target": "com.amazonaws.appintegrations#PublicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The events that the application publishes.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appintegrations#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created time of the Application.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.appintegrations#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the Application.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appintegrations#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#GetDataIntegration": {
@@ -1841,6 +2296,105 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.appintegrations#ListApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#ListApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#ListApplicationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Lists applications in the account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list applications in the account",
+                        "documentation": "The following lists application summary in the account.",
+                        "input": {
+                            "MaxResults": 1
+                        },
+                        "output": {
+                            "Applications": [
+                                {
+                                    "Id": "98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+                                    "Arn": "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+                                    "Name": "My Application",
+                                    "Namespace": "myapplication"
+                                }
+                            ],
+                            "NextToken": "abc"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Applications",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appintegrations#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#ListApplicationsResponse": {
+            "type": "structure",
+            "members": {
+                "Applications": {
+                    "target": "com.amazonaws.appintegrations#ApplicationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Applications associated with this account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appintegrations#ListDataIntegrationAssociations": {
             "type": "operation",
             "input": {
@@ -1872,6 +2426,12 @@
                     "method": "GET",
                     "uri": "/dataIntegrations/{DataIntegrationIdentifier}/associations",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DataIntegrationAssociations",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -1953,6 +2513,12 @@
                     "method": "GET",
                     "uri": "/dataIntegrations",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DataIntegrations",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -2029,6 +2595,12 @@
                     "method": "GET",
                     "uri": "/eventIntegrations/{EventIntegrationName}/associations",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EventIntegrationAssociations",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -2110,6 +2682,12 @@
                     "method": "GET",
                     "uri": "/eventIntegrations",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EventIntegrations",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -2290,6 +2868,46 @@
                 "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
             }
         },
+        "com.amazonaws.appintegrations#Publication": {
+            "type": "structure",
+            "members": {
+                "Event": {
+                    "target": "com.amazonaws.appintegrations#EventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the publication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.appintegrations#EventDefinitionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON schema of the publication event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the publication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an event that the application publishes.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#PublicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#Publication"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.appintegrations#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -2361,6 +2979,39 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)$"
+            }
+        },
+        "com.amazonaws.appintegrations#Subscription": {
+            "type": "structure",
+            "members": {
+                "Event": {
+                    "target": "com.amazonaws.appintegrations#EventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the subscription.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an event that the application subscribes.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#SubscriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#Subscription"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.appintegrations#TagKey": {
@@ -2483,6 +3134,19 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.appintegrations#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.appintegrations#URL": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^\\w+\\:\\/\\/.*$"
+            }
+        },
         "com.amazonaws.appintegrations#UUID": {
             "type": "string",
             "traits": {
@@ -2545,6 +3209,104 @@
             }
         },
         "com.amazonaws.appintegrations#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#UpdateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#UpdateApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Updates and persists an Application resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update an application",
+                        "documentation": "The following updates an existing application named with a new name.",
+                        "input": {
+                            "Arn": "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+                            "Name": "My New Application Name"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/applications/{Arn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appintegrations#ArnOrUUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.appintegrations#ApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appintegrations#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application.</p>"
+                    }
+                },
+                "ApplicationSourceConfig": {
+                    "target": "com.amazonaws.appintegrations#ApplicationSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for where the application should be loaded from.</p>"
+                    }
+                },
+                "Subscriptions": {
+                    "target": "com.amazonaws.appintegrations#SubscriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The events that the application subscribes.</p>"
+                    }
+                },
+                "Publications": {
+                    "target": "com.amazonaws.appintegrations#PublicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The events that the application publishes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateApplicationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -2668,7 +3430,7 @@
                 "Description": {
                     "target": "com.amazonaws.appintegrations#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the event inegration.</p>"
+                        "smithy.api#documentation": "<p>The description of the event integration.</p>"
                     }
                 }
             },

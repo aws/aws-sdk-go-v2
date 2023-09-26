@@ -1288,13 +1288,13 @@
                 "BuildCommand": {
                     "target": "com.amazonaws.apprunner#BuildCommand",
                     "traits": {
-                        "smithy.api#documentation": "<p>The command App Runner runs to build your application.</p>"
+                        "smithy.api#documentation": "<p>The command App Runner runs to build your\n      application.</p>"
                     }
                 },
                 "StartCommand": {
                     "target": "com.amazonaws.apprunner#StartCommand",
                     "traits": {
-                        "smithy.api#documentation": "<p>The command App Runner runs to start your application.</p>"
+                        "smithy.api#documentation": "<p>The command App Runner runs to start your\n      application.</p>"
                     }
                 },
                 "Port": {
@@ -1312,7 +1312,7 @@
                 "RuntimeEnvironmentSecrets": {
                     "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecrets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable. The supported\n      values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager\n      Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p> If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, you can use\n            either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified. </p>\n               </li>\n               <li>\n                  <p> Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported. </p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -1341,6 +1341,12 @@
                     "target": "com.amazonaws.apprunner#CodeConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for building and running the service from a source code repository.</p>\n         <note>\n            <p>\n               <code>CodeConfiguration</code> is required only for <code>CreateService</code> request.</p>\n         </note>"
+                    }
+                },
+                "SourceDirectory": {
+                    "target": "com.amazonaws.apprunner#SourceDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute\n      from root and, if not specified, defaults to the repository root.</p>"
                     }
                 }
             },
@@ -1525,7 +1531,7 @@
                 "AutoScalingConfigurationName": {
                     "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number\n        <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>\n         <note>\n            <p>Prior to the release of <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/release-yyyy-mm-dd-asc-improvements.html\">Managing auto\n          scaling</a>, the name <code>DefaultConfiguration</code> was reserved. </p>\n            <p>This restriction is no longer in place. You can now manage <code>DefaultConfiguration</code> the same way you manage your custom auto scaling\n        configurations. This means you can do the following with the <code>DefaultConfiguration</code> that App Runner provides:</p>\n            <ul>\n               <li>\n                  <p>Create new revisions of the <code>DefaultConfiguration</code>.</p>\n               </li>\n               <li>\n                  <p>Delete the revisions of the <code>DefaultConfiguration</code>.</p>\n               </li>\n               <li>\n                  <p>Delete the auto scaling configuration for which the App Runner <code>DefaultConfiguration</code> was created.</p>\n               </li>\n               <li>\n                  <p>If you delete the auto scaling configuration you can create another custom auto scaling configuration with the same\n              <code>DefaultConfiguration</code> name. The original <code>DefaultConfiguration</code> resource provided by App Runner remains in your account unless\n            you make changes to it.</p>\n               </li>\n            </ul>\n         </note>",
+                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number\n        <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>\n         <note>\n            <p>Prior to the release of <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/release-2023-09-22-auto-scale-config.html\">Auto scale\n        configuration enhancements</a>, the name <code>DefaultConfiguration</code> was reserved. </p>\n            <p>This restriction is no longer in place. You can now manage <code>DefaultConfiguration</code> the same way you manage your custom auto scaling\n        configurations. This means you can do the following with the <code>DefaultConfiguration</code> that App Runner provides:</p>\n            <ul>\n               <li>\n                  <p>Create new revisions of the <code>DefaultConfiguration</code>.</p>\n               </li>\n               <li>\n                  <p>Delete the revisions of the <code>DefaultConfiguration</code>.</p>\n               </li>\n               <li>\n                  <p>Delete the auto scaling configuration for which the App Runner <code>DefaultConfiguration</code> was created.</p>\n               </li>\n               <li>\n                  <p>If you delete the auto scaling configuration you can create another custom auto scaling configuration with the same\n              <code>DefaultConfiguration</code> name. The original <code>DefaultConfiguration</code> resource provided by App Runner remains in your account unless\n            you make changes to it.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3054,7 +3060,7 @@
                 "RuntimeEnvironmentSecrets": {
                     "target": "com.amazonaws.apprunner#RuntimeEnvironmentSecrets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable.  \n      The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n            If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, \n            you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.\n          </p>\n               </li>\n               <li>\n                  <p>\n            Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.\n          </p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable. The supported\n      values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager\n      Parameter Store.</p>\n         <note>\n            <ul>\n               <li>\n                  <p> If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, you can use\n            either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified. </p>\n               </li>\n               <li>\n                  <p> Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported. </p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -4589,7 +4595,7 @@
                 "Status": {
                     "target": "com.amazonaws.apprunner#ServiceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the App Runner service. These particular values mean the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The service failed to create. The failed service isn't usable, and still counts towards your service quota. \n          To troubleshoot this failure, read the failure events and logs, change any\n          parameters that need to be fixed, and rebuild your service using <code>UpdateService</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure\n          that all related resources are removed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The current state of the App Runner service. These particular values mean the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The service failed to create. The failed service isn't usable, and still counts towards your service quota. To\n          troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and rebuild your service using\n            <code>UpdateService</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure\n          that all related resources are removed.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4693,7 +4699,7 @@
                 "ObservabilityConfigurationArn": {
                     "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the observability configuration that is associated with the service. Specified only when\n        <code>ObservabilityEnabled</code> is <code>true</code>.</p>\n         <p>Specify an ARN with a name and a revision number to associate that revision. For example:\n          <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3</code>\n         </p>\n         <p>Specify just the name to associate the latest revision. For example:\n        <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the observability configuration that is associated with the service. Specified only when\n        <code>ObservabilityEnabled</code> is <code>true</code>.</p>\n         <p>Specify an ARN with a name and a revision number to associate that revision. For example:\n        <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3</code>\n         </p>\n         <p>Specify just the name to associate the latest revision. For example:\n        <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing</code>\n         </p>"
                     }
                 }
             },
@@ -4801,7 +4807,7 @@
                 "Status": {
                     "target": "com.amazonaws.apprunner#ServiceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the App Runner service. These particular values mean the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The service failed to create. The failed service isn't usable, and still counts towards your service quota. \n          To troubleshoot this failure, read the failure events and logs, change any\n          parameters that need to be fixed, and rebuild your service using <code>UpdateService</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure\n          that all related resources are removed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current state of the App Runner service. These particular values mean the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The service failed to create. The failed service isn't usable, and still counts towards your service quota. To\n          troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and rebuild your service using\n            <code>UpdateService</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure\n          that all related resources are removed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4854,7 +4860,7 @@
                 "CodeRepository": {
                     "target": "com.amazonaws.apprunner#CodeRepository",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of a source code repository.</p>\n         <p>You must provide either this member or <code>ImageRepository</code> (but not both).</p>"
+                        "smithy.api#documentation": "<p>The description of a source code\n      repository.</p>\n         <p>You must provide either this member or <code>ImageRepository</code> (but not both).</p>"
                     }
                 },
                 "ImageRepository": {
@@ -4878,6 +4884,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the source deployed to an App Runner service. It can be a code or an image repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#SourceDirectory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
             }
         },
         "com.amazonaws.apprunner#StartCommand": {

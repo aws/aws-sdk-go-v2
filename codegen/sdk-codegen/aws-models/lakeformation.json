@@ -55,10 +55,16 @@
                     "target": "com.amazonaws.lakeformation#CreateDataCellsFilter"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#CreateLakeFormationOptIn"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#CreateLFTag"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DeleteDataCellsFilter"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#DeleteLakeFormationOptIn"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DeleteLFTag"
@@ -119,6 +125,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListDataCellsFilter"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListLakeFormationOptIns"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListLFTags"
@@ -2049,6 +2058,70 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lakeformation#CreateLakeFormationOptIn": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#CreateLakeFormationOptInRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#CreateLakeFormationOptInResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enforce Lake Formation permissions for the given databases, tables, and principals.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateLakeFormationOptIn",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CreateLakeFormationOptInRequest": {
+            "type": "structure",
+            "members": {
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#CreateLakeFormationOptInResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#CredentialTimeoutDurationSecondInteger": {
             "type": "integer",
             "traits": {
@@ -2495,6 +2568,70 @@
             }
         },
         "com.amazonaws.lakeformation#DeleteLFTagResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteLakeFormationOptIn": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DeleteLakeFormationOptInRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DeleteLakeFormationOptInResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteLakeFormationOptIn",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteLakeFormationOptInRequest": {
+            "type": "structure",
+            "members": {
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteLakeFormationOptInResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -4331,7 +4468,7 @@
                 "TagValues": {
                     "target": "com.amazonaws.lakeformation#TagValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of possible values an attribute can take.</p>",
+                        "smithy.api#documentation": "<p>A list of possible values an attribute can take.</p>\n         <p>The maximum number of values that can be defined for a LF-Tag is 1000. A single API call\n      supports 50 values. You can use multiple API calls to add more values.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4480,6 +4617,38 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.lakeformation#LakeFormationOptInsInfo": {
+            "type": "structure",
+            "members": {
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource"
+                },
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal"
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.lakeformation#LastModifiedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified date and time of the record.</p>"
+                    }
+                },
+                "LastUpdatedBy": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who updated the record.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single principal-resource pair that has Lake Formation permissins enforced.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#LakeFormationOptInsInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#LakeFormationOptInsInfo"
             }
         },
         "com.amazonaws.lakeformation#LastModifiedTimestamp": {
@@ -4653,6 +4822,91 @@
                     "target": "com.amazonaws.lakeformation#Token",
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListLakeFormationOptIns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListLakeFormationOptInsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListLakeFormationOptInsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the current list of resources and principals that are opt in to enforce Lake Formation permissions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLakeFormationOptIns",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListLakeFormationOptInsRequest": {
+            "type": "structure",
+            "members": {
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal"
+                },
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure for the resource.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListLakeFormationOptInsResponse": {
+            "type": "structure",
+            "members": {
+                "LakeFormationOptInsInfoList": {
+                    "target": "com.amazonaws.lakeformation#LakeFormationOptInsInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of principal-resource pairs that have Lake Formation permissins enforced.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
                     }
                 }
             },
@@ -5445,6 +5699,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This attribute can be used to return any additional details of <code>PrincipalResourcePermissions</code>. Currently returns only as a RAM resource share ARN.</p>"
                     }
+                },
+                "LastUpdated": {
+                    "target": "com.amazonaws.lakeformation#LastModifiedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the resource was last updated.</p>"
+                    }
+                },
+                "LastUpdatedBy": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who updated the record.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5675,6 +5941,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether or not the resource is a federated resource.</p>"
                     }
+                },
+                "HybridAccessEnabled": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.\n  </p>"
+                    }
                 }
             },
             "traits": {
@@ -5854,6 +6126,12 @@
                     "target": "com.amazonaws.lakeformation#NullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether or not the resource is a federated resource.</p>"
+                    }
+                },
+                "HybridAccessEnabled": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Indicates whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.\n    </p>"
                     }
                 }
             },
@@ -7103,6 +7381,12 @@
                     "target": "com.amazonaws.lakeformation#NullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether or not the resource is a federated resource.</p>"
+                    }
+                },
+                "HybridAccessEnabled": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.\n    </p>"
                     }
                 }
             },

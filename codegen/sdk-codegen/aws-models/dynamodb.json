@@ -5246,6 +5246,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of items exported.</p>"
                     }
+                },
+                "ExportType": {
+                    "target": "com.amazonaws.dynamodb#ExportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>. If <code>INCREMENTAL_EXPORT</code> is provided, the <code>IncrementalExportSpecification</code> must also be used.</p>"
+                    }
+                },
+                "IncrementalExportSpecification": {
+                    "target": "com.amazonaws.dynamodb#IncrementalExportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional object containing the parameters specific to an incremental export.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5271,6 +5283,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.dynamodb#ExportFromTime": {
+            "type": "timestamp"
         },
         "com.amazonaws.dynamodb#ExportManifest": {
             "type": "string"
@@ -5335,6 +5350,12 @@
                     "target": "com.amazonaws.dynamodb#ExportStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Export can be in one of the following states: IN_PROGRESS, COMPLETED, or\n            FAILED.</p>"
+                    }
+                },
+                "ExportType": {
+                    "target": "com.amazonaws.dynamodb#ExportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>. If <code>INCREMENTAL_EXPORT</code> is provided, the <code>IncrementalExportSpecification</code> must also be used.</p>"
                     }
                 }
             },
@@ -5433,6 +5454,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The format for the exported data. Valid values for <code>ExportFormat</code> are\n                <code>DYNAMODB_JSON</code> or <code>ION</code>.</p>"
                     }
+                },
+                "ExportType": {
+                    "target": "com.amazonaws.dynamodb#ExportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>. If <code>INCREMENTAL_EXPORT</code> is provided, the <code>IncrementalExportSpecification</code> must also be used.</p>"
+                    }
+                },
+                "IncrementalExportSpecification": {
+                    "target": "com.amazonaws.dynamodb#IncrementalExportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional object containing the parameters specific to an incremental export.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5455,6 +5488,43 @@
         },
         "com.amazonaws.dynamodb#ExportTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#ExportToTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#ExportType": {
+            "type": "enum",
+            "members": {
+                "FULL_EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_EXPORT"
+                    }
+                },
+                "INCREMENTAL_EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL_EXPORT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ExportViewType": {
+            "type": "enum",
+            "members": {
+                "NEW_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_IMAGE"
+                    }
+                },
+                "NEW_AND_OLD_IMAGES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_AND_OLD_IMAGES"
+                    }
+                }
+            }
         },
         "com.amazonaws.dynamodb#ExpressionAttributeNameMap": {
             "type": "map",
@@ -6426,6 +6496,32 @@
                 }
             }
         },
+        "com.amazonaws.dynamodb#IncrementalExportSpecification": {
+            "type": "structure",
+            "members": {
+                "ExportFromTime": {
+                    "target": "com.amazonaws.dynamodb#ExportFromTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time in the past which provides the inclusive start range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state including and after this point in time.</p>"
+                    }
+                },
+                "ExportToTime": {
+                    "target": "com.amazonaws.dynamodb#ExportToTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time in the past which provides the exclusive end range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state just prior to this point in time. If this is not provided, the latest time with data available will be used.</p>"
+                    }
+                },
+                "ExportViewType": {
+                    "target": "com.amazonaws.dynamodb#ExportViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choice of whether to output the previous item image prior to the start time of the incremental export. Valid values are <code>NEW_AND_OLD_IMAGES</code> and <code>NEW_IMAGES</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Optional object containing the parameters specific to an incremental export.</p>"
+            }
+        },
         "com.amazonaws.dynamodb#IndexName": {
             "type": "string",
             "traits": {
@@ -6961,7 +7057,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>List backups associated with an Amazon Web Services account. To list backups for a\n            given table, specify <code>TableName</code>. <code>ListBackups</code> returns a\n            paginated list of results with at most 1 MB worth of items in a page. You can also\n            specify a maximum number of entries to be returned in a page.</p>\n         <p>In the request, start time is inclusive, but end time is exclusive. Note that these\n            boundaries are for the time at which the original backup was requested.</p>\n         <p>You can call <code>ListBackups</code> a maximum of five times per second.</p>"
+                "smithy.api#documentation": "<p>List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup. \n            To list these backups for a given table, specify <code>TableName</code>. <code>ListBackups</code> returns a\n            paginated list of results with at most 1 MB worth of items in a page. You can also\n            specify a maximum number of entries to be returned in a page.</p>\n         <p>In the request, start time is inclusive, but end time is exclusive. Note that these\n            boundaries are for the time at which the original backup was requested.</p>\n         <p>You can call <code>ListBackups</code> a maximum of five times per second.</p>\n         <p>If you want to retrieve the complete list of backups made with Amazon Web Services Backup, use the \n            <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupJobs.html\">Amazon Web Services Backup list API.</a>\n         </p>"
             }
         },
         "com.amazonaws.dynamodb#ListBackupsInput": {

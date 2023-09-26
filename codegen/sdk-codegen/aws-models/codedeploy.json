@@ -192,7 +192,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An application with the specified name with the IAM user or Amazon Web Services account already exists.</p>",
+                "smithy.api#documentation": "<p>An application with the specified name with the user or Amazon Web Services account\n            already exists.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -207,7 +207,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The application does not exist with the IAM user or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>The application does not exist with the user or Amazon Web Services account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -625,7 +625,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the applicable\n                IAM or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the applicable user\n            or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2379,7 +2379,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the application. This name must be unique with the applicable IAM or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the application. This name must be unique with the applicable user or\n                Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2711,7 +2711,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2846,7 +2846,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2865,7 +2865,7 @@
                 "deploymentConfigName": {
                     "target": "com.amazonaws.codedeploy#DeploymentConfigName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a deployment configuration associated with the IAM user or\n                Amazon Web Services account.</p>\n         <p>If not specified, the value configured in the deployment group is used as the default.\n            If the deployment group does not have a deployment configuration associated with it,\n                <code>CodeDeployDefault</code>.<code>OneAtATime</code> is used by default.</p>"
+                        "smithy.api#documentation": "<p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>\n         <p>If not specified, the value configured in the deployment group is used as the default.\n            If the deployment group does not have a deployment configuration associated with it,\n                <code>CodeDeployDefault</code>.<code>OneAtATime</code> is used by default.</p>"
                     }
                 },
                 "description": {
@@ -2909,7 +2909,7 @@
                 "overrideAlarmConfiguration": {
                     "target": "com.amazonaws.codedeploy#AlarmConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to specify information about alarms associated with a deployment. The alarm\n            configuration that you specify here will override the alarm configuration at the\n            deployment group level. Consider overriding the alarm configuration if you have set up\n            alarms at the deployment group level that are causing deployment failures. In this case,\n            you would call <code>CreateDeployment</code> to create a new deployment that uses a\n            previous application revision that is known to work, and set its alarm configuration to\n            turn off alarm polling. Turning off alarm polling ensures that the new deployment\n            proceeds without being blocked by the alarm that was generated by the previous, failed,\n            deployment.</p>\n         <note>\n            <p>If you specify an <code>overrideAlarmConfiguration</code>, you need the\n                    <code>UpdateDeploymentGroup</code> IAM permission when calling\n                    <code>CreateDeployment</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Allows you to specify information about alarms associated with a deployment. The alarm\n            configuration that you specify here will override the alarm configuration at the\n            deployment group level. Consider overriding the alarm configuration if you have set up\n            alarms at the deployment group level that are causing deployment failures. In this case,\n            you would call <code>CreateDeployment</code> to create a new deployment that uses a\n            previous application revision that is known to work, and set its alarm configuration to\n            turn off alarm polling. Turning off alarm polling ensures that the new deployment\n            proceeds without being blocked by the alarm that was generated by the previous, failed,\n            deployment.</p>\n         <note>\n            <p>If you specify an <code>overrideAlarmConfiguration</code>, you need the\n                    <code>UpdateDeploymentGroup</code>\n                IAM permission when calling <code>CreateDeployment</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -2962,7 +2962,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3004,7 +3004,7 @@
                 "deploymentConfigName": {
                     "target": "com.amazonaws.codedeploy#DeploymentConfigName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a deployment configuration associated with the IAM user or\n                Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3049,7 +3049,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3149,7 +3149,7 @@
                 "target": "com.amazonaws.codedeploy#DeleteResourcesByExternalIdOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes resources linked to an external ID.</p>"
+                "smithy.api#documentation": "<p>Deletes resources linked to an external ID. This action only applies if you have\n            configured blue/green deployments through CloudFormation. </p>\n         <note>\n            <p>It is not necessary to call this action directly. CloudFormation calls it\n                on your behalf when it needs to delete stack resources. This action is offered\n                publicly in case you need to delete resources to comply with General Data Protection\n                Regulation (GDPR) requirements.</p>\n         </note>"
             }
         },
         "com.amazonaws.codedeploy#DeleteResourcesByExternalIdInput": {
@@ -3199,7 +3199,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A deployment configuration with the specified name with the IAM user or\n                Amazon Web Services account already exists.</p>",
+                "smithy.api#documentation": "<p>A deployment configuration with the specified name with the user or Amazon Web Services account already exists.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3214,7 +3214,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The deployment configuration does not exist with the IAM user or\n                Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>The deployment configuration does not exist with the user or Amazon Web Services account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3383,7 +3383,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The deployment with the IAM user or Amazon Web Services account does not\n            exist.</p>",
+                "smithy.api#documentation": "<p>The deployment with the user or Amazon Web Services account does not exist.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3398,7 +3398,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A deployment group with the specified name with the IAM user or Amazon Web Services account already exists.</p>",
+                "smithy.api#documentation": "<p>A deployment group with the specified name with the user or Amazon Web Services account\n            already exists.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3413,7 +3413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The named deployment group with the IAM user or Amazon Web Services account does not exist.</p>",
+                "smithy.api#documentation": "<p>The named deployment group with the user or Amazon Web Services account does not\n            exist.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4558,12 +4558,12 @@
                 "name": {
                     "target": "com.amazonaws.codedeploy#ELBName",
                     "traits": {
-                        "smithy.api#documentation": "<p>For blue/green deployments, the name of the load balancer that is used to route\n            traffic from original instances to replacement instances in a blue/green deployment. For\n            in-place deployments, the name of the load balancer that instances are deregistered from\n            so they are not serving traffic during a deployment, and then re-registered with after\n            the deployment is complete.</p>"
+                        "smithy.api#documentation": "<p>For blue/green deployments, the name of the Classic Load Balancer that is used to route\n            traffic from original instances to replacement instances in a blue/green deployment. For\n            in-place deployments, the name of the Classic Load Balancer that instances are deregistered from\n            so they are not serving traffic during a deployment, and then re-registered with after\n            the deployment is complete.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a load balancer in Elastic Load Balancing to use in a deployment.\n            Instances are registered directly with a load balancer, and traffic is routed to the\n            load balancer.</p>"
+                "smithy.api#documentation": "<p>Information about a Classic Load Balancer in Elastic Load Balancing to use in a deployment.\n            Instances are registered directly with a load balancer, and traffic is routed to the\n            load balancer.</p>"
             }
         },
         "com.amazonaws.codedeploy#ELBInfoList": {
@@ -4912,7 +4912,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5111,7 +5111,7 @@
                 "deploymentConfigName": {
                     "target": "com.amazonaws.codedeploy#DeploymentConfigName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a deployment configuration associated with the IAM user or\n                Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5177,7 +5177,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5215,7 +5215,7 @@
                 "deploymentId": {
                     "target": "com.amazonaws.codedeploy#DeploymentId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of a deployment associated with the IAM user or Amazon Web Services account. </p>",
+                        "smithy.api#documentation": "<p> The unique ID of a deployment associated with the user or Amazon Web Services account.\n        </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5543,7 +5543,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>No IAM ARN was included in the request. You must use an IAM session ARN or IAM user ARN in the request.</p>",
+                "smithy.api#documentation": "<p>No IAM ARN was included in the request. You must use an IAM session ARN or user ARN in the request.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5579,7 +5579,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified IAM user ARN is already registered with an on-premises\n            instance.</p>",
+                "smithy.api#documentation": "<p>The specified user ARN is already registered with an on-premises instance.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5594,7 +5594,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An IAM user ARN was not specified.</p>",
+                "smithy.api#documentation": "<p>An user ARN was not specified.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5675,13 +5675,13 @@
                 "iamSessionArn": {
                     "target": "com.amazonaws.codedeploy#IamSessionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM session associated with the on-premises instance.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM session associated with the on-premises\n            instance.</p>"
                     }
                 },
                 "iamUserArn": {
                     "target": "com.amazonaws.codedeploy#IamUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM user ARN associated with the on-premises instance.</p>"
+                        "smithy.api#documentation": "<p>The user ARN associated with the on-premises instance.</p>"
                     }
                 },
                 "instanceArn": {
@@ -6364,7 +6364,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The IAM user ARN was specified in an invalid format.</p>",
+                "smithy.api#documentation": "<p>The user ARN was specified in an invalid format.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7138,7 +7138,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account. </p>",
+                        "smithy.api#documentation": "<p> The name of an CodeDeploy application associated with the user or Amazon Web Services account. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7219,7 +7219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the applications registered with the IAM user or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists the applications registered with the user or Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7277,7 +7277,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the deployment configurations with the IAM user or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists the deployment configurations with the user or Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7344,7 +7344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the deployment groups for an application registered with the IAM\n            user or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists the deployment groups for an application registered with the Amazon Web Services\n            user or Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7358,7 +7358,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7445,7 +7445,7 @@
                 "smithy.api#deprecated": {
                     "message": "This operation is deprecated, use ListDeploymentTargets instead."
                 },
-                "smithy.api#documentation": "<note>\n            <p> The newer <code>BatchGetDeploymentTargets</code> should be used instead because\n                it works with all compute types. <code>ListDeploymentInstances</code> throws an\n                exception if it is used with a compute platform other than EC2/On-premises or\n                    Lambda. </p>\n         </note>\n         <p> Lists the instance for a deployment associated with the IAM user or\n                Amazon Web Services account. </p>",
+                "smithy.api#documentation": "<note>\n            <p> The newer <code>BatchGetDeploymentTargets</code> should be used instead because\n                it works with all compute types. <code>ListDeploymentInstances</code> throws an\n                exception if it is used with a compute platform other than EC2/On-premises or\n                    Lambda. </p>\n         </note>\n         <p> Lists the instance for a deployment associated with the user or Amazon Web Services account. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7636,7 +7636,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the deployments in a deployment group for an application registered with the\n                IAM user or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists the deployments in a deployment group for an application registered with the\n            user or Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7650,7 +7650,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>\n         <note>\n            <p>If <code>applicationName</code> is specified, then\n                    <code>deploymentGroupName</code> must be specified. If it is not specified, then\n                    <code>deploymentGroupName</code> must not be specified. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>\n         <note>\n            <p>If <code>applicationName</code> is specified, then\n                    <code>deploymentGroupName</code> must be specified. If it is not specified, then\n                    <code>deploymentGroupName</code> must not be specified. </p>\n         </note>"
                     }
                 },
                 "deploymentGroupName": {
@@ -7942,13 +7942,13 @@
                 "elbInfoList": {
                     "target": "com.amazonaws.codedeploy#ELBInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains information about the load balancer to use for load balancing\n            in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load\n            Balancers.</p>\n         <note>\n            <p> Adding more than one load balancer to the array is not supported. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>An array that contains information about the load balancers to use for load balancing\n            in a deployment. If you're using Classic Load Balancers, specify those load balancers\n            in this array. </p>\n         <note>\n            <p>You can add up to 10 load balancers to the array.</p>\n         </note>\n         <note>\n            <p>If you're using Application Load Balancers or Network Load Balancers, use the\n                    <code>targetGroupInfoList</code> array instead of this one.</p>\n         </note>"
                     }
                 },
                 "targetGroupInfoList": {
                     "target": "com.amazonaws.codedeploy#TargetGroupInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains information about the target group to use for load balancing in\n            a deployment. In Elastic Load Balancing, target groups are used with Application Load\n            Balancers.</p>\n         <note>\n            <p> Adding more than one target group to the array is not supported. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>An array that contains information about the target groups to use for load balancing\n            in a deployment. If you're using Application Load Balancers and Network Load Balancers,\n            specify their associated target groups in this array.</p>\n         <note>\n            <p>You can add up to 10 target groups to the array.</p>\n         </note>\n         <note>\n            <p>If you're using Classic Load Balancers, use the <code>elbInfoList</code> array\n                instead of this one.</p>\n         </note>"
                     }
                 },
                 "targetGroupPairInfoList": {
@@ -7959,7 +7959,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the Elastic Load Balancing load balancer or target group used in a\n            deployment.</p>"
+                "smithy.api#documentation": "<p>Information about the Elastic Load Balancing load balancer or target group used in a\n            deployment.</p>\n         <p>You can use load balancers and target groups in combination. For example, if you have\n            two Classic Load Balancers, and five target groups tied to an Application Load Balancer,\n            you can specify the two Classic Load Balancers in <code>elbInfoList</code>, and the five\n            target groups in <code>targetGroupInfoList</code>.</p>"
             }
         },
         "com.amazonaws.codedeploy#LogTail": {
@@ -8023,7 +8023,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Both an IAM user ARN and an IAM session ARN were\n            included in the request. Use only one ARN type.</p>",
+                "smithy.api#documentation": "<p>Both an user ARN and an IAM session ARN were included in the request.\n            Use only one ARN type.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8233,7 +8233,7 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8319,7 +8319,7 @@
                 "iamUserArn": {
                     "target": "com.amazonaws.codedeploy#IamUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM user to associate with the on-premises\n            instance.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the user to associate with the on-premises instance.</p>"
                     }
                 }
             },
@@ -8467,7 +8467,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The named revision does not exist with the IAM user or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>The named revision does not exist with the user or Amazon Web Services account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8653,7 +8653,7 @@
                 "bundleType": {
                     "target": "com.amazonaws.codedeploy#BundleType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file type of the application revision. Must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tar</code>: A tar archive file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tgz</code>: A compressed tar archive file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>zip</code>: A zip archive file.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The file type of the application revision. Must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tar</code>: A tar archive file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tgz</code>: A compressed tar archive file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>zip</code>: A zip archive file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>YAML</code>: A YAML-formatted file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code>: A JSON-formatted file.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "version": {
@@ -9774,7 +9774,7 @@
                 "autoScalingGroups": {
                     "target": "com.amazonaws.codedeploy#AutoScalingGroupNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replacement list of Auto Scaling groups to be included in the deployment\n            group, if you want to change them.</p>\n         <ul>\n            <li>\n               <p>To keep the Auto Scaling groups, enter their names or do not specify this\n                    parameter. </p>\n            </li>\n            <li>\n               <p>To remove Auto Scaling groups, specify a non-null empty list of Auto Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat\">Amazon EC2 instances in an Amazon EC2 Auto Scaling group fail to\n                        launch and receive the error \"Heartbeat Timeout\"</a> in the\n                            <i>CodeDeploy User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The replacement list of Auto Scaling groups to be included in the deployment\n            group, if you want to change them.</p>\n         <ul>\n            <li>\n               <p>To keep the Auto Scaling groups, enter their names or do not specify this\n                    parameter. </p>\n            </li>\n            <li>\n               <p>To remove Auto Scaling groups, specify a non-null empty list of Auto Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat\">Amazon EC2 instances in an Amazon EC2 Auto Scaling group fail to\n                        launch and receive the error \"Heartbeat Timeout\"</a> in the\n                            <i>CodeDeploy User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "serviceRoleArn": {

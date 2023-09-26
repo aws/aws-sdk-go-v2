@@ -979,6 +979,9 @@
                     "target": "com.amazonaws.connect#ListSecurityKeys"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListSecurityProfileApplications"
+                },
+                {
                     "target": "com.amazonaws.connect#ListSecurityProfilePermissions"
                 },
                 {
@@ -2057,6 +2060,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration of the answering machine detection.</p>"
+            }
+        },
+        "com.amazonaws.connect#Application": {
+            "type": "structure",
+            "members": {
+                "Namespace": {
+                    "target": "com.amazonaws.connect#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Namespace of the application that you want to give access to.</p>"
+                    }
+                },
+                "ApplicationPermissions": {
+                    "target": "com.amazonaws.connect#ApplicationPermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that the agent is granted on the application. Only the <code>ACCESS</code> permission is supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A third party application's metadata.</p>"
+            }
+        },
+        "com.amazonaws.connect#ApplicationPermissions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Permission"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#Applications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Application"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.connect#ApproximateTotalCount": {
@@ -5184,7 +5231,7 @@
                 "Name": {
                     "target": "com.amazonaws.connect#QuickConnectName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the quick connect.</p>",
+                        "smithy.api#documentation": "<p>A unique name of the quick connect.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5570,6 +5617,12 @@
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> |\n    <code>SecurityProfile</code> | <code>Queue</code> | <code>RoutingProfile</code>\n         </p>"
+                    }
+                },
+                "Applications": {
+                    "target": "com.amazonaws.connect#Applications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of third party applications that the security profile will give access to.</p>"
                     }
                 }
             },
@@ -14627,6 +14680,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CASES_DOMAIN"
                     }
+                },
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION"
+                    }
                 }
             }
         },
@@ -16523,7 +16582,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>We recommend using <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> to\n      return phone number types. ListPhoneNumbers doesn't support number types <code>UIFN</code>,\n      <code>SHARED</code>, <code>THIRD_PARTY_TF</code>, and <code>THIRD_PARTY_DID</code>. While it returns\n      numbers of those types, it incorrectly lists them as <code>TOLL_FREE</code> or <code>DID</code>. </p>\n               </li>\n               <li>\n                  <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n       <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail\n      with a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n      It returns the new phone number ARN that can be used to tag phone number resources.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>We recommend using <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> to\n      return phone number types. ListPhoneNumbers doesn't support number types <code>UIFN</code>,\n       <code>SHARED</code>, <code>THIRD_PARTY_TF</code>, and <code>THIRD_PARTY_DID</code>. While it\n      returns numbers of those types, it incorrectly lists them as <code>TOLL_FREE</code> or\n       <code>DID</code>. </p>\n               </li>\n               <li>\n                  <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n       <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail\n      with a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n      It returns the new phone number ARN that can be used to tag phone number resources.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/phone-numbers-summary/{InstanceId}",
@@ -16551,7 +16610,7 @@
                 "PhoneNumberTypes": {
                     "target": "com.amazonaws.connect#PhoneNumberTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of phone number.</p>",
+                        "smithy.api#documentation": "<p>The type of phone number.</p>\n         <note>\n            <p>We recommend using <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> to\n    return phone number types. While ListPhoneNumbers returns number types <code>UIFN</code>,\n     <code>SHARED</code>, <code>THIRD_PARTY_TF</code>, and <code>THIRD_PARTY_DID</code>, it\n    incorrectly lists them as <code>TOLL_FREE</code> or <code>DID</code>. </p>\n         </note>",
                         "smithy.api#httpQuery": "phoneNumberTypes"
                     }
                 },
@@ -17523,6 +17582,105 @@
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListSecurityProfileApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListSecurityProfileApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListSecurityProfileApplicationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of third party applications in a specific security profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/security-profiles-applications/{InstanceId}/{SecurityProfileId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Applications",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListSecurityProfileApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityProfileId": {
+                    "target": "com.amazonaws.connect#SecurityProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security profile identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. The next set of results can be retrieved by using the \n   token value returned in the previous response when making the next request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListSecurityProfileApplicationsResponse": {
+            "type": "structure",
+            "members": {
+                "Applications": {
+                    "target": "com.amazonaws.connect#Applications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the third party application's metadata.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. The next set of results can be retrieved by using the \n   token value returned in the previous response when making the next request.</p>"
                     }
                 }
             },
@@ -18962,6 +19120,15 @@
                 "smithy.api#pattern": "^(^[\\S].*[\\S]$)|(^[\\S]$)$"
             }
         },
+        "com.amazonaws.connect#Namespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.connect#NextToken": {
             "type": "string"
         },
@@ -19399,6 +19566,15 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#Permission": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
                 }
             }
         },
@@ -23043,19 +23219,19 @@
                 "EventBridgeAction": {
                     "target": "com.amazonaws.connect#EventBridgeActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the EventBridge action.</p>"
+                        "smithy.api#documentation": "<p>Information about the EventBridge action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |\n    <code>OnMetricDataUpdate</code>\n         </p>"
                     }
                 },
                 "AssignContactCategoryAction": {
                     "target": "com.amazonaws.connect#AssignContactCategoryActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the contact category action.</p>"
+                        "smithy.api#documentation": "<p>Information about the contact category action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnZendeskTicketCreate</code> |\n    <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>\n         </p>"
                     }
                 },
                 "SendNotificationAction": {
                     "target": "com.amazonaws.connect#SendNotificationActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the send notification action.</p>"
+                        "smithy.api#documentation": "<p>Information about the send notification action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |\n   <code>OnMetricDataUpdate</code>\n         </p>"
                     }
                 }
             },
@@ -23196,7 +23372,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the\n   following values: <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> |\n    <code>OnSalesforceCaseCreate</code>\n         </p>"
+                "smithy.api#documentation": "<p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the\n   following values: <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> |\n    <code>OnSalesforceCaseCreate</code> | <code>OnContactEvaluationSubmit</code> |\n    <code>OnMetricDataUpdate</code>.</p>"
             }
         },
         "com.amazonaws.connect#S3Config": {
@@ -29540,6 +29716,12 @@
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
+                    }
+                },
+                "Applications": {
+                    "target": "com.amazonaws.connect#Applications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third party application's metadata.</p>"
                     }
                 }
             },

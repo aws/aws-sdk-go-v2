@@ -16448,7 +16448,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.</p>",
+                "smithy.api#documentation": "<p>Removes one or more custom attributes, of the same attribute type, from the application. Existing endpoints still have the attributes but Amazon Pinpoint will stop capturing new or changed values for these attributes.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/apps/{ApplicationId}/attributes/{AttributeType}",
