@@ -40,7 +40,7 @@ jobs:
 
     - name: Find smithy-go
       env:
-        TRIGGERING_ACTOR: ${{ github.event.pull_request.head.repo.owner }}
+        TRIGGERING_ACTOR: ${{ github.event.pull_request.head.repo.owner.login }}
         RUNNER_TMPDIR: ${{ runner.temp }}
       run: ./ci-find-smithy-go.sh
 
