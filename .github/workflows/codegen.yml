@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go
+
 jobs:
   codegen-test:
     name: SDK Codegen Test
@@ -38,9 +41,9 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
 
-    - name: Find smithy-go
+    - name:g Find smithy-go
+      shell: bash
       env:
-        TRIGGERING_ACTOR: ${{ github.event.pull_request.head.repo.owner.login }}
         RUNNER_TMPDIR: ${{ runner.temp }}
       run: ./ci-find-smithy-go.sh
 
@@ -49,7 +52,7 @@ jobs:
       run: make smithy-publish-local
 
     - name: Cleanup smithy-go
-      run: rm -rf tmp-smithy-go
+      run: rm -rf ${{ runner.temp }}/smithy-go
 
     - name: SDK Codegen
       run: make smithy-generate

@@ -9,7 +9,9 @@
 #  - feat-foo-bar
 #  - feat-foo
 
-SMITHY_GO_REPOSITORY=$TRIGGERING_ACTOR/smithy-go
+if [ -z "$SMITHY_GO_REPOSITORY" ]; then
+    SMITHY_GO_REPOSITORY=aws/smithy-go
+fi
 
 if [ -z "$RUNNER_TMPDIR" ]; then
     echo env RUNNER_TMPDIR is required
