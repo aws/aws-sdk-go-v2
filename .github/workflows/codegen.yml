@@ -7,6 +7,7 @@ on:
     branches: [ main ]
 
 env:
+  # get owner of the repository. used by forks.
   SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go
 
 jobs:
@@ -41,7 +42,7 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
 
-    - name:g Find smithy-go
+    - name: Find smithy-go
       shell: bash
       env:
         RUNNER_TMPDIR: ${{ runner.temp }}
