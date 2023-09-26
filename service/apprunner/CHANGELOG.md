@@ -1,3 +1,7 @@
+# v1.21.0 (2023-09-26)
+
+* **Feature**: This release allows an App Runner customer to specify a custom source directory to run the build & start command. This change allows App Runner to support monorepo based repositories
+
 # v1.20.0 (2023-09-20)
 
 * **Feature**: This release adds improvements for managing App Runner auto scaling configuration resources. New APIs: UpdateDefaultAutoScalingConfiguration and ListServicesForAutoScalingConfiguration. Updated API: DeleteAutoScalingConfiguration.

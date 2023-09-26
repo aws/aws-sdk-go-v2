@@ -19,7 +19,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.16.2
-	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.26.1
@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.5
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.120.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.121.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.7
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.20.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.39.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.3

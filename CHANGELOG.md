@@ -1,3 +1,28 @@
+# Release (2023-09-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.18.0](service/appintegrations/CHANGELOG.md#v1180-2023-09-26)
+  * **Feature**: The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.21.0](service/apprunner/CHANGELOG.md#v1210-2023-09-26)
+  * **Feature**: This release allows an App Runner customer to specify a custom source directory to run the build & start command. This change allows App Runner to support monorepo based repositories
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.18.1](service/codedeploy/CHANGELOG.md#v1181-2023-09-26)
+  * **Documentation**: CodeDeploy now supports In-place and Blue/Green EC2 deployments with multiple Classic Load Balancers and multiple Target Groups.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.68.0](service/connect/CHANGELOG.md#v1680-2023-09-26)
+  * **Feature**: This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.22.0](service/dynamodb/CHANGELOG.md#v1220-2023-09-26)
+  * **Feature**: Amazon DynamoDB now supports Incremental Export as an enhancement to the existing Export Table
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.121.0](service/ec2/CHANGELOG.md#v11210-2023-09-26)
+  * **Feature**: The release includes AWS verified access to support FIPs compliance in North America regions
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.24.0](service/lakeformation/CHANGELOG.md#v1240-2023-09-26)
+  * **Feature**: This release adds three new API support "CreateLakeFormationOptIn", "DeleteLakeFormationOptIn" and "ListLakeFormationOptIns", and also updates the corresponding documentation.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.22.6](service/pinpoint/CHANGELOG.md#v1226-2023-09-26)
+  * **Documentation**: Update documentation for RemoveAttributes to more accurately reflect its behavior when attributes are deleted.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.40.0](service/s3/CHANGELOG.md#v1400-2023-09-26)
+  * **Feature**: This release adds a new field COMPLETED to the ReplicationStatus Enum. You can now use this field to validate the replication status of S3 objects using the AWS SDK.
+
 # Release (2023-09-25)
 
 ## Module Highlights

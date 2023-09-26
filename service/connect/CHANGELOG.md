@@ -1,3 +1,7 @@
+# v1.68.0 (2023-09-26)
+
+* **Feature**: This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace.
+
 # v1.67.0 (2023-09-15)
 
 * **Feature**: New rule type (OnMetricDataUpdate) has been added

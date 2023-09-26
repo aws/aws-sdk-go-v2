@@ -1,8 +1,0 @@
-{
-    "id": "45bec59e-b0b8-4fbd-9e47-d84c838c8a55",
-    "type": "documentation",
-    "description": "Update documentation for RemoveAttributes to more accurately reflect its behavior when attributes are deleted.",
-    "modules": [
-        "service/pinpoint"
-    ]
-}

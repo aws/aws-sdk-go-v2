@@ -1,8 +1,0 @@
-{
-    "id": "7b13dd91-c23c-4b48-bccb-840a625ef510",
-    "type": "feature",
-    "description": "The release includes AWS verified access to support FIPs compliance in North America regions",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.18.0 (2023-09-26)
+
+* **Feature**: The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace.
+
 # v1.17.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

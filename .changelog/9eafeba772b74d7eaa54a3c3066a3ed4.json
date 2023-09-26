@@ -1,8 +1,0 @@
-{
-    "id": "9eafeba7-72b7-4d7e-aa54-a3c3066a3ed4",
-    "type": "feature",
-    "description": "This release adds a new field COMPLETED to the ReplicationStatus Enum. You can now use this field to validate the replication status of S3 objects using the AWS SDK.",
-    "modules": [
-        "service/s3"
-    ]
-}

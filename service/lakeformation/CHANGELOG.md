@@ -1,3 +1,7 @@
+# v1.24.0 (2023-09-26)
+
+* **Feature**: This release adds three new API support "CreateLakeFormationOptIn", "DeleteLakeFormationOptIn" and "ListLakeFormationOptIns", and also updates the corresponding documentation.
+
 # v1.23.6 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

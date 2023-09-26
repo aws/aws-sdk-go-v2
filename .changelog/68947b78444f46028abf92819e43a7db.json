@@ -1,8 +1,0 @@
-{
-    "id": "68947b78-444f-4602-8abf-92819e43a7db",
-    "type": "feature",
-    "description": "This release adds three new API support \"CreateLakeFormationOptIn\", \"DeleteLakeFormationOptIn\" and \"ListLakeFormationOptIns\", and also updates the corresponding documentation.",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9a459f3e-29f2-4cee-81f1-036d81854f16",
-    "type": "feature",
-    "description": "The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}
