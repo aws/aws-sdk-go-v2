@@ -9,8 +9,11 @@
 #  - feat-foo-bar
 #  - feat-foo
 
+echo $GITHUB_REPOSITORY
 repo_owner=$($GITHUB_REPOSITORY | cut -d/ -f 2)
+echo $repo_owner
 SMITHY_GO_REPOSITORY=$repo_owner/smithy-go
+echo $SMITHY_GO_REPOSITORY
 
 if [ -z "$RUNNER_TMPDIR" ]; then
     echo env RUNNER_TMPDIR is required
