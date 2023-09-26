@@ -18,7 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Set;
 import java.util.TreeSet;
 
-gimport software.amazon.smithy.codegen.core.Symbol;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
