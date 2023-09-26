@@ -2149,6 +2149,11 @@ func awsAwsjson10_serializeDocumentCodeRepository(v *types.CodeRepository, value
 		}
 	}
 
+	if v.SourceDirectory != nil {
+		ok := object.Key("SourceDirectory")
+		ok.String(*v.SourceDirectory)
+	}
+
 	return nil
 }
 

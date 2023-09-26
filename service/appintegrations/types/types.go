@@ -4,7 +4,41 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
+
+// The configuration for where the application should be loaded from.
+type ApplicationSourceConfig struct {
+
+	// The external URL source for the application.
+	ExternalUrlConfig *ExternalUrlConfig
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about the Application.
+type ApplicationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the Application.
+	Arn *string
+
+	// The time when the application was created.
+	CreatedTime *time.Time
+
+	// A unique identifier for the Application.
+	Id *string
+
+	// The time when the application was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the application.
+	Name *string
+
+	// The namespace of the application.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
 
 // Summary information about the DataIntegration association.
 type DataIntegrationAssociationSummary struct {
@@ -97,6 +131,20 @@ type EventIntegrationAssociation struct {
 	noSmithyDocumentSerde
 }
 
+// The external URL source for the application.
+type ExternalUrlConfig struct {
+
+	// The URL to access the application.
+	//
+	// This member is required.
+	AccessUrl *string
+
+	// Additional URLs to allow list if different than the access URL.
+	ApprovedOrigins []string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for what files should be pulled from the source.
 type FileConfiguration struct {
 
@@ -107,6 +155,25 @@ type FileConfiguration struct {
 
 	// Restrictions for what files should be pulled from the source.
 	Filters map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an event that the application publishes.
+type Publication struct {
+
+	// The name of the publication.
+	//
+	// This member is required.
+	Event *string
+
+	// The JSON schema of the publication event.
+	//
+	// This member is required.
+	Schema *string
+
+	// The description of the publication.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -125,6 +192,20 @@ type ScheduleConfiguration struct {
 
 	// The name of the object to pull from the data source.
 	Object *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an event that the application subscribes.
+type Subscription struct {
+
+	// The name of the subscription.
+	//
+	// This member is required.
+	Event *string
+
+	// The description of the subscription.
+	Description *string
 
 	noSmithyDocumentSerde
 }

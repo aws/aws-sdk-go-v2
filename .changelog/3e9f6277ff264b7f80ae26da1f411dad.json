@@ -1,0 +1,8 @@
+{
+    "id": "3e9f6277-ff26-4b7f-80ae-26da1f411dad",
+    "type": "feature",
+    "description": "This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace.",
+    "modules": [
+        "service/connect"
+    ]
+}

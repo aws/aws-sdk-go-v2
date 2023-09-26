@@ -683,16 +683,17 @@ type ECSTaskSet struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a load balancer in Elastic Load Balancing to use in a
+// Information about a Classic Load Balancer in Elastic Load Balancing to use in a
 // deployment. Instances are registered directly with a load balancer, and traffic
 // is routed to the load balancer.
 type ELBInfo struct {
 
-	// For blue/green deployments, the name of the load balancer that is used to route
-	// traffic from original instances to replacement instances in a blue/green
-	// deployment. For in-place deployments, the name of the load balancer that
-	// instances are deregistered from so they are not serving traffic during a
-	// deployment, and then re-registered with after the deployment is complete.
+	// For blue/green deployments, the name of the Classic Load Balancer that is used
+	// to route traffic from original instances to replacement instances in a
+	// blue/green deployment. For in-place deployments, the name of the Classic Load
+	// Balancer that instances are deregistered from so they are not serving traffic
+	// during a deployment, and then re-registered with after the deployment is
+	// complete.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -795,7 +796,7 @@ type InstanceInfo struct {
 	// The ARN of the IAM session associated with the on-premises instance.
 	IamSessionArn *string
 
-	// The IAM user ARN associated with the on-premises instance.
+	// The user ARN associated with the on-premises instance.
 	IamUserArn *string
 
 	// The ARN of the on-premises instance.
@@ -979,19 +980,24 @@ type LifecycleEvent struct {
 }
 
 // Information about the Elastic Load Balancing load balancer or target group used
-// in a deployment.
+// in a deployment. You can use load balancers and target groups in combination.
+// For example, if you have two Classic Load Balancers, and five target groups tied
+// to an Application Load Balancer, you can specify the two Classic Load Balancers
+// in elbInfoList , and the five target groups in targetGroupInfoList .
 type LoadBalancerInfo struct {
 
-	// An array that contains information about the load balancer to use for load
-	// balancing in a deployment. In Elastic Load Balancing, load balancers are used
-	// with Classic Load Balancers. Adding more than one load balancer to the array is
-	// not supported.
+	// An array that contains information about the load balancers to use for load
+	// balancing in a deployment. If you're using Classic Load Balancers, specify those
+	// load balancers in this array. You can add up to 10 load balancers to the array.
+	// If you're using Application Load Balancers or Network Load Balancers, use the
+	// targetGroupInfoList array instead of this one.
 	ElbInfoList []ELBInfo
 
-	// An array that contains information about the target group to use for load
-	// balancing in a deployment. In Elastic Load Balancing, target groups are used
-	// with Application Load Balancers. Adding more than one target group to the array
-	// is not supported.
+	// An array that contains information about the target groups to use for load
+	// balancing in a deployment. If you're using Application Load Balancers and
+	// Network Load Balancers, specify their associated target groups in this array.
+	// You can add up to 10 target groups to the array. If you're using Classic Load
+	// Balancers, use the elbInfoList array instead of this one.
 	TargetGroupInfoList []TargetGroupInfo
 
 	// The target group pair information. This is an array of TargeGroupPairInfo
@@ -1146,6 +1152,8 @@ type S3Location struct {
 	//   - tar : A tar archive file.
 	//   - tgz : A compressed tar archive file.
 	//   - zip : A zip archive file.
+	//   - YAML : A YAML-formatted file.
+	//   - JSON : A JSON-formatted file.
 	BundleType BundleType
 
 	// The ETag of the Amazon S3 object that represents the bundled artifacts for the

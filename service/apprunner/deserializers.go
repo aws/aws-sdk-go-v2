@@ -5159,6 +5159,15 @@ func awsAwsjson10_deserializeDocumentCodeRepository(v **types.CodeRepository, va
 				return err
 			}
 
+		case "SourceDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceDirectory to be of type string, got %T instead", value)
+				}
+				sv.SourceDirectory = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

@@ -127959,6 +127959,22 @@ func awsEc2query_deserializeDocumentVerifiedAccessInstance(v **types.VerifiedAcc
 				sv.Description = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("fipsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.FipsEnabled = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("lastUpdatedTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

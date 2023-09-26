@@ -35,7 +35,7 @@ func (c *Client) BatchGetDeploymentGroups(ctx context.Context, params *BatchGetD
 // Represents the input of a BatchGetDeploymentGroups operation.
 type BatchGetDeploymentGroupsInput struct {
 
-	// The name of an CodeDeploy application associated with the applicable IAM or
+	// The name of an CodeDeploy application associated with the applicable user or
 	// Amazon Web Services account.
 	//
 	// This member is required.

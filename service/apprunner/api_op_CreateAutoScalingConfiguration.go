@@ -50,8 +50,8 @@ type CreateAutoScalingConfigurationInput struct {
 	// A name for the auto scaling configuration. When you use it for the first time
 	// in an Amazon Web Services Region, App Runner creates revision number 1 of this
 	// name. When you use the same name in subsequent calls, App Runner creates
-	// incremental revisions of the configuration. Prior to the release of Managing
-	// auto scaling (https://docs.aws.amazon.com/apprunner/latest/relnotes/release-yyyy-mm-dd-asc-improvements.html)
+	// incremental revisions of the configuration. Prior to the release of Auto scale
+	// configuration enhancements (https://docs.aws.amazon.com/apprunner/latest/relnotes/release-2023-09-22-auto-scale-config.html)
 	// , the name DefaultConfiguration was reserved. This restriction is no longer in
 	// place. You can now manage DefaultConfiguration the same way you manage your
 	// custom auto scaling configurations. This means you can do the following with the

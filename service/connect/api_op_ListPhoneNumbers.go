@@ -64,7 +64,10 @@ type ListPhoneNumbersInput struct {
 	// The ISO country code.
 	PhoneNumberCountryCodes []types.PhoneNumberCountryCode
 
-	// The type of phone number.
+	// The type of phone number. We recommend using ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
+	// to return phone number types. While ListPhoneNumbers returns number types UIFN ,
+	// SHARED , THIRD_PARTY_TF , and THIRD_PARTY_DID , it incorrectly lists them as
+	// TOLL_FREE or DID .
 	PhoneNumberTypes []types.PhoneNumberType
 
 	noSmithyDocumentSerde

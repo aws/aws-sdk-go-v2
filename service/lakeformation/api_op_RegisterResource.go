@@ -50,6 +50,10 @@ type RegisterResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
+	// Specifies whether the data access of tables pointing to the location can be
+	// managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
+	HybridAccessEnabled *bool
+
 	// The identifier for the role that registers the resource.
 	RoleArn *string
 

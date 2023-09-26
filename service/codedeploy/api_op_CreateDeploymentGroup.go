@@ -35,8 +35,8 @@ func (c *Client) CreateDeploymentGroup(ctx context.Context, params *CreateDeploy
 // Represents the input of a CreateDeploymentGroup operation.
 type CreateDeploymentGroupInput struct {
 
-	// The name of an CodeDeploy application associated with the IAM user or Amazon
-	// Web Services account.
+	// The name of an CodeDeploy application associated with the user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string

@@ -51811,6 +51811,11 @@ func awsEc2query_serializeOpDocumentCreateVerifiedAccessInstanceInput(v *CreateV
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if v.FIPSEnabled != nil {
+		objectKey := object.Key("FIPSEnabled")
+		objectKey.Boolean(*v.FIPSEnabled)
+	}
+
 	if v.TagSpecifications != nil {
 		objectKey := object.FlatKey("TagSpecification")
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {

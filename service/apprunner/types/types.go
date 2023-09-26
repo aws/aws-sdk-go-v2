@@ -245,6 +245,11 @@ type CodeRepository struct {
 	// repository. CodeConfiguration is required only for CreateService request.
 	CodeConfiguration *CodeConfiguration
 
+	// The path of the directory that stores source code and configuration files. The
+	// build and start commands also execute from here. The path is absolute from root
+	// and, if not specified, defaults to the repository root.
+	SourceDirectory *string
+
 	noSmithyDocumentSerde
 }
 

@@ -364,6 +364,24 @@ type FilterCondition struct {
 	noSmithyDocumentSerde
 }
 
+// A single principal-resource pair that has Lake Formation permissins enforced.
+type LakeFormationOptInsInfo struct {
+
+	// The last modified date and time of the record.
+	LastModified *time.Time
+
+	// The user who updated the record.
+	LastUpdatedBy *string
+
+	// The Lake Formation principal. Supported principals are IAM users or IAM roles.
+	Principal *DataLakePrincipal
+
+	// A structure for the resource.
+	Resource *Resource
+
+	noSmithyDocumentSerde
+}
+
 // A structure that allows an admin to grant user permissions on certain
 // conditions. For example, granting a role access to all columns that do not have
 // the LF-tag 'PII' in tables that have the LF-tag 'Prod'.
@@ -374,7 +392,9 @@ type LFTag struct {
 	// This member is required.
 	TagKey *string
 
-	// A list of possible values an attribute can take.
+	// A list of possible values an attribute can take. The maximum number of values
+	// that can be defined for a LF-Tag is 1000. A single API call supports 50 values.
+	// You can use multiple API calls to add more values.
 	//
 	// This member is required.
 	TagValues []string
@@ -523,6 +543,12 @@ type PrincipalResourcePermissions struct {
 	// ARN.
 	AdditionalDetails *DetailsMap
 
+	// The date and time when the resource was last updated.
+	LastUpdated *time.Time
+
+	// The user who updated the record.
+	LastUpdatedBy *string
+
 	// The permissions to be granted or revoked on the resource.
 	Permissions []Permission
 
@@ -609,6 +635,10 @@ type Resource struct {
 
 // A structure containing information about an Lake Formation resource.
 type ResourceInfo struct {
+
+	// Indicates whether the data access of tables pointing to the location can be
+	// managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
+	HybridAccessEnabled *bool
 
 	// The date and time the resource was last modified.
 	LastModified *time.Time

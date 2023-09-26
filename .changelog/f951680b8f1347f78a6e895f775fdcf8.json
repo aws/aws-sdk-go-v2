@@ -1,0 +1,8 @@
+{
+    "id": "f951680b-8f13-47f7-8a6e-895f775fdcf8",
+    "type": "feature",
+    "description": "This release allows an App Runner customer to specify a custom source directory to run the build \u0026 start command. This change allows App Runner to support monorepo based repositories",
+    "modules": [
+        "service/apprunner"
+    ]
+}

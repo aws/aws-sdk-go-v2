@@ -43,7 +43,7 @@ type RegisterOnPremisesInstanceInput struct {
 	// The ARN of the IAM session to associate with the on-premises instance.
 	IamSessionArn *string
 
-	// The ARN of the IAM user to associate with the on-premises instance.
+	// The ARN of the user to associate with the on-premises instance.
 	IamUserArn *string
 
 	noSmithyDocumentSerde

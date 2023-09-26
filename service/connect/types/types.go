@@ -147,6 +147,20 @@ type AnswerMachineDetectionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// This API is in preview release for Amazon Connect and is subject to change. A
+// third party application's metadata.
+type Application struct {
+
+	// The permissions that the agent is granted on the application. Only the ACCESS
+	// permission is supported.
+	ApplicationPermissions []string
+
+	// Namespace of the application that you want to give access to.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
 // This action must be set if TriggerEventSource is one of the following values:
 // OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
 // OnPostChatAnalysisAvailable . Contact is categorized using the rule name.
@@ -3053,13 +3067,21 @@ type RuleAction struct {
 	// This member is required.
 	ActionType ActionType
 
-	// Information about the contact category action.
+	// Information about the contact category action. Supported only for
+	// TriggerEventSource values: OnPostCallAnalysisAvailable |
+	// OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable |
+	// OnZendeskTicketCreate | OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
 	AssignContactCategoryAction *AssignContactCategoryActionDefinition
 
-	// Information about the EventBridge action.
+	// Information about the EventBridge action. Supported only for TriggerEventSource
+	// values: OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
+	// OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate
 	EventBridgeAction *EventBridgeActionDefinition
 
-	// Information about the send notification action.
+	// Information about the send notification action. Supported only for
+	// TriggerEventSource values: OnPostCallAnalysisAvailable |
+	// OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable |
+	// OnContactEvaluationSubmit | OnMetricDataUpdate
 	SendNotificationAction *SendNotificationActionDefinition
 
 	// Information about the task action. This field is required if TriggerEventSource
@@ -3118,7 +3140,7 @@ type RuleSummary struct {
 
 // The name of the event source. This field is required if TriggerEventSource is
 // one of the following values: OnZendeskTicketCreate | OnZendeskTicketStatusUpdate
-// | OnSalesforceCaseCreate
+// | OnSalesforceCaseCreate | OnContactEvaluationSubmit | OnMetricDataUpdate .
 type RuleTriggerEventSource struct {
 
 	// The name of the event source.

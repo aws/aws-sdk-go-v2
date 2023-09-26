@@ -15,8 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the deployment groups for an application registered with the IAM user or
-// Amazon Web Services account.
+// Lists the deployment groups for an application registered with the Amazon Web
+// Services user or Amazon Web Services account.
 func (c *Client) ListDeploymentGroups(ctx context.Context, params *ListDeploymentGroupsInput, optFns ...func(*Options)) (*ListDeploymentGroupsOutput, error) {
 	if params == nil {
 		params = &ListDeploymentGroupsInput{}
@@ -35,8 +35,8 @@ func (c *Client) ListDeploymentGroups(ctx context.Context, params *ListDeploymen
 // Represents the input of a ListDeploymentGroups operation.
 type ListDeploymentGroupsInput struct {
 
-	// The name of an CodeDeploy application associated with the IAM user or Amazon
-	// Web Services account.
+	// The name of an CodeDeploy application associated with the user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string

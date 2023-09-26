@@ -134,6 +134,97 @@ func (c *Client) addOperationListDataIntegrationsMiddlewares(stack *middleware.S
 	return nil
 }
 
+// ListDataIntegrationsAPIClient is a client that implements the
+// ListDataIntegrations operation.
+type ListDataIntegrationsAPIClient interface {
+	ListDataIntegrations(context.Context, *ListDataIntegrationsInput, ...func(*Options)) (*ListDataIntegrationsOutput, error)
+}
+
+var _ ListDataIntegrationsAPIClient = (*Client)(nil)
+
+// ListDataIntegrationsPaginatorOptions is the paginator options for
+// ListDataIntegrations
+type ListDataIntegrationsPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDataIntegrationsPaginator is a paginator for ListDataIntegrations
+type ListDataIntegrationsPaginator struct {
+	options   ListDataIntegrationsPaginatorOptions
+	client    ListDataIntegrationsAPIClient
+	params    *ListDataIntegrationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDataIntegrationsPaginator returns a new ListDataIntegrationsPaginator
+func NewListDataIntegrationsPaginator(client ListDataIntegrationsAPIClient, params *ListDataIntegrationsInput, optFns ...func(*ListDataIntegrationsPaginatorOptions)) *ListDataIntegrationsPaginator {
+	if params == nil {
+		params = &ListDataIntegrationsInput{}
+	}
+
+	options := ListDataIntegrationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListDataIntegrationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDataIntegrationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListDataIntegrations page.
+func (p *ListDataIntegrationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataIntegrationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListDataIntegrations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListDataIntegrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -35,8 +35,8 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 // Represents the input of a CreateDeployment operation.
 type CreateDeploymentInput struct {
 
-	// The name of an CodeDeploy application associated with the IAM user or Amazon
-	// Web Services account.
+	// The name of an CodeDeploy application associated with the user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string
@@ -45,9 +45,9 @@ type CreateDeploymentInput struct {
 	// deployment is created.
 	AutoRollbackConfiguration *types.AutoRollbackConfiguration
 
-	// The name of a deployment configuration associated with the IAM user or Amazon
-	// Web Services account. If not specified, the value configured in the deployment
-	// group is used as the default. If the deployment group does not have a deployment
+	// The name of a deployment configuration associated with the user or Amazon Web
+	// Services account. If not specified, the value configured in the deployment group
+	// is used as the default. If the deployment group does not have a deployment
 	// configuration associated with it, CodeDeployDefault . OneAtATime is used by
 	// default.
 	DeploymentConfigName *string

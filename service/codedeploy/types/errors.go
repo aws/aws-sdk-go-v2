@@ -33,7 +33,7 @@ func (e *AlarmsLimitExceededException) ErrorCode() string {
 }
 func (e *AlarmsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An application with the specified name with the IAM user or Amazon Web Services
+// An application with the specified name with the user or Amazon Web Services
 // account already exists.
 type ApplicationAlreadyExistsException struct {
 	Message *string
@@ -60,7 +60,7 @@ func (e *ApplicationAlreadyExistsException) ErrorCode() string {
 }
 func (e *ApplicationAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The application does not exist with the IAM user or Amazon Web Services account.
+// The application does not exist with the user or Amazon Web Services account.
 type ApplicationDoesNotExistException struct {
 	Message *string
 
@@ -245,8 +245,8 @@ func (e *DeploymentAlreadyCompletedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A deployment configuration with the specified name with the IAM user or Amazon
-// Web Services account already exists.
+// A deployment configuration with the specified name with the user or Amazon Web
+// Services account already exists.
 type DeploymentConfigAlreadyExistsException struct {
 	Message *string
 
@@ -274,7 +274,7 @@ func (e *DeploymentConfigAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// The deployment configuration does not exist with the IAM user or Amazon Web
+// The deployment configuration does not exist with the user or Amazon Web
 // Services account.
 type DeploymentConfigDoesNotExistException struct {
 	Message *string
@@ -385,7 +385,7 @@ func (e *DeploymentConfigNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The deployment with the IAM user or Amazon Web Services account does not exist.
+// The deployment with the user or Amazon Web Services account does not exist.
 type DeploymentDoesNotExistException struct {
 	Message *string
 
@@ -411,8 +411,8 @@ func (e *DeploymentDoesNotExistException) ErrorCode() string {
 }
 func (e *DeploymentDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A deployment group with the specified name with the IAM user or Amazon Web
-// Services account already exists.
+// A deployment group with the specified name with the user or Amazon Web Services
+// account already exists.
 type DeploymentGroupAlreadyExistsException struct {
 	Message *string
 
@@ -440,8 +440,8 @@ func (e *DeploymentGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The named deployment group with the IAM user or Amazon Web Services account
-// does not exist.
+// The named deployment group with the user or Amazon Web Services account does
+// not exist.
 type DeploymentGroupDoesNotExistException struct {
 	Message *string
 
@@ -829,8 +829,8 @@ func (e *GitHubAccountTokenNameRequiredException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// No IAM ARN was included in the request. You must use an IAM session ARN or IAM
-// user ARN in the request.
+// No IAM ARN was included in the request. You must use an IAM session ARN or user
+// ARN in the request.
 type IamArnRequiredException struct {
 	Message *string
 
@@ -885,7 +885,7 @@ func (e *IamSessionArnAlreadyRegisteredException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// The specified IAM user ARN is already registered with an on-premises instance.
+// The specified user ARN is already registered with an on-premises instance.
 type IamUserArnAlreadyRegisteredException struct {
 	Message *string
 
@@ -913,7 +913,7 @@ func (e *IamUserArnAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// An IAM user ARN was not specified.
+// An user ARN was not specified.
 type IamUserArnRequiredException struct {
 	Message *string
 
@@ -1787,7 +1787,7 @@ func (e *InvalidIamSessionArnException) ErrorCode() string {
 }
 func (e *InvalidIamSessionArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The IAM user ARN was specified in an invalid format.
+// The user ARN was specified in an invalid format.
 type InvalidIamUserArnException struct {
 	Message *string
 
@@ -2630,8 +2630,8 @@ func (e *LifecycleHookLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Both an IAM user ARN and an IAM session ARN were included in the request. Use
-// only one ARN type.
+// Both an user ARN and an IAM session ARN were included in the request. Use only
+// one ARN type.
 type MultipleIamArnsProvidedException struct {
 	Message *string
 
@@ -2735,8 +2735,7 @@ func (e *ResourceValidationException) ErrorCode() string {
 }
 func (e *ResourceValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The named revision does not exist with the IAM user or Amazon Web Services
-// account.
+// The named revision does not exist with the user or Amazon Web Services account.
 type RevisionDoesNotExistException struct {
 	Message *string
 

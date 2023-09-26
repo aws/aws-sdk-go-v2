@@ -40,7 +40,7 @@ type CreateQuickConnectInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the quick connect.
+	// A unique name of the quick connect.
 	//
 	// This member is required.
 	Name *string

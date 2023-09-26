@@ -60,7 +60,7 @@ type UpdateDeploymentGroupInput struct {
 	//   - To remove Auto Scaling groups, specify a non-null empty list of Auto
 	//   Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle
 	//   hooks. For examples, see Amazon EC2 instances in an Amazon EC2 Auto Scaling
-	//   group fail to launch and receive the error "Heartbeat Timeout" (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat)
+	//   group fail to launch and receive the error "Heartbeat Timeout" (https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat)
 	//   in the CodeDeploy User Guide.
 	AutoScalingGroups []string
 

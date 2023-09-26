@@ -35,7 +35,7 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 // Represents the input of a CreateApplication operation.
 type CreateApplicationInput struct {
 
-	// The name of the application. This name must be unique with the applicable IAM
+	// The name of the application. This name must be unique with the applicable user
 	// or Amazon Web Services account.
 	//
 	// This member is required.

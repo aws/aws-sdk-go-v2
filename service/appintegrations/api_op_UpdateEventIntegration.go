@@ -38,7 +38,7 @@ type UpdateEventIntegrationInput struct {
 	// This member is required.
 	Name *string
 
-	// The description of the event inegration.
+	// The description of the event integration.
 	Description *string
 
 	noSmithyDocumentSerde

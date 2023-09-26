@@ -16,8 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more attributes, of the same attribute type, from all the
-// endpoints that are associated with an application.
+// Removes one or more custom attributes, of the same attribute type, from the
+// application. Existing endpoints still have the attributes but Amazon Pinpoint
+// will stop capturing new or changed values for these attributes.
 func (c *Client) RemoveAttributes(ctx context.Context, params *RemoveAttributesInput, optFns ...func(*Options)) (*RemoveAttributesOutput, error) {
 	if params == nil {
 		params = &RemoveAttributesInput{}

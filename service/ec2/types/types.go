@@ -16543,6 +16543,10 @@ type VerifiedAccessInstance struct {
 	// A description for the Amazon Web Services Verified Access instance.
 	Description *string
 
+	// Describes if support for Federal Information Processing Standards (FIPS) is
+	// enabled on the instance.
+	FipsEnabled *bool
+
 	// The last updated time.
 	LastUpdatedTime *string
 

@@ -136,6 +136,7 @@
         "api_op_ListRoutingProfiles.go",
         "api_op_ListRules.go",
         "api_op_ListSecurityKeys.go",
+        "api_op_ListSecurityProfileApplications.go",
         "api_op_ListSecurityProfilePermissions.go",
         "api_op_ListSecurityProfiles.go",
         "api_op_ListTagsForResource.go",

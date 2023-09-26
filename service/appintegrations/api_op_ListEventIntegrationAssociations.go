@@ -138,6 +138,99 @@ func (c *Client) addOperationListEventIntegrationAssociationsMiddlewares(stack *
 	return nil
 }
 
+// ListEventIntegrationAssociationsAPIClient is a client that implements the
+// ListEventIntegrationAssociations operation.
+type ListEventIntegrationAssociationsAPIClient interface {
+	ListEventIntegrationAssociations(context.Context, *ListEventIntegrationAssociationsInput, ...func(*Options)) (*ListEventIntegrationAssociationsOutput, error)
+}
+
+var _ ListEventIntegrationAssociationsAPIClient = (*Client)(nil)
+
+// ListEventIntegrationAssociationsPaginatorOptions is the paginator options for
+// ListEventIntegrationAssociations
+type ListEventIntegrationAssociationsPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEventIntegrationAssociationsPaginator is a paginator for
+// ListEventIntegrationAssociations
+type ListEventIntegrationAssociationsPaginator struct {
+	options   ListEventIntegrationAssociationsPaginatorOptions
+	client    ListEventIntegrationAssociationsAPIClient
+	params    *ListEventIntegrationAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEventIntegrationAssociationsPaginator returns a new
+// ListEventIntegrationAssociationsPaginator
+func NewListEventIntegrationAssociationsPaginator(client ListEventIntegrationAssociationsAPIClient, params *ListEventIntegrationAssociationsInput, optFns ...func(*ListEventIntegrationAssociationsPaginatorOptions)) *ListEventIntegrationAssociationsPaginator {
+	if params == nil {
+		params = &ListEventIntegrationAssociationsInput{}
+	}
+
+	options := ListEventIntegrationAssociationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListEventIntegrationAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEventIntegrationAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListEventIntegrationAssociations page.
+func (p *ListEventIntegrationAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEventIntegrationAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListEventIntegrationAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListEventIntegrationAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
