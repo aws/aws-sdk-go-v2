@@ -64,6 +64,7 @@ jobs:
 
     - name: Find smithy-go
       env:
+        TRIGGERING_ACTOR: ${{ github.triggering_actor }}
         RUNNER_TMPDIR: ${{ runner.temp }}
       run: ./ci-find-smithy-go.sh
 

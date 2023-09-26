@@ -9,6 +9,7 @@
 #  - feat-foo-bar
 #  - feat-foo
 
+echo $TRIGGERING_ACTOR
 echo $GITHUB_REPOSITORY
 repo_owner=$($GITHUB_REPOSITORY | cut -d/ -f 2)
 echo $repo_owner
