@@ -9,9 +9,8 @@
 #  - feat-foo-bar
 #  - feat-foo
 
-if [ -z "$SMITHY_GO_REPOSITORY" ]; then
-    SMITHY_GO_REPOSITORY=aws/smithy-go
-fi
+repo_owner=$($GITHUB_REPOSITORY | cut -d/ -f 2)
+SMITHY_GO_REPOSITORY=$repo_owner/smithy-go
 
 if [ -z "$RUNNER_TMPDIR" ]; then
     echo env RUNNER_TMPDIR is required
