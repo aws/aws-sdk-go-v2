@@ -12,12 +12,12 @@ type AuthResolverParameters struct {
 	// The name of the operation being invoked.
 	Operation string
 
-	// The region in which the operation is being invoked.
-	Region string
-
 	// The endpoint resolver parameters for this operation. This service's default
 	// resolver delegates to endpoint rules.
 	endpointParams *EndpointParameters
+
+	// The region in which the operation is being invoked.
+	Region string
 }
 
 type operationNamer interface {
