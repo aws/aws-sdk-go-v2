@@ -43,6 +43,10 @@ type DeleteEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEndpointAccessInput) operationName() string {
+	return "DeleteEndpointAccess"
+}
+
 // Describes a Redshift-managed VPC endpoint.
 type DeleteEndpointAccessOutput struct {
 

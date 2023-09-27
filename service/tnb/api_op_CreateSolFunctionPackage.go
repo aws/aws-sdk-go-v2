@@ -52,6 +52,10 @@ type CreateSolFunctionPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSolFunctionPackageInput) operationName() string {
+	return "CreateSolFunctionPackage"
+}
+
 type CreateSolFunctionPackageOutput struct {
 
 	// Function package ARN.

@@ -50,6 +50,10 @@ type DeleteAppInstanceStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppInstanceStreamingConfigurationsInput) operationName() string {
+	return "DeleteAppInstanceStreamingConfigurations"
+}
+
 type DeleteAppInstanceStreamingConfigurationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

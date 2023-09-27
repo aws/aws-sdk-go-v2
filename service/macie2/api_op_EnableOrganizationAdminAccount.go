@@ -47,6 +47,10 @@ type EnableOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableOrganizationAdminAccountInput) operationName() string {
+	return "EnableOrganizationAdminAccount"
+}
+
 type EnableOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type PutReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutReplicationConfigurationInput) operationName() string {
+	return "PutReplicationConfiguration"
+}
+
 type PutReplicationConfigurationOutput struct {
 
 	// The contents of the replication configuration for the registry.

@@ -63,6 +63,10 @@ type SendMessageBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendMessageBatchInput) operationName() string {
+	return "SendMessageBatch"
+}
+
 // For each message in the batch, the response contains a
 // SendMessageBatchResultEntry tag if the message succeeds or a
 // BatchResultErrorEntry tag if the message fails.

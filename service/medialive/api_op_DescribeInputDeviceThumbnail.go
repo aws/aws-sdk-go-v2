@@ -50,6 +50,10 @@ type DescribeInputDeviceThumbnailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInputDeviceThumbnailInput) operationName() string {
+	return "DescribeInputDeviceThumbnail"
+}
+
 // Placeholder documentation for DescribeInputDeviceThumbnailResponse
 type DescribeInputDeviceThumbnailOutput struct {
 

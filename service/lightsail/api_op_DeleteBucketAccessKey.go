@@ -52,6 +52,10 @@ type DeleteBucketAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketAccessKeyInput) operationName() string {
+	return "DeleteBucketAccessKey"
+}
+
 type DeleteBucketAccessKeyOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

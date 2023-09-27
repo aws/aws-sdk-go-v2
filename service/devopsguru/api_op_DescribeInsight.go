@@ -45,6 +45,10 @@ type DescribeInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInsightInput) operationName() string {
+	return "DescribeInsight"
+}
+
 type DescribeInsightOutput struct {
 
 	// A ProactiveInsight object that represents the requested insight.

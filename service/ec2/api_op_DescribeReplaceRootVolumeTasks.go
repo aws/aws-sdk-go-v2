@@ -63,6 +63,10 @@ type DescribeReplaceRootVolumeTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplaceRootVolumeTasksInput) operationName() string {
+	return "DescribeReplaceRootVolumeTasks"
+}
+
 type DescribeReplaceRootVolumeTasksOutput struct {
 
 	// The token to include in another request to get the next page of items. This

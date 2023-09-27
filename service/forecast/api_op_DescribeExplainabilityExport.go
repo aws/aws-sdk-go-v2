@@ -44,6 +44,10 @@ type DescribeExplainabilityExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExplainabilityExportInput) operationName() string {
+	return "DescribeExplainabilityExport"
+}
+
 type DescribeExplainabilityExportOutput struct {
 
 	// When the Explainability export was created.

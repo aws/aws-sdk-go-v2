@@ -50,6 +50,10 @@ type TestRenderTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestRenderTemplateInput) operationName() string {
+	return "TestRenderTemplate"
+}
+
 type TestRenderTemplateOutput struct {
 
 	// The complete MIME message rendered by applying the data in the TemplateData

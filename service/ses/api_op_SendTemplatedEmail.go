@@ -159,6 +159,10 @@ type SendTemplatedEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendTemplatedEmailInput) operationName() string {
+	return "SendTemplatedEmail"
+}
+
 type SendTemplatedEmailOutput struct {
 
 	// The unique message identifier returned from the SendTemplatedEmail action.

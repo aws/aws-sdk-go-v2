@@ -58,6 +58,10 @@ type UpdateBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBackendStorageInput) operationName() string {
+	return "UpdateBackendStorage"
+}
+
 type UpdateBackendStorageOutput struct {
 
 	// The app ID.

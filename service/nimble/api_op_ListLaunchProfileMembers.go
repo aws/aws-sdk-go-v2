@@ -53,6 +53,10 @@ type ListLaunchProfileMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLaunchProfileMembersInput) operationName() string {
+	return "ListLaunchProfileMembers"
+}
+
 type ListLaunchProfileMembersOutput struct {
 
 	// A list of members.

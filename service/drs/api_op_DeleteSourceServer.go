@@ -42,6 +42,10 @@ type DeleteSourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSourceServerInput) operationName() string {
+	return "DeleteSourceServer"
+}
+
 type DeleteSourceServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

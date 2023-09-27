@@ -43,6 +43,10 @@ type GetVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVirtualMachineInput) operationName() string {
+	return "GetVirtualMachine"
+}
+
 type GetVirtualMachineOutput struct {
 
 	// This object contains the basic attributes of VirtualMachine contained by the

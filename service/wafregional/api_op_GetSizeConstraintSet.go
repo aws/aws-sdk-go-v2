@@ -48,6 +48,10 @@ type GetSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSizeConstraintSetInput) operationName() string {
+	return "GetSizeConstraintSet"
+}
+
 type GetSizeConstraintSetOutput struct {
 
 	// Information about the SizeConstraintSet that you specified in the

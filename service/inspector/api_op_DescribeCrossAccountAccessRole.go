@@ -36,6 +36,10 @@ type DescribeCrossAccountAccessRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCrossAccountAccessRoleInput) operationName() string {
+	return "DescribeCrossAccountAccessRole"
+}
+
 type DescribeCrossAccountAccessRoleOutput struct {
 
 	// The date when the cross-account access role was registered.

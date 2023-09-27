@@ -67,6 +67,10 @@ type BatchMeterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchMeterUsageInput) operationName() string {
+	return "BatchMeterUsage"
+}
+
 // Contains the UsageRecords processed by BatchMeterUsage and any records that
 // have failed due to transient error.
 type BatchMeterUsageOutput struct {

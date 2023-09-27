@@ -65,6 +65,10 @@ type PublishTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishTypeInput) operationName() string {
+	return "PublishType"
+}
+
 type PublishTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the public extension upon

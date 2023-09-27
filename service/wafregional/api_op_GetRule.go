@@ -48,6 +48,10 @@ type GetRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRuleInput) operationName() string {
+	return "GetRule"
+}
+
 type GetRuleOutput struct {
 
 	// Information about the Rule that you specified in the GetRule request. For more

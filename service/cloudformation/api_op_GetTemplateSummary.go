@@ -86,6 +86,10 @@ type GetTemplateSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateSummaryInput) operationName() string {
+	return "GetTemplateSummary"
+}
+
 // The output for the GetTemplateSummary action.
 type GetTemplateSummaryOutput struct {
 

@@ -52,6 +52,10 @@ type UpdateStreamingDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStreamingDistributionInput) operationName() string {
+	return "UpdateStreamingDistribution"
+}
+
 // The returned result of the corresponding request.
 type UpdateStreamingDistributionOutput struct {
 

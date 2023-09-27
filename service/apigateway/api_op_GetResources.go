@@ -58,6 +58,10 @@ type GetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcesInput) operationName() string {
+	return "GetResources"
+}
+
 // Represents a collection of Resource resources.
 type GetResourcesOutput struct {
 

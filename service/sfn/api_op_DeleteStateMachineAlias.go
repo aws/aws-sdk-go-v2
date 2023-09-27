@@ -48,6 +48,10 @@ type DeleteStateMachineAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStateMachineAliasInput) operationName() string {
+	return "DeleteStateMachineAlias"
+}
+
 type DeleteStateMachineAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

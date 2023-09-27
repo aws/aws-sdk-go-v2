@@ -63,6 +63,10 @@ type GetPositionEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPositionEstimateInput) operationName() string {
+	return "GetPositionEstimate"
+}
+
 type GetPositionEstimateOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The

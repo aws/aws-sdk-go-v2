@@ -61,6 +61,10 @@ type ListContactReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContactReferencesInput) operationName() string {
+	return "ListContactReferences"
+}
+
 type ListContactReferencesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

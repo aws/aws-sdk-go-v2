@@ -52,6 +52,7 @@
         "api_op_UpdateEventDestination.go",
         "api_op_UpdatePhoneNumber.go",
         "api_op_UpdatePool.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -104,6 +104,10 @@ type CreateLedgerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLedgerInput) operationName() string {
+	return "CreateLedger"
+}
+
 type CreateLedgerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.

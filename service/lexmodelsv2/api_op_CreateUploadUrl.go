@@ -36,6 +36,10 @@ type CreateUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUploadUrlInput) operationName() string {
+	return "CreateUploadUrl"
+}
+
 type CreateUploadUrlOutput struct {
 
 	// An identifier for a unique import job. Use it when you call the StartImport (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_StartImport.html)

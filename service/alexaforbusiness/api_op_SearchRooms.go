@@ -57,6 +57,10 @@ type SearchRoomsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchRoomsInput) operationName() string {
+	return "SearchRooms"
+}
+
 type SearchRoomsOutput struct {
 
 	// The token returned to indicate that there is more data available.

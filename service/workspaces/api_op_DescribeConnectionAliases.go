@@ -53,6 +53,10 @@ type DescribeConnectionAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectionAliasesInput) operationName() string {
+	return "DescribeConnectionAliases"
+}
+
 type DescribeConnectionAliasesOutput struct {
 
 	// Information about the specified connection aliases.

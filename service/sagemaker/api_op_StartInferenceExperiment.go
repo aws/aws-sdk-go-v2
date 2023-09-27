@@ -41,6 +41,10 @@ type StartInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInferenceExperimentInput) operationName() string {
+	return "StartInferenceExperiment"
+}
+
 type StartInferenceExperimentOutput struct {
 
 	// The ARN of the started inference experiment to start.

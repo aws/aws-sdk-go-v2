@@ -56,6 +56,10 @@ type ListServicePrincipalNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicePrincipalNamesInput) operationName() string {
+	return "ListServicePrincipalNames"
+}
+
 type ListServicePrincipalNamesOutput struct {
 
 	// Use this parameter when paginating results in a subsequent request after you

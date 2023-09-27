@@ -57,6 +57,10 @@ type ListVocabularyFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVocabularyFiltersInput) operationName() string {
+	return "ListVocabularyFilters"
+}
+
 type ListVocabularyFiltersOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are

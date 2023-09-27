@@ -47,6 +47,10 @@ type RevokeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeVpcEndpointAccessInput) operationName() string {
+	return "RevokeVpcEndpointAccess"
+}
+
 type RevokeVpcEndpointAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

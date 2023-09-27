@@ -47,6 +47,10 @@ type DeleteImageSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImageSetInput) operationName() string {
+	return "DeleteImageSet"
+}
+
 type DeleteImageSetOutput struct {
 
 	// The data store identifier.

@@ -53,6 +53,10 @@ type CancelCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelCapacityReservationInput) operationName() string {
+	return "CancelCapacityReservation"
+}
+
 type CancelCapacityReservationOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

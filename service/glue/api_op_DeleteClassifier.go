@@ -41,6 +41,10 @@ type DeleteClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClassifierInput) operationName() string {
+	return "DeleteClassifier"
+}
+
 type DeleteClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

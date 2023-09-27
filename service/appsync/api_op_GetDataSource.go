@@ -47,6 +47,10 @@ type GetDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataSourceInput) operationName() string {
+	return "GetDataSource"
+}
+
 type GetDataSourceOutput struct {
 
 	// The DataSource object.

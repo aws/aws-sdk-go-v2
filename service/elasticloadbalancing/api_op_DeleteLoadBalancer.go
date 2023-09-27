@@ -48,6 +48,10 @@ type DeleteLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLoadBalancerInput) operationName() string {
+	return "DeleteLoadBalancer"
+}
+
 // Contains the output of DeleteLoadBalancer.
 type DeleteLoadBalancerOutput struct {
 	// Metadata pertaining to the operation's result.

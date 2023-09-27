@@ -50,6 +50,10 @@ type DeleteNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNamespaceInput) operationName() string {
+	return "DeleteNamespace"
+}
+
 type DeleteNamespaceOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

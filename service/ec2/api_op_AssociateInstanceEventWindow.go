@@ -56,6 +56,10 @@ type AssociateInstanceEventWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateInstanceEventWindowInput) operationName() string {
+	return "AssociateInstanceEventWindow"
+}
+
 type AssociateInstanceEventWindowOutput struct {
 
 	// Information about the event window.

@@ -43,6 +43,10 @@ type GetVpcLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVpcLinkInput) operationName() string {
+	return "GetVpcLink"
+}
+
 type GetVpcLinkOutput struct {
 
 	// The timestamp when the VPC link was created.

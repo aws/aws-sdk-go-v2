@@ -42,6 +42,10 @@ type GetComponentPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentPolicyInput) operationName() string {
+	return "GetComponentPolicy"
+}
+
 type GetComponentPolicyOutput struct {
 
 	// The component policy.

@@ -52,6 +52,10 @@ type DescribeTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTaskDefinitionInput) operationName() string {
+	return "DescribeTaskDefinition"
+}
+
 type DescribeTaskDefinitionOutput struct {
 
 	// The metadata that's applied to the task definition to help you categorize and

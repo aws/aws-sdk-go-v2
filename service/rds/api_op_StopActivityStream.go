@@ -53,6 +53,10 @@ type StopActivityStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopActivityStreamInput) operationName() string {
+	return "StopActivityStream"
+}
+
 type StopActivityStreamOutput struct {
 
 	// The name of the Amazon Kinesis data stream used for the database activity

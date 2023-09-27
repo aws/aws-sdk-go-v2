@@ -43,6 +43,10 @@ type DescribeIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIndexInput) operationName() string {
+	return "DescribeIndex"
+}
+
 type DescribeIndexOutput struct {
 
 	// For Enterprise Edition indexes, you can choose to use additional capacity to

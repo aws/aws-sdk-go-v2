@@ -114,6 +114,10 @@ type InvokeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeEndpointInput) operationName() string {
+	return "InvokeEndpoint"
+}
+
 type InvokeEndpointOutput struct {
 
 	// Includes the inference provided by the model. For information about the format

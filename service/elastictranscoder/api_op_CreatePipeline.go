@@ -192,6 +192,10 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePipelineInput) operationName() string {
+	return "CreatePipeline"
+}
+
 // When you create a pipeline, Elastic Transcoder returns the values that you
 // specified in the request.
 type CreatePipelineOutput struct {

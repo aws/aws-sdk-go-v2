@@ -100,6 +100,10 @@ type StartMLModelTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMLModelTransformJobInput) operationName() string {
+	return "StartMLModelTransformJob"
+}
+
 type StartMLModelTransformJobOutput struct {
 
 	// The ARN of the model transform job.

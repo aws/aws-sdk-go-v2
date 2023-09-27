@@ -55,6 +55,10 @@ type ListRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoutesInput) operationName() string {
+	return "ListRoutes"
+}
+
 type ListRoutesOutput struct {
 
 	// The token for the next page of results.

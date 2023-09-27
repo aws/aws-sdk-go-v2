@@ -53,6 +53,10 @@ type UpdateCampaignOutboundCallConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCampaignOutboundCallConfigInput) operationName() string {
+	return "UpdateCampaignOutboundCallConfig"
+}
+
 type UpdateCampaignOutboundCallConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

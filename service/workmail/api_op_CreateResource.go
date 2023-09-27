@@ -59,6 +59,10 @@ type CreateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceInput) operationName() string {
+	return "CreateResource"
+}
+
 type CreateResourceOutput struct {
 
 	// The identifier of the new resource.

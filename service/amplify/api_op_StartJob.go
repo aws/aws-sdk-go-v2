@@ -73,6 +73,10 @@ type StartJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartJobInput) operationName() string {
+	return "StartJob"
+}
+
 // The result structure for the run job request.
 type StartJobOutput struct {
 

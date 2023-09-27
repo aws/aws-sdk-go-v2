@@ -55,6 +55,10 @@ type DescribeJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobExecutionInput) operationName() string {
+	return "DescribeJobExecution"
+}
+
 type DescribeJobExecutionOutput struct {
 
 	// Contains data about a job execution.

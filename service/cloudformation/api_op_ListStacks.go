@@ -50,6 +50,10 @@ type ListStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStacksInput) operationName() string {
+	return "ListStacks"
+}
+
 // The output for ListStacks action.
 type ListStacksOutput struct {
 

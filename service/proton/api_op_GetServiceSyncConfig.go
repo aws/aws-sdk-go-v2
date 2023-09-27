@@ -42,6 +42,10 @@ type GetServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceSyncConfigInput) operationName() string {
+	return "GetServiceSyncConfig"
+}
+
 type GetServiceSyncConfigOutput struct {
 
 	// The detailed data of the requested service sync configuration.

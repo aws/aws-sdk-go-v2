@@ -198,6 +198,10 @@ type UpdateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFleetInput) operationName() string {
+	return "UpdateFleet"
+}
+
 type UpdateFleetOutput struct {
 
 	// Information about the fleet.

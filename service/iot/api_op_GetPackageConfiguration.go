@@ -38,6 +38,10 @@ type GetPackageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPackageConfigurationInput) operationName() string {
+	return "GetPackageConfiguration"
+}
+
 type GetPackageConfigurationOutput struct {
 
 	// The version that is associated to a specific job.

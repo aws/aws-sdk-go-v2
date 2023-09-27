@@ -44,6 +44,10 @@ type GetAdmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAdmChannelInput) operationName() string {
+	return "GetAdmChannel"
+}
+
 type GetAdmChannelOutput struct {
 
 	// Provides information about the status and settings of the ADM (Amazon Device

@@ -48,6 +48,10 @@ type StartSchemaCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSchemaCreationInput) operationName() string {
+	return "StartSchemaCreation"
+}
+
 type StartSchemaCreationOutput struct {
 
 	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or

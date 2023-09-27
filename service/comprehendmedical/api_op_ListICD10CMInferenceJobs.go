@@ -48,6 +48,10 @@ type ListICD10CMInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListICD10CMInferenceJobsInput) operationName() string {
+	return "ListICD10CMInferenceJobs"
+}
+
 type ListICD10CMInferenceJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.

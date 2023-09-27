@@ -50,6 +50,10 @@ type DescribeLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoadBalancersInput) operationName() string {
+	return "DescribeLoadBalancers"
+}
+
 // Contains the parameters for DescribeLoadBalancers.
 type DescribeLoadBalancersOutput struct {
 

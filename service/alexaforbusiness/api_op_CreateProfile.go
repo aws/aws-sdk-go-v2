@@ -94,6 +94,10 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfileInput) operationName() string {
+	return "CreateProfile"
+}
+
 type CreateProfileOutput struct {
 
 	// The ARN of the newly created room profile in the response.

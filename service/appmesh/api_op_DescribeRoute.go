@@ -59,6 +59,10 @@ type DescribeRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRouteInput) operationName() string {
+	return "DescribeRoute"
+}
+
 type DescribeRouteOutput struct {
 
 	// The full description of your route.

@@ -42,6 +42,10 @@ type GetApprovalRuleTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApprovalRuleTemplateInput) operationName() string {
+	return "GetApprovalRuleTemplate"
+}
+
 type GetApprovalRuleTemplateOutput struct {
 
 	// The content and structure of the approval rule template.

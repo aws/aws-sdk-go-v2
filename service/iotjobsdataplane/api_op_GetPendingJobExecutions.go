@@ -42,6 +42,10 @@ type GetPendingJobExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPendingJobExecutionsInput) operationName() string {
+	return "GetPendingJobExecutions"
+}
+
 type GetPendingJobExecutionsOutput struct {
 
 	// A list of JobExecutionSummary objects with status IN_PROGRESS.

@@ -233,6 +233,10 @@ type CreateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServerInput) operationName() string {
+	return "CreateServer"
+}
+
 type CreateServerOutput struct {
 
 	// The server that is created by the request.

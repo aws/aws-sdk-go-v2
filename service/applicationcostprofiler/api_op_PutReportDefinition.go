@@ -64,6 +64,10 @@ type PutReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutReportDefinitionInput) operationName() string {
+	return "PutReportDefinition"
+}
+
 type PutReportDefinitionOutput struct {
 
 	// ID of the report.

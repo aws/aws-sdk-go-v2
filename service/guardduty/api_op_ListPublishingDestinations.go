@@ -52,6 +52,10 @@ type ListPublishingDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPublishingDestinationsInput) operationName() string {
+	return "ListPublishingDestinations"
+}
+
 type ListPublishingDestinationsOutput struct {
 
 	// A Destinations object that includes information about each publishing

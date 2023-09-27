@@ -51,6 +51,10 @@ type BatchGetNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetNamedQueryInput) operationName() string {
+	return "BatchGetNamedQuery"
+}
+
 type BatchGetNamedQueryOutput struct {
 
 	// Information about the named query IDs submitted.

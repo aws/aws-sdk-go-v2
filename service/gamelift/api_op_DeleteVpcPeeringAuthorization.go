@@ -55,6 +55,10 @@ type DeleteVpcPeeringAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcPeeringAuthorizationInput) operationName() string {
+	return "DeleteVpcPeeringAuthorization"
+}
+
 type DeleteVpcPeeringAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

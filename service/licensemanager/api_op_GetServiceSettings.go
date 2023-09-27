@@ -36,6 +36,10 @@ type GetServiceSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceSettingsInput) operationName() string {
+	return "GetServiceSettings"
+}
+
 type GetServiceSettingsOutput struct {
 
 	// Indicates whether cross-account discovery is enabled.

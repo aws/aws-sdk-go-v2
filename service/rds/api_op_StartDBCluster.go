@@ -46,6 +46,10 @@ type StartDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDBClusterInput) operationName() string {
+	return "StartDBCluster"
+}
+
 type StartDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

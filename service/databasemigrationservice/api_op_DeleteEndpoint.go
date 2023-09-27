@@ -43,6 +43,10 @@ type DeleteEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEndpointInput) operationName() string {
+	return "DeleteEndpoint"
+}
+
 type DeleteEndpointOutput struct {
 
 	// The endpoint that was deleted.

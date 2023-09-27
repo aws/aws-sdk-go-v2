@@ -60,6 +60,10 @@ type UpdateAccountAuditConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountAuditConfigurationInput) operationName() string {
+	return "UpdateAccountAuditConfiguration"
+}
+
 type UpdateAccountAuditConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

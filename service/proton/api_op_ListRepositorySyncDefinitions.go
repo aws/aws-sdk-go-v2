@@ -57,6 +57,10 @@ type ListRepositorySyncDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRepositorySyncDefinitionsInput) operationName() string {
+	return "ListRepositorySyncDefinitions"
+}
+
 type ListRepositorySyncDefinitionsOutput struct {
 
 	// An array of repository sync definitions.

@@ -48,6 +48,10 @@ type GetBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotInput) operationName() string {
+	return "GetBot"
+}
+
 type GetBotOutput struct {
 
 	// The chat bot details.

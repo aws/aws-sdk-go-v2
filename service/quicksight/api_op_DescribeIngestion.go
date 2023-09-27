@@ -52,6 +52,10 @@ type DescribeIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIngestionInput) operationName() string {
+	return "DescribeIngestion"
+}
+
 type DescribeIngestionOutput struct {
 
 	// Information about the ingestion.

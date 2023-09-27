@@ -53,6 +53,10 @@ type RejectTransitGatewayMulticastDomainAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectTransitGatewayMulticastDomainAssociationsInput) operationName() string {
+	return "RejectTransitGatewayMulticastDomainAssociations"
+}
+
 type RejectTransitGatewayMulticastDomainAssociationsOutput struct {
 
 	// Information about the multicast domain associations.

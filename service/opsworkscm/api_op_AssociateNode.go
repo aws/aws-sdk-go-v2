@@ -74,6 +74,10 @@ type AssociateNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateNodeInput) operationName() string {
+	return "AssociateNode"
+}
+
 type AssociateNodeOutput struct {
 
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus API

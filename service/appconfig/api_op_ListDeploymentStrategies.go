@@ -44,6 +44,10 @@ type ListDeploymentStrategiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeploymentStrategiesInput) operationName() string {
+	return "ListDeploymentStrategies"
+}
+
 type ListDeploymentStrategiesOutput struct {
 
 	// The elements from this collection.

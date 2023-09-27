@@ -47,6 +47,10 @@ type DisableEbsEncryptionByDefaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableEbsEncryptionByDefaultInput) operationName() string {
+	return "DisableEbsEncryptionByDefault"
+}
+
 type DisableEbsEncryptionByDefaultOutput struct {
 
 	// The updated status of encryption by default.

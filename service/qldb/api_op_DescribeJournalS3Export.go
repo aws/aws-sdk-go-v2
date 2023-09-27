@@ -54,6 +54,10 @@ type DescribeJournalS3ExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJournalS3ExportInput) operationName() string {
+	return "DescribeJournalS3Export"
+}
+
 type DescribeJournalS3ExportOutput struct {
 
 	// Information about the journal export job returned by a DescribeJournalS3Export

@@ -59,6 +59,10 @@ type ListAssetRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssetRelationshipsInput) operationName() string {
+	return "ListAssetRelationships"
+}
+
 type ListAssetRelationshipsOutput struct {
 
 	// A list that summarizes each asset relationship.

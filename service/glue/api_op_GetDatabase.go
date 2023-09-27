@@ -47,6 +47,10 @@ type GetDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDatabaseInput) operationName() string {
+	return "GetDatabase"
+}
+
 type GetDatabaseOutput struct {
 
 	// The definition of the specified database in the Data Catalog.

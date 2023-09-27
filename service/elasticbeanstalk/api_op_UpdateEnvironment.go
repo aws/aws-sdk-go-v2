@@ -103,6 +103,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 // Describes the properties of an environment.
 type UpdateEnvironmentOutput struct {
 

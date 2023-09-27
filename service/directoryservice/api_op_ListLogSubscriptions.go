@@ -50,6 +50,10 @@ type ListLogSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLogSubscriptionsInput) operationName() string {
+	return "ListLogSubscriptions"
+}
+
 type ListLogSubscriptionsOutput struct {
 
 	// A list of active LogSubscription objects for calling the Amazon Web Services

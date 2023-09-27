@@ -55,6 +55,10 @@ type ModifyInstanceMaintenanceOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceMaintenanceOptionsInput) operationName() string {
+	return "ModifyInstanceMaintenanceOptions"
+}
+
 type ModifyInstanceMaintenanceOptionsOutput struct {
 
 	// Provides information on the current automatic recovery behavior of your

@@ -90,6 +90,10 @@ type StartKeyPhrasesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartKeyPhrasesDetectionJobInput) operationName() string {
+	return "StartKeyPhrasesDetectionJob"
+}
+
 type StartKeyPhrasesDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique,

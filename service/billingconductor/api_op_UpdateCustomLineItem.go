@@ -55,6 +55,10 @@ type UpdateCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCustomLineItemInput) operationName() string {
+	return "UpdateCustomLineItem"
+}
+
 type UpdateCustomLineItemOutput struct {
 
 	// The ARN of the successfully updated custom line item.

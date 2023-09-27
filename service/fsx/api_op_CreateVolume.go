@@ -62,6 +62,10 @@ type CreateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVolumeInput) operationName() string {
+	return "CreateVolume"
+}
+
 type CreateVolumeOutput struct {
 
 	// Returned after a successful CreateVolume API operation, describing the volume

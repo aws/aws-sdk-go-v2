@@ -95,6 +95,10 @@ type UpdateAnomalySubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnomalySubscriptionInput) operationName() string {
+	return "UpdateAnomalySubscription"
+}
+
 type UpdateAnomalySubscriptionOutput struct {
 
 	// A cost anomaly subscription ARN.

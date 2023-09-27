@@ -53,6 +53,10 @@ type ListFleetsForVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFleetsForVehicleInput) operationName() string {
+	return "ListFleetsForVehicle"
+}
+
 type ListFleetsForVehicleOutput struct {
 
 	// A list of fleet IDs that the vehicle is associated with.

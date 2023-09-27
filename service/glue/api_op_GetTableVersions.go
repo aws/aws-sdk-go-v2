@@ -59,6 +59,10 @@ type GetTableVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableVersionsInput) operationName() string {
+	return "GetTableVersions"
+}
+
 type GetTableVersionsOutput struct {
 
 	// A continuation token, if the list of available versions does not include the

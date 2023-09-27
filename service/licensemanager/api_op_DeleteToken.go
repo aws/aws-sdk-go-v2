@@ -41,6 +41,10 @@ type DeleteTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTokenInput) operationName() string {
+	return "DeleteToken"
+}
+
 type DeleteTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

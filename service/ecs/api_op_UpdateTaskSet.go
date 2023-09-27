@@ -62,6 +62,10 @@ type UpdateTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTaskSetInput) operationName() string {
+	return "UpdateTaskSet"
+}
+
 type UpdateTaskSetOutput struct {
 
 	// Details about the task set.

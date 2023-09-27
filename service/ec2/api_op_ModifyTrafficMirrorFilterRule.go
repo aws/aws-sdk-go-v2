@@ -83,6 +83,10 @@ type ModifyTrafficMirrorFilterRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTrafficMirrorFilterRuleInput) operationName() string {
+	return "ModifyTrafficMirrorFilterRule"
+}
+
 type ModifyTrafficMirrorFilterRuleOutput struct {
 
 	// Modifies a Traffic Mirror rule.

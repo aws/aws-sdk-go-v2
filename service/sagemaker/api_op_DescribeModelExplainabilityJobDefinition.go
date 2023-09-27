@@ -44,6 +44,10 @@ type DescribeModelExplainabilityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelExplainabilityJobDefinitionInput) operationName() string {
+	return "DescribeModelExplainabilityJobDefinition"
+}
+
 type DescribeModelExplainabilityJobDefinitionOutput struct {
 
 	// The time at which the model explainability job was created.

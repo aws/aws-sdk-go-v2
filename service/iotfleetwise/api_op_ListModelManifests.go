@@ -53,6 +53,10 @@ type ListModelManifestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelManifestsInput) operationName() string {
+	return "ListModelManifests"
+}
+
 type ListModelManifestsOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

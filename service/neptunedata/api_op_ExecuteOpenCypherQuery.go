@@ -55,6 +55,10 @@ type ExecuteOpenCypherQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteOpenCypherQueryInput) operationName() string {
+	return "ExecuteOpenCypherQuery"
+}
+
 type ExecuteOpenCypherQueryOutput struct {
 
 	// The openCypherquery results.

@@ -58,6 +58,10 @@ type CreateInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInsightInput) operationName() string {
+	return "CreateInsight"
+}
+
 type CreateInsightOutput struct {
 
 	// The ARN of the insight created.

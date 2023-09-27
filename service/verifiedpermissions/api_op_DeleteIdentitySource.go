@@ -51,6 +51,10 @@ type DeleteIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIdentitySourceInput) operationName() string {
+	return "DeleteIdentitySource"
+}
+
 type DeleteIdentitySourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

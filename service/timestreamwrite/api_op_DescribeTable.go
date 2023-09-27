@@ -52,6 +52,10 @@ type DescribeTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTableInput) operationName() string {
+	return "DescribeTable"
+}
+
 type DescribeTableOutput struct {
 
 	// The Timestream table.

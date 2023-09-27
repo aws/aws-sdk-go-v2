@@ -69,6 +69,10 @@ type GetCommentsForPullRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCommentsForPullRequestInput) operationName() string {
+	return "GetCommentsForPullRequest"
+}
+
 type GetCommentsForPullRequestOutput struct {
 
 	// An array of comment objects on the pull request.

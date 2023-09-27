@@ -58,6 +58,10 @@ type StartMaintenanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMaintenanceInput) operationName() string {
+	return "StartMaintenance"
+}
+
 type StartMaintenanceOutput struct {
 
 	// Contains the response to a StartMaintenance request.

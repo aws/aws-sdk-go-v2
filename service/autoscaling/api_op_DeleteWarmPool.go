@@ -49,6 +49,10 @@ type DeleteWarmPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWarmPoolInput) operationName() string {
+	return "DeleteWarmPool"
+}
+
 type DeleteWarmPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

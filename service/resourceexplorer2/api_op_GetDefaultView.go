@@ -37,6 +37,10 @@ type GetDefaultViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDefaultViewInput) operationName() string {
+	return "GetDefaultView"
+}
+
 type GetDefaultViewOutput struct {
 
 	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

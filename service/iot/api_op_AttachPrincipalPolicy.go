@@ -54,6 +54,10 @@ type AttachPrincipalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachPrincipalPolicyInput) operationName() string {
+	return "AttachPrincipalPolicy"
+}
+
 type AttachPrincipalPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

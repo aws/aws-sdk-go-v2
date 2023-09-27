@@ -79,6 +79,10 @@ type AddApplicationOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationOutputInput) operationName() string {
+	return "AddApplicationOutput"
+}
+
 type AddApplicationOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

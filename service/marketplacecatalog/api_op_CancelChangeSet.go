@@ -50,6 +50,10 @@ type CancelChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelChangeSetInput) operationName() string {
+	return "CancelChangeSet"
+}
+
 type CancelChangeSetOutput struct {
 
 	// The ARN associated with the change set referenced in this request.

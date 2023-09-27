@@ -48,6 +48,10 @@ type ListCampaignsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCampaignsInput) operationName() string {
+	return "ListCampaigns"
+}
+
 // ListCampaignsResponse
 type ListCampaignsOutput struct {
 

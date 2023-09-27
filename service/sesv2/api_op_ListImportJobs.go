@@ -54,6 +54,10 @@ type ListImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportJobsInput) operationName() string {
+	return "ListImportJobs"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type ListImportJobsOutput struct {

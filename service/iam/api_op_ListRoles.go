@@ -73,6 +73,10 @@ type ListRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRolesInput) operationName() string {
+	return "ListRoles"
+}
+
 // Contains the response to a successful ListRoles request.
 type ListRolesOutput struct {
 

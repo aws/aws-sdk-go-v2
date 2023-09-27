@@ -52,6 +52,10 @@ type DisassociateMergedGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateMergedGraphqlApiInput) operationName() string {
+	return "DisassociateMergedGraphqlApi"
+}
+
 type DisassociateMergedGraphqlApiOutput struct {
 
 	// The state of the source API association.

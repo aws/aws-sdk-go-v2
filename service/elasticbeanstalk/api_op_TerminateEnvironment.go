@@ -63,6 +63,10 @@ type TerminateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateEnvironmentInput) operationName() string {
+	return "TerminateEnvironment"
+}
+
 // Describes the properties of an environment.
 type TerminateEnvironmentOutput struct {
 

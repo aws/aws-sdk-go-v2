@@ -53,6 +53,10 @@ type BatchUnsuspendUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUnsuspendUserInput) operationName() string {
+	return "BatchUnsuspendUser"
+}
+
 type BatchUnsuspendUserOutput struct {
 
 	// If the BatchUnsuspendUser action fails for one or more of the user IDs in the

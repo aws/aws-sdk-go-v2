@@ -52,6 +52,10 @@ type ListReferenceImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReferenceImportJobsInput) operationName() string {
+	return "ListReferenceImportJobs"
+}
+
 type ListReferenceImportJobsOutput struct {
 
 	// A lis of jobs.

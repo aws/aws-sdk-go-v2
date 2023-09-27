@@ -49,6 +49,10 @@ type GetAuthorizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAuthorizersInput) operationName() string {
+	return "GetAuthorizers"
+}
+
 type GetAuthorizersOutput struct {
 
 	// The elements from this collection.

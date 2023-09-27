@@ -42,6 +42,10 @@ type PauseCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PauseCampaignInput) operationName() string {
+	return "PauseCampaign"
+}
+
 type PauseCampaignOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

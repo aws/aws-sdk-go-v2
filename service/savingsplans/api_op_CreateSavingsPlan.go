@@ -64,6 +64,10 @@ type CreateSavingsPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSavingsPlanInput) operationName() string {
+	return "CreateSavingsPlan"
+}
+
 type CreateSavingsPlanOutput struct {
 
 	// The ID of the Savings Plan.

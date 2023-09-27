@@ -50,6 +50,10 @@ type DeleteNatGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNatGatewayInput) operationName() string {
+	return "DeleteNatGateway"
+}
+
 type DeleteNatGatewayOutput struct {
 
 	// The ID of the NAT gateway.

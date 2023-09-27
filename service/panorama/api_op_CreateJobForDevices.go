@@ -51,6 +51,10 @@ type CreateJobForDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateJobForDevicesInput) operationName() string {
+	return "CreateJobForDevices"
+}
+
 type CreateJobForDevicesOutput struct {
 
 	// A list of jobs.

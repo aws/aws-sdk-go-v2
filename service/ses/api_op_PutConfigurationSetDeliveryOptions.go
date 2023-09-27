@@ -47,6 +47,10 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationSetDeliveryOptionsInput) operationName() string {
+	return "PutConfigurationSetDeliveryOptions"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetDeliveryOptionsOutput struct {

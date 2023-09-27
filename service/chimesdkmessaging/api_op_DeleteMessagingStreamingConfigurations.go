@@ -43,6 +43,10 @@ type DeleteMessagingStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMessagingStreamingConfigurationsInput) operationName() string {
+	return "DeleteMessagingStreamingConfigurations"
+}
+
 type DeleteMessagingStreamingConfigurationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

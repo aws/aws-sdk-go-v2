@@ -54,6 +54,10 @@ type GetDeliverabilityDashboardOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeliverabilityDashboardOptionsInput) operationName() string {
+	return "GetDeliverabilityDashboardOptions"
+}
+
 // An object that shows the status of the Deliverability dashboard for your Amazon
 // Pinpoint account.
 type GetDeliverabilityDashboardOptionsOutput struct {

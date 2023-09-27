@@ -58,6 +58,10 @@ type DeleteHubContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHubContentInput) operationName() string {
+	return "DeleteHubContent"
+}
+
 type DeleteHubContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

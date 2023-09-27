@@ -73,6 +73,10 @@ type CreateTransitGatewayPeeringAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayPeeringAttachmentInput) operationName() string {
+	return "CreateTransitGatewayPeeringAttachment"
+}
+
 type CreateTransitGatewayPeeringAttachmentOutput struct {
 
 	// The transit gateway peering attachment.

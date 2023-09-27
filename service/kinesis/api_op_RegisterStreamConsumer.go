@@ -63,6 +63,10 @@ type RegisterStreamConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterStreamConsumerInput) operationName() string {
+	return "RegisterStreamConsumer"
+}
+
 type RegisterStreamConsumerOutput struct {
 
 	// An object that represents the details of the consumer you registered. When you

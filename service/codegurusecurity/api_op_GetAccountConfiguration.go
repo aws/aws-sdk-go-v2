@@ -36,6 +36,10 @@ type GetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountConfigurationInput) operationName() string {
+	return "GetAccountConfiguration"
+}
+
 type GetAccountConfigurationOutput struct {
 
 	// An EncryptionConfig object that contains the KMS key ARN to use for encryption.

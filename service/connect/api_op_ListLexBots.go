@@ -54,6 +54,10 @@ type ListLexBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLexBotsInput) operationName() string {
+	return "ListLexBots"
+}
+
 type ListLexBotsOutput struct {
 
 	// The names and Amazon Web Services Regions of the Amazon Lex bots associated

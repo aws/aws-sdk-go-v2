@@ -52,6 +52,10 @@ type ListManagedInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedInsightRulesInput) operationName() string {
+	return "ListManagedInsightRules"
+}
+
 type ListManagedInsightRulesOutput struct {
 
 	// The managed rules that are available for the specified Amazon Web Services

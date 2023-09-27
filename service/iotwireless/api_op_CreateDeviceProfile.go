@@ -56,6 +56,10 @@ type CreateDeviceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeviceProfileInput) operationName() string {
+	return "CreateDeviceProfile"
+}
+
 type CreateDeviceProfileOutput struct {
 
 	// The Amazon Resource Name of the new resource.

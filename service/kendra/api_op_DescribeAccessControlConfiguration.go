@@ -51,6 +51,10 @@ type DescribeAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccessControlConfigurationInput) operationName() string {
+	return "DescribeAccessControlConfiguration"
+}
+
 type DescribeAccessControlConfigurationOutput struct {
 
 	// The name for the access control configuration.

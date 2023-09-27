@@ -46,6 +46,10 @@ type DeleteCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomVerificationEmailTemplateInput) operationName() string {
+	return "DeleteCustomVerificationEmailTemplate"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type DeleteCustomVerificationEmailTemplateOutput struct {

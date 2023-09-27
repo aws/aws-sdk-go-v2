@@ -63,6 +63,10 @@ type DescribeSourceRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSourceRegionsInput) operationName() string {
+	return "DescribeSourceRegions"
+}
+
 // Contains the result of a successful invocation of the DescribeSourceRegions
 // action.
 type DescribeSourceRegionsOutput struct {

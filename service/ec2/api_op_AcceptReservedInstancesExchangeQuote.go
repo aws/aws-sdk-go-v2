@@ -55,6 +55,10 @@ type AcceptReservedInstancesExchangeQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptReservedInstancesExchangeQuoteInput) operationName() string {
+	return "AcceptReservedInstancesExchangeQuote"
+}
+
 // The result of the exchange and whether it was successful .
 type AcceptReservedInstancesExchangeQuoteOutput struct {
 

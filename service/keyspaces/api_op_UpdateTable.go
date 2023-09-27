@@ -105,6 +105,10 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTableInput) operationName() string {
+	return "UpdateTable"
+}
+
 type UpdateTableOutput struct {
 
 	// The Amazon Resource Name (ARN) of the modified table.

@@ -57,6 +57,10 @@ type DeleteBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketInput) operationName() string {
+	return "DeleteBucket"
+}
+
 type DeleteBucketOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

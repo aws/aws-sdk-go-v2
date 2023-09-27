@@ -58,6 +58,10 @@ type DescribeEngineDefaultParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEngineDefaultParametersInput) operationName() string {
+	return "DescribeEngineDefaultParameters"
+}
+
 type DescribeEngineDefaultParametersOutput struct {
 
 	// Represents the output of a DescribeEngineDefaultParameters operation.

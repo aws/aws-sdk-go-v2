@@ -49,6 +49,10 @@ type DescribeSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSourceServersInput) operationName() string {
+	return "DescribeSourceServers"
+}
+
 type DescribeSourceServersOutput struct {
 
 	// Request to filter Source Servers list by item.

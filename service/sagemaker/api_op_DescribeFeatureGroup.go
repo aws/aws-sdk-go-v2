@@ -49,6 +49,10 @@ type DescribeFeatureGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFeatureGroupInput) operationName() string {
+	return "DescribeFeatureGroup"
+}
+
 type DescribeFeatureGroupOutput struct {
 
 	// A timestamp indicating when SageMaker created the FeatureGroup .

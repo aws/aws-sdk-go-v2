@@ -45,6 +45,10 @@ type GetGameConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGameConfigurationInput) operationName() string {
+	return "GetGameConfiguration"
+}
+
 type GetGameConfigurationOutput struct {
 
 	// Details about the game configuration.

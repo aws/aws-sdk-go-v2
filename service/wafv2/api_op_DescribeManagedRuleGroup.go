@@ -68,6 +68,10 @@ type DescribeManagedRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeManagedRuleGroupInput) operationName() string {
+	return "DescribeManagedRuleGroup"
+}
+
 type DescribeManagedRuleGroupOutput struct {
 
 	// The labels that one or more rules in this rule group add to matching web

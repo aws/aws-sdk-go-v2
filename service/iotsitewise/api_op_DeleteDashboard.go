@@ -46,6 +46,10 @@ type DeleteDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDashboardInput) operationName() string {
+	return "DeleteDashboard"
+}
+
 type DeleteDashboardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

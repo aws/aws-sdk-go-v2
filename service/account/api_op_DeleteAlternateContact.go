@@ -67,6 +67,10 @@ type DeleteAlternateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAlternateContactInput) operationName() string {
+	return "DeleteAlternateContact"
+}
+
 type DeleteAlternateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

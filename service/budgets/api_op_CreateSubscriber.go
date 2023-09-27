@@ -61,6 +61,10 @@ type CreateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubscriberInput) operationName() string {
+	return "CreateSubscriber"
+}
+
 // Response of CreateSubscriber
 type CreateSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.

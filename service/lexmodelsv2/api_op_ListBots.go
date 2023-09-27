@@ -58,6 +58,10 @@ type ListBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBotsInput) operationName() string {
+	return "ListBots"
+}
+
 type ListBotsOutput struct {
 
 	// Summary information for the bots that meet the filter criteria specified in the

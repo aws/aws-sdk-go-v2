@@ -104,6 +104,10 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateJobInput) operationName() string {
+	return "CreateJob"
+}
+
 type CreateJobOutput struct {
 
 	// The ID for this job. Amazon S3 generates this ID automatically and returns it

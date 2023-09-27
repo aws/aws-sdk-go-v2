@@ -60,6 +60,10 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMaintenanceWindowScheduleInput) operationName() string {
+	return "DescribeMaintenanceWindowSchedule"
+}
+
 type DescribeMaintenanceWindowScheduleOutput struct {
 
 	// The token for the next set of items to return. (You use this token in the next

@@ -51,6 +51,10 @@ type SetLocalConsolePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetLocalConsolePasswordInput) operationName() string {
+	return "SetLocalConsolePassword"
+}
+
 type SetLocalConsolePasswordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

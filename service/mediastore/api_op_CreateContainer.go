@@ -55,6 +55,10 @@ type CreateContainerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContainerInput) operationName() string {
+	return "CreateContainer"
+}
+
 type CreateContainerOutput struct {
 
 	// ContainerARN: The Amazon Resource Name (ARN) of the newly created container.

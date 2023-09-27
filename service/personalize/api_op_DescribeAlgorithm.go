@@ -42,6 +42,10 @@ type DescribeAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlgorithmInput) operationName() string {
+	return "DescribeAlgorithm"
+}
+
 type DescribeAlgorithmOutput struct {
 
 	// A listing of the properties of the algorithm.

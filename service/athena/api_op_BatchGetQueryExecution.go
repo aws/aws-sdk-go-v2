@@ -48,6 +48,10 @@ type BatchGetQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetQueryExecutionInput) operationName() string {
+	return "BatchGetQueryExecution"
+}
+
 type BatchGetQueryExecutionOutput struct {
 
 	// Information about a query execution.

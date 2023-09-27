@@ -83,6 +83,10 @@ type PutFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutFileInput) operationName() string {
+	return "PutFile"
+}
+
 type PutFileOutput struct {
 
 	// The ID of the blob, which is its SHA-1 pointer.

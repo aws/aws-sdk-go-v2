@@ -55,6 +55,10 @@ type StartSimulationJobBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSimulationJobBatchInput) operationName() string {
+	return "StartSimulationJobBatch"
+}
+
 type StartSimulationJobBatchOutput struct {
 
 	// The Amazon Resource Name (arn) of the batch.

@@ -59,6 +59,10 @@ type CreateClusterSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterSecurityGroupInput) operationName() string {
+	return "CreateClusterSecurityGroup"
+}
+
 type CreateClusterSecurityGroupOutput struct {
 
 	// Describes a security group.

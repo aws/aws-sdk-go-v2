@@ -339,6 +339,10 @@ type PutObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectInput) operationName() string {
+	return "PutObject"
+}
+
 type PutObjectOutput struct {
 
 	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side

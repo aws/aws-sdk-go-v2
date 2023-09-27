@@ -43,6 +43,10 @@ type DeleteMigrationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMigrationProjectInput) operationName() string {
+	return "DeleteMigrationProject"
+}
+
 type DeleteMigrationProjectOutput struct {
 
 	// The migration project that was deleted.

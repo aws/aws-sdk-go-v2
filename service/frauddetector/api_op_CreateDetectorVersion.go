@@ -68,6 +68,10 @@ type CreateDetectorVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDetectorVersionInput) operationName() string {
+	return "CreateDetectorVersion"
+}
+
 type CreateDetectorVersionOutput struct {
 
 	// The ID for the created version's parent detector.

@@ -98,6 +98,10 @@ type RestoreTableToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreTableToPointInTimeInput) operationName() string {
+	return "RestoreTableToPointInTime"
+}
+
 type RestoreTableToPointInTimeOutput struct {
 
 	// Represents the properties of a table.

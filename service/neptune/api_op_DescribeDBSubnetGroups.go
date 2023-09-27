@@ -57,6 +57,10 @@ type DescribeDBSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBSubnetGroupsInput) operationName() string {
+	return "DescribeDBSubnetGroups"
+}
+
 type DescribeDBSubnetGroupsOutput struct {
 
 	// A list of DBSubnetGroup instances.

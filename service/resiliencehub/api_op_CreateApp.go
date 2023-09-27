@@ -85,6 +85,10 @@ type CreateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInput) operationName() string {
+	return "CreateApp"
+}
+
 type CreateAppOutput struct {
 
 	// The created application returned as an object with details including compliance

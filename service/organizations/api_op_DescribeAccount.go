@@ -48,6 +48,10 @@ type DescribeAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountInput) operationName() string {
+	return "DescribeAccount"
+}
+
 type DescribeAccountOutput struct {
 
 	// A structure that contains information about the requested account.

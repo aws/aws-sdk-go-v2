@@ -82,6 +82,10 @@ type ImportModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportModelVersionInput) operationName() string {
+	return "ImportModelVersion"
+}
+
 type ImportModelVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model being created.

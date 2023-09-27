@@ -42,6 +42,10 @@ type BatchGetBuildBatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetBuildBatchesInput) operationName() string {
+	return "BatchGetBuildBatches"
+}
+
 type BatchGetBuildBatchesOutput struct {
 
 	// An array of BuildBatch objects that represent the retrieved batch builds.

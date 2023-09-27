@@ -50,6 +50,10 @@ type DescribeForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeForecastInput) operationName() string {
+	return "DescribeForecast"
+}
+
 type DescribeForecastOutput struct {
 
 	// When the forecast creation task was created.

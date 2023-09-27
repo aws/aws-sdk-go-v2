@@ -51,6 +51,10 @@ type RevokeEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeEndpointAccessInput) operationName() string {
+	return "RevokeEndpointAccess"
+}
+
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
 // endpoint access to a cluster across Amazon Web Services accounts.
 type RevokeEndpointAccessOutput struct {

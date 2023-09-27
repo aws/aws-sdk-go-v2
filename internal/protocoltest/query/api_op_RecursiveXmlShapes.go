@@ -30,6 +30,10 @@ type RecursiveXmlShapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecursiveXmlShapesInput) operationName() string {
+	return "RecursiveXmlShapes"
+}
+
 type RecursiveXmlShapesOutput struct {
 	Nested *types.RecursiveXmlShapesOutputNested1
 

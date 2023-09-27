@@ -110,6 +110,10 @@ type SearchPlaceIndexForTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchPlaceIndexForTextInput) operationName() string {
+	return "SearchPlaceIndexForText"
+}
+
 type SearchPlaceIndexForTextOutput struct {
 
 	// A list of Places matching the input text. Each result contains additional

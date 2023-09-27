@@ -42,6 +42,10 @@ type GetClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClusterInput) operationName() string {
+	return "GetCluster"
+}
+
 type GetClusterOutput struct {
 
 	// Returns information about a specific Elastic DocumentDB cluster.

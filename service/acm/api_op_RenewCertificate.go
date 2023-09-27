@@ -50,6 +50,10 @@ type RenewCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RenewCertificateInput) operationName() string {
+	return "RenewCertificate"
+}
+
 type RenewCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

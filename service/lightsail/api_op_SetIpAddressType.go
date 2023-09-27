@@ -59,6 +59,10 @@ type SetIpAddressTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetIpAddressTypeInput) operationName() string {
+	return "SetIpAddressType"
+}
+
 type SetIpAddressTypeOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

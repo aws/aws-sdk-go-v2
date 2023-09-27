@@ -49,6 +49,10 @@ type DisassociateUserFromPermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateUserFromPermissionGroupInput) operationName() string {
+	return "DisassociateUserFromPermissionGroup"
+}
+
 type DisassociateUserFromPermissionGroupOutput struct {
 
 	// The returned status code of the response.

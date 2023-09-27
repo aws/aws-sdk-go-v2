@@ -43,6 +43,10 @@ type GetServiceEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceEndpointInput) operationName() string {
+	return "GetServiceEndpoint"
+}
+
 type GetServiceEndpointOutput struct {
 
 	// The Root CA of the server trust certificate.

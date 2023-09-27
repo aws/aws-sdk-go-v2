@@ -52,6 +52,10 @@ type UpdateLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLoggingConfigurationInput) operationName() string {
+	return "UpdateLoggingConfiguration"
+}
+
 // Represents the output of an UpdateLoggingConfiguration operation.
 type UpdateLoggingConfigurationOutput struct {
 

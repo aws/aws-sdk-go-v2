@@ -45,6 +45,10 @@ type DescribeInferenceRecommendationsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInferenceRecommendationsJobInput) operationName() string {
+	return "DescribeInferenceRecommendationsJob"
+}
+
 type DescribeInferenceRecommendationsJobOutput struct {
 
 	// A timestamp that shows when the job was created.

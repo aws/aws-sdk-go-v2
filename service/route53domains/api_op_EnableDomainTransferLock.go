@@ -46,6 +46,10 @@ type EnableDomainTransferLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableDomainTransferLockInput) operationName() string {
+	return "EnableDomainTransferLock"
+}
+
 // The EnableDomainTransferLock response includes the following elements.
 type EnableDomainTransferLockOutput struct {
 

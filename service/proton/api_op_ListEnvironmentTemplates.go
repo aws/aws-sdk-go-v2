@@ -45,6 +45,10 @@ type ListEnvironmentTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentTemplatesInput) operationName() string {
+	return "ListEnvironmentTemplates"
+}
+
 type ListEnvironmentTemplatesOutput struct {
 
 	// An array of environment templates with detail data.

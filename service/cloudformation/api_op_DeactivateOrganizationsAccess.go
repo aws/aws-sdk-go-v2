@@ -37,6 +37,10 @@ type DeactivateOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateOrganizationsAccessInput) operationName() string {
+	return "DeactivateOrganizationsAccess"
+}
+
 type DeactivateOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

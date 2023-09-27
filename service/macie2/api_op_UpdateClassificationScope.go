@@ -46,6 +46,10 @@ type UpdateClassificationScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClassificationScopeInput) operationName() string {
+	return "UpdateClassificationScope"
+}
+
 type UpdateClassificationScopeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

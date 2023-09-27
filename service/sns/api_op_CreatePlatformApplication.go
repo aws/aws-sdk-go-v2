@@ -79,6 +79,10 @@ type CreatePlatformApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePlatformApplicationInput) operationName() string {
+	return "CreatePlatformApplication"
+}
+
 // Response from CreatePlatformApplication action.
 type CreatePlatformApplicationOutput struct {
 

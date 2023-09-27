@@ -78,6 +78,10 @@ type ListTrialComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrialComponentsInput) operationName() string {
+	return "ListTrialComponents"
+}
+
 type ListTrialComponentsOutput struct {
 
 	// A token for getting the next set of components, if there are any.

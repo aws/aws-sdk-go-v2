@@ -50,6 +50,10 @@ type DetectKeyPhrasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectKeyPhrasesInput) operationName() string {
+	return "DetectKeyPhrases"
+}
+
 type DetectKeyPhrasesOutput struct {
 
 	// A collection of key phrases that Amazon Comprehend identified in the input

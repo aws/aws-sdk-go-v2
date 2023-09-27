@@ -67,6 +67,10 @@ type CreateReplicationSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationSubnetGroupInput) operationName() string {
+	return "CreateReplicationSubnetGroup"
+}
+
 type CreateReplicationSubnetGroupOutput struct {
 
 	// The replication subnet group that was created.

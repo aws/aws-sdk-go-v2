@@ -68,6 +68,10 @@ type DescribeMountTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMountTargetsInput) operationName() string {
+	return "DescribeMountTargets"
+}
+
 type DescribeMountTargetsOutput struct {
 
 	// If the request included the Marker , the response returns that value in this

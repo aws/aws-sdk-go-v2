@@ -85,6 +85,10 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateJobInput) operationName() string {
+	return "CreateJob"
+}
+
 // The CreateJobResponse structure.
 type CreateJobOutput struct {
 

@@ -60,6 +60,10 @@ type DeleteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMembersInput) operationName() string {
+	return "DeleteMembers"
+}
+
 type DeleteMembersOutput struct {
 
 	// The list of Amazon Web Services account identifiers for the member accounts

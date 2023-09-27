@@ -49,6 +49,10 @@ type PromoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PromoteInput) operationName() string {
+	return "Promote"
+}
+
 type PromoteOutput struct {
 
 	// The unique ID that Amazon MQ generates for the broker.

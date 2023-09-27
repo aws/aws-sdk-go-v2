@@ -89,6 +89,10 @@ type CreateAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppMonitorInput) operationName() string {
+	return "CreateAppMonitor"
+}
+
 type CreateAppMonitorOutput struct {
 
 	// The unique ID of the new app monitor.

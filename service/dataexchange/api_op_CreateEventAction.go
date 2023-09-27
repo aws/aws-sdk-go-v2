@@ -48,6 +48,10 @@ type CreateEventActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventActionInput) operationName() string {
+	return "CreateEventAction"
+}
+
 type CreateEventActionOutput struct {
 
 	// What occurs after a certain event.

@@ -41,6 +41,10 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartJobRunInput) operationName() string {
+	return "StartJobRun"
+}
+
 type StartJobRunOutput struct {
 
 	// A system-generated identifier for this particular job run.

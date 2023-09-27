@@ -78,6 +78,10 @@ type GetIpamResourceCidrsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIpamResourceCidrsInput) operationName() string {
+	return "GetIpamResourceCidrs"
+}
+
 type GetIpamResourceCidrsOutput struct {
 
 	// The resource CIDRs.

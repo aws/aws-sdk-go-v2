@@ -65,6 +65,10 @@ type DeleteLaunchTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLaunchTemplateVersionsInput) operationName() string {
+	return "DeleteLaunchTemplateVersions"
+}
+
 type DeleteLaunchTemplateVersionsOutput struct {
 
 	// Information about the launch template versions that were successfully deleted.

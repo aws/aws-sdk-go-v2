@@ -86,6 +86,10 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateEmbedUrlForRegisteredUserInput) operationName() string {
+	return "GenerateEmbedUrlForRegisteredUser"
+}
+
 type GenerateEmbedUrlForRegisteredUserOutput struct {
 
 	// The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, or

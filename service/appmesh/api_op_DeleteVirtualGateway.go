@@ -55,6 +55,10 @@ type DeleteVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualGatewayInput) operationName() string {
+	return "DeleteVirtualGateway"
+}
+
 type DeleteVirtualGatewayOutput struct {
 
 	// The virtual gateway that was deleted.

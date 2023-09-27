@@ -47,6 +47,10 @@ type FlushStageCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FlushStageCacheInput) operationName() string {
+	return "FlushStageCache"
+}
+
 type FlushStageCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,6 +55,10 @@ type SwitchoverBlueGreenDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SwitchoverBlueGreenDeploymentInput) operationName() string {
+	return "SwitchoverBlueGreenDeployment"
+}
+
 type SwitchoverBlueGreenDeploymentOutput struct {
 
 	// Details about a blue/green deployment. For more information, see Using Amazon

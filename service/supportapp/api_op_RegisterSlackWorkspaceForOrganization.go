@@ -68,6 +68,10 @@ type RegisterSlackWorkspaceForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterSlackWorkspaceForOrganizationInput) operationName() string {
+	return "RegisterSlackWorkspaceForOrganization"
+}
+
 type RegisterSlackWorkspaceForOrganizationOutput struct {
 
 	// Whether the Amazon Web Services account is a management or member account

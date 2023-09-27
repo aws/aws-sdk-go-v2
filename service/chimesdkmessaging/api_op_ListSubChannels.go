@@ -56,6 +56,10 @@ type ListSubChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubChannelsInput) operationName() string {
+	return "ListSubChannels"
+}
+
 type ListSubChannelsOutput struct {
 
 	// The ARN of elastic channel.

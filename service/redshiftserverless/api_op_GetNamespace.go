@@ -42,6 +42,10 @@ type GetNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNamespaceInput) operationName() string {
+	return "GetNamespace"
+}
+
 type GetNamespaceOutput struct {
 
 	// The returned namespace object.

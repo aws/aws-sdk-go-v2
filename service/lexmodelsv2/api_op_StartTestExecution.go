@@ -59,6 +59,10 @@ type StartTestExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTestExecutionInput) operationName() string {
+	return "StartTestExecution"
+}
+
 type StartTestExecutionOutput struct {
 
 	// Indicates whether we use streaming or non-streaming APIs for the test set

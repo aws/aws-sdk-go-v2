@@ -44,6 +44,10 @@ type DescribeResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourcePolicyInput) operationName() string {
+	return "DescribeResourcePolicy"
+}
+
 type DescribeResourcePolicyOutput struct {
 
 	// The time at which the policy was created.

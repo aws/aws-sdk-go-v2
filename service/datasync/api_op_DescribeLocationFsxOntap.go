@@ -46,6 +46,10 @@ type DescribeLocationFsxOntapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationFsxOntapInput) operationName() string {
+	return "DescribeLocationFsxOntap"
+}
+
 type DescribeLocationFsxOntapOutput struct {
 
 	// The time that the location was created.

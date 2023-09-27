@@ -52,6 +52,10 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAliasInput) operationName() string {
+	return "CreateAlias"
+}
+
 // Contains the results of the CreateAlias operation.
 type CreateAliasOutput struct {
 

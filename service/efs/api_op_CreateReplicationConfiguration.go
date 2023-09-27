@@ -98,6 +98,10 @@ type CreateReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationConfigurationInput) operationName() string {
+	return "CreateReplicationConfiguration"
+}
+
 // Describes the replication configuration for a specific file system.
 type CreateReplicationConfigurationOutput struct {
 

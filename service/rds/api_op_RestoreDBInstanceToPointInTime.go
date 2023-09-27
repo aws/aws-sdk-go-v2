@@ -326,6 +326,10 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBInstanceToPointInTimeInput) operationName() string {
+	return "RestoreDBInstanceToPointInTime"
+}
+
 type RestoreDBInstanceToPointInTimeOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

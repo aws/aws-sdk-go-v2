@@ -57,6 +57,10 @@ type GetGeneratedPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGeneratedPolicyInput) operationName() string {
+	return "GetGeneratedPolicy"
+}
+
 type GetGeneratedPolicyOutput struct {
 
 	// A GeneratedPolicyResult object that contains the generated policies and

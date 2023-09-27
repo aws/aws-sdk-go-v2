@@ -43,6 +43,10 @@ type DescribeCustomPluginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomPluginInput) operationName() string {
+	return "DescribeCustomPlugin"
+}
+
 type DescribeCustomPluginOutput struct {
 
 	// The time that the custom plugin was created.

@@ -43,6 +43,10 @@ type DeleteProvisioningTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProvisioningTemplateInput) operationName() string {
+	return "DeleteProvisioningTemplate"
+}
+
 type DeleteProvisioningTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

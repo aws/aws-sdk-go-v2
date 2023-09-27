@@ -67,6 +67,10 @@ type UpdatePipelineNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePipelineNotificationsInput) operationName() string {
+	return "UpdatePipelineNotifications"
+}
+
 // The UpdatePipelineNotificationsResponse structure.
 type UpdatePipelineNotificationsOutput struct {
 

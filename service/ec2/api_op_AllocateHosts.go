@@ -109,6 +109,10 @@ type AllocateHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateHostsInput) operationName() string {
+	return "AllocateHosts"
+}
+
 // Contains the output of AllocateHosts.
 type AllocateHostsOutput struct {
 

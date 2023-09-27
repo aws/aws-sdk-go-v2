@@ -109,6 +109,10 @@ type DeleteObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteObjectInput) operationName() string {
+	return "DeleteObject"
+}
+
 type DeleteObjectOutput struct {
 
 	// Indicates whether the specified object version that was permanently deleted was

@@ -47,6 +47,10 @@ type DescribeAlarmModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlarmModelInput) operationName() string {
+	return "DescribeAlarmModel"
+}
+
 type DescribeAlarmModelOutput struct {
 
 	// Contains the configuration information of alarm state changes.

@@ -52,6 +52,10 @@ type ListRunTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRunTasksInput) operationName() string {
+	return "ListRunTasks"
+}
+
 type ListRunTasksOutput struct {
 
 	// A list of tasks.

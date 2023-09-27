@@ -59,6 +59,10 @@ type CreateBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBudgetInput) operationName() string {
+	return "CreateBudget"
+}
+
 // Response of CreateBudget
 type CreateBudgetOutput struct {
 	// Metadata pertaining to the operation's result.

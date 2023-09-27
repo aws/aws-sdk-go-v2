@@ -50,6 +50,10 @@ type PutNotificationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutNotificationSettingsInput) operationName() string {
+	return "PutNotificationSettings"
+}
+
 type PutNotificationSettingsOutput struct {
 
 	// The state of the trust anchor after a read or write operation.

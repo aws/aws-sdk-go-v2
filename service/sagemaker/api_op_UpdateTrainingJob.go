@@ -54,6 +54,10 @@ type UpdateTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrainingJobInput) operationName() string {
+	return "UpdateTrainingJob"
+}
+
 type UpdateTrainingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the training job.

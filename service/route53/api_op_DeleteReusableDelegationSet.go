@@ -47,6 +47,10 @@ type DeleteReusableDelegationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReusableDelegationSetInput) operationName() string {
+	return "DeleteReusableDelegationSet"
+}
+
 // An empty element.
 type DeleteReusableDelegationSetOutput struct {
 	// Metadata pertaining to the operation's result.

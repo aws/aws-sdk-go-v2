@@ -43,6 +43,10 @@ type DescribeActiveReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActiveReceiptRuleSetInput) operationName() string {
+	return "DescribeActiveReceiptRuleSet"
+}
+
 // Represents the metadata and receipt rules for the receipt rule set that is
 // currently active.
 type DescribeActiveReceiptRuleSetOutput struct {

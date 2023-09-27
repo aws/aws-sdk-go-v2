@@ -64,6 +64,10 @@ type CreateAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAgentStatusInput) operationName() string {
+	return "CreateAgentStatus"
+}
+
 type CreateAgentStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the agent status.

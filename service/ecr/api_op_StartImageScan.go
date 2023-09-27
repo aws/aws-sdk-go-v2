@@ -55,6 +55,10 @@ type StartImageScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImageScanInput) operationName() string {
+	return "StartImageScan"
+}
+
 type StartImageScanOutput struct {
 
 	// An object with identifying information for an image in an Amazon ECR repository.

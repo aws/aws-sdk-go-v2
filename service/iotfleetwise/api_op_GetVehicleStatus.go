@@ -53,6 +53,10 @@ type GetVehicleStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVehicleStatusInput) operationName() string {
+	return "GetVehicleStatus"
+}
+
 type GetVehicleStatusOutput struct {
 
 	// Lists information about the state of the vehicle with deployed campaigns.

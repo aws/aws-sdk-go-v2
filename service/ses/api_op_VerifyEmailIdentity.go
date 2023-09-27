@@ -47,6 +47,10 @@ type VerifyEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyEmailIdentityInput) operationName() string {
+	return "VerifyEmailIdentity"
+}
+
 // An empty element returned on a successful request.
 type VerifyEmailIdentityOutput struct {
 	// Metadata pertaining to the operation's result.

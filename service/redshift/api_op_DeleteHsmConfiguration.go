@@ -41,6 +41,10 @@ type DeleteHsmConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHsmConfigurationInput) operationName() string {
+	return "DeleteHsmConfiguration"
+}
+
 type DeleteHsmConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

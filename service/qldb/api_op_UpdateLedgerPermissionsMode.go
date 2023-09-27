@@ -68,6 +68,10 @@ type UpdateLedgerPermissionsModeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLedgerPermissionsModeInput) operationName() string {
+	return "UpdateLedgerPermissionsMode"
+}
+
 type UpdateLedgerPermissionsModeOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.

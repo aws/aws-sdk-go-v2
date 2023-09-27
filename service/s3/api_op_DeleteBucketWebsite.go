@@ -61,6 +61,10 @@ type DeleteBucketWebsiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketWebsiteInput) operationName() string {
+	return "DeleteBucketWebsite"
+}
+
 type DeleteBucketWebsiteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

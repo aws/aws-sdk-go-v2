@@ -49,6 +49,10 @@ type DescribeCustomDomainAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomDomainAssociationsInput) operationName() string {
+	return "DescribeCustomDomainAssociations"
+}
+
 type DescribeCustomDomainAssociationsOutput struct {
 
 	// The associations for the custom domain.

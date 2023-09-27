@@ -65,6 +65,10 @@ type RevokePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokePermissionsInput) operationName() string {
+	return "RevokePermissions"
+}
+
 type RevokePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

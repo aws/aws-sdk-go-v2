@@ -44,6 +44,10 @@ type GetPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPackageInput) operationName() string {
+	return "GetPackage"
+}
+
 type GetPackageOutput struct {
 
 	// The date the package was created.

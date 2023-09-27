@@ -47,6 +47,10 @@ type ListBackupPlanTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupPlanTemplatesInput) operationName() string {
+	return "ListBackupPlanTemplates"
+}
+
 type ListBackupPlanTemplatesOutput struct {
 
 	// An array of template list items containing metadata about your saved templates.

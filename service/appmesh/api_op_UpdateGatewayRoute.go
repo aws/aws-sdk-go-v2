@@ -69,6 +69,10 @@ type UpdateGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGatewayRouteInput) operationName() string {
+	return "UpdateGatewayRoute"
+}
+
 type UpdateGatewayRouteOutput struct {
 
 	// A full description of the gateway route that was updated.

@@ -41,6 +41,10 @@ type DeleteCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCollaborationInput) operationName() string {
+	return "DeleteCollaboration"
+}
+
 type DeleteCollaborationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

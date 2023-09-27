@@ -43,6 +43,10 @@ type DeleteArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteArtifactInput) operationName() string {
+	return "DeleteArtifact"
+}
+
 type DeleteArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.

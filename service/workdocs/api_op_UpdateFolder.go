@@ -57,6 +57,10 @@ type UpdateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFolderInput) operationName() string {
+	return "UpdateFolder"
+}
+
 type UpdateFolderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

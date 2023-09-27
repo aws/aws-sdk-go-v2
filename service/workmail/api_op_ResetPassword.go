@@ -52,6 +52,10 @@ type ResetPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetPasswordInput) operationName() string {
+	return "ResetPassword"
+}
+
 type ResetPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

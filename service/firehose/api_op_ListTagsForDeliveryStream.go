@@ -54,6 +54,10 @@ type ListTagsForDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForDeliveryStreamInput) operationName() string {
+	return "ListTagsForDeliveryStream"
+}
+
 type ListTagsForDeliveryStreamOutput struct {
 
 	// If this is true in the response, more tags are available. To list the remaining

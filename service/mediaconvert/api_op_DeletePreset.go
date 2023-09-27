@@ -41,6 +41,10 @@ type DeletePresetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePresetInput) operationName() string {
+	return "DeletePreset"
+}
+
 type DeletePresetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

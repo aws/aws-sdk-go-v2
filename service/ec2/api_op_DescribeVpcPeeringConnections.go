@@ -86,6 +86,10 @@ type DescribeVpcPeeringConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcPeeringConnectionsInput) operationName() string {
+	return "DescribeVpcPeeringConnections"
+}
+
 type DescribeVpcPeeringConnectionsOutput struct {
 
 	// The token to include in another request to get the next page of items. This

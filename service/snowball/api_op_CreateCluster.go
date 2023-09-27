@@ -154,6 +154,10 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterInput) operationName() string {
+	return "CreateCluster"
+}
+
 type CreateClusterOutput struct {
 
 	// The automatically generated ID for a cluster.

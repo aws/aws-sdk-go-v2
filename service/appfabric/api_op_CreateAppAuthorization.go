@@ -93,6 +93,10 @@ type CreateAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppAuthorizationInput) operationName() string {
+	return "CreateAppAuthorization"
+}
+
 type CreateAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.

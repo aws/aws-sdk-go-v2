@@ -42,6 +42,10 @@ type GetFirewallDomainListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFirewallDomainListInput) operationName() string {
+	return "GetFirewallDomainList"
+}
+
 type GetFirewallDomainListOutput struct {
 
 	// The domain list that you requested.

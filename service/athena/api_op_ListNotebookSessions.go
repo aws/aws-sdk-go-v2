@@ -52,6 +52,10 @@ type ListNotebookSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotebookSessionsInput) operationName() string {
+	return "ListNotebookSessions"
+}
+
 type ListNotebookSessionsOutput struct {
 
 	// A list of the sessions belonging to the notebook.

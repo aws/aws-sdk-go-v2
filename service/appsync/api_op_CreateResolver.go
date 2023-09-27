@@ -99,6 +99,10 @@ type CreateResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResolverInput) operationName() string {
+	return "CreateResolver"
+}
+
 type CreateResolverOutput struct {
 
 	// The Resolver object.

@@ -54,6 +54,10 @@ type ListUserPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserPoolsInput) operationName() string {
+	return "ListUserPools"
+}
+
 // Represents the response to list user pools.
 type ListUserPoolsOutput struct {
 

@@ -59,6 +59,10 @@ type PutMaintenanceStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMaintenanceStartTimeInput) operationName() string {
+	return "PutMaintenanceStartTime"
+}
+
 type PutMaintenanceStartTimeOutput struct {
 
 	// The Amazon Resource Name (ARN) of a gateway for which you set the maintenance

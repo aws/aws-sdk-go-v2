@@ -41,6 +41,10 @@ type ListSAMLProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSAMLProvidersInput) operationName() string {
+	return "ListSAMLProviders"
+}
+
 // Contains the response to a successful ListSAMLProviders request.
 type ListSAMLProvidersOutput struct {
 

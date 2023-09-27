@@ -97,6 +97,10 @@ type ExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteStatementInput) operationName() string {
+	return "ExecuteStatement"
+}
+
 // The response elements represent the output of a request to run a SQL statement
 // against a database.
 type ExecuteStatementOutput struct {

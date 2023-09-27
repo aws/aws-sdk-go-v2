@@ -62,6 +62,10 @@ type ListApplicationComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationComponentsInput) operationName() string {
+	return "ListApplicationComponents"
+}
+
 type ListApplicationComponentsOutput struct {
 
 	// The list of application components with detailed information about each

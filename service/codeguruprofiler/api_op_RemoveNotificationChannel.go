@@ -49,6 +49,10 @@ type RemoveNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveNotificationChannelInput) operationName() string {
+	return "RemoveNotificationChannel"
+}
+
 // The structure representing the RemoveNotificationChannelResponse.
 type RemoveNotificationChannelOutput struct {
 

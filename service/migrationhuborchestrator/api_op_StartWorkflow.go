@@ -43,6 +43,10 @@ type StartWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartWorkflowInput) operationName() string {
+	return "StartWorkflow"
+}
+
 type StartWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the migration workflow.

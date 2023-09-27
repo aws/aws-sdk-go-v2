@@ -48,6 +48,10 @@ type UpdateDeviceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeviceInstanceInput) operationName() string {
+	return "UpdateDeviceInstance"
+}
+
 type UpdateDeviceInstanceOutput struct {
 
 	// An object that contains information about your device instance.

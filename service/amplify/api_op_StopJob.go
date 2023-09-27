@@ -53,6 +53,10 @@ type StopJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopJobInput) operationName() string {
+	return "StopJob"
+}
+
 // The result structure for the stop job request.
 type StopJobOutput struct {
 

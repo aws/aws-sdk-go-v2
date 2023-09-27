@@ -60,6 +60,10 @@ type DeleteAppVersionAppComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppVersionAppComponentInput) operationName() string {
+	return "DeleteAppVersionAppComponent"
+}
+
 type DeleteAppVersionAppComponentOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

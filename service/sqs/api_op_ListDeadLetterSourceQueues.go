@@ -58,6 +58,10 @@ type ListDeadLetterSourceQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeadLetterSourceQueuesInput) operationName() string {
+	return "ListDeadLetterSourceQueues"
+}
+
 // A list of your dead letter source queues.
 type ListDeadLetterSourceQueuesOutput struct {
 

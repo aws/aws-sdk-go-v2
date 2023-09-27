@@ -40,6 +40,7 @@
         "api_op_UpdateSecurityConfig.go",
         "api_op_UpdateSecurityPolicy.go",
         "api_op_UpdateVpcEndpoint.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "document/doc.go",

@@ -52,6 +52,10 @@ type DescribeEndpointTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointTypesInput) operationName() string {
+	return "DescribeEndpointTypes"
+}
+
 type DescribeEndpointTypesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

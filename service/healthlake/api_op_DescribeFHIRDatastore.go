@@ -44,6 +44,10 @@ type DescribeFHIRDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFHIRDatastoreInput) operationName() string {
+	return "DescribeFHIRDatastore"
+}
+
 type DescribeFHIRDatastoreOutput struct {
 
 	// All properties associated with a data store, including the data store ID, data

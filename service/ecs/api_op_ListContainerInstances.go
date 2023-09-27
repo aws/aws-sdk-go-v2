@@ -76,6 +76,10 @@ type ListContainerInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContainerInstancesInput) operationName() string {
+	return "ListContainerInstances"
+}
+
 type ListContainerInstancesOutput struct {
 
 	// The list of container instances with full ARN entries for each container

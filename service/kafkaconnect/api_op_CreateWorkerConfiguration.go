@@ -51,6 +51,10 @@ type CreateWorkerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkerConfigurationInput) operationName() string {
+	return "CreateWorkerConfiguration"
+}
+
 type CreateWorkerConfigurationOutput struct {
 
 	// The time that the worker configuration was created.

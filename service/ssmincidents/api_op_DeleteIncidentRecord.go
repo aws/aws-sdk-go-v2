@@ -41,6 +41,10 @@ type DeleteIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIncidentRecordInput) operationName() string {
+	return "DeleteIncidentRecord"
+}
+
 type DeleteIncidentRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,6 +60,10 @@ type UpdateFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFacetInput) operationName() string {
+	return "UpdateFacet"
+}
+
 type UpdateFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

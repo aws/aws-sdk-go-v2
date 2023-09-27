@@ -58,6 +58,10 @@ type SendVoiceMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendVoiceMessageInput) operationName() string {
+	return "SendVoiceMessage"
+}
+
 // An object that that contains the Message ID of a Voice message that was sent
 // successfully.
 type SendVoiceMessageOutput struct {

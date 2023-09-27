@@ -77,6 +77,10 @@ type BatchGetFrameMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetFrameMetricDataInput) operationName() string {
+	return "BatchGetFrameMetricData"
+}
+
 // The structure representing the BatchGetFrameMetricDataResponse.
 type BatchGetFrameMetricDataOutput struct {
 

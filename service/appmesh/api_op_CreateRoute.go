@@ -79,6 +79,10 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRouteInput) operationName() string {
+	return "CreateRoute"
+}
+
 type CreateRouteOutput struct {
 
 	// The full description of your mesh following the create call.

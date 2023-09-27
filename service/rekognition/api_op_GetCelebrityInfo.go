@@ -48,6 +48,10 @@ type GetCelebrityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCelebrityInfoInput) operationName() string {
+	return "GetCelebrityInfo"
+}
+
 type GetCelebrityInfoOutput struct {
 
 	// Retrieves the known gender for the celebrity.

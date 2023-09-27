@@ -47,6 +47,10 @@ type UpdateCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCapacityReservationInput) operationName() string {
+	return "UpdateCapacityReservation"
+}
+
 type UpdateCapacityReservationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

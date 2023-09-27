@@ -57,6 +57,10 @@ type DeleteServiceLinkedRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceLinkedRoleInput) operationName() string {
+	return "DeleteServiceLinkedRole"
+}
+
 type DeleteServiceLinkedRoleOutput struct {
 
 	// The deletion task identifier that you can use to check the status of the

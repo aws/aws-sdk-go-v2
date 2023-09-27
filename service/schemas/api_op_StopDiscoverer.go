@@ -42,6 +42,10 @@ type StopDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDiscovererInput) operationName() string {
+	return "StopDiscoverer"
+}
+
 type StopDiscovererOutput struct {
 
 	// The ID of the discoverer.

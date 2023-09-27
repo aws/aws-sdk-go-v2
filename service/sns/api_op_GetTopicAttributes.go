@@ -43,6 +43,10 @@ type GetTopicAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTopicAttributesInput) operationName() string {
+	return "GetTopicAttributes"
+}
+
 // Response for GetTopicAttributes action.
 type GetTopicAttributesOutput struct {
 

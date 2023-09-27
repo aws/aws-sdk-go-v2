@@ -127,6 +127,10 @@ type CreateRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRateBasedRuleInput) operationName() string {
+	return "CreateRateBasedRule"
+}
+
 type CreateRateBasedRuleOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRateBasedRule request. You

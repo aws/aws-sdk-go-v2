@@ -150,6 +150,10 @@ type SubmitJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitJobInput) operationName() string {
+	return "SubmitJob"
+}
+
 type SubmitJobOutput struct {
 
 	// The unique identifier for the job.

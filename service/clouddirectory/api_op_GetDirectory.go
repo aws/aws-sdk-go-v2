@@ -42,6 +42,10 @@ type GetDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDirectoryInput) operationName() string {
+	return "GetDirectory"
+}
+
 type GetDirectoryOutput struct {
 
 	// Metadata about the directory.

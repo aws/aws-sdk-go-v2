@@ -59,6 +59,10 @@ type SubmitContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitContactEvaluationInput) operationName() string {
+	return "SubmitContactEvaluation"
+}
+
 type SubmitContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.

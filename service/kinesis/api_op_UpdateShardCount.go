@@ -93,6 +93,10 @@ type UpdateShardCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateShardCountInput) operationName() string {
+	return "UpdateShardCount"
+}
+
 type UpdateShardCountOutput struct {
 
 	// The current number of shards.

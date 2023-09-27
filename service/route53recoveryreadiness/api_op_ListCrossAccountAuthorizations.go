@@ -43,6 +43,10 @@ type ListCrossAccountAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCrossAccountAuthorizationsInput) operationName() string {
+	return "ListCrossAccountAuthorizations"
+}
+
 type ListCrossAccountAuthorizationsOutput struct {
 
 	// A list of cross-account authorizations.

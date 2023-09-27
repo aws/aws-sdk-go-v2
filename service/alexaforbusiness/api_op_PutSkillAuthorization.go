@@ -55,6 +55,10 @@ type PutSkillAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSkillAuthorizationInput) operationName() string {
+	return "PutSkillAuthorization"
+}
+
 type PutSkillAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

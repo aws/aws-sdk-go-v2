@@ -54,6 +54,10 @@ type RollbackApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RollbackApplicationInput) operationName() string {
+	return "RollbackApplication"
+}
+
 type RollbackApplicationOutput struct {
 
 	// Describes the application, including the application Amazon Resource Name

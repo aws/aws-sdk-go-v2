@@ -59,6 +59,10 @@ type GetStreamingSessionStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStreamingSessionStreamInput) operationName() string {
+	return "GetStreamingSessionStream"
+}
+
 type GetStreamingSessionStreamOutput struct {
 
 	// The stream.

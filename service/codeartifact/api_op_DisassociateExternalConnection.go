@@ -57,6 +57,10 @@ type DisassociateExternalConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateExternalConnectionInput) operationName() string {
+	return "DisassociateExternalConnection"
+}
+
 type DisassociateExternalConnectionOutput struct {
 
 	// The repository associated with the removed external connection.

@@ -89,6 +89,10 @@ type DisposePackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisposePackageVersionsInput) operationName() string {
+	return "DisposePackageVersions"
+}
+
 type DisposePackageVersionsOutput struct {
 
 	// A PackageVersionError object that contains a map of errors codes for the

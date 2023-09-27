@@ -46,6 +46,10 @@ type DeleteMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMLTransformInput) operationName() string {
+	return "DeleteMLTransform"
+}
+
 type DeleteMLTransformOutput struct {
 
 	// The unique identifier of the transform that was deleted.

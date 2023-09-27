@@ -85,6 +85,10 @@ type CreateMetricSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMetricSetInput) operationName() string {
+	return "CreateMetricSet"
+}
+
 type CreateMetricSetOutput struct {
 
 	// The ARN of the dataset.

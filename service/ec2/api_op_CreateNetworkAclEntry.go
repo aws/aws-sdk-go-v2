@@ -106,6 +106,10 @@ type CreateNetworkAclEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkAclEntryInput) operationName() string {
+	return "CreateNetworkAclEntry"
+}
+
 type CreateNetworkAclEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

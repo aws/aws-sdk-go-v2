@@ -61,6 +61,10 @@ type GetStudioSessionMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStudioSessionMappingInput) operationName() string {
+	return "GetStudioSessionMapping"
+}
+
 type GetStudioSessionMappingOutput struct {
 
 	// The session mapping details for the specified Amazon EMR Studio and identity,

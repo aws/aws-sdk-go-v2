@@ -100,6 +100,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsInput) operationName() string {
+	return "DescribeEvents"
+}
+
 // Contains the result of a successful invocation of the DescribeEvents action.
 type DescribeEventsOutput struct {
 

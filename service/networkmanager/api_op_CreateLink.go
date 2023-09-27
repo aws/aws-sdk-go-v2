@@ -66,6 +66,10 @@ type CreateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLinkInput) operationName() string {
+	return "CreateLink"
+}
+
 type CreateLinkOutput struct {
 
 	// Information about the link.

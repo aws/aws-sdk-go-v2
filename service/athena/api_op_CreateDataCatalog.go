@@ -85,6 +85,10 @@ type CreateDataCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataCatalogInput) operationName() string {
+	return "CreateDataCatalog"
+}
+
 type CreateDataCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

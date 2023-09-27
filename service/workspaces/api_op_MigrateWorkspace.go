@@ -55,6 +55,10 @@ type MigrateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MigrateWorkspaceInput) operationName() string {
+	return "MigrateWorkspace"
+}
+
 type MigrateWorkspaceOutput struct {
 
 	// The original identifier of the WorkSpace that is being migrated.

@@ -65,6 +65,10 @@ type CreateDataViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataViewInput) operationName() string {
+	return "CreateDataView"
+}
+
 // Response for creating a data view.
 type CreateDataViewOutput struct {
 

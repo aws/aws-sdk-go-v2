@@ -50,6 +50,10 @@ type DeleteVpnConnectionRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpnConnectionRouteInput) operationName() string {
+	return "DeleteVpnConnectionRoute"
+}
+
 type DeleteVpnConnectionRouteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

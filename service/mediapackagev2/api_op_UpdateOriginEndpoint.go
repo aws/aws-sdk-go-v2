@@ -88,6 +88,10 @@ type UpdateOriginEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOriginEndpointInput) operationName() string {
+	return "UpdateOriginEndpoint"
+}
+
 type UpdateOriginEndpointOutput struct {
 
 	// The ARN associated with the resource.

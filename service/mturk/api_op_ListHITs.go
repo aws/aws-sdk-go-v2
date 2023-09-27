@@ -43,6 +43,10 @@ type ListHITsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHITsInput) operationName() string {
+	return "ListHITs"
+}
+
 type ListHITsOutput struct {
 
 	// The list of HIT elements returned by the query.

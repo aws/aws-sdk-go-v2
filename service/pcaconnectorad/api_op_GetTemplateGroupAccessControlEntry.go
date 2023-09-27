@@ -49,6 +49,10 @@ type GetTemplateGroupAccessControlEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateGroupAccessControlEntryInput) operationName() string {
+	return "GetTemplateGroupAccessControlEntry"
+}
+
 type GetTemplateGroupAccessControlEntryOutput struct {
 
 	// An access control entry allows or denies an Active Directory group from

@@ -50,6 +50,10 @@ type ListAnnotationStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnnotationStoresInput) operationName() string {
+	return "ListAnnotationStores"
+}
+
 type ListAnnotationStoresOutput struct {
 
 	// A list of stores.

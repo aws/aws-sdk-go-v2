@@ -87,6 +87,10 @@ type UpdateStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStudioComponentInput) operationName() string {
+	return "UpdateStudioComponent"
+}
+
 type UpdateStudioComponentOutput struct {
 
 	// Information about the studio component.

@@ -45,6 +45,10 @@ type DescribeStorageSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorageSystemInput) operationName() string {
+	return "DescribeStorageSystem"
+}
+
 type DescribeStorageSystemOutput struct {
 
 	// The ARN of the DataSync agent that connects to and reads from your on-premises

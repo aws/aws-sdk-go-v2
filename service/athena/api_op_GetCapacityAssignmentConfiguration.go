@@ -44,6 +44,10 @@ type GetCapacityAssignmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCapacityAssignmentConfigurationInput) operationName() string {
+	return "GetCapacityAssignmentConfiguration"
+}
+
 type GetCapacityAssignmentConfigurationOutput struct {
 
 	// The requested capacity assignment configuration for the specified capacity

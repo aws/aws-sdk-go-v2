@@ -47,6 +47,10 @@ type DescribeQuerySuggestionsConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeQuerySuggestionsConfigInput) operationName() string {
+	return "DescribeQuerySuggestionsConfig"
+}
+
 type DescribeQuerySuggestionsConfigOutput struct {
 
 	// Configuration information for the document fields/attributes that you want to

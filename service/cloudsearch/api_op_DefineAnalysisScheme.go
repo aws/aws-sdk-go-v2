@@ -58,6 +58,10 @@ type DefineAnalysisSchemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DefineAnalysisSchemeInput) operationName() string {
+	return "DefineAnalysisScheme"
+}
+
 // The result of a DefineAnalysisScheme request. Contains the status of the
 // newly-configured analysis scheme.
 type DefineAnalysisSchemeOutput struct {

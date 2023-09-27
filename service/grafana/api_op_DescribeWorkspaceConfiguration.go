@@ -41,6 +41,10 @@ type DescribeWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceConfigurationInput) operationName() string {
+	return "DescribeWorkspaceConfiguration"
+}
+
 type DescribeWorkspaceConfigurationOutput struct {
 
 	// The configuration string for the workspace that you requested. For more

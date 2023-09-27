@@ -42,6 +42,10 @@ type GetDiskSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDiskSnapshotInput) operationName() string {
+	return "GetDiskSnapshot"
+}
+
 type GetDiskSnapshotOutput struct {
 
 	// An object containing information about the disk snapshot.

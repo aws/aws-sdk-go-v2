@@ -49,6 +49,10 @@ type DeleteKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKnowledgeBaseInput) operationName() string {
+	return "DeleteKnowledgeBase"
+}
+
 type DeleteKnowledgeBaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

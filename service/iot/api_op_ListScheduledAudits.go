@@ -45,6 +45,10 @@ type ListScheduledAuditsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScheduledAuditsInput) operationName() string {
+	return "ListScheduledAudits"
+}
+
 type ListScheduledAuditsOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there

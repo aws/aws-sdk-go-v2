@@ -66,6 +66,10 @@ type UpdateSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSSHPublicKeyInput) operationName() string {
+	return "UpdateSSHPublicKey"
+}
+
 type UpdateSSHPublicKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

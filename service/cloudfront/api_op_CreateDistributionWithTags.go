@@ -46,6 +46,10 @@ type CreateDistributionWithTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDistributionWithTagsInput) operationName() string {
+	return "CreateDistributionWithTags"
+}
+
 // The returned result of the corresponding request.
 type CreateDistributionWithTagsOutput struct {
 

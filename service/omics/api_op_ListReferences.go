@@ -52,6 +52,10 @@ type ListReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReferencesInput) operationName() string {
+	return "ListReferences"
+}
+
 type ListReferencesOutput struct {
 
 	// A list of references.

@@ -68,6 +68,10 @@ type UploadEntityDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadEntityDefinitionsInput) operationName() string {
+	return "UploadEntityDefinitions"
+}
+
 type UploadEntityDefinitionsOutput struct {
 
 	// The ID that specifies the upload action. You can use this to track the status

@@ -54,6 +54,10 @@ type CreateSiteToSiteVpnAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSiteToSiteVpnAttachmentInput) operationName() string {
+	return "CreateSiteToSiteVpnAttachment"
+}
+
 type CreateSiteToSiteVpnAttachmentOutput struct {
 
 	// Details about a site-to-site VPN attachment.

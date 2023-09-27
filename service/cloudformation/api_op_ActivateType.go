@@ -94,6 +94,10 @@ type ActivateTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateTypeInput) operationName() string {
+	return "ActivateType"
+}
+
 type ActivateTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the activated extension, in this account and

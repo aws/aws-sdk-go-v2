@@ -52,6 +52,10 @@ type ListSupportedInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSupportedInstanceTypesInput) operationName() string {
+	return "ListSupportedInstanceTypes"
+}
+
 type ListSupportedInstanceTypesOutput struct {
 
 	// The pagination token that marks the next set of results to retrieve.

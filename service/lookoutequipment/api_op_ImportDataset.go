@@ -60,6 +60,10 @@ type ImportDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportDatasetInput) operationName() string {
+	return "ImportDataset"
+}
+
 type ImportDatasetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset that was imported.

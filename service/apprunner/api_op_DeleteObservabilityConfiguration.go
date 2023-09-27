@@ -47,6 +47,10 @@ type DeleteObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteObservabilityConfigurationInput) operationName() string {
+	return "DeleteObservabilityConfiguration"
+}
+
 type DeleteObservabilityConfigurationOutput struct {
 
 	// A description of the App Runner observability configuration that this request

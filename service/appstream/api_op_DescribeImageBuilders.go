@@ -49,6 +49,10 @@ type DescribeImageBuildersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageBuildersInput) operationName() string {
+	return "DescribeImageBuilders"
+}
+
 type DescribeImageBuildersOutput struct {
 
 	// Information about the image builders.

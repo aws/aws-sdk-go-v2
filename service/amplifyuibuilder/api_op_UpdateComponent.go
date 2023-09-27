@@ -60,6 +60,10 @@ type UpdateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateComponentInput) operationName() string {
+	return "UpdateComponent"
+}
+
 type UpdateComponentOutput struct {
 
 	// Describes the configuration of the updated component.

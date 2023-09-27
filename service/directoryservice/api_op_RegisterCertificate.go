@@ -55,6 +55,10 @@ type RegisterCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterCertificateInput) operationName() string {
+	return "RegisterCertificate"
+}
+
 type RegisterCertificateOutput struct {
 
 	// The identifier of the certificate.

@@ -55,6 +55,10 @@ type MoveAddressToVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MoveAddressToVpcInput) operationName() string {
+	return "MoveAddressToVpc"
+}
+
 type MoveAddressToVpcOutput struct {
 
 	// The allocation ID for the Elastic IP address.

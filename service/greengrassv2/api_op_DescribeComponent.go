@@ -44,6 +44,10 @@ type DescribeComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComponentInput) operationName() string {
+	return "DescribeComponent"
+}
+
 type DescribeComponentOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

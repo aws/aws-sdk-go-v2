@@ -47,6 +47,10 @@ type DeregisterDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterDevicesInput) operationName() string {
+	return "DeregisterDevices"
+}
+
 type DeregisterDevicesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

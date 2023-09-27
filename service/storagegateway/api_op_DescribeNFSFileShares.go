@@ -45,6 +45,10 @@ type DescribeNFSFileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNFSFileSharesInput) operationName() string {
+	return "DescribeNFSFileShares"
+}
+
 // DescribeNFSFileSharesOutput
 type DescribeNFSFileSharesOutput struct {
 

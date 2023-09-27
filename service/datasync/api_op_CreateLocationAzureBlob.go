@@ -88,6 +88,10 @@ type CreateLocationAzureBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationAzureBlobInput) operationName() string {
+	return "CreateLocationAzureBlob"
+}
+
 type CreateLocationAzureBlobOutput struct {
 
 	// The ARN of the Azure Blob Storage transfer location that you created.

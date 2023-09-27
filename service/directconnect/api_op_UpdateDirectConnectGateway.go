@@ -47,6 +47,10 @@ type UpdateDirectConnectGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDirectConnectGatewayInput) operationName() string {
+	return "UpdateDirectConnectGateway"
+}
+
 type UpdateDirectConnectGatewayOutput struct {
 
 	// Information about a Direct Connect gateway, which enables you to connect

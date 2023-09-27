@@ -54,6 +54,10 @@ type DeploySystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeploySystemInstanceInput) operationName() string {
+	return "DeploySystemInstance"
+}
+
 type DeploySystemInstanceOutput struct {
 
 	// An object that contains summary information about a system instance that was

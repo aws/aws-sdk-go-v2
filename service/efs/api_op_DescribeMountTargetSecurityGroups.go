@@ -48,6 +48,10 @@ type DescribeMountTargetSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMountTargetSecurityGroupsInput) operationName() string {
+	return "DescribeMountTargetSecurityGroups"
+}
+
 type DescribeMountTargetSecurityGroupsOutput struct {
 
 	// An array of security groups.

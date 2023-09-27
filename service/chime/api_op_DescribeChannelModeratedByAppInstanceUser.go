@@ -61,6 +61,10 @@ type DescribeChannelModeratedByAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelModeratedByAppInstanceUserInput) operationName() string {
+	return "DescribeChannelModeratedByAppInstanceUser"
+}
+
 type DescribeChannelModeratedByAppInstanceUserOutput struct {
 
 	// The moderated channel.

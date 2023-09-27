@@ -49,6 +49,10 @@ type DeleteDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDeploymentGroupInput) operationName() string {
+	return "DeleteDeploymentGroup"
+}
+
 // Represents the output of a DeleteDeploymentGroup operation.
 type DeleteDeploymentGroupOutput struct {
 

@@ -43,6 +43,10 @@ type DeleteServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceSyncConfigInput) operationName() string {
+	return "DeleteServiceSyncConfig"
+}
+
 type DeleteServiceSyncConfigOutput struct {
 
 	// The detailed data for the service sync config.

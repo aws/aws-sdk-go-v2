@@ -91,6 +91,10 @@ type StartModelPackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartModelPackagingJobInput) operationName() string {
+	return "StartModelPackagingJob"
+}
+
 type StartModelPackagingJobOutput struct {
 
 	// The job name for the model packaging job. If you don't supply a job name in the

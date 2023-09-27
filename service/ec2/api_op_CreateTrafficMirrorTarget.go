@@ -71,6 +71,10 @@ type CreateTrafficMirrorTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrafficMirrorTargetInput) operationName() string {
+	return "CreateTrafficMirrorTarget"
+}
+
 type CreateTrafficMirrorTargetOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

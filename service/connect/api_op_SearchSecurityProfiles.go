@@ -60,6 +60,10 @@ type SearchSecurityProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchSecurityProfilesInput) operationName() string {
+	return "SearchSecurityProfiles"
+}
+
 type SearchSecurityProfilesOutput struct {
 
 	// The total number of security profiles which matched your search query.

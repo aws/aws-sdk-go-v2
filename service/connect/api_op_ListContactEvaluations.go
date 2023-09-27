@@ -54,6 +54,10 @@ type ListContactEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContactEvaluationsInput) operationName() string {
+	return "ListContactEvaluations"
+}
+
 type ListContactEvaluationsOutput struct {
 
 	// Provides details about a list of contact evaluations belonging to an instance.

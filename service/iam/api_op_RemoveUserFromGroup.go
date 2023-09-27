@@ -52,6 +52,10 @@ type RemoveUserFromGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveUserFromGroupInput) operationName() string {
+	return "RemoveUserFromGroup"
+}
+
 type RemoveUserFromGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

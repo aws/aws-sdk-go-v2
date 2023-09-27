@@ -41,6 +41,10 @@ type DeletePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePortalInput) operationName() string {
+	return "DeletePortal"
+}
+
 type DeletePortalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

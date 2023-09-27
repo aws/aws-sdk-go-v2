@@ -44,6 +44,10 @@ type ResumeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeClusterInput) operationName() string {
+	return "ResumeCluster"
+}
+
 type ResumeClusterOutput struct {
 
 	// Describes a cluster.

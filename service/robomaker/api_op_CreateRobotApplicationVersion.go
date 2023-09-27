@@ -55,6 +55,10 @@ type CreateRobotApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRobotApplicationVersionInput) operationName() string {
+	return "CreateRobotApplicationVersion"
+}
+
 type CreateRobotApplicationVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the robot application.

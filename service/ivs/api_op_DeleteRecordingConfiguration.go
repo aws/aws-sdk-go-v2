@@ -46,6 +46,10 @@ type DeleteRecordingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRecordingConfigurationInput) operationName() string {
+	return "DeleteRecordingConfiguration"
+}
+
 type DeleteRecordingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

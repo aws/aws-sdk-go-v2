@@ -76,6 +76,10 @@ type DescribeBlueGreenDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBlueGreenDeploymentsInput) operationName() string {
+	return "DescribeBlueGreenDeployments"
+}
+
 type DescribeBlueGreenDeploymentsOutput struct {
 
 	// A list of blue/green deployments in the current account and Amazon Web Services

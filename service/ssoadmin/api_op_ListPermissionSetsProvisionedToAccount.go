@@ -62,6 +62,10 @@ type ListPermissionSetsProvisionedToAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionSetsProvisionedToAccountInput) operationName() string {
+	return "ListPermissionSetsProvisionedToAccount"
+}
+
 type ListPermissionSetsProvisionedToAccountOutput struct {
 
 	// The pagination token for the list API. Initially the value is null. Use the

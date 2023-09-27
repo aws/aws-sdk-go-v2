@@ -45,6 +45,10 @@ type DescribeApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationInput) operationName() string {
+	return "DescribeApplication"
+}
+
 type DescribeApplicationOutput struct {
 
 	// Information about the application.

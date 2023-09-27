@@ -127,6 +127,10 @@ type CreateInstancesFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstancesFromSnapshotInput) operationName() string {
+	return "CreateInstancesFromSnapshot"
+}
+
 type CreateInstancesFromSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

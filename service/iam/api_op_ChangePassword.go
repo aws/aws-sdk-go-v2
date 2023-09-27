@@ -62,6 +62,10 @@ type ChangePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangePasswordInput) operationName() string {
+	return "ChangePassword"
+}
+
 type ChangePasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

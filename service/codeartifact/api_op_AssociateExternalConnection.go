@@ -67,6 +67,10 @@ type AssociateExternalConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateExternalConnectionInput) operationName() string {
+	return "AssociateExternalConnection"
+}
+
 type AssociateExternalConnectionOutput struct {
 
 	// Information about the connected repository after processing the request.

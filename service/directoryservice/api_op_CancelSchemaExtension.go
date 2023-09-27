@@ -49,6 +49,10 @@ type CancelSchemaExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelSchemaExtensionInput) operationName() string {
+	return "CancelSchemaExtension"
+}
+
 type CancelSchemaExtensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

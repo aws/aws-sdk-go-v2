@@ -44,6 +44,10 @@ type DeleteCacheSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCacheSubnetGroupInput) operationName() string {
+	return "DeleteCacheSubnetGroup"
+}
+
 type DeleteCacheSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

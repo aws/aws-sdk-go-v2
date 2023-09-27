@@ -57,6 +57,10 @@ type ListDistributionsByCachePolicyIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionsByCachePolicyIdInput) operationName() string {
+	return "ListDistributionsByCachePolicyId"
+}
+
 type ListDistributionsByCachePolicyIdOutput struct {
 
 	// A list of distribution IDs.

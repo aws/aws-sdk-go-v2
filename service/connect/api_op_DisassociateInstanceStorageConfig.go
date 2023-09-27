@@ -56,6 +56,10 @@ type DisassociateInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateInstanceStorageConfigInput) operationName() string {
+	return "DisassociateInstanceStorageConfig"
+}
+
 type DisassociateInstanceStorageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

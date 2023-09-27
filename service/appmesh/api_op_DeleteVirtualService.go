@@ -54,6 +54,10 @@ type DeleteVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualServiceInput) operationName() string {
+	return "DeleteVirtualService"
+}
+
 type DeleteVirtualServiceOutput struct {
 
 	// The virtual service that was deleted.

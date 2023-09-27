@@ -70,6 +70,10 @@ type UpdateLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLaunchProfileInput) operationName() string {
+	return "UpdateLaunchProfile"
+}
+
 type UpdateLaunchProfileOutput struct {
 
 	// The launch profile.

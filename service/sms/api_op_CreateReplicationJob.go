@@ -82,6 +82,10 @@ type CreateReplicationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationJobInput) operationName() string {
+	return "CreateReplicationJob"
+}
+
 type CreateReplicationJobOutput struct {
 
 	// The unique identifier of the replication job.

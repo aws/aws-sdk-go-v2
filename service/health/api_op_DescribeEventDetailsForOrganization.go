@@ -73,6 +73,10 @@ type DescribeEventDetailsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventDetailsForOrganizationInput) operationName() string {
+	return "DescribeEventDetailsForOrganization"
+}
+
 type DescribeEventDetailsForOrganizationOutput struct {
 
 	// Error messages for any events that could not be retrieved.

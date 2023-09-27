@@ -67,6 +67,10 @@ type UpdateAttendeeCapabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAttendeeCapabilitiesInput) operationName() string {
+	return "UpdateAttendeeCapabilities"
+}
+
 type UpdateAttendeeCapabilitiesOutput struct {
 
 	// The updated attendee data.

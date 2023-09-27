@@ -50,6 +50,10 @@ type ListCrawlersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCrawlersInput) operationName() string {
+	return "ListCrawlers"
+}
+
 type ListCrawlersOutput struct {
 
 	// The names of all crawlers in the account, or the crawlers with the specified

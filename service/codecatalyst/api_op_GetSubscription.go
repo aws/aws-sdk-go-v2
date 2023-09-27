@@ -41,6 +41,10 @@ type GetSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubscriptionInput) operationName() string {
+	return "GetSubscription"
+}
+
 type GetSubscriptionOutput struct {
 
 	// The display name of the Amazon Web Services account used for billing for the

@@ -45,6 +45,10 @@ type AcceptInboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptInboundCrossClusterSearchConnectionInput) operationName() string {
+	return "AcceptInboundCrossClusterSearchConnection"
+}
+
 // The result of a AcceptInboundCrossClusterSearchConnection operation. Contains
 // details of accepted inbound connection.
 type AcceptInboundCrossClusterSearchConnectionOutput struct {

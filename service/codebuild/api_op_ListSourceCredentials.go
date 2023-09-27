@@ -36,6 +36,10 @@ type ListSourceCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSourceCredentialsInput) operationName() string {
+	return "ListSourceCredentials"
+}
+
 type ListSourceCredentialsOutput struct {
 
 	// A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object

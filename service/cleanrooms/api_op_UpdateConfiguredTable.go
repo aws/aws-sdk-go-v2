@@ -49,6 +49,10 @@ type UpdateConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfiguredTableInput) operationName() string {
+	return "UpdateConfiguredTable"
+}
+
 type UpdateConfiguredTableOutput struct {
 
 	// The updated configured table.

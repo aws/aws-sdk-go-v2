@@ -45,6 +45,10 @@ type ListJobTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobTemplatesInput) operationName() string {
+	return "ListJobTemplates"
+}
+
 type ListJobTemplatesOutput struct {
 
 	// A list of objects that contain information about the job templates.

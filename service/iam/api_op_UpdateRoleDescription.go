@@ -49,6 +49,10 @@ type UpdateRoleDescriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoleDescriptionInput) operationName() string {
+	return "UpdateRoleDescription"
+}
+
 type UpdateRoleDescriptionOutput struct {
 
 	// A structure that contains details about the modified role.

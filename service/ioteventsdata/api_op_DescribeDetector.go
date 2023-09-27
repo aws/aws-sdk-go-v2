@@ -47,6 +47,10 @@ type DescribeDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDetectorInput) operationName() string {
+	return "DescribeDetector"
+}
+
 type DescribeDetectorOutput struct {
 
 	// Information about the detector (instance).

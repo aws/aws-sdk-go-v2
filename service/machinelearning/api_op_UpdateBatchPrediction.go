@@ -47,6 +47,10 @@ type UpdateBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBatchPredictionInput) operationName() string {
+	return "UpdateBatchPrediction"
+}
+
 // Represents the output of an UpdateBatchPrediction operation. You can see the
 // updated content by using the GetBatchPrediction operation.
 type UpdateBatchPredictionOutput struct {

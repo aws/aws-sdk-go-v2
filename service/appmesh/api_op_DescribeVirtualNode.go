@@ -54,6 +54,10 @@ type DescribeVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualNodeInput) operationName() string {
+	return "DescribeVirtualNode"
+}
+
 type DescribeVirtualNodeOutput struct {
 
 	// The full description of your virtual node.

@@ -50,6 +50,10 @@ type ModifyReplicationSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReplicationSubnetGroupInput) operationName() string {
+	return "ModifyReplicationSubnetGroup"
+}
+
 type ModifyReplicationSubnetGroupOutput struct {
 
 	// The modified replication subnet group.

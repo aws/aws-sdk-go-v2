@@ -57,6 +57,10 @@ type UpdateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIntegrationInput) operationName() string {
+	return "UpdateIntegration"
+}
+
 // Represents an HTTP , HTTP_PROXY , AWS , AWS_PROXY , or Mock integration.
 type UpdateIntegrationOutput struct {
 

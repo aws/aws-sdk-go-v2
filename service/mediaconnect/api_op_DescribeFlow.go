@@ -48,6 +48,10 @@ type DescribeFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFlowInput) operationName() string {
+	return "DescribeFlow"
+}
+
 type DescribeFlowOutput struct {
 
 	// The settings for a flow, including its source, outputs, and entitlements.

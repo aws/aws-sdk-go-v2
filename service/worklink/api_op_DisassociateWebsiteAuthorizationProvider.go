@@ -51,6 +51,10 @@ type DisassociateWebsiteAuthorizationProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateWebsiteAuthorizationProviderInput) operationName() string {
+	return "DisassociateWebsiteAuthorizationProvider"
+}
+
 type DisassociateWebsiteAuthorizationProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

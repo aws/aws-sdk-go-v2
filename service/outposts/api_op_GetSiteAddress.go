@@ -47,6 +47,10 @@ type GetSiteAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSiteAddressInput) operationName() string {
+	return "GetSiteAddress"
+}
+
 type GetSiteAddressOutput struct {
 
 	// Information about the address.

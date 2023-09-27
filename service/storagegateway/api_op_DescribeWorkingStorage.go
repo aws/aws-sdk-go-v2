@@ -49,6 +49,10 @@ type DescribeWorkingStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkingStorageInput) operationName() string {
+	return "DescribeWorkingStorage"
+}
+
 // A JSON object containing the following fields:
 type DescribeWorkingStorageOutput struct {
 

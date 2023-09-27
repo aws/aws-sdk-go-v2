@@ -50,6 +50,10 @@ type DescribeSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSettingsInput) operationName() string {
+	return "DescribeSettings"
+}
+
 type DescribeSettingsOutput struct {
 
 	// The identifier of the directory.

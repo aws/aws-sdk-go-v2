@@ -51,6 +51,10 @@ type UpdateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScheduleInput) operationName() string {
+	return "UpdateSchedule"
+}
+
 type UpdateScheduleOutput struct {
 
 	// The name of the schedule that was updated.

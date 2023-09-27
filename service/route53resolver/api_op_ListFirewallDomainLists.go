@@ -54,6 +54,10 @@ type ListFirewallDomainListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFirewallDomainListsInput) operationName() string {
+	return "ListFirewallDomainLists"
+}
+
 type ListFirewallDomainListsOutput struct {
 
 	// A list of the domain lists that you have defined. This might be a partial list

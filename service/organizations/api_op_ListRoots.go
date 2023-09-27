@@ -65,6 +65,10 @@ type ListRootsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRootsInput) operationName() string {
+	return "ListRoots"
+}
+
 type ListRootsOutput struct {
 
 	// If present, indicates that more output is available than is included in the

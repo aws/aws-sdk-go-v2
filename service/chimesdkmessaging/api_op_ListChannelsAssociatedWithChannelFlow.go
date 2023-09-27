@@ -51,6 +51,10 @@ type ListChannelsAssociatedWithChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelsAssociatedWithChannelFlowInput) operationName() string {
+	return "ListChannelsAssociatedWithChannelFlow"
+}
+
 type ListChannelsAssociatedWithChannelFlowOutput struct {
 
 	// The information about each channel.

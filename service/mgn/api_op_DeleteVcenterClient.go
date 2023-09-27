@@ -41,6 +41,10 @@ type DeleteVcenterClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVcenterClientInput) operationName() string {
+	return "DeleteVcenterClient"
+}
+
 type DeleteVcenterClientOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

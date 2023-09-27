@@ -63,6 +63,10 @@ type PublishBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishBatchInput) operationName() string {
+	return "PublishBatch"
+}
+
 type PublishBatchOutput struct {
 
 	// A list of failed PublishBatch responses.

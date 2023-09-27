@@ -52,6 +52,10 @@ type ListFeaturedResultsSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFeaturedResultsSetsInput) operationName() string {
+	return "ListFeaturedResultsSets"
+}
+
 type ListFeaturedResultsSetsOutput struct {
 
 	// An array of summary information for one or more featured results sets.

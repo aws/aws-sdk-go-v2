@@ -52,6 +52,10 @@ type DeleteServiceSpecificCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceSpecificCredentialInput) operationName() string {
+	return "DeleteServiceSpecificCredential"
+}
+
 type DeleteServiceSpecificCredentialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

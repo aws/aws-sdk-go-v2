@@ -37,6 +37,10 @@ type GetMacieSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMacieSessionInput) operationName() string {
+	return "GetMacieSession"
+}
+
 type GetMacieSessionOutput struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when the Amazon Macie

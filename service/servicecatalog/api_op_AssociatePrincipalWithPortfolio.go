@@ -104,6 +104,10 @@ type AssociatePrincipalWithPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePrincipalWithPortfolioInput) operationName() string {
+	return "AssociatePrincipalWithPortfolio"
+}
+
 type AssociatePrincipalWithPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

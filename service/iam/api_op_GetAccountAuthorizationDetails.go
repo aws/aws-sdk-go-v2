@@ -69,6 +69,10 @@ type GetAccountAuthorizationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountAuthorizationDetailsInput) operationName() string {
+	return "GetAccountAuthorizationDetails"
+}
+
 // Contains the response to a successful GetAccountAuthorizationDetails request.
 type GetAccountAuthorizationDetailsOutput struct {
 

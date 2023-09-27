@@ -48,6 +48,10 @@ type AssociateSigninDelegateGroupsWithAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSigninDelegateGroupsWithAccountInput) operationName() string {
+	return "AssociateSigninDelegateGroupsWithAccount"
+}
+
 type AssociateSigninDelegateGroupsWithAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type ListGeofencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGeofencesInput) operationName() string {
+	return "ListGeofences"
+}
+
 type ListGeofencesOutput struct {
 
 	// Contains a list of geofences stored in the geofence collection.

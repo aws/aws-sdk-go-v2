@@ -45,6 +45,10 @@ type GetBackupVaultAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackupVaultAccessPolicyInput) operationName() string {
+	return "GetBackupVaultAccessPolicy"
+}
+
 type GetBackupVaultAccessPolicyOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for

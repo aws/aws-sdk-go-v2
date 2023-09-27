@@ -63,6 +63,10 @@ type PutLaunchProfileMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLaunchProfileMembersInput) operationName() string {
+	return "PutLaunchProfileMembers"
+}
+
 type PutLaunchProfileMembersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

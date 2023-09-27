@@ -53,6 +53,10 @@ type ListConfigurationProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationProfilesInput) operationName() string {
+	return "ListConfigurationProfiles"
+}
+
 type ListConfigurationProfilesOutput struct {
 
 	// The elements from this collection.

@@ -51,6 +51,10 @@ type ListExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExecutionsInput) operationName() string {
+	return "ListExecutions"
+}
+
 type ListExecutionsOutput struct {
 
 	// A list of executions. Each execution contains the task ID, the device that the

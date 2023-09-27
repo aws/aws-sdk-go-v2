@@ -45,6 +45,10 @@ type CreateDataLakeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataLakeOrganizationConfigurationInput) operationName() string {
+	return "CreateDataLakeOrganizationConfiguration"
+}
+
 type CreateDataLakeOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

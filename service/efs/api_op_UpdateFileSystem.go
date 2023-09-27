@@ -59,6 +59,10 @@ type UpdateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFileSystemInput) operationName() string {
+	return "UpdateFileSystem"
+}
+
 // A description of the file system.
 type UpdateFileSystemOutput struct {
 

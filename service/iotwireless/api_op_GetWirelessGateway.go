@@ -47,6 +47,10 @@ type GetWirelessGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWirelessGatewayInput) operationName() string {
+	return "GetWirelessGateway"
+}
+
 type GetWirelessGatewayOutput struct {
 
 	// The Amazon Resource Name of the resource.

@@ -45,6 +45,10 @@ type StopEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopEngagementInput) operationName() string {
+	return "StopEngagement"
+}
+
 type StopEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type ListPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPoliciesInput) operationName() string {
+	return "ListPolicies"
+}
+
 type ListPoliciesOutput struct {
 
 	// If you have more PolicySummary objects than the number that you specified for

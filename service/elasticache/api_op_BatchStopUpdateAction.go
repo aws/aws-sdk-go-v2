@@ -50,6 +50,10 @@ type BatchStopUpdateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchStopUpdateActionInput) operationName() string {
+	return "BatchStopUpdateAction"
+}
+
 type BatchStopUpdateActionOutput struct {
 
 	// Update actions that have been processed successfully

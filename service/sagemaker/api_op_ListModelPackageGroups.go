@@ -62,6 +62,10 @@ type ListModelPackageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelPackageGroupsInput) operationName() string {
+	return "ListModelPackageGroups"
+}
+
 type ListModelPackageGroupsOutput struct {
 
 	// A list of summaries of the model groups in your Amazon Web Services account.

@@ -47,6 +47,10 @@ type ListMetricAttributionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMetricAttributionsInput) operationName() string {
+	return "ListMetricAttributions"
+}
+
 type ListMetricAttributionsOutput struct {
 
 	// The list of metric attributions.

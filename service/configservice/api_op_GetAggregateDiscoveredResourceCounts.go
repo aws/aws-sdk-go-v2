@@ -63,6 +63,10 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAggregateDiscoveredResourceCountsInput) operationName() string {
+	return "GetAggregateDiscoveredResourceCounts"
+}
+
 type GetAggregateDiscoveredResourceCountsOutput struct {
 
 	// The total number of resources that are present in an aggregator with the

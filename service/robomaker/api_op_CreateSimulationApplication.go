@@ -67,6 +67,10 @@ type CreateSimulationApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSimulationApplicationInput) operationName() string {
+	return "CreateSimulationApplication"
+}
+
 type CreateSimulationApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation application.

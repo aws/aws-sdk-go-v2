@@ -53,6 +53,10 @@ type AttachInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachInstancesInput) operationName() string {
+	return "AttachInstances"
+}
+
 type AttachInstancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

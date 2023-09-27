@@ -46,6 +46,10 @@ type ListGamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGamesInput) operationName() string {
+	return "ListGames"
+}
+
 type ListGamesOutput struct {
 
 	// The list of games.

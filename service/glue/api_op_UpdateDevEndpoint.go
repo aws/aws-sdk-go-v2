@@ -70,6 +70,10 @@ type UpdateDevEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDevEndpointInput) operationName() string {
+	return "UpdateDevEndpoint"
+}
+
 type UpdateDevEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

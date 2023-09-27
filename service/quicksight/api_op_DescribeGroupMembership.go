@@ -61,6 +61,10 @@ type DescribeGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGroupMembershipInput) operationName() string {
+	return "DescribeGroupMembership"
+}
+
 type DescribeGroupMembershipOutput struct {
 
 	// A member of an Amazon QuickSight group. Currently, group members must be users.

@@ -41,6 +41,10 @@ type DeleteEventsByEventTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventsByEventTypeInput) operationName() string {
+	return "DeleteEventsByEventType"
+}
+
 type DeleteEventsByEventTypeOutput struct {
 
 	// Name of event type for which to delete the events.

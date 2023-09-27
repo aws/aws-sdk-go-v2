@@ -54,6 +54,10 @@ type GetFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFeedbackInput) operationName() string {
+	return "GetFeedback"
+}
+
 type GetFeedbackOutput struct {
 
 	// Feedback for an anomalous metric.

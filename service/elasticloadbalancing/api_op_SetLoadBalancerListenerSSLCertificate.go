@@ -56,6 +56,10 @@ type SetLoadBalancerListenerSSLCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetLoadBalancerListenerSSLCertificateInput) operationName() string {
+	return "SetLoadBalancerListenerSSLCertificate"
+}
+
 // Contains the output of SetLoadBalancerListenerSSLCertificate.
 type SetLoadBalancerListenerSSLCertificateOutput struct {
 	// Metadata pertaining to the operation's result.

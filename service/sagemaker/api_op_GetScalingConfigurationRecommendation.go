@@ -63,6 +63,10 @@ type GetScalingConfigurationRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetScalingConfigurationRecommendationInput) operationName() string {
+	return "GetScalingConfigurationRecommendation"
+}
+
 type GetScalingConfigurationRecommendationOutput struct {
 
 	// An object with the recommended values for you to specify when creating an

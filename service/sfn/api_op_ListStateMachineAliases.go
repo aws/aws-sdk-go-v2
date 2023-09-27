@@ -71,6 +71,10 @@ type ListStateMachineAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStateMachineAliasesInput) operationName() string {
+	return "ListStateMachineAliases"
+}
+
 type ListStateMachineAliasesOutput struct {
 
 	// Aliases for the state machine.

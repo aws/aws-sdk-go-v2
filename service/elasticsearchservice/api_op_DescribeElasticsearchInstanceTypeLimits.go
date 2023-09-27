@@ -57,6 +57,10 @@ type DescribeElasticsearchInstanceTypeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeElasticsearchInstanceTypeLimitsInput) operationName() string {
+	return "DescribeElasticsearchInstanceTypeLimits"
+}
+
 // Container for the parameters received from
 // DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {

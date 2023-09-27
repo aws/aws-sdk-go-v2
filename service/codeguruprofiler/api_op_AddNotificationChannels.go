@@ -48,6 +48,10 @@ type AddNotificationChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddNotificationChannelsInput) operationName() string {
+	return "AddNotificationChannels"
+}
+
 // The structure representing the AddNotificationChannelsResponse.
 type AddNotificationChannelsOutput struct {
 

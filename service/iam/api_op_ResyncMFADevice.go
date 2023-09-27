@@ -67,6 +67,10 @@ type ResyncMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResyncMFADeviceInput) operationName() string {
+	return "ResyncMFADevice"
+}
+
 type ResyncMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

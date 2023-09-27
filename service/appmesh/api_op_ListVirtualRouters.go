@@ -64,6 +64,10 @@ type ListVirtualRoutersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVirtualRoutersInput) operationName() string {
+	return "ListVirtualRouters"
+}
+
 type ListVirtualRoutersOutput struct {
 
 	// The list of existing virtual routers for the specified service mesh.

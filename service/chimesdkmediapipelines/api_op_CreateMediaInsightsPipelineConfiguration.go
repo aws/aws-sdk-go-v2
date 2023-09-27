@@ -66,6 +66,10 @@ type CreateMediaInsightsPipelineConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMediaInsightsPipelineConfigurationInput) operationName() string {
+	return "CreateMediaInsightsPipelineConfiguration"
+}
+
 type CreateMediaInsightsPipelineConfigurationOutput struct {
 
 	// The configuration settings for the media insights pipeline.

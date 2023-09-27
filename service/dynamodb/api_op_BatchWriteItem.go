@@ -136,6 +136,10 @@ type BatchWriteItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchWriteItemInput) operationName() string {
+	return "BatchWriteItem"
+}
+
 // Represents the output of a BatchWriteItem operation.
 type BatchWriteItemOutput struct {
 

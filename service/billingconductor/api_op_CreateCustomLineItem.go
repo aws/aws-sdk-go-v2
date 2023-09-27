@@ -73,6 +73,10 @@ type CreateCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomLineItemInput) operationName() string {
+	return "CreateCustomLineItem"
+}
+
 type CreateCustomLineItemOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created custom line item.

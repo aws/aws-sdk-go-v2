@@ -50,6 +50,10 @@ type UpdateChannelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChannelGroupInput) operationName() string {
+	return "UpdateChannelGroup"
+}
+
 type UpdateChannelGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the resource.

@@ -63,6 +63,10 @@ type GetVpnConnectionDeviceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVpnConnectionDeviceTypesInput) operationName() string {
+	return "GetVpnConnectionDeviceTypes"
+}
+
 type GetVpnConnectionDeviceTypesOutput struct {
 
 	// The NextToken value to include in a future GetVpnConnectionDeviceTypes request.

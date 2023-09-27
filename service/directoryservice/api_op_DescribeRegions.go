@@ -50,6 +50,10 @@ type DescribeRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRegionsInput) operationName() string {
+	return "DescribeRegions"
+}
+
 type DescribeRegionsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken

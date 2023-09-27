@@ -46,6 +46,10 @@ type DeactivateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateUserInput) operationName() string {
+	return "DeactivateUser"
+}
+
 type DeactivateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

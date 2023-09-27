@@ -49,6 +49,10 @@ type DeleteIntentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIntentVersionInput) operationName() string {
+	return "DeleteIntentVersion"
+}
+
 type DeleteIntentVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,6 +41,10 @@ type DisassociateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateUserAccessLoggingSettingsInput) operationName() string {
+	return "DisassociateUserAccessLoggingSettings"
+}
+
 type DisassociateUserAccessLoggingSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

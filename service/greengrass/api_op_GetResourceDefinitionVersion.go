@@ -53,6 +53,10 @@ type GetResourceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceDefinitionVersionInput) operationName() string {
+	return "GetResourceDefinitionVersion"
+}
+
 type GetResourceDefinitionVersionOutput struct {
 
 	// Arn of the resource definition version.

@@ -53,6 +53,10 @@ type ListBackupVaultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupVaultsInput) operationName() string {
+	return "ListBackupVaults"
+}
+
 type ListBackupVaultsOutput struct {
 
 	// An array of backup vault list members containing vault metadata, including

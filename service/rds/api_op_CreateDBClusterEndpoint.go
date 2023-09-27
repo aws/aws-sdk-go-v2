@@ -66,6 +66,10 @@ type CreateDBClusterEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterEndpointInput) operationName() string {
+	return "CreateDBClusterEndpoint"
+}
+
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:

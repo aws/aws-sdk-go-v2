@@ -48,6 +48,10 @@ type GetReferenceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReferenceMetadataInput) operationName() string {
+	return "GetReferenceMetadata"
+}
+
 type GetReferenceMetadataOutput struct {
 
 	// The reference's ARN.

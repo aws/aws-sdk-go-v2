@@ -53,6 +53,10 @@ type UpdateThingShadowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThingShadowInput) operationName() string {
+	return "UpdateThingShadow"
+}
+
 // The output from the UpdateThingShadow operation.
 type UpdateThingShadowOutput struct {
 

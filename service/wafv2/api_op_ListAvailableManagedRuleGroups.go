@@ -64,6 +64,10 @@ type ListAvailableManagedRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableManagedRuleGroupsInput) operationName() string {
+	return "ListAvailableManagedRuleGroups"
+}
+
 type ListAvailableManagedRuleGroupsOutput struct {
 
 	// Array of managed rule groups that you can use. If you specified a Limit in your

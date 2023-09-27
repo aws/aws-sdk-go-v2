@@ -61,6 +61,10 @@ type ListAnomaliesForInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnomaliesForInsightInput) operationName() string {
+	return "ListAnomaliesForInsight"
+}
+
 type ListAnomaliesForInsightOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

@@ -43,6 +43,10 @@ type DescribeResourceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourceGroupsInput) operationName() string {
+	return "DescribeResourceGroups"
+}
+
 type DescribeResourceGroupsOutput struct {
 
 	// Resource group details that cannot be described. An error code is provided for

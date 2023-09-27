@@ -52,6 +52,10 @@ type PutCommentReactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCommentReactionInput) operationName() string {
+	return "PutCommentReaction"
+}
+
 type PutCommentReactionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

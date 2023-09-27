@@ -49,6 +49,10 @@ type ListEventIntegrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventIntegrationAssociationsInput) operationName() string {
+	return "ListEventIntegrationAssociations"
+}
+
 type ListEventIntegrationAssociationsOutput struct {
 
 	// The event integration associations.

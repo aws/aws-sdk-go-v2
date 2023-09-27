@@ -48,6 +48,10 @@ type DescribeStorediSCSIVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorediSCSIVolumesInput) operationName() string {
+	return "DescribeStorediSCSIVolumes"
+}
+
 type DescribeStorediSCSIVolumesOutput struct {
 
 	// Describes a single unit of output from DescribeStorediSCSIVolumes . The

@@ -30,6 +30,10 @@ type XmlEmptyListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*XmlEmptyListsInput) operationName() string {
+	return "XmlEmptyLists"
+}
+
 type XmlEmptyListsOutput struct {
 	BooleanList []bool
 

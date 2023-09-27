@@ -54,6 +54,10 @@ type ListImageSetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImageSetVersionsInput) operationName() string {
+	return "ListImageSetVersions"
+}
+
 type ListImageSetVersionsOutput struct {
 
 	// Lists all properties associated with an image set.

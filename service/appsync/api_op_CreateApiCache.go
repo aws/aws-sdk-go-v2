@@ -86,6 +86,10 @@ type CreateApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApiCacheInput) operationName() string {
+	return "CreateApiCache"
+}
+
 // Represents the output of a CreateApiCache operation.
 type CreateApiCacheOutput struct {
 

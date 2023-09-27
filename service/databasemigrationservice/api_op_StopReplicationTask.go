@@ -42,6 +42,10 @@ type StopReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopReplicationTaskInput) operationName() string {
+	return "StopReplicationTask"
+}
+
 type StopReplicationTaskOutput struct {
 
 	// The replication task stopped.

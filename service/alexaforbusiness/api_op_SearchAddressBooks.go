@@ -58,6 +58,10 @@ type SearchAddressBooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchAddressBooksInput) operationName() string {
+	return "SearchAddressBooks"
+}
+
 type SearchAddressBooksOutput struct {
 
 	// The address books that meet the specified set of filter criteria, in sort order.

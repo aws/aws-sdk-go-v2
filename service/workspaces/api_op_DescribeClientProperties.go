@@ -42,6 +42,10 @@ type DescribeClientPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientPropertiesInput) operationName() string {
+	return "DescribeClientProperties"
+}
+
 type DescribeClientPropertiesOutput struct {
 
 	// Information about the specified Amazon WorkSpaces clients.

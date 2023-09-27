@@ -49,6 +49,10 @@ type GetOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOpsMetadataInput) operationName() string {
+	return "GetOpsMetadata"
+}
+
 type GetOpsMetadataOutput struct {
 
 	// OpsMetadata for an Application Manager application.

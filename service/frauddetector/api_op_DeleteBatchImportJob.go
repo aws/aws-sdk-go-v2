@@ -42,6 +42,10 @@ type DeleteBatchImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBatchImportJobInput) operationName() string {
+	return "DeleteBatchImportJob"
+}
+
 type DeleteBatchImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

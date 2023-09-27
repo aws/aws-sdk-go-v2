@@ -51,6 +51,10 @@ type DeleteVpnGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpnGatewayInput) operationName() string {
+	return "DeleteVpnGateway"
+}
+
 type DeleteVpnGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -74,6 +74,10 @@ type ListViolationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListViolationEventsInput) operationName() string {
+	return "ListViolationEvents"
+}
+
 type ListViolationEventsOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there

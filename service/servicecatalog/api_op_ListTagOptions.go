@@ -48,6 +48,10 @@ type ListTagOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagOptionsInput) operationName() string {
+	return "ListTagOptions"
+}
+
 type ListTagOptionsOutput struct {
 
 	// The page token for the next set of results. To retrieve the first set of

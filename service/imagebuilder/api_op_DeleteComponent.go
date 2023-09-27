@@ -41,6 +41,10 @@ type DeleteComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteComponentInput) operationName() string {
+	return "DeleteComponent"
+}
+
 type DeleteComponentOutput struct {
 
 	// The ARN of the component build version that this request deleted.

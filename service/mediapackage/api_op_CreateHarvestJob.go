@@ -66,6 +66,10 @@ type CreateHarvestJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHarvestJobInput) operationName() string {
+	return "CreateHarvestJob"
+}
+
 type CreateHarvestJobOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the HarvestJob.

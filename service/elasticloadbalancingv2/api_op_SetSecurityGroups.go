@@ -57,6 +57,10 @@ type SetSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetSecurityGroupsInput) operationName() string {
+	return "SetSecurityGroups"
+}
+
 type SetSecurityGroupsOutput struct {
 
 	// Indicates whether to evaluate inbound security group rules for traffic sent to

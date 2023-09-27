@@ -61,6 +61,10 @@ type DeleteApplicationOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationOutputInput) operationName() string {
+	return "DeleteApplicationOutput"
+}
+
 type DeleteApplicationOutputOutput struct {
 
 	// The application Amazon Resource Name (ARN).

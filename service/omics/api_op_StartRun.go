@@ -89,6 +89,10 @@ type StartRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRunInput) operationName() string {
+	return "StartRun"
+}
+
 type StartRunOutput struct {
 
 	// The run's ARN.

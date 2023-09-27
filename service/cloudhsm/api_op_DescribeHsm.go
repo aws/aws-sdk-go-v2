@@ -56,6 +56,10 @@ type DescribeHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHsmInput) operationName() string {
+	return "DescribeHsm"
+}
+
 // Contains the output of the DescribeHsm operation.
 type DescribeHsmOutput struct {
 

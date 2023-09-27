@@ -72,6 +72,10 @@ type StartAssetBundleImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAssetBundleImportJobInput) operationName() string {
+	return "StartAssetBundleImportJob"
+}
+
 type StartAssetBundleImportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the import job.

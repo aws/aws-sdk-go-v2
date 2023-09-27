@@ -68,6 +68,10 @@ type DeleteAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnalysisInput) operationName() string {
+	return "DeleteAnalysis"
+}
+
 type DeleteAnalysisOutput struct {
 
 	// The ID of the deleted analysis.

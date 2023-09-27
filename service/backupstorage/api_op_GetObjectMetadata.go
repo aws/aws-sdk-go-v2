@@ -48,6 +48,10 @@ type GetObjectMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectMetadataInput) operationName() string {
+	return "GetObjectMetadata"
+}
+
 type GetObjectMetadataOutput struct {
 
 	// Metadata blob.

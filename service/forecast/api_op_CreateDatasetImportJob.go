@@ -138,6 +138,10 @@ type CreateDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetImportJobInput) operationName() string {
+	return "CreateDatasetImportJob"
+}
+
 type CreateDatasetImportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset import job.

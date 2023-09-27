@@ -84,6 +84,10 @@ type PutBucketIntelligentTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketIntelligentTieringConfigurationInput) operationName() string {
+	return "PutBucketIntelligentTieringConfiguration"
+}
+
 type PutBucketIntelligentTieringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

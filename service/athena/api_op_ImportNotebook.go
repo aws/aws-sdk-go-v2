@@ -67,6 +67,10 @@ type ImportNotebookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportNotebookInput) operationName() string {
+	return "ImportNotebook"
+}
+
 type ImportNotebookOutput struct {
 
 	// The ID assigned to the imported notebook.

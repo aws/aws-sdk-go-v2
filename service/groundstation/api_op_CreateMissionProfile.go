@@ -78,6 +78,10 @@ type CreateMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMissionProfileInput) operationName() string {
+	return "CreateMissionProfile"
+}
+
 type CreateMissionProfileOutput struct {
 
 	// UUID of a mission profile.

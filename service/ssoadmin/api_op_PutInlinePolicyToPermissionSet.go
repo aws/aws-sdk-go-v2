@@ -57,6 +57,10 @@ type PutInlinePolicyToPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutInlinePolicyToPermissionSetInput) operationName() string {
+	return "PutInlinePolicyToPermissionSet"
+}
+
 type PutInlinePolicyToPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

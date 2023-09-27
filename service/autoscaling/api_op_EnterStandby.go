@@ -59,6 +59,10 @@ type EnterStandbyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnterStandbyInput) operationName() string {
+	return "EnterStandby"
+}
+
 type EnterStandbyOutput struct {
 
 	// The activities related to moving instances into Standby mode.

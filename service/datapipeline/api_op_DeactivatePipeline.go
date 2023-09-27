@@ -51,6 +51,10 @@ type DeactivatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivatePipelineInput) operationName() string {
+	return "DeactivatePipeline"
+}
+
 // Contains the output of DeactivatePipeline.
 type DeactivatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.

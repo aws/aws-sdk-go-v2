@@ -53,6 +53,10 @@ type ListVehiclesInFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVehiclesInFleetInput) operationName() string {
+	return "ListVehiclesInFleet"
+}
+
 type ListVehiclesInFleetOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

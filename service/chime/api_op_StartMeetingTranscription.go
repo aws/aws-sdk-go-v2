@@ -67,6 +67,10 @@ type StartMeetingTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMeetingTranscriptionInput) operationName() string {
+	return "StartMeetingTranscription"
+}
+
 type StartMeetingTranscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

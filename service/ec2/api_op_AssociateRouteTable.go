@@ -60,6 +60,10 @@ type AssociateRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateRouteTableInput) operationName() string {
+	return "AssociateRouteTable"
+}
+
 type AssociateRouteTableOutput struct {
 
 	// The route table association ID. This ID is required for disassociating the

@@ -80,6 +80,10 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBClusterSnapshotAttributeInput) operationName() string {
+	return "ModifyDBClusterSnapshotAttribute"
+}
+
 type ModifyDBClusterSnapshotAttributeOutput struct {
 
 	// Detailed information about the attributes that are associated with a cluster

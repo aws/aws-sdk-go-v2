@@ -59,6 +59,10 @@ type UpdateSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSceneInput) operationName() string {
+	return "UpdateScene"
+}
+
 type UpdateSceneOutput struct {
 
 	// The date and time when the scene was last updated.

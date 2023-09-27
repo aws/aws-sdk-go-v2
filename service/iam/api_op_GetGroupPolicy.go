@@ -63,6 +63,10 @@ type GetGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupPolicyInput) operationName() string {
+	return "GetGroupPolicy"
+}
+
 // Contains the response to a successful GetGroupPolicy request.
 type GetGroupPolicyOutput struct {
 

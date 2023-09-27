@@ -49,6 +49,10 @@ type StartObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartObjectInput) operationName() string {
+	return "StartObject"
+}
+
 type StartObjectOutput struct {
 
 	// Upload Id for a given upload.

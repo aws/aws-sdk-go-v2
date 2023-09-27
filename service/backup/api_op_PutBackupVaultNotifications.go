@@ -66,6 +66,10 @@ type PutBackupVaultNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBackupVaultNotificationsInput) operationName() string {
+	return "PutBackupVaultNotifications"
+}
+
 type PutBackupVaultNotificationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

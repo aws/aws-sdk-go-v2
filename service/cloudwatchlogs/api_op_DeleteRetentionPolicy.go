@@ -42,6 +42,10 @@ type DeleteRetentionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRetentionPolicyInput) operationName() string {
+	return "DeleteRetentionPolicy"
+}
+
 type DeleteRetentionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

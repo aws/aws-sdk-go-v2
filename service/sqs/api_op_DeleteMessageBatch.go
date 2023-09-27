@@ -52,6 +52,10 @@ type DeleteMessageBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMessageBatchInput) operationName() string {
+	return "DeleteMessageBatch"
+}
+
 // For each message in the batch, the response contains a
 // DeleteMessageBatchResultEntry tag if the message is deleted or a
 // BatchResultErrorEntry tag if the message can't be deleted.

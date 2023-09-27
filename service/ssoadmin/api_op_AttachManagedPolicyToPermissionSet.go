@@ -58,6 +58,10 @@ type AttachManagedPolicyToPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachManagedPolicyToPermissionSetInput) operationName() string {
+	return "AttachManagedPolicyToPermissionSet"
+}
+
 type AttachManagedPolicyToPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

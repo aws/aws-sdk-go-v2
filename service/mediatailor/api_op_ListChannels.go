@@ -47,6 +47,10 @@ type ListChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelsInput) operationName() string {
+	return "ListChannels"
+}
+
 type ListChannelsOutput struct {
 
 	// A list of channels that are associated with this account.

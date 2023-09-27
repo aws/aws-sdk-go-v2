@@ -77,6 +77,10 @@ type SendCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendCommandInput) operationName() string {
+	return "SendCommand"
+}
+
 type SendCommandOutput struct {
 
 	// Contains the details of the aborted transaction.

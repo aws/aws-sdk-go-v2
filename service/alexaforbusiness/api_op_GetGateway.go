@@ -44,6 +44,10 @@ type GetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGatewayInput) operationName() string {
+	return "GetGateway"
+}
+
 type GetGatewayOutput struct {
 
 	// The details of the gateway.

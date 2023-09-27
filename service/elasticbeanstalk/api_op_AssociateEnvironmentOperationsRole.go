@@ -52,6 +52,10 @@ type AssociateEnvironmentOperationsRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateEnvironmentOperationsRoleInput) operationName() string {
+	return "AssociateEnvironmentOperationsRole"
+}
+
 type AssociateEnvironmentOperationsRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

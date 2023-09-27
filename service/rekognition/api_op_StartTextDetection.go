@@ -78,6 +78,10 @@ type StartTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTextDetectionInput) operationName() string {
+	return "StartTextDetection"
+}
+
 type StartTextDetectionOutput struct {
 
 	// Identifier for the text detection job. Use JobId to identify the job in a

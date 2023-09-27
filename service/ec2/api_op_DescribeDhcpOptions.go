@@ -73,6 +73,10 @@ type DescribeDhcpOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDhcpOptionsInput) operationName() string {
+	return "DescribeDhcpOptions"
+}
+
 type DescribeDhcpOptionsOutput struct {
 
 	// Information about one or more DHCP options sets.

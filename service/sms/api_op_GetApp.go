@@ -40,6 +40,10 @@ type GetAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppInput) operationName() string {
+	return "GetApp"
+}
+
 type GetAppOutput struct {
 
 	// Information about the application.

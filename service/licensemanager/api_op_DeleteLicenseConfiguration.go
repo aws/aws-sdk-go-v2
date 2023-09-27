@@ -42,6 +42,10 @@ type DeleteLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLicenseConfigurationInput) operationName() string {
+	return "DeleteLicenseConfiguration"
+}
+
 type DeleteLicenseConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

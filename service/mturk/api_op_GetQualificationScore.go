@@ -51,6 +51,10 @@ type GetQualificationScoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQualificationScoreInput) operationName() string {
+	return "GetQualificationScore"
+}
+
 type GetQualificationScoreOutput struct {
 
 	// The Qualification data structure of the Qualification assigned to a user,

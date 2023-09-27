@@ -54,6 +54,10 @@ type ModifyDBSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBSubnetGroupInput) operationName() string {
+	return "ModifyDBSubnetGroup"
+}
+
 type ModifyDBSubnetGroupOutput struct {
 
 	// Detailed information about a subnet group.

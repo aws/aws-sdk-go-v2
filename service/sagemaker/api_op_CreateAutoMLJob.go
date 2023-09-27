@@ -103,6 +103,10 @@ type CreateAutoMLJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAutoMLJobInput) operationName() string {
+	return "CreateAutoMLJob"
+}
+
 type CreateAutoMLJobOutput struct {
 
 	// The unique ARN assigned to the AutoML job when it is created.

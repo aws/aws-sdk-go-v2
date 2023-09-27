@@ -63,6 +63,10 @@ type CreateProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfilingGroupInput) operationName() string {
+	return "CreateProfilingGroup"
+}
+
 // The structure representing the createProfilingGroupResponse.
 type CreateProfilingGroupOutput struct {
 

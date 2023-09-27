@@ -77,6 +77,10 @@ type GetBucketLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketLocationInput) operationName() string {
+	return "GetBucketLocation"
+}
+
 type GetBucketLocationOutput struct {
 
 	// Specifies the Region where the bucket resides. For a list of all the Amazon S3

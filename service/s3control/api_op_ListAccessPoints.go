@@ -83,6 +83,10 @@ type ListAccessPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessPointsInput) operationName() string {
+	return "ListAccessPoints"
+}
+
 type ListAccessPointsOutput struct {
 
 	// Contains identification and configuration information for one or more access

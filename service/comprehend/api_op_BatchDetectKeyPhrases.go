@@ -50,6 +50,10 @@ type BatchDetectKeyPhrasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDetectKeyPhrasesInput) operationName() string {
+	return "BatchDetectKeyPhrases"
+}
+
 type BatchDetectKeyPhrasesOutput struct {
 
 	// A list containing one object for each document that contained an error. The

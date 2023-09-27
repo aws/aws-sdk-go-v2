@@ -50,6 +50,10 @@ type CancelImageCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelImageCreationInput) operationName() string {
+	return "CancelImageCreation"
+}
+
 type CancelImageCreationOutput struct {
 
 	// The idempotency token that was used for this request.

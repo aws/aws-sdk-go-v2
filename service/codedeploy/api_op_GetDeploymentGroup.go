@@ -49,6 +49,10 @@ type GetDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentGroupInput) operationName() string {
+	return "GetDeploymentGroup"
+}
+
 // Represents the output of a GetDeploymentGroup operation.
 type GetDeploymentGroupOutput struct {
 

@@ -69,6 +69,10 @@ type ListAutoMLJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAutoMLJobsInput) operationName() string {
+	return "ListAutoMLJobs"
+}
+
 type ListAutoMLJobsOutput struct {
 
 	// Returns a summary list of jobs.

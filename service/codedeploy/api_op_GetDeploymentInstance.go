@@ -50,6 +50,10 @@ type GetDeploymentInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentInstanceInput) operationName() string {
+	return "GetDeploymentInstance"
+}
+
 // Represents the output of a GetDeploymentInstance operation.
 type GetDeploymentInstanceOutput struct {
 

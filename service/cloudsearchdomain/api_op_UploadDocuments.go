@@ -70,6 +70,10 @@ type UploadDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadDocumentsInput) operationName() string {
+	return "UploadDocuments"
+}
+
 // Contains the response to an UploadDocuments request.
 type UploadDocumentsOutput struct {
 

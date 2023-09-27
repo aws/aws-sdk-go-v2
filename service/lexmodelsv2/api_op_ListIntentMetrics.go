@@ -110,6 +110,10 @@ type ListIntentMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIntentMetricsInput) operationName() string {
+	return "ListIntentMetrics"
+}
+
 type ListIntentMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved intent metrics.

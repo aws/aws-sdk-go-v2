@@ -74,6 +74,10 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociatePrincipalFromPortfolioInput) operationName() string {
+	return "DisassociatePrincipalFromPortfolio"
+}
+
 type DisassociatePrincipalFromPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

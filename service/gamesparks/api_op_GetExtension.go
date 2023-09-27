@@ -47,6 +47,10 @@ type GetExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExtensionInput) operationName() string {
+	return "GetExtension"
+}
+
 type GetExtensionOutput struct {
 
 	// Details about the extension.

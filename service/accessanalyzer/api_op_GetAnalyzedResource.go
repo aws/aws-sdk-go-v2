@@ -49,6 +49,10 @@ type GetAnalyzedResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnalyzedResourceInput) operationName() string {
+	return "GetAnalyzedResource"
+}
+
 // The response to the request.
 type GetAnalyzedResourceOutput struct {
 

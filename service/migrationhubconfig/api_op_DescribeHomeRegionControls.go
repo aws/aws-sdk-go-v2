@@ -56,6 +56,10 @@ type DescribeHomeRegionControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHomeRegionControlsInput) operationName() string {
+	return "DescribeHomeRegionControls"
+}
+
 type DescribeHomeRegionControlsOutput struct {
 
 	// An array that contains your HomeRegionControl objects.

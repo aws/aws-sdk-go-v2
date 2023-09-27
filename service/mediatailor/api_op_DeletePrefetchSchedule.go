@@ -51,6 +51,10 @@ type DeletePrefetchScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePrefetchScheduleInput) operationName() string {
+	return "DeletePrefetchSchedule"
+}
+
 type DeletePrefetchScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

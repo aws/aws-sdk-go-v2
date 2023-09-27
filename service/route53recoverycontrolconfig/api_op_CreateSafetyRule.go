@@ -63,6 +63,10 @@ type CreateSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSafetyRuleInput) operationName() string {
+	return "CreateSafetyRule"
+}
+
 type CreateSafetyRuleOutput struct {
 
 	// The assertion rule created.

@@ -54,6 +54,10 @@ type ListCasesForContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCasesForContactInput) operationName() string {
+	return "ListCasesForContact"
+}
+
 type ListCasesForContactOutput struct {
 
 	// A list of Case summary information.

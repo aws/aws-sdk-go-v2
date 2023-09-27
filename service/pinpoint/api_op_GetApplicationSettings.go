@@ -43,6 +43,10 @@ type GetApplicationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationSettingsInput) operationName() string {
+	return "GetApplicationSettings"
+}
+
 type GetApplicationSettingsOutput struct {
 
 	// Provides information about an application, including the default settings for

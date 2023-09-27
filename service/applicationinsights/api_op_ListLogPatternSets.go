@@ -51,6 +51,10 @@ type ListLogPatternSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLogPatternSetsInput) operationName() string {
+	return "ListLogPatternSets"
+}
+
 type ListLogPatternSetsOutput struct {
 
 	// The AWS account ID for the resource group owner.

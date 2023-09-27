@@ -46,6 +46,10 @@ type GetModelTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelTemplateInput) operationName() string {
+	return "GetModelTemplate"
+}
+
 type GetModelTemplateOutput struct {
 
 	// The template value.

@@ -42,6 +42,10 @@ type CancelInputDeviceTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelInputDeviceTransferInput) operationName() string {
+	return "CancelInputDeviceTransfer"
+}
+
 // Placeholder documentation for CancelInputDeviceTransferResponse
 type CancelInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.

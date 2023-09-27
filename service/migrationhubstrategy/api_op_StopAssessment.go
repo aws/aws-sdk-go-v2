@@ -41,6 +41,10 @@ type StopAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAssessmentInput) operationName() string {
+	return "StopAssessment"
+}
+
 type StopAssessmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

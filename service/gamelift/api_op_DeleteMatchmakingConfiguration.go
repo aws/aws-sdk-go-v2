@@ -44,6 +44,10 @@ type DeleteMatchmakingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMatchmakingConfigurationInput) operationName() string {
+	return "DeleteMatchmakingConfiguration"
+}
+
 type DeleteMatchmakingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

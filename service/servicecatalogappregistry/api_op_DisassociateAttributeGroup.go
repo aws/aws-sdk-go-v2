@@ -49,6 +49,10 @@ type DisassociateAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateAttributeGroupInput) operationName() string {
+	return "DisassociateAttributeGroup"
+}
+
 type DisassociateAttributeGroupOutput struct {
 
 	// The Amazon resource name (ARN) that specifies the application.

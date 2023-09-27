@@ -46,6 +46,10 @@ type ListLicenseConversionTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLicenseConversionTasksInput) operationName() string {
+	return "ListLicenseConversionTasks"
+}
+
 type ListLicenseConversionTasksOutput struct {
 
 	// Information about the license configuration tasks for your account.

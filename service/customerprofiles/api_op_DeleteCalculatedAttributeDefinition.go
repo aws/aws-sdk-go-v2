@@ -49,6 +49,10 @@ type DeleteCalculatedAttributeDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCalculatedAttributeDefinitionInput) operationName() string {
+	return "DeleteCalculatedAttributeDefinition"
+}
+
 type DeleteCalculatedAttributeDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

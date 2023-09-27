@@ -53,6 +53,10 @@ type EnableKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableKeyInput) operationName() string {
+	return "EnableKey"
+}
+
 type EnableKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

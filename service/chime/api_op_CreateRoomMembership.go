@@ -57,6 +57,10 @@ type CreateRoomMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoomMembershipInput) operationName() string {
+	return "CreateRoomMembership"
+}
+
 type CreateRoomMembershipOutput struct {
 
 	// The room membership details.

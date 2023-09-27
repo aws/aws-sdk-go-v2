@@ -45,6 +45,10 @@ type GetWorkingLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkingLocationInput) operationName() string {
+	return "GetWorkingLocation"
+}
+
 type GetWorkingLocationOutput struct {
 
 	// Returns the Amazon S3 bucket name for the working location.

@@ -42,6 +42,10 @@ type DeleteCustomPluginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomPluginInput) operationName() string {
+	return "DeleteCustomPlugin"
+}
+
 type DeleteCustomPluginOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin that you requested to

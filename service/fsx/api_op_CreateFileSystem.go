@@ -181,6 +181,10 @@ type CreateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFileSystemInput) operationName() string {
+	return "CreateFileSystem"
+}
+
 // The response object returned after the file system is created.
 type CreateFileSystemOutput struct {
 

@@ -44,6 +44,10 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTagsInput) operationName() string {
+	return "GetTags"
+}
+
 type GetTagsOutput struct {
 
 	// The ARN of the tagged resource group.

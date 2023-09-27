@@ -61,6 +61,10 @@ type UpdatePrimaryEmailAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePrimaryEmailAddressInput) operationName() string {
+	return "UpdatePrimaryEmailAddress"
+}
+
 type UpdatePrimaryEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

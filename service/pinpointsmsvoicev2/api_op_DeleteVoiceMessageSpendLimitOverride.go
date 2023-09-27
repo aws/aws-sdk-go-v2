@@ -39,6 +39,10 @@ type DeleteVoiceMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVoiceMessageSpendLimitOverrideInput) operationName() string {
+	return "DeleteVoiceMessageSpendLimitOverride"
+}
+
 type DeleteVoiceMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit, in US dollars.

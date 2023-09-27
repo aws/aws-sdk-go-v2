@@ -49,6 +49,10 @@ type DescribeRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRuntimeConfigurationInput) operationName() string {
+	return "DescribeRuntimeConfiguration"
+}
+
 type DescribeRuntimeConfigurationOutput struct {
 
 	// Instructions that describe how server processes should be launched and

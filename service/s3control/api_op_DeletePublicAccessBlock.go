@@ -50,6 +50,10 @@ type DeletePublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePublicAccessBlockInput) operationName() string {
+	return "DeletePublicAccessBlock"
+}
+
 type DeletePublicAccessBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

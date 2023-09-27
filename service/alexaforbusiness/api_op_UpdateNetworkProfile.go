@@ -66,6 +66,10 @@ type UpdateNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkProfileInput) operationName() string {
+	return "UpdateNetworkProfile"
+}
+
 type UpdateNetworkProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

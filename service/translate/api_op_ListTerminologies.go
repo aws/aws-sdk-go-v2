@@ -44,6 +44,10 @@ type ListTerminologiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTerminologiesInput) operationName() string {
+	return "ListTerminologies"
+}
+
 type ListTerminologiesOutput struct {
 
 	// If the response to the ListTerminologies was truncated, the NextToken fetches

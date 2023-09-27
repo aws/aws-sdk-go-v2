@@ -61,6 +61,10 @@ type ListLayerVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLayerVersionsInput) operationName() string {
+	return "ListLayerVersions"
+}
+
 type ListLayerVersionsOutput struct {
 
 	// A list of versions.

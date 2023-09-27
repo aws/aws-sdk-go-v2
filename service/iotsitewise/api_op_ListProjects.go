@@ -48,6 +48,10 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectsInput) operationName() string {
+	return "ListProjects"
+}
+
 type ListProjectsOutput struct {
 
 	// A list that summarizes each project in the portal.

@@ -73,6 +73,10 @@ type CreateIngestionDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIngestionDestinationInput) operationName() string {
+	return "CreateIngestionDestination"
+}
+
 type CreateIngestionDestinationOutput struct {
 
 	// Contains information about an ingestion destination.

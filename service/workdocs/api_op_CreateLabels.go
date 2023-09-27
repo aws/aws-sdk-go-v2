@@ -50,6 +50,10 @@ type CreateLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLabelsInput) operationName() string {
+	return "CreateLabels"
+}
+
 type CreateLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type CompleteMultipartReadSetUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteMultipartReadSetUploadInput) operationName() string {
+	return "CompleteMultipartReadSetUpload"
+}
+
 type CompleteMultipartReadSetUploadOutput struct {
 
 	// The read set ID created for an uploaded read set.

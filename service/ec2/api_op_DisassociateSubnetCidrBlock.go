@@ -44,6 +44,10 @@ type DisassociateSubnetCidrBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateSubnetCidrBlockInput) operationName() string {
+	return "DisassociateSubnetCidrBlock"
+}
+
 type DisassociateSubnetCidrBlockOutput struct {
 
 	// Information about the IPv6 CIDR block association.

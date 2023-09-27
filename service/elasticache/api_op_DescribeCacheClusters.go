@@ -82,6 +82,10 @@ type DescribeCacheClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCacheClustersInput) operationName() string {
+	return "DescribeCacheClusters"
+}
+
 // Represents the output of a DescribeCacheClusters operation.
 type DescribeCacheClustersOutput struct {
 

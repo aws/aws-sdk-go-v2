@@ -95,6 +95,10 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolverQueryLogConfigAssociationsInput) operationName() string {
+	return "ListResolverQueryLogConfigAssociations"
+}
+
 type ListResolverQueryLogConfigAssociationsOutput struct {
 
 	// If there are more than MaxResults query logging associations, you can submit

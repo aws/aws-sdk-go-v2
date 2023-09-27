@@ -52,6 +52,10 @@ type DescribePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackagesInput) operationName() string {
+	return "DescribePackages"
+}
+
 // Container for the response returned by the DescribePackages operation.
 type DescribePackagesOutput struct {
 

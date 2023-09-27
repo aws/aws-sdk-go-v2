@@ -49,6 +49,10 @@ type GetMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLEndpointInput) operationName() string {
+	return "GetMLEndpoint"
+}
+
 type GetMLEndpointOutput struct {
 
 	// The endpoint definition.

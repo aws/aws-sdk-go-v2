@@ -55,6 +55,10 @@ type ListArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListArtifactsInput) operationName() string {
+	return "ListArtifacts"
+}
+
 // Represents the result of a list artifacts operation.
 type ListArtifactsOutput struct {
 

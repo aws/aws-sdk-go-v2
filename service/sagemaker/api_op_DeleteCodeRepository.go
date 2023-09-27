@@ -41,6 +41,10 @@ type DeleteCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCodeRepositoryInput) operationName() string {
+	return "DeleteCodeRepository"
+}
+
 type DeleteCodeRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

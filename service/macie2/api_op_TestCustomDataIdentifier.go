@@ -69,6 +69,10 @@ type TestCustomDataIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestCustomDataIdentifierInput) operationName() string {
+	return "TestCustomDataIdentifier"
+}
+
 type TestCustomDataIdentifierOutput struct {
 
 	// The number of occurrences of sample text that matched the criteria specified by

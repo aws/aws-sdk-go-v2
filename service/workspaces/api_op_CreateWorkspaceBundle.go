@@ -72,6 +72,10 @@ type CreateWorkspaceBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkspaceBundleInput) operationName() string {
+	return "CreateWorkspaceBundle"
+}
+
 type CreateWorkspaceBundleOutput struct {
 
 	// Describes a WorkSpace bundle.

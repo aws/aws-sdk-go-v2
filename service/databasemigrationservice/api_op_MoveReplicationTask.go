@@ -50,6 +50,10 @@ type MoveReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MoveReplicationTaskInput) operationName() string {
+	return "MoveReplicationTask"
+}
+
 type MoveReplicationTaskOutput struct {
 
 	// The replication task that was moved.

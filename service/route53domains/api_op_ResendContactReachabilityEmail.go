@@ -43,6 +43,10 @@ type ResendContactReachabilityEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResendContactReachabilityEmailInput) operationName() string {
+	return "ResendContactReachabilityEmail"
+}
+
 type ResendContactReachabilityEmailOutput struct {
 
 	// The domain name for which you requested a confirmation email.

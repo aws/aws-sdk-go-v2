@@ -90,6 +90,10 @@ type UpdateQuerySuggestionsConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQuerySuggestionsConfigInput) operationName() string {
+	return "UpdateQuerySuggestionsConfig"
+}
+
 type UpdateQuerySuggestionsConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

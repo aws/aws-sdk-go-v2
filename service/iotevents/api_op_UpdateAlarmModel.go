@@ -71,6 +71,10 @@ type UpdateAlarmModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAlarmModelInput) operationName() string {
+	return "UpdateAlarmModel"
+}
+
 type UpdateAlarmModelOutput struct {
 
 	// The ARN of the alarm model. For more information, see Amazon Resource Names

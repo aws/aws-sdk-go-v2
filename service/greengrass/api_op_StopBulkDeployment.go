@@ -44,6 +44,10 @@ type StopBulkDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopBulkDeploymentInput) operationName() string {
+	return "StopBulkDeployment"
+}
+
 type StopBulkDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

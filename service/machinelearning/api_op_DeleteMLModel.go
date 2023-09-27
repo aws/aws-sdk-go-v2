@@ -44,6 +44,10 @@ type DeleteMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMLModelInput) operationName() string {
+	return "DeleteMLModel"
+}
+
 // Represents the output of a DeleteMLModel operation. You can use the GetMLModel
 // operation and check the value of the Status parameter to see whether an MLModel
 // is marked as DELETED .

@@ -53,6 +53,10 @@ type GetCoverageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoverageStatisticsInput) operationName() string {
+	return "GetCoverageStatistics"
+}
+
 type GetCoverageStatisticsOutput struct {
 
 	// Represents the count aggregated by the statusCode and resourceType .

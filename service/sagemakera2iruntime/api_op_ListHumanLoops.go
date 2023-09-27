@@ -64,6 +64,10 @@ type ListHumanLoopsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHumanLoopsInput) operationName() string {
+	return "ListHumanLoops"
+}
+
 type ListHumanLoopsOutput struct {
 
 	// An array of objects that contain information about the human loops.

@@ -51,6 +51,10 @@ type ListOriginAccessControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOriginAccessControlsInput) operationName() string {
+	return "ListOriginAccessControls"
+}
+
 type ListOriginAccessControlsOutput struct {
 
 	// A list of origin access controls.

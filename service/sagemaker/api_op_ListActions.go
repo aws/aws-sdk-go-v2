@@ -64,6 +64,10 @@ type ListActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListActionsInput) operationName() string {
+	return "ListActions"
+}
+
 type ListActionsOutput struct {
 
 	// A list of actions and their properties.

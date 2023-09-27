@@ -44,6 +44,10 @@ type GetGcmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGcmChannelInput) operationName() string {
+	return "GetGcmChannel"
+}
+
 type GetGcmChannelOutput struct {
 
 	// Provides information about the status and settings of the GCM channel for an

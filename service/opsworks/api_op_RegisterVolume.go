@@ -52,6 +52,10 @@ type RegisterVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterVolumeInput) operationName() string {
+	return "RegisterVolume"
+}
+
 // Contains the response to a RegisterVolume request.
 type RegisterVolumeOutput struct {
 

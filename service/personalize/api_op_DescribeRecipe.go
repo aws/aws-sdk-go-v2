@@ -53,6 +53,10 @@ type DescribeRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecipeInput) operationName() string {
+	return "DescribeRecipe"
+}
+
 type DescribeRecipeOutput struct {
 
 	// An object that describes the recipe.

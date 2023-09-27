@@ -60,6 +60,10 @@ type ListPrefetchSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPrefetchSchedulesInput) operationName() string {
+	return "ListPrefetchSchedules"
+}
+
 type ListPrefetchSchedulesOutput struct {
 
 	// Lists the prefetch schedules. An empty Items list doesn't mean there aren't

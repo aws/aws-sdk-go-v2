@@ -63,6 +63,10 @@ type GetComplianceDetailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComplianceDetailInput) operationName() string {
+	return "GetComplianceDetail"
+}
+
 type GetComplianceDetailOutput struct {
 
 	// Information about the resources and the policy that you specified in the

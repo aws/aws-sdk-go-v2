@@ -48,6 +48,10 @@ type DeleteImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImageVersionInput) operationName() string {
+	return "DeleteImageVersion"
+}
+
 type DeleteImageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

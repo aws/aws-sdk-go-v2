@@ -41,6 +41,10 @@ type DeleteAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAuthenticationProfileInput) operationName() string {
+	return "DeleteAuthenticationProfile"
+}
+
 type DeleteAuthenticationProfileOutput struct {
 
 	// The name of the authentication profile that was deleted.

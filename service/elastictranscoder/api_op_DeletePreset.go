@@ -43,6 +43,10 @@ type DeletePresetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePresetInput) operationName() string {
+	return "DeletePreset"
+}
+
 // The DeletePresetResponse structure.
 type DeletePresetOutput struct {
 	// Metadata pertaining to the operation's result.

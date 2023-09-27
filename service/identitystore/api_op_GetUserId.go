@@ -53,6 +53,10 @@ type GetUserIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserIdInput) operationName() string {
+	return "GetUserId"
+}
+
 type GetUserIdOutput struct {
 
 	// The globally unique identifier for the identity store.

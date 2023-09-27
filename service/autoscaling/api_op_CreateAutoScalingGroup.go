@@ -256,6 +256,10 @@ type CreateAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAutoScalingGroupInput) operationName() string {
+	return "CreateAutoScalingGroup"
+}
+
 type CreateAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

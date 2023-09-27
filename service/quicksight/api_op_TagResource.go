@@ -64,6 +64,10 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagResourceInput) operationName() string {
+	return "TagResource"
+}
+
 type TagResourceOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

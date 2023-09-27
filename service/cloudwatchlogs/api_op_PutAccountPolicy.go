@@ -108,6 +108,10 @@ type PutAccountPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountPolicyInput) operationName() string {
+	return "PutAccountPolicy"
+}
+
 type PutAccountPolicyOutput struct {
 
 	// The account policy that you created.

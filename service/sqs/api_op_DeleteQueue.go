@@ -52,6 +52,10 @@ type DeleteQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQueueInput) operationName() string {
+	return "DeleteQueue"
+}
+
 type DeleteQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

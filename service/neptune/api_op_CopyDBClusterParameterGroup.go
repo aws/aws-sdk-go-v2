@@ -70,6 +70,10 @@ type CopyDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDBClusterParameterGroupInput) operationName() string {
+	return "CopyDBClusterParameterGroup"
+}
+
 type CopyDBClusterParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster parameter group. This data

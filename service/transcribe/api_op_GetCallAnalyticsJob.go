@@ -52,6 +52,10 @@ type GetCallAnalyticsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCallAnalyticsJobInput) operationName() string {
+	return "GetCallAnalyticsJob"
+}
+
 type GetCallAnalyticsJobOutput struct {
 
 	// Provides detailed information about the specified Call Analytics job, including

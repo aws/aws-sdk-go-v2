@@ -67,6 +67,10 @@ type StartReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReplicationInput) operationName() string {
+	return "StartReplication"
+}
+
 type StartReplicationOutput struct {
 
 	// The replication that DMS started.

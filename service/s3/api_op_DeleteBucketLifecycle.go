@@ -60,6 +60,10 @@ type DeleteBucketLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketLifecycleInput) operationName() string {
+	return "DeleteBucketLifecycle"
+}
+
 type DeleteBucketLifecycleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

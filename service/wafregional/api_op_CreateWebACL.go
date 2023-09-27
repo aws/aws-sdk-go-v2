@@ -93,6 +93,10 @@ type CreateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWebACLInput) operationName() string {
+	return "CreateWebACL"
+}
+
 type CreateWebACLOutput struct {
 
 	// The ChangeToken that you used to submit the CreateWebACL request. You can also

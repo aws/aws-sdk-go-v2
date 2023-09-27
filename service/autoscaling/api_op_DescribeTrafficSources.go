@@ -61,6 +61,10 @@ type DescribeTrafficSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrafficSourcesInput) operationName() string {
+	return "DescribeTrafficSources"
+}
+
 type DescribeTrafficSourcesOutput struct {
 
 	// This string indicates that the response contains more items than can be

@@ -48,6 +48,10 @@ type ListFoldersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFoldersInput) operationName() string {
+	return "ListFolders"
+}
+
 type ListFoldersOutput struct {
 
 	// A structure that contains all of the folders in the Amazon Web Services

@@ -44,6 +44,10 @@ type DisableTrustAnchorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableTrustAnchorInput) operationName() string {
+	return "DisableTrustAnchor"
+}
+
 type DisableTrustAnchorOutput struct {
 
 	// The state of the trust anchor after a read or write operation.

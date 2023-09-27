@@ -67,6 +67,10 @@ type UpdateSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSettingsInput) operationName() string {
+	return "UpdateSettings"
+}
+
 type UpdateSettingsOutput struct {
 
 	// The current list of settings.

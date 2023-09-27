@@ -55,6 +55,10 @@ type UntagLogGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagLogGroupInput) operationName() string {
+	return "UntagLogGroup"
+}
+
 type UntagLogGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

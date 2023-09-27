@@ -53,6 +53,10 @@ type ListQueuedMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQueuedMessagesInput) operationName() string {
+	return "ListQueuedMessages"
+}
+
 type ListQueuedMessagesOutput struct {
 
 	// The messages in the downlink queue.

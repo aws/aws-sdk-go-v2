@@ -95,6 +95,10 @@ type UpdateGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGameServerGroupInput) operationName() string {
+	return "UpdateGameServerGroup"
+}
+
 type UpdateGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource with updated properties.

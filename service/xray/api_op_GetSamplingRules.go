@@ -40,6 +40,10 @@ type GetSamplingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSamplingRulesInput) operationName() string {
+	return "GetSamplingRules"
+}
+
 type GetSamplingRulesOutput struct {
 
 	// Pagination token.

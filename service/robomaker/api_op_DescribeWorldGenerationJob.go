@@ -43,6 +43,10 @@ type DescribeWorldGenerationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorldGenerationJobInput) operationName() string {
+	return "DescribeWorldGenerationJob"
+}
+
 type DescribeWorldGenerationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world generation job.

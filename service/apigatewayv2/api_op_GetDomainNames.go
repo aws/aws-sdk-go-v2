@@ -44,6 +44,10 @@ type GetDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainNamesInput) operationName() string {
+	return "GetDomainNames"
+}
+
 type GetDomainNamesOutput struct {
 
 	// The elements from this collection.

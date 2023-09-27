@@ -55,6 +55,10 @@ type ResetAddressAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetAddressAttributeInput) operationName() string {
+	return "ResetAddressAttribute"
+}
+
 type ResetAddressAttributeOutput struct {
 
 	// Information about the IP address.

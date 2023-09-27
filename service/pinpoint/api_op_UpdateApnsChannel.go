@@ -50,6 +50,10 @@ type UpdateApnsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApnsChannelInput) operationName() string {
+	return "UpdateApnsChannel"
+}
+
 type UpdateApnsChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push

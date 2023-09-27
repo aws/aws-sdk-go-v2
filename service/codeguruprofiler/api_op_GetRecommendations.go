@@ -79,6 +79,10 @@ type GetRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecommendationsInput) operationName() string {
+	return "GetRecommendations"
+}
+
 // The structure representing the GetRecommendationsResponse.
 type GetRecommendationsOutput struct {
 

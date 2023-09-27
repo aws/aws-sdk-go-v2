@@ -44,6 +44,10 @@ type ListConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigsInput) operationName() string {
+	return "ListConfigs"
+}
+
 type ListConfigsOutput struct {
 
 	// List of Config items.

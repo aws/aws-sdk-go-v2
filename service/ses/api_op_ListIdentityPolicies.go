@@ -57,6 +57,10 @@ type ListIdentityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityPoliciesInput) operationName() string {
+	return "ListIdentityPolicies"
+}
+
 // A list of names of sending authorization policies that apply to an identity.
 type ListIdentityPoliciesOutput struct {
 

@@ -78,6 +78,10 @@ type GetPackageVersionReadmeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPackageVersionReadmeInput) operationName() string {
+	return "GetPackageVersionReadme"
+}
+
 type GetPackageVersionReadmeOutput struct {
 
 	// The format of the package with the requested readme file.

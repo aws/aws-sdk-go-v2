@@ -39,6 +39,10 @@ type DeleteAppLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppLaunchConfigurationInput) operationName() string {
+	return "DeleteAppLaunchConfiguration"
+}
+
 type DeleteAppLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

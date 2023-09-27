@@ -54,6 +54,10 @@ type CreateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserAccessLoggingSettingsInput) operationName() string {
+	return "CreateUserAccessLoggingSettings"
+}
+
 type CreateUserAccessLoggingSettingsOutput struct {
 
 	// The ARN of the user access logging settings.

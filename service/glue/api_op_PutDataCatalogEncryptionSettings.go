@@ -48,6 +48,10 @@ type PutDataCatalogEncryptionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDataCatalogEncryptionSettingsInput) operationName() string {
+	return "PutDataCatalogEncryptionSettings"
+}
+
 type PutDataCatalogEncryptionSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

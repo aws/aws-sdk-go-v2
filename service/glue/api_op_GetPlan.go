@@ -64,6 +64,10 @@ type GetPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPlanInput) operationName() string {
+	return "GetPlan"
+}
+
 type GetPlanOutput struct {
 
 	// A Python script to perform the mapping.

@@ -91,6 +91,10 @@ type ModifyInstanceMetadataOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceMetadataOptionsInput) operationName() string {
+	return "ModifyInstanceMetadataOptions"
+}
+
 type ModifyInstanceMetadataOptionsOutput struct {
 
 	// The ID of the instance.

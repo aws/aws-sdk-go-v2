@@ -47,6 +47,10 @@ type StopTrainingEntityRecognizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopTrainingEntityRecognizerInput) operationName() string {
+	return "StopTrainingEntityRecognizer"
+}
+
 type StopTrainingEntityRecognizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

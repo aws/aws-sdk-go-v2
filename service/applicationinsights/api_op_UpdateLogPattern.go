@@ -66,6 +66,10 @@ type UpdateLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLogPatternInput) operationName() string {
+	return "UpdateLogPattern"
+}
+
 type UpdateLogPatternOutput struct {
 
 	// The successfully created log pattern.

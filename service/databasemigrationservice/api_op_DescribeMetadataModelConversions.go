@@ -60,6 +60,10 @@ type DescribeMetadataModelConversionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetadataModelConversionsInput) operationName() string {
+	return "DescribeMetadataModelConversions"
+}
+
 type DescribeMetadataModelConversionsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the

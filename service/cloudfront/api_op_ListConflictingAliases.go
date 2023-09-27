@@ -79,6 +79,10 @@ type ListConflictingAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConflictingAliasesInput) operationName() string {
+	return "ListConflictingAliases"
+}
+
 type ListConflictingAliasesOutput struct {
 
 	// A list of conflicting aliases.

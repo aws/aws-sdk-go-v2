@@ -49,6 +49,10 @@ type DescribeOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationalUnitInput) operationName() string {
+	return "DescribeOrganizationalUnit"
+}
+
 type DescribeOrganizationalUnitOutput struct {
 
 	// A structure that contains details about the specified OU.

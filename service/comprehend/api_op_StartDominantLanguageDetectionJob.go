@@ -83,6 +83,10 @@ type StartDominantLanguageDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDominantLanguageDetectionJobInput) operationName() string {
+	return "StartDominantLanguageDetectionJob"
+}
+
 type StartDominantLanguageDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dominant language detection job. It is a

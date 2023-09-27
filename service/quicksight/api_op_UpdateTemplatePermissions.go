@@ -53,6 +53,10 @@ type UpdateTemplatePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTemplatePermissionsInput) operationName() string {
+	return "UpdateTemplatePermissions"
+}
+
 type UpdateTemplatePermissionsOutput struct {
 
 	// A list of resource permissions to be set on the template.

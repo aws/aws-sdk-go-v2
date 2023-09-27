@@ -70,6 +70,10 @@ type TerminateProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateProvisionedProductInput) operationName() string {
+	return "TerminateProvisionedProduct"
+}
+
 type TerminateProvisionedProductOutput struct {
 
 	// Information about the result of this request.

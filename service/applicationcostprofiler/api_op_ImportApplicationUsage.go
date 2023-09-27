@@ -45,6 +45,10 @@ type ImportApplicationUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportApplicationUsageInput) operationName() string {
+	return "ImportApplicationUsage"
+}
+
 type ImportApplicationUsageOutput struct {
 
 	// ID of the import request.

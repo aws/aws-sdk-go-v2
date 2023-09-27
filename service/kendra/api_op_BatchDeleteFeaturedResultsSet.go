@@ -49,6 +49,10 @@ type BatchDeleteFeaturedResultsSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteFeaturedResultsSetInput) operationName() string {
+	return "BatchDeleteFeaturedResultsSet"
+}
+
 type BatchDeleteFeaturedResultsSetOutput struct {
 
 	// The list of errors for the featured results set IDs, explaining why they

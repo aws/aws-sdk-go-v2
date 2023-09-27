@@ -64,6 +64,10 @@ type StartCalculationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCalculationExecutionInput) operationName() string {
+	return "StartCalculationExecution"
+}
+
 type StartCalculationExecutionOutput struct {
 
 	// The calculation execution UUID.

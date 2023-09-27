@@ -78,6 +78,10 @@ type StartTaskExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTaskExecutionInput) operationName() string {
+	return "StartTaskExecution"
+}
+
 // StartTaskExecutionResponse
 type StartTaskExecutionOutput struct {
 

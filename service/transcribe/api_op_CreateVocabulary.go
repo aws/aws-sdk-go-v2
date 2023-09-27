@@ -103,6 +103,10 @@ type CreateVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVocabularyInput) operationName() string {
+	return "CreateVocabulary"
+}
+
 type CreateVocabularyOutput struct {
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the

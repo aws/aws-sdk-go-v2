@@ -58,6 +58,10 @@ type PutImageScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutImageScanningConfigurationInput) operationName() string {
+	return "PutImageScanningConfiguration"
+}
+
 type PutImageScanningConfigurationOutput struct {
 
 	// The image scanning configuration setting for the repository.

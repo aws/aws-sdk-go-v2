@@ -48,6 +48,10 @@ type GetVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVocabularyInput) operationName() string {
+	return "GetVocabulary"
+}
+
 type GetVocabularyOutput struct {
 
 	// The S3 location where the custom vocabulary is stored; use this URI to view or

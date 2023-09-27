@@ -98,6 +98,10 @@ type UpdateManagedRuleSetVersionExpiryDateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateManagedRuleSetVersionExpiryDateInput) operationName() string {
+	return "UpdateManagedRuleSetVersionExpiryDate"
+}
+
 type UpdateManagedRuleSetVersionExpiryDateOutput struct {
 
 	// The version that is set to expire.

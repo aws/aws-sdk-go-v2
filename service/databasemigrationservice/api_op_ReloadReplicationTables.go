@@ -55,6 +55,10 @@ type ReloadReplicationTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReloadReplicationTablesInput) operationName() string {
+	return "ReloadReplicationTables"
+}
+
 type ReloadReplicationTablesOutput struct {
 
 	// The Amazon Resource Name of the replication config for which to reload tables.

@@ -42,6 +42,10 @@ type GetReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReplicationConfigurationInput) operationName() string {
+	return "GetReplicationConfiguration"
+}
+
 type GetReplicationConfigurationOutput struct {
 
 	// Whether to associate the default Elastic Disaster Recovery Security group with

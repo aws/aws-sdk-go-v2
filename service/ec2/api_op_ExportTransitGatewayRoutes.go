@@ -75,6 +75,10 @@ type ExportTransitGatewayRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportTransitGatewayRoutesInput) operationName() string {
+	return "ExportTransitGatewayRoutes"
+}
+
 type ExportTransitGatewayRoutesOutput struct {
 
 	// The URL of the exported file in Amazon S3. For example,

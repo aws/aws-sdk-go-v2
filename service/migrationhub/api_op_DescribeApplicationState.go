@@ -44,6 +44,10 @@ type DescribeApplicationStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationStateInput) operationName() string {
+	return "DescribeApplicationState"
+}
+
 type DescribeApplicationStateOutput struct {
 
 	// Status of the application - Not Started, In-Progress, Complete.

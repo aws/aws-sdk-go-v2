@@ -54,6 +54,10 @@ type FailoverDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverDBClusterInput) operationName() string {
+	return "FailoverDBCluster"
+}
+
 type FailoverDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as

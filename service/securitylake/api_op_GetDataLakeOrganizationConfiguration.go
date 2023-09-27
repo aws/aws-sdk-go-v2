@@ -38,6 +38,10 @@ type GetDataLakeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataLakeOrganizationConfigurationInput) operationName() string {
+	return "GetDataLakeOrganizationConfiguration"
+}
+
 type GetDataLakeOrganizationConfigurationOutput struct {
 
 	// The configuration for new accounts.

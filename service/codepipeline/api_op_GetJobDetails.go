@@ -47,6 +47,10 @@ type GetJobDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobDetailsInput) operationName() string {
+	return "GetJobDetails"
+}
+
 // Represents the output of a GetJobDetails action.
 type GetJobDetailsOutput struct {
 

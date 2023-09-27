@@ -57,6 +57,10 @@ type GetBotAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotAliasesInput) operationName() string {
+	return "GetBotAliases"
+}
+
 type GetBotAliasesOutput struct {
 
 	// An array of BotAliasMetadata objects, each describing a bot alias.

@@ -50,6 +50,10 @@ type PutCapacityAssignmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCapacityAssignmentConfigurationInput) operationName() string {
+	return "PutCapacityAssignmentConfiguration"
+}
+
 type PutCapacityAssignmentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type RemoveNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveNotificationChannelInput) operationName() string {
+	return "RemoveNotificationChannel"
+}
+
 type RemoveNotificationChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

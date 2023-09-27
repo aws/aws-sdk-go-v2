@@ -77,6 +77,10 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePipelineInput) operationName() string {
+	return "CreatePipeline"
+}
+
 // Contains the output of CreatePipeline.
 type CreatePipelineOutput struct {
 

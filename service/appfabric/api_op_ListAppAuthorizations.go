@@ -55,6 +55,10 @@ type ListAppAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppAuthorizationsInput) operationName() string {
+	return "ListAppAuthorizations"
+}
+
 type ListAppAuthorizationsOutput struct {
 
 	// Contains a list of app authorization summaries.

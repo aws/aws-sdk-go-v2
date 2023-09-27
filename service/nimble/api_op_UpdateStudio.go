@@ -60,6 +60,10 @@ type UpdateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStudioInput) operationName() string {
+	return "UpdateStudio"
+}
+
 type UpdateStudioOutput struct {
 
 	// Information about a studio.

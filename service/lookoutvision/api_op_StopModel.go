@@ -62,6 +62,10 @@ type StopModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopModelInput) operationName() string {
+	return "StopModel"
+}
+
 type StopModelOutput struct {
 
 	// The status of the model.

@@ -51,6 +51,10 @@ type CreateDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataLakeExceptionSubscriptionInput) operationName() string {
+	return "CreateDataLakeExceptionSubscription"
+}
+
 type CreateDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,6 +42,10 @@ type GetFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFleetInput) operationName() string {
+	return "GetFleet"
+}
+
 type GetFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the fleet.

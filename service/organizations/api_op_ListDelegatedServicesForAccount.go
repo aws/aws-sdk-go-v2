@@ -62,6 +62,10 @@ type ListDelegatedServicesForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDelegatedServicesForAccountInput) operationName() string {
+	return "ListDelegatedServicesForAccount"
+}
+
 type ListDelegatedServicesForAccountOutput struct {
 
 	// The services for which the account is a delegated administrator.

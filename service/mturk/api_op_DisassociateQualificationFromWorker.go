@@ -53,6 +53,10 @@ type DisassociateQualificationFromWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateQualificationFromWorkerInput) operationName() string {
+	return "DisassociateQualificationFromWorker"
+}
+
 type DisassociateQualificationFromWorkerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

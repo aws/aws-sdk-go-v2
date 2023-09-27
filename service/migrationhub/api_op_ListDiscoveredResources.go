@@ -55,6 +55,10 @@ type ListDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDiscoveredResourcesInput) operationName() string {
+	return "ListDiscoveredResources"
+}
+
 type ListDiscoveredResourcesOutput struct {
 
 	// Returned list of discovered resources associated with the given MigrationTask.

@@ -52,6 +52,10 @@ type CreateBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBlueprintInput) operationName() string {
+	return "CreateBlueprint"
+}
+
 type CreateBlueprintOutput struct {
 
 	// Returns the name of the blueprint that was registered.

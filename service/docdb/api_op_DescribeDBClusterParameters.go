@@ -63,6 +63,10 @@ type DescribeDBClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterParametersInput) operationName() string {
+	return "DescribeDBClusterParameters"
+}
+
 // Represents the output of DBClusterParameterGroup .
 type DescribeDBClusterParametersOutput struct {
 

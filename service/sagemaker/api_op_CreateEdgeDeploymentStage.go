@@ -47,6 +47,10 @@ type CreateEdgeDeploymentStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEdgeDeploymentStageInput) operationName() string {
+	return "CreateEdgeDeploymentStage"
+}
+
 type CreateEdgeDeploymentStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

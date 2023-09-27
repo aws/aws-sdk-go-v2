@@ -48,6 +48,10 @@ type IndexDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IndexDocumentsInput) operationName() string {
+	return "IndexDocuments"
+}
+
 // The result of an IndexDocuments request. Contains the status of the indexing
 // operation, including the fields being indexed.
 type IndexDocumentsOutput struct {

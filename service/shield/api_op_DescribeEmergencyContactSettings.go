@@ -38,6 +38,10 @@ type DescribeEmergencyContactSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEmergencyContactSettingsInput) operationName() string {
+	return "DescribeEmergencyContactSettings"
+}
+
 type DescribeEmergencyContactSettingsOutput struct {
 
 	// A list of email addresses and phone numbers that the Shield Response Team (SRT)

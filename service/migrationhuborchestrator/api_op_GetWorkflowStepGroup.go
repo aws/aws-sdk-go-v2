@@ -48,6 +48,10 @@ type GetWorkflowStepGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowStepGroupInput) operationName() string {
+	return "GetWorkflowStepGroup"
+}
+
 type GetWorkflowStepGroupOutput struct {
 
 	// The time at which the step group was created.

@@ -49,6 +49,10 @@ type UntagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagInput) operationName() string {
+	return "Untag"
+}
+
 type UntagOutput struct {
 
 	// The ARN of the resource group from which tags have been removed.

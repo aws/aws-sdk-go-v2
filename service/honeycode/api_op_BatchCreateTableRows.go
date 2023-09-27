@@ -75,6 +75,10 @@ type BatchCreateTableRowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateTableRowsInput) operationName() string {
+	return "BatchCreateTableRows"
+}
+
 type BatchCreateTableRowsOutput struct {
 
 	// The map of batch item id to the row id that was created for that item.

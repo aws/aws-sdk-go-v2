@@ -52,6 +52,10 @@ type PutImageRecipePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutImageRecipePolicyInput) operationName() string {
+	return "PutImageRecipePolicy"
+}
+
 type PutImageRecipePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image recipe that this policy was applied

@@ -68,6 +68,10 @@ type ListFeatureGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFeatureGroupsInput) operationName() string {
+	return "ListFeatureGroups"
+}
+
 type ListFeatureGroupsOutput struct {
 
 	// A summary of feature groups.

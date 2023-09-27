@@ -64,6 +64,10 @@ type DeleteDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterInput) operationName() string {
+	return "DeleteDBCluster"
+}
+
 type DeleteDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as

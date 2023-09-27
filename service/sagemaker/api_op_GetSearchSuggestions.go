@@ -47,6 +47,10 @@ type GetSearchSuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSearchSuggestionsInput) operationName() string {
+	return "GetSearchSuggestions"
+}
+
 type GetSearchSuggestionsOutput struct {
 
 	// A list of property names for a Resource that match a SuggestionQuery .

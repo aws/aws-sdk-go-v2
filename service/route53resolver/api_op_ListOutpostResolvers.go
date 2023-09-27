@@ -49,6 +49,10 @@ type ListOutpostResolversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOutpostResolversInput) operationName() string {
+	return "ListOutpostResolvers"
+}
+
 type ListOutpostResolversOutput struct {
 
 	// If more than MaxResults Resolvers match the specified criteria, you can submit

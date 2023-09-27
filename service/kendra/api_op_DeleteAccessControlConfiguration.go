@@ -49,6 +49,10 @@ type DeleteAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccessControlConfigurationInput) operationName() string {
+	return "DeleteAccessControlConfiguration"
+}
+
 type DeleteAccessControlConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

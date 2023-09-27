@@ -57,6 +57,10 @@ type StartConfigRulesEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartConfigRulesEvaluationInput) operationName() string {
+	return "StartConfigRulesEvaluation"
+}
+
 // The output when you start the evaluation for the specified Config rule.
 type StartConfigRulesEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.

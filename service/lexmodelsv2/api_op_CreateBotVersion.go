@@ -59,6 +59,10 @@ type CreateBotVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBotVersionInput) operationName() string {
+	return "CreateBotVersion"
+}
+
 type CreateBotVersionOutput struct {
 
 	// The bot identifier specified in the request.

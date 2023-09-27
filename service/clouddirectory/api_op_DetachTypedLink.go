@@ -50,6 +50,10 @@ type DetachTypedLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachTypedLinkInput) operationName() string {
+	return "DetachTypedLink"
+}
+
 type DetachTypedLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

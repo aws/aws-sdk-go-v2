@@ -56,6 +56,10 @@ type ListJobsByStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobsByStatusInput) operationName() string {
+	return "ListJobsByStatus"
+}
+
 // The ListJobsByStatusResponse structure.
 type ListJobsByStatusOutput struct {
 

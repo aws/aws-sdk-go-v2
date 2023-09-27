@@ -46,6 +46,10 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsInput) operationName() string {
+	return "ListTags"
+}
+
 // The result of a ListTags operation. Contains tags for all requested
 // Elasticsearch domains.
 type ListTagsOutput struct {

@@ -52,6 +52,10 @@ type DescribeWarmPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWarmPoolInput) operationName() string {
+	return "DescribeWarmPool"
+}
+
 type DescribeWarmPoolOutput struct {
 
 	// The instances that are currently in the warm pool.

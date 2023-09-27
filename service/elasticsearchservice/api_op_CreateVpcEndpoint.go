@@ -51,6 +51,10 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcEndpointInput) operationName() string {
+	return "CreateVpcEndpoint"
+}
+
 // Container for response parameters to the CreateVpcEndpoint operation. Contains
 // the configuration and status of the VPC Endpoint being created.
 type CreateVpcEndpointOutput struct {

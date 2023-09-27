@@ -49,6 +49,10 @@ type ListFieldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFieldsInput) operationName() string {
+	return "ListFields"
+}
+
 type ListFieldsOutput struct {
 
 	// List of detailed field information.

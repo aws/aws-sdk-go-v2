@@ -46,6 +46,10 @@ type DeleteDatasetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDatasetGroupInput) operationName() string {
+	return "DeleteDatasetGroup"
+}
+
 type DeleteDatasetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

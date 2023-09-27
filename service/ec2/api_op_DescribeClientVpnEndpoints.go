@@ -59,6 +59,10 @@ type DescribeClientVpnEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientVpnEndpointsInput) operationName() string {
+	return "DescribeClientVpnEndpoints"
+}
+
 type DescribeClientVpnEndpointsOutput struct {
 
 	// Information about the Client VPN endpoints.

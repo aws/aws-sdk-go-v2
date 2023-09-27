@@ -56,6 +56,10 @@ type ConvertRecoveryPointToSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConvertRecoveryPointToSnapshotInput) operationName() string {
+	return "ConvertRecoveryPointToSnapshot"
+}
+
 type ConvertRecoveryPointToSnapshotOutput struct {
 
 	// The snapshot converted from the recovery point.

@@ -52,6 +52,10 @@ type DeleteClientBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClientBrandingInput) operationName() string {
+	return "DeleteClientBranding"
+}
+
 type DeleteClientBrandingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

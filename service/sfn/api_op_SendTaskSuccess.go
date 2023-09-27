@@ -51,6 +51,10 @@ type SendTaskSuccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendTaskSuccessInput) operationName() string {
+	return "SendTaskSuccess"
+}
+
 type SendTaskSuccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

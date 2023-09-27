@@ -98,6 +98,10 @@ type ImportCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportCertificateInput) operationName() string {
+	return "ImportCertificate"
+}
+
 type ImportCertificateOutput struct {
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

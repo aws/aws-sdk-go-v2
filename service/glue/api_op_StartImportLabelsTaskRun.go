@@ -71,6 +71,10 @@ type StartImportLabelsTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImportLabelsTaskRunInput) operationName() string {
+	return "StartImportLabelsTaskRun"
+}
+
 type StartImportLabelsTaskRunOutput struct {
 
 	// The unique identifier for the task run.

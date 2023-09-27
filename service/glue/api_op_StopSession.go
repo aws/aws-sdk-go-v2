@@ -44,6 +44,10 @@ type StopSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSessionInput) operationName() string {
+	return "StopSession"
+}
+
 type StopSessionOutput struct {
 
 	// Returns the Id of the stopped session.

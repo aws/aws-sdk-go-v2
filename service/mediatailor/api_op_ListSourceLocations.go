@@ -48,6 +48,10 @@ type ListSourceLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSourceLocationsInput) operationName() string {
+	return "ListSourceLocations"
+}
+
 type ListSourceLocationsOutput struct {
 
 	// A list of source locations.

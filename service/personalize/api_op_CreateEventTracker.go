@@ -69,6 +69,10 @@ type CreateEventTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventTrackerInput) operationName() string {
+	return "CreateEventTracker"
+}
+
 type CreateEventTrackerOutput struct {
 
 	// The ARN of the event tracker.

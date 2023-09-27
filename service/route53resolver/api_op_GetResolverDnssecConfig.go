@@ -42,6 +42,10 @@ type GetResolverDnssecConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverDnssecConfigInput) operationName() string {
+	return "GetResolverDnssecConfig"
+}
+
 type GetResolverDnssecConfigOutput struct {
 
 	// The information about a configuration for DNSSEC validation.

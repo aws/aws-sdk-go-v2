@@ -55,6 +55,10 @@ type ValidateSolFunctionPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateSolFunctionPackageContentInput) operationName() string {
+	return "ValidateSolFunctionPackageContent"
+}
+
 type ValidateSolFunctionPackageContentOutput struct {
 
 	// Function package ID.

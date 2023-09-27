@@ -45,6 +45,10 @@ type ListApplicationDPUSizesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationDPUSizesInput) operationName() string {
+	return "ListApplicationDPUSizes"
+}
+
 type ListApplicationDPUSizesOutput struct {
 
 	// A list of the supported DPU sizes that the application runtime supports.

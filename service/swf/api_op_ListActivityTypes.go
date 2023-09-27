@@ -84,6 +84,10 @@ type ListActivityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListActivityTypesInput) operationName() string {
+	return "ListActivityTypes"
+}
+
 // Contains a paginated list of activity type information structures.
 type ListActivityTypesOutput struct {
 

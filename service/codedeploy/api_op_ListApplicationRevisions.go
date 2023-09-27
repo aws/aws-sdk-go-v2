@@ -80,6 +80,10 @@ type ListApplicationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationRevisionsInput) operationName() string {
+	return "ListApplicationRevisions"
+}
+
 // Represents the output of a ListApplicationRevisions operation.
 type ListApplicationRevisionsOutput struct {
 

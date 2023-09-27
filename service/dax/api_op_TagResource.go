@@ -48,6 +48,10 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagResourceInput) operationName() string {
+	return "TagResource"
+}
+
 type TagResourceOutput struct {
 
 	// The list of tags that are associated with the DAX resource.

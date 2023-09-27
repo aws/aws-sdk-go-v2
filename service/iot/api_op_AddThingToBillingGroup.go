@@ -51,6 +51,10 @@ type AddThingToBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddThingToBillingGroupInput) operationName() string {
+	return "AddThingToBillingGroup"
+}
+
 type AddThingToBillingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,6 +42,10 @@ type GetMulticastGroupSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMulticastGroupSessionInput) operationName() string {
+	return "GetMulticastGroupSession"
+}
+
 type GetMulticastGroupSessionOutput struct {
 
 	// The LoRaWAN information used with the multicast session.

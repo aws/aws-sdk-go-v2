@@ -42,6 +42,10 @@ type CancelResizeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelResizeInput) operationName() string {
+	return "CancelResize"
+}
+
 // Describes the result of a cluster resize operation.
 type CancelResizeOutput struct {
 

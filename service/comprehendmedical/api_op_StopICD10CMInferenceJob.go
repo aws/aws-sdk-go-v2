@@ -41,6 +41,10 @@ type StopICD10CMInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopICD10CMInferenceJobInput) operationName() string {
+	return "StopICD10CMInferenceJob"
+}
+
 type StopICD10CMInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this

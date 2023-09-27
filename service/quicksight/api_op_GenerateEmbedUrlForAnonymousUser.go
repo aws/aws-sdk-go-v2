@@ -102,6 +102,10 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateEmbedUrlForAnonymousUserInput) operationName() string {
+	return "GenerateEmbedUrlForAnonymousUser"
+}
+
 type GenerateEmbedUrlForAnonymousUserOutput struct {
 
 	// The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight user.

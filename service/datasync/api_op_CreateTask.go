@@ -95,6 +95,10 @@ type CreateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTaskInput) operationName() string {
+	return "CreateTask"
+}
+
 // CreateTaskResponse
 type CreateTaskOutput struct {
 

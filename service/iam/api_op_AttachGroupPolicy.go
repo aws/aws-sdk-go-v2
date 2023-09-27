@@ -58,6 +58,10 @@ type AttachGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachGroupPolicyInput) operationName() string {
+	return "AttachGroupPolicy"
+}
+
 type AttachGroupPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

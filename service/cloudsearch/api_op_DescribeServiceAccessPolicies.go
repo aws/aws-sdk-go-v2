@@ -54,6 +54,10 @@ type DescribeServiceAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceAccessPoliciesInput) operationName() string {
+	return "DescribeServiceAccessPolicies"
+}
+
 // The result of a DescribeServiceAccessPolicies request.
 type DescribeServiceAccessPoliciesOutput struct {
 

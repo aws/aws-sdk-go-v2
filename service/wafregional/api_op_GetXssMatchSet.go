@@ -48,6 +48,10 @@ type GetXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetXssMatchSetInput) operationName() string {
+	return "GetXssMatchSet"
+}
+
 // The response to a GetXssMatchSet request.
 type GetXssMatchSetOutput struct {
 

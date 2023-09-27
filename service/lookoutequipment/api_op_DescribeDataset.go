@@ -44,6 +44,10 @@ type DescribeDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetInput) operationName() string {
+	return "DescribeDataset"
+}
+
 type DescribeDatasetOutput struct {
 
 	// Specifies the time the dataset was created in Lookout for Equipment.

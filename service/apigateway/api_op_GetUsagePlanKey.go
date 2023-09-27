@@ -49,6 +49,10 @@ type GetUsagePlanKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsagePlanKeyInput) operationName() string {
+	return "GetUsagePlanKey"
+}
+
 // Represents a usage plan key to identify a plan customer.
 type GetUsagePlanKeyOutput struct {
 

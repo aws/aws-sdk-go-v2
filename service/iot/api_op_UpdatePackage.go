@@ -62,6 +62,10 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePackageInput) operationName() string {
+	return "UpdatePackage"
+}
+
 type UpdatePackageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,6 +77,10 @@ type CreateReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReportPlanInput) operationName() string {
+	return "CreateReportPlan"
+}
+
 type CreateReportPlanOutput struct {
 
 	// The date and time a backup vault is created, in Unix format and Coordinated

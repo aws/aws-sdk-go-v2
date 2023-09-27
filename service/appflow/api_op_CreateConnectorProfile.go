@@ -88,6 +88,10 @@ type CreateConnectorProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectorProfileInput) operationName() string {
+	return "CreateConnectorProfile"
+}
+
 type CreateConnectorProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector profile.

@@ -45,6 +45,10 @@ type CreatePublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePublicKeyInput) operationName() string {
+	return "CreatePublicKey"
+}
+
 type CreatePublicKeyOutput struct {
 
 	// The identifier for this version of the public key.

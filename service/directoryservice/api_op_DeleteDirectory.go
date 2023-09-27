@@ -47,6 +47,10 @@ type DeleteDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDirectoryInput) operationName() string {
+	return "DeleteDirectory"
+}
+
 // Contains the results of the DeleteDirectory operation.
 type DeleteDirectoryOutput struct {
 

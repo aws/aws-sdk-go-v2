@@ -48,6 +48,10 @@ type ListProjectAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectAssetsInput) operationName() string {
+	return "ListProjectAssets"
+}
+
 type ListProjectAssetsOutput struct {
 
 	// A list that contains the IDs of each asset associated with the project.

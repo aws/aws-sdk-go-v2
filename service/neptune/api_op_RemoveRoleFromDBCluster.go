@@ -53,6 +53,10 @@ type RemoveRoleFromDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveRoleFromDBClusterInput) operationName() string {
+	return "RemoveRoleFromDBCluster"
+}
+
 type RemoveRoleFromDBClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

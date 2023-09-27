@@ -49,6 +49,10 @@ type ListPlaybackConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPlaybackConfigurationsInput) operationName() string {
+	return "ListPlaybackConfigurations"
+}
+
 type ListPlaybackConfigurationsOutput struct {
 
 	// Array of playback configurations. This might be all the available

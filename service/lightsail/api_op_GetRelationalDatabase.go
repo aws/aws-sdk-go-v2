@@ -42,6 +42,10 @@ type GetRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseInput) operationName() string {
+	return "GetRelationalDatabase"
+}
+
 type GetRelationalDatabaseOutput struct {
 
 	// An object describing the specified database.

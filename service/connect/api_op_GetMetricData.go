@@ -115,6 +115,10 @@ type GetMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricDataInput) operationName() string {
+	return "GetMetricData"
+}
+
 type GetMetricDataOutput struct {
 
 	// Information about the historical metrics. If no grouping is specified, a

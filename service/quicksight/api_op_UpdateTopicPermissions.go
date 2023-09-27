@@ -55,6 +55,10 @@ type UpdateTopicPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTopicPermissionsInput) operationName() string {
+	return "UpdateTopicPermissions"
+}
+
 type UpdateTopicPermissionsOutput struct {
 
 	// A list of resource permissions on the topic.

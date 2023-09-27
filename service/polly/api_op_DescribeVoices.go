@@ -68,6 +68,10 @@ type DescribeVoicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVoicesInput) operationName() string {
+	return "DescribeVoices"
+}
+
 type DescribeVoicesOutput struct {
 
 	// The pagination token to use in the next request to continue the listing of

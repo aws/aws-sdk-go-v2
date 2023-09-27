@@ -61,6 +61,10 @@ type TagQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagQueueInput) operationName() string {
+	return "TagQueue"
+}
+
 type TagQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

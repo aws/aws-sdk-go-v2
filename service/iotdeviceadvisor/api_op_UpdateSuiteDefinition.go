@@ -50,6 +50,10 @@ type UpdateSuiteDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSuiteDefinitionInput) operationName() string {
+	return "UpdateSuiteDefinition"
+}
+
 type UpdateSuiteDefinitionOutput struct {
 
 	// Timestamp of when the test suite was created.

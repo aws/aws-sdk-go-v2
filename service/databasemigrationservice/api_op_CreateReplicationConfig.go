@@ -107,6 +107,10 @@ type CreateReplicationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationConfigInput) operationName() string {
+	return "CreateReplicationConfig"
+}
+
 type CreateReplicationConfigOutput struct {
 
 	// Configuration parameters returned from the DMS Serverless replication after it

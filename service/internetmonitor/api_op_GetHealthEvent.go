@@ -56,6 +56,10 @@ type GetHealthEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHealthEventInput) operationName() string {
+	return "GetHealthEvent"
+}
+
 type GetHealthEventOutput struct {
 
 	// The Amazon Resource Name (ARN) of the event.

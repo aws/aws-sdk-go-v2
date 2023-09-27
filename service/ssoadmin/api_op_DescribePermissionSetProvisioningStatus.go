@@ -51,6 +51,10 @@ type DescribePermissionSetProvisioningStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePermissionSetProvisioningStatusInput) operationName() string {
+	return "DescribePermissionSetProvisioningStatus"
+}
+
 type DescribePermissionSetProvisioningStatusOutput struct {
 
 	// The status object for the permission set provisioning operation.

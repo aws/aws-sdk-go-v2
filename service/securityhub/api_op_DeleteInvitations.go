@@ -46,6 +46,10 @@ type DeleteInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInvitationsInput) operationName() string {
+	return "DeleteInvitations"
+}
+
 type DeleteInvitationsOutput struct {
 
 	// The list of Amazon Web Services accounts for which the invitations were not

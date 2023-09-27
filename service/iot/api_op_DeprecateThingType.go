@@ -48,6 +48,10 @@ type DeprecateThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprecateThingTypeInput) operationName() string {
+	return "DeprecateThingType"
+}
+
 // The output for the DeprecateThingType operation.
 type DeprecateThingTypeOutput struct {
 	// Metadata pertaining to the operation's result.

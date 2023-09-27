@@ -56,6 +56,10 @@ type UpdateGroupQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGroupQueryInput) operationName() string {
+	return "UpdateGroupQuery"
+}
+
 type UpdateGroupQueryOutput struct {
 
 	// The updated resource query associated with the resource group after the update.

@@ -75,6 +75,10 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartJobRunInput) operationName() string {
+	return "StartJobRun"
+}
+
 type StartJobRunOutput struct {
 
 	// This output lists the ARN of job run.

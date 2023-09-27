@@ -69,6 +69,10 @@ type PutBucketLifecycleConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketLifecycleConfigurationInput) operationName() string {
+	return "PutBucketLifecycleConfiguration"
+}
+
 type PutBucketLifecycleConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type DeleteCachePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCachePolicyInput) operationName() string {
+	return "DeleteCachePolicy"
+}
+
 type DeleteCachePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

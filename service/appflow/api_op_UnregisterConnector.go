@@ -47,6 +47,10 @@ type UnregisterConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnregisterConnectorInput) operationName() string {
+	return "UnregisterConnector"
+}
+
 type UnregisterConnectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,6 +42,10 @@ type BatchGetFindingDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetFindingDetailsInput) operationName() string {
+	return "BatchGetFindingDetails"
+}
+
 type BatchGetFindingDetailsOutput struct {
 
 	// Error information for findings that details could not be returned for.

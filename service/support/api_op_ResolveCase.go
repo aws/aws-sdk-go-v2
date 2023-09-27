@@ -49,6 +49,10 @@ type ResolveCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResolveCaseInput) operationName() string {
+	return "ResolveCase"
+}
+
 // The status of the case returned by the ResolveCase operation.
 type ResolveCaseOutput struct {
 

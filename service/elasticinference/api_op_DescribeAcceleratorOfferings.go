@@ -58,6 +58,10 @@ type DescribeAcceleratorOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAcceleratorOfferingsInput) operationName() string {
+	return "DescribeAcceleratorOfferings"
+}
+
 type DescribeAcceleratorOfferingsOutput struct {
 
 	// The list of accelerator type offerings for a specific location.

@@ -63,6 +63,10 @@ type ListQualificationTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQualificationTypesInput) operationName() string {
+	return "ListQualificationTypes"
+}
+
 type ListQualificationTypesOutput struct {
 
 	// If the previous response was incomplete (because there is more data to

@@ -48,6 +48,10 @@ type SetV2LoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetV2LoggingOptionsInput) operationName() string {
+	return "SetV2LoggingOptions"
+}
+
 type SetV2LoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -70,6 +70,10 @@ type DescribeAddonVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddonVersionsInput) operationName() string {
+	return "DescribeAddonVersions"
+}
+
 type DescribeAddonVersionsOutput struct {
 
 	// The list of available versions with Kubernetes version compatibility and other

@@ -57,6 +57,10 @@ type StartCodegenJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCodegenJobInput) operationName() string {
+	return "StartCodegenJob"
+}
+
 type StartCodegenJobOutput struct {
 
 	// The code generation job for a UI component that is associated with an Amplify

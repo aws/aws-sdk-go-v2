@@ -70,6 +70,10 @@ type DescribeProjectVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProjectVersionsInput) operationName() string {
+	return "DescribeProjectVersions"
+}
+
 type DescribeProjectVersionsOutput struct {
 
 	// If the previous response was incomplete (because there is more results to

@@ -58,6 +58,10 @@ type ExportVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportVectorEnrichmentJobInput) operationName() string {
+	return "ExportVectorEnrichmentJob"
+}
+
 type ExportVectorEnrichmentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Vector Enrichment job being exported.

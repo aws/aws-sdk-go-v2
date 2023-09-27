@@ -62,6 +62,10 @@ type CreateComputerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComputerInput) operationName() string {
+	return "CreateComputer"
+}
+
 // Contains the results for the CreateComputer operation.
 type CreateComputerOutput struct {
 

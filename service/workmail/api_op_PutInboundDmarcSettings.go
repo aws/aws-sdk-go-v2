@@ -46,6 +46,10 @@ type PutInboundDmarcSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutInboundDmarcSettingsInput) operationName() string {
+	return "PutInboundDmarcSettings"
+}
+
 type PutInboundDmarcSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

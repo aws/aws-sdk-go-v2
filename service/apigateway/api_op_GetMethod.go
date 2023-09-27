@@ -53,6 +53,10 @@ type GetMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMethodInput) operationName() string {
+	return "GetMethod"
+}
+
 // Represents a client-facing interface by which the client calls the API to
 // access back-end resources. A Method resource is integrated with an Integration
 // resource. Both consist of a request and one or more responses. The method

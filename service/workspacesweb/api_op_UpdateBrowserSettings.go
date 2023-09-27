@@ -54,6 +54,10 @@ type UpdateBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBrowserSettingsInput) operationName() string {
+	return "UpdateBrowserSettings"
+}
+
 type UpdateBrowserSettingsOutput struct {
 
 	// The browser settings.

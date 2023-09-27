@@ -56,6 +56,10 @@ type ListImageRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImageRecipesInput) operationName() string {
+	return "ListImageRecipes"
+}
+
 type ListImageRecipesOutput struct {
 
 	// The list of image pipelines.

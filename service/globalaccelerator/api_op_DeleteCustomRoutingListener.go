@@ -41,6 +41,10 @@ type DeleteCustomRoutingListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomRoutingListenerInput) operationName() string {
+	return "DeleteCustomRoutingListener"
+}
+
 type DeleteCustomRoutingListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,6 +63,10 @@ type ListObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectAttributesInput) operationName() string {
+	return "ListObjectAttributes"
+}
+
 type ListObjectAttributesOutput struct {
 
 	// Attributes map that is associated with the object. AttributeArn is the key, and

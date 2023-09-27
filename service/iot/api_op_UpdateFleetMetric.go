@@ -76,6 +76,10 @@ type UpdateFleetMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFleetMetricInput) operationName() string {
+	return "UpdateFleetMetric"
+}
+
 type UpdateFleetMetricOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

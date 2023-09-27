@@ -69,6 +69,10 @@ type CreateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBucketInput) operationName() string {
+	return "CreateBucket"
+}
+
 type CreateBucketOutput struct {
 
 	// An object that describes the bucket that is created.

@@ -79,6 +79,10 @@ type CreateHsmConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHsmConfigurationInput) operationName() string {
+	return "CreateHsmConfiguration"
+}
+
 type CreateHsmConfigurationOutput struct {
 
 	// Returns information about an HSM configuration, which is an object that

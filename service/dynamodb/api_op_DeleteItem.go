@@ -153,6 +153,10 @@ type DeleteItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteItemInput) operationName() string {
+	return "DeleteItem"
+}
+
 // Represents the output of a DeleteItem operation.
 type DeleteItemOutput struct {
 

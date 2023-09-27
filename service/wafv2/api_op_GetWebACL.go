@@ -62,6 +62,10 @@ type GetWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWebACLInput) operationName() string {
+	return "GetWebACL"
+}
+
 type GetWebACLOutput struct {
 
 	// The URL to use in SDK integrations with Amazon Web Services managed rule

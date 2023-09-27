@@ -45,6 +45,10 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterInput) operationName() string {
+	return "DeleteCluster"
+}
+
 type DeleteClusterOutput struct {
 
 	// Information about the cluster that was deleted.

@@ -106,6 +106,10 @@ type StartSpeechSynthesisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSpeechSynthesisTaskInput) operationName() string {
+	return "StartSpeechSynthesisTask"
+}
+
 type StartSpeechSynthesisTaskOutput struct {
 
 	// SynthesisTask object that provides information and attributes about a newly

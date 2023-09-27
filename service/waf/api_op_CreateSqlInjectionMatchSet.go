@@ -68,6 +68,10 @@ type CreateSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSqlInjectionMatchSetInput) operationName() string {
+	return "CreateSqlInjectionMatchSet"
+}
+
 // The response to a CreateSqlInjectionMatchSet request.
 type CreateSqlInjectionMatchSetOutput struct {
 

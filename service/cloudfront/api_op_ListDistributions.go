@@ -48,6 +48,10 @@ type ListDistributionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionsInput) operationName() string {
+	return "ListDistributions"
+}
+
 // The returned result of the corresponding request.
 type ListDistributionsOutput struct {
 

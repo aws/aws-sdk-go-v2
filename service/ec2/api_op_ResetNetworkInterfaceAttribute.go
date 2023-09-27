@@ -52,6 +52,10 @@ type ResetNetworkInterfaceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetNetworkInterfaceAttributeInput) operationName() string {
+	return "ResetNetworkInterfaceAttribute"
+}
+
 type ResetNetworkInterfaceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

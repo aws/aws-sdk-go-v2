@@ -50,6 +50,10 @@ type UnassignPrivateIpAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnassignPrivateIpAddressesInput) operationName() string {
+	return "UnassignPrivateIpAddresses"
+}
+
 type UnassignPrivateIpAddressesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

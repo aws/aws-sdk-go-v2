@@ -54,6 +54,10 @@ type ListEntitledApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntitledApplicationsInput) operationName() string {
+	return "ListEntitledApplications"
+}
+
 type ListEntitledApplicationsOutput struct {
 
 	// The entitled applications.

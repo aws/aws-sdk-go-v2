@@ -51,6 +51,10 @@ type DeleteLFTagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLFTagInput) operationName() string {
+	return "DeleteLFTag"
+}
+
 type DeleteLFTagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

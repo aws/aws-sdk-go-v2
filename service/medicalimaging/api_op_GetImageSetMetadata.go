@@ -50,6 +50,10 @@ type GetImageSetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImageSetMetadataInput) operationName() string {
+	return "GetImageSetMetadata"
+}
+
 type GetImageSetMetadataOutput struct {
 
 	// The blob containing the aggregated metadata information for the image set.

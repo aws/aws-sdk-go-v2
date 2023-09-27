@@ -45,6 +45,10 @@ type DescribeProvisioningTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProvisioningTemplateInput) operationName() string {
+	return "DescribeProvisioningTemplate"
+}
+
 type DescribeProvisioningTemplateOutput struct {
 
 	// The date when the provisioning template was created.

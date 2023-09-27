@@ -40,6 +40,10 @@ type DescribeOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationInput) operationName() string {
+	return "DescribeOrganization"
+}
+
 type DescribeOrganizationOutput struct {
 
 	// A structure that contains information about the organization. The

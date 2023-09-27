@@ -109,6 +109,10 @@ type ListObjectVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectVersionsInput) operationName() string {
+	return "ListObjectVersions"
+}
+
 type ListObjectVersionsOutput struct {
 
 	// All of the keys rolled up into a common prefix count as a single return when

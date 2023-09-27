@@ -62,6 +62,10 @@ type UpdateVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceConnectorGroupInput) operationName() string {
+	return "UpdateVoiceConnectorGroup"
+}
+
 type UpdateVoiceConnectorGroupOutput struct {
 
 	// The updated Amazon Chime Voice Connector group details.

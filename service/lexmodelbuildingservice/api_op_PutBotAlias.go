@@ -75,6 +75,10 @@ type PutBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBotAliasInput) operationName() string {
+	return "PutBotAlias"
+}
+
 type PutBotAliasOutput struct {
 
 	// The name of the bot that the alias points to.

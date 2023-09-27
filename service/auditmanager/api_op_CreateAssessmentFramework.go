@@ -57,6 +57,10 @@ type CreateAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssessmentFrameworkInput) operationName() string {
+	return "CreateAssessmentFramework"
+}
+
 type CreateAssessmentFrameworkOutput struct {
 
 	// The name of the new framework that the CreateAssessmentFramework API returned.

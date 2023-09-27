@@ -58,6 +58,10 @@ type CreateCarrierGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCarrierGatewayInput) operationName() string {
+	return "CreateCarrierGateway"
+}
+
 type CreateCarrierGatewayOutput struct {
 
 	// Information about the carrier gateway.

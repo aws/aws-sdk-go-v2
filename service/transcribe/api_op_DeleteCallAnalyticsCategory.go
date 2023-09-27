@@ -44,6 +44,10 @@ type DeleteCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCallAnalyticsCategoryInput) operationName() string {
+	return "DeleteCallAnalyticsCategory"
+}
+
 type DeleteCallAnalyticsCategoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

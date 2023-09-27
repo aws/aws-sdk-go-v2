@@ -41,6 +41,10 @@ type ExtendTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExtendTransactionInput) operationName() string {
+	return "ExtendTransaction"
+}
+
 type ExtendTransactionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

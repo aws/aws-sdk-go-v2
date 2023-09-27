@@ -52,6 +52,10 @@ type RestoreKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreKeyInput) operationName() string {
+	return "RestoreKey"
+}
+
 type RestoreKeyOutput struct {
 
 	// The key material of the restored key. The KeyState will change to

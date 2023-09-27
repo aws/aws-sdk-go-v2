@@ -53,6 +53,10 @@ type DescribeConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationsInput) operationName() string {
+	return "DescribeConfigurations"
+}
+
 type DescribeConfigurationsOutput struct {
 
 	// A key in the response map. The value is an array of data.

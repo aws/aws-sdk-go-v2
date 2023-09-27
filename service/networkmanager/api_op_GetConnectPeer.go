@@ -42,6 +42,10 @@ type GetConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectPeerInput) operationName() string {
+	return "GetConnectPeer"
+}
+
 type GetConnectPeerOutput struct {
 
 	// Returns information about a core network Connect peer.

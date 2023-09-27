@@ -75,6 +75,10 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterInput) operationName() string {
+	return "UpdateCluster"
+}
+
 type UpdateClusterOutput struct {
 
 	// Returns information about the updated Elastic DocumentDB cluster.

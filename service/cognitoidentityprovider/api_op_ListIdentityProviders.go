@@ -54,6 +54,10 @@ type ListIdentityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityProvidersInput) operationName() string {
+	return "ListIdentityProviders"
+}
+
 type ListIdentityProvidersOutput struct {
 
 	// A list of IdP objects.

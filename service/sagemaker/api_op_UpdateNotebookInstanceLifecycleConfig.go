@@ -53,6 +53,10 @@ type UpdateNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNotebookInstanceLifecycleConfigInput) operationName() string {
+	return "UpdateNotebookInstanceLifecycleConfig"
+}
+
 type UpdateNotebookInstanceLifecycleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

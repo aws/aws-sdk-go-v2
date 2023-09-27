@@ -49,6 +49,10 @@ type CreateTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTestGridProjectInput) operationName() string {
+	return "CreateTestGridProject"
+}
+
 type CreateTestGridProjectOutput struct {
 
 	// ARN of the Selenium testing project that was created.

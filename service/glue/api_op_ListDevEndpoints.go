@@ -50,6 +50,10 @@ type ListDevEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevEndpointsInput) operationName() string {
+	return "ListDevEndpoints"
+}
+
 type ListDevEndpointsOutput struct {
 
 	// The names of all the DevEndpoint s in the account, or the DevEndpoint s with the

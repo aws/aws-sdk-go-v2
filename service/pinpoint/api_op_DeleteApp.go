@@ -43,6 +43,10 @@ type DeleteAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppInput) operationName() string {
+	return "DeleteApp"
+}
+
 type DeleteAppOutput struct {
 
 	// Provides information about an application.

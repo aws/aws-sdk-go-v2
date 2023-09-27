@@ -76,6 +76,10 @@ type RevokeGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeGrantInput) operationName() string {
+	return "RevokeGrant"
+}
+
 type RevokeGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

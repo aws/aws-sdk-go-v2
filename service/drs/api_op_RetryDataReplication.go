@@ -48,6 +48,10 @@ type RetryDataReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetryDataReplicationInput) operationName() string {
+	return "RetryDataReplication"
+}
+
 type RetryDataReplicationOutput struct {
 
 	// The ARN of the Source Server.

@@ -72,6 +72,10 @@ type ListConformancePackComplianceScoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConformancePackComplianceScoresInput) operationName() string {
+	return "ListConformancePackComplianceScores"
+}
+
 type ListConformancePackComplianceScoresOutput struct {
 
 	// A list of ConformancePackComplianceScore objects.

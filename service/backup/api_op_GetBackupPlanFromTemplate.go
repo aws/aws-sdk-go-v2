@@ -42,6 +42,10 @@ type GetBackupPlanFromTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackupPlanFromTemplateInput) operationName() string {
+	return "GetBackupPlanFromTemplate"
+}
+
 type GetBackupPlanFromTemplateOutput struct {
 
 	// Returns the body of a backup plan based on the target template, including the

@@ -42,6 +42,10 @@ type ListDeploymentConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeploymentConfigsInput) operationName() string {
+	return "ListDeploymentConfigs"
+}
+
 // Represents the output of a ListDeploymentConfigs operation.
 type ListDeploymentConfigsOutput struct {
 

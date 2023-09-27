@@ -101,6 +101,10 @@ type StartChangeRequestExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartChangeRequestExecutionInput) operationName() string {
+	return "StartChangeRequestExecution"
+}
+
 type StartChangeRequestExecutionOutput struct {
 
 	// The unique ID of a runbook workflow operation. (A runbook workflow is a type of

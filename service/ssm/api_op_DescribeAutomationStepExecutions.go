@@ -59,6 +59,10 @@ type DescribeAutomationStepExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutomationStepExecutionsInput) operationName() string {
+	return "DescribeAutomationStepExecutions"
+}
+
 type DescribeAutomationStepExecutionsOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

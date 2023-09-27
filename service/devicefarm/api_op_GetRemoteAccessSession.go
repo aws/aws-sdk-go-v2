@@ -45,6 +45,10 @@ type GetRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRemoteAccessSessionInput) operationName() string {
+	return "GetRemoteAccessSession"
+}
+
 // Represents the response from the server that lists detailed information about
 // the remote access session.
 type GetRemoteAccessSessionOutput struct {

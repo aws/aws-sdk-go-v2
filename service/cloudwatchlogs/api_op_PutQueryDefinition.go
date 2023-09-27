@@ -78,6 +78,10 @@ type PutQueryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutQueryDefinitionInput) operationName() string {
+	return "PutQueryDefinition"
+}
+
 type PutQueryDefinitionOutput struct {
 
 	// The ID of the query definition.

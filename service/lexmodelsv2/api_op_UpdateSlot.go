@@ -96,6 +96,10 @@ type UpdateSlotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSlotInput) operationName() string {
+	return "UpdateSlot"
+}
+
 type UpdateSlotOutput struct {
 
 	// The identifier of the bot that contains the slot.

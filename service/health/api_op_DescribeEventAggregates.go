@@ -59,6 +59,10 @@ type DescribeEventAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventAggregatesInput) operationName() string {
+	return "DescribeEventAggregates"
+}
+
 type DescribeEventAggregatesOutput struct {
 
 	// The number of events in each category that meet the optional filter criteria.

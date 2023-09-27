@@ -59,6 +59,10 @@ type CreateConditionalForwarderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConditionalForwarderInput) operationName() string {
+	return "CreateConditionalForwarder"
+}
+
 // The result of a CreateConditinalForwarder request.
 type CreateConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.

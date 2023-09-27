@@ -75,6 +75,10 @@ type StartMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMatchmakingInput) operationName() string {
+	return "StartMatchmaking"
+}
+
 type StartMatchmakingOutput struct {
 
 	// Ticket representing the matchmaking request. This object include the

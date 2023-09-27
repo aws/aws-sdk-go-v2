@@ -59,6 +59,10 @@ type DescribeTrustsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrustsInput) operationName() string {
+	return "DescribeTrusts"
+}
+
 // The result of a DescribeTrust request.
 type DescribeTrustsOutput struct {
 

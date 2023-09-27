@@ -70,6 +70,10 @@ type ListPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionsInput) operationName() string {
+	return "ListPermissions"
+}
+
 type ListPermissionsOutput struct {
 
 	// A continuation token, if this is not the first call to retrieve this list.

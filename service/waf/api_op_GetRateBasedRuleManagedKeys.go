@@ -52,6 +52,10 @@ type GetRateBasedRuleManagedKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRateBasedRuleManagedKeysInput) operationName() string {
+	return "GetRateBasedRuleManagedKeys"
+}
+
 type GetRateBasedRuleManagedKeysOutput struct {
 
 	// An array of IP addresses that currently are blocked by the specified

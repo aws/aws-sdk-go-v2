@@ -56,6 +56,10 @@ type MergePullRequestByFastForwardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergePullRequestByFastForwardInput) operationName() string {
+	return "MergePullRequestByFastForward"
+}
+
 type MergePullRequestByFastForwardOutput struct {
 
 	// Information about the specified pull request, including the merge.

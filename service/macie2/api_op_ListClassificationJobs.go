@@ -50,6 +50,10 @@ type ListClassificationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClassificationJobsInput) operationName() string {
+	return "ListClassificationJobs"
+}
+
 type ListClassificationJobsOutput struct {
 
 	// An array of objects, one for each job that matches the filter criteria

@@ -57,6 +57,10 @@ type UpdatePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePositionInput) operationName() string {
+	return "UpdatePosition"
+}
+
 type UpdatePositionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,6 +49,10 @@ type DescribeMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMeshInput) operationName() string {
+	return "DescribeMesh"
+}
+
 type DescribeMeshOutput struct {
 
 	// The full description of your service mesh.

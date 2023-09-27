@@ -47,6 +47,10 @@ type DescribeProductViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProductViewInput) operationName() string {
+	return "DescribeProductView"
+}
+
 type DescribeProductViewOutput struct {
 
 	// Summary information about the product.

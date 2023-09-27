@@ -66,6 +66,10 @@ type ListConnectorEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectorEntitiesInput) operationName() string {
+	return "ListConnectorEntities"
+}
+
 type ListConnectorEntitiesOutput struct {
 
 	// The response of ListConnectorEntities lists entities grouped by category. This

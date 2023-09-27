@@ -44,6 +44,10 @@ type ListMulticastGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMulticastGroupsInput) operationName() string {
+	return "ListMulticastGroups"
+}
+
 type ListMulticastGroupsOutput struct {
 
 	// List of multicast groups.

@@ -61,6 +61,10 @@ type DescribeFleetAdvisorSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetAdvisorSchemasInput) operationName() string {
+	return "DescribeFleetAdvisorSchemas"
+}
+
 type DescribeFleetAdvisorSchemasOutput struct {
 
 	// A collection of SchemaResponse objects.

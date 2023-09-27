@@ -76,6 +76,10 @@ type GetBucketAccelerateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketAccelerateConfigurationInput) operationName() string {
+	return "GetBucketAccelerateConfiguration"
+}
+
 type GetBucketAccelerateConfigurationOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

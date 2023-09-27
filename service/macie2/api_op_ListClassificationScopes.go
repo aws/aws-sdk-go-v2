@@ -44,6 +44,10 @@ type ListClassificationScopesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClassificationScopesInput) operationName() string {
+	return "ListClassificationScopes"
+}
+
 type ListClassificationScopesOutput struct {
 
 	// An array that specifies the unique identifier and name of the classification

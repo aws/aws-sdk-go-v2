@@ -41,6 +41,10 @@ type DisassociateWirelessGatewayFromThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateWirelessGatewayFromThingInput) operationName() string {
+	return "DisassociateWirelessGatewayFromThing"
+}
+
 type DisassociateWirelessGatewayFromThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

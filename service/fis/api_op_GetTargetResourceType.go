@@ -42,6 +42,10 @@ type GetTargetResourceTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTargetResourceTypeInput) operationName() string {
+	return "GetTargetResourceType"
+}
+
 type GetTargetResourceTypeOutput struct {
 
 	// Information about the resource type.

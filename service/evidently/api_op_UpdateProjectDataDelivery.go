@@ -55,6 +55,10 @@ type UpdateProjectDataDeliveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProjectDataDeliveryInput) operationName() string {
+	return "UpdateProjectDataDelivery"
+}
+
 type UpdateProjectDataDeliveryOutput struct {
 
 	// A structure containing details about the project that you updated.

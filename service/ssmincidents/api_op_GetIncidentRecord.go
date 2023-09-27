@@ -42,6 +42,10 @@ type GetIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIncidentRecordInput) operationName() string {
+	return "GetIncidentRecord"
+}
+
 type GetIncidentRecordOutput struct {
 
 	// Details the structure of the incident record.

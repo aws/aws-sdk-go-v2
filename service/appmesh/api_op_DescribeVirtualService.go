@@ -54,6 +54,10 @@ type DescribeVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualServiceInput) operationName() string {
+	return "DescribeVirtualService"
+}
+
 type DescribeVirtualServiceOutput struct {
 
 	// The full description of your virtual service.

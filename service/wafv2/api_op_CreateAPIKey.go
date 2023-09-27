@@ -63,6 +63,10 @@ type CreateAPIKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAPIKeyInput) operationName() string {
+	return "CreateAPIKey"
+}
+
 type CreateAPIKeyOutput struct {
 
 	// The generated, encrypted API key. You can copy this for use in your JavaScript

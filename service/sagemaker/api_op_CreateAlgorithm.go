@@ -87,6 +87,10 @@ type CreateAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAlgorithmInput) operationName() string {
+	return "CreateAlgorithm"
+}
+
 type CreateAlgorithmOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new algorithm.

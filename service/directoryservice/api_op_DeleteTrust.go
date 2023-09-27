@@ -47,6 +47,10 @@ type DeleteTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrustInput) operationName() string {
+	return "DeleteTrust"
+}
+
 // The result of a DeleteTrust request.
 type DeleteTrustOutput struct {
 

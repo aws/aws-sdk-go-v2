@@ -44,6 +44,10 @@ type BatchGetCodeSnippetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCodeSnippetInput) operationName() string {
+	return "BatchGetCodeSnippet"
+}
+
 type BatchGetCodeSnippetOutput struct {
 
 	// The retrieved code snippets associated with the provided finding ARNs.

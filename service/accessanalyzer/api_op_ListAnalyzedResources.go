@@ -54,6 +54,10 @@ type ListAnalyzedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnalyzedResourcesInput) operationName() string {
+	return "ListAnalyzedResources"
+}
+
 // The response to the request.
 type ListAnalyzedResourcesOutput struct {
 

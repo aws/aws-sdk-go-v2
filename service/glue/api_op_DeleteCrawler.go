@@ -42,6 +42,10 @@ type DeleteCrawlerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCrawlerInput) operationName() string {
+	return "DeleteCrawler"
+}
+
 type DeleteCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

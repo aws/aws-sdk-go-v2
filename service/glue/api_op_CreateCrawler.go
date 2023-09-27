@@ -104,6 +104,10 @@ type CreateCrawlerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCrawlerInput) operationName() string {
+	return "CreateCrawler"
+}
+
 type CreateCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

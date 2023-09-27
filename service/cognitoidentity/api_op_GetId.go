@@ -57,6 +57,10 @@ type GetIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdInput) operationName() string {
+	return "GetId"
+}
+
 // Returned in response to a GetId request.
 type GetIdOutput struct {
 

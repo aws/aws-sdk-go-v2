@@ -59,6 +59,10 @@ type GetAlarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAlarmsInput) operationName() string {
+	return "GetAlarms"
+}
+
 type GetAlarmsOutput struct {
 
 	// An array of objects that describe the alarms.

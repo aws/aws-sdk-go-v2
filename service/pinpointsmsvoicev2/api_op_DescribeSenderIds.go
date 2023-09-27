@@ -55,6 +55,10 @@ type DescribeSenderIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSenderIdsInput) operationName() string {
+	return "DescribeSenderIds"
+}
+
 type DescribeSenderIdsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is

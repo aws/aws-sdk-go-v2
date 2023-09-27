@@ -50,6 +50,10 @@ type GetAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAttachmentInput) operationName() string {
+	return "GetAttachment"
+}
+
 type GetAttachmentOutput struct {
 
 	// This is the pre-signed URL that can be used for uploading the file to Amazon S3

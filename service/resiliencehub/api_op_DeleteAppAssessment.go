@@ -51,6 +51,10 @@ type DeleteAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppAssessmentInput) operationName() string {
+	return "DeleteAppAssessment"
+}
+
 type DeleteAppAssessmentOutput struct {
 
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:

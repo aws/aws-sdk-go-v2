@@ -52,6 +52,10 @@ type AssociateApprovalRuleTemplateWithRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateApprovalRuleTemplateWithRepositoryInput) operationName() string {
+	return "AssociateApprovalRuleTemplateWithRepository"
+}
+
 type AssociateApprovalRuleTemplateWithRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

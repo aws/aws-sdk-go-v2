@@ -98,6 +98,10 @@ type ReplaceRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceRouteInput) operationName() string {
+	return "ReplaceRoute"
+}
+
 type ReplaceRouteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

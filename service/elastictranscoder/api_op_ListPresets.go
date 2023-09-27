@@ -48,6 +48,10 @@ type ListPresetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPresetsInput) operationName() string {
+	return "ListPresets"
+}
+
 // The ListPresetsResponse structure.
 type ListPresetsOutput struct {
 

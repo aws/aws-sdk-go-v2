@@ -41,6 +41,10 @@ type GetAppLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppLaunchConfigurationInput) operationName() string {
+	return "GetAppLaunchConfiguration"
+}
+
 type GetAppLaunchConfigurationOutput struct {
 
 	// The ID of the application.

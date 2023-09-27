@@ -62,6 +62,10 @@ type AssociateMemberToGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateMemberToGroupInput) operationName() string {
+	return "AssociateMemberToGroup"
+}
+
 type AssociateMemberToGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

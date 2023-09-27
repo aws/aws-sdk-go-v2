@@ -42,6 +42,10 @@ type GetCoreNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoreNetworkInput) operationName() string {
+	return "GetCoreNetwork"
+}
+
 type GetCoreNetworkOutput struct {
 
 	// Details about a core network.

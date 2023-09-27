@@ -63,6 +63,10 @@ type DescribePendingMaintenanceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePendingMaintenanceActionsInput) operationName() string {
+	return "DescribePendingMaintenanceActions"
+}
+
 type DescribePendingMaintenanceActionsOutput struct {
 
 	// An optional pagination token provided by a previous

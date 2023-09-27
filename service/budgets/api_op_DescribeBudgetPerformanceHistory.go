@@ -60,6 +60,10 @@ type DescribeBudgetPerformanceHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBudgetPerformanceHistoryInput) operationName() string {
+	return "DescribeBudgetPerformanceHistory"
+}
+
 type DescribeBudgetPerformanceHistoryOutput struct {
 
 	// The history of how often the budget has gone into an ALARM state. For DAILY

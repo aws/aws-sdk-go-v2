@@ -41,6 +41,10 @@ type StopHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopHumanLoopInput) operationName() string {
+	return "StopHumanLoop"
+}
+
 type StopHumanLoopOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

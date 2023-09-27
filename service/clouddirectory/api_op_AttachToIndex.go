@@ -53,6 +53,10 @@ type AttachToIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachToIndexInput) operationName() string {
+	return "AttachToIndex"
+}
+
 type AttachToIndexOutput struct {
 
 	// The ObjectIdentifier of the object that was attached to the index.

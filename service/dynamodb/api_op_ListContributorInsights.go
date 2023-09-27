@@ -47,6 +47,10 @@ type ListContributorInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContributorInsightsInput) operationName() string {
+	return "ListContributorInsights"
+}
+
 type ListContributorInsightsOutput struct {
 
 	// A list of ContributorInsightsSummary.

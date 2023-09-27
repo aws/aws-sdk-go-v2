@@ -49,6 +49,10 @@ type ListDomainConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainConfigurationsInput) operationName() string {
+	return "ListDomainConfigurations"
+}
+
 type ListDomainConfigurationsOutput struct {
 
 	// A list of objects that contain summary information about the user's domain

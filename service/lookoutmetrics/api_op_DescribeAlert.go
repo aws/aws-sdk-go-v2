@@ -44,6 +44,10 @@ type DescribeAlertInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlertInput) operationName() string {
+	return "DescribeAlert"
+}
+
 type DescribeAlertOutput struct {
 
 	// Contains information about an alert.

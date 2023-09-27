@@ -51,6 +51,10 @@ type ListHITsForQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHITsForQualificationTypeInput) operationName() string {
+	return "ListHITsForQualificationType"
+}
+
 type ListHITsForQualificationTypeOutput struct {
 
 	// The list of HIT elements returned by the query.

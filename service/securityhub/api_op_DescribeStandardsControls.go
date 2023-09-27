@@ -55,6 +55,10 @@ type DescribeStandardsControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStandardsControlsInput) operationName() string {
+	return "DescribeStandardsControls"
+}
+
 type DescribeStandardsControlsOutput struct {
 
 	// A list of security standards controls.

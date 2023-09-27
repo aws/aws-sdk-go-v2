@@ -76,6 +76,10 @@ type DescribeVpcEndpointServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointServicesInput) operationName() string {
+	return "DescribeVpcEndpointServices"
+}
+
 type DescribeVpcEndpointServicesOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

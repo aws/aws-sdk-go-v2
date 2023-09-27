@@ -110,6 +110,10 @@ type GetPartitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPartitionsInput) operationName() string {
+	return "GetPartitions"
+}
+
 type GetPartitionsOutput struct {
 
 	// A continuation token, if the returned list of partitions does not include the

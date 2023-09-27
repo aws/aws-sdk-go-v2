@@ -89,6 +89,10 @@ type GetConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigurationInput) operationName() string {
+	return "GetConfiguration"
+}
+
 type GetConfigurationOutput struct {
 
 	// The configuration version.

@@ -89,6 +89,10 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQueueInput) operationName() string {
+	return "CreateQueue"
+}
+
 type CreateQueueOutput struct {
 
 	// The Amazon Resource Name (ARN) of the queue.

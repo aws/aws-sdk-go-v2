@@ -73,6 +73,10 @@ type CreatePrefetchScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePrefetchScheduleInput) operationName() string {
+	return "CreatePrefetchSchedule"
+}
+
 type CreatePrefetchScheduleOutput struct {
 
 	// The ARN to assign to the prefetch schedule.

@@ -79,6 +79,10 @@ type RecordActivityTaskHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecordActivityTaskHeartbeatInput) operationName() string {
+	return "RecordActivityTaskHeartbeat"
+}
+
 // Status information about an activity task.
 type RecordActivityTaskHeartbeatOutput struct {
 

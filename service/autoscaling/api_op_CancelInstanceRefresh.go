@@ -47,6 +47,10 @@ type CancelInstanceRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelInstanceRefreshInput) operationName() string {
+	return "CancelInstanceRefresh"
+}
+
 type CancelInstanceRefreshOutput struct {
 
 	// The instance refresh ID associated with the request. This is the unique ID

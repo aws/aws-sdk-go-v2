@@ -44,6 +44,10 @@ type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountSettingsInput) operationName() string {
+	return "DescribeAccountSettings"
+}
+
 type DescribeAccountSettingsOutput struct {
 
 	// The Amazon QuickSight settings for this Amazon Web Services account. This

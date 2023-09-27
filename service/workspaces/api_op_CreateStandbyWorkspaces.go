@@ -47,6 +47,10 @@ type CreateStandbyWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStandbyWorkspacesInput) operationName() string {
+	return "CreateStandbyWorkspaces"
+}
+
 type CreateStandbyWorkspacesOutput struct {
 
 	// Information about the standby WorkSpace that could not be created.

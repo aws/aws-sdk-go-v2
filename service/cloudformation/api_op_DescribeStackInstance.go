@@ -68,6 +68,10 @@ type DescribeStackInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackInstanceInput) operationName() string {
+	return "DescribeStackInstance"
+}
+
 type DescribeStackInstanceOutput struct {
 
 	// The stack instance that matches the specified request parameters.

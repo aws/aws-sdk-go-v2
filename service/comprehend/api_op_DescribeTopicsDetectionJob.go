@@ -43,6 +43,10 @@ type DescribeTopicsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTopicsDetectionJobInput) operationName() string {
+	return "DescribeTopicsDetectionJob"
+}
+
 type DescribeTopicsDetectionJobOutput struct {
 
 	// The list of properties for the requested job.

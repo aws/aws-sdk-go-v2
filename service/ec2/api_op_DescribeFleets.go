@@ -72,6 +72,10 @@ type DescribeFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetsInput) operationName() string {
+	return "DescribeFleets"
+}
+
 type DescribeFleetsOutput struct {
 
 	// Information about the EC2 Fleets.

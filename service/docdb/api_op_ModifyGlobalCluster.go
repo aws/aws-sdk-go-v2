@@ -59,6 +59,10 @@ type ModifyGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyGlobalClusterInput) operationName() string {
+	return "ModifyGlobalCluster"
+}
+
 type ModifyGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.

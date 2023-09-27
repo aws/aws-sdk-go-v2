@@ -50,6 +50,10 @@ type ListEnabledControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnabledControlsInput) operationName() string {
+	return "ListEnabledControls"
+}
+
 type ListEnabledControlsOutput struct {
 
 	// Lists the controls enabled by AWS Control Tower on the specified organizational

@@ -53,6 +53,10 @@ type RevokeRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeRevisionInput) operationName() string {
+	return "RevokeRevision"
+}
+
 type RevokeRevisionOutput struct {
 
 	// The ARN for the revision.

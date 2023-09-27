@@ -153,6 +153,10 @@ type GetInstanceMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceMetricDataInput) operationName() string {
+	return "GetInstanceMetricData"
+}
+
 type GetInstanceMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.

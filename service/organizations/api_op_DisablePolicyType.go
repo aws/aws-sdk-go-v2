@@ -68,6 +68,10 @@ type DisablePolicyTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisablePolicyTypeInput) operationName() string {
+	return "DisablePolicyType"
+}
+
 type DisablePolicyTypeOutput struct {
 
 	// A structure that shows the root with the updated list of enabled policy types.

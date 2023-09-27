@@ -53,6 +53,10 @@ type UpdateImagePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateImagePermissionsInput) operationName() string {
+	return "UpdateImagePermissions"
+}
+
 type UpdateImagePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,6 +69,10 @@ type UpdateInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInferenceExperimentInput) operationName() string {
+	return "UpdateInferenceExperiment"
+}
+
 type UpdateInferenceExperimentOutput struct {
 
 	// The ARN of the updated inference experiment.

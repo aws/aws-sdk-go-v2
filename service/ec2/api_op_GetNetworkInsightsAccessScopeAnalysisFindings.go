@@ -55,6 +55,10 @@ type GetNetworkInsightsAccessScopeAnalysisFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkInsightsAccessScopeAnalysisFindingsInput) operationName() string {
+	return "GetNetworkInsightsAccessScopeAnalysisFindings"
+}
+
 type GetNetworkInsightsAccessScopeAnalysisFindingsOutput struct {
 
 	// The findings associated with Network Access Scope Analysis.

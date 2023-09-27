@@ -189,6 +189,10 @@ type SendRawEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendRawEmailInput) operationName() string {
+	return "SendRawEmail"
+}
+
 // Represents a unique message ID.
 type SendRawEmailOutput struct {
 

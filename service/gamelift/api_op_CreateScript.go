@@ -97,6 +97,10 @@ type CreateScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScriptInput) operationName() string {
+	return "CreateScript"
+}
+
 type CreateScriptOutput struct {
 
 	// The newly created script record with a unique script ID and ARN. The new

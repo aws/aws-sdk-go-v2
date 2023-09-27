@@ -76,6 +76,10 @@ type ListResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesInput) operationName() string {
+	return "ListResources"
+}
+
 type ListResourcesOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to

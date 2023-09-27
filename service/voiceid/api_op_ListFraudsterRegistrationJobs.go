@@ -58,6 +58,10 @@ type ListFraudsterRegistrationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFraudsterRegistrationJobsInput) operationName() string {
+	return "ListFraudsterRegistrationJobs"
+}
+
 type ListFraudsterRegistrationJobsOutput struct {
 
 	// A list containing details about each specified fraudster registration job.

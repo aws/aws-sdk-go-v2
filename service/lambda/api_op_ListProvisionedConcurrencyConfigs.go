@@ -54,6 +54,10 @@ type ListProvisionedConcurrencyConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProvisionedConcurrencyConfigsInput) operationName() string {
+	return "ListProvisionedConcurrencyConfigs"
+}
+
 type ListProvisionedConcurrencyConfigsOutput struct {
 
 	// The pagination token that's included if more results are available.

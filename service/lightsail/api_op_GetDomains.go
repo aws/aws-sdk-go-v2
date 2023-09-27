@@ -43,6 +43,10 @@ type GetDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainsInput) operationName() string {
+	return "GetDomains"
+}
+
 type GetDomainsOutput struct {
 
 	// An array of key-value pairs containing information about each of the domain

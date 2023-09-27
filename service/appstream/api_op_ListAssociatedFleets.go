@@ -45,6 +45,10 @@ type ListAssociatedFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedFleetsInput) operationName() string {
+	return "ListAssociatedFleets"
+}
+
 type ListAssociatedFleetsOutput struct {
 
 	// The name of the fleet.

@@ -43,6 +43,10 @@ type GetRepositoryTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositoryTriggersInput) operationName() string {
+	return "GetRepositoryTriggers"
+}
+
 // Represents the output of a get repository triggers operation.
 type GetRepositoryTriggersOutput struct {
 

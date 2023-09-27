@@ -133,6 +133,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The environment detail data that's returned by Proton.

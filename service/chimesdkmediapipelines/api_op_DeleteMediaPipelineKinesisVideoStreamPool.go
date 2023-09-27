@@ -41,6 +41,10 @@ type DeleteMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMediaPipelineKinesisVideoStreamPoolInput) operationName() string {
+	return "DeleteMediaPipelineKinesisVideoStreamPool"
+}
+
 type DeleteMediaPipelineKinesisVideoStreamPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

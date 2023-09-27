@@ -55,6 +55,10 @@ type ListInferenceSchedulersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInferenceSchedulersInput) operationName() string {
+	return "ListInferenceSchedulers"
+}
+
 type ListInferenceSchedulersOutput struct {
 
 	// Provides information about the specified inference scheduler, including data

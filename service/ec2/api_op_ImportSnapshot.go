@@ -91,6 +91,10 @@ type ImportSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportSnapshotInput) operationName() string {
+	return "ImportSnapshot"
+}
+
 type ImportSnapshotOutput struct {
 
 	// A description of the import snapshot task.

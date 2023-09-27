@@ -63,6 +63,10 @@ type StartServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartServiceSoftwareUpdateInput) operationName() string {
+	return "StartServiceSoftwareUpdate"
+}
+
 // Represents the output of a StartServiceSoftwareUpdate operation. Contains the
 // status of the update.
 type StartServiceSoftwareUpdateOutput struct {

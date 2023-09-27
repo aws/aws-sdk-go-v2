@@ -74,6 +74,10 @@ type StartRxNormInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRxNormInferenceJobInput) operationName() string {
+	return "StartRxNormInferenceJob"
+}
+
 type StartRxNormInferenceJobOutput struct {
 
 	// The identifier of the job.

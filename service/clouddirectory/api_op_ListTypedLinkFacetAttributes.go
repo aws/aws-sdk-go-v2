@@ -56,6 +56,10 @@ type ListTypedLinkFacetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTypedLinkFacetAttributesInput) operationName() string {
+	return "ListTypedLinkFacetAttributes"
+}
+
 type ListTypedLinkFacetAttributesOutput struct {
 
 	// An ordered set of attributes associate with the typed link.

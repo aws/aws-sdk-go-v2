@@ -52,6 +52,10 @@ type UpdateRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRelatedItemsInput) operationName() string {
+	return "UpdateRelatedItems"
+}
+
 type UpdateRelatedItemsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

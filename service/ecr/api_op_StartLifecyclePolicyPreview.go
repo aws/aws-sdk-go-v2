@@ -53,6 +53,10 @@ type StartLifecyclePolicyPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartLifecyclePolicyPreviewInput) operationName() string {
+	return "StartLifecyclePolicyPreview"
+}
+
 type StartLifecyclePolicyPreviewOutput struct {
 
 	// The JSON repository policy text.

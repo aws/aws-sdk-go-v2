@@ -50,6 +50,10 @@ type DescribeVPCConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVPCConnectionInput) operationName() string {
+	return "DescribeVPCConnection"
+}
+
 type DescribeVPCConnectionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

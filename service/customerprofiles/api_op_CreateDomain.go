@@ -89,6 +89,10 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainInput) operationName() string {
+	return "CreateDomain"
+}
+
 type CreateDomainOutput struct {
 
 	// The timestamp of when the domain was created.

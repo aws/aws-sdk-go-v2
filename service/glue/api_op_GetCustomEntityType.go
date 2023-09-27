@@ -41,6 +41,10 @@ type GetCustomEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCustomEntityTypeInput) operationName() string {
+	return "GetCustomEntityType"
+}
+
 type GetCustomEntityTypeOutput struct {
 
 	// A list of context words if specified when you created the custom pattern. If

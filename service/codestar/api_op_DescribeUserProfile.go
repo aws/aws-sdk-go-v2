@@ -42,6 +42,10 @@ type DescribeUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserProfileInput) operationName() string {
+	return "DescribeUserProfile"
+}
+
 type DescribeUserProfileOutput struct {
 
 	// The date and time when the user profile was created in AWS CodeStar, in

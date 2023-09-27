@@ -49,6 +49,10 @@ type DetachDiskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachDiskInput) operationName() string {
+	return "DetachDisk"
+}
+
 type DetachDiskOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

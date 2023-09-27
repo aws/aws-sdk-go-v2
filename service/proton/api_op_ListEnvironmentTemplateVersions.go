@@ -56,6 +56,10 @@ type ListEnvironmentTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentTemplateVersionsInput) operationName() string {
+	return "ListEnvironmentTemplateVersions"
+}
+
 type ListEnvironmentTemplateVersionsOutput struct {
 
 	// An array of major or minor versions of an environment template detail data.

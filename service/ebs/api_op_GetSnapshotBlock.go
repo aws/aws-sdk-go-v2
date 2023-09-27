@@ -66,6 +66,10 @@ type GetSnapshotBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSnapshotBlockInput) operationName() string {
+	return "GetSnapshotBlock"
+}
+
 type GetSnapshotBlockOutput struct {
 
 	// The data content of the block.

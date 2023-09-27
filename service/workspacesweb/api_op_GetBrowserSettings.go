@@ -42,6 +42,10 @@ type GetBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBrowserSettingsInput) operationName() string {
+	return "GetBrowserSettings"
+}
+
 type GetBrowserSettingsOutput struct {
 
 	// The browser settings.

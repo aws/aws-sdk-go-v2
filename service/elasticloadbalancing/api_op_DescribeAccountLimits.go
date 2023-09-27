@@ -46,6 +46,10 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountLimitsInput) operationName() string {
+	return "DescribeAccountLimits"
+}
+
 type DescribeAccountLimitsOutput struct {
 
 	// Information about the limits.

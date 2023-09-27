@@ -59,6 +59,10 @@ type CreateLocationFsxLustreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationFsxLustreInput) operationName() string {
+	return "CreateLocationFsxLustre"
+}
+
 type CreateLocationFsxLustreOutput struct {
 
 	// The Amazon Resource Name (ARN) of the FSx for Lustre file system location

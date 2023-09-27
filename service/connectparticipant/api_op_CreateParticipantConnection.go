@@ -73,6 +73,10 @@ type CreateParticipantConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateParticipantConnectionInput) operationName() string {
+	return "CreateParticipantConnection"
+}
+
 type CreateParticipantConnectionOutput struct {
 
 	// Creates the participant's connection credentials. The authentication token

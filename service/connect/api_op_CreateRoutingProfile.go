@@ -81,6 +81,10 @@ type CreateRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoutingProfileInput) operationName() string {
+	return "CreateRoutingProfile"
+}
+
 type CreateRoutingProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the routing profile.

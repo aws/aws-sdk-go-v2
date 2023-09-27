@@ -64,6 +64,10 @@ type CreateParticipantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateParticipantInput) operationName() string {
+	return "CreateParticipant"
+}
+
 type CreateParticipantOutput struct {
 
 	// The token used by the chat participant to call CreateParticipantConnection . The

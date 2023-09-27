@@ -43,6 +43,10 @@ type DescribeBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBundleInput) operationName() string {
+	return "DescribeBundle"
+}
+
 // Result structure contains the details of the bundle.
 type DescribeBundleOutput struct {
 

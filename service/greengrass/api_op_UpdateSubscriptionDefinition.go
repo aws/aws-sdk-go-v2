@@ -44,6 +44,10 @@ type UpdateSubscriptionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubscriptionDefinitionInput) operationName() string {
+	return "UpdateSubscriptionDefinition"
+}
+
 type UpdateSubscriptionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

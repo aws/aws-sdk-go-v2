@@ -86,6 +86,10 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceInput) operationName() string {
+	return "CreateService"
+}
+
 type CreateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can

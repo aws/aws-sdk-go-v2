@@ -64,6 +64,10 @@ type ListReplacePermissionAssociationsWorkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReplacePermissionAssociationsWorkInput) operationName() string {
+	return "ListReplacePermissionAssociationsWork"
+}
+
 type ListReplacePermissionAssociationsWorkOutput struct {
 
 	// If present, this value indicates that more output is available than is included

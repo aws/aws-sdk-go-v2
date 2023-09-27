@@ -53,6 +53,10 @@ type DescribeStackEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackEventsInput) operationName() string {
+	return "DescribeStackEvents"
+}
+
 // The output for a DescribeStackEvents action.
 type DescribeStackEventsOutput struct {
 

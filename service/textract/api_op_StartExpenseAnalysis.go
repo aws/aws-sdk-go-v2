@@ -84,6 +84,10 @@ type StartExpenseAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartExpenseAnalysisInput) operationName() string {
+	return "StartExpenseAnalysis"
+}
+
 type StartExpenseAnalysisOutput struct {
 
 	// A unique identifier for the text detection job. The JobId is returned from

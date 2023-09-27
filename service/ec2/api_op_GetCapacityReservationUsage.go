@@ -62,6 +62,10 @@ type GetCapacityReservationUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCapacityReservationUsageInput) operationName() string {
+	return "GetCapacityReservationUsage"
+}
+
 type GetCapacityReservationUsageOutput struct {
 
 	// The remaining capacity. Indicates the number of instances that can be launched

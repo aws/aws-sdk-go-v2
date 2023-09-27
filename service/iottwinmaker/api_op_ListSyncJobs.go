@@ -49,6 +49,10 @@ type ListSyncJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSyncJobsInput) operationName() string {
+	return "ListSyncJobs"
+}
+
 type ListSyncJobsOutput struct {
 
 	// The string that specifies the next page of results.

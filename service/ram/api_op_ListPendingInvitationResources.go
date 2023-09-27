@@ -72,6 +72,10 @@ type ListPendingInvitationResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPendingInvitationResourcesInput) operationName() string {
+	return "ListPendingInvitationResources"
+}
+
 type ListPendingInvitationResourcesOutput struct {
 
 	// If present, this value indicates that more output is available than is included

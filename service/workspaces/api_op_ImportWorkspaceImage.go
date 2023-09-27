@@ -83,6 +83,10 @@ type ImportWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportWorkspaceImageInput) operationName() string {
+	return "ImportWorkspaceImage"
+}
+
 type ImportWorkspaceImageOutput struct {
 
 	// The identifier of the WorkSpace image.

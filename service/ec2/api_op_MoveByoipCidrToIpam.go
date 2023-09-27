@@ -63,6 +63,10 @@ type MoveByoipCidrToIpamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MoveByoipCidrToIpamInput) operationName() string {
+	return "MoveByoipCidrToIpam"
+}
+
 type MoveByoipCidrToIpamOutput struct {
 
 	// The BYOIP CIDR.

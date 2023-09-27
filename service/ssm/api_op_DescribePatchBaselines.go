@@ -51,6 +51,10 @@ type DescribePatchBaselinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePatchBaselinesInput) operationName() string {
+	return "DescribePatchBaselines"
+}
+
 type DescribePatchBaselinesOutput struct {
 
 	// An array of PatchBaselineIdentity elements.

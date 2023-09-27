@@ -96,6 +96,10 @@ type UpdateResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResolverInput) operationName() string {
+	return "UpdateResolver"
+}
+
 type UpdateResolverOutput struct {
 
 	// The updated Resolver object.

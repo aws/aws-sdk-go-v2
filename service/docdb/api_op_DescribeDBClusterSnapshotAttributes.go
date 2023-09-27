@@ -49,6 +49,10 @@ type DescribeDBClusterSnapshotAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterSnapshotAttributesInput) operationName() string {
+	return "DescribeDBClusterSnapshotAttributes"
+}
+
 type DescribeDBClusterSnapshotAttributesOutput struct {
 
 	// Detailed information about the attributes that are associated with a cluster

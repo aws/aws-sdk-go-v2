@@ -66,6 +66,10 @@ type DescribePipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePipelinesInput) operationName() string {
+	return "DescribePipelines"
+}
+
 // Contains the output of DescribePipelines.
 type DescribePipelinesOutput struct {
 

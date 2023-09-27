@@ -50,6 +50,10 @@ type GetFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFacetInput) operationName() string {
+	return "GetFacet"
+}
+
 type GetFacetOutput struct {
 
 	// The Facet structure that is associated with the facet.

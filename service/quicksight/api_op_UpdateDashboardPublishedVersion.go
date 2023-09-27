@@ -52,6 +52,10 @@ type UpdateDashboardPublishedVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDashboardPublishedVersionInput) operationName() string {
+	return "UpdateDashboardPublishedVersion"
+}
+
 type UpdateDashboardPublishedVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.

@@ -36,6 +36,10 @@ type GetMessagingSessionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMessagingSessionEndpointInput) operationName() string {
+	return "GetMessagingSessionEndpoint"
+}
+
 type GetMessagingSessionEndpointOutput struct {
 
 	// The endpoint returned in the response.

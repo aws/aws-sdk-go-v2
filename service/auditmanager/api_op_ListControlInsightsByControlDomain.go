@@ -52,6 +52,10 @@ type ListControlInsightsByControlDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListControlInsightsByControlDomainInput) operationName() string {
+	return "ListControlInsightsByControlDomain"
+}
+
 type ListControlInsightsByControlDomainOutput struct {
 
 	// The control analytics data that the ListControlInsightsByControlDomain API

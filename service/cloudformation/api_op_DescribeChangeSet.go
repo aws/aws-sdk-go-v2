@@ -60,6 +60,10 @@ type DescribeChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChangeSetInput) operationName() string {
+	return "DescribeChangeSet"
+}
+
 // The output for the DescribeChangeSet action.
 type DescribeChangeSetOutput struct {
 

@@ -39,6 +39,10 @@ type DeleteElasticsearchServiceRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteElasticsearchServiceRoleInput) operationName() string {
+	return "DeleteElasticsearchServiceRole"
+}
+
 type DeleteElasticsearchServiceRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

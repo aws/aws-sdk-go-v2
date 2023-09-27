@@ -60,6 +60,10 @@ type ListLaunchPathsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLaunchPathsInput) operationName() string {
+	return "ListLaunchPaths"
+}
+
 type ListLaunchPathsOutput struct {
 
 	// Information about the launch path.

@@ -60,6 +60,10 @@ type DeleteRegexMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRegexMatchSetInput) operationName() string {
+	return "DeleteRegexMatchSet"
+}
+
 type DeleteRegexMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRegexMatchSet request. You

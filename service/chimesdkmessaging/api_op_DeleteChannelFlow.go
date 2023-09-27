@@ -45,6 +45,10 @@ type DeleteChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChannelFlowInput) operationName() string {
+	return "DeleteChannelFlow"
+}
+
 type DeleteChannelFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

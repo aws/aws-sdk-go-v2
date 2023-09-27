@@ -49,6 +49,10 @@ type DescribeTargetGroupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTargetGroupAttributesInput) operationName() string {
+	return "DescribeTargetGroupAttributes"
+}
+
 type DescribeTargetGroupAttributesOutput struct {
 
 	// Information about the target group attributes

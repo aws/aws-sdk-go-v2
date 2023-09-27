@@ -75,6 +75,10 @@ type GetSegmentDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSegmentDetectionInput) operationName() string {
+	return "GetSegmentDetection"
+}
+
 type GetSegmentDetectionOutput struct {
 
 	// An array of objects. There can be multiple audio streams. Each AudioMetadata

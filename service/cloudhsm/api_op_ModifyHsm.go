@@ -74,6 +74,10 @@ type ModifyHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyHsmInput) operationName() string {
+	return "ModifyHsm"
+}
+
 // Contains the output of the ModifyHsm operation.
 type ModifyHsmOutput struct {
 

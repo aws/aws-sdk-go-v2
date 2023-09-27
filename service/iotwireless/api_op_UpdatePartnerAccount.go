@@ -52,6 +52,10 @@ type UpdatePartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePartnerAccountInput) operationName() string {
+	return "UpdatePartnerAccount"
+}
+
 type UpdatePartnerAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

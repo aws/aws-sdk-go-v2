@@ -38,6 +38,10 @@ type GetIndexingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIndexingConfigurationInput) operationName() string {
+	return "GetIndexingConfiguration"
+}
+
 type GetIndexingConfigurationOutput struct {
 
 	// The index configuration.

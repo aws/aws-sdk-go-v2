@@ -86,6 +86,10 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSavingsPlansUtilizationDetailsInput) operationName() string {
+	return "GetSavingsPlansUtilizationDetails"
+}
+
 type GetSavingsPlansUtilizationDetailsOutput struct {
 
 	// Retrieves a single daily or monthly Savings Plans utilization rate and details

@@ -77,6 +77,10 @@ type CreateThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThesaurusInput) operationName() string {
+	return "CreateThesaurus"
+}
+
 type CreateThesaurusOutput struct {
 
 	// The identifier of the thesaurus.

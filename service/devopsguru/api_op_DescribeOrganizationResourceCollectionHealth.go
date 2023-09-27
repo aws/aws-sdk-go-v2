@@ -64,6 +64,10 @@ type DescribeOrganizationResourceCollectionHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationResourceCollectionHealthInput) operationName() string {
+	return "DescribeOrganizationResourceCollectionHealth"
+}
+
 type DescribeOrganizationResourceCollectionHealthOutput struct {
 
 	// The name of the organization's account.

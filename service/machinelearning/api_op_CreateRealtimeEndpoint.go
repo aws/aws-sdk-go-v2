@@ -44,6 +44,10 @@ type CreateRealtimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRealtimeEndpointInput) operationName() string {
+	return "CreateRealtimeEndpoint"
+}
+
 // Represents the output of an CreateRealtimeEndpoint operation. The result
 // contains the MLModelId and the endpoint information for the MLModel . Note: The
 // endpoint information includes the URI of the MLModel ; that is, the location to

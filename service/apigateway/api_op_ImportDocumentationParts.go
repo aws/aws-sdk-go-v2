@@ -59,6 +59,10 @@ type ImportDocumentationPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportDocumentationPartsInput) operationName() string {
+	return "ImportDocumentationParts"
+}
+
 // A collection of the imported DocumentationPart identifiers.
 type ImportDocumentationPartsOutput struct {
 

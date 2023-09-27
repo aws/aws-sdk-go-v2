@@ -44,6 +44,10 @@ type DescribeEndpointConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointConfigInput) operationName() string {
+	return "DescribeEndpointConfig"
+}
+
 type DescribeEndpointConfigOutput struct {
 
 	// A timestamp that shows when the endpoint configuration was created.

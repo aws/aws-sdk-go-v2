@@ -58,6 +58,10 @@ type ModifyEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyEventSubscriptionInput) operationName() string {
+	return "ModifyEventSubscription"
+}
+
 type ModifyEventSubscriptionOutput struct {
 
 	// The modified event subscription.

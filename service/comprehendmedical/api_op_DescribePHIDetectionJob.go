@@ -44,6 +44,10 @@ type DescribePHIDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePHIDetectionJobInput) operationName() string {
+	return "DescribePHIDetectionJob"
+}
+
 type DescribePHIDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a detection job.

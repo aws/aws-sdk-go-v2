@@ -43,6 +43,10 @@ type GetQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQualificationTypeInput) operationName() string {
+	return "GetQualificationType"
+}
+
 type GetQualificationTypeOutput struct {
 
 	// The returned Qualification Type

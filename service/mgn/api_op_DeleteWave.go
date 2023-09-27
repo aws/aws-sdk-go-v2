@@ -44,6 +44,10 @@ type DeleteWaveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWaveInput) operationName() string {
+	return "DeleteWave"
+}
+
 type DeleteWaveOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

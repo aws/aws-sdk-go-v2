@@ -51,6 +51,10 @@ type DescribeUserGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserGroupsInput) operationName() string {
+	return "DescribeUserGroups"
+}
+
 type DescribeUserGroupsOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for

@@ -44,6 +44,10 @@ type DescribeReportDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReportDefinitionsInput) operationName() string {
+	return "DescribeReportDefinitions"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response.
 type DescribeReportDefinitionsOutput struct {
 

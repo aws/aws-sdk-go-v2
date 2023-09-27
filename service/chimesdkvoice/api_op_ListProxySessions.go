@@ -51,6 +51,10 @@ type ListProxySessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProxySessionsInput) operationName() string {
+	return "ListProxySessions"
+}
+
 type ListProxySessionsOutput struct {
 
 	// The token used to retrieve the next page of results.

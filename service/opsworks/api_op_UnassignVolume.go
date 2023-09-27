@@ -47,6 +47,10 @@ type UnassignVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnassignVolumeInput) operationName() string {
+	return "UnassignVolume"
+}
+
 type UnassignVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type GetRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRoomInput) operationName() string {
+	return "GetRoom"
+}
+
 type GetRoomOutput struct {
 
 	// The room details.

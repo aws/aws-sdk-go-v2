@@ -50,6 +50,10 @@ type UpdateContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContextInput) operationName() string {
+	return "UpdateContext"
+}
+
 type UpdateContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.

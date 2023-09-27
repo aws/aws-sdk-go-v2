@@ -43,6 +43,10 @@ type GetEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventStreamInput) operationName() string {
+	return "GetEventStream"
+}
+
 type GetEventStreamOutput struct {
 
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream

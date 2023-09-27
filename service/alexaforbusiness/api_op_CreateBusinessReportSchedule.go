@@ -71,6 +71,10 @@ type CreateBusinessReportScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBusinessReportScheduleInput) operationName() string {
+	return "CreateBusinessReportSchedule"
+}
+
 type CreateBusinessReportScheduleOutput struct {
 
 	// The ARN of the business report schedule.

@@ -43,6 +43,10 @@ type GetUsageTotalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsageTotalsInput) operationName() string {
+	return "GetUsageTotals"
+}
+
 type GetUsageTotalsOutput struct {
 
 	// The inclusive time period that the usage data applies to. Possible values are:

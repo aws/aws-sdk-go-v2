@@ -43,6 +43,10 @@ type StartChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartChannelInput) operationName() string {
+	return "StartChannel"
+}
+
 type StartChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

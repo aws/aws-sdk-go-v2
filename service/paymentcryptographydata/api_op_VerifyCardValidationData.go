@@ -80,6 +80,10 @@ type VerifyCardValidationDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyCardValidationDataInput) operationName() string {
+	return "VerifyCardValidationData"
+}
+
 type VerifyCardValidationDataOutput struct {
 
 	// The keyARN of the CVK encryption key that Amazon Web Services Payment

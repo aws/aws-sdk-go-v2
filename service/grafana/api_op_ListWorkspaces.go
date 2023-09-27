@@ -47,6 +47,10 @@ type ListWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkspacesInput) operationName() string {
+	return "ListWorkspaces"
+}
+
 type ListWorkspacesOutput struct {
 
 	// An array of structures that contain some information about the workspaces in

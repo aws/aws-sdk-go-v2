@@ -54,6 +54,10 @@ type GetLoginProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoginProfileInput) operationName() string {
+	return "GetLoginProfile"
+}
+
 // Contains the response to a successful GetLoginProfile request.
 type GetLoginProfileOutput struct {
 

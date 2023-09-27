@@ -55,6 +55,10 @@ type ListRumMetricsDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRumMetricsDestinationsInput) operationName() string {
+	return "ListRumMetricsDestinations"
+}
+
 type ListRumMetricsDestinationsOutput struct {
 
 	// The list of CloudWatch RUM extended metrics destinations associated with the

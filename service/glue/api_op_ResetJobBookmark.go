@@ -49,6 +49,10 @@ type ResetJobBookmarkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetJobBookmarkInput) operationName() string {
+	return "ResetJobBookmark"
+}
+
 type ResetJobBookmarkOutput struct {
 
 	// The reset bookmark entry.

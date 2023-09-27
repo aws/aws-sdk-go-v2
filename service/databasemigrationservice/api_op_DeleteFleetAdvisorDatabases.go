@@ -41,6 +41,10 @@ type DeleteFleetAdvisorDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFleetAdvisorDatabasesInput) operationName() string {
+	return "DeleteFleetAdvisorDatabases"
+}
+
 type DeleteFleetAdvisorDatabasesOutput struct {
 
 	// The IDs of the databases that the operation deleted.

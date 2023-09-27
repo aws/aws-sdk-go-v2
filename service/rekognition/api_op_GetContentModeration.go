@@ -93,6 +93,10 @@ type GetContentModerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContentModerationInput) operationName() string {
+	return "GetContentModeration"
+}
+
 type GetContentModerationOutput struct {
 
 	// Information about the paramters used when getting a response. Includes

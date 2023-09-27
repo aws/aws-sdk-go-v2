@@ -48,6 +48,10 @@ type CancelCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelCommandInput) operationName() string {
+	return "CancelCommand"
+}
+
 // Whether or not the command was successfully canceled. There is no guarantee
 // that a request can be canceled.
 type CancelCommandOutput struct {

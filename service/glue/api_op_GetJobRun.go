@@ -50,6 +50,10 @@ type GetJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobRunInput) operationName() string {
+	return "GetJobRun"
+}
+
 type GetJobRunOutput struct {
 
 	// The requested job-run metadata.

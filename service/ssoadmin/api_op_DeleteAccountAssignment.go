@@ -77,6 +77,10 @@ type DeleteAccountAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccountAssignmentInput) operationName() string {
+	return "DeleteAccountAssignment"
+}
+
 type DeleteAccountAssignmentOutput struct {
 
 	// The status object for the account assignment deletion operation.

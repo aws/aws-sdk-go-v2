@@ -55,6 +55,10 @@ type RemoveRoleFromDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveRoleFromDBInstanceInput) operationName() string {
+	return "RemoveRoleFromDBInstance"
+}
+
 type RemoveRoleFromDBInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

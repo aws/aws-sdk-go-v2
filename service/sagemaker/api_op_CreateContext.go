@@ -66,6 +66,10 @@ type CreateContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContextInput) operationName() string {
+	return "CreateContext"
+}
+
 type CreateContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.

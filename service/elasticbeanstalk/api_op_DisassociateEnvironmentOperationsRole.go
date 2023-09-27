@@ -46,6 +46,10 @@ type DisassociateEnvironmentOperationsRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateEnvironmentOperationsRoleInput) operationName() string {
+	return "DisassociateEnvironmentOperationsRole"
+}
+
 type DisassociateEnvironmentOperationsRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

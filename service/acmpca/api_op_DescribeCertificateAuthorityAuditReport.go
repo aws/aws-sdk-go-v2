@@ -59,6 +59,10 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCertificateAuthorityAuditReportInput) operationName() string {
+	return "DescribeCertificateAuthorityAuditReport"
+}
+
 type DescribeCertificateAuthorityAuditReportOutput struct {
 
 	// Specifies whether report creation is in progress, has succeeded, or has failed.

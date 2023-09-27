@@ -48,6 +48,10 @@ type DeleteFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFirewallRuleInput) operationName() string {
+	return "DeleteFirewallRule"
+}
+
 type DeleteFirewallRuleOutput struct {
 
 	// The specification for the firewall rule that you just deleted.

@@ -49,6 +49,10 @@ type ListTopicsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTopicsInput) operationName() string {
+	return "ListTopics"
+}
+
 type ListTopicsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

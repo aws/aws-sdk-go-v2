@@ -49,6 +49,10 @@ type GetDatasetContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDatasetContentInput) operationName() string {
+	return "GetDatasetContent"
+}
+
 type GetDatasetContentOutput struct {
 
 	// A list of DatasetEntry objects.

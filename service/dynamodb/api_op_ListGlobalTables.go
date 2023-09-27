@@ -59,6 +59,10 @@ type ListGlobalTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGlobalTablesInput) operationName() string {
+	return "ListGlobalTables"
+}
+
 type ListGlobalTablesOutput struct {
 
 	// List of global table names.

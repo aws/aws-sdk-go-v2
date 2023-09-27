@@ -36,6 +36,10 @@ type GetEventConfigurationByResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventConfigurationByResourceTypesInput) operationName() string {
+	return "GetEventConfigurationByResourceTypes"
+}
+
 type GetEventConfigurationByResourceTypesOutput struct {
 
 	// Resource type event configuration for the connection status event.

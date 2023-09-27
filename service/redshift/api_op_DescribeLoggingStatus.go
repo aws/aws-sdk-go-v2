@@ -45,6 +45,10 @@ type DescribeLoggingStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoggingStatusInput) operationName() string {
+	return "DescribeLoggingStatus"
+}
+
 // Describes the status of logging for a cluster.
 type DescribeLoggingStatusOutput struct {
 

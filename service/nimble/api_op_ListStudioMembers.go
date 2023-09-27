@@ -49,6 +49,10 @@ type ListStudioMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStudioMembersInput) operationName() string {
+	return "ListStudioMembers"
+}
+
 type ListStudioMembersOutput struct {
 
 	// A list of admin members.

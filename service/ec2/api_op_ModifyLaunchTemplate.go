@@ -61,6 +61,10 @@ type ModifyLaunchTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyLaunchTemplateInput) operationName() string {
+	return "ModifyLaunchTemplate"
+}
+
 type ModifyLaunchTemplateOutput struct {
 
 	// Information about the launch template.

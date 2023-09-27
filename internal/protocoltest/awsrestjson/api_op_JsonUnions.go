@@ -35,6 +35,10 @@ type JsonUnionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*JsonUnionsInput) operationName() string {
+	return "JsonUnions"
+}
+
 // A shared structure that contains a single union member.
 type JsonUnionsOutput struct {
 

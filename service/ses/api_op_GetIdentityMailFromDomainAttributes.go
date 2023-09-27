@@ -48,6 +48,10 @@ type GetIdentityMailFromDomainAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityMailFromDomainAttributesInput) operationName() string {
+	return "GetIdentityMailFromDomainAttributes"
+}
+
 // Represents the custom MAIL FROM attributes for a list of identities.
 type GetIdentityMailFromDomainAttributesOutput struct {
 

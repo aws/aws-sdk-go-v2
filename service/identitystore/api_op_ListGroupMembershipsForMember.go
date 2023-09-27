@@ -65,6 +65,10 @@ type ListGroupMembershipsForMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupMembershipsForMemberInput) operationName() string {
+	return "ListGroupMembershipsForMember"
+}
+
 type ListGroupMembershipsForMemberOutput struct {
 
 	// A list of GroupMembership objects in the group for a specified member.

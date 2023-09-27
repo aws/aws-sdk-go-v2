@@ -61,6 +61,10 @@ type ListWebACLsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWebACLsInput) operationName() string {
+	return "ListWebACLs"
+}
+
 type ListWebACLsOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of

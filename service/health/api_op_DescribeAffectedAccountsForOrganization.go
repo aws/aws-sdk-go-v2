@@ -63,6 +63,10 @@ type DescribeAffectedAccountsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAffectedAccountsForOrganizationInput) operationName() string {
+	return "DescribeAffectedAccountsForOrganization"
+}
+
 type DescribeAffectedAccountsForOrganizationOutput struct {
 
 	// A JSON set of elements of the affected accounts.

@@ -84,6 +84,10 @@ type DescribeAvailabilityZonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAvailabilityZonesInput) operationName() string {
+	return "DescribeAvailabilityZones"
+}
+
 type DescribeAvailabilityZonesOutput struct {
 
 	// Information about the Availability Zones, Local Zones, and Wavelength Zones.

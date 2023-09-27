@@ -64,6 +64,10 @@ type CreateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTemplateInput) operationName() string {
+	return "CreateTemplate"
+}
+
 type CreateTemplateOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the template.

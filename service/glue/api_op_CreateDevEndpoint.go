@@ -126,6 +126,10 @@ type CreateDevEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDevEndpointInput) operationName() string {
+	return "CreateDevEndpoint"
+}
+
 type CreateDevEndpointOutput struct {
 
 	// The map of arguments used to configure this DevEndpoint . Valid arguments are:

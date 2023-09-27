@@ -62,6 +62,10 @@ type CreateServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceSyncConfigInput) operationName() string {
+	return "CreateServiceSyncConfig"
+}
+
 type CreateServiceSyncConfigOutput struct {
 
 	// The detailed data of the Proton Ops file.

@@ -44,6 +44,10 @@ type ListAssistantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssistantsInput) operationName() string {
+	return "ListAssistants"
+}
+
 type ListAssistantsOutput struct {
 
 	// Information about the assistants.

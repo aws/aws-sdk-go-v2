@@ -45,6 +45,10 @@ type ListStagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStagesInput) operationName() string {
+	return "ListStages"
+}
+
 type ListStagesOutput struct {
 
 	// List of the matching stages (summary information only).

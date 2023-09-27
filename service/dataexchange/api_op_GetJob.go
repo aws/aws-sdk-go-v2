@@ -43,6 +43,10 @@ type GetJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobInput) operationName() string {
+	return "GetJob"
+}
+
 type GetJobOutput struct {
 
 	// The ARN for the job.

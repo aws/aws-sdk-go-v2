@@ -51,6 +51,10 @@ type DisconnectRecoveryInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisconnectRecoveryInstanceInput) operationName() string {
+	return "DisconnectRecoveryInstance"
+}
+
 type DisconnectRecoveryInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

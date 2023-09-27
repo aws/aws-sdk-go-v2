@@ -41,6 +41,10 @@ type GetAssociatedRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssociatedRoleInput) operationName() string {
+	return "GetAssociatedRole"
+}
+
 type GetAssociatedRoleOutput struct {
 
 	// The time when the role was associated with the group.

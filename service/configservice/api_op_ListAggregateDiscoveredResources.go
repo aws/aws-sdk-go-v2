@@ -66,6 +66,10 @@ type ListAggregateDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAggregateDiscoveredResourcesInput) operationName() string {
+	return "ListAggregateDiscoveredResources"
+}
+
 type ListAggregateDiscoveredResourcesOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next

@@ -50,6 +50,10 @@ type ListDataSetImportHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataSetImportHistoryInput) operationName() string {
+	return "ListDataSetImportHistory"
+}
+
 type ListDataSetImportHistoryOutput struct {
 
 	// The data set import tasks.

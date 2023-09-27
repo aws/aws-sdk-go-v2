@@ -53,6 +53,10 @@ type UpdateLiveSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLiveSourceInput) operationName() string {
+	return "UpdateLiveSource"
+}
+
 type UpdateLiveSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with this live source.

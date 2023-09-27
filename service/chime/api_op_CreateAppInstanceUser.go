@@ -73,6 +73,10 @@ type CreateAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInstanceUserInput) operationName() string {
+	return "CreateAppInstanceUser"
+}
+
 type CreateAppInstanceUserOutput struct {
 
 	// The user's ARN.

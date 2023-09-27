@@ -51,6 +51,10 @@ type ListFaqsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFaqsInput) operationName() string {
+	return "ListFaqs"
+}
+
 type ListFaqsOutput struct {
 
 	// information about the FAQs associated with the specified index.

@@ -54,6 +54,10 @@ type DescribeSSLPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSSLPoliciesInput) operationName() string {
+	return "DescribeSSLPolicies"
+}
+
 type DescribeSSLPoliciesOutput struct {
 
 	// If there are additional results, this is the marker for the next set of

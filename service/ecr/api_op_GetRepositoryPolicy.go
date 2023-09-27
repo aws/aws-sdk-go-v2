@@ -46,6 +46,10 @@ type GetRepositoryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositoryPolicyInput) operationName() string {
+	return "GetRepositoryPolicy"
+}
+
 type GetRepositoryPolicyOutput struct {
 
 	// The JSON repository policy text associated with the repository.

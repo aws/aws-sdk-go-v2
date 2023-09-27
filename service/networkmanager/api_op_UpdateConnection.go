@@ -58,6 +58,10 @@ type UpdateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectionInput) operationName() string {
+	return "UpdateConnection"
+}
+
 type UpdateConnectionOutput struct {
 
 	// Information about the connection.

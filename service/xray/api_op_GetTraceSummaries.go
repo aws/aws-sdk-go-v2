@@ -76,6 +76,10 @@ type GetTraceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTraceSummariesInput) operationName() string {
+	return "GetTraceSummaries"
+}
+
 type GetTraceSummariesOutput struct {
 
 	// The start time of this page of results.

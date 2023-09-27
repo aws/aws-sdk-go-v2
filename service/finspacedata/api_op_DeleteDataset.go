@@ -45,6 +45,10 @@ type DeleteDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDatasetInput) operationName() string {
+	return "DeleteDataset"
+}
+
 // The response from an DeleteDataset operation
 type DeleteDatasetOutput struct {
 

@@ -42,6 +42,10 @@ type GetCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCodeSigningConfigInput) operationName() string {
+	return "GetCodeSigningConfig"
+}
+
 type GetCodeSigningConfigOutput struct {
 
 	// The code signing configuration

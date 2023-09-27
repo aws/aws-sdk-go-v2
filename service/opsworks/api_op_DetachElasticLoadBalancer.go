@@ -50,6 +50,10 @@ type DetachElasticLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachElasticLoadBalancerInput) operationName() string {
+	return "DetachElasticLoadBalancer"
+}
+
 type DetachElasticLoadBalancerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

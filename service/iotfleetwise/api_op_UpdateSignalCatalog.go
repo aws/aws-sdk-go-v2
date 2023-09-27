@@ -54,6 +54,10 @@ type UpdateSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSignalCatalogInput) operationName() string {
+	return "UpdateSignalCatalog"
+}
+
 type UpdateSignalCatalogOutput struct {
 
 	// The ARN of the updated signal catalog.

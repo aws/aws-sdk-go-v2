@@ -144,6 +144,10 @@ type StartCallAnalyticsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCallAnalyticsJobInput) operationName() string {
+	return "StartCallAnalyticsJob"
+}
+
 type StartCallAnalyticsJobOutput struct {
 
 	// Provides detailed information about the current Call Analytics job, including

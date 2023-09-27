@@ -44,6 +44,10 @@ type GetQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryExecutionInput) operationName() string {
+	return "GetQueryExecution"
+}
+
 type GetQueryExecutionOutput struct {
 
 	// Information about the query execution.

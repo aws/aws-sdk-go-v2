@@ -57,6 +57,10 @@ type ModifyUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyUserInput) operationName() string {
+	return "ModifyUser"
+}
+
 type ModifyUserOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user.

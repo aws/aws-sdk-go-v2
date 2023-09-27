@@ -71,6 +71,10 @@ type DescribeReservedNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedNodesInput) operationName() string {
+	return "DescribeReservedNodes"
+}
+
 type DescribeReservedNodesOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for

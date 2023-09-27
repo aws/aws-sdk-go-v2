@@ -54,6 +54,10 @@ type GetLensVersionDifferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLensVersionDifferenceInput) operationName() string {
+	return "GetLensVersionDifference"
+}
+
 type GetLensVersionDifferenceOutput struct {
 
 	// The base version of the lens.

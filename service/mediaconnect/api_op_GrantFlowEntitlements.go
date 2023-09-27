@@ -48,6 +48,10 @@ type GrantFlowEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GrantFlowEntitlementsInput) operationName() string {
+	return "GrantFlowEntitlements"
+}
+
 type GrantFlowEntitlementsOutput struct {
 
 	// The entitlements that were just granted.

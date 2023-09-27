@@ -67,6 +67,10 @@ type UpdateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTemplateInput) operationName() string {
+	return "UpdateTemplate"
+}
+
 type UpdateTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,6 +73,10 @@ type CreateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFlowInput) operationName() string {
+	return "CreateFlow"
+}
+
 type CreateFlowOutput struct {
 
 	// The settings for a flow, including its source, outputs, and entitlements.

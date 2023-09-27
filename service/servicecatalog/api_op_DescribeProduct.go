@@ -50,6 +50,10 @@ type DescribeProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProductInput) operationName() string {
+	return "DescribeProduct"
+}
+
 type DescribeProductOutput struct {
 
 	// Information about the associated budgets.

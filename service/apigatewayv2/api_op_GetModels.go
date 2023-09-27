@@ -49,6 +49,10 @@ type GetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelsInput) operationName() string {
+	return "GetModels"
+}
+
 type GetModelsOutput struct {
 
 	// The elements from this collection.

@@ -80,6 +80,10 @@ type ListDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetsInput) operationName() string {
+	return "ListDatasets"
+}
+
 // Returned for a successful ListDatasets request.
 type ListDatasetsOutput struct {
 

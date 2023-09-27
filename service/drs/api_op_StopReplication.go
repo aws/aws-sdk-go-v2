@@ -43,6 +43,10 @@ type StopReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopReplicationInput) operationName() string {
+	return "StopReplication"
+}
+
 type StopReplicationOutput struct {
 
 	// The Source Server that this action was targeted on.

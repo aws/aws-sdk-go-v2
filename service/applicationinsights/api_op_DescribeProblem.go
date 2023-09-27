@@ -45,6 +45,10 @@ type DescribeProblemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProblemInput) operationName() string {
+	return "DescribeProblem"
+}
+
 type DescribeProblemOutput struct {
 
 	// Information about the problem.

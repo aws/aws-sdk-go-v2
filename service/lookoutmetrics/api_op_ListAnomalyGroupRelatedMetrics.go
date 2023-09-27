@@ -59,6 +59,10 @@ type ListAnomalyGroupRelatedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnomalyGroupRelatedMetricsInput) operationName() string {
+	return "ListAnomalyGroupRelatedMetrics"
+}
+
 type ListAnomalyGroupRelatedMetricsOutput struct {
 
 	// Aggregated details about the measures contributing to the anomaly group, and

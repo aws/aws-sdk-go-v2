@@ -58,6 +58,10 @@ type PutCorsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCorsPolicyInput) operationName() string {
+	return "PutCorsPolicy"
+}
+
 type PutCorsPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

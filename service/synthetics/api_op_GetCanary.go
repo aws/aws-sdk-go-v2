@@ -45,6 +45,10 @@ type GetCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCanaryInput) operationName() string {
+	return "GetCanary"
+}
+
 type GetCanaryOutput struct {
 
 	// A structure that contains the full information about the canary.

@@ -46,6 +46,10 @@ type GetSensitiveDataOccurrencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSensitiveDataOccurrencesInput) operationName() string {
+	return "GetSensitiveDataOccurrences"
+}
+
 type GetSensitiveDataOccurrencesOutput struct {
 
 	// If an error occurred when Amazon Macie attempted to retrieve occurrences of

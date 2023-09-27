@@ -54,6 +54,10 @@ type DescribeUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserInput) operationName() string {
+	return "DescribeUser"
+}
+
 type DescribeUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

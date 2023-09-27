@@ -52,6 +52,10 @@ type UpdateDocumentationPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDocumentationPartInput) operationName() string {
+	return "UpdateDocumentationPart"
+}
+
 // A documentation part for a targeted API entity.
 type UpdateDocumentationPartOutput struct {
 

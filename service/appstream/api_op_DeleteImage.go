@@ -43,6 +43,10 @@ type DeleteImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImageInput) operationName() string {
+	return "DeleteImage"
+}
+
 type DeleteImageOutput struct {
 
 	// Information about the image.

@@ -67,6 +67,10 @@ type AssociateFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFirewallPolicyInput) operationName() string {
+	return "AssociateFirewallPolicy"
+}
+
 type AssociateFirewallPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.

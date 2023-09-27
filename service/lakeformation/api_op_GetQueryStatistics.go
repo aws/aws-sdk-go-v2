@@ -43,6 +43,10 @@ type GetQueryStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryStatisticsInput) operationName() string {
+	return "GetQueryStatistics"
+}
+
 type GetQueryStatisticsOutput struct {
 
 	// An ExecutionStatistics structure containing execution statistics.

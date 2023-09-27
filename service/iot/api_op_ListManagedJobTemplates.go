@@ -47,6 +47,10 @@ type ListManagedJobTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedJobTemplatesInput) operationName() string {
+	return "ListManagedJobTemplates"
+}
+
 type ListManagedJobTemplatesOutput struct {
 
 	// A list of managed job templates that are returned.

@@ -91,6 +91,10 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEnvironmentInput) operationName() string {
+	return "CreateEnvironment"
+}
+
 type CreateEnvironmentOutput struct {
 
 	// The unique identifier of the runtime environment.

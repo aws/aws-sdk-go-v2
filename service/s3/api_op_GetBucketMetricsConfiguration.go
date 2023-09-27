@@ -69,6 +69,10 @@ type GetBucketMetricsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketMetricsConfigurationInput) operationName() string {
+	return "GetBucketMetricsConfiguration"
+}
+
 type GetBucketMetricsConfigurationOutput struct {
 
 	// Specifies the metrics configuration.

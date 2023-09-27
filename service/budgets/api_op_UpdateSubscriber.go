@@ -64,6 +64,10 @@ type UpdateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubscriberInput) operationName() string {
+	return "UpdateSubscriber"
+}
+
 // Response of UpdateSubscriber
 type UpdateSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.

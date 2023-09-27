@@ -81,6 +81,10 @@ type ModifyTrafficMirrorSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTrafficMirrorSessionInput) operationName() string {
+	return "ModifyTrafficMirrorSession"
+}
+
 type ModifyTrafficMirrorSessionOutput struct {
 
 	// Information about the Traffic Mirror session.

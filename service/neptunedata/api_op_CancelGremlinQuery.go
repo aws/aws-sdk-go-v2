@@ -42,6 +42,10 @@ type CancelGremlinQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelGremlinQueryInput) operationName() string {
+	return "CancelGremlinQuery"
+}
+
 type CancelGremlinQueryOutput struct {
 
 	// The status of the cancelation

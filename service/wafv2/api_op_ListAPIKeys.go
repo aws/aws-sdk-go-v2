@@ -66,6 +66,10 @@ type ListAPIKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAPIKeysInput) operationName() string {
+	return "ListAPIKeys"
+}
+
 type ListAPIKeysOutput struct {
 
 	// The array of key summaries. If you specified a Limit in your request, this

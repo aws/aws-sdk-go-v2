@@ -118,6 +118,10 @@ type DescribeDBSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBSnapshotsInput) operationName() string {
+	return "DescribeDBSnapshots"
+}
+
 // Contains the result of a successful invocation of the DescribeDBSnapshots
 // action.
 type DescribeDBSnapshotsOutput struct {

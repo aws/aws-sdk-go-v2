@@ -67,6 +67,10 @@ type CreateHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHostInput) operationName() string {
+	return "CreateHost"
+}
+
 type CreateHostOutput struct {
 
 	// The Amazon Resource Name (ARN) of the host to be created.

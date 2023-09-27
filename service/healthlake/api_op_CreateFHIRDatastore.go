@@ -63,6 +63,10 @@ type CreateFHIRDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFHIRDatastoreInput) operationName() string {
+	return "CreateFHIRDatastore"
+}
+
 type CreateFHIRDatastoreOutput struct {
 
 	// The data store ARN is generated during the creation of the data store and can

@@ -50,6 +50,10 @@ type RequestUploadCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestUploadCredentialsInput) operationName() string {
+	return "RequestUploadCredentials"
+}
+
 type RequestUploadCredentialsOutput struct {
 
 	// Amazon S3 path and key, identifying where the game build files are stored.

@@ -52,6 +52,10 @@ type DescribeCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCertificatesInput) operationName() string {
+	return "DescribeCertificates"
+}
+
 type DescribeCertificatesOutput struct {
 
 	// The Secure Sockets Layer (SSL) certificates associated with the replication

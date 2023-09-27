@@ -42,6 +42,10 @@ type GetSchemaAsJsonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaAsJsonInput) operationName() string {
+	return "GetSchemaAsJson"
+}
+
 type GetSchemaAsJsonOutput struct {
 
 	// The JSON representation of the schema document.

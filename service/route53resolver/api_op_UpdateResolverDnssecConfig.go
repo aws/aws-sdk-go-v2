@@ -51,6 +51,10 @@ type UpdateResolverDnssecConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResolverDnssecConfigInput) operationName() string {
+	return "UpdateResolverDnssecConfig"
+}
+
 type UpdateResolverDnssecConfigOutput struct {
 
 	// A complex type that contains settings for the specified DNSSEC configuration.

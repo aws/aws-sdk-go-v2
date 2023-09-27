@@ -47,6 +47,10 @@ type StopVoiceToneAnalysisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopVoiceToneAnalysisTaskInput) operationName() string {
+	return "StopVoiceToneAnalysisTask"
+}
+
 type StopVoiceToneAnalysisTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

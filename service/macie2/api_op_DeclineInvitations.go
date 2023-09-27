@@ -44,6 +44,10 @@ type DeclineInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeclineInvitationsInput) operationName() string {
+	return "DeclineInvitations"
+}
+
 type DeclineInvitationsOutput struct {
 
 	// An array of objects, one for each account whose invitation hasn't been

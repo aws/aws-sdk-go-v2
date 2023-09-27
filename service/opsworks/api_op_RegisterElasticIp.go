@@ -54,6 +54,10 @@ type RegisterElasticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterElasticIpInput) operationName() string {
+	return "RegisterElasticIp"
+}
+
 // Contains the response to a RegisterElasticIp request.
 type RegisterElasticIpOutput struct {
 

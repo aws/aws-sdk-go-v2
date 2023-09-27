@@ -53,6 +53,10 @@ type PutSchemaVersionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSchemaVersionMetadataInput) operationName() string {
+	return "PutSchemaVersionMetadata"
+}
+
 type PutSchemaVersionMetadataOutput struct {
 
 	// The latest version of the schema.

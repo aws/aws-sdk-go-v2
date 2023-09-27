@@ -49,6 +49,10 @@ type UpdateContactListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContactListInput) operationName() string {
+	return "UpdateContactList"
+}
+
 type UpdateContactListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

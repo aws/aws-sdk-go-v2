@@ -49,6 +49,10 @@ type ListCalculatedAttributeDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCalculatedAttributeDefinitionsInput) operationName() string {
+	return "ListCalculatedAttributeDefinitions"
+}
+
 type ListCalculatedAttributeDefinitionsOutput struct {
 
 	// The list of calculated attribute definitions.

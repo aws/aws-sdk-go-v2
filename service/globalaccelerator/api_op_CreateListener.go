@@ -78,6 +78,10 @@ type CreateListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateListenerInput) operationName() string {
+	return "CreateListener"
+}
+
 type CreateListenerOutput struct {
 
 	// The listener that you've created.

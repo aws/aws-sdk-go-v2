@@ -50,6 +50,10 @@ type ListCollaborationAnalysisTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCollaborationAnalysisTemplatesInput) operationName() string {
+	return "ListCollaborationAnalysisTemplates"
+}
+
 type ListCollaborationAnalysisTemplatesOutput struct {
 
 	// The metadata of the analysis template within a collaboration.

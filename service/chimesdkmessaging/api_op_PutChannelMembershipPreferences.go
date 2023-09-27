@@ -64,6 +64,10 @@ type PutChannelMembershipPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutChannelMembershipPreferencesInput) operationName() string {
+	return "PutChannelMembershipPreferences"
+}
+
 type PutChannelMembershipPreferencesOutput struct {
 
 	// The ARN of the channel.

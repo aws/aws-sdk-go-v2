@@ -47,6 +47,10 @@ type AssociateAppBlockBuilderAppBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAppBlockBuilderAppBlockInput) operationName() string {
+	return "AssociateAppBlockBuilderAppBlock"
+}
+
 type AssociateAppBlockBuilderAppBlockOutput struct {
 
 	// The list of app block builders associated with app blocks.

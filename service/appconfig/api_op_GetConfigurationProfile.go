@@ -48,6 +48,10 @@ type GetConfigurationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigurationProfileInput) operationName() string {
+	return "GetConfigurationProfile"
+}
+
 type GetConfigurationProfileOutput struct {
 
 	// The application ID.

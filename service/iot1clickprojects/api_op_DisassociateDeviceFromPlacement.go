@@ -51,6 +51,10 @@ type DisassociateDeviceFromPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDeviceFromPlacementInput) operationName() string {
+	return "DisassociateDeviceFromPlacement"
+}
+
 type DisassociateDeviceFromPlacementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

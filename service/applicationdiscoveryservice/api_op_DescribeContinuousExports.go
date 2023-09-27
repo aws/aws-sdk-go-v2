@@ -49,6 +49,10 @@ type DescribeContinuousExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContinuousExportsInput) operationName() string {
+	return "DescribeContinuousExports"
+}
+
 type DescribeContinuousExportsOutput struct {
 
 	// A list of continuous export descriptions.

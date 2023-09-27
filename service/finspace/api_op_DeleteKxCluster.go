@@ -49,6 +49,10 @@ type DeleteKxClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKxClusterInput) operationName() string {
+	return "DeleteKxCluster"
+}
+
 type DeleteKxClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type PublishSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishSchemaInput) operationName() string {
+	return "PublishSchema"
+}
+
 type PublishSchemaOutput struct {
 
 	// The ARN that is associated with the published schema. For more information, see

@@ -49,6 +49,10 @@ type DescribeConfigurationRecorderStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationRecorderStatusInput) operationName() string {
+	return "DescribeConfigurationRecorderStatus"
+}
+
 // The output for the DescribeConfigurationRecorderStatus action, in JSON format.
 type DescribeConfigurationRecorderStatusOutput struct {
 

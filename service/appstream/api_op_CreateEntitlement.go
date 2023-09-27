@@ -65,6 +65,10 @@ type CreateEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEntitlementInput) operationName() string {
+	return "CreateEntitlement"
+}
+
 type CreateEntitlementOutput struct {
 
 	// The entitlement.

@@ -54,6 +54,10 @@ type DeleteTransitGatewayPrefixListReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayPrefixListReferenceInput) operationName() string {
+	return "DeleteTransitGatewayPrefixListReference"
+}
+
 type DeleteTransitGatewayPrefixListReferenceOutput struct {
 
 	// Information about the deleted prefix list reference.

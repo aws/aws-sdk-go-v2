@@ -51,6 +51,10 @@ type CreateResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourcePolicyInput) operationName() string {
+	return "CreateResourcePolicy"
+}
+
 type CreateResourcePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy

@@ -42,6 +42,10 @@ type GetResourceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceDefinitionInput) operationName() string {
+	return "GetResourceDefinition"
+}
+
 type GetResourceDefinitionOutput struct {
 
 	// The ARN of the definition.

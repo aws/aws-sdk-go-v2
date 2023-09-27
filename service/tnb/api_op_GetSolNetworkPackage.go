@@ -44,6 +44,10 @@ type GetSolNetworkPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSolNetworkPackageInput) operationName() string {
+	return "GetSolNetworkPackage"
+}
+
 type GetSolNetworkPackageOutput struct {
 
 	// Network package ARN.

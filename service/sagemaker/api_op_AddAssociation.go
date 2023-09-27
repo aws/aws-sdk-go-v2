@@ -65,6 +65,10 @@ type AddAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddAssociationInput) operationName() string {
+	return "AddAssociation"
+}
+
 type AddAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the destination.

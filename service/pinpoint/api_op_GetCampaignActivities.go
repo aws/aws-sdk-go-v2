@@ -56,6 +56,10 @@ type GetCampaignActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignActivitiesInput) operationName() string {
+	return "GetCampaignActivities"
+}
+
 type GetCampaignActivitiesOutput struct {
 
 	// Provides information about the activities that were performed by a campaign.

@@ -56,6 +56,10 @@ type CancelConversionTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelConversionTaskInput) operationName() string {
+	return "CancelConversionTask"
+}
+
 type CancelConversionTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

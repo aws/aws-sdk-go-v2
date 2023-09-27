@@ -48,6 +48,10 @@ type GetResourcesSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcesSummaryInput) operationName() string {
+	return "GetResourcesSummary"
+}
+
 type GetResourcesSummaryOutput struct {
 
 	// Summary counts of each Proton resource type.

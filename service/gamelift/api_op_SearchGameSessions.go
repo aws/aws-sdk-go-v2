@@ -151,6 +151,10 @@ type SearchGameSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchGameSessionsInput) operationName() string {
+	return "SearchGameSessions"
+}
+
 type SearchGameSessionsOutput struct {
 
 	// A collection of objects containing game session properties for each session

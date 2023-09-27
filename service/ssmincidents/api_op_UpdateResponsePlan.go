@@ -93,6 +93,10 @@ type UpdateResponsePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResponsePlanInput) operationName() string {
+	return "UpdateResponsePlan"
+}
+
 type UpdateResponsePlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

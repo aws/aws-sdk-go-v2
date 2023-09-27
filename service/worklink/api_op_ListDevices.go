@@ -52,6 +52,10 @@ type ListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevicesInput) operationName() string {
+	return "ListDevices"
+}
+
 type ListDevicesOutput struct {
 
 	// Information about the devices.

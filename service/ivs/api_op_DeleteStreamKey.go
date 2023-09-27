@@ -42,6 +42,10 @@ type DeleteStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStreamKeyInput) operationName() string {
+	return "DeleteStreamKey"
+}
+
 type DeleteStreamKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

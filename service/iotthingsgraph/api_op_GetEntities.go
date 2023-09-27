@@ -61,6 +61,10 @@ type GetEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEntitiesInput) operationName() string {
+	return "GetEntities"
+}
+
 type GetEntitiesOutput struct {
 
 	// An array of descriptions for the specified entities.

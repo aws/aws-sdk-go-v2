@@ -68,6 +68,10 @@ type CreateStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamingURLInput) operationName() string {
+	return "CreateStreamingURL"
+}
+
 type CreateStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.

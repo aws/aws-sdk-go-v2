@@ -97,6 +97,10 @@ type GetUsageForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsageForecastInput) operationName() string {
+	return "GetUsageForecast"
+}
+
 type GetUsageForecastOutput struct {
 
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of

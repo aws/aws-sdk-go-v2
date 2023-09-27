@@ -74,6 +74,10 @@ type ListAttacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttacksInput) operationName() string {
+	return "ListAttacks"
+}
+
 type ListAttacksOutput struct {
 
 	// The attack information for the specified time range.

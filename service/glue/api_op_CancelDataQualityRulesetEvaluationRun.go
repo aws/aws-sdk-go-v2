@@ -41,6 +41,10 @@ type CancelDataQualityRulesetEvaluationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelDataQualityRulesetEvaluationRunInput) operationName() string {
+	return "CancelDataQualityRulesetEvaluationRun"
+}
+
 type CancelDataQualityRulesetEvaluationRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

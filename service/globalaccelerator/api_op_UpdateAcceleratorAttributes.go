@@ -59,6 +59,10 @@ type UpdateAcceleratorAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAcceleratorAttributesInput) operationName() string {
+	return "UpdateAcceleratorAttributes"
+}
+
 type UpdateAcceleratorAttributesOutput struct {
 
 	// Updated attributes for the accelerator.

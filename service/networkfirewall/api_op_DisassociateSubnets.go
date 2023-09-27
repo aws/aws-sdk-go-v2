@@ -67,6 +67,10 @@ type DisassociateSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateSubnetsInput) operationName() string {
+	return "DisassociateSubnets"
+}
+
 type DisassociateSubnetsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.

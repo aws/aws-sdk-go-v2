@@ -46,6 +46,10 @@ type GetDevicesInPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevicesInPlacementInput) operationName() string {
+	return "GetDevicesInPlacement"
+}
+
 type GetDevicesInPlacementOutput struct {
 
 	// An object containing the devices (zero or more) within the placement.

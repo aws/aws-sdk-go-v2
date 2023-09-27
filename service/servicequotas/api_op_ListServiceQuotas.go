@@ -70,6 +70,10 @@ type ListServiceQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceQuotasInput) operationName() string {
+	return "ListServiceQuotas"
+}
+
 type ListServiceQuotasOutput struct {
 
 	// If present, indicates that more output is available than is included in the

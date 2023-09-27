@@ -59,6 +59,10 @@ type CreateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMembershipInput) operationName() string {
+	return "CreateMembership"
+}
+
 type CreateMembershipOutput struct {
 
 	// The membership that was created.

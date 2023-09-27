@@ -108,6 +108,10 @@ type GetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProfileInput) operationName() string {
+	return "GetProfile"
+}
+
 // The structure representing the getProfileResponse.
 type GetProfileOutput struct {
 

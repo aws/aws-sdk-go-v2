@@ -42,6 +42,10 @@ type DeleteInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInsightInput) operationName() string {
+	return "DeleteInsight"
+}
+
 type DeleteInsightOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

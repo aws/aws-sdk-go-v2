@@ -133,6 +133,10 @@ type CreateCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCanaryInput) operationName() string {
+	return "CreateCanary"
+}
+
 type CreateCanaryOutput struct {
 
 	// The full details about the canary you have created.

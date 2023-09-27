@@ -46,6 +46,10 @@ type GetBlacklistReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlacklistReportsInput) operationName() string {
+	return "GetBlacklistReports"
+}
+
 // An object that contains information about blacklist events.
 type GetBlacklistReportsOutput struct {
 

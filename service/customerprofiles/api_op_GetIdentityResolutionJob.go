@@ -51,6 +51,10 @@ type GetIdentityResolutionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityResolutionJobInput) operationName() string {
+	return "GetIdentityResolutionJob"
+}
+
 type GetIdentityResolutionJobOutput struct {
 
 	// Configuration settings for how to perform the auto-merging of profiles.

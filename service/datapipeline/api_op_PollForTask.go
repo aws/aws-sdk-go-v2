@@ -95,6 +95,10 @@ type PollForTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PollForTaskInput) operationName() string {
+	return "PollForTask"
+}
+
 // Contains the output of PollForTask.
 type PollForTaskOutput struct {
 

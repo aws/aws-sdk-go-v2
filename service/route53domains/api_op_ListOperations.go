@@ -69,6 +69,10 @@ type ListOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOperationsInput) operationName() string {
+	return "ListOperations"
+}
+
 // The ListOperations response includes the following elements.
 type ListOperationsOutput struct {
 

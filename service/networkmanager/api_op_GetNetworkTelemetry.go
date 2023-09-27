@@ -82,6 +82,10 @@ type GetNetworkTelemetryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkTelemetryInput) operationName() string {
+	return "GetNetworkTelemetry"
+}
+
 type GetNetworkTelemetryOutput struct {
 
 	// The network telemetry.

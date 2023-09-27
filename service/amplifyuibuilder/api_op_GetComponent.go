@@ -52,6 +52,10 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentInput) operationName() string {
+	return "GetComponent"
+}
+
 type GetComponentOutput struct {
 
 	// Represents the configuration settings for the component.

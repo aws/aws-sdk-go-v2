@@ -43,6 +43,10 @@ type StartPipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPipeInput) operationName() string {
+	return "StartPipe"
+}
+
 type StartPipeOutput struct {
 
 	// The ARN of the pipe.

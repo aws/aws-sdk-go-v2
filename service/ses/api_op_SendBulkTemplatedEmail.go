@@ -152,6 +152,10 @@ type SendBulkTemplatedEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendBulkTemplatedEmailInput) operationName() string {
+	return "SendBulkTemplatedEmail"
+}
+
 type SendBulkTemplatedEmailOutput struct {
 
 	// One object per intended recipient. Check each response object and retry any

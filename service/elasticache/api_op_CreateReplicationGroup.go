@@ -366,6 +366,10 @@ type CreateReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationGroupInput) operationName() string {
+	return "CreateReplicationGroup"
+}
+
 type CreateReplicationGroupOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

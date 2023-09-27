@@ -62,6 +62,10 @@ type DeleteRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRecoveryPointInput) operationName() string {
+	return "DeleteRecoveryPoint"
+}
+
 type DeleteRecoveryPointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

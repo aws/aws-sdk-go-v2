@@ -41,6 +41,10 @@ type DeleteMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMissionProfileInput) operationName() string {
+	return "DeleteMissionProfile"
+}
+
 type DeleteMissionProfileOutput struct {
 
 	// UUID of a mission profile.

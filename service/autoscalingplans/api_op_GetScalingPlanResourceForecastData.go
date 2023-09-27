@@ -97,6 +97,10 @@ type GetScalingPlanResourceForecastDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetScalingPlanResourceForecastDataInput) operationName() string {
+	return "GetScalingPlanResourceForecastData"
+}
+
 type GetScalingPlanResourceForecastDataOutput struct {
 
 	// The data points to return.

@@ -50,6 +50,10 @@ type DescribeEventTopicsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventTopicsInput) operationName() string {
+	return "DescribeEventTopics"
+}
+
 // The result of a DescribeEventTopic request.
 type DescribeEventTopicsOutput struct {
 

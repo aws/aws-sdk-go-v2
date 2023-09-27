@@ -52,6 +52,10 @@ type UpdateFailbackReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFailbackReplicationConfigurationInput) operationName() string {
+	return "UpdateFailbackReplicationConfiguration"
+}
+
 type UpdateFailbackReplicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

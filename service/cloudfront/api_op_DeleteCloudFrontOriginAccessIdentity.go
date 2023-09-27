@@ -46,6 +46,10 @@ type DeleteCloudFrontOriginAccessIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCloudFrontOriginAccessIdentityInput) operationName() string {
+	return "DeleteCloudFrontOriginAccessIdentity"
+}
+
 type DeleteCloudFrontOriginAccessIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

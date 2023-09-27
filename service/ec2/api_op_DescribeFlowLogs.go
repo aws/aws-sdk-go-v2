@@ -74,6 +74,10 @@ type DescribeFlowLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFlowLogsInput) operationName() string {
+	return "DescribeFlowLogs"
+}
+
 type DescribeFlowLogsOutput struct {
 
 	// Information about the flow logs.

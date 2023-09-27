@@ -69,6 +69,10 @@ type CreateParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateParallelDataInput) operationName() string {
+	return "CreateParallelData"
+}
+
 type CreateParallelDataOutput struct {
 
 	// The custom name that you assigned to the parallel data resource.

@@ -51,6 +51,10 @@ type AuthorizeDataShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeDataShareInput) operationName() string {
+	return "AuthorizeDataShare"
+}
+
 type AuthorizeDataShareOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly

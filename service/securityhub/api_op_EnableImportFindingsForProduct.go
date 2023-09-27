@@ -44,6 +44,10 @@ type EnableImportFindingsForProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableImportFindingsForProductInput) operationName() string {
+	return "EnableImportFindingsForProduct"
+}
+
 type EnableImportFindingsForProductOutput struct {
 
 	// The ARN of your subscription to the product to enable integrations for.

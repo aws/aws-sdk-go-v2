@@ -94,6 +94,10 @@ type UpdateReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReplicationConfigurationInput) operationName() string {
+	return "UpdateReplicationConfiguration"
+}
+
 type UpdateReplicationConfigurationOutput struct {
 
 	// Whether to associate the default Elastic Disaster Recovery Security group with

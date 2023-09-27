@@ -54,6 +54,10 @@ type DescribeVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualGatewayInput) operationName() string {
+	return "DescribeVirtualGateway"
+}
+
 type DescribeVirtualGatewayOutput struct {
 
 	// The full description of your virtual gateway.

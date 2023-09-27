@@ -49,6 +49,10 @@ type StartLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartLoggingInput) operationName() string {
+	return "StartLogging"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type StartLoggingOutput struct {

@@ -39,6 +39,7 @@
         "api_op_UpdateReplicationSet.go",
         "api_op_UpdateResponsePlan.go",
         "api_op_UpdateTimelineEvent.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -62,6 +62,10 @@ type ModifyVpcEndpointServicePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcEndpointServicePermissionsInput) operationName() string {
+	return "ModifyVpcEndpointServicePermissions"
+}
+
 type ModifyVpcEndpointServicePermissionsOutput struct {
 
 	// Information about the added principals.

@@ -46,6 +46,10 @@ type EnableReachabilityAnalyzerOrganizationSharingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableReachabilityAnalyzerOrganizationSharingInput) operationName() string {
+	return "EnableReachabilityAnalyzerOrganizationSharing"
+}
+
 type EnableReachabilityAnalyzerOrganizationSharingOutput struct {
 
 	// Returns true if the request succeeds; otherwise, returns an error.

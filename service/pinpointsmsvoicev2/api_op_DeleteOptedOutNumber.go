@@ -50,6 +50,10 @@ type DeleteOptedOutNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOptedOutNumberInput) operationName() string {
+	return "DeleteOptedOutNumber"
+}
+
 type DeleteOptedOutNumberOutput struct {
 
 	// This is true if it was the end user who requested their phone number be removed.

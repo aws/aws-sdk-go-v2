@@ -59,6 +59,10 @@ type CreateKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKxDatabaseInput) operationName() string {
+	return "CreateKxDatabase"
+}
+
 type CreateKxDatabaseOutput struct {
 
 	// The timestamp at which the database is created in FinSpace. The value is

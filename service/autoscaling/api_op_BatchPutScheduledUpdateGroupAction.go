@@ -48,6 +48,10 @@ type BatchPutScheduledUpdateGroupActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutScheduledUpdateGroupActionInput) operationName() string {
+	return "BatchPutScheduledUpdateGroupAction"
+}
+
 type BatchPutScheduledUpdateGroupActionOutput struct {
 
 	// The names of the scheduled actions that could not be created or updated,

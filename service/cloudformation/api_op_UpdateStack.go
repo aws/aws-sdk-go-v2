@@ -214,6 +214,10 @@ type UpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStackInput) operationName() string {
+	return "UpdateStack"
+}
+
 // The output for an UpdateStack action.
 type UpdateStackOutput struct {
 

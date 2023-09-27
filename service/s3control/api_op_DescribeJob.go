@@ -57,6 +57,10 @@ type DescribeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobInput) operationName() string {
+	return "DescribeJob"
+}
+
 type DescribeJobOutput struct {
 
 	// Contains the configuration parameters and status for the job specified in the

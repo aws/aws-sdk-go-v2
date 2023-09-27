@@ -63,6 +63,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

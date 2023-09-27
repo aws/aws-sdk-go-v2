@@ -41,6 +41,10 @@ type DeleteAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAlgorithmInput) operationName() string {
+	return "DeleteAlgorithm"
+}
+
 type DeleteAlgorithmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

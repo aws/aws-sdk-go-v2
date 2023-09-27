@@ -44,6 +44,10 @@ type DescribeDomainHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainHealthInput) operationName() string {
+	return "DescribeDomainHealth"
+}
+
 // The result of a DescribeDomainHealth request. Contains health information for
 // the requested domain.
 type DescribeDomainHealthOutput struct {

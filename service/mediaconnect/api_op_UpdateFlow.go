@@ -49,6 +49,10 @@ type UpdateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowInput) operationName() string {
+	return "UpdateFlow"
+}
+
 type UpdateFlowOutput struct {
 
 	// The settings for a flow, including its source, outputs, and entitlements.

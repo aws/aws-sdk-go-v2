@@ -49,6 +49,10 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicesInput) operationName() string {
+	return "ListServices"
+}
+
 type ListServicesOutput struct {
 
 	// A list of service summary information records. In a paginated request, the

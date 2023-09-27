@@ -54,6 +54,10 @@ type ListRuleGroupsNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRuleGroupsNamespacesInput) operationName() string {
+	return "ListRuleGroupsNamespaces"
+}
+
 // Represents the output of a ListRuleGroupsNamespaces operation.
 type ListRuleGroupsNamespacesOutput struct {
 

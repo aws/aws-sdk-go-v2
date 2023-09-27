@@ -51,6 +51,10 @@ type CreateProvisioningTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProvisioningTemplateVersionInput) operationName() string {
+	return "CreateProvisioningTemplateVersion"
+}
+
 type CreateProvisioningTemplateVersionOutput struct {
 
 	// True if the provisioning template version is the default version, otherwise

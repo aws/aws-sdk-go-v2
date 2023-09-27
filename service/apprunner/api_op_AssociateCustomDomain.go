@@ -62,6 +62,10 @@ type AssociateCustomDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateCustomDomainInput) operationName() string {
+	return "AssociateCustomDomain"
+}
+
 type AssociateCustomDomainOutput struct {
 
 	// A description of the domain name that's being associated.

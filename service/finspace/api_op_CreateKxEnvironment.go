@@ -58,6 +58,10 @@ type CreateKxEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKxEnvironmentInput) operationName() string {
+	return "CreateKxEnvironment"
+}
+
 type CreateKxEnvironmentOutput struct {
 
 	// The timestamp at which the kdb environment was created in FinSpace.

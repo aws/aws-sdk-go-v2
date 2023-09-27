@@ -55,6 +55,10 @@ type ImportApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportApiKeysInput) operationName() string {
+	return "ImportApiKeys"
+}
+
 // The identifier of an ApiKey used in a UsagePlan.
 type ImportApiKeysOutput struct {
 

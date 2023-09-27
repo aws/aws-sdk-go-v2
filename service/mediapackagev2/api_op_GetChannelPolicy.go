@@ -51,6 +51,10 @@ type GetChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelPolicyInput) operationName() string {
+	return "GetChannelPolicy"
+}
+
 type GetChannelPolicyOutput struct {
 
 	// The name that describes the channel group. The name is the primary identifier

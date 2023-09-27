@@ -47,6 +47,10 @@ type DeleteRequestValidatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRequestValidatorInput) operationName() string {
+	return "DeleteRequestValidator"
+}
+
 type DeleteRequestValidatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

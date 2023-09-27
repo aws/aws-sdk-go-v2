@@ -50,6 +50,10 @@ type AssociateLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateLicenseInput) operationName() string {
+	return "AssociateLicense"
+}
+
 type AssociateLicenseOutput struct {
 
 	// A structure containing data about the workspace.

@@ -47,6 +47,10 @@ type ListSecurityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecurityPoliciesInput) operationName() string {
+	return "ListSecurityPolicies"
+}
+
 type ListSecurityPoliciesOutput struct {
 
 	// An array of security policies that were listed.

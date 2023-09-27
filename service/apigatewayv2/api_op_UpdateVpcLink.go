@@ -47,6 +47,10 @@ type UpdateVpcLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVpcLinkInput) operationName() string {
+	return "UpdateVpcLink"
+}
+
 type UpdateVpcLinkOutput struct {
 
 	// The timestamp when the VPC link was created.

@@ -159,6 +159,10 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCallAnalyticsStreamTranscriptionInput) operationName() string {
+	return "StartCallAnalyticsStreamTranscription"
+}
+
 type StartCallAnalyticsStreamTranscriptionOutput struct {
 
 	// Shows whether content identification was enabled for your Call Analytics

@@ -61,6 +61,10 @@ type UpdateHoursOfOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHoursOfOperationInput) operationName() string {
+	return "UpdateHoursOfOperation"
+}
+
 type UpdateHoursOfOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

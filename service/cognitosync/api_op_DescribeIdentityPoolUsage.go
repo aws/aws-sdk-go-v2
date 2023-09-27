@@ -64,6 +64,10 @@ type DescribeIdentityPoolUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityPoolUsageInput) operationName() string {
+	return "DescribeIdentityPoolUsage"
+}
+
 // Response to a successful DescribeIdentityPoolUsage request.
 type DescribeIdentityPoolUsageOutput struct {
 

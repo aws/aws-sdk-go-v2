@@ -36,6 +36,10 @@ type DescribeLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoggingOptionsInput) operationName() string {
+	return "DescribeLoggingOptions"
+}
+
 type DescribeLoggingOptionsOutput struct {
 
 	// The current settings of the AWS IoT Events logging options.

@@ -43,6 +43,10 @@ type GetRelationalDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabasesInput) operationName() string {
+	return "GetRelationalDatabases"
+}
+
 type GetRelationalDatabasesOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

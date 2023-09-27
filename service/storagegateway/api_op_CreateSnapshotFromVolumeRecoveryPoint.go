@@ -72,6 +72,10 @@ type CreateSnapshotFromVolumeRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSnapshotFromVolumeRecoveryPointInput) operationName() string {
+	return "CreateSnapshotFromVolumeRecoveryPoint"
+}
+
 type CreateSnapshotFromVolumeRecoveryPointOutput struct {
 
 	// The ID of the snapshot.

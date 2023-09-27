@@ -45,6 +45,10 @@ type UpdateGameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGameInput) operationName() string {
+	return "UpdateGame"
+}
+
 type UpdateGameOutput struct {
 
 	// The details of the game.

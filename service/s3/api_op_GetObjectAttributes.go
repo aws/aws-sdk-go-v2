@@ -168,6 +168,10 @@ type GetObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectAttributesInput) operationName() string {
+	return "GetObjectAttributes"
+}
+
 type GetObjectAttributesOutput struct {
 
 	// The checksum or digest of the object.

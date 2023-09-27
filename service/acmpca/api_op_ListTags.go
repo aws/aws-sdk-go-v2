@@ -61,6 +61,10 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsInput) operationName() string {
+	return "ListTags"
+}
+
 type ListTagsOutput struct {
 
 	// When the list is truncated, this value is present and should be used for the

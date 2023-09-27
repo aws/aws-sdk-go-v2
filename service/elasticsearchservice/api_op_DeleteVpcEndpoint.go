@@ -43,6 +43,10 @@ type DeleteVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcEndpointInput) operationName() string {
+	return "DeleteVpcEndpoint"
+}
+
 // Container for response parameters to the DeleteVpcEndpoint operation. Contains
 // the summarized detail of the VPC Endpoint being deleted.
 type DeleteVpcEndpointOutput struct {

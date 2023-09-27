@@ -55,6 +55,10 @@ type CreatePullThroughCacheRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePullThroughCacheRuleInput) operationName() string {
+	return "CreatePullThroughCacheRule"
+}
+
 type CreatePullThroughCacheRuleOutput struct {
 
 	// The date and time, in JavaScript date format, when the pull through cache rule

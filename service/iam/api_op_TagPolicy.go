@@ -74,6 +74,10 @@ type TagPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagPolicyInput) operationName() string {
+	return "TagPolicy"
+}
+
 type TagPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

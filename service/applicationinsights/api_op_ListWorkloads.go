@@ -57,6 +57,10 @@ type ListWorkloadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkloadsInput) operationName() string {
+	return "ListWorkloads"
+}
+
 type ListWorkloadsOutput struct {
 
 	// The token to request the next page of results.

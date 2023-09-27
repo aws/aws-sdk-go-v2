@@ -74,6 +74,10 @@ type CreateTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTimelineEventInput) operationName() string {
+	return "CreateTimelineEvent"
+}
+
 type CreateTimelineEventOutput struct {
 
 	// The ID of the event for easy reference later.

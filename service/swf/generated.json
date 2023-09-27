@@ -46,6 +46,7 @@
         "api_op_UndeprecateDomain.go",
         "api_op_UndeprecateWorkflowType.go",
         "api_op_UntagResource.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

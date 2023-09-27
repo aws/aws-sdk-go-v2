@@ -47,6 +47,10 @@ type DescribeWatchlistInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWatchlistInput) operationName() string {
+	return "DescribeWatchlist"
+}
+
 type DescribeWatchlistOutput struct {
 
 	// Information about the specified watchlist.

@@ -66,6 +66,10 @@ type ListBotLocalesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBotLocalesInput) operationName() string {
+	return "ListBotLocales"
+}
+
 type ListBotLocalesOutput struct {
 
 	// The identifier of the bot to list locales for.

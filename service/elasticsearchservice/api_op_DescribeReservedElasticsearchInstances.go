@@ -50,6 +50,10 @@ type DescribeReservedElasticsearchInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedElasticsearchInstancesInput) operationName() string {
+	return "DescribeReservedElasticsearchInstances"
+}
+
 // Container for results from DescribeReservedElasticsearchInstances
 type DescribeReservedElasticsearchInstancesOutput struct {
 

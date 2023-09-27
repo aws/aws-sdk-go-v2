@@ -65,6 +65,10 @@ type StartFleetActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFleetActionsInput) operationName() string {
+	return "StartFleetActions"
+}
+
 type StartFleetActionsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

@@ -44,6 +44,10 @@ type DeleteTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTestGridProjectInput) operationName() string {
+	return "DeleteTestGridProject"
+}
+
 type DeleteTestGridProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

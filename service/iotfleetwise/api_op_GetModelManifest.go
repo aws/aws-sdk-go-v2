@@ -43,6 +43,10 @@ type GetModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelManifestInput) operationName() string {
+	return "GetModelManifest"
+}
+
 type GetModelManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the vehicle model.

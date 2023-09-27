@@ -63,6 +63,10 @@ type AdminSetUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminSetUserSettingsInput) operationName() string {
+	return "AdminSetUserSettings"
+}
+
 // Represents the response from the server to set user settings as an
 // administrator.
 type AdminSetUserSettingsOutput struct {

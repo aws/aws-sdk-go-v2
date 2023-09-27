@@ -56,6 +56,10 @@ type ListMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMembersInput) operationName() string {
+	return "ListMembers"
+}
+
 type ListMembersOutput struct {
 
 	// The list of member accounts in the behavior graph. For invited accounts, the

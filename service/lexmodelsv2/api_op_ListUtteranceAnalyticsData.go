@@ -90,6 +90,10 @@ type ListUtteranceAnalyticsDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUtteranceAnalyticsDataInput) operationName() string {
+	return "ListUtteranceAnalyticsData"
+}
+
 type ListUtteranceAnalyticsDataOutput struct {
 
 	// The unique identifier of the bot that the utterances belong to.

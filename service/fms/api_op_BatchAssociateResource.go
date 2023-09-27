@@ -49,6 +49,10 @@ type BatchAssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchAssociateResourceInput) operationName() string {
+	return "BatchAssociateResource"
+}
+
 type BatchAssociateResourceOutput struct {
 
 	// The resources that failed to associate to the resource set.

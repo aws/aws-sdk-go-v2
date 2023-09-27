@@ -47,6 +47,10 @@ type ListDatasetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetGroupsInput) operationName() string {
+	return "ListDatasetGroups"
+}
+
 type ListDatasetGroupsOutput struct {
 
 	// The list of your dataset groups.

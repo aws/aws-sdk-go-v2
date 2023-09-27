@@ -72,6 +72,10 @@ type EnableSecurityHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableSecurityHubInput) operationName() string {
+	return "EnableSecurityHub"
+}
+
 type EnableSecurityHubOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

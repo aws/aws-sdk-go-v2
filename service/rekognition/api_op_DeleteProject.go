@@ -48,6 +48,10 @@ type DeleteProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProjectInput) operationName() string {
+	return "DeleteProject"
+}
+
 type DeleteProjectOutput struct {
 
 	// The current status of the delete project operation.

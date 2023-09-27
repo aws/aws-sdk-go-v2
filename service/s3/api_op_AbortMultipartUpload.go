@@ -98,6 +98,10 @@ type AbortMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AbortMultipartUploadInput) operationName() string {
+	return "AbortMultipartUpload"
+}
+
 type AbortMultipartUploadOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

@@ -75,6 +75,10 @@ type DescribeNatGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNatGatewaysInput) operationName() string {
+	return "DescribeNatGateways"
+}
+
 type DescribeNatGatewaysOutput struct {
 
 	// Information about the NAT gateways.

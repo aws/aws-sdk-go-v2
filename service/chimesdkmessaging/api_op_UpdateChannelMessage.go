@@ -69,6 +69,10 @@ type UpdateChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChannelMessageInput) operationName() string {
+	return "UpdateChannelMessage"
+}
+
 type UpdateChannelMessageOutput struct {
 
 	// The ARN of the channel.

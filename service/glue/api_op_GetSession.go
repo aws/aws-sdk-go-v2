@@ -45,6 +45,10 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSessionInput) operationName() string {
+	return "GetSession"
+}
+
 type GetSessionOutput struct {
 
 	// The session object is returned in the response.

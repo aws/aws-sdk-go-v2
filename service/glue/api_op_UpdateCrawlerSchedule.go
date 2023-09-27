@@ -47,6 +47,10 @@ type UpdateCrawlerScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCrawlerScheduleInput) operationName() string {
+	return "UpdateCrawlerSchedule"
+}
+
 type UpdateCrawlerScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

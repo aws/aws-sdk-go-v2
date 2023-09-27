@@ -76,6 +76,10 @@ type RestoreTableFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreTableFromBackupInput) operationName() string {
+	return "RestoreTableFromBackup"
+}
+
 type RestoreTableFromBackupOutput struct {
 
 	// The description of the table created from an existing backup.

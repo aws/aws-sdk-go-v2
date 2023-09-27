@@ -60,6 +60,10 @@ type DeleteByteMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteByteMatchSetInput) operationName() string {
+	return "DeleteByteMatchSet"
+}
+
 type DeleteByteMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You can

@@ -47,6 +47,10 @@ type DescribeDataSetRefreshPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSetRefreshPropertiesInput) operationName() string {
+	return "DescribeDataSetRefreshProperties"
+}
+
 type DescribeDataSetRefreshPropertiesOutput struct {
 
 	// The dataset refresh properties.

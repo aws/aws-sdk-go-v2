@@ -50,6 +50,10 @@ type ListConfigurationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationRevisionsInput) operationName() string {
+	return "ListConfigurationRevisions"
+}
+
 type ListConfigurationRevisionsOutput struct {
 
 	// The unique ID that Amazon MQ generates for the configuration.

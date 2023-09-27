@@ -66,6 +66,10 @@ type ListModelBiasJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelBiasJobDefinitionsInput) operationName() string {
+	return "ListModelBiasJobDefinitions"
+}
+
 type ListModelBiasJobDefinitionsOutput struct {
 
 	// A JSON array in which each element is a summary for a model bias jobs.

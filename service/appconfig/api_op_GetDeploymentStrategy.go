@@ -46,6 +46,10 @@ type GetDeploymentStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentStrategyInput) operationName() string {
+	return "GetDeploymentStrategy"
+}
+
 type GetDeploymentStrategyOutput struct {
 
 	// Total amount of time the deployment lasted.

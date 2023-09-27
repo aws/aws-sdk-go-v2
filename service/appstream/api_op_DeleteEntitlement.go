@@ -46,6 +46,10 @@ type DeleteEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEntitlementInput) operationName() string {
+	return "DeleteEntitlement"
+}
+
 type DeleteEntitlementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

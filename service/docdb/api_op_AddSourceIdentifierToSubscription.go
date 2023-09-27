@@ -55,6 +55,10 @@ type AddSourceIdentifierToSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddSourceIdentifierToSubscriptionInput) operationName() string {
+	return "AddSourceIdentifierToSubscription"
+}
+
 type AddSourceIdentifierToSubscriptionOutput struct {
 
 	// Detailed information about an event to which you have subscribed.

@@ -89,6 +89,10 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceInput) operationName() string {
+	return "CreateService"
+}
+
 type CreateServiceOutput struct {
 
 	// The ID of the application that the created service belongs to.

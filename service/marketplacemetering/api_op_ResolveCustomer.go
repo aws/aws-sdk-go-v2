@@ -53,6 +53,10 @@ type ResolveCustomerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResolveCustomerInput) operationName() string {
+	return "ResolveCustomer"
+}
+
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
 // along with the CustomerAWSAccountId and ProductCode .
 type ResolveCustomerOutput struct {

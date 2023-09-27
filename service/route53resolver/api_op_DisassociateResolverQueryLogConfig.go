@@ -56,6 +56,10 @@ type DisassociateResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateResolverQueryLogConfigInput) operationName() string {
+	return "DisassociateResolverQueryLogConfig"
+}
+
 type DisassociateResolverQueryLogConfigOutput struct {
 
 	// A complex type that contains settings for the association that you deleted

@@ -48,6 +48,10 @@ type ResetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetDeploymentsInput) operationName() string {
+	return "ResetDeployments"
+}
+
 type ResetDeploymentsOutput struct {
 
 	// The ARN of the deployment.

@@ -89,6 +89,10 @@ type DescribeNetworkAclsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkAclsInput) operationName() string {
+	return "DescribeNetworkAcls"
+}
+
 type DescribeNetworkAclsOutput struct {
 
 	// Information about one or more network ACLs.

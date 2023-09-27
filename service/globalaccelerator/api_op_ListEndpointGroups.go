@@ -50,6 +50,10 @@ type ListEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEndpointGroupsInput) operationName() string {
+	return "ListEndpointGroups"
+}
+
 type ListEndpointGroupsOutput struct {
 
 	// The list of the endpoint groups associated with a listener.

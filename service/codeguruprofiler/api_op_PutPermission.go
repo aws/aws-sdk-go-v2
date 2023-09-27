@@ -76,6 +76,10 @@ type PutPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPermissionInput) operationName() string {
+	return "PutPermission"
+}
+
 // The structure representing the putPermissionResponse .
 type PutPermissionOutput struct {
 

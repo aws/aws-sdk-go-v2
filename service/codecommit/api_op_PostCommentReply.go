@@ -55,6 +55,10 @@ type PostCommentReplyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostCommentReplyInput) operationName() string {
+	return "PostCommentReply"
+}
+
 type PostCommentReplyOutput struct {
 
 	// Information about the reply to a comment.

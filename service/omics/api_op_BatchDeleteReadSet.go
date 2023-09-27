@@ -47,6 +47,10 @@ type BatchDeleteReadSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteReadSetInput) operationName() string {
+	return "BatchDeleteReadSet"
+}
+
 type BatchDeleteReadSetOutput struct {
 
 	// Errors returned by individual delete operations.

@@ -61,6 +61,10 @@ type CreateRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRelatedItemInput) operationName() string {
+	return "CreateRelatedItem"
+}
+
 type CreateRelatedItemOutput struct {
 
 	// The Amazon Resource Name (ARN) of the related item.

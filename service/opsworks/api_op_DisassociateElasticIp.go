@@ -47,6 +47,10 @@ type DisassociateElasticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateElasticIpInput) operationName() string {
+	return "DisassociateElasticIp"
+}
+
 type DisassociateElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

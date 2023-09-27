@@ -64,6 +64,10 @@ type CreateSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSceneInput) operationName() string {
+	return "CreateScene"
+}
+
 type CreateSceneOutput struct {
 
 	// The ARN of the scene.

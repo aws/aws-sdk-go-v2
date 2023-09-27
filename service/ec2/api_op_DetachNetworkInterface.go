@@ -60,6 +60,10 @@ type DetachNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachNetworkInterfaceInput) operationName() string {
+	return "DetachNetworkInterface"
+}
+
 type DetachNetworkInterfaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

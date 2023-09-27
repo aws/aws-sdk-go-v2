@@ -59,6 +59,10 @@ type UpdateFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowTemplateInput) operationName() string {
+	return "UpdateFlowTemplate"
+}
+
 type UpdateFlowTemplateOutput struct {
 
 	// An object containing summary information about the updated workflow.

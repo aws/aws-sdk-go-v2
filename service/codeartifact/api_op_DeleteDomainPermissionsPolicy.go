@@ -51,6 +51,10 @@ type DeleteDomainPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainPermissionsPolicyInput) operationName() string {
+	return "DeleteDomainPermissionsPolicy"
+}
+
 type DeleteDomainPermissionsPolicyOutput struct {
 
 	// Information about the deleted resource policy after processing the request.

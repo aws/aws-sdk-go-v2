@@ -55,6 +55,10 @@ type ExportMetadataModelAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportMetadataModelAssessmentInput) operationName() string {
+	return "ExportMetadataModelAssessment"
+}
+
 type ExportMetadataModelAssessmentOutput struct {
 
 	// The Amazon S3 details for an assessment exported in CSV format.

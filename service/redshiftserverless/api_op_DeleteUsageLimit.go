@@ -42,6 +42,10 @@ type DeleteUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUsageLimitInput) operationName() string {
+	return "DeleteUsageLimit"
+}
+
 type DeleteUsageLimitOutput struct {
 
 	// The deleted usage limit object.

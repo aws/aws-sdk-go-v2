@@ -44,6 +44,10 @@ type ListCustomMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomMetricsInput) operationName() string {
+	return "ListCustomMetrics"
+}
+
 type ListCustomMetricsOutput struct {
 
 	// The name of the custom metric.

@@ -59,6 +59,10 @@ type CreateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceProfileInput) operationName() string {
+	return "CreateInstanceProfile"
+}
+
 type CreateInstanceProfileOutput struct {
 
 	// An object that contains information about your instance profile.

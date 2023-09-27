@@ -79,6 +79,10 @@ type GetBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketInput) operationName() string {
+	return "GetBucket"
+}
+
 type GetBucketOutput struct {
 
 	// The Outposts bucket requested.

@@ -48,6 +48,10 @@ type ListAnomalyDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnomalyDetectorsInput) operationName() string {
+	return "ListAnomalyDetectors"
+}
+
 type ListAnomalyDetectorsOutput struct {
 
 	// A list of anomaly detectors in the account in the current region.

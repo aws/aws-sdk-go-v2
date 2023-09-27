@@ -48,6 +48,10 @@ type DeleteTransitGatewayPeeringAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayPeeringAttachmentInput) operationName() string {
+	return "DeleteTransitGatewayPeeringAttachment"
+}
+
 type DeleteTransitGatewayPeeringAttachmentOutput struct {
 
 	// The transit gateway peering attachment.

@@ -61,6 +61,10 @@ type UpdateIngestionDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIngestionDestinationInput) operationName() string {
+	return "UpdateIngestionDestination"
+}
+
 type UpdateIngestionDestinationOutput struct {
 
 	// Contains information about an ingestion destination.

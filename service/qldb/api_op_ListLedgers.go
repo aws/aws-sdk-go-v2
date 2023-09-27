@@ -49,6 +49,10 @@ type ListLedgersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLedgersInput) operationName() string {
+	return "ListLedgers"
+}
+
 type ListLedgersOutput struct {
 
 	// The ledgers that are associated with the current Amazon Web Services account

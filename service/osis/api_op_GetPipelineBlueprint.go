@@ -45,6 +45,10 @@ type GetPipelineBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPipelineBlueprintInput) operationName() string {
+	return "GetPipelineBlueprint"
+}
+
 type GetPipelineBlueprintOutput struct {
 
 	// The requested blueprint in YAML format.

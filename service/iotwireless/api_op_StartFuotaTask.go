@@ -45,6 +45,10 @@ type StartFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFuotaTaskInput) operationName() string {
+	return "StartFuotaTask"
+}
+
 type StartFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type ActivateKeySigningKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateKeySigningKeyInput) operationName() string {
+	return "ActivateKeySigningKey"
+}
+
 type ActivateKeySigningKeyOutput struct {
 
 	// A complex type that describes change information about changes made to your

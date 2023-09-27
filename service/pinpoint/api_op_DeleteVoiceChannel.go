@@ -44,6 +44,10 @@ type DeleteVoiceChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVoiceChannelInput) operationName() string {
+	return "DeleteVoiceChannel"
+}
+
 type DeleteVoiceChannelOutput struct {
 
 	// Provides information about the status and settings of the voice channel for an

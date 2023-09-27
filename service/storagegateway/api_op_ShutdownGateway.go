@@ -58,6 +58,10 @@ type ShutdownGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ShutdownGatewayInput) operationName() string {
+	return "ShutdownGateway"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
 // shut down.
 type ShutdownGatewayOutput struct {

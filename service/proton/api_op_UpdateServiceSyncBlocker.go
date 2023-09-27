@@ -47,6 +47,10 @@ type UpdateServiceSyncBlockerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceSyncBlockerInput) operationName() string {
+	return "UpdateServiceSyncBlocker"
+}
+
 type UpdateServiceSyncBlockerOutput struct {
 
 	// The name of the service that you want to update the service sync blocker for.

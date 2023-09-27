@@ -48,6 +48,10 @@ type GetRetainedMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRetainedMessageInput) operationName() string {
+	return "GetRetainedMessage"
+}
+
 // The output from the GetRetainedMessage operation.
 type GetRetainedMessageOutput struct {
 

@@ -41,6 +41,10 @@ type DeleteFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFrameworkInput) operationName() string {
+	return "DeleteFramework"
+}
+
 type DeleteFrameworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -94,6 +94,10 @@ type StartConversationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartConversationInput) operationName() string {
+	return "StartConversation"
+}
+
 type StartConversationOutput struct {
 	eventStream *StartConversationEventStream
 

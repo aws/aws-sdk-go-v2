@@ -43,6 +43,10 @@ type DescribeDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDocumentClassifierInput) operationName() string {
+	return "DescribeDocumentClassifier"
+}
+
 type DescribeDocumentClassifierOutput struct {
 
 	// An object that contains the properties associated with a document classifier.

@@ -49,6 +49,10 @@ type DescribeUserPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserPoolInput) operationName() string {
+	return "DescribeUserPool"
+}
+
 // Represents the response to describe the user pool.
 type DescribeUserPoolOutput struct {
 

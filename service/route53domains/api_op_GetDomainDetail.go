@@ -46,6 +46,10 @@ type GetDomainDetailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainDetailInput) operationName() string {
+	return "GetDomainDetail"
+}
+
 // The GetDomainDetail response includes the following elements.
 type GetDomainDetailOutput struct {
 

@@ -87,6 +87,10 @@ type PutRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRecommendationPreferencesInput) operationName() string {
+	return "PutRecommendationPreferences"
+}
+
 type PutRecommendationPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

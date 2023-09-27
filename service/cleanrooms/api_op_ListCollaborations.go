@@ -49,6 +49,10 @@ type ListCollaborationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCollaborationsInput) operationName() string {
+	return "ListCollaborations"
+}
+
 type ListCollaborationsOutput struct {
 
 	// The list of collaborations.

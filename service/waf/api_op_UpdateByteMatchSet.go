@@ -91,6 +91,10 @@ type UpdateByteMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateByteMatchSetInput) operationName() string {
+	return "UpdateByteMatchSet"
+}
+
 type UpdateByteMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateByteMatchSet request. You can

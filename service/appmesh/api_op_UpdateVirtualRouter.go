@@ -64,6 +64,10 @@ type UpdateVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVirtualRouterInput) operationName() string {
+	return "UpdateVirtualRouter"
+}
+
 type UpdateVirtualRouterOutput struct {
 
 	// A full description of the virtual router that was updated.

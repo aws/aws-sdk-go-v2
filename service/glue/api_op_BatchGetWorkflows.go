@@ -50,6 +50,10 @@ type BatchGetWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetWorkflowsInput) operationName() string {
+	return "BatchGetWorkflows"
+}
+
 type BatchGetWorkflowsOutput struct {
 
 	// A list of names of workflows not found.

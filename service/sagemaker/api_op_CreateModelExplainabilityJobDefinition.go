@@ -84,6 +84,10 @@ type CreateModelExplainabilityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelExplainabilityJobDefinitionInput) operationName() string {
+	return "CreateModelExplainabilityJobDefinition"
+}
+
 type CreateModelExplainabilityJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model explainability job.

@@ -81,6 +81,10 @@ type CreateVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcPeeringConnectionInput) operationName() string {
+	return "CreateVpcPeeringConnection"
+}
+
 type CreateVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

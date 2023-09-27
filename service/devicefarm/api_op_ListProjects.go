@@ -47,6 +47,10 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectsInput) operationName() string {
+	return "ListProjects"
+}
+
 // Represents the result of a list projects request.
 type ListProjectsOutput struct {
 

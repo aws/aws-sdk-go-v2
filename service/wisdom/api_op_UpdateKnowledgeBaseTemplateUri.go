@@ -54,6 +54,10 @@ type UpdateKnowledgeBaseTemplateUriInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKnowledgeBaseTemplateUriInput) operationName() string {
+	return "UpdateKnowledgeBaseTemplateUri"
+}
+
 type UpdateKnowledgeBaseTemplateUriOutput struct {
 
 	// The knowledge base to update.

@@ -42,6 +42,10 @@ type DeleteParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteParallelDataInput) operationName() string {
+	return "DeleteParallelData"
+}
+
 type DeleteParallelDataOutput struct {
 
 	// The name of the parallel data resource that is being deleted.

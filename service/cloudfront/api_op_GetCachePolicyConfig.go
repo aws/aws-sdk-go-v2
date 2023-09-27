@@ -49,6 +49,10 @@ type GetCachePolicyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCachePolicyConfigInput) operationName() string {
+	return "GetCachePolicyConfig"
+}
+
 type GetCachePolicyConfigOutput struct {
 
 	// The cache policy configuration.

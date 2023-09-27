@@ -74,6 +74,10 @@ type CreatePresetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePresetInput) operationName() string {
+	return "CreatePreset"
+}
+
 // The CreatePresetResponse structure.
 type CreatePresetOutput struct {
 

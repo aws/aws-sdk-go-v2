@@ -44,6 +44,10 @@ type DeleteEmailChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEmailChannelInput) operationName() string {
+	return "DeleteEmailChannel"
+}
+
 type DeleteEmailChannelOutput struct {
 
 	// Provides information about the status and settings of the email channel for an

@@ -65,6 +65,10 @@ type DescribeEcsClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEcsClustersInput) operationName() string {
+	return "DescribeEcsClusters"
+}
+
 // Contains the response to a DescribeEcsClusters request.
 type DescribeEcsClustersOutput struct {
 

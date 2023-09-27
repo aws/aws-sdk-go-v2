@@ -73,6 +73,10 @@ type CreateWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWirelessDeviceInput) operationName() string {
+	return "CreateWirelessDevice"
+}
+
 type CreateWirelessDeviceOutput struct {
 
 	// The Amazon Resource Name of the new resource.

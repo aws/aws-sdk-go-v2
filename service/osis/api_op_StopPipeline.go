@@ -44,6 +44,10 @@ type StopPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopPipelineInput) operationName() string {
+	return "StopPipeline"
+}
+
 type StopPipelineOutput struct {
 
 	// Information about an existing OpenSearch Ingestion pipeline.

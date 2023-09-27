@@ -60,6 +60,10 @@ type ListVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVocabulariesInput) operationName() string {
+	return "ListVocabularies"
+}
+
 type ListVocabulariesOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are

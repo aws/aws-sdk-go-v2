@@ -51,6 +51,10 @@ type StartGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartGatewayInput) operationName() string {
+	return "StartGateway"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
 // restarted.
 type StartGatewayOutput struct {

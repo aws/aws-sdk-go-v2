@@ -55,6 +55,10 @@ type UpdateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUsageInput) operationName() string {
+	return "UpdateUsage"
+}
+
 // Represents the usage data of a usage plan.
 type UpdateUsageOutput struct {
 

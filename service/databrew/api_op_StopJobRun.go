@@ -46,6 +46,10 @@ type StopJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopJobRunInput) operationName() string {
+	return "StopJobRun"
+}
+
 type StopJobRunOutput struct {
 
 	// The ID of the job run that you stopped.

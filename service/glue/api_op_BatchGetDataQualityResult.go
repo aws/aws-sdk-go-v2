@@ -42,6 +42,10 @@ type BatchGetDataQualityResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetDataQualityResultInput) operationName() string {
+	return "BatchGetDataQualityResult"
+}
+
 type BatchGetDataQualityResultOutput struct {
 
 	// A list of DataQualityResult objects representing the data quality results.

@@ -70,6 +70,10 @@ type GetObjectTorrentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectTorrentInput) operationName() string {
+	return "GetObjectTorrent"
+}
+
 type GetObjectTorrentOutput struct {
 
 	// A Bencoded dictionary as defined by the BitTorrent specification

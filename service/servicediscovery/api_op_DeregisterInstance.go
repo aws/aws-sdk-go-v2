@@ -48,6 +48,10 @@ type DeregisterInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterInstanceInput) operationName() string {
+	return "DeregisterInstance"
+}
+
 type DeregisterInstanceOutput struct {
 
 	// A value that you can use to determine whether the request completed

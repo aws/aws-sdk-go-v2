@@ -47,6 +47,10 @@ type DeleteProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProjectVersionInput) operationName() string {
+	return "DeleteProjectVersion"
+}
+
 type DeleteProjectVersionOutput struct {
 
 	// The status of the deletion operation.

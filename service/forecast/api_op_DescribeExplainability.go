@@ -44,6 +44,10 @@ type DescribeExplainabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExplainabilityInput) operationName() string {
+	return "DescribeExplainability"
+}
+
 type DescribeExplainabilityOutput struct {
 
 	// When the Explainability resource was created.

@@ -60,6 +60,10 @@ type UpdateAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssessmentInput) operationName() string {
+	return "UpdateAssessment"
+}
+
 type UpdateAssessmentOutput struct {
 
 	// The response object for the UpdateAssessment API. This is the name of the

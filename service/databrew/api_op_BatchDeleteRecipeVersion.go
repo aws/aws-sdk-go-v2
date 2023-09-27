@@ -66,6 +66,10 @@ type BatchDeleteRecipeVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteRecipeVersionInput) operationName() string {
+	return "BatchDeleteRecipeVersion"
+}
+
 type BatchDeleteRecipeVersionOutput struct {
 
 	// The name of the recipe that was modified.

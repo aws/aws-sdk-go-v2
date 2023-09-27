@@ -47,6 +47,10 @@ type ListMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMembershipsInput) operationName() string {
+	return "ListMemberships"
+}
+
 type ListMembershipsOutput struct {
 
 	// The list of memberships returned from the ListMemberships operation.

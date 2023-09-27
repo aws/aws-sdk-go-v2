@@ -47,6 +47,10 @@ type DeleteEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEndpointInput) operationName() string {
+	return "DeleteEndpoint"
+}
+
 type DeleteEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

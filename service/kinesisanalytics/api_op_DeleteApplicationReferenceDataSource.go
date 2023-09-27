@@ -64,6 +64,10 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationReferenceDataSourceInput) operationName() string {
+	return "DeleteApplicationReferenceDataSource"
+}
+
 type DeleteApplicationReferenceDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

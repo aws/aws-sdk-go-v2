@@ -46,6 +46,10 @@ type ResetUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetUserPasswordInput) operationName() string {
+	return "ResetUserPassword"
+}
+
 type ResetUserPasswordOutput struct {
 
 	// A randomly generated temporary password for the requested user. This password

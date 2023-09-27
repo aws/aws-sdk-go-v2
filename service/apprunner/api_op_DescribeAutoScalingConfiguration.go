@@ -47,6 +47,10 @@ type DescribeAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoScalingConfigurationInput) operationName() string {
+	return "DescribeAutoScalingConfiguration"
+}
+
 type DescribeAutoScalingConfigurationOutput struct {
 
 	// A full description of the App Runner auto scaling configuration that you

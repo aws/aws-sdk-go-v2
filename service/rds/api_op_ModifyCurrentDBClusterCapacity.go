@@ -77,6 +77,10 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCurrentDBClusterCapacityInput) operationName() string {
+	return "ModifyCurrentDBClusterCapacity"
+}
+
 type ModifyCurrentDBClusterCapacityOutput struct {
 
 	// The current capacity of the DB cluster.

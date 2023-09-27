@@ -43,6 +43,10 @@ type ListReceiptFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReceiptFiltersInput) operationName() string {
+	return "ListReceiptFilters"
+}
+
 // A list of IP address filters that exist under your Amazon Web Services account.
 type ListReceiptFiltersOutput struct {
 

@@ -60,6 +60,10 @@ type DeleteCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCacheClusterInput) operationName() string {
+	return "DeleteCacheCluster"
+}
+
 type DeleteCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.

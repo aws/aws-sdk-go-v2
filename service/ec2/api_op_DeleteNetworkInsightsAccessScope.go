@@ -47,6 +47,10 @@ type DeleteNetworkInsightsAccessScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkInsightsAccessScopeInput) operationName() string {
+	return "DeleteNetworkInsightsAccessScope"
+}
+
 type DeleteNetworkInsightsAccessScopeOutput struct {
 
 	// The ID of the Network Access Scope.

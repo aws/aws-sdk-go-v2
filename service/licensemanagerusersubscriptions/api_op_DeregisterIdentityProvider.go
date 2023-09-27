@@ -47,6 +47,10 @@ type DeregisterIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterIdentityProviderInput) operationName() string {
+	return "DeregisterIdentityProvider"
+}
+
 type DeregisterIdentityProviderOutput struct {
 
 	// Metadata that describes the results of an identity provider operation.

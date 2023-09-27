@@ -69,6 +69,10 @@ type GetManagedRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetManagedRuleSetInput) operationName() string {
+	return "GetManagedRuleSet"
+}
+
 type GetManagedRuleSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

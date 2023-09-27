@@ -58,6 +58,10 @@ type GetIntentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntentVersionsInput) operationName() string {
+	return "GetIntentVersions"
+}
+
 type GetIntentVersionsOutput struct {
 
 	// An array of IntentMetadata objects, one for each numbered version of the intent

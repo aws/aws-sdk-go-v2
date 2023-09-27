@@ -49,6 +49,10 @@ type PutMessagingStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMessagingStreamingConfigurationsInput) operationName() string {
+	return "PutMessagingStreamingConfigurations"
+}
+
 type PutMessagingStreamingConfigurationsOutput struct {
 
 	// The requested streaming configurations.

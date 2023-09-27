@@ -41,6 +41,10 @@ type DeleteImagePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImagePipelineInput) operationName() string {
+	return "DeleteImagePipeline"
+}
+
 type DeleteImagePipelineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image pipeline that was deleted.

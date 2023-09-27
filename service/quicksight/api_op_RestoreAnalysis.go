@@ -46,6 +46,10 @@ type RestoreAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreAnalysisInput) operationName() string {
+	return "RestoreAnalysis"
+}
+
 type RestoreAnalysisOutput struct {
 
 	// The ID of the analysis that you're restoring.

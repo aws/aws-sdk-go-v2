@@ -65,6 +65,10 @@ type SearchProductsAsAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchProductsAsAdminInput) operationName() string {
+	return "SearchProductsAsAdmin"
+}
+
 type SearchProductsAsAdminOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

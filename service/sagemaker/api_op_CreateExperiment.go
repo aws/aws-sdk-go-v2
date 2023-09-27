@@ -74,6 +74,10 @@ type CreateExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExperimentInput) operationName() string {
+	return "CreateExperiment"
+}
+
 type CreateExperimentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the experiment.

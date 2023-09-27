@@ -58,6 +58,10 @@ type GetBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlueprintsInput) operationName() string {
+	return "GetBlueprints"
+}
+
 type GetBlueprintsOutput struct {
 
 	// An array of key-value pairs that contains information about the available

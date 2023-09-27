@@ -48,6 +48,10 @@ type DescribeBrokerEngineTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBrokerEngineTypesInput) operationName() string {
+	return "DescribeBrokerEngineTypes"
+}
+
 type DescribeBrokerEngineTypesOutput struct {
 
 	// List of available engine types and versions.

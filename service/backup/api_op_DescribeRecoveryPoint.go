@@ -58,6 +58,10 @@ type DescribeRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecoveryPointInput) operationName() string {
+	return "DescribeRecoveryPoint"
+}
+
 type DescribeRecoveryPointOutput struct {
 
 	// The size, in bytes, of a backup.

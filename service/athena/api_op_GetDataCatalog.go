@@ -42,6 +42,10 @@ type GetDataCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataCatalogInput) operationName() string {
+	return "GetDataCatalog"
+}
+
 type GetDataCatalogOutput struct {
 
 	// The data catalog returned.

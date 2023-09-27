@@ -64,6 +64,10 @@ type UpdateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityProfileInput) operationName() string {
+	return "UpdateSecurityProfile"
+}
+
 type UpdateSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

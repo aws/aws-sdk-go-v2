@@ -76,6 +76,10 @@ type GetMatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMatchesInput) operationName() string {
+	return "GetMatches"
+}
+
 type GetMatchesOutput struct {
 
 	// The timestamp this version of Match Result generated.

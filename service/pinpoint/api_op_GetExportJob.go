@@ -49,6 +49,10 @@ type GetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExportJobInput) operationName() string {
+	return "GetExportJob"
+}
+
 type GetExportJobOutput struct {
 
 	// Provides information about the status and settings of a job that exports

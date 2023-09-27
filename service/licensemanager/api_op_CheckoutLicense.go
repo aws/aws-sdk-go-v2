@@ -71,6 +71,10 @@ type CheckoutLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckoutLicenseInput) operationName() string {
+	return "CheckoutLicense"
+}
+
 type CheckoutLicenseOutput struct {
 
 	// Checkout type.

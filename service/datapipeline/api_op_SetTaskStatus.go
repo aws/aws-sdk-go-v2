@@ -79,6 +79,10 @@ type SetTaskStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTaskStatusInput) operationName() string {
+	return "SetTaskStatus"
+}
+
 // Contains the output of SetTaskStatus.
 type SetTaskStatusOutput struct {
 	// Metadata pertaining to the operation's result.

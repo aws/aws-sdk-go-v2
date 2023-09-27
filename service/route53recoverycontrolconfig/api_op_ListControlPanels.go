@@ -46,6 +46,10 @@ type ListControlPanelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListControlPanelsInput) operationName() string {
+	return "ListControlPanels"
+}
+
 type ListControlPanelsOutput struct {
 
 	// The result of a successful ListControlPanel request.

@@ -54,6 +54,10 @@ type ListSignalCatalogNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSignalCatalogNodesInput) operationName() string {
+	return "ListSignalCatalogNodes"
+}
+
 type ListSignalCatalogNodesOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

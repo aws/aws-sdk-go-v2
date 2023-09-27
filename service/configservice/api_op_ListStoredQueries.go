@@ -45,6 +45,10 @@ type ListStoredQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStoredQueriesInput) operationName() string {
+	return "ListStoredQueries"
+}
+
 type ListStoredQueriesOutput struct {
 
 	// If the previous paginated request didn't return all of the remaining results,

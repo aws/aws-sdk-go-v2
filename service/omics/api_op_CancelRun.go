@@ -41,6 +41,10 @@ type CancelRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelRunInput) operationName() string {
+	return "CancelRun"
+}
+
 type CancelRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -87,6 +87,10 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSavingsPlansPurchaseRecommendationInput) operationName() string {
+	return "GetSavingsPlansPurchaseRecommendation"
+}
+
 type GetSavingsPlansPurchaseRecommendationOutput struct {
 
 	// Information that regards this specific recommendation set.

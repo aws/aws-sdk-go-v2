@@ -63,6 +63,10 @@ type ListAutoScalingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAutoScalingConfigurationsInput) operationName() string {
+	return "ListAutoScalingConfigurations"
+}
+
 type ListAutoScalingConfigurationsOutput struct {
 
 	// A list of summary information records for auto scaling configurations. In a

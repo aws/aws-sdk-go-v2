@@ -73,6 +73,10 @@ type PutRemediationExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRemediationExceptionsInput) operationName() string {
+	return "PutRemediationExceptions"
+}
+
 type PutRemediationExceptionsOutput struct {
 
 	// Returns a list of failed remediation exceptions batch objects. Each object in

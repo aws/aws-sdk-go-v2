@@ -48,6 +48,10 @@ type StopDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDeploymentInput) operationName() string {
+	return "StopDeployment"
+}
+
 // Represents the output of a StopDeployment operation.
 type StopDeploymentOutput struct {
 

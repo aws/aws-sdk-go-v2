@@ -36,6 +36,10 @@ type GetDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataLakeExceptionSubscriptionInput) operationName() string {
+	return "GetDataLakeExceptionSubscription"
+}
+
 type GetDataLakeExceptionSubscriptionOutput struct {
 
 	// The expiration period and time-to-live (TTL).

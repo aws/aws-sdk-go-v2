@@ -45,6 +45,10 @@ type StartStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartStackInput) operationName() string {
+	return "StartStack"
+}
+
 type StartStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

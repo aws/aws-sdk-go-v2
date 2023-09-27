@@ -75,6 +75,10 @@ type CreateKxChangesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKxChangesetInput) operationName() string {
+	return "CreateKxChangeset"
+}
+
 type CreateKxChangesetOutput struct {
 
 	// A list of change requests.

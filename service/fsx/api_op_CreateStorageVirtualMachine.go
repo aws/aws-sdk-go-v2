@@ -78,6 +78,10 @@ type CreateStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStorageVirtualMachineInput) operationName() string {
+	return "CreateStorageVirtualMachine"
+}
+
 type CreateStorageVirtualMachineOutput struct {
 
 	// Returned after a successful CreateStorageVirtualMachine operation; describes

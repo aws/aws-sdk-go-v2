@@ -58,6 +58,10 @@ type UpdateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVehicleInput) operationName() string {
+	return "UpdateVehicle"
+}
+
 type UpdateVehicleOutput struct {
 
 	// The ARN of the updated vehicle.

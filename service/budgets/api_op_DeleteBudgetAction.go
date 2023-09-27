@@ -53,6 +53,10 @@ type DeleteBudgetActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBudgetActionInput) operationName() string {
+	return "DeleteBudgetAction"
+}
+
 type DeleteBudgetActionOutput struct {
 
 	// The account ID of the user. It's a 12-digit number.

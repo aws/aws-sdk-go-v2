@@ -45,6 +45,10 @@ type ListProfilePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfilePermissionsInput) operationName() string {
+	return "ListProfilePermissions"
+}
+
 type ListProfilePermissionsOutput struct {
 
 	// String for specifying the next set of paginated results.

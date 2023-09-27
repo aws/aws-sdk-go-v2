@@ -46,6 +46,10 @@ type DeleteVodSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVodSourceInput) operationName() string {
+	return "DeleteVodSource"
+}
+
 type DeleteVodSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

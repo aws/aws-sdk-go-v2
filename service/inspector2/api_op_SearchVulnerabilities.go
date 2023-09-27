@@ -48,6 +48,10 @@ type SearchVulnerabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchVulnerabilitiesInput) operationName() string {
+	return "SearchVulnerabilities"
+}
+
 type SearchVulnerabilitiesOutput struct {
 
 	// Details about the listed vulnerability.

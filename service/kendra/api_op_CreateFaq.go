@@ -89,6 +89,10 @@ type CreateFaqInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFaqInput) operationName() string {
+	return "CreateFaq"
+}
+
 type CreateFaqOutput struct {
 
 	// The identifier of the FAQ.

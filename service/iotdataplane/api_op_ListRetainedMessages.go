@@ -52,6 +52,10 @@ type ListRetainedMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRetainedMessagesInput) operationName() string {
+	return "ListRetainedMessages"
+}
+
 type ListRetainedMessagesOutput struct {
 
 	// The token for the next set of results, or null if there are no additional

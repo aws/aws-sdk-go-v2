@@ -63,6 +63,10 @@ type CreateRotationOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRotationOverrideInput) operationName() string {
+	return "CreateRotationOverride"
+}
+
 type CreateRotationOverrideOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created rotation override.

@@ -42,6 +42,10 @@ type FlushApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FlushApiCacheInput) operationName() string {
+	return "FlushApiCache"
+}
+
 // Represents the output of a FlushApiCache operation.
 type FlushApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.

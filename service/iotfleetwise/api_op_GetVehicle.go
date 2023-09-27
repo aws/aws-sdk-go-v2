@@ -42,6 +42,10 @@ type GetVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVehicleInput) operationName() string {
+	return "GetVehicle"
+}
+
 type GetVehicleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the vehicle to retrieve information about.

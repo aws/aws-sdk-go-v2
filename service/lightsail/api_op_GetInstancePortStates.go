@@ -44,6 +44,10 @@ type GetInstancePortStatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstancePortStatesInput) operationName() string {
+	return "GetInstancePortStates"
+}
+
 type GetInstancePortStatesOutput struct {
 
 	// An array of objects that describe the firewall port states for the specified

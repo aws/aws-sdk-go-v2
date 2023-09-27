@@ -58,6 +58,10 @@ type AttachUserPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachUserPolicyInput) operationName() string {
+	return "AttachUserPolicy"
+}
+
 type AttachUserPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

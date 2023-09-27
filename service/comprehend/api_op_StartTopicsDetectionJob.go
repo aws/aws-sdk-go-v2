@@ -88,6 +88,10 @@ type StartTopicsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTopicsDetectionJobInput) operationName() string {
+	return "StartTopicsDetectionJob"
+}
+
 type StartTopicsDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topics detection job. It is a unique,

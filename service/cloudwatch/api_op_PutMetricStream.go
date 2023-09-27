@@ -132,6 +132,10 @@ type PutMetricStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMetricStreamInput) operationName() string {
+	return "PutMetricStream"
+}
+
 type PutMetricStreamOutput struct {
 
 	// The ARN of the metric stream.

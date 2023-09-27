@@ -86,6 +86,10 @@ type PutAccessControlRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccessControlRuleInput) operationName() string {
+	return "PutAccessControlRule"
+}
+
 type PutAccessControlRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

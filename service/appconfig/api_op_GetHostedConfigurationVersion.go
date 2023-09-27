@@ -51,6 +51,10 @@ type GetHostedConfigurationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostedConfigurationVersionInput) operationName() string {
+	return "GetHostedConfigurationVersion"
+}
+
 type GetHostedConfigurationVersionOutput struct {
 
 	// The application ID.

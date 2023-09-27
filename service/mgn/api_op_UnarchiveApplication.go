@@ -45,6 +45,10 @@ type UnarchiveApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnarchiveApplicationInput) operationName() string {
+	return "UnarchiveApplication"
+}
+
 type UnarchiveApplicationOutput struct {
 
 	// Application aggregated status.

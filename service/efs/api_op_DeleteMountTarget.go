@@ -58,6 +58,10 @@ type DeleteMountTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMountTargetInput) operationName() string {
+	return "DeleteMountTarget"
+}
+
 type DeleteMountTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

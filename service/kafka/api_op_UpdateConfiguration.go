@@ -53,6 +53,10 @@ type UpdateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationInput) operationName() string {
+	return "UpdateConfiguration"
+}
+
 type UpdateConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration.

@@ -48,6 +48,10 @@ type RejectTransitGatewayPeeringAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectTransitGatewayPeeringAttachmentInput) operationName() string {
+	return "RejectTransitGatewayPeeringAttachment"
+}
+
 type RejectTransitGatewayPeeringAttachmentOutput struct {
 
 	// The transit gateway peering attachment.

@@ -57,6 +57,10 @@ type DeleteLaunchProfileMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLaunchProfileMemberInput) operationName() string {
+	return "DeleteLaunchProfileMember"
+}
+
 type DeleteLaunchProfileMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

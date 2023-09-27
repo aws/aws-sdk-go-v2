@@ -38,6 +38,10 @@ type GetDistributionBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDistributionBundlesInput) operationName() string {
+	return "GetDistributionBundles"
+}
+
 type GetDistributionBundlesOutput struct {
 
 	// An object that describes a distribution bundle.

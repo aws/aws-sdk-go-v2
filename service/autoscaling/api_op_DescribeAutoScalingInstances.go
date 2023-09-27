@@ -50,6 +50,10 @@ type DescribeAutoScalingInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoScalingInstancesInput) operationName() string {
+	return "DescribeAutoScalingInstances"
+}
+
 type DescribeAutoScalingInstancesOutput struct {
 
 	// The instances.

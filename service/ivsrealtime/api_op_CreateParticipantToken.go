@@ -63,6 +63,10 @@ type CreateParticipantTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateParticipantTokenInput) operationName() string {
+	return "CreateParticipantToken"
+}
+
 type CreateParticipantTokenOutput struct {
 
 	// The participant token that was created.

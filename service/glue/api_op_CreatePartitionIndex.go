@@ -56,6 +56,10 @@ type CreatePartitionIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePartitionIndexInput) operationName() string {
+	return "CreatePartitionIndex"
+}
+
 type CreatePartitionIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

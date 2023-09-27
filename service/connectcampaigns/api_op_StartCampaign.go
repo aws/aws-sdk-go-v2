@@ -42,6 +42,10 @@ type StartCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCampaignInput) operationName() string {
+	return "StartCampaign"
+}
+
 type StartCampaignOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

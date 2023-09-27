@@ -42,6 +42,10 @@ type GetEnrollmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnrollmentStatusInput) operationName() string {
+	return "GetEnrollmentStatus"
+}
+
 type GetEnrollmentStatusOutput struct {
 
 	// The Unix epoch timestamp, in seconds, of when the account enrollment status was

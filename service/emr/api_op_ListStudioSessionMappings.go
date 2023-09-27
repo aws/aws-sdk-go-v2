@@ -49,6 +49,10 @@ type ListStudioSessionMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStudioSessionMappingsInput) operationName() string {
+	return "ListStudioSessionMappings"
+}
+
 type ListStudioSessionMappingsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.

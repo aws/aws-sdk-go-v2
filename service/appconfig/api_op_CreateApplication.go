@@ -53,6 +53,10 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationInput) operationName() string {
+	return "CreateApplication"
+}
+
 type CreateApplicationOutput struct {
 
 	// The description of the application.

@@ -86,6 +86,10 @@ type DeleteBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketReplicationInput) operationName() string {
+	return "DeleteBucketReplication"
+}
+
 type DeleteBucketReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -66,6 +66,10 @@ type StartImportFileTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImportFileTaskInput) operationName() string {
+	return "StartImportFileTask"
+}
+
 type StartImportFileTaskOutput struct {
 
 	// The ID for a specific import task. The ID is unique within an AWS account.

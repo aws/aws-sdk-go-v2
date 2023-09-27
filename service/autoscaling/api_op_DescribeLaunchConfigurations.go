@@ -49,6 +49,10 @@ type DescribeLaunchConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLaunchConfigurationsInput) operationName() string {
+	return "DescribeLaunchConfigurations"
+}
+
 type DescribeLaunchConfigurationsOutput struct {
 
 	// The launch configurations.

@@ -58,6 +58,10 @@ type SearchDatabasesByLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchDatabasesByLFTagsInput) operationName() string {
+	return "SearchDatabasesByLFTags"
+}
+
 type SearchDatabasesByLFTagsOutput struct {
 
 	// A list of databases that meet the LF-tag conditions.

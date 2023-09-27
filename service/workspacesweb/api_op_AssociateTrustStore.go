@@ -46,6 +46,10 @@ type AssociateTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTrustStoreInput) operationName() string {
+	return "AssociateTrustStore"
+}
+
 type AssociateTrustStoreOutput struct {
 
 	// The ARN of the web portal.

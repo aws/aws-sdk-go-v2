@@ -45,6 +45,10 @@ type DescribeCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCacheInput) operationName() string {
+	return "DescribeCache"
+}
+
 type DescribeCacheOutput struct {
 
 	// The amount of cache in bytes allocated to a gateway.

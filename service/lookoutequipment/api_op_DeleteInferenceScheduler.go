@@ -42,6 +42,10 @@ type DeleteInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInferenceSchedulerInput) operationName() string {
+	return "DeleteInferenceScheduler"
+}
+
 type DeleteInferenceSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

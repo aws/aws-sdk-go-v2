@@ -62,6 +62,10 @@ type GetCredentialsForIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCredentialsForIdentityInput) operationName() string {
+	return "GetCredentialsForIdentity"
+}
+
 // Returned in response to a successful GetCredentialsForIdentity operation.
 type GetCredentialsForIdentityOutput struct {
 

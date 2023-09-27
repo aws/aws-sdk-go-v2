@@ -52,6 +52,10 @@ type DeleteBGPPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBGPPeerInput) operationName() string {
+	return "DeleteBGPPeer"
+}
+
 type DeleteBGPPeerOutput struct {
 
 	// The virtual interface.

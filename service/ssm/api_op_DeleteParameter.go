@@ -42,6 +42,10 @@ type DeleteParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteParameterInput) operationName() string {
+	return "DeleteParameter"
+}
+
 type DeleteParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

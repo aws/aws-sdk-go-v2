@@ -70,6 +70,10 @@ type UpdateFlowEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowEntitlementInput) operationName() string {
+	return "UpdateFlowEntitlement"
+}
+
 type UpdateFlowEntitlementOutput struct {
 
 	// The new configuration of the entitlement that you updated.

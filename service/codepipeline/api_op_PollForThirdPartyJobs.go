@@ -50,6 +50,10 @@ type PollForThirdPartyJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PollForThirdPartyJobsInput) operationName() string {
+	return "PollForThirdPartyJobs"
+}
+
 // Represents the output of a PollForThirdPartyJobs action.
 type PollForThirdPartyJobsOutput struct {
 

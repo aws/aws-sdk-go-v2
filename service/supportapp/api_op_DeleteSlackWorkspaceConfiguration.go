@@ -43,6 +43,10 @@ type DeleteSlackWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSlackWorkspaceConfigurationInput) operationName() string {
+	return "DeleteSlackWorkspaceConfiguration"
+}
+
 type DeleteSlackWorkspaceConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

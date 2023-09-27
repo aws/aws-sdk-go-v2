@@ -43,6 +43,10 @@ type ReadPresetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReadPresetInput) operationName() string {
+	return "ReadPreset"
+}
+
 // The ReadPresetResponse structure.
 type ReadPresetOutput struct {
 

@@ -53,6 +53,10 @@ type ValidateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateTemplateInput) operationName() string {
+	return "ValidateTemplate"
+}
+
 // The output for ValidateTemplate action.
 type ValidateTemplateOutput struct {
 

@@ -42,6 +42,10 @@ type DeleteKxEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKxEnvironmentInput) operationName() string {
+	return "DeleteKxEnvironment"
+}
+
 type DeleteKxEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

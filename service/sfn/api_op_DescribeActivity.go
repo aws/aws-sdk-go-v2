@@ -43,6 +43,10 @@ type DescribeActivityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActivityInput) operationName() string {
+	return "DescribeActivity"
+}
+
 type DescribeActivityOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the activity.

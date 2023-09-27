@@ -25,6 +25,7 @@
         "api_op_DescribeTrustedAdvisorChecks.go",
         "api_op_RefreshTrustedAdvisorCheck.go",
         "api_op_ResolveCase.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -52,6 +52,10 @@ type DisassociateRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateRouteTableInput) operationName() string {
+	return "DisassociateRouteTable"
+}
+
 type DisassociateRouteTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

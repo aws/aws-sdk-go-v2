@@ -61,6 +61,10 @@ type UpdateKeyDescriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKeyDescriptionInput) operationName() string {
+	return "UpdateKeyDescription"
+}
+
 type UpdateKeyDescriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

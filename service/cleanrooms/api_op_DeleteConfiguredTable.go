@@ -41,6 +41,10 @@ type DeleteConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfiguredTableInput) operationName() string {
+	return "DeleteConfiguredTable"
+}
+
 // The empty output for a successful deletion.
 type DeleteConfiguredTableOutput struct {
 	// Metadata pertaining to the operation's result.

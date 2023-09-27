@@ -88,6 +88,10 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectorInput) operationName() string {
+	return "CreateConnector"
+}
+
 type CreateConnectorOutput struct {
 
 	// The unique identifier for the connector, returned after the API call succeeds.

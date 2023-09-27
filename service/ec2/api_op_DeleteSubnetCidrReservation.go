@@ -48,6 +48,10 @@ type DeleteSubnetCidrReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSubnetCidrReservationInput) operationName() string {
+	return "DeleteSubnetCidrReservation"
+}
+
 type DeleteSubnetCidrReservationOutput struct {
 
 	// Information about the deleted subnet CIDR reservation.

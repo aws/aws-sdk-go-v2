@@ -45,6 +45,10 @@ type ResumeReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeReplicationInput) operationName() string {
+	return "ResumeReplication"
+}
+
 type ResumeReplicationOutput struct {
 
 	// Source server application ID.

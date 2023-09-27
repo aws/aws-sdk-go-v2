@@ -51,6 +51,10 @@ type GetVariablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVariablesInput) operationName() string {
+	return "GetVariables"
+}
+
 type GetVariablesOutput struct {
 
 	// The next page token to be used in subsequent requests.

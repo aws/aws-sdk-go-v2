@@ -44,6 +44,10 @@ type DescribeMaintenanceStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMaintenanceStartTimeInput) operationName() string {
+	return "DescribeMaintenanceStartTime"
+}
+
 // A JSON object containing the following fields:
 //   - DescribeMaintenanceStartTimeOutput$DayOfMonth
 //   - DescribeMaintenanceStartTimeOutput$DayOfWeek

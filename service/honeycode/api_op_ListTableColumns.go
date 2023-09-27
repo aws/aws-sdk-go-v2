@@ -57,6 +57,10 @@ type ListTableColumnsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTableColumnsInput) operationName() string {
+	return "ListTableColumns"
+}
+
 type ListTableColumnsOutput struct {
 
 	// The list of columns in the table.

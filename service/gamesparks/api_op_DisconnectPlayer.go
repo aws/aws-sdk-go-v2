@@ -52,6 +52,10 @@ type DisconnectPlayerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisconnectPlayerInput) operationName() string {
+	return "DisconnectPlayer"
+}
+
 type DisconnectPlayerOutput struct {
 
 	// The list of the connection ids that could not be disconnected.

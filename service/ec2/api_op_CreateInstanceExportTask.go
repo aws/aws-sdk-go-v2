@@ -63,6 +63,10 @@ type CreateInstanceExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceExportTaskInput) operationName() string {
+	return "CreateInstanceExportTask"
+}
+
 type CreateInstanceExportTaskOutput struct {
 
 	// Information about the export instance task.

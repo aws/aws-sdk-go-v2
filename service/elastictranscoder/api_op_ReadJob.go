@@ -47,6 +47,10 @@ type ReadJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReadJobInput) operationName() string {
+	return "ReadJob"
+}
+
 // The ReadJobResponse structure.
 type ReadJobOutput struct {
 

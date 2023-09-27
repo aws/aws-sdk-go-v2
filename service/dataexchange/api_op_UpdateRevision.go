@@ -55,6 +55,10 @@ type UpdateRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRevisionInput) operationName() string {
+	return "UpdateRevision"
+}
+
 type UpdateRevisionOutput struct {
 
 	// The ARN for the revision.

@@ -51,6 +51,10 @@ type DescribeConfigRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigRulesInput) operationName() string {
+	return "DescribeConfigRules"
+}
+
 type DescribeConfigRulesOutput struct {
 
 	// The details about your Config rules.

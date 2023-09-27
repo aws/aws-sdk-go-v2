@@ -46,6 +46,10 @@ type GetModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelInput) operationName() string {
+	return "GetModel"
+}
+
 type GetModelOutput struct {
 
 	// The content-type for the model, for example, "application/json".

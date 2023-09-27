@@ -59,6 +59,10 @@ type CreateUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserImportJobInput) operationName() string {
+	return "CreateUserImportJob"
+}
+
 // Represents the response from the server to the request to create the user
 // import job.
 type CreateUserImportJobOutput struct {

@@ -44,6 +44,10 @@ type DeleteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMembersInput) operationName() string {
+	return "DeleteMembers"
+}
+
 type DeleteMembersOutput struct {
 
 	// The list of Amazon Web Services accounts that were not deleted. For each

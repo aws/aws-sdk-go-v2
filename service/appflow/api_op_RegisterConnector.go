@@ -66,6 +66,10 @@ type RegisterConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterConnectorInput) operationName() string {
+	return "RegisterConnector"
+}
+
 type RegisterConnectorOutput struct {
 
 	// The ARN of the connector being registered.

@@ -58,6 +58,10 @@ type AddPartnerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddPartnerInput) operationName() string {
+	return "AddPartner"
+}
+
 type AddPartnerOutput struct {
 
 	// The name of the database that receives data from the partner.

@@ -51,6 +51,10 @@ type ListJournalS3ExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJournalS3ExportsInput) operationName() string {
+	return "ListJournalS3Exports"
+}
+
 type ListJournalS3ExportsOutput struct {
 
 	// The journal export jobs for all ledgers that are associated with the current

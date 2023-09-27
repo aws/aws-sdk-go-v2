@@ -72,6 +72,10 @@ type StartIncidentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartIncidentInput) operationName() string {
+	return "StartIncident"
+}
+
 type StartIncidentOutput struct {
 
 	// The ARN of the newly created incident record.

@@ -53,6 +53,10 @@ type ListKxChangesetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKxChangesetsInput) operationName() string {
+	return "ListKxChangesets"
+}
+
 type ListKxChangesetsOutput struct {
 
 	// A list of changesets for a database.

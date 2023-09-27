@@ -61,6 +61,10 @@ type UpdateFeatureGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFeatureGroupInput) operationName() string {
+	return "UpdateFeatureGroup"
+}
+
 type UpdateFeatureGroupOutput struct {
 
 	// The Amazon Resource Number (ARN) of the feature group that you're updating.

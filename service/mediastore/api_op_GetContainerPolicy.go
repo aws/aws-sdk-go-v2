@@ -43,6 +43,10 @@ type GetContainerPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerPolicyInput) operationName() string {
+	return "GetContainerPolicy"
+}
+
 type GetContainerPolicyOutput struct {
 
 	// The contents of the access policy.

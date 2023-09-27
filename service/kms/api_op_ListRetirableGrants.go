@@ -78,6 +78,10 @@ type ListRetirableGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRetirableGrantsInput) operationName() string {
+	return "ListRetirableGrants"
+}
+
 type ListRetirableGrantsOutput struct {
 
 	// A list of grants.

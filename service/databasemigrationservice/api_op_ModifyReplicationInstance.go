@@ -108,6 +108,10 @@ type ModifyReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReplicationInstanceInput) operationName() string {
+	return "ModifyReplicationInstance"
+}
+
 type ModifyReplicationInstanceOutput struct {
 
 	// The modified replication instance.

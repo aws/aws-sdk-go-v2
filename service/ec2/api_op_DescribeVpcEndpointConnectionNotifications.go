@@ -64,6 +64,10 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointConnectionNotificationsInput) operationName() string {
+	return "DescribeVpcEndpointConnectionNotifications"
+}
+
 type DescribeVpcEndpointConnectionNotificationsOutput struct {
 
 	// The notifications.

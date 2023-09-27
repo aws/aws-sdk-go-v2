@@ -110,6 +110,10 @@ type CreateLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoadBalancerInput) operationName() string {
+	return "CreateLoadBalancer"
+}
+
 type CreateLoadBalancerOutput struct {
 
 	// Information about the load balancer.

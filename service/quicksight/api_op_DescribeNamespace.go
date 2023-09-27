@@ -48,6 +48,10 @@ type DescribeNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNamespaceInput) operationName() string {
+	return "DescribeNamespace"
+}
+
 type DescribeNamespaceOutput struct {
 
 	// The information about the namespace that you're describing. The response

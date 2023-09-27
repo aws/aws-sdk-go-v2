@@ -56,6 +56,10 @@ type ListOrganizationInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationInsightsInput) operationName() string {
+	return "ListOrganizationInsights"
+}
+
 type ListOrganizationInsightsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

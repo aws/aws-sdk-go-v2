@@ -63,6 +63,10 @@ type DescribeServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServicesInput) operationName() string {
+	return "DescribeServices"
+}
+
 // The list of Amazon Web Services services returned by the DescribeServices
 // operation.
 type DescribeServicesOutput struct {

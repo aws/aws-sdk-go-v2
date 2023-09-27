@@ -54,6 +54,10 @@ type DeleteBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBotAliasInput) operationName() string {
+	return "DeleteBotAlias"
+}
+
 type DeleteBotAliasOutput struct {
 
 	// The unique identifier of the bot alias to delete.

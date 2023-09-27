@@ -96,6 +96,10 @@ type PutBucketVersioningInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketVersioningInput) operationName() string {
+	return "PutBucketVersioning"
+}
+
 type PutBucketVersioningOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

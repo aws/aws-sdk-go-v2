@@ -42,6 +42,10 @@ type JsonEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*JsonEnumsInput) operationName() string {
+	return "JsonEnums"
+}
+
 type JsonEnumsOutput struct {
 	FooEnum1 types.FooEnum
 

@@ -59,6 +59,10 @@ type StopContactRecordingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopContactRecordingInput) operationName() string {
+	return "StopContactRecording"
+}
+
 type StopContactRecordingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

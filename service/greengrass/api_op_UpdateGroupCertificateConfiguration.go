@@ -44,6 +44,10 @@ type UpdateGroupCertificateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGroupCertificateConfigurationInput) operationName() string {
+	return "UpdateGroupCertificateConfiguration"
+}
+
 type UpdateGroupCertificateConfigurationOutput struct {
 
 	// The amount of time remaining before the certificate authority expires, in

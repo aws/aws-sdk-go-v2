@@ -62,6 +62,10 @@ type DescribeRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecordInput) operationName() string {
+	return "DescribeRecord"
+}
+
 type DescribeRecordOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

@@ -41,6 +41,10 @@ type DeleteReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReportInput) operationName() string {
+	return "DeleteReport"
+}
+
 type DeleteReportOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

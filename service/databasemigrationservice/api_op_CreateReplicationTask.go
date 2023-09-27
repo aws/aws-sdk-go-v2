@@ -125,6 +125,10 @@ type CreateReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationTaskInput) operationName() string {
+	return "CreateReplicationTask"
+}
+
 type CreateReplicationTaskOutput struct {
 
 	// The replication task that was created.

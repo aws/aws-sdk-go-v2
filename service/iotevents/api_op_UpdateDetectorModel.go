@@ -61,6 +61,10 @@ type UpdateDetectorModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDetectorModelInput) operationName() string {
+	return "UpdateDetectorModel"
+}
+
 type UpdateDetectorModelOutput struct {
 
 	// Information about how the detector model is configured.

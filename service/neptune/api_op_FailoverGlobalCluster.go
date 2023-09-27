@@ -61,6 +61,10 @@ type FailoverGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverGlobalClusterInput) operationName() string {
+	return "FailoverGlobalCluster"
+}
+
 type FailoverGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is

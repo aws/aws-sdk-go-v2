@@ -65,6 +65,10 @@ type ListKeyPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeyPoliciesInput) operationName() string {
+	return "ListKeyPolicies"
+}
+
 type ListKeyPoliciesOutput struct {
 
 	// When Truncated is true, this element is present and contains the value to use

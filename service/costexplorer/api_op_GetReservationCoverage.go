@@ -141,6 +141,10 @@ type GetReservationCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReservationCoverageInput) operationName() string {
+	return "GetReservationCoverage"
+}
+
 type GetReservationCoverageOutput struct {
 
 	// The amount of time that your reservations covered.

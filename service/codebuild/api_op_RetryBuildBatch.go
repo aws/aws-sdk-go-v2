@@ -51,6 +51,10 @@ type RetryBuildBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetryBuildBatchInput) operationName() string {
+	return "RetryBuildBatch"
+}
+
 type RetryBuildBatchOutput struct {
 
 	// Contains information about a batch build.

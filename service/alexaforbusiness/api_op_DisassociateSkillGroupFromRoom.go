@@ -45,6 +45,10 @@ type DisassociateSkillGroupFromRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateSkillGroupFromRoomInput) operationName() string {
+	return "DisassociateSkillGroupFromRoom"
+}
+
 type DisassociateSkillGroupFromRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

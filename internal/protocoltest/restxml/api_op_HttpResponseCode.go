@@ -28,6 +28,10 @@ type HttpResponseCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpResponseCodeInput) operationName() string {
+	return "HttpResponseCode"
+}
+
 type HttpResponseCodeOutput struct {
 	Status *int32
 

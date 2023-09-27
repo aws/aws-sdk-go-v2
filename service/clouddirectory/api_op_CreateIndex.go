@@ -60,6 +60,10 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIndexInput) operationName() string {
+	return "CreateIndex"
+}
+
 type CreateIndexOutput struct {
 
 	// The ObjectIdentifier of the index created by this operation.

@@ -54,6 +54,10 @@ type CreateLongTermPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLongTermPricingInput) operationName() string {
+	return "CreateLongTermPricing"
+}
+
 type CreateLongTermPricingOutput struct {
 
 	// The ID of the long-term pricing type for the device.

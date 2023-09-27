@@ -49,6 +49,10 @@ type ListResourceDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceDefinitionVersionsInput) operationName() string {
+	return "ListResourceDefinitionVersions"
+}
+
 type ListResourceDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional

@@ -115,6 +115,10 @@ type PutAccountSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountSettingInput) operationName() string {
+	return "PutAccountSetting"
+}
+
 type PutAccountSettingOutput struct {
 
 	// The current account setting for a resource.

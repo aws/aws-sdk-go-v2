@@ -80,6 +80,10 @@ type UpdateIdentityPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIdentityPoolInput) operationName() string {
+	return "UpdateIdentityPool"
+}
+
 // An object representing an Amazon Cognito identity pool.
 type UpdateIdentityPoolOutput struct {
 

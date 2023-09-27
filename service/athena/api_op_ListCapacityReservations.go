@@ -44,6 +44,10 @@ type ListCapacityReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCapacityReservationsInput) operationName() string {
+	return "ListCapacityReservations"
+}
+
 type ListCapacityReservationsOutput struct {
 
 	// The capacity reservations for the current account.

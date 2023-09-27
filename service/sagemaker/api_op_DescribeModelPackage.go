@@ -48,6 +48,10 @@ type DescribeModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelPackageInput) operationName() string {
+	return "DescribeModelPackage"
+}
+
 type DescribeModelPackageOutput struct {
 
 	// A timestamp specifying when the model package was created.

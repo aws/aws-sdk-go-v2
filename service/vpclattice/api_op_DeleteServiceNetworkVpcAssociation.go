@@ -43,6 +43,10 @@ type DeleteServiceNetworkVpcAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceNetworkVpcAssociationInput) operationName() string {
+	return "DeleteServiceNetworkVpcAssociation"
+}
+
 type DeleteServiceNetworkVpcAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.

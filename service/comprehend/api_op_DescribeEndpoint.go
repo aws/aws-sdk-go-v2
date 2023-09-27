@@ -45,6 +45,10 @@ type DescribeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointInput) operationName() string {
+	return "DescribeEndpoint"
+}
+
 type DescribeEndpointOutput struct {
 
 	// Describes information associated with the specific endpoint.

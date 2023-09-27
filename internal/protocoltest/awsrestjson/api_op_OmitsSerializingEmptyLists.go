@@ -46,6 +46,10 @@ type OmitsSerializingEmptyListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*OmitsSerializingEmptyListsInput) operationName() string {
+	return "OmitsSerializingEmptyLists"
+}
+
 type OmitsSerializingEmptyListsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

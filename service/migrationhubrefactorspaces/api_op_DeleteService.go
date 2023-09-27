@@ -55,6 +55,10 @@ type DeleteServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceInput) operationName() string {
+	return "DeleteService"
+}
+
 type DeleteServiceOutput struct {
 
 	// The ID of the application that the service is in.

@@ -56,6 +56,10 @@ type UpdateUserDefinedFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserDefinedFunctionInput) operationName() string {
+	return "UpdateUserDefinedFunction"
+}
+
 type UpdateUserDefinedFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

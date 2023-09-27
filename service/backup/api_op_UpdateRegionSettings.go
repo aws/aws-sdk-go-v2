@@ -51,6 +51,10 @@ type UpdateRegionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRegionSettingsInput) operationName() string {
+	return "UpdateRegionSettings"
+}
+
 type UpdateRegionSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

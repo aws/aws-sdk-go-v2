@@ -40,6 +40,10 @@ type GetRDFGraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRDFGraphSummaryInput) operationName() string {
+	return "GetRDFGraphSummary"
+}
+
 type GetRDFGraphSummaryOutput struct {
 
 	// Payload for an RDF graph summary response

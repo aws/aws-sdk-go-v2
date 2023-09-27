@@ -47,6 +47,10 @@ type GetAccessKeyLastUsedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessKeyLastUsedInput) operationName() string {
+	return "GetAccessKeyLastUsed"
+}
+
 // Contains the response to a successful GetAccessKeyLastUsed request. It is also
 // returned as a member of the AccessKeyMetaData structure returned by the
 // ListAccessKeys action.

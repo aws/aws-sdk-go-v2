@@ -42,6 +42,10 @@ type DeactivateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateContactChannelInput) operationName() string {
+	return "DeactivateContactChannel"
+}
+
 type DeactivateContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

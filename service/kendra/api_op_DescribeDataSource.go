@@ -48,6 +48,10 @@ type DescribeDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSourceInput) operationName() string {
+	return "DescribeDataSource"
+}
+
 type DescribeDataSourceOutput struct {
 
 	// Configuration details for the data source connector. This shows how the data

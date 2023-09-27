@@ -40,6 +40,10 @@ type GetSampleDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSampleDataInput) operationName() string {
+	return "GetSampleData"
+}
+
 type GetSampleDataOutput struct {
 
 	// A list of header labels for the records.

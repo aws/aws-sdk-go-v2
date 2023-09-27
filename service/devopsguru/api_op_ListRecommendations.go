@@ -53,6 +53,10 @@ type ListRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecommendationsInput) operationName() string {
+	return "ListRecommendations"
+}
+
 type ListRecommendationsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

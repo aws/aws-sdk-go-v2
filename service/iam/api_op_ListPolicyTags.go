@@ -63,6 +63,10 @@ type ListPolicyTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPolicyTagsInput) operationName() string {
+	return "ListPolicyTags"
+}
+
 type ListPolicyTagsOutput struct {
 
 	// The list of tags that are currently attached to the IAM customer managed

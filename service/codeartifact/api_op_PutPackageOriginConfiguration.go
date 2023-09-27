@@ -94,6 +94,10 @@ type PutPackageOriginConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPackageOriginConfigurationInput) operationName() string {
+	return "PutPackageOriginConfiguration"
+}
+
 type PutPackageOriginConfigurationOutput struct {
 
 	// A PackageOriginConfiguration (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)

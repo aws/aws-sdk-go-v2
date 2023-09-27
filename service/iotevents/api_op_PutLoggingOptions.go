@@ -46,6 +46,10 @@ type PutLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLoggingOptionsInput) operationName() string {
+	return "PutLoggingOptions"
+}
+
 type PutLoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

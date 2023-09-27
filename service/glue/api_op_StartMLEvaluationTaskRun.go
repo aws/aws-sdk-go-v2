@@ -45,6 +45,10 @@ type StartMLEvaluationTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMLEvaluationTaskRunInput) operationName() string {
+	return "StartMLEvaluationTaskRun"
+}
+
 type StartMLEvaluationTaskRunOutput struct {
 
 	// The unique identifier associated with this run.

@@ -47,6 +47,10 @@ type UnshareApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnshareApplicationInput) operationName() string {
+	return "UnshareApplication"
+}
+
 type UnshareApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

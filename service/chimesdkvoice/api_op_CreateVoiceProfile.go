@@ -48,6 +48,10 @@ type CreateVoiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVoiceProfileInput) operationName() string {
+	return "CreateVoiceProfile"
+}
+
 type CreateVoiceProfileOutput struct {
 
 	// The requested voice profile.

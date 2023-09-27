@@ -55,6 +55,10 @@ type EnableAddressTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableAddressTransferInput) operationName() string {
+	return "EnableAddressTransfer"
+}
+
 type EnableAddressTransferOutput struct {
 
 	// An Elastic IP address transfer.

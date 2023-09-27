@@ -52,6 +52,10 @@ type DescribeDomainEndpointOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainEndpointOptionsInput) operationName() string {
+	return "DescribeDomainEndpointOptions"
+}
+
 // The result of a DescribeDomainEndpointOptions request. Contains the status and
 // configuration of a search domain's endpoint options.
 type DescribeDomainEndpointOptionsOutput struct {

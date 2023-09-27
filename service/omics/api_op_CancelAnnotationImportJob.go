@@ -41,6 +41,10 @@ type CancelAnnotationImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelAnnotationImportJobInput) operationName() string {
+	return "CancelAnnotationImportJob"
+}
+
 type CancelAnnotationImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

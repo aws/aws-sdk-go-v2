@@ -42,6 +42,10 @@ type DeleteInputSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInputSecurityGroupInput) operationName() string {
+	return "DeleteInputSecurityGroup"
+}
+
 // Placeholder documentation for DeleteInputSecurityGroupResponse
 type DeleteInputSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.

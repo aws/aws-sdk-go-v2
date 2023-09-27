@@ -85,6 +85,10 @@ type ModifyListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyListenerInput) operationName() string {
+	return "ModifyListener"
+}
+
 type ModifyListenerOutput struct {
 
 	// Information about the modified listener.

@@ -41,6 +41,10 @@ type DeleteModelQualityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteModelQualityJobDefinitionInput) operationName() string {
+	return "DeleteModelQualityJobDefinition"
+}
+
 type DeleteModelQualityJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

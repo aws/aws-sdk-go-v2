@@ -80,6 +80,10 @@ type CreateVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVocabularyInput) operationName() string {
+	return "CreateVocabulary"
+}
+
 type CreateVocabularyOutput struct {
 
 	// The current state of the custom vocabulary.

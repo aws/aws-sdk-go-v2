@@ -66,6 +66,10 @@ type ModifyVpcPeeringConnectionOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcPeeringConnectionOptionsInput) operationName() string {
+	return "ModifyVpcPeeringConnectionOptions"
+}
+
 type ModifyVpcPeeringConnectionOptionsOutput struct {
 
 	// Information about the VPC peering connection options for the accepter VPC.

@@ -121,6 +121,10 @@ type DescribeSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSecurityGroupsInput) operationName() string {
+	return "DescribeSecurityGroups"
+}
+
 type DescribeSecurityGroupsOutput struct {
 
 	// The token to include in another request to get the next page of items. This

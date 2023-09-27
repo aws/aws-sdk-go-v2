@@ -54,6 +54,10 @@ type UpdateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeploymentInput) operationName() string {
+	return "UpdateDeployment"
+}
+
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
 // over the Internet.

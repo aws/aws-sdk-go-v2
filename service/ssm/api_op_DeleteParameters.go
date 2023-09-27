@@ -43,6 +43,10 @@ type DeleteParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteParametersInput) operationName() string {
+	return "DeleteParameters"
+}
+
 type DeleteParametersOutput struct {
 
 	// The names of the deleted parameters.

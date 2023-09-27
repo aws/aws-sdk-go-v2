@@ -42,6 +42,10 @@ type ValidateAssessmentReportIntegrityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateAssessmentReportIntegrityInput) operationName() string {
+	return "ValidateAssessmentReportIntegrity"
+}
+
 type ValidateAssessmentReportIntegrityOutput struct {
 
 	// The signature algorithm that's used to code sign the assessment report file.

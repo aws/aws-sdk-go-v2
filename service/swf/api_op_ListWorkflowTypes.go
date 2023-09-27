@@ -81,6 +81,10 @@ type ListWorkflowTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkflowTypesInput) operationName() string {
+	return "ListWorkflowTypes"
+}
+
 // Contains a paginated list of information structures about workflow types.
 type ListWorkflowTypesOutput struct {
 

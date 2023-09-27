@@ -61,6 +61,10 @@ type NotifyTerminateProvisionedProductEngineWorkflowResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyTerminateProvisionedProductEngineWorkflowResultInput) operationName() string {
+	return "NotifyTerminateProvisionedProductEngineWorkflowResult"
+}
+
 type NotifyTerminateProvisionedProductEngineWorkflowResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

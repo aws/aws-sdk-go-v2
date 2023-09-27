@@ -68,6 +68,10 @@ type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecreaseNodeGroupsInGlobalReplicationGroupInput) operationName() string {
+	return "DecreaseNodeGroupsInGlobalReplicationGroup"
+}
+
 type DecreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary

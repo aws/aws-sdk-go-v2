@@ -72,6 +72,10 @@ type PutAccountDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountDetailsInput) operationName() string {
+	return "PutAccountDetails"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountDetailsOutput struct {

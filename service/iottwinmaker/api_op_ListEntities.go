@@ -53,6 +53,10 @@ type ListEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntitiesInput) operationName() string {
+	return "ListEntities"
+}
+
 type ListEntitiesOutput struct {
 
 	// A list of objects that contain information about the entities.

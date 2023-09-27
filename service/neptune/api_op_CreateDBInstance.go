@@ -244,6 +244,10 @@ type CreateDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBInstanceInput) operationName() string {
+	return "CreateDBInstance"
+}
+
 type CreateDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used

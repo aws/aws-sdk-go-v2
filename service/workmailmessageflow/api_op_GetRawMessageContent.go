@@ -42,6 +42,10 @@ type GetRawMessageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRawMessageContentInput) operationName() string {
+	return "GetRawMessageContent"
+}
+
 type GetRawMessageContentOutput struct {
 
 	// The raw content of the email message, in MIME format.

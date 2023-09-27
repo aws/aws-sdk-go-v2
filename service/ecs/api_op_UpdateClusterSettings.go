@@ -55,6 +55,10 @@ type UpdateClusterSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterSettingsInput) operationName() string {
+	return "UpdateClusterSettings"
+}
+
 type UpdateClusterSettingsOutput struct {
 
 	// Details about the cluster

@@ -54,6 +54,10 @@ type CreateHumanTaskUiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHumanTaskUiInput) operationName() string {
+	return "CreateHumanTaskUi"
+}
+
 type CreateHumanTaskUiOutput struct {
 
 	// The Amazon Resource Name (ARN) of the human review workflow user interface you

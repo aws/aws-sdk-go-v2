@@ -45,6 +45,10 @@ type UpdateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSnapshotInput) operationName() string {
+	return "UpdateSnapshot"
+}
+
 type UpdateSnapshotOutput struct {
 
 	// The updated snapshot object.

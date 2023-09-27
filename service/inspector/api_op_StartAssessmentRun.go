@@ -47,6 +47,10 @@ type StartAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAssessmentRunInput) operationName() string {
+	return "StartAssessmentRun"
+}
+
 type StartAssessmentRunOutput struct {
 
 	// The ARN of the assessment run that has been started.

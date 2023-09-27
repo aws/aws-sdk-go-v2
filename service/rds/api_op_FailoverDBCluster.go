@@ -65,6 +65,10 @@ type FailoverDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverDBClusterInput) operationName() string {
+	return "FailoverDBCluster"
+}
+
 type FailoverDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

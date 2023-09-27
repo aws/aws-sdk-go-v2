@@ -71,6 +71,10 @@ type ListProcessingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProcessingJobsInput) operationName() string {
+	return "ListProcessingJobs"
+}
+
 type ListProcessingJobsOutput struct {
 
 	// An array of ProcessingJobSummary objects, each listing a processing job.

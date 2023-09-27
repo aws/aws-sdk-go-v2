@@ -72,6 +72,10 @@ type CreateDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeviceInput) operationName() string {
+	return "CreateDevice"
+}
+
 type CreateDeviceOutput struct {
 
 	// Information about the device.

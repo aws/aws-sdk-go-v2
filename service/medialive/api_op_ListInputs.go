@@ -44,6 +44,10 @@ type ListInputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInputsInput) operationName() string {
+	return "ListInputs"
+}
+
 // Placeholder documentation for ListInputsResponse
 type ListInputsOutput struct {
 

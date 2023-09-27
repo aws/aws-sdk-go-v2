@@ -48,6 +48,10 @@ type RefreshTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RefreshTokenInput) operationName() string {
+	return "RefreshToken"
+}
+
 type RefreshTokenOutput struct {
 
 	// The access token.

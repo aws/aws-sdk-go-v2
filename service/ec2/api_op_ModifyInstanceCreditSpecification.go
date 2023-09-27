@@ -56,6 +56,10 @@ type ModifyInstanceCreditSpecificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceCreditSpecificationInput) operationName() string {
+	return "ModifyInstanceCreditSpecification"
+}
+
 type ModifyInstanceCreditSpecificationOutput struct {
 
 	// Information about the instances whose credit option for CPU usage was

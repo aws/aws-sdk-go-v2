@@ -53,6 +53,10 @@ type DescribeStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStatementInput) operationName() string {
+	return "DescribeStatement"
+}
+
 type DescribeStatementOutput struct {
 
 	// The identifier of the SQL statement described. This value is a universally

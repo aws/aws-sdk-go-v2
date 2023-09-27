@@ -45,6 +45,10 @@ type ListFleetMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFleetMetricsInput) operationName() string {
+	return "ListFleetMetrics"
+}
+
 type ListFleetMetricsOutput struct {
 
 	// The list of fleet metrics objects.

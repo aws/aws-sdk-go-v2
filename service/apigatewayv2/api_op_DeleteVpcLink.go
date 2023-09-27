@@ -41,6 +41,10 @@ type DeleteVpcLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcLinkInput) operationName() string {
+	return "DeleteVpcLink"
+}
+
 type DeleteVpcLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

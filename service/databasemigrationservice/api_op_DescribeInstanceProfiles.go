@@ -56,6 +56,10 @@ type DescribeInstanceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceProfilesInput) operationName() string {
+	return "DescribeInstanceProfiles"
+}
+
 type DescribeInstanceProfilesOutput struct {
 
 	// A description of instance profiles.

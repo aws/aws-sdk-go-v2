@@ -51,6 +51,10 @@ type GetResponseHeadersPolicyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResponseHeadersPolicyConfigInput) operationName() string {
+	return "GetResponseHeadersPolicyConfig"
+}
+
 type GetResponseHeadersPolicyConfigOutput struct {
 
 	// The version identifier for the current version of the response headers policy.

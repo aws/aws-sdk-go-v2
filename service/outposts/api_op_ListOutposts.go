@@ -56,6 +56,10 @@ type ListOutpostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOutpostsInput) operationName() string {
+	return "ListOutposts"
+}
+
 type ListOutpostsOutput struct {
 
 	// The pagination token.

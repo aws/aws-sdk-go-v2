@@ -32,6 +32,7 @@
         "api_op_UpdateBudgetAction.go",
         "api_op_UpdateNotification.go",
         "api_op_UpdateSubscriber.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

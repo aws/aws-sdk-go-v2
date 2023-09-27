@@ -50,6 +50,10 @@ type ListPermissionGroupsByUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionGroupsByUserInput) operationName() string {
+	return "ListPermissionGroupsByUser"
+}
+
 type ListPermissionGroupsByUserOutput struct {
 
 	// A token that indicates where a results page should begin.

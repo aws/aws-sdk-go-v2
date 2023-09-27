@@ -60,6 +60,10 @@ type CreateOriginRequestPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOriginRequestPolicyInput) operationName() string {
+	return "CreateOriginRequestPolicy"
+}
+
 type CreateOriginRequestPolicyOutput struct {
 
 	// The current version of the origin request policy.

@@ -47,6 +47,10 @@ type ListEventActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventActionsInput) operationName() string {
+	return "ListEventActions"
+}
+
 type ListEventActionsOutput struct {
 
 	// The event action objects listed by the request.

@@ -58,6 +58,10 @@ type CreateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContactInput) operationName() string {
+	return "CreateContact"
+}
+
 type CreateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

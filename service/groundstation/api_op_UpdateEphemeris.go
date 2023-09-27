@@ -56,6 +56,10 @@ type UpdateEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEphemerisInput) operationName() string {
+	return "UpdateEphemeris"
+}
+
 type UpdateEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.

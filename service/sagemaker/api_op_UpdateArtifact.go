@@ -50,6 +50,10 @@ type UpdateArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateArtifactInput) operationName() string {
+	return "UpdateArtifact"
+}
+
 type UpdateArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.

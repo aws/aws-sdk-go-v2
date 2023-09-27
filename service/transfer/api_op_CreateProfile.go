@@ -62,6 +62,10 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfileInput) operationName() string {
+	return "CreateProfile"
+}
+
 type CreateProfileOutput struct {
 
 	// The unique identifier for the AS2 profile, returned after the API call succeeds.

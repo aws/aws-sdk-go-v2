@@ -56,6 +56,10 @@ type DeleteKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKeyPairInput) operationName() string {
+	return "DeleteKeyPair"
+}
+
 type DeleteKeyPairOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

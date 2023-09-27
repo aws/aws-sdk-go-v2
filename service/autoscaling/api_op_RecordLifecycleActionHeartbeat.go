@@ -75,6 +75,10 @@ type RecordLifecycleActionHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecordLifecycleActionHeartbeatInput) operationName() string {
+	return "RecordLifecycleActionHeartbeat"
+}
+
 type RecordLifecycleActionHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

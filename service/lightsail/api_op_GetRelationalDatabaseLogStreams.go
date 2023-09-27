@@ -42,6 +42,10 @@ type GetRelationalDatabaseLogStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseLogStreamsInput) operationName() string {
+	return "GetRelationalDatabaseLogStreams"
+}
+
 type GetRelationalDatabaseLogStreamsOutput struct {
 
 	// An object describing the result of your get relational database log streams

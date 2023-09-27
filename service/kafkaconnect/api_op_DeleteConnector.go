@@ -45,6 +45,10 @@ type DeleteConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectorInput) operationName() string {
+	return "DeleteConnector"
+}
+
 type DeleteConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector that you requested to delete.

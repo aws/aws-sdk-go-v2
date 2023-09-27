@@ -46,6 +46,10 @@ type GetReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReplicationSetInput) operationName() string {
+	return "GetReplicationSet"
+}
+
 type GetReplicationSetOutput struct {
 
 	// Details of the replication set.

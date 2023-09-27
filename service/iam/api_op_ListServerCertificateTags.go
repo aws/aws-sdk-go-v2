@@ -67,6 +67,10 @@ type ListServerCertificateTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServerCertificateTagsInput) operationName() string {
+	return "ListServerCertificateTags"
+}
+
 type ListServerCertificateTagsOutput struct {
 
 	// The list of tags that are currently attached to the IAM server certificate.

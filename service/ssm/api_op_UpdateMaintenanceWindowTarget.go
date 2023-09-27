@@ -75,6 +75,10 @@ type UpdateMaintenanceWindowTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMaintenanceWindowTargetInput) operationName() string {
+	return "UpdateMaintenanceWindowTarget"
+}
+
 type UpdateMaintenanceWindowTargetOutput struct {
 
 	// The updated description.

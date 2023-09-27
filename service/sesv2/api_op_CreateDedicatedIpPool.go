@@ -54,6 +54,10 @@ type CreateDedicatedIpPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDedicatedIpPoolInput) operationName() string {
+	return "CreateDedicatedIpPool"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CreateDedicatedIpPoolOutput struct {

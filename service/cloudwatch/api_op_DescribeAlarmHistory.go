@@ -74,6 +74,10 @@ type DescribeAlarmHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlarmHistoryInput) operationName() string {
+	return "DescribeAlarmHistory"
+}
+
 type DescribeAlarmHistoryOutput struct {
 
 	// The alarm histories, in JSON format.

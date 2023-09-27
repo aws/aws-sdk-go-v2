@@ -52,6 +52,10 @@ type UnlabelParameterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnlabelParameterVersionInput) operationName() string {
+	return "UnlabelParameterVersion"
+}
+
 type UnlabelParameterVersionOutput struct {
 
 	// The labels that aren't attached to the given parameter version.

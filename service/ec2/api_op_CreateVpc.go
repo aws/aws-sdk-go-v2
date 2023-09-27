@@ -115,6 +115,10 @@ type CreateVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcInput) operationName() string {
+	return "CreateVpc"
+}
+
 type CreateVpcOutput struct {
 
 	// Information about the VPC.

@@ -65,6 +65,10 @@ type DeleteKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKeyInput) operationName() string {
+	return "DeleteKey"
+}
+
 type DeleteKeyOutput struct {
 
 	// The KeyARN of the key that is scheduled for deletion.

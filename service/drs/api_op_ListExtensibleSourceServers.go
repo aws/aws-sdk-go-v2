@@ -51,6 +51,10 @@ type ListExtensibleSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExtensibleSourceServersInput) operationName() string {
+	return "ListExtensibleSourceServers"
+}
+
 type ListExtensibleSourceServersOutput struct {
 
 	// A list of source servers on a staging Account that are extensible.

@@ -49,6 +49,10 @@ type StopTargetedSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopTargetedSentimentDetectionJobInput) operationName() string {
+	return "StopTargetedSentimentDetectionJob"
+}
+
 type StopTargetedSentimentDetectionJobOutput struct {
 
 	// The identifier of the targeted sentiment detection job to stop.

@@ -56,6 +56,10 @@ type UpdateInstanceAccessControlAttributeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInstanceAccessControlAttributeConfigurationInput) operationName() string {
+	return "UpdateInstanceAccessControlAttributeConfiguration"
+}
+
 type UpdateInstanceAccessControlAttributeConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

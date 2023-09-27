@@ -59,6 +59,10 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationReferenceDataSourceInput) operationName() string {
+	return "DeleteApplicationReferenceDataSource"
+}
+
 type DeleteApplicationReferenceDataSourceOutput struct {
 
 	// The application Amazon Resource Name (ARN).

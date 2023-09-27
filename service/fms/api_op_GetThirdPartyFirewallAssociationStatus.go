@@ -43,6 +43,10 @@ type GetThirdPartyFirewallAssociationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetThirdPartyFirewallAssociationStatusInput) operationName() string {
+	return "GetThirdPartyFirewallAssociationStatus"
+}
+
 type GetThirdPartyFirewallAssociationStatusOutput struct {
 
 	// The status for subscribing to the third-party firewall vendor in the Amazon Web

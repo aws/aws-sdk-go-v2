@@ -39,6 +39,10 @@ type DeleteNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNamespaceInput) operationName() string {
+	return "DeleteNamespace"
+}
+
 type DeleteNamespaceOutput struct {
 
 	// The ARN of the namespace to be deleted.

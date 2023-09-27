@@ -53,6 +53,10 @@ type SampleChannelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SampleChannelDataInput) operationName() string {
+	return "SampleChannelData"
+}
+
 type SampleChannelDataOutput struct {
 
 	// The list of message samples. Each sample message is returned as a

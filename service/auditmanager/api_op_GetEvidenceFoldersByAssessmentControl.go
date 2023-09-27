@@ -59,6 +59,10 @@ type GetEvidenceFoldersByAssessmentControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEvidenceFoldersByAssessmentControlInput) operationName() string {
+	return "GetEvidenceFoldersByAssessmentControl"
+}
+
 type GetEvidenceFoldersByAssessmentControlOutput struct {
 
 	// The list of evidence folders that the GetEvidenceFoldersByAssessmentControl API

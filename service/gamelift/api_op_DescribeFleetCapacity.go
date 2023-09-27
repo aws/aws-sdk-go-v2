@@ -71,6 +71,10 @@ type DescribeFleetCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetCapacityInput) operationName() string {
+	return "DescribeFleetCapacity"
+}
+
 type DescribeFleetCapacityOutput struct {
 
 	// A collection of objects that contains capacity information for each requested

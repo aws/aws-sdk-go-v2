@@ -55,6 +55,10 @@ type ConnectAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConnectAppAuthorizationInput) operationName() string {
+	return "ConnectAppAuthorization"
+}
+
 type ConnectAppAuthorizationOutput struct {
 
 	// Contains a summary of the app authorization.

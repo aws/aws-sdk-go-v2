@@ -59,6 +59,10 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainInput) operationName() string {
+	return "UpdateDomain"
+}
+
 type UpdateDomainOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain.

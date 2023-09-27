@@ -65,6 +65,10 @@ type ListPredictorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPredictorsInput) operationName() string {
+	return "ListPredictors"
+}
+
 type ListPredictorsOutput struct {
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve

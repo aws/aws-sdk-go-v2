@@ -98,6 +98,10 @@ type CreateOTAUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOTAUpdateInput) operationName() string {
+	return "CreateOTAUpdate"
+}
+
 type CreateOTAUpdateOutput struct {
 
 	// The IoT job ARN associated with the OTA update.

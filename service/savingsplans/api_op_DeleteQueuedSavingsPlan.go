@@ -41,6 +41,10 @@ type DeleteQueuedSavingsPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQueuedSavingsPlanInput) operationName() string {
+	return "DeleteQueuedSavingsPlan"
+}
+
 type DeleteQueuedSavingsPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

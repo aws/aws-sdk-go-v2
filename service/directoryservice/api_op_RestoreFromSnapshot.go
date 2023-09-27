@@ -48,6 +48,10 @@ type RestoreFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreFromSnapshotInput) operationName() string {
+	return "RestoreFromSnapshot"
+}
+
 // Contains the results of the RestoreFromSnapshot operation.
 type RestoreFromSnapshotOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -60,6 +60,10 @@ type DescribeIndexFieldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIndexFieldsInput) operationName() string {
+	return "DescribeIndexFields"
+}
+
 // The result of a DescribeIndexFields request. Contains the index fields
 // configured for the domain specified in the request.
 type DescribeIndexFieldsOutput struct {

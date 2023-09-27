@@ -111,6 +111,10 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelInput) operationName() string {
+	return "CreateModel"
+}
+
 type CreateModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model being created.

@@ -83,6 +83,10 @@ type CreateManagedEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateManagedEndpointInput) operationName() string {
+	return "CreateManagedEndpoint"
+}
+
 type CreateManagedEndpointOutput struct {
 
 	// The output contains the ARN of the managed endpoint.

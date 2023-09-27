@@ -48,6 +48,10 @@ type GetTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTimelineEventInput) operationName() string {
+	return "GetTimelineEvent"
+}
+
 type GetTimelineEventOutput struct {
 
 	// Details about the timeline event.

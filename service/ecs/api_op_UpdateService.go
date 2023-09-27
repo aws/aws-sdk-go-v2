@@ -272,6 +272,10 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceInput) operationName() string {
+	return "UpdateService"
+}
+
 type UpdateServiceOutput struct {
 
 	// The full description of your service following the update call.

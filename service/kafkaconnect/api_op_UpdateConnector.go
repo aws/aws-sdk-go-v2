@@ -52,6 +52,10 @@ type UpdateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectorInput) operationName() string {
+	return "UpdateConnector"
+}
+
 type UpdateConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector.

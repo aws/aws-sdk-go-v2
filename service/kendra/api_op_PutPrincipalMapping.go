@@ -96,6 +96,10 @@ type PutPrincipalMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPrincipalMappingInput) operationName() string {
+	return "PutPrincipalMapping"
+}
+
 type PutPrincipalMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

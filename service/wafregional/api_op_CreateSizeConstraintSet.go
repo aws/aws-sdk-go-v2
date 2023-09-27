@@ -70,6 +70,10 @@ type CreateSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSizeConstraintSetInput) operationName() string {
+	return "CreateSizeConstraintSet"
+}
+
 type CreateSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateSizeConstraintSet request.

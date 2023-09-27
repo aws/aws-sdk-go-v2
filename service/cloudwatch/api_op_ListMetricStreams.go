@@ -44,6 +44,10 @@ type ListMetricStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMetricStreamsInput) operationName() string {
+	return "ListMetricStreams"
+}
+
 type ListMetricStreamsOutput struct {
 
 	// The array of metric stream information.

@@ -46,6 +46,10 @@ type GetStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStudioInput) operationName() string {
+	return "GetStudio"
+}
+
 type GetStudioOutput struct {
 
 	// Information about a studio.

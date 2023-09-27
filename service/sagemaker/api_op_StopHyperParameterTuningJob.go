@@ -46,6 +46,10 @@ type StopHyperParameterTuningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopHyperParameterTuningJobInput) operationName() string {
+	return "StopHyperParameterTuningJob"
+}
+
 type StopHyperParameterTuningJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

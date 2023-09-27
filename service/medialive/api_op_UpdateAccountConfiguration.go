@@ -41,6 +41,10 @@ type UpdateAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountConfigurationInput) operationName() string {
+	return "UpdateAccountConfiguration"
+}
+
 // Placeholder documentation for UpdateAccountConfigurationResponse
 type UpdateAccountConfigurationOutput struct {
 

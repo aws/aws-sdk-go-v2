@@ -46,6 +46,10 @@ type DescribeImageGenerationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageGenerationConfigurationInput) operationName() string {
+	return "DescribeImageGenerationConfiguration"
+}
+
 type DescribeImageGenerationConfigurationOutput struct {
 
 	// The structure that contains the information required for the Kinesis video

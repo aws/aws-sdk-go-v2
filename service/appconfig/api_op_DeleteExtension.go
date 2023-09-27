@@ -46,6 +46,10 @@ type DeleteExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExtensionInput) operationName() string {
+	return "DeleteExtension"
+}
+
 type DeleteExtensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

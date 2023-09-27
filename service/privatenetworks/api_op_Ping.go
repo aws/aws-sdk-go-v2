@@ -35,6 +35,10 @@ type PingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PingInput) operationName() string {
+	return "Ping"
+}
+
 type PingOutput struct {
 
 	// Information about the health of the service.

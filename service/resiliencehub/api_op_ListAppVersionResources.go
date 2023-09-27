@@ -61,6 +61,10 @@ type ListAppVersionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppVersionResourcesInput) operationName() string {
+	return "ListAppVersionResources"
+}
+
 type ListAppVersionResourcesOutput struct {
 
 	// The physical resources in the application version.

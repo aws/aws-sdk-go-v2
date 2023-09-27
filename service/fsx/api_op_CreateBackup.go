@@ -93,6 +93,10 @@ type CreateBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBackupInput) operationName() string {
+	return "CreateBackup"
+}
+
 // The response object for the CreateBackup operation.
 type CreateBackupOutput struct {
 

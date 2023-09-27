@@ -64,6 +64,10 @@ type AcceptHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptHandshakeInput) operationName() string {
+	return "AcceptHandshake"
+}
+
 type AcceptHandshakeOutput struct {
 
 	// A structure that contains details about the accepted handshake.

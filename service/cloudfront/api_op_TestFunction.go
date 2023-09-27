@@ -67,6 +67,10 @@ type TestFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestFunctionInput) operationName() string {
+	return "TestFunction"
+}
+
 type TestFunctionOutput struct {
 
 	// An object that represents the result of running the function with the provided

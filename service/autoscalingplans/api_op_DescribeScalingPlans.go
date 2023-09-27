@@ -57,6 +57,10 @@ type DescribeScalingPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalingPlansInput) operationName() string {
+	return "DescribeScalingPlans"
+}
+
 type DescribeScalingPlansOutput struct {
 
 	// The token required to get the next set of results. This value is null if there

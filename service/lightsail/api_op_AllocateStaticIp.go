@@ -42,6 +42,10 @@ type AllocateStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateStaticIpInput) operationName() string {
+	return "AllocateStaticIp"
+}
+
 type AllocateStaticIpOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

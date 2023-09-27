@@ -52,6 +52,10 @@ type AddRoleToDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddRoleToDBClusterInput) operationName() string {
+	return "AddRoleToDBCluster"
+}
+
 type AddRoleToDBClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

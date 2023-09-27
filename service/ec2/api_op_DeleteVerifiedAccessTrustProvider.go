@@ -53,6 +53,10 @@ type DeleteVerifiedAccessTrustProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVerifiedAccessTrustProviderInput) operationName() string {
+	return "DeleteVerifiedAccessTrustProvider"
+}
+
 type DeleteVerifiedAccessTrustProviderOutput struct {
 
 	// The ID of the Verified Access trust provider.

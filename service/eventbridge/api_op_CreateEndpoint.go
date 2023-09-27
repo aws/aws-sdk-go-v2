@@ -73,6 +73,10 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEndpointInput) operationName() string {
+	return "CreateEndpoint"
+}
+
 type CreateEndpointOutput struct {
 
 	// The ARN of the endpoint that was created by this request.

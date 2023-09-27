@@ -50,6 +50,10 @@ type DeleteCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCollectionInput) operationName() string {
+	return "DeleteCollection"
+}
+
 type DeleteCollectionOutput struct {
 
 	// Details of the deleted collection.

@@ -63,6 +63,10 @@ type StartDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDevEnvironmentInput) operationName() string {
+	return "StartDevEnvironment"
+}
+
 type StartDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the Dev Environment.

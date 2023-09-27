@@ -49,6 +49,10 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelinesInput) operationName() string {
+	return "ListPipelines"
+}
+
 type ListPipelinesOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of

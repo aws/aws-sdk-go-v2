@@ -46,6 +46,10 @@ type ListFindingAggregatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingAggregatorsInput) operationName() string {
+	return "ListFindingAggregators"
+}
+
 type ListFindingAggregatorsOutput struct {
 
 	// The list of finding aggregators. This operation currently only returns a single

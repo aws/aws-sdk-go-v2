@@ -52,6 +52,10 @@ type RegisterClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterClientInput) operationName() string {
+	return "RegisterClient"
+}
+
 type RegisterClientOutput struct {
 
 	// The endpoint where the client can request authorization.

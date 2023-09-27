@@ -65,6 +65,10 @@ type ListStateMachineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStateMachineVersionsInput) operationName() string {
+	return "ListStateMachineVersions"
+}
+
 type ListStateMachineVersionsOutput struct {
 
 	// Versions for the state machine.

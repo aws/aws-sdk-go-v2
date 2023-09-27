@@ -57,6 +57,10 @@ type QueryAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryAssistantInput) operationName() string {
+	return "QueryAssistant"
+}
+
 type QueryAssistantOutput struct {
 
 	// The results of the query.

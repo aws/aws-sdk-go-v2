@@ -52,6 +52,10 @@ type GetThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetThemeInput) operationName() string {
+	return "GetTheme"
+}
+
 type GetThemeOutput struct {
 
 	// Represents the configuration settings for the theme.

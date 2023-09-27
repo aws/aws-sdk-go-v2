@@ -84,6 +84,10 @@ type StartPiiEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPiiEntitiesDetectionJobInput) operationName() string {
+	return "StartPiiEntitiesDetectionJob"
+}
+
 type StartPiiEntitiesDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique,

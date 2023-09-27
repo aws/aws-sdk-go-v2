@@ -55,6 +55,10 @@ type ListThemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThemesInput) operationName() string {
+	return "ListThemes"
+}
+
 type ListThemesOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

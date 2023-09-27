@@ -52,6 +52,10 @@ type UntagInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagInstanceProfileInput) operationName() string {
+	return "UntagInstanceProfile"
+}
+
 type UntagInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

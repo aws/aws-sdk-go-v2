@@ -57,6 +57,10 @@ type ListStackInstancesForProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStackInstancesForProvisionedProductInput) operationName() string {
+	return "ListStackInstancesForProvisionedProduct"
+}
+
 type ListStackInstancesForProvisionedProductOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

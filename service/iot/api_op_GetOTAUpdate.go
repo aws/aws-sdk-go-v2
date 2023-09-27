@@ -43,6 +43,10 @@ type GetOTAUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOTAUpdateInput) operationName() string {
+	return "GetOTAUpdate"
+}
+
 type GetOTAUpdateOutput struct {
 
 	// The OTA update info.

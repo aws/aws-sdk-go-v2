@@ -64,6 +64,10 @@ type DescribeDataRepositoryTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataRepositoryTasksInput) operationName() string {
+	return "DescribeDataRepositoryTasks"
+}
+
 type DescribeDataRepositoryTasksOutput struct {
 
 	// The collection of data repository task descriptions returned.

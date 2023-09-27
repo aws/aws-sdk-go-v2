@@ -56,6 +56,10 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateServiceActionWithProvisioningArtifactInput) operationName() string {
+	return "AssociateServiceActionWithProvisioningArtifact"
+}
+
 type AssociateServiceActionWithProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

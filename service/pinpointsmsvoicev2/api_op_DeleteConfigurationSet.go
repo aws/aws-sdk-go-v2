@@ -48,6 +48,10 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetInput) operationName() string {
+	return "DeleteConfigurationSet"
+}
+
 type DeleteConfigurationSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted configuration set.

@@ -50,6 +50,10 @@ type ModifyBackupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyBackupAttributesInput) operationName() string {
+	return "ModifyBackupAttributes"
+}
+
 type ModifyBackupAttributesOutput struct {
 
 	// Contains information about a backup of an AWS CloudHSM cluster. All backup

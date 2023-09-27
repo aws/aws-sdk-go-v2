@@ -41,6 +41,10 @@ type DisassociateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateIpAccessSettingsInput) operationName() string {
+	return "DisassociateIpAccessSettings"
+}
+
 type DisassociateIpAccessSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

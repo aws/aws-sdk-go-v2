@@ -60,6 +60,10 @@ type ListBotVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBotVersionsInput) operationName() string {
+	return "ListBotVersions"
+}
+
 type ListBotVersionsOutput struct {
 
 	// The identifier of the bot to list versions for.

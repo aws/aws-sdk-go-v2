@@ -45,6 +45,10 @@ type DeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectionInput) operationName() string {
+	return "DeleteConnection"
+}
+
 type DeleteConnectionOutput struct {
 
 	// The ARN of the connection that was deleted.

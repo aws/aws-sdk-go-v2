@@ -56,6 +56,10 @@ type DescribeProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProvisionedProductInput) operationName() string {
+	return "DescribeProvisionedProduct"
+}
+
 type DescribeProvisionedProductOutput struct {
 
 	// Any CloudWatch dashboards that were created when provisioning the product.

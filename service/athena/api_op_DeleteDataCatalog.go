@@ -41,6 +41,10 @@ type DeleteDataCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataCatalogInput) operationName() string {
+	return "DeleteDataCatalog"
+}
+
 type DeleteDataCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

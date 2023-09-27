@@ -43,6 +43,10 @@ type GetProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProjectInput) operationName() string {
+	return "GetProject"
+}
+
 // Represents the result of a get project request.
 type GetProjectOutput struct {
 

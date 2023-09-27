@@ -50,6 +50,10 @@ type PutLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLabelInput) operationName() string {
+	return "PutLabel"
+}
+
 type PutLabelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

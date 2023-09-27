@@ -42,6 +42,10 @@ type DeleteVPCEConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVPCEConfigurationInput) operationName() string {
+	return "DeleteVPCEConfiguration"
+}
+
 type DeleteVPCEConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,6 +65,10 @@ type CreateTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTargetGroupInput) operationName() string {
+	return "CreateTargetGroup"
+}
+
 type CreateTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.

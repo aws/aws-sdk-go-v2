@@ -54,6 +54,10 @@ type CreateActionTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateActionTargetInput) operationName() string {
+	return "CreateActionTarget"
+}
+
 type CreateActionTargetOutput struct {
 
 	// The Amazon Resource Name (ARN) for the custom action target.

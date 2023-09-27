@@ -44,6 +44,10 @@ type PauseClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PauseClusterInput) operationName() string {
+	return "PauseCluster"
+}
+
 type PauseClusterOutput struct {
 
 	// Describes a cluster.

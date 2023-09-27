@@ -81,6 +81,10 @@ type CreateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMembersInput) operationName() string {
+	return "CreateMembers"
+}
+
 type CreateMembersOutput struct {
 
 	// The set of member account invitation or enablement requests that Detective was

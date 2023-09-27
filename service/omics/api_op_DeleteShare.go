@@ -42,6 +42,10 @@ type DeleteShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteShareInput) operationName() string {
+	return "DeleteShare"
+}
+
 type DeleteShareOutput struct {
 
 	// The status of the share being deleted.

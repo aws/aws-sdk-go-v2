@@ -54,6 +54,10 @@ type GetFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionEventInvokeConfigInput) operationName() string {
+	return "GetFunctionEventInvokeConfig"
+}
+
 type GetFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for

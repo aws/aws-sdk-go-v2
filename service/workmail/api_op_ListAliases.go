@@ -53,6 +53,10 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAliasesInput) operationName() string {
+	return "ListAliases"
+}
+
 type ListAliasesOutput struct {
 
 	// The entity's paginated aliases.

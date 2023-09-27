@@ -58,6 +58,10 @@ type DescribeMaintenanceWindowTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMaintenanceWindowTasksInput) operationName() string {
+	return "DescribeMaintenanceWindowTasks"
+}
+
 type DescribeMaintenanceWindowTasksOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

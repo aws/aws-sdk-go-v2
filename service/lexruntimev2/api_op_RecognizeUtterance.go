@@ -146,6 +146,10 @@ type RecognizeUtteranceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecognizeUtteranceInput) operationName() string {
+	return "RecognizeUtterance"
+}
+
 type RecognizeUtteranceOutput struct {
 
 	// The prompt or statement to send to the user. This is based on the bot

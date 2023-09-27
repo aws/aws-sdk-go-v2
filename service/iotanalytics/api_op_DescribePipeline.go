@@ -42,6 +42,10 @@ type DescribePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePipelineInput) operationName() string {
+	return "DescribePipeline"
+}
+
 type DescribePipelineOutput struct {
 
 	// A Pipeline object that contains information about the pipeline.

@@ -58,6 +58,10 @@ type DescribeAccessPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccessPointsInput) operationName() string {
+	return "DescribeAccessPoints"
+}
+
 type DescribeAccessPointsOutput struct {
 
 	// An array of access point descriptions.

@@ -48,6 +48,10 @@ type DescribeResizeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResizeInput) operationName() string {
+	return "DescribeResize"
+}
+
 // Describes the result of a cluster resize operation.
 type DescribeResizeOutput struct {
 

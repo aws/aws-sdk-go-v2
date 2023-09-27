@@ -47,6 +47,10 @@ type DeleteNetworkInsightsPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkInsightsPathInput) operationName() string {
+	return "DeleteNetworkInsightsPath"
+}
+
 type DeleteNetworkInsightsPathOutput struct {
 
 	// The ID of the path.

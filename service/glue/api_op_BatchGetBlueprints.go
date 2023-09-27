@@ -49,6 +49,10 @@ type BatchGetBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetBlueprintsInput) operationName() string {
+	return "BatchGetBlueprints"
+}
+
 type BatchGetBlueprintsOutput struct {
 
 	// Returns a list of blueprint as a Blueprints object.

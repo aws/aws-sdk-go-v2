@@ -37,6 +37,10 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationConfigurationInput) operationName() string {
+	return "DescribeOrganizationConfiguration"
+}
+
 type DescribeOrganizationConfigurationOutput struct {
 
 	// The scan types are automatically enabled for new members of your organization.

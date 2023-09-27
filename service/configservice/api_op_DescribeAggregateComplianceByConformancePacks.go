@@ -58,6 +58,10 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAggregateComplianceByConformancePacksInput) operationName() string {
+	return "DescribeAggregateComplianceByConformancePacks"
+}
+
 type DescribeAggregateComplianceByConformancePacksOutput struct {
 
 	// Returns the AggregateComplianceByConformancePack object.

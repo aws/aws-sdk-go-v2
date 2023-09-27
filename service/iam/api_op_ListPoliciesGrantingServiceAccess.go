@@ -86,6 +86,10 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPoliciesGrantingServiceAccessInput) operationName() string {
+	return "ListPoliciesGrantingServiceAccess"
+}
+
 type ListPoliciesGrantingServiceAccessOutput struct {
 
 	// A ListPoliciesGrantingServiceAccess object that contains details about the

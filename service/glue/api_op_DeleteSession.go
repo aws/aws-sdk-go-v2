@@ -44,6 +44,10 @@ type DeleteSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSessionInput) operationName() string {
+	return "DeleteSession"
+}
+
 type DeleteSessionOutput struct {
 
 	// Returns the ID of the deleted session.

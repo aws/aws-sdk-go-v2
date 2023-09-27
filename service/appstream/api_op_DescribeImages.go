@@ -55,6 +55,10 @@ type DescribeImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImagesInput) operationName() string {
+	return "DescribeImages"
+}
+
 type DescribeImagesOutput struct {
 
 	// Information about the images.

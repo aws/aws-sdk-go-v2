@@ -82,6 +82,10 @@ type GetPersonalizedRankingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPersonalizedRankingInput) operationName() string {
+	return "GetPersonalizedRanking"
+}
+
 type GetPersonalizedRankingOutput struct {
 
 	// A list of items in order of most likely interest to the user. The maximum is

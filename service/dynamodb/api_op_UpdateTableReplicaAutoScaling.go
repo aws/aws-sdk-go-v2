@@ -56,6 +56,10 @@ type UpdateTableReplicaAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTableReplicaAutoScalingInput) operationName() string {
+	return "UpdateTableReplicaAutoScaling"
+}
+
 type UpdateTableReplicaAutoScalingOutput struct {
 
 	// Returns information about the auto scaling settings of a table with replicas.

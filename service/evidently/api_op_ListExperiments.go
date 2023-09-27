@@ -54,6 +54,10 @@ type ListExperimentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExperimentsInput) operationName() string {
+	return "ListExperiments"
+}
+
 type ListExperimentsOutput struct {
 
 	// An array of structures that contain the configuration details of the

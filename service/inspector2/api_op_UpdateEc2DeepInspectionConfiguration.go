@@ -49,6 +49,10 @@ type UpdateEc2DeepInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEc2DeepInspectionConfigurationInput) operationName() string {
+	return "UpdateEc2DeepInspectionConfiguration"
+}
+
 type UpdateEc2DeepInspectionConfigurationOutput struct {
 
 	// An error message explaining why new Amazon Inspector deep inspection custom

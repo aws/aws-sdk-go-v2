@@ -41,6 +41,10 @@ type GetAppReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppReplicationConfigurationInput) operationName() string {
+	return "GetAppReplicationConfiguration"
+}
+
 type GetAppReplicationConfigurationOutput struct {
 
 	// The replication configurations associated with server groups in this

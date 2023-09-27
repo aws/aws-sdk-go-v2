@@ -57,6 +57,10 @@ type DescribeIpamScopesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIpamScopesInput) operationName() string {
+	return "DescribeIpamScopes"
+}
+
 type DescribeIpamScopesOutput struct {
 
 	// The scopes you want information on.

@@ -54,6 +54,10 @@ type AssociateDelegationSignerToDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDelegationSignerToDomainInput) operationName() string {
+	return "AssociateDelegationSignerToDomain"
+}
+
 type AssociateDelegationSignerToDomainOutput struct {
 
 	// The identifier for tracking the progress of the request. To query the operation

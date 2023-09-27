@@ -57,6 +57,10 @@ type CreateOptOutListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOptOutListInput) operationName() string {
+	return "CreateOptOutList"
+}
+
 type CreateOptOutListOutput struct {
 
 	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)

@@ -70,6 +70,10 @@ type DetectTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectTextInput) operationName() string {
+	return "DetectText"
+}
+
 type DetectTextOutput struct {
 
 	// An array of text that was detected in the input image.

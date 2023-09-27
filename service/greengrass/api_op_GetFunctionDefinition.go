@@ -42,6 +42,10 @@ type GetFunctionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionDefinitionInput) operationName() string {
+	return "GetFunctionDefinition"
+}
+
 type GetFunctionDefinitionOutput struct {
 
 	// The ARN of the definition.

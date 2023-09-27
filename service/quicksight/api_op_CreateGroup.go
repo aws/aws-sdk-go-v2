@@ -61,6 +61,10 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupInput) operationName() string {
+	return "CreateGroup"
+}
+
 // The response object for this operation.
 type CreateGroupOutput struct {
 

@@ -55,6 +55,10 @@ type ListAssessmentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentTargetsInput) operationName() string {
+	return "ListAssessmentTargets"
+}
+
 type ListAssessmentTargetsOutput struct {
 
 	// A list of ARNs that specifies the assessment targets that are returned by the

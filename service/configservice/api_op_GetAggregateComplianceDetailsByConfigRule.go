@@ -76,6 +76,10 @@ type GetAggregateComplianceDetailsByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAggregateComplianceDetailsByConfigRuleInput) operationName() string {
+	return "GetAggregateComplianceDetailsByConfigRule"
+}
+
 type GetAggregateComplianceDetailsByConfigRuleOutput struct {
 
 	// Returns an AggregateEvaluationResults object.

@@ -61,6 +61,10 @@ type CreateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFilterInput) operationName() string {
+	return "CreateFilter"
+}
+
 type CreateFilterOutput struct {
 
 	// The ARN of the new filter.

@@ -63,6 +63,10 @@ type CreateEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEndpointAccessInput) operationName() string {
+	return "CreateEndpointAccess"
+}
+
 // Describes a Redshift-managed VPC endpoint.
 type CreateEndpointAccessOutput struct {
 

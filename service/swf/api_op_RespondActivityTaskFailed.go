@@ -70,6 +70,10 @@ type RespondActivityTaskFailedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RespondActivityTaskFailedInput) operationName() string {
+	return "RespondActivityTaskFailed"
+}
+
 type RespondActivityTaskFailedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

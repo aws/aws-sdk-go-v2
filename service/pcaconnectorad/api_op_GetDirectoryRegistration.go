@@ -44,6 +44,10 @@ type GetDirectoryRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDirectoryRegistrationInput) operationName() string {
+	return "GetDirectoryRegistration"
+}
+
 type GetDirectoryRegistrationOutput struct {
 
 	// The directory registration represents the authorization of the connector

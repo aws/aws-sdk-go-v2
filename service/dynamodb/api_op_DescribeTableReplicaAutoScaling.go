@@ -44,6 +44,10 @@ type DescribeTableReplicaAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTableReplicaAutoScalingInput) operationName() string {
+	return "DescribeTableReplicaAutoScaling"
+}
+
 type DescribeTableReplicaAutoScalingOutput struct {
 
 	// Represents the auto scaling properties of the table.

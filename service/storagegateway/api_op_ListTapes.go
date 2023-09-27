@@ -61,6 +61,10 @@ type ListTapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTapesInput) operationName() string {
+	return "ListTapes"
+}
+
 // A JSON object containing the following fields:
 //   - ListTapesOutput$Marker
 //   - ListTapesOutput$VolumeInfos

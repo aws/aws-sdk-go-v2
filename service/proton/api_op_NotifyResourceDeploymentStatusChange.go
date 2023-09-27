@@ -56,6 +56,10 @@ type NotifyResourceDeploymentStatusChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyResourceDeploymentStatusChangeInput) operationName() string {
+	return "NotifyResourceDeploymentStatusChange"
+}
+
 type NotifyResourceDeploymentStatusChangeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

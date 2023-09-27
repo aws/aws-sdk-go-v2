@@ -55,6 +55,10 @@ type ListApplicationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationVersionsInput) operationName() string {
+	return "ListApplicationVersions"
+}
+
 type ListApplicationVersionsOutput struct {
 
 	// A list of the application versions and the associated configuration summaries.

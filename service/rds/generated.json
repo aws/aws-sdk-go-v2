@@ -159,6 +159,7 @@
         "api_op_SwitchoverBlueGreenDeployment.go",
         "api_op_SwitchoverGlobalCluster.go",
         "api_op_SwitchoverReadReplica.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

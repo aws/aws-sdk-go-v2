@@ -51,6 +51,10 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDashboardsInput) operationName() string {
+	return "ListDashboards"
+}
+
 type ListDashboardsOutput struct {
 
 	// The list of matching dashboards.

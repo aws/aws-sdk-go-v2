@@ -37,6 +37,10 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSettingsInput) operationName() string {
+	return "GetAccountSettings"
+}
+
 type GetAccountSettingsOutput struct {
 
 	// Limits that are related to concurrency and code storage.

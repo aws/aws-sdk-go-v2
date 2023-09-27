@@ -57,6 +57,10 @@ type GetImpersonationRoleEffectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImpersonationRoleEffectInput) operationName() string {
+	return "GetImpersonationRoleEffect"
+}
+
 type GetImpersonationRoleEffectOutput struct {
 
 	// Effect of the impersonation role on the target user based on its rules.

@@ -42,6 +42,10 @@ type DisableOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableOrganizationAdminAccountInput) operationName() string {
+	return "DisableOrganizationAdminAccount"
+}
+
 type DisableOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

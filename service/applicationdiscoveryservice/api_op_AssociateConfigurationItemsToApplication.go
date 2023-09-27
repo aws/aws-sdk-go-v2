@@ -46,6 +46,10 @@ type AssociateConfigurationItemsToApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateConfigurationItemsToApplicationInput) operationName() string {
+	return "AssociateConfigurationItemsToApplication"
+}
+
 type AssociateConfigurationItemsToApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

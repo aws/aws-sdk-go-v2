@@ -80,6 +80,10 @@ type UpdateWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkflowStepInput) operationName() string {
+	return "UpdateWorkflowStep"
+}
+
 type UpdateWorkflowStepOutput struct {
 
 	// The ID of the step.

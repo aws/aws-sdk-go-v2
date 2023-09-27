@@ -42,6 +42,10 @@ type GetDeviceMethodsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceMethodsInput) operationName() string {
+	return "GetDeviceMethods"
+}
+
 type GetDeviceMethodsOutput struct {
 
 	// List of available device APIs.

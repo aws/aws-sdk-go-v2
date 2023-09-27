@@ -44,6 +44,10 @@ type DescribeRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRetrainingSchedulerInput) operationName() string {
+	return "DescribeRetrainingScheduler"
+}
+
 type DescribeRetrainingSchedulerOutput struct {
 
 	// Indicates the time and date at which the retraining scheduler was created.

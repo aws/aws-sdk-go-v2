@@ -60,6 +60,10 @@ type DescribeTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTableRestoreStatusInput) operationName() string {
+	return "DescribeTableRestoreStatus"
+}
+
 type DescribeTableRestoreStatusOutput struct {
 
 	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus

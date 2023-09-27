@@ -37,6 +37,10 @@ type GetComplianceSummaryByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComplianceSummaryByConfigRuleInput) operationName() string {
+	return "GetComplianceSummaryByConfigRule"
+}
+
 type GetComplianceSummaryByConfigRuleOutput struct {
 
 	// The number of Config rules that are compliant and the number that are

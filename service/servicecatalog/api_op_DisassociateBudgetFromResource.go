@@ -47,6 +47,10 @@ type DisassociateBudgetFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateBudgetFromResourceInput) operationName() string {
+	return "DisassociateBudgetFromResource"
+}
+
 type DisassociateBudgetFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

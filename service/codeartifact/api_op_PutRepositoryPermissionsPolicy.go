@@ -66,6 +66,10 @@ type PutRepositoryPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRepositoryPermissionsPolicyInput) operationName() string {
+	return "PutRepositoryPermissionsPolicy"
+}
+
 type PutRepositoryPermissionsPolicyOutput struct {
 
 	// The resource policy that was set after processing the request.

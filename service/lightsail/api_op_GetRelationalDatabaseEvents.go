@@ -53,6 +53,10 @@ type GetRelationalDatabaseEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseEventsInput) operationName() string {
+	return "GetRelationalDatabaseEvents"
+}
+
 type GetRelationalDatabaseEventsOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

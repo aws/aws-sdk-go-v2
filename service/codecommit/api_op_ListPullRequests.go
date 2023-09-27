@@ -59,6 +59,10 @@ type ListPullRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPullRequestsInput) operationName() string {
+	return "ListPullRequests"
+}
+
 type ListPullRequestsOutput struct {
 
 	// The system-generated IDs of the pull requests.

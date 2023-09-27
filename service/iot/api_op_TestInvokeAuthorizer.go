@@ -62,6 +62,10 @@ type TestInvokeAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestInvokeAuthorizerInput) operationName() string {
+	return "TestInvokeAuthorizer"
+}
+
 type TestInvokeAuthorizerOutput struct {
 
 	// The number of seconds after which the connection is terminated.

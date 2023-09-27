@@ -40,6 +40,10 @@ type GetSamplingStatisticSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSamplingStatisticSummariesInput) operationName() string {
+	return "GetSamplingStatisticSummaries"
+}
+
 type GetSamplingStatisticSummariesOutput struct {
 
 	// Pagination token.

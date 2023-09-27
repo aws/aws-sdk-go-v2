@@ -74,6 +74,10 @@ type DescribeStorageSystemResourceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorageSystemResourceMetricsInput) operationName() string {
+	return "DescribeStorageSystemResourceMetrics"
+}
+
 type DescribeStorageSystemResourceMetricsOutput struct {
 
 	// The details that your discovery job collected about your storage system

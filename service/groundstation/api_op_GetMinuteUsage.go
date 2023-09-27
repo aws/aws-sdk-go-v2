@@ -46,6 +46,10 @@ type GetMinuteUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMinuteUsageInput) operationName() string {
+	return "GetMinuteUsage"
+}
+
 type GetMinuteUsageOutput struct {
 
 	// Estimated number of minutes remaining for an account, specific to the month

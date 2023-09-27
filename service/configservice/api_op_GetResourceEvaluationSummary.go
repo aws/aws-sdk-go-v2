@@ -52,6 +52,10 @@ type GetResourceEvaluationSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceEvaluationSummaryInput) operationName() string {
+	return "GetResourceEvaluationSummary"
+}
+
 type GetResourceEvaluationSummaryOutput struct {
 
 	// The compliance status of the resource evaluation summary.

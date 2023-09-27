@@ -54,6 +54,10 @@ type AddCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddCacheInput) operationName() string {
+	return "AddCache"
+}
+
 type AddCacheOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

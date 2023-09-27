@@ -44,6 +44,10 @@ type DescribeKeyPhrasesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeKeyPhrasesDetectionJobInput) operationName() string {
+	return "DescribeKeyPhrasesDetectionJob"
+}
+
 type DescribeKeyPhrasesDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a key phrases detection

@@ -51,6 +51,10 @@ type DeleteRoomSkillParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRoomSkillParameterInput) operationName() string {
+	return "DeleteRoomSkillParameter"
+}
+
 type DeleteRoomSkillParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

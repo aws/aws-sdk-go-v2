@@ -42,6 +42,10 @@ type CreateSampleFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSampleFindingsInput) operationName() string {
+	return "CreateSampleFindings"
+}
+
 type CreateSampleFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

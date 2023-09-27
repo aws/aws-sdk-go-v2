@@ -51,6 +51,10 @@ type RunPipelineActivityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunPipelineActivityInput) operationName() string {
+	return "RunPipelineActivity"
+}
+
 type RunPipelineActivityOutput struct {
 
 	// In case the pipeline activity fails, the log message that is generated.

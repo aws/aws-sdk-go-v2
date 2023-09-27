@@ -80,6 +80,10 @@ type ListStreamConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamConsumersInput) operationName() string {
+	return "ListStreamConsumers"
+}
+
 type ListStreamConsumersOutput struct {
 
 	// An array of JSON objects. Each object represents one registered consumer.

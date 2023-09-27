@@ -69,6 +69,10 @@ type ListServicesByNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicesByNamespaceInput) operationName() string {
+	return "ListServicesByNamespace"
+}
+
 type ListServicesByNamespaceOutput struct {
 
 	// The nextToken value to include in a future ListServicesByNamespace request.

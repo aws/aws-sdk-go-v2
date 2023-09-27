@@ -63,6 +63,10 @@ type UpdatePortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePortfolioInput) operationName() string {
+	return "UpdatePortfolio"
+}
+
 type UpdatePortfolioOutput struct {
 
 	// Information about the portfolio.

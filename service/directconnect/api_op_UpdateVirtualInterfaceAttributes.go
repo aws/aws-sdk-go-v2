@@ -59,6 +59,10 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVirtualInterfaceAttributesInput) operationName() string {
+	return "UpdateVirtualInterfaceAttributes"
+}
+
 // Information about a virtual interface.
 type UpdateVirtualInterfaceAttributesOutput struct {
 

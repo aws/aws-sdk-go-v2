@@ -46,6 +46,10 @@ type GetWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowInput) operationName() string {
+	return "GetWorkflow"
+}
+
 type GetWorkflowOutput struct {
 
 	// The resource metadata for the workflow.

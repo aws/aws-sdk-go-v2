@@ -54,6 +54,10 @@ type TestHypervisorConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestHypervisorConfigurationInput) operationName() string {
+	return "TestHypervisorConfiguration"
+}
+
 type TestHypervisorConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

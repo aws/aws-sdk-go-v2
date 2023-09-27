@@ -58,6 +58,10 @@ type GetBucketWebsiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketWebsiteInput) operationName() string {
+	return "GetBucketWebsite"
+}
+
 type GetBucketWebsiteOutput struct {
 
 	// The object key name of the website error document to use for 4XX class errors.

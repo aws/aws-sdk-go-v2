@@ -48,6 +48,10 @@ type GetKeyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyGroupInput) operationName() string {
+	return "GetKeyGroup"
+}
+
 type GetKeyGroupOutput struct {
 
 	// The identifier for this version of the key group.

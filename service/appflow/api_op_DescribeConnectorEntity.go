@@ -53,6 +53,10 @@ type DescribeConnectorEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectorEntityInput) operationName() string {
+	return "DescribeConnectorEntity"
+}
+
 type DescribeConnectorEntityOutput struct {
 
 	// Describes the fields for that connector entity. For example, for an account

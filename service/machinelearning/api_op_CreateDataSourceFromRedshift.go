@@ -108,6 +108,10 @@ type CreateDataSourceFromRedshiftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataSourceFromRedshiftInput) operationName() string {
+	return "CreateDataSourceFromRedshift"
+}
+
 // Represents the output of a CreateDataSourceFromRedshift operation, and is an
 // acknowledgement that Amazon ML received the request. The
 // CreateDataSourceFromRedshift operation is asynchronous. You can poll for updates

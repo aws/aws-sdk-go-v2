@@ -72,6 +72,10 @@ type ListEdgePackagingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEdgePackagingJobsInput) operationName() string {
+	return "ListEdgePackagingJobs"
+}
+
 type ListEdgePackagingJobsOutput struct {
 
 	// Summaries of edge packaging jobs.

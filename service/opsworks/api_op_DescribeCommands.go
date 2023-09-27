@@ -55,6 +55,10 @@ type DescribeCommandsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCommandsInput) operationName() string {
+	return "DescribeCommands"
+}
+
 // Contains the response to a DescribeCommands request.
 type DescribeCommandsOutput struct {
 

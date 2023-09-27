@@ -57,6 +57,10 @@ type DescribeDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeliveryStreamInput) operationName() string {
+	return "DescribeDeliveryStream"
+}
+
 type DescribeDeliveryStreamOutput struct {
 
 	// Information about the delivery stream.

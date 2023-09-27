@@ -73,6 +73,10 @@ type DescribePatchPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePatchPropertiesInput) operationName() string {
+	return "DescribePatchProperties"
+}
+
 type DescribePatchPropertiesOutput struct {
 
 	// The token for the next set of items to return. (You use this token in the next

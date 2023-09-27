@@ -42,6 +42,10 @@ type DescribeResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourcePolicyInput) operationName() string {
+	return "DescribeResourcePolicy"
+}
+
 type DescribeResourcePolicyOutput struct {
 
 	// The IAM policy for the resource.

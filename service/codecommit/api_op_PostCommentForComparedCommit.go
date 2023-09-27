@@ -68,6 +68,10 @@ type PostCommentForComparedCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostCommentForComparedCommitInput) operationName() string {
+	return "PostCommentForComparedCommit"
+}
+
 type PostCommentForComparedCommitOutput struct {
 
 	// In the directionality you established, the blob ID of the after blob.

@@ -64,6 +64,10 @@ type ListAccountAssignmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountAssignmentsInput) operationName() string {
+	return "ListAccountAssignments"
+}
+
 type ListAccountAssignmentsOutput struct {
 
 	// The list of assignments that match the input Amazon Web Services account and

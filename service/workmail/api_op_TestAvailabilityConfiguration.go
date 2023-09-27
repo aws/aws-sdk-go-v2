@@ -60,6 +60,10 @@ type TestAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestAvailabilityConfigurationInput) operationName() string {
+	return "TestAvailabilityConfiguration"
+}
+
 type TestAvailabilityConfigurationOutput struct {
 
 	// String containing the reason for a failed test if TestPassed is false.

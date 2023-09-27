@@ -49,6 +49,10 @@ type ListFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFunctionsInput) operationName() string {
+	return "ListFunctions"
+}
+
 type ListFunctionsOutput struct {
 
 	// A list of Function objects.

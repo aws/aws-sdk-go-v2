@@ -52,6 +52,10 @@ type DeleteUseCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUseCaseInput) operationName() string {
+	return "DeleteUseCase"
+}
+
 type DeleteUseCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

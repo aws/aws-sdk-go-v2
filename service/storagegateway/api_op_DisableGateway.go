@@ -47,6 +47,10 @@ type DisableGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableGatewayInput) operationName() string {
+	return "DisableGateway"
+}
+
 // DisableGatewayOutput
 type DisableGatewayOutput struct {
 

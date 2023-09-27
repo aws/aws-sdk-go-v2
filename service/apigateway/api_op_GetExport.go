@@ -67,6 +67,10 @@ type GetExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExportInput) operationName() string {
+	return "GetExport"
+}
+
 // The binary blob response to GetExport, which contains the generated SDK.
 type GetExportOutput struct {
 

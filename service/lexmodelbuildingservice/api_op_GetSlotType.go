@@ -50,6 +50,10 @@ type GetSlotTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSlotTypeInput) operationName() string {
+	return "GetSlotType"
+}
+
 type GetSlotTypeOutput struct {
 
 	// Checksum of the $LATEST version of the slot type.

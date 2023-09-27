@@ -60,6 +60,10 @@ type GetOriginEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOriginEndpointInput) operationName() string {
+	return "GetOriginEndpoint"
+}
+
 type GetOriginEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the resource.

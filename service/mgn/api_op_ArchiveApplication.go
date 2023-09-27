@@ -45,6 +45,10 @@ type ArchiveApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ArchiveApplicationInput) operationName() string {
+	return "ArchiveApplication"
+}
+
 type ArchiveApplicationOutput struct {
 
 	// Application aggregated status.

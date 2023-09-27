@@ -47,6 +47,10 @@ type ListKeyspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeyspacesInput) operationName() string {
+	return "ListKeyspaces"
+}
+
 type ListKeyspacesOutput struct {
 
 	// A list of keyspaces.

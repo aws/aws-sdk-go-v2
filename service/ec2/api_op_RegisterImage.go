@@ -174,6 +174,10 @@ type RegisterImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterImageInput) operationName() string {
+	return "RegisterImage"
+}
+
 // Contains the output of RegisterImage.
 type RegisterImageOutput struct {
 

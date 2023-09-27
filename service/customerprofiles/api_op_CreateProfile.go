@@ -119,6 +119,10 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfileInput) operationName() string {
+	return "CreateProfile"
+}
+
 type CreateProfileOutput struct {
 
 	// The unique identifier of a customer profile.

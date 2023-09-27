@@ -102,6 +102,10 @@ type PutBucketLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketLoggingInput) operationName() string {
+	return "PutBucketLogging"
+}
+
 type PutBucketLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

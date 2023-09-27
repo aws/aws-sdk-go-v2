@@ -75,6 +75,7 @@
         "api_op_XmlNamespaces_test.go",
         "api_op_XmlTimestamps.go",
         "api_op_XmlTimestamps_test.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -58,6 +58,10 @@ type ReplicateSecretToRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplicateSecretToRegionsInput) operationName() string {
+	return "ReplicateSecretToRegions"
+}
+
 type ReplicateSecretToRegionsOutput struct {
 
 	// The ARN of the primary secret.

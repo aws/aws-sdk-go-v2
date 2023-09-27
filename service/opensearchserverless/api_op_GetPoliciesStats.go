@@ -37,6 +37,10 @@ type GetPoliciesStatsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPoliciesStatsInput) operationName() string {
+	return "GetPoliciesStats"
+}
+
 type GetPoliciesStatsOutput struct {
 
 	// Information about the data access policies in your account.

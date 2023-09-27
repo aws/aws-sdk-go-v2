@@ -55,6 +55,10 @@ type ListRecoveryPointsByResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecoveryPointsByResourceInput) operationName() string {
+	return "ListRecoveryPointsByResource"
+}
+
 type ListRecoveryPointsByResourceOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a

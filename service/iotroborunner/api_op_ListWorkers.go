@@ -52,6 +52,10 @@ type ListWorkersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkersInput) operationName() string {
+	return "ListWorkers"
+}
+
 type ListWorkersOutput struct {
 
 	// Pagination token returned when another page of data exists. Provide it in your

@@ -48,6 +48,10 @@ type UpdateTagOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTagOptionInput) operationName() string {
+	return "UpdateTagOption"
+}
+
 type UpdateTagOptionOutput struct {
 
 	// Information about the TagOption.

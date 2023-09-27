@@ -42,6 +42,10 @@ type GetUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserAccessLoggingSettingsInput) operationName() string {
+	return "GetUserAccessLoggingSettings"
+}
+
 type GetUserAccessLoggingSettingsOutput struct {
 
 	// The user access logging settings.

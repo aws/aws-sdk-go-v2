@@ -48,6 +48,10 @@ type UpdateConnectivityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectivityInfoInput) operationName() string {
+	return "UpdateConnectivityInfo"
+}
+
 type UpdateConnectivityInfoOutput struct {
 
 	// A message about the connectivity info update request.

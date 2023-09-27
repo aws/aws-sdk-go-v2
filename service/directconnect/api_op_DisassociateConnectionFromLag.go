@@ -57,6 +57,10 @@ type DisassociateConnectionFromLagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateConnectionFromLagInput) operationName() string {
+	return "DisassociateConnectionFromLag"
+}
+
 // Information about an Direct Connect connection.
 type DisassociateConnectionFromLagOutput struct {
 

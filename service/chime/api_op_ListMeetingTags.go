@@ -50,6 +50,10 @@ type ListMeetingTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMeetingTagsInput) operationName() string {
+	return "ListMeetingTags"
+}
+
 type ListMeetingTagsOutput struct {
 
 	// A list of tag key-value pairs.

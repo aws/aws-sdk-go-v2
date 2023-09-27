@@ -54,6 +54,10 @@ type CancelCapacityReservationFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelCapacityReservationFleetsInput) operationName() string {
+	return "CancelCapacityReservationFleets"
+}
+
 type CancelCapacityReservationFleetsOutput struct {
 
 	// Information about the Capacity Reservation Fleets that could not be cancelled.

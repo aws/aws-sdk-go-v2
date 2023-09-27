@@ -62,6 +62,10 @@ type DeleteProgressUpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProgressUpdateStreamInput) operationName() string {
+	return "DeleteProgressUpdateStream"
+}
+
 type DeleteProgressUpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

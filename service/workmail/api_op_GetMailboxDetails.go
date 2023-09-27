@@ -53,6 +53,10 @@ type GetMailboxDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMailboxDetailsInput) operationName() string {
+	return "GetMailboxDetails"
+}
+
 type GetMailboxDetailsOutput struct {
 
 	// The maximum allowed mailbox size, in MB, for the specified user.

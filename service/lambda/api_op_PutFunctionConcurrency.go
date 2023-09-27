@@ -61,6 +61,10 @@ type PutFunctionConcurrencyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutFunctionConcurrencyInput) operationName() string {
+	return "PutFunctionConcurrency"
+}
+
 type PutFunctionConcurrencyOutput struct {
 
 	// The number of concurrent executions that are reserved for this function. For

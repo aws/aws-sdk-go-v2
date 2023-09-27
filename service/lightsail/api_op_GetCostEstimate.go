@@ -64,6 +64,10 @@ type GetCostEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCostEstimateInput) operationName() string {
+	return "GetCostEstimate"
+}
+
 type GetCostEstimateOutput struct {
 
 	// Returns the estimate's forecasted cost or usage.

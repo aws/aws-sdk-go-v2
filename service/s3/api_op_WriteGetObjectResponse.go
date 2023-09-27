@@ -284,6 +284,10 @@ type WriteGetObjectResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*WriteGetObjectResponseInput) operationName() string {
+	return "WriteGetObjectResponse"
+}
+
 type WriteGetObjectResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

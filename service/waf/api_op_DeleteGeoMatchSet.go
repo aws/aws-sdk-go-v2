@@ -60,6 +60,10 @@ type DeleteGeoMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGeoMatchSetInput) operationName() string {
+	return "DeleteGeoMatchSet"
+}
+
 type DeleteGeoMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteGeoMatchSet request. You can

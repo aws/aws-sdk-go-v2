@@ -63,6 +63,10 @@ type UpdateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateViewInput) operationName() string {
+	return "UpdateView"
+}
+
 type UpdateViewOutput struct {
 
 	// Details about the view that you changed with this operation.

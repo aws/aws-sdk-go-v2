@@ -60,6 +60,10 @@ type ListCachePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCachePoliciesInput) operationName() string {
+	return "ListCachePolicies"
+}
+
 type ListCachePoliciesOutput struct {
 
 	// A list of cache policies.

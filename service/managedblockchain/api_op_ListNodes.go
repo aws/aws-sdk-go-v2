@@ -57,6 +57,10 @@ type ListNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNodesInput) operationName() string {
+	return "ListNodes"
+}
+
 type ListNodesOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.

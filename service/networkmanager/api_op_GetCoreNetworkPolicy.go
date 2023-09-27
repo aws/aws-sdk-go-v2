@@ -49,6 +49,10 @@ type GetCoreNetworkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoreNetworkPolicyInput) operationName() string {
+	return "GetCoreNetworkPolicy"
+}
+
 type GetCoreNetworkPolicyOutput struct {
 
 	// The details about a core network policy.

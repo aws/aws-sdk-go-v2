@@ -45,6 +45,10 @@ type CreatePresignedNotebookUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePresignedNotebookUrlInput) operationName() string {
+	return "CreatePresignedNotebookUrl"
+}
+
 type CreatePresignedNotebookUrlOutput struct {
 
 	// The authentication token for the notebook.

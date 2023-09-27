@@ -47,6 +47,10 @@ type DeleteEdgeDeploymentStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEdgeDeploymentStageInput) operationName() string {
+	return "DeleteEdgeDeploymentStage"
+}
+
 type DeleteEdgeDeploymentStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

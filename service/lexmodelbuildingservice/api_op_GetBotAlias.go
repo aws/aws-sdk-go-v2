@@ -50,6 +50,10 @@ type GetBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotAliasInput) operationName() string {
+	return "GetBotAlias"
+}
+
 type GetBotAliasOutput struct {
 
 	// The name of the bot that the alias points to.

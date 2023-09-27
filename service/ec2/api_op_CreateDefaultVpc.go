@@ -48,6 +48,10 @@ type CreateDefaultVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDefaultVpcInput) operationName() string {
+	return "CreateDefaultVpc"
+}
+
 type CreateDefaultVpcOutput struct {
 
 	// Information about the VPC.

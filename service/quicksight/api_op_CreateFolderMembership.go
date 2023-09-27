@@ -57,6 +57,10 @@ type CreateFolderMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFolderMembershipInput) operationName() string {
+	return "CreateFolderMembership"
+}
+
 type CreateFolderMembershipOutput struct {
 
 	// Information about the member in the folder.

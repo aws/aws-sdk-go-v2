@@ -72,6 +72,10 @@ type UploadLayerPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadLayerPartInput) operationName() string {
+	return "UploadLayerPart"
+}
+
 type UploadLayerPartOutput struct {
 
 	// The integer value of the last byte received in the request.

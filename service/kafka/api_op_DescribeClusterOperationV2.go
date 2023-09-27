@@ -42,6 +42,10 @@ type DescribeClusterOperationV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterOperationV2Input) operationName() string {
+	return "DescribeClusterOperationV2"
+}
+
 type DescribeClusterOperationV2Output struct {
 
 	// Cluster operation information

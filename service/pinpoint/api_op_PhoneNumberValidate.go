@@ -42,6 +42,10 @@ type PhoneNumberValidateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PhoneNumberValidateInput) operationName() string {
+	return "PhoneNumberValidate"
+}
+
 type PhoneNumberValidateOutput struct {
 
 	// Provides information about a phone number.

@@ -47,6 +47,10 @@ type GetServiceLinkedRoleDeletionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceLinkedRoleDeletionStatusInput) operationName() string {
+	return "GetServiceLinkedRoleDeletionStatus"
+}
+
 type GetServiceLinkedRoleDeletionStatusOutput struct {
 
 	// The status of the deletion.

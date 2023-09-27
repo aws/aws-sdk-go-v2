@@ -51,6 +51,10 @@ type GetReservedNodeExchangeOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReservedNodeExchangeOfferingsInput) operationName() string {
+	return "GetReservedNodeExchangeOfferings"
+}
+
 type GetReservedNodeExchangeOfferingsOutput struct {
 
 	// An optional parameter that specifies the starting point for returning a set of

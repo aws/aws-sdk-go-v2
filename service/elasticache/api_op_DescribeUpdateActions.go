@@ -71,6 +71,10 @@ type DescribeUpdateActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUpdateActionsInput) operationName() string {
+	return "DescribeUpdateActions"
+}
+
 type DescribeUpdateActionsOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for

@@ -79,6 +79,10 @@ type StartReplayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReplayInput) operationName() string {
+	return "StartReplay"
+}
+
 type StartReplayOutput struct {
 
 	// The ARN of the replay.

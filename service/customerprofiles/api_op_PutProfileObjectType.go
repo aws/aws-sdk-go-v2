@@ -91,6 +91,10 @@ type PutProfileObjectTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutProfileObjectTypeInput) operationName() string {
+	return "PutProfileObjectType"
+}
+
 type PutProfileObjectTypeOutput struct {
 
 	// Description of the profile object type.

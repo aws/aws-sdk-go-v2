@@ -59,6 +59,10 @@ type SearchDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchDashboardsInput) operationName() string {
+	return "SearchDashboards"
+}
+
 type SearchDashboardsOutput struct {
 
 	// The list of dashboards owned by the user specified in Filters in your request.

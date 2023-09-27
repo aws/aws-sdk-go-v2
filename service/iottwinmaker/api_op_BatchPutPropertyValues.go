@@ -48,6 +48,10 @@ type BatchPutPropertyValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutPropertyValuesInput) operationName() string {
+	return "BatchPutPropertyValues"
+}
+
 type BatchPutPropertyValuesOutput struct {
 
 	// Entries that caused errors in the batch put operation.

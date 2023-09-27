@@ -57,6 +57,10 @@ type AcknowledgeThirdPartyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcknowledgeThirdPartyJobInput) operationName() string {
+	return "AcknowledgeThirdPartyJob"
+}
+
 // Represents the output of an AcknowledgeThirdPartyJob action.
 type AcknowledgeThirdPartyJobOutput struct {
 

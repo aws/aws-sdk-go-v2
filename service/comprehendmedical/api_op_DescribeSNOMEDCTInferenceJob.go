@@ -44,6 +44,10 @@ type DescribeSNOMEDCTInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSNOMEDCTInferenceJobInput) operationName() string {
+	return "DescribeSNOMEDCTInferenceJob"
+}
+
 type DescribeSNOMEDCTInferenceJobOutput struct {
 
 	// Provides information about a detection job.

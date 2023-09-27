@@ -72,6 +72,10 @@ type CreateInstanceConnectEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceConnectEndpointInput) operationName() string {
+	return "CreateInstanceConnectEndpoint"
+}
+
 type CreateInstanceConnectEndpointOutput struct {
 
 	// Unique, case-sensitive idempotency token provided by the client in the the

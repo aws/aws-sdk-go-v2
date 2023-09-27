@@ -42,6 +42,10 @@ type GetNotebookMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNotebookMetadataInput) operationName() string {
+	return "GetNotebookMetadata"
+}
+
 type GetNotebookMetadataOutput struct {
 
 	// The metadata that is returned for the specified notebook ID.

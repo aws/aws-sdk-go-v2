@@ -61,6 +61,10 @@ type StartStageDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartStageDeploymentInput) operationName() string {
+	return "StartStageDeployment"
+}
+
 type StartStageDeploymentOutput struct {
 
 	// Properties that describe the stage deployment.

@@ -50,6 +50,10 @@ type StopSolutionVersionCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSolutionVersionCreationInput) operationName() string {
+	return "StopSolutionVersionCreation"
+}
+
 type StopSolutionVersionCreationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

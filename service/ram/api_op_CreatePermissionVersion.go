@@ -81,6 +81,10 @@ type CreatePermissionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePermissionVersionInput) operationName() string {
+	return "CreatePermissionVersion"
+}
+
 type CreatePermissionVersionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

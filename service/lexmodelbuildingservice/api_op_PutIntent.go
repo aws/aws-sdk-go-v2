@@ -184,6 +184,10 @@ type PutIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutIntentInput) operationName() string {
+	return "PutIntent"
+}
+
 type PutIntentOutput struct {
 
 	// Checksum of the $LATEST version of the intent created or updated.

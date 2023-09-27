@@ -61,6 +61,10 @@ type ListParticipantEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListParticipantEventsInput) operationName() string {
+	return "ListParticipantEvents"
+}
+
 type ListParticipantEventsOutput struct {
 
 	// List of the matching events.

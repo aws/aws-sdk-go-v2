@@ -57,6 +57,10 @@ type CreateSchedulingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSchedulingPolicyInput) operationName() string {
+	return "CreateSchedulingPolicy"
+}
+
 type CreateSchedulingPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the scheduling policy. The format is

@@ -49,6 +49,10 @@ type DescribeCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCampaignInput) operationName() string {
+	return "DescribeCampaign"
+}
+
 type DescribeCampaignOutput struct {
 
 	// The properties of the campaign.

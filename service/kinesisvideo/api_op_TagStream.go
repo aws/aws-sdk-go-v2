@@ -57,6 +57,10 @@ type TagStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagStreamInput) operationName() string {
+	return "TagStream"
+}
+
 type TagStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

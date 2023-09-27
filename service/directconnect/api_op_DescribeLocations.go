@@ -38,6 +38,10 @@ type DescribeLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationsInput) operationName() string {
+	return "DescribeLocations"
+}
+
 type DescribeLocationsOutput struct {
 
 	// The locations.

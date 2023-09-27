@@ -61,6 +61,10 @@ type SetRiskConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetRiskConfigurationInput) operationName() string {
+	return "SetRiskConfiguration"
+}
+
 type SetRiskConfigurationOutput struct {
 
 	// The risk configuration.

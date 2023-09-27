@@ -61,6 +61,10 @@ type DeleteReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationGroupInput) operationName() string {
+	return "DeleteReplicationGroup"
+}
+
 type DeleteReplicationGroupOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

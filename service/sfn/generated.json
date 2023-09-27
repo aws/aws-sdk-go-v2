@@ -43,6 +43,7 @@
         "api_op_UpdateMapRun.go",
         "api_op_UpdateStateMachine.go",
         "api_op_UpdateStateMachineAlias.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

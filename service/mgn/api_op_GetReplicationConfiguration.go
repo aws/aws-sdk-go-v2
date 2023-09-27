@@ -45,6 +45,10 @@ type GetReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReplicationConfigurationInput) operationName() string {
+	return "GetReplicationConfiguration"
+}
+
 type GetReplicationConfigurationOutput struct {
 
 	// Replication Configuration associate default Application Migration Service

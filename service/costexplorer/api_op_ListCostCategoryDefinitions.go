@@ -54,6 +54,10 @@ type ListCostCategoryDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCostCategoryDefinitionsInput) operationName() string {
+	return "ListCostCategoryDefinitions"
+}
+
 type ListCostCategoryDefinitionsOutput struct {
 
 	// A reference to a Cost Category that contains enough information to identify the

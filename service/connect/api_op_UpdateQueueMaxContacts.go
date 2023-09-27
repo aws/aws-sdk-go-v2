@@ -53,6 +53,10 @@ type UpdateQueueMaxContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQueueMaxContactsInput) operationName() string {
+	return "UpdateQueueMaxContacts"
+}
+
 type UpdateQueueMaxContactsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

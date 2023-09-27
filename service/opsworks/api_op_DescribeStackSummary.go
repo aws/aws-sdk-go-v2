@@ -47,6 +47,10 @@ type DescribeStackSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackSummaryInput) operationName() string {
+	return "DescribeStackSummary"
+}
+
 // Contains the response to a DescribeStackSummary request.
 type DescribeStackSummaryOutput struct {
 

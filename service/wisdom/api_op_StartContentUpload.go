@@ -53,6 +53,10 @@ type StartContentUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartContentUploadInput) operationName() string {
+	return "StartContentUpload"
+}
+
 type StartContentUploadOutput struct {
 
 	// The headers to include in the upload.

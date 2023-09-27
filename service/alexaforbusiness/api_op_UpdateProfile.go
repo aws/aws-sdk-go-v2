@@ -83,6 +83,10 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProfileInput) operationName() string {
+	return "UpdateProfile"
+}
+
 type UpdateProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

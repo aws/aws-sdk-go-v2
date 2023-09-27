@@ -60,6 +60,10 @@ type DescribeConnectorProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectorProfilesInput) operationName() string {
+	return "DescribeConnectorProfiles"
+}
+
 type DescribeConnectorProfilesOutput struct {
 
 	// Returns information about the connector profiles associated with the flow.

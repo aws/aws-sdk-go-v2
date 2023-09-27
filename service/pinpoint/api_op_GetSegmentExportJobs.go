@@ -57,6 +57,10 @@ type GetSegmentExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSegmentExportJobsInput) operationName() string {
+	return "GetSegmentExportJobs"
+}
+
 type GetSegmentExportJobsOutput struct {
 
 	// Provides information about all the export jobs that are associated with an

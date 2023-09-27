@@ -67,6 +67,10 @@ type DisassociateNatGatewayAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateNatGatewayAddressInput) operationName() string {
+	return "DisassociateNatGatewayAddress"
+}
+
 type DisassociateNatGatewayAddressOutput struct {
 
 	// Information about the NAT gateway IP addresses.

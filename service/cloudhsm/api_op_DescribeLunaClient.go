@@ -51,6 +51,10 @@ type DescribeLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLunaClientInput) operationName() string {
+	return "DescribeLunaClient"
+}
+
 type DescribeLunaClientOutput struct {
 
 	// The certificate installed on the HSMs used by this client.

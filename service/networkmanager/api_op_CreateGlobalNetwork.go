@@ -44,6 +44,10 @@ type CreateGlobalNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGlobalNetworkInput) operationName() string {
+	return "CreateGlobalNetwork"
+}
+
 type CreateGlobalNetworkOutput struct {
 
 	// Information about the global network object.

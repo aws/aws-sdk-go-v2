@@ -37,6 +37,10 @@ type GetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountConfigurationInput) operationName() string {
+	return "GetAccountConfiguration"
+}
+
 type GetAccountConfigurationOutput struct {
 
 	// Expiration events configuration options associated with the Amazon Web Services

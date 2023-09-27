@@ -56,6 +56,10 @@ type ListTapePoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTapePoolsInput) operationName() string {
+	return "ListTapePools"
+}
+
 type ListTapePoolsOutput struct {
 
 	// A string that indicates the position at which to begin the returned list of

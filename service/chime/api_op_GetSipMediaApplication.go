@@ -51,6 +51,10 @@ type GetSipMediaApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSipMediaApplicationInput) operationName() string {
+	return "GetSipMediaApplication"
+}
+
 type GetSipMediaApplicationOutput struct {
 
 	// The SIP media application details.

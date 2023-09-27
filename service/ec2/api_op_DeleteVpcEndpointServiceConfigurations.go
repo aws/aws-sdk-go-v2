@@ -51,6 +51,10 @@ type DeleteVpcEndpointServiceConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcEndpointServiceConfigurationsInput) operationName() string {
+	return "DeleteVpcEndpointServiceConfigurations"
+}
+
 type DeleteVpcEndpointServiceConfigurationsOutput struct {
 
 	// Information about the service configurations that were not deleted, if

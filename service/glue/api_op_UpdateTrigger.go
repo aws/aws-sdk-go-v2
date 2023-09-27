@@ -47,6 +47,10 @@ type UpdateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTriggerInput) operationName() string {
+	return "UpdateTrigger"
+}
+
 type UpdateTriggerOutput struct {
 
 	// The resulting trigger definition.

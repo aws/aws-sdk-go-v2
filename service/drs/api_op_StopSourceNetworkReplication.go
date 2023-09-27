@@ -43,6 +43,10 @@ type StopSourceNetworkReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSourceNetworkReplicationInput) operationName() string {
+	return "StopSourceNetworkReplication"
+}
+
 type StopSourceNetworkReplicationOutput struct {
 
 	// Source Network which was requested to stop replication.

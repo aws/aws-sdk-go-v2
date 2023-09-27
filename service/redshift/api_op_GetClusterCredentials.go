@@ -118,6 +118,10 @@ type GetClusterCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClusterCredentialsInput) operationName() string {
+	return "GetClusterCredentials"
+}
+
 // Temporary credentials with authorization to log on to an Amazon Redshift
 // database.
 type GetClusterCredentialsOutput struct {

@@ -48,6 +48,10 @@ type ListVpcConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcConnectorsInput) operationName() string {
+	return "ListVpcConnectors"
+}
+
 type ListVpcConnectorsOutput struct {
 
 	// A list of information records for VPC connectors. In a paginated request, the

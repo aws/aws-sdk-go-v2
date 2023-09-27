@@ -72,6 +72,10 @@ type DescribeOptionGroupOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOptionGroupOptionsInput) operationName() string {
+	return "DescribeOptionGroupOptions"
+}
+
 type DescribeOptionGroupOptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

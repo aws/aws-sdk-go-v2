@@ -49,6 +49,10 @@ type BatchCreateAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateAttendeeInput) operationName() string {
+	return "BatchCreateAttendee"
+}
+
 type BatchCreateAttendeeOutput struct {
 
 	// The attendee information, including attendees' IDs and join tokens.

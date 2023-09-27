@@ -46,6 +46,10 @@ type CancelBatchJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelBatchJobExecutionInput) operationName() string {
+	return "CancelBatchJobExecution"
+}
+
 type CancelBatchJobExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

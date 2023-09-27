@@ -58,6 +58,10 @@ type CreateAnnotationStoreVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnnotationStoreVersionInput) operationName() string {
+	return "CreateAnnotationStoreVersion"
+}
+
 type CreateAnnotationStoreVersionOutput struct {
 
 	// The time stamp for the creation of an annotation store version.

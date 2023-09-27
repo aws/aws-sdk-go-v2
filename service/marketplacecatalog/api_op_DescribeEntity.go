@@ -46,6 +46,10 @@ type DescribeEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntityInput) operationName() string {
+	return "DescribeEntity"
+}
+
 type DescribeEntityOutput struct {
 
 	// This stringified JSON object includes the details of the entity.

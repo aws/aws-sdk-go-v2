@@ -41,6 +41,10 @@ type DescribeAuthenticationProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAuthenticationProfilesInput) operationName() string {
+	return "DescribeAuthenticationProfiles"
+}
+
 type DescribeAuthenticationProfilesOutput struct {
 
 	// The list of authentication profiles.

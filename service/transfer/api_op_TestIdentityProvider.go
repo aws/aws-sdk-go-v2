@@ -90,6 +90,10 @@ type TestIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestIdentityProviderInput) operationName() string {
+	return "TestIdentityProvider"
+}
+
 type TestIdentityProviderOutput struct {
 
 	// The HTTP status code that is the response from your API Gateway or your Lambda

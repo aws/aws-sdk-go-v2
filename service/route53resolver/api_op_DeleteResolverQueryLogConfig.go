@@ -54,6 +54,10 @@ type DeleteResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResolverQueryLogConfigInput) operationName() string {
+	return "DeleteResolverQueryLogConfig"
+}
+
 type DeleteResolverQueryLogConfigOutput struct {
 
 	// Information about the query logging configuration that you deleted, including

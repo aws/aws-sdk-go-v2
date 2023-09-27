@@ -72,6 +72,10 @@ type AssumeDecoratedRoleWithSAMLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssumeDecoratedRoleWithSAMLInput) operationName() string {
+	return "AssumeDecoratedRoleWithSAML"
+}
+
 type AssumeDecoratedRoleWithSAMLOutput struct {
 
 	// The access key ID for the temporary credentials. (The access key consists of an

@@ -56,6 +56,10 @@ type ListOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOperationsInput) operationName() string {
+	return "ListOperations"
+}
+
 type ListOperationsOutput struct {
 
 	// The token that you can pass in a subsequent request to get the next result

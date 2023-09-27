@@ -50,6 +50,10 @@ type ListIdentityResolutionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityResolutionJobsInput) operationName() string {
+	return "ListIdentityResolutionJobs"
+}
+
 type ListIdentityResolutionJobsOutput struct {
 
 	// A list of Identity Resolution Jobs.

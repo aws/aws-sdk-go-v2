@@ -47,6 +47,10 @@ type AssociateProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateProfilesInput) operationName() string {
+	return "AssociateProfiles"
+}
+
 type AssociateProfilesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

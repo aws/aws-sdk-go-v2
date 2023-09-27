@@ -50,6 +50,10 @@ type AssociateAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAttributeGroupInput) operationName() string {
+	return "AssociateAttributeGroup"
+}
+
 type AssociateAttributeGroupOutput struct {
 
 	// The Amazon resource name (ARN) of the application that was augmented with

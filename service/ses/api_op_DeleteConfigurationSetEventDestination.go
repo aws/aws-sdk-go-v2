@@ -55,6 +55,10 @@ type DeleteConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetEventDestinationInput) operationName() string {
+	return "DeleteConfigurationSetEventDestination"
+}
+
 // An empty element returned on a successful request.
 type DeleteConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.

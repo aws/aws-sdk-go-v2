@@ -48,6 +48,10 @@ type ListFHIRDatastoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFHIRDatastoresInput) operationName() string {
+	return "ListFHIRDatastores"
+}
+
 type ListFHIRDatastoresOutput struct {
 
 	// All properties associated with the listed data stores.

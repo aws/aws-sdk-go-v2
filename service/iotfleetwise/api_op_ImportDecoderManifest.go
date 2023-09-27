@@ -48,6 +48,10 @@ type ImportDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportDecoderManifestInput) operationName() string {
+	return "ImportDecoderManifest"
+}
+
 type ImportDecoderManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the decoder manifest that was imported.

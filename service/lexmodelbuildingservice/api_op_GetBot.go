@@ -50,6 +50,10 @@ type GetBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotInput) operationName() string {
+	return "GetBot"
+}
+
 type GetBotOutput struct {
 
 	// The message that Amazon Lex returns when the user elects to end the

@@ -42,6 +42,10 @@ type DeleteAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAssistantInput) operationName() string {
+	return "DeleteAssistant"
+}
+
 type DeleteAssistantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

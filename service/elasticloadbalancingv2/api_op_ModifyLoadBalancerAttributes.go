@@ -50,6 +50,10 @@ type ModifyLoadBalancerAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyLoadBalancerAttributesInput) operationName() string {
+	return "ModifyLoadBalancerAttributes"
+}
+
 type ModifyLoadBalancerAttributesOutput struct {
 
 	// Information about the load balancer attributes.

@@ -71,6 +71,10 @@ type CreateTransitGatewayVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayVpcAttachmentInput) operationName() string {
+	return "CreateTransitGatewayVpcAttachment"
+}
+
 type CreateTransitGatewayVpcAttachmentOutput struct {
 
 	// Information about the VPC attachment.

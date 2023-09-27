@@ -77,6 +77,10 @@ type GetObjectRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectRetentionInput) operationName() string {
+	return "GetObjectRetention"
+}
+
 type GetObjectRetentionOutput struct {
 
 	// The container element for an object's retention settings.

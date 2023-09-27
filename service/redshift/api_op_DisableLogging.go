@@ -45,6 +45,10 @@ type DisableLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableLoggingInput) operationName() string {
+	return "DisableLogging"
+}
+
 // Describes the status of logging for a cluster.
 type DisableLoggingOutput struct {
 

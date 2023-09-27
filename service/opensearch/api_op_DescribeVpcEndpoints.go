@@ -42,6 +42,10 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointsInput) operationName() string {
+	return "DescribeVpcEndpoints"
+}
+
 type DescribeVpcEndpointsOutput struct {
 
 	// Any errors associated with the request.

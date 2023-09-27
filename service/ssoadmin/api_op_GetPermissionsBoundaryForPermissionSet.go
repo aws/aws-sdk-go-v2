@@ -48,6 +48,10 @@ type GetPermissionsBoundaryForPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPermissionsBoundaryForPermissionSetInput) operationName() string {
+	return "GetPermissionsBoundaryForPermissionSet"
+}
+
 type GetPermissionsBoundaryForPermissionSetOutput struct {
 
 	// The permissions boundary attached to the specified permission set.

@@ -48,6 +48,10 @@ type DisableRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableRuleInput) operationName() string {
+	return "DisableRule"
+}
+
 type DisableRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

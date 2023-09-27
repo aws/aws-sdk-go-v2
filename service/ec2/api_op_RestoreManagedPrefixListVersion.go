@@ -59,6 +59,10 @@ type RestoreManagedPrefixListVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreManagedPrefixListVersionInput) operationName() string {
+	return "RestoreManagedPrefixListVersion"
+}
+
 type RestoreManagedPrefixListVersionOutput struct {
 
 	// Information about the prefix list.

@@ -58,6 +58,10 @@ type DisassociateTransitGatewayMulticastDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTransitGatewayMulticastDomainInput) operationName() string {
+	return "DisassociateTransitGatewayMulticastDomain"
+}
+
 type DisassociateTransitGatewayMulticastDomainOutput struct {
 
 	// Information about the association.

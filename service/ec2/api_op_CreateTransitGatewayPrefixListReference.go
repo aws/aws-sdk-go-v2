@@ -60,6 +60,10 @@ type CreateTransitGatewayPrefixListReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayPrefixListReferenceInput) operationName() string {
+	return "CreateTransitGatewayPrefixListReference"
+}
+
 type CreateTransitGatewayPrefixListReferenceOutput struct {
 
 	// Information about the prefix list reference.

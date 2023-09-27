@@ -91,6 +91,10 @@ type PutRecordBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRecordBatchInput) operationName() string {
+	return "PutRecordBatch"
+}
+
 type PutRecordBatchOutput struct {
 
 	// The number of records that might have failed processing. This number might be

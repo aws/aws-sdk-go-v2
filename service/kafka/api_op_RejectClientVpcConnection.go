@@ -46,6 +46,10 @@ type RejectClientVpcConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectClientVpcConnectionInput) operationName() string {
+	return "RejectClientVpcConnection"
+}
+
 type RejectClientVpcConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

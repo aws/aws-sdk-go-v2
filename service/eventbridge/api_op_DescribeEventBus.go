@@ -49,6 +49,10 @@ type DescribeEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventBusInput) operationName() string {
+	return "DescribeEventBus"
+}
+
 type DescribeEventBusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account permitted to write events to the

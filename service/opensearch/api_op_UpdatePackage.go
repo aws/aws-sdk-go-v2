@@ -57,6 +57,10 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePackageInput) operationName() string {
+	return "UpdatePackage"
+}
+
 // Container for the response returned by the UpdatePackage operation.
 type UpdatePackageOutput struct {
 

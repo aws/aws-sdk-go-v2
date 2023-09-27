@@ -56,6 +56,10 @@ type UpdateDeviceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeviceStatusInput) operationName() string {
+	return "UpdateDeviceStatus"
+}
+
 // The response to the request to update the device status.
 type UpdateDeviceStatusOutput struct {
 	// Metadata pertaining to the operation's result.

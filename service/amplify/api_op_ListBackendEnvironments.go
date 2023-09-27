@@ -54,6 +54,10 @@ type ListBackendEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackendEnvironmentsInput) operationName() string {
+	return "ListBackendEnvironments"
+}
+
 // The result structure for the list backend environments result.
 type ListBackendEnvironmentsOutput struct {
 

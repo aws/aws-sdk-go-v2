@@ -43,6 +43,10 @@ type GetDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataSetInput) operationName() string {
+	return "GetDataSet"
+}
+
 type GetDataSetOutput struct {
 
 	// The ARN for the data set.

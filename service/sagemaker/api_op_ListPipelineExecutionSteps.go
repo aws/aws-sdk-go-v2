@@ -51,6 +51,10 @@ type ListPipelineExecutionStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelineExecutionStepsInput) operationName() string {
+	return "ListPipelineExecutionSteps"
+}
+
 type ListPipelineExecutionStepsOutput struct {
 
 	// If the result of the previous ListPipelineExecutionSteps request was truncated,

@@ -55,6 +55,10 @@ type CreateEnvironmentMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEnvironmentMembershipInput) operationName() string {
+	return "CreateEnvironmentMembership"
+}
+
 type CreateEnvironmentMembershipOutput struct {
 
 	// Information about the environment member that was added.

@@ -53,6 +53,10 @@ type DescribeThumbnailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThumbnailsInput) operationName() string {
+	return "DescribeThumbnails"
+}
+
 // Placeholder documentation for DescribeThumbnailsResponse
 type DescribeThumbnailsOutput struct {
 

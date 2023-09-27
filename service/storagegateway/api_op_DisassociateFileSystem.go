@@ -50,6 +50,10 @@ type DisassociateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateFileSystemInput) operationName() string {
+	return "DisassociateFileSystem"
+}
+
 type DisassociateFileSystemOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted file system association.

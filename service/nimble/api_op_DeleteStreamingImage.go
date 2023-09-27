@@ -53,6 +53,10 @@ type DeleteStreamingImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStreamingImageInput) operationName() string {
+	return "DeleteStreamingImage"
+}
+
 type DeleteStreamingImageOutput struct {
 
 	// The streaming image.

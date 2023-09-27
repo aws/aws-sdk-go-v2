@@ -59,6 +59,10 @@ type ListFileCommitHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFileCommitHistoryInput) operationName() string {
+	return "ListFileCommitHistory"
+}
+
 type ListFileCommitHistoryOutput struct {
 
 	// An array of FileVersion objects that form a directed acyclic graph (DAG) of the

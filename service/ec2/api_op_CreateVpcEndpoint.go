@@ -109,6 +109,10 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcEndpointInput) operationName() string {
+	return "CreateVpcEndpoint"
+}
+
 type CreateVpcEndpointOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

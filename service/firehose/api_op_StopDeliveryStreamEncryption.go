@@ -59,6 +59,10 @@ type StopDeliveryStreamEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDeliveryStreamEncryptionInput) operationName() string {
+	return "StopDeliveryStreamEncryption"
+}
+
 type StopDeliveryStreamEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

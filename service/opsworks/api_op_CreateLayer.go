@@ -137,6 +137,10 @@ type CreateLayerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLayerInput) operationName() string {
+	return "CreateLayer"
+}
+
 // Contains the response to a CreateLayer request.
 type CreateLayerOutput struct {
 

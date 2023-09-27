@@ -36,6 +36,10 @@ type GetAssociationForServiceQuotaTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssociationForServiceQuotaTemplateInput) operationName() string {
+	return "GetAssociationForServiceQuotaTemplate"
+}
+
 type GetAssociationForServiceQuotaTemplateOutput struct {
 
 	// The association status. If the status is ASSOCIATED , the quota increase

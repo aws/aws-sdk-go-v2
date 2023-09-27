@@ -43,6 +43,10 @@ type StartExtensionPackAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartExtensionPackAssociationInput) operationName() string {
+	return "StartExtensionPackAssociation"
+}
+
 type StartExtensionPackAssociationOutput struct {
 
 	// The identifier for the request operation.

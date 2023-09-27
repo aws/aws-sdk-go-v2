@@ -107,6 +107,10 @@ type PutOrganizationConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutOrganizationConfigRuleInput) operationName() string {
+	return "PutOrganizationConfigRule"
+}
+
 type PutOrganizationConfigRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of an organization Config rule.

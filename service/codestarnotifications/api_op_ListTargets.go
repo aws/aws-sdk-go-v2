@@ -52,6 +52,10 @@ type ListTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTargetsInput) operationName() string {
+	return "ListTargets"
+}
+
 type ListTargetsOutput struct {
 
 	// An enumeration token that can be used in a request to return the next batch of

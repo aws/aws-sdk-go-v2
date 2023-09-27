@@ -53,6 +53,10 @@ type ListConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectionsInput) operationName() string {
+	return "ListConnections"
+}
+
 type ListConnectionsOutput struct {
 
 	// A list of summary information records for connections. In a paginated request,

@@ -78,6 +78,10 @@ type DescribeActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActivitiesInput) operationName() string {
+	return "DescribeActivities"
+}
+
 type DescribeActivitiesOutput struct {
 
 	// The marker for the next set of results.

@@ -64,6 +64,10 @@ type RollbackStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RollbackStackInput) operationName() string {
+	return "RollbackStack"
+}
+
 type RollbackStackOutput struct {
 
 	// Unique identifier of the stack.

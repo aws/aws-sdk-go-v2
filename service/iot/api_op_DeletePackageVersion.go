@@ -53,6 +53,10 @@ type DeletePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackageVersionInput) operationName() string {
+	return "DeletePackageVersion"
+}
+
 type DeletePackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

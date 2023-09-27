@@ -64,6 +64,10 @@ type CreateDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDevicePoolInput) operationName() string {
+	return "CreateDevicePool"
+}
+
 // Represents the result of a create device pool request.
 type CreateDevicePoolOutput struct {
 

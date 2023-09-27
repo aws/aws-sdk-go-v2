@@ -46,6 +46,10 @@ type DescribeBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBuildInput) operationName() string {
+	return "DescribeBuild"
+}
+
 type DescribeBuildOutput struct {
 
 	// Set of properties describing the requested build.

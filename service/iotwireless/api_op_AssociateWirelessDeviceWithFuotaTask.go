@@ -46,6 +46,10 @@ type AssociateWirelessDeviceWithFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateWirelessDeviceWithFuotaTaskInput) operationName() string {
+	return "AssociateWirelessDeviceWithFuotaTask"
+}
+
 type AssociateWirelessDeviceWithFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

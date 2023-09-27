@@ -60,6 +60,10 @@ type CreateAnomalyMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnomalyMonitorInput) operationName() string {
+	return "CreateAnomalyMonitor"
+}
+
 type CreateAnomalyMonitorOutput struct {
 
 	// The unique identifier of your newly created cost anomaly detection monitor.

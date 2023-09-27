@@ -54,6 +54,10 @@ type ConfirmProductInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmProductInstanceInput) operationName() string {
+	return "ConfirmProductInstance"
+}
+
 type ConfirmProductInstanceOutput struct {
 
 	// The Amazon Web Services account ID of the instance owner. This is only present

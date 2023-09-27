@@ -44,6 +44,10 @@ type DescribeLocationHdfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationHdfsInput) operationName() string {
+	return "DescribeLocationHdfs"
+}
+
 type DescribeLocationHdfsOutput struct {
 
 	// The ARNs of the agents that are used to connect to the HDFS cluster.

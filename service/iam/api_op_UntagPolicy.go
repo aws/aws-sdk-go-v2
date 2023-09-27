@@ -53,6 +53,10 @@ type UntagPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagPolicyInput) operationName() string {
+	return "UntagPolicy"
+}
+
 type UntagPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

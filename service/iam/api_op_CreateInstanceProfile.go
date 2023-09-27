@@ -68,6 +68,10 @@ type CreateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceProfileInput) operationName() string {
+	return "CreateInstanceProfile"
+}
+
 // Contains the response to a successful CreateInstanceProfile request.
 type CreateInstanceProfileOutput struct {
 

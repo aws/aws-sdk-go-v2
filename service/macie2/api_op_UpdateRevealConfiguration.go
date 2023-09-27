@@ -44,6 +44,10 @@ type UpdateRevealConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRevealConfigurationInput) operationName() string {
+	return "UpdateRevealConfiguration"
+}
+
 type UpdateRevealConfigurationOutput struct {
 
 	// The new configuration settings and the status of the configuration for the

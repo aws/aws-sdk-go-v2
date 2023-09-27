@@ -59,6 +59,10 @@ type GetConnectorDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectorDefinitionVersionInput) operationName() string {
+	return "GetConnectorDefinitionVersion"
+}
+
 type GetConnectorDefinitionVersionOutput struct {
 
 	// The ARN of the connector definition version.

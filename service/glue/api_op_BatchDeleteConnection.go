@@ -46,6 +46,10 @@ type BatchDeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteConnectionInput) operationName() string {
+	return "BatchDeleteConnection"
+}
+
 type BatchDeleteConnectionOutput struct {
 
 	// A map of the names of connections that were not successfully deleted to error

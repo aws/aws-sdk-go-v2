@@ -41,6 +41,10 @@ type DeleteFindingsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFindingsFilterInput) operationName() string {
+	return "DeleteFindingsFilter"
+}
+
 type DeleteFindingsFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

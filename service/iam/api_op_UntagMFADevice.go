@@ -54,6 +54,10 @@ type UntagMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagMFADeviceInput) operationName() string {
+	return "UntagMFADevice"
+}
+
 type UntagMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,6 +62,10 @@ type DescribeSubscribersForNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSubscribersForNotificationInput) operationName() string {
+	return "DescribeSubscribersForNotification"
+}
+
 // Response of DescribeSubscribersForNotification
 type DescribeSubscribersForNotificationOutput struct {
 

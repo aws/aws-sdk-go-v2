@@ -49,6 +49,10 @@ type DeregisterInstanceEventNotificationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterInstanceEventNotificationAttributesInput) operationName() string {
+	return "DeregisterInstanceEventNotificationAttributes"
+}
+
 type DeregisterInstanceEventNotificationAttributesOutput struct {
 
 	// The resulting set of tag keys.

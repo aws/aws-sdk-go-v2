@@ -61,6 +61,10 @@ type UpdateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDashboardInput) operationName() string {
+	return "UpdateDashboard"
+}
+
 type UpdateDashboardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

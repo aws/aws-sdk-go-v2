@@ -78,6 +78,10 @@ type GetBucketTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketTaggingInput) operationName() string {
+	return "GetBucketTagging"
+}
+
 type GetBucketTaggingOutput struct {
 
 	// The tags set of the Outposts bucket.

@@ -42,6 +42,10 @@ type GetInstanceStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceStateInput) operationName() string {
+	return "GetInstanceState"
+}
+
 type GetInstanceStateOutput struct {
 
 	// The state of the instance.

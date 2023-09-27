@@ -64,6 +64,10 @@ type DescribeMetricFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetricFiltersInput) operationName() string {
+	return "DescribeMetricFilters"
+}
+
 type DescribeMetricFiltersOutput struct {
 
 	// The metric filters.

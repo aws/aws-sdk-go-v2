@@ -51,6 +51,10 @@ type ListIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIntegrationsInput) operationName() string {
+	return "ListIntegrations"
+}
+
 type ListIntegrationsOutput struct {
 
 	// The list of ListIntegrations instances.

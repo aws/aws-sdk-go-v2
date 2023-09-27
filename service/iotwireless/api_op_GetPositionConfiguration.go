@@ -52,6 +52,10 @@ type GetPositionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPositionConfigurationInput) operationName() string {
+	return "GetPositionConfiguration"
+}
+
 type GetPositionConfigurationOutput struct {
 
 	// The position data destination that describes the AWS IoT rule that processes

@@ -46,6 +46,10 @@ type ListRegistriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRegistriesInput) operationName() string {
+	return "ListRegistries"
+}
+
 type ListRegistriesOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if

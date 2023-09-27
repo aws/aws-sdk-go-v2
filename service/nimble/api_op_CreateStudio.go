@@ -88,6 +88,10 @@ type CreateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStudioInput) operationName() string {
+	return "CreateStudio"
+}
+
 type CreateStudioOutput struct {
 
 	// Information about a studio.

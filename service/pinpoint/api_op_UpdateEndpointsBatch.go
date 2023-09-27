@@ -53,6 +53,10 @@ type UpdateEndpointsBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointsBatchInput) operationName() string {
+	return "UpdateEndpointsBatch"
+}
+
 type UpdateEndpointsBatchOutput struct {
 
 	// Provides information about an API request or response.

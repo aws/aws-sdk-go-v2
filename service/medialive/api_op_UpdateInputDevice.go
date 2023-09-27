@@ -55,6 +55,10 @@ type UpdateInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInputDeviceInput) operationName() string {
+	return "UpdateInputDevice"
+}
+
 // Placeholder documentation for UpdateInputDeviceResponse
 type UpdateInputDeviceOutput struct {
 

@@ -48,6 +48,10 @@ type UpdateMediaInsightsPipelineStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMediaInsightsPipelineStatusInput) operationName() string {
+	return "UpdateMediaInsightsPipelineStatus"
+}
+
 type UpdateMediaInsightsPipelineStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

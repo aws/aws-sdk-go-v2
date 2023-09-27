@@ -59,6 +59,10 @@ type UpdateDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDatastoreInput) operationName() string {
+	return "UpdateDatastore"
+}
+
 type UpdateDatastoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

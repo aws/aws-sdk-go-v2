@@ -58,6 +58,10 @@ type AddWorkingStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddWorkingStorageInput) operationName() string {
+	return "AddWorkingStorage"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway for
 // which working storage was configured.
 type AddWorkingStorageOutput struct {

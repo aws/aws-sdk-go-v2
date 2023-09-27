@@ -42,6 +42,10 @@ type UndeploySystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UndeploySystemInstanceInput) operationName() string {
+	return "UndeploySystemInstance"
+}
+
 type UndeploySystemInstanceOutput struct {
 
 	// An object that contains summary information about the system instance that was

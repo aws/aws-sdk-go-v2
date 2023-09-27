@@ -58,6 +58,10 @@ type UpdateAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAgentStatusInput) operationName() string {
+	return "UpdateAgentStatus"
+}
+
 type UpdateAgentStatusOutput struct {
 
 	// UUID of updated agent.

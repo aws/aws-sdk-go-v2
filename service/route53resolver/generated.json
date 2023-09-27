@@ -77,6 +77,7 @@
         "api_op_UpdateResolverDnssecConfig.go",
         "api_op_UpdateResolverEndpoint.go",
         "api_op_UpdateResolverRule.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

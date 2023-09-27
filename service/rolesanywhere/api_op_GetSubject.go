@@ -46,6 +46,10 @@ type GetSubjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubjectInput) operationName() string {
+	return "GetSubject"
+}
+
 type GetSubjectOutput struct {
 
 	// The state of the subject after a read or write operation.

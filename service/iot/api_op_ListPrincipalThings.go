@@ -52,6 +52,10 @@ type ListPrincipalThingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPrincipalThingsInput) operationName() string {
+	return "ListPrincipalThings"
+}
+
 // The output from the ListPrincipalThings operation.
 type ListPrincipalThingsOutput struct {
 

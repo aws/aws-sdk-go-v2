@@ -42,6 +42,10 @@ type RejectDataShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectDataShareInput) operationName() string {
+	return "RejectDataShare"
+}
+
 type RejectDataShareOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly

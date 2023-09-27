@@ -44,6 +44,10 @@ type DescribeWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkteamInput) operationName() string {
+	return "DescribeWorkteam"
+}
+
 type DescribeWorkteamOutput struct {
 
 	// A Workteam instance that contains information about the work team.

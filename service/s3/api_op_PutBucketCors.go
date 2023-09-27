@@ -101,6 +101,10 @@ type PutBucketCorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketCorsInput) operationName() string {
+	return "PutBucketCors"
+}
+
 type PutBucketCorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,6 +49,10 @@ type RemoveFlowVpcInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveFlowVpcInterfaceInput) operationName() string {
+	return "RemoveFlowVpcInterface"
+}
+
 type RemoveFlowVpcInterfaceOutput struct {
 
 	// The ARN of the flow that is associated with the VPC interface you removed.

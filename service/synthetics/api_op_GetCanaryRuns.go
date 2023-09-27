@@ -52,6 +52,10 @@ type GetCanaryRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCanaryRunsInput) operationName() string {
+	return "GetCanaryRuns"
+}
+
 type GetCanaryRunsOutput struct {
 
 	// An array of structures. Each structure contains the details of one of the

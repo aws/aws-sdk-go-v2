@@ -53,6 +53,10 @@ type FailoverGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverGlobalReplicationGroupInput) operationName() string {
+	return "FailoverGlobalReplicationGroup"
+}
+
 type FailoverGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary

@@ -70,6 +70,10 @@ type CreateProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProxySessionInput) operationName() string {
+	return "CreateProxySession"
+}
+
 type CreateProxySessionOutput struct {
 
 	// The proxy session details.

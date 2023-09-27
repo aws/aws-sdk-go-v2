@@ -56,6 +56,10 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOutboundCrossClusterSearchConnectionInput) operationName() string {
+	return "CreateOutboundCrossClusterSearchConnection"
+}
+
 // The result of a CreateOutboundCrossClusterSearchConnection request. Contains
 // the details of the newly created cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {

@@ -52,6 +52,10 @@ type CreateKeyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeyGroupInput) operationName() string {
+	return "CreateKeyGroup"
+}
+
 type CreateKeyGroupOutput struct {
 
 	// The identifier for this version of the key group.

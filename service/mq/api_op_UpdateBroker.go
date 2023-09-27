@@ -82,6 +82,10 @@ type UpdateBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBrokerInput) operationName() string {
+	return "UpdateBroker"
+}
+
 type UpdateBrokerOutput struct {
 
 	// Optional. The authentication strategy used to secure the broker. The default is

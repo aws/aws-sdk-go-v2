@@ -58,6 +58,10 @@ type DescribeInstancePatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstancePatchesInput) operationName() string {
+	return "DescribeInstancePatches"
+}
+
 type DescribeInstancePatchesOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

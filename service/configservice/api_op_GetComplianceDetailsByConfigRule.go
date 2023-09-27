@@ -59,6 +59,10 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComplianceDetailsByConfigRuleInput) operationName() string {
+	return "GetComplianceDetailsByConfigRule"
+}
+
 type GetComplianceDetailsByConfigRuleOutput struct {
 
 	// Indicates whether the Amazon Web Services resource complies with the specified

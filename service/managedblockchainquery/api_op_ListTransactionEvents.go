@@ -59,6 +59,10 @@ type ListTransactionEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTransactionEventsInput) operationName() string {
+	return "ListTransactionEvents"
+}
+
 type ListTransactionEventsOutput struct {
 
 	// An array of TransactionEvent objects. Each object contains details about the

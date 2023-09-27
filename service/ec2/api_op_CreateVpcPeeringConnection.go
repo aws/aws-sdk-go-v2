@@ -74,6 +74,10 @@ type CreateVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcPeeringConnectionInput) operationName() string {
+	return "CreateVpcPeeringConnection"
+}
+
 type CreateVpcPeeringConnectionOutput struct {
 
 	// Information about the VPC peering connection.

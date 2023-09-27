@@ -43,6 +43,10 @@ type DescribeDataQualityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataQualityJobDefinitionInput) operationName() string {
+	return "DescribeDataQualityJobDefinition"
+}
+
 type DescribeDataQualityJobDefinitionOutput struct {
 
 	// The time that the data quality monitoring job definition was created.

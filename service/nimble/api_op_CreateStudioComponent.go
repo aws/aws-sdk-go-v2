@@ -90,6 +90,10 @@ type CreateStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStudioComponentInput) operationName() string {
+	return "CreateStudioComponent"
+}
+
 type CreateStudioComponentOutput struct {
 
 	// Information about the studio component.

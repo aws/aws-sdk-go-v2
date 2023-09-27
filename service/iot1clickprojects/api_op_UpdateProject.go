@@ -54,6 +54,10 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProjectInput) operationName() string {
+	return "UpdateProject"
+}
+
 type UpdateProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

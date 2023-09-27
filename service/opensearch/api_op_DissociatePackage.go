@@ -53,6 +53,10 @@ type DissociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DissociatePackageInput) operationName() string {
+	return "DissociatePackage"
+}
+
 // Container for the response returned by an DissociatePackage operation.
 type DissociatePackageOutput struct {
 

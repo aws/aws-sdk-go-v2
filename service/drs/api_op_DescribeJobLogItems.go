@@ -48,6 +48,10 @@ type DescribeJobLogItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobLogItemsInput) operationName() string {
+	return "DescribeJobLogItems"
+}
+
 type DescribeJobLogItemsOutput struct {
 
 	// An array of Job log items.

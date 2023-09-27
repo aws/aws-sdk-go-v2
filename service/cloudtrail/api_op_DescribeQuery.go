@@ -54,6 +54,10 @@ type DescribeQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeQueryInput) operationName() string {
+	return "DescribeQuery"
+}
+
 type DescribeQueryOutput struct {
 
 	// The URI for the S3 bucket where CloudTrail delivered query results, if

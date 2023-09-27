@@ -52,6 +52,10 @@ type DescribeProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProductsInput) operationName() string {
+	return "DescribeProducts"
+}
+
 type DescribeProductsOutput struct {
 
 	// A list of products, including details for each product.

@@ -48,6 +48,10 @@ type PutCaseEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCaseEventConfigurationInput) operationName() string {
+	return "PutCaseEventConfiguration"
+}
+
 type PutCaseEventConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

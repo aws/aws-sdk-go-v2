@@ -63,6 +63,10 @@ type CreateMediaInsightsPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMediaInsightsPipelineInput) operationName() string {
+	return "CreateMediaInsightsPipeline"
+}
+
 type CreateMediaInsightsPipelineOutput struct {
 
 	// The media insights pipeline object.

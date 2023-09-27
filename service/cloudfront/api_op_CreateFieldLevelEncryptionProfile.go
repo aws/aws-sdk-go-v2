@@ -42,6 +42,10 @@ type CreateFieldLevelEncryptionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFieldLevelEncryptionProfileInput) operationName() string {
+	return "CreateFieldLevelEncryptionProfile"
+}
+
 type CreateFieldLevelEncryptionProfileOutput struct {
 
 	// The current version of the field level encryption profile. For example:

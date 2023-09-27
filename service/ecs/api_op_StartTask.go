@@ -128,6 +128,10 @@ type StartTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTaskInput) operationName() string {
+	return "StartTask"
+}
+
 type StartTaskOutput struct {
 
 	// Any failures associated with the call.

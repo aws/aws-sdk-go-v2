@@ -59,6 +59,10 @@ type ListImagesInRecycleBinInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImagesInRecycleBinInput) operationName() string {
+	return "ListImagesInRecycleBin"
+}
+
 type ListImagesInRecycleBinOutput struct {
 
 	// Information about the AMIs.

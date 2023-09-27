@@ -54,6 +54,10 @@ type DeleteRumMetricsDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRumMetricsDestinationInput) operationName() string {
+	return "DeleteRumMetricsDestination"
+}
+
 type DeleteRumMetricsDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

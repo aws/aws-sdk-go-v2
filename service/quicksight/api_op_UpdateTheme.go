@@ -65,6 +65,10 @@ type UpdateThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThemeInput) operationName() string {
+	return "UpdateTheme"
+}
+
 type UpdateThemeOutput struct {
 
 	// The Amazon Resource Name (ARN) for the theme.

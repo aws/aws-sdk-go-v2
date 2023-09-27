@@ -42,6 +42,10 @@ type GetVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVpcAttachmentInput) operationName() string {
+	return "GetVpcAttachment"
+}
+
 type GetVpcAttachmentOutput struct {
 
 	// Returns details about a VPC attachment.

@@ -67,6 +67,10 @@ type GetAutoScalingGroupRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAutoScalingGroupRecommendationsInput) operationName() string {
+	return "GetAutoScalingGroupRecommendations"
+}
+
 type GetAutoScalingGroupRecommendationsOutput struct {
 
 	// An array of objects that describe Auto Scaling group recommendations.

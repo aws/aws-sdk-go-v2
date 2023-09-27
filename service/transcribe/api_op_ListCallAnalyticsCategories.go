@@ -52,6 +52,10 @@ type ListCallAnalyticsCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCallAnalyticsCategoriesInput) operationName() string {
+	return "ListCallAnalyticsCategories"
+}
+
 type ListCallAnalyticsCategoriesOutput struct {
 
 	// Provides detailed information about your Call Analytics categories, including

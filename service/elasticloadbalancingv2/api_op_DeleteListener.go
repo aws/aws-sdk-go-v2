@@ -42,6 +42,10 @@ type DeleteListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteListenerInput) operationName() string {
+	return "DeleteListener"
+}
+
 type DeleteListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

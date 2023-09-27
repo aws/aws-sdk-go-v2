@@ -44,6 +44,10 @@ type CancelClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelClusterInput) operationName() string {
+	return "CancelCluster"
+}
+
 type CancelClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

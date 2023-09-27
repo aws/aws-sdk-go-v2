@@ -55,6 +55,10 @@ type ListS3ResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListS3ResourcesInput) operationName() string {
+	return "ListS3Resources"
+}
+
 type ListS3ResourcesOutput struct {
 
 	// (Discontinued) When a response is generated, if there is more data to be

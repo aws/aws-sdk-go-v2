@@ -45,6 +45,10 @@ type PromoteReadReplicaDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PromoteReadReplicaDBClusterInput) operationName() string {
+	return "PromoteReadReplicaDBCluster"
+}
+
 type PromoteReadReplicaDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

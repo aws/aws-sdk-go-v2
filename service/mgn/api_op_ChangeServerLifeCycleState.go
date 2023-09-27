@@ -54,6 +54,10 @@ type ChangeServerLifeCycleStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangeServerLifeCycleStateInput) operationName() string {
+	return "ChangeServerLifeCycleState"
+}
+
 type ChangeServerLifeCycleStateOutput struct {
 
 	// Source server application ID.

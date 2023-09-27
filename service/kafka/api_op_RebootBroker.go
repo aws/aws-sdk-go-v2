@@ -48,6 +48,10 @@ type RebootBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootBrokerInput) operationName() string {
+	return "RebootBroker"
+}
+
 type RebootBrokerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

@@ -59,6 +59,10 @@ type GetBucketPolicyStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketPolicyStatusInput) operationName() string {
+	return "GetBucketPolicyStatus"
+}
+
 type GetBucketPolicyStatusOutput struct {
 
 	// The policy status for the specified bucket.

@@ -58,6 +58,7 @@
         "api_op_UpdateLabelGroup.go",
         "api_op_UpdateModel.go",
         "api_op_UpdateRetrainingScheduler.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

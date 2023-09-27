@@ -64,6 +64,10 @@ type UpdateVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVirtualServiceInput) operationName() string {
+	return "UpdateVirtualService"
+}
+
 type UpdateVirtualServiceOutput struct {
 
 	// A full description of the virtual service that was updated.

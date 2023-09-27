@@ -51,6 +51,10 @@ type PurchaseReservedNodeOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseReservedNodeOfferingInput) operationName() string {
+	return "PurchaseReservedNodeOffering"
+}
+
 type PurchaseReservedNodeOfferingOutput struct {
 
 	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API

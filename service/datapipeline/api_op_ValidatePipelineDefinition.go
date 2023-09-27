@@ -89,6 +89,10 @@ type ValidatePipelineDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidatePipelineDefinitionInput) operationName() string {
+	return "ValidatePipelineDefinition"
+}
+
 // Contains the output of ValidatePipelineDefinition.
 type ValidatePipelineDefinitionOutput struct {
 

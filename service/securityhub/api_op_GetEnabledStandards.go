@@ -49,6 +49,10 @@ type GetEnabledStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnabledStandardsInput) operationName() string {
+	return "GetEnabledStandards"
+}
+
 type GetEnabledStandardsOutput struct {
 
 	// The pagination token to use to request the next page of results.

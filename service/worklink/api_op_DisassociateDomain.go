@@ -50,6 +50,10 @@ type DisassociateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDomainInput) operationName() string {
+	return "DisassociateDomain"
+}
+
 type DisassociateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

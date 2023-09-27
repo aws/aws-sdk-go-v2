@@ -42,6 +42,10 @@ type GetVoiceConnectorTerminationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorTerminationInput) operationName() string {
+	return "GetVoiceConnectorTermination"
+}
+
 type GetVoiceConnectorTerminationOutput struct {
 
 	// The termination setting details.

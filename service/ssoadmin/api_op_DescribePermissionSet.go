@@ -50,6 +50,10 @@ type DescribePermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePermissionSetInput) operationName() string {
+	return "DescribePermissionSet"
+}
+
 type DescribePermissionSetOutput struct {
 
 	// Describes the level of access on an Amazon Web Services account.

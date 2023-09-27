@@ -83,6 +83,10 @@ type RestoreTableFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreTableFromSnapshotInput) operationName() string {
+	return "RestoreTableFromSnapshot"
+}
+
 type RestoreTableFromSnapshotOutput struct {
 
 	// The TableRestoreStatus object that contains the status of the restore operation.

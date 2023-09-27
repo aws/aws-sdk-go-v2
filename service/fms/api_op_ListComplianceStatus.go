@@ -59,6 +59,10 @@ type ListComplianceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComplianceStatusInput) operationName() string {
+	return "ListComplianceStatus"
+}
+
 type ListComplianceStatusOutput struct {
 
 	// If you have more PolicyComplianceStatus objects than the number that you

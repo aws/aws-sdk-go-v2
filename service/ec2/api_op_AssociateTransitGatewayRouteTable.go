@@ -54,6 +54,10 @@ type AssociateTransitGatewayRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTransitGatewayRouteTableInput) operationName() string {
+	return "AssociateTransitGatewayRouteTable"
+}
+
 type AssociateTransitGatewayRouteTableOutput struct {
 
 	// The ID of the association.

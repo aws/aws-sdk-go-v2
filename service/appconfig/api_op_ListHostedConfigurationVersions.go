@@ -61,6 +61,10 @@ type ListHostedConfigurationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHostedConfigurationVersionsInput) operationName() string {
+	return "ListHostedConfigurationVersions"
+}
+
 type ListHostedConfigurationVersionsOutput struct {
 
 	// The elements from this collection.

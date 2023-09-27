@@ -56,6 +56,10 @@ type ListContainerRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContainerRecipesInput) operationName() string {
+	return "ListContainerRecipes"
+}
+
 type ListContainerRecipesOutput struct {
 
 	// The list of container recipes returned for the request.

@@ -48,6 +48,10 @@ type DeleteSubnetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSubnetInput) operationName() string {
+	return "DeleteSubnet"
+}
+
 type DeleteSubnetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

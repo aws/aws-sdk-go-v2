@@ -71,6 +71,10 @@ type BatchImportEvidenceToAssessmentControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchImportEvidenceToAssessmentControlInput) operationName() string {
+	return "BatchImportEvidenceToAssessmentControl"
+}
+
 type BatchImportEvidenceToAssessmentControlOutput struct {
 
 	// A list of errors that the BatchImportEvidenceToAssessmentControl API returned.

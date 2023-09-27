@@ -42,6 +42,10 @@ type BatchDeleteBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteBuildsInput) operationName() string {
+	return "BatchDeleteBuilds"
+}
+
 type BatchDeleteBuildsOutput struct {
 
 	// The IDs of the builds that were successfully deleted.

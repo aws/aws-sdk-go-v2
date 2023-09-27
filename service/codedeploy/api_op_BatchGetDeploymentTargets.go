@@ -64,6 +64,10 @@ type BatchGetDeploymentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetDeploymentTargetsInput) operationName() string {
+	return "BatchGetDeploymentTargets"
+}
+
 type BatchGetDeploymentTargetsOutput struct {
 
 	// A list of target objects for a deployment. Each target object contains details

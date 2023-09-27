@@ -62,6 +62,10 @@ type UpdateResourceSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceSetInput) operationName() string {
+	return "UpdateResourceSet"
+}
+
 type UpdateResourceSetOutput struct {
 
 	// The Amazon Resource Name (ARN) for the resource set.

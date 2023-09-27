@@ -49,6 +49,10 @@ type DescribeQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeQueueInput) operationName() string {
+	return "DescribeQueue"
+}
+
 type DescribeQueueOutput struct {
 
 	// The name of the queue.

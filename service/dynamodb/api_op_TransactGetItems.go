@@ -61,6 +61,10 @@ type TransactGetItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TransactGetItemsInput) operationName() string {
+	return "TransactGetItems"
+}
+
 type TransactGetItemsOutput struct {
 
 	// If the ReturnConsumedCapacity value was TOTAL , this is an array of

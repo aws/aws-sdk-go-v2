@@ -112,6 +112,10 @@ type GetLabelDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLabelDetectionInput) operationName() string {
+	return "GetLabelDetection"
+}
+
 type GetLabelDetectionOutput struct {
 
 	// Information about the paramters used when getting a response. Includes

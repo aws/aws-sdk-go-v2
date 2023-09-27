@@ -51,6 +51,10 @@ type ListApplicationSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationSnapshotsInput) operationName() string {
+	return "ListApplicationSnapshots"
+}
+
 type ListApplicationSnapshotsOutput struct {
 
 	// The token for the next set of results, or null if there are no additional

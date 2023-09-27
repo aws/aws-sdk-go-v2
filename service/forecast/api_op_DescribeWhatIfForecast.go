@@ -50,6 +50,10 @@ type DescribeWhatIfForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWhatIfForecastInput) operationName() string {
+	return "DescribeWhatIfForecast"
+}
+
 type DescribeWhatIfForecastOutput struct {
 
 	// When the what-if forecast was created.

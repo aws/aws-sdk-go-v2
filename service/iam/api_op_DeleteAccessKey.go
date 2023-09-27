@@ -55,6 +55,10 @@ type DeleteAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccessKeyInput) operationName() string {
+	return "DeleteAccessKey"
+}
+
 type DeleteAccessKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

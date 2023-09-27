@@ -61,6 +61,10 @@ type DescribeDBParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBParametersInput) operationName() string {
+	return "DescribeDBParameters"
+}
+
 type DescribeDBParametersOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

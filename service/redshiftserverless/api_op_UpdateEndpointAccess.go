@@ -46,6 +46,10 @@ type UpdateEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointAccessInput) operationName() string {
+	return "UpdateEndpointAccess"
+}
+
 type UpdateEndpointAccessOutput struct {
 
 	// The updated VPC endpoint.

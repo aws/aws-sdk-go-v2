@@ -48,6 +48,10 @@ type UpdateResourceProfileDetectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceProfileDetectionsInput) operationName() string {
+	return "UpdateResourceProfileDetections"
+}
+
 type UpdateResourceProfileDetectionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

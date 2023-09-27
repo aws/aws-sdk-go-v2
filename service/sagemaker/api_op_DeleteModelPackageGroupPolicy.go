@@ -41,6 +41,10 @@ type DeleteModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteModelPackageGroupPolicyInput) operationName() string {
+	return "DeleteModelPackageGroupPolicy"
+}
+
 type DeleteModelPackageGroupPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

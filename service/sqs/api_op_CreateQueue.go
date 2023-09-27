@@ -216,6 +216,10 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQueueInput) operationName() string {
+	return "CreateQueue"
+}
+
 // Returns the QueueUrl attribute of the created queue.
 type CreateQueueOutput struct {
 

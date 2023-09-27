@@ -54,6 +54,10 @@ type GetRouteResponsesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRouteResponsesInput) operationName() string {
+	return "GetRouteResponses"
+}
+
 type GetRouteResponsesOutput struct {
 
 	// The elements from this collection.

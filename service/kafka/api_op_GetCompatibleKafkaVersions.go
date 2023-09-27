@@ -40,6 +40,10 @@ type GetCompatibleKafkaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCompatibleKafkaVersionsInput) operationName() string {
+	return "GetCompatibleKafkaVersions"
+}
+
 type GetCompatibleKafkaVersionsOutput struct {
 
 	// A list of CompatibleKafkaVersion objects.

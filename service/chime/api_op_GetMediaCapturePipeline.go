@@ -51,6 +51,10 @@ type GetMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMediaCapturePipelineInput) operationName() string {
+	return "GetMediaCapturePipeline"
+}
+
 type GetMediaCapturePipelineOutput struct {
 
 	// The media capture pipeline object.

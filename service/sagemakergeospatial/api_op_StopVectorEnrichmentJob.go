@@ -41,6 +41,10 @@ type StopVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopVectorEnrichmentJobInput) operationName() string {
+	return "StopVectorEnrichmentJob"
+}
+
 type StopVectorEnrichmentJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,6 +64,10 @@ type AddRoleToInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddRoleToInstanceProfileInput) operationName() string {
+	return "AddRoleToInstanceProfile"
+}
+
 type AddRoleToInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type ListChannelMembershipsForAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelMembershipsForAppInstanceUserInput) operationName() string {
+	return "ListChannelMembershipsForAppInstanceUser"
+}
+
 type ListChannelMembershipsForAppInstanceUserOutput struct {
 
 	// The information for the requested channel memberships.

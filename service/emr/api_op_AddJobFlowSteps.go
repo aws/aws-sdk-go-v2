@@ -71,6 +71,10 @@ type AddJobFlowStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddJobFlowStepsInput) operationName() string {
+	return "AddJobFlowSteps"
+}
+
 // The output for the AddJobFlowSteps operation.
 type AddJobFlowStepsOutput struct {
 

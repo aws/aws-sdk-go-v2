@@ -92,6 +92,10 @@ type GetObjectTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectTaggingInput) operationName() string {
+	return "GetObjectTagging"
+}
+
 type GetObjectTaggingOutput struct {
 
 	// Contains the tag set.

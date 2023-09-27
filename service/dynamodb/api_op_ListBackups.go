@@ -74,6 +74,10 @@ type ListBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupsInput) operationName() string {
+	return "ListBackups"
+}
+
 type ListBackupsOutput struct {
 
 	// List of BackupSummary objects.

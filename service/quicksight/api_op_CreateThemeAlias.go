@@ -60,6 +60,10 @@ type CreateThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThemeAliasInput) operationName() string {
+	return "CreateThemeAlias"
+}
+
 type CreateThemeAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

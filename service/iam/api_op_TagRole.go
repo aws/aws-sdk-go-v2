@@ -81,6 +81,10 @@ type TagRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagRoleInput) operationName() string {
+	return "TagRole"
+}
+
 type TagRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

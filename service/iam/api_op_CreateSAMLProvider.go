@@ -79,6 +79,10 @@ type CreateSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSAMLProviderInput) operationName() string {
+	return "CreateSAMLProvider"
+}
+
 // Contains the response to a successful CreateSAMLProvider request.
 type CreateSAMLProviderOutput struct {
 

@@ -72,6 +72,10 @@ type ListServerCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServerCertificatesInput) operationName() string {
+	return "ListServerCertificates"
+}
+
 // Contains the response to a successful ListServerCertificates request.
 type ListServerCertificatesOutput struct {
 

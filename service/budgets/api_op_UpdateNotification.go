@@ -59,6 +59,10 @@ type UpdateNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNotificationInput) operationName() string {
+	return "UpdateNotification"
+}
+
 // Response of UpdateNotification
 type UpdateNotificationOutput struct {
 	// Metadata pertaining to the operation's result.

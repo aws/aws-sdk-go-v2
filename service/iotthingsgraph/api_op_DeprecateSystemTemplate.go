@@ -44,6 +44,10 @@ type DeprecateSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprecateSystemTemplateInput) operationName() string {
+	return "DeprecateSystemTemplate"
+}
+
 type DeprecateSystemTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

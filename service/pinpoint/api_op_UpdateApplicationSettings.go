@@ -48,6 +48,10 @@ type UpdateApplicationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationSettingsInput) operationName() string {
+	return "UpdateApplicationSettings"
+}
+
 type UpdateApplicationSettingsOutput struct {
 
 	// Provides information about an application, including the default settings for

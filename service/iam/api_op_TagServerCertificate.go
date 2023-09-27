@@ -81,6 +81,10 @@ type TagServerCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagServerCertificateInput) operationName() string {
+	return "TagServerCertificate"
+}
+
 type TagServerCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

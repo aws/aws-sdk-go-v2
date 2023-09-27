@@ -55,6 +55,10 @@ type DeregisterFromWorkMailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterFromWorkMailInput) operationName() string {
+	return "DeregisterFromWorkMail"
+}
+
 type DeregisterFromWorkMailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

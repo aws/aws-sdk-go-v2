@@ -64,6 +64,10 @@ type RegisterInstancesWithLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterInstancesWithLoadBalancerInput) operationName() string {
+	return "RegisterInstancesWithLoadBalancer"
+}
+
 // Contains the output of RegisterInstancesWithLoadBalancer.
 type RegisterInstancesWithLoadBalancerOutput struct {
 

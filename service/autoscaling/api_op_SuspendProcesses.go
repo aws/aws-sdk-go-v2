@@ -59,6 +59,10 @@ type SuspendProcessesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SuspendProcessesInput) operationName() string {
+	return "SuspendProcesses"
+}
+
 type SuspendProcessesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

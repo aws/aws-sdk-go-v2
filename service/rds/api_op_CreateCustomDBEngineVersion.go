@@ -107,6 +107,10 @@ type CreateCustomDBEngineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomDBEngineVersionInput) operationName() string {
+	return "CreateCustomDBEngineVersion"
+}
+
 // This data type is used as a response element in the action
 // DescribeDBEngineVersions .
 type CreateCustomDBEngineVersionOutput struct {

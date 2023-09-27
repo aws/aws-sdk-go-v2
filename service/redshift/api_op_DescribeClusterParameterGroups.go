@@ -84,6 +84,10 @@ type DescribeClusterParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterParameterGroupsInput) operationName() string {
+	return "DescribeClusterParameterGroups"
+}
+
 // Contains the output from the DescribeClusterParameterGroups action.
 type DescribeClusterParameterGroupsOutput struct {
 

@@ -51,6 +51,10 @@ type DescribeOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationsAccessInput) operationName() string {
+	return "DescribeOrganizationsAccess"
+}
+
 type DescribeOrganizationsAccessOutput struct {
 
 	// Presents the status of the OrganizationAccess .

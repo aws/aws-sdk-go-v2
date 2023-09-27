@@ -48,6 +48,10 @@ type ListTagsForStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForStreamInput) operationName() string {
+	return "ListTagsForStream"
+}
+
 type ListTagsForStreamOutput struct {
 
 	// If you specify this parameter and the result of a ListTags call is truncated,

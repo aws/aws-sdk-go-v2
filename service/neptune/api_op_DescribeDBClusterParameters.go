@@ -62,6 +62,10 @@ type DescribeDBClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterParametersInput) operationName() string {
+	return "DescribeDBClusterParameters"
+}
+
 type DescribeDBClusterParametersOutput struct {
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameters

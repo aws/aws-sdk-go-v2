@@ -42,6 +42,10 @@ type BatchDeleteClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteClusterSnapshotsInput) operationName() string {
+	return "BatchDeleteClusterSnapshots"
+}
+
 type BatchDeleteClusterSnapshotsOutput struct {
 
 	// A list of any errors returned.

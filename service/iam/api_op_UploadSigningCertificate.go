@@ -73,6 +73,10 @@ type UploadSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadSigningCertificateInput) operationName() string {
+	return "UploadSigningCertificate"
+}
+
 // Contains the response to a successful UploadSigningCertificate request.
 type UploadSigningCertificateOutput struct {
 

@@ -42,6 +42,10 @@ type EnableDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableDirectoryInput) operationName() string {
+	return "EnableDirectory"
+}
+
 type EnableDirectoryOutput struct {
 
 	// The ARN of the enabled directory.

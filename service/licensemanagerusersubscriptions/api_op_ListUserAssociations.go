@@ -57,6 +57,10 @@ type ListUserAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserAssociationsInput) operationName() string {
+	return "ListUserAssociations"
+}
+
 type ListUserAssociationsOutput struct {
 
 	// Metadata that describes the list user association operation.

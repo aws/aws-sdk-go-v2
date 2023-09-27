@@ -42,6 +42,10 @@ type DeregisterApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterApplicationInput) operationName() string {
+	return "DeregisterApplication"
+}
+
 type DeregisterApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

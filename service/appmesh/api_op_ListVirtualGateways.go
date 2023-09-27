@@ -64,6 +64,10 @@ type ListVirtualGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVirtualGatewaysInput) operationName() string {
+	return "ListVirtualGateways"
+}
+
 type ListVirtualGatewaysOutput struct {
 
 	// The list of existing virtual gateways for the specified service mesh.

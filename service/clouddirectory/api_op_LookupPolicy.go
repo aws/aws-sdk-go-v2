@@ -61,6 +61,10 @@ type LookupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LookupPolicyInput) operationName() string {
+	return "LookupPolicy"
+}
+
 type LookupPolicyOutput struct {
 
 	// The pagination token.

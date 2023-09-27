@@ -85,6 +85,10 @@ type DeletePackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackageVersionsInput) operationName() string {
+	return "DeletePackageVersions"
+}
+
 type DeletePackageVersionsOutput struct {
 
 	// A PackageVersionError object that contains a map of errors codes for the

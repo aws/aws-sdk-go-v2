@@ -71,6 +71,10 @@ type UpdateLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLaunchInput) operationName() string {
+	return "UpdateLaunch"
+}
+
 type UpdateLaunchOutput struct {
 
 	// A structure that contains the new configuration of the launch that was updated.

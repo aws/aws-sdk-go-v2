@@ -70,6 +70,10 @@ type CreateAuditSuppressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAuditSuppressionInput) operationName() string {
+	return "CreateAuditSuppression"
+}
+
 type CreateAuditSuppressionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

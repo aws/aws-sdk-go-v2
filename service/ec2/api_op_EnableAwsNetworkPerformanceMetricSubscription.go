@@ -57,6 +57,10 @@ type EnableAwsNetworkPerformanceMetricSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableAwsNetworkPerformanceMetricSubscriptionInput) operationName() string {
+	return "EnableAwsNetworkPerformanceMetricSubscription"
+}
+
 type EnableAwsNetworkPerformanceMetricSubscriptionOutput struct {
 
 	// Indicates whether the subscribe action was successful.

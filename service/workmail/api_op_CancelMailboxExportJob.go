@@ -52,6 +52,10 @@ type CancelMailboxExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelMailboxExportJobInput) operationName() string {
+	return "CancelMailboxExportJob"
+}
+
 type CancelMailboxExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

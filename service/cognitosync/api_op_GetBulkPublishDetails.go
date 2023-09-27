@@ -48,6 +48,10 @@ type GetBulkPublishDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBulkPublishDetailsInput) operationName() string {
+	return "GetBulkPublishDetails"
+}
+
 // The output for the GetBulkPublishDetails operation.
 type GetBulkPublishDetailsOutput struct {
 

@@ -53,6 +53,10 @@ type UpdateThingGroupsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThingGroupsForThingInput) operationName() string {
+	return "UpdateThingGroupsForThing"
+}
+
 type UpdateThingGroupsForThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

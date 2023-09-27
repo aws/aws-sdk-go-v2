@@ -43,6 +43,10 @@ type GetNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNamedQueryInput) operationName() string {
+	return "GetNamedQuery"
+}
+
 type GetNamedQueryOutput struct {
 
 	// Information about the query.

@@ -56,6 +56,10 @@ type DescribeCacheSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCacheSubnetGroupsInput) operationName() string {
+	return "DescribeCacheSubnetGroups"
+}
+
 // Represents the output of a DescribeCacheSubnetGroups operation.
 type DescribeCacheSubnetGroupsOutput struct {
 

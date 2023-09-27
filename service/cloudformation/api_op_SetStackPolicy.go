@@ -54,6 +54,10 @@ type SetStackPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetStackPolicyInput) operationName() string {
+	return "SetStackPolicy"
+}
+
 type SetStackPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

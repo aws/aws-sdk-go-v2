@@ -49,6 +49,10 @@ type CreateExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExportJobInput) operationName() string {
+	return "CreateExportJob"
+}
+
 type CreateExportJobOutput struct {
 
 	// Provides information about the status and settings of a job that exports

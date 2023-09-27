@@ -42,6 +42,10 @@ type GetOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOrderInput) operationName() string {
+	return "GetOrder"
+}
+
 type GetOrderOutput struct {
 
 	// Information about the order.

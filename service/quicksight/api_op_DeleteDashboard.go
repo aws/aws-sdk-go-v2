@@ -51,6 +51,10 @@ type DeleteDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDashboardInput) operationName() string {
+	return "DeleteDashboard"
+}
+
 type DeleteDashboardOutput struct {
 
 	// The Secure Socket Layer (SSL) properties that apply for the resource.

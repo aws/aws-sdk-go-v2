@@ -46,6 +46,10 @@ type DeleteAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAlarmInput) operationName() string {
+	return "DeleteAlarm"
+}
+
 type DeleteAlarmOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

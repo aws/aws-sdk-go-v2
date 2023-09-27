@@ -48,6 +48,10 @@ type UpdateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEvaluationInput) operationName() string {
+	return "UpdateEvaluation"
+}
+
 // Represents the output of an UpdateEvaluation operation. You can see the updated
 // content by using the GetEvaluation operation.
 type UpdateEvaluationOutput struct {

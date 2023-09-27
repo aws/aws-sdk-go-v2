@@ -50,6 +50,10 @@ type DisableAddressTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableAddressTransferInput) operationName() string {
+	return "DisableAddressTransfer"
+}
+
 type DisableAddressTransferOutput struct {
 
 	// An Elastic IP address transfer.

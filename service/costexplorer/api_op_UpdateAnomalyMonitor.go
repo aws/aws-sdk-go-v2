@@ -45,6 +45,10 @@ type UpdateAnomalyMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnomalyMonitorInput) operationName() string {
+	return "UpdateAnomalyMonitor"
+}
+
 type UpdateAnomalyMonitorOutput struct {
 
 	// A cost anomaly monitor ARN.

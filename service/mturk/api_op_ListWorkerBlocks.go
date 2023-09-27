@@ -42,6 +42,10 @@ type ListWorkerBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkerBlocksInput) operationName() string {
+	return "ListWorkerBlocks"
+}
+
 type ListWorkerBlocksOutput struct {
 
 	// If the previous response was incomplete (because there is more data to

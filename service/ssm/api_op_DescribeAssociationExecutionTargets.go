@@ -59,6 +59,10 @@ type DescribeAssociationExecutionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssociationExecutionTargetsInput) operationName() string {
+	return "DescribeAssociationExecutionTargets"
+}
+
 type DescribeAssociationExecutionTargetsOutput struct {
 
 	// Information about the execution.

@@ -154,6 +154,10 @@ type CreateTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTargetGroupInput) operationName() string {
+	return "CreateTargetGroup"
+}
+
 type CreateTargetGroupOutput struct {
 
 	// Information about the target group.

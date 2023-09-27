@@ -49,6 +49,10 @@ type ListTagsForCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForCertificateInput) operationName() string {
+	return "ListTagsForCertificate"
+}
+
 type ListTagsForCertificateOutput struct {
 
 	// The key-value pairs that define the applied tags.

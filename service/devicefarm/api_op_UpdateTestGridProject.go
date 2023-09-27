@@ -51,6 +51,10 @@ type UpdateTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTestGridProjectInput) operationName() string {
+	return "UpdateTestGridProject"
+}
+
 type UpdateTestGridProjectOutput struct {
 
 	// The project, including updated information.

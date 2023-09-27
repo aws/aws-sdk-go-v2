@@ -38,6 +38,10 @@ type GetV2LoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetV2LoggingOptionsInput) operationName() string {
+	return "GetV2LoggingOptions"
+}
+
 type GetV2LoggingOptionsOutput struct {
 
 	// The default log level.

@@ -50,6 +50,10 @@ type ReplaceIamInstanceProfileAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceIamInstanceProfileAssociationInput) operationName() string {
+	return "ReplaceIamInstanceProfileAssociation"
+}
+
 type ReplaceIamInstanceProfileAssociationOutput struct {
 
 	// Information about the IAM instance profile association.

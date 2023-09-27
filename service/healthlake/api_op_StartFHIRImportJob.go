@@ -65,6 +65,10 @@ type StartFHIRImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFHIRImportJobInput) operationName() string {
+	return "StartFHIRImportJob"
+}
+
 type StartFHIRImportJobOutput struct {
 
 	// The AWS-generated job ID.

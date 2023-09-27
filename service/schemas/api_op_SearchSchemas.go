@@ -55,6 +55,10 @@ type SearchSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchSchemasInput) operationName() string {
+	return "SearchSchemas"
+}
+
 type SearchSchemasOutput struct {
 
 	// The token that specifies the next page of results to return. To request the

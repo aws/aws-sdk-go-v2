@@ -82,6 +82,10 @@ type CountOpenWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CountOpenWorkflowExecutionsInput) operationName() string {
+	return "CountOpenWorkflowExecutions"
+}
+
 // Contains the count of workflow executions returned from
 // CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
 type CountOpenWorkflowExecutionsOutput struct {

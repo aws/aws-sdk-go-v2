@@ -49,6 +49,10 @@ type PushDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PushDomainInput) operationName() string {
+	return "PushDomain"
+}
+
 type PushDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

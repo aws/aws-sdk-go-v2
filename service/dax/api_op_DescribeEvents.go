@@ -72,6 +72,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsInput) operationName() string {
+	return "DescribeEvents"
+}
+
 type DescribeEventsOutput struct {
 
 	// An array of events. Each element in the array represents one event.

@@ -49,6 +49,10 @@ type ListEventTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventTypesInput) operationName() string {
+	return "ListEventTypes"
+}
+
 type ListEventTypesOutput struct {
 
 	// Information about each event, including service name, resource type, event ID,

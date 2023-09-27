@@ -69,6 +69,10 @@ type ConfigureAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureAgentInput) operationName() string {
+	return "ConfigureAgent"
+}
+
 // The structure representing the configureAgentResponse.
 type ConfigureAgentOutput struct {
 

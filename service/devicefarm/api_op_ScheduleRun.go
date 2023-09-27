@@ -70,6 +70,10 @@ type ScheduleRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ScheduleRunInput) operationName() string {
+	return "ScheduleRun"
+}
+
 // Represents the result of a schedule run request.
 type ScheduleRunOutput struct {
 

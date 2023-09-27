@@ -66,6 +66,10 @@ type DescribeClusterVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterVersionsInput) operationName() string {
+	return "DescribeClusterVersions"
+}
+
 // Contains the output from the DescribeClusterVersions action.
 type DescribeClusterVersionsOutput struct {
 

@@ -141,6 +141,10 @@ type PutIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutIntegrationInput) operationName() string {
+	return "PutIntegration"
+}
+
 // Represents an HTTP , HTTP_PROXY , AWS , AWS_PROXY , or Mock integration.
 type PutIntegrationOutput struct {
 

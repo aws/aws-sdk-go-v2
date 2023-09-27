@@ -47,6 +47,10 @@ type BatchUpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateClusterInput) operationName() string {
+	return "BatchUpdateCluster"
+}
+
 type BatchUpdateClusterOutput struct {
 
 	// The list of clusters that have been updated.

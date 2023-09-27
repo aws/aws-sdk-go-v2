@@ -54,6 +54,10 @@ type UpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStreamInput) operationName() string {
+	return "UpdateStream"
+}
+
 type UpdateStreamOutput struct {
 
 	// A description of the stream.

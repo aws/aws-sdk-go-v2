@@ -57,6 +57,10 @@ type UpdateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQueueInput) operationName() string {
+	return "UpdateQueue"
+}
+
 type UpdateQueueOutput struct {
 
 	// You can use queues to manage the resources that are available to your AWS

@@ -62,6 +62,10 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEmailIdentityMailFromAttributesInput) operationName() string {
+	return "PutEmailIdentityMailFromAttributes"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutEmailIdentityMailFromAttributesOutput struct {

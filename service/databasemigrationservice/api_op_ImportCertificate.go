@@ -55,6 +55,10 @@ type ImportCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportCertificateInput) operationName() string {
+	return "ImportCertificate"
+}
+
 type ImportCertificateOutput struct {
 
 	// The certificate to be uploaded.

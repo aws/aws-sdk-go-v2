@@ -47,6 +47,10 @@ type ModifyInstanceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceGroupsInput) operationName() string {
+	return "ModifyInstanceGroups"
+}
+
 type ModifyInstanceGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

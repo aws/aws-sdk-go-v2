@@ -65,6 +65,10 @@ type UploadSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadSSHPublicKeyInput) operationName() string {
+	return "UploadSSHPublicKey"
+}
+
 // Contains the response to a successful UploadSSHPublicKey request.
 type UploadSSHPublicKeyOutput struct {
 

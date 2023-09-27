@@ -58,6 +58,10 @@ type CreateReportGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReportGroupInput) operationName() string {
+	return "CreateReportGroup"
+}
+
 type CreateReportGroupOutput struct {
 
 	// Information about the report group that was created.

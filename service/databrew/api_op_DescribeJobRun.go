@@ -48,6 +48,10 @@ type DescribeJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobRunInput) operationName() string {
+	return "DescribeJobRun"
+}
+
 type DescribeJobRunOutput struct {
 
 	// The name of the job being processed during this run.

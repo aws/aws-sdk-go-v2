@@ -48,6 +48,10 @@ type DeleteLayerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLayerInput) operationName() string {
+	return "DeleteLayer"
+}
+
 type DeleteLayerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

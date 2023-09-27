@@ -50,6 +50,10 @@ type UpdateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSpaceInput) operationName() string {
+	return "UpdateSpace"
+}
+
 type UpdateSpaceOutput struct {
 
 	// The space's Amazon Resource Name (ARN).

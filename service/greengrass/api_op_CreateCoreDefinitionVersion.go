@@ -49,6 +49,10 @@ type CreateCoreDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCoreDefinitionVersionInput) operationName() string {
+	return "CreateCoreDefinitionVersion"
+}
+
 type CreateCoreDefinitionVersionOutput struct {
 
 	// The ARN of the version.

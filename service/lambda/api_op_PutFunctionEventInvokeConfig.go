@@ -79,6 +79,10 @@ type PutFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutFunctionEventInvokeConfigInput) operationName() string {
+	return "PutFunctionEventInvokeConfig"
+}
+
 type PutFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for

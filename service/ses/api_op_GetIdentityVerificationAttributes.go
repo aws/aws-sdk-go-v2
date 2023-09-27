@@ -67,6 +67,10 @@ type GetIdentityVerificationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityVerificationAttributesInput) operationName() string {
+	return "GetIdentityVerificationAttributes"
+}
+
 // The Amazon SES verification status of a list of identities. For domain
 // identities, this response also contains the verification token.
 type GetIdentityVerificationAttributesOutput struct {

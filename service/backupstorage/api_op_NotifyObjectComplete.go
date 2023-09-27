@@ -73,6 +73,10 @@ type NotifyObjectCompleteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyObjectCompleteInput) operationName() string {
+	return "NotifyObjectComplete"
+}
+
 type NotifyObjectCompleteOutput struct {
 
 	// Object checksum

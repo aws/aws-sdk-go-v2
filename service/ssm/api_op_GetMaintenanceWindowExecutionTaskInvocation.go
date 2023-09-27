@@ -54,6 +54,10 @@ type GetMaintenanceWindowExecutionTaskInvocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMaintenanceWindowExecutionTaskInvocationInput) operationName() string {
+	return "GetMaintenanceWindowExecutionTaskInvocation"
+}
+
 type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 
 	// The time that the task finished running on the target.

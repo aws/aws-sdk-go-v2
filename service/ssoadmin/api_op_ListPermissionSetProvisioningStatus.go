@@ -56,6 +56,10 @@ type ListPermissionSetProvisioningStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionSetProvisioningStatusInput) operationName() string {
+	return "ListPermissionSetProvisioningStatus"
+}
+
 type ListPermissionSetProvisioningStatusOutput struct {
 
 	// The pagination token for the list API. Initially the value is null. Use the

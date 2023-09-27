@@ -57,6 +57,10 @@ type DescribeOrganizationConformancePackStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationConformancePackStatusesInput) operationName() string {
+	return "DescribeOrganizationConformancePackStatuses"
+}
+
 type DescribeOrganizationConformancePackStatusesOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next

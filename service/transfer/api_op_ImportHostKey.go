@@ -54,6 +54,10 @@ type ImportHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportHostKeyInput) operationName() string {
+	return "ImportHostKey"
+}
+
 type ImportHostKeyOutput struct {
 
 	// Returns the host key identifier for the imported key.

@@ -57,6 +57,10 @@ type DescribeParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeParametersInput) operationName() string {
+	return "DescribeParameters"
+}
+
 type DescribeParametersOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.

@@ -67,6 +67,10 @@ type ListModelExplainabilityJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelExplainabilityJobDefinitionsInput) operationName() string {
+	return "ListModelExplainabilityJobDefinitions"
+}
+
 type ListModelExplainabilityJobDefinitionsOutput struct {
 
 	// A JSON array in which each element is a summary for a explainability bias jobs.

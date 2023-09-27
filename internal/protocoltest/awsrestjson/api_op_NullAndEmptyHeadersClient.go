@@ -35,6 +35,10 @@ type NullAndEmptyHeadersClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NullAndEmptyHeadersClientInput) operationName() string {
+	return "NullAndEmptyHeadersClient"
+}
+
 type NullAndEmptyHeadersClientOutput struct {
 	A *string
 

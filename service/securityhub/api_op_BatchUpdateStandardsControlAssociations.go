@@ -43,6 +43,10 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateStandardsControlAssociationsInput) operationName() string {
+	return "BatchUpdateStandardsControlAssociations"
+}
+
 type BatchUpdateStandardsControlAssociationsOutput struct {
 
 	// A security control (identified with SecurityControlId , SecurityControlArn , or

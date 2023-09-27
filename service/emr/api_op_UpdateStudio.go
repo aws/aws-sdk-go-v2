@@ -58,6 +58,10 @@ type UpdateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStudioInput) operationName() string {
+	return "UpdateStudio"
+}
+
 type UpdateStudioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

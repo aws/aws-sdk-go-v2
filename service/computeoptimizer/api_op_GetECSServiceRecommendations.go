@@ -63,6 +63,10 @@ type GetECSServiceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetECSServiceRecommendationsInput) operationName() string {
+	return "GetECSServiceRecommendations"
+}
+
 type GetECSServiceRecommendationsOutput struct {
 
 	// An array of objects that describe the Amazon ECS service recommendations.

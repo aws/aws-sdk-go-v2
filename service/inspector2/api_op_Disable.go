@@ -44,6 +44,10 @@ type DisableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableInput) operationName() string {
+	return "Disable"
+}
+
 type DisableOutput struct {
 
 	// Information on the accounts that have had Amazon Inspector scans successfully

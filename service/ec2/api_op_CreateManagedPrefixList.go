@@ -71,6 +71,10 @@ type CreateManagedPrefixListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateManagedPrefixListInput) operationName() string {
+	return "CreateManagedPrefixList"
+}
+
 type CreateManagedPrefixListOutput struct {
 
 	// Information about the prefix list.

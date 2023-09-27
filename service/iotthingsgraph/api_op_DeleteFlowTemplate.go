@@ -47,6 +47,10 @@ type DeleteFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFlowTemplateInput) operationName() string {
+	return "DeleteFlowTemplate"
+}
+
 type DeleteFlowTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

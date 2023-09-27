@@ -50,6 +50,10 @@ type UpdateShareInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateShareInvitationInput) operationName() string {
+	return "UpdateShareInvitation"
+}
+
 type UpdateShareInvitationOutput struct {
 
 	// The updated workload or custom lens share invitation.

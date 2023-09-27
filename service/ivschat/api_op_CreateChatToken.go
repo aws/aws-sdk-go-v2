@@ -73,6 +73,10 @@ type CreateChatTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChatTokenInput) operationName() string {
+	return "CreateChatToken"
+}
+
 type CreateChatTokenOutput struct {
 
 	// Time after which an end user's session is no longer valid. This is an ISO 8601

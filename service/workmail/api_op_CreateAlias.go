@@ -51,6 +51,10 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAliasInput) operationName() string {
+	return "CreateAlias"
+}
+
 type CreateAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

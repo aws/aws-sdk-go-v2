@@ -62,6 +62,10 @@ type UpdateServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceSyncConfigInput) operationName() string {
+	return "UpdateServiceSyncConfig"
+}
+
 type UpdateServiceSyncConfigOutput struct {
 
 	// The detailed data of the Proton Ops file.

@@ -49,6 +49,10 @@ type DeleteVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcIngressConnectionInput) operationName() string {
+	return "DeleteVpcIngressConnection"
+}
+
 type DeleteVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection that this request just

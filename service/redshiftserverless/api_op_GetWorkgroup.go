@@ -42,6 +42,10 @@ type GetWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkgroupInput) operationName() string {
+	return "GetWorkgroup"
+}
+
 type GetWorkgroupOutput struct {
 
 	// The returned workgroup object.

@@ -44,6 +44,10 @@ type DeleteEvaluationResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEvaluationResultsInput) operationName() string {
+	return "DeleteEvaluationResults"
+}
+
 // The output when you delete the evaluation results for the specified Config rule.
 type DeleteEvaluationResultsOutput struct {
 	// Metadata pertaining to the operation's result.

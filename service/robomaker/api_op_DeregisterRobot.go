@@ -51,6 +51,10 @@ type DeregisterRobotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterRobotInput) operationName() string {
+	return "DeregisterRobot"
+}
+
 type DeregisterRobotOutput struct {
 
 	// The Amazon Resource Name (ARN) of the fleet.

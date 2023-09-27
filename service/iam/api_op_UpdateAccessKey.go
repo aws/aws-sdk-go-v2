@@ -67,6 +67,10 @@ type UpdateAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccessKeyInput) operationName() string {
+	return "UpdateAccessKey"
+}
+
 type UpdateAccessKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

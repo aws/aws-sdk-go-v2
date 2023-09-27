@@ -66,6 +66,10 @@ type StopInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopInferenceExperimentInput) operationName() string {
+	return "StopInferenceExperiment"
+}
+
 type StopInferenceExperimentOutput struct {
 
 	// The ARN of the stopped inference experiment.

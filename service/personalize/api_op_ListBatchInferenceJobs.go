@@ -49,6 +49,10 @@ type ListBatchInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBatchInferenceJobsInput) operationName() string {
+	return "ListBatchInferenceJobs"
+}
+
 type ListBatchInferenceJobsOutput struct {
 
 	// A list containing information on each job that is returned.

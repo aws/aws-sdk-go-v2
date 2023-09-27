@@ -65,6 +65,10 @@ type ExecutePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecutePolicyInput) operationName() string {
+	return "ExecutePolicy"
+}
+
 type ExecutePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

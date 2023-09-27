@@ -54,6 +54,10 @@ type BatchModifyClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchModifyClusterSnapshotsInput) operationName() string {
+	return "BatchModifyClusterSnapshots"
+}
+
 type BatchModifyClusterSnapshotsOutput struct {
 
 	// A list of any errors returned.

@@ -43,6 +43,10 @@ type GetCampaignStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignStateInput) operationName() string {
+	return "GetCampaignState"
+}
+
 // GetCampaignStateResponse
 type GetCampaignStateOutput struct {
 

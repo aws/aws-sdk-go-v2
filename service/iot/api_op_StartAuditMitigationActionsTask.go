@@ -66,6 +66,10 @@ type StartAuditMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAuditMitigationActionsTaskInput) operationName() string {
+	return "StartAuditMitigationActionsTask"
+}
+
 type StartAuditMitigationActionsTaskOutput struct {
 
 	// The unique identifier for the audit mitigation task. This matches the taskId

@@ -60,6 +60,10 @@ type CreateImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImageInput) operationName() string {
+	return "CreateImage"
+}
+
 type CreateImageOutput struct {
 
 	// The ARN of the image.

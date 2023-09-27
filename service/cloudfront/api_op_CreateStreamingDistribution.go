@@ -46,6 +46,10 @@ type CreateStreamingDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamingDistributionInput) operationName() string {
+	return "CreateStreamingDistribution"
+}
+
 // The returned result of the corresponding request.
 type CreateStreamingDistributionOutput struct {
 

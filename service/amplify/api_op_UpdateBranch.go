@@ -98,6 +98,10 @@ type UpdateBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBranchInput) operationName() string {
+	return "UpdateBranch"
+}
+
 // The result structure for the update branch request.
 type UpdateBranchOutput struct {
 

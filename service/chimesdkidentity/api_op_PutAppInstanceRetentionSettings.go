@@ -48,6 +48,10 @@ type PutAppInstanceRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppInstanceRetentionSettingsInput) operationName() string {
+	return "PutAppInstanceRetentionSettings"
+}
+
 type PutAppInstanceRetentionSettingsOutput struct {
 
 	// The time in days to retain data. Data type: number.

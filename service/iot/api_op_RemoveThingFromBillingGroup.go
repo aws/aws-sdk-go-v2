@@ -51,6 +51,10 @@ type RemoveThingFromBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveThingFromBillingGroupInput) operationName() string {
+	return "RemoveThingFromBillingGroup"
+}
+
 type RemoveThingFromBillingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

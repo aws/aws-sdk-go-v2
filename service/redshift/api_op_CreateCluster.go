@@ -261,6 +261,10 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterInput) operationName() string {
+	return "CreateCluster"
+}
+
 type CreateClusterOutput struct {
 
 	// Describes a cluster.

@@ -70,6 +70,10 @@ type CreateIpamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIpamInput) operationName() string {
+	return "CreateIpam"
+}
+
 type CreateIpamOutput struct {
 
 	// Information about the IPAM created.

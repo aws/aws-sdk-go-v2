@@ -65,6 +65,10 @@ type PutThirdPartyJobSuccessResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutThirdPartyJobSuccessResultInput) operationName() string {
+	return "PutThirdPartyJobSuccessResult"
+}
+
 type PutThirdPartyJobSuccessResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -82,6 +82,10 @@ type UpdateSlackChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSlackChannelConfigurationInput) operationName() string {
+	return "UpdateSlackChannelConfiguration"
+}
+
 type UpdateSlackChannelConfigurationOutput struct {
 
 	// The channel ID in Slack. This ID identifies a channel within a Slack workspace.

@@ -43,6 +43,10 @@ type StartChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartChannelInput) operationName() string {
+	return "StartChannel"
+}
+
 // Placeholder documentation for StartChannelResponse
 type StartChannelOutput struct {
 

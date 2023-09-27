@@ -43,6 +43,10 @@ type GetCompatibleVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCompatibleVersionsInput) operationName() string {
+	return "GetCompatibleVersions"
+}
+
 // Container for the response returned by the GetCompatibleVersions operation.
 type GetCompatibleVersionsOutput struct {
 

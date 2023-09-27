@@ -82,6 +82,10 @@ type DescribeDBClusterBacktracksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterBacktracksInput) operationName() string {
+	return "DescribeDBClusterBacktracks"
+}
+
 // Contains the result of a successful invocation of the
 // DescribeDBClusterBacktracks action.
 type DescribeDBClusterBacktracksOutput struct {

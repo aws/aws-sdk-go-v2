@@ -46,6 +46,10 @@ type ListConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectorsInput) operationName() string {
+	return "ListConnectors"
+}
+
 type ListConnectorsOutput struct {
 
 	// Contains information about the connectors supported by Amazon AppFlow.

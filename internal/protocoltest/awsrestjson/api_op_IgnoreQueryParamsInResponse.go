@@ -31,6 +31,10 @@ type IgnoreQueryParamsInResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IgnoreQueryParamsInResponseInput) operationName() string {
+	return "IgnoreQueryParamsInResponse"
+}
+
 type IgnoreQueryParamsInResponseOutput struct {
 	Baz *string
 

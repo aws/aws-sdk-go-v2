@@ -72,6 +72,10 @@ type DescribeProvisioningParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProvisioningParametersInput) operationName() string {
+	return "DescribeProvisioningParameters"
+}
+
 type DescribeProvisioningParametersOutput struct {
 
 	// Information about the constraints used to provision the product.

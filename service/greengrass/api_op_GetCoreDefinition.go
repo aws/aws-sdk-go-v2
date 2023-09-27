@@ -41,6 +41,10 @@ type GetCoreDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoreDefinitionInput) operationName() string {
+	return "GetCoreDefinition"
+}
+
 type GetCoreDefinitionOutput struct {
 
 	// The ARN of the definition.

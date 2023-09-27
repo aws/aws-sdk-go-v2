@@ -61,6 +61,10 @@ type ProvisionPublicIpv4PoolCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ProvisionPublicIpv4PoolCidrInput) operationName() string {
+	return "ProvisionPublicIpv4PoolCidr"
+}
+
 type ProvisionPublicIpv4PoolCidrOutput struct {
 
 	// Information about the address range of the public IPv4 pool.

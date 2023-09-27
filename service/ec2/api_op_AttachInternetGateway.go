@@ -55,6 +55,10 @@ type AttachInternetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachInternetGatewayInput) operationName() string {
+	return "AttachInternetGateway"
+}
+
 type AttachInternetGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

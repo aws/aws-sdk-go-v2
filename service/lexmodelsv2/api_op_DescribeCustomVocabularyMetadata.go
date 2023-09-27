@@ -54,6 +54,10 @@ type DescribeCustomVocabularyMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomVocabularyMetadataInput) operationName() string {
+	return "DescribeCustomVocabularyMetadata"
+}
+
 type DescribeCustomVocabularyMetadataOutput struct {
 
 	// The identifier of the bot that contains the custom vocabulary.

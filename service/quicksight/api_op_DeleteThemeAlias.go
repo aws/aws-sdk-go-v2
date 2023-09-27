@@ -54,6 +54,10 @@ type DeleteThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteThemeAliasInput) operationName() string {
+	return "DeleteThemeAlias"
+}
+
 type DeleteThemeAliasOutput struct {
 
 	// The name for the theme alias.

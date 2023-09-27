@@ -52,6 +52,10 @@ type RetryPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetryPipelineExecutionInput) operationName() string {
+	return "RetryPipelineExecution"
+}
+
 type RetryPipelineExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.

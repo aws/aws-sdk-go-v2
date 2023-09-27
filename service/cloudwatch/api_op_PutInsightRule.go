@@ -69,6 +69,10 @@ type PutInsightRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutInsightRuleInput) operationName() string {
+	return "PutInsightRule"
+}
+
 type PutInsightRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

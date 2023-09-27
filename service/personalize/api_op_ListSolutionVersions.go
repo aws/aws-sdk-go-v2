@@ -50,6 +50,10 @@ type ListSolutionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSolutionVersionsInput) operationName() string {
+	return "ListSolutionVersions"
+}
+
 type ListSolutionVersionsOutput struct {
 
 	// A token for getting the next set of solution versions (if they exist).

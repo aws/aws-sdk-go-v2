@@ -58,6 +58,10 @@ type RemoveTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveTagsFromResourceInput) operationName() string {
+	return "RemoveTagsFromResource"
+}
+
 type RemoveTagsFromResourceOutput struct {
 
 	// The status of the operation.

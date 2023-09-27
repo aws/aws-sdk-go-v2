@@ -81,6 +81,10 @@ type ListPreviewRotationShiftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPreviewRotationShiftsInput) operationName() string {
+	return "ListPreviewRotationShifts"
+}
+
 type ListPreviewRotationShiftsOutput struct {
 
 	// The token for the next set of items to return. This token is used to get the

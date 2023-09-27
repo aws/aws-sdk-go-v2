@@ -114,6 +114,10 @@ type SignUpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SignUpInput) operationName() string {
+	return "SignUp"
+}
+
 // The response from the server for a registration request.
 type SignUpOutput struct {
 

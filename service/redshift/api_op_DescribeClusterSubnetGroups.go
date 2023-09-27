@@ -80,6 +80,10 @@ type DescribeClusterSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterSubnetGroupsInput) operationName() string {
+	return "DescribeClusterSubnetGroups"
+}
+
 // Contains the output from the DescribeClusterSubnetGroups action.
 type DescribeClusterSubnetGroupsOutput struct {
 

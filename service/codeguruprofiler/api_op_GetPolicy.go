@@ -42,6 +42,10 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyInput) operationName() string {
+	return "GetPolicy"
+}
+
 // The structure representing the getPolicyResponse .
 type GetPolicyOutput struct {
 

@@ -56,6 +56,10 @@ type UpdateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssetInput) operationName() string {
+	return "UpdateAsset"
+}
+
 type UpdateAssetOutput struct {
 
 	// The status of the asset, which contains a state ( UPDATING after successfully

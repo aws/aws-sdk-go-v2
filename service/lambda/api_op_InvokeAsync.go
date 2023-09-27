@@ -55,6 +55,10 @@ type InvokeAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeAsyncInput) operationName() string {
+	return "InvokeAsync"
+}
+
 // A success response ( 202 Accepted ) indicates that the request is queued for
 // invocation.
 type InvokeAsyncOutput struct {

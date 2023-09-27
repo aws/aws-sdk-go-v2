@@ -74,6 +74,10 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotebookInstanceLifecycleConfigsInput) operationName() string {
+	return "ListNotebookInstanceLifecycleConfigs"
+}
+
 type ListNotebookInstanceLifecycleConfigsOutput struct {
 
 	// If the response is truncated, SageMaker returns this token. To get the next set

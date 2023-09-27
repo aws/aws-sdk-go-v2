@@ -58,6 +58,10 @@ type CreateMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMultiplexProgramInput) operationName() string {
+	return "CreateMultiplexProgram"
+}
+
 // Placeholder documentation for CreateMultiplexProgramResponse
 type CreateMultiplexProgramOutput struct {
 

@@ -43,6 +43,10 @@ type StartWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartWorkspacesInput) operationName() string {
+	return "StartWorkspaces"
+}
+
 type StartWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be started.

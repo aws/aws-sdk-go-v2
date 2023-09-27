@@ -44,6 +44,10 @@ type DeleteExternalModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExternalModelInput) operationName() string {
+	return "DeleteExternalModel"
+}
+
 type DeleteExternalModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

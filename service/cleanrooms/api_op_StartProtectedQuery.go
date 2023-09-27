@@ -56,6 +56,10 @@ type StartProtectedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartProtectedQueryInput) operationName() string {
+	return "StartProtectedQuery"
+}
+
 type StartProtectedQueryOutput struct {
 
 	// The protected query.

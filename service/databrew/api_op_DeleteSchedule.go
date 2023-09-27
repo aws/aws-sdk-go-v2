@@ -41,6 +41,10 @@ type DeleteScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteScheduleInput) operationName() string {
+	return "DeleteSchedule"
+}
+
 type DeleteScheduleOutput struct {
 
 	// The name of the schedule that was deleted.

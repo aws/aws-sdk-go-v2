@@ -45,6 +45,10 @@ type UpdateIndexingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIndexingConfigurationInput) operationName() string {
+	return "UpdateIndexingConfiguration"
+}
+
 type UpdateIndexingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

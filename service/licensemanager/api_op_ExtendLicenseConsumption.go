@@ -46,6 +46,10 @@ type ExtendLicenseConsumptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExtendLicenseConsumptionInput) operationName() string {
+	return "ExtendLicenseConsumption"
+}
+
 type ExtendLicenseConsumptionOutput struct {
 
 	// Date and time at which the license consumption expires.

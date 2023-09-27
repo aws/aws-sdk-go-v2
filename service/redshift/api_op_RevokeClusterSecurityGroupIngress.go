@@ -63,6 +63,10 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeClusterSecurityGroupIngressInput) operationName() string {
+	return "RevokeClusterSecurityGroupIngress"
+}
+
 type RevokeClusterSecurityGroupIngressOutput struct {
 
 	// Describes a security group.

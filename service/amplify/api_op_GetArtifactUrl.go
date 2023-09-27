@@ -42,6 +42,10 @@ type GetArtifactUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetArtifactUrlInput) operationName() string {
+	return "GetArtifactUrl"
+}
+
 // Returns the result structure for the get artifact request.
 type GetArtifactUrlOutput struct {
 

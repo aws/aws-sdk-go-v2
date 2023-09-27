@@ -111,6 +111,10 @@ type StartGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartGameSessionPlacementInput) operationName() string {
+	return "StartGameSessionPlacement"
+}
+
 type StartGameSessionPlacementOutput struct {
 
 	// Object that describes the newly created game session placement. This object

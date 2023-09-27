@@ -203,6 +203,10 @@ type ReplicateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplicateKeyInput) operationName() string {
+	return "ReplicateKey"
+}
+
 type ReplicateKeyOutput struct {
 
 	// Displays details about the new replica key, including its Amazon Resource Name (

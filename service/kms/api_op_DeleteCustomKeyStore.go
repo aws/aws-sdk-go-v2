@@ -76,6 +76,10 @@ type DeleteCustomKeyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomKeyStoreInput) operationName() string {
+	return "DeleteCustomKeyStore"
+}
+
 type DeleteCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

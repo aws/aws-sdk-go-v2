@@ -52,6 +52,10 @@ type ListConnectorDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectorDefinitionVersionsInput) operationName() string {
+	return "ListConnectorDefinitionVersions"
+}
+
 type ListConnectorDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional

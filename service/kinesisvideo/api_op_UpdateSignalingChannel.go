@@ -55,6 +55,10 @@ type UpdateSignalingChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSignalingChannelInput) operationName() string {
+	return "UpdateSignalingChannel"
+}
+
 type UpdateSignalingChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

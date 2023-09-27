@@ -53,6 +53,10 @@ type DisassociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateResourceInput) operationName() string {
+	return "DisassociateResource"
+}
+
 type DisassociateResourceOutput struct {
 
 	// The Amazon resource name (ARN) that specifies the application.

@@ -60,6 +60,10 @@ type CreateCacheSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCacheSubnetGroupInput) operationName() string {
+	return "CreateCacheSubnetGroup"
+}
+
 type CreateCacheSubnetGroupOutput struct {
 
 	// Represents the output of one of the following operations:

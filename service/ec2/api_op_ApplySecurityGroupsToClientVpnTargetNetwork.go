@@ -60,6 +60,10 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplySecurityGroupsToClientVpnTargetNetworkInput) operationName() string {
+	return "ApplySecurityGroupsToClientVpnTargetNetwork"
+}
+
 type ApplySecurityGroupsToClientVpnTargetNetworkOutput struct {
 
 	// The IDs of the applied security groups.

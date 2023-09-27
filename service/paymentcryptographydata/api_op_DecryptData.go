@@ -77,6 +77,10 @@ type DecryptDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecryptDataInput) operationName() string {
+	return "DecryptData"
+}
+
 type DecryptDataOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography

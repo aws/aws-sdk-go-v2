@@ -51,6 +51,10 @@ type GetVoiceConnectorOriginationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorOriginationInput) operationName() string {
+	return "GetVoiceConnectorOrigination"
+}
+
 type GetVoiceConnectorOriginationOutput struct {
 
 	// The origination setting details.

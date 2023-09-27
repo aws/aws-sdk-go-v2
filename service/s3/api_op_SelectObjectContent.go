@@ -174,6 +174,10 @@ type SelectObjectContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SelectObjectContentInput) operationName() string {
+	return "SelectObjectContent"
+}
+
 type SelectObjectContentOutput struct {
 	eventStream *SelectObjectContentEventStream
 

@@ -104,6 +104,10 @@ type CreatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePortalInput) operationName() string {
+	return "CreatePortal"
+}
+
 type CreatePortalOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

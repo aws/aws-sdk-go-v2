@@ -61,6 +61,10 @@ type UpdateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInstanceProfileInput) operationName() string {
+	return "UpdateInstanceProfile"
+}
+
 type UpdateInstanceProfileOutput struct {
 
 	// An object that contains information about your instance profile.

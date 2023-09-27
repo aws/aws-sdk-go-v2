@@ -50,6 +50,10 @@ type ListApiDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApiDestinationsInput) operationName() string {
+	return "ListApiDestinations"
+}
+
 type ListApiDestinationsOutput struct {
 
 	// An array of ApiDestination objects that include information about an API

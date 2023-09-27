@@ -75,6 +75,10 @@ type CloseAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CloseAccountInput) operationName() string {
+	return "CloseAccount"
+}
+
 type CloseAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,6 +55,10 @@ type ListSourceServerActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSourceServerActionsInput) operationName() string {
+	return "ListSourceServerActions"
+}
+
 type ListSourceServerActionsOutput struct {
 
 	// List of source server post migration custom actions.

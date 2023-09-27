@@ -45,6 +45,10 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTagsInput) operationName() string {
+	return "DescribeTags"
+}
+
 type DescribeTagsOutput struct {
 
 	// Information about the tags.

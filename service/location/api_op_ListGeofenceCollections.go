@@ -46,6 +46,10 @@ type ListGeofenceCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGeofenceCollectionsInput) operationName() string {
+	return "ListGeofenceCollections"
+}
+
 type ListGeofenceCollectionsOutput struct {
 
 	// Lists the geofence collections that exist in your Amazon Web Services account.

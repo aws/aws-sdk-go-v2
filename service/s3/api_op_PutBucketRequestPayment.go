@@ -78,6 +78,10 @@ type PutBucketRequestPaymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketRequestPaymentInput) operationName() string {
+	return "PutBucketRequestPayment"
+}
+
 type PutBucketRequestPaymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type PutChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutChannelPolicyInput) operationName() string {
+	return "PutChannelPolicy"
+}
+
 type PutChannelPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

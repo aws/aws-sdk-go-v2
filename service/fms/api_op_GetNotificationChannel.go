@@ -36,6 +36,10 @@ type GetNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNotificationChannelInput) operationName() string {
+	return "GetNotificationChannel"
+}
+
 type GetNotificationChannelOutput struct {
 
 	// The IAM role that is used by Firewall Manager to record activity to SNS.

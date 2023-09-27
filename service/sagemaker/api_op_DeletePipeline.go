@@ -50,6 +50,10 @@ type DeletePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePipelineInput) operationName() string {
+	return "DeletePipeline"
+}
+
 type DeletePipelineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline to delete.

@@ -53,6 +53,10 @@ type GetTableMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableMetadataInput) operationName() string {
+	return "GetTableMetadata"
+}
+
 type GetTableMetadataOutput struct {
 
 	// An object that contains table metadata.

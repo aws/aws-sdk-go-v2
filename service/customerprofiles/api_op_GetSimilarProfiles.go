@@ -66,6 +66,10 @@ type GetSimilarProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSimilarProfilesInput) operationName() string {
+	return "GetSimilarProfiles"
+}
+
 type GetSimilarProfilesOutput struct {
 
 	// It only has value when the MatchType is ML_BASED_MATCHING .A number between 0

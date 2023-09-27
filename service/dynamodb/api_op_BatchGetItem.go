@@ -134,6 +134,10 @@ type BatchGetItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetItemInput) operationName() string {
+	return "BatchGetItem"
+}
+
 // Represents the output of a BatchGetItem operation.
 type BatchGetItemOutput struct {
 

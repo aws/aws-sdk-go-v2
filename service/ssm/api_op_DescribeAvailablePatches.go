@@ -75,6 +75,10 @@ type DescribeAvailablePatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAvailablePatchesInput) operationName() string {
+	return "DescribeAvailablePatches"
+}
+
 type DescribeAvailablePatchesOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

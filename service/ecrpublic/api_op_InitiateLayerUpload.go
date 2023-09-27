@@ -51,6 +51,10 @@ type InitiateLayerUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateLayerUploadInput) operationName() string {
+	return "InitiateLayerUpload"
+}
+
 type InitiateLayerUploadOutput struct {
 
 	// The size, in bytes, that Amazon ECR expects future layer part uploads to be.

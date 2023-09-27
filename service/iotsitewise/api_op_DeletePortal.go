@@ -47,6 +47,10 @@ type DeletePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePortalInput) operationName() string {
+	return "DeletePortal"
+}
+
 type DeletePortalOutput struct {
 
 	// The status of the portal, which contains a state ( DELETING after successfully

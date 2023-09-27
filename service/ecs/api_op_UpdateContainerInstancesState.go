@@ -94,6 +94,10 @@ type UpdateContainerInstancesStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContainerInstancesStateInput) operationName() string {
+	return "UpdateContainerInstancesState"
+}
+
 type UpdateContainerInstancesStateOutput struct {
 
 	// The list of container instances.

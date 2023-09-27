@@ -98,6 +98,10 @@ type UpdateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMonitorInput) operationName() string {
+	return "UpdateMonitor"
+}
+
 type UpdateMonitorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitor.

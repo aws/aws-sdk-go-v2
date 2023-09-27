@@ -53,6 +53,10 @@ type AddLFTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddLFTagsToResourceInput) operationName() string {
+	return "AddLFTagsToResource"
+}
+
 type AddLFTagsToResourceOutput struct {
 
 	// A list of failures to tag the resource.

@@ -44,6 +44,10 @@ type PutReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutReportDefinitionInput) operationName() string {
+	return "PutReportDefinition"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type PutReportDefinitionOutput struct {

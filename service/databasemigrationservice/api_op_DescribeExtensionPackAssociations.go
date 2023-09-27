@@ -63,6 +63,10 @@ type DescribeExtensionPackAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExtensionPackAssociationsInput) operationName() string {
+	return "DescribeExtensionPackAssociations"
+}
+
 type DescribeExtensionPackAssociationsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the

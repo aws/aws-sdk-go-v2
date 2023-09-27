@@ -52,6 +52,10 @@ type CancelEnvironmentDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelEnvironmentDeploymentInput) operationName() string {
+	return "CancelEnvironmentDeployment"
+}
+
 type CancelEnvironmentDeploymentOutput struct {
 
 	// The environment summary data that's returned by Proton.

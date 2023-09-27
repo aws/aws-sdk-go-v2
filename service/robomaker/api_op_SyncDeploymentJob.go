@@ -56,6 +56,10 @@ type SyncDeploymentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SyncDeploymentJobInput) operationName() string {
+	return "SyncDeploymentJob"
+}
+
 type SyncDeploymentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the synchronization request.

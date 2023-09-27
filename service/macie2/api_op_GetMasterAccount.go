@@ -38,6 +38,10 @@ type GetMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMasterAccountInput) operationName() string {
+	return "GetMasterAccount"
+}
+
 type GetMasterAccountOutput struct {
 
 	// (Deprecated) The Amazon Web Services account ID for the administrator account.

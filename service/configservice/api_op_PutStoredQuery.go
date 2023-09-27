@@ -55,6 +55,10 @@ type PutStoredQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutStoredQueryInput) operationName() string {
+	return "PutStoredQuery"
+}
+
 type PutStoredQueryOutput struct {
 
 	// Amazon Resource Name (ARN) of the query. For example,

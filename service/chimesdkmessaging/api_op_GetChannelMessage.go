@@ -58,6 +58,10 @@ type GetChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelMessageInput) operationName() string {
+	return "GetChannelMessage"
+}
+
 type GetChannelMessageOutput struct {
 
 	// The details of and content in the message.

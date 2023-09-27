@@ -42,6 +42,10 @@ type DeleteFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFlowInput) operationName() string {
+	return "DeleteFlow"
+}
+
 type DeleteFlowOutput struct {
 
 	// The ARN of the flow that was deleted.

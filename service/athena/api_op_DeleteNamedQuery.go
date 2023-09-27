@@ -44,6 +44,10 @@ type DeleteNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNamedQueryInput) operationName() string {
+	return "DeleteNamedQuery"
+}
+
 type DeleteNamedQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

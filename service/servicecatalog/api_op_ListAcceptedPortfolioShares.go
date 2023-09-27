@@ -61,6 +61,10 @@ type ListAcceptedPortfolioSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAcceptedPortfolioSharesInput) operationName() string {
+	return "ListAcceptedPortfolioShares"
+}
+
 type ListAcceptedPortfolioSharesOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

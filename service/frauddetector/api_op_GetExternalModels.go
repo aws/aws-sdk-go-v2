@@ -51,6 +51,10 @@ type GetExternalModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExternalModelsInput) operationName() string {
+	return "GetExternalModels"
+}
+
 type GetExternalModelsOutput struct {
 
 	// Gets the Amazon SageMaker models.

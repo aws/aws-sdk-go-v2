@@ -48,6 +48,10 @@ type DeleteManagedEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteManagedEndpointInput) operationName() string {
+	return "DeleteManagedEndpoint"
+}
+
 type DeleteManagedEndpointOutput struct {
 
 	// The output displays the ID of the managed endpoint.

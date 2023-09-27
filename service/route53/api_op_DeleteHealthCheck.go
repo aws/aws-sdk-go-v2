@@ -54,6 +54,10 @@ type DeleteHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHealthCheckInput) operationName() string {
+	return "DeleteHealthCheck"
+}
+
 // An empty element.
 type DeleteHealthCheckOutput struct {
 	// Metadata pertaining to the operation's result.

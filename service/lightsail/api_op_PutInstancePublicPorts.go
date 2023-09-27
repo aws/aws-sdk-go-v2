@@ -56,6 +56,10 @@ type PutInstancePublicPortsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutInstancePublicPortsInput) operationName() string {
+	return "PutInstancePublicPorts"
+}
+
 type PutInstancePublicPortsOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

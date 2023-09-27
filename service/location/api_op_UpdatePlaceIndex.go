@@ -55,6 +55,10 @@ type UpdatePlaceIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePlaceIndexInput) operationName() string {
+	return "UpdatePlaceIndex"
+}
+
 type UpdatePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) of the upated place index resource. Used to

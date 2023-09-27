@@ -57,6 +57,10 @@ type UpdateMediaInsightsPipelineConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMediaInsightsPipelineConfigurationInput) operationName() string {
+	return "UpdateMediaInsightsPipelineConfiguration"
+}
+
 type UpdateMediaInsightsPipelineConfigurationOutput struct {
 
 	// The updated configuration settings.

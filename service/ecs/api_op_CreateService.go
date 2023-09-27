@@ -348,6 +348,10 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceInput) operationName() string {
+	return "CreateService"
+}
+
 type CreateServiceOutput struct {
 
 	// The full description of your service following the create call. A service will

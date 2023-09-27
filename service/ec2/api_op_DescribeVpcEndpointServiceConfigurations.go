@@ -70,6 +70,10 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointServiceConfigurationsInput) operationName() string {
+	return "DescribeVpcEndpointServiceConfigurations"
+}
+
 type DescribeVpcEndpointServiceConfigurationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

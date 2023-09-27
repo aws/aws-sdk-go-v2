@@ -123,6 +123,10 @@ type CreateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInput) operationName() string {
+	return "CreateApp"
+}
+
 type CreateAppOutput struct {
 
 	// Represents the different branches of a repository for building, deploying, and

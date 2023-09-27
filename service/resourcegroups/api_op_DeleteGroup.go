@@ -49,6 +49,10 @@ type DeleteGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGroupInput) operationName() string {
+	return "DeleteGroup"
+}
+
 type DeleteGroupOutput struct {
 
 	// A full description of the deleted resource group.

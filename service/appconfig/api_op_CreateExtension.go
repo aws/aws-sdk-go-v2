@@ -85,6 +85,10 @@ type CreateExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExtensionInput) operationName() string {
+	return "CreateExtension"
+}
+
 type CreateExtensionOutput struct {
 
 	// The actions defined in the extension.

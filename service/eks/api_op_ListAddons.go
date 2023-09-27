@@ -58,6 +58,10 @@ type ListAddonsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAddonsInput) operationName() string {
+	return "ListAddons"
+}
+
 type ListAddonsOutput struct {
 
 	// A list of available add-ons.

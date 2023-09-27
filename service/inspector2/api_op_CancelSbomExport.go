@@ -41,6 +41,10 @@ type CancelSbomExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelSbomExportInput) operationName() string {
+	return "CancelSbomExport"
+}
+
 type CancelSbomExportOutput struct {
 
 	// The report ID of the canceled SBOM export.

@@ -49,6 +49,10 @@ type PutOptedOutNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutOptedOutNumberInput) operationName() string {
+	return "PutOptedOutNumber"
+}
+
 type PutOptedOutNumberOutput struct {
 
 	// This is true if it was the end user who requested their phone number be removed.

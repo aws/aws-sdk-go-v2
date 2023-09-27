@@ -63,6 +63,10 @@ type ListInferenceEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInferenceEventsInput) operationName() string {
+	return "ListInferenceEvents"
+}
+
 type ListInferenceEventsOutput struct {
 
 	// Provides an array of information about the individual inference events returned

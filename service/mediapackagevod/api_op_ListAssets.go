@@ -46,6 +46,10 @@ type ListAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssetsInput) operationName() string {
+	return "ListAssets"
+}
+
 type ListAssetsOutput struct {
 
 	// A list of MediaPackage VOD Asset resources.

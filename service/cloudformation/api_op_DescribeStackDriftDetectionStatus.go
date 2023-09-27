@@ -57,6 +57,10 @@ type DescribeStackDriftDetectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackDriftDetectionStatusInput) operationName() string {
+	return "DescribeStackDriftDetectionStatus"
+}
+
 type DescribeStackDriftDetectionStatusOutput struct {
 
 	// The status of the stack drift detection operation.

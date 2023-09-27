@@ -85,6 +85,10 @@ type CreateLocationS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationS3Input) operationName() string {
+	return "CreateLocationS3"
+}
+
 // CreateLocationS3Response
 type CreateLocationS3Output struct {
 

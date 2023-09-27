@@ -169,6 +169,10 @@ type DecryptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecryptInput) operationName() string {
+	return "Decrypt"
+}
+
 type DecryptOutput struct {
 
 	// The plaintext data encrypted with the public key in the attestation document.

@@ -94,6 +94,10 @@ type ExportEBSVolumeRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportEBSVolumeRecommendationsInput) operationName() string {
+	return "ExportEBSVolumeRecommendations"
+}
+
 type ExportEBSVolumeRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the

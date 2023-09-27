@@ -90,6 +90,10 @@ type RegisterContainerInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterContainerInstanceInput) operationName() string {
+	return "RegisterContainerInstance"
+}
+
 type RegisterContainerInstanceOutput struct {
 
 	// The container instance that was registered.

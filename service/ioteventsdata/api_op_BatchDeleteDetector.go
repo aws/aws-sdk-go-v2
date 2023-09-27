@@ -46,6 +46,10 @@ type BatchDeleteDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteDetectorInput) operationName() string {
+	return "BatchDeleteDetector"
+}
+
 type BatchDeleteDetectorOutput struct {
 
 	// A list of errors associated with the request, or an empty array ( [] ) if there

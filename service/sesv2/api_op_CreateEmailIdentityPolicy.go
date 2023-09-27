@@ -66,6 +66,10 @@ type CreateEmailIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEmailIdentityPolicyInput) operationName() string {
+	return "CreateEmailIdentityPolicy"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CreateEmailIdentityPolicyOutput struct {

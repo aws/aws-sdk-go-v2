@@ -149,6 +149,10 @@ type GenerateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateDataSetInput) operationName() string {
+	return "GenerateDataSet"
+}
+
 // Container for the result of the GenerateDataSet operation.
 type GenerateDataSetOutput struct {
 

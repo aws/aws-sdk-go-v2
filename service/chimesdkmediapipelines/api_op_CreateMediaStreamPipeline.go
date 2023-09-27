@@ -53,6 +53,10 @@ type CreateMediaStreamPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMediaStreamPipelineInput) operationName() string {
+	return "CreateMediaStreamPipeline"
+}
+
 type CreateMediaStreamPipelineOutput struct {
 
 	// The requested media pipeline.

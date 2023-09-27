@@ -79,6 +79,10 @@ type CreateQuantumTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQuantumTaskInput) operationName() string {
+	return "CreateQuantumTask"
+}
+
 type CreateQuantumTaskOutput struct {
 
 	// The ARN of the task created by the request.

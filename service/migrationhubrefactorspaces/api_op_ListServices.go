@@ -55,6 +55,10 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicesInput) operationName() string {
+	return "ListServices"
+}
+
 type ListServicesOutput struct {
 
 	// The token for the next page of results.

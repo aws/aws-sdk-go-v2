@@ -53,6 +53,10 @@ type DisassociateTransitGatewayPolicyTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTransitGatewayPolicyTableInput) operationName() string {
+	return "DisassociateTransitGatewayPolicyTable"
+}
+
 type DisassociateTransitGatewayPolicyTableOutput struct {
 
 	// Returns details about the transit gateway policy table disassociation.

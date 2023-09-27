@@ -47,6 +47,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 type UntagResourceOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

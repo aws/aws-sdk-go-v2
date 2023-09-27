@@ -41,6 +41,10 @@ type DeleteAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAssessmentFrameworkInput) operationName() string {
+	return "DeleteAssessmentFramework"
+}
+
 type DeleteAssessmentFrameworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -83,6 +83,10 @@ type CreateCustomerGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomerGatewayInput) operationName() string {
+	return "CreateCustomerGateway"
+}
+
 // Contains the output of CreateCustomerGateway.
 type CreateCustomerGatewayOutput struct {
 

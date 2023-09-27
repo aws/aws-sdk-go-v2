@@ -59,6 +59,10 @@ type ComposeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ComposeEnvironmentsInput) operationName() string {
+	return "ComposeEnvironments"
+}
+
 // Result message containing a list of environment descriptions.
 type ComposeEnvironmentsOutput struct {
 

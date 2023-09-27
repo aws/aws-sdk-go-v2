@@ -142,6 +142,10 @@ type RegisterDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterDomainInput) operationName() string {
+	return "RegisterDomain"
+}
+
 // The RegisterDomain response includes the following element.
 type RegisterDomainOutput struct {
 

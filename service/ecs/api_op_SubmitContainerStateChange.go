@@ -63,6 +63,10 @@ type SubmitContainerStateChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitContainerStateChangeInput) operationName() string {
+	return "SubmitContainerStateChange"
+}
+
 type SubmitContainerStateChangeOutput struct {
 
 	// Acknowledgement of the state change.

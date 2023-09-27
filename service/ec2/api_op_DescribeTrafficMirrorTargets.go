@@ -63,6 +63,10 @@ type DescribeTrafficMirrorTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrafficMirrorTargetsInput) operationName() string {
+	return "DescribeTrafficMirrorTargets"
+}
+
 type DescribeTrafficMirrorTargetsOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is null when

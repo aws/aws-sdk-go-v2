@@ -46,6 +46,10 @@ type GetQueryLoggingConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryLoggingConfigInput) operationName() string {
+	return "GetQueryLoggingConfig"
+}
+
 type GetQueryLoggingConfigOutput struct {
 
 	// A complex type that contains information about the query logging configuration

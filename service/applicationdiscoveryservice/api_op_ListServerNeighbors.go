@@ -60,6 +60,10 @@ type ListServerNeighborsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServerNeighborsInput) operationName() string {
+	return "ListServerNeighbors"
+}
+
 type ListServerNeighborsOutput struct {
 
 	// List of distinct servers that are one hop away from the given server.

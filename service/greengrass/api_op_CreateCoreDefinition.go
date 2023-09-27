@@ -52,6 +52,10 @@ type CreateCoreDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCoreDefinitionInput) operationName() string {
+	return "CreateCoreDefinition"
+}
+
 type CreateCoreDefinitionOutput struct {
 
 	// The ARN of the definition.

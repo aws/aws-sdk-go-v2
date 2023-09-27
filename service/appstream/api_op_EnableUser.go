@@ -51,6 +51,10 @@ type EnableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableUserInput) operationName() string {
+	return "EnableUser"
+}
+
 type EnableUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

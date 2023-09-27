@@ -45,6 +45,10 @@ type GetLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLegalHoldInput) operationName() string {
+	return "GetLegalHold"
+}
+
 type GetLegalHoldOutput struct {
 
 	// String describing the reason for removing the legal hold.

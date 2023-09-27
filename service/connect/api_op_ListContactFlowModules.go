@@ -54,6 +54,10 @@ type ListContactFlowModulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContactFlowModulesInput) operationName() string {
+	return "ListContactFlowModules"
+}
+
 type ListContactFlowModulesOutput struct {
 
 	// Information about the flow module.

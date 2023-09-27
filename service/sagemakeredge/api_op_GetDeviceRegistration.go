@@ -46,6 +46,10 @@ type GetDeviceRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceRegistrationInput) operationName() string {
+	return "GetDeviceRegistration"
+}
+
 type GetDeviceRegistrationOutput struct {
 
 	// The amount of time, in seconds, that the registration status is stored on the

@@ -87,6 +87,10 @@ type GetTileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTileInput) operationName() string {
+	return "GetTile"
+}
+
 type GetTileOutput struct {
 
 	// The output binary file.

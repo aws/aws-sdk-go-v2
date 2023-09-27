@@ -67,6 +67,10 @@ type GetBucketIntelligentTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketIntelligentTieringConfigurationInput) operationName() string {
+	return "GetBucketIntelligentTieringConfiguration"
+}
+
 type GetBucketIntelligentTieringConfigurationOutput struct {
 
 	// Container for S3 Intelligent-Tiering configuration.

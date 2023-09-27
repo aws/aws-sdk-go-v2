@@ -124,6 +124,10 @@ type CreateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSessionInput) operationName() string {
+	return "CreateSession"
+}
+
 type CreateSessionOutput struct {
 
 	// Returns the session object in the response.

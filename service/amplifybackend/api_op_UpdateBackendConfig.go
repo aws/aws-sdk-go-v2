@@ -46,6 +46,10 @@ type UpdateBackendConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBackendConfigInput) operationName() string {
+	return "UpdateBackendConfig"
+}
+
 type UpdateBackendConfigOutput struct {
 
 	// The app ID.

@@ -52,6 +52,10 @@ type GetEvidenceFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEvidenceFolderInput) operationName() string {
+	return "GetEvidenceFolder"
+}
+
 type GetEvidenceFolderOutput struct {
 
 	// The folder that the evidence is stored in.

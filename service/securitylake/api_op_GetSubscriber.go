@@ -44,6 +44,10 @@ type GetSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubscriberInput) operationName() string {
+	return "GetSubscriber"
+}
+
 type GetSubscriberOutput struct {
 
 	// The subscriber information for the specified subscriber ID.

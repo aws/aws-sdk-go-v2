@@ -43,6 +43,10 @@ type GetDefaultPatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDefaultPatchBaselineInput) operationName() string {
+	return "GetDefaultPatchBaseline"
+}
+
 type GetDefaultPatchBaselineOutput struct {
 
 	// The ID of the default patch baseline.

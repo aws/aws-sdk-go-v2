@@ -44,6 +44,10 @@ type DescribeDiscoveryJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDiscoveryJobInput) operationName() string {
+	return "DescribeDiscoveryJob"
+}
+
 type DescribeDiscoveryJobOutput struct {
 
 	// The number of minutes that the discovery job runs.

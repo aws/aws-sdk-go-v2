@@ -63,6 +63,10 @@ type DeleteCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCanaryInput) operationName() string {
+	return "DeleteCanary"
+}
+
 type DeleteCanaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

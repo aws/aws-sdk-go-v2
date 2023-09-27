@@ -75,6 +75,10 @@ type DescribeObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeObjectsInput) operationName() string {
+	return "DescribeObjects"
+}
+
 // Contains the output of DescribeObjects.
 type DescribeObjectsOutput struct {
 

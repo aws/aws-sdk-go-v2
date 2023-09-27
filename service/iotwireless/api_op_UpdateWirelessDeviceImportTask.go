@@ -47,6 +47,10 @@ type UpdateWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWirelessDeviceImportTaskInput) operationName() string {
+	return "UpdateWirelessDeviceImportTask"
+}
+
 type UpdateWirelessDeviceImportTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

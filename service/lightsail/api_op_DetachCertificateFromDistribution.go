@@ -46,6 +46,10 @@ type DetachCertificateFromDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachCertificateFromDistributionInput) operationName() string {
+	return "DetachCertificateFromDistribution"
+}
+
 type DetachCertificateFromDistributionOutput struct {
 
 	// An object that describes the result of the action, such as the status of the

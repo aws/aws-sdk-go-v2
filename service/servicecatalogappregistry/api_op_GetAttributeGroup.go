@@ -44,6 +44,10 @@ type GetAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAttributeGroupInput) operationName() string {
+	return "GetAttributeGroup"
+}
+
 type GetAttributeGroupOutput struct {
 
 	// The Amazon resource name (ARN) that specifies the attribute group across

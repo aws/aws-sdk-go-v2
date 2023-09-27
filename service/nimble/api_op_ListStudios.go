@@ -41,6 +41,10 @@ type ListStudiosInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStudiosInput) operationName() string {
+	return "ListStudios"
+}
+
 type ListStudiosOutput struct {
 
 	// A collection of studios.

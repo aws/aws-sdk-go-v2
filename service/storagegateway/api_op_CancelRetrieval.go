@@ -51,6 +51,10 @@ type CancelRetrievalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelRetrievalInput) operationName() string {
+	return "CancelRetrieval"
+}
+
 // CancelRetrievalOutput
 type CancelRetrievalOutput struct {
 

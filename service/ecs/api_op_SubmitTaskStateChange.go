@@ -70,6 +70,10 @@ type SubmitTaskStateChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitTaskStateChangeInput) operationName() string {
+	return "SubmitTaskStateChange"
+}
+
 type SubmitTaskStateChangeOutput struct {
 
 	// Acknowledgement of the state change.

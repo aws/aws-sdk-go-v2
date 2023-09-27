@@ -122,6 +122,10 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTablesInput) operationName() string {
+	return "ListTables"
+}
+
 type ListTablesOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

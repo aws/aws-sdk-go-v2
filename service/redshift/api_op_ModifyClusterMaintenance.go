@@ -61,6 +61,10 @@ type ModifyClusterMaintenanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterMaintenanceInput) operationName() string {
+	return "ModifyClusterMaintenance"
+}
+
 type ModifyClusterMaintenanceOutput struct {
 
 	// Describes a cluster.

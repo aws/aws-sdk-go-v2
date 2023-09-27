@@ -59,6 +59,10 @@ type DetachVerifiedAccessTrustProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachVerifiedAccessTrustProviderInput) operationName() string {
+	return "DetachVerifiedAccessTrustProvider"
+}
+
 type DetachVerifiedAccessTrustProviderOutput struct {
 
 	// The ID of the Verified Access instance.

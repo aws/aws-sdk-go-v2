@@ -131,6 +131,10 @@ type CreateMountTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMountTargetInput) operationName() string {
+	return "CreateMountTarget"
+}
+
 // Provides a description of a mount target.
 type CreateMountTargetOutput struct {
 

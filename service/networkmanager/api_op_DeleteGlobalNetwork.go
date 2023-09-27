@@ -44,6 +44,10 @@ type DeleteGlobalNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGlobalNetworkInput) operationName() string {
+	return "DeleteGlobalNetwork"
+}
+
 type DeleteGlobalNetworkOutput struct {
 
 	// Information about the global network.

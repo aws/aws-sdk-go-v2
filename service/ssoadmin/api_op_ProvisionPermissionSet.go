@@ -60,6 +60,10 @@ type ProvisionPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ProvisionPermissionSetInput) operationName() string {
+	return "ProvisionPermissionSet"
+}
+
 type ProvisionPermissionSetOutput struct {
 
 	// The status object for the permission set provisioning operation.

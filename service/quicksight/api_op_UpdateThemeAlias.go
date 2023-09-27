@@ -58,6 +58,10 @@ type UpdateThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThemeAliasInput) operationName() string {
+	return "UpdateThemeAlias"
+}
+
 type UpdateThemeAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

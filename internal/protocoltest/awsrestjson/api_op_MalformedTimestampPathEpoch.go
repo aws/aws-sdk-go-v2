@@ -33,6 +33,10 @@ type MalformedTimestampPathEpochInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedTimestampPathEpochInput) operationName() string {
+	return "MalformedTimestampPathEpoch"
+}
+
 type MalformedTimestampPathEpochOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,6 +60,10 @@ type CreateRunGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRunGroupInput) operationName() string {
+	return "CreateRunGroup"
+}
+
 type CreateRunGroupOutput struct {
 
 	// The group's ARN.

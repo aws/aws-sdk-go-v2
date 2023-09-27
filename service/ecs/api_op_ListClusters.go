@@ -53,6 +53,10 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClustersInput) operationName() string {
+	return "ListClusters"
+}
+
 type ListClustersOutput struct {
 
 	// The list of full Amazon Resource Name (ARN) entries for each cluster that's

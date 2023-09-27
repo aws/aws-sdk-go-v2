@@ -51,6 +51,10 @@ type ListUniqueProblemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUniqueProblemsInput) operationName() string {
+	return "ListUniqueProblems"
+}
+
 // Represents the result of a list unique problems request.
 type ListUniqueProblemsOutput struct {
 

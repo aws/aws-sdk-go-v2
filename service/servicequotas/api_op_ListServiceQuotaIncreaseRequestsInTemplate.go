@@ -61,6 +61,10 @@ type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceQuotaIncreaseRequestsInTemplateInput) operationName() string {
+	return "ListServiceQuotaIncreaseRequestsInTemplate"
+}
+
 type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 
 	// If present, indicates that more output is available than is included in the

@@ -71,6 +71,10 @@ type DescribeStackResourceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackResourceDriftsInput) operationName() string {
+	return "DescribeStackResourceDrifts"
+}
+
 type DescribeStackResourceDriftsOutput struct {
 
 	// Drift information for the resources that have been checked for drift in the
