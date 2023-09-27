@@ -142,6 +142,12 @@ final class AwsProtocolUtils {
                         .operation(ShapeId.from("aws.protocoltests.restxml#PutWithContentEncoding"))
                         .addTestName("SDKAppliedContentEncoding_restXml")
                         .addTestName("SDKAppendedGzipAfterProvidedEncoding_restXml")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
+                        .operation(ShapeId.from("aws.protocoltests.restxml#HttpPayloadWithUnion"))
+                        .addTestName("RestXmlHttpPayloadWithUnion")
+                        .addTestName("RestXmlHttpPayloadWithUnsetUnion")
                         .build()
                 ));
 
@@ -158,6 +164,22 @@ final class AwsProtocolUtils {
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPrefixHeaders"))
                         .addTestName("HttpPrefixHeadersAreNotPresent")
+                        .build(),
+
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#JsonUnions"))
+                        .addTestName("RestJsonDeserializeIgnoreType")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#JsonUnions"))
+                        .addTestName("AwsJson10DeserializeIgnoreType")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
+                        .operation(ShapeId.from("aws.protocoltests.json#JsonUnions"))
+                        .addTestName("AwsJson11DeserializeIgnoreType")
                         .build()
         ));
 

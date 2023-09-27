@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 )
 
+func ExampleUnionPayload_outputUsage() {
+	var union types.UnionPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UnionPayloadMemberGreeting:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleXmlUnionShape_outputUsage() {
 	var union types.XmlUnionShape
 	// type switches can be used to check the union value

@@ -11,7 +11,7 @@ on:
 
 env:
   EACHMODULE_CONCURRENCY: 2
-  SMITHY_GO_REPOSITORY: ${{ vars.SMITHY_GO_REPOSITORY }}
+  SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go
   GIT_PAT: ${{ secrets.CI_GIT_PAT}}
 
 jobs:

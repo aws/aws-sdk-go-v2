@@ -3,8 +3,7 @@ package software.amazon.smithy.aws.go.codegen;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.endpoints.FnProvider;
-import software.amazon.smithy.rulesengine.language.syntax.fn.FunctionDefinition;
-
+import software.amazon.smithy.rulesengine.language.syntax.expressions.functions.FunctionDefinition;
 
 public class AwsFnProvider implements FnProvider {
     @Override
@@ -15,8 +14,8 @@ public class AwsFnProvider implements FnProvider {
             case "aws.parseArn" -> SymbolUtils.createValueSymbolBuilder("ParseARN",
                     AwsGoDependency.AWS_ENDPOINT_RULESFN).build();
             case "aws.isVirtualHostableS3Bucket" ->
-                    SymbolUtils.createValueSymbolBuilder("IsVirtualHostableS3Bucket",
-                    AwsGoDependency.AWS_ENDPOINT_RULESFN).build();
+                SymbolUtils.createValueSymbolBuilder("IsVirtualHostableS3Bucket",
+                        AwsGoDependency.AWS_ENDPOINT_RULESFN).build();
 
             default -> null;
         };

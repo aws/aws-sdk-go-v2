@@ -9,7 +9,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This examples uses a @mediaType trait on the payload to force a custom
+// This example uses a @mediaType trait on the payload to force a custom
 // content-type to be serialized.
 func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *HttpPayloadTraitsWithMediaTypeInput, optFns ...func(*Options)) (*HttpPayloadTraitsWithMediaTypeOutput, error) {
 	if params == nil {

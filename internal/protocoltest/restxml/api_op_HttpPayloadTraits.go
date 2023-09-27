@@ -9,7 +9,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This examples serializes a blob shape in the payload. In this example, no XML
+// This example serializes a blob shape in the payload. In this example, no XML
 // document is synthesized because the payload is not a structure or a union type.
 func (c *Client) HttpPayloadTraits(ctx context.Context, params *HttpPayloadTraitsInput, optFns ...func(*Options)) (*HttpPayloadTraitsOutput, error) {
 	if params == nil {

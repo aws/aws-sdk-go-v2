@@ -43,6 +43,8 @@
         "api_op_HttpPayloadTraits_test.go",
         "api_op_HttpPayloadWithStructure.go",
         "api_op_HttpPayloadWithStructure_test.go",
+        "api_op_HttpPayloadWithUnion.go",
+        "api_op_HttpPayloadWithUnion_test.go",
         "api_op_HttpPrefixHeaders.go",
         "api_op_HttpPrefixHeadersInResponse.go",
         "api_op_HttpPrefixHeadersInResponse_test.go",

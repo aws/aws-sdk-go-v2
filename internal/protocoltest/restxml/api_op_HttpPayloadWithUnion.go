@@ -10,31 +10,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example serializes a structure in the payload. Note that serializing a
-// structure changes the wrapper element name to match the targeted structure.
-func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPayloadWithStructureInput, optFns ...func(*Options)) (*HttpPayloadWithStructureOutput, error) {
+// This example serializes a union in the payload.
+func (c *Client) HttpPayloadWithUnion(ctx context.Context, params *HttpPayloadWithUnionInput, optFns ...func(*Options)) (*HttpPayloadWithUnionOutput, error) {
 	if params == nil {
-		params = &HttpPayloadWithStructureInput{}
+		params = &HttpPayloadWithUnionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithStructure", params, optFns, c.addOperationHttpPayloadWithStructureMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithUnion", params, optFns, c.addOperationHttpPayloadWithUnionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*HttpPayloadWithStructureOutput)
+	out := result.(*HttpPayloadWithUnionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type HttpPayloadWithStructureInput struct {
-	Nested *types.NestedPayload
+type HttpPayloadWithUnionInput struct {
+	Nested types.UnionPayload
 
 	noSmithyDocumentSerde
 }
 
-type HttpPayloadWithStructureOutput struct {
-	Nested *types.NestedPayload
+type HttpPayloadWithUnionOutput struct {
+	Nested types.UnionPayload
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,12 +41,12 @@ type HttpPayloadWithStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithStructure{}, middleware.After)
+func (c *Client) addOperationHttpPayloadWithUnionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithUnion{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadWithStructure{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadWithUnion{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -84,7 +83,7 @@ func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithStructure(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithUnion(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -105,10 +104,10 @@ func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middlewa
 	return nil
 }
 
-func newServiceMetadataMiddleware_opHttpPayloadWithStructure(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opHttpPayloadWithUnion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "HttpPayloadWithStructure",
+		OperationName: "HttpPayloadWithUnion",
 	}
 }
