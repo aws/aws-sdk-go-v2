@@ -101,7 +101,7 @@
                 "FeatureTypes": {
                     "target": "com.amazonaws.textract#FeatureTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected form\n         data. Add SIGNATURES to return the locations of detected signatures. To perform both forms \n         and table analysis, add TABLES and FORMS to <code>FeatureTypes</code>. To detect signatures within\n         form data and table data, add SIGNATURES to either TABLES or FORMS.\n         All lines and words detected in the document are included in the response (including text\n         that isn't related to the value of <code>FeatureTypes</code>). </p>",
+                        "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected form\n         data. Add SIGNATURES to return the locations of detected signatures. Add LAYOUT to the list\n         to return information about the layout of the document. To perform both forms\n         and table analysis, add TABLES and FORMS to <code>FeatureTypes</code>. To detect signatures\n         within the document and within form data and table data, add SIGNATURES to either TABLES or\n         FORMS. All lines and words detected in the document are included in the response (including\n         text that isn't related to the value of <code>FeatureTypes</code>). </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -353,7 +353,7 @@
                 "BlockType": {
                     "target": "com.amazonaws.textract#BlockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_TITLE</i> - The title of a table. A title is typically a\n               line of text above or below a table, or embedded as the first row of a table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_FOOTER</i> - The footer associated with a table. A footer\n               is typically a line or lines of text below a table or embedded as the last row of a\n               table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>MERGED_CELL</i>  - A cell in a table whose content spans more than\n               one row or column. The <code>Relationships</code> array for this cell contain data\n               from individual cells.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SIGNATURE</i> - The location and confidene score of a signature detected on a\n               document page. Can be returned as part of a Key-Value pair or a detected cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_TITLE</i> - The title of a table. A title is typically a\n               line of text above or below a table, or embedded as the first row of a table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_FOOTER</i> - The footer associated with a table. A footer\n               is typically a line or lines of text below a table or embedded as the last row of a\n               table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>MERGED_CELL</i>  - A cell in a table whose content spans more than\n               one row or column. The <code>Relationships</code> array for this cell contain data\n               from individual cells.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SIGNATURE</i> - The location and confidence score of a signature detected on a\n               document page. Can be returned as part of a Key-Value pair or a detected cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Confidence": {
@@ -431,7 +431,7 @@
                 "Page": {
                     "target": "com.amazonaws.textract#UInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by synchronous and\n         asynchronous operations. Page values greater than 1 are only returned for multipage\n         documents that are in PDF or TIFF format. A scanned image (JPEG/PNG) provided to an\n         asynchronous operation, even if it contains multiple document pages, is considered a\n         single-page document. This means that for scanned images the value of <code>Page</code> is\n         always 1. Synchronous operations will also return a <code>Page</code> value of 1\n         because every input document is considered to be a single-page document.</p>"
+                        "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by synchronous and\n         asynchronous operations. Page values greater than 1 are only returned for multipage\n         documents that are in PDF or TIFF format. A scanned image (JPEG/PNG) provided to an\n         asynchronous operation, even if it contains multiple document pages, is considered a\n         single-page document. This means that for scanned images the value of <code>Page</code> is\n         always 1. </p>"
                     }
                 },
                 "Query": {
@@ -536,6 +536,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TABLE_FOOTER"
+                    }
+                },
+                "LAYOUT_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_TEXT"
+                    }
+                },
+                "LAYOUT_TITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_TITLE"
+                    }
+                },
+                "LAYOUT_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_HEADER"
+                    }
+                },
+                "LAYOUT_FOOTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_FOOTER"
+                    }
+                },
+                "LAYOUT_SECTION_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_SECTION_HEADER"
+                    }
+                },
+                "LAYOUT_PAGE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_PAGE_NUMBER"
+                    }
+                },
+                "LAYOUT_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_LIST"
+                    }
+                },
+                "LAYOUT_FIGURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_FIGURE"
+                    }
+                },
+                "LAYOUT_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_TABLE"
+                    }
+                },
+                "LAYOUT_KEY_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_KEY_VALUE"
                     }
                 }
             }
@@ -1126,6 +1186,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SIGNATURES"
+                    }
+                },
+                "LAYOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT"
                     }
                 }
             }

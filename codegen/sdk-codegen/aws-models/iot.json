@@ -4392,7 +4392,7 @@
                 "criteria": {
                     "target": "com.amazonaws.iot#BehaviorCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria that determine if a device is behaving normally in regard to\n          the <code>metric</code>.</p>"
+                        "smithy.api#documentation": "<p>The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.</p>\n         <note>\n            <p>In the IoT console, you can choose to be sent an alert through Amazon SNS when IoT Device Defender detects that a device is behaving anomalously.</p>\n         </note>"
                     }
                 },
                 "suppressAlerts": {
@@ -6449,7 +6449,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.\n      </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.\n      </p>\n         <note>\n            <p>The CSR must include a public key that is either an\n            RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. \n            For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n               Certificate signing algorithms supported by IoT</a>.\n         </p>\n         </note>\n         <note>\n            <p>Reusing the same certificate signing request (CSR)\n            results in a distinct certificate.</p>\n         </note>\n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple <code>.csr</code> files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs. In the following commands, we assume that a set of CSRs are located inside of the\n         directory my-csr-directory:</p>\n         <p>On Linux and OS X, the command is: </p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}</code>\n         </p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for\n         the corresponding CSR. </p>\n         <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the\n         command in parallel to speed up the certificate creation process:</p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}\n         </code>\n         </p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/$_}\n         </code>\n         </p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n            --certificate-signing-request file://@path\"\n         </code>\n         </p>",
+                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.\n      </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.\n      </p>\n         <note>\n            <p>The CSR must include a public key that is either an RSA key with a length of at least\n            2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-521 curves. For supported\n            certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\"> Certificate signing algorithms supported by IoT</a>. </p>\n         </note>\n         <note>\n            <p>Reusing the same certificate signing request (CSR)\n            results in a distinct certificate.</p>\n         </note>\n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple <code>.csr</code> files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs. In the following commands, we assume that a set of CSRs are located inside of the\n         directory my-csr-directory:</p>\n         <p>On Linux and OS X, the command is: </p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}</code>\n         </p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for\n         the corresponding CSR. </p>\n         <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the\n         command in parallel to speed up the certificate creation process:</p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}\n         </code>\n         </p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/$_}\n         </code>\n         </p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n            --certificate-signing-request file://@path\"\n         </code>\n         </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/certificates",
@@ -7334,7 +7334,7 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link to the job document to use in the template. Required if you don't specify a value for <code>document</code>.</p>\n         <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a bucket</a>.</p>"
                     }
                 },
                 "document": {
@@ -7705,7 +7705,7 @@
                 "additionalParameters": {
                     "target": "com.amazonaws.iot#AdditionalParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of additional OTA update parameters which are name-value pairs.</p>"
+                        "smithy.api#documentation": "<p>A list of additional OTA update parameters, which are name-value pairs. \n            They won't be sent to devices as a part of the Job document.</p>"
                     }
                 },
                 "tags": {
@@ -7798,7 +7798,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new package.</p>",
+                        "smithy.api#documentation": "<p>The name of the new software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7834,7 +7834,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                        "smithy.api#documentation": "<p>The name of the software package.</p>"
                     }
                 },
                 "packageArn": {
@@ -7895,7 +7895,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the associated package.</p>",
+                        "smithy.api#documentation": "<p>The name of the associated software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7951,7 +7951,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the associated package.</p>"
+                        "smithy.api#documentation": "<p>The name of the associated software package.</p>"
                     }
                 },
                 "versionName": {
@@ -10560,7 +10560,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#documentation": "<p>The name of the target software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10605,7 +10605,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specific version from a software package.</p>\n         <p>\n            <b>Note:</b> If a package version is designated as default, you must remove the designation from the package using the <a>UpdatePackage</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a specific version from a software package.</p>\n         <p>\n            <b>Note:</b> If a package version is designated as default, you must remove the designation from the software package using the <a>UpdatePackage</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/packages/{packageName}/versions/{versionName}",
@@ -10620,7 +10620,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the associated package.</p>",
+                        "smithy.api#documentation": "<p>The name of the associated software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12811,7 +12811,7 @@
                 "endpointType": {
                     "target": "com.amazonaws.iot#EndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint type. Valid endpoint types include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:Data</code> - Returns a VeriSign signed data endpoint.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:Data-ATS</code> - Returns an ATS signed data endpoint.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:CredentialProvider</code> - Returns an IoT credentials provider API\n               endpoint.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:Jobs</code> - Returns an IoT device management Jobs API\n               endpoint.</p>\n            </li>\n         </ul>\n         <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid \n         issues related to the widespread distrust of Symantec certificate authorities.</p>",
+                        "smithy.api#documentation": "<p>The endpoint type. Valid endpoint types include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:Data</code> - Returns a VeriSign signed data endpoint.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:Data-ATS</code> - Returns an ATS signed data endpoint.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:CredentialProvider</code> - Returns an IoT credentials provider API\n               endpoint.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>iot:Jobs</code> - Returns an IoT device management Jobs API\n               endpoint.</p>\n            </li>\n         </ul>\n         <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid \n         issues related to the widespread distrust of Symantec certificate authorities. ATS Signed Certificates\n         are more secure and are trusted by most popular browsers.</p>",
                         "smithy.api#httpQuery": "endpointType"
                     }
                 }
@@ -17142,7 +17142,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#documentation": "<p>The name of the target software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17158,7 +17158,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                        "smithy.api#documentation": "<p>The name of the software package.</p>"
                     }
                 },
                 "packageArn": {
@@ -17263,7 +17263,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                        "smithy.api#documentation": "<p>The name of the software package.</p>"
                     }
                 },
                 "versionName": {
@@ -19397,10 +19397,68 @@
                         "smithy.api#documentation": "<p>Properties of the Apache Kafka producer client.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "headers": {
+                    "target": "com.amazonaws.iot#KafkaHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Kafka headers that you specify.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>"
+            }
+        },
+        "com.amazonaws.iot#KafkaActionHeader": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.iot#KafkaHeaderKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the Kafka header.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.iot#KafkaHeaderValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the Kafka header.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a Kafka header using key-value pairs when you create a Rule’s Kafka Action.\n         You can use these headers to route data from IoT clients to downstream Kafka clusters\n         without modifying your message payload.</p>\n         <p>For more information about Rule's Kafka action, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/apache-kafka-rule-action.html\">Apache Kafka</a>.\n      </p>"
+            }
+        },
+        "com.amazonaws.iot#KafkaHeaderKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16384
+                }
+            }
+        },
+        "com.amazonaws.iot#KafkaHeaderValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16384
+                }
+            }
+        },
+        "com.amazonaws.iot#KafkaHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#KafkaActionHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.iot#Key": {
@@ -22243,7 +22301,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#documentation": "<p>The name of the target software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -25234,6 +25292,18 @@
                     "traits": {
                         "smithy.api#enumValue": "PRINCIPAL_ID"
                     }
+                },
+                "EVENT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT_TYPE"
+                    }
+                },
+                "DEVICE_DEFENDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE_DEFENDER"
+                    }
                 }
             }
         },
@@ -26100,7 +26170,7 @@
                 "attributes": {
                     "target": "com.amazonaws.iot#AttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of name/attribute pairs.</p>"
+                        "smithy.api#documentation": "<p>A list of name-attribute pairs. They won't be sent to devices as a part of the Job document.</p>"
                     }
                 }
             },
@@ -26445,7 +26515,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the target package.</p>"
+                        "smithy.api#documentation": "<p>The name for the target software package.</p>"
                     }
                 },
                 "defaultVersionName": {
@@ -28895,13 +28965,13 @@
                 "startTime": {
                     "target": "com.amazonaws.iot#StringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time a job will begin rollout of the job document to all devices in the target\n            group for a job. The <code>startTime</code> can be scheduled up to a year in advance and\n            must be scheduled a minimum of thirty minutes from the current time. The date and time\n            format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the\n            time.</p>"
+                        "smithy.api#documentation": "<p>The time a job will begin rollout of the job document to all devices in the target\n            group for a job. The <code>startTime</code> can be scheduled up to a year in advance and\n            must be scheduled a minimum of thirty minutes from the current time. The date and time\n            format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the\n            time.</p>\n         <p>For more information on the syntax for <code>startTime</code> when using an API\n                command or the Command Line Interface, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a>.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.iot#StringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time a job will stop rollout of the job document to all devices in the target\n            group for a job. The <code>endTime</code> must take place no later than two years from\n            the current time and be scheduled a minimum of thirty minutes from the current time. The\n            minimum duration between <code>startTime</code> and <code>endTime</code> is thirty\n            minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is\n            two years. The date and time format for the <code>endTime</code> is YYYY-MM-DD for the\n            date and HH:MM for the time.</p>"
+                        "smithy.api#documentation": "<p>The time a job will stop rollout of the job document to all devices in the target\n            group for a job. The <code>endTime</code> must take place no later than two years from\n            the current time and be scheduled a minimum of thirty minutes from the current time. The\n            minimum duration between <code>startTime</code> and <code>endTime</code> is thirty\n            minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is\n            two years. The date and time format for the <code>endTime</code> is YYYY-MM-DD for the\n            date and HH:MM for the time.</p>\n         <p>For more information on the syntax for <code>endTime</code> when using an API command\n            or the Command Line Interface, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a>.</p>"
                     }
                 },
                 "endBehavior": {
@@ -33862,7 +33932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the supported fields for a specific package.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackage</a> and <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetIndexingConfiguration</a> actions.</p>",
+                "smithy.api#documentation": "<p>Updates the supported fields for a specific software package.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackage</a> and <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetIndexingConfiguration</a> actions.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/packages/{packageName}",
@@ -33891,7 +33961,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the package configuration.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackageConfiguration</a> and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">iam:PassRole</a> actions.</p>",
+                "smithy.api#documentation": "<p>Updates the software package configuration.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackageConfiguration</a> and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">iam:PassRole</a> actions.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/package-configuration",
@@ -33935,7 +34005,7 @@
                 "packageName": {
                     "target": "com.amazonaws.iot#PackageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#documentation": "<p>The name of the target software package.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -34038,7 +34108,7 @@
                 "attributes": {
                     "target": "com.amazonaws.iot#ResourceAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet. </p>\n         <p>\n            <b>Note:</b> Attributes can be updated only when the package version\n      is in a draft state.</p>\n         <p>The combined size of all the attributes on a package version is limited to 3KB.</p>"
+                        "smithy.api#documentation": "<p>Metadata that can be used to define a package version’s configuration. For example, the Amazon S3 file location, configuration options that are being sent to the device or fleet. </p>\n         <p>\n            <b>Note:</b> Attributes can be updated only when the package version\n      is in a draft state.</p>\n         <p>The combined size of all the attributes on a package version is limited to 3KB.</p>"
                     }
                 },
                 "action": {

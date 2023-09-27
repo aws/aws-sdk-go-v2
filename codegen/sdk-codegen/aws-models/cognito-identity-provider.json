@@ -1769,7 +1769,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username for the user. Must be unique within the user pool. Must be a UTF-8 string\n            between 1 and 128 characters. After the user is created, the username can't be\n            changed.</p>",
+                        "smithy.api#documentation": "<p>The value that you want to set as the username sign-in attribute. The following\n            conditions apply to the username parameter.</p>\n         <ul>\n            <li>\n               <p>The username can't be a duplicate of another username in the same user\n                    pool.</p>\n            </li>\n            <li>\n               <p>You can't change the value of a username after you create it.</p>\n            </li>\n            <li>\n               <p>You can only provide a value if usernames are a valid sign-in attribute for\n                    your user pool. If your user pool only supports phone numbers or email addresses\n                    as sign-in attributes, Amazon Cognito automatically generates a username value. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases\">Customizing sign-in attributes</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4602,7 +4602,7 @@
                 "LogGroupArn": {
                     "target": "com.amazonaws.cognitoidentityprovider#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of a CloudWatch Logs log group where your user pool sends logs.\n            The log group must not be encrypted with Key Management Service and must be in the same Amazon Web Services account\n            as your user pool.</p>\n         <p>To send logs to log groups with a resource policy of a size greater than 5120\n            characters, configure a log group with a path that starts with\n            <code>/aws/vendedlogs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling\n                logging from certain Amazon Web Services services</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of a CloudWatch Logs log group where your user pool sends logs.\n            The log group must not be encrypted with Key Management Service and must be in the same Amazon Web Services account\n            as your user pool.</p>\n         <p>To send logs to log groups with a resource policy of a size greater than 5120\n            characters, configure a log group with a path that starts with\n                <code>/aws/vendedlogs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling\n                logging from certain Amazon Web Services services</a>.</p>"
                     }
                 }
             },
@@ -15292,6 +15292,9 @@
                 "Status": {
                     "target": "com.amazonaws.cognitoidentityprovider#StatusType",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is no longer available."
+                        },
                         "smithy.api#documentation": "<p>The user pool status in a user pool description.</p>"
                     }
                 },
@@ -15439,6 +15442,9 @@
                 "Status": {
                     "target": "com.amazonaws.cognitoidentityprovider#StatusType",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is no longer available."
+                        },
                         "smithy.api#documentation": "<p>The status of a user pool.</p>"
                     }
                 },
