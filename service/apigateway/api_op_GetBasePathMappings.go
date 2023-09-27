@@ -50,6 +50,10 @@ type GetBasePathMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBasePathMappingsInput) operationName() string {
+	return "GetBasePathMappings"
+}
+
 // Represents a collection of BasePathMapping resources.
 type GetBasePathMappingsOutput struct {
 

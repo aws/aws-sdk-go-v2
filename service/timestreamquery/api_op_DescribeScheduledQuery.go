@@ -43,6 +43,10 @@ type DescribeScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledQueryInput) operationName() string {
+	return "DescribeScheduledQuery"
+}
+
 type DescribeScheduledQueryOutput struct {
 
 	// The scheduled query.

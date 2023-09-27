@@ -50,6 +50,10 @@ type GetOutcomesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOutcomesInput) operationName() string {
+	return "GetOutcomes"
+}
+
 type GetOutcomesOutput struct {
 
 	// The next page token for subsequent requests.

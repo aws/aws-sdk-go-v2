@@ -77,6 +77,10 @@ type ListAppImageConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppImageConfigsInput) operationName() string {
+	return "ListAppImageConfigs"
+}
+
 type ListAppImageConfigsOutput struct {
 
 	// A list of AppImageConfigs and their properties.

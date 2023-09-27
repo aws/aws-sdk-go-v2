@@ -65,6 +65,10 @@ type ListCreateAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCreateAccountStatusInput) operationName() string {
+	return "ListCreateAccountStatus"
+}
+
 type ListCreateAccountStatusOutput struct {
 
 	// A list of objects with details about the requests. Certain elements, such as

@@ -49,6 +49,10 @@ type GetAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPolicyInput) operationName() string {
+	return "GetAccessPolicy"
+}
+
 type GetAccessPolicyOutput struct {
 
 	// Details about the requested access policy.

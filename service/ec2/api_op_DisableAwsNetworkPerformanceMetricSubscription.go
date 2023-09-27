@@ -57,6 +57,10 @@ type DisableAwsNetworkPerformanceMetricSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableAwsNetworkPerformanceMetricSubscriptionInput) operationName() string {
+	return "DisableAwsNetworkPerformanceMetricSubscription"
+}
+
 type DisableAwsNetworkPerformanceMetricSubscriptionOutput struct {
 
 	// Indicates whether the unsubscribe action was successful.

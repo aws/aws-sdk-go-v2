@@ -73,6 +73,10 @@ type ListModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelVersionsInput) operationName() string {
+	return "ListModelVersions"
+}
+
 type ListModelVersionsOutput struct {
 
 	// Provides information on the specified model version, including the created

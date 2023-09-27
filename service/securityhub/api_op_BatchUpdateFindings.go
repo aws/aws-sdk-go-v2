@@ -112,6 +112,10 @@ type BatchUpdateFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateFindingsInput) operationName() string {
+	return "BatchUpdateFindings"
+}
+
 type BatchUpdateFindingsOutput struct {
 
 	// The list of findings that were updated successfully.

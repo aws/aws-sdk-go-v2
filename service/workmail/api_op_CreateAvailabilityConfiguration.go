@@ -60,6 +60,10 @@ type CreateAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAvailabilityConfigurationInput) operationName() string {
+	return "CreateAvailabilityConfiguration"
+}
+
 type CreateAvailabilityConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

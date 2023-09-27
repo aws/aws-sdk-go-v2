@@ -53,6 +53,10 @@ type DescribeAnalysisDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnalysisDefinitionInput) operationName() string {
+	return "DescribeAnalysisDefinition"
+}
+
 type DescribeAnalysisDefinitionOutput struct {
 
 	// The ID of the analysis described.

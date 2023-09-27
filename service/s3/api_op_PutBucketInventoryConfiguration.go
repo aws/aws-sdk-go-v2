@@ -100,6 +100,10 @@ type PutBucketInventoryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketInventoryConfigurationInput) operationName() string {
+	return "PutBucketInventoryConfiguration"
+}
+
 type PutBucketInventoryConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

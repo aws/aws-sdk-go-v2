@@ -65,6 +65,10 @@ type GetCurrentUserDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCurrentUserDataInput) operationName() string {
+	return "GetCurrentUserData"
+}
+
 type GetCurrentUserDataOutput struct {
 
 	// The total count of the result, regardless of the current page size.

@@ -42,6 +42,10 @@ type DeleteVpcConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcConnectionInput) operationName() string {
+	return "DeleteVpcConnection"
+}
+
 type DeleteVpcConnectionOutput struct {
 
 	// The state of the VPC connection.

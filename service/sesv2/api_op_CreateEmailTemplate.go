@@ -54,6 +54,10 @@ type CreateEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEmailTemplateInput) operationName() string {
+	return "CreateEmailTemplate"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type CreateEmailTemplateOutput struct {

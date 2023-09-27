@@ -51,6 +51,10 @@ type AttachThingPrincipalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachThingPrincipalInput) operationName() string {
+	return "AttachThingPrincipal"
+}
+
 // The output from the AttachThingPrincipal operation.
 type AttachThingPrincipalOutput struct {
 	// Metadata pertaining to the operation's result.

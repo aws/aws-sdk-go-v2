@@ -66,6 +66,10 @@ type ListWhatIfForecastsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWhatIfForecastsInput) operationName() string {
+	return "ListWhatIfForecasts"
+}
+
 type ListWhatIfForecastsOutput struct {
 
 	// If the result of the previous request was truncated, the response includes a

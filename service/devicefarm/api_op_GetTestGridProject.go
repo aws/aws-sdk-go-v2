@@ -43,6 +43,10 @@ type GetTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTestGridProjectInput) operationName() string {
+	return "GetTestGridProject"
+}
+
 type GetTestGridProjectOutput struct {
 
 	// A TestGridProject .

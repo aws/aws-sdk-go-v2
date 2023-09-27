@@ -64,6 +64,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateOrganizationalUnit.go",
         "api_op_UpdatePolicy.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

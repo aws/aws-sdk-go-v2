@@ -36,6 +36,10 @@ type GetEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEncryptionConfigInput) operationName() string {
+	return "GetEncryptionConfig"
+}
+
 type GetEncryptionConfigOutput struct {
 
 	// The encryption configuration document.

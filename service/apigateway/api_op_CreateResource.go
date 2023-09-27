@@ -53,6 +53,10 @@ type CreateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceInput) operationName() string {
+	return "CreateResource"
+}
+
 // Represents an API resource.
 type CreateResourceOutput struct {
 

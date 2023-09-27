@@ -52,6 +52,10 @@ type ListEdgeAgentConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEdgeAgentConfigurationsInput) operationName() string {
+	return "ListEdgeAgentConfigurations"
+}
+
 type ListEdgeAgentConfigurationsOutput struct {
 
 	// A description of a single stream's edge configuration.

@@ -43,6 +43,10 @@ type DescribeDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainConfigInput) operationName() string {
+	return "DescribeDomainConfig"
+}
+
 // Contains the configuration information of the requested domain.
 type DescribeDomainConfigOutput struct {
 

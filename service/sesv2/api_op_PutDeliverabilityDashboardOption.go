@@ -64,6 +64,10 @@ type PutDeliverabilityDashboardOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDeliverabilityDashboardOptionInput) operationName() string {
+	return "PutDeliverabilityDashboardOption"
+}
+
 // A response that indicates whether the Deliverability dashboard is enabled.
 type PutDeliverabilityDashboardOptionOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -172,6 +172,10 @@ type PutItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutItemInput) operationName() string {
+	return "PutItem"
+}
+
 // Represents the output of a PutItem operation.
 type PutItemOutput struct {
 

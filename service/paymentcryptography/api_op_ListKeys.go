@@ -60,6 +60,10 @@ type ListKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeysInput) operationName() string {
+	return "ListKeys"
+}
+
 type ListKeysOutput struct {
 
 	// The list of keys created within the caller's Amazon Web Services account and

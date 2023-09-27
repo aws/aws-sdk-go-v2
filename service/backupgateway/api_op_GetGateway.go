@@ -42,6 +42,10 @@ type GetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGatewayInput) operationName() string {
+	return "GetGateway"
+}
+
 type GetGatewayOutput struct {
 
 	// By providing the ARN (Amazon Resource Name), this API returns the gateway.

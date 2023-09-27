@@ -45,6 +45,10 @@ type DescribeTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTextTranslationJobInput) operationName() string {
+	return "DescribeTextTranslationJob"
+}
+
 type DescribeTextTranslationJobOutput struct {
 
 	// An object that contains the properties associated with an asynchronous batch

@@ -64,6 +64,10 @@ type ListAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssetsInput) operationName() string {
+	return "ListAssets"
+}
+
 type ListAssetsOutput struct {
 
 	// A list that summarizes each asset.

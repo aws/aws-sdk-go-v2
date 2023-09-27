@@ -48,6 +48,10 @@ type GetContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactInput) operationName() string {
+	return "GetContact"
+}
+
 type GetContactOutput struct {
 
 	// The attribute data attached to a contact.

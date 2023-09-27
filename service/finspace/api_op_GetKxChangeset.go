@@ -53,6 +53,10 @@ type GetKxChangesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKxChangesetInput) operationName() string {
+	return "GetKxChangeset"
+}
+
 type GetKxChangesetOutput struct {
 
 	// Beginning time from which the changeset is active. The value is determined as

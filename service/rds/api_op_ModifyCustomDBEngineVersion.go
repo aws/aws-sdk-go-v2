@@ -75,6 +75,10 @@ type ModifyCustomDBEngineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCustomDBEngineVersionInput) operationName() string {
+	return "ModifyCustomDBEngineVersion"
+}
+
 // This data type is used as a response element in the action
 // DescribeDBEngineVersions .
 type ModifyCustomDBEngineVersionOutput struct {

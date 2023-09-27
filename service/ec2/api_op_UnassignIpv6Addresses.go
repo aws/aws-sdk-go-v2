@@ -48,6 +48,10 @@ type UnassignIpv6AddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnassignIpv6AddressesInput) operationName() string {
+	return "UnassignIpv6Addresses"
+}
+
 type UnassignIpv6AddressesOutput struct {
 
 	// The ID of the network interface.

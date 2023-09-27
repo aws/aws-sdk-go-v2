@@ -42,6 +42,10 @@ type DescribeCopyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCopyJobInput) operationName() string {
+	return "DescribeCopyJob"
+}
+
 type DescribeCopyJobOutput struct {
 
 	// Contains detailed information about a copy job.

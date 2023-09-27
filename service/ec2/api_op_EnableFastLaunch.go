@@ -74,6 +74,10 @@ type EnableFastLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableFastLaunchInput) operationName() string {
+	return "EnableFastLaunch"
+}
+
 type EnableFastLaunchOutput struct {
 
 	// The image ID that identifies the Windows AMI for which faster launching was

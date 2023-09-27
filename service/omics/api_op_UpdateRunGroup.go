@@ -56,6 +56,10 @@ type UpdateRunGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRunGroupInput) operationName() string {
+	return "UpdateRunGroup"
+}
+
 type UpdateRunGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

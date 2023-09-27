@@ -88,6 +88,10 @@ type UpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStackInput) operationName() string {
+	return "UpdateStack"
+}
+
 type UpdateStackOutput struct {
 
 	// Information about the stack.

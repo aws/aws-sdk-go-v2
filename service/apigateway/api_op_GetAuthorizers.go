@@ -50,6 +50,10 @@ type GetAuthorizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAuthorizersInput) operationName() string {
+	return "GetAuthorizers"
+}
+
 // Represents a collection of Authorizer resources.
 type GetAuthorizersOutput struct {
 

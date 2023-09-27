@@ -45,6 +45,10 @@ type GetSdkTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSdkTypesInput) operationName() string {
+	return "GetSdkTypes"
+}
+
 // The collection of SdkType instances.
 type GetSdkTypesOutput struct {
 

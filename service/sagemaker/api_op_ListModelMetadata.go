@@ -52,6 +52,10 @@ type ListModelMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelMetadataInput) operationName() string {
+	return "ListModelMetadata"
+}
+
 type ListModelMetadataOutput struct {
 
 	// A structure that holds model metadata.

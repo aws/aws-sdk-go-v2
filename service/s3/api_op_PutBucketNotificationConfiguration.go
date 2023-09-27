@@ -92,6 +92,10 @@ type PutBucketNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketNotificationConfigurationInput) operationName() string {
+	return "PutBucketNotificationConfiguration"
+}
+
 type PutBucketNotificationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

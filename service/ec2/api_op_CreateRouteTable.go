@@ -54,6 +54,10 @@ type CreateRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRouteTableInput) operationName() string {
+	return "CreateRouteTable"
+}
+
 type CreateRouteTableOutput struct {
 
 	// Information about the route table.

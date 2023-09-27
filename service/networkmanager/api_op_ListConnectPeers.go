@@ -49,6 +49,10 @@ type ListConnectPeersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectPeersInput) operationName() string {
+	return "ListConnectPeers"
+}
+
 type ListConnectPeersOutput struct {
 
 	// Describes the Connect peers.

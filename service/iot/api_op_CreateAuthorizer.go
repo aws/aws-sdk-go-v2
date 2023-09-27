@@ -74,6 +74,10 @@ type CreateAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAuthorizerInput) operationName() string {
+	return "CreateAuthorizer"
+}
+
 type CreateAuthorizerOutput struct {
 
 	// The authorizer ARN.

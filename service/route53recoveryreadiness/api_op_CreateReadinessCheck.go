@@ -53,6 +53,10 @@ type CreateReadinessCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReadinessCheckInput) operationName() string {
+	return "CreateReadinessCheck"
+}
+
 type CreateReadinessCheckOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with a readiness check.

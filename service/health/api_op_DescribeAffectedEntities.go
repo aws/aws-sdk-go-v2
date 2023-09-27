@@ -68,6 +68,10 @@ type DescribeAffectedEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAffectedEntitiesInput) operationName() string {
+	return "DescribeAffectedEntities"
+}
+
 type DescribeAffectedEntitiesOutput struct {
 
 	// The entities that match the filter criteria.

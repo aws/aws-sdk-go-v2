@@ -72,6 +72,10 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetInput) operationName() string {
+	return "CreateDataset"
+}
+
 type CreateDatasetOutput struct {
 
 	// The ARN of the created Amazon Rekognition Custom Labels dataset.

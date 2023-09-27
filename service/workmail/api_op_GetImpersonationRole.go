@@ -48,6 +48,10 @@ type GetImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImpersonationRoleInput) operationName() string {
+	return "GetImpersonationRole"
+}
+
 type GetImpersonationRoleOutput struct {
 
 	// The date when the impersonation role was created.

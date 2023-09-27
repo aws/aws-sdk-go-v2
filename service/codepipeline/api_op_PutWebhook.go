@@ -55,6 +55,10 @@ type PutWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutWebhookInput) operationName() string {
+	return "PutWebhook"
+}
+
 type PutWebhookOutput struct {
 
 	// The detail returned from creating the webhook, such as the webhook name,

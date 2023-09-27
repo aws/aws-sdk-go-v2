@@ -57,6 +57,10 @@ type ResumeContactRecordingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeContactRecordingInput) operationName() string {
+	return "ResumeContactRecording"
+}
+
 type ResumeContactRecordingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

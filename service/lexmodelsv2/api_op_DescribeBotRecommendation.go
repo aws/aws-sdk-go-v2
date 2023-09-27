@@ -64,6 +64,10 @@ type DescribeBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBotRecommendationInput) operationName() string {
+	return "DescribeBotRecommendation"
+}
+
 type DescribeBotRecommendationOutput struct {
 
 	// The identifier of the bot associated with the bot recommendation.

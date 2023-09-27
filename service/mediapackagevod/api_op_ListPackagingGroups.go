@@ -43,6 +43,10 @@ type ListPackagingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackagingGroupsInput) operationName() string {
+	return "ListPackagingGroups"
+}
+
 type ListPackagingGroupsOutput struct {
 
 	// A token that can be used to resume pagination from the end of the collection.

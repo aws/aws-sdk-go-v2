@@ -54,6 +54,10 @@ type ListRealtimeContactAnalysisSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRealtimeContactAnalysisSegmentsInput) operationName() string {
+	return "ListRealtimeContactAnalysisSegments"
+}
+
 type ListRealtimeContactAnalysisSegmentsOutput struct {
 
 	// An analyzed transcript or category.

@@ -66,6 +66,10 @@ type ListBucketIntelligentTieringConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBucketIntelligentTieringConfigurationsInput) operationName() string {
+	return "ListBucketIntelligentTieringConfigurations"
+}
+
 type ListBucketIntelligentTieringConfigurationsOutput struct {
 
 	// The ContinuationToken that represents a placeholder from where this request

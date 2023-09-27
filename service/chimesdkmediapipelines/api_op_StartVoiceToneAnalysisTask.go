@@ -62,6 +62,10 @@ type StartVoiceToneAnalysisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartVoiceToneAnalysisTaskInput) operationName() string {
+	return "StartVoiceToneAnalysisTask"
+}
+
 type StartVoiceToneAnalysisTaskOutput struct {
 
 	// The details of the voice tone analysis task.

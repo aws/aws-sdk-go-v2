@@ -42,6 +42,10 @@ type GetRunGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRunGroupInput) operationName() string {
+	return "GetRunGroup"
+}
+
 type GetRunGroupOutput struct {
 
 	// The group's ARN.

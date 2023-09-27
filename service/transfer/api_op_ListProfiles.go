@@ -53,6 +53,10 @@ type ListProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfilesInput) operationName() string {
+	return "ListProfiles"
+}
+
 type ListProfilesOutput struct {
 
 	// Returns an array, where each item contains the details of a profile.

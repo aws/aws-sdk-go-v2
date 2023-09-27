@@ -51,6 +51,10 @@ type UpdateDataIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataIntegrationInput) operationName() string {
+	return "UpdateDataIntegration"
+}
+
 type UpdateDataIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

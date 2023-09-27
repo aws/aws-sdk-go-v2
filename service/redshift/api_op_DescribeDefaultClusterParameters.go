@@ -60,6 +60,10 @@ type DescribeDefaultClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDefaultClusterParametersInput) operationName() string {
+	return "DescribeDefaultClusterParameters"
+}
+
 type DescribeDefaultClusterParametersOutput struct {
 
 	// Describes the default cluster parameters for a parameter group family.

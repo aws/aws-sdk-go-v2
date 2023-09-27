@@ -73,6 +73,10 @@ type SearchTransitGatewayRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchTransitGatewayRoutesInput) operationName() string {
+	return "SearchTransitGatewayRoutes"
+}
+
 type SearchTransitGatewayRoutesOutput struct {
 
 	// Indicates whether there are additional routes available.

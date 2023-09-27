@@ -48,6 +48,10 @@ type ListAccessLogSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessLogSubscriptionsInput) operationName() string {
+	return "ListAccessLogSubscriptions"
+}
+
 type ListAccessLogSubscriptionsOutput struct {
 
 	// The access log subscriptions.

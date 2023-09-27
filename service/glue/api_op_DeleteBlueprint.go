@@ -41,6 +41,10 @@ type DeleteBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBlueprintInput) operationName() string {
+	return "DeleteBlueprint"
+}
+
 type DeleteBlueprintOutput struct {
 
 	// Returns the name of the blueprint that was deleted.

@@ -88,6 +88,10 @@ type GetPropertygraphStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPropertygraphStreamInput) operationName() string {
+	return "GetPropertygraphStream"
+}
+
 type GetPropertygraphStreamOutput struct {
 
 	// Serialization format for the change records being returned. Currently, the only

@@ -44,6 +44,10 @@ type GetDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDashboardInput) operationName() string {
+	return "GetDashboard"
+}
+
 type GetDashboardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.

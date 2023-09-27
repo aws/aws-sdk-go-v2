@@ -49,6 +49,10 @@ type DeleteWatchlistInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWatchlistInput) operationName() string {
+	return "DeleteWatchlist"
+}
+
 type DeleteWatchlistOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

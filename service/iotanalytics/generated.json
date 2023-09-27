@@ -43,6 +43,7 @@
         "api_op_UpdateDataset.go",
         "api_op_UpdateDatastore.go",
         "api_op_UpdatePipeline.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

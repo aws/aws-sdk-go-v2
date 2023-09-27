@@ -54,6 +54,10 @@ type ListAllowedNodeTypeModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAllowedNodeTypeModificationsInput) operationName() string {
+	return "ListAllowedNodeTypeModifications"
+}
+
 // Represents the allowed node types you can use to modify your cluster or
 // replication group.
 type ListAllowedNodeTypeModificationsOutput struct {

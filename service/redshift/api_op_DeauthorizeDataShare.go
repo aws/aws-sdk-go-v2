@@ -50,6 +50,10 @@ type DeauthorizeDataShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeauthorizeDataShareInput) operationName() string {
+	return "DeauthorizeDataShare"
+}
+
 type DeauthorizeDataShareOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly

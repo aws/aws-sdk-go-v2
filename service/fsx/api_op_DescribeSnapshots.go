@@ -70,6 +70,10 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotsInput) operationName() string {
+	return "DescribeSnapshots"
+}
+
 type DescribeSnapshotsOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).

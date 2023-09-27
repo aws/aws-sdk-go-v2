@@ -71,6 +71,10 @@ type ListCheckSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCheckSummariesInput) operationName() string {
+	return "ListCheckSummaries"
+}
+
 type ListCheckSummariesOutput struct {
 
 	// List of Trusted Advisor summaries related to the Well-Architected best practice.

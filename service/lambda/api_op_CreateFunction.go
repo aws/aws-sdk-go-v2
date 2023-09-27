@@ -202,6 +202,10 @@ type CreateFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFunctionInput) operationName() string {
+	return "CreateFunction"
+}
+
 // Details about a function's configuration.
 type CreateFunctionOutput struct {
 

@@ -43,6 +43,10 @@ type GetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceInput) operationName() string {
+	return "GetDevice"
+}
+
 // Represents the result of a get device request.
 type GetDeviceOutput struct {
 

@@ -42,6 +42,10 @@ type ListGroupCertificateAuthoritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupCertificateAuthoritiesInput) operationName() string {
+	return "ListGroupCertificateAuthorities"
+}
+
 type ListGroupCertificateAuthoritiesOutput struct {
 
 	// A list of certificate authorities associated with the group.

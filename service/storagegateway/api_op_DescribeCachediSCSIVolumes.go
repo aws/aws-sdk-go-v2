@@ -48,6 +48,10 @@ type DescribeCachediSCSIVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCachediSCSIVolumesInput) operationName() string {
+	return "DescribeCachediSCSIVolumes"
+}
+
 // A JSON object containing the following fields:
 type DescribeCachediSCSIVolumesOutput struct {
 

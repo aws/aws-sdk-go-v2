@@ -48,6 +48,10 @@ type GetCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCertificateInput) operationName() string {
+	return "GetCertificate"
+}
+
 type GetCertificateOutput struct {
 
 	// The ACM-issued certificate corresponding to the ARN specified as input.

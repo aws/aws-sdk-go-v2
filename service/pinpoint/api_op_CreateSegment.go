@@ -52,6 +52,10 @@ type CreateSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSegmentInput) operationName() string {
+	return "CreateSegment"
+}
+
 type CreateSegmentOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for

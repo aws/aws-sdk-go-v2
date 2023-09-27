@@ -62,6 +62,10 @@ type UpdateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKeyInput) operationName() string {
+	return "UpdateKey"
+}
+
 type UpdateKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to

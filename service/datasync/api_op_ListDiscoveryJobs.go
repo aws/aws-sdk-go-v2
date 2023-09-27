@@ -50,6 +50,10 @@ type ListDiscoveryJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDiscoveryJobsInput) operationName() string {
+	return "ListDiscoveryJobs"
+}
+
 type ListDiscoveryJobsOutput struct {
 
 	// The discovery jobs that you've run.

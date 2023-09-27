@@ -75,6 +75,10 @@ type UpdateWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkforceInput) operationName() string {
+	return "UpdateWorkforce"
+}
+
 type UpdateWorkforceOutput struct {
 
 	// A single private workforce. You can create one private work force in each

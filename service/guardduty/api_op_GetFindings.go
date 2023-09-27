@@ -51,6 +51,10 @@ type GetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingsInput) operationName() string {
+	return "GetFindings"
+}
+
 type GetFindingsOutput struct {
 
 	// A list of findings.

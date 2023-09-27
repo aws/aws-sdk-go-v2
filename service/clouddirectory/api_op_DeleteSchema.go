@@ -43,6 +43,10 @@ type DeleteSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSchemaInput) operationName() string {
+	return "DeleteSchema"
+}
+
 type DeleteSchemaOutput struct {
 
 	// The input ARN that is returned as part of the response. For more information,

@@ -48,6 +48,10 @@ type DeleteOrganizationConformancePackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOrganizationConformancePackInput) operationName() string {
+	return "DeleteOrganizationConformancePack"
+}
+
 type DeleteOrganizationConformancePackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

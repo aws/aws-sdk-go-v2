@@ -119,6 +119,10 @@ type CreateGameSessionQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGameSessionQueueInput) operationName() string {
+	return "CreateGameSessionQueue"
+}
+
 type CreateGameSessionQueueOutput struct {
 
 	// An object that describes the newly created game session queue.

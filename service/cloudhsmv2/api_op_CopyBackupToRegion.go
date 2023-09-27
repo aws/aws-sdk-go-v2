@@ -52,6 +52,10 @@ type CopyBackupToRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyBackupToRegionInput) operationName() string {
+	return "CopyBackupToRegion"
+}
+
 type CopyBackupToRegionOutput struct {
 
 	// Information on the backup that will be copied to the destination region,

@@ -46,6 +46,10 @@ type StartKeyUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartKeyUsageInput) operationName() string {
+	return "StartKeyUsage"
+}
+
 type StartKeyUsageOutput struct {
 
 	// The KeyARN of the Amazon Web Services Payment Cryptography key activated for

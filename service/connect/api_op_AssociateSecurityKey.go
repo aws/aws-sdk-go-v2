@@ -48,6 +48,10 @@ type AssociateSecurityKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSecurityKeyInput) operationName() string {
+	return "AssociateSecurityKey"
+}
+
 type AssociateSecurityKeyOutput struct {
 
 	// The existing association identifier that uniquely identifies the resource type

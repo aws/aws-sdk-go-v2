@@ -52,6 +52,10 @@ type PutSolNetworkPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSolNetworkPackageContentInput) operationName() string {
+	return "PutSolNetworkPackageContent"
+}
+
 type PutSolNetworkPackageContentOutput struct {
 
 	// Network package ARN.

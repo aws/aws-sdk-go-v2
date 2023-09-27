@@ -52,6 +52,10 @@ type UpdateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeploymentInput) operationName() string {
+	return "UpdateDeployment"
+}
+
 type UpdateDeploymentOutput struct {
 
 	// Specifies whether a deployment was automatically released.

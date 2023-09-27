@@ -45,6 +45,10 @@ type DetectDominantLanguageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectDominantLanguageInput) operationName() string {
+	return "DetectDominantLanguage"
+}
+
 type DetectDominantLanguageOutput struct {
 
 	// Array of languages that Amazon Comprehend detected in the input text. The array

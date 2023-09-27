@@ -90,6 +90,10 @@ type RevokeSecurityGroupEgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeSecurityGroupEgressInput) operationName() string {
+	return "RevokeSecurityGroupEgress"
+}
+
 type RevokeSecurityGroupEgressOutput struct {
 
 	// Returns true if the request succeeds; otherwise, returns an error.

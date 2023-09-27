@@ -44,6 +44,10 @@ type ListGameServerGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGameServerGroupsInput) operationName() string {
+	return "ListGameServerGroups"
+}
+
 type ListGameServerGroupsOutput struct {
 
 	// The game server groups' game server groups.

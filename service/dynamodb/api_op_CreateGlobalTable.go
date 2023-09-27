@@ -84,6 +84,10 @@ type CreateGlobalTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGlobalTableInput) operationName() string {
+	return "CreateGlobalTable"
+}
+
 type CreateGlobalTableOutput struct {
 
 	// Contains the details of the global table.

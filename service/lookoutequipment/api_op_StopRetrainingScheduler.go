@@ -42,6 +42,10 @@ type StopRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopRetrainingSchedulerInput) operationName() string {
+	return "StopRetrainingScheduler"
+}
+
 type StopRetrainingSchedulerOutput struct {
 
 	// The ARN of the model whose retraining scheduler is being stopped.

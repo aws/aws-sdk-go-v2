@@ -43,6 +43,10 @@ type DeleteEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventStreamInput) operationName() string {
+	return "DeleteEventStream"
+}
+
 type DeleteEventStreamOutput struct {
 
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream

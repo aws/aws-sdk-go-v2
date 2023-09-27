@@ -77,6 +77,10 @@ type UpdateSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSnapshotScheduleInput) operationName() string {
+	return "UpdateSnapshotSchedule"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the updated storage
 // volume.
 type UpdateSnapshotScheduleOutput struct {

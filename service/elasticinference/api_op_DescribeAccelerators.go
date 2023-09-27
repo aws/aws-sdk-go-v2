@@ -63,6 +63,10 @@ type DescribeAcceleratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAcceleratorsInput) operationName() string {
+	return "DescribeAccelerators"
+}
+
 type DescribeAcceleratorsOutput struct {
 
 	// The details of the Elastic Inference Accelerators.

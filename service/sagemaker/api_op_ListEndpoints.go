@@ -76,6 +76,10 @@ type ListEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEndpointsInput) operationName() string {
+	return "ListEndpoints"
+}
+
 type ListEndpointsOutput struct {
 
 	// An array or endpoint objects.

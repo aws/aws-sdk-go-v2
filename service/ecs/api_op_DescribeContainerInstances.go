@@ -58,6 +58,10 @@ type DescribeContainerInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContainerInstancesInput) operationName() string {
+	return "DescribeContainerInstances"
+}
+
 type DescribeContainerInstancesOutput struct {
 
 	// The list of container instances.

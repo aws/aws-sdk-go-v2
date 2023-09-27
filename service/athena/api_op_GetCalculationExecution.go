@@ -42,6 +42,10 @@ type GetCalculationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCalculationExecutionInput) operationName() string {
+	return "GetCalculationExecution"
+}
+
 type GetCalculationExecutionOutput struct {
 
 	// The calculation execution UUID.

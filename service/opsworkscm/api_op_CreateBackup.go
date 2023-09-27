@@ -67,6 +67,10 @@ type CreateBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBackupInput) operationName() string {
+	return "CreateBackup"
+}
+
 type CreateBackupOutput struct {
 
 	// Backup created by request.

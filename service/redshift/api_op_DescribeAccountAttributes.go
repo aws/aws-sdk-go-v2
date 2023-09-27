@@ -40,6 +40,10 @@ type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountAttributesInput) operationName() string {
+	return "DescribeAccountAttributes"
+}
+
 type DescribeAccountAttributesOutput struct {
 
 	// A list of attributes assigned to an account.

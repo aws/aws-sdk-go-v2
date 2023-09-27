@@ -52,6 +52,10 @@ type CreateContainerServiceRegistryLoginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContainerServiceRegistryLoginInput) operationName() string {
+	return "CreateContainerServiceRegistryLogin"
+}
+
 type CreateContainerServiceRegistryLoginOutput struct {
 
 	// An object that describes the log in information for the container service

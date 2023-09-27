@@ -56,6 +56,10 @@ type ReplaceNetworkAclAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceNetworkAclAssociationInput) operationName() string {
+	return "ReplaceNetworkAclAssociation"
+}
+
 type ReplaceNetworkAclAssociationOutput struct {
 
 	// The ID of the new association.

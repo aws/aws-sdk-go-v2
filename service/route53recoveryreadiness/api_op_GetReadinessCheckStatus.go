@@ -51,6 +51,10 @@ type GetReadinessCheckStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReadinessCheckStatusInput) operationName() string {
+	return "GetReadinessCheckStatus"
+}
+
 type GetReadinessCheckStatusOutput struct {
 
 	// Top level messages for readiness check status

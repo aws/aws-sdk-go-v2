@@ -77,6 +77,10 @@ type DescribePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackageVersionInput) operationName() string {
+	return "DescribePackageVersion"
+}
+
 type DescribePackageVersionOutput struct {
 
 	// A PackageVersionDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)

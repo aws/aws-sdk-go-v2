@@ -64,6 +64,10 @@ type CreateDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDecoderManifestInput) operationName() string {
+	return "CreateDecoderManifest"
+}
+
 type CreateDecoderManifestOutput struct {
 
 	// The ARN of the created decoder manifest.

@@ -59,6 +59,10 @@ type DescribeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstancesInput) operationName() string {
+	return "DescribeInstances"
+}
+
 // Contains the response to a DescribeInstances request.
 type DescribeInstancesOutput struct {
 

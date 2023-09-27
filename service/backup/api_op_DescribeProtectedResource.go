@@ -45,6 +45,10 @@ type DescribeProtectedResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProtectedResourceInput) operationName() string {
+	return "DescribeProtectedResource"
+}
+
 type DescribeProtectedResourceOutput struct {
 
 	// The date and time that a resource was last backed up, in Unix format and

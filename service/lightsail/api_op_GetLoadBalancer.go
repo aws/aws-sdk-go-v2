@@ -42,6 +42,10 @@ type GetLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoadBalancerInput) operationName() string {
+	return "GetLoadBalancer"
+}
+
 type GetLoadBalancerOutput struct {
 
 	// An object containing information about your load balancer.

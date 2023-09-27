@@ -50,6 +50,10 @@ type SearchJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchJobsInput) operationName() string {
+	return "SearchJobs"
+}
+
 type SearchJobsOutput struct {
 
 	// An array of JobSummary objects for devices that match the specified filter

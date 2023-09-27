@@ -69,6 +69,10 @@ type CreateStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamingSessionInput) operationName() string {
+	return "CreateStreamingSession"
+}
+
 type CreateStreamingSessionOutput struct {
 
 	// The session.

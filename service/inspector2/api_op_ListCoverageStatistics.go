@@ -50,6 +50,10 @@ type ListCoverageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCoverageStatisticsInput) operationName() string {
+	return "ListCoverageStatistics"
+}
+
 type ListCoverageStatisticsOutput struct {
 
 	// The total number for all groups.

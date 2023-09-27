@@ -75,6 +75,10 @@ type StartFileTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFileTransferInput) operationName() string {
+	return "StartFileTransfer"
+}
+
 type StartFileTransferOutput struct {
 
 	// Returns the unique identifier for the file transfer.

@@ -63,6 +63,10 @@ type ListObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectsInput) operationName() string {
+	return "ListObjects"
+}
+
 type ListObjectsOutput struct {
 
 	// Object list

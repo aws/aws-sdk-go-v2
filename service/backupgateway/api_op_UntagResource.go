@@ -46,6 +46,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 type UntagResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource from which you removed tags.

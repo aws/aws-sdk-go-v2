@@ -44,6 +44,10 @@ type DeleteBackupVaultNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackupVaultNotificationsInput) operationName() string {
+	return "DeleteBackupVaultNotifications"
+}
+
 type DeleteBackupVaultNotificationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

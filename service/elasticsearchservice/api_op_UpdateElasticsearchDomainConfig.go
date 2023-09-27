@@ -101,6 +101,10 @@ type UpdateElasticsearchDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateElasticsearchDomainConfigInput) operationName() string {
+	return "UpdateElasticsearchDomainConfig"
+}
+
 // The result of an UpdateElasticsearchDomain request. Contains the status of the
 // Elasticsearch domain being updated.
 type UpdateElasticsearchDomainConfigOutput struct {

@@ -57,6 +57,10 @@ type DeleteStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStackSetInput) operationName() string {
+	return "DeleteStackSet"
+}
+
 type DeleteStackSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

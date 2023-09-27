@@ -59,6 +59,10 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectorInput) operationName() string {
+	return "CreateConnector"
+}
+
 type CreateConnectorOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the connector for Active

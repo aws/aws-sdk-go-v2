@@ -51,6 +51,10 @@ type StartExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartExportInput) operationName() string {
+	return "StartExport"
+}
+
 // Start export response.
 type StartExportOutput struct {
 

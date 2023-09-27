@@ -64,6 +64,10 @@ type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityGroupRuleDescriptionsIngressInput) operationName() string {
+	return "UpdateSecurityGroupRuleDescriptionsIngress"
+}
+
 type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
 
 	// Returns true if the request succeeds; otherwise, returns an error.

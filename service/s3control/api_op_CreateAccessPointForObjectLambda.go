@@ -63,6 +63,10 @@ type CreateAccessPointForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessPointForObjectLambdaInput) operationName() string {
+	return "CreateAccessPointForObjectLambda"
+}
+
 type CreateAccessPointForObjectLambdaOutput struct {
 
 	// The alias of the Object Lambda Access Point.

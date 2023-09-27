@@ -50,6 +50,10 @@ type DescribeWhatIfAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWhatIfAnalysisInput) operationName() string {
+	return "DescribeWhatIfAnalysis"
+}
+
 type DescribeWhatIfAnalysisOutput struct {
 
 	// When the what-if analysis was created.

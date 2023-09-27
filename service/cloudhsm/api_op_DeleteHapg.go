@@ -51,6 +51,10 @@ type DeleteHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHapgInput) operationName() string {
+	return "DeleteHapg"
+}
+
 // Contains the output of the DeleteHapg action.
 type DeleteHapgOutput struct {
 

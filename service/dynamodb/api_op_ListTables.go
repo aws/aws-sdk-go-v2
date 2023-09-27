@@ -49,6 +49,10 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTablesInput) operationName() string {
+	return "ListTables"
+}
+
 // Represents the output of a ListTables operation.
 type ListTablesOutput struct {
 

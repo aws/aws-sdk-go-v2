@@ -48,6 +48,10 @@ type GetScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetScheduleInput) operationName() string {
+	return "GetSchedule"
+}
+
 type GetScheduleOutput struct {
 
 	// Indicates the action that EventBridge Scheduler applies to the schedule after

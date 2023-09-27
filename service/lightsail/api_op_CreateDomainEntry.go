@@ -55,6 +55,10 @@ type CreateDomainEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainEntryInput) operationName() string {
+	return "CreateDomainEntry"
+}
+
 type CreateDomainEntryOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

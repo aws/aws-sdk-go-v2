@@ -56,6 +56,10 @@ type DescribeViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeViewInput) operationName() string {
+	return "DescribeView"
+}
+
 type DescribeViewOutput struct {
 
 	// All view data is contained within the View object.

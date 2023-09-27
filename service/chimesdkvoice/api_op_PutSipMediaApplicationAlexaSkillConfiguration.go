@@ -45,6 +45,10 @@ type PutSipMediaApplicationAlexaSkillConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSipMediaApplicationAlexaSkillConfigurationInput) operationName() string {
+	return "PutSipMediaApplicationAlexaSkillConfiguration"
+}
+
 type PutSipMediaApplicationAlexaSkillConfigurationOutput struct {
 
 	// Returns the Alexa Skill configuration.

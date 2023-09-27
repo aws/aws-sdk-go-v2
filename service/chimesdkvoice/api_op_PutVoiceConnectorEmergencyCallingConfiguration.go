@@ -47,6 +47,10 @@ type PutVoiceConnectorEmergencyCallingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorEmergencyCallingConfigurationInput) operationName() string {
+	return "PutVoiceConnectorEmergencyCallingConfiguration"
+}
+
 type PutVoiceConnectorEmergencyCallingConfigurationOutput struct {
 
 	// The updated configuration.

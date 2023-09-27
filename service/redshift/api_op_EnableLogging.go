@@ -69,6 +69,10 @@ type EnableLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableLoggingInput) operationName() string {
+	return "EnableLogging"
+}
+
 // Describes the status of logging for a cluster.
 type EnableLoggingOutput struct {
 

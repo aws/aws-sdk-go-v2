@@ -56,6 +56,10 @@ type AllocatePrivateVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocatePrivateVirtualInterfaceInput) operationName() string {
+	return "AllocatePrivateVirtualInterface"
+}
+
 // Information about a virtual interface.
 type AllocatePrivateVirtualInterfaceOutput struct {
 

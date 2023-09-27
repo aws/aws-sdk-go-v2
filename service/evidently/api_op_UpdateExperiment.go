@@ -90,6 +90,10 @@ type UpdateExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateExperimentInput) operationName() string {
+	return "UpdateExperiment"
+}
+
 type UpdateExperimentOutput struct {
 
 	// A structure containing the configuration details of the experiment that was

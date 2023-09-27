@@ -62,6 +62,10 @@ type ListDeviceEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceEventsInput) operationName() string {
+	return "ListDeviceEvents"
+}
+
 type ListDeviceEventsOutput struct {
 
 	// The device events requested for the device ARN.

@@ -145,6 +145,10 @@ type CreateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBucketInput) operationName() string {
+	return "CreateBucket"
+}
+
 type CreateBucketOutput struct {
 
 	// A forward slash followed by the name of the bucket.

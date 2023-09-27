@@ -43,6 +43,10 @@ type DescribeReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservationInput) operationName() string {
+	return "DescribeReservation"
+}
+
 // Placeholder documentation for DescribeReservationResponse
 type DescribeReservationOutput struct {
 

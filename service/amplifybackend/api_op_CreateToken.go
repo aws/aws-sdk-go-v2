@@ -42,6 +42,10 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTokenInput) operationName() string {
+	return "CreateToken"
+}
+
 type CreateTokenOutput struct {
 
 	// The app ID.

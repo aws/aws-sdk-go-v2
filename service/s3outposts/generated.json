@@ -14,6 +14,7 @@
         "api_op_ListEndpoints.go",
         "api_op_ListOutpostsWithS3.go",
         "api_op_ListSharedEndpoints.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

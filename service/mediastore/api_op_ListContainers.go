@@ -54,6 +54,10 @@ type ListContainersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContainersInput) operationName() string {
+	return "ListContainers"
+}
+
 type ListContainersOutput struct {
 
 	// The names of the containers.

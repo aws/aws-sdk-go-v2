@@ -53,6 +53,10 @@ type ListAlarmRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAlarmRecommendationsInput) operationName() string {
+	return "ListAlarmRecommendations"
+}
+
 type ListAlarmRecommendationsOutput struct {
 
 	// The alarm recommendations for an Resilience Hub application, returned as an

@@ -50,6 +50,10 @@ type GetDefaultCreditSpecificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDefaultCreditSpecificationInput) operationName() string {
+	return "GetDefaultCreditSpecification"
+}
+
 type GetDefaultCreditSpecificationOutput struct {
 
 	// The default credit option for CPU usage of the instance family.

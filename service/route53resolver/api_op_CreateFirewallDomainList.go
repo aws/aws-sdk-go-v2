@@ -55,6 +55,10 @@ type CreateFirewallDomainListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFirewallDomainListInput) operationName() string {
+	return "CreateFirewallDomainList"
+}
+
 type CreateFirewallDomainListOutput struct {
 
 	// The domain list that you just created.

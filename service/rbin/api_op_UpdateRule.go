@@ -71,6 +71,10 @@ type UpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuleInput) operationName() string {
+	return "UpdateRule"
+}
+
 type UpdateRuleOutput struct {
 
 	// The retention rule description.

@@ -63,6 +63,10 @@ type AssociateTransitGatewayMulticastDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTransitGatewayMulticastDomainInput) operationName() string {
+	return "AssociateTransitGatewayMulticastDomain"
+}
+
 type AssociateTransitGatewayMulticastDomainOutput struct {
 
 	// Information about the transit gateway multicast domain associations.

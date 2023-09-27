@@ -48,6 +48,10 @@ type GetBlueprintRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlueprintRunsInput) operationName() string {
+	return "GetBlueprintRuns"
+}
+
 type GetBlueprintRunsOutput struct {
 
 	// Returns a list of BlueprintRun objects.

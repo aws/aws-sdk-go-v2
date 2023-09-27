@@ -46,6 +46,10 @@ type DescribeNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNotebookInstanceLifecycleConfigInput) operationName() string {
+	return "DescribeNotebookInstanceLifecycleConfig"
+}
+
 type DescribeNotebookInstanceLifecycleConfigOutput struct {
 
 	// A timestamp that tells when the lifecycle configuration was created.

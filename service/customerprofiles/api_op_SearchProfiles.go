@@ -89,6 +89,10 @@ type SearchProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchProfilesInput) operationName() string {
+	return "SearchProfiles"
+}
+
 type SearchProfilesOutput struct {
 
 	// The list of Profiles matching the search criteria.

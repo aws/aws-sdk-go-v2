@@ -48,6 +48,10 @@ type GetMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMappingInput) operationName() string {
+	return "GetMapping"
+}
+
 type GetMappingOutput struct {
 
 	// A list of mappings to the specified targets.

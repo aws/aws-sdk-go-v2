@@ -63,6 +63,10 @@ type DeletePushTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePushTemplateInput) operationName() string {
+	return "DeletePushTemplate"
+}
+
 type DeletePushTemplateOutput struct {
 
 	// Provides information about an API request or response.

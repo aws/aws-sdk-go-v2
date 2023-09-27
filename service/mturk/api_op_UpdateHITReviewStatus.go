@@ -49,6 +49,10 @@ type UpdateHITReviewStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHITReviewStatusInput) operationName() string {
+	return "UpdateHITReviewStatus"
+}
+
 type UpdateHITReviewStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

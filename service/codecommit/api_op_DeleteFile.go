@@ -83,6 +83,10 @@ type DeleteFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFileInput) operationName() string {
+	return "DeleteFile"
+}
+
 type DeleteFileOutput struct {
 
 	// The blob ID removed from the tree as part of deleting the file.

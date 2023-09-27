@@ -56,6 +56,10 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobsInput) operationName() string {
+	return "ListJobs"
+}
+
 // The maximum number of records to list in a single response.
 type ListJobsOutput struct {
 

@@ -72,6 +72,10 @@ type AssignIpv6AddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssignIpv6AddressesInput) operationName() string {
+	return "AssignIpv6Addresses"
+}
+
 type AssignIpv6AddressesOutput struct {
 
 	// The new IPv6 addresses assigned to the network interface. Existing IPv6

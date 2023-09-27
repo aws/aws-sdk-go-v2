@@ -72,6 +72,10 @@ type CreateAppVersionAppComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppVersionAppComponentInput) operationName() string {
+	return "CreateAppVersionAppComponent"
+}
+
 type CreateAppVersionAppComponentOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

@@ -53,6 +53,10 @@ type DescribeOptOutListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOptOutListsInput) operationName() string {
+	return "DescribeOptOutLists"
+}
+
 type DescribeOptOutListsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is

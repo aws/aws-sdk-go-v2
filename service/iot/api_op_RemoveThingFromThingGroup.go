@@ -52,6 +52,10 @@ type RemoveThingFromThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveThingFromThingGroupInput) operationName() string {
+	return "RemoveThingFromThingGroup"
+}
+
 type RemoveThingFromThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

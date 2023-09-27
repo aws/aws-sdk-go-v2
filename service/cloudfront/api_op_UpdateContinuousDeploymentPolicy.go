@@ -63,6 +63,10 @@ type UpdateContinuousDeploymentPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContinuousDeploymentPolicyInput) operationName() string {
+	return "UpdateContinuousDeploymentPolicy"
+}
+
 type UpdateContinuousDeploymentPolicyOutput struct {
 
 	// A continuous deployment policy.

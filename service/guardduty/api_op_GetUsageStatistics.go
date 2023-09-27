@@ -72,6 +72,10 @@ type GetUsageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsageStatisticsInput) operationName() string {
+	return "GetUsageStatistics"
+}
+
 type GetUsageStatisticsOutput struct {
 
 	// The pagination parameter to be used on the next list operation to retrieve more

@@ -42,6 +42,10 @@ type UpdateDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataCellsFilterInput) operationName() string {
+	return "UpdateDataCellsFilter"
+}
+
 type UpdateDataCellsFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

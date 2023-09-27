@@ -77,6 +77,10 @@ type UpdateInAppTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInAppTemplateInput) operationName() string {
+	return "UpdateInAppTemplate"
+}
+
 type UpdateInAppTemplateOutput struct {
 
 	// Provides information about an API request or response.

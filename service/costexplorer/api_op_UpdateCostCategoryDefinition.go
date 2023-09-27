@@ -69,6 +69,10 @@ type UpdateCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCostCategoryDefinitionInput) operationName() string {
+	return "UpdateCostCategoryDefinition"
+}
+
 type UpdateCostCategoryDefinitionOutput struct {
 
 	// The unique identifier for your Cost Category.

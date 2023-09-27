@@ -42,6 +42,10 @@ type GetVoiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceProfileInput) operationName() string {
+	return "GetVoiceProfile"
+}
+
 type GetVoiceProfileOutput struct {
 
 	// The voice profile details.

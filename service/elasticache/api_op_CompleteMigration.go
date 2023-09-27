@@ -47,6 +47,10 @@ type CompleteMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteMigrationInput) operationName() string {
+	return "CompleteMigration"
+}
+
 type CompleteMigrationOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

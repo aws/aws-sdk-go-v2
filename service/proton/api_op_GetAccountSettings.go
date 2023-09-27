@@ -36,6 +36,10 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSettingsInput) operationName() string {
+	return "GetAccountSettings"
+}
+
 type GetAccountSettingsOutput struct {
 
 	// The Proton pipeline service role detail data that's returned by Proton.

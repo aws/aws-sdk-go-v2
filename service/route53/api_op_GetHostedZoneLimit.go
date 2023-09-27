@@ -57,6 +57,10 @@ type GetHostedZoneLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostedZoneLimitInput) operationName() string {
+	return "GetHostedZoneLimit"
+}
+
 // A complex type that contains the requested limit.
 type GetHostedZoneLimitOutput struct {
 

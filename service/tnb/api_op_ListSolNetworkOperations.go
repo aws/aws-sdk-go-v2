@@ -45,6 +45,10 @@ type ListSolNetworkOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSolNetworkOperationsInput) operationName() string {
+	return "ListSolNetworkOperations"
+}
+
 type ListSolNetworkOperationsOutput struct {
 
 	// Lists network operation occurrences. Lifecycle management operations are

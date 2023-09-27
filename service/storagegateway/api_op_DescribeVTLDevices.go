@@ -60,6 +60,10 @@ type DescribeVTLDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVTLDevicesInput) operationName() string {
+	return "DescribeVTLDevices"
+}
+
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
 

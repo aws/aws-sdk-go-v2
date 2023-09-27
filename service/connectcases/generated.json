@@ -39,6 +39,7 @@
         "api_op_UpdateField.go",
         "api_op_UpdateLayout.go",
         "api_op_UpdateTemplate.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

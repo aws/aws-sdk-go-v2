@@ -61,6 +61,10 @@ type DescribeDBParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBParametersInput) operationName() string {
+	return "DescribeDBParameters"
+}
+
 // Contains the result of a successful invocation of the DescribeDBParameters
 // action.
 type DescribeDBParametersOutput struct {

@@ -74,6 +74,10 @@ type CreateProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProtectionInput) operationName() string {
+	return "CreateProtection"
+}
+
 type CreateProtectionOutput struct {
 
 	// The unique identifier (ID) for the Protection object that is created.

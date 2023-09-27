@@ -42,6 +42,10 @@ type DeleteProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProfilingGroupInput) operationName() string {
+	return "DeleteProfilingGroup"
+}
+
 // The structure representing the deleteProfilingGroupResponse.
 type DeleteProfilingGroupOutput struct {
 	// Metadata pertaining to the operation's result.

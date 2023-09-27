@@ -48,6 +48,10 @@ type GetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaInput) operationName() string {
+	return "GetSchema"
+}
+
 type GetSchemaOutput struct {
 
 	// The entire schema object.

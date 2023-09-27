@@ -73,6 +73,10 @@ type PutChunkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutChunkInput) operationName() string {
+	return "PutChunk"
+}
+
 type PutChunkOutput struct {
 
 	// Chunk checksum

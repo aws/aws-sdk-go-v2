@@ -35,6 +35,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateAppAuthorization.go",
         "api_op_UpdateIngestionDestination.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

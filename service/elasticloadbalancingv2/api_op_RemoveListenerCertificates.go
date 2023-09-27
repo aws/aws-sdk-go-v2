@@ -49,6 +49,10 @@ type RemoveListenerCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveListenerCertificatesInput) operationName() string {
+	return "RemoveListenerCertificates"
+}
+
 type RemoveListenerCertificatesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

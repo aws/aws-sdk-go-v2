@@ -80,6 +80,10 @@ type AssociateFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFirewallRuleGroupInput) operationName() string {
+	return "AssociateFirewallRuleGroup"
+}
+
 type AssociateFirewallRuleGroupOutput struct {
 
 	// The association that you just created. The association has an ID that you can

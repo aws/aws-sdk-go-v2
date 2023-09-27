@@ -37,6 +37,7 @@
         "api_op_UpdateArchiveRule.go",
         "api_op_UpdateFindings.go",
         "api_op_ValidatePolicy.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

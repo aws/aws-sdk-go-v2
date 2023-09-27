@@ -36,6 +36,10 @@ type EndpointWithHostLabelOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EndpointWithHostLabelOperationInput) operationName() string {
+	return "EndpointWithHostLabelOperation"
+}
+
 type EndpointWithHostLabelOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

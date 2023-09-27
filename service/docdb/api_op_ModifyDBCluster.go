@@ -130,6 +130,10 @@ type ModifyDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBClusterInput) operationName() string {
+	return "ModifyDBCluster"
+}
+
 type ModifyDBClusterOutput struct {
 
 	// Detailed information about a cluster.

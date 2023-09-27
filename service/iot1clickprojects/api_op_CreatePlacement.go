@@ -50,6 +50,10 @@ type CreatePlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePlacementInput) operationName() string {
+	return "CreatePlacement"
+}
+
 type CreatePlacementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

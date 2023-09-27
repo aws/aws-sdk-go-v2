@@ -55,6 +55,10 @@ type CreateCustomMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomMetadataInput) operationName() string {
+	return "CreateCustomMetadata"
+}
+
 type CreateCustomMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

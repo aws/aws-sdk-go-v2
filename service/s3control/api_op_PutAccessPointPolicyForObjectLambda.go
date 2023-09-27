@@ -61,6 +61,10 @@ type PutAccessPointPolicyForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccessPointPolicyForObjectLambdaInput) operationName() string {
+	return "PutAccessPointPolicyForObjectLambda"
+}
+
 type PutAccessPointPolicyForObjectLambdaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

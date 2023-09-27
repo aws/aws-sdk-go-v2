@@ -72,6 +72,10 @@ type SearchAvailablePhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchAvailablePhoneNumbersInput) operationName() string {
+	return "SearchAvailablePhoneNumbers"
+}
+
 type SearchAvailablePhoneNumbersOutput struct {
 
 	// A list of available phone numbers that you can claim to your Amazon Connect

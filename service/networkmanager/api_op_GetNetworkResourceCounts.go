@@ -68,6 +68,10 @@ type GetNetworkResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkResourceCountsInput) operationName() string {
+	return "GetNetworkResourceCounts"
+}
+
 type GetNetworkResourceCountsOutput struct {
 
 	// The count of resources.

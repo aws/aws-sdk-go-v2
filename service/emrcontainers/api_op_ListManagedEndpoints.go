@@ -63,6 +63,10 @@ type ListManagedEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedEndpointsInput) operationName() string {
+	return "ListManagedEndpoints"
+}
+
 type ListManagedEndpointsOutput struct {
 
 	// The managed endpoints to be listed.

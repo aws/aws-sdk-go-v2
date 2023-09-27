@@ -64,6 +64,10 @@ type ListPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPoliciesInput) operationName() string {
+	return "ListPolicies"
+}
+
 type ListPoliciesOutput struct {
 
 	// Lists all policies that are available in the specified policy store.

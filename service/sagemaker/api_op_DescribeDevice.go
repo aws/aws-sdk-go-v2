@@ -51,6 +51,10 @@ type DescribeDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeviceInput) operationName() string {
+	return "DescribeDevice"
+}
+
 type DescribeDeviceOutput struct {
 
 	// The name of the fleet the device belongs to.

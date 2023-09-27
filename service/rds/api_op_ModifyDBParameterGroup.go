@@ -74,6 +74,10 @@ type ModifyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBParameterGroupInput) operationName() string {
+	return "ModifyDBParameterGroup"
+}
+
 // Contains the result of a successful invocation of the ModifyDBParameterGroup or
 // ResetDBParameterGroup action.
 type ModifyDBParameterGroupOutput struct {

@@ -47,6 +47,10 @@ type ListPlaybackKeyPairsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPlaybackKeyPairsInput) operationName() string {
+	return "ListPlaybackKeyPairs"
+}
+
 type ListPlaybackKeyPairsOutput struct {
 
 	// List of key pairs.

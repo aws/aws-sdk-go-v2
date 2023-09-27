@@ -85,6 +85,10 @@ type UpdateEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointGroupInput) operationName() string {
+	return "UpdateEndpointGroup"
+}
+
 type UpdateEndpointGroupOutput struct {
 
 	// The information about the endpoint group that was updated.

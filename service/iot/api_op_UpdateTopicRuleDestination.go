@@ -62,6 +62,10 @@ type UpdateTopicRuleDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTopicRuleDestinationInput) operationName() string {
+	return "UpdateTopicRuleDestination"
+}
+
 type UpdateTopicRuleDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

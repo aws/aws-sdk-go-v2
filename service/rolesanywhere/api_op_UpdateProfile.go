@@ -61,6 +61,10 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProfileInput) operationName() string {
+	return "UpdateProfile"
+}
+
 type UpdateProfileOutput struct {
 
 	// The state of the profile after a read or write operation.

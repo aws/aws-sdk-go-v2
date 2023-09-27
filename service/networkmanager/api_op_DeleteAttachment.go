@@ -42,6 +42,10 @@ type DeleteAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAttachmentInput) operationName() string {
+	return "DeleteAttachment"
+}
+
 type DeleteAttachmentOutput struct {
 
 	// Information about the deleted attachment.

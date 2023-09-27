@@ -63,6 +63,10 @@ type ListSharedProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSharedProjectsInput) operationName() string {
+	return "ListSharedProjects"
+}
+
 type ListSharedProjectsOutput struct {
 
 	// During a previous call, the maximum number of items that can be returned is the

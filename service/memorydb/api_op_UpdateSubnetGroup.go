@@ -48,6 +48,10 @@ type UpdateSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubnetGroupInput) operationName() string {
+	return "UpdateSubnetGroup"
+}
+
 type UpdateSubnetGroupOutput struct {
 
 	// The updated subnet group

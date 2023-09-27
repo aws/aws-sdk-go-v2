@@ -52,6 +52,10 @@ type ListReadSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReadSetsInput) operationName() string {
+	return "ListReadSets"
+}
+
 type ListReadSetsOutput struct {
 
 	// A list of read sets.

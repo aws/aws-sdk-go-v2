@@ -56,6 +56,10 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVolumeInput) operationName() string {
+	return "DeleteVolume"
+}
+
 type DeleteVolumeOutput struct {
 
 	// The lifecycle state of the volume being deleted. If the DeleteVolume operation

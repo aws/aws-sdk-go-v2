@@ -17,6 +17,7 @@
         "api_op_ListConfigurationSets.go",
         "api_op_SendVoiceMessage.go",
         "api_op_UpdateConfigurationSetEventDestination.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

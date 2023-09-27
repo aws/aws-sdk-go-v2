@@ -49,6 +49,10 @@ type ListSubscriptionDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubscriptionDefinitionVersionsInput) operationName() string {
+	return "ListSubscriptionDefinitionVersions"
+}
+
 type ListSubscriptionDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional

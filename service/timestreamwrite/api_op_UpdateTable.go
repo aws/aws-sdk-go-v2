@@ -64,6 +64,10 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTableInput) operationName() string {
+	return "UpdateTable"
+}
+
 type UpdateTableOutput struct {
 
 	// The updated Timestream table.

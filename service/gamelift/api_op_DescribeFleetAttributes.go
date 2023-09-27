@@ -66,6 +66,10 @@ type DescribeFleetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetAttributesInput) operationName() string {
+	return "DescribeFleetAttributes"
+}
+
 type DescribeFleetAttributesOutput struct {
 
 	// A collection of objects containing attribute metadata for each requested fleet

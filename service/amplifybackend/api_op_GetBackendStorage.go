@@ -53,6 +53,10 @@ type GetBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendStorageInput) operationName() string {
+	return "GetBackendStorage"
+}
+
 type GetBackendStorageOutput struct {
 
 	// The app ID.

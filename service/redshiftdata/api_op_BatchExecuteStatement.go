@@ -109,6 +109,10 @@ type BatchExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchExecuteStatementInput) operationName() string {
+	return "BatchExecuteStatement"
+}
+
 type BatchExecuteStatementOutput struct {
 
 	// The cluster identifier. This element is not returned when connecting to a

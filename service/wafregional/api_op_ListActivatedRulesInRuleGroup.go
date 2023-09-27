@@ -58,6 +58,10 @@ type ListActivatedRulesInRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListActivatedRulesInRuleGroupInput) operationName() string {
+	return "ListActivatedRulesInRuleGroup"
+}
+
 type ListActivatedRulesInRuleGroupOutput struct {
 
 	// An array of ActivatedRules objects.

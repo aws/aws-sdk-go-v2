@@ -52,6 +52,10 @@ type ModifyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyRuleInput) operationName() string {
+	return "ModifyRule"
+}
+
 type ModifyRuleOutput struct {
 
 	// Information about the modified rule.

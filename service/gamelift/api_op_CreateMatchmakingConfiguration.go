@@ -154,6 +154,10 @@ type CreateMatchmakingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMatchmakingConfigurationInput) operationName() string {
+	return "CreateMatchmakingConfiguration"
+}
+
 type CreateMatchmakingConfigurationOutput struct {
 
 	// Object that describes the newly created matchmaking configuration.

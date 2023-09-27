@@ -41,6 +41,10 @@ type StopFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopFleetInput) operationName() string {
+	return "StopFleet"
+}
+
 type StopFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

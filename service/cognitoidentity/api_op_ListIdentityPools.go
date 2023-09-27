@@ -47,6 +47,10 @@ type ListIdentityPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityPoolsInput) operationName() string {
+	return "ListIdentityPools"
+}
+
 // The result of a successful ListIdentityPools action.
 type ListIdentityPoolsOutput struct {
 

@@ -45,6 +45,10 @@ type CancelComponentDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelComponentDeploymentInput) operationName() string {
+	return "CancelComponentDeployment"
+}
+
 type CancelComponentDeploymentOutput struct {
 
 	// The detailed data of the component with the deployment that is being canceled.

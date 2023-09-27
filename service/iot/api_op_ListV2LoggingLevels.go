@@ -48,6 +48,10 @@ type ListV2LoggingLevelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListV2LoggingLevelsInput) operationName() string {
+	return "ListV2LoggingLevels"
+}
+
 type ListV2LoggingLevelsOutput struct {
 
 	// The logging configuration for a target.

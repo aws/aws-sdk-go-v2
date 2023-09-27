@@ -46,6 +46,10 @@ type DisassociateMulticastGroupFromFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateMulticastGroupFromFuotaTaskInput) operationName() string {
+	return "DisassociateMulticastGroupFromFuotaTask"
+}
+
 type DisassociateMulticastGroupFromFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

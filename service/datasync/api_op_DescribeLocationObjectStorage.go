@@ -45,6 +45,10 @@ type DescribeLocationObjectStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationObjectStorageInput) operationName() string {
+	return "DescribeLocationObjectStorage"
+}
+
 // DescribeLocationObjectStorageResponse
 type DescribeLocationObjectStorageOutput struct {
 

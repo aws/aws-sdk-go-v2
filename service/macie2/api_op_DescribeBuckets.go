@@ -52,6 +52,10 @@ type DescribeBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBucketsInput) operationName() string {
+	return "DescribeBuckets"
+}
+
 type DescribeBucketsOutput struct {
 
 	// An array of objects, one for each bucket that matches the filter criteria

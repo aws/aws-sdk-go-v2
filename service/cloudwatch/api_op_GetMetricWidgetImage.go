@@ -71,6 +71,10 @@ type GetMetricWidgetImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricWidgetImageInput) operationName() string {
+	return "GetMetricWidgetImage"
+}
+
 type GetMetricWidgetImageOutput struct {
 
 	// The image of the graph, in the output format specified. The output is

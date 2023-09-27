@@ -73,6 +73,10 @@ type UpdateRecoveryPointLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRecoveryPointLifecycleInput) operationName() string {
+	return "UpdateRecoveryPointLifecycle"
+}
+
 type UpdateRecoveryPointLifecycleOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,

@@ -45,6 +45,10 @@ type DeleteVariantStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVariantStoreInput) operationName() string {
+	return "DeleteVariantStore"
+}
+
 type DeleteVariantStoreOutput struct {
 
 	// The store's status.

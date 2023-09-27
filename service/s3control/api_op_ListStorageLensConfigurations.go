@@ -55,6 +55,10 @@ type ListStorageLensConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStorageLensConfigurationsInput) operationName() string {
+	return "ListStorageLensConfigurations"
+}
+
 type ListStorageLensConfigurationsOutput struct {
 
 	// If the request produced more than the maximum number of S3 Storage Lens

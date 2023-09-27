@@ -44,6 +44,10 @@ type GetResolverQueryLogConfigPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverQueryLogConfigPolicyInput) operationName() string {
+	return "GetResolverQueryLogConfigPolicy"
+}
+
 type GetResolverQueryLogConfigPolicyOutput struct {
 
 	// Information about the query logging policy for the query logging configuration

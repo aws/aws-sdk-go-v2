@@ -178,6 +178,10 @@ type SetQueueAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetQueueAttributesInput) operationName() string {
+	return "SetQueueAttributes"
+}
+
 type SetQueueAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

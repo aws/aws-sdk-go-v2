@@ -54,6 +54,10 @@ type PredictInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PredictInput) operationName() string {
+	return "Predict"
+}
+
 type PredictOutput struct {
 
 	// The output from a Predict operation:

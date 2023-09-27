@@ -57,6 +57,10 @@ type StartReadSetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReadSetImportJobInput) operationName() string {
+	return "StartReadSetImportJob"
+}
+
 type StartReadSetImportJobOutput struct {
 
 	// When the job was created.

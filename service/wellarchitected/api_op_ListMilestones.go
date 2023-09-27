@@ -50,6 +50,10 @@ type ListMilestonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMilestonesInput) operationName() string {
+	return "ListMilestones"
+}
+
 // Output of a list milestones call.
 type ListMilestonesOutput struct {
 

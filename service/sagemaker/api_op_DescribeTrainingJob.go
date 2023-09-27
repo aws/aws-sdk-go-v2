@@ -51,6 +51,10 @@ type DescribeTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrainingJobInput) operationName() string {
+	return "DescribeTrainingJob"
+}
+
 type DescribeTrainingJobOutput struct {
 
 	// Information about the algorithm used for training, and algorithm metadata.

@@ -90,6 +90,10 @@ type PutOrganizationConformancePackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutOrganizationConformancePackInput) operationName() string {
+	return "PutOrganizationConformancePack"
+}
+
 type PutOrganizationConformancePackOutput struct {
 
 	// ARN of the organization conformance pack.

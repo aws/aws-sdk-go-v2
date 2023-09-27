@@ -50,6 +50,10 @@ type DescribeEdgeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEdgeConfigurationInput) operationName() string {
+	return "DescribeEdgeConfiguration"
+}
+
 type DescribeEdgeConfigurationOutput struct {
 
 	// The timestamp at which a stream’s edge configuration was first created.

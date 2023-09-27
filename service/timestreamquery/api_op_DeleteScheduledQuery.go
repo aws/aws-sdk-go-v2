@@ -42,6 +42,10 @@ type DeleteScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteScheduledQueryInput) operationName() string {
+	return "DeleteScheduledQuery"
+}
+
 type DeleteScheduledQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

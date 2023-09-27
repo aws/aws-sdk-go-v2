@@ -406,6 +406,10 @@ type ModifyDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBClusterInput) operationName() string {
+	return "ModifyDBCluster"
+}
+
 type ModifyDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

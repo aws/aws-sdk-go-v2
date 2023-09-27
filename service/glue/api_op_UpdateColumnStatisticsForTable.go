@@ -57,6 +57,10 @@ type UpdateColumnStatisticsForTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateColumnStatisticsForTableInput) operationName() string {
+	return "UpdateColumnStatisticsForTable"
+}
+
 type UpdateColumnStatisticsForTableOutput struct {
 
 	// List of ColumnStatisticsErrors.

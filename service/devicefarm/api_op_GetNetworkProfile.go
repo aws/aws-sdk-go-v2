@@ -42,6 +42,10 @@ type GetNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkProfileInput) operationName() string {
+	return "GetNetworkProfile"
+}
+
 type GetNetworkProfileOutput struct {
 
 	// The network profile.

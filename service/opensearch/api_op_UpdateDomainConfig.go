@@ -126,6 +126,10 @@ type UpdateDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainConfigInput) operationName() string {
+	return "UpdateDomainConfig"
+}
+
 // The results of an UpdateDomain request. Contains the status of the domain being
 // updated.
 type UpdateDomainConfigOutput struct {

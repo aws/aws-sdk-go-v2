@@ -52,6 +52,10 @@ type UpdatePublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePublicKeyInput) operationName() string {
+	return "UpdatePublicKey"
+}
+
 type UpdatePublicKeyOutput struct {
 
 	// The identifier of the current version of the public key.

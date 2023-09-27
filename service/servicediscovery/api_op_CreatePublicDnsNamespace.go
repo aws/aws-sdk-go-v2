@@ -68,6 +68,10 @@ type CreatePublicDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePublicDnsNamespaceInput) operationName() string {
+	return "CreatePublicDnsNamespace"
+}
+
 type CreatePublicDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed

@@ -45,6 +45,10 @@ type CreateAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccountInput) operationName() string {
+	return "CreateAccount"
+}
+
 type CreateAccountOutput struct {
 
 	// The Amazon Chime account details.

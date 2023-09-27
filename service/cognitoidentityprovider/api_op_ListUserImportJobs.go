@@ -57,6 +57,10 @@ type ListUserImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserImportJobsInput) operationName() string {
+	return "ListUserImportJobs"
+}
+
 // Represents the response from the server to the request to list the user import
 // jobs.
 type ListUserImportJobsOutput struct {

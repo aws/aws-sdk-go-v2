@@ -50,6 +50,10 @@ type ListStreamSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamSessionsInput) operationName() string {
+	return "ListStreamSessions"
+}
+
 type ListStreamSessionsOutput struct {
 
 	// List of stream sessions.

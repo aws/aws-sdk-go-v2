@@ -54,6 +54,10 @@ type ListCodegenJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCodegenJobsInput) operationName() string {
+	return "ListCodegenJobs"
+}
+
 type ListCodegenJobsOutput struct {
 
 	// The list of code generation jobs for the Amplify app.

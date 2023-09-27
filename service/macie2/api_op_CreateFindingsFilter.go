@@ -80,6 +80,10 @@ type CreateFindingsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFindingsFilterInput) operationName() string {
+	return "CreateFindingsFilter"
+}
+
 type CreateFindingsFilterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the filter that was created.

@@ -45,6 +45,10 @@ type DeleteInboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInboundCrossClusterSearchConnectionInput) operationName() string {
+	return "DeleteInboundCrossClusterSearchConnection"
+}
+
 // The result of a DeleteInboundCrossClusterSearchConnection operation. Contains
 // details of deleted inbound connection.
 type DeleteInboundCrossClusterSearchConnectionOutput struct {

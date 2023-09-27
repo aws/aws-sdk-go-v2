@@ -74,6 +74,10 @@ type DescribeOpsItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOpsItemsInput) operationName() string {
+	return "DescribeOpsItems"
+}
+
 type DescribeOpsItemsOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

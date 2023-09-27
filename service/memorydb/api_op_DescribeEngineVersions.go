@@ -59,6 +59,10 @@ type DescribeEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEngineVersionsInput) operationName() string {
+	return "DescribeEngineVersions"
+}
+
 type DescribeEngineVersionsOutput struct {
 
 	// A list of engine version details. Each element in the list contains detailed

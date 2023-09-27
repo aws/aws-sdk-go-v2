@@ -48,6 +48,10 @@ type AddFlowSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddFlowSourcesInput) operationName() string {
+	return "AddFlowSources"
+}
+
 type AddFlowSourcesOutput struct {
 
 	// The ARN of the flow that these sources were added to.

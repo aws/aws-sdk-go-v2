@@ -251,6 +251,10 @@ type ScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ScanInput) operationName() string {
+	return "Scan"
+}
+
 // Represents the output of a Scan operation.
 type ScanOutput struct {
 

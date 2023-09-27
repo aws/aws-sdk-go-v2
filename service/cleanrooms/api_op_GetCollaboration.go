@@ -42,6 +42,10 @@ type GetCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCollaborationInput) operationName() string {
+	return "GetCollaboration"
+}
+
 type GetCollaborationOutput struct {
 
 	// The entire collaboration for this identifier.

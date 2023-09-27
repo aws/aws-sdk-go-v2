@@ -41,6 +41,10 @@ type GetLineageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLineageGroupPolicyInput) operationName() string {
+	return "GetLineageGroupPolicy"
+}
+
 type GetLineageGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lineage group.

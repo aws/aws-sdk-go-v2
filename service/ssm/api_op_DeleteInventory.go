@@ -65,6 +65,10 @@ type DeleteInventoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInventoryInput) operationName() string {
+	return "DeleteInventory"
+}
+
 type DeleteInventoryOutput struct {
 
 	// Every DeleteInventory operation is assigned a unique ID. This option returns a

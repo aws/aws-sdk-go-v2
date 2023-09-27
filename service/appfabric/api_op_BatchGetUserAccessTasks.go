@@ -49,6 +49,10 @@ type BatchGetUserAccessTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetUserAccessTasksInput) operationName() string {
+	return "BatchGetUserAccessTasks"
+}
+
 type BatchGetUserAccessTasksOutput struct {
 
 	// Contains a list of user access results.

@@ -68,6 +68,10 @@ type PutDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDestinationInput) operationName() string {
+	return "PutDestination"
+}
+
 type PutDestinationOutput struct {
 
 	// The destination.

@@ -52,6 +52,10 @@ type GetWorkUnitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkUnitsInput) operationName() string {
+	return "GetWorkUnits"
+}
+
 // A structure for the output.
 type GetWorkUnitsOutput struct {
 

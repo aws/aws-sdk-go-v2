@@ -64,6 +64,10 @@ type ListQueryLoggingConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQueryLoggingConfigsInput) operationName() string {
+	return "ListQueryLoggingConfigs"
+}
+
 type ListQueryLoggingConfigsOutput struct {
 
 	// An array that contains one QueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html)

@@ -46,6 +46,10 @@ type AssociateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateUserSettingsInput) operationName() string {
+	return "AssociateUserSettings"
+}
+
 type AssociateUserSettingsOutput struct {
 
 	// The ARN of the web portal.

@@ -67,6 +67,10 @@ type GetMergeCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMergeCommitInput) operationName() string {
+	return "GetMergeCommit"
+}
+
 type GetMergeCommitOutput struct {
 
 	// The commit ID of the merge base.

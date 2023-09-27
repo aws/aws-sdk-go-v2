@@ -67,6 +67,10 @@ type DescribeTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTypeInput) operationName() string {
+	return "DescribeType"
+}
+
 type DescribeTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the extension.

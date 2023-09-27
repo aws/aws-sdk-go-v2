@@ -59,6 +59,10 @@ type DescribeJobQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobQueuesInput) operationName() string {
+	return "DescribeJobQueues"
+}
+
 type DescribeJobQueuesOutput struct {
 
 	// The list of job queues.

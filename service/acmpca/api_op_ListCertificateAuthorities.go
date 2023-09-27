@@ -54,6 +54,10 @@ type ListCertificateAuthoritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCertificateAuthoritiesInput) operationName() string {
+	return "ListCertificateAuthorities"
+}
+
 type ListCertificateAuthoritiesOutput struct {
 
 	// Summary information about each certificate authority you have created.

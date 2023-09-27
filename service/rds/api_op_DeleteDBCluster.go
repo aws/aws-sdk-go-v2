@@ -74,6 +74,10 @@ type DeleteDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterInput) operationName() string {
+	return "DeleteDBCluster"
+}
+
 type DeleteDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

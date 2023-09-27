@@ -71,6 +71,10 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserInput) operationName() string {
+	return "CreateUser"
+}
+
 type CreateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

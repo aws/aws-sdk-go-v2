@@ -50,6 +50,10 @@ type StartRecoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRecoveryInput) operationName() string {
+	return "StartRecovery"
+}
+
 type StartRecoveryOutput struct {
 
 	// The Recovery Job.

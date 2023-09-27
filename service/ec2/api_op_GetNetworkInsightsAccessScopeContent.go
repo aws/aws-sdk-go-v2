@@ -48,6 +48,10 @@ type GetNetworkInsightsAccessScopeContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkInsightsAccessScopeContentInput) operationName() string {
+	return "GetNetworkInsightsAccessScopeContent"
+}
+
 type GetNetworkInsightsAccessScopeContentOutput struct {
 
 	// The Network Access Scope content.

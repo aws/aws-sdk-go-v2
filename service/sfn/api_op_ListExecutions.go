@@ -83,6 +83,10 @@ type ListExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExecutionsInput) operationName() string {
+	return "ListExecutions"
+}
+
 type ListExecutionsOutput struct {
 
 	// The list of matching executions.

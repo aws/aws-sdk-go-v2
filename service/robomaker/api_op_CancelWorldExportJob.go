@@ -41,6 +41,10 @@ type CancelWorldExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelWorldExportJobInput) operationName() string {
+	return "CancelWorldExportJob"
+}
+
 type CancelWorldExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

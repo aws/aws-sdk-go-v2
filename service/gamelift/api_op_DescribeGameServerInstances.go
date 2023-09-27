@@ -68,6 +68,10 @@ type DescribeGameServerInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGameServerInstancesInput) operationName() string {
+	return "DescribeGameServerInstances"
+}
+
 type DescribeGameServerInstancesOutput struct {
 
 	// The collection of requested game server instances.

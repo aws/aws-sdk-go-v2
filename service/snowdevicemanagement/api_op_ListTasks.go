@@ -46,6 +46,10 @@ type ListTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTasksInput) operationName() string {
+	return "ListTasks"
+}
+
 type ListTasksOutput struct {
 
 	// A pagination token to continue to the next page of tasks.

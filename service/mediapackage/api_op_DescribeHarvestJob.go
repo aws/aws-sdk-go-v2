@@ -42,6 +42,10 @@ type DescribeHarvestJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHarvestJobInput) operationName() string {
+	return "DescribeHarvestJob"
+}
+
 type DescribeHarvestJobOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the HarvestJob.

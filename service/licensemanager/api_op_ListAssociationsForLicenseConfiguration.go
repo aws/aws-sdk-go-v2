@@ -51,6 +51,10 @@ type ListAssociationsForLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociationsForLicenseConfigurationInput) operationName() string {
+	return "ListAssociationsForLicenseConfiguration"
+}
+
 type ListAssociationsForLicenseConfigurationOutput struct {
 
 	// Information about the associations for the license configuration.

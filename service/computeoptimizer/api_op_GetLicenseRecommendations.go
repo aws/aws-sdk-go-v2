@@ -63,6 +63,10 @@ type GetLicenseRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLicenseRecommendationsInput) operationName() string {
+	return "GetLicenseRecommendations"
+}
+
 type GetLicenseRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request.

@@ -48,6 +48,10 @@ type GetApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationVersionInput) operationName() string {
+	return "GetApplicationVersion"
+}
+
 type GetApplicationVersionOutput struct {
 
 	// The specific version of the application.

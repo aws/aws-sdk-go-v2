@@ -60,6 +60,10 @@ type CreateRoleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoleAliasInput) operationName() string {
+	return "CreateRoleAlias"
+}
+
 type CreateRoleAliasOutput struct {
 
 	// The role alias.

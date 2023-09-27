@@ -78,6 +78,10 @@ type RegisterAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterAppInstanceUserEndpointInput) operationName() string {
+	return "RegisterAppInstanceUserEndpoint"
+}
+
 type RegisterAppInstanceUserEndpointOutput struct {
 
 	// The ARN of the AppInstanceUser .

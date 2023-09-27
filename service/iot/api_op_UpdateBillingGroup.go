@@ -54,6 +54,10 @@ type UpdateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBillingGroupInput) operationName() string {
+	return "UpdateBillingGroup"
+}
+
 type UpdateBillingGroupOutput struct {
 
 	// The latest version of the billing group.

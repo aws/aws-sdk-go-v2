@@ -43,6 +43,10 @@ type StopChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopChannelInput) operationName() string {
+	return "StopChannel"
+}
+
 // Placeholder documentation for StopChannelResponse
 type StopChannelOutput struct {
 

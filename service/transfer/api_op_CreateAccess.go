@@ -126,6 +126,10 @@ type CreateAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessInput) operationName() string {
+	return "CreateAccess"
+}
+
 type CreateAccessOutput struct {
 
 	// The external identifier of the group whose users have access to your Amazon S3

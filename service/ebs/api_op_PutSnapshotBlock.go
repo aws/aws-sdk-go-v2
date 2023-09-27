@@ -96,6 +96,10 @@ type PutSnapshotBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSnapshotBlockInput) operationName() string {
+	return "PutSnapshotBlock"
+}
+
 type PutSnapshotBlockOutput struct {
 
 	// The SHA256 checksum generated for the block data by Amazon EBS.

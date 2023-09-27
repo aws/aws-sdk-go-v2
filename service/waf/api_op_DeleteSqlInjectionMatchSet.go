@@ -62,6 +62,10 @@ type DeleteSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSqlInjectionMatchSetInput) operationName() string {
+	return "DeleteSqlInjectionMatchSet"
+}
+
 // The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
 type DeleteSqlInjectionMatchSetOutput struct {
 

@@ -60,6 +60,10 @@ type UpdateClusterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterVersionInput) operationName() string {
+	return "UpdateClusterVersion"
+}
+
 type UpdateClusterVersionOutput struct {
 
 	// The full description of the specified update

@@ -65,6 +65,10 @@ type UpdateSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityPolicyInput) operationName() string {
+	return "UpdateSecurityPolicy"
+}
+
 type UpdateSecurityPolicyOutput struct {
 
 	// Details about the updated security policy.

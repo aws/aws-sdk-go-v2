@@ -60,6 +60,10 @@ type UpdateThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThemeInput) operationName() string {
+	return "UpdateTheme"
+}
+
 type UpdateThemeOutput struct {
 
 	// Describes the configuration of the updated theme.

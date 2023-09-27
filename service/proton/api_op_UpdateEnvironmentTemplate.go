@@ -49,6 +49,10 @@ type UpdateEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentTemplateInput) operationName() string {
+	return "UpdateEnvironmentTemplate"
+}
+
 type UpdateEnvironmentTemplateOutput struct {
 
 	// The environment template detail data that's returned by Proton.

@@ -98,6 +98,10 @@ type UpdateMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMaintenanceWindowInput) operationName() string {
+	return "UpdateMaintenanceWindow"
+}
+
 type UpdateMaintenanceWindowOutput struct {
 
 	// Whether targets must be registered with the maintenance window before tasks can

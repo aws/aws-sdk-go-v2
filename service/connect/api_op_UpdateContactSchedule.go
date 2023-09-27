@@ -55,6 +55,10 @@ type UpdateContactScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContactScheduleInput) operationName() string {
+	return "UpdateContactSchedule"
+}
+
 type UpdateContactScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

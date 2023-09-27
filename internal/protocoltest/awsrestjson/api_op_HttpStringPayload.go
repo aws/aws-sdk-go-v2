@@ -30,6 +30,10 @@ type HttpStringPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpStringPayloadInput) operationName() string {
+	return "HttpStringPayload"
+}
+
 type HttpStringPayloadOutput struct {
 	Payload *string
 

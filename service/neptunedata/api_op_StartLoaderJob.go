@@ -205,6 +205,10 @@ type StartLoaderJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartLoaderJobInput) operationName() string {
+	return "StartLoaderJob"
+}
+
 type StartLoaderJobOutput struct {
 
 	// Contains a loadId name-value pair that provides an identifier for the load

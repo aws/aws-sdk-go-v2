@@ -109,6 +109,10 @@ type CreatePatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePatchBaselineInput) operationName() string {
+	return "CreatePatchBaseline"
+}
+
 type CreatePatchBaselineOutput struct {
 
 	// The ID of the created patch baseline.

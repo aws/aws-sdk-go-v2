@@ -70,6 +70,10 @@ type DescribeDataRepositoryAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataRepositoryAssociationsInput) operationName() string {
+	return "DescribeDataRepositoryAssociations"
+}
+
 type DescribeDataRepositoryAssociationsOutput struct {
 
 	// An array of one or more data repository association descriptions.

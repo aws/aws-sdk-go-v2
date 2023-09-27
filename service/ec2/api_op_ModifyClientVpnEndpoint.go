@@ -98,6 +98,10 @@ type ModifyClientVpnEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClientVpnEndpointInput) operationName() string {
+	return "ModifyClientVpnEndpoint"
+}
+
 type ModifyClientVpnEndpointOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

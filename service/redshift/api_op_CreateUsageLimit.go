@@ -74,6 +74,10 @@ type CreateUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUsageLimitInput) operationName() string {
+	return "CreateUsageLimit"
+}
+
 // Describes a usage limit object for a cluster.
 type CreateUsageLimitOutput struct {
 

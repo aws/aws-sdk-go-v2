@@ -52,6 +52,10 @@ type AssociateFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFraudsterInput) operationName() string {
+	return "AssociateFraudster"
+}
+
 type AssociateFraudsterOutput struct {
 
 	// Contains all the information about a fraudster.

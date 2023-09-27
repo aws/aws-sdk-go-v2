@@ -56,6 +56,10 @@ type ModifyTransitGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTransitGatewayInput) operationName() string {
+	return "ModifyTransitGateway"
+}
+
 type ModifyTransitGatewayOutput struct {
 
 	// Information about the transit gateway.

@@ -53,6 +53,10 @@ type GetIdentityNotificationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityNotificationAttributesInput) operationName() string {
+	return "GetIdentityNotificationAttributes"
+}
+
 // Represents the notification attributes for a list of identities.
 type GetIdentityNotificationAttributesOutput struct {
 

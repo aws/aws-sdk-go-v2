@@ -44,6 +44,10 @@ type DescribeProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProfilingGroupInput) operationName() string {
+	return "DescribeProfilingGroup"
+}
+
 // The structure representing the describeProfilingGroupResponse.
 type DescribeProfilingGroupOutput struct {
 

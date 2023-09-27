@@ -61,6 +61,10 @@ type CreateMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMeshInput) operationName() string {
+	return "CreateMesh"
+}
+
 type CreateMeshOutput struct {
 
 	// The full description of your service mesh following the create call.

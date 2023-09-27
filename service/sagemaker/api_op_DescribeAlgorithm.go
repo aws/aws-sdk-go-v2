@@ -43,6 +43,10 @@ type DescribeAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlgorithmInput) operationName() string {
+	return "DescribeAlgorithm"
+}
+
 type DescribeAlgorithmOutput struct {
 
 	// The Amazon Resource Name (ARN) of the algorithm.

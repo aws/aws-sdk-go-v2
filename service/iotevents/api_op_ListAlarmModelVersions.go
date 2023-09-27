@@ -49,6 +49,10 @@ type ListAlarmModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAlarmModelVersionsInput) operationName() string {
+	return "ListAlarmModelVersions"
+}
+
 type ListAlarmModelVersionsOutput struct {
 
 	// A list that summarizes each alarm model version.

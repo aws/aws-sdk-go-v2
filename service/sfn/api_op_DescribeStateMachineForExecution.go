@@ -50,6 +50,10 @@ type DescribeStateMachineForExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStateMachineForExecutionInput) operationName() string {
+	return "DescribeStateMachineForExecution"
+}
+
 type DescribeStateMachineForExecutionOutput struct {
 
 	// The Amazon States Language definition of the state machine. See Amazon States

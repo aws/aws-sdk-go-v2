@@ -125,6 +125,10 @@ type UpdateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecretInput) operationName() string {
+	return "UpdateSecret"
+}
+
 type UpdateSecretOutput struct {
 
 	// The ARN of the secret that was updated.

@@ -49,6 +49,10 @@ type DescribePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePermissionsInput) operationName() string {
+	return "DescribePermissions"
+}
+
 // Contains the response to a DescribePermissions request.
 type DescribePermissionsOutput struct {
 

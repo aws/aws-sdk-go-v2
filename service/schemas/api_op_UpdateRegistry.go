@@ -45,6 +45,10 @@ type UpdateRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRegistryInput) operationName() string {
+	return "UpdateRegistry"
+}
+
 type UpdateRegistryOutput struct {
 
 	// The description of the registry.

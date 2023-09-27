@@ -71,6 +71,10 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserInput) operationName() string {
+	return "UpdateUser"
+}
+
 type UpdateUserOutput struct {
 
 	// The unique identifier of the updated user.

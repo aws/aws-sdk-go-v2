@@ -62,6 +62,10 @@ type ListGameServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGameServersInput) operationName() string {
+	return "ListGameServers"
+}
+
 type ListGameServersOutput struct {
 
 	// A collection of game server objects that match the request.

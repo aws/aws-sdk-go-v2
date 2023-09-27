@@ -51,6 +51,10 @@ type UpdateS3ResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateS3ResourcesInput) operationName() string {
+	return "UpdateS3Resources"
+}
+
 type UpdateS3ResourcesOutput struct {
 
 	// (Discontinued) The S3 resources whose classification types can't be updated. An

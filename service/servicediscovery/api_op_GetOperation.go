@@ -45,6 +45,10 @@ type GetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOperationInput) operationName() string {
+	return "GetOperation"
+}
+
 type GetOperationOutput struct {
 
 	// A complex type that contains information about the operation.

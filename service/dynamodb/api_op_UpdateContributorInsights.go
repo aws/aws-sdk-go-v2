@@ -56,6 +56,10 @@ type UpdateContributorInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContributorInsightsInput) operationName() string {
+	return "UpdateContributorInsights"
+}
+
 type UpdateContributorInsightsOutput struct {
 
 	// The status of contributor insights

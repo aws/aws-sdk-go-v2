@@ -75,6 +75,10 @@ type ListGeoLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGeoLocationsInput) operationName() string {
+	return "ListGeoLocations"
+}
+
 // A complex type containing the response information for the request.
 type ListGeoLocationsOutput struct {
 

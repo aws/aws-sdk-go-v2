@@ -50,6 +50,10 @@ type GetFunctionUrlConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionUrlConfigInput) operationName() string {
+	return "GetFunctionUrlConfig"
+}
+
 type GetFunctionUrlConfigOutput struct {
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you

@@ -46,6 +46,10 @@ type DeleteAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAssociationInput) operationName() string {
+	return "DeleteAssociation"
+}
+
 type DeleteAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the destination.

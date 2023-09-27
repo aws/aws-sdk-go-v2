@@ -45,6 +45,10 @@ type DisableInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableInsightRulesInput) operationName() string {
+	return "DisableInsightRules"
+}
+
 type DisableInsightRulesOutput struct {
 
 	// An array listing the rules that could not be disabled. You cannot disable

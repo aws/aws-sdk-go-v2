@@ -48,6 +48,10 @@ type PurgeQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurgeQueueInput) operationName() string {
+	return "PurgeQueue"
+}
+
 type PurgeQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

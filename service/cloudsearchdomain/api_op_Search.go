@@ -312,6 +312,10 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchInput) operationName() string {
+	return "Search"
+}
+
 // The result of a Search request. Contains the documents that match the specified
 // search criteria and any requested fields, highlights, and facet information.
 type SearchOutput struct {

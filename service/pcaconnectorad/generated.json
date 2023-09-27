@@ -34,6 +34,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateTemplate.go",
         "api_op_UpdateTemplateGroupAccessControlEntry.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

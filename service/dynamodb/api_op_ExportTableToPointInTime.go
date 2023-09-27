@@ -97,6 +97,10 @@ type ExportTableToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportTableToPointInTimeInput) operationName() string {
+	return "ExportTableToPointInTime"
+}
+
 type ExportTableToPointInTimeOutput struct {
 
 	// Contains a description of the table export.

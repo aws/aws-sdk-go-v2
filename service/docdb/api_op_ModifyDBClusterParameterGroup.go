@@ -59,6 +59,10 @@ type ModifyDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBClusterParameterGroupInput) operationName() string {
+	return "ModifyDBClusterParameterGroup"
+}
+
 // Contains the name of a cluster parameter group.
 type ModifyDBClusterParameterGroupOutput struct {
 

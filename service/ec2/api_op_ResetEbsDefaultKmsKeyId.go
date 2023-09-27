@@ -47,6 +47,10 @@ type ResetEbsDefaultKmsKeyIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetEbsDefaultKmsKeyIdInput) operationName() string {
+	return "ResetEbsDefaultKmsKeyId"
+}
+
 type ResetEbsDefaultKmsKeyIdOutput struct {
 
 	// The Amazon Resource Name (ARN) of the default KMS key for EBS encryption by

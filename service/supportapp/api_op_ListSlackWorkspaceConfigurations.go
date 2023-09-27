@@ -44,6 +44,10 @@ type ListSlackWorkspaceConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSlackWorkspaceConfigurationsInput) operationName() string {
+	return "ListSlackWorkspaceConfigurations"
+}
+
 type ListSlackWorkspaceConfigurationsOutput struct {
 
 	// The point where pagination should resume when the response returns only partial

@@ -51,6 +51,10 @@ type CreateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDirectoryInput) operationName() string {
+	return "CreateDirectory"
+}
+
 type CreateDirectoryOutput struct {
 
 	// The ARN of the published schema in the Directory . Once a published schema is

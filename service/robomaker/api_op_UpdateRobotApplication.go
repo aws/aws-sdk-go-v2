@@ -57,6 +57,10 @@ type UpdateRobotApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRobotApplicationInput) operationName() string {
+	return "UpdateRobotApplication"
+}
+
 type UpdateRobotApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated robot application.

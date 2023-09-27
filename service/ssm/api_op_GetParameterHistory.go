@@ -57,6 +57,10 @@ type GetParameterHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParameterHistoryInput) operationName() string {
+	return "GetParameterHistory"
+}
+
 type GetParameterHistoryOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

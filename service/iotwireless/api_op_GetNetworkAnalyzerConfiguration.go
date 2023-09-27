@@ -42,6 +42,10 @@ type GetNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkAnalyzerConfigurationInput) operationName() string {
+	return "GetNetworkAnalyzerConfiguration"
+}
+
 type GetNetworkAnalyzerConfigurationOutput struct {
 
 	// The Amazon Resource Name of the new resource.

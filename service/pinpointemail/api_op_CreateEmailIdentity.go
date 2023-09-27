@@ -59,6 +59,10 @@ type CreateEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEmailIdentityInput) operationName() string {
+	return "CreateEmailIdentity"
+}
+
 // If the email identity is a domain, this object contains tokens that you can use
 // to create a set of CNAME records. To sucessfully verify your domain, you have to
 // add these records to the DNS configuration for your domain. If the email

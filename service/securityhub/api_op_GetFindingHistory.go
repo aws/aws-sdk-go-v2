@@ -89,6 +89,10 @@ type GetFindingHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingHistoryInput) operationName() string {
+	return "GetFindingHistory"
+}
+
 type GetFindingHistoryOutput struct {
 
 	// A token for pagination purposes. Provide this token in the subsequent request

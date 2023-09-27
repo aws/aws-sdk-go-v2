@@ -51,6 +51,10 @@ type SearchSystemInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchSystemInstancesInput) operationName() string {
+	return "SearchSystemInstances"
+}
+
 type SearchSystemInstancesOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.

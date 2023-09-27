@@ -70,6 +70,10 @@ type CreateServiceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceInstanceInput) operationName() string {
+	return "CreateServiceInstance"
+}
+
 type CreateServiceInstanceOutput struct {
 
 	// The detailed data of the service instance being created.

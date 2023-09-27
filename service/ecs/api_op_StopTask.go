@@ -61,6 +61,10 @@ type StopTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopTaskInput) operationName() string {
+	return "StopTask"
+}
+
 type StopTaskOutput struct {
 
 	// The task that was stopped.

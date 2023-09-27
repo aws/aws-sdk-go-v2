@@ -60,6 +60,10 @@ type SearchRoutingProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchRoutingProfilesInput) operationName() string {
+	return "SearchRoutingProfiles"
+}
+
 type SearchRoutingProfilesOutput struct {
 
 	// The total number of routing profiles which matched your search query.

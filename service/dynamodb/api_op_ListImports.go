@@ -48,6 +48,10 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportsInput) operationName() string {
+	return "ListImports"
+}
+
 type ListImportsOutput struct {
 
 	// A list of ImportSummary objects.

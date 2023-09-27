@@ -42,6 +42,10 @@ type DeleteDedicatedIpPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDedicatedIpPoolInput) operationName() string {
+	return "DeleteDedicatedIpPool"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteDedicatedIpPoolOutput struct {

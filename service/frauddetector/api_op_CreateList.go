@@ -61,6 +61,10 @@ type CreateListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateListInput) operationName() string {
+	return "CreateList"
+}
+
 type CreateListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

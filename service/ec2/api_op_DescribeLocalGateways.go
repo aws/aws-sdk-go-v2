@@ -62,6 +62,10 @@ type DescribeLocalGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocalGatewaysInput) operationName() string {
+	return "DescribeLocalGateways"
+}
+
 type DescribeLocalGatewaysOutput struct {
 
 	// Information about the local gateways.

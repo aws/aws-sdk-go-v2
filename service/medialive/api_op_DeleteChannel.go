@@ -43,6 +43,10 @@ type DeleteChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChannelInput) operationName() string {
+	return "DeleteChannel"
+}
+
 // Placeholder documentation for DeleteChannelResponse
 type DeleteChannelOutput struct {
 

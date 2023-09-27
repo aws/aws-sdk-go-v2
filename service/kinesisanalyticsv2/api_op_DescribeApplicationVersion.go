@@ -50,6 +50,10 @@ type DescribeApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationVersionInput) operationName() string {
+	return "DescribeApplicationVersion"
+}
+
 type DescribeApplicationVersionOutput struct {
 
 	// Describes the application, including the application Amazon Resource Name

@@ -42,6 +42,10 @@ type GetFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFirewallRuleGroupInput) operationName() string {
+	return "GetFirewallRuleGroup"
+}
+
 type GetFirewallRuleGroupOutput struct {
 
 	// A collection of rules used to filter DNS network traffic.

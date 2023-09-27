@@ -49,6 +49,10 @@ type GrantAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GrantAccessInput) operationName() string {
+	return "GrantAccess"
+}
+
 // Contains the response to a GrantAccess request.
 type GrantAccessOutput struct {
 

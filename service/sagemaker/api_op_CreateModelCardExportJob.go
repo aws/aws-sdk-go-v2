@@ -57,6 +57,10 @@ type CreateModelCardExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelCardExportJobInput) operationName() string {
+	return "CreateModelCardExportJob"
+}
+
 type CreateModelCardExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model card export job.

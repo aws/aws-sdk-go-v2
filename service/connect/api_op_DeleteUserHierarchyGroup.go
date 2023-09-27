@@ -48,6 +48,10 @@ type DeleteUserHierarchyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserHierarchyGroupInput) operationName() string {
+	return "DeleteUserHierarchyGroup"
+}
+
 type DeleteUserHierarchyGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

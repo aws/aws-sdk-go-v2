@@ -41,6 +41,10 @@ type DeleteWirelessGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWirelessGatewayInput) operationName() string {
+	return "DeleteWirelessGateway"
+}
+
 type DeleteWirelessGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

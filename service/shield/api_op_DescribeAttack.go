@@ -42,6 +42,10 @@ type DescribeAttackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAttackInput) operationName() string {
+	return "DescribeAttack"
+}
+
 type DescribeAttackOutput struct {
 
 	// The attack that you requested.

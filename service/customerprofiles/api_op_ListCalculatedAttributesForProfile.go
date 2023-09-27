@@ -54,6 +54,10 @@ type ListCalculatedAttributesForProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCalculatedAttributesForProfileInput) operationName() string {
+	return "ListCalculatedAttributesForProfile"
+}
+
 type ListCalculatedAttributesForProfileOutput struct {
 
 	// The list of calculated attributes.

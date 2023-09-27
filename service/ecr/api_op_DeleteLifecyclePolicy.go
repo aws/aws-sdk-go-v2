@@ -47,6 +47,10 @@ type DeleteLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLifecyclePolicyInput) operationName() string {
+	return "DeleteLifecyclePolicy"
+}
+
 type DeleteLifecyclePolicyOutput struct {
 
 	// The time stamp of the last time that the lifecycle policy was run.

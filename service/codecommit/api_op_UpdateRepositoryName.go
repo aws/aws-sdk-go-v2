@@ -52,6 +52,10 @@ type UpdateRepositoryNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRepositoryNameInput) operationName() string {
+	return "UpdateRepositoryName"
+}
+
 type UpdateRepositoryNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

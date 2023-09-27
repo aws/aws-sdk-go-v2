@@ -47,6 +47,10 @@ type ListServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServersInput) operationName() string {
+	return "ListServers"
+}
+
 type ListServersOutput struct {
 
 	// An array of servers that were listed.

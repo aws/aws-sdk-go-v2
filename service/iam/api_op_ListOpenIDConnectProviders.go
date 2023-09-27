@@ -41,6 +41,10 @@ type ListOpenIDConnectProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpenIDConnectProvidersInput) operationName() string {
+	return "ListOpenIDConnectProviders"
+}
+
 // Contains the response to a successful ListOpenIDConnectProviders request.
 type ListOpenIDConnectProvidersOutput struct {
 

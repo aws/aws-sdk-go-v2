@@ -43,6 +43,10 @@ type DeleteSimulationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSimulationInput) operationName() string {
+	return "DeleteSimulation"
+}
+
 type DeleteSimulationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

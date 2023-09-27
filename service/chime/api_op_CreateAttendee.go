@@ -61,6 +61,10 @@ type CreateAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAttendeeInput) operationName() string {
+	return "CreateAttendee"
+}
+
 type CreateAttendeeOutput struct {
 
 	// The attendee information, including attendee ID and join token.

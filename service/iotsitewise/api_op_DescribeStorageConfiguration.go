@@ -37,6 +37,10 @@ type DescribeStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorageConfigurationInput) operationName() string {
+	return "DescribeStorageConfiguration"
+}
+
 type DescribeStorageConfigurationOutput struct {
 
 	// Contains current status information for the configuration.

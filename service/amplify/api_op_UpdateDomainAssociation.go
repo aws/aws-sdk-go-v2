@@ -61,6 +61,10 @@ type UpdateDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainAssociationInput) operationName() string {
+	return "UpdateDomainAssociation"
+}
+
 // The result structure for the update domain association request.
 type UpdateDomainAssociationOutput struct {
 

@@ -30,6 +30,10 @@ type DatetimeOffsetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DatetimeOffsetsInput) operationName() string {
+	return "DatetimeOffsets"
+}
+
 type DatetimeOffsetsOutput struct {
 	Datetime *time.Time
 

@@ -71,6 +71,10 @@ type GetTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTextDetectionInput) operationName() string {
+	return "GetTextDetection"
+}
+
 type GetTextDetectionOutput struct {
 
 	// Job identifier for the text detection operation for which you want to obtain

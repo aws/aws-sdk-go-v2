@@ -46,6 +46,10 @@ type ListPlaceIndexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPlaceIndexesInput) operationName() string {
+	return "ListPlaceIndexes"
+}
+
 type ListPlaceIndexesOutput struct {
 
 	// Lists the place index resources that exist in your Amazon Web Services account

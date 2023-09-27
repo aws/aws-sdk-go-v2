@@ -42,6 +42,10 @@ type DescribeCustomRoutingAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomRoutingAcceleratorInput) operationName() string {
+	return "DescribeCustomRoutingAccelerator"
+}
+
 type DescribeCustomRoutingAcceleratorOutput struct {
 
 	// The description of the custom routing accelerator.

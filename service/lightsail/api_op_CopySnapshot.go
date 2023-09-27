@@ -90,6 +90,10 @@ type CopySnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopySnapshotInput) operationName() string {
+	return "CopySnapshot"
+}
+
 type CopySnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

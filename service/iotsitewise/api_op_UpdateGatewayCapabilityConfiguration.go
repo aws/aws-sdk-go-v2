@@ -63,6 +63,10 @@ type UpdateGatewayCapabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGatewayCapabilityConfigurationInput) operationName() string {
+	return "UpdateGatewayCapabilityConfiguration"
+}
+
 type UpdateGatewayCapabilityConfigurationOutput struct {
 
 	// The namespace of the gateway capability.

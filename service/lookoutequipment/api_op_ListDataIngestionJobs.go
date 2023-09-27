@@ -51,6 +51,10 @@ type ListDataIngestionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataIngestionJobsInput) operationName() string {
+	return "ListDataIngestionJobs"
+}
+
 type ListDataIngestionJobsOutput struct {
 
 	// Specifies information about the specific data ingestion job, including dataset

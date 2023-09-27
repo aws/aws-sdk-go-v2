@@ -94,6 +94,10 @@ type DescribeAccountCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountCustomizationInput) operationName() string {
+	return "DescribeAccountCustomization"
+}
+
 type DescribeAccountCustomizationOutput struct {
 
 	// The Amazon QuickSight customizations that exist in the current Amazon Web

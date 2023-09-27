@@ -45,6 +45,10 @@ type DeleteElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteElasticsearchDomainInput) operationName() string {
+	return "DeleteElasticsearchDomain"
+}
+
 // The result of a DeleteElasticsearchDomain request. Contains the status of the
 // pending deletion, or no status if the domain and all of its resources have been
 // deleted.

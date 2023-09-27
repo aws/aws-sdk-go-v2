@@ -49,6 +49,10 @@ type GetProgrammaticAccessCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProgrammaticAccessCredentialsInput) operationName() string {
+	return "GetProgrammaticAccessCredentials"
+}
+
 // Response for GetProgrammaticAccessCredentials operation
 type GetProgrammaticAccessCredentialsOutput struct {
 

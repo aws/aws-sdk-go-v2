@@ -42,6 +42,10 @@ type DeleteIpGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIpGroupInput) operationName() string {
+	return "DeleteIpGroup"
+}
+
 type DeleteIpGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

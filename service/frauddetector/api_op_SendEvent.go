@@ -73,6 +73,10 @@ type SendEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendEventInput) operationName() string {
+	return "SendEvent"
+}
+
 type SendEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

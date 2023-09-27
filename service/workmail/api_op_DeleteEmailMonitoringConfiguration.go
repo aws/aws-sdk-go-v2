@@ -42,6 +42,10 @@ type DeleteEmailMonitoringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEmailMonitoringConfigurationInput) operationName() string {
+	return "DeleteEmailMonitoringConfiguration"
+}
+
 type DeleteEmailMonitoringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

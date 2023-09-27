@@ -47,6 +47,10 @@ type ListTagsForProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForProjectInput) operationName() string {
+	return "ListTagsForProject"
+}
+
 type ListTagsForProjectOutput struct {
 
 	// Reserved for future use.

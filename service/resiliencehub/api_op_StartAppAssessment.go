@@ -64,6 +64,10 @@ type StartAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAppAssessmentInput) operationName() string {
+	return "StartAppAssessment"
+}
+
 type StartAppAssessmentOutput struct {
 
 	// The assessment created.

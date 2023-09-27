@@ -163,6 +163,10 @@ type StartWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartWorkflowExecutionInput) operationName() string {
+	return "StartWorkflowExecution"
+}
+
 // Specifies the runId of a workflow execution.
 type StartWorkflowExecutionOutput struct {
 

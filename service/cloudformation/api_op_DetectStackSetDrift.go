@@ -87,6 +87,10 @@ type DetectStackSetDriftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectStackSetDriftInput) operationName() string {
+	return "DetectStackSetDrift"
+}
+
 type DetectStackSetDriftOutput struct {
 
 	// The ID of the drift detection stack set operation. You can use this operation

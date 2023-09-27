@@ -42,6 +42,10 @@ type StopPiiEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopPiiEntitiesDetectionJobInput) operationName() string {
+	return "StopPiiEntitiesDetectionJob"
+}
+
 type StopPiiEntitiesDetectionJobOutput struct {
 
 	// The identifier of the PII entities detection job to stop.

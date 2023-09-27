@@ -53,6 +53,10 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTablesInput) operationName() string {
+	return "ListTables"
+}
+
 type ListTablesOutput struct {
 
 	// The list of tables in the workbook.

@@ -62,6 +62,10 @@ type ChannelFlowCallbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChannelFlowCallbackInput) operationName() string {
+	return "ChannelFlowCallback"
+}
+
 type ChannelFlowCallbackOutput struct {
 
 	// The call back ID passed in the request.

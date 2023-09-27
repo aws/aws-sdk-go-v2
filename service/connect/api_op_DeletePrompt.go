@@ -47,6 +47,10 @@ type DeletePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePromptInput) operationName() string {
+	return "DeletePrompt"
+}
+
 type DeletePromptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

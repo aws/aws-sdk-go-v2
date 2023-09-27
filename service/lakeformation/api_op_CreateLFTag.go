@@ -52,6 +52,10 @@ type CreateLFTagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLFTagInput) operationName() string {
+	return "CreateLFTag"
+}
+
 type CreateLFTagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

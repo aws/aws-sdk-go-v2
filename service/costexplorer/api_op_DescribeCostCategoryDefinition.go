@@ -50,6 +50,10 @@ type DescribeCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCostCategoryDefinitionInput) operationName() string {
+	return "DescribeCostCategoryDefinition"
+}
+
 type DescribeCostCategoryDefinitionOutput struct {
 
 	// The structure of Cost Categories. This includes detailed metadata and the set

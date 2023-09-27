@@ -82,6 +82,10 @@ type CreateWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkgroupInput) operationName() string {
+	return "CreateWorkgroup"
+}
+
 type CreateWorkgroupOutput struct {
 
 	// The created workgroup object.

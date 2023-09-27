@@ -62,6 +62,10 @@ type ListLineageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLineageGroupsInput) operationName() string {
+	return "ListLineageGroups"
+}
+
 type ListLineageGroupsOutput struct {
 
 	// A list of lineage groups and their properties.

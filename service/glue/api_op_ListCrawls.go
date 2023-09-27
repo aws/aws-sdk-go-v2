@@ -60,6 +60,10 @@ type ListCrawlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCrawlsInput) operationName() string {
+	return "ListCrawls"
+}
+
 type ListCrawlsOutput struct {
 
 	// A list of CrawlerHistory objects representing the crawl runs that meet your

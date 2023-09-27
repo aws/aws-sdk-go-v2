@@ -54,6 +54,10 @@ type GetAccessPointPolicyStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointPolicyStatusInput) operationName() string {
+	return "GetAccessPointPolicyStatus"
+}
+
 type GetAccessPointPolicyStatusOutput struct {
 
 	// Indicates the current policy status of the specified access point.

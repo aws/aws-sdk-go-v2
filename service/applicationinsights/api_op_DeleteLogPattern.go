@@ -51,6 +51,10 @@ type DeleteLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLogPatternInput) operationName() string {
+	return "DeleteLogPattern"
+}
+
 type DeleteLogPatternOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

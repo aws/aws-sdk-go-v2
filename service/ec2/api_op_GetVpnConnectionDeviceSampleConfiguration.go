@@ -58,6 +58,10 @@ type GetVpnConnectionDeviceSampleConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVpnConnectionDeviceSampleConfigurationInput) operationName() string {
+	return "GetVpnConnectionDeviceSampleConfiguration"
+}
+
 type GetVpnConnectionDeviceSampleConfigurationOutput struct {
 
 	// Sample configuration file for the specified customer gateway device.

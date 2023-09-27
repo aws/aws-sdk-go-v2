@@ -59,6 +59,10 @@ type ListSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSpacesInput) operationName() string {
+	return "ListSpaces"
+}
+
 type ListSpacesOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in

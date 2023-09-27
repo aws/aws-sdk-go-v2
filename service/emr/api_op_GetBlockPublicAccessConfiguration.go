@@ -39,6 +39,10 @@ type GetBlockPublicAccessConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlockPublicAccessConfigurationInput) operationName() string {
+	return "GetBlockPublicAccessConfiguration"
+}
+
 type GetBlockPublicAccessConfigurationOutput struct {
 
 	// A configuration for Amazon EMR block public access. The configuration applies

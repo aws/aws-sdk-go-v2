@@ -44,6 +44,10 @@ type GetPropertygraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPropertygraphSummaryInput) operationName() string {
+	return "GetPropertygraphSummary"
+}
+
 type GetPropertygraphSummaryOutput struct {
 
 	// Payload containing the property graph summary response.

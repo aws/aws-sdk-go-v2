@@ -44,6 +44,10 @@ type AcceptSharedDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptSharedDirectoryInput) operationName() string {
+	return "AcceptSharedDirectory"
+}
+
 type AcceptSharedDirectoryOutput struct {
 
 	// The shared directory in the directory consumer account.

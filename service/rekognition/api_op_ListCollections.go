@@ -46,6 +46,10 @@ type ListCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCollectionsInput) operationName() string {
+	return "ListCollections"
+}
+
 type ListCollectionsOutput struct {
 
 	// An array of collection IDs.

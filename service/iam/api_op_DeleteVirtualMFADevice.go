@@ -47,6 +47,10 @@ type DeleteVirtualMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualMFADeviceInput) operationName() string {
+	return "DeleteVirtualMFADevice"
+}
+
 type DeleteVirtualMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

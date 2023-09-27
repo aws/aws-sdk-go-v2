@@ -46,6 +46,10 @@ type AssociateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateIpAccessSettingsInput) operationName() string {
+	return "AssociateIpAccessSettings"
+}
+
 type AssociateIpAccessSettingsOutput struct {
 
 	// The ARN of the IP access settings resource.

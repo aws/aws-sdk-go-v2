@@ -43,6 +43,10 @@ type BatchGetTokenBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetTokenBalanceInput) operationName() string {
+	return "BatchGetTokenBalance"
+}
+
 type BatchGetTokenBalanceOutput struct {
 
 	// An array of BatchGetTokenBalanceErrorItem objects returned from the request.

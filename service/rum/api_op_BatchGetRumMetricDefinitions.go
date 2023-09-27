@@ -63,6 +63,10 @@ type BatchGetRumMetricDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetRumMetricDefinitionsInput) operationName() string {
+	return "BatchGetRumMetricDefinitions"
+}
+
 type BatchGetRumMetricDefinitionsOutput struct {
 
 	// An array of structures that display information about the metrics that are sent

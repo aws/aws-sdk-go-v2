@@ -53,6 +53,10 @@ type DeleteEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventDestinationInput) operationName() string {
+	return "DeleteEventDestination"
+}
+
 type DeleteEventDestinationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.

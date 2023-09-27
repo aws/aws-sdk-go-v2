@@ -134,6 +134,10 @@ type ImportImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportImageInput) operationName() string {
+	return "ImportImage"
+}
+
 type ImportImageOutput struct {
 
 	// The architecture of the virtual machine.

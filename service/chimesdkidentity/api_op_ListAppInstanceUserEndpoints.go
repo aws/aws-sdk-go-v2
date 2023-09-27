@@ -49,6 +49,10 @@ type ListAppInstanceUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppInstanceUserEndpointsInput) operationName() string {
+	return "ListAppInstanceUserEndpoints"
+}
+
 type ListAppInstanceUserEndpointsOutput struct {
 
 	// The information for each requested AppInstanceUserEndpoint .

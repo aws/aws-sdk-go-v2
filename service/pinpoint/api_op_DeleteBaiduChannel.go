@@ -44,6 +44,10 @@ type DeleteBaiduChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBaiduChannelInput) operationName() string {
+	return "DeleteBaiduChannel"
+}
+
 type DeleteBaiduChannelOutput struct {
 
 	// Provides information about the status and settings of the Baidu (Baidu Cloud

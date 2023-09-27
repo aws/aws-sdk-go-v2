@@ -64,6 +64,10 @@ type GetObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectInput) operationName() string {
+	return "GetObject"
+}
+
 type GetObjectOutput struct {
 
 	// The HTML status code of the request. Status codes ranging from 200 to 299

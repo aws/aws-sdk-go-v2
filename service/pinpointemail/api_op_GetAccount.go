@@ -39,6 +39,10 @@ type GetAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountInput) operationName() string {
+	return "GetAccount"
+}
+
 // A list of details about the email-sending capabilities of your Amazon Pinpoint
 // account in the current AWS Region.
 type GetAccountOutput struct {

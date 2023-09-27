@@ -69,6 +69,10 @@ type AssociateNatGatewayAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateNatGatewayAddressInput) operationName() string {
+	return "AssociateNatGatewayAddress"
+}
+
 type AssociateNatGatewayAddressOutput struct {
 
 	// The IP addresses.

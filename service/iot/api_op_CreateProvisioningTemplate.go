@@ -80,6 +80,10 @@ type CreateProvisioningTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProvisioningTemplateInput) operationName() string {
+	return "CreateProvisioningTemplate"
+}
+
 type CreateProvisioningTemplateOutput struct {
 
 	// The default version of the provisioning template.

@@ -48,6 +48,10 @@ type DeleteDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataCellsFilterInput) operationName() string {
+	return "DeleteDataCellsFilter"
+}
+
 type DeleteDataCellsFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

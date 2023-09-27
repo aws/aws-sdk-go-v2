@@ -66,6 +66,10 @@ type CreateAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAttributeGroupInput) operationName() string {
+	return "CreateAttributeGroup"
+}
+
 type CreateAttributeGroupOutput struct {
 
 	// Information about the attribute group.

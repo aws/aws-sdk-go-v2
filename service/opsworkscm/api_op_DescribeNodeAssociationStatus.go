@@ -56,6 +56,10 @@ type DescribeNodeAssociationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNodeAssociationStatusInput) operationName() string {
+	return "DescribeNodeAssociationStatus"
+}
+
 type DescribeNodeAssociationStatusOutput struct {
 
 	// Attributes specific to the node association. In Puppet, the attibute

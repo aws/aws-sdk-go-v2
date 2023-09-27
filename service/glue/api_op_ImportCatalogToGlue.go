@@ -40,6 +40,10 @@ type ImportCatalogToGlueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportCatalogToGlueInput) operationName() string {
+	return "ImportCatalogToGlue"
+}
+
 type ImportCatalogToGlueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

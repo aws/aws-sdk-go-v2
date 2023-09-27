@@ -56,6 +56,10 @@ type CreateRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRecipeInput) operationName() string {
+	return "CreateRecipe"
+}
+
 type CreateRecipeOutput struct {
 
 	// The name of the recipe that you created.

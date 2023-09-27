@@ -53,6 +53,10 @@ type DescribeEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEvaluationFormInput) operationName() string {
+	return "DescribeEvaluationForm"
+}
+
 type DescribeEvaluationFormOutput struct {
 
 	// Information about the evaluation form.

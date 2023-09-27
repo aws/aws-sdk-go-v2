@@ -63,6 +63,10 @@ type AddProfileKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddProfileKeyInput) operationName() string {
+	return "AddProfileKey"
+}
+
 type AddProfileKeyOutput struct {
 
 	// A searchable identifier of a customer profile.

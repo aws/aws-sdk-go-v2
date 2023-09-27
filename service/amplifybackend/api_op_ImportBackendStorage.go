@@ -56,6 +56,10 @@ type ImportBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportBackendStorageInput) operationName() string {
+	return "ImportBackendStorage"
+}
+
 type ImportBackendStorageOutput struct {
 
 	// The app ID.

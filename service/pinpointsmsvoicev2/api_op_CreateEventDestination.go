@@ -79,6 +79,10 @@ type CreateEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventDestinationInput) operationName() string {
+	return "CreateEventDestination"
+}
+
 type CreateEventDestinationOutput struct {
 
 	// The ARN of the configuration set.

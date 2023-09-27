@@ -42,6 +42,10 @@ type DeleteGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGatewayInput) operationName() string {
+	return "DeleteGateway"
+}
+
 type DeleteGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

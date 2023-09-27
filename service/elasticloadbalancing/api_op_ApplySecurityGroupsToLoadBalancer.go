@@ -52,6 +52,10 @@ type ApplySecurityGroupsToLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplySecurityGroupsToLoadBalancerInput) operationName() string {
+	return "ApplySecurityGroupsToLoadBalancer"
+}
+
 // Contains the output of ApplySecurityGroupsToLoadBalancer.
 type ApplySecurityGroupsToLoadBalancerOutput struct {
 

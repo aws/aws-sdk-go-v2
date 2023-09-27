@@ -42,6 +42,10 @@ type GetEulaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEulaInput) operationName() string {
+	return "GetEula"
+}
+
 type GetEulaOutput struct {
 
 	// The EULA.

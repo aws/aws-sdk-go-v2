@@ -212,6 +212,10 @@ type ModifyReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReplicationGroupInput) operationName() string {
+	return "ModifyReplicationGroup"
+}
+
 type ModifyReplicationGroupOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

@@ -46,6 +46,10 @@ type AssociateNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateNetworkSettingsInput) operationName() string {
+	return "AssociateNetworkSettings"
+}
+
 type AssociateNetworkSettingsOutput struct {
 
 	// The ARN of the network settings.

@@ -48,6 +48,10 @@ type ListTopicsDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTopicsDetectionJobsInput) operationName() string {
+	return "ListTopicsDetectionJobs"
+}
+
 type ListTopicsDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.

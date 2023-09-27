@@ -53,6 +53,10 @@ type AssociateWebsiteCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateWebsiteCertificateAuthorityInput) operationName() string {
+	return "AssociateWebsiteCertificateAuthority"
+}
+
 type AssociateWebsiteCertificateAuthorityOutput struct {
 
 	// A unique identifier for the CA.

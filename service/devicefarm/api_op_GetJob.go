@@ -43,6 +43,10 @@ type GetJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobInput) operationName() string {
+	return "GetJob"
+}
+
 // Represents the result of a get job request.
 type GetJobOutput struct {
 

@@ -87,6 +87,10 @@ type MergePullRequestBySquashInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergePullRequestBySquashInput) operationName() string {
+	return "MergePullRequestBySquash"
+}
+
 type MergePullRequestBySquashOutput struct {
 
 	// Returns information about a pull request.

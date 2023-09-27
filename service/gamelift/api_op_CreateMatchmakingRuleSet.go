@@ -68,6 +68,10 @@ type CreateMatchmakingRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMatchmakingRuleSetInput) operationName() string {
+	return "CreateMatchmakingRuleSet"
+}
+
 type CreateMatchmakingRuleSetOutput struct {
 
 	// The newly created matchmaking rule set.

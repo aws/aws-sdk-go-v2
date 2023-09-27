@@ -46,6 +46,10 @@ type SwitchoverReadReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SwitchoverReadReplicaInput) operationName() string {
+	return "SwitchoverReadReplica"
+}
+
 type SwitchoverReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

@@ -48,6 +48,10 @@ type DeleteCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCampaignInput) operationName() string {
+	return "DeleteCampaign"
+}
+
 type DeleteCampaignOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a

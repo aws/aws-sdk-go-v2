@@ -51,6 +51,10 @@ type PutTelemetryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutTelemetryRecordsInput) operationName() string {
+	return "PutTelemetryRecords"
+}
+
 type PutTelemetryRecordsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

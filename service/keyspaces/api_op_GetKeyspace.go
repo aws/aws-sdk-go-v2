@@ -42,6 +42,10 @@ type GetKeyspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyspaceInput) operationName() string {
+	return "GetKeyspace"
+}
+
 type GetKeyspaceOutput struct {
 
 	// The name of the keyspace.

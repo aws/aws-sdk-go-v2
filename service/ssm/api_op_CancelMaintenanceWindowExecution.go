@@ -43,6 +43,10 @@ type CancelMaintenanceWindowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelMaintenanceWindowExecutionInput) operationName() string {
+	return "CancelMaintenanceWindowExecution"
+}
+
 type CancelMaintenanceWindowExecutionOutput struct {
 
 	// The ID of the maintenance window execution that has been stopped.

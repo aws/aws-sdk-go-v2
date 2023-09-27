@@ -50,6 +50,10 @@ type SignOutUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SignOutUserInput) operationName() string {
+	return "SignOutUser"
+}
+
 type SignOutUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

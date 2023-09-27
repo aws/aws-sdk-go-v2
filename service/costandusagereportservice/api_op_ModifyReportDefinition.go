@@ -50,6 +50,10 @@ type ModifyReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReportDefinitionInput) operationName() string {
+	return "ModifyReportDefinition"
+}
+
 type ModifyReportDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

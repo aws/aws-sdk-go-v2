@@ -52,6 +52,10 @@ type DisconnectUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisconnectUserInput) operationName() string {
+	return "DisconnectUser"
+}
+
 type DisconnectUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

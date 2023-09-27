@@ -98,6 +98,10 @@ type CreateSubnetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubnetInput) operationName() string {
+	return "CreateSubnet"
+}
+
 type CreateSubnetOutput struct {
 
 	// Information about the subnet.

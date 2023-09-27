@@ -142,6 +142,10 @@ type EncryptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EncryptInput) operationName() string {
+	return "Encrypt"
+}
+
 type EncryptOutput struct {
 
 	// The encrypted plaintext. When you use the HTTP API or the Amazon Web Services

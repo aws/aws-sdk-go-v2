@@ -69,6 +69,10 @@ type PublishStateMachineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishStateMachineVersionInput) operationName() string {
+	return "PublishStateMachineVersion"
+}
+
 type PublishStateMachineVersionOutput struct {
 
 	// The date the version was created.

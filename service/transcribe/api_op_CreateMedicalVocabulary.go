@@ -79,6 +79,10 @@ type CreateMedicalVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMedicalVocabularyInput) operationName() string {
+	return "CreateMedicalVocabulary"
+}
+
 type CreateMedicalVocabularyOutput struct {
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the

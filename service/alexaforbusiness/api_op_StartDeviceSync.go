@@ -59,6 +59,10 @@ type StartDeviceSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDeviceSyncInput) operationName() string {
+	return "StartDeviceSync"
+}
+
 type StartDeviceSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

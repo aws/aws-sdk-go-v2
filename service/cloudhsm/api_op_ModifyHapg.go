@@ -57,6 +57,10 @@ type ModifyHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyHapgInput) operationName() string {
+	return "ModifyHapg"
+}
+
 type ModifyHapgOutput struct {
 
 	// The ARN of the high-availability partition group.

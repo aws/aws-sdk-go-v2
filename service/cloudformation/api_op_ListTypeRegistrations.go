@@ -66,6 +66,10 @@ type ListTypeRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTypeRegistrationsInput) operationName() string {
+	return "ListTypeRegistrations"
+}
+
 type ListTypeRegistrationsOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a

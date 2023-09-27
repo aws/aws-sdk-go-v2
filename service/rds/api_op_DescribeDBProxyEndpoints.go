@@ -61,6 +61,10 @@ type DescribeDBProxyEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBProxyEndpointsInput) operationName() string {
+	return "DescribeDBProxyEndpoints"
+}
+
 type DescribeDBProxyEndpointsOutput struct {
 
 	// The list of ProxyEndpoint objects returned by the API operation.

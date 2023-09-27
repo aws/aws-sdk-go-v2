@@ -52,6 +52,10 @@ type ListCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCollectionsInput) operationName() string {
+	return "ListCollections"
+}
+
 type ListCollectionsOutput struct {
 
 	// Details about each collection.

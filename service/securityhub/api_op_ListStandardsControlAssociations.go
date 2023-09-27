@@ -57,6 +57,10 @@ type ListStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStandardsControlAssociationsInput) operationName() string {
+	return "ListStandardsControlAssociations"
+}
+
 type ListStandardsControlAssociationsOutput struct {
 
 	// An array that provides the enablement status and other details for each

@@ -54,6 +54,10 @@ type RejectAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectAssignmentInput) operationName() string {
+	return "RejectAssignment"
+}
+
 type RejectAssignmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

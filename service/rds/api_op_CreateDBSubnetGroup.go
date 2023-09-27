@@ -62,6 +62,10 @@ type CreateDBSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBSubnetGroupInput) operationName() string {
+	return "CreateDBSubnetGroup"
+}
+
 type CreateDBSubnetGroupOutput struct {
 
 	// Contains the details of an Amazon RDS DB subnet group. This data type is used

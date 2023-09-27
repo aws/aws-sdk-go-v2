@@ -49,6 +49,10 @@ type ApplySchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplySchemaInput) operationName() string {
+	return "ApplySchema"
+}
+
 type ApplySchemaOutput struct {
 
 	// The applied schema ARN that is associated with the copied schema in the

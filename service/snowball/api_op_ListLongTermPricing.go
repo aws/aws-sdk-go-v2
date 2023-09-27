@@ -44,6 +44,10 @@ type ListLongTermPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLongTermPricingInput) operationName() string {
+	return "ListLongTermPricing"
+}
+
 type ListLongTermPricingOutput struct {
 
 	// Each LongTermPricingEntry object contains a status, ID, and other information

@@ -49,6 +49,10 @@ type RunStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunStatementInput) operationName() string {
+	return "RunStatement"
+}
+
 type RunStatementOutput struct {
 
 	// Returns the Id of the statement that was run.

@@ -75,6 +75,10 @@ type ListFirewallRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFirewallRulesInput) operationName() string {
+	return "ListFirewallRules"
+}
+
 type ListFirewallRulesOutput struct {
 
 	// A list of the rules that you have defined. This might be a partial list of the

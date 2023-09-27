@@ -59,6 +59,10 @@ type SendAutomationSignalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendAutomationSignalInput) operationName() string {
+	return "SendAutomationSignal"
+}
+
 type SendAutomationSignalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

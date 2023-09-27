@@ -48,6 +48,10 @@ type GetThingShadowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetThingShadowInput) operationName() string {
+	return "GetThingShadow"
+}
+
 // The output from the GetThingShadow operation.
 type GetThingShadowOutput struct {
 

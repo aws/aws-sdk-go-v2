@@ -52,6 +52,10 @@ type UpdateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceInput) operationName() string {
+	return "UpdateResource"
+}
+
 // Represents an API resource.
 type UpdateResourceOutput struct {
 

@@ -62,6 +62,10 @@ type AssociatePhoneNumbersWithVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePhoneNumbersWithVoiceConnectorGroupInput) operationName() string {
+	return "AssociatePhoneNumbersWithVoiceConnectorGroup"
+}
+
 type AssociatePhoneNumbersWithVoiceConnectorGroupOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list

@@ -56,6 +56,10 @@ type DeleteBotVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBotVersionInput) operationName() string {
+	return "DeleteBotVersion"
+}
+
 type DeleteBotVersionOutput struct {
 
 	// The identifier of the bot that is being deleted.

@@ -65,6 +65,10 @@ type SendEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendEventInput) operationName() string {
+	return "SendEvent"
+}
+
 type SendEventOutput struct {
 
 	// The time when the event was sent. It's specified in ISO 8601 format:

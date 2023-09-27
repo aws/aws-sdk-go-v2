@@ -58,6 +58,10 @@ type ListAssessmentControlInsightsByControlDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentControlInsightsByControlDomainInput) operationName() string {
+	return "ListAssessmentControlInsightsByControlDomain"
+}
+
 type ListAssessmentControlInsightsByControlDomainOutput struct {
 
 	// The assessment control analytics data that the

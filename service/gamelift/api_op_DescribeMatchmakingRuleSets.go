@@ -56,6 +56,10 @@ type DescribeMatchmakingRuleSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMatchmakingRuleSetsInput) operationName() string {
+	return "DescribeMatchmakingRuleSets"
+}
+
 type DescribeMatchmakingRuleSetsOutput struct {
 
 	// A collection of requested matchmaking rule set objects.

@@ -47,6 +47,10 @@ type ModifyEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyEndpointAccessInput) operationName() string {
+	return "ModifyEndpointAccess"
+}
+
 // Describes a Redshift-managed VPC endpoint.
 type ModifyEndpointAccessOutput struct {
 

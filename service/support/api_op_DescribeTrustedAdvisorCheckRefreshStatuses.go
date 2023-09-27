@@ -62,6 +62,10 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrustedAdvisorCheckRefreshStatusesInput) operationName() string {
+	return "DescribeTrustedAdvisorCheckRefreshStatuses"
+}
+
 // The statuses of the Trusted Advisor checks returned by the
 // DescribeTrustedAdvisorCheckRefreshStatuses operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {

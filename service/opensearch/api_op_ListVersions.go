@@ -47,6 +47,10 @@ type ListVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVersionsInput) operationName() string {
+	return "ListVersions"
+}
+
 // Container for the parameters for response received from the ListVersions
 // operation.
 type ListVersionsOutput struct {

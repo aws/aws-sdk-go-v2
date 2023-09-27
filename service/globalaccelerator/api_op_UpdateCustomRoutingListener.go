@@ -51,6 +51,10 @@ type UpdateCustomRoutingListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCustomRoutingListenerInput) operationName() string {
+	return "UpdateCustomRoutingListener"
+}
+
 type UpdateCustomRoutingListenerOutput struct {
 
 	// Information for the updated listener for a custom routing accelerator.

@@ -65,6 +65,10 @@ type DeleteCustomDBEngineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomDBEngineVersionInput) operationName() string {
+	return "DeleteCustomDBEngineVersion"
+}
+
 // This data type is used as a response element in the action
 // DescribeDBEngineVersions .
 type DeleteCustomDBEngineVersionOutput struct {

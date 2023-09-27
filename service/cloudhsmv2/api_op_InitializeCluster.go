@@ -62,6 +62,10 @@ type InitializeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitializeClusterInput) operationName() string {
+	return "InitializeCluster"
+}
+
 type InitializeClusterOutput struct {
 
 	// The cluster's state.

@@ -64,6 +64,10 @@ type CheckCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckCapacityInput) operationName() string {
+	return "CheckCapacity"
+}
+
 type CheckCapacityOutput struct {
 
 	// The capacity required by the rules and scope.

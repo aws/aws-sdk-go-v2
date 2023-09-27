@@ -55,6 +55,10 @@ type GroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GroupResourcesInput) operationName() string {
+	return "GroupResources"
+}
+
 type GroupResourcesOutput struct {
 
 	// A list of ARNs of any resources that this operation failed to add to the group.

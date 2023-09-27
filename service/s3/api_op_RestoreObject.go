@@ -241,6 +241,10 @@ type RestoreObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreObjectInput) operationName() string {
+	return "RestoreObject"
+}
+
 type RestoreObjectOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

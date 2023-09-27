@@ -53,6 +53,10 @@ type UpdateSolNetworkPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSolNetworkPackageInput) operationName() string {
+	return "UpdateSolNetworkPackage"
+}
+
 type UpdateSolNetworkPackageOutput struct {
 
 	// Operational state of the network service descriptor in the network package.

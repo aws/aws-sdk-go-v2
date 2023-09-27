@@ -41,6 +41,10 @@ type StartApplicationRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartApplicationRefreshInput) operationName() string {
+	return "StartApplicationRefresh"
+}
+
 type StartApplicationRefreshOutput struct {
 
 	// The ID of the operation.

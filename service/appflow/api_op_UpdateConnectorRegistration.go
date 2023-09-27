@@ -65,6 +65,10 @@ type UpdateConnectorRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectorRegistrationInput) operationName() string {
+	return "UpdateConnectorRegistration"
+}
+
 type UpdateConnectorRegistrationOutput struct {
 
 	// The ARN of the connector being updated.

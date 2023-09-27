@@ -48,6 +48,10 @@ type DeleteLocalGatewayRouteTableVpcAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLocalGatewayRouteTableVpcAssociationInput) operationName() string {
+	return "DeleteLocalGatewayRouteTableVpcAssociation"
+}
+
 type DeleteLocalGatewayRouteTableVpcAssociationOutput struct {
 
 	// Information about the association.

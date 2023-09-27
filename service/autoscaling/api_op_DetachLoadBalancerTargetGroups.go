@@ -59,6 +59,10 @@ type DetachLoadBalancerTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachLoadBalancerTargetGroupsInput) operationName() string {
+	return "DetachLoadBalancerTargetGroups"
+}
+
 type DetachLoadBalancerTargetGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

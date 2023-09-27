@@ -44,6 +44,10 @@ type CommitTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CommitTransactionInput) operationName() string {
+	return "CommitTransaction"
+}
+
 type CommitTransactionOutput struct {
 
 	// The status of the transaction.

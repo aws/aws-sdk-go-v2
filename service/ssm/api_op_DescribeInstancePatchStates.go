@@ -50,6 +50,10 @@ type DescribeInstancePatchStatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstancePatchStatesInput) operationName() string {
+	return "DescribeInstancePatchStates"
+}
+
 type DescribeInstancePatchStatesOutput struct {
 
 	// The high-level patch state for the requested managed nodes.

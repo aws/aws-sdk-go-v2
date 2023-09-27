@@ -54,6 +54,10 @@ type PutContainerRecipePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutContainerRecipePolicyInput) operationName() string {
+	return "PutContainerRecipePolicy"
+}
+
 type PutContainerRecipePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the container recipe that this policy was

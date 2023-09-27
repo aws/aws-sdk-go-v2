@@ -67,6 +67,10 @@ type CopyWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyWorkspaceImageInput) operationName() string {
+	return "CopyWorkspaceImage"
+}
+
 type CopyWorkspaceImageOutput struct {
 
 	// The identifier of the image.

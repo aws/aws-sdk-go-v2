@@ -50,6 +50,10 @@ type DescribeFeaturedResultsSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFeaturedResultsSetInput) operationName() string {
+	return "DescribeFeaturedResultsSet"
+}
+
 type DescribeFeaturedResultsSetOutput struct {
 
 	// The Unix timestamp when the set of the featured results was created.

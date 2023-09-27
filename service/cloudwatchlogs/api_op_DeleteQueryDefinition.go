@@ -46,6 +46,10 @@ type DeleteQueryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQueryDefinitionInput) operationName() string {
+	return "DeleteQueryDefinition"
+}
+
 type DeleteQueryDefinitionOutput struct {
 
 	// A value of TRUE indicates that the operation succeeded. FALSE indicates that

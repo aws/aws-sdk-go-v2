@@ -79,6 +79,10 @@ type PutResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourceConfigInput) operationName() string {
+	return "PutResourceConfig"
+}
+
 type PutResourceConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

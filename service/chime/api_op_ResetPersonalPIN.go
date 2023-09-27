@@ -48,6 +48,10 @@ type ResetPersonalPINInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetPersonalPINInput) operationName() string {
+	return "ResetPersonalPIN"
+}
+
 type ResetPersonalPINOutput struct {
 
 	// The user details and new personal meeting PIN.

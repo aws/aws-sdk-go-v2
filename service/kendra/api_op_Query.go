@@ -141,6 +141,10 @@ type QueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryInput) operationName() string {
+	return "Query"
+}
+
 type QueryOutput struct {
 
 	// Contains the facet results. A FacetResult contains the counts for each

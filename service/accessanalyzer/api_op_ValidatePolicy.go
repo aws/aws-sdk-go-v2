@@ -78,6 +78,10 @@ type ValidatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidatePolicyInput) operationName() string {
+	return "ValidatePolicy"
+}
+
 type ValidatePolicyOutput struct {
 
 	// The list of findings in a policy returned by IAM Access Analyzer based on its

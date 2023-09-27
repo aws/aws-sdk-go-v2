@@ -49,6 +49,10 @@ type GetFeatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFeatureInput) operationName() string {
+	return "GetFeature"
+}
+
 type GetFeatureOutput struct {
 
 	// A structure containing the configuration details of the feature.

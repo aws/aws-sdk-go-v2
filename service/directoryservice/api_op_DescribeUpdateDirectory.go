@@ -54,6 +54,10 @@ type DescribeUpdateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUpdateDirectoryInput) operationName() string {
+	return "DescribeUpdateDirectory"
+}
+
 type DescribeUpdateDirectoryOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken

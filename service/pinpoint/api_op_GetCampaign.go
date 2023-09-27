@@ -49,6 +49,10 @@ type GetCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignInput) operationName() string {
+	return "GetCampaign"
+}
+
 type GetCampaignOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a

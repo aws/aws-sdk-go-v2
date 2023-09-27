@@ -58,6 +58,10 @@ type ListOriginEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOriginEndpointsInput) operationName() string {
+	return "ListOriginEndpoints"
+}
+
 type ListOriginEndpointsOutput struct {
 
 	// The objects being returned.

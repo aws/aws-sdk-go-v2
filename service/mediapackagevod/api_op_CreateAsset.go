@@ -64,6 +64,10 @@ type CreateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssetInput) operationName() string {
+	return "CreateAsset"
+}
+
 type CreateAssetOutput struct {
 
 	// The ARN of the Asset.

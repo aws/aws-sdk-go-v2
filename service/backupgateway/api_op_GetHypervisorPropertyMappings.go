@@ -45,6 +45,10 @@ type GetHypervisorPropertyMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHypervisorPropertyMappingsInput) operationName() string {
+	return "GetHypervisorPropertyMappings"
+}
+
 type GetHypervisorPropertyMappingsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor.

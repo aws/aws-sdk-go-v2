@@ -92,6 +92,10 @@ type LookupEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LookupEventsInput) operationName() string {
+	return "LookupEvents"
+}
+
 // Contains a response to a LookupEvents action.
 type LookupEventsOutput struct {
 

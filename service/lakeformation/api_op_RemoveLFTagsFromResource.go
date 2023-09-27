@@ -55,6 +55,10 @@ type RemoveLFTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveLFTagsFromResourceInput) operationName() string {
+	return "RemoveLFTagsFromResource"
+}
+
 type RemoveLFTagsFromResourceOutput struct {
 
 	// A list of failures to untag a resource.

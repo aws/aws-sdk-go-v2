@@ -44,6 +44,10 @@ type DeletePlaybackKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePlaybackKeyPairInput) operationName() string {
+	return "DeletePlaybackKeyPair"
+}
+
 type DeletePlaybackKeyPairOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

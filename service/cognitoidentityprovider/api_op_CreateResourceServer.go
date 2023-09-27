@@ -64,6 +64,10 @@ type CreateResourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceServerInput) operationName() string {
+	return "CreateResourceServer"
+}
+
 type CreateResourceServerOutput struct {
 
 	// The newly created resource server.

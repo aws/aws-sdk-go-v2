@@ -47,6 +47,10 @@ type GetRouteAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRouteAnalysisInput) operationName() string {
+	return "GetRouteAnalysis"
+}
+
 type GetRouteAnalysisOutput struct {
 
 	// The route analysis.

@@ -121,6 +121,10 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserInput) operationName() string {
+	return "UpdateUser"
+}
+
 type UpdateUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

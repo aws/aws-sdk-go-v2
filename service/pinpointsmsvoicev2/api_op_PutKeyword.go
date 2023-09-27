@@ -67,6 +67,10 @@ type PutKeywordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutKeywordInput) operationName() string {
+	return "PutKeyword"
+}
+
 type PutKeywordOutput struct {
 
 	// The keyword that was added.

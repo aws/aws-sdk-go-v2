@@ -53,6 +53,10 @@ type GetVoiceConnectorLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorLoggingConfigurationInput) operationName() string {
+	return "GetVoiceConnectorLoggingConfiguration"
+}
+
 type GetVoiceConnectorLoggingConfigurationOutput struct {
 
 	// The logging configuration details.

@@ -36,6 +36,10 @@ type GetContainerAPIMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerAPIMetadataInput) operationName() string {
+	return "GetContainerAPIMetadata"
+}
+
 type GetContainerAPIMetadataOutput struct {
 
 	// Metadata about Lightsail containers, such as the current version of the

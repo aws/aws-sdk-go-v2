@@ -77,6 +77,10 @@ type CreateLensShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLensShareInput) operationName() string {
+	return "CreateLensShare"
+}
+
 type CreateLensShareOutput struct {
 
 	// The ID associated with the share.

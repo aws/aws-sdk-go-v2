@@ -77,6 +77,10 @@ type PutConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigRuleInput) operationName() string {
+	return "PutConfigRule"
+}
+
 type PutConfigRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

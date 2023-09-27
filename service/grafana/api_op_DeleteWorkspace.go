@@ -42,6 +42,10 @@ type DeleteWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkspaceInput) operationName() string {
+	return "DeleteWorkspace"
+}
+
 type DeleteWorkspaceOutput struct {
 
 	// A structure containing information about the workspace that was deleted.

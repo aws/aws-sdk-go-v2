@@ -55,6 +55,10 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComponentInput) operationName() string {
+	return "CreateComponent"
+}
+
 type CreateComponentOutput struct {
 
 	// Describes the configuration of the new component.

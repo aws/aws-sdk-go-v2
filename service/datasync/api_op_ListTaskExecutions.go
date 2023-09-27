@@ -48,6 +48,10 @@ type ListTaskExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTaskExecutionsInput) operationName() string {
+	return "ListTaskExecutions"
+}
+
 // ListTaskExecutionsResponse
 type ListTaskExecutionsOutput struct {
 

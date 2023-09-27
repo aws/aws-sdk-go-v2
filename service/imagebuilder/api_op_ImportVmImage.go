@@ -91,6 +91,10 @@ type ImportVmImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportVmImageInput) operationName() string {
+	return "ImportVmImage"
+}
+
 type ImportVmImageOutput struct {
 
 	// The idempotency token that was used for this request.

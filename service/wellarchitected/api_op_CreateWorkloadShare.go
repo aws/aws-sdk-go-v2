@@ -73,6 +73,10 @@ type CreateWorkloadShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkloadShareInput) operationName() string {
+	return "CreateWorkloadShare"
+}
+
 // Input for Create Workload Share
 type CreateWorkloadShareOutput struct {
 

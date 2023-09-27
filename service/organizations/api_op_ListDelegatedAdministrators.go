@@ -63,6 +63,10 @@ type ListDelegatedAdministratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDelegatedAdministratorsInput) operationName() string {
+	return "ListDelegatedAdministrators"
+}
+
 type ListDelegatedAdministratorsOutput struct {
 
 	// The list of delegated administrators in your organization.

@@ -60,6 +60,10 @@ type DescribeTrunkInterfaceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrunkInterfaceAssociationsInput) operationName() string {
+	return "DescribeTrunkInterfaceAssociations"
+}
+
 type DescribeTrunkInterfaceAssociationsOutput struct {
 
 	// Information about the trunk associations.

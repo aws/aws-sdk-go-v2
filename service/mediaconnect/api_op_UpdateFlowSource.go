@@ -117,6 +117,10 @@ type UpdateFlowSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowSourceInput) operationName() string {
+	return "UpdateFlowSource"
+}
+
 type UpdateFlowSourceOutput struct {
 
 	// The ARN of the flow that you want to update.

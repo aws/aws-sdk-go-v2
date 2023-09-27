@@ -62,6 +62,10 @@ type BatchDeleteCustomVocabularyItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteCustomVocabularyItemInput) operationName() string {
+	return "BatchDeleteCustomVocabularyItem"
+}
+
 type BatchDeleteCustomVocabularyItemOutput struct {
 
 	// The identifier of the bot associated with this custom vocabulary.

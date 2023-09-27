@@ -79,6 +79,10 @@ type GetMergeConflictsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMergeConflictsInput) operationName() string {
+	return "GetMergeConflicts"
+}
+
 type GetMergeConflictsOutput struct {
 
 	// A list of metadata for any conflicting files. If the specified merge strategy

@@ -109,6 +109,10 @@ type CreateFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFirewallRuleInput) operationName() string {
+	return "CreateFirewallRule"
+}
+
 type CreateFirewallRuleOutput struct {
 
 	// The firewall rule that you just created.

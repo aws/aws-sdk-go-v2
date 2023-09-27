@@ -45,6 +45,10 @@ type GetEventDataStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventDataStoreInput) operationName() string {
+	return "GetEventDataStore"
+}
+
 type GetEventDataStoreOutput struct {
 
 	// The advanced event selectors used to select events for the data store.

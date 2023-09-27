@@ -55,6 +55,10 @@ type SetReceiptRulePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetReceiptRulePositionInput) operationName() string {
+	return "SetReceiptRulePosition"
+}
+
 // An empty element returned on a successful request.
 type SetReceiptRulePositionOutput struct {
 	// Metadata pertaining to the operation's result.

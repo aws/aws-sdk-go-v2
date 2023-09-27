@@ -47,6 +47,10 @@ type DescribeApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationsInput) operationName() string {
+	return "DescribeApplications"
+}
+
 type DescribeApplicationsOutput struct {
 
 	// The applications in the list.

@@ -49,6 +49,10 @@ type GetAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppAuthorizationInput) operationName() string {
+	return "GetAppAuthorization"
+}
+
 type GetAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.

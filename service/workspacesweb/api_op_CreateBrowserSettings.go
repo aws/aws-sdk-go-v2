@@ -62,6 +62,10 @@ type CreateBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBrowserSettingsInput) operationName() string {
+	return "CreateBrowserSettings"
+}
+
 type CreateBrowserSettingsOutput struct {
 
 	// The ARN of the browser settings.

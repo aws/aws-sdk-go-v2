@@ -36,6 +36,10 @@ type ListCuratedEnvironmentImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCuratedEnvironmentImagesInput) operationName() string {
+	return "ListCuratedEnvironmentImages"
+}
+
 type ListCuratedEnvironmentImagesOutput struct {
 
 	// Information about supported platforms for Docker images that are managed by

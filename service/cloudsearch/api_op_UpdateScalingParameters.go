@@ -60,6 +60,10 @@ type UpdateScalingParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScalingParametersInput) operationName() string {
+	return "UpdateScalingParameters"
+}
+
 // The result of a UpdateScalingParameters request. Contains the status of the
 // newly-configured scaling parameters.
 type UpdateScalingParametersOutput struct {

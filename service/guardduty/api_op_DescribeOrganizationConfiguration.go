@@ -57,6 +57,10 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationConfigurationInput) operationName() string {
+	return "DescribeOrganizationConfiguration"
+}
+
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Indicates whether the maximum number of allowed member accounts are already

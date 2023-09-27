@@ -56,6 +56,10 @@ type ModifyInstanceCapacityReservationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceCapacityReservationAttributesInput) operationName() string {
+	return "ModifyInstanceCapacityReservationAttributes"
+}
+
 type ModifyInstanceCapacityReservationAttributesOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

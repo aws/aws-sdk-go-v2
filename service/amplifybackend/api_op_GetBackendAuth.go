@@ -53,6 +53,10 @@ type GetBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendAuthInput) operationName() string {
+	return "GetBackendAuth"
+}
+
 type GetBackendAuthOutput struct {
 
 	// The app ID.

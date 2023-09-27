@@ -128,6 +128,10 @@ type PutObjectTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectTaggingInput) operationName() string {
+	return "PutObjectTagging"
+}
+
 type PutObjectTaggingOutput struct {
 
 	// The versionId of the object the tag-set was added to.

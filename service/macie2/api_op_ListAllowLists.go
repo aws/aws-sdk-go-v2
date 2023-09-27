@@ -44,6 +44,10 @@ type ListAllowListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAllowListsInput) operationName() string {
+	return "ListAllowLists"
+}
+
 type ListAllowListsOutput struct {
 
 	// An array of objects, one for each allow list.

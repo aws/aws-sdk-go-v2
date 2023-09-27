@@ -59,6 +59,10 @@ type ListMapRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMapRunsInput) operationName() string {
+	return "ListMapRuns"
+}
+
 type ListMapRunsOutput struct {
 
 	// An array that lists information related to a Map Run, such as the Amazon

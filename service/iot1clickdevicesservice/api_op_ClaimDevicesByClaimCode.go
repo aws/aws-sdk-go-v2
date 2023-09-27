@@ -42,6 +42,10 @@ type ClaimDevicesByClaimCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClaimDevicesByClaimCodeInput) operationName() string {
+	return "ClaimDevicesByClaimCode"
+}
+
 type ClaimDevicesByClaimCodeOutput struct {
 
 	// The claim code provided by the device manufacturer.

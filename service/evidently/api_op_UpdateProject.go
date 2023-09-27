@@ -59,6 +59,10 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProjectInput) operationName() string {
+	return "UpdateProject"
+}
+
 type UpdateProjectOutput struct {
 
 	// A structure containing information about the updated project.

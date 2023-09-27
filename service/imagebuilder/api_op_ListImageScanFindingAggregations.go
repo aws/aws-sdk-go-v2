@@ -55,6 +55,10 @@ type ListImageScanFindingAggregationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImageScanFindingAggregationsInput) operationName() string {
+	return "ListImageScanFindingAggregations"
+}
+
 type ListImageScanFindingAggregationsOutput struct {
 
 	// The aggregation type specifies what type of key is used to group the image scan

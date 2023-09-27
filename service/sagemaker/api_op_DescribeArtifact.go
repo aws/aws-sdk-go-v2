@@ -43,6 +43,10 @@ type DescribeArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeArtifactInput) operationName() string {
+	return "DescribeArtifact"
+}
+
 type DescribeArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.

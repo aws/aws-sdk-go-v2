@@ -54,6 +54,10 @@ type UpdateBandwidthRateLimitScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBandwidthRateLimitScheduleInput) operationName() string {
+	return "UpdateBandwidthRateLimitSchedule"
+}
+
 type UpdateBandwidthRateLimitScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

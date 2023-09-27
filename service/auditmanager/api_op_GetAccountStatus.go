@@ -36,6 +36,10 @@ type GetAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountStatusInput) operationName() string {
+	return "GetAccountStatus"
+}
+
 type GetAccountStatusOutput struct {
 
 	// The status of the Amazon Web Services account.

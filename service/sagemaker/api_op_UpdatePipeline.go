@@ -61,6 +61,10 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePipelineInput) operationName() string {
+	return "UpdatePipeline"
+}
+
 type UpdatePipelineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated pipeline.

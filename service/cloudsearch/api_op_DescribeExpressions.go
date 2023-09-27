@@ -60,6 +60,10 @@ type DescribeExpressionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExpressionsInput) operationName() string {
+	return "DescribeExpressions"
+}
+
 // The result of a DescribeExpressions request. Contains the expressions
 // configured for the domain specified in the request.
 type DescribeExpressionsOutput struct {

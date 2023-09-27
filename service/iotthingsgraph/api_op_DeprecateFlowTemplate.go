@@ -46,6 +46,10 @@ type DeprecateFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprecateFlowTemplateInput) operationName() string {
+	return "DeprecateFlowTemplate"
+}
+
 type DeprecateFlowTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

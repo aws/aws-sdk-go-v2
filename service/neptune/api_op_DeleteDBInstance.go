@@ -74,6 +74,10 @@ type DeleteDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBInstanceInput) operationName() string {
+	return "DeleteDBInstance"
+}
+
 type DeleteDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used

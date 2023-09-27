@@ -60,6 +60,10 @@ type DescribeAnalysisSchemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnalysisSchemesInput) operationName() string {
+	return "DescribeAnalysisSchemes"
+}
+
 // The result of a DescribeAnalysisSchemes request. Contains the analysis schemes
 // configured for the domain specified in the request.
 type DescribeAnalysisSchemesOutput struct {

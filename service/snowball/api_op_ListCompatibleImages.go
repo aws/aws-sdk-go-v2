@@ -53,6 +53,10 @@ type ListCompatibleImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCompatibleImagesInput) operationName() string {
+	return "ListCompatibleImages"
+}
+
 type ListCompatibleImagesOutput struct {
 
 	// A JSON-formatted object that describes a compatible AMI, including the ID and

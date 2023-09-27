@@ -49,6 +49,10 @@ type ListExportErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExportErrorsInput) operationName() string {
+	return "ListExportErrors"
+}
+
 // List export errors response.
 type ListExportErrorsOutput struct {
 

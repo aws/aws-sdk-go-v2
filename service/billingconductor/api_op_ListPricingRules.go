@@ -51,6 +51,10 @@ type ListPricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPricingRulesInput) operationName() string {
+	return "ListPricingRules"
+}
+
 type ListPricingRulesOutput struct {
 
 	// The billing period for which the described pricing rules are applicable.

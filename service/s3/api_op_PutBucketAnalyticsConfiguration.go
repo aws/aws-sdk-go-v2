@@ -97,6 +97,10 @@ type PutBucketAnalyticsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketAnalyticsConfigurationInput) operationName() string {
+	return "PutBucketAnalyticsConfiguration"
+}
+
 type PutBucketAnalyticsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

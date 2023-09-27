@@ -95,6 +95,10 @@ type CreateLocationObjectStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationObjectStorageInput) operationName() string {
+	return "CreateLocationObjectStorage"
+}
+
 // CreateLocationObjectStorageResponse
 type CreateLocationObjectStorageOutput struct {
 

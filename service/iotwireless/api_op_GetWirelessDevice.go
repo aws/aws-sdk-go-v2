@@ -47,6 +47,10 @@ type GetWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWirelessDeviceInput) operationName() string {
+	return "GetWirelessDevice"
+}
+
 type GetWirelessDeviceOutput struct {
 
 	// The Amazon Resource Name of the resource.

@@ -49,6 +49,10 @@ type DescribeGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGameSessionPlacementInput) operationName() string {
+	return "DescribeGameSessionPlacement"
+}
+
 type DescribeGameSessionPlacementOutput struct {
 
 	// Object that describes the requested game session placement.

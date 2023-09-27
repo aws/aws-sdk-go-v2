@@ -47,6 +47,10 @@ type GetThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetThreatIntelSetInput) operationName() string {
+	return "GetThreatIntelSet"
+}
+
 type GetThreatIntelSetOutput struct {
 
 	// The format of the threatIntelSet.

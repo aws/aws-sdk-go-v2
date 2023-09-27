@@ -44,6 +44,10 @@ type ListSchemaMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemaMappingsInput) operationName() string {
+	return "ListSchemaMappings"
+}
+
 type ListSchemaMappingsOutput struct {
 
 	// The pagination token from the previous API call.

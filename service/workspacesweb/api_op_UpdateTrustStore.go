@@ -55,6 +55,10 @@ type UpdateTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrustStoreInput) operationName() string {
+	return "UpdateTrustStore"
+}
+
 type UpdateTrustStoreOutput struct {
 
 	// The ARN of the trust store.

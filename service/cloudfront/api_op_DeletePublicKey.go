@@ -45,6 +45,10 @@ type DeletePublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePublicKeyInput) operationName() string {
+	return "DeletePublicKey"
+}
+
 type DeletePublicKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

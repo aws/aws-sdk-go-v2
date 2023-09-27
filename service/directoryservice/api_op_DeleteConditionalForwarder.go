@@ -49,6 +49,10 @@ type DeleteConditionalForwarderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConditionalForwarderInput) operationName() string {
+	return "DeleteConditionalForwarder"
+}
+
 // The result of a DeleteConditionalForwarder request.
 type DeleteConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.

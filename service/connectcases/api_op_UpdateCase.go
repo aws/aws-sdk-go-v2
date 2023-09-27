@@ -55,6 +55,10 @@ type UpdateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCaseInput) operationName() string {
+	return "UpdateCase"
+}
+
 type UpdateCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

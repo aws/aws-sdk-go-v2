@@ -54,6 +54,10 @@ type PutSolFunctionPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSolFunctionPackageContentInput) operationName() string {
+	return "PutSolFunctionPackageContent"
+}
+
 type PutSolFunctionPackageContentOutput struct {
 
 	// Function package ID.

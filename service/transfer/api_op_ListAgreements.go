@@ -54,6 +54,10 @@ type ListAgreementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAgreementsInput) operationName() string {
+	return "ListAgreements"
+}
+
 type ListAgreementsOutput struct {
 
 	// Returns an array, where each item contains the details of an agreement.

@@ -65,6 +65,10 @@ type DescribeBudgetActionHistoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBudgetActionHistoriesInput) operationName() string {
+	return "DescribeBudgetActionHistories"
+}
+
 type DescribeBudgetActionHistoriesOutput struct {
 
 	// The historical record of the budget action resource.

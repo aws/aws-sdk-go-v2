@@ -77,6 +77,10 @@ type PollForActivityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PollForActivityTaskInput) operationName() string {
+	return "PollForActivityTask"
+}
+
 // Unit of work sent to an activity worker.
 type PollForActivityTaskOutput struct {
 

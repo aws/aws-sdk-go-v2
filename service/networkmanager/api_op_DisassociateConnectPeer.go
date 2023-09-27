@@ -47,6 +47,10 @@ type DisassociateConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateConnectPeerInput) operationName() string {
+	return "DisassociateConnectPeer"
+}
+
 type DisassociateConnectPeerOutput struct {
 
 	// Describes the Connect peer association.

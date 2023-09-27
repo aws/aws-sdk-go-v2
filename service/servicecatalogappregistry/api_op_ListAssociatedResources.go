@@ -53,6 +53,10 @@ type ListAssociatedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedResourcesInput) operationName() string {
+	return "ListAssociatedResources"
+}
+
 type ListAssociatedResourcesOutput struct {
 
 	// The token to use to get the next page of results after a previous API call.

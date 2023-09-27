@@ -63,6 +63,10 @@ type DeleteRepositoryPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRepositoryPermissionsPolicyInput) operationName() string {
+	return "DeleteRepositoryPermissionsPolicy"
+}
+
 type DeleteRepositoryPermissionsPolicyOutput struct {
 
 	// Information about the deleted policy after processing the request.

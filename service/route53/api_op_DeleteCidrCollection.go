@@ -42,6 +42,10 @@ type DeleteCidrCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCidrCollectionInput) operationName() string {
+	return "DeleteCidrCollection"
+}
+
 type DeleteCidrCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

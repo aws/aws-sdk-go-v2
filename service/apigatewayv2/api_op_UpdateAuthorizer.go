@@ -122,6 +122,10 @@ type UpdateAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAuthorizerInput) operationName() string {
+	return "UpdateAuthorizer"
+}
+
 type UpdateAuthorizerOutput struct {
 
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the

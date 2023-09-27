@@ -89,6 +89,10 @@ type UpdateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRouteInput) operationName() string {
+	return "UpdateRoute"
+}
+
 type UpdateRouteOutput struct {
 
 	// Specifies whether a route is managed by API Gateway. If you created an API

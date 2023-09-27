@@ -65,6 +65,10 @@ type ListRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecommendationFeedbackInput) operationName() string {
+	return "ListRecommendationFeedback"
+}
+
 type ListRecommendationFeedbackOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of

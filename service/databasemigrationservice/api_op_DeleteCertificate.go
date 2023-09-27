@@ -42,6 +42,10 @@ type DeleteCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCertificateInput) operationName() string {
+	return "DeleteCertificate"
+}
+
 type DeleteCertificateOutput struct {
 
 	// The Secure Sockets Layer (SSL) certificate.

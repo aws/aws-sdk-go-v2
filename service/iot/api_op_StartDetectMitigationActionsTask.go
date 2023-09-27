@@ -71,6 +71,10 @@ type StartDetectMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDetectMitigationActionsTaskInput) operationName() string {
+	return "StartDetectMitigationActionsTask"
+}
+
 type StartDetectMitigationActionsTaskOutput struct {
 
 	// The unique identifier of the task.

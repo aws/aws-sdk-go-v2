@@ -51,6 +51,10 @@ type ListApplicationDependenciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationDependenciesInput) operationName() string {
+	return "ListApplicationDependencies"
+}
+
 type ListApplicationDependenciesOutput struct {
 
 	// An array of application summaries nested in the application.

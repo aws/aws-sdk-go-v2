@@ -100,6 +100,10 @@ type PutRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRecordsInput) operationName() string {
+	return "PutRecords"
+}
+
 // PutRecords results.
 type PutRecordsOutput struct {
 

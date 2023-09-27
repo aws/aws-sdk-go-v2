@@ -60,6 +60,10 @@ type ListPolicyTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPolicyTemplatesInput) operationName() string {
+	return "ListPolicyTemplates"
+}
+
 type ListPolicyTemplatesOutput struct {
 
 	// The list of the policy templates in the specified policy store.

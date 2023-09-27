@@ -74,6 +74,10 @@ type CreateThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThreatIntelSetInput) operationName() string {
+	return "CreateThreatIntelSet"
+}
+
 type CreateThreatIntelSetOutput struct {
 
 	// The ID of the ThreatIntelSet resource.

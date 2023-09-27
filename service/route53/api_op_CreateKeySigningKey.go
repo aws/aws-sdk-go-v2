@@ -81,6 +81,10 @@ type CreateKeySigningKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeySigningKeyInput) operationName() string {
+	return "CreateKeySigningKey"
+}
+
 type CreateKeySigningKeyOutput struct {
 
 	// A complex type that describes change information about changes made to your

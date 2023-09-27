@@ -52,6 +52,10 @@ type GenerateMobileSdkReleaseUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateMobileSdkReleaseUrlInput) operationName() string {
+	return "GenerateMobileSdkReleaseUrl"
+}
+
 type GenerateMobileSdkReleaseUrlOutput struct {
 
 	// The presigned download URL for the specified SDK release.

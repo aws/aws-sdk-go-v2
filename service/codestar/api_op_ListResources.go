@@ -49,6 +49,10 @@ type ListResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesInput) operationName() string {
+	return "ListResources"
+}
+
 type ListResourcesOutput struct {
 
 	// The continuation token to use when requesting the next set of results, if there

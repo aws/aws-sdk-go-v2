@@ -49,6 +49,10 @@ type ModifyCertificateBasedAuthPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCertificateBasedAuthPropertiesInput) operationName() string {
+	return "ModifyCertificateBasedAuthProperties"
+}
+
 type ModifyCertificateBasedAuthPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

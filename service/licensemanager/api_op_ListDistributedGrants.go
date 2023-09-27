@@ -54,6 +54,10 @@ type ListDistributedGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributedGrantsInput) operationName() string {
+	return "ListDistributedGrants"
+}
+
 type ListDistributedGrantsOutput struct {
 
 	// Distributed grant details.

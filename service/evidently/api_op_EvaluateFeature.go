@@ -85,6 +85,10 @@ type EvaluateFeatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EvaluateFeatureInput) operationName() string {
+	return "EvaluateFeature"
+}
+
 type EvaluateFeatureOutput struct {
 
 	// If this user was assigned to a launch or experiment, this field lists the

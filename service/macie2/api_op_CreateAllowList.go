@@ -67,6 +67,10 @@ type CreateAllowListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAllowListInput) operationName() string {
+	return "CreateAllowList"
+}
+
 type CreateAllowListOutput struct {
 
 	// The Amazon Resource Name (ARN) of the allow list.

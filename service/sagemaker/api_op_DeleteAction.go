@@ -41,6 +41,10 @@ type DeleteActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteActionInput) operationName() string {
+	return "DeleteAction"
+}
+
 type DeleteActionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the action.

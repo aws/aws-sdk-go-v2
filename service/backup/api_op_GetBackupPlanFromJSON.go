@@ -42,6 +42,10 @@ type GetBackupPlanFromJSONInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackupPlanFromJSONInput) operationName() string {
+	return "GetBackupPlanFromJSON"
+}
+
 type GetBackupPlanFromJSONOutput struct {
 
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more

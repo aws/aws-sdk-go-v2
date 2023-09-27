@@ -45,6 +45,10 @@ type DeleteDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterSnapshotInput) operationName() string {
+	return "DeleteDBClusterSnapshot"
+}
+
 type DeleteDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon Neptune DB cluster snapshot This data type

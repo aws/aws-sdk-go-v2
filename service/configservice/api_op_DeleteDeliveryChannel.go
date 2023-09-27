@@ -45,6 +45,10 @@ type DeleteDeliveryChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDeliveryChannelInput) operationName() string {
+	return "DeleteDeliveryChannel"
+}
+
 type DeleteDeliveryChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

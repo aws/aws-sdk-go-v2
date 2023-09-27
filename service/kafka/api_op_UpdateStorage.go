@@ -59,6 +59,10 @@ type UpdateStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStorageInput) operationName() string {
+	return "UpdateStorage"
+}
+
 type UpdateStorageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

@@ -61,6 +61,10 @@ type StartProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartProjectVersionInput) operationName() string {
+	return "StartProjectVersion"
+}
+
 type StartProjectVersionOutput struct {
 
 	// The current running status of the model.

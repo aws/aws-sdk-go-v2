@@ -99,6 +99,10 @@ type GetComplianceSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComplianceSummaryInput) operationName() string {
+	return "GetComplianceSummary"
+}
+
 type GetComplianceSummaryOutput struct {
 
 	// A string that indicates that there is more data available than this response

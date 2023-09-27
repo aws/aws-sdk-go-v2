@@ -66,6 +66,10 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRuleInput) operationName() string {
+	return "CreateRule"
+}
+
 type CreateRuleOutput struct {
 
 	// Information about the rule.

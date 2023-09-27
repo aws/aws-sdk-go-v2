@@ -47,6 +47,10 @@ type BuildSuggestersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BuildSuggestersInput) operationName() string {
+	return "BuildSuggesters"
+}
+
 // The result of a BuildSuggester request. Contains a list of the fields used for
 // suggestions.
 type BuildSuggestersOutput struct {

@@ -43,6 +43,10 @@ type DeleteExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExperimentInput) operationName() string {
+	return "DeleteExperiment"
+}
+
 type DeleteExperimentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the experiment that is being deleted.

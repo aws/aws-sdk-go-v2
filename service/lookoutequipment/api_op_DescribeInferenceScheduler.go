@@ -44,6 +44,10 @@ type DescribeInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInferenceSchedulerInput) operationName() string {
+	return "DescribeInferenceScheduler"
+}
+
 type DescribeInferenceSchedulerOutput struct {
 
 	// Specifies the time at which the inference scheduler was created.

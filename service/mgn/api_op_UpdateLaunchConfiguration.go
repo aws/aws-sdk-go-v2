@@ -75,6 +75,10 @@ type UpdateLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLaunchConfigurationInput) operationName() string {
+	return "UpdateLaunchConfiguration"
+}
+
 type UpdateLaunchConfigurationOutput struct {
 
 	// Launch configuration boot mode.

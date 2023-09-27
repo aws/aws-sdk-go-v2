@@ -88,6 +88,10 @@ type CreateLocationFsxWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationFsxWindowsInput) operationName() string {
+	return "CreateLocationFsxWindows"
+}
+
 type CreateLocationFsxWindowsOutput struct {
 
 	// The ARN of the FSx for Windows File Server file system location you created.

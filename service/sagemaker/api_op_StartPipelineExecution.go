@@ -64,6 +64,10 @@ type StartPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPipelineExecutionInput) operationName() string {
+	return "StartPipelineExecution"
+}
+
 type StartPipelineExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.

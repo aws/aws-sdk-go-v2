@@ -52,6 +52,10 @@ type ListTLSInspectionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTLSInspectionConfigurationsInput) operationName() string {
+	return "ListTLSInspectionConfigurations"
+}
+
 type ListTLSInspectionConfigurationsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of

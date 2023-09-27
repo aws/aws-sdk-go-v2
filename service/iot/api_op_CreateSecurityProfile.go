@@ -72,6 +72,10 @@ type CreateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSecurityProfileInput) operationName() string {
+	return "CreateSecurityProfile"
+}
+
 type CreateSecurityProfileOutput struct {
 
 	// The ARN of the security profile.

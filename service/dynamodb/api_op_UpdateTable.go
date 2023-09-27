@@ -110,6 +110,10 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTableInput) operationName() string {
+	return "UpdateTable"
+}
+
 // Represents the output of an UpdateTable operation.
 type UpdateTableOutput struct {
 

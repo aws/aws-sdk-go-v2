@@ -64,6 +64,10 @@ type AssociateTargetsWithJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTargetsWithJobInput) operationName() string {
+	return "AssociateTargetsWithJob"
+}
+
 type AssociateTargetsWithJobOutput struct {
 
 	// A short text description of the job.

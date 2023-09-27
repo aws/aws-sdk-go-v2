@@ -86,6 +86,10 @@ type CreateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataSourceInput) operationName() string {
+	return "CreateDataSource"
+}
+
 type CreateDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.

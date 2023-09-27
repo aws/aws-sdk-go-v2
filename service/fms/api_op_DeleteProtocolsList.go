@@ -42,6 +42,10 @@ type DeleteProtocolsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProtocolsListInput) operationName() string {
+	return "DeleteProtocolsList"
+}
+
 type DeleteProtocolsListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,6 +58,10 @@ type DescribeInterconnectLoaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInterconnectLoaInput) operationName() string {
+	return "DescribeInterconnectLoa"
+}
+
 type DescribeInterconnectLoaOutput struct {
 
 	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).

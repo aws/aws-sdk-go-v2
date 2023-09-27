@@ -40,6 +40,10 @@ type DescribeLagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLagsInput) operationName() string {
+	return "DescribeLags"
+}
+
 type DescribeLagsOutput struct {
 
 	// The LAGs.

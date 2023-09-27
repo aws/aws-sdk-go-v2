@@ -53,6 +53,10 @@ type SearchResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchResourcesInput) operationName() string {
+	return "SearchResources"
+}
+
 type SearchResourcesOutput struct {
 
 	// An array of objects, one for each resource that matches the filter criteria

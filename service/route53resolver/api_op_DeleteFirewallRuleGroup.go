@@ -42,6 +42,10 @@ type DeleteFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFirewallRuleGroupInput) operationName() string {
+	return "DeleteFirewallRuleGroup"
+}
+
 type DeleteFirewallRuleGroupOutput struct {
 
 	// A collection of rules used to filter DNS network traffic.

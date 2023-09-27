@@ -63,6 +63,10 @@ type SuggestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SuggestInput) operationName() string {
+	return "Suggest"
+}
+
 // Contains the response to a Suggest request.
 type SuggestOutput struct {
 

@@ -35,6 +35,7 @@
         "api_op_UpdateSite.go",
         "api_op_UpdateSiteAddress.go",
         "api_op_UpdateSiteRackPhysicalProperties.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

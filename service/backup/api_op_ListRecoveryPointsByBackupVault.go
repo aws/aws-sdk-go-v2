@@ -79,6 +79,10 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecoveryPointsByBackupVaultInput) operationName() string {
+	return "ListRecoveryPointsByBackupVault"
+}
+
 type ListRecoveryPointsByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a

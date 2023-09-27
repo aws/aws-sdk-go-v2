@@ -45,6 +45,10 @@ type DescribeAutoMLJobV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoMLJobV2Input) operationName() string {
+	return "DescribeAutoMLJobV2"
+}
+
 type DescribeAutoMLJobV2Output struct {
 
 	// Returns the Amazon Resource Name (ARN) of the AutoML job V2.

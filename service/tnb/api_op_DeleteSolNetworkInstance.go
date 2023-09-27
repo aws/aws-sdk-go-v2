@@ -46,6 +46,10 @@ type DeleteSolNetworkInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSolNetworkInstanceInput) operationName() string {
+	return "DeleteSolNetworkInstance"
+}
+
 type DeleteSolNetworkInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

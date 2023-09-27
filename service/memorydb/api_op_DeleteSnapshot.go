@@ -44,6 +44,10 @@ type DeleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSnapshotInput) operationName() string {
+	return "DeleteSnapshot"
+}
+
 type DeleteSnapshotOutput struct {
 
 	// The snapshot object that has been deleted.

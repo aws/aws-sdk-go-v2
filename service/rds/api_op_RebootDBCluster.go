@@ -52,6 +52,10 @@ type RebootDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootDBClusterInput) operationName() string {
+	return "RebootDBCluster"
+}
+
 type RebootDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

@@ -57,6 +57,10 @@ type PutBlockPublicAccessConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBlockPublicAccessConfigurationInput) operationName() string {
+	return "PutBlockPublicAccessConfiguration"
+}
+
 type PutBlockPublicAccessConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

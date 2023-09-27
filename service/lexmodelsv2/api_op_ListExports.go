@@ -70,6 +70,10 @@ type ListExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExportsInput) operationName() string {
+	return "ListExports"
+}
+
 type ListExportsOutput struct {
 
 	// The unique identifier assigned to the bot by Amazon Lex.

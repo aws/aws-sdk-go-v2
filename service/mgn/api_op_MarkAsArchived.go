@@ -47,6 +47,10 @@ type MarkAsArchivedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MarkAsArchivedInput) operationName() string {
+	return "MarkAsArchived"
+}
+
 type MarkAsArchivedOutput struct {
 
 	// Source server application ID.

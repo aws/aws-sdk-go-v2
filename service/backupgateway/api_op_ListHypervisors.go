@@ -46,6 +46,10 @@ type ListHypervisorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHypervisorsInput) operationName() string {
+	return "ListHypervisors"
+}
+
 type ListHypervisorsOutput struct {
 
 	// A list of your Hypervisor objects, ordered by their Amazon Resource Names

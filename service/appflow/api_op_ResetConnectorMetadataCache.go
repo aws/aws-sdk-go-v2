@@ -88,6 +88,10 @@ type ResetConnectorMetadataCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetConnectorMetadataCacheInput) operationName() string {
+	return "ResetConnectorMetadataCache"
+}
+
 type ResetConnectorMetadataCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,6 +73,10 @@ type StartPHIDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPHIDetectionJobInput) operationName() string {
+	return "StartPHIDetectionJob"
+}
+
 type StartPHIDetectionJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this

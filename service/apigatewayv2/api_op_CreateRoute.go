@@ -86,6 +86,10 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRouteInput) operationName() string {
+	return "CreateRoute"
+}
+
 type CreateRouteOutput struct {
 
 	// Specifies whether a route is managed by API Gateway. If you created an API

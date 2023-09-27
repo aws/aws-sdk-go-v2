@@ -60,6 +60,10 @@ type ConfirmDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmDeviceInput) operationName() string {
+	return "ConfirmDevice"
+}
+
 // Confirms the device response.
 type ConfirmDeviceOutput struct {
 

@@ -46,6 +46,10 @@ type ListSubjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubjectsInput) operationName() string {
+	return "ListSubjects"
+}
+
 type ListSubjectsOutput struct {
 
 	// A token that indicates where the output should continue from, if a previous

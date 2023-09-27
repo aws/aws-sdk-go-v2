@@ -47,6 +47,10 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountSettingsInput) operationName() string {
+	return "UpdateAccountSettings"
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// OpenSearch Serverless-related settings for the current Amazon Web Services

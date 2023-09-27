@@ -70,6 +70,10 @@ type CreateNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkAnalyzerConfigurationInput) operationName() string {
+	return "CreateNetworkAnalyzerConfiguration"
+}
+
 type CreateNetworkAnalyzerConfigurationOutput struct {
 
 	// The Amazon Resource Name of the new resource.

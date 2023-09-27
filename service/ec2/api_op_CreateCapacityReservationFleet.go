@@ -102,6 +102,10 @@ type CreateCapacityReservationFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCapacityReservationFleetInput) operationName() string {
+	return "CreateCapacityReservationFleet"
+}
+
 type CreateCapacityReservationFleetOutput struct {
 
 	// The allocation strategy used by the Capacity Reservation Fleet.

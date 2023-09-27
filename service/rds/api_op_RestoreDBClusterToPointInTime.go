@@ -267,6 +267,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBClusterToPointInTimeInput) operationName() string {
+	return "RestoreDBClusterToPointInTime"
+}
+
 type RestoreDBClusterToPointInTimeOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

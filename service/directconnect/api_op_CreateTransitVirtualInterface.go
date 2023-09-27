@@ -62,6 +62,10 @@ type CreateTransitVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitVirtualInterfaceInput) operationName() string {
+	return "CreateTransitVirtualInterface"
+}
+
 type CreateTransitVirtualInterfaceOutput struct {
 
 	// Information about a virtual interface.

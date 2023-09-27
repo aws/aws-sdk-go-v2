@@ -48,6 +48,10 @@ type ListBulkImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBulkImportJobsInput) operationName() string {
+	return "ListBulkImportJobs"
+}
+
 type ListBulkImportJobsOutput struct {
 
 	// One or more job summaries to list.

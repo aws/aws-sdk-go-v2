@@ -61,6 +61,10 @@ type SendWorkflowStepStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendWorkflowStepStateInput) operationName() string {
+	return "SendWorkflowStepState"
+}
+
 type SendWorkflowStepStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

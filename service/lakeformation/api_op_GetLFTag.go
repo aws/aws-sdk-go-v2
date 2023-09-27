@@ -47,6 +47,10 @@ type GetLFTagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLFTagInput) operationName() string {
+	return "GetLFTag"
+}
+
 type GetLFTagOutput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data

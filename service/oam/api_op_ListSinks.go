@@ -45,6 +45,10 @@ type ListSinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSinksInput) operationName() string {
+	return "ListSinks"
+}
+
 type ListSinksOutput struct {
 
 	// An array of structures that contain the information about the returned sinks.

@@ -63,6 +63,10 @@ type SetTerminationProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTerminationProtectionInput) operationName() string {
+	return "SetTerminationProtection"
+}
+
 type SetTerminationProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

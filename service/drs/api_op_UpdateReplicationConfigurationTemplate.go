@@ -91,6 +91,10 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReplicationConfigurationTemplateInput) operationName() string {
+	return "UpdateReplicationConfigurationTemplate"
+}
+
 type UpdateReplicationConfigurationTemplateOutput struct {
 
 	// The Replication Configuration Template ID.

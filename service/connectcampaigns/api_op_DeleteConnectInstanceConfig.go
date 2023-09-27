@@ -42,6 +42,10 @@ type DeleteConnectInstanceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectInstanceConfigInput) operationName() string {
+	return "DeleteConnectInstanceConfig"
+}
+
 type DeleteConnectInstanceConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

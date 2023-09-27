@@ -50,6 +50,10 @@ type ListContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContactsInput) operationName() string {
+	return "ListContacts"
+}
+
 type ListContactsOutput struct {
 
 	// A list of the contacts and escalation plans in your Incident Manager account.

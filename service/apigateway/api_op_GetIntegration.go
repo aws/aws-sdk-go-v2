@@ -53,6 +53,10 @@ type GetIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntegrationInput) operationName() string {
+	return "GetIntegration"
+}
+
 // Represents an HTTP , HTTP_PROXY , AWS , AWS_PROXY , or Mock integration.
 type GetIntegrationOutput struct {
 

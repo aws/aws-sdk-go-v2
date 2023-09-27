@@ -133,6 +133,10 @@ type RequestCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestCertificateInput) operationName() string {
+	return "RequestCertificate"
+}
+
 type RequestCertificateOutput struct {
 
 	// String that contains the ARN of the issued certificate. This must be of the

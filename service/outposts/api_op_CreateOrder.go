@@ -55,6 +55,10 @@ type CreateOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOrderInput) operationName() string {
+	return "CreateOrder"
+}
+
 type CreateOrderOutput struct {
 
 	// Information about this order.

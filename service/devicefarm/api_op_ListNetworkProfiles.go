@@ -51,6 +51,10 @@ type ListNetworkProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNetworkProfilesInput) operationName() string {
+	return "ListNetworkProfiles"
+}
+
 type ListNetworkProfilesOutput struct {
 
 	// A list of the available network profiles.

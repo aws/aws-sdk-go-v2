@@ -52,6 +52,10 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelinesInput) operationName() string {
+	return "ListPipelines"
+}
+
 // Contains the output of ListPipelines.
 type ListPipelinesOutput struct {
 

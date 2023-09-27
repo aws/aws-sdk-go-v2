@@ -51,6 +51,10 @@ type CreateVpnConnectionRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpnConnectionRouteInput) operationName() string {
+	return "CreateVpnConnectionRoute"
+}
+
 type CreateVpnConnectionRouteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,6 +63,10 @@ type CreateRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoomInput) operationName() string {
+	return "CreateRoom"
+}
+
 type CreateRoomOutput struct {
 
 	// Room ARN, assigned by the system.

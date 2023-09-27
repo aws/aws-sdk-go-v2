@@ -42,6 +42,10 @@ type DisassociateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateConnectorInput) operationName() string {
+	return "DisassociateConnector"
+}
+
 type DisassociateConnectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

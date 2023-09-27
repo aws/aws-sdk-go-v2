@@ -68,6 +68,10 @@ type UpdateConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationTemplateInput) operationName() string {
+	return "UpdateConfigurationTemplate"
+}
+
 // Describes the settings for a configuration set.
 type UpdateConfigurationTemplateOutput struct {
 

@@ -67,6 +67,10 @@ type ListRoutingControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoutingControlsInput) operationName() string {
+	return "ListRoutingControls"
+}
+
 type ListRoutingControlsOutput struct {
 
 	// The list of routing controls.

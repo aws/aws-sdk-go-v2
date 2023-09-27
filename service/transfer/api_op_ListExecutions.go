@@ -60,6 +60,10 @@ type ListExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExecutionsInput) operationName() string {
+	return "ListExecutions"
+}
+
 type ListExecutionsOutput struct {
 
 	// Returns the details for each execution, in a ListedExecution array.

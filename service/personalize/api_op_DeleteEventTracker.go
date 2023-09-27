@@ -44,6 +44,10 @@ type DeleteEventTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventTrackerInput) operationName() string {
+	return "DeleteEventTracker"
+}
+
 type DeleteEventTrackerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,6 +62,10 @@ type CreateOutboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOutboundConnectionInput) operationName() string {
+	return "CreateOutboundConnection"
+}
+
 // The result of a CreateOutboundConnection request. Contains details about the
 // newly created cross-cluster connection.
 type CreateOutboundConnectionOutput struct {

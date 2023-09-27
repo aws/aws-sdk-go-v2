@@ -47,6 +47,10 @@ type DeleteTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTimelineEventInput) operationName() string {
+	return "DeleteTimelineEvent"
+}
+
 type DeleteTimelineEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

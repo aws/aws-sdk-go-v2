@@ -46,6 +46,10 @@ type GetWorkflowRunPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowRunPropertiesInput) operationName() string {
+	return "GetWorkflowRunProperties"
+}
+
 type GetWorkflowRunPropertiesOutput struct {
 
 	// The workflow run properties which were set during the specified run.

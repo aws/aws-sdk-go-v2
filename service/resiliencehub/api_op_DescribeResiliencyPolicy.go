@@ -47,6 +47,10 @@ type DescribeResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResiliencyPolicyInput) operationName() string {
+	return "DescribeResiliencyPolicy"
+}
+
 type DescribeResiliencyPolicyOutput struct {
 
 	// Information about the specific resiliency policy, returned as an object. This

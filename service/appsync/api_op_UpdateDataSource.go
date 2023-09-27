@@ -82,6 +82,10 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataSourceInput) operationName() string {
+	return "UpdateDataSource"
+}
+
 type UpdateDataSourceOutput struct {
 
 	// The updated DataSource object.

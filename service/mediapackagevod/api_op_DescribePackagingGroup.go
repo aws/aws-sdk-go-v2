@@ -42,6 +42,10 @@ type DescribePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackagingGroupInput) operationName() string {
+	return "DescribePackagingGroup"
+}
+
 type DescribePackagingGroupOutput struct {
 
 	// The approximate asset count of the PackagingGroup.

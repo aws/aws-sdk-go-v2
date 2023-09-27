@@ -53,6 +53,10 @@ type EnableHealthServiceAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableHealthServiceAccessForOrganizationInput) operationName() string {
+	return "EnableHealthServiceAccessForOrganization"
+}
+
 type EnableHealthServiceAccessForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

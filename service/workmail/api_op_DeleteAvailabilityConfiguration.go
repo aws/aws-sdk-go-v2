@@ -48,6 +48,10 @@ type DeleteAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAvailabilityConfigurationInput) operationName() string {
+	return "DeleteAvailabilityConfiguration"
+}
+
 type DeleteAvailabilityConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

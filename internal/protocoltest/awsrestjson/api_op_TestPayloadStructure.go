@@ -36,6 +36,10 @@ type TestPayloadStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestPayloadStructureInput) operationName() string {
+	return "TestPayloadStructure"
+}
+
 type TestPayloadStructureOutput struct {
 	PayloadConfig *types.PayloadConfig
 

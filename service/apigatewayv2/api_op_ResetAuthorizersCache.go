@@ -47,6 +47,10 @@ type ResetAuthorizersCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetAuthorizersCacheInput) operationName() string {
+	return "ResetAuthorizersCache"
+}
+
 type ResetAuthorizersCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

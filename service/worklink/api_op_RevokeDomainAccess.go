@@ -49,6 +49,10 @@ type RevokeDomainAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeDomainAccessInput) operationName() string {
+	return "RevokeDomainAccess"
+}
+
 type RevokeDomainAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

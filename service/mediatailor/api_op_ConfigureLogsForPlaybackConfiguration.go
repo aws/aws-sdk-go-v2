@@ -53,6 +53,10 @@ type ConfigureLogsForPlaybackConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureLogsForPlaybackConfigurationInput) operationName() string {
+	return "ConfigureLogsForPlaybackConfiguration"
+}
+
 type ConfigureLogsForPlaybackConfigurationOutput struct {
 
 	// The percentage of session logs that MediaTailor sends to your Cloudwatch Logs

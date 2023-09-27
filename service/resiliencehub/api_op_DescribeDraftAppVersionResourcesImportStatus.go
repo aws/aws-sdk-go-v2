@@ -49,6 +49,10 @@ type DescribeDraftAppVersionResourcesImportStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDraftAppVersionResourcesImportStatusInput) operationName() string {
+	return "DescribeDraftAppVersionResourcesImportStatus"
+}
+
 type DescribeDraftAppVersionResourcesImportStatusOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

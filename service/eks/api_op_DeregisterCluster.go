@@ -42,6 +42,10 @@ type DeregisterClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterClusterInput) operationName() string {
+	return "DeregisterCluster"
+}
+
 type DeregisterClusterOutput struct {
 
 	// An object representing an Amazon EKS cluster.

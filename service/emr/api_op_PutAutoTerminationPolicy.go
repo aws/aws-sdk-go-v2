@@ -52,6 +52,10 @@ type PutAutoTerminationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAutoTerminationPolicyInput) operationName() string {
+	return "PutAutoTerminationPolicy"
+}
+
 type PutAutoTerminationPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

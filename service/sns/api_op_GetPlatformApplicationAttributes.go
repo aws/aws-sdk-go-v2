@@ -45,6 +45,10 @@ type GetPlatformApplicationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPlatformApplicationAttributesInput) operationName() string {
+	return "GetPlatformApplicationAttributes"
+}
+
 // Response for GetPlatformApplicationAttributes action.
 type GetPlatformApplicationAttributesOutput struct {
 

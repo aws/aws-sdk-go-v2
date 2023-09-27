@@ -47,6 +47,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdatePackageVersionsStatus.go",
         "api_op_UpdateRepository.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

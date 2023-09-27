@@ -89,6 +89,10 @@ type ListGroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupResourcesInput) operationName() string {
+	return "ListGroupResources"
+}
+
 type ListGroupResourcesOutput struct {
 
 	// If present, indicates that more output is available than is included in the

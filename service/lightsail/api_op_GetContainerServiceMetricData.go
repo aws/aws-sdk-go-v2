@@ -97,6 +97,10 @@ type GetContainerServiceMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerServiceMetricDataInput) operationName() string {
+	return "GetContainerServiceMetricData"
+}
+
 type GetContainerServiceMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.

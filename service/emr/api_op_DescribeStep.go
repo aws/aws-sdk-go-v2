@@ -52,6 +52,10 @@ type DescribeStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStepInput) operationName() string {
+	return "DescribeStep"
+}
+
 // This output contains the description of the cluster step.
 type DescribeStepOutput struct {
 

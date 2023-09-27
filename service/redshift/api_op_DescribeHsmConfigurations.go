@@ -82,6 +82,10 @@ type DescribeHsmConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHsmConfigurationsInput) operationName() string {
+	return "DescribeHsmConfigurations"
+}
+
 type DescribeHsmConfigurationsOutput struct {
 
 	// A list of HsmConfiguration objects.

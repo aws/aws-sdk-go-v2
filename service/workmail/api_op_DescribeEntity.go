@@ -47,6 +47,10 @@ type DescribeEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntityInput) operationName() string {
+	return "DescribeEntity"
+}
+
 type DescribeEntityOutput struct {
 
 	// The entity ID under which the entity exists.

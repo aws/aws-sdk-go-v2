@@ -66,6 +66,10 @@ type ListAccessPointsForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessPointsForObjectLambdaInput) operationName() string {
+	return "ListAccessPointsForObjectLambda"
+}
+
 type ListAccessPointsForObjectLambdaOutput struct {
 
 	// If the list has more access points than can be returned in one call to this

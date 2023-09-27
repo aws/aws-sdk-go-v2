@@ -49,6 +49,10 @@ type GetStagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStagesInput) operationName() string {
+	return "GetStages"
+}
+
 type GetStagesOutput struct {
 
 	// The elements from this collection.

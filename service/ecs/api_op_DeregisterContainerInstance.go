@@ -71,6 +71,10 @@ type DeregisterContainerInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterContainerInstanceInput) operationName() string {
+	return "DeregisterContainerInstance"
+}
+
 type DeregisterContainerInstanceOutput struct {
 
 	// The container instance that was deregistered.

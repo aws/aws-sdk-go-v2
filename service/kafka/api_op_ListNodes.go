@@ -51,6 +51,10 @@ type ListNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNodesInput) operationName() string {
+	return "ListNodes"
+}
+
 type ListNodesOutput struct {
 
 	// The paginated results marker. When the result of a ListNodes operation is

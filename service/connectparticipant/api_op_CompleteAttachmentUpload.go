@@ -59,6 +59,10 @@ type CompleteAttachmentUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteAttachmentUploadInput) operationName() string {
+	return "CompleteAttachmentUpload"
+}
+
 type CompleteAttachmentUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

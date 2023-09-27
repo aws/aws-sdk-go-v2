@@ -60,6 +60,10 @@ type ListRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecoveryPointsInput) operationName() string {
+	return "ListRecoveryPoints"
+}
+
 type ListRecoveryPointsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of

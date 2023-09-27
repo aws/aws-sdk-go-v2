@@ -115,6 +115,10 @@ type CreateCompilationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCompilationJobInput) operationName() string {
+	return "CreateCompilationJob"
+}
+
 type CreateCompilationJobOutput struct {
 
 	// If the action is successful, the service sends back an HTTP 200 response.

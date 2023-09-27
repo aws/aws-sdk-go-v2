@@ -48,6 +48,10 @@ type GetFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionInput) operationName() string {
+	return "GetFunction"
+}
+
 type GetFunctionOutput struct {
 
 	// The content type (media type) of the response.

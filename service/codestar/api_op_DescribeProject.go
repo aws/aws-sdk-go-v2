@@ -43,6 +43,10 @@ type DescribeProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProjectInput) operationName() string {
+	return "DescribeProject"
+}
+
 type DescribeProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) for the project.

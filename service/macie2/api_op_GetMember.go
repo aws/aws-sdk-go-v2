@@ -44,6 +44,10 @@ type GetMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMemberInput) operationName() string {
+	return "GetMember"
+}
+
 type GetMemberOutput struct {
 
 	// The Amazon Web Services account ID for the account.

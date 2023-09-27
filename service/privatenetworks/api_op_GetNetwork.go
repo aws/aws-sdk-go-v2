@@ -42,6 +42,10 @@ type GetNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkInput) operationName() string {
+	return "GetNetwork"
+}
+
 type GetNetworkOutput struct {
 
 	// Information about the network.

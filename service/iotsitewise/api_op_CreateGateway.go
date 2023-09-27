@@ -55,6 +55,10 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGatewayInput) operationName() string {
+	return "CreateGateway"
+}
+
 type CreateGatewayOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

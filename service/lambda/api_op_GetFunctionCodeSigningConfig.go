@@ -46,6 +46,10 @@ type GetFunctionCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionCodeSigningConfigInput) operationName() string {
+	return "GetFunctionCodeSigningConfig"
+}
+
 type GetFunctionCodeSigningConfigOutput struct {
 
 	// The The Amazon Resource Name (ARN) of the code signing configuration.

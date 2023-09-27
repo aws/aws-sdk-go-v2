@@ -72,6 +72,10 @@ type ListTransformJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTransformJobsInput) operationName() string {
+	return "ListTransformJobs"
+}
+
 type ListTransformJobsOutput struct {
 
 	// An array of TransformJobSummary objects.

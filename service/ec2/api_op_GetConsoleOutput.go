@@ -63,6 +63,10 @@ type GetConsoleOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConsoleOutputInput) operationName() string {
+	return "GetConsoleOutput"
+}
+
 type GetConsoleOutputOutput struct {
 
 	// The ID of the instance.

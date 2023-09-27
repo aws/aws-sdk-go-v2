@@ -46,6 +46,10 @@ type DescribeImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImportInput) operationName() string {
+	return "DescribeImport"
+}
+
 type DescribeImportOutput struct {
 
 	// The date and time that the import was created.

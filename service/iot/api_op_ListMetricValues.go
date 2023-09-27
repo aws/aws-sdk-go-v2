@@ -72,6 +72,10 @@ type ListMetricValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMetricValuesInput) operationName() string {
+	return "ListMetricValues"
+}
+
 type ListMetricValuesOutput struct {
 
 	// The data the thing reports for the metric during the specified time period.

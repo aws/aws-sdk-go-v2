@@ -41,6 +41,10 @@ type DeleteConnectorDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectorDefinitionInput) operationName() string {
+	return "DeleteConnectorDefinition"
+}
+
 type DeleteConnectorDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

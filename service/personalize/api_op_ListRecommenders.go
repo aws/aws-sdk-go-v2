@@ -54,6 +54,10 @@ type ListRecommendersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecommendersInput) operationName() string {
+	return "ListRecommenders"
+}
+
 type ListRecommendersOutput struct {
 
 	// A token for getting the next set of recommenders (if they exist).

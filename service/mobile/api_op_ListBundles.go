@@ -46,6 +46,10 @@ type ListBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBundlesInput) operationName() string {
+	return "ListBundles"
+}
+
 // Result structure contains a list of all available bundles with details.
 type ListBundlesOutput struct {
 

@@ -88,6 +88,10 @@ type CreateLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLicenseConfigurationInput) operationName() string {
+	return "CreateLicenseConfiguration"
+}
+
 type CreateLicenseConfigurationOutput struct {
 
 	// Amazon Resource Name (ARN) of the license configuration.

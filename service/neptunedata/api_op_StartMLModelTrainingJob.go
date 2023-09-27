@@ -123,6 +123,10 @@ type StartMLModelTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMLModelTrainingJobInput) operationName() string {
+	return "StartMLModelTrainingJob"
+}
+
 type StartMLModelTrainingJobOutput struct {
 
 	// The ARN of the new model training job.

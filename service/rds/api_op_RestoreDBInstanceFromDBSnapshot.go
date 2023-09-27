@@ -336,6 +336,10 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBInstanceFromDBSnapshotInput) operationName() string {
+	return "RestoreDBInstanceFromDBSnapshot"
+}
+
 type RestoreDBInstanceFromDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

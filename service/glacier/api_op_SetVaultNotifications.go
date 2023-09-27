@@ -82,6 +82,10 @@ type SetVaultNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetVaultNotificationsInput) operationName() string {
+	return "SetVaultNotifications"
+}
+
 type SetVaultNotificationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

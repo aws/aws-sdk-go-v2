@@ -55,6 +55,10 @@ type DistributeDatasetEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DistributeDatasetEntriesInput) operationName() string {
+	return "DistributeDatasetEntries"
+}
+
 type DistributeDatasetEntriesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

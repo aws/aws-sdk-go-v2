@@ -68,6 +68,10 @@ type UntagResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourcesInput) operationName() string {
+	return "UntagResources"
+}
+
 type UntagResourcesOutput struct {
 
 	// A map containing a key-value pair for each failed item that couldn't be

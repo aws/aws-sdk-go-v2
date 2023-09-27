@@ -50,6 +50,10 @@ type GetRecoveryGroupReadinessSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecoveryGroupReadinessSummaryInput) operationName() string {
+	return "GetRecoveryGroupReadinessSummary"
+}
+
 type GetRecoveryGroupReadinessSummaryOutput struct {
 
 	// The token that identifies which batch of results you want to see.

@@ -68,6 +68,10 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTableInput) operationName() string {
+	return "CreateTable"
+}
+
 type CreateTableOutput struct {
 
 	// The newly created Timestream table.

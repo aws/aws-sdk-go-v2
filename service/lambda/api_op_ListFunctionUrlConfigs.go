@@ -56,6 +56,10 @@ type ListFunctionUrlConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFunctionUrlConfigsInput) operationName() string {
+	return "ListFunctionUrlConfigs"
+}
+
 type ListFunctionUrlConfigsOutput struct {
 
 	// A list of function URL configurations.

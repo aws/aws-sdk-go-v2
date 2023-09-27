@@ -53,6 +53,10 @@ type StartRemediationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRemediationExecutionInput) operationName() string {
+	return "StartRemediationExecution"
+}
+
 type StartRemediationExecutionOutput struct {
 
 	// For resources that have failed to start execution, the API returns a resource

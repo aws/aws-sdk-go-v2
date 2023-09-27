@@ -94,6 +94,10 @@ type CreateLanguageModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLanguageModelInput) operationName() string {
+	return "CreateLanguageModel"
+}
+
 type CreateLanguageModelOutput struct {
 
 	// The Amazon Transcribe standard language model, or base model, you specified

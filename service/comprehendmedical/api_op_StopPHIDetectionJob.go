@@ -41,6 +41,10 @@ type StopPHIDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopPHIDetectionJobInput) operationName() string {
+	return "StopPHIDetectionJob"
+}
+
 type StopPHIDetectionJobOutput struct {
 
 	// The identifier of the PHI detection job that was stopped.

@@ -68,6 +68,10 @@ type UpdateComponentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateComponentConfigurationInput) operationName() string {
+	return "UpdateComponentConfiguration"
+}
+
 type UpdateComponentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

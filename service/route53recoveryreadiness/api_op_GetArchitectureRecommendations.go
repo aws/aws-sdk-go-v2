@@ -50,6 +50,10 @@ type GetArchitectureRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetArchitectureRecommendationsInput) operationName() string {
+	return "GetArchitectureRecommendations"
+}
+
 type GetArchitectureRecommendationsOutput struct {
 
 	// The time that a recovery group was last assessed for recommendations, in UTC

@@ -58,6 +58,10 @@ type DescribeServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServicesInput) operationName() string {
+	return "DescribeServices"
+}
+
 type DescribeServicesOutput struct {
 
 	// The format version of the response. For example, aws_v1 .

@@ -50,6 +50,10 @@ type DeleteAllowListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAllowListInput) operationName() string {
+	return "DeleteAllowList"
+}
+
 type DeleteAllowListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

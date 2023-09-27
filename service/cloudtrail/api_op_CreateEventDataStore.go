@@ -107,6 +107,10 @@ type CreateEventDataStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventDataStoreInput) operationName() string {
+	return "CreateEventDataStore"
+}
+
 type CreateEventDataStoreOutput struct {
 
 	// The advanced event selectors that were used to select the events for the data

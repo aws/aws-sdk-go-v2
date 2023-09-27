@@ -125,6 +125,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBClusterToPointInTimeInput) operationName() string {
+	return "RestoreDBClusterToPointInTime"
+}
+
 type RestoreDBClusterToPointInTimeOutput struct {
 
 	// Detailed information about a cluster.

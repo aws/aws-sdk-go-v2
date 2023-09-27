@@ -46,6 +46,10 @@ type DescribeBatchLoadTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBatchLoadTaskInput) operationName() string {
+	return "DescribeBatchLoadTask"
+}
+
 type DescribeBatchLoadTaskOutput struct {
 
 	// Description of the batch load task.

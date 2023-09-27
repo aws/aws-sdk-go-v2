@@ -234,6 +234,10 @@ type ModifyCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCacheClusterInput) operationName() string {
+	return "ModifyCacheCluster"
+}
+
 type ModifyCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.

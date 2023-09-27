@@ -98,6 +98,10 @@ type CreateLocationSmbInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationSmbInput) operationName() string {
+	return "CreateLocationSmb"
+}
+
 // CreateLocationSmbResponse
 type CreateLocationSmbOutput struct {
 

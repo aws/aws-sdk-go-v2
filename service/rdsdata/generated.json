@@ -15,6 +15,7 @@
         "api_op_ExecuteSql.go",
         "api_op_ExecuteStatement.go",
         "api_op_RollbackTransaction.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

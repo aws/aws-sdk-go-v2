@@ -41,6 +41,10 @@ type DeleteRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRoomInput) operationName() string {
+	return "DeleteRoom"
+}
+
 type DeleteRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

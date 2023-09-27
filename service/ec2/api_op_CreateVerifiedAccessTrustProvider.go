@@ -86,6 +86,10 @@ type CreateVerifiedAccessTrustProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVerifiedAccessTrustProviderInput) operationName() string {
+	return "CreateVerifiedAccessTrustProvider"
+}
+
 type CreateVerifiedAccessTrustProviderOutput struct {
 
 	// The ID of the Verified Access trust provider.

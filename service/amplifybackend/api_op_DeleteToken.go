@@ -46,6 +46,10 @@ type DeleteTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTokenInput) operationName() string {
+	return "DeleteToken"
+}
+
 type DeleteTokenOutput struct {
 
 	// Indicates whether the request succeeded or failed.

@@ -49,6 +49,10 @@ type GetJobBookmarkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobBookmarkInput) operationName() string {
+	return "GetJobBookmark"
+}
+
 type GetJobBookmarkOutput struct {
 
 	// A structure that defines a point that a job can resume processing.

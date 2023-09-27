@@ -56,6 +56,10 @@ type UpdateApplicationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationSettingsInput) operationName() string {
+	return "UpdateApplicationSettings"
+}
+
 type UpdateApplicationSettingsOutput struct {
 
 	// The update message.

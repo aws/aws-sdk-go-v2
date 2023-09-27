@@ -55,6 +55,10 @@ type ModifyVpcEndpointServicePayerResponsibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcEndpointServicePayerResponsibilityInput) operationName() string {
+	return "ModifyVpcEndpointServicePayerResponsibility"
+}
+
 type ModifyVpcEndpointServicePayerResponsibilityOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

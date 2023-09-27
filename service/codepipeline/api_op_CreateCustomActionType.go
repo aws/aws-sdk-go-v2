@@ -78,6 +78,10 @@ type CreateCustomActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomActionTypeInput) operationName() string {
+	return "CreateCustomActionType"
+}
+
 // Represents the output of a CreateCustomActionType operation.
 type CreateCustomActionTypeOutput struct {
 

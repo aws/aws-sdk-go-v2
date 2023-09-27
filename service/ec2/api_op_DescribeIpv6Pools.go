@@ -62,6 +62,10 @@ type DescribeIpv6PoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIpv6PoolsInput) operationName() string {
+	return "DescribeIpv6Pools"
+}
+
 type DescribeIpv6PoolsOutput struct {
 
 	// Information about the IPv6 address pools.

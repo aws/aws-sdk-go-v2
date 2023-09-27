@@ -78,6 +78,10 @@ type DescribeInstanceCreditSpecificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceCreditSpecificationsInput) operationName() string {
+	return "DescribeInstanceCreditSpecifications"
+}
+
 type DescribeInstanceCreditSpecificationsOutput struct {
 
 	// Information about the credit option for CPU usage of an instance.

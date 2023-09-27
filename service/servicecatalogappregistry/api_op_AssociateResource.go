@@ -53,6 +53,10 @@ type AssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateResourceInput) operationName() string {
+	return "AssociateResource"
+}
+
 type AssociateResourceOutput struct {
 
 	// The Amazon resource name (ARN) of the application that was augmented with

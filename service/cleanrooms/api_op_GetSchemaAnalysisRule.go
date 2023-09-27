@@ -55,6 +55,10 @@ type GetSchemaAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaAnalysisRuleInput) operationName() string {
+	return "GetSchemaAnalysisRule"
+}
+
 type GetSchemaAnalysisRuleOutput struct {
 
 	// A specification about how data from the configured table can be used.

@@ -58,6 +58,10 @@ type ListIdentityProviderConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityProviderConfigsInput) operationName() string {
+	return "ListIdentityProviderConfigs"
+}
+
 type ListIdentityProviderConfigsOutput struct {
 
 	// The identity provider configurations for the cluster.

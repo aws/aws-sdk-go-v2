@@ -76,6 +76,10 @@ type ModifyDBProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBProxyInput) operationName() string {
+	return "ModifyDBProxy"
+}
+
 type ModifyDBProxyOutput struct {
 
 	// The DBProxy object representing the new settings for the proxy.

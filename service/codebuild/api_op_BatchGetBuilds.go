@@ -42,6 +42,10 @@ type BatchGetBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetBuildsInput) operationName() string {
+	return "BatchGetBuilds"
+}
+
 type BatchGetBuildsOutput struct {
 
 	// Information about the requested builds.

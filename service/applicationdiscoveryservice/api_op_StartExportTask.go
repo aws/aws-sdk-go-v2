@@ -82,6 +82,10 @@ type StartExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartExportTaskInput) operationName() string {
+	return "StartExportTask"
+}
+
 type StartExportTaskOutput struct {
 
 	// A unique identifier used to query the status of an export request.

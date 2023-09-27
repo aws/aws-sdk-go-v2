@@ -58,6 +58,10 @@ type NotifyRecommendationsReceivedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyRecommendationsReceivedInput) operationName() string {
+	return "NotifyRecommendationsReceived"
+}
+
 type NotifyRecommendationsReceivedOutput struct {
 
 	// The identifiers of recommendations that are causing errors.

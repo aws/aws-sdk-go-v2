@@ -90,6 +90,10 @@ type CreateForecastExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateForecastExportJobInput) operationName() string {
+	return "CreateForecastExportJob"
+}
+
 type CreateForecastExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the export job.

@@ -58,6 +58,10 @@ type UpdateLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLayoutInput) operationName() string {
+	return "UpdateLayout"
+}
+
 type UpdateLayoutOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

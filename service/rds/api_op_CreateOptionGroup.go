@@ -78,6 +78,10 @@ type CreateOptionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOptionGroupInput) operationName() string {
+	return "CreateOptionGroup"
+}
+
 type CreateOptionGroupOutput struct {
 
 	//

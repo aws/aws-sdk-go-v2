@@ -51,6 +51,10 @@ type UpdateSecurityHubConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityHubConfigurationInput) operationName() string {
+	return "UpdateSecurityHubConfiguration"
+}
+
 type UpdateSecurityHubConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

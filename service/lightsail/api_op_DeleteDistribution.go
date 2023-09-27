@@ -41,6 +41,10 @@ type DeleteDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDistributionInput) operationName() string {
+	return "DeleteDistribution"
+}
+
 type DeleteDistributionOutput struct {
 
 	// An object that describes the result of the action, such as the status of the

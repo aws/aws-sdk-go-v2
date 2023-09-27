@@ -41,6 +41,10 @@ type DeleteEarthObservationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEarthObservationJobInput) operationName() string {
+	return "DeleteEarthObservationJob"
+}
+
 type DeleteEarthObservationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

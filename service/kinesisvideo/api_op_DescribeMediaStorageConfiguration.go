@@ -46,6 +46,10 @@ type DescribeMediaStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMediaStorageConfigurationInput) operationName() string {
+	return "DescribeMediaStorageConfiguration"
+}
+
 type DescribeMediaStorageConfigurationOutput struct {
 
 	// A structure that encapsulates, or contains, the media storage configuration

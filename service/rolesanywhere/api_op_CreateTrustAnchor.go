@@ -61,6 +61,10 @@ type CreateTrustAnchorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrustAnchorInput) operationName() string {
+	return "CreateTrustAnchor"
+}
+
 type CreateTrustAnchorOutput struct {
 
 	// The state of the trust anchor after a read or write operation.

@@ -48,6 +48,10 @@ type DeleteTrafficMirrorFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrafficMirrorFilterInput) operationName() string {
+	return "DeleteTrafficMirrorFilter"
+}
+
 type DeleteTrafficMirrorFilterOutput struct {
 
 	// The ID of the Traffic Mirror filter.

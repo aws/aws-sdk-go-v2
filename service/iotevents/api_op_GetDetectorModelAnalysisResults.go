@@ -50,6 +50,10 @@ type GetDetectorModelAnalysisResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDetectorModelAnalysisResultsInput) operationName() string {
+	return "GetDetectorModelAnalysisResults"
+}
+
 type GetDetectorModelAnalysisResultsOutput struct {
 
 	// Contains information about one or more analysis results.

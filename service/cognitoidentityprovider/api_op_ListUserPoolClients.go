@@ -57,6 +57,10 @@ type ListUserPoolClientsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserPoolClientsInput) operationName() string {
+	return "ListUserPoolClients"
+}
+
 // Represents the response from the server that lists user pool clients.
 type ListUserPoolClientsOutput struct {
 

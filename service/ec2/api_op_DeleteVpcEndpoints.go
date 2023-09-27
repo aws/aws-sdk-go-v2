@@ -53,6 +53,10 @@ type DeleteVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcEndpointsInput) operationName() string {
+	return "DeleteVpcEndpoints"
+}
+
 type DeleteVpcEndpointsOutput struct {
 
 	// Information about the VPC endpoints that were not successfully deleted.

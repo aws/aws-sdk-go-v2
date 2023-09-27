@@ -62,6 +62,10 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTokenInput) operationName() string {
+	return "CreateToken"
+}
+
 type CreateTokenOutput struct {
 
 	// Refresh token, encoded as a JWT token.

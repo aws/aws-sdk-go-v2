@@ -62,6 +62,10 @@ type TestEventPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestEventPatternInput) operationName() string {
+	return "TestEventPattern"
+}
+
 type TestEventPatternOutput struct {
 
 	// Indicates whether the event matches the event pattern.

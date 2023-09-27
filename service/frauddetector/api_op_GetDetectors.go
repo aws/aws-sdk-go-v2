@@ -51,6 +51,10 @@ type GetDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDetectorsInput) operationName() string {
+	return "GetDetectors"
+}
+
 type GetDetectorsOutput struct {
 
 	// The detectors.

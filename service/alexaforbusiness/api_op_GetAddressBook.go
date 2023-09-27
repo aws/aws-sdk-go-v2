@@ -44,6 +44,10 @@ type GetAddressBookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAddressBookInput) operationName() string {
+	return "GetAddressBook"
+}
+
 type GetAddressBookOutput struct {
 
 	// The details of the requested address book.

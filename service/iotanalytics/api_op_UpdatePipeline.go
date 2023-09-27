@@ -56,6 +56,10 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePipelineInput) operationName() string {
+	return "UpdatePipeline"
+}
+
 type UpdatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,6 +41,10 @@ type GetEngineStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEngineStatusInput) operationName() string {
+	return "GetEngineStatus"
+}
+
 type GetEngineStatusOutput struct {
 
 	// Set to the Neptune engine version running on your DB cluster. If this engine

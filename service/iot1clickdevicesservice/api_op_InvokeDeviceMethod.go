@@ -49,6 +49,10 @@ type InvokeDeviceMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeDeviceMethodInput) operationName() string {
+	return "InvokeDeviceMethod"
+}
+
 type InvokeDeviceMethodOutput struct {
 
 	// A JSON encoded string containing the device method response.

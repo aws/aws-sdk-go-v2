@@ -55,6 +55,10 @@ type CreateUserGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserGroupInput) operationName() string {
+	return "CreateUserGroup"
+}
+
 type CreateUserGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user group.

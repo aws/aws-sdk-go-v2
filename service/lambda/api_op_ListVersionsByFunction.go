@@ -58,6 +58,10 @@ type ListVersionsByFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVersionsByFunctionInput) operationName() string {
+	return "ListVersionsByFunction"
+}
+
 type ListVersionsByFunctionOutput struct {
 
 	// The pagination token that's included if more results are available.

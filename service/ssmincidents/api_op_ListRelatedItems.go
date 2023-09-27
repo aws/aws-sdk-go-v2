@@ -49,6 +49,10 @@ type ListRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRelatedItemsInput) operationName() string {
+	return "ListRelatedItems"
+}
+
 type ListRelatedItemsOutput struct {
 
 	// Details about each related item.

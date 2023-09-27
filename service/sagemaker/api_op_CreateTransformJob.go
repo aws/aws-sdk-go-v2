@@ -153,6 +153,10 @@ type CreateTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransformJobInput) operationName() string {
+	return "CreateTransformJob"
+}
+
 type CreateTransformJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the transform job.

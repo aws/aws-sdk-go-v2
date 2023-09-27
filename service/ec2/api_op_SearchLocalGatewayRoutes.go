@@ -70,6 +70,10 @@ type SearchLocalGatewayRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchLocalGatewayRoutesInput) operationName() string {
+	return "SearchLocalGatewayRoutes"
+}
+
 type SearchLocalGatewayRoutesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

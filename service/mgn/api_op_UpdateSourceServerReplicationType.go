@@ -51,6 +51,10 @@ type UpdateSourceServerReplicationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSourceServerReplicationTypeInput) operationName() string {
+	return "UpdateSourceServerReplicationType"
+}
+
 type UpdateSourceServerReplicationTypeOutput struct {
 
 	// Source server application ID.

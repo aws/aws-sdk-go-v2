@@ -61,6 +61,10 @@ type UpdateAuditSuppressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAuditSuppressionInput) operationName() string {
+	return "UpdateAuditSuppression"
+}
+
 type UpdateAuditSuppressionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,6 +55,10 @@ type DeleteAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAcceleratorInput) operationName() string {
+	return "DeleteAccelerator"
+}
+
 type DeleteAcceleratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

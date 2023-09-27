@@ -83,6 +83,10 @@ type GetJourneyDateRangeKpiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJourneyDateRangeKpiInput) operationName() string {
+	return "GetJourneyDateRangeKpi"
+}
+
 type GetJourneyDateRangeKpiOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard

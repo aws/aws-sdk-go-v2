@@ -64,6 +64,10 @@ type ListMFADeviceTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMFADeviceTagsInput) operationName() string {
+	return "ListMFADeviceTags"
+}
+
 type ListMFADeviceTagsOutput struct {
 
 	// The list of tags that are currently attached to the virtual MFA device. Each

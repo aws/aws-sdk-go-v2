@@ -90,6 +90,10 @@ type DeleteStackInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStackInstancesInput) operationName() string {
+	return "DeleteStackInstances"
+}
+
 type DeleteStackInstancesOutput struct {
 
 	// The unique identifier for this stack set operation.

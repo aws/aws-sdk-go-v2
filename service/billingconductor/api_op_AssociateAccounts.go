@@ -51,6 +51,10 @@ type AssociateAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAccountsInput) operationName() string {
+	return "AssociateAccounts"
+}
+
 type AssociateAccountsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the billing group that associates the array

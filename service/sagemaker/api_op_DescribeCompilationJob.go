@@ -47,6 +47,10 @@ type DescribeCompilationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCompilationJobInput) operationName() string {
+	return "DescribeCompilationJob"
+}
+
 type DescribeCompilationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model compilation job.

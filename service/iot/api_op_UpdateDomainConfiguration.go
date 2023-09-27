@@ -57,6 +57,10 @@ type UpdateDomainConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainConfigurationInput) operationName() string {
+	return "UpdateDomainConfiguration"
+}
+
 type UpdateDomainConfigurationOutput struct {
 
 	// The ARN of the domain configuration that was updated.

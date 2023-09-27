@@ -65,6 +65,10 @@ type AttachTypedLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachTypedLinkInput) operationName() string {
+	return "AttachTypedLink"
+}
+
 type AttachTypedLinkOutput struct {
 
 	// Returns a typed link specifier as output.

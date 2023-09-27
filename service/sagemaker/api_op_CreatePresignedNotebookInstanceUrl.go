@@ -60,6 +60,10 @@ type CreatePresignedNotebookInstanceUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePresignedNotebookInstanceUrlInput) operationName() string {
+	return "CreatePresignedNotebookInstanceUrl"
+}
+
 type CreatePresignedNotebookInstanceUrlOutput struct {
 
 	// A JSON object that contains the URL string.

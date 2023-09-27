@@ -113,6 +113,10 @@ type DescribeCapacityReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCapacityReservationsInput) operationName() string {
+	return "DescribeCapacityReservations"
+}
+
 type DescribeCapacityReservationsOutput struct {
 
 	// Information about the Capacity Reservations.

@@ -86,6 +86,10 @@ type RequestPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestPhoneNumberInput) operationName() string {
+	return "RequestPhoneNumber"
+}
+
 type RequestPhoneNumberOutput struct {
 
 	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)

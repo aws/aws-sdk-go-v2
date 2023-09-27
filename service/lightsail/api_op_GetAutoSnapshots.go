@@ -45,6 +45,10 @@ type GetAutoSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAutoSnapshotsInput) operationName() string {
+	return "GetAutoSnapshots"
+}
+
 type GetAutoSnapshotsOutput struct {
 
 	// An array of objects that describe the automatic snapshots that are available

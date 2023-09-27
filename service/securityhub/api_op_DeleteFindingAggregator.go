@@ -45,6 +45,10 @@ type DeleteFindingAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFindingAggregatorInput) operationName() string {
+	return "DeleteFindingAggregator"
+}
+
 type DeleteFindingAggregatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

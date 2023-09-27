@@ -46,6 +46,10 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComplianceSummaryByResourceTypeInput) operationName() string {
+	return "GetComplianceSummaryByResourceType"
+}
+
 type GetComplianceSummaryByResourceTypeOutput struct {
 
 	// The number of resources that are compliant and the number that are

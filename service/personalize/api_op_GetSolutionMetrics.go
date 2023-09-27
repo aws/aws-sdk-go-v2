@@ -41,6 +41,10 @@ type GetSolutionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSolutionMetricsInput) operationName() string {
+	return "GetSolutionMetrics"
+}
+
 type GetSolutionMetricsOutput struct {
 
 	// The metrics for the solution version. For more information, see  Evaluating a

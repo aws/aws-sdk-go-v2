@@ -55,6 +55,10 @@ type GetBucketOwnershipControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketOwnershipControlsInput) operationName() string {
+	return "GetBucketOwnershipControls"
+}
+
 type GetBucketOwnershipControlsOutput struct {
 
 	// The OwnershipControls (BucketOwnerEnforced, BucketOwnerPreferred, or

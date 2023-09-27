@@ -63,6 +63,10 @@ type GetCommentsForComparedCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCommentsForComparedCommitInput) operationName() string {
+	return "GetCommentsForComparedCommit"
+}
+
 type GetCommentsForComparedCommitOutput struct {
 
 	// A list of comment objects on the compared commit.

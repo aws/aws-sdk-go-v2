@@ -61,6 +61,10 @@ type ModifyVpcAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcAttributeInput) operationName() string {
+	return "ModifyVpcAttribute"
+}
+
 type ModifyVpcAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

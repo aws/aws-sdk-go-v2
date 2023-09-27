@@ -56,6 +56,10 @@ type DescribeAggregateComplianceByConfigRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAggregateComplianceByConfigRulesInput) operationName() string {
+	return "DescribeAggregateComplianceByConfigRules"
+}
+
 type DescribeAggregateComplianceByConfigRulesOutput struct {
 
 	// Returns a list of AggregateComplianceByConfigRule object.

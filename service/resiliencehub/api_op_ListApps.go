@@ -73,6 +73,10 @@ type ListAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppsInput) operationName() string {
+	return "ListApps"
+}
+
 type ListAppsOutput struct {
 
 	// Summaries for the Resilience Hub application.

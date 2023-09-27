@@ -45,6 +45,10 @@ type DescribeFleetMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetMetricInput) operationName() string {
+	return "DescribeFleetMetric"
+}
+
 type DescribeFleetMetricOutput struct {
 
 	// The field to aggregate.

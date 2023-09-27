@@ -58,6 +58,10 @@ type ListStageDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStageDevicesInput) operationName() string {
+	return "ListStageDevices"
+}
+
 type ListStageDevicesOutput struct {
 
 	// List of summaries of devices allocated to the stage.

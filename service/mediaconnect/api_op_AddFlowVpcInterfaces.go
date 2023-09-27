@@ -48,6 +48,10 @@ type AddFlowVpcInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddFlowVpcInterfacesInput) operationName() string {
+	return "AddFlowVpcInterfaces"
+}
+
 type AddFlowVpcInterfacesOutput struct {
 
 	// The ARN of the flow that these VPC interfaces were added to.

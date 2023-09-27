@@ -123,6 +123,10 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationInput) operationName() string {
+	return "CreateApplication"
+}
+
 // TBD
 type CreateApplicationOutput struct {
 

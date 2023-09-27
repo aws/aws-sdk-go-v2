@@ -77,6 +77,10 @@ type UpdateContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContentInput) operationName() string {
+	return "UpdateContent"
+}
+
 type UpdateContentOutput struct {
 
 	// The content.

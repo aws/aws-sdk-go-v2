@@ -55,6 +55,10 @@ type CreateLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLunaClientInput) operationName() string {
+	return "CreateLunaClient"
+}
+
 // Contains the output of the CreateLunaClient action.
 type CreateLunaClientOutput struct {
 

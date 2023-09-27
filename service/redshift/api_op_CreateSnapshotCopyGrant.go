@@ -60,6 +60,10 @@ type CreateSnapshotCopyGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSnapshotCopyGrantInput) operationName() string {
+	return "CreateSnapshotCopyGrant"
+}
+
 type CreateSnapshotCopyGrantOutput struct {
 
 	// The snapshot copy grant that grants Amazon Redshift permission to encrypt

@@ -53,6 +53,10 @@ type ListChunksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChunksInput) operationName() string {
+	return "ListChunks"
+}
+
 type ListChunksOutput struct {
 
 	// List of chunks

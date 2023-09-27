@@ -83,6 +83,10 @@ type GetSparqlStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSparqlStreamInput) operationName() string {
+	return "GetSparqlStream"
+}
+
 type GetSparqlStreamOutput struct {
 
 	// Serialization format for the change records being returned. Currently, the only

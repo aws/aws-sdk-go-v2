@@ -65,6 +65,10 @@ type ListOpenIDConnectProviderTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpenIDConnectProviderTagsInput) operationName() string {
+	return "ListOpenIDConnectProviderTags"
+}
+
 type ListOpenIDConnectProviderTagsOutput struct {
 
 	// The list of tags that are currently attached to the OpenID Connect (OIDC)

@@ -114,6 +114,10 @@ type GetItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetItemInput) operationName() string {
+	return "GetItem"
+}
+
 // Represents the output of a GetItem operation.
 type GetItemOutput struct {
 

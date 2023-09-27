@@ -46,6 +46,7 @@
         "api_op_SubscribeToEvent.go",
         "api_op_UnsubscribeFromEvent.go",
         "api_op_UpdateAssessmentTarget.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -52,6 +52,10 @@ type GetMLModelTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLModelTrainingJobInput) operationName() string {
+	return "GetMLModelTrainingJob"
+}
+
 type GetMLModelTrainingJobOutput struct {
 
 	// The HPO job.

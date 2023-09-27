@@ -49,6 +49,10 @@ type CreateOriginAccessControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOriginAccessControlInput) operationName() string {
+	return "CreateOriginAccessControl"
+}
+
 type CreateOriginAccessControlOutput struct {
 
 	// The version identifier for the current version of the origin access control.

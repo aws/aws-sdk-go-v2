@@ -44,6 +44,10 @@ type GetImportFileTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImportFileTaskInput) operationName() string {
+	return "GetImportFileTask"
+}
+
 type GetImportFileTaskOutput struct {
 
 	// The time that the import task completed.

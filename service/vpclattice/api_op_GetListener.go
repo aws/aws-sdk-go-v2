@@ -48,6 +48,10 @@ type GetListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetListenerInput) operationName() string {
+	return "GetListener"
+}
+
 type GetListenerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the listener.

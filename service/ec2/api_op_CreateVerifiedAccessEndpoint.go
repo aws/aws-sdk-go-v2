@@ -105,6 +105,10 @@ type CreateVerifiedAccessEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVerifiedAccessEndpointInput) operationName() string {
+	return "CreateVerifiedAccessEndpoint"
+}
+
 type CreateVerifiedAccessEndpointOutput struct {
 
 	// The ID of the Verified Access endpoint.

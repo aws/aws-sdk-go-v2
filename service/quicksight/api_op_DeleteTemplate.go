@@ -51,6 +51,10 @@ type DeleteTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTemplateInput) operationName() string {
+	return "DeleteTemplate"
+}
+
 type DeleteTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource.

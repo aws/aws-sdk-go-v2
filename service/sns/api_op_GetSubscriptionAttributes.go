@@ -42,6 +42,10 @@ type GetSubscriptionAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubscriptionAttributesInput) operationName() string {
+	return "GetSubscriptionAttributes"
+}
+
 // Response for GetSubscriptionAttributes action.
 type GetSubscriptionAttributesOutput struct {
 

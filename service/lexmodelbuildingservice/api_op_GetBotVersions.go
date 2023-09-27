@@ -57,6 +57,10 @@ type GetBotVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBotVersionsInput) operationName() string {
+	return "GetBotVersions"
+}
+
 type GetBotVersionsOutput struct {
 
 	// An array of BotMetadata objects, one for each numbered version of the bot plus

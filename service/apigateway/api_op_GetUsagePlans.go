@@ -48,6 +48,10 @@ type GetUsagePlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsagePlansInput) operationName() string {
+	return "GetUsagePlans"
+}
+
 // Represents a collection of usage plans for an AWS account.
 type GetUsagePlansOutput struct {
 

@@ -55,6 +55,10 @@ type UpdateDomainEndpointOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainEndpointOptionsInput) operationName() string {
+	return "UpdateDomainEndpointOptions"
+}
+
 // The result of a UpdateDomainEndpointOptions request. Contains the configuration
 // and status of the domain's endpoint options.
 type UpdateDomainEndpointOptionsOutput struct {

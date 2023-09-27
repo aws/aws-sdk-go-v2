@@ -44,6 +44,10 @@ type GetBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBatchPredictionInput) operationName() string {
+	return "GetBatchPrediction"
+}
+
 // Represents the output of a GetBatchPrediction operation and describes a
 // BatchPrediction .
 type GetBatchPredictionOutput struct {

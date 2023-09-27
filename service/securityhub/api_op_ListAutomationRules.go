@@ -46,6 +46,10 @@ type ListAutomationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAutomationRulesInput) operationName() string {
+	return "ListAutomationRules"
+}
+
 type ListAutomationRulesOutput struct {
 
 	// Metadata for rules in the calling account. The response includes rules with a

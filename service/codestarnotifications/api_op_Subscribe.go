@@ -55,6 +55,10 @@ type SubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubscribeInput) operationName() string {
+	return "Subscribe"
+}
+
 type SubscribeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notification rule for which you have

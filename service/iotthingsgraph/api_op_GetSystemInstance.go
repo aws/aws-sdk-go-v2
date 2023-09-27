@@ -46,6 +46,10 @@ type GetSystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSystemInstanceInput) operationName() string {
+	return "GetSystemInstance"
+}
+
 type GetSystemInstanceOutput struct {
 
 	// An object that describes the system instance.

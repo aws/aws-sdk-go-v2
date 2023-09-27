@@ -52,6 +52,10 @@ type UpdateRoutingProfileDefaultOutboundQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoutingProfileDefaultOutboundQueueInput) operationName() string {
+	return "UpdateRoutingProfileDefaultOutboundQueue"
+}
+
 type UpdateRoutingProfileDefaultOutboundQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

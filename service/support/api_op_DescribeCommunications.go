@@ -72,6 +72,10 @@ type DescribeCommunicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCommunicationsInput) operationName() string {
+	return "DescribeCommunications"
+}
+
 // The communications returned by the DescribeCommunications operation.
 type DescribeCommunicationsOutput struct {
 

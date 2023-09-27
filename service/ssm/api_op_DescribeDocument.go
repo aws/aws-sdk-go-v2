@@ -52,6 +52,10 @@ type DescribeDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDocumentInput) operationName() string {
+	return "DescribeDocument"
+}
+
 type DescribeDocumentOutput struct {
 
 	// Information about the SSM document.

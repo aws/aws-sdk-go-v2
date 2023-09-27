@@ -42,6 +42,10 @@ type DescribeTagOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTagOptionInput) operationName() string {
+	return "DescribeTagOption"
+}
+
 type DescribeTagOptionOutput struct {
 
 	// Information about the TagOption.

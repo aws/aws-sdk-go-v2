@@ -52,6 +52,10 @@ type GetVoiceConnectorEmergencyCallingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorEmergencyCallingConfigurationInput) operationName() string {
+	return "GetVoiceConnectorEmergencyCallingConfiguration"
+}
+
 type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
 
 	// The emergency calling configuration details.

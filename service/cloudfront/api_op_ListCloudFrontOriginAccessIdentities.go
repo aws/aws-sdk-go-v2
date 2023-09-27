@@ -48,6 +48,10 @@ type ListCloudFrontOriginAccessIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCloudFrontOriginAccessIdentitiesInput) operationName() string {
+	return "ListCloudFrontOriginAccessIdentities"
+}
+
 // The returned result of the corresponding request.
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
 

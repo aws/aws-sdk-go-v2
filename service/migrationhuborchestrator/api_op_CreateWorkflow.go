@@ -68,6 +68,10 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkflowInput) operationName() string {
+	return "CreateWorkflow"
+}
+
 type CreateWorkflowOutput struct {
 
 	// The configuration ID of the application configured in Application Discovery

@@ -46,6 +46,10 @@ type DescribeManagedJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeManagedJobTemplateInput) operationName() string {
+	return "DescribeManagedJobTemplate"
+}
+
 type DescribeManagedJobTemplateOutput struct {
 
 	// The unique description of a managed template.

@@ -71,6 +71,10 @@ type UpdateChapCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChapCredentialsInput) operationName() string {
+	return "UpdateChapCredentials"
+}
+
 // A JSON object containing the following fields:
 type UpdateChapCredentialsOutput struct {
 

@@ -69,6 +69,10 @@ type CreateByteMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateByteMatchSetInput) operationName() string {
+	return "CreateByteMatchSet"
+}
+
 type CreateByteMatchSetOutput struct {
 
 	// A ByteMatchSet that contains no ByteMatchTuple objects.

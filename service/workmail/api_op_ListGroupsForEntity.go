@@ -62,6 +62,10 @@ type ListGroupsForEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupsForEntityInput) operationName() string {
+	return "ListGroupsForEntity"
+}
+
 type ListGroupsForEntityOutput struct {
 
 	// The overview of groups in an organization.

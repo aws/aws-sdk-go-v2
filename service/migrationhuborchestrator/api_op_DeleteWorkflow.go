@@ -43,6 +43,10 @@ type DeleteWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkflowInput) operationName() string {
+	return "DeleteWorkflow"
+}
+
 type DeleteWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the migration workflow.

@@ -54,6 +54,10 @@ type DescribeDomainControllersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainControllersInput) operationName() string {
+	return "DescribeDomainControllers"
+}
+
 type DescribeDomainControllersOutput struct {
 
 	// List of the DomainController objects that were retrieved.

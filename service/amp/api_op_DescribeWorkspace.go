@@ -47,6 +47,10 @@ type DescribeWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceInput) operationName() string {
+	return "DescribeWorkspace"
+}
+
 // Represents the output of a DescribeWorkspace operation.
 type DescribeWorkspaceOutput struct {
 

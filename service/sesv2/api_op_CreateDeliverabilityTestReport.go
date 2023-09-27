@@ -71,6 +71,10 @@ type CreateDeliverabilityTestReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeliverabilityTestReportInput) operationName() string {
+	return "CreateDeliverabilityTestReport"
+}
+
 // Information about the predictive inbox placement test that you created.
 type CreateDeliverabilityTestReportOutput struct {
 

@@ -65,6 +65,10 @@ type DeleteAppInputSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppInputSourceInput) operationName() string {
+	return "DeleteAppInputSource"
+}
+
 type DeleteAppInputSourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

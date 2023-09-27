@@ -42,6 +42,10 @@ type DescribeEnvironmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEnvironmentStatusInput) operationName() string {
+	return "DescribeEnvironmentStatus"
+}
+
 type DescribeEnvironmentStatusOutput struct {
 
 	// Any informational message about the status of the environment.

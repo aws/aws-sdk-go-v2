@@ -63,6 +63,10 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImportInput) operationName() string {
+	return "StartImport"
+}
+
 type StartImportOutput struct {
 
 	// The date and time that the import request was created.

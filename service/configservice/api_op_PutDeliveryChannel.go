@@ -54,6 +54,10 @@ type PutDeliveryChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDeliveryChannelInput) operationName() string {
+	return "PutDeliveryChannel"
+}
+
 type PutDeliveryChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

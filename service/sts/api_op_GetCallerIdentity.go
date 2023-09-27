@@ -42,6 +42,10 @@ type GetCallerIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCallerIdentityInput) operationName() string {
+	return "GetCallerIdentity"
+}
+
 // Contains the response to a successful GetCallerIdentity request, including
 // information about the entity making the request.
 type GetCallerIdentityOutput struct {

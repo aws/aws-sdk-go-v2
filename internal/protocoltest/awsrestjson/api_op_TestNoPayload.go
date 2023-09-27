@@ -33,6 +33,10 @@ type TestNoPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestNoPayloadInput) operationName() string {
+	return "TestNoPayload"
+}
+
 type TestNoPayloadOutput struct {
 	TestId *string
 

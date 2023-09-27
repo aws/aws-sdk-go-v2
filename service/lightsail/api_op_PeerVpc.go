@@ -36,6 +36,10 @@ type PeerVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PeerVpcInput) operationName() string {
+	return "PeerVpc"
+}
+
 type PeerVpcOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

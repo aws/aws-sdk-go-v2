@@ -43,6 +43,10 @@ type BatchGetAutomationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetAutomationRulesInput) operationName() string {
+	return "BatchGetAutomationRules"
+}
+
 type BatchGetAutomationRulesOutput struct {
 
 	// A list of rule details for the provided rule ARNs.

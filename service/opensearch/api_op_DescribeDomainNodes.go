@@ -45,6 +45,10 @@ type DescribeDomainNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainNodesInput) operationName() string {
+	return "DescribeDomainNodes"
+}
+
 // The result of a DescribeDomainNodes request. Contains information about the
 // nodes on the requested domain.
 type DescribeDomainNodesOutput struct {

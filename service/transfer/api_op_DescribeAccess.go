@@ -59,6 +59,10 @@ type DescribeAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccessInput) operationName() string {
+	return "DescribeAccess"
+}
+
 type DescribeAccessOutput struct {
 
 	// The external identifier of the server that the access is attached to.

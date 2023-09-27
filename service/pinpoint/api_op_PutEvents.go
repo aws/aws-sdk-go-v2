@@ -49,6 +49,10 @@ type PutEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEventsInput) operationName() string {
+	return "PutEvents"
+}
+
 type PutEventsOutput struct {
 
 	// Provides information about endpoints and the events that they're associated

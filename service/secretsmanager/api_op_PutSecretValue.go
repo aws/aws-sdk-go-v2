@@ -116,6 +116,10 @@ type PutSecretValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSecretValueInput) operationName() string {
+	return "PutSecretValue"
+}
+
 type PutSecretValueOutput struct {
 
 	// The ARN of the secret.

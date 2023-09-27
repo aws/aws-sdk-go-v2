@@ -90,6 +90,10 @@ type RecognizeTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecognizeTextInput) operationName() string {
+	return "RecognizeText"
+}
+
 type RecognizeTextOutput struct {
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's

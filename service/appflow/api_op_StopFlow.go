@@ -45,6 +45,10 @@ type StopFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopFlowInput) operationName() string {
+	return "StopFlow"
+}
+
 type StopFlowOutput struct {
 
 	// The flow's Amazon Resource Name (ARN).

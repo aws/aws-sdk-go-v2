@@ -48,6 +48,10 @@ type DeleteContinuousDeploymentPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteContinuousDeploymentPolicyInput) operationName() string {
+	return "DeleteContinuousDeploymentPolicy"
+}
+
 type DeleteContinuousDeploymentPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

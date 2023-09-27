@@ -64,6 +64,10 @@ type UpdateSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSigningCertificateInput) operationName() string {
+	return "UpdateSigningCertificate"
+}
+
 type UpdateSigningCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

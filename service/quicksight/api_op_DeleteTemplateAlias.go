@@ -55,6 +55,10 @@ type DeleteTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTemplateAliasInput) operationName() string {
+	return "DeleteTemplateAlias"
+}
+
 type DeleteTemplateAliasOutput struct {
 
 	// The name for the template alias.

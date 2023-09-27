@@ -82,6 +82,10 @@ type UpdateNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkProfileInput) operationName() string {
+	return "UpdateNetworkProfile"
+}
+
 type UpdateNetworkProfileOutput struct {
 
 	// A list of the available network profiles.

@@ -78,6 +78,10 @@ type DescribeLoadBalancerTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoadBalancerTargetGroupsInput) operationName() string {
+	return "DescribeLoadBalancerTargetGroups"
+}
+
 type DescribeLoadBalancerTargetGroupsOutput struct {
 
 	// Information about the target groups.

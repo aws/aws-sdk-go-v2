@@ -61,6 +61,10 @@ type UpdateAvailabilityOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAvailabilityOptionsInput) operationName() string {
+	return "UpdateAvailabilityOptions"
+}
+
 // The result of a UpdateAvailabilityOptions request. Contains the status of the
 // domain's availability options.
 type UpdateAvailabilityOptionsOutput struct {

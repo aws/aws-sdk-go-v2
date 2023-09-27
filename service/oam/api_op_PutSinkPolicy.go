@@ -61,6 +61,10 @@ type PutSinkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSinkPolicyInput) operationName() string {
+	return "PutSinkPolicy"
+}
+
 type PutSinkPolicyOutput struct {
 
 	// The policy that you specified.

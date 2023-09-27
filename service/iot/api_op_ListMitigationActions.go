@@ -49,6 +49,10 @@ type ListMitigationActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMitigationActionsInput) operationName() string {
+	return "ListMitigationActions"
+}
+
 type ListMitigationActionsOutput struct {
 
 	// A set of actions that matched the specified filter criteria.

@@ -42,6 +42,10 @@ type DescribeDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDiscovererInput) operationName() string {
+	return "DescribeDiscoverer"
+}
+
 type DescribeDiscovererOutput struct {
 
 	// The Status if the discoverer will discover schemas from events sent from

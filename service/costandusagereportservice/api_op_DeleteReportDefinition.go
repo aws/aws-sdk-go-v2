@@ -41,6 +41,10 @@ type DeleteReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReportDefinitionInput) operationName() string {
+	return "DeleteReportDefinition"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response.
 type DeleteReportDefinitionOutput struct {
 

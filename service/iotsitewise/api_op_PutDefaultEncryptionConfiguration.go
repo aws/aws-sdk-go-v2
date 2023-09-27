@@ -48,6 +48,10 @@ type PutDefaultEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDefaultEncryptionConfigurationInput) operationName() string {
+	return "PutDefaultEncryptionConfiguration"
+}
+
 type PutDefaultEncryptionConfigurationOutput struct {
 
 	// The status of the account configuration. This contains the ConfigurationState .

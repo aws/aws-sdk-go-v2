@@ -53,6 +53,10 @@ type ImportSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportSignalCatalogInput) operationName() string {
+	return "ImportSignalCatalog"
+}
+
 type ImportSignalCatalogOutput struct {
 
 	// The Amazon Resource Name (ARN) of the imported signal catalog.

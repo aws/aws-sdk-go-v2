@@ -45,6 +45,10 @@ type ListBranchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBranchesInput) operationName() string {
+	return "ListBranches"
+}
+
 // Represents the output of a list branches operation.
 type ListBranchesOutput struct {
 

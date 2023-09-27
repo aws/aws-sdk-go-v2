@@ -41,6 +41,10 @@ type DeleteDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataflowEndpointGroupInput) operationName() string {
+	return "DeleteDataflowEndpointGroup"
+}
+
 type DeleteDataflowEndpointGroupOutput struct {
 
 	// UUID of a dataflow endpoint group.

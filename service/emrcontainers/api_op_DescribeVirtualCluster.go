@@ -47,6 +47,10 @@ type DescribeVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualClusterInput) operationName() string {
+	return "DescribeVirtualCluster"
+}
+
 type DescribeVirtualClusterOutput struct {
 
 	// This output displays information about the specified virtual cluster.

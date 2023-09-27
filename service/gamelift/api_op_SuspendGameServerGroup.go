@@ -63,6 +63,10 @@ type SuspendGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SuspendGameServerGroupInput) operationName() string {
+	return "SuspendGameServerGroup"
+}
+
 type SuspendGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource, with the

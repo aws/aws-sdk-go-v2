@@ -55,6 +55,10 @@ type UpdateAppVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppVersionInput) operationName() string {
+	return "UpdateAppVersion"
+}
+
 type UpdateAppVersionOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

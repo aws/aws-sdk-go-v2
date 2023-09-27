@@ -35,6 +35,10 @@ type DescribeAutoScalingNotificationTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoScalingNotificationTypesInput) operationName() string {
+	return "DescribeAutoScalingNotificationTypes"
+}
+
 type DescribeAutoScalingNotificationTypesOutput struct {
 
 	// The notification types.

@@ -45,6 +45,10 @@ type DeleteSamplingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSamplingRuleInput) operationName() string {
+	return "DeleteSamplingRule"
+}
+
 type DeleteSamplingRuleOutput struct {
 
 	// The deleted rule definition and metadata.

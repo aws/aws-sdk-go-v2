@@ -205,6 +205,10 @@ type PutParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutParameterInput) operationName() string {
+	return "PutParameter"
+}
+
 type PutParameterOutput struct {
 
 	// The tier assigned to the parameter.

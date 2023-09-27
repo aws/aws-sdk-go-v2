@@ -56,6 +56,10 @@ type AcceptAddressTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptAddressTransferInput) operationName() string {
+	return "AcceptAddressTransfer"
+}
+
 type AcceptAddressTransferOutput struct {
 
 	// An Elastic IP address transfer.

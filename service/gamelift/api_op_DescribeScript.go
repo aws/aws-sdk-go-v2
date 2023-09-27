@@ -46,6 +46,10 @@ type DescribeScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScriptInput) operationName() string {
+	return "DescribeScript"
+}
+
 type DescribeScriptOutput struct {
 
 	// A set of properties describing the requested script.

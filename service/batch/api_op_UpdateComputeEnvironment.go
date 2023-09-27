@@ -99,6 +99,10 @@ type UpdateComputeEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateComputeEnvironmentInput) operationName() string {
+	return "UpdateComputeEnvironment"
+}
+
 type UpdateComputeEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.

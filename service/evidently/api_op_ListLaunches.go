@@ -53,6 +53,10 @@ type ListLaunchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLaunchesInput) operationName() string {
+	return "ListLaunches"
+}
+
 type ListLaunchesOutput struct {
 
 	// An array of structures that contain the configuration details of the launches

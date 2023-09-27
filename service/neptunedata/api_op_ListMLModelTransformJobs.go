@@ -49,6 +49,10 @@ type ListMLModelTransformJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMLModelTransformJobsInput) operationName() string {
+	return "ListMLModelTransformJobs"
+}
+
 type ListMLModelTransformJobsOutput struct {
 
 	// A page from the list of model transform IDs.

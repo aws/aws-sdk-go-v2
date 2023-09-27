@@ -42,6 +42,10 @@ type GetContactPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactPolicyInput) operationName() string {
+	return "GetContactPolicy"
+}
+
 type GetContactPolicyOutput struct {
 
 	// The ARN of the contact or escalation plan.

@@ -11,6 +11,7 @@
         "api_client_test.go",
         "api_op_GetRawMessageContent.go",
         "api_op_PutRawMessageContent.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

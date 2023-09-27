@@ -42,6 +42,10 @@ type DescribeCustomRoutingEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomRoutingEndpointGroupInput) operationName() string {
+	return "DescribeCustomRoutingEndpointGroup"
+}
+
 type DescribeCustomRoutingEndpointGroupOutput struct {
 
 	// The description of an endpoint group for a custom routing accelerator.

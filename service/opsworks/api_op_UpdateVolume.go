@@ -53,6 +53,10 @@ type UpdateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVolumeInput) operationName() string {
+	return "UpdateVolume"
+}
+
 type UpdateVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,6 +41,10 @@ type DeleteFunctionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFunctionDefinitionInput) operationName() string {
+	return "DeleteFunctionDefinition"
+}
+
 type DeleteFunctionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

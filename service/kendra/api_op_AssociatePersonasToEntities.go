@@ -61,6 +61,10 @@ type AssociatePersonasToEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePersonasToEntitiesInput) operationName() string {
+	return "AssociatePersonasToEntities"
+}
+
 type AssociatePersonasToEntitiesOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that

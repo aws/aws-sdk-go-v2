@@ -49,6 +49,10 @@ type SendUsersMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendUsersMessagesInput) operationName() string {
+	return "SendUsersMessages"
+}
+
 type SendUsersMessagesOutput struct {
 
 	// Provides information about which users and endpoints a message was sent to.

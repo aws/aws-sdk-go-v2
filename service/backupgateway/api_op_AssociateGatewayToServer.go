@@ -48,6 +48,10 @@ type AssociateGatewayToServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateGatewayToServerInput) operationName() string {
+	return "AssociateGatewayToServer"
+}
+
 type AssociateGatewayToServerOutput struct {
 
 	// The Amazon Resource Name (ARN) of a gateway.

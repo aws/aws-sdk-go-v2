@@ -50,6 +50,10 @@ type ListAssistantAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssistantAssociationsInput) operationName() string {
+	return "ListAssistantAssociations"
+}
+
 type ListAssistantAssociationsOutput struct {
 
 	// Summary information about assistant associations.

@@ -83,6 +83,10 @@ type AssociateFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFacesInput) operationName() string {
+	return "AssociateFaces"
+}
+
 type AssociateFacesOutput struct {
 
 	// An array of AssociatedFace objects containing FaceIDs that are successfully

@@ -49,6 +49,10 @@ type DetectPiiEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectPiiEntitiesInput) operationName() string {
+	return "DetectPiiEntities"
+}
+
 type DetectPiiEntitiesOutput struct {
 
 	// A collection of PII entities identified in the input text. For each entity, the

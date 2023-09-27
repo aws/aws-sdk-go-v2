@@ -46,6 +46,10 @@ type DescribeRulesPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRulesPackagesInput) operationName() string {
+	return "DescribeRulesPackages"
+}
+
 type DescribeRulesPackagesOutput struct {
 
 	// Rules package details that cannot be described. An error code is provided for

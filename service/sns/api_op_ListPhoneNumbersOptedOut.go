@@ -47,6 +47,10 @@ type ListPhoneNumbersOptedOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPhoneNumbersOptedOutInput) operationName() string {
+	return "ListPhoneNumbersOptedOut"
+}
+
 // The response from the ListPhoneNumbersOptedOut action.
 type ListPhoneNumbersOptedOutOutput struct {
 

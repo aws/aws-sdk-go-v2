@@ -44,6 +44,10 @@ type DeleteDBSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBSnapshotInput) operationName() string {
+	return "DeleteDBSnapshot"
+}
+
 type DeleteDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a

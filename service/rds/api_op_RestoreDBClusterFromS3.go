@@ -279,6 +279,10 @@ type RestoreDBClusterFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBClusterFromS3Input) operationName() string {
+	return "RestoreDBClusterFromS3"
+}
+
 type RestoreDBClusterFromS3Output struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

@@ -59,6 +59,10 @@ type ResetDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetDBParameterGroupInput) operationName() string {
+	return "ResetDBParameterGroup"
+}
+
 type ResetDBParameterGroupOutput struct {
 
 	// Provides the name of the DB parameter group.

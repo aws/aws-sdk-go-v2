@@ -50,6 +50,10 @@ type ReleaseHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleaseHostsInput) operationName() string {
+	return "ReleaseHosts"
+}
+
 type ReleaseHostsOutput struct {
 
 	// The IDs of the Dedicated Hosts that were successfully released.

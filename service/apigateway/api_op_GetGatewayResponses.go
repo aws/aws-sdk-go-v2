@@ -58,6 +58,10 @@ type GetGatewayResponsesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGatewayResponsesInput) operationName() string {
+	return "GetGatewayResponses"
+}
+
 // The collection of the GatewayResponse instances of a RestApi as a responseType
 // -to-GatewayResponse object map of key-value pairs. As such, pagination is not
 // supported for querying this collection.

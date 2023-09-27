@@ -47,6 +47,10 @@ type GetBandwidthRateLimitScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBandwidthRateLimitScheduleInput) operationName() string {
+	return "GetBandwidthRateLimitSchedule"
+}
+
 type GetBandwidthRateLimitScheduleOutput struct {
 
 	// An array containing bandwidth rate limit schedule intervals for a gateway. When

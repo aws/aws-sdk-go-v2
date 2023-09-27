@@ -44,6 +44,10 @@ type GetMeetingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMeetingInput) operationName() string {
+	return "GetMeeting"
+}
+
 type GetMeetingOutput struct {
 
 	// The Amazon Chime SDK meeting information.

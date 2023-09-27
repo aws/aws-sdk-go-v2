@@ -49,6 +49,10 @@ type GetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentsInput) operationName() string {
+	return "GetDeployments"
+}
+
 type GetDeploymentsOutput struct {
 
 	// The elements from this collection.

@@ -54,6 +54,10 @@ type DescribeAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAttachmentInput) operationName() string {
+	return "DescribeAttachment"
+}
+
 // The content and file name of the attachment returned by the DescribeAttachment
 // operation.
 type DescribeAttachmentOutput struct {

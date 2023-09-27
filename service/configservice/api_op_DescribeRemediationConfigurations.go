@@ -43,6 +43,10 @@ type DescribeRemediationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRemediationConfigurationsInput) operationName() string {
+	return "DescribeRemediationConfigurations"
+}
+
 type DescribeRemediationConfigurationsOutput struct {
 
 	// Returns a remediation configuration object.

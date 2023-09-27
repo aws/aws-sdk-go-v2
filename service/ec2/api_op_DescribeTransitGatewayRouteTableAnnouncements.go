@@ -56,6 +56,10 @@ type DescribeTransitGatewayRouteTableAnnouncementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransitGatewayRouteTableAnnouncementsInput) operationName() string {
+	return "DescribeTransitGatewayRouteTableAnnouncements"
+}
+
 type DescribeTransitGatewayRouteTableAnnouncementsOutput struct {
 
 	// The token for the next page of results.

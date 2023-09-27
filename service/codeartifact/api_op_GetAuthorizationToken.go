@@ -67,6 +67,10 @@ type GetAuthorizationTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAuthorizationTokenInput) operationName() string {
+	return "GetAuthorizationToken"
+}
+
 type GetAuthorizationTokenOutput struct {
 
 	// The returned authentication token.

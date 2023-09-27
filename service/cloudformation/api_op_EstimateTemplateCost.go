@@ -56,6 +56,10 @@ type EstimateTemplateCostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EstimateTemplateCostInput) operationName() string {
+	return "EstimateTemplateCost"
+}
+
 // The output for a EstimateTemplateCost action.
 type EstimateTemplateCostOutput struct {
 

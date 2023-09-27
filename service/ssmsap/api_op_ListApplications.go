@@ -47,6 +47,10 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationsInput) operationName() string {
+	return "ListApplications"
+}
+
 type ListApplicationsOutput struct {
 
 	// The applications registered with AWS Systems Manager for SAP.

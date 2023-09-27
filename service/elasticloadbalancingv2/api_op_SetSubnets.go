@@ -80,6 +80,10 @@ type SetSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetSubnetsInput) operationName() string {
+	return "SetSubnets"
+}
+
 type SetSubnetsOutput struct {
 
 	// Information about the subnets.

@@ -52,6 +52,10 @@ type UpdateOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOutpostResolverInput) operationName() string {
+	return "UpdateOutpostResolver"
+}
+
 type UpdateOutpostResolverOutput struct {
 
 	// The response to an UpdateOutpostResolver request.

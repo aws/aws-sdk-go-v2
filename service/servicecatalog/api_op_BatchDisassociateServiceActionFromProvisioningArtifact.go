@@ -49,6 +49,10 @@ type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateServiceActionFromProvisioningArtifactInput) operationName() string {
+	return "BatchDisassociateServiceActionFromProvisioningArtifact"
+}
+
 type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
 
 	// An object that contains a list of errors, along with information to help you

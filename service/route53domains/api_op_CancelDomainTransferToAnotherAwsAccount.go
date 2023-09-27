@@ -53,6 +53,10 @@ type CancelDomainTransferToAnotherAwsAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelDomainTransferToAnotherAwsAccountInput) operationName() string {
+	return "CancelDomainTransferToAnotherAwsAccount"
+}
+
 // The CancelDomainTransferToAnotherAwsAccount response includes the following
 // element.
 type CancelDomainTransferToAnotherAwsAccountOutput struct {

@@ -87,6 +87,7 @@
         "api_op_UpdatePullRequestTitle.go",
         "api_op_UpdateRepositoryDescription.go",
         "api_op_UpdateRepositoryName.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

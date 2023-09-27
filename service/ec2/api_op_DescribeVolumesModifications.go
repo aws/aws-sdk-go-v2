@@ -81,6 +81,10 @@ type DescribeVolumesModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVolumesModificationsInput) operationName() string {
+	return "DescribeVolumesModifications"
+}
+
 type DescribeVolumesModificationsOutput struct {
 
 	// The token to include in another request to get the next page of items. This

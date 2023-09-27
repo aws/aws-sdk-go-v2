@@ -46,6 +46,10 @@ type UpdateSchedulingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSchedulingPolicyInput) operationName() string {
+	return "UpdateSchedulingPolicy"
+}
+
 type UpdateSchedulingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type ListHarvestJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHarvestJobsInput) operationName() string {
+	return "ListHarvestJobs"
+}
+
 type ListHarvestJobsOutput struct {
 
 	// A list of HarvestJob records.

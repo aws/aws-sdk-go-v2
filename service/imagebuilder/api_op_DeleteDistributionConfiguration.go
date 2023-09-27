@@ -41,6 +41,10 @@ type DeleteDistributionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDistributionConfigurationInput) operationName() string {
+	return "DeleteDistributionConfiguration"
+}
+
 type DeleteDistributionConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the distribution configuration that was

@@ -59,6 +59,10 @@ type ModifyVerifiedAccessGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVerifiedAccessGroupInput) operationName() string {
+	return "ModifyVerifiedAccessGroup"
+}
+
 type ModifyVerifiedAccessGroupOutput struct {
 
 	// Details of Verified Access group.

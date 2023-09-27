@@ -44,6 +44,10 @@ type ListLoggerDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLoggerDefinitionsInput) operationName() string {
+	return "ListLoggerDefinitions"
+}
+
 type ListLoggerDefinitionsOutput struct {
 
 	// Information about a definition.

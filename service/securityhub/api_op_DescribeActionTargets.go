@@ -49,6 +49,10 @@ type DescribeActionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActionTargetsInput) operationName() string {
+	return "DescribeActionTargets"
+}
+
 type DescribeActionTargetsOutput struct {
 
 	// A list of ActionTarget objects. Each object includes the ActionTargetArn ,

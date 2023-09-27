@@ -58,6 +58,10 @@ type DescribeVpcClassicLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcClassicLinkInput) operationName() string {
+	return "DescribeVpcClassicLink"
+}
+
 type DescribeVpcClassicLinkOutput struct {
 
 	// The ClassicLink status of the VPCs.

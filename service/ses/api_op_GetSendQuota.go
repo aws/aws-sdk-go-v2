@@ -36,6 +36,10 @@ type GetSendQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSendQuotaInput) operationName() string {
+	return "GetSendQuota"
+}
+
 // Represents your Amazon SES daily sending quota, maximum send rate, and the
 // number of emails you have sent in the last 24 hours.
 type GetSendQuotaOutput struct {

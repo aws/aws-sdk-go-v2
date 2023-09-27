@@ -48,6 +48,10 @@ type ListResiliencyPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResiliencyPoliciesInput) operationName() string {
+	return "ListResiliencyPolicies"
+}
+
 type ListResiliencyPoliciesOutput struct {
 
 	// The resiliency policies for the Resilience Hub applications.

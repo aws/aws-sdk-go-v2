@@ -57,6 +57,10 @@ type ListIAMPolicyAssignmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIAMPolicyAssignmentsInput) operationName() string {
+	return "ListIAMPolicyAssignments"
+}
+
 type ListIAMPolicyAssignmentsOutput struct {
 
 	// Information describing the IAM policy assignments.

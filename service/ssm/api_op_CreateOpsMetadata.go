@@ -57,6 +57,10 @@ type CreateOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOpsMetadataInput) operationName() string {
+	return "CreateOpsMetadata"
+}
+
 type CreateOpsMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the

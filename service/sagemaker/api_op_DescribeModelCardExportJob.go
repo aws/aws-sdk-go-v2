@@ -43,6 +43,10 @@ type DescribeModelCardExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelCardExportJobInput) operationName() string {
+	return "DescribeModelCardExportJob"
+}
+
 type DescribeModelCardExportJobOutput struct {
 
 	// The date and time that the model export job was created.

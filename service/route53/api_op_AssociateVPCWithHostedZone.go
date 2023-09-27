@@ -71,6 +71,10 @@ type AssociateVPCWithHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateVPCWithHostedZoneInput) operationName() string {
+	return "AssociateVPCWithHostedZone"
+}
+
 // A complex type that contains the response information for the
 // AssociateVPCWithHostedZone request.
 type AssociateVPCWithHostedZoneOutput struct {

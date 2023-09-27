@@ -63,6 +63,10 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChannelInput) operationName() string {
+	return "CreateChannel"
+}
+
 type CreateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new channel.

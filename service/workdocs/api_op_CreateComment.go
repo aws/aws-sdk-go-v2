@@ -71,6 +71,10 @@ type CreateCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCommentInput) operationName() string {
+	return "CreateComment"
+}
+
 type CreateCommentOutput struct {
 
 	// The comment that has been created.

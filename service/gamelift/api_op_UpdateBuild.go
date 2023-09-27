@@ -55,6 +55,10 @@ type UpdateBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBuildInput) operationName() string {
+	return "UpdateBuild"
+}
+
 type UpdateBuildOutput struct {
 
 	// The updated build resource.

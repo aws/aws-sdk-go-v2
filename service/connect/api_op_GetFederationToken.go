@@ -51,6 +51,10 @@ type GetFederationTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFederationTokenInput) operationName() string {
+	return "GetFederationToken"
+}
+
 type GetFederationTokenOutput struct {
 
 	// The credentials to use for federation.

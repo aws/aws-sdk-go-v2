@@ -44,6 +44,10 @@ type DescribeOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOfferingInput) operationName() string {
+	return "DescribeOffering"
+}
+
 type DescribeOfferingOutput struct {
 
 	// A savings plan that reserves a certain amount of outbound bandwidth usage at a

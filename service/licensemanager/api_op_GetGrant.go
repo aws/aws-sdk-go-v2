@@ -45,6 +45,10 @@ type GetGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGrantInput) operationName() string {
+	return "GetGrant"
+}
+
 type GetGrantOutput struct {
 
 	// Grant details.

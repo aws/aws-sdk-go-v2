@@ -53,6 +53,10 @@ type ListAccountPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountPermissionsInput) operationName() string {
+	return "ListAccountPermissions"
+}
+
 type ListAccountPermissionsOutput struct {
 
 	// Contains details on the permissions an account has to configure Amazon

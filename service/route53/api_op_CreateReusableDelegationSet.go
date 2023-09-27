@@ -81,6 +81,10 @@ type CreateReusableDelegationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReusableDelegationSetInput) operationName() string {
+	return "CreateReusableDelegationSet"
+}
+
 type CreateReusableDelegationSetOutput struct {
 
 	// A complex type that contains name server information.

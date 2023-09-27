@@ -73,6 +73,10 @@ type UpdateTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTimelineEventInput) operationName() string {
+	return "UpdateTimelineEvent"
+}
+
 type UpdateTimelineEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

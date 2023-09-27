@@ -54,6 +54,10 @@ type RebootDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootDBInstanceInput) operationName() string {
+	return "RebootDBInstance"
+}
+
 type RebootDBInstanceOutput struct {
 
 	// Detailed information about an instance.

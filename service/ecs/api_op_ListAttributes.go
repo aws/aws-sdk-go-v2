@@ -76,6 +76,10 @@ type ListAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttributesInput) operationName() string {
+	return "ListAttributes"
+}
+
 type ListAttributesOutput struct {
 
 	// A list of attribute objects that meet the criteria of the request.

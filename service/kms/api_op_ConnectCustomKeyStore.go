@@ -97,6 +97,10 @@ type ConnectCustomKeyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConnectCustomKeyStoreInput) operationName() string {
+	return "ConnectCustomKeyStore"
+}
+
 type ConnectCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

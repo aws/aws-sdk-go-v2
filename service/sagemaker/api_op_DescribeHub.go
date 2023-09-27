@@ -43,6 +43,10 @@ type DescribeHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHubInput) operationName() string {
+	return "DescribeHub"
+}
+
 type DescribeHubOutput struct {
 
 	// The date and time that the hub was created.

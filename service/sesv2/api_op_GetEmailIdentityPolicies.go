@@ -49,6 +49,10 @@ type GetEmailIdentityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEmailIdentityPoliciesInput) operationName() string {
+	return "GetEmailIdentityPolicies"
+}
+
 // Identity policies associated with email identity.
 type GetEmailIdentityPoliciesOutput struct {
 

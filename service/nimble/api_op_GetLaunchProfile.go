@@ -51,6 +51,10 @@ type GetLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLaunchProfileInput) operationName() string {
+	return "GetLaunchProfile"
+}
+
 type GetLaunchProfileOutput struct {
 
 	// The launch profile.

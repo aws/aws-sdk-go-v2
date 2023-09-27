@@ -41,6 +41,10 @@ type BackTestAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BackTestAnomalyDetectorInput) operationName() string {
+	return "BackTestAnomalyDetector"
+}
+
 type BackTestAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

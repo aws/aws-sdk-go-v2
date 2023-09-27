@@ -52,6 +52,10 @@ type CreateDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainNameInput) operationName() string {
+	return "CreateDomainName"
+}
+
 type CreateDomainNameOutput struct {
 
 	// The configuration for the DomainName .

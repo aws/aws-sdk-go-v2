@@ -41,6 +41,10 @@ type DeletePredictorBacktestExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePredictorBacktestExportJobInput) operationName() string {
+	return "DeletePredictorBacktestExportJob"
+}
+
 type DeletePredictorBacktestExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

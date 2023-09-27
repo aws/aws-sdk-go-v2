@@ -48,6 +48,10 @@ type DeleteKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKeyPairInput) operationName() string {
+	return "DeleteKeyPair"
+}
+
 type DeleteKeyPairOutput struct {
 
 	// The ID of the key pair.

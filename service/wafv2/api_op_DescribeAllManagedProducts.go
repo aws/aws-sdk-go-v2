@@ -51,6 +51,10 @@ type DescribeAllManagedProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAllManagedProductsInput) operationName() string {
+	return "DescribeAllManagedProducts"
+}
+
 type DescribeAllManagedProductsOutput struct {
 
 	// High-level information for the Amazon Web Services Managed Rules rule groups

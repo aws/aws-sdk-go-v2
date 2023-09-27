@@ -50,6 +50,10 @@ type PutJobFailureResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutJobFailureResultInput) operationName() string {
+	return "PutJobFailureResult"
+}
+
 type PutJobFailureResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

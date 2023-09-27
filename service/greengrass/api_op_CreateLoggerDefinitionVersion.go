@@ -48,6 +48,10 @@ type CreateLoggerDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoggerDefinitionVersionInput) operationName() string {
+	return "CreateLoggerDefinitionVersion"
+}
+
 type CreateLoggerDefinitionVersionOutput struct {
 
 	// The ARN of the version.

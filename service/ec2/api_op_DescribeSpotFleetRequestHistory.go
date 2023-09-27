@@ -74,6 +74,10 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpotFleetRequestHistoryInput) operationName() string {
+	return "DescribeSpotFleetRequestHistory"
+}
+
 // Contains the output of DescribeSpotFleetRequestHistory.
 type DescribeSpotFleetRequestHistoryOutput struct {
 

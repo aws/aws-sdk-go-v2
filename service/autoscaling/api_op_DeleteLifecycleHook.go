@@ -48,6 +48,10 @@ type DeleteLifecycleHookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLifecycleHookInput) operationName() string {
+	return "DeleteLifecycleHook"
+}
+
 type DeleteLifecycleHookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

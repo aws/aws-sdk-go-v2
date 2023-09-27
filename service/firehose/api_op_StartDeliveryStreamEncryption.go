@@ -81,6 +81,10 @@ type StartDeliveryStreamEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDeliveryStreamEncryptionInput) operationName() string {
+	return "StartDeliveryStreamEncryption"
+}
+
 type StartDeliveryStreamEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

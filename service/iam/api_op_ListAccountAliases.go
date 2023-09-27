@@ -55,6 +55,10 @@ type ListAccountAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountAliasesInput) operationName() string {
+	return "ListAccountAliases"
+}
+
 // Contains the response to a successful ListAccountAliases request.
 type ListAccountAliasesOutput struct {
 

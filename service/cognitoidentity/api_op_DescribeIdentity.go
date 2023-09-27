@@ -45,6 +45,10 @@ type DescribeIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityInput) operationName() string {
+	return "DescribeIdentity"
+}
+
 // A description of the identity.
 type DescribeIdentityOutput struct {
 

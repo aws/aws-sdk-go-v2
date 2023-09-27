@@ -107,6 +107,10 @@ type DescribeBatchPredictionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBatchPredictionsInput) operationName() string {
+	return "DescribeBatchPredictions"
+}
+
 // Represents the output of a DescribeBatchPredictions operation. The content is
 // essentially a list of BatchPrediction s.
 type DescribeBatchPredictionsOutput struct {

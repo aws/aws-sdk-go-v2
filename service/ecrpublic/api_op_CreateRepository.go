@@ -57,6 +57,10 @@ type CreateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRepositoryInput) operationName() string {
+	return "CreateRepository"
+}
+
 type CreateRepositoryOutput struct {
 
 	// The catalog data for a repository. This data is publicly visible in the Amazon

@@ -48,6 +48,10 @@ type ModifyAquaConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyAquaConfigurationInput) operationName() string {
+	return "ModifyAquaConfiguration"
+}
+
 type ModifyAquaConfigurationOutput struct {
 
 	// This parameter is retired. Amazon Redshift automatically determines whether to

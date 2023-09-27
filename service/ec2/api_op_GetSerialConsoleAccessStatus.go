@@ -46,6 +46,10 @@ type GetSerialConsoleAccessStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSerialConsoleAccessStatusInput) operationName() string {
+	return "GetSerialConsoleAccessStatus"
+}
+
 type GetSerialConsoleAccessStatusOutput struct {
 
 	// If true , access to the EC2 serial console of all instances is enabled for your

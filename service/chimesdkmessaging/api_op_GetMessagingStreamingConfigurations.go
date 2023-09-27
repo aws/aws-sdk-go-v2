@@ -44,6 +44,10 @@ type GetMessagingStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMessagingStreamingConfigurationsInput) operationName() string {
+	return "GetMessagingStreamingConfigurations"
+}
+
 type GetMessagingStreamingConfigurationsOutput struct {
 
 	// The streaming settings.

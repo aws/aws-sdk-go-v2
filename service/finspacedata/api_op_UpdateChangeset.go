@@ -84,6 +84,10 @@ type UpdateChangesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChangesetInput) operationName() string {
+	return "UpdateChangeset"
+}
+
 // The response from a update changeset operation.
 type UpdateChangesetOutput struct {
 

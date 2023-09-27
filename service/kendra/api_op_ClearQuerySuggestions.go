@@ -47,6 +47,10 @@ type ClearQuerySuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClearQuerySuggestionsInput) operationName() string {
+	return "ClearQuerySuggestions"
+}
+
 type ClearQuerySuggestionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,6 +73,10 @@ type DecreaseReplicaCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecreaseReplicaCountInput) operationName() string {
+	return "DecreaseReplicaCount"
+}
+
 type DecreaseReplicaCountOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

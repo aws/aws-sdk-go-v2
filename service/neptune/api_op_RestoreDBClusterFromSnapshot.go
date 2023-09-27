@@ -137,6 +137,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBClusterFromSnapshotInput) operationName() string {
+	return "RestoreDBClusterFromSnapshot"
+}
+
 type RestoreDBClusterFromSnapshotOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as

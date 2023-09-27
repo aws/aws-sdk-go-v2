@@ -68,6 +68,10 @@ type IsAuthorizedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IsAuthorizedInput) operationName() string {
+	return "IsAuthorized"
+}
+
 type IsAuthorizedOutput struct {
 
 	// An authorization decision that indicates if the authorization request should be

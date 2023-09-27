@@ -42,6 +42,10 @@ type StopRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopRecommenderInput) operationName() string {
+	return "StopRecommender"
+}
+
 type StopRecommenderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the recommender you stopped.

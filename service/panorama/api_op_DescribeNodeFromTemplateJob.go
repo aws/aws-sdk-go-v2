@@ -43,6 +43,10 @@ type DescribeNodeFromTemplateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNodeFromTemplateJobInput) operationName() string {
+	return "DescribeNodeFromTemplateJob"
+}
+
 type DescribeNodeFromTemplateJobOutput struct {
 
 	// When the job was created.

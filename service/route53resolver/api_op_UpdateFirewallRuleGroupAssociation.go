@@ -59,6 +59,10 @@ type UpdateFirewallRuleGroupAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallRuleGroupAssociationInput) operationName() string {
+	return "UpdateFirewallRuleGroupAssociation"
+}
+
 type UpdateFirewallRuleGroupAssociationOutput struct {
 
 	// The association that you just updated.

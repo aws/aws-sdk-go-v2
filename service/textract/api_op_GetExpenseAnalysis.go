@@ -71,6 +71,10 @@ type GetExpenseAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExpenseAnalysisInput) operationName() string {
+	return "GetExpenseAnalysis"
+}
+
 type GetExpenseAnalysisOutput struct {
 
 	// The current model version of AnalyzeExpense.

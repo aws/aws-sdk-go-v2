@@ -69,6 +69,10 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataSourceInput) operationName() string {
+	return "UpdateDataSource"
+}
+
 type UpdateDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.

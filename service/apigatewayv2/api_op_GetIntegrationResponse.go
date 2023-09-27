@@ -52,6 +52,10 @@ type GetIntegrationResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntegrationResponseInput) operationName() string {
+	return "GetIntegrationResponse"
+}
+
 type GetIntegrationResponseOutput struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload

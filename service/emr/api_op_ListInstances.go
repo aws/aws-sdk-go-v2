@@ -65,6 +65,10 @@ type ListInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstancesInput) operationName() string {
+	return "ListInstances"
+}
+
 // This output contains the list of instances.
 type ListInstancesOutput struct {
 

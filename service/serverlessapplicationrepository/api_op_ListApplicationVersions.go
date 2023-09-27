@@ -48,6 +48,10 @@ type ListApplicationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationVersionsInput) operationName() string {
+	return "ListApplicationVersions"
+}
+
 type ListApplicationVersionsOutput struct {
 
 	// The token to request the next page of results.

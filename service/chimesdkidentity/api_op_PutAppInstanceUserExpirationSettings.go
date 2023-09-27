@@ -50,6 +50,10 @@ type PutAppInstanceUserExpirationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppInstanceUserExpirationSettingsInput) operationName() string {
+	return "PutAppInstanceUserExpirationSettings"
+}
+
 type PutAppInstanceUserExpirationSettingsOutput struct {
 
 	// The ARN of the AppInstanceUser .

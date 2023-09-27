@@ -80,6 +80,10 @@ type ListCompilationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCompilationJobsInput) operationName() string {
+	return "ListCompilationJobs"
+}
+
 type ListCompilationJobsOutput struct {
 
 	// An array of CompilationJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CompilationJobSummary.html)

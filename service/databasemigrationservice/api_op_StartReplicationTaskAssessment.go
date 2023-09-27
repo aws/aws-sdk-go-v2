@@ -51,6 +51,10 @@ type StartReplicationTaskAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReplicationTaskAssessmentInput) operationName() string {
+	return "StartReplicationTaskAssessment"
+}
+
 type StartReplicationTaskAssessmentOutput struct {
 
 	// The assessed replication task.

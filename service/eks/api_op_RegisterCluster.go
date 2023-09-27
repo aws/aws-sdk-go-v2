@@ -68,6 +68,10 @@ type RegisterClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterClusterInput) operationName() string {
+	return "RegisterCluster"
+}
+
 type RegisterClusterOutput struct {
 
 	// An object representing an Amazon EKS cluster.

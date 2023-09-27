@@ -38,6 +38,10 @@ type DescribeAccountHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountHealthInput) operationName() string {
+	return "DescribeAccountHealth"
+}
+
 type DescribeAccountHealthOutput struct {
 
 	// An integer that specifies the number of metrics that have been analyzed in your

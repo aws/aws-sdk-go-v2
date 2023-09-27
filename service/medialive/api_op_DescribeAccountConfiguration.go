@@ -37,6 +37,10 @@ type DescribeAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountConfigurationInput) operationName() string {
+	return "DescribeAccountConfiguration"
+}
+
 // Placeholder documentation for DescribeAccountConfigurationResponse
 type DescribeAccountConfigurationOutput struct {
 

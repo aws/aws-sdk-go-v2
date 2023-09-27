@@ -73,6 +73,10 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkflowInput) operationName() string {
+	return "CreateWorkflow"
+}
+
 type CreateWorkflowOutput struct {
 
 	// The workflow's ARN.

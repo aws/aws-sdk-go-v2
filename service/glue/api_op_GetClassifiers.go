@@ -43,6 +43,10 @@ type GetClassifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClassifiersInput) operationName() string {
+	return "GetClassifiers"
+}
+
 type GetClassifiersOutput struct {
 
 	// The requested list of classifier objects.

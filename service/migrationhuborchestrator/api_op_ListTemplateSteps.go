@@ -53,6 +53,10 @@ type ListTemplateStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplateStepsInput) operationName() string {
+	return "ListTemplateSteps"
+}
+
 type ListTemplateStepsOutput struct {
 
 	// The pagination token.

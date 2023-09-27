@@ -72,6 +72,10 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkAnalyzerConfigurationInput) operationName() string {
+	return "UpdateNetworkAnalyzerConfiguration"
+}
+
 type UpdateNetworkAnalyzerConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

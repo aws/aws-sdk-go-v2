@@ -70,6 +70,10 @@ type GetMediaForFragmentListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMediaForFragmentListInput) operationName() string {
+	return "GetMediaForFragmentList"
+}
+
 type GetMediaForFragmentListOutput struct {
 
 	// The content type of the requested media.

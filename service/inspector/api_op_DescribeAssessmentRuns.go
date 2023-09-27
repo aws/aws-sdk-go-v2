@@ -43,6 +43,10 @@ type DescribeAssessmentRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssessmentRunsInput) operationName() string {
+	return "DescribeAssessmentRuns"
+}
+
 type DescribeAssessmentRunsOutput struct {
 
 	// Information about the assessment run.

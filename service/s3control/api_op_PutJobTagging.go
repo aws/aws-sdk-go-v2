@@ -88,6 +88,10 @@ type PutJobTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutJobTaggingInput) operationName() string {
+	return "PutJobTagging"
+}
+
 type PutJobTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

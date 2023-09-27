@@ -53,6 +53,10 @@ type DeleteConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetEventDestinationInput) operationName() string {
+	return "DeleteConfigurationSetEventDestination"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteConfigurationSetEventDestinationOutput struct {

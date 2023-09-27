@@ -55,6 +55,10 @@ type DescribeRecommendationLimitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecommendationLimitationsInput) operationName() string {
+	return "DescribeRecommendationLimitations"
+}
+
 type DescribeRecommendationLimitationsOutput struct {
 
 	// The list of limitations for recommendations of target Amazon Web Services

@@ -53,6 +53,10 @@ type CreateFunctionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFunctionDefinitionVersionInput) operationName() string {
+	return "CreateFunctionDefinitionVersion"
+}
+
 type CreateFunctionDefinitionVersionOutput struct {
 
 	// The ARN of the version.

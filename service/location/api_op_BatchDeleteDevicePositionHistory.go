@@ -48,6 +48,10 @@ type BatchDeleteDevicePositionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteDevicePositionHistoryInput) operationName() string {
+	return "BatchDeleteDevicePositionHistory"
+}
+
 type BatchDeleteDevicePositionHistoryOutput struct {
 
 	// Contains error details for each device history that failed to delete.

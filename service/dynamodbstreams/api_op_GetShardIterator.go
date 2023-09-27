@@ -70,6 +70,10 @@ type GetShardIteratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetShardIteratorInput) operationName() string {
+	return "GetShardIterator"
+}
+
 // Represents the output of a GetShardIterator operation.
 type GetShardIteratorOutput struct {
 

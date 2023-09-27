@@ -73,6 +73,10 @@ type BatchUpdateTableRowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateTableRowsInput) operationName() string {
+	return "BatchUpdateTableRows"
+}
+
 type BatchUpdateTableRowsOutput struct {
 
 	// The updated workbook cursor after adding the new rows at the end of the table.

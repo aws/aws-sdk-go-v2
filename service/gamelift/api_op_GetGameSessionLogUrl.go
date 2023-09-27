@@ -47,6 +47,10 @@ type GetGameSessionLogUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGameSessionLogUrlInput) operationName() string {
+	return "GetGameSessionLogUrl"
+}
+
 type GetGameSessionLogUrlOutput struct {
 
 	// Location of the requested game session logs, available for download. This URL

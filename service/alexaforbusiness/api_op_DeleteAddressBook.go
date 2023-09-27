@@ -43,6 +43,10 @@ type DeleteAddressBookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAddressBookInput) operationName() string {
+	return "DeleteAddressBook"
+}
+
 type DeleteAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

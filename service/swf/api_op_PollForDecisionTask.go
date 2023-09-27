@@ -110,6 +110,10 @@ type PollForDecisionTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PollForDecisionTaskInput) operationName() string {
+	return "PollForDecisionTask"
+}
+
 // A structure that represents a decision task. Decision tasks are sent to
 // deciders in order for them to make decisions.
 type PollForDecisionTaskOutput struct {

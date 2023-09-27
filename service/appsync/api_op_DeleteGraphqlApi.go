@@ -41,6 +41,10 @@ type DeleteGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGraphqlApiInput) operationName() string {
+	return "DeleteGraphqlApi"
+}
+
 type DeleteGraphqlApiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

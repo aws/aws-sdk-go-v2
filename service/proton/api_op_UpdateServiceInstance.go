@@ -83,6 +83,10 @@ type UpdateServiceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceInstanceInput) operationName() string {
+	return "UpdateServiceInstance"
+}
+
 type UpdateServiceInstanceOutput struct {
 
 	// The service instance summary data that's returned by Proton.

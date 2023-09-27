@@ -62,6 +62,10 @@ type UpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuleInput) operationName() string {
+	return "UpdateRule"
+}
+
 type UpdateRuleOutput struct {
 
 	// Information about the action for the specified listener rule.

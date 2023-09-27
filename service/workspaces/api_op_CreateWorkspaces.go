@@ -49,6 +49,10 @@ type CreateWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkspacesInput) operationName() string {
+	return "CreateWorkspaces"
+}
+
 type CreateWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be created.

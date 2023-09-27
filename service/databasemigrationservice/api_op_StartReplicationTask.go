@@ -86,6 +86,10 @@ type StartReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReplicationTaskInput) operationName() string {
+	return "StartReplicationTask"
+}
+
 type StartReplicationTaskOutput struct {
 
 	// The replication task started.

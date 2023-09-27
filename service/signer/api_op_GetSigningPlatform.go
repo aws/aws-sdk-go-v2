@@ -42,6 +42,10 @@ type GetSigningPlatformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSigningPlatformInput) operationName() string {
+	return "GetSigningPlatform"
+}
+
 type GetSigningPlatformOutput struct {
 
 	// The category type of the target signing platform.

@@ -54,6 +54,10 @@ type UpdateRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRecommenderInput) operationName() string {
+	return "UpdateRecommender"
+}
+
 type UpdateRecommenderOutput struct {
 
 	// The same recommender Amazon Resource Name (ARN) as given in the request.

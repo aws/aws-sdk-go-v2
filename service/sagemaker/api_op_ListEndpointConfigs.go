@@ -64,6 +64,10 @@ type ListEndpointConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEndpointConfigsInput) operationName() string {
+	return "ListEndpointConfigs"
+}
+
 type ListEndpointConfigsOutput struct {
 
 	// An array of endpoint configurations.

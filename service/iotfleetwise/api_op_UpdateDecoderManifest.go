@@ -73,6 +73,10 @@ type UpdateDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDecoderManifestInput) operationName() string {
+	return "UpdateDecoderManifest"
+}
+
 type UpdateDecoderManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated decoder manifest.

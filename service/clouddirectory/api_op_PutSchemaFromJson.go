@@ -48,6 +48,10 @@ type PutSchemaFromJsonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSchemaFromJsonInput) operationName() string {
+	return "PutSchemaFromJson"
+}
+
 type PutSchemaFromJsonOutput struct {
 
 	// The ARN of the schema to update.

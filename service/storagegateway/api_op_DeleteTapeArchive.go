@@ -50,6 +50,10 @@ type DeleteTapeArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTapeArchiveInput) operationName() string {
+	return "DeleteTapeArchive"
+}
+
 // DeleteTapeArchiveOutput
 type DeleteTapeArchiveOutput struct {
 

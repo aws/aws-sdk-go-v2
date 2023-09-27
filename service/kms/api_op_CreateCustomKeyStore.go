@@ -213,6 +213,10 @@ type CreateCustomKeyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomKeyStoreInput) operationName() string {
+	return "CreateCustomKeyStore"
+}
+
 type CreateCustomKeyStoreOutput struct {
 
 	// A unique identifier for the new custom key store.

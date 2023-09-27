@@ -84,6 +84,10 @@ type ListPermissionAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionAssociationsInput) operationName() string {
+	return "ListPermissionAssociations"
+}
+
 type ListPermissionAssociationsOutput struct {
 
 	// If present, this value indicates that more output is available than is included

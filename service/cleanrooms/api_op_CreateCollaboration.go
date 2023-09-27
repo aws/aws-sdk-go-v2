@@ -78,6 +78,10 @@ type CreateCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCollaborationInput) operationName() string {
+	return "CreateCollaboration"
+}
+
 type CreateCollaborationOutput struct {
 
 	// The entire created collaboration object.

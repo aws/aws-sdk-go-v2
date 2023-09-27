@@ -44,6 +44,10 @@ type ListWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkspacesInput) operationName() string {
+	return "ListWorkspaces"
+}
+
 type ListWorkspacesOutput struct {
 
 	// The string that specifies the next page of results.

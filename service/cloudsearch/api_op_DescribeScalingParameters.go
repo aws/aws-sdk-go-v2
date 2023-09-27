@@ -50,6 +50,10 @@ type DescribeScalingParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalingParametersInput) operationName() string {
+	return "DescribeScalingParameters"
+}
+
 // The result of a DescribeScalingParameters request. Contains the scaling
 // parameters configured for the domain specified in the request.
 type DescribeScalingParametersOutput struct {

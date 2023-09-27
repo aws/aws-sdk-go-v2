@@ -53,6 +53,10 @@ type ListDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatabasesInput) operationName() string {
+	return "ListDatabases"
+}
+
 type ListDatabasesOutput struct {
 
 	// The SAP HANA databases of an application.

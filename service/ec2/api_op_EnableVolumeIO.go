@@ -48,6 +48,10 @@ type EnableVolumeIOInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableVolumeIOInput) operationName() string {
+	return "EnableVolumeIO"
+}
+
 type EnableVolumeIOOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

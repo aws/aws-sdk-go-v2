@@ -48,6 +48,10 @@ type DescribeDataSourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSourcePermissionsInput) operationName() string {
+	return "DescribeDataSourcePermissions"
+}
+
 type DescribeDataSourcePermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.

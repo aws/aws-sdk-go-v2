@@ -50,6 +50,10 @@ type ListRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRepositoriesInput) operationName() string {
+	return "ListRepositories"
+}
+
 type ListRepositoriesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

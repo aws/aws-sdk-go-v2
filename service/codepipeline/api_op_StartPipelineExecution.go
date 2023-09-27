@@ -52,6 +52,10 @@ type StartPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPipelineExecutionInput) operationName() string {
+	return "StartPipelineExecution"
+}
+
 // Represents the output of a StartPipelineExecution action.
 type StartPipelineExecutionOutput struct {
 

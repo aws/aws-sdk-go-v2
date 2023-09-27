@@ -59,6 +59,10 @@ type GetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingsInput) operationName() string {
+	return "GetFindings"
+}
+
 type GetFindingsOutput struct {
 
 	// The findings that matched the filters specified in the request.

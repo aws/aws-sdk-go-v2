@@ -58,6 +58,10 @@ type GetReadinessCheckResourceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReadinessCheckResourceStatusInput) operationName() string {
+	return "GetReadinessCheckResourceStatus"
+}
+
 type GetReadinessCheckResourceStatusOutput struct {
 
 	// The token that identifies which batch of results you want to see.

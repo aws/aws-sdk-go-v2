@@ -68,6 +68,10 @@ type GetLambdaFunctionRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLambdaFunctionRecommendationsInput) operationName() string {
+	return "GetLambdaFunctionRecommendations"
+}
+
 type GetLambdaFunctionRecommendationsOutput struct {
 
 	// An array of objects that describe function recommendations.

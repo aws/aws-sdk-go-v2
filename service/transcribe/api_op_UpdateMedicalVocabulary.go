@@ -61,6 +61,10 @@ type UpdateMedicalVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMedicalVocabularyInput) operationName() string {
+	return "UpdateMedicalVocabulary"
+}
+
 type UpdateMedicalVocabularyOutput struct {
 
 	// The language code you selected for your custom medical vocabulary. US English (

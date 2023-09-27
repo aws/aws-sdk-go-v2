@@ -43,6 +43,10 @@ type GetLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoggingConfigurationInput) operationName() string {
+	return "GetLoggingConfiguration"
+}
+
 type GetLoggingConfigurationOutput struct {
 
 	// The LoggingConfiguration for the specified web ACL.

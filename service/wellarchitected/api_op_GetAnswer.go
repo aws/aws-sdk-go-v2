@@ -63,6 +63,10 @@ type GetAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnswerInput) operationName() string {
+	return "GetAnswer"
+}
+
 // Output of a get answer call.
 type GetAnswerOutput struct {
 

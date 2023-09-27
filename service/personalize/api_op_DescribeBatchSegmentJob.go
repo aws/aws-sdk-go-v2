@@ -44,6 +44,10 @@ type DescribeBatchSegmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBatchSegmentJobInput) operationName() string {
+	return "DescribeBatchSegmentJob"
+}
+
 type DescribeBatchSegmentJobOutput struct {
 
 	// Information on the specified batch segment job.

@@ -47,6 +47,10 @@ type ListLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLinksInput) operationName() string {
+	return "ListLinks"
+}
+
 type ListLinksOutput struct {
 
 	// An array of structures that contain the information about the returned links.

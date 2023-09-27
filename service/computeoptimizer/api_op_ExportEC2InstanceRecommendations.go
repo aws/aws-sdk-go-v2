@@ -96,6 +96,10 @@ type ExportEC2InstanceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportEC2InstanceRecommendationsInput) operationName() string {
+	return "ExportEC2InstanceRecommendations"
+}
+
 type ExportEC2InstanceRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the

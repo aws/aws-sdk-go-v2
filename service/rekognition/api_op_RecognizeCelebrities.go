@@ -66,6 +66,10 @@ type RecognizeCelebritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecognizeCelebritiesInput) operationName() string {
+	return "RecognizeCelebrities"
+}
+
 type RecognizeCelebritiesOutput struct {
 
 	// Details about each celebrity found in the image. Amazon Rekognition can detect

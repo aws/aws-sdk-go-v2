@@ -40,6 +40,10 @@ type GetFindingsReportStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingsReportStatusInput) operationName() string {
+	return "GetFindingsReportStatus"
+}
+
 type GetFindingsReportStatusOutput struct {
 
 	// The destination of the report.

@@ -44,6 +44,10 @@ type DescribeTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTaskInput) operationName() string {
+	return "DescribeTask"
+}
+
 // DescribeTaskResponse
 type DescribeTaskOutput struct {
 

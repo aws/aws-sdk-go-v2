@@ -65,6 +65,10 @@ type ReportTaskProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReportTaskProgressInput) operationName() string {
+	return "ReportTaskProgress"
+}
+
 // Contains the output of ReportTaskProgress.
 type ReportTaskProgressOutput struct {
 

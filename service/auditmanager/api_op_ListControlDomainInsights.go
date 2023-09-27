@@ -47,6 +47,10 @@ type ListControlDomainInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListControlDomainInsightsInput) operationName() string {
+	return "ListControlDomainInsights"
+}
+
 type ListControlDomainInsightsOutput struct {
 
 	// The control domain analytics data that the ListControlDomainInsights API

@@ -55,6 +55,10 @@ type DisableControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableControlInput) operationName() string {
+	return "DisableControl"
+}
+
 type DisableControlOutput struct {
 
 	// The ID of the asynchronous operation, which is used to track status. The

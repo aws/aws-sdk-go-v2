@@ -60,6 +60,10 @@ type DescribeSuggestersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSuggestersInput) operationName() string {
+	return "DescribeSuggesters"
+}
+
 // The result of a DescribeSuggesters request.
 type DescribeSuggestersOutput struct {
 

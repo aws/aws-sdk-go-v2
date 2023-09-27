@@ -46,6 +46,10 @@ type DeleteReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReferenceInput) operationName() string {
+	return "DeleteReference"
+}
+
 type DeleteReferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

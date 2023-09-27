@@ -43,6 +43,10 @@ type DescribeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationInput) operationName() string {
+	return "DescribeConfiguration"
+}
+
 type DescribeConfigurationOutput struct {
 
 	// Required. The ARN of the configuration.

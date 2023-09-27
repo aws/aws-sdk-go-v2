@@ -43,6 +43,10 @@ type GetSuiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSuiteInput) operationName() string {
+	return "GetSuite"
+}
+
 // Represents the result of a get suite request.
 type GetSuiteOutput struct {
 

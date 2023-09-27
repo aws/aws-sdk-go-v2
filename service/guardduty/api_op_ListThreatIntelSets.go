@@ -53,6 +53,10 @@ type ListThreatIntelSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThreatIntelSetsInput) operationName() string {
+	return "ListThreatIntelSets"
+}
+
 type ListThreatIntelSetsOutput struct {
 
 	// The IDs of the ThreatIntelSet resources.

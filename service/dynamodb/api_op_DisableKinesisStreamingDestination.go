@@ -49,6 +49,10 @@ type DisableKinesisStreamingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableKinesisStreamingDestinationInput) operationName() string {
+	return "DisableKinesisStreamingDestination"
+}
+
 type DisableKinesisStreamingDestinationOutput struct {
 
 	// The current status of the replication.

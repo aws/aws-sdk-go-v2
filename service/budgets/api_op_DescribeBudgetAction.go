@@ -53,6 +53,10 @@ type DescribeBudgetActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBudgetActionInput) operationName() string {
+	return "DescribeBudgetAction"
+}
+
 type DescribeBudgetActionOutput struct {
 
 	// The account ID of the user. It's a 12-digit number.

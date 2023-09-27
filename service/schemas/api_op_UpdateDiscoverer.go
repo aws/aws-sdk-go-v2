@@ -49,6 +49,10 @@ type UpdateDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDiscovererInput) operationName() string {
+	return "UpdateDiscoverer"
+}
+
 type UpdateDiscovererOutput struct {
 
 	// The Status if the discoverer will discover schemas from events sent from

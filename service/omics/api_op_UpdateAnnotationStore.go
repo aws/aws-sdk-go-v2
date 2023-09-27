@@ -46,6 +46,10 @@ type UpdateAnnotationStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnnotationStoreInput) operationName() string {
+	return "UpdateAnnotationStore"
+}
+
 type UpdateAnnotationStoreOutput struct {
 
 	// When the store was created.

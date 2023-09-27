@@ -74,6 +74,10 @@ type UpdateQuerySuggestionsBlockListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQuerySuggestionsBlockListInput) operationName() string {
+	return "UpdateQuerySuggestionsBlockList"
+}
+
 type UpdateQuerySuggestionsBlockListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

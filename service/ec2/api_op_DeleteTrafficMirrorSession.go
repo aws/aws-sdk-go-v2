@@ -47,6 +47,10 @@ type DeleteTrafficMirrorSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrafficMirrorSessionInput) operationName() string {
+	return "DeleteTrafficMirrorSession"
+}
+
 type DeleteTrafficMirrorSessionOutput struct {
 
 	// The ID of the deleted Traffic Mirror session.

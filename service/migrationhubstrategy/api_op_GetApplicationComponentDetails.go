@@ -42,6 +42,10 @@ type GetApplicationComponentDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationComponentDetailsInput) operationName() string {
+	return "GetApplicationComponentDetails"
+}
+
 type GetApplicationComponentDetailsOutput struct {
 
 	// Detailed information about an application component.

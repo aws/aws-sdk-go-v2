@@ -53,6 +53,10 @@ type DeleteVerifiedAccessInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVerifiedAccessInstanceInput) operationName() string {
+	return "DeleteVerifiedAccessInstance"
+}
+
 type DeleteVerifiedAccessInstanceOutput struct {
 
 	// The ID of the Verified Access instance.

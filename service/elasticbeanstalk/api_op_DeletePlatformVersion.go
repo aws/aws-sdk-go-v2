@@ -40,6 +40,10 @@ type DeletePlatformVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePlatformVersionInput) operationName() string {
+	return "DeletePlatformVersion"
+}
+
 type DeletePlatformVersionOutput struct {
 
 	// Detailed information about the version of the custom platform.

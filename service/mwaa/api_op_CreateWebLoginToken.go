@@ -43,6 +43,10 @@ type CreateWebLoginTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWebLoginTokenInput) operationName() string {
+	return "CreateWebLoginToken"
+}
+
 type CreateWebLoginTokenOutput struct {
 
 	// The Airflow web server hostname for the environment.

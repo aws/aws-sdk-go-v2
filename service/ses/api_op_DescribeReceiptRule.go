@@ -53,6 +53,10 @@ type DescribeReceiptRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReceiptRuleInput) operationName() string {
+	return "DescribeReceiptRule"
+}
+
 // Represents the details of a receipt rule.
 type DescribeReceiptRuleOutput struct {
 

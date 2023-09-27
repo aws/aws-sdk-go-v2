@@ -45,6 +45,10 @@ type GetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExportJobInput) operationName() string {
+	return "GetExportJob"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type GetExportJobOutput struct {

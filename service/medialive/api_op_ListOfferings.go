@@ -75,6 +75,10 @@ type ListOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOfferingsInput) operationName() string {
+	return "ListOfferings"
+}
+
 // Placeholder documentation for ListOfferingsResponse
 type ListOfferingsOutput struct {
 

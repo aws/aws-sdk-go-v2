@@ -54,6 +54,10 @@ type CreateNetworkAclInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkAclInput) operationName() string {
+	return "CreateNetworkAcl"
+}
+
 type CreateNetworkAclOutput struct {
 
 	// Information about the network ACL.

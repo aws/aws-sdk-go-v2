@@ -100,6 +100,10 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelInput) operationName() string {
+	return "CreateModel"
+}
+
 type CreateModelOutput struct {
 
 	// The ARN of the model created in SageMaker.

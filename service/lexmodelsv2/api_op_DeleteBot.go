@@ -55,6 +55,10 @@ type DeleteBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBotInput) operationName() string {
+	return "DeleteBot"
+}
+
 type DeleteBotOutput struct {
 
 	// The unique identifier of the bot that Amazon Lex is deleting.

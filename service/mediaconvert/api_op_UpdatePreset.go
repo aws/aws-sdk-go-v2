@@ -51,6 +51,10 @@ type UpdatePresetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePresetInput) operationName() string {
+	return "UpdatePreset"
+}
+
 type UpdatePresetOutput struct {
 
 	// A preset is a collection of preconfigured media conversion settings that you

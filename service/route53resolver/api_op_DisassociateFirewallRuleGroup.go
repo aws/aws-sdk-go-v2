@@ -43,6 +43,10 @@ type DisassociateFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateFirewallRuleGroupInput) operationName() string {
+	return "DisassociateFirewallRuleGroup"
+}
+
 type DisassociateFirewallRuleGroupOutput struct {
 
 	// The firewall rule group association that you just removed.

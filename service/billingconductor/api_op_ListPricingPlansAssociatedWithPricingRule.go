@@ -51,6 +51,10 @@ type ListPricingPlansAssociatedWithPricingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPricingPlansAssociatedWithPricingRuleInput) operationName() string {
+	return "ListPricingPlansAssociatedWithPricingRule"
+}
+
 type ListPricingPlansAssociatedWithPricingRuleOutput struct {
 
 	// The pricing plan billing period for which associations will be listed.

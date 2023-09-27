@@ -128,6 +128,10 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateDataKeyPairWithoutPlaintextInput) operationName() string {
+	return "GenerateDataKeyPairWithoutPlaintext"
+}
+
 type GenerateDataKeyPairWithoutPlaintextOutput struct {
 
 	// The Amazon Resource Name ( key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)

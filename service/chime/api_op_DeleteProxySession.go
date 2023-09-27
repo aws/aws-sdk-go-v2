@@ -55,6 +55,10 @@ type DeleteProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProxySessionInput) operationName() string {
+	return "DeleteProxySession"
+}
+
 type DeleteProxySessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

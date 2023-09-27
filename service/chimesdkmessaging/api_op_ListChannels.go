@@ -67,6 +67,10 @@ type ListChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelsInput) operationName() string {
+	return "ListChannels"
+}
+
 type ListChannelsOutput struct {
 
 	// The information about each channel.

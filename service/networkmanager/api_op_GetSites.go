@@ -51,6 +51,10 @@ type GetSitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSitesInput) operationName() string {
+	return "GetSites"
+}
+
 type GetSitesOutput struct {
 
 	// The token for the next page of results.

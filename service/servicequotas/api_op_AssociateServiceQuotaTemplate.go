@@ -38,6 +38,10 @@ type AssociateServiceQuotaTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateServiceQuotaTemplateInput) operationName() string {
+	return "AssociateServiceQuotaTemplate"
+}
+
 type AssociateServiceQuotaTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

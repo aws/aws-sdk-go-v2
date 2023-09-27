@@ -50,6 +50,10 @@ type GetDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDatabaseInput) operationName() string {
+	return "GetDatabase"
+}
+
 type GetDatabaseOutput struct {
 
 	// The SAP HANA database of an application registered with AWS Systems Manager for

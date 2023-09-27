@@ -45,6 +45,10 @@ type DeleteIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIdentitiesInput) operationName() string {
+	return "DeleteIdentities"
+}
+
 // Returned in response to a successful DeleteIdentities operation.
 type DeleteIdentitiesOutput struct {
 

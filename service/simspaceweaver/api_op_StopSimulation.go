@@ -43,6 +43,10 @@ type StopSimulationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSimulationInput) operationName() string {
+	return "StopSimulation"
+}
+
 type StopSimulationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

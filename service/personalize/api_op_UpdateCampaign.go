@@ -63,6 +63,10 @@ type UpdateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCampaignInput) operationName() string {
+	return "UpdateCampaign"
+}
+
 type UpdateCampaignOutput struct {
 
 	// The same campaign ARN as given in the request.

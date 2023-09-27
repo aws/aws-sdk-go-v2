@@ -50,6 +50,10 @@ type StopMeetingTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopMeetingTranscriptionInput) operationName() string {
+	return "StopMeetingTranscription"
+}
+
 type StopMeetingTranscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

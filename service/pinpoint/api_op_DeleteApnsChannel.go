@@ -44,6 +44,10 @@ type DeleteApnsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApnsChannelInput) operationName() string {
+	return "DeleteApnsChannel"
+}
+
 type DeleteApnsChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push

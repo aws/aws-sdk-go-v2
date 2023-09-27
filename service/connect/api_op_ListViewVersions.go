@@ -57,6 +57,10 @@ type ListViewVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListViewVersionsInput) operationName() string {
+	return "ListViewVersions"
+}
+
 type ListViewVersionsOutput struct {
 
 	// The token for the next set of results. Use the value returned in the previous

@@ -68,6 +68,10 @@ type CreateGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGlobalClusterInput) operationName() string {
+	return "CreateGlobalCluster"
+}
+
 type CreateGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is

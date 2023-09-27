@@ -56,6 +56,10 @@ type DescribeRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecommendationsInput) operationName() string {
+	return "DescribeRecommendations"
+}
+
 type DescribeRecommendationsOutput struct {
 
 	// The unique pagination token returned for you to pass to a subsequent request.

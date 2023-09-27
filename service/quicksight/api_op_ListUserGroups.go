@@ -61,6 +61,10 @@ type ListUserGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserGroupsInput) operationName() string {
+	return "ListUserGroups"
+}
+
 type ListUserGroupsOutput struct {
 
 	// The list of groups the user is a member of.

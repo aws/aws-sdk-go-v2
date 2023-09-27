@@ -43,6 +43,10 @@ type ListReadinessChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReadinessChecksInput) operationName() string {
+	return "ListReadinessChecks"
+}
+
 type ListReadinessChecksOutput struct {
 
 	// The token that identifies which batch of results you want to see.

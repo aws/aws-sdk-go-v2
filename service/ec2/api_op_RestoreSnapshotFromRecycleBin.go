@@ -51,6 +51,10 @@ type RestoreSnapshotFromRecycleBinInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreSnapshotFromRecycleBinInput) operationName() string {
+	return "RestoreSnapshotFromRecycleBin"
+}
+
 type RestoreSnapshotFromRecycleBinOutput struct {
 
 	// The description for the snapshot.

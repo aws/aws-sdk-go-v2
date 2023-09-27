@@ -59,6 +59,10 @@ type CreateSlotTypeVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSlotTypeVersionInput) operationName() string {
+	return "CreateSlotTypeVersion"
+}
+
 type CreateSlotTypeVersionOutput struct {
 
 	// Checksum of the $LATEST version of the slot type.

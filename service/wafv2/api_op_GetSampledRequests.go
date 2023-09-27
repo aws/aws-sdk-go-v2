@@ -89,6 +89,10 @@ type GetSampledRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSampledRequestsInput) operationName() string {
+	return "GetSampledRequests"
+}
+
 type GetSampledRequestsOutput struct {
 
 	// The total number of requests from which GetSampledRequests got a sample of

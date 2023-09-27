@@ -53,6 +53,10 @@ type DeleteEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEvaluationFormInput) operationName() string {
+	return "DeleteEvaluationForm"
+}
+
 type DeleteEvaluationFormOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

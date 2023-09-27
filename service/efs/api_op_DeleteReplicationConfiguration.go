@@ -44,6 +44,10 @@ type DeleteReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationConfigurationInput) operationName() string {
+	return "DeleteReplicationConfiguration"
+}
+
 type DeleteReplicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

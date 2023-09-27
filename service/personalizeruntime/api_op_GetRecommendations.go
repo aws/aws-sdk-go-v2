@@ -96,6 +96,10 @@ type GetRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecommendationsInput) operationName() string {
+	return "GetRecommendations"
+}
+
 type GetRecommendationsOutput struct {
 
 	// A list of recommendations sorted in descending order by prediction score. There

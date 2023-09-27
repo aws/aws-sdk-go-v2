@@ -47,6 +47,10 @@ type ListOfferingTransactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOfferingTransactionsInput) operationName() string {
+	return "ListOfferingTransactions"
+}
+
 // Returns the transaction log of the specified offerings.
 type ListOfferingTransactionsOutput struct {
 

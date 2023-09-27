@@ -48,6 +48,10 @@ type UpdateCellInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCellInput) operationName() string {
+	return "UpdateCell"
+}
+
 type UpdateCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.

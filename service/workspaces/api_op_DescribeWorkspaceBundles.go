@@ -51,6 +51,10 @@ type DescribeWorkspaceBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceBundlesInput) operationName() string {
+	return "DescribeWorkspaceBundles"
+}
+
 type DescribeWorkspaceBundlesOutput struct {
 
 	// Information about the bundles.

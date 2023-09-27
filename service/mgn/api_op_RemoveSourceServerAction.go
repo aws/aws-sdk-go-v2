@@ -49,6 +49,10 @@ type RemoveSourceServerActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveSourceServerActionInput) operationName() string {
+	return "RemoveSourceServerAction"
+}
+
 type RemoveSourceServerActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,6 +62,10 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThirdPartyFirewallFirewallPoliciesInput) operationName() string {
+	return "ListThirdPartyFirewallFirewallPolicies"
+}
+
 type ListThirdPartyFirewallFirewallPoliciesOutput struct {
 
 	// The value that you will use for NextToken in the next

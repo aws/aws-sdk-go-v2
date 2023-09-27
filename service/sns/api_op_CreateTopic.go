@@ -106,6 +106,10 @@ type CreateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTopicInput) operationName() string {
+	return "CreateTopic"
+}
+
 // Response from CreateTopic action.
 type CreateTopicOutput struct {
 

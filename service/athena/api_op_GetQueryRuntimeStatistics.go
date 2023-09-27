@@ -47,6 +47,10 @@ type GetQueryRuntimeStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryRuntimeStatisticsInput) operationName() string {
+	return "GetQueryRuntimeStatistics"
+}
+
 type GetQueryRuntimeStatisticsOutput struct {
 
 	// Runtime statistics about the query execution.

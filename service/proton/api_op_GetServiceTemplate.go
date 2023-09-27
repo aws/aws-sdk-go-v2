@@ -42,6 +42,10 @@ type GetServiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceTemplateInput) operationName() string {
+	return "GetServiceTemplate"
+}
+
 type GetServiceTemplateOutput struct {
 
 	// The detailed data of the requested service template.

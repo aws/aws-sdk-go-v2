@@ -60,6 +60,10 @@ type ListDeliveryStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeliveryStreamsInput) operationName() string {
+	return "ListDeliveryStreams"
+}
+
 type ListDeliveryStreamsOutput struct {
 
 	// The names of the delivery streams.

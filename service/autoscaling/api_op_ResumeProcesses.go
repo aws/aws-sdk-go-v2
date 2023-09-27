@@ -57,6 +57,10 @@ type ResumeProcessesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeProcessesInput) operationName() string {
+	return "ResumeProcesses"
+}
+
 type ResumeProcessesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

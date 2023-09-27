@@ -61,6 +61,10 @@ type UpdateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRepositoryInput) operationName() string {
+	return "UpdateRepository"
+}
+
 type UpdateRepositoryOutput struct {
 
 	// The updated repository.

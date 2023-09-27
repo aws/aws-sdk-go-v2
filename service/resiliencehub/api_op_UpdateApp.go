@@ -69,6 +69,10 @@ type UpdateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppInput) operationName() string {
+	return "UpdateApp"
+}
+
 type UpdateAppOutput struct {
 
 	// The specified application, returned as an object with details including

@@ -60,6 +60,10 @@ type SendCustomVerificationEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendCustomVerificationEmailInput) operationName() string {
+	return "SendCustomVerificationEmail"
+}
+
 // The following element is returned by the service.
 type SendCustomVerificationEmailOutput struct {
 

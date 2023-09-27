@@ -85,6 +85,10 @@ type JoinDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*JoinDomainInput) operationName() string {
+	return "JoinDomain"
+}
+
 // JoinDomainOutput
 type JoinDomainOutput struct {
 

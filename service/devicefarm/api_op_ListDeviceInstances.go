@@ -46,6 +46,10 @@ type ListDeviceInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceInstancesInput) operationName() string {
+	return "ListDeviceInstances"
+}
+
 type ListDeviceInstancesOutput struct {
 
 	// An object that contains information about your device instances.

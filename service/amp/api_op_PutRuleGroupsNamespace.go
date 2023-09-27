@@ -57,6 +57,10 @@ type PutRuleGroupsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRuleGroupsNamespaceInput) operationName() string {
+	return "PutRuleGroupsNamespace"
+}
+
 // Represents the output of a PutRuleGroupsNamespace operation.
 type PutRuleGroupsNamespaceOutput struct {
 

@@ -47,6 +47,10 @@ type ListFacetNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFacetNamesInput) operationName() string {
+	return "ListFacetNames"
+}
+
 type ListFacetNamesOutput struct {
 
 	// The names of facets that exist within the schema.

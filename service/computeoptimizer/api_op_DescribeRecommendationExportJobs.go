@@ -58,6 +58,10 @@ type DescribeRecommendationExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecommendationExportJobsInput) operationName() string {
+	return "DescribeRecommendationExportJobs"
+}
+
 type DescribeRecommendationExportJobsOutput struct {
 
 	// The token to use to advance to the next page of export jobs. This value is null

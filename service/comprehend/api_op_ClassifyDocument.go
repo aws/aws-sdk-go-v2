@@ -71,6 +71,10 @@ type ClassifyDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClassifyDocumentInput) operationName() string {
+	return "ClassifyDocument"
+}
+
 type ClassifyDocumentOutput struct {
 
 	// The classes used by the document being analyzed. These are used for multi-class

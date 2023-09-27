@@ -84,6 +84,10 @@ type DeleteAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnomalyDetectorInput) operationName() string {
+	return "DeleteAnomalyDetector"
+}
+
 type DeleteAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

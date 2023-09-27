@@ -44,6 +44,10 @@ type ListTrustStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrustStoresInput) operationName() string {
+	return "ListTrustStores"
+}
+
 type ListTrustStoresOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this

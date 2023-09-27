@@ -55,6 +55,10 @@ type UpdateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkflowInput) operationName() string {
+	return "UpdateWorkflow"
+}
+
 type UpdateWorkflowOutput struct {
 
 	// The ID of the application configured in Application Discovery Service.

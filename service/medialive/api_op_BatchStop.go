@@ -44,6 +44,10 @@ type BatchStopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchStopInput) operationName() string {
+	return "BatchStop"
+}
+
 // Placeholder documentation for BatchStopResponse
 type BatchStopOutput struct {
 

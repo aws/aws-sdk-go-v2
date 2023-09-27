@@ -46,6 +46,10 @@ type DeleteFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFirewallPolicyInput) operationName() string {
+	return "DeleteFirewallPolicy"
+}
+
 type DeleteFirewallPolicyOutput struct {
 
 	// The object containing the definition of the FirewallPolicyResponse that you

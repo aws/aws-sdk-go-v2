@@ -43,6 +43,10 @@ type GetDNSSECInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDNSSECInput) operationName() string {
+	return "GetDNSSEC"
+}
+
 type GetDNSSECOutput struct {
 
 	// The key-signing keys (KSKs) in your account.

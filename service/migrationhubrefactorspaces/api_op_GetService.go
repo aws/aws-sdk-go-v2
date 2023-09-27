@@ -53,6 +53,10 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceInput) operationName() string {
+	return "GetService"
+}
+
 type GetServiceOutput struct {
 
 	// The ID of the application.

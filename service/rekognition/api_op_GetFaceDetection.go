@@ -70,6 +70,10 @@ type GetFaceDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFaceDetectionInput) operationName() string {
+	return "GetFaceDetection"
+}
+
 type GetFaceDetectionOutput struct {
 
 	// An array of faces detected in the video. Each element contains a detected

@@ -62,6 +62,10 @@ type CreateRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRulesetInput) operationName() string {
+	return "CreateRuleset"
+}
+
 type CreateRulesetOutput struct {
 
 	// The unique name of the created ruleset.

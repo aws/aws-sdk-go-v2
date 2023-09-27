@@ -118,6 +118,10 @@ type ImportCertificateAuthorityCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportCertificateAuthorityCertificateInput) operationName() string {
+	return "ImportCertificateAuthorityCertificate"
+}
+
 type ImportCertificateAuthorityCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

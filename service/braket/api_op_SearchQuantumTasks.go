@@ -50,6 +50,10 @@ type SearchQuantumTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchQuantumTasksInput) operationName() string {
+	return "SearchQuantumTasks"
+}
+
 type SearchQuantumTasksOutput struct {
 
 	// An array of QuantumTaskSummary objects for tasks that match the specified

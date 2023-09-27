@@ -58,6 +58,10 @@ type CreateWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkspaceImageInput) operationName() string {
+	return "CreateWorkspaceImage"
+}
+
 type CreateWorkspaceImageOutput struct {
 
 	// The date when the image was created.

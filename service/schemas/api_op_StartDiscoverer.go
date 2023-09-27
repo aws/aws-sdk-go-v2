@@ -42,6 +42,10 @@ type StartDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDiscovererInput) operationName() string {
+	return "StartDiscoverer"
+}
+
 type StartDiscovererOutput struct {
 
 	// The ID of the discoverer.

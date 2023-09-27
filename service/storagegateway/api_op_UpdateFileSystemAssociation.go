@@ -58,6 +58,10 @@ type UpdateFileSystemAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFileSystemAssociationInput) operationName() string {
+	return "UpdateFileSystemAssociation"
+}
+
 type UpdateFileSystemAssociationOutput struct {
 
 	// The ARN of the updated file system association.

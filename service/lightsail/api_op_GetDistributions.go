@@ -49,6 +49,10 @@ type GetDistributionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDistributionsInput) operationName() string {
+	return "GetDistributions"
+}
+
 type GetDistributionsOutput struct {
 
 	// An array of objects that describe your distributions.

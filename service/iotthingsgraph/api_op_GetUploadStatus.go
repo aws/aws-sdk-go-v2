@@ -46,6 +46,10 @@ type GetUploadStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUploadStatusInput) operationName() string {
+	return "GetUploadStatus"
+}
+
 type GetUploadStatusOutput struct {
 
 	// The date at which the upload was created.

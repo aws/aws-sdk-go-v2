@@ -47,6 +47,10 @@ type BatchGetFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetFieldInput) operationName() string {
+	return "BatchGetField"
+}
+
 type BatchGetFieldOutput struct {
 
 	// A list of field errors.

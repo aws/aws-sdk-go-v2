@@ -54,6 +54,10 @@ type DisassociateIdentityProviderConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateIdentityProviderConfigInput) operationName() string {
+	return "DisassociateIdentityProviderConfig"
+}
+
 type DisassociateIdentityProviderConfigOutput struct {
 
 	// An object representing an asynchronous update.

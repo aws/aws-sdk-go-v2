@@ -72,6 +72,10 @@ type CreateResponsePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResponsePlanInput) operationName() string {
+	return "CreateResponsePlan"
+}
+
 type CreateResponsePlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the response plan.

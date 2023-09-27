@@ -46,6 +46,10 @@ type CancelLoaderJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelLoaderJobInput) operationName() string {
+	return "CancelLoaderJob"
+}
+
 type CancelLoaderJobOutput struct {
 
 	// The cancellation status.

@@ -52,6 +52,10 @@ type DescribeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRepositoryInput) operationName() string {
+	return "DescribeRepository"
+}
+
 type DescribeRepositoryOutput struct {
 
 	// A RepositoryDescription object that contains the requested repository

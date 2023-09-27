@@ -54,6 +54,10 @@ type ListUserHierarchyGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserHierarchyGroupsInput) operationName() string {
+	return "ListUserHierarchyGroups"
+}
+
 type ListUserHierarchyGroupsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

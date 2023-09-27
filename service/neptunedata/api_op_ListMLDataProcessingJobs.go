@@ -49,6 +49,10 @@ type ListMLDataProcessingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMLDataProcessingJobsInput) operationName() string {
+	return "ListMLDataProcessingJobs"
+}
+
 type ListMLDataProcessingJobsOutput struct {
 
 	// A page listing data processing job IDs.

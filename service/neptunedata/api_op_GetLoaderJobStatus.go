@@ -65,6 +65,10 @@ type GetLoaderJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoaderJobStatusInput) operationName() string {
+	return "GetLoaderJobStatus"
+}
+
 type GetLoaderJobStatusOutput struct {
 
 	// Status information about the load job, in a layout that could look like this:

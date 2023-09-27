@@ -79,6 +79,10 @@ type RetireGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetireGrantInput) operationName() string {
+	return "RetireGrant"
+}
+
 type RetireGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

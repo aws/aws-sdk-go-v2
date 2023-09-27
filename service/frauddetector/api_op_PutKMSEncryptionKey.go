@@ -42,6 +42,10 @@ type PutKMSEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutKMSEncryptionKeyInput) operationName() string {
+	return "PutKMSEncryptionKey"
+}
+
 type PutKMSEncryptionKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

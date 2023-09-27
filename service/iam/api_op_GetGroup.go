@@ -61,6 +61,10 @@ type GetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupInput) operationName() string {
+	return "GetGroup"
+}
+
 // Contains the response to a successful GetGroup request.
 type GetGroupOutput struct {
 

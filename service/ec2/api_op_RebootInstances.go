@@ -53,6 +53,10 @@ type RebootInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootInstancesInput) operationName() string {
+	return "RebootInstances"
+}
+
 type RebootInstancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,6 +61,10 @@ type RegisterSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterSchemaVersionInput) operationName() string {
+	return "RegisterSchemaVersion"
+}
+
 type RegisterSchemaVersionOutput struct {
 
 	// The unique ID that represents the version of this schema.

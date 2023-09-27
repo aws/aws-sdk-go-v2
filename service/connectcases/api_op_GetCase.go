@@ -56,6 +56,10 @@ type GetCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCaseInput) operationName() string {
+	return "GetCase"
+}
+
 type GetCaseOutput struct {
 
 	// A list of detailed field information.

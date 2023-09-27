@@ -46,6 +46,10 @@ type ListEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEndpointsInput) operationName() string {
+	return "ListEndpoints"
+}
+
 type ListEndpointsOutput struct {
 
 	// The list of endpoints associated with the specified Outpost.

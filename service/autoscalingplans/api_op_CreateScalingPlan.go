@@ -56,6 +56,10 @@ type CreateScalingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScalingPlanInput) operationName() string {
+	return "CreateScalingPlan"
+}
+
 type CreateScalingPlanOutput struct {
 
 	// The version number of the scaling plan. This value is always 1 . Currently, you

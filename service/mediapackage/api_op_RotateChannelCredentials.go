@@ -46,6 +46,10 @@ type RotateChannelCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RotateChannelCredentialsInput) operationName() string {
+	return "RotateChannelCredentials"
+}
+
 type RotateChannelCredentialsOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.

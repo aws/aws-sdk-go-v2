@@ -68,6 +68,10 @@ type AssociateDRTRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDRTRoleInput) operationName() string {
+	return "AssociateDRTRole"
+}
+
 type AssociateDRTRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

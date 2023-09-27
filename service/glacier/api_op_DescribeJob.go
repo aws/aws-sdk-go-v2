@@ -73,6 +73,10 @@ type DescribeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobInput) operationName() string {
+	return "DescribeJob"
+}
+
 // Contains the description of an Amazon S3 Glacier job.
 type DescribeJobOutput struct {
 

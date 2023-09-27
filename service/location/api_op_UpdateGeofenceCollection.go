@@ -57,6 +57,10 @@ type UpdateGeofenceCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGeofenceCollectionInput) operationName() string {
+	return "UpdateGeofenceCollection"
+}
+
 type UpdateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated geofence collection. Used to

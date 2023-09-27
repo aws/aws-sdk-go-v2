@@ -43,6 +43,10 @@ type GetDedicatedIpPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDedicatedIpPoolInput) operationName() string {
+	return "GetDedicatedIpPool"
+}
+
 // The following element is returned by the service.
 type GetDedicatedIpPoolOutput struct {
 

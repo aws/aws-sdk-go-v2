@@ -43,6 +43,10 @@ type DescribeClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClassificationJobInput) operationName() string {
+	return "DescribeClassificationJob"
+}
+
 type DescribeClassificationJobOutput struct {
 
 	// An array of unique identifiers, one for each allow list that the job uses when

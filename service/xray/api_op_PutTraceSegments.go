@@ -75,6 +75,10 @@ type PutTraceSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutTraceSegmentsInput) operationName() string {
+	return "PutTraceSegments"
+}
+
 type PutTraceSegmentsOutput struct {
 
 	// Segments that failed processing.

@@ -48,6 +48,10 @@ type EnableLDAPSInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableLDAPSInput) operationName() string {
+	return "EnableLDAPS"
+}
+
 type EnableLDAPSOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

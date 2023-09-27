@@ -38,6 +38,10 @@ type DescribeLifecycleHookTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLifecycleHookTypesInput) operationName() string {
+	return "DescribeLifecycleHookTypes"
+}
+
 type DescribeLifecycleHookTypesOutput struct {
 
 	// The lifecycle hook types.

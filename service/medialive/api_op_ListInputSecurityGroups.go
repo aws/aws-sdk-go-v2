@@ -44,6 +44,10 @@ type ListInputSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInputSecurityGroupsInput) operationName() string {
+	return "ListInputSecurityGroups"
+}
+
 // Placeholder documentation for ListInputSecurityGroupsResponse
 type ListInputSecurityGroupsOutput struct {
 

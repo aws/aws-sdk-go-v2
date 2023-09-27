@@ -81,6 +81,10 @@ type PutRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRecordInput) operationName() string {
+	return "PutRecord"
+}
+
 type PutRecordOutput struct {
 
 	// The ID of the record.

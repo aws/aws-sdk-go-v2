@@ -54,6 +54,10 @@ type ListLaunchProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLaunchProfilesInput) operationName() string {
+	return "ListLaunchProfiles"
+}
+
 type ListLaunchProfilesOutput struct {
 
 	// A collection of launch profiles.

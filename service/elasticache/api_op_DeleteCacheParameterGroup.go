@@ -45,6 +45,10 @@ type DeleteCacheParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCacheParameterGroupInput) operationName() string {
+	return "DeleteCacheParameterGroup"
+}
+
 type DeleteCacheParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

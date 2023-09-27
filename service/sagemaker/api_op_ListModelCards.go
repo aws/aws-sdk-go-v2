@@ -65,6 +65,10 @@ type ListModelCardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelCardsInput) operationName() string {
+	return "ListModelCards"
+}
+
 type ListModelCardsOutput struct {
 
 	// The summaries of the listed model cards.

@@ -52,6 +52,10 @@ type GetMLDataProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLDataProcessingJobInput) operationName() string {
+	return "GetMLDataProcessingJob"
+}
+
 type GetMLDataProcessingJobOutput struct {
 
 	// The unique identifier of this data-processing job.

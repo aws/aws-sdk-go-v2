@@ -52,6 +52,10 @@ type PutDataSetRefreshPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDataSetRefreshPropertiesInput) operationName() string {
+	return "PutDataSetRefreshProperties"
+}
+
 type PutDataSetRefreshPropertiesOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

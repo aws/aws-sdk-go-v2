@@ -41,6 +41,10 @@ type StopAutoMLJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAutoMLJobInput) operationName() string {
+	return "StopAutoMLJob"
+}
+
 type StopAutoMLJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

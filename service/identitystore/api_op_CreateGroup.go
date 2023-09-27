@@ -49,6 +49,10 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupInput) operationName() string {
+	return "CreateGroup"
+}
+
 type CreateGroupOutput struct {
 
 	// The identifier of the newly created group in the identity store.

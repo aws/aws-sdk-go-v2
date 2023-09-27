@@ -98,6 +98,10 @@ type VerifyAuthRequestCryptogramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyAuthRequestCryptogramInput) operationName() string {
+	return "VerifyAuthRequestCryptogram"
+}
+
 type VerifyAuthRequestCryptogramOutput struct {
 
 	// The keyARN of the major encryption key that Amazon Web Services Payment

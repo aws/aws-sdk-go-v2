@@ -45,6 +45,10 @@ type ListOrganizationAdminAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationAdminAccountsInput) operationName() string {
+	return "ListOrganizationAdminAccounts"
+}
+
 type ListOrganizationAdminAccountsOutput struct {
 
 	// An array of objects, one for each delegated Amazon Macie administrator account

@@ -76,6 +76,10 @@ type CreateCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCommitInput) operationName() string {
+	return "CreateCommit"
+}
+
 type CreateCommitOutput struct {
 
 	// The full commit ID of the commit that contains your committed file changes.

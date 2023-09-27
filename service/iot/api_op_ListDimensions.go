@@ -44,6 +44,10 @@ type ListDimensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDimensionsInput) operationName() string {
+	return "ListDimensions"
+}
+
 type ListDimensionsOutput struct {
 
 	// A list of the names of the defined dimensions. Use DescribeDimension to get

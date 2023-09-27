@@ -63,6 +63,10 @@ type GetInAppTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInAppTemplateInput) operationName() string {
+	return "GetInAppTemplate"
+}
+
 type GetInAppTemplateOutput struct {
 
 	// In-App Template Response.

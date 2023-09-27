@@ -51,6 +51,10 @@ type FailoverShardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverShardInput) operationName() string {
+	return "FailoverShard"
+}
+
 type FailoverShardOutput struct {
 
 	// The cluster being failed over

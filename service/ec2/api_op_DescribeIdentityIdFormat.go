@@ -66,6 +66,10 @@ type DescribeIdentityIdFormatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityIdFormatInput) operationName() string {
+	return "DescribeIdentityIdFormat"
+}
+
 type DescribeIdentityIdFormatOutput struct {
 
 	// Information about the ID format for the resources.

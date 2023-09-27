@@ -51,6 +51,10 @@ type UpdateReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReplicationSetInput) operationName() string {
+	return "UpdateReplicationSet"
+}
+
 type UpdateReplicationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,6 +72,10 @@ type GetScreenDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetScreenDataInput) operationName() string {
+	return "GetScreenData"
+}
+
 type GetScreenDataOutput struct {
 
 	// A map of all the rows on the screen keyed by block name.

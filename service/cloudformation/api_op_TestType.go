@@ -85,6 +85,10 @@ type TestTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestTypeInput) operationName() string {
+	return "TestType"
+}
+
 type TestTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the extension.

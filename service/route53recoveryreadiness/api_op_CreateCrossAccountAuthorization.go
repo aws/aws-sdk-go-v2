@@ -43,6 +43,10 @@ type CreateCrossAccountAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCrossAccountAuthorizationInput) operationName() string {
+	return "CreateCrossAccountAuthorization"
+}
+
 type CreateCrossAccountAuthorizationOutput struct {
 
 	// The cross-account authorization.

@@ -13,6 +13,7 @@
         "api_op_MeterUsage.go",
         "api_op_RegisterUsage.go",
         "api_op_ResolveCustomer.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

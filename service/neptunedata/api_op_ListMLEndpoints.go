@@ -49,6 +49,10 @@ type ListMLEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMLEndpointsInput) operationName() string {
+	return "ListMLEndpoints"
+}
+
 type ListMLEndpointsOutput struct {
 
 	// A page from the list of inference endpoint IDs.

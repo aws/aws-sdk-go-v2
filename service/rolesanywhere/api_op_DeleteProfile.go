@@ -42,6 +42,10 @@ type DeleteProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProfileInput) operationName() string {
+	return "DeleteProfile"
+}
+
 type DeleteProfileOutput struct {
 
 	// The state of the profile after a read or write operation.

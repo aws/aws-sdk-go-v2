@@ -54,6 +54,10 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemasInput) operationName() string {
+	return "ListSchemas"
+}
+
 type ListSchemasOutput struct {
 
 	// The retrieved list of schemas.

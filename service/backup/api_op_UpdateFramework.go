@@ -58,6 +58,10 @@ type UpdateFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFrameworkInput) operationName() string {
+	return "UpdateFramework"
+}
+
 type UpdateFrameworkOutput struct {
 
 	// The date and time that a framework is created, in ISO 8601 representation. The

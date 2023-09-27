@@ -92,6 +92,10 @@ type PutLifecycleConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLifecycleConfigurationInput) operationName() string {
+	return "PutLifecycleConfiguration"
+}
+
 type PutLifecycleConfigurationOutput struct {
 
 	// An array of lifecycle management policies. EFS supports a maximum of one policy

@@ -50,6 +50,10 @@ type ListVariantStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVariantStoresInput) operationName() string {
+	return "ListVariantStores"
+}
+
 type ListVariantStoresOutput struct {
 
 	// A pagination token that's included if more results are available.

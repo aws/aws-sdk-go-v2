@@ -55,6 +55,10 @@ type CancelMLModelTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelMLModelTransformJobInput) operationName() string {
+	return "CancelMLModelTransformJob"
+}
+
 type CancelMLModelTransformJobOutput struct {
 
 	// the status of the cancelation.

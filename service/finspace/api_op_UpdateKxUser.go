@@ -55,6 +55,10 @@ type UpdateKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKxUserInput) operationName() string {
+	return "UpdateKxUser"
+}
+
 type UpdateKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.

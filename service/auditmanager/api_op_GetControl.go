@@ -42,6 +42,10 @@ type GetControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetControlInput) operationName() string {
+	return "GetControl"
+}
+
 type GetControlOutput struct {
 
 	// The details of the control that the GetControl API returned.

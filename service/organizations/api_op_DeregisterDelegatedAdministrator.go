@@ -62,6 +62,10 @@ type DeregisterDelegatedAdministratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterDelegatedAdministratorInput) operationName() string {
+	return "DeregisterDelegatedAdministrator"
+}
+
 type DeregisterDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

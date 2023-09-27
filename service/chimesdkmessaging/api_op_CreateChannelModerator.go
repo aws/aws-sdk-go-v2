@@ -61,6 +61,10 @@ type CreateChannelModeratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChannelModeratorInput) operationName() string {
+	return "CreateChannelModerator"
+}
+
 type CreateChannelModeratorOutput struct {
 
 	// The ARN of the channel.

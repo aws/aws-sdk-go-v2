@@ -101,6 +101,10 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterInput) operationName() string {
+	return "UpdateCluster"
+}
+
 type UpdateClusterOutput struct {
 
 	// The updated cluster

@@ -45,6 +45,10 @@ type GetControlOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetControlOperationInput) operationName() string {
+	return "GetControlOperation"
+}
+
 type GetControlOperationOutput struct {
 
 	// An operation performed by the control.

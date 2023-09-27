@@ -59,6 +59,10 @@ type CreateSchemaMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSchemaMappingInput) operationName() string {
+	return "CreateSchemaMapping"
+}
+
 type CreateSchemaMappingOutput struct {
 
 	// A description of the schema.

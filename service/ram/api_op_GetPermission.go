@@ -52,6 +52,10 @@ type GetPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPermissionInput) operationName() string {
+	return "GetPermission"
+}
+
 type GetPermissionOutput struct {
 
 	// An object with details about the permission.

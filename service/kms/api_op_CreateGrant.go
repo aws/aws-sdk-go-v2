@@ -167,6 +167,10 @@ type CreateGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGrantInput) operationName() string {
+	return "CreateGrant"
+}
+
 type CreateGrantOutput struct {
 
 	// The unique identifier for the grant. You can use the GrantId in a ListGrants ,

@@ -50,6 +50,10 @@ type DescribeRdsDbInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRdsDbInstancesInput) operationName() string {
+	return "DescribeRdsDbInstances"
+}
+
 // Contains the response to a DescribeRdsDbInstances request.
 type DescribeRdsDbInstancesOutput struct {
 

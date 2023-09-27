@@ -57,6 +57,10 @@ type UpdateResolverConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResolverConfigInput) operationName() string {
+	return "UpdateResolverConfig"
+}
+
 type UpdateResolverConfigOutput struct {
 
 	// An array that contains settings for the specified Resolver configuration.

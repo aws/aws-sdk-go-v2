@@ -43,6 +43,10 @@ type DeletePlaybackConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePlaybackConfigurationInput) operationName() string {
+	return "DeletePlaybackConfiguration"
+}
+
 type DeletePlaybackConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

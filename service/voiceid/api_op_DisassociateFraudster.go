@@ -56,6 +56,10 @@ type DisassociateFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateFraudsterInput) operationName() string {
+	return "DisassociateFraudster"
+}
+
 type DisassociateFraudsterOutput struct {
 
 	// Contains all the information about a fraudster.

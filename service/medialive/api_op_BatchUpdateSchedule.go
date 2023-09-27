@@ -49,6 +49,10 @@ type BatchUpdateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateScheduleInput) operationName() string {
+	return "BatchUpdateSchedule"
+}
+
 // Placeholder documentation for BatchUpdateScheduleResponse
 type BatchUpdateScheduleOutput struct {
 

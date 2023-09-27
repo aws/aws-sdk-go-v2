@@ -55,6 +55,10 @@ type GetDataEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataEndpointInput) operationName() string {
+	return "GetDataEndpoint"
+}
+
 type GetDataEndpointOutput struct {
 
 	// The endpoint value. To read data from the stream or to write data to it,

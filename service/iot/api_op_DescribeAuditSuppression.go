@@ -51,6 +51,10 @@ type DescribeAuditSuppressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAuditSuppressionInput) operationName() string {
+	return "DescribeAuditSuppression"
+}
+
 type DescribeAuditSuppressionOutput struct {
 
 	// An audit check name. Checks must be enabled for your account. (Use

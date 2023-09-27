@@ -52,6 +52,10 @@ type GetNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNodeInput) operationName() string {
+	return "GetNode"
+}
+
 type GetNodeOutput struct {
 
 	// Properties of the node configuration.

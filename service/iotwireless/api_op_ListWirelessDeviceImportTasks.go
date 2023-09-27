@@ -44,6 +44,10 @@ type ListWirelessDeviceImportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWirelessDeviceImportTasksInput) operationName() string {
+	return "ListWirelessDeviceImportTasks"
+}
+
 type ListWirelessDeviceImportTasksOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

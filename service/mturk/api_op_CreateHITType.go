@@ -87,6 +87,10 @@ type CreateHITTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHITTypeInput) operationName() string {
+	return "CreateHITType"
+}
+
 type CreateHITTypeOutput struct {
 
 	// The ID of the newly registered HIT type.

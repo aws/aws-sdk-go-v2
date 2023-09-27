@@ -49,6 +49,10 @@ type BatchGetCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCollectionInput) operationName() string {
+	return "BatchGetCollection"
+}
+
 type BatchGetCollectionOutput struct {
 
 	// Details about each collection.

@@ -43,6 +43,10 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcePolicyInput) operationName() string {
+	return "GetResourcePolicy"
+}
+
 type GetResourcePolicyOutput struct {
 
 	// The policy document to set; formatted in JSON.

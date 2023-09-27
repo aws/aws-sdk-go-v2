@@ -56,6 +56,10 @@ type ListSubscribedRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubscribedRuleGroupsInput) operationName() string {
+	return "ListSubscribedRuleGroups"
+}
+
 type ListSubscribedRuleGroupsOutput struct {
 
 	// If you have more objects than the number that you specified for Limit in the

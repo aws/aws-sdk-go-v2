@@ -37,6 +37,10 @@ type ListAvailableVoiceConnectorRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableVoiceConnectorRegionsInput) operationName() string {
+	return "ListAvailableVoiceConnectorRegions"
+}
+
 type ListAvailableVoiceConnectorRegionsOutput struct {
 
 	// The list of AWS Regions.

@@ -41,6 +41,10 @@ type DeletePackagingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackagingConfigurationInput) operationName() string {
+	return "DeletePackagingConfiguration"
+}
+
 type DeletePackagingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

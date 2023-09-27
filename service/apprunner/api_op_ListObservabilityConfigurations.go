@@ -63,6 +63,10 @@ type ListObservabilityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObservabilityConfigurationsInput) operationName() string {
+	return "ListObservabilityConfigurations"
+}
+
 type ListObservabilityConfigurationsOutput struct {
 
 	// A list of summary information records for observability configurations. In a

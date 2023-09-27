@@ -56,6 +56,10 @@ type UpdateVoiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceProfileInput) operationName() string {
+	return "UpdateVoiceProfile"
+}
+
 type UpdateVoiceProfileOutput struct {
 
 	// The updated voice profile settings.

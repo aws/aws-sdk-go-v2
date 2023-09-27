@@ -71,6 +71,10 @@ type UpdateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInputInput) operationName() string {
+	return "UpdateInput"
+}
+
 // Placeholder documentation for UpdateInputResponse
 type UpdateInputOutput struct {
 

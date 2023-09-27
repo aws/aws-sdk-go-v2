@@ -118,6 +118,10 @@ type ListClosedWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClosedWorkflowExecutionsInput) operationName() string {
+	return "ListClosedWorkflowExecutions"
+}
+
 // Contains a paginated list of information about workflow executions.
 type ListClosedWorkflowExecutionsOutput struct {
 

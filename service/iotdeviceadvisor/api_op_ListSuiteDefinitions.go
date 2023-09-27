@@ -45,6 +45,10 @@ type ListSuiteDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSuiteDefinitionsInput) operationName() string {
+	return "ListSuiteDefinitions"
+}
+
 type ListSuiteDefinitionsOutput struct {
 
 	// A token used to get the next set of results.

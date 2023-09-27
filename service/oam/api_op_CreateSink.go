@@ -56,6 +56,10 @@ type CreateSinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSinkInput) operationName() string {
+	return "CreateSink"
+}
+
 type CreateSinkOutput struct {
 
 	// The ARN of the sink that is newly created.

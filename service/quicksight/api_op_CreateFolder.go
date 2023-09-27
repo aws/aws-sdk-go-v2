@@ -68,6 +68,10 @@ type CreateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFolderInput) operationName() string {
+	return "CreateFolder"
+}
+
 type CreateFolderOutput struct {
 
 	// The Amazon Resource Name (ARN) for the newly created folder.

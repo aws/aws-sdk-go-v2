@@ -54,6 +54,10 @@ type PutEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEncryptionConfigInput) operationName() string {
+	return "PutEncryptionConfig"
+}
+
 type PutEncryptionConfigOutput struct {
 
 	// The new encryption configuration.

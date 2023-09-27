@@ -53,6 +53,10 @@ type AssociateQueueQuickConnectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateQueueQuickConnectsInput) operationName() string {
+	return "AssociateQueueQuickConnects"
+}
+
 type AssociateQueueQuickConnectsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

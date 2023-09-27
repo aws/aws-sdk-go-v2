@@ -42,6 +42,10 @@ type StopEventsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopEventsDetectionJobInput) operationName() string {
+	return "StopEventsDetectionJob"
+}
+
 type StopEventsDetectionJobOutput struct {
 
 	// The identifier of the events detection job to stop.

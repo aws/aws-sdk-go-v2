@@ -108,6 +108,10 @@ type StartBackupJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBackupJobInput) operationName() string {
+	return "StartBackupJob"
+}
+
 type StartBackupJobOutput struct {
 
 	// Uniquely identifies a request to Backup to back up a resource.

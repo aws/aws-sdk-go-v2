@@ -65,6 +65,10 @@ type RegisterToWorkMailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterToWorkMailInput) operationName() string {
+	return "RegisterToWorkMail"
+}
+
 type RegisterToWorkMailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

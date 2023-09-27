@@ -61,6 +61,10 @@ type UpgradeProfileVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpgradeProfileVersionInput) operationName() string {
+	return "UpgradeProfileVersion"
+}
+
 type UpgradeProfileVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

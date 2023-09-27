@@ -47,6 +47,10 @@ type DeleteLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLicenseInput) operationName() string {
+	return "DeleteLicense"
+}
+
 type DeleteLicenseOutput struct {
 
 	// Date when the license is deleted.

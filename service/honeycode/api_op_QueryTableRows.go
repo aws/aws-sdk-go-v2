@@ -65,6 +65,10 @@ type QueryTableRowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryTableRowsInput) operationName() string {
+	return "QueryTableRows"
+}
+
 type QueryTableRowsOutput struct {
 
 	// The list of columns in the table whose row data is returned in the result.

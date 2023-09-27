@@ -76,6 +76,10 @@ type UpdateReplicationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReplicationJobInput) operationName() string {
+	return "UpdateReplicationJob"
+}
+
 type UpdateReplicationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

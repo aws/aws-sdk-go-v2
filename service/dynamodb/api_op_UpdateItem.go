@@ -214,6 +214,10 @@ type UpdateItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateItemInput) operationName() string {
+	return "UpdateItem"
+}
+
 // Represents the output of an UpdateItem operation.
 type UpdateItemOutput struct {
 

@@ -59,6 +59,10 @@ type DeleteGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGatewayRouteInput) operationName() string {
+	return "DeleteGatewayRoute"
+}
+
 type DeleteGatewayRouteOutput struct {
 
 	// The gateway route that was deleted.

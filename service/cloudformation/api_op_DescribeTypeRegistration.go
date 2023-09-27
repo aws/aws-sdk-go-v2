@@ -53,6 +53,10 @@ type DescribeTypeRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTypeRegistrationInput) operationName() string {
+	return "DescribeTypeRegistration"
+}
+
 type DescribeTypeRegistrationOutput struct {
 
 	// The description of the extension registration request.

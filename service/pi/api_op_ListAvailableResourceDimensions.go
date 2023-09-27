@@ -67,6 +67,10 @@ type ListAvailableResourceDimensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableResourceDimensionsInput) operationName() string {
+	return "ListAvailableResourceDimensions"
+}
+
 type ListAvailableResourceDimensionsOutput struct {
 
 	// The dimension information returned for requested metric types.

@@ -64,6 +64,10 @@ type CreateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFilterInput) operationName() string {
+	return "CreateFilter"
+}
+
 type CreateFilterOutput struct {
 
 	// The Amazon Resource Number (ARN) of the successfully created filter.

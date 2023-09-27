@@ -44,6 +44,10 @@ type ListChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelsInput) operationName() string {
+	return "ListChannels"
+}
+
 // Placeholder documentation for ListChannelsResponse
 type ListChannelsOutput struct {
 

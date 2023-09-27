@@ -75,6 +75,10 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserInput) operationName() string {
+	return "CreateUser"
+}
+
 // Contains the response to a successful CreateUser request.
 type CreateUserOutput struct {
 

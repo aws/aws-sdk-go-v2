@@ -42,6 +42,10 @@ type GetStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStreamInput) operationName() string {
+	return "GetStream"
+}
+
 type GetStreamOutput struct {
 
 	//

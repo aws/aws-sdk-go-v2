@@ -54,6 +54,10 @@ type UpdateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTopicInput) operationName() string {
+	return "UpdateTopic"
+}
+
 type UpdateTopicOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topic.

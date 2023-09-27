@@ -82,6 +82,10 @@ type CreateWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkforceInput) operationName() string {
+	return "CreateWorkforce"
+}
+
 type CreateWorkforceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the workforce.

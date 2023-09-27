@@ -64,6 +64,10 @@ type AssociateOpsItemRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateOpsItemRelatedItemInput) operationName() string {
+	return "AssociateOpsItemRelatedItem"
+}
+
 type AssociateOpsItemRelatedItemOutput struct {
 
 	// The association ID.

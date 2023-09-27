@@ -199,6 +199,10 @@ type StartBuildBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBuildBatchInput) operationName() string {
+	return "StartBuildBatch"
+}
+
 type StartBuildBatchOutput struct {
 
 	// A BuildBatch object that contains information about the batch build.

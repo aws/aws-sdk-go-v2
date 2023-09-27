@@ -75,6 +75,10 @@ type GetDocumentTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentTextDetectionInput) operationName() string {
+	return "GetDocumentTextDetection"
+}
+
 type GetDocumentTextDetectionOutput struct {
 
 	// The results of the text-detection operation.

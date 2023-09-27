@@ -69,6 +69,10 @@ type ListRestoreJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRestoreJobsInput) operationName() string {
+	return "ListRestoreJobs"
+}
+
 type ListRestoreJobsOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a

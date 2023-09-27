@@ -44,6 +44,10 @@ type ListFindingsFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsFiltersInput) operationName() string {
+	return "ListFindingsFilters"
+}
+
 type ListFindingsFiltersOutput struct {
 
 	// An array of objects, one for each filter that's associated with the account.

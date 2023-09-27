@@ -39,6 +39,10 @@ type DeleteSparqlStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSparqlStatisticsInput) operationName() string {
+	return "DeleteSparqlStatistics"
+}
+
 type DeleteSparqlStatisticsOutput struct {
 
 	// The deletion payload.

@@ -63,6 +63,10 @@ type StartConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartConnectionInput) operationName() string {
+	return "StartConnection"
+}
+
 type StartConnectionOutput struct {
 
 	// The ID of the connection.

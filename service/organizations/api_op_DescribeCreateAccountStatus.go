@@ -49,6 +49,10 @@ type DescribeCreateAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCreateAccountStatusInput) operationName() string {
+	return "DescribeCreateAccountStatus"
+}
+
 type DescribeCreateAccountStatusOutput struct {
 
 	// A structure that contains the current status of an account creation request.

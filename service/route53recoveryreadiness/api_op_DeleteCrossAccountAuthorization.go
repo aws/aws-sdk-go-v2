@@ -41,6 +41,10 @@ type DeleteCrossAccountAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCrossAccountAuthorizationInput) operationName() string {
+	return "DeleteCrossAccountAuthorization"
+}
+
 type DeleteCrossAccountAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

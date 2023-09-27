@@ -47,6 +47,10 @@ type ListScramSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScramSecretsInput) operationName() string {
+	return "ListScramSecrets"
+}
+
 type ListScramSecretsOutput struct {
 
 	// Paginated results marker.

@@ -281,6 +281,10 @@ type GetHLSStreamingSessionURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHLSStreamingSessionURLInput) operationName() string {
+	return "GetHLSStreamingSessionURL"
+}
+
 type GetHLSStreamingSessionURLOutput struct {
 
 	// The URL (containing the session token) that a media player can use to retrieve

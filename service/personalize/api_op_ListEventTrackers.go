@@ -51,6 +51,10 @@ type ListEventTrackersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventTrackersInput) operationName() string {
+	return "ListEventTrackers"
+}
+
 type ListEventTrackersOutput struct {
 
 	// A list of event trackers.

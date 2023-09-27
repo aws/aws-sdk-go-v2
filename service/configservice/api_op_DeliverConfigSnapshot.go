@@ -48,6 +48,10 @@ type DeliverConfigSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeliverConfigSnapshotInput) operationName() string {
+	return "DeliverConfigSnapshot"
+}
+
 // The output for the DeliverConfigSnapshot action, in JSON format.
 type DeliverConfigSnapshotOutput struct {
 

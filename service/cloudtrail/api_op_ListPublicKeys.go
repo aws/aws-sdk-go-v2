@@ -57,6 +57,10 @@ type ListPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPublicKeysInput) operationName() string {
+	return "ListPublicKeys"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type ListPublicKeysOutput struct {

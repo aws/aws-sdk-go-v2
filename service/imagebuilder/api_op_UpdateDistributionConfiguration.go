@@ -57,6 +57,10 @@ type UpdateDistributionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDistributionConfigurationInput) operationName() string {
+	return "UpdateDistributionConfiguration"
+}
+
 type UpdateDistributionConfigurationOutput struct {
 
 	// The idempotency token used to make this request idempotent.

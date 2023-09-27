@@ -57,6 +57,10 @@ type GetAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssetPropertyValueInput) operationName() string {
+	return "GetAssetPropertyValue"
+}
+
 type GetAssetPropertyValueOutput struct {
 
 	// The current asset property value.

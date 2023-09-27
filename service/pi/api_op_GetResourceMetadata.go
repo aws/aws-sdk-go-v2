@@ -51,6 +51,10 @@ type GetResourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceMetadataInput) operationName() string {
+	return "GetResourceMetadata"
+}
+
 type GetResourceMetadataOutput struct {
 
 	// The metadata for different features. For example, the metadata might indicate

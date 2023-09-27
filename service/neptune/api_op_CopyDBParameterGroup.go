@@ -65,6 +65,10 @@ type CopyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDBParameterGroupInput) operationName() string {
+	return "CopyDBParameterGroup"
+}
+
 type CopyDBParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB parameter group. This data type is

@@ -163,6 +163,10 @@ type CreateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSecretInput) operationName() string {
+	return "CreateSecret"
+}
+
 type CreateSecretOutput struct {
 
 	// The ARN of the new secret. The ARN includes the name of the secret followed by

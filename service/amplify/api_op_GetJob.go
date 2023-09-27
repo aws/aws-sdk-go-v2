@@ -53,6 +53,10 @@ type GetJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobInput) operationName() string {
+	return "GetJob"
+}
+
 type GetJobOutput struct {
 
 	// Describes an execution job for an Amplify app.

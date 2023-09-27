@@ -67,6 +67,10 @@ type UpdateStudioSessionMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStudioSessionMappingInput) operationName() string {
+	return "UpdateStudioSessionMapping"
+}
+
 type UpdateStudioSessionMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

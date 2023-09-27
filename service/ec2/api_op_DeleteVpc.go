@@ -52,6 +52,10 @@ type DeleteVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcInput) operationName() string {
+	return "DeleteVpc"
+}
+
 type DeleteVpcOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

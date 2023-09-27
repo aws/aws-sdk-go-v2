@@ -52,6 +52,10 @@ type UpdateReportGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReportGroupInput) operationName() string {
+	return "UpdateReportGroup"
+}
+
 type UpdateReportGroupOutput struct {
 
 	// Information about the updated report group.

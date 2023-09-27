@@ -48,6 +48,10 @@ type DescribeFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFunctionInput) operationName() string {
+	return "DescribeFunction"
+}
+
 type DescribeFunctionOutput struct {
 
 	// The version identifier for the current version of the CloudFront function.

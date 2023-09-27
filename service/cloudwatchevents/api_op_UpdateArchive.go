@@ -52,6 +52,10 @@ type UpdateArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateArchiveInput) operationName() string {
+	return "UpdateArchive"
+}
+
 type UpdateArchiveOutput struct {
 
 	// The ARN of the archive.

@@ -63,6 +63,10 @@ type ListTypesByAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTypesByAssociationInput) operationName() string {
+	return "ListTypesByAssociation"
+}
+
 type ListTypesByAssociationOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which

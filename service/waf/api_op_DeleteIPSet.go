@@ -59,6 +59,10 @@ type DeleteIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIPSetInput) operationName() string {
+	return "DeleteIPSet"
+}
+
 type DeleteIPSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteIPSet request. You can also

@@ -43,6 +43,10 @@ type DescribeSolutionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSolutionVersionInput) operationName() string {
+	return "DescribeSolutionVersion"
+}
+
 type DescribeSolutionVersionOutput struct {
 
 	// The solution version.

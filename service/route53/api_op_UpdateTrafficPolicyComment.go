@@ -55,6 +55,10 @@ type UpdateTrafficPolicyCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrafficPolicyCommentInput) operationName() string {
+	return "UpdateTrafficPolicyComment"
+}
+
 // A complex type that contains the response information for the traffic policy.
 type UpdateTrafficPolicyCommentOutput struct {
 

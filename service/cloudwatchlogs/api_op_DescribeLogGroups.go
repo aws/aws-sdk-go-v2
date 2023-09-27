@@ -81,6 +81,10 @@ type DescribeLogGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLogGroupsInput) operationName() string {
+	return "DescribeLogGroups"
+}
+
 type DescribeLogGroupsOutput struct {
 
 	// The log groups. If the retentionInDays value is not included for a log group,

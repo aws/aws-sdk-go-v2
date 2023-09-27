@@ -36,6 +36,10 @@ type GetInvitationsCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInvitationsCountInput) operationName() string {
+	return "GetInvitationsCount"
+}
+
 type GetInvitationsCountOutput struct {
 
 	// The number of received invitations.

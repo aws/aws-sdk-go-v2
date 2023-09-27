@@ -98,6 +98,10 @@ type CreateRecipeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRecipeJobInput) operationName() string {
+	return "CreateRecipeJob"
+}
+
 type CreateRecipeJobOutput struct {
 
 	// The name of the job that you created.

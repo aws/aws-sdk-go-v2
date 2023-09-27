@@ -60,6 +60,10 @@ type SetLoadBalancerPoliciesOfListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetLoadBalancerPoliciesOfListenerInput) operationName() string {
+	return "SetLoadBalancerPoliciesOfListener"
+}
+
 // Contains the output of SetLoadBalancePoliciesOfListener.
 type SetLoadBalancerPoliciesOfListenerOutput struct {
 	// Metadata pertaining to the operation's result.

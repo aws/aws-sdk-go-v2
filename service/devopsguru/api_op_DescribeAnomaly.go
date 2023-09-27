@@ -45,6 +45,10 @@ type DescribeAnomalyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnomalyInput) operationName() string {
+	return "DescribeAnomaly"
+}
+
 type DescribeAnomalyOutput struct {
 
 	// A ProactiveAnomaly object that represents the requested anomaly.

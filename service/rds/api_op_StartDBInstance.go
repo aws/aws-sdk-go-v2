@@ -48,6 +48,10 @@ type StartDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDBInstanceInput) operationName() string {
+	return "StartDBInstance"
+}
+
 type StartDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

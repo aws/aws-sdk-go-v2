@@ -45,6 +45,10 @@ type RebootInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootInstanceInput) operationName() string {
+	return "RebootInstance"
+}
+
 type RebootInstanceOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

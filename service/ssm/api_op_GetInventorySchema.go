@@ -57,6 +57,10 @@ type GetInventorySchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInventorySchemaInput) operationName() string {
+	return "GetInventorySchema"
+}
+
 type GetInventorySchemaOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no

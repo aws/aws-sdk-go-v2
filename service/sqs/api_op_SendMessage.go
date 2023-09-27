@@ -136,6 +136,10 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendMessageInput) operationName() string {
+	return "SendMessage"
+}
+
 // The MD5OfMessageBody and MessageId elements.
 type SendMessageOutput struct {
 

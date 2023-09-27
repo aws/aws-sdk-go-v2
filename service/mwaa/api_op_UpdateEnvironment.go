@@ -161,6 +161,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example,

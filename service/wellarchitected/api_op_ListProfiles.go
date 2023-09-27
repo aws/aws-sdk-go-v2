@@ -50,6 +50,10 @@ type ListProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfilesInput) operationName() string {
+	return "ListProfiles"
+}
+
 type ListProfilesOutput struct {
 
 	// The token to use to retrieve the next set of results.

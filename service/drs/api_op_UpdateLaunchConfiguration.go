@@ -69,6 +69,10 @@ type UpdateLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLaunchConfigurationInput) operationName() string {
+	return "UpdateLaunchConfiguration"
+}
+
 type UpdateLaunchConfigurationOutput struct {
 
 	// Whether we should copy the Private IP of the Source Server to the Recovery

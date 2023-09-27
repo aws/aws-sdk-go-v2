@@ -118,6 +118,10 @@ type CreateEntityRecognizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEntityRecognizerInput) operationName() string {
+	return "CreateEntityRecognizer"
+}
+
 type CreateEntityRecognizerOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.

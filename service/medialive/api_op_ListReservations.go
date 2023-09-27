@@ -68,6 +68,10 @@ type ListReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReservationsInput) operationName() string {
+	return "ListReservations"
+}
+
 // Placeholder documentation for ListReservationsResponse
 type ListReservationsOutput struct {
 

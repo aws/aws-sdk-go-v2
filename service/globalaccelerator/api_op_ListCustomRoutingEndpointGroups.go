@@ -51,6 +51,10 @@ type ListCustomRoutingEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomRoutingEndpointGroupsInput) operationName() string {
+	return "ListCustomRoutingEndpointGroups"
+}
+
 type ListCustomRoutingEndpointGroupsOutput struct {
 
 	// The list of the endpoint groups associated with a listener for a custom routing

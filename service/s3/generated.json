@@ -108,6 +108,7 @@
         "api_op_UploadPart.go",
         "api_op_UploadPartCopy.go",
         "api_op_WriteGetObjectResponse.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

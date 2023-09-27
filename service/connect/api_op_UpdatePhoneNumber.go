@@ -68,6 +68,10 @@ type UpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePhoneNumberInput) operationName() string {
+	return "UpdatePhoneNumber"
+}
+
 type UpdatePhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the phone number.

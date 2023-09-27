@@ -49,6 +49,10 @@ type ListSourceApiAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSourceApiAssociationsInput) operationName() string {
+	return "ListSourceApiAssociations"
+}
+
 type ListSourceApiAssociationsOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which

@@ -101,6 +101,10 @@ type GetCostAndUsageWithResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCostAndUsageWithResourcesInput) operationName() string {
+	return "GetCostAndUsageWithResources"
+}
+
 type GetCostAndUsageWithResourcesOutput struct {
 
 	// The attributes that apply to a specific dimension value. For example, if the

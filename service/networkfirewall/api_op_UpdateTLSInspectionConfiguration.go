@@ -90,6 +90,10 @@ type UpdateTLSInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTLSInspectionConfigurationInput) operationName() string {
+	return "UpdateTLSInspectionConfiguration"
+}
+
 type UpdateTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with

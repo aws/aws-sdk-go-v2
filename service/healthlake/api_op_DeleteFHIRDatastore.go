@@ -42,6 +42,10 @@ type DeleteFHIRDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFHIRDatastoreInput) operationName() string {
+	return "DeleteFHIRDatastore"
+}
+
 type DeleteFHIRDatastoreOutput struct {
 
 	// The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.

@@ -61,6 +61,10 @@ type ExecuteGremlinExplainQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteGremlinExplainQueryInput) operationName() string {
+	return "ExecuteGremlinExplainQuery"
+}
+
 type ExecuteGremlinExplainQueryOutput struct {
 
 	// A text blob containing the Gremlin explain result, as described in Tuning

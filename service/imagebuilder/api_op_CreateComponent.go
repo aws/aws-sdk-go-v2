@@ -101,6 +101,10 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComponentInput) operationName() string {
+	return "CreateComponent"
+}
+
 type CreateComponentOutput struct {
 
 	// The idempotency token used to make this request idempotent.

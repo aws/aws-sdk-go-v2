@@ -51,6 +51,10 @@ type GetConnectPeerAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectPeerAssociationsInput) operationName() string {
+	return "GetConnectPeerAssociations"
+}
+
 type GetConnectPeerAssociationsOutput struct {
 
 	// Displays a list of Connect peer associations.

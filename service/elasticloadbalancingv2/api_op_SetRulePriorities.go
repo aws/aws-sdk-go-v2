@@ -44,6 +44,10 @@ type SetRulePrioritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetRulePrioritiesInput) operationName() string {
+	return "SetRulePriorities"
+}
+
 type SetRulePrioritiesOutput struct {
 
 	// Information about the rules.

@@ -43,6 +43,10 @@ type GetDataQualityResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataQualityResultInput) operationName() string {
+	return "GetDataQualityResult"
+}
+
 type GetDataQualityResultOutput struct {
 
 	// The date and time when the run for this data quality result was completed.

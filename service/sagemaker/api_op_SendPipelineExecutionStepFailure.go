@@ -51,6 +51,10 @@ type SendPipelineExecutionStepFailureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendPipelineExecutionStepFailureInput) operationName() string {
+	return "SendPipelineExecutionStepFailure"
+}
+
 type SendPipelineExecutionStepFailureOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.

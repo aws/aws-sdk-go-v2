@@ -45,6 +45,10 @@ type GetVoiceConnectorStreamingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorStreamingConfigurationInput) operationName() string {
+	return "GetVoiceConnectorStreamingConfiguration"
+}
+
 type GetVoiceConnectorStreamingConfigurationOutput struct {
 
 	// The details of the streaming configuration.

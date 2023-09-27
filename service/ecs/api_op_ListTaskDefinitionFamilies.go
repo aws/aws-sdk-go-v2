@@ -73,6 +73,10 @@ type ListTaskDefinitionFamiliesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTaskDefinitionFamiliesInput) operationName() string {
+	return "ListTaskDefinitionFamilies"
+}
+
 type ListTaskDefinitionFamiliesOutput struct {
 
 	// The list of task definition family names that match the

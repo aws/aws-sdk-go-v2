@@ -54,6 +54,10 @@ type UpdateServiceSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceSettingsInput) operationName() string {
+	return "UpdateServiceSettings"
+}
+
 type UpdateServiceSettingsOutput struct {
 
 	// The Region in which License Manager displays the aggregated data for Linux

@@ -57,6 +57,10 @@ type AssociateProactiveEngagementDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateProactiveEngagementDetailsInput) operationName() string {
+	return "AssociateProactiveEngagementDetails"
+}
+
 type AssociateProactiveEngagementDetailsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

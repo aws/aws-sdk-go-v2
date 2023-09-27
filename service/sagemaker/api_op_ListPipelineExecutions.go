@@ -65,6 +65,10 @@ type ListPipelineExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelineExecutionsInput) operationName() string {
+	return "ListPipelineExecutions"
+}
+
 type ListPipelineExecutionsOutput struct {
 
 	// If the result of the previous ListPipelineExecutions request was truncated, the

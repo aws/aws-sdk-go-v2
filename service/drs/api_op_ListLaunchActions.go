@@ -51,6 +51,10 @@ type ListLaunchActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLaunchActionsInput) operationName() string {
+	return "ListLaunchActions"
+}
+
 type ListLaunchActionsOutput struct {
 
 	// List of resource launch actions.

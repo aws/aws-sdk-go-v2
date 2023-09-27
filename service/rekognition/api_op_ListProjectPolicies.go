@@ -56,6 +56,10 @@ type ListProjectPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectPoliciesInput) operationName() string {
+	return "ListProjectPolicies"
+}
+
 type ListProjectPoliciesOutput struct {
 
 	// If the response is truncated, Amazon Rekognition returns this token that you

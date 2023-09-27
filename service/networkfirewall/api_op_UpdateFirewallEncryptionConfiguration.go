@@ -68,6 +68,10 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallEncryptionConfigurationInput) operationName() string {
+	return "UpdateFirewallEncryptionConfiguration"
+}
+
 type UpdateFirewallEncryptionConfigurationOutput struct {
 
 	// A complex type that contains optional Amazon Web Services Key Management

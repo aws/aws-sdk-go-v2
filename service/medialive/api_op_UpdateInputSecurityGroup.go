@@ -50,6 +50,10 @@ type UpdateInputSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInputSecurityGroupInput) operationName() string {
+	return "UpdateInputSecurityGroup"
+}
+
 // Placeholder documentation for UpdateInputSecurityGroupResponse
 type UpdateInputSecurityGroupOutput struct {
 

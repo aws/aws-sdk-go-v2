@@ -46,6 +46,10 @@ type DeleteAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnalysisTemplateInput) operationName() string {
+	return "DeleteAnalysisTemplate"
+}
+
 type DeleteAnalysisTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

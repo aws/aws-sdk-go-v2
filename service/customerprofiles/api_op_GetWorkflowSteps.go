@@ -54,6 +54,10 @@ type GetWorkflowStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowStepsInput) operationName() string {
+	return "GetWorkflowSteps"
+}
+
 type GetWorkflowStepsOutput struct {
 
 	// List containing workflow step details.

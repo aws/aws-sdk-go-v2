@@ -47,6 +47,10 @@ type ListDistributionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionConfigurationsInput) operationName() string {
+	return "ListDistributionConfigurations"
+}
+
 type ListDistributionConfigurationsOutput struct {
 
 	// The list of distributions.

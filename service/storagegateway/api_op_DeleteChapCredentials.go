@@ -53,6 +53,10 @@ type DeleteChapCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChapCredentialsInput) operationName() string {
+	return "DeleteChapCredentials"
+}
+
 // A JSON object containing the following fields:
 type DeleteChapCredentialsOutput struct {
 

@@ -61,6 +61,10 @@ type BatchDeleteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteTableInput) operationName() string {
+	return "BatchDeleteTable"
+}
+
 type BatchDeleteTableOutput struct {
 
 	// A list of errors encountered in attempting to delete the specified tables.

@@ -58,6 +58,10 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectionInput) operationName() string {
+	return "CreateConnection"
+}
+
 type CreateConnectionOutput struct {
 
 	// A description of the App Runner connection that's created by this request.

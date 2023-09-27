@@ -52,6 +52,10 @@ type UpdateThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThingGroupInput) operationName() string {
+	return "UpdateThingGroup"
+}
+
 type UpdateThingGroupOutput struct {
 
 	// The version of the updated thing group.

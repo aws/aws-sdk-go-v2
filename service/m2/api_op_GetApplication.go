@@ -43,6 +43,10 @@ type GetApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationInput) operationName() string {
+	return "GetApplication"
+}
+
 type GetApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.

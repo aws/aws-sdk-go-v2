@@ -47,6 +47,10 @@ type DeleteTemplateSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTemplateSyncConfigInput) operationName() string {
+	return "DeleteTemplateSyncConfig"
+}
+
 type DeleteTemplateSyncConfigOutput struct {
 
 	// The template sync configuration detail data that's returned by Proton.

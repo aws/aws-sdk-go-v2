@@ -62,6 +62,10 @@ type CreateServiceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceNetworkInput) operationName() string {
+	return "CreateServiceNetwork"
+}
+
 type CreateServiceNetworkOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service network.

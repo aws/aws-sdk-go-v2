@@ -72,6 +72,10 @@ type AllocateConnectionOnInterconnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateConnectionOnInterconnectInput) operationName() string {
+	return "AllocateConnectionOnInterconnect"
+}
+
 // Information about an Direct Connect connection.
 type AllocateConnectionOnInterconnectOutput struct {
 

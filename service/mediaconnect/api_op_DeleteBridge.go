@@ -41,6 +41,10 @@ type DeleteBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBridgeInput) operationName() string {
+	return "DeleteBridge"
+}
+
 type DeleteBridgeOutput struct {
 
 	// The Amazon Resource Number (ARN) of the deleted bridge.

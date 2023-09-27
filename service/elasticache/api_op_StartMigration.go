@@ -48,6 +48,10 @@ type StartMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMigrationInput) operationName() string {
+	return "StartMigration"
+}
+
 type StartMigrationOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

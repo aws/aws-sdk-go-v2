@@ -65,6 +65,10 @@ type CreateGroupVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupVersionInput) operationName() string {
+	return "CreateGroupVersion"
+}
+
 type CreateGroupVersionOutput struct {
 
 	// The ARN of the version.

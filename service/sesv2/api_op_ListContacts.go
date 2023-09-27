@@ -57,6 +57,10 @@ type ListContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContactsInput) operationName() string {
+	return "ListContacts"
+}
+
 type ListContactsOutput struct {
 
 	// The contacts present in a specific contact list.

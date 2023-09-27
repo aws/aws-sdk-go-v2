@@ -43,6 +43,10 @@ type DeleteMitigationActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMitigationActionInput) operationName() string {
+	return "DeleteMitigationAction"
+}
+
 type DeleteMitigationActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

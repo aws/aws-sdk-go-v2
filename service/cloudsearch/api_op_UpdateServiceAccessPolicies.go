@@ -56,6 +56,10 @@ type UpdateServiceAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceAccessPoliciesInput) operationName() string {
+	return "UpdateServiceAccessPolicies"
+}
+
 // The result of an UpdateServiceAccessPolicies request. Contains the new access
 // policies.
 type UpdateServiceAccessPoliciesOutput struct {

@@ -89,6 +89,10 @@ type MergeBranchesByThreeWayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergeBranchesByThreeWayInput) operationName() string {
+	return "MergeBranchesByThreeWay"
+}
+
 type MergeBranchesByThreeWayOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.

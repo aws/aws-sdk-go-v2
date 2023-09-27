@@ -50,6 +50,10 @@ type UpdateRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRadiusInput) operationName() string {
+	return "UpdateRadius"
+}
+
 // Contains the results of the UpdateRadius operation.
 type UpdateRadiusOutput struct {
 	// Metadata pertaining to the operation's result.

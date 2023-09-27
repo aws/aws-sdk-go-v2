@@ -60,6 +60,10 @@ type ListResourceSharePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceSharePermissionsInput) operationName() string {
+	return "ListResourceSharePermissions"
+}
+
 type ListResourceSharePermissionsOutput struct {
 
 	// If present, this value indicates that more output is available than is included

@@ -42,6 +42,10 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainInput) operationName() string {
+	return "DeleteDomain"
+}
+
 type DeleteDomainOutput struct {
 
 	// A message that indicates the delete request is done.

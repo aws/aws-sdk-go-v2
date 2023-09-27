@@ -52,6 +52,10 @@ type ListJourneysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJourneysInput) operationName() string {
+	return "ListJourneys"
+}
+
 type ListJourneysOutput struct {
 
 	// Provides information about the status, configuration, and other settings for

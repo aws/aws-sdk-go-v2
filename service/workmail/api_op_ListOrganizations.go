@@ -44,6 +44,10 @@ type ListOrganizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationsInput) operationName() string {
+	return "ListOrganizations"
+}
+
 type ListOrganizationsOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is "null" when

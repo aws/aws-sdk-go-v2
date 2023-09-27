@@ -56,6 +56,10 @@ type ListActionExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListActionExecutionsInput) operationName() string {
+	return "ListActionExecutions"
+}
+
 type ListActionExecutionsOutput struct {
 
 	// The details for a list of recent executions, such as action execution ID.

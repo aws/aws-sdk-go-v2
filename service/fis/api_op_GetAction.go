@@ -42,6 +42,10 @@ type GetActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetActionInput) operationName() string {
+	return "GetAction"
+}
+
 type GetActionOutput struct {
 
 	// Information about the action.

@@ -70,6 +70,10 @@ type CreateNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNamedQueryInput) operationName() string {
+	return "CreateNamedQuery"
+}
+
 type CreateNamedQueryOutput struct {
 
 	// The unique ID of the query.

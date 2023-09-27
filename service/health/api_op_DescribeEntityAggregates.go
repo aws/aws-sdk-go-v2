@@ -43,6 +43,10 @@ type DescribeEntityAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntityAggregatesInput) operationName() string {
+	return "DescribeEntityAggregates"
+}
+
 type DescribeEntityAggregatesOutput struct {
 
 	// The number of entities that are affected by each of the specified events.

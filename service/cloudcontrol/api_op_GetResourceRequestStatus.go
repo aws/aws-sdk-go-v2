@@ -50,6 +50,10 @@ type GetResourceRequestStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceRequestStatusInput) operationName() string {
+	return "GetResourceRequestStatus"
+}
+
 type GetResourceRequestStatusOutput struct {
 
 	// Represents the current status of the resource operation request.

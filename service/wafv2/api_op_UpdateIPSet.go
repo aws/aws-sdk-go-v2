@@ -123,6 +123,10 @@ type UpdateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIPSetInput) operationName() string {
+	return "UpdateIPSet"
+}
+
 type UpdateIPSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update

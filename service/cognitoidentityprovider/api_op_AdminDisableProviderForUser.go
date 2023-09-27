@@ -74,6 +74,10 @@ type AdminDisableProviderForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminDisableProviderForUserInput) operationName() string {
+	return "AdminDisableProviderForUser"
+}
+
 type AdminDisableProviderForUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

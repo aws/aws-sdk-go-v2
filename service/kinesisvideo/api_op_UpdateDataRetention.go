@@ -74,6 +74,10 @@ type UpdateDataRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataRetentionInput) operationName() string {
+	return "UpdateDataRetention"
+}
+
 type UpdateDataRetentionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

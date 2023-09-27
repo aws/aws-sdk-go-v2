@@ -52,6 +52,10 @@ type GetServiceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceInstanceInput) operationName() string {
+	return "GetServiceInstance"
+}
+
 type GetServiceInstanceOutput struct {
 
 	// The detailed data of the requested service instance.

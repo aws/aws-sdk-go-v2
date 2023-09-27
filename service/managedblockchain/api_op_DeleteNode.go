@@ -54,6 +54,10 @@ type DeleteNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNodeInput) operationName() string {
+	return "DeleteNode"
+}
+
 type DeleteNodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -78,6 +78,10 @@ type UpdateDatasetEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDatasetEntriesInput) operationName() string {
+	return "UpdateDatasetEntries"
+}
+
 type UpdateDatasetEntriesOutput struct {
 
 	// The status of the dataset update.

@@ -117,6 +117,10 @@ type DescribeDBClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterSnapshotsInput) operationName() string {
+	return "DescribeDBClusterSnapshots"
+}
+
 // Provides a list of DB cluster snapshots for the user as the result of a call to
 // the DescribeDBClusterSnapshots action.
 type DescribeDBClusterSnapshotsOutput struct {

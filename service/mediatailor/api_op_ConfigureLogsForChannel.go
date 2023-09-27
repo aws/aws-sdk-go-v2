@@ -47,6 +47,10 @@ type ConfigureLogsForChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureLogsForChannelInput) operationName() string {
+	return "ConfigureLogsForChannel"
+}
+
 type ConfigureLogsForChannelOutput struct {
 
 	// The name of the channel.

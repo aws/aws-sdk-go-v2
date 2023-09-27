@@ -61,6 +61,10 @@ type ListChannelsModeratedByAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelsModeratedByAppInstanceUserInput) operationName() string {
+	return "ListChannelsModeratedByAppInstanceUser"
+}
+
 type ListChannelsModeratedByAppInstanceUserOutput struct {
 
 	// The moderated channels in the request.

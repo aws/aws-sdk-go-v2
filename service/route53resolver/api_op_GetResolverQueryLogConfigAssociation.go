@@ -45,6 +45,10 @@ type GetResolverQueryLogConfigAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverQueryLogConfigAssociationInput) operationName() string {
+	return "GetResolverQueryLogConfigAssociation"
+}
+
 type GetResolverQueryLogConfigAssociationOutput struct {
 
 	// Information about the Resolver query logging configuration association that you

@@ -143,6 +143,10 @@ type CreateModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelPackageInput) operationName() string {
+	return "CreateModelPackage"
+}
+
 type CreateModelPackageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new model package.

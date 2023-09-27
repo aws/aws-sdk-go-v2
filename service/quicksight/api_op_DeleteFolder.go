@@ -46,6 +46,10 @@ type DeleteFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFolderInput) operationName() string {
+	return "DeleteFolder"
+}
+
 type DeleteFolderOutput struct {
 
 	// The Amazon Resource Name of the deleted folder.

@@ -42,6 +42,10 @@ type DescribeBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBridgeInput) operationName() string {
+	return "DescribeBridge"
+}
+
 type DescribeBridgeOutput struct {
 
 	// A Bridge is the connection between your datacenter's Instances and the AWS

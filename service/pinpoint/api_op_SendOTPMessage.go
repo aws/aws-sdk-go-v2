@@ -47,6 +47,10 @@ type SendOTPMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendOTPMessageInput) operationName() string {
+	return "SendOTPMessage"
+}
+
 type SendOTPMessageOutput struct {
 
 	// Provides information about the results of a request to send a message to an

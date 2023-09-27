@@ -46,6 +46,10 @@ type ListRulesPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRulesPackagesInput) operationName() string {
+	return "ListRulesPackages"
+}
+
 type ListRulesPackagesOutput struct {
 
 	// The list of ARNs that specifies the rules packages returned by the action.

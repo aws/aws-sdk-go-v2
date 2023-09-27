@@ -44,6 +44,10 @@ type ExportProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportProjectInput) operationName() string {
+	return "ExportProject"
+}
+
 // Result structure used for requests to export project configuration details.
 type ExportProjectOutput struct {
 

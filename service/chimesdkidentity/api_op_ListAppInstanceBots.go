@@ -48,6 +48,10 @@ type ListAppInstanceBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppInstanceBotsInput) operationName() string {
+	return "ListAppInstanceBots"
+}
+
 type ListAppInstanceBotsOutput struct {
 
 	// The ARN of the AppInstance.

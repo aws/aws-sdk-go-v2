@@ -53,6 +53,10 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemasInput) operationName() string {
+	return "ListSchemas"
+}
+
 type ListSchemasOutput struct {
 
 	// The token that specifies the next page of results to return. To request the

@@ -53,6 +53,10 @@ type DescribeStorageVirtualMachinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorageVirtualMachinesInput) operationName() string {
+	return "DescribeStorageVirtualMachines"
+}
+
 type DescribeStorageVirtualMachinesOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).

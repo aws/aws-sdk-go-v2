@@ -48,6 +48,10 @@ type ListEventsDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventsDetectionJobsInput) operationName() string {
+	return "ListEventsDetectionJobs"
+}
+
 type ListEventsDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.

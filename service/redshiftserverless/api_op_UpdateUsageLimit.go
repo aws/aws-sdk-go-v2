@@ -52,6 +52,10 @@ type UpdateUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUsageLimitInput) operationName() string {
+	return "UpdateUsageLimit"
+}
+
 type UpdateUsageLimitOutput struct {
 
 	// The updated usage limit object.

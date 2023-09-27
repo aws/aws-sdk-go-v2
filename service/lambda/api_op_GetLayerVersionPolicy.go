@@ -47,6 +47,10 @@ type GetLayerVersionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLayerVersionPolicyInput) operationName() string {
+	return "GetLayerVersionPolicy"
+}
+
 type GetLayerVersionPolicyOutput struct {
 
 	// The policy document.

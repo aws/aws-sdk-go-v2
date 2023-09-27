@@ -48,6 +48,10 @@ type GetGatewayResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGatewayResponseInput) operationName() string {
+	return "GetGatewayResponse"
+}
+
 // A gateway response of a given response type and status code, with optional
 // response parameters and mapping templates.
 type GetGatewayResponseOutput struct {

@@ -45,6 +45,10 @@ type GetInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightInput) operationName() string {
+	return "GetInsight"
+}
+
 type GetInsightOutput struct {
 
 	// The summary information of an insight.

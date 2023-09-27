@@ -56,6 +56,10 @@ type DeleteStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStreamingSessionInput) operationName() string {
+	return "DeleteStreamingSession"
+}
+
 type DeleteStreamingSessionOutput struct {
 
 	// The session.

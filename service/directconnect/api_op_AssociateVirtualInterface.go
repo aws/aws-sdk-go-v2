@@ -57,6 +57,10 @@ type AssociateVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateVirtualInterfaceInput) operationName() string {
+	return "AssociateVirtualInterface"
+}
+
 // Information about a virtual interface.
 type AssociateVirtualInterfaceOutput struct {
 

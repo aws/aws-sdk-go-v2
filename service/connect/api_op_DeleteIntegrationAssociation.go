@@ -48,6 +48,10 @@ type DeleteIntegrationAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIntegrationAssociationInput) operationName() string {
+	return "DeleteIntegrationAssociation"
+}
+
 type DeleteIntegrationAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

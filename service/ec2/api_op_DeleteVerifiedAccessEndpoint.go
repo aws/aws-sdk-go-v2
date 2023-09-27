@@ -53,6 +53,10 @@ type DeleteVerifiedAccessEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVerifiedAccessEndpointInput) operationName() string {
+	return "DeleteVerifiedAccessEndpoint"
+}
+
 type DeleteVerifiedAccessEndpointOutput struct {
 
 	// The ID of the Verified Access endpoint.

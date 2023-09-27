@@ -59,6 +59,10 @@ type SearchProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchProductsInput) operationName() string {
+	return "SearchProducts"
+}
+
 type SearchProductsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

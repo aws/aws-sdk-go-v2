@@ -82,6 +82,10 @@ type CreateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDistributionInput) operationName() string {
+	return "CreateDistribution"
+}
+
 type CreateDistributionOutput struct {
 
 	// An object that describes the distribution created.

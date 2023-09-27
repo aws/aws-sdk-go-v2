@@ -49,6 +49,10 @@ type ListResourceEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceEvaluationsInput) operationName() string {
+	return "ListResourceEvaluations"
+}
+
 type ListResourceEvaluationsOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next

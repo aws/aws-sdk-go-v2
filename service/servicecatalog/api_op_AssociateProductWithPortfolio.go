@@ -55,6 +55,10 @@ type AssociateProductWithPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateProductWithPortfolioInput) operationName() string {
+	return "AssociateProductWithPortfolio"
+}
+
 type AssociateProductWithPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

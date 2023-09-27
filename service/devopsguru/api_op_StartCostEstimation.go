@@ -47,6 +47,10 @@ type StartCostEstimationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCostEstimationInput) operationName() string {
+	return "StartCostEstimation"
+}
+
 type StartCostEstimationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

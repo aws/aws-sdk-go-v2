@@ -53,6 +53,10 @@ type PutRepositoryCatalogDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRepositoryCatalogDataInput) operationName() string {
+	return "PutRepositoryCatalogData"
+}
+
 type PutRepositoryCatalogDataOutput struct {
 
 	// The catalog data for the repository.

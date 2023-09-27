@@ -58,6 +58,10 @@ type UpdateAssessmentControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssessmentControlInput) operationName() string {
+	return "UpdateAssessmentControl"
+}
+
 type UpdateAssessmentControlOutput struct {
 
 	// The name of the updated control set that the UpdateAssessmentControl API

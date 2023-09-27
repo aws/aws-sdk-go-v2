@@ -96,6 +96,10 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrderableDBInstanceOptionsInput) operationName() string {
+	return "DescribeOrderableDBInstanceOptions"
+}
+
 // Contains the result of a successful invocation of the
 // DescribeOrderableDBInstanceOptions action.
 type DescribeOrderableDBInstanceOptionsOutput struct {

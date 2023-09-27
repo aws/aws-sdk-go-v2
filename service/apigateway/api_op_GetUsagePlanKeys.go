@@ -56,6 +56,10 @@ type GetUsagePlanKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsagePlanKeysInput) operationName() string {
+	return "GetUsagePlanKeys"
+}
+
 // Represents the collection of usage plan keys added to usage plans for the
 // associated API keys and, possibly, other types of keys.
 type GetUsagePlanKeysOutput struct {

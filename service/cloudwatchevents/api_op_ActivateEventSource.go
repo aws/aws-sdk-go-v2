@@ -42,6 +42,10 @@ type ActivateEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateEventSourceInput) operationName() string {
+	return "ActivateEventSource"
+}
+
 type ActivateEventSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

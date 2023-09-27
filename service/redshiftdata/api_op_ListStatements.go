@@ -78,6 +78,10 @@ type ListStatementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStatementsInput) operationName() string {
+	return "ListStatements"
+}
+
 type ListStatementsOutput struct {
 
 	// The SQL statements.

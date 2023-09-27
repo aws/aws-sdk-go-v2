@@ -54,6 +54,10 @@ type CreateDataSetImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataSetImportTaskInput) operationName() string {
+	return "CreateDataSetImportTask"
+}
+
 type CreateDataSetImportTaskOutput struct {
 
 	// The task identifier. This operation is asynchronous. Use this identifier with

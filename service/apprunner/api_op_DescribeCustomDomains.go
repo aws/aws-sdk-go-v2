@@ -55,6 +55,10 @@ type DescribeCustomDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomDomainsInput) operationName() string {
+	return "DescribeCustomDomains"
+}
+
 type DescribeCustomDomainsOutput struct {
 
 	// A list of descriptions of custom domain names that are associated with the

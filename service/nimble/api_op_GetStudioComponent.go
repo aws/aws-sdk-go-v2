@@ -51,6 +51,10 @@ type GetStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStudioComponentInput) operationName() string {
+	return "GetStudioComponent"
+}
+
 type GetStudioComponentOutput struct {
 
 	// Information about the studio component.

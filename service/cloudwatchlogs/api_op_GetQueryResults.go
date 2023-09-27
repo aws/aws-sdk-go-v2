@@ -53,6 +53,10 @@ type GetQueryResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryResultsInput) operationName() string {
+	return "GetQueryResults"
+}
+
 type GetQueryResultsOutput struct {
 
 	// If you associated an KMS key with the CloudWatch Logs Insights query results in

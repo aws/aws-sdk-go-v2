@@ -61,6 +61,10 @@ type GetBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlockInput) operationName() string {
+	return "GetBlock"
+}
+
 type GetBlockOutput struct {
 
 	// The block data object in Amazon Ion format.

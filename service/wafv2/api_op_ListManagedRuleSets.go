@@ -66,6 +66,10 @@ type ListManagedRuleSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedRuleSetsInput) operationName() string {
+	return "ListManagedRuleSets"
+}
+
 type ListManagedRuleSetsOutput struct {
 
 	// Your managed rule sets. If you specified a Limit in your request, this might

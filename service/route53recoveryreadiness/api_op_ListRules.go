@@ -47,6 +47,10 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRulesInput) operationName() string {
+	return "ListRules"
+}
+
 type ListRulesOutput struct {
 
 	// The token that identifies which batch of results you want to see.

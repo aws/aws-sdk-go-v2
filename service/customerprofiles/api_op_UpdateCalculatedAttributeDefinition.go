@@ -60,6 +60,10 @@ type UpdateCalculatedAttributeDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCalculatedAttributeDefinitionInput) operationName() string {
+	return "UpdateCalculatedAttributeDefinition"
+}
+
 type UpdateCalculatedAttributeDefinitionOutput struct {
 
 	// The mathematical expression and a list of attribute items specified in that

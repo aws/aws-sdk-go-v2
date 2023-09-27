@@ -48,6 +48,10 @@ type DescribePublisherInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePublisherInput) operationName() string {
+	return "DescribePublisher"
+}
+
 type DescribePublisherOutput struct {
 
 	// The type of account used as the identity provider when registering this

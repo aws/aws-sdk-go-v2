@@ -47,6 +47,10 @@ type ListDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetsInput) operationName() string {
+	return "ListDatasets"
+}
+
 type ListDatasetsOutput struct {
 
 	// Provides information about the specified dataset, including creation time,

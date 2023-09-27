@@ -43,6 +43,10 @@ type DescribeWorldExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorldExportJobInput) operationName() string {
+	return "DescribeWorldExportJob"
+}
+
 type DescribeWorldExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world export job.

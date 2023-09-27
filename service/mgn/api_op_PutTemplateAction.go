@@ -89,6 +89,10 @@ type PutTemplateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutTemplateActionInput) operationName() string {
+	return "PutTemplateAction"
+}
+
 type PutTemplateActionOutput struct {
 
 	// Template post migration custom action ID.

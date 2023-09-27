@@ -54,6 +54,10 @@ type DescribeAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssociationInput) operationName() string {
+	return "DescribeAssociation"
+}
+
 type DescribeAssociationOutput struct {
 
 	// Information about the association.

@@ -67,6 +67,10 @@ type PutMobileDeviceAccessOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMobileDeviceAccessOverrideInput) operationName() string {
+	return "PutMobileDeviceAccessOverride"
+}
+
 type PutMobileDeviceAccessOverrideOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,6 +62,10 @@ type GetMultiRegionAccessPointRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMultiRegionAccessPointRoutesInput) operationName() string {
+	return "GetMultiRegionAccessPointRoutes"
+}
+
 type GetMultiRegionAccessPointRoutesOutput struct {
 
 	// The Multi-Region Access Point ARN.

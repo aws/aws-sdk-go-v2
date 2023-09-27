@@ -50,6 +50,10 @@ type ListBulkDeploymentDetailedReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBulkDeploymentDetailedReportsInput) operationName() string {
+	return "ListBulkDeploymentDetailedReports"
+}
+
 type ListBulkDeploymentDetailedReportsOutput struct {
 
 	// A list of the individual group deployments in the bulk deployment operation.

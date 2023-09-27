@@ -62,6 +62,10 @@ type ListMedicalTranscriptionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMedicalTranscriptionJobsInput) operationName() string {
+	return "ListMedicalTranscriptionJobs"
+}
+
 type ListMedicalTranscriptionJobsOutput struct {
 
 	// Provides a summary of information about each result.

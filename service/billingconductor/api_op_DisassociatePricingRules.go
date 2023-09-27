@@ -47,6 +47,10 @@ type DisassociatePricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociatePricingRulesInput) operationName() string {
+	return "DisassociatePricingRules"
+}
+
 type DisassociatePricingRulesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pricing plan that the pricing rules

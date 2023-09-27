@@ -49,6 +49,10 @@ type CreateReceiptFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReceiptFilterInput) operationName() string {
+	return "CreateReceiptFilter"
+}
+
 // An empty element returned on a successful request.
 type CreateReceiptFilterOutput struct {
 	// Metadata pertaining to the operation's result.

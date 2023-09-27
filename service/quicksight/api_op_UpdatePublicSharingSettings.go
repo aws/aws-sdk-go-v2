@@ -53,6 +53,10 @@ type UpdatePublicSharingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePublicSharingSettingsInput) operationName() string {
+	return "UpdatePublicSharingSettings"
+}
+
 type UpdatePublicSharingSettingsOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

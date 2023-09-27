@@ -44,6 +44,10 @@ type GetConferenceProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConferenceProviderInput) operationName() string {
+	return "GetConferenceProvider"
+}
+
 type GetConferenceProviderOutput struct {
 
 	// The conference provider.

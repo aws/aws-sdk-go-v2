@@ -179,6 +179,10 @@ type GenerateDataKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateDataKeyInput) operationName() string {
+	return "GenerateDataKey"
+}
+
 type GenerateDataKeyOutput struct {
 
 	// The encrypted copy of the data key. When you use the HTTP API or the Amazon Web

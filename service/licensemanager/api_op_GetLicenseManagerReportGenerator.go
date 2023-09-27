@@ -42,6 +42,10 @@ type GetLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLicenseManagerReportGeneratorInput) operationName() string {
+	return "GetLicenseManagerReportGenerator"
+}
+
 type GetLicenseManagerReportGeneratorOutput struct {
 
 	// A report generator that creates periodic reports about your license

@@ -67,6 +67,10 @@ type PutDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDashboardInput) operationName() string {
+	return "PutDashboard"
+}
+
 type PutDashboardOutput struct {
 
 	// If the input for PutDashboard was correct and the dashboard was successfully

@@ -43,6 +43,10 @@ type DeleteLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLicenseManagerReportGeneratorInput) operationName() string {
+	return "DeleteLicenseManagerReportGenerator"
+}
+
 type DeleteLicenseManagerReportGeneratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

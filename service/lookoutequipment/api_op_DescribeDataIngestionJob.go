@@ -44,6 +44,10 @@ type DescribeDataIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataIngestionJobInput) operationName() string {
+	return "DescribeDataIngestionJob"
+}
+
 type DescribeDataIngestionJobOutput struct {
 
 	// The time at which the data ingestion job was created.

@@ -44,6 +44,10 @@ type GetAutomationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAutomationExecutionInput) operationName() string {
+	return "GetAutomationExecution"
+}
+
 type GetAutomationExecutionOutput struct {
 
 	// Detailed information about the current state of an automation execution.

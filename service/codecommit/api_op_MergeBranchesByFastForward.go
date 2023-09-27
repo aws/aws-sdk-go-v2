@@ -56,6 +56,10 @@ type MergeBranchesByFastForwardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergeBranchesByFastForwardInput) operationName() string {
+	return "MergeBranchesByFastForward"
+}
+
 type MergeBranchesByFastForwardOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.

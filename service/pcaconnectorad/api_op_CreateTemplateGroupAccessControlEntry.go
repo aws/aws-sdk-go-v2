@@ -66,6 +66,10 @@ type CreateTemplateGroupAccessControlEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTemplateGroupAccessControlEntryInput) operationName() string {
+	return "CreateTemplateGroupAccessControlEntry"
+}
+
 type CreateTemplateGroupAccessControlEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

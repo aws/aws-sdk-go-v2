@@ -53,6 +53,10 @@ type ListLensesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLensesInput) operationName() string {
+	return "ListLenses"
+}
+
 // Output of a list lenses call.
 type ListLensesOutput struct {
 

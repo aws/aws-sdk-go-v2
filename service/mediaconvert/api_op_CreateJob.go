@@ -119,6 +119,10 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateJobInput) operationName() string {
+	return "CreateJob"
+}
+
 type CreateJobOutput struct {
 
 	// Each job converts an input file into an output file or files. For more

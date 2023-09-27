@@ -53,6 +53,10 @@ type ListAdminAccountsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAdminAccountsForOrganizationInput) operationName() string {
+	return "ListAdminAccountsForOrganization"
+}
+
 type ListAdminAccountsForOrganizationOutput struct {
 
 	// A list of Firewall Manager administrator accounts within the organization that

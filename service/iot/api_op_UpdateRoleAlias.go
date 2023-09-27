@@ -50,6 +50,10 @@ type UpdateRoleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoleAliasInput) operationName() string {
+	return "UpdateRoleAlias"
+}
+
 type UpdateRoleAliasOutput struct {
 
 	// The role alias.

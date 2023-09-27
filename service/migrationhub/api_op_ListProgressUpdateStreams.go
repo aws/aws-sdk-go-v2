@@ -45,6 +45,10 @@ type ListProgressUpdateStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProgressUpdateStreamsInput) operationName() string {
+	return "ListProgressUpdateStreams"
+}
+
 type ListProgressUpdateStreamsOutput struct {
 
 	// If there are more streams created than the max result, return the next token to

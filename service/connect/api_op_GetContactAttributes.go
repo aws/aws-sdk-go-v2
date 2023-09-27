@@ -46,6 +46,10 @@ type GetContactAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactAttributesInput) operationName() string {
+	return "GetContactAttributes"
+}
+
 type GetContactAttributesOutput struct {
 
 	// Information about the attributes.

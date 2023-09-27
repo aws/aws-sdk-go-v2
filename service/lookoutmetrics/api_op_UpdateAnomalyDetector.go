@@ -53,6 +53,10 @@ type UpdateAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnomalyDetectorInput) operationName() string {
+	return "UpdateAnomalyDetector"
+}
+
 type UpdateAnomalyDetectorOutput struct {
 
 	// The ARN of the updated detector.

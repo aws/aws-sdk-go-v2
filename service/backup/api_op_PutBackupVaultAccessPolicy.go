@@ -49,6 +49,10 @@ type PutBackupVaultAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBackupVaultAccessPolicyInput) operationName() string {
+	return "PutBackupVaultAccessPolicy"
+}
+
 type PutBackupVaultAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

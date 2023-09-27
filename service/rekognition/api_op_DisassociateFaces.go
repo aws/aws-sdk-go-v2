@@ -65,6 +65,10 @@ type DisassociateFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateFacesInput) operationName() string {
+	return "DisassociateFaces"
+}
+
 type DisassociateFacesOutput struct {
 
 	// An array of DissociatedFace objects containing FaceIds that are successfully

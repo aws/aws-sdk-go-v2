@@ -92,6 +92,10 @@ type DescribeSpotPriceHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpotPriceHistoryInput) operationName() string {
+	return "DescribeSpotPriceHistory"
+}
+
 // Contains the output of DescribeSpotPriceHistory.
 type DescribeSpotPriceHistoryOutput struct {
 

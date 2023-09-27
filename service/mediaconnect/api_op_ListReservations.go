@@ -55,6 +55,10 @@ type ListReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReservationsInput) operationName() string {
+	return "ListReservations"
+}
+
 type ListReservationsOutput struct {
 
 	// The token that identifies which batch of results that you want to see. For

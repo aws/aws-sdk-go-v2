@@ -49,6 +49,10 @@ type DescribeGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGameServerGroupInput) operationName() string {
+	return "DescribeGameServerGroup"
+}
+
 type DescribeGameServerGroupOutput struct {
 
 	// An object with the property settings for the requested game server group

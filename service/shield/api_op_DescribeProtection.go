@@ -47,6 +47,10 @@ type DescribeProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProtectionInput) operationName() string {
+	return "DescribeProtection"
+}
+
 type DescribeProtectionOutput struct {
 
 	// The Protection that you requested.

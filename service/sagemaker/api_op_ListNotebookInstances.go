@@ -94,6 +94,10 @@ type ListNotebookInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotebookInstancesInput) operationName() string {
+	return "ListNotebookInstances"
+}
+
 type ListNotebookInstancesOutput struct {
 
 	// If the response to the previous ListNotebookInstances request was truncated,

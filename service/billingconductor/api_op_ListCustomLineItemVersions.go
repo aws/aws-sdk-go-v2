@@ -53,6 +53,10 @@ type ListCustomLineItemVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomLineItemVersionsInput) operationName() string {
+	return "ListCustomLineItemVersions"
+}
+
 type ListCustomLineItemVersionsOutput struct {
 
 	// A list of CustomLineItemVersionListElements that are received.

@@ -79,6 +79,10 @@ type AssociateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateRepositoryInput) operationName() string {
+	return "AssociateRepository"
+}
+
 type AssociateRepositoryOutput struct {
 
 	// Information about the repository association.

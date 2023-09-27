@@ -95,6 +95,10 @@ type ListResolverQueryLogConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolverQueryLogConfigsInput) operationName() string {
+	return "ListResolverQueryLogConfigs"
+}
+
 type ListResolverQueryLogConfigsOutput struct {
 
 	// If there are more than MaxResults query logging configurations, you can submit

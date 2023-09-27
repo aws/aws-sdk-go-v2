@@ -72,6 +72,10 @@ type CreateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRepositoryInput) operationName() string {
+	return "CreateRepository"
+}
+
 type CreateRepositoryOutput struct {
 
 	// The repository that was created.

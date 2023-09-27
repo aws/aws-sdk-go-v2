@@ -49,6 +49,10 @@ type ListOpenCypherQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpenCypherQueriesInput) operationName() string {
+	return "ListOpenCypherQueries"
+}
+
 type ListOpenCypherQueriesOutput struct {
 
 	// The number of queries that have been accepted but not yet completed, including

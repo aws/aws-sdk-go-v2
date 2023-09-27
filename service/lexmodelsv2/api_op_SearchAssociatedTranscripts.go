@@ -81,6 +81,10 @@ type SearchAssociatedTranscriptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchAssociatedTranscriptsInput) operationName() string {
+	return "SearchAssociatedTranscripts"
+}
+
 type SearchAssociatedTranscriptsOutput struct {
 
 	// The object that contains the associated transcript that meet the criteria you

@@ -50,6 +50,10 @@ type DescribeStreamSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStreamSummaryInput) operationName() string {
+	return "DescribeStreamSummary"
+}
+
 type DescribeStreamSummaryOutput struct {
 
 	// A StreamDescriptionSummary containing information about the stream.

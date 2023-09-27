@@ -42,6 +42,10 @@ type GetServerStrategiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServerStrategiesInput) operationName() string {
+	return "GetServerStrategies"
+}
+
 type GetServerStrategiesOutput struct {
 
 	// A list of strategy recommendations for the server.

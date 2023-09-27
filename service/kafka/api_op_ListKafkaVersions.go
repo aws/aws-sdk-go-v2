@@ -46,6 +46,10 @@ type ListKafkaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKafkaVersionsInput) operationName() string {
+	return "ListKafkaVersions"
+}
+
 type ListKafkaVersionsOutput struct {
 	KafkaVersions []types.KafkaVersion
 

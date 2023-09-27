@@ -50,6 +50,10 @@ type DescribeEdgeDeploymentPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEdgeDeploymentPlanInput) operationName() string {
+	return "DescribeEdgeDeploymentPlan"
+}
+
 type DescribeEdgeDeploymentPlanOutput struct {
 
 	// The device fleet used for this edge deployment plan.

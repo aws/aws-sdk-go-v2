@@ -50,6 +50,10 @@ type StartSourceNetworkRecoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSourceNetworkRecoveryInput) operationName() string {
+	return "StartSourceNetworkRecovery"
+}
+
 type StartSourceNetworkRecoveryOutput struct {
 
 	// The Source Network recovery Job.

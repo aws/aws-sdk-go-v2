@@ -65,6 +65,10 @@ type PostAgentProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostAgentProfileInput) operationName() string {
+	return "PostAgentProfile"
+}
+
 // The structure representing the postAgentProfileResponse.
 type PostAgentProfileOutput struct {
 	// Metadata pertaining to the operation's result.

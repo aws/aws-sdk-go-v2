@@ -55,6 +55,10 @@ type DescribeRootFoldersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRootFoldersInput) operationName() string {
+	return "DescribeRootFolders"
+}
+
 type DescribeRootFoldersOutput struct {
 
 	// The user's special folders.

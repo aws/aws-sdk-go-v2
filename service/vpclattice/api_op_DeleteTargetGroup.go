@@ -43,6 +43,10 @@ type DeleteTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTargetGroupInput) operationName() string {
+	return "DeleteTargetGroup"
+}
+
 type DeleteTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.

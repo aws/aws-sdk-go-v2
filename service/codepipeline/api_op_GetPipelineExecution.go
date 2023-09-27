@@ -50,6 +50,10 @@ type GetPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPipelineExecutionInput) operationName() string {
+	return "GetPipelineExecution"
+}
+
 // Represents the output of a GetPipelineExecution action.
 type GetPipelineExecutionOutput struct {
 

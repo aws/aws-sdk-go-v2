@@ -49,6 +49,10 @@ type ListMailboxExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMailboxExportJobsInput) operationName() string {
+	return "ListMailboxExportJobs"
+}
+
 type ListMailboxExportJobsOutput struct {
 
 	// The mailbox export job details.

@@ -43,6 +43,10 @@ type DescribeKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeKeyInput) operationName() string {
+	return "DescribeKey"
+}
+
 type DescribeKeyOutput struct {
 
 	// The timestamp for when the API key resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)

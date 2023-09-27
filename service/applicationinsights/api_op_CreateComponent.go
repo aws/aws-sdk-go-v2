@@ -51,6 +51,10 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComponentInput) operationName() string {
+	return "CreateComponent"
+}
+
 type CreateComponentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

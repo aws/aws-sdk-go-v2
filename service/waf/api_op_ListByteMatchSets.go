@@ -54,6 +54,10 @@ type ListByteMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListByteMatchSetsInput) operationName() string {
+	return "ListByteMatchSets"
+}
+
 type ListByteMatchSetsOutput struct {
 
 	// An array of ByteMatchSetSummary objects.

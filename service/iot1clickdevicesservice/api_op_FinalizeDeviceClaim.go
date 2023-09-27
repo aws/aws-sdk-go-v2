@@ -50,6 +50,10 @@ type FinalizeDeviceClaimInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FinalizeDeviceClaimInput) operationName() string {
+	return "FinalizeDeviceClaim"
+}
+
 type FinalizeDeviceClaimOutput struct {
 
 	// The device's final claim state.

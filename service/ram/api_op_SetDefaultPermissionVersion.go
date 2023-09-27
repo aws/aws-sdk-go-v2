@@ -63,6 +63,10 @@ type SetDefaultPermissionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDefaultPermissionVersionInput) operationName() string {
+	return "SetDefaultPermissionVersion"
+}
+
 type SetDefaultPermissionVersionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

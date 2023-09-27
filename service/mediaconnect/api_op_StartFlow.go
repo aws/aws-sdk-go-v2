@@ -42,6 +42,10 @@ type StartFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFlowInput) operationName() string {
+	return "StartFlow"
+}
+
 type StartFlowOutput struct {
 
 	// The ARN of the flow that you started.

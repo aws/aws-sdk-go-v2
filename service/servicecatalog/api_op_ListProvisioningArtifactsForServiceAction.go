@@ -55,6 +55,10 @@ type ListProvisioningArtifactsForServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProvisioningArtifactsForServiceActionInput) operationName() string {
+	return "ListProvisioningArtifactsForServiceAction"
+}
+
 type ListProvisioningArtifactsForServiceActionOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

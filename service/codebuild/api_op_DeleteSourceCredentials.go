@@ -41,6 +41,10 @@ type DeleteSourceCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSourceCredentialsInput) operationName() string {
+	return "DeleteSourceCredentials"
+}
+
 type DeleteSourceCredentialsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the token.

@@ -64,6 +64,10 @@ type DescribeFleetInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetInstancesInput) operationName() string {
+	return "DescribeFleetInstances"
+}
+
 type DescribeFleetInstancesOutput struct {
 
 	// The running instances. This list is refreshed periodically and might be out of

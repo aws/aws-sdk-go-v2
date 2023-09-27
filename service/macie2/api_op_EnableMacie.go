@@ -51,6 +51,10 @@ type EnableMacieInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableMacieInput) operationName() string {
+	return "EnableMacie"
+}
+
 type EnableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

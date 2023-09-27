@@ -51,6 +51,10 @@ type PurchaseReservedInstanceOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseReservedInstanceOfferingInput) operationName() string {
+	return "PurchaseReservedInstanceOffering"
+}
+
 // Represents the output of a PurchaseReservedInstanceOffering operation.
 type PurchaseReservedInstanceOfferingOutput struct {
 

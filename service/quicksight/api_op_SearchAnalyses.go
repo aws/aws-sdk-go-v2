@@ -56,6 +56,10 @@ type SearchAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchAnalysesInput) operationName() string {
+	return "SearchAnalyses"
+}
+
 type SearchAnalysesOutput struct {
 
 	// Metadata describing the analyses that you searched for.

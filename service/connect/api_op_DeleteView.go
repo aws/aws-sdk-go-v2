@@ -48,6 +48,10 @@ type DeleteViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteViewInput) operationName() string {
+	return "DeleteView"
+}
+
 type DeleteViewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

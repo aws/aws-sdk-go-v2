@@ -71,6 +71,10 @@ type GetExecutionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExecutionHistoryInput) operationName() string {
+	return "GetExecutionHistory"
+}
+
 type GetExecutionHistoryOutput struct {
 
 	// The list of events that occurred in the execution.

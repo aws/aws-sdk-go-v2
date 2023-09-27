@@ -48,6 +48,10 @@ type DescribeLaunchConfigurationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLaunchConfigurationTemplatesInput) operationName() string {
+	return "DescribeLaunchConfigurationTemplates"
+}
+
 type DescribeLaunchConfigurationTemplatesOutput struct {
 
 	// List of items returned by DescribeLaunchConfigurationTemplates.

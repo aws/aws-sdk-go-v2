@@ -57,6 +57,10 @@ type AttachVpnGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachVpnGatewayInput) operationName() string {
+	return "AttachVpnGateway"
+}
+
 // Contains the output of AttachVpnGateway.
 type AttachVpnGatewayOutput struct {
 

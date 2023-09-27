@@ -63,6 +63,10 @@ type CreateStoreImageTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStoreImageTaskInput) operationName() string {
+	return "CreateStoreImageTask"
+}
+
 type CreateStoreImageTaskOutput struct {
 
 	// The name of the stored AMI object in the S3 bucket.

@@ -48,6 +48,10 @@ type CreateInvalidationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInvalidationInput) operationName() string {
+	return "CreateInvalidation"
+}
+
 // The returned result of the corresponding request.
 type CreateInvalidationOutput struct {
 

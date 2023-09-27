@@ -44,6 +44,10 @@ type DisassociateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateCertificateInput) operationName() string {
+	return "DisassociateCertificate"
+}
+
 type DisassociateCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

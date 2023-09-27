@@ -52,6 +52,10 @@ type CloneBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CloneBackendInput) operationName() string {
+	return "CloneBackend"
+}
+
 type CloneBackendOutput struct {
 
 	// The app ID.

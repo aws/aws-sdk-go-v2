@@ -74,6 +74,10 @@ type GetDifferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDifferencesInput) operationName() string {
+	return "GetDifferences"
+}
+
 type GetDifferencesOutput struct {
 
 	// A data type object that contains information about the differences, including

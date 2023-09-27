@@ -47,6 +47,10 @@ type DeleteSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSyncJobInput) operationName() string {
+	return "DeleteSyncJob"
+}
+
 type DeleteSyncJobOutput struct {
 
 	// The SyncJob response state.

@@ -65,6 +65,10 @@ type CreateApplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationInstanceInput) operationName() string {
+	return "CreateApplicationInstance"
+}
+
 type CreateApplicationInstanceOutput struct {
 
 	// The application instance's ID.

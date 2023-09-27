@@ -64,6 +64,10 @@ type CreateEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEntityInput) operationName() string {
+	return "CreateEntity"
+}
+
 type CreateEntityOutput struct {
 
 	// The ARN of the entity.

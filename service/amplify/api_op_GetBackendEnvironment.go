@@ -48,6 +48,10 @@ type GetBackendEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendEnvironmentInput) operationName() string {
+	return "GetBackendEnvironment"
+}
+
 // The result structure for the get backend environment result.
 type GetBackendEnvironmentOutput struct {
 

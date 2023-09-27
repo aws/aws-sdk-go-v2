@@ -52,6 +52,10 @@ type CreateDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatastoreInput) operationName() string {
+	return "CreateDatastore"
+}
+
 type CreateDatastoreOutput struct {
 
 	// The data store identifier.

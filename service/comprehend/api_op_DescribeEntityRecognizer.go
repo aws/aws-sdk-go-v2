@@ -43,6 +43,10 @@ type DescribeEntityRecognizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntityRecognizerInput) operationName() string {
+	return "DescribeEntityRecognizer"
+}
+
 type DescribeEntityRecognizerOutput struct {
 
 	// Describes information associated with an entity recognizer.

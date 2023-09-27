@@ -54,6 +54,10 @@ type ListSecurityProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecurityProfilesInput) operationName() string {
+	return "ListSecurityProfiles"
+}
+
 type ListSecurityProfilesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

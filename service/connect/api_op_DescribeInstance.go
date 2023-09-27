@@ -48,6 +48,10 @@ type DescribeInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceInput) operationName() string {
+	return "DescribeInstance"
+}
+
 type DescribeInstanceOutput struct {
 
 	// The name of the instance.

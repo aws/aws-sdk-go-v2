@@ -77,6 +77,10 @@ type CreateLocationFsxOntapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationFsxOntapInput) operationName() string {
+	return "CreateLocationFsxOntap"
+}
+
 type CreateLocationFsxOntapOutput struct {
 
 	// Specifies the ARN of the FSx for ONTAP file system location that you create.

@@ -37,6 +37,10 @@ type DescribeDRTAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDRTAccessInput) operationName() string {
+	return "DescribeDRTAccess"
+}
+
 type DescribeDRTAccessOutput struct {
 
 	// The list of Amazon S3 buckets accessed by the SRT.

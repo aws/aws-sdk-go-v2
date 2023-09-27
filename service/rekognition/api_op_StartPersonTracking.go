@@ -70,6 +70,10 @@ type StartPersonTrackingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPersonTrackingInput) operationName() string {
+	return "StartPersonTracking"
+}
+
 type StartPersonTrackingOutput struct {
 
 	// The identifier for the person detection job. Use JobId to identify the job in a

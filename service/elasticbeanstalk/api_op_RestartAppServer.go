@@ -47,6 +47,10 @@ type RestartAppServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestartAppServerInput) operationName() string {
+	return "RestartAppServer"
+}
+
 type RestartAppServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

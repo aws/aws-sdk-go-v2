@@ -86,6 +86,10 @@ type StartMailboxExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMailboxExportJobInput) operationName() string {
+	return "StartMailboxExportJob"
+}
+
 type StartMailboxExportJobOutput struct {
 
 	// The job ID.

@@ -59,6 +59,10 @@ type ListAppInputSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppInputSourcesInput) operationName() string {
+	return "ListAppInputSources"
+}
+
 type ListAppInputSourcesOutput struct {
 
 	// The list of Resilience Hub application input sources.

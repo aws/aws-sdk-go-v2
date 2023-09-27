@@ -48,6 +48,10 @@ type GetJobRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobRunsInput) operationName() string {
+	return "GetJobRuns"
+}
+
 type GetJobRunsOutput struct {
 
 	// A list of job-run metadata objects.

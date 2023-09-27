@@ -103,6 +103,10 @@ type GetExperimentResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExperimentResultsInput) operationName() string {
+	return "GetExperimentResults"
+}
+
 type GetExperimentResultsOutput struct {
 
 	// If the experiment doesn't yet have enough events to provide valid results, this

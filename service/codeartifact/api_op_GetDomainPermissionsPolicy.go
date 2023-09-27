@@ -49,6 +49,10 @@ type GetDomainPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainPermissionsPolicyInput) operationName() string {
+	return "GetDomainPermissionsPolicy"
+}
+
 type GetDomainPermissionsPolicyOutput struct {
 
 	// The returned resource policy.

@@ -47,6 +47,10 @@ type BatchGetStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetStandardsControlAssociationsInput) operationName() string {
+	return "BatchGetStandardsControlAssociations"
+}
+
 type BatchGetStandardsControlAssociationsOutput struct {
 
 	// Provides the enablement status of a security control in a specified standard

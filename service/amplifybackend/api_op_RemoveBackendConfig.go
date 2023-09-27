@@ -41,6 +41,10 @@ type RemoveBackendConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveBackendConfigInput) operationName() string {
+	return "RemoveBackendConfig"
+}
+
 type RemoveBackendConfigOutput struct {
 
 	// If the request fails, this error is returned.

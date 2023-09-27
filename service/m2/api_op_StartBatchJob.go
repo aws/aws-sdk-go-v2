@@ -54,6 +54,10 @@ type StartBatchJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBatchJobInput) operationName() string {
+	return "StartBatchJob"
+}
+
 type StartBatchJobOutput struct {
 
 	// The unique identifier of this execution of the batch job.

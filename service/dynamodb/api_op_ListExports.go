@@ -48,6 +48,10 @@ type ListExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExportsInput) operationName() string {
+	return "ListExports"
+}
+
 type ListExportsOutput struct {
 
 	// A list of ExportSummary objects.

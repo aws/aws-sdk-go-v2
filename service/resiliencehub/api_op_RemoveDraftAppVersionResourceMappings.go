@@ -67,6 +67,10 @@ type RemoveDraftAppVersionResourceMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveDraftAppVersionResourceMappingsInput) operationName() string {
+	return "RemoveDraftAppVersionResourceMappings"
+}
+
 type RemoveDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

@@ -43,6 +43,10 @@ type ListMediaPipelineKinesisVideoStreamPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMediaPipelineKinesisVideoStreamPoolsInput) operationName() string {
+	return "ListMediaPipelineKinesisVideoStreamPools"
+}
+
 type ListMediaPipelineKinesisVideoStreamPoolsOutput struct {
 
 	// The list of video stream pools.

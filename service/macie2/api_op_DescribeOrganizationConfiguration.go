@@ -36,6 +36,10 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationConfigurationInput) operationName() string {
+	return "DescribeOrganizationConfiguration"
+}
+
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Specifies whether Amazon Macie is enabled automatically for accounts that are

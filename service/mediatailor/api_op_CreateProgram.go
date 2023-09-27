@@ -69,6 +69,10 @@ type CreateProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProgramInput) operationName() string {
+	return "CreateProgram"
+}
+
 type CreateProgramOutput struct {
 
 	// The ad break configuration settings.

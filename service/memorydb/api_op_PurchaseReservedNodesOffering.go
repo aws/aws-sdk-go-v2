@@ -53,6 +53,10 @@ type PurchaseReservedNodesOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseReservedNodesOfferingInput) operationName() string {
+	return "PurchaseReservedNodesOffering"
+}
+
 type PurchaseReservedNodesOfferingOutput struct {
 
 	// Represents the output of a PurchaseReservedNodesOffering operation.

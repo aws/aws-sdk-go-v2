@@ -56,6 +56,10 @@ type DescribeSavingsPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSavingsPlansInput) operationName() string {
+	return "DescribeSavingsPlans"
+}
+
 type DescribeSavingsPlansOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

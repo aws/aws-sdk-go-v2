@@ -52,6 +52,10 @@ type ListBackupPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupPlansInput) operationName() string {
+	return "ListBackupPlans"
+}
+
 type ListBackupPlansOutput struct {
 
 	// An array of backup plan list items containing metadata about your saved backup

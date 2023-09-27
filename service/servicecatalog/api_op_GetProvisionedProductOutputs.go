@@ -61,6 +61,10 @@ type GetProvisionedProductOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProvisionedProductOutputsInput) operationName() string {
+	return "GetProvisionedProductOutputs"
+}
+
 type GetProvisionedProductOutputsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

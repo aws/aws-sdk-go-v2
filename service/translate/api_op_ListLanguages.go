@@ -48,6 +48,10 @@ type ListLanguagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLanguagesInput) operationName() string {
+	return "ListLanguages"
+}
+
 type ListLanguagesOutput struct {
 
 	// The language code passed in with the request.

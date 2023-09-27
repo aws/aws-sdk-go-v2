@@ -54,6 +54,10 @@ type DeleteRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRegexPatternSetInput) operationName() string {
+	return "DeleteRegexPatternSet"
+}
+
 type DeleteRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRegexPatternSet request. You

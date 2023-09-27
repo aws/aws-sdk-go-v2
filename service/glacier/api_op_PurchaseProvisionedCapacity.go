@@ -45,6 +45,10 @@ type PurchaseProvisionedCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseProvisionedCapacityInput) operationName() string {
+	return "PurchaseProvisionedCapacity"
+}
+
 type PurchaseProvisionedCapacityOutput struct {
 
 	// The ID that identifies the provisioned capacity unit.

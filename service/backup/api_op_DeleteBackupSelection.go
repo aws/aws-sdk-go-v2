@@ -48,6 +48,10 @@ type DeleteBackupSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackupSelectionInput) operationName() string {
+	return "DeleteBackupSelection"
+}
+
 type DeleteBackupSelectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

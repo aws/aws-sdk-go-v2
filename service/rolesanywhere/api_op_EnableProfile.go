@@ -43,6 +43,10 @@ type EnableProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableProfileInput) operationName() string {
+	return "EnableProfile"
+}
+
 type EnableProfileOutput struct {
 
 	// The state of the profile after a read or write operation.

@@ -43,6 +43,10 @@ type DescribeSolutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSolutionInput) operationName() string {
+	return "DescribeSolution"
+}
+
 type DescribeSolutionOutput struct {
 
 	// An object that describes the solution.

@@ -53,6 +53,10 @@ type ListLogSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLogSourcesInput) operationName() string {
+	return "ListLogSources"
+}
+
 type ListLogSourcesOutput struct {
 
 	// If nextToken is returned, there are more results available. You can repeat the

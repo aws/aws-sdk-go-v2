@@ -90,6 +90,10 @@ type GetBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketReplicationInput) operationName() string {
+	return "GetBucketReplication"
+}
+
 type GetBucketReplicationOutput struct {
 
 	// A container for one or more replication rules. A replication configuration must

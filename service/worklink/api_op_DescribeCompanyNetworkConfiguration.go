@@ -45,6 +45,10 @@ type DescribeCompanyNetworkConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCompanyNetworkConfigurationInput) operationName() string {
+	return "DescribeCompanyNetworkConfiguration"
+}
+
 type DescribeCompanyNetworkConfigurationOutput struct {
 
 	// The security groups associated with access to the provided subnets.

@@ -48,6 +48,10 @@ type GetWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowInput) operationName() string {
+	return "GetWorkflow"
+}
+
 type GetWorkflowOutput struct {
 
 	// Attributes provided for workflow execution.

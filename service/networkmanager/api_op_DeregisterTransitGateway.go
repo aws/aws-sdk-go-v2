@@ -49,6 +49,10 @@ type DeregisterTransitGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterTransitGatewayInput) operationName() string {
+	return "DeregisterTransitGateway"
+}
+
 type DeregisterTransitGatewayOutput struct {
 
 	// The transit gateway registration information.

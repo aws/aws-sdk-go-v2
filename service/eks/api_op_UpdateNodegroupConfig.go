@@ -70,6 +70,10 @@ type UpdateNodegroupConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNodegroupConfigInput) operationName() string {
+	return "UpdateNodegroupConfig"
+}
+
 type UpdateNodegroupConfigOutput struct {
 
 	// An object representing an asynchronous update.

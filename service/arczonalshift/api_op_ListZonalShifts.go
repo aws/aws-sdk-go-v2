@@ -54,6 +54,10 @@ type ListZonalShiftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListZonalShiftsInput) operationName() string {
+	return "ListZonalShifts"
+}
+
 type ListZonalShiftsOutput struct {
 
 	// The items in the response list.

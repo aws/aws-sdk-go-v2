@@ -44,6 +44,10 @@ type GetCostEstimationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCostEstimationInput) operationName() string {
+	return "GetCostEstimation"
+}
+
 type GetCostEstimationOutput struct {
 
 	// An array of ResourceCost objects that each contains details about the monthly

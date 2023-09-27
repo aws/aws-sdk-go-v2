@@ -59,6 +59,10 @@ type UpdateSolNetworkInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSolNetworkInstanceInput) operationName() string {
+	return "UpdateSolNetworkInstance"
+}
+
 type UpdateSolNetworkInstanceOutput struct {
 
 	// The identifier of the network operation.

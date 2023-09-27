@@ -54,6 +54,10 @@ type AssociateTrafficDistributionGroupUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTrafficDistributionGroupUserInput) operationName() string {
+	return "AssociateTrafficDistributionGroupUser"
+}
+
 type AssociateTrafficDistributionGroupUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type ListApplicationInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationInstancesInput) operationName() string {
+	return "ListApplicationInstances"
+}
+
 type ListApplicationInstancesOutput struct {
 
 	// A list of application instances.

@@ -56,6 +56,10 @@ type UpdateProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProgramInput) operationName() string {
+	return "UpdateProgram"
+}
+
 type UpdateProgramOutput struct {
 
 	// The ad break configuration settings.

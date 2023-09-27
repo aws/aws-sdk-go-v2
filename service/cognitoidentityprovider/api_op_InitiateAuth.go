@@ -149,6 +149,10 @@ type InitiateAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateAuthInput) operationName() string {
+	return "InitiateAuth"
+}
+
 // Initiates the authentication response.
 type InitiateAuthOutput struct {
 

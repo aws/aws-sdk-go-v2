@@ -48,6 +48,10 @@ type DeleteStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStudioInput) operationName() string {
+	return "DeleteStudio"
+}
+
 type DeleteStudioOutput struct {
 
 	// Information about a studio.

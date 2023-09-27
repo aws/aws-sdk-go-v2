@@ -50,6 +50,10 @@ type GetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceInput) operationName() string {
+	return "GetDevice"
+}
+
 type GetDeviceOutput struct {
 
 	// The ARN of the device.

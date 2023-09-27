@@ -78,6 +78,10 @@ type DeleteObjectTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteObjectTaggingInput) operationName() string {
+	return "DeleteObjectTagging"
+}
+
 type DeleteObjectTaggingOutput struct {
 
 	// The versionId of the object the tag-set was removed from.

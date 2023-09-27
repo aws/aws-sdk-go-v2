@@ -47,6 +47,10 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainInput) operationName() string {
+	return "CreateDomain"
+}
+
 // The result of a CreateDomainRequest . Contains the status of a newly created
 // domain.
 type CreateDomainOutput struct {

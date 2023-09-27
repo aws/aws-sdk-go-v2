@@ -42,6 +42,10 @@ type ListDataLakesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataLakesInput) operationName() string {
+	return "ListDataLakes"
+}
+
 type ListDataLakesOutput struct {
 
 	// Retrieves the Security Lake configuration object.

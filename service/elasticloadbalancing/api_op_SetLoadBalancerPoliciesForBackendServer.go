@@ -64,6 +64,10 @@ type SetLoadBalancerPoliciesForBackendServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetLoadBalancerPoliciesForBackendServerInput) operationName() string {
+	return "SetLoadBalancerPoliciesForBackendServer"
+}
+
 // Contains the output of SetLoadBalancerPoliciesForBackendServer.
 type SetLoadBalancerPoliciesForBackendServerOutput struct {
 	// Metadata pertaining to the operation's result.

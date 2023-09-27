@@ -54,6 +54,10 @@ type ResetClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetClusterParameterGroupInput) operationName() string {
+	return "ResetClusterParameterGroup"
+}
+
 type ResetClusterParameterGroupOutput struct {
 
 	// The name of the cluster parameter group.

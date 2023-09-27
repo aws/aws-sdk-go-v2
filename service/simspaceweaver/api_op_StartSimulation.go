@@ -94,6 +94,10 @@ type StartSimulationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSimulationInput) operationName() string {
+	return "StartSimulation"
+}
+
 type StartSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about

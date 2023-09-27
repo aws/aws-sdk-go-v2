@@ -70,6 +70,10 @@ type CreateDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDestinationInput) operationName() string {
+	return "CreateDestination"
+}
+
 type CreateDestinationOutput struct {
 
 	// The Amazon Resource Name of the new resource.

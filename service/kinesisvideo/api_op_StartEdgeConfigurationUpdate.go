@@ -66,6 +66,10 @@ type StartEdgeConfigurationUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartEdgeConfigurationUpdateInput) operationName() string {
+	return "StartEdgeConfigurationUpdate"
+}
+
 type StartEdgeConfigurationUpdateOutput struct {
 
 	// The timestamp at which a stream’s edge configuration was first created.

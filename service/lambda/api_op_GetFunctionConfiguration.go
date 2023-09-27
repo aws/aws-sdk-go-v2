@@ -59,6 +59,10 @@ type GetFunctionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionConfigurationInput) operationName() string {
+	return "GetFunctionConfiguration"
+}
+
 // Details about a function's configuration.
 type GetFunctionConfigurationOutput struct {
 

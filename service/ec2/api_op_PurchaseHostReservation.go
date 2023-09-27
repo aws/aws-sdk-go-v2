@@ -70,6 +70,10 @@ type PurchaseHostReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseHostReservationInput) operationName() string {
+	return "PurchaseHostReservation"
+}
+
 type PurchaseHostReservationOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

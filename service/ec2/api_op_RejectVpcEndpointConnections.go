@@ -53,6 +53,10 @@ type RejectVpcEndpointConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectVpcEndpointConnectionsInput) operationName() string {
+	return "RejectVpcEndpointConnections"
+}
+
 type RejectVpcEndpointConnectionsOutput struct {
 
 	// Information about the endpoints that were not rejected, if applicable.

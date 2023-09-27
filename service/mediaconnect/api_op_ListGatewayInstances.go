@@ -59,6 +59,10 @@ type ListGatewayInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGatewayInstancesInput) operationName() string {
+	return "ListGatewayInstances"
+}
+
 type ListGatewayInstancesOutput struct {
 
 	// A list of instance summaries.

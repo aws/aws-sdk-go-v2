@@ -52,6 +52,10 @@ type GetEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnvironmentInput) operationName() string {
+	return "GetEnvironment"
+}
+
 type GetEnvironmentOutput struct {
 
 	// The application ID.

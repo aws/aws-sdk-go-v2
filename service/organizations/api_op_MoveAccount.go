@@ -71,6 +71,10 @@ type MoveAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MoveAccountInput) operationName() string {
+	return "MoveAccount"
+}
+
 type MoveAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

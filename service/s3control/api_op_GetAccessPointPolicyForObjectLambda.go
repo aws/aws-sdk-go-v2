@@ -54,6 +54,10 @@ type GetAccessPointPolicyForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointPolicyForObjectLambdaInput) operationName() string {
+	return "GetAccessPointPolicyForObjectLambda"
+}
+
 type GetAccessPointPolicyForObjectLambdaOutput struct {
 
 	// Object Lambda Access Point resource policy document.

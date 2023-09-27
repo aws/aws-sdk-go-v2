@@ -41,6 +41,10 @@ type GetTestExecutionArtifactsUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTestExecutionArtifactsUrlInput) operationName() string {
+	return "GetTestExecutionArtifactsUrl"
+}
+
 type GetTestExecutionArtifactsUrlOutput struct {
 
 	// The pre-signed Amazon S3 URL to download completed test execution.

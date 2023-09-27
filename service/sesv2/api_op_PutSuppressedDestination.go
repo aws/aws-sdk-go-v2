@@ -49,6 +49,10 @@ type PutSuppressedDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSuppressedDestinationInput) operationName() string {
+	return "PutSuppressedDestination"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutSuppressedDestinationOutput struct {

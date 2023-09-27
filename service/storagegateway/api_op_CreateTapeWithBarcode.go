@@ -89,6 +89,10 @@ type CreateTapeWithBarcodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTapeWithBarcodeInput) operationName() string {
+	return "CreateTapeWithBarcode"
+}
+
 // CreateTapeOutput
 type CreateTapeWithBarcodeOutput struct {
 

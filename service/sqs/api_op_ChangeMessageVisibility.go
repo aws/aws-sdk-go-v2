@@ -94,6 +94,10 @@ type ChangeMessageVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangeMessageVisibilityInput) operationName() string {
+	return "ChangeMessageVisibility"
+}
+
 type ChangeMessageVisibilityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

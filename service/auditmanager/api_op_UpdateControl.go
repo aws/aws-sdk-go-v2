@@ -64,6 +64,10 @@ type UpdateControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateControlInput) operationName() string {
+	return "UpdateControl"
+}
+
 type UpdateControlOutput struct {
 
 	// The name of the updated control set that the UpdateControl API returned.

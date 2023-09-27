@@ -46,6 +46,10 @@ type GetCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCustomVerificationEmailTemplateInput) operationName() string {
+	return "GetCustomVerificationEmailTemplate"
+}
+
 // The following elements are returned by the service.
 type GetCustomVerificationEmailTemplateOutput struct {
 

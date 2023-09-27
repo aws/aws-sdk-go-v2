@@ -110,6 +110,10 @@ type GetInsightRuleReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightRuleReportInput) operationName() string {
+	return "GetInsightRuleReport"
+}
+
 type GetInsightRuleReportOutput struct {
 
 	// The sum of the values from all individual contributors that match the rule.

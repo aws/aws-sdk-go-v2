@@ -43,6 +43,10 @@ type DescribeActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActionInput) operationName() string {
+	return "DescribeAction"
+}
+
 type DescribeActionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the action.

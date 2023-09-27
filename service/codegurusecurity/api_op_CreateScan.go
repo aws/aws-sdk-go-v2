@@ -75,6 +75,10 @@ type CreateScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScanInput) operationName() string {
+	return "CreateScan"
+}
+
 type CreateScanOutput struct {
 
 	// The identifier for the resource object that contains resources that were

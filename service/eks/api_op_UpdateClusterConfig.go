@@ -75,6 +75,10 @@ type UpdateClusterConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterConfigInput) operationName() string {
+	return "UpdateClusterConfig"
+}
+
 type UpdateClusterConfigOutput struct {
 
 	// An object representing an asynchronous update.

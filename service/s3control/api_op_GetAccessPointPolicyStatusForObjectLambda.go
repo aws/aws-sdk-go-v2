@@ -53,6 +53,10 @@ type GetAccessPointPolicyStatusForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointPolicyStatusForObjectLambdaInput) operationName() string {
+	return "GetAccessPointPolicyStatusForObjectLambda"
+}
+
 type GetAccessPointPolicyStatusForObjectLambdaOutput struct {
 
 	// Indicates whether this access point policy is public. For more information

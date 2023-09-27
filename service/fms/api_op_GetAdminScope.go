@@ -44,6 +44,10 @@ type GetAdminScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAdminScopeInput) operationName() string {
+	return "GetAdminScope"
+}
+
 type GetAdminScopeOutput struct {
 
 	// Contains details about the administrative scope of the requested account.

@@ -36,6 +36,10 @@ type RunFleetAdvisorLsaAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunFleetAdvisorLsaAnalysisInput) operationName() string {
+	return "RunFleetAdvisorLsaAnalysis"
+}
+
 type RunFleetAdvisorLsaAnalysisOutput struct {
 
 	// The ID of the LSA analysis run.

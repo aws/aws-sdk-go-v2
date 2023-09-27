@@ -46,6 +46,10 @@ type GetJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobInput) operationName() string {
+	return "GetJob"
+}
+
 type GetJobOutput struct {
 
 	// Definition of the Amazon Braket job created. Specifies the container image the

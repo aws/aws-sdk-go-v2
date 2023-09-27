@@ -45,6 +45,10 @@ type RemoveAllBackendsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveAllBackendsInput) operationName() string {
+	return "RemoveAllBackends"
+}
+
 type RemoveAllBackendsOutput struct {
 
 	// The app ID.

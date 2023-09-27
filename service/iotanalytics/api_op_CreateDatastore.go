@@ -64,6 +64,10 @@ type CreateDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatastoreInput) operationName() string {
+	return "CreateDatastore"
+}
+
 type CreateDatastoreOutput struct {
 
 	// The ARN of the data store.

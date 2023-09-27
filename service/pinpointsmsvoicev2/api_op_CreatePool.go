@@ -79,6 +79,10 @@ type CreatePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePoolInput) operationName() string {
+	return "CreatePool"
+}
+
 type CreatePoolOutput struct {
 
 	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)

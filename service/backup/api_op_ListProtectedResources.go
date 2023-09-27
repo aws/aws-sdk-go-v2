@@ -48,6 +48,10 @@ type ListProtectedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProtectedResourcesInput) operationName() string {
+	return "ListProtectedResources"
+}
+
 type ListProtectedResourcesOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a

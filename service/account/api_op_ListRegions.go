@@ -76,6 +76,10 @@ type ListRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRegionsInput) operationName() string {
+	return "ListRegions"
+}
+
 type ListRegionsOutput struct {
 
 	// If there is more data to be returned, this will be populated. It should be

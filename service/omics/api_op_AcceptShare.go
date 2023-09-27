@@ -42,6 +42,10 @@ type AcceptShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptShareInput) operationName() string {
+	return "AcceptShare"
+}
+
 type AcceptShareOutput struct {
 
 	// The status of an analytics store share.

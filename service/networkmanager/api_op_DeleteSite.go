@@ -47,6 +47,10 @@ type DeleteSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSiteInput) operationName() string {
+	return "DeleteSite"
+}
+
 type DeleteSiteOutput struct {
 
 	// Information about the site.

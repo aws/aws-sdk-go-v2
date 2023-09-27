@@ -49,6 +49,10 @@ type UpdateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWebhookInput) operationName() string {
+	return "UpdateWebhook"
+}
+
 // The result structure for the update webhook request.
 type UpdateWebhookOutput struct {
 

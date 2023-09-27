@@ -180,6 +180,10 @@ type CreateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIntegrationInput) operationName() string {
+	return "CreateIntegration"
+}
+
 type CreateIntegrationOutput struct {
 
 	// Specifies whether an integration is managed by API Gateway. If you created an

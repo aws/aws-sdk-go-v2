@@ -54,6 +54,10 @@ type DeleteResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourceShareInput) operationName() string {
+	return "DeleteResourceShare"
+}
+
 type DeleteResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

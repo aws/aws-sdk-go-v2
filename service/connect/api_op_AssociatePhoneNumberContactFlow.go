@@ -60,6 +60,10 @@ type AssociatePhoneNumberContactFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePhoneNumberContactFlowInput) operationName() string {
+	return "AssociatePhoneNumberContactFlow"
+}
+
 type AssociatePhoneNumberContactFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

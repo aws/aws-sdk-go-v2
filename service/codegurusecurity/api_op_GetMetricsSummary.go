@@ -48,6 +48,10 @@ type GetMetricsSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricsSummaryInput) operationName() string {
+	return "GetMetricsSummary"
+}
+
 type GetMetricsSummaryOutput struct {
 
 	// The summary metrics from the specified date.

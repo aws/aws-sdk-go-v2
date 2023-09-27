@@ -65,6 +65,10 @@ type ListBackendJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackendJobsInput) operationName() string {
+	return "ListBackendJobs"
+}
+
 type ListBackendJobsOutput struct {
 
 	// An array of jobs and their properties.

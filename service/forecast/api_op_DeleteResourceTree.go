@@ -55,6 +55,10 @@ type DeleteResourceTreeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourceTreeInput) operationName() string {
+	return "DeleteResourceTree"
+}
+
 type DeleteResourceTreeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type DescribeDirectConnectGatewayAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDirectConnectGatewayAttachmentsInput) operationName() string {
+	return "DescribeDirectConnectGatewayAttachments"
+}
+
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
 
 	// The attachments.

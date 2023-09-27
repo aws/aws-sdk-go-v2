@@ -54,6 +54,10 @@ type ListScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScheduledActionsInput) operationName() string {
+	return "ListScheduledActions"
+}
+
 type ListScheduledActionsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of

@@ -128,6 +128,10 @@ type CopySnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopySnapshotInput) operationName() string {
+	return "CopySnapshot"
+}
+
 type CopySnapshotOutput struct {
 
 	// The ID of the new snapshot.

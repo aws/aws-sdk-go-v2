@@ -71,6 +71,10 @@ type ListAnswersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnswersInput) operationName() string {
+	return "ListAnswers"
+}
+
 // Output of a list answers call.
 type ListAnswersOutput struct {
 

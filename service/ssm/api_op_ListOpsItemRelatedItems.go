@@ -53,6 +53,10 @@ type ListOpsItemRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpsItemRelatedItemsInput) operationName() string {
+	return "ListOpsItemRelatedItems"
+}
+
 type ListOpsItemRelatedItemsOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

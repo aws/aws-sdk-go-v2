@@ -47,6 +47,10 @@ type GetStageSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStageSessionInput) operationName() string {
+	return "GetStageSession"
+}
+
 type GetStageSessionOutput struct {
 
 	// The stage session that is returned.

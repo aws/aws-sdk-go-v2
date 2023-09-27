@@ -67,6 +67,10 @@ type AcceptPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptPageInput) operationName() string {
+	return "AcceptPage"
+}
+
 type AcceptPageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

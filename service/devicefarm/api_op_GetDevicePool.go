@@ -43,6 +43,10 @@ type GetDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevicePoolInput) operationName() string {
+	return "GetDevicePool"
+}
+
 // Represents the result of a get device pool request.
 type GetDevicePoolOutput struct {
 

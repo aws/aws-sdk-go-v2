@@ -48,6 +48,10 @@ type AssociateApprovedOriginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateApprovedOriginInput) operationName() string {
+	return "AssociateApprovedOrigin"
+}
+
 type AssociateApprovedOriginOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

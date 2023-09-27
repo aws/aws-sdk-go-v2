@@ -43,6 +43,10 @@ type GetCustomDataIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCustomDataIdentifierInput) operationName() string {
+	return "GetCustomDataIdentifier"
+}
+
 type GetCustomDataIdentifierOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom data identifier.

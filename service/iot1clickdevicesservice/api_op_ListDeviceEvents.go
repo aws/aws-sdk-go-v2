@@ -63,6 +63,10 @@ type ListDeviceEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceEventsInput) operationName() string {
+	return "ListDeviceEvents"
+}
+
 type ListDeviceEventsOutput struct {
 
 	// An array of zero or more elements describing the event(s) associated with the

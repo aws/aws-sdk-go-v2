@@ -89,6 +89,10 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainInput) operationName() string {
+	return "UpdateDomain"
+}
+
 type UpdateDomainOutput struct {
 
 	// The timestamp of when the domain was created.

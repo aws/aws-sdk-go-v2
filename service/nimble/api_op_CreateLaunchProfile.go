@@ -83,6 +83,10 @@ type CreateLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLaunchProfileInput) operationName() string {
+	return "CreateLaunchProfile"
+}
+
 type CreateLaunchProfileOutput struct {
 
 	// The launch profile.

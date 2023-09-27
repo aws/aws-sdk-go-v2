@@ -55,6 +55,10 @@ type DeprovisionPublicIpv4PoolCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprovisionPublicIpv4PoolCidrInput) operationName() string {
+	return "DeprovisionPublicIpv4PoolCidr"
+}
+
 type DeprovisionPublicIpv4PoolCidrOutput struct {
 
 	// The deprovisioned CIDRs.

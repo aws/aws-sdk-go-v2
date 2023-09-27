@@ -84,6 +84,10 @@ type ListMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMetricsInput) operationName() string {
+	return "ListMetrics"
+}
+
 type ListMetricsOutput struct {
 
 	// The metrics that match your request.

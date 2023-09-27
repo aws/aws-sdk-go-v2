@@ -55,6 +55,10 @@ type ActivateEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateEvaluationFormInput) operationName() string {
+	return "ActivateEvaluationForm"
+}
+
 type ActivateEvaluationFormOutput struct {
 
 	// The Amazon Resource Name (ARN) for the evaluation form resource.

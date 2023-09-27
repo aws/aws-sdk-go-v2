@@ -36,6 +36,10 @@ type GetInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightsInput) operationName() string {
+	return "GetInsights"
+}
+
 type GetInsightsOutput struct {
 
 	// The analytics data that the GetInsights API returned.

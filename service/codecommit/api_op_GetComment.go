@@ -46,6 +46,10 @@ type GetCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCommentInput) operationName() string {
+	return "GetComment"
+}
+
 type GetCommentOutput struct {
 
 	// The contents of the comment.

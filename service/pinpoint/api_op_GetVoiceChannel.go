@@ -44,6 +44,10 @@ type GetVoiceChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceChannelInput) operationName() string {
+	return "GetVoiceChannel"
+}
+
 type GetVoiceChannelOutput struct {
 
 	// Provides information about the status and settings of the voice channel for an

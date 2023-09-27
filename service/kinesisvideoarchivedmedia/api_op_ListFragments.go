@@ -81,6 +81,10 @@ type ListFragmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFragmentsInput) operationName() string {
+	return "ListFragments"
+}
+
 type ListFragmentsOutput struct {
 
 	// A list of archived Fragment objects from the stream that meet the selector

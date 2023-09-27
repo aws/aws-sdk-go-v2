@@ -46,6 +46,10 @@ type DeleteAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccountSubscriptionInput) operationName() string {
+	return "DeleteAccountSubscription"
+}
+
 type DeleteAccountSubscriptionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

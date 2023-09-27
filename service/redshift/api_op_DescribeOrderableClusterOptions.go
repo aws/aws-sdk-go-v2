@@ -69,6 +69,10 @@ type DescribeOrderableClusterOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrderableClusterOptionsInput) operationName() string {
+	return "DescribeOrderableClusterOptions"
+}
+
 // Contains the output from the DescribeOrderableClusterOptions action.
 type DescribeOrderableClusterOptionsOutput struct {
 

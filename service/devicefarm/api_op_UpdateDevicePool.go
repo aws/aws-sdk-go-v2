@@ -72,6 +72,10 @@ type UpdateDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDevicePoolInput) operationName() string {
+	return "UpdateDevicePool"
+}
+
 // Represents the result of an update device pool request.
 type UpdateDevicePoolOutput struct {
 

@@ -66,6 +66,10 @@ type DescribeCanariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCanariesInput) operationName() string {
+	return "DescribeCanaries"
+}
+
 type DescribeCanariesOutput struct {
 
 	// Returns an array. Each item in the array contains the full information about

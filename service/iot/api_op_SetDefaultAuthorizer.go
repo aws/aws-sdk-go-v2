@@ -44,6 +44,10 @@ type SetDefaultAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDefaultAuthorizerInput) operationName() string {
+	return "SetDefaultAuthorizer"
+}
+
 type SetDefaultAuthorizerOutput struct {
 
 	// The authorizer ARN.

@@ -83,6 +83,10 @@ type UpdatePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePortfolioShareInput) operationName() string {
+	return "UpdatePortfolioShare"
+}
+
 type UpdatePortfolioShareOutput struct {
 
 	// The token that tracks the status of the UpdatePortfolioShare operation for

@@ -60,6 +60,10 @@ type StartConfigurationSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartConfigurationSessionInput) operationName() string {
+	return "StartConfigurationSession"
+}
+
 type StartConfigurationSessionOutput struct {
 
 	// Token encapsulating state about the configuration session. Provide this token

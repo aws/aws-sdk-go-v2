@@ -42,6 +42,10 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserInput) operationName() string {
+	return "GetUser"
+}
+
 type GetUserOutput struct {
 
 	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to

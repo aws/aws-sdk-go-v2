@@ -51,6 +51,10 @@ type UpdateDefaultBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDefaultBranchInput) operationName() string {
+	return "UpdateDefaultBranch"
+}
+
 type UpdateDefaultBranchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

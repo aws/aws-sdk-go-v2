@@ -40,6 +40,10 @@ type DeletePropertygraphStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePropertygraphStatisticsInput) operationName() string {
+	return "DeletePropertygraphStatistics"
+}
+
 type DeletePropertygraphStatisticsOutput struct {
 
 	// The deletion payload.

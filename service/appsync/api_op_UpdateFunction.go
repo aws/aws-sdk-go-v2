@@ -89,6 +89,10 @@ type UpdateFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFunctionInput) operationName() string {
+	return "UpdateFunction"
+}
+
 type UpdateFunctionOutput struct {
 
 	// The Function object.

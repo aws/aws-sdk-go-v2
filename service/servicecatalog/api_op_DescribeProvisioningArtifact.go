@@ -62,6 +62,10 @@ type DescribeProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProvisioningArtifactInput) operationName() string {
+	return "DescribeProvisioningArtifact"
+}
+
 type DescribeProvisioningArtifactOutput struct {
 
 	// The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.

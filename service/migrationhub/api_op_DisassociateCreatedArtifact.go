@@ -66,6 +66,10 @@ type DisassociateCreatedArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateCreatedArtifactInput) operationName() string {
+	return "DisassociateCreatedArtifact"
+}
+
 type DisassociateCreatedArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -79,6 +79,10 @@ type CreateMatchingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMatchingWorkflowInput) operationName() string {
+	return "CreateMatchingWorkflow"
+}
+
 type CreateMatchingWorkflowOutput struct {
 
 	// A list of InputSource objects, which have the fields InputSourceARN and

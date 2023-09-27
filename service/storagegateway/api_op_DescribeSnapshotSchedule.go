@@ -48,6 +48,10 @@ type DescribeSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotScheduleInput) operationName() string {
+	return "DescribeSnapshotSchedule"
+}
+
 type DescribeSnapshotScheduleOutput struct {
 
 	// The snapshot description.

@@ -49,6 +49,10 @@ type ListBatchSegmentJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBatchSegmentJobsInput) operationName() string {
+	return "ListBatchSegmentJobs"
+}
+
 type ListBatchSegmentJobsOutput struct {
 
 	// A list containing information on each job that is returned.

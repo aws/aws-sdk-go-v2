@@ -60,6 +60,10 @@ type ListCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCoverageInput) operationName() string {
+	return "ListCoverage"
+}
+
 type ListCoverageOutput struct {
 
 	// A list of resources and their attributes providing cluster details.

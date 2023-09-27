@@ -73,6 +73,10 @@ type RegisterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterAccountInput) operationName() string {
+	return "RegisterAccount"
+}
+
 type RegisterAccountOutput struct {
 
 	// The time the account was registered, in seconds since epoch (January 1, 1970 at

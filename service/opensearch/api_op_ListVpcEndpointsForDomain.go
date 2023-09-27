@@ -48,6 +48,10 @@ type ListVpcEndpointsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcEndpointsForDomainInput) operationName() string {
+	return "ListVpcEndpointsForDomain"
+}
+
 type ListVpcEndpointsForDomainOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of

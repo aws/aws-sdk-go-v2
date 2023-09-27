@@ -48,6 +48,10 @@ type ProvideAnomalyFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ProvideAnomalyFeedbackInput) operationName() string {
+	return "ProvideAnomalyFeedback"
+}
+
 type ProvideAnomalyFeedbackOutput struct {
 
 	// The ID of the modified cost anomaly.

@@ -54,6 +54,10 @@ type ListAgentStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAgentStatusesInput) operationName() string {
+	return "ListAgentStatuses"
+}
+
 type ListAgentStatusesOutput struct {
 
 	// A summary of agent statuses.

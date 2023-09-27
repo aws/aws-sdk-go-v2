@@ -58,6 +58,10 @@ type DescribeAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAgentsInput) operationName() string {
+	return "DescribeAgents"
+}
+
 type DescribeAgentsOutput struct {
 
 	// Lists agents or the collector by ID or lists all agents/collectors associated

@@ -50,6 +50,10 @@ type DescribeExportConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportConfigurationsInput) operationName() string {
+	return "DescribeExportConfigurations"
+}
+
 type DescribeExportConfigurationsOutput struct {
 
 	//

@@ -113,6 +113,10 @@ type StartAutomationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAutomationExecutionInput) operationName() string {
+	return "StartAutomationExecution"
+}
+
 type StartAutomationExecutionOutput struct {
 
 	// The unique ID of a newly scheduled automation execution.

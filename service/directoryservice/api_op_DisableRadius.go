@@ -43,6 +43,10 @@ type DisableRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableRadiusInput) operationName() string {
+	return "DisableRadius"
+}
+
 // Contains the results of the DisableRadius operation.
 type DisableRadiusOutput struct {
 	// Metadata pertaining to the operation's result.

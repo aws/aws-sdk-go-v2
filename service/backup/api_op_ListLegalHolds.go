@@ -46,6 +46,10 @@ type ListLegalHoldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLegalHoldsInput) operationName() string {
+	return "ListLegalHolds"
+}
+
 type ListLegalHoldsOutput struct {
 
 	// This is an array of returned legal holds, both active and previous.

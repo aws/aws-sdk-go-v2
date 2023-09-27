@@ -100,6 +100,10 @@ type CreateFargateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFargateProfileInput) operationName() string {
+	return "CreateFargateProfile"
+}
+
 type CreateFargateProfileOutput struct {
 
 	// The full description of your new Fargate profile.

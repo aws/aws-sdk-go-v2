@@ -44,6 +44,10 @@ type ListInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInvitationsInput) operationName() string {
+	return "ListInvitations"
+}
+
 type ListInvitationsOutput struct {
 
 	// The invitations for the network.

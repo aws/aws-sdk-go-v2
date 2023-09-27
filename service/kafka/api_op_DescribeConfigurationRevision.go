@@ -48,6 +48,10 @@ type DescribeConfigurationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationRevisionInput) operationName() string {
+	return "DescribeConfigurationRevision"
+}
+
 type DescribeConfigurationRevisionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration.

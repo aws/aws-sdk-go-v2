@@ -42,6 +42,10 @@ type StopBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopBuildInput) operationName() string {
+	return "StopBuild"
+}
+
 type StopBuildOutput struct {
 
 	// Information about the build.

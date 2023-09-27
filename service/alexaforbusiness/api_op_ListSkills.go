@@ -58,6 +58,10 @@ type ListSkillsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSkillsInput) operationName() string {
+	return "ListSkills"
+}
+
 type ListSkillsOutput struct {
 
 	// The token returned to indicate that there is more data available.

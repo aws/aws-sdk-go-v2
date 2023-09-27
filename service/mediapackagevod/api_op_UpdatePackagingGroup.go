@@ -47,6 +47,10 @@ type UpdatePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePackagingGroupInput) operationName() string {
+	return "UpdatePackagingGroup"
+}
+
 type UpdatePackagingGroupOutput struct {
 
 	// The approximate asset count of the PackagingGroup.

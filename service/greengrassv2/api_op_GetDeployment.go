@@ -44,6 +44,10 @@ type GetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentInput) operationName() string {
+	return "GetDeployment"
+}
+
 type GetDeploymentOutput struct {
 
 	// The components to deploy. This is a dictionary, where each key is the name of a

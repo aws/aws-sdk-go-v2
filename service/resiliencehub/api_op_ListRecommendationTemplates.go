@@ -66,6 +66,10 @@ type ListRecommendationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecommendationTemplatesInput) operationName() string {
+	return "ListRecommendationTemplates"
+}
+
 type ListRecommendationTemplatesOutput struct {
 
 	// Token for the next set of results, or null if there are no more results.

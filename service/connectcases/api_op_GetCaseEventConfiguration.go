@@ -42,6 +42,10 @@ type GetCaseEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCaseEventConfigurationInput) operationName() string {
+	return "GetCaseEventConfiguration"
+}
+
 type GetCaseEventConfigurationOutput struct {
 
 	// Configuration to enable EventBridge case event delivery and determine what data

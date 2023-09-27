@@ -67,6 +67,10 @@ type GetRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecommendationPreferencesInput) operationName() string {
+	return "GetRecommendationPreferences"
+}
+
 type GetRecommendationPreferencesOutput struct {
 
 	// The token to use to advance to the next page of recommendation preferences.

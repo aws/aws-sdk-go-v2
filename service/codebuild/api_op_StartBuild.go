@@ -202,6 +202,10 @@ type StartBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBuildInput) operationName() string {
+	return "StartBuild"
+}
+
 type StartBuildOutput struct {
 
 	// Information about the build to be run.

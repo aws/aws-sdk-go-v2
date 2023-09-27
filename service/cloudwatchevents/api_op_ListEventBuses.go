@@ -50,6 +50,10 @@ type ListEventBusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventBusesInput) operationName() string {
+	return "ListEventBuses"
+}
+
 type ListEventBusesOutput struct {
 
 	// This list of event buses.

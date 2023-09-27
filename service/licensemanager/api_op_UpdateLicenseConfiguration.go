@@ -67,6 +67,10 @@ type UpdateLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLicenseConfigurationInput) operationName() string {
+	return "UpdateLicenseConfiguration"
+}
+
 type UpdateLicenseConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

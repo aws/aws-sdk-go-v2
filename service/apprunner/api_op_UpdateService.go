@@ -77,6 +77,10 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceInput) operationName() string {
+	return "UpdateService"
+}
+
 type UpdateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can

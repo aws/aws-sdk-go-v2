@@ -60,6 +60,10 @@ type UpdateSecurityConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityConfigInput) operationName() string {
+	return "UpdateSecurityConfig"
+}
+
 type UpdateSecurityConfigOutput struct {
 
 	// Details about the updated security configuration.

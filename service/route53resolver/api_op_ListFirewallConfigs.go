@@ -54,6 +54,10 @@ type ListFirewallConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFirewallConfigsInput) operationName() string {
+	return "ListFirewallConfigs"
+}
+
 type ListFirewallConfigsOutput struct {
 
 	// The configurations for the firewall behavior provided by DNS Firewall for VPCs

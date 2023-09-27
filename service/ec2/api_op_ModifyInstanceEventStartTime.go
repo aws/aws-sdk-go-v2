@@ -59,6 +59,10 @@ type ModifyInstanceEventStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceEventStartTimeInput) operationName() string {
+	return "ModifyInstanceEventStartTime"
+}
+
 type ModifyInstanceEventStartTimeOutput struct {
 
 	// Information about the event.

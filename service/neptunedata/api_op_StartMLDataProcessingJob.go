@@ -110,6 +110,10 @@ type StartMLDataProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMLDataProcessingJobInput) operationName() string {
+	return "StartMLDataProcessingJob"
+}
+
 type StartMLDataProcessingJobOutput struct {
 
 	// The ARN of the data processing job.

@@ -53,6 +53,10 @@ type UpdateUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUploadInput) operationName() string {
+	return "UpdateUpload"
+}
+
 type UpdateUploadOutput struct {
 
 	// A test spec uploaded to Device Farm.

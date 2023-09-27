@@ -61,6 +61,10 @@ type UpdateModelVersionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelVersionStatusInput) operationName() string {
+	return "UpdateModelVersionStatus"
+}
+
 type UpdateModelVersionStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -101,6 +101,10 @@ type UpdateInfrastructureConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInfrastructureConfigurationInput) operationName() string {
+	return "UpdateInfrastructureConfiguration"
+}
+
 type UpdateInfrastructureConfigurationOutput struct {
 
 	// The idempotency token used to make this request idempotent.

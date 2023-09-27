@@ -79,6 +79,10 @@ type CreateRotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRotationInput) operationName() string {
+	return "CreateRotation"
+}
+
 type CreateRotationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created rotation.

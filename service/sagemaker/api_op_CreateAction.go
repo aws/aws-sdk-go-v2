@@ -72,6 +72,10 @@ type CreateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateActionInput) operationName() string {
+	return "CreateAction"
+}
+
 type CreateActionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the action.

@@ -55,6 +55,10 @@ type GetAccessPointConfigurationForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointConfigurationForObjectLambdaInput) operationName() string {
+	return "GetAccessPointConfigurationForObjectLambda"
+}
+
 type GetAccessPointConfigurationForObjectLambdaOutput struct {
 
 	// Object Lambda Access Point configuration document.

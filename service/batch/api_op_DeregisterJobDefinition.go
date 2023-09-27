@@ -43,6 +43,10 @@ type DeregisterJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterJobDefinitionInput) operationName() string {
+	return "DeregisterJobDefinition"
+}
+
 type DeregisterJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

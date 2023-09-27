@@ -95,6 +95,10 @@ type ListCopyJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCopyJobsInput) operationName() string {
+	return "ListCopyJobs"
+}
+
 type ListCopyJobsOutput struct {
 
 	// An array of structures containing metadata about your copy jobs returned in

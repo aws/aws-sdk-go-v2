@@ -111,6 +111,10 @@ type CreateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCaseInput) operationName() string {
+	return "CreateCase"
+}
+
 // The support case ID returned by a successful completion of the CreateCase
 // operation.
 type CreateCaseOutput struct {

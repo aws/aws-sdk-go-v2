@@ -60,6 +60,10 @@ type ListIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentitiesInput) operationName() string {
+	return "ListIdentities"
+}
+
 // A list of all identities that you have attempted to verify under your Amazon
 // Web Services account, regardless of verification status.
 type ListIdentitiesOutput struct {

@@ -49,6 +49,10 @@ type DescribeFHIRExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFHIRExportJobInput) operationName() string {
+	return "DescribeFHIRExportJob"
+}
+
 type DescribeFHIRExportJobOutput struct {
 
 	// Displays the properties of the export job, including the ID, Arn, Name, and the

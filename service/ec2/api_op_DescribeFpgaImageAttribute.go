@@ -53,6 +53,10 @@ type DescribeFpgaImageAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFpgaImageAttributeInput) operationName() string {
+	return "DescribeFpgaImageAttribute"
+}
+
 type DescribeFpgaImageAttributeOutput struct {
 
 	// Information about the attribute.

@@ -203,6 +203,10 @@ type PutScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutScheduledActionInput) operationName() string {
+	return "PutScheduledAction"
+}
+
 type PutScheduledActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

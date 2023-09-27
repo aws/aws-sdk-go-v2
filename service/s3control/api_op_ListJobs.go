@@ -68,6 +68,10 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobsInput) operationName() string {
+	return "ListJobs"
+}
+
 type ListJobsOutput struct {
 
 	// The list of current jobs and jobs that have ended within the last 30 days.

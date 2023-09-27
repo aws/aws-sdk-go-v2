@@ -65,6 +65,10 @@ type ListForecastsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListForecastsInput) operationName() string {
+	return "ListForecasts"
+}
+
 type ListForecastsOutput struct {
 
 	// An array of objects that summarize each forecast's properties.

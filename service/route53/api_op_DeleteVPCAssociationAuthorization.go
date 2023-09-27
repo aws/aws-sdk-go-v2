@@ -63,6 +63,10 @@ type DeleteVPCAssociationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVPCAssociationAuthorizationInput) operationName() string {
+	return "DeleteVPCAssociationAuthorization"
+}
+
 // Empty response for the request.
 type DeleteVPCAssociationAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.

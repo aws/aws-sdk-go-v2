@@ -71,6 +71,10 @@ type DescribeVpnGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpnGatewaysInput) operationName() string {
+	return "DescribeVpnGateways"
+}
+
 // Contains the output of DescribeVpnGateways.
 type DescribeVpnGatewaysOutput struct {
 

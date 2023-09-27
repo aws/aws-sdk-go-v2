@@ -46,6 +46,10 @@ type DescribeLocationNfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationNfsInput) operationName() string {
+	return "DescribeLocationNfs"
+}
+
 // DescribeLocationNfsResponse
 type DescribeLocationNfsOutput struct {
 

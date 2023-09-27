@@ -63,6 +63,10 @@ type ReplicateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplicateInstanceInput) operationName() string {
+	return "ReplicateInstance"
+}
+
 type ReplicateInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replicated instance.

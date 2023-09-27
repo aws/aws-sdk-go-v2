@@ -151,6 +151,10 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutScalingPolicyInput) operationName() string {
+	return "PutScalingPolicy"
+}
+
 // Contains the output of PutScalingPolicy.
 type PutScalingPolicyOutput struct {
 

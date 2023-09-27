@@ -56,6 +56,10 @@ type DescribeOrganizationOverviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationOverviewInput) operationName() string {
+	return "DescribeOrganizationOverview"
+}
+
 type DescribeOrganizationOverviewOutput struct {
 
 	// An integer that specifies the number of open proactive insights in your Amazon

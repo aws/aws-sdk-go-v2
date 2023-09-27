@@ -37,6 +37,10 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationConfigurationInput) operationName() string {
+	return "DescribeOrganizationConfiguration"
+}
+
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Whether to automatically enable Security Hub for new accounts in the

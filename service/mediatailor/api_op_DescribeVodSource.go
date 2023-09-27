@@ -49,6 +49,10 @@ type DescribeVodSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVodSourceInput) operationName() string {
+	return "DescribeVodSource"
+}
+
 type DescribeVodSourceOutput struct {
 
 	// The ad break opportunities within the VOD source.

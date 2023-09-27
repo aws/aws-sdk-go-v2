@@ -46,6 +46,10 @@ type RejectSkillInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectSkillInput) operationName() string {
+	return "RejectSkill"
+}
+
 type RejectSkillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

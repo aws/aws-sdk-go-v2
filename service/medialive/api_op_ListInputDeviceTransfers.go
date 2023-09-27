@@ -51,6 +51,10 @@ type ListInputDeviceTransfersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInputDeviceTransfersInput) operationName() string {
+	return "ListInputDeviceTransfers"
+}
+
 // Placeholder documentation for ListInputDeviceTransfersResponse
 type ListInputDeviceTransfersOutput struct {
 

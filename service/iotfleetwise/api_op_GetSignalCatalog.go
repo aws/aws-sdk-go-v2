@@ -43,6 +43,10 @@ type GetSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSignalCatalogInput) operationName() string {
+	return "GetSignalCatalog"
+}
+
 type GetSignalCatalogOutput struct {
 
 	// The Amazon Resource Name (ARN) of the signal catalog.

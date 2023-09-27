@@ -146,6 +146,10 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterTaskWithMaintenanceWindowInput) operationName() string {
+	return "RegisterTaskWithMaintenanceWindow"
+}
+
 type RegisterTaskWithMaintenanceWindowOutput struct {
 
 	// The ID of the task in the maintenance window.

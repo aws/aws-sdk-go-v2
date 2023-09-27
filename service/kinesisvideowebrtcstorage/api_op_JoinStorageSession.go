@@ -55,6 +55,10 @@ type JoinStorageSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*JoinStorageSessionInput) operationName() string {
+	return "JoinStorageSession"
+}
+
 type JoinStorageSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

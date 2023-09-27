@@ -32,6 +32,10 @@ type HttpRequestWithRegexLiteralInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpRequestWithRegexLiteralInput) operationName() string {
+	return "HttpRequestWithRegexLiteral"
+}
+
 type HttpRequestWithRegexLiteralOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

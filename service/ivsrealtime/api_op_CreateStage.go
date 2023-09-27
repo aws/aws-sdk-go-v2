@@ -50,6 +50,10 @@ type CreateStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStageInput) operationName() string {
+	return "CreateStage"
+}
+
 type CreateStageOutput struct {
 
 	// Participant tokens attached to the stage. These correspond to the participants

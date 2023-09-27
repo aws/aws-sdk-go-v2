@@ -51,6 +51,10 @@ type CancelLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelLegalHoldInput) operationName() string {
+	return "CancelLegalHold"
+}
+
 type CancelLegalHoldOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

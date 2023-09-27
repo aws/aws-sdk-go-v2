@@ -49,6 +49,10 @@ type ListSafetyRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSafetyRulesInput) operationName() string {
+	return "ListSafetyRules"
+}
+
 type ListSafetyRulesOutput struct {
 
 	// The token that identifies which batch of results you want to see.

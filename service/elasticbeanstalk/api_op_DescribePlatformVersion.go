@@ -44,6 +44,10 @@ type DescribePlatformVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePlatformVersionInput) operationName() string {
+	return "DescribePlatformVersion"
+}
+
 type DescribePlatformVersionOutput struct {
 
 	// Detailed information about the platform version.

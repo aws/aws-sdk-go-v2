@@ -42,6 +42,10 @@ type DeleteRouteCalculatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRouteCalculatorInput) operationName() string {
+	return "DeleteRouteCalculator"
+}
+
 type DeleteRouteCalculatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

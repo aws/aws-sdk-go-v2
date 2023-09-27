@@ -74,6 +74,10 @@ type QueryObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryObjectsInput) operationName() string {
+	return "QueryObjects"
+}
+
 // Contains the output of QueryObjects.
 type QueryObjectsOutput struct {
 

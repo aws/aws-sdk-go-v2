@@ -60,6 +60,10 @@ type DescribeEndpointAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointAuthorizationInput) operationName() string {
+	return "DescribeEndpointAuthorization"
+}
+
 type DescribeEndpointAuthorizationOutput struct {
 
 	// The authorizations to an endpoint.

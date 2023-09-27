@@ -42,6 +42,10 @@ type DeleteMediaInsightsPipelineConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMediaInsightsPipelineConfigurationInput) operationName() string {
+	return "DeleteMediaInsightsPipelineConfiguration"
+}
+
 type DeleteMediaInsightsPipelineConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobsInput) operationName() string {
+	return "ListJobs"
+}
+
 type ListJobsOutput struct {
 
 	// The names of all jobs in the account, or the jobs with the specified tags.

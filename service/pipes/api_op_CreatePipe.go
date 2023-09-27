@@ -80,6 +80,10 @@ type CreatePipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePipeInput) operationName() string {
+	return "CreatePipe"
+}
+
 type CreatePipeOutput struct {
 
 	// The ARN of the pipe.

@@ -59,6 +59,10 @@ type CreateVolumeFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVolumeFromBackupInput) operationName() string {
+	return "CreateVolumeFromBackup"
+}
+
 type CreateVolumeFromBackupOutput struct {
 
 	// Returned after a successful CreateVolumeFromBackup API operation, describing

@@ -43,6 +43,10 @@ type DeleteTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrialInput) operationName() string {
+	return "DeleteTrial"
+}
+
 type DeleteTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial that is being deleted.

@@ -67,6 +67,10 @@ type GetBucketAnalyticsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketAnalyticsConfigurationInput) operationName() string {
+	return "GetBucketAnalyticsConfiguration"
+}
+
 type GetBucketAnalyticsConfigurationOutput struct {
 
 	// The configuration and any analyses for the analytics filter.

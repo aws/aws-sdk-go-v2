@@ -42,6 +42,10 @@ type GetUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsageLimitInput) operationName() string {
+	return "GetUsageLimit"
+}
+
 type GetUsageLimitOutput struct {
 
 	// The returned usage limit object.

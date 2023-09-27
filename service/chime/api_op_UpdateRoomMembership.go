@@ -58,6 +58,10 @@ type UpdateRoomMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoomMembershipInput) operationName() string {
+	return "UpdateRoomMembership"
+}
+
 type UpdateRoomMembershipOutput struct {
 
 	// The room membership details.

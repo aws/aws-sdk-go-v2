@@ -48,6 +48,10 @@ type DescribeThemePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThemePermissionsInput) operationName() string {
+	return "DescribeThemePermissions"
+}
+
 type DescribeThemePermissionsOutput struct {
 
 	// A list of resource permissions set on the theme.

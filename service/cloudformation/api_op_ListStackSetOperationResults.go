@@ -76,6 +76,10 @@ type ListStackSetOperationResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStackSetOperationResultsInput) operationName() string {
+	return "ListStackSetOperationResults"
+}
+
 type ListStackSetOperationResultsOutput struct {
 
 	// If the request doesn't return all results, NextToken is set to a token. To

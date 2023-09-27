@@ -52,6 +52,10 @@ type ListConfigurationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationRevisionsInput) operationName() string {
+	return "ListConfigurationRevisions"
+}
+
 type ListConfigurationRevisionsOutput struct {
 
 	// Paginated results marker.

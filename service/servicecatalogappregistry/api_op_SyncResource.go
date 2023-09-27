@@ -52,6 +52,10 @@ type SyncResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SyncResourceInput) operationName() string {
+	return "SyncResource"
+}
+
 type SyncResourceOutput struct {
 
 	// The results of the output if an application is associated with an ARN value,

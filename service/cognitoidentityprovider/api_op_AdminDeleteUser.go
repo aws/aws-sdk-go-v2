@@ -53,6 +53,10 @@ type AdminDeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminDeleteUserInput) operationName() string {
+	return "AdminDeleteUser"
+}
+
 type AdminDeleteUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

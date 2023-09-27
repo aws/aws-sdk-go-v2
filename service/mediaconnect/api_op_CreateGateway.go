@@ -57,6 +57,10 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGatewayInput) operationName() string {
+	return "CreateGateway"
+}
+
 type CreateGatewayOutput struct {
 
 	// The settings for a gateway, including its networks.

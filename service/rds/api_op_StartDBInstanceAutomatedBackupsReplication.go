@@ -73,6 +73,10 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDBInstanceAutomatedBackupsReplicationInput) operationName() string {
+	return "StartDBInstanceAutomatedBackupsReplication"
+}
+
 type StartDBInstanceAutomatedBackupsReplicationOutput struct {
 
 	// An automated backup of a DB instance. It consists of system backups,

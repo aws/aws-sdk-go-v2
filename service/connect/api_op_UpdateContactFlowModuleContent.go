@@ -54,6 +54,10 @@ type UpdateContactFlowModuleContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContactFlowModuleContentInput) operationName() string {
+	return "UpdateContactFlowModuleContent"
+}
+
 type UpdateContactFlowModuleContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

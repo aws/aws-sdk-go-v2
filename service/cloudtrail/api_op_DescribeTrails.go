@@ -62,6 +62,10 @@ type DescribeTrailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrailsInput) operationName() string {
+	return "DescribeTrails"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type DescribeTrailsOutput struct {

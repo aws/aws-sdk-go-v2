@@ -67,6 +67,7 @@
         "api_op_UpdatePlaceIndex.go",
         "api_op_UpdateRouteCalculator.go",
         "api_op_UpdateTracker.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

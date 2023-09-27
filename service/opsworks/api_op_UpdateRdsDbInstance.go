@@ -51,6 +51,10 @@ type UpdateRdsDbInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRdsDbInstanceInput) operationName() string {
+	return "UpdateRdsDbInstance"
+}
+
 type UpdateRdsDbInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

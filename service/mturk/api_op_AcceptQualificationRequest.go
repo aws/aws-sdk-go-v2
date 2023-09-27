@@ -49,6 +49,10 @@ type AcceptQualificationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptQualificationRequestInput) operationName() string {
+	return "AcceptQualificationRequest"
+}
+
 type AcceptQualificationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

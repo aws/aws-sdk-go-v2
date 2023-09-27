@@ -60,6 +60,10 @@ type UpdateSourceLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSourceLocationInput) operationName() string {
+	return "UpdateSourceLocation"
+}
+
 type UpdateSourceLocationOutput struct {
 
 	// Access configuration parameters. Configures the type of authentication used to

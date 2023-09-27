@@ -45,6 +45,10 @@ type DeleteForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteForecastInput) operationName() string {
+	return "DeleteForecast"
+}
+
 type DeleteForecastOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

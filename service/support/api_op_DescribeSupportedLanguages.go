@@ -64,6 +64,10 @@ type DescribeSupportedLanguagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSupportedLanguagesInput) operationName() string {
+	return "DescribeSupportedLanguages"
+}
+
 type DescribeSupportedLanguagesOutput struct {
 
 	// A JSON-formatted array that contains the available ISO 639-1 language codes.

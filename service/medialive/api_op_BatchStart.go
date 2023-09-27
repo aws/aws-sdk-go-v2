@@ -44,6 +44,10 @@ type BatchStartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchStartInput) operationName() string {
+	return "BatchStart"
+}
+
 // Placeholder documentation for BatchStartResponse
 type BatchStartOutput struct {
 

@@ -58,6 +58,10 @@ type StartPipelineReprocessingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartPipelineReprocessingInput) operationName() string {
+	return "StartPipelineReprocessing"
+}
+
 type StartPipelineReprocessingOutput struct {
 
 	// The ID of the pipeline reprocessing activity that was started.

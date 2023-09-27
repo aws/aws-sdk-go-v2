@@ -64,6 +64,10 @@ type ListAlgorithmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAlgorithmsInput) operationName() string {
+	return "ListAlgorithms"
+}
+
 type ListAlgorithmsOutput struct {
 
 	// >An array of AlgorithmSummary objects, each of which lists an algorithm.

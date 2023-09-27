@@ -52,6 +52,10 @@ type StopAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAppInput) operationName() string {
+	return "StopApp"
+}
+
 type StopAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

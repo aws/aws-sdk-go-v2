@@ -48,6 +48,10 @@ type GetSuiteRunReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSuiteRunReportInput) operationName() string {
+	return "GetSuiteRunReport"
+}
+
 type GetSuiteRunReportOutput struct {
 
 	// Download URL of the qualification report.

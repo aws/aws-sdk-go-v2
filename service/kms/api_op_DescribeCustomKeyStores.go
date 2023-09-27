@@ -94,6 +94,10 @@ type DescribeCustomKeyStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomKeyStoresInput) operationName() string {
+	return "DescribeCustomKeyStores"
+}
+
 type DescribeCustomKeyStoresOutput struct {
 
 	// Contains metadata about each custom key store.

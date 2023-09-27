@@ -109,6 +109,10 @@ type CreateStateMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStateMachineInput) operationName() string {
+	return "CreateStateMachine"
+}
+
 type CreateStateMachineOutput struct {
 
 	// The date the state machine is created.

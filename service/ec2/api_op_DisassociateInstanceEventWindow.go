@@ -55,6 +55,10 @@ type DisassociateInstanceEventWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateInstanceEventWindowInput) operationName() string {
+	return "DisassociateInstanceEventWindow"
+}
+
 type DisassociateInstanceEventWindowOutput struct {
 
 	// Information about the event window.

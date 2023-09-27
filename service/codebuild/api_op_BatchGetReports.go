@@ -42,6 +42,10 @@ type BatchGetReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetReportsInput) operationName() string {
+	return "BatchGetReports"
+}
+
 type BatchGetReportsOutput struct {
 
 	// The array of Report objects returned by BatchGetReports .

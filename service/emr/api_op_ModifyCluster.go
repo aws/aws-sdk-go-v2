@@ -48,6 +48,10 @@ type ModifyClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterInput) operationName() string {
+	return "ModifyCluster"
+}
+
 type ModifyClusterOutput struct {
 
 	// The number of steps that can be executed concurrently.

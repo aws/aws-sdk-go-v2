@@ -121,6 +121,10 @@ type UpdateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppInput) operationName() string {
+	return "UpdateApp"
+}
+
 // The result structure for an Amplify app update request.
 type UpdateAppOutput struct {
 

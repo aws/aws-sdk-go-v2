@@ -64,6 +64,10 @@ type AssociateCustomerGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateCustomerGatewayInput) operationName() string {
+	return "AssociateCustomerGateway"
+}
+
 type AssociateCustomerGatewayOutput struct {
 
 	// The customer gateway association.

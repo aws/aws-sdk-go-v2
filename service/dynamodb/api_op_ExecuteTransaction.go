@@ -59,6 +59,10 @@ type ExecuteTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteTransactionInput) operationName() string {
+	return "ExecuteTransaction"
+}
+
 type ExecuteTransactionOutput struct {
 
 	// The capacity units consumed by the entire operation. The values of the list are

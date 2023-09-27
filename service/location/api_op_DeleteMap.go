@@ -43,6 +43,10 @@ type DeleteMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMapInput) operationName() string {
+	return "DeleteMap"
+}
+
 type DeleteMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

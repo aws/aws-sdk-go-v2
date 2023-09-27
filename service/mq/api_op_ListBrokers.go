@@ -45,6 +45,10 @@ type ListBrokersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBrokersInput) operationName() string {
+	return "ListBrokers"
+}
+
 type ListBrokersOutput struct {
 
 	// A list of information about all brokers.

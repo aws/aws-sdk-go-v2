@@ -53,6 +53,10 @@ type DescribeEndpointSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointSettingsInput) operationName() string {
+	return "DescribeEndpointSettings"
+}
+
 type DescribeEndpointSettingsOutput struct {
 
 	// Descriptions of the endpoint settings available for your source or target

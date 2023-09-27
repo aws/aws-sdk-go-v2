@@ -46,6 +46,10 @@ type RemoveBridgeOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveBridgeOutputInput) operationName() string {
+	return "RemoveBridgeOutput"
+}
+
 type RemoveBridgeOutputOutput struct {
 	BridgeArn *string
 

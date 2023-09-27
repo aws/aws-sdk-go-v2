@@ -60,6 +60,10 @@ type ValidateConfigurationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateConfigurationSettingsInput) operationName() string {
+	return "ValidateConfigurationSettings"
+}
+
 // Provides a list of validation messages.
 type ValidateConfigurationSettingsOutput struct {
 

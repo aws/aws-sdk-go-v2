@@ -42,6 +42,10 @@ type GetMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMediaPipelineKinesisVideoStreamPoolInput) operationName() string {
+	return "GetMediaPipelineKinesisVideoStreamPool"
+}
+
 type GetMediaPipelineKinesisVideoStreamPoolOutput struct {
 
 	// The video stream pool configuration object.

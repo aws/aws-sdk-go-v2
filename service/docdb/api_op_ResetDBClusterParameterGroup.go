@@ -60,6 +60,10 @@ type ResetDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetDBClusterParameterGroupInput) operationName() string {
+	return "ResetDBClusterParameterGroup"
+}
+
 // Contains the name of a cluster parameter group.
 type ResetDBClusterParameterGroupOutput struct {
 

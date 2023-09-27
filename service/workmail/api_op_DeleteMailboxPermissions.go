@@ -65,6 +65,10 @@ type DeleteMailboxPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMailboxPermissionsInput) operationName() string {
+	return "DeleteMailboxPermissions"
+}
+
 type DeleteMailboxPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

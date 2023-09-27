@@ -49,6 +49,10 @@ type ListServiceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceActionsInput) operationName() string {
+	return "ListServiceActions"
+}
+
 type ListServiceActionsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

@@ -77,6 +77,10 @@ type UpdatePullRequestApprovalRuleContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePullRequestApprovalRuleContentInput) operationName() string {
+	return "UpdatePullRequestApprovalRuleContent"
+}
+
 type UpdatePullRequestApprovalRuleContentOutput struct {
 
 	// Information about the updated approval rule.

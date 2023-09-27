@@ -76,6 +76,10 @@ type SubscribeToDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubscribeToDatasetInput) operationName() string {
+	return "SubscribeToDataset"
+}
+
 // Response to a SubscribeToDataset request.
 type SubscribeToDatasetOutput struct {
 	// Metadata pertaining to the operation's result.

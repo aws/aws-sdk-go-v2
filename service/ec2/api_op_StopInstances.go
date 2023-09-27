@@ -91,6 +91,10 @@ type StopInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopInstancesInput) operationName() string {
+	return "StopInstances"
+}
+
 type StopInstancesOutput struct {
 
 	// Information about the stopped instances.

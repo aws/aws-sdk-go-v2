@@ -62,6 +62,10 @@ type DeleteDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterInput) operationName() string {
+	return "DeleteDBCluster"
+}
+
 type DeleteDBClusterOutput struct {
 
 	// Detailed information about a cluster.

@@ -42,6 +42,10 @@ type GetCatalogItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCatalogItemInput) operationName() string {
+	return "GetCatalogItem"
+}
+
 type GetCatalogItemOutput struct {
 
 	// Information about this catalog item.

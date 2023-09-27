@@ -60,6 +60,10 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainsInput) operationName() string {
+	return "ListDomains"
+}
+
 // The ListDomains response includes the following elements.
 type ListDomainsOutput struct {
 

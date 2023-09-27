@@ -97,6 +97,10 @@ type PutManagedRuleSetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutManagedRuleSetVersionsInput) operationName() string {
+	return "PutManagedRuleSetVersions"
+}
+
 type PutManagedRuleSetVersionsOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

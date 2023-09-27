@@ -49,6 +49,10 @@ type ListClusterOperationsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClusterOperationsV2Input) operationName() string {
+	return "ListClusterOperationsV2"
+}
+
 type ListClusterOperationsV2Output struct {
 
 	// An array of cluster operation information objects.

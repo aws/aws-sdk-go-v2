@@ -47,6 +47,10 @@ type StartFlywheelIterationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFlywheelIterationInput) operationName() string {
+	return "StartFlywheelIteration"
+}
+
 type StartFlywheelIterationOutput struct {
 
 	//

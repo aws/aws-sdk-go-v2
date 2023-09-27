@@ -55,6 +55,10 @@ type ResetServiceSpecificCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetServiceSpecificCredentialInput) operationName() string {
+	return "ResetServiceSpecificCredential"
+}
+
 type ResetServiceSpecificCredentialOutput struct {
 
 	// A structure with details about the updated service-specific credential,

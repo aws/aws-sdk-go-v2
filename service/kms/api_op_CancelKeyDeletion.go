@@ -56,6 +56,10 @@ type CancelKeyDeletionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelKeyDeletionInput) operationName() string {
+	return "CancelKeyDeletion"
+}
+
 type CancelKeyDeletionOutput struct {
 
 	// The Amazon Resource Name ( key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)

@@ -66,6 +66,10 @@ type ListPipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipesInput) operationName() string {
+	return "ListPipes"
+}
+
 type ListPipesOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of

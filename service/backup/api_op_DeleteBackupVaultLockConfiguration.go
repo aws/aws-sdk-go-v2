@@ -45,6 +45,10 @@ type DeleteBackupVaultLockConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackupVaultLockConfigurationInput) operationName() string {
+	return "DeleteBackupVaultLockConfiguration"
+}
+
 type DeleteBackupVaultLockConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

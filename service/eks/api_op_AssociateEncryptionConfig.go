@@ -53,6 +53,10 @@ type AssociateEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateEncryptionConfigInput) operationName() string {
+	return "AssociateEncryptionConfig"
+}
+
 type AssociateEncryptionConfigOutput struct {
 
 	// An object representing an asynchronous update.

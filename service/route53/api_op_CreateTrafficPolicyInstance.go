@@ -80,6 +80,10 @@ type CreateTrafficPolicyInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrafficPolicyInstanceInput) operationName() string {
+	return "CreateTrafficPolicyInstance"
+}
+
 // A complex type that contains the response information for the
 // CreateTrafficPolicyInstance request.
 type CreateTrafficPolicyInstanceOutput struct {

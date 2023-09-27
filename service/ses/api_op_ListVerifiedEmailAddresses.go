@@ -36,6 +36,10 @@ type ListVerifiedEmailAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVerifiedEmailAddressesInput) operationName() string {
+	return "ListVerifiedEmailAddresses"
+}
+
 // A list of email addresses that you have verified with Amazon SES under your
 // Amazon Web Services account.
 type ListVerifiedEmailAddressesOutput struct {

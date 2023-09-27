@@ -84,6 +84,10 @@ type CreateReplaceRootVolumeTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplaceRootVolumeTaskInput) operationName() string {
+	return "CreateReplaceRootVolumeTask"
+}
+
 type CreateReplaceRootVolumeTaskOutput struct {
 
 	// Information about the root volume replacement task.

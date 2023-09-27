@@ -57,6 +57,10 @@ type GetActivityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetActivityTaskInput) operationName() string {
+	return "GetActivityTask"
+}
+
 type GetActivityTaskOutput struct {
 
 	// The string that contains the JSON input data for the task. Length constraints

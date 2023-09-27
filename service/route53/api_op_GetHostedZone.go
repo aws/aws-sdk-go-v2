@@ -44,6 +44,10 @@ type GetHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostedZoneInput) operationName() string {
+	return "GetHostedZone"
+}
+
 // A complex type that contain the response to a GetHostedZone request.
 type GetHostedZoneOutput struct {
 

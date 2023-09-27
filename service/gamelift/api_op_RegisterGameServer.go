@@ -78,6 +78,10 @@ type RegisterGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterGameServerInput) operationName() string {
+	return "RegisterGameServer"
+}
+
 type RegisterGameServerOutput struct {
 
 	// Object that describes the newly registered game server.

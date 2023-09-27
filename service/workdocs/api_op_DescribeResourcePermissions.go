@@ -56,6 +56,10 @@ type DescribeResourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourcePermissionsInput) operationName() string {
+	return "DescribeResourcePermissions"
+}
+
 type DescribeResourcePermissionsOutput struct {
 
 	// The marker to use when requesting the next set of results. If there are no

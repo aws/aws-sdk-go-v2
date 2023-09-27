@@ -122,6 +122,10 @@ type CreateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDashboardInput) operationName() string {
+	return "CreateDashboard"
+}
+
 type CreateDashboardOutput struct {
 
 	// The ARN of the dashboard.

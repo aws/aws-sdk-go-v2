@@ -57,6 +57,10 @@ type DeletePartnerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePartnerInput) operationName() string {
+	return "DeletePartner"
+}
+
 type DeletePartnerOutput struct {
 
 	// The name of the database that receives data from the partner.

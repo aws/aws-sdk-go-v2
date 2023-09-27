@@ -49,6 +49,10 @@ type DescribeServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServerInput) operationName() string {
+	return "DescribeServer"
+}
+
 type DescribeServerOutput struct {
 
 	// An array containing the properties of a server with the ServerID you specified.

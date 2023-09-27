@@ -50,6 +50,10 @@ type ForgetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ForgetDeviceInput) operationName() string {
+	return "ForgetDevice"
+}
+
 type ForgetDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

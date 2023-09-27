@@ -46,6 +46,10 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectsInput) operationName() string {
+	return "ListProjects"
+}
+
 // Result structure used for requests to list projects in AWS Mobile Hub.
 type ListProjectsOutput struct {
 

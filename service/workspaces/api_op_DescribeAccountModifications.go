@@ -42,6 +42,10 @@ type DescribeAccountModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountModificationsInput) operationName() string {
+	return "DescribeAccountModifications"
+}
+
 type DescribeAccountModificationsOutput struct {
 
 	// The list of modifications to the configuration of BYOL.

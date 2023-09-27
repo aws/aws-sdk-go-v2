@@ -46,6 +46,10 @@ type ListFrameworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFrameworksInput) operationName() string {
+	return "ListFrameworks"
+}
+
 type ListFrameworksOutput struct {
 
 	// A list of frameworks with details for each framework, including the framework

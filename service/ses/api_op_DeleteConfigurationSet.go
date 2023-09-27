@@ -48,6 +48,10 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetInput) operationName() string {
+	return "DeleteConfigurationSet"
+}
+
 // An empty element returned on a successful request.
 type DeleteConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.

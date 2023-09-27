@@ -48,6 +48,10 @@ type GetReplicationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReplicationJobsInput) operationName() string {
+	return "GetReplicationJobs"
+}
+
 type GetReplicationJobsOutput struct {
 
 	// The token required to retrieve the next set of results. This value is null when

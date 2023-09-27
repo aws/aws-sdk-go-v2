@@ -44,6 +44,10 @@ type DescribeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobInput) operationName() string {
+	return "DescribeJob"
+}
+
 type DescribeJobOutput struct {
 
 	// Information about a specific job, including shipping information, job status,

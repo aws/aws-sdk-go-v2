@@ -42,6 +42,10 @@ type DescribeWorldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorldInput) operationName() string {
+	return "DescribeWorld"
+}
+
 type DescribeWorldOutput struct {
 
 	// The Amazon Resource Name (arn) of the world.

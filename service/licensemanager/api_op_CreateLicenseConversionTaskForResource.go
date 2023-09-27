@@ -57,6 +57,10 @@ type CreateLicenseConversionTaskForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLicenseConversionTaskForResourceInput) operationName() string {
+	return "CreateLicenseConversionTaskForResource"
+}
+
 type CreateLicenseConversionTaskForResourceOutput struct {
 
 	// The ID of the created license type conversion task.

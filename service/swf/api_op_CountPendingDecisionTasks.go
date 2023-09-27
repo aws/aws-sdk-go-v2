@@ -63,6 +63,10 @@ type CountPendingDecisionTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CountPendingDecisionTasksInput) operationName() string {
+	return "CountPendingDecisionTasks"
+}
+
 // Contains the count of tasks in a task list.
 type CountPendingDecisionTasksOutput struct {
 

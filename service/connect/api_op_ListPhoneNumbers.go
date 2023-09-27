@@ -73,6 +73,10 @@ type ListPhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPhoneNumbersInput) operationName() string {
+	return "ListPhoneNumbers"
+}
+
 type ListPhoneNumbersOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

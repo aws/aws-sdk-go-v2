@@ -71,6 +71,10 @@ type ListSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecretsInput) operationName() string {
+	return "ListSecrets"
+}
+
 type ListSecretsOutput struct {
 
 	// Secrets Manager includes this value if there's more output available than what

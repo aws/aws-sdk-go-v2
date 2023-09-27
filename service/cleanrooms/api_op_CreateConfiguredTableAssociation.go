@@ -72,6 +72,10 @@ type CreateConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfiguredTableAssociationInput) operationName() string {
+	return "CreateConfiguredTableAssociation"
+}
+
 type CreateConfiguredTableAssociationOutput struct {
 
 	// The entire configured table association object.

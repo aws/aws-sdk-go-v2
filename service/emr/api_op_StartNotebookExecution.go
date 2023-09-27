@@ -90,6 +90,10 @@ type StartNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartNotebookExecutionInput) operationName() string {
+	return "StartNotebookExecution"
+}
+
 type StartNotebookExecutionOutput struct {
 
 	// The unique identifier of the notebook execution.

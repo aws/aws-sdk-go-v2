@@ -61,6 +61,10 @@ type GetRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRulesInput) operationName() string {
+	return "GetRules"
+}
+
 type GetRulesOutput struct {
 
 	// The next page token to be used in subsequent requests.

@@ -53,6 +53,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 // A complex type that contains information about the health checks or hosted
 // zones for which you want to list tags.
 type ListTagsForResourceOutput struct {

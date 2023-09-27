@@ -51,6 +51,10 @@ type DeleteProvisionedConcurrencyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProvisionedConcurrencyConfigInput) operationName() string {
+	return "DeleteProvisionedConcurrencyConfig"
+}
+
 type DeleteProvisionedConcurrencyConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

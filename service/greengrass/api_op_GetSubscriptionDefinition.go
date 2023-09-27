@@ -41,6 +41,10 @@ type GetSubscriptionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubscriptionDefinitionInput) operationName() string {
+	return "GetSubscriptionDefinition"
+}
+
 type GetSubscriptionDefinitionOutput struct {
 
 	// The ARN of the definition.

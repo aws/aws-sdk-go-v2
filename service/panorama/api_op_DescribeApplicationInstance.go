@@ -43,6 +43,10 @@ type DescribeApplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationInstanceInput) operationName() string {
+	return "DescribeApplicationInstance"
+}
+
 type DescribeApplicationInstanceOutput struct {
 
 	// The application instance's ID.

@@ -42,6 +42,10 @@ type StopInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopInferenceSchedulerInput) operationName() string {
+	return "StopInferenceScheduler"
+}
+
 type StopInferenceSchedulerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the inference schedule being stopped.

@@ -43,6 +43,10 @@ type CancelDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelDeploymentInput) operationName() string {
+	return "CancelDeployment"
+}
+
 type CancelDeploymentOutput struct {
 
 	// A message that communicates if the cancel was successful.

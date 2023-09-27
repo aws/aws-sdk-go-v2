@@ -56,6 +56,10 @@ type ResolveRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResolveRoomInput) operationName() string {
+	return "ResolveRoom"
+}
+
 type ResolveRoomOutput struct {
 
 	// The ARN of the room from which the skill request was invoked.

@@ -51,6 +51,10 @@ type ListNotificationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotificationRulesInput) operationName() string {
+	return "ListNotificationRules"
+}
+
 type ListNotificationRulesOutput struct {
 
 	// An enumeration token that can be used in a request to return the next batch of

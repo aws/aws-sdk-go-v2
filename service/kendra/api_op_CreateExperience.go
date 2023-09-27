@@ -71,6 +71,10 @@ type CreateExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExperienceInput) operationName() string {
+	return "CreateExperience"
+}
+
 type CreateExperienceOutput struct {
 
 	// The identifier of your Amazon Kendra experience.

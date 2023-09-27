@@ -45,6 +45,10 @@ type UpdatePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePricingPlanInput) operationName() string {
+	return "UpdatePricingPlan"
+}
+
 type UpdatePricingPlanOutput struct {
 
 	// Update the current pricing plan.

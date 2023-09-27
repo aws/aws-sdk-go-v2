@@ -58,6 +58,10 @@ type ListManagedPoliciesInPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedPoliciesInPermissionSetInput) operationName() string {
+	return "ListManagedPoliciesInPermissionSet"
+}
+
 type ListManagedPoliciesInPermissionSetOutput struct {
 
 	// An array of the AttachedManagedPolicy data type object.

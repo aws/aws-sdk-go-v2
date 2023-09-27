@@ -58,6 +58,10 @@ type StartNetworkInsightsAccessScopeAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartNetworkInsightsAccessScopeAnalysisInput) operationName() string {
+	return "StartNetworkInsightsAccessScopeAnalysis"
+}
+
 type StartNetworkInsightsAccessScopeAnalysisOutput struct {
 
 	// The Network Access Scope analysis.

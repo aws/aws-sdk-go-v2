@@ -46,6 +46,10 @@ type DescribeContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContactInput) operationName() string {
+	return "DescribeContact"
+}
+
 type DescribeContactOutput struct {
 
 	// UUID of a contact.

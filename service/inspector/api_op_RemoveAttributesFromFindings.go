@@ -49,6 +49,10 @@ type RemoveAttributesFromFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveAttributesFromFindingsInput) operationName() string {
+	return "RemoveAttributesFromFindings"
+}
+
 type RemoveAttributesFromFindingsOutput struct {
 
 	// Attributes details that cannot be described. An error code is provided for each

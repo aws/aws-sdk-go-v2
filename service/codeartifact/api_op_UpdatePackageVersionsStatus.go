@@ -97,6 +97,10 @@ type UpdatePackageVersionsStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePackageVersionsStatusInput) operationName() string {
+	return "UpdatePackageVersionsStatus"
+}
+
 type UpdatePackageVersionsStatusOutput struct {
 
 	// A list of SuccessfulPackageVersionInfo objects, one for each package version

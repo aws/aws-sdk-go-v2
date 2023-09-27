@@ -58,6 +58,10 @@ type DeleteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTableInput) operationName() string {
+	return "DeleteTable"
+}
+
 // Represents the output of a DeleteTable operation.
 type DeleteTableOutput struct {
 

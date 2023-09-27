@@ -81,6 +81,7 @@
         "api_op_VerifyDomainIdentity.go",
         "api_op_VerifyEmailAddress.go",
         "api_op_VerifyEmailIdentity.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

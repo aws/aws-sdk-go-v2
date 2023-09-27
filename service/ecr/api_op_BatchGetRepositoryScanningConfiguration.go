@@ -42,6 +42,10 @@ type BatchGetRepositoryScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetRepositoryScanningConfigurationInput) operationName() string {
+	return "BatchGetRepositoryScanningConfiguration"
+}
+
 type BatchGetRepositoryScanningConfigurationOutput struct {
 
 	// Any failures associated with the call.

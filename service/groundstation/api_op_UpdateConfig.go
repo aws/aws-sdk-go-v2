@@ -59,6 +59,10 @@ type UpdateConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigInput) operationName() string {
+	return "UpdateConfig"
+}
+
 type UpdateConfigOutput struct {
 
 	// ARN of a Config .

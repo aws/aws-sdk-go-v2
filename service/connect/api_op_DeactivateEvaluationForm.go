@@ -55,6 +55,10 @@ type DeactivateEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateEvaluationFormInput) operationName() string {
+	return "DeactivateEvaluationForm"
+}
+
 type DeactivateEvaluationFormOutput struct {
 
 	// The Amazon Resource Name (ARN) for the evaluation form resource.

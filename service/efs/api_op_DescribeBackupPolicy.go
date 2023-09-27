@@ -42,6 +42,10 @@ type DescribeBackupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBackupPolicyInput) operationName() string {
+	return "DescribeBackupPolicy"
+}
+
 type DescribeBackupPolicyOutput struct {
 
 	// Describes the file system's backup policy, indicating whether automatic backups

@@ -66,6 +66,10 @@ type CreateSourceLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSourceLocationInput) operationName() string {
+	return "CreateSourceLocation"
+}
+
 type CreateSourceLocationOutput struct {
 
 	// Access configuration parameters. Configures the type of authentication used to

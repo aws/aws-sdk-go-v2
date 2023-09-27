@@ -36,6 +36,10 @@ type GetSubscriptionStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubscriptionStateInput) operationName() string {
+	return "GetSubscriptionState"
+}
+
 type GetSubscriptionStateOutput struct {
 
 	// The status of the subscription.

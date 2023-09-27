@@ -69,6 +69,10 @@ type ListAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessKeysInput) operationName() string {
+	return "ListAccessKeys"
+}
+
 // Contains the response to a successful ListAccessKeys request.
 type ListAccessKeysOutput struct {
 

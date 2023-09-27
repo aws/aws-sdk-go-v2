@@ -70,6 +70,10 @@ type DescribeNetworkInsightsAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkInsightsAnalysesInput) operationName() string {
+	return "DescribeNetworkInsightsAnalyses"
+}
+
 type DescribeNetworkInsightsAnalysesOutput struct {
 
 	// Information about the network insights analyses.

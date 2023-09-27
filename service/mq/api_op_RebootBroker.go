@@ -41,6 +41,10 @@ type RebootBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootBrokerInput) operationName() string {
+	return "RebootBroker"
+}
+
 type RebootBrokerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

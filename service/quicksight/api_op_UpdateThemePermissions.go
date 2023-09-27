@@ -74,6 +74,10 @@ type UpdateThemePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateThemePermissionsInput) operationName() string {
+	return "UpdateThemePermissions"
+}
+
 type UpdateThemePermissionsOutput struct {
 
 	// The resulting list of resource permissions for the theme.

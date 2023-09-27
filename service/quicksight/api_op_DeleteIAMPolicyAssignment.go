@@ -52,6 +52,10 @@ type DeleteIAMPolicyAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIAMPolicyAssignmentInput) operationName() string {
+	return "DeleteIAMPolicyAssignment"
+}
+
 type DeleteIAMPolicyAssignmentOutput struct {
 
 	// The name of the assignment.

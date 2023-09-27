@@ -45,6 +45,10 @@ type ListAvailableZonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableZonesInput) operationName() string {
+	return "ListAvailableZones"
+}
+
 type ListAvailableZonesOutput struct {
 
 	// The list of Availability Zones that have available AWS CloudHSM capacity.

@@ -67,6 +67,10 @@ type GetInsightSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightSummariesInput) operationName() string {
+	return "GetInsightSummaries"
+}
+
 type GetInsightSummariesOutput struct {
 
 	// The summary of each insight within the group matching the provided filters. The

@@ -48,6 +48,10 @@ type DescribeRobotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRobotInput) operationName() string {
+	return "DescribeRobot"
+}
+
 type DescribeRobotOutput struct {
 
 	// The target architecture of the robot application.

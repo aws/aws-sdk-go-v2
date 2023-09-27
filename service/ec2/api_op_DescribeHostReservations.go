@@ -63,6 +63,10 @@ type DescribeHostReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHostReservationsInput) operationName() string {
+	return "DescribeHostReservations"
+}
+
 type DescribeHostReservationsOutput struct {
 
 	// Details about the reservation's configuration.

@@ -112,6 +112,10 @@ type CreateEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventSubscriptionInput) operationName() string {
+	return "CreateEventSubscription"
+}
+
 type CreateEventSubscriptionOutput struct {
 
 	// Contains the results of a successful invocation of the

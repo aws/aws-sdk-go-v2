@@ -52,6 +52,10 @@ type ListDevicesForWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevicesForWirelessDeviceImportTaskInput) operationName() string {
+	return "ListDevicesForWirelessDeviceImportTask"
+}
+
 type ListDevicesForWirelessDeviceImportTaskOutput struct {
 
 	// The name of the Sidewalk destination that describes the IoT rule to route

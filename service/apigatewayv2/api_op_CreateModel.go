@@ -59,6 +59,10 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelInput) operationName() string {
+	return "CreateModel"
+}
+
 type CreateModelOutput struct {
 
 	// The content-type for the model, for example, "application/json".

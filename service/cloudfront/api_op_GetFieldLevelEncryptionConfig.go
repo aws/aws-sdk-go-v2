@@ -42,6 +42,10 @@ type GetFieldLevelEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFieldLevelEncryptionConfigInput) operationName() string {
+	return "GetFieldLevelEncryptionConfig"
+}
+
 type GetFieldLevelEncryptionConfigOutput struct {
 
 	// The current version of the field level encryption configuration. For example:

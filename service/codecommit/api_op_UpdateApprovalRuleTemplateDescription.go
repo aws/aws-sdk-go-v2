@@ -47,6 +47,10 @@ type UpdateApprovalRuleTemplateDescriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApprovalRuleTemplateDescriptionInput) operationName() string {
+	return "UpdateApprovalRuleTemplateDescription"
+}
+
 type UpdateApprovalRuleTemplateDescriptionOutput struct {
 
 	// The structure and content of the updated approval rule template.

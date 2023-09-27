@@ -33,6 +33,10 @@ type MediaTypeHeaderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MediaTypeHeaderInput) operationName() string {
+	return "MediaTypeHeader"
+}
+
 type MediaTypeHeaderOutput struct {
 
 	// This value conforms to the media type: application/json

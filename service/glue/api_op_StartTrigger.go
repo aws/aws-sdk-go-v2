@@ -42,6 +42,10 @@ type StartTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTriggerInput) operationName() string {
+	return "StartTrigger"
+}
+
 type StartTriggerOutput struct {
 
 	// The name of the trigger that was started.

@@ -68,6 +68,10 @@ type ListTrialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrialsInput) operationName() string {
+	return "ListTrials"
+}
+
 type ListTrialsOutput struct {
 
 	// A token for getting the next set of trials, if there are any.

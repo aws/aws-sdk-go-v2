@@ -52,6 +52,10 @@ type GetDashboardForJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDashboardForJobRunInput) operationName() string {
+	return "GetDashboardForJobRun"
+}
+
 type GetDashboardForJobRunOutput struct {
 
 	// The URL to view job run's dashboard.

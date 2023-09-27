@@ -48,6 +48,10 @@ type ListVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcEndpointAccessInput) operationName() string {
+	return "ListVpcEndpointAccess"
+}
+
 // Container for response parameters to the ListVpcEndpointAccess operation.
 // Returns a list of accounts id and account type authorized to manage VPC
 // endpoints.

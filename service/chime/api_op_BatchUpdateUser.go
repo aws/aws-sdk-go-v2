@@ -49,6 +49,10 @@ type BatchUpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateUserInput) operationName() string {
+	return "BatchUpdateUser"
+}
+
 type BatchUpdateUserOutput struct {
 
 	// If the BatchUpdateUser action fails for one or more of the user IDs in the

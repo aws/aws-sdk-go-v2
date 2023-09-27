@@ -48,6 +48,10 @@ type DescribeMigrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMigrationTaskInput) operationName() string {
+	return "DescribeMigrationTask"
+}
+
 type DescribeMigrationTaskOutput struct {
 
 	// Object encapsulating information about the migration task.

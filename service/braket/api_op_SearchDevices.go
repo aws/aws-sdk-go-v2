@@ -50,6 +50,10 @@ type SearchDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchDevicesInput) operationName() string {
+	return "SearchDevices"
+}
+
 type SearchDevicesOutput struct {
 
 	// An array of DeviceSummary objects for devices that match the specified filter

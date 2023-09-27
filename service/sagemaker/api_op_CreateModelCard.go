@@ -68,6 +68,10 @@ type CreateModelCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelCardInput) operationName() string {
+	return "CreateModelCard"
+}
+
 type CreateModelCardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the successfully created model card.

@@ -45,6 +45,10 @@ type ListAppMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppMonitorsInput) operationName() string {
+	return "ListAppMonitors"
+}
+
 type ListAppMonitorsOutput struct {
 
 	// An array of structures that contain information about the returned app monitors.

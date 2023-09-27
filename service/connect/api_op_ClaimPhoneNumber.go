@@ -89,6 +89,10 @@ type ClaimPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClaimPhoneNumberInput) operationName() string {
+	return "ClaimPhoneNumber"
+}
+
 type ClaimPhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the phone number.

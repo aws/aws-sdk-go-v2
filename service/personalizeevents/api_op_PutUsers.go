@@ -50,6 +50,10 @@ type PutUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutUsersInput) operationName() string {
+	return "PutUsers"
+}
+
 type PutUsersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -87,6 +87,10 @@ type DetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectEntitiesInput) operationName() string {
+	return "DetectEntities"
+}
+
 type DetectEntitiesOutput struct {
 
 	// Information about each block of text in the input document. Blocks are nested.

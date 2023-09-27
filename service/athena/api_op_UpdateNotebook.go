@@ -63,6 +63,10 @@ type UpdateNotebookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNotebookInput) operationName() string {
+	return "UpdateNotebook"
+}
+
 type UpdateNotebookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

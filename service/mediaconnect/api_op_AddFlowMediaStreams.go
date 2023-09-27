@@ -50,6 +50,10 @@ type AddFlowMediaStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddFlowMediaStreamsInput) operationName() string {
+	return "AddFlowMediaStreams"
+}
+
 type AddFlowMediaStreamsOutput struct {
 
 	// The ARN of the flow that you added media streams to.

@@ -73,6 +73,10 @@ type ModifyGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyGlobalClusterInput) operationName() string {
+	return "ModifyGlobalCluster"
+}
+
 type ModifyGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is

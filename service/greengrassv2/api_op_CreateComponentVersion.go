@@ -87,6 +87,10 @@ type CreateComponentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComponentVersionInput) operationName() string {
+	return "CreateComponentVersion"
+}
+
 type CreateComponentVersionOutput struct {
 
 	// The name of the component.

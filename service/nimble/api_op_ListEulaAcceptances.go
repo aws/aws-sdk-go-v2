@@ -48,6 +48,10 @@ type ListEulaAcceptancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEulaAcceptancesInput) operationName() string {
+	return "ListEulaAcceptances"
+}
+
 type ListEulaAcceptancesOutput struct {
 
 	// A collection of EULA acceptances.

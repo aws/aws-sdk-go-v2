@@ -49,6 +49,10 @@ type EvaluatePullRequestApprovalRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EvaluatePullRequestApprovalRulesInput) operationName() string {
+	return "EvaluatePullRequestApprovalRules"
+}
+
 type EvaluatePullRequestApprovalRulesOutput struct {
 
 	// The result of the evaluation, including the names of the rules whose conditions

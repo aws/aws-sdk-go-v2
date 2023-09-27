@@ -51,6 +51,10 @@ type ContinueDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ContinueDeploymentInput) operationName() string {
+	return "ContinueDeployment"
+}
+
 type ContinueDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

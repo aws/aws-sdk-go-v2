@@ -136,6 +136,10 @@ type SubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubscribeInput) operationName() string {
+	return "Subscribe"
+}
+
 // Response for Subscribe action.
 type SubscribeOutput struct {
 

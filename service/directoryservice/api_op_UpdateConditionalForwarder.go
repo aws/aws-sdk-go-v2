@@ -56,6 +56,10 @@ type UpdateConditionalForwarderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConditionalForwarderInput) operationName() string {
+	return "UpdateConditionalForwarder"
+}
+
 // The result of an UpdateConditionalForwarder request.
 type UpdateConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.

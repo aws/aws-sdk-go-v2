@@ -48,6 +48,10 @@ type ListKeyPhrasesDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeyPhrasesDetectionJobsInput) operationName() string {
+	return "ListKeyPhrasesDetectionJobs"
+}
+
 type ListKeyPhrasesDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.

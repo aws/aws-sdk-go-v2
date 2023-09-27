@@ -88,6 +88,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsInput) operationName() string {
+	return "DescribeEvents"
+}
+
 // Represents the output of DescribeEvents .
 type DescribeEventsOutput struct {
 

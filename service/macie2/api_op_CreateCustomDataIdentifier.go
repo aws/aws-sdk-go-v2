@@ -104,6 +104,10 @@ type CreateCustomDataIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomDataIdentifierInput) operationName() string {
+	return "CreateCustomDataIdentifier"
+}
+
 type CreateCustomDataIdentifierOutput struct {
 
 	// The unique identifier for the custom data identifier that was created.

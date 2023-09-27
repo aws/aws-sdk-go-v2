@@ -51,6 +51,10 @@ type ListAssetBundleImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssetBundleImportJobsInput) operationName() string {
+	return "ListAssetBundleImportJobs"
+}
+
 type ListAssetBundleImportJobsOutput struct {
 
 	// A list of import job summaries.

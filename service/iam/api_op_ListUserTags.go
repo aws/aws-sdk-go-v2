@@ -63,6 +63,10 @@ type ListUserTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserTagsInput) operationName() string {
+	return "ListUserTags"
+}
+
 type ListUserTagsOutput struct {
 
 	// The list of tags that are currently attached to the user. Each tag consists of

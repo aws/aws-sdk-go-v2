@@ -75,6 +75,10 @@ type ModifyReplicationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReplicationConfigInput) operationName() string {
+	return "ModifyReplicationConfig"
+}
+
 type ModifyReplicationConfigOutput struct {
 
 	// Information about the serverless replication config that was modified.

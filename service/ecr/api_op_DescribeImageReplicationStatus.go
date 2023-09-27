@@ -51,6 +51,10 @@ type DescribeImageReplicationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageReplicationStatusInput) operationName() string {
+	return "DescribeImageReplicationStatus"
+}
+
 type DescribeImageReplicationStatusOutput struct {
 
 	// An object with identifying information for an image in an Amazon ECR repository.

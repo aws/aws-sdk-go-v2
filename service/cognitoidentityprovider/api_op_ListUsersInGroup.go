@@ -59,6 +59,10 @@ type ListUsersInGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsersInGroupInput) operationName() string {
+	return "ListUsersInGroup"
+}
+
 type ListUsersInGroupOutput struct {
 
 	// An identifier that you can use in a later request to return the next set of

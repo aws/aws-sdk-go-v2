@@ -58,6 +58,10 @@ type PollForJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PollForJobsInput) operationName() string {
+	return "PollForJobs"
+}
+
 // Represents the output of a PollForJobs action.
 type PollForJobsOutput struct {
 

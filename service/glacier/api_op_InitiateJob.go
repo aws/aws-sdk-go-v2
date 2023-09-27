@@ -59,6 +59,10 @@ type InitiateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateJobInput) operationName() string {
+	return "InitiateJob"
+}
+
 // Contains the Amazon S3 Glacier response to your request.
 type InitiateJobOutput struct {
 

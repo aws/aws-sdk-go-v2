@@ -42,6 +42,10 @@ type DescribeAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAcceleratorInput) operationName() string {
+	return "DescribeAccelerator"
+}
+
 type DescribeAcceleratorOutput struct {
 
 	// The description of the accelerator.

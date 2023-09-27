@@ -50,6 +50,10 @@ type PublishMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishMetricsInput) operationName() string {
+	return "PublishMetrics"
+}
+
 type PublishMetricsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type UpdateAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppInstanceUserEndpointInput) operationName() string {
+	return "UpdateAppInstanceUserEndpoint"
+}
+
 type UpdateAppInstanceUserEndpointOutput struct {
 
 	// The ARN of the AppInstanceUser .

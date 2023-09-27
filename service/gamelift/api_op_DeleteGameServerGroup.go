@@ -70,6 +70,10 @@ type DeleteGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGameServerGroupInput) operationName() string {
+	return "DeleteGameServerGroup"
+}
+
 type DeleteGameServerGroupOutput struct {
 
 	// An object that describes the deleted game server group resource, with status

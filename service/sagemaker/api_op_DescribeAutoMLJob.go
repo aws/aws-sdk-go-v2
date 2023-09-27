@@ -45,6 +45,10 @@ type DescribeAutoMLJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoMLJobInput) operationName() string {
+	return "DescribeAutoMLJob"
+}
+
 type DescribeAutoMLJobOutput struct {
 
 	// Returns the ARN of the AutoML job.

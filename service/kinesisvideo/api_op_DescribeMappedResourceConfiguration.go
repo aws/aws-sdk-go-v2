@@ -50,6 +50,10 @@ type DescribeMappedResourceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMappedResourceConfigurationInput) operationName() string {
+	return "DescribeMappedResourceConfiguration"
+}
+
 type DescribeMappedResourceConfigurationOutput struct {
 
 	// A structure that encapsulates, or contains, the media storage configuration

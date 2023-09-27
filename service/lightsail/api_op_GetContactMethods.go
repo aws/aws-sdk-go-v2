@@ -49,6 +49,10 @@ type GetContactMethodsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactMethodsInput) operationName() string {
+	return "GetContactMethods"
+}
+
 type GetContactMethodsOutput struct {
 
 	// An array of objects that describe the contact methods.

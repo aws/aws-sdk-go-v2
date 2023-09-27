@@ -55,6 +55,10 @@ type ListOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOnPremisesInstancesInput) operationName() string {
+	return "ListOnPremisesInstances"
+}
+
 // Represents the output of the list on-premises instances operation.
 type ListOnPremisesInstancesOutput struct {
 

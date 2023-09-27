@@ -44,6 +44,10 @@ type UnlockRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnlockRuleInput) operationName() string {
+	return "UnlockRule"
+}
+
 type UnlockRuleOutput struct {
 
 	// The retention rule description.

@@ -45,6 +45,10 @@ type GetReusableDelegationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReusableDelegationSetInput) operationName() string {
+	return "GetReusableDelegationSet"
+}
+
 // A complex type that contains the response to the GetReusableDelegationSet
 // request.
 type GetReusableDelegationSetOutput struct {

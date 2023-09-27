@@ -45,6 +45,10 @@ type ManageSparqlStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ManageSparqlStatisticsInput) operationName() string {
+	return "ManageSparqlStatistics"
+}
+
 type ManageSparqlStatisticsOutput struct {
 
 	// The HTTP return code of the request. If the request succeeded, the code is 200.

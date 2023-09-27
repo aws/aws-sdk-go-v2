@@ -57,6 +57,10 @@ type UpdateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserProfileInput) operationName() string {
+	return "UpdateUserProfile"
+}
+
 type UpdateUserProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user in IAM.

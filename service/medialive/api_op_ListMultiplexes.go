@@ -44,6 +44,10 @@ type ListMultiplexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMultiplexesInput) operationName() string {
+	return "ListMultiplexes"
+}
+
 // Placeholder documentation for ListMultiplexesResponse
 type ListMultiplexesOutput struct {
 

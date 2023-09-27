@@ -50,6 +50,10 @@ type DeleteThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteThingInput) operationName() string {
+	return "DeleteThing"
+}
+
 // The output of the DeleteThing operation.
 type DeleteThingOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -73,6 +73,10 @@ type UpdateVPCConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVPCConnectionInput) operationName() string {
+	return "UpdateVPCConnection"
+}
+
 type UpdateVPCConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the VPC connection.

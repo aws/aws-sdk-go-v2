@@ -74,6 +74,10 @@ type ListOrganizationalUnitsForParentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationalUnitsForParentInput) operationName() string {
+	return "ListOrganizationalUnitsForParent"
+}
+
 type ListOrganizationalUnitsForParentOutput struct {
 
 	// If present, indicates that more output is available than is included in the

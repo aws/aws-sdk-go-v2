@@ -91,6 +91,10 @@ type RestoreTableFromClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreTableFromClusterSnapshotInput) operationName() string {
+	return "RestoreTableFromClusterSnapshot"
+}
+
 type RestoreTableFromClusterSnapshotOutput struct {
 
 	// Describes the status of a RestoreTableFromClusterSnapshot operation.

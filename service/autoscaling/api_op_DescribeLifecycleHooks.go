@@ -46,6 +46,10 @@ type DescribeLifecycleHooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLifecycleHooksInput) operationName() string {
+	return "DescribeLifecycleHooks"
+}
+
 type DescribeLifecycleHooksOutput struct {
 
 	// The lifecycle hooks for the specified group.

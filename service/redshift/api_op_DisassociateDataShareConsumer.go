@@ -55,6 +55,10 @@ type DisassociateDataShareConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDataShareConsumerInput) operationName() string {
+	return "DisassociateDataShareConsumer"
+}
+
 type DisassociateDataShareConsumerOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly

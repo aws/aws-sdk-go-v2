@@ -41,6 +41,10 @@ type DeleteAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppMonitorInput) operationName() string {
+	return "DeleteAppMonitor"
+}
+
 type DeleteAppMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

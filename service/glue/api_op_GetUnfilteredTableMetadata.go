@@ -62,6 +62,10 @@ type GetUnfilteredTableMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUnfilteredTableMetadataInput) operationName() string {
+	return "GetUnfilteredTableMetadata"
+}
+
 type GetUnfilteredTableMetadataOutput struct {
 
 	// A list of column names that the user has been granted access to.

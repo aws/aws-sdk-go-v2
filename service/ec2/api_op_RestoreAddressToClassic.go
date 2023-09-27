@@ -51,6 +51,10 @@ type RestoreAddressToClassicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreAddressToClassicInput) operationName() string {
+	return "RestoreAddressToClassic"
+}
+
 type RestoreAddressToClassicOutput struct {
 
 	// The Elastic IP address.

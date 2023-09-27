@@ -45,6 +45,10 @@ type ListIndicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIndicesInput) operationName() string {
+	return "ListIndices"
+}
+
 type ListIndicesOutput struct {
 
 	// An array of summary information on the configuration of one or more indexes.

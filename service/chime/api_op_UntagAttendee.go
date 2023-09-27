@@ -56,6 +56,10 @@ type UntagAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagAttendeeInput) operationName() string {
+	return "UntagAttendee"
+}
+
 type UntagAttendeeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

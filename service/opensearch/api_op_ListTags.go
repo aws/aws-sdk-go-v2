@@ -45,6 +45,10 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsInput) operationName() string {
+	return "ListTags"
+}
+
 // The results of a ListTags operation.
 type ListTagsOutput struct {
 

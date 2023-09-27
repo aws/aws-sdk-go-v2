@@ -42,6 +42,10 @@ type GetCalculationExecutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCalculationExecutionStatusInput) operationName() string {
+	return "GetCalculationExecutionStatus"
+}
+
 type GetCalculationExecutionStatusOutput struct {
 
 	// Contains information about the DPU execution time and progress.

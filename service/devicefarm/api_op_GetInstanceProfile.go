@@ -42,6 +42,10 @@ type GetInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceProfileInput) operationName() string {
+	return "GetInstanceProfile"
+}
+
 type GetInstanceProfileOutput struct {
 
 	// An object that contains information about an instance profile.

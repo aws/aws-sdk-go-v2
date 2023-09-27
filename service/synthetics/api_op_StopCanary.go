@@ -47,6 +47,10 @@ type StopCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopCanaryInput) operationName() string {
+	return "StopCanary"
+}
+
 type StopCanaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

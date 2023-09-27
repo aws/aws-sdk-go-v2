@@ -56,6 +56,10 @@ type ListSchedulingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchedulingPoliciesInput) operationName() string {
+	return "ListSchedulingPolicies"
+}
+
 type ListSchedulingPoliciesOutput struct {
 
 	// The nextToken value to include in a future ListSchedulingPolicies request. When

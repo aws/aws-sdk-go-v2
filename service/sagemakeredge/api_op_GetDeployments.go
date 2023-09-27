@@ -48,6 +48,10 @@ type GetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentsInput) operationName() string {
+	return "GetDeployments"
+}
+
 type GetDeploymentsOutput struct {
 
 	// Returns a list of the configurations of the active deployments on the device.

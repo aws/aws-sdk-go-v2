@@ -47,6 +47,10 @@ type CancelJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelJobRunInput) operationName() string {
+	return "CancelJobRun"
+}
+
 type CancelJobRunOutput struct {
 
 	// The output contains the ID of the cancelled job run.

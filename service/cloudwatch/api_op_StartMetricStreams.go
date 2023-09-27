@@ -44,6 +44,10 @@ type StartMetricStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMetricStreamsInput) operationName() string {
+	return "StartMetricStreams"
+}
+
 type StartMetricStreamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

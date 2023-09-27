@@ -135,6 +135,10 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTableInput) operationName() string {
+	return "CreateTable"
+}
+
 type CreateTableOutput struct {
 
 	// The unique identifier of the table in the format of an Amazon Resource Name

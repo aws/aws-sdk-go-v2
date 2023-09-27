@@ -91,6 +91,10 @@ type ExportECSServiceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportECSServiceRecommendationsInput) operationName() string {
+	return "ExportECSServiceRecommendations"
+}
+
 type ExportECSServiceRecommendationsOutput struct {
 
 	// The identification number of the export job. To view the status of an export

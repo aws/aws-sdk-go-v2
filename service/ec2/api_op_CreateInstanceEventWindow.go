@@ -82,6 +82,10 @@ type CreateInstanceEventWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceEventWindowInput) operationName() string {
+	return "CreateInstanceEventWindow"
+}
+
 type CreateInstanceEventWindowOutput struct {
 
 	// Information about the event window.

@@ -43,6 +43,10 @@ type GetRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRuleInput) operationName() string {
+	return "GetRule"
+}
+
 type GetRuleOutput struct {
 
 	// The retention rule description.

@@ -86,6 +86,10 @@ type ListPackageVersionDependenciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackageVersionDependenciesInput) operationName() string {
+	return "ListPackageVersionDependencies"
+}
+
 type ListPackageVersionDependenciesOutput struct {
 
 	// The returned list of PackageDependency (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)

@@ -53,6 +53,10 @@ type PutAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAttributesInput) operationName() string {
+	return "PutAttributes"
+}
+
 type PutAttributesOutput struct {
 
 	// The attributes applied to your resource.

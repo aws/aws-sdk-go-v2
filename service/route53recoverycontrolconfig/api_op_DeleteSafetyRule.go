@@ -41,6 +41,10 @@ type DeleteSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSafetyRuleInput) operationName() string {
+	return "DeleteSafetyRule"
+}
+
 type DeleteSafetyRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

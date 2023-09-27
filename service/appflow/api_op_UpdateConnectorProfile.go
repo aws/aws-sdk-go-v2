@@ -65,6 +65,10 @@ type UpdateConnectorProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectorProfileInput) operationName() string {
+	return "UpdateConnectorProfile"
+}
+
 type UpdateConnectorProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector profile.

@@ -44,6 +44,10 @@ type StartMultiplexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMultiplexInput) operationName() string {
+	return "StartMultiplex"
+}
+
 // Placeholder documentation for StartMultiplexResponse
 type StartMultiplexOutput struct {
 

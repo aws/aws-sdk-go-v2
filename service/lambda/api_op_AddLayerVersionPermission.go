@@ -79,6 +79,10 @@ type AddLayerVersionPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddLayerVersionPermissionInput) operationName() string {
+	return "AddLayerVersionPermission"
+}
+
 type AddLayerVersionPermissionOutput struct {
 
 	// A unique identifier for the current revision of the policy.

@@ -68,6 +68,10 @@ type UpdateWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkteamInput) operationName() string {
+	return "UpdateWorkteam"
+}
+
 type UpdateWorkteamOutput struct {
 
 	// A Workteam object that describes the updated work team.

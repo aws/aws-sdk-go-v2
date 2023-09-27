@@ -77,6 +77,10 @@ type StartResourceEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartResourceEvaluationInput) operationName() string {
+	return "StartResourceEvaluation"
+}
+
 type StartResourceEvaluationOutput struct {
 
 	// A unique ResourceEvaluationId that is associated with a single execution.

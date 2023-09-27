@@ -43,6 +43,10 @@ type DescribeSchedulingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSchedulingPoliciesInput) operationName() string {
+	return "DescribeSchedulingPolicies"
+}
+
 type DescribeSchedulingPoliciesOutput struct {
 
 	// The list of scheduling policies.

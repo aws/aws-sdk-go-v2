@@ -83,6 +83,7 @@
         "api_op_UpdateRecoveryPointLifecycle.go",
         "api_op_UpdateRegionSettings.go",
         "api_op_UpdateReportPlan.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

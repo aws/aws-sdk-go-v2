@@ -113,6 +113,10 @@ type CreateCachediSCSIVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCachediSCSIVolumeInput) operationName() string {
+	return "CreateCachediSCSIVolume"
+}
+
 type CreateCachediSCSIVolumeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI

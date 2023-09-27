@@ -50,6 +50,10 @@ type DescribeConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectorInput) operationName() string {
+	return "DescribeConnector"
+}
+
 type DescribeConnectorOutput struct {
 
 	// Configuration info of all the connectors that the user requested.

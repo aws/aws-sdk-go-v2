@@ -62,6 +62,10 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountsForProvisionedPermissionSetInput) operationName() string {
+	return "ListAccountsForProvisionedPermissionSet"
+}
+
 type ListAccountsForProvisionedPermissionSetOutput struct {
 
 	// The list of Amazon Web Services AccountIds .

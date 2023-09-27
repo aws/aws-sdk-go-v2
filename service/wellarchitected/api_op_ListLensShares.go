@@ -61,6 +61,10 @@ type ListLensSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLensSharesInput) operationName() string {
+	return "ListLensShares"
+}
+
 type ListLensSharesOutput struct {
 
 	// A list of lens share summaries.

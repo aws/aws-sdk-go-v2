@@ -56,6 +56,10 @@ type SendAlexaOfferToMasterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendAlexaOfferToMasterInput) operationName() string {
+	return "SendAlexaOfferToMaster"
+}
+
 type SendAlexaOfferToMasterOutput struct {
 
 	// The base64-encoded SDP answer content.

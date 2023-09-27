@@ -37,6 +37,10 @@ type ClearDefaultAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClearDefaultAuthorizerInput) operationName() string {
+	return "ClearDefaultAuthorizer"
+}
+
 type ClearDefaultAuthorizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

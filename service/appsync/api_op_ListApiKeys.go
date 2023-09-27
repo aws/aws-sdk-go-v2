@@ -52,6 +52,10 @@ type ListApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApiKeysInput) operationName() string {
+	return "ListApiKeys"
+}
+
 type ListApiKeysOutput struct {
 
 	// The ApiKey objects.

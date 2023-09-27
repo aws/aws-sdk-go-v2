@@ -48,6 +48,10 @@ type GetMailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMailDomainInput) operationName() string {
+	return "GetMailDomain"
+}
+
 type GetMailDomainOutput struct {
 
 	// Indicates the status of a DKIM verification.

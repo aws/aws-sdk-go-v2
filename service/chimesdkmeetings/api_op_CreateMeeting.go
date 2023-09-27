@@ -112,6 +112,10 @@ type CreateMeetingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMeetingInput) operationName() string {
+	return "CreateMeeting"
+}
+
 type CreateMeetingOutput struct {
 
 	// The meeting information, including the meeting ID and MediaPlacement .

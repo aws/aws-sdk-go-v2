@@ -46,6 +46,10 @@ type AssociateWirelessGatewayWithCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateWirelessGatewayWithCertificateInput) operationName() string {
+	return "AssociateWirelessGatewayWithCertificate"
+}
+
 type AssociateWirelessGatewayWithCertificateOutput struct {
 
 	// The ID of the certificate associated with the wireless gateway.

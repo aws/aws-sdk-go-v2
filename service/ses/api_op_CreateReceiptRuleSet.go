@@ -52,6 +52,10 @@ type CreateReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReceiptRuleSetInput) operationName() string {
+	return "CreateReceiptRuleSet"
+}
+
 // An empty element returned on a successful request.
 type CreateReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.

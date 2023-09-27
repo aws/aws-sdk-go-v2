@@ -62,6 +62,10 @@ type DeleteIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIdentityPolicyInput) operationName() string {
+	return "DeleteIdentityPolicy"
+}
+
 // An empty element returned on a successful request.
 type DeleteIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.

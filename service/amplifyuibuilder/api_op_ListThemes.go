@@ -53,6 +53,10 @@ type ListThemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThemesInput) operationName() string {
+	return "ListThemes"
+}
+
 type ListThemesOutput struct {
 
 	// The list of themes for the Amplify app.

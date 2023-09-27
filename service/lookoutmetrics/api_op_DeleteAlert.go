@@ -41,6 +41,10 @@ type DeleteAlertInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAlertInput) operationName() string {
+	return "DeleteAlert"
+}
+
 type DeleteAlertOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

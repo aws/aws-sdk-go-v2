@@ -48,6 +48,10 @@ type StopKeyUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopKeyUsageInput) operationName() string {
+	return "StopKeyUsage"
+}
+
 type StopKeyUsageOutput struct {
 
 	// The KeyARN of the key.

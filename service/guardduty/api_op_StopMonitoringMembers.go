@@ -52,6 +52,10 @@ type StopMonitoringMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopMonitoringMembersInput) operationName() string {
+	return "StopMonitoringMembers"
+}
+
 type StopMonitoringMembersOutput struct {
 
 	// A list of objects that contain an accountId for each account that could not be

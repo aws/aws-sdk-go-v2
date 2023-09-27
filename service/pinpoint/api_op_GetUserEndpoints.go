@@ -49,6 +49,10 @@ type GetUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserEndpointsInput) operationName() string {
+	return "GetUserEndpoints"
+}
+
 type GetUserEndpointsOutput struct {
 
 	// Provides information about all the endpoints that are associated with a user ID.

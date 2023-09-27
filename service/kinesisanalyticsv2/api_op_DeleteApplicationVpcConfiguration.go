@@ -60,6 +60,10 @@ type DeleteApplicationVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationVpcConfigurationInput) operationName() string {
+	return "DeleteApplicationVpcConfiguration"
+}
+
 type DeleteApplicationVpcConfigurationOutput struct {
 
 	// The ARN of the Kinesis Data Analytics application.

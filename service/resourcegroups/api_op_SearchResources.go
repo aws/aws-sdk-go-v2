@@ -67,6 +67,10 @@ type SearchResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchResourcesInput) operationName() string {
+	return "SearchResources"
+}
+
 type SearchResourcesOutput struct {
 
 	// If present, indicates that more output is available than is included in the

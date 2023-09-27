@@ -66,6 +66,10 @@ type CreateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCertificateInput) operationName() string {
+	return "CreateCertificate"
+}
+
 type CreateCertificateOutput struct {
 
 	// An object that describes the certificate created.

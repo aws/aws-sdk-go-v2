@@ -55,6 +55,10 @@ type DisassociatePhoneNumberContactFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociatePhoneNumberContactFlowInput) operationName() string {
+	return "DisassociatePhoneNumberContactFlow"
+}
+
 type DisassociatePhoneNumberContactFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

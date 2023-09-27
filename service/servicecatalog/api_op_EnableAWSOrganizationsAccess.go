@@ -49,6 +49,10 @@ type EnableAWSOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableAWSOrganizationsAccessInput) operationName() string {
+	return "EnableAWSOrganizationsAccess"
+}
+
 type EnableAWSOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

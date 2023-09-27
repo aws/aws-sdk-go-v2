@@ -43,6 +43,10 @@ type ListMediaPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMediaPipelinesInput) operationName() string {
+	return "ListMediaPipelines"
+}
+
 type ListMediaPipelinesOutput struct {
 
 	// The media pipeline objects in the list.

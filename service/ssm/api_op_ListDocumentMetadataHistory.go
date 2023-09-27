@@ -60,6 +60,10 @@ type ListDocumentMetadataHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDocumentMetadataHistoryInput) operationName() string {
+	return "ListDocumentMetadataHistory"
+}
+
 type ListDocumentMetadataHistoryOutput struct {
 
 	// The user ID of the person in the organization who requested the review of the

@@ -41,6 +41,10 @@ type DeleteBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBillingGroupInput) operationName() string {
+	return "DeleteBillingGroup"
+}
+
 type DeleteBillingGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted billing group.

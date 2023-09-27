@@ -53,6 +53,10 @@ type GetThirdPartyJobDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetThirdPartyJobDetailsInput) operationName() string {
+	return "GetThirdPartyJobDetails"
+}
+
 // Represents the output of a GetThirdPartyJobDetails action.
 type GetThirdPartyJobDetailsOutput struct {
 

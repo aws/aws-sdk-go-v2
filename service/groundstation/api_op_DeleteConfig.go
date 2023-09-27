@@ -47,6 +47,10 @@ type DeleteConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigInput) operationName() string {
+	return "DeleteConfig"
+}
+
 type DeleteConfigOutput struct {
 
 	// ARN of a Config .

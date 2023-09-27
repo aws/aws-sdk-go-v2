@@ -43,6 +43,10 @@ type DeleteReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReservationInput) operationName() string {
+	return "DeleteReservation"
+}
+
 // Placeholder documentation for DeleteReservationResponse
 type DeleteReservationOutput struct {
 

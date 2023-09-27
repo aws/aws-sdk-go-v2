@@ -53,6 +53,10 @@ type ListRateBasedRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRateBasedRulesInput) operationName() string {
+	return "ListRateBasedRules"
+}
+
 type ListRateBasedRulesOutput struct {
 
 	// If you have more Rules than the number that you specified for Limit in the

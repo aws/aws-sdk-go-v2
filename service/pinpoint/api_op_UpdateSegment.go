@@ -57,6 +57,10 @@ type UpdateSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSegmentInput) operationName() string {
+	return "UpdateSegment"
+}
+
 type UpdateSegmentOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for

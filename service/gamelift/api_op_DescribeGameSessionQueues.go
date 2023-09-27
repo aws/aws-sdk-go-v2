@@ -53,6 +53,10 @@ type DescribeGameSessionQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGameSessionQueuesInput) operationName() string {
+	return "DescribeGameSessionQueues"
+}
+
 type DescribeGameSessionQueuesOutput struct {
 
 	// A collection of objects that describe the requested game session queues.

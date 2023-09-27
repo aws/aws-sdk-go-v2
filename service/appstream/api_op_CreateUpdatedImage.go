@@ -75,6 +75,10 @@ type CreateUpdatedImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUpdatedImageInput) operationName() string {
+	return "CreateUpdatedImage"
+}
+
 type CreateUpdatedImageOutput struct {
 
 	// Indicates whether a new image can be created.

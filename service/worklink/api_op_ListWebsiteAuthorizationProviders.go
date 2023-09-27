@@ -53,6 +53,10 @@ type ListWebsiteAuthorizationProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWebsiteAuthorizationProvidersInput) operationName() string {
+	return "ListWebsiteAuthorizationProviders"
+}
+
 type ListWebsiteAuthorizationProvidersOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

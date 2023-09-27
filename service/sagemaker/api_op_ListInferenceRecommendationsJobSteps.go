@@ -59,6 +59,10 @@ type ListInferenceRecommendationsJobStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInferenceRecommendationsJobStepsInput) operationName() string {
+	return "ListInferenceRecommendationsJobSteps"
+}
+
 type ListInferenceRecommendationsJobStepsOutput struct {
 
 	// A token that you can specify in your next request to return more results from

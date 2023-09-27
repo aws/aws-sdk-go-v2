@@ -101,6 +101,10 @@ type CreateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBucketInput) operationName() string {
+	return "CreateBucket"
+}
+
 type CreateBucketOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bucket. For using this parameter with

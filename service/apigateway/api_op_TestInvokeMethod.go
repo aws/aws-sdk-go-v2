@@ -76,6 +76,10 @@ type TestInvokeMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestInvokeMethodInput) operationName() string {
+	return "TestInvokeMethod"
+}
+
 // Represents the response of the test invoke request in the HTTP method.
 type TestInvokeMethodOutput struct {
 

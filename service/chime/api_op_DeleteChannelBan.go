@@ -59,6 +59,10 @@ type DeleteChannelBanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChannelBanInput) operationName() string {
+	return "DeleteChannelBan"
+}
+
 type DeleteChannelBanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

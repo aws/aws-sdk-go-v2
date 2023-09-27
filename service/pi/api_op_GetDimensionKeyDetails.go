@@ -82,6 +82,10 @@ type GetDimensionKeyDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDimensionKeyDetailsInput) operationName() string {
+	return "GetDimensionKeyDetails"
+}
+
 type GetDimensionKeyDetailsOutput struct {
 
 	// The details for the requested dimensions.

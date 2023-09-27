@@ -76,6 +76,10 @@ type CopyDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDistributionInput) operationName() string {
+	return "CopyDistribution"
+}
+
 type CopyDistributionOutput struct {
 
 	// A distribution tells CloudFront where you want content to be delivered from,

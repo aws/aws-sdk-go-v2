@@ -63,6 +63,10 @@ type ListDistributionsByRealtimeLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionsByRealtimeLogConfigInput) operationName() string {
+	return "ListDistributionsByRealtimeLogConfig"
+}
+
 type ListDistributionsByRealtimeLogConfigOutput struct {
 
 	// A distribution list.

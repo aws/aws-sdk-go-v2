@@ -77,6 +77,10 @@ type UpdateAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnalysisInput) operationName() string {
+	return "UpdateAnalysis"
+}
+
 type UpdateAnalysisOutput struct {
 
 	// The ID of the analysis.

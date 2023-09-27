@@ -100,6 +100,10 @@ type GetSavingsPlansCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSavingsPlansCoverageInput) operationName() string {
+	return "GetSavingsPlansCoverage"
+}
+
 type GetSavingsPlansCoverageOutput struct {
 
 	// The amount of spend that your Savings Plans covered.

@@ -46,6 +46,10 @@ type GetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingsInput) operationName() string {
+	return "GetFindings"
+}
+
 type GetFindingsOutput struct {
 
 	// An array of objects, one for each finding that matches the criteria specified

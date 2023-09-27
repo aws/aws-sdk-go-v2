@@ -43,6 +43,10 @@ type SetVoiceMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetVoiceMessageSpendLimitOverrideInput) operationName() string {
+	return "SetVoiceMessageSpendLimitOverride"
+}
+
 type SetVoiceMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit to enforce on sending voice messages.

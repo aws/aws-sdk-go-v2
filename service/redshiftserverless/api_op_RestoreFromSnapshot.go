@@ -70,6 +70,10 @@ type RestoreFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreFromSnapshotInput) operationName() string {
+	return "RestoreFromSnapshot"
+}
+
 type RestoreFromSnapshotOutput struct {
 
 	// A collection of database objects and users.

@@ -49,6 +49,10 @@ type ListGremlinQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGremlinQueriesInput) operationName() string {
+	return "ListGremlinQueries"
+}
+
 type ListGremlinQueriesOutput struct {
 
 	// The number of queries that have been accepted but not yet completed, including

@@ -57,6 +57,10 @@ type AssignInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssignInstanceInput) operationName() string {
+	return "AssignInstance"
+}
+
 type AssignInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -82,6 +82,10 @@ type StartAssessmentFrameworkShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAssessmentFrameworkShareInput) operationName() string {
+	return "StartAssessmentFrameworkShare"
+}
+
 type StartAssessmentFrameworkShareOutput struct {
 
 	// The share request that's created by the StartAssessmentFrameworkShare API.

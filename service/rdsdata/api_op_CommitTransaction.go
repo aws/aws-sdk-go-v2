@@ -53,6 +53,10 @@ type CommitTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CommitTransactionInput) operationName() string {
+	return "CommitTransaction"
+}
+
 // The response elements represent the output of a commit transaction request.
 type CommitTransactionOutput struct {
 

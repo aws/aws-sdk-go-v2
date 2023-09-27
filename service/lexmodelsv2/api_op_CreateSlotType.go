@@ -95,6 +95,10 @@ type CreateSlotTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSlotTypeInput) operationName() string {
+	return "CreateSlotType"
+}
+
 type CreateSlotTypeOutput struct {
 
 	// The identifier for the bot associated with the slot type.

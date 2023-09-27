@@ -73,6 +73,10 @@ type CreateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSecurityProfileInput) operationName() string {
+	return "CreateSecurityProfile"
+}
+
 type CreateSecurityProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) for the security profile.

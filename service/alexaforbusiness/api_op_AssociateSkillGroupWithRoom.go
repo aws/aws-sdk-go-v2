@@ -45,6 +45,10 @@ type AssociateSkillGroupWithRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSkillGroupWithRoomInput) operationName() string {
+	return "AssociateSkillGroupWithRoom"
+}
+
 type AssociateSkillGroupWithRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

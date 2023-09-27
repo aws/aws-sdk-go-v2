@@ -52,6 +52,10 @@ type DescribeAnomalyDetectionExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnomalyDetectionExecutionsInput) operationName() string {
+	return "DescribeAnomalyDetectionExecutions"
+}
+
 type DescribeAnomalyDetectionExecutionsOutput struct {
 
 	// A list of detection jobs.

@@ -65,6 +65,10 @@ type UpdateDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataRepositoryAssociationInput) operationName() string {
+	return "UpdateDataRepositoryAssociation"
+}
+
 type UpdateDataRepositoryAssociationOutput struct {
 
 	// The response object returned after the data repository association is updated.

@@ -49,6 +49,10 @@ type CreateLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationInput) operationName() string {
+	return "CreateLocation"
+}
+
 type CreateLocationOutput struct {
 
 	// The details of the custom location you created.

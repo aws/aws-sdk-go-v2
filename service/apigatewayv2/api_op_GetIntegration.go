@@ -47,6 +47,10 @@ type GetIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntegrationInput) operationName() string {
+	return "GetIntegration"
+}
+
 type GetIntegrationOutput struct {
 
 	// Specifies whether an integration is managed by API Gateway. If you created an

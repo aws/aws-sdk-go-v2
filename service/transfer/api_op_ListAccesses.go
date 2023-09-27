@@ -50,6 +50,10 @@ type ListAccessesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessesInput) operationName() string {
+	return "ListAccesses"
+}
+
 type ListAccessesOutput struct {
 
 	// Returns the accesses and their properties for the ServerId value that you

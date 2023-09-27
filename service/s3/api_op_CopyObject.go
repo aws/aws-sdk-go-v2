@@ -403,6 +403,10 @@ type CopyObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyObjectInput) operationName() string {
+	return "CopyObject"
+}
+
 type CopyObjectOutput struct {
 
 	// Indicates whether the copied object uses an S3 Bucket Key for server-side

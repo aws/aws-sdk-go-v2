@@ -59,6 +59,10 @@ type UpdateMediaStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMediaStorageConfigurationInput) operationName() string {
+	return "UpdateMediaStorageConfiguration"
+}
+
 type UpdateMediaStorageConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

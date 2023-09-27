@@ -46,6 +46,10 @@ type UpdateLabelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLabelGroupInput) operationName() string {
+	return "UpdateLabelGroup"
+}
+
 type UpdateLabelGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

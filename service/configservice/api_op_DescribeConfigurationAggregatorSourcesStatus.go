@@ -59,6 +59,10 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationAggregatorSourcesStatusInput) operationName() string {
+	return "DescribeConfigurationAggregatorSourcesStatus"
+}
+
 type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 
 	// Returns an AggregatedSourceStatus object.

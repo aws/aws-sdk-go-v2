@@ -70,6 +70,10 @@ type StartActivityStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartActivityStreamInput) operationName() string {
+	return "StartActivityStream"
+}
+
 type StartActivityStreamOutput struct {
 
 	// Indicates whether or not the database activity stream will start as soon as

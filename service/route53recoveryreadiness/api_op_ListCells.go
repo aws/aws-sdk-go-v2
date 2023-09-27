@@ -43,6 +43,10 @@ type ListCellsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCellsInput) operationName() string {
+	return "ListCells"
+}
+
 type ListCellsOutput struct {
 
 	// A list of cells.

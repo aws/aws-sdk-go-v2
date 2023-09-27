@@ -55,6 +55,10 @@ type AddNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddNotificationChannelInput) operationName() string {
+	return "AddNotificationChannel"
+}
+
 type AddNotificationChannelOutput struct {
 
 	// The ID of the added notification channel.

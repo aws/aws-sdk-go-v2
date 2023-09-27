@@ -66,6 +66,10 @@ type UpdateRouteResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRouteResponseInput) operationName() string {
+	return "UpdateRouteResponse"
+}
+
 type UpdateRouteResponseOutput struct {
 
 	// Represents the model selection expression of a route response. Supported only

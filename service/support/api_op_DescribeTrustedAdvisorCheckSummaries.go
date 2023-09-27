@@ -58,6 +58,10 @@ type DescribeTrustedAdvisorCheckSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrustedAdvisorCheckSummariesInput) operationName() string {
+	return "DescribeTrustedAdvisorCheckSummaries"
+}
+
 // The summaries of the Trusted Advisor checks returned by the
 // DescribeTrustedAdvisorCheckSummaries operation.
 type DescribeTrustedAdvisorCheckSummariesOutput struct {

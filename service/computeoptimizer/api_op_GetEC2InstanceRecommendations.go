@@ -67,6 +67,10 @@ type GetEC2InstanceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEC2InstanceRecommendationsInput) operationName() string {
+	return "GetEC2InstanceRecommendations"
+}
+
 type GetEC2InstanceRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request. For example, an error

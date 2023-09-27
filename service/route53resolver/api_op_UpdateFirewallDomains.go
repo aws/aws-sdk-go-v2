@@ -63,6 +63,10 @@ type UpdateFirewallDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallDomainsInput) operationName() string {
+	return "UpdateFirewallDomains"
+}
+
 type UpdateFirewallDomainsOutput struct {
 
 	// The ID of the firewall domain list that DNS Firewall just updated.

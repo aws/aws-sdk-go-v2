@@ -58,6 +58,10 @@ type ExecuteOpenCypherExplainQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteOpenCypherExplainQueryInput) operationName() string {
+	return "ExecuteOpenCypherExplainQuery"
+}
+
 type ExecuteOpenCypherExplainQueryOutput struct {
 
 	// A text blob containing the openCypher explain results.

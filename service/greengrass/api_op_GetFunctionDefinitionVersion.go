@@ -57,6 +57,10 @@ type GetFunctionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionDefinitionVersionInput) operationName() string {
+	return "GetFunctionDefinitionVersion"
+}
+
 type GetFunctionDefinitionVersionOutput struct {
 
 	// The ARN of the function definition version.

@@ -111,6 +111,10 @@ type CreateProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProjectVersionInput) operationName() string {
+	return "CreateProjectVersion"
+}
+
 type CreateProjectVersionOutput struct {
 
 	// The ARN of the model or the project version that was created. Use

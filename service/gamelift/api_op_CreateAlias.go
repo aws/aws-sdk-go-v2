@@ -71,6 +71,10 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAliasInput) operationName() string {
+	return "CreateAlias"
+}
+
 type CreateAliasOutput struct {
 
 	// The newly created alias resource.

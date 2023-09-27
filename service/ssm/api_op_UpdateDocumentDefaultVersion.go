@@ -49,6 +49,10 @@ type UpdateDocumentDefaultVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDocumentDefaultVersionInput) operationName() string {
+	return "UpdateDocumentDefaultVersion"
+}
+
 type UpdateDocumentDefaultVersionOutput struct {
 
 	// The description of a custom document that you want to set as the default

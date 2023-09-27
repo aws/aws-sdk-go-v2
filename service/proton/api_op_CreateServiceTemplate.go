@@ -71,6 +71,10 @@ type CreateServiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceTemplateInput) operationName() string {
+	return "CreateServiceTemplate"
+}
+
 type CreateServiceTemplateOutput struct {
 
 	// The service template detail data that's returned by Proton.

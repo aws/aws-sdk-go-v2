@@ -62,6 +62,10 @@ type DescribeFastSnapshotRestoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFastSnapshotRestoresInput) operationName() string {
+	return "DescribeFastSnapshotRestores"
+}
+
 type DescribeFastSnapshotRestoresOutput struct {
 
 	// Information about the state of fast snapshot restores.

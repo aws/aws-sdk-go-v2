@@ -65,6 +65,10 @@ type UpdateSimulationApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSimulationApplicationInput) operationName() string {
+	return "UpdateSimulationApplication"
+}
+
 type UpdateSimulationApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated simulation application.

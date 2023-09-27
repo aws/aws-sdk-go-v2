@@ -60,6 +60,10 @@ type DetachInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachInstancesInput) operationName() string {
+	return "DetachInstances"
+}
+
 type DetachInstancesOutput struct {
 
 	// The activities related to detaching the instances from the Auto Scaling group.

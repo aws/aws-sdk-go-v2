@@ -95,6 +95,10 @@ type InvokeEndpointAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeEndpointAsyncInput) operationName() string {
+	return "InvokeEndpointAsync"
+}
+
 type InvokeEndpointAsyncOutput struct {
 
 	// The Amazon S3 URI where the inference failure response payload is stored.

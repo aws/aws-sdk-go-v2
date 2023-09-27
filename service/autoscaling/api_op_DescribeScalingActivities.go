@@ -67,6 +67,10 @@ type DescribeScalingActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalingActivitiesInput) operationName() string {
+	return "DescribeScalingActivities"
+}
+
 type DescribeScalingActivitiesOutput struct {
 
 	// The scaling activities. Activities are sorted by start time. Activities still

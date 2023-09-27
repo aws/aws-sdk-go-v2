@@ -53,6 +53,10 @@ type UpdateRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoomInput) operationName() string {
+	return "UpdateRoom"
+}
+
 type UpdateRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,6 +77,10 @@ type CreateStateMachineAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStateMachineAliasInput) operationName() string {
+	return "CreateStateMachineAlias"
+}
+
 type CreateStateMachineAliasOutput struct {
 
 	// The date the state machine alias was created.

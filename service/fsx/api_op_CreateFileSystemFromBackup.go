@@ -152,6 +152,10 @@ type CreateFileSystemFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFileSystemFromBackupInput) operationName() string {
+	return "CreateFileSystemFromBackup"
+}
+
 // The response object for the CreateFileSystemFromBackup operation.
 type CreateFileSystemFromBackupOutput struct {
 

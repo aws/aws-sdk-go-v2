@@ -63,6 +63,10 @@ type DetectStackDriftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectStackDriftInput) operationName() string {
+	return "DetectStackDrift"
+}
+
 type DetectStackDriftOutput struct {
 
 	// The ID of the drift detection results of this operation. CloudFormation

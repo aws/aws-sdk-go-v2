@@ -48,6 +48,10 @@ type StartDataCollectionByAgentIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDataCollectionByAgentIdsInput) operationName() string {
+	return "StartDataCollectionByAgentIds"
+}
+
 type StartDataCollectionByAgentIdsOutput struct {
 
 	// Information about agents that were instructed to start collecting data.

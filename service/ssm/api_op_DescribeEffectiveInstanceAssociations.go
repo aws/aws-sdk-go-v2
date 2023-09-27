@@ -50,6 +50,10 @@ type DescribeEffectiveInstanceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEffectiveInstanceAssociationsInput) operationName() string {
+	return "DescribeEffectiveInstanceAssociations"
+}
+
 type DescribeEffectiveInstanceAssociationsOutput struct {
 
 	// The associations for the requested managed node.

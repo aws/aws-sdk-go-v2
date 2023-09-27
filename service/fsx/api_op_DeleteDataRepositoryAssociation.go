@@ -56,6 +56,10 @@ type DeleteDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataRepositoryAssociationInput) operationName() string {
+	return "DeleteDataRepositoryAssociation"
+}
+
 type DeleteDataRepositoryAssociationOutput struct {
 
 	// The ID of the data repository association being deleted.

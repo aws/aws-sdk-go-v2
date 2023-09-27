@@ -45,6 +45,10 @@ type PutPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPolicyInput) operationName() string {
+	return "PutPolicy"
+}
+
 type PutPolicyOutput struct {
 
 	// A policy configures behavior that you allow or disallow for your account. For

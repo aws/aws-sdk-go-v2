@@ -54,6 +54,10 @@ type CreateThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThingGroupInput) operationName() string {
+	return "CreateThingGroup"
+}
+
 type CreateThingGroupOutput struct {
 
 	// The thing group ARN.

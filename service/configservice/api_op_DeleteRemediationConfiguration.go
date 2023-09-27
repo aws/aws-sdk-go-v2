@@ -45,6 +45,10 @@ type DeleteRemediationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRemediationConfigurationInput) operationName() string {
+	return "DeleteRemediationConfiguration"
+}
+
 type DeleteRemediationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

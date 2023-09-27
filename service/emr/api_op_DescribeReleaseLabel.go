@@ -49,6 +49,10 @@ type DescribeReleaseLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReleaseLabelInput) operationName() string {
+	return "DescribeReleaseLabel"
+}
+
 type DescribeReleaseLabelOutput struct {
 
 	// The list of applications available for the target release label. Name is the

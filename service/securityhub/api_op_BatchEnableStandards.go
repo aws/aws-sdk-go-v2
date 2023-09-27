@@ -45,6 +45,10 @@ type BatchEnableStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchEnableStandardsInput) operationName() string {
+	return "BatchEnableStandards"
+}
+
 type BatchEnableStandardsOutput struct {
 
 	// The details of the standards subscriptions that were enabled.

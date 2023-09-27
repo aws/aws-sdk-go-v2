@@ -57,6 +57,10 @@ type ListAvailableManagementCidrRangesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableManagementCidrRangesInput) operationName() string {
+	return "ListAvailableManagementCidrRanges"
+}
+
 type ListAvailableManagementCidrRangesOutput struct {
 
 	// The list of available IP address ranges, specified as IPv4 CIDR blocks.

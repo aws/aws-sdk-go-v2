@@ -42,6 +42,10 @@ type DisableVpcClassicLinkDnsSupportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableVpcClassicLinkDnsSupportInput) operationName() string {
+	return "DisableVpcClassicLinkDnsSupport"
+}
+
 type DisableVpcClassicLinkDnsSupportOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

@@ -49,6 +49,10 @@ type BatchGrantPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGrantPermissionsInput) operationName() string {
+	return "BatchGrantPermissions"
+}
+
 type BatchGrantPermissionsOutput struct {
 
 	// A list of failures to grant permissions to the resources.

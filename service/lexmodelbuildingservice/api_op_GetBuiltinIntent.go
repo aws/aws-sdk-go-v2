@@ -45,6 +45,10 @@ type GetBuiltinIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBuiltinIntentInput) operationName() string {
+	return "GetBuiltinIntent"
+}
+
 type GetBuiltinIntentOutput struct {
 
 	// The unique identifier for a built-in intent.

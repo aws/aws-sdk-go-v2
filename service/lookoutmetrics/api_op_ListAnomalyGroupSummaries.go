@@ -54,6 +54,10 @@ type ListAnomalyGroupSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnomalyGroupSummariesInput) operationName() string {
+	return "ListAnomalyGroupSummaries"
+}
+
 type ListAnomalyGroupSummariesOutput struct {
 
 	// Aggregated details about the anomaly groups.

@@ -51,6 +51,10 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemasInput) operationName() string {
+	return "ListSchemas"
+}
+
 type ListSchemasOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if

@@ -60,6 +60,10 @@ type ListExecutorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExecutorsInput) operationName() string {
+	return "ListExecutors"
+}
+
 type ListExecutorsOutput struct {
 
 	// The session ID.

@@ -55,6 +55,10 @@ type RemoveRegionsFromReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveRegionsFromReplicationInput) operationName() string {
+	return "RemoveRegionsFromReplication"
+}
+
 type RemoveRegionsFromReplicationOutput struct {
 
 	// The ARN of the primary secret.

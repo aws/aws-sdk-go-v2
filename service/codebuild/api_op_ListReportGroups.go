@@ -61,6 +61,10 @@ type ListReportGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReportGroupsInput) operationName() string {
+	return "ListReportGroups"
+}
+
 type ListReportGroupsOutput struct {
 
 	// During a previous call, the maximum number of items that can be returned is the

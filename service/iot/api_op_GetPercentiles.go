@@ -64,6 +64,10 @@ type GetPercentilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPercentilesInput) operationName() string {
+	return "GetPercentiles"
+}
+
 type GetPercentilesOutput struct {
 
 	// The percentile values of the aggregated fields.

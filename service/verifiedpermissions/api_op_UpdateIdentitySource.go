@@ -66,6 +66,10 @@ type UpdateIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIdentitySourceInput) operationName() string {
+	return "UpdateIdentitySource"
+}
+
 type UpdateIdentitySourceOutput struct {
 
 	// The date and time that the updated identity source was originally created.

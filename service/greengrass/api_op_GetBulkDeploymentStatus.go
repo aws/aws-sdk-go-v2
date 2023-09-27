@@ -42,6 +42,10 @@ type GetBulkDeploymentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBulkDeploymentStatusInput) operationName() string {
+	return "GetBulkDeploymentStatus"
+}
+
 type GetBulkDeploymentStatusOutput struct {
 
 	// Relevant metrics on input records processed during bulk deployment.

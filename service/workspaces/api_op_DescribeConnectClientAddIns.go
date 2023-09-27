@@ -49,6 +49,10 @@ type DescribeConnectClientAddInsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectClientAddInsInput) operationName() string {
+	return "DescribeConnectClientAddIns"
+}
+
 type DescribeConnectClientAddInsOutput struct {
 
 	// Information about client add-ins.

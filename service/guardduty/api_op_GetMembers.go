@@ -50,6 +50,10 @@ type GetMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMembersInput) operationName() string {
+	return "GetMembers"
+}
+
 type GetMembersOutput struct {
 
 	// A list of members.

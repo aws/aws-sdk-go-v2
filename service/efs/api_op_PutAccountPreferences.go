@@ -56,6 +56,10 @@ type PutAccountPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountPreferencesInput) operationName() string {
+	return "PutAccountPreferences"
+}
+
 type PutAccountPreferencesOutput struct {
 
 	// Describes the resource type and its ID preference for the user's Amazon Web

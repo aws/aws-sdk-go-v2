@@ -113,6 +113,10 @@ type DescribeInstanceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceStatusInput) operationName() string {
+	return "DescribeInstanceStatus"
+}
+
 type DescribeInstanceStatusOutput struct {
 
 	// Information about the status of the instances.

@@ -54,6 +54,10 @@ type ListGeoMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGeoMatchSetsInput) operationName() string {
+	return "ListGeoMatchSets"
+}
+
 type ListGeoMatchSetsOutput struct {
 
 	// An array of GeoMatchSetSummary objects.

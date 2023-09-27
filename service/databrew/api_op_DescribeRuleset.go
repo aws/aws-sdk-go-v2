@@ -43,6 +43,10 @@ type DescribeRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRulesetInput) operationName() string {
+	return "DescribeRuleset"
+}
+
 type DescribeRulesetOutput struct {
 
 	// The name of the ruleset.

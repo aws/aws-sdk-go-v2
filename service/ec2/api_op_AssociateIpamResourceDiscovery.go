@@ -61,6 +61,10 @@ type AssociateIpamResourceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateIpamResourceDiscoveryInput) operationName() string {
+	return "AssociateIpamResourceDiscovery"
+}
+
 type AssociateIpamResourceDiscoveryOutput struct {
 
 	// A resource discovery association. An associated resource discovery is a

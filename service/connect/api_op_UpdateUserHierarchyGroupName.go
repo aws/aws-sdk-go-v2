@@ -52,6 +52,10 @@ type UpdateUserHierarchyGroupNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserHierarchyGroupNameInput) operationName() string {
+	return "UpdateUserHierarchyGroupName"
+}
+
 type UpdateUserHierarchyGroupNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

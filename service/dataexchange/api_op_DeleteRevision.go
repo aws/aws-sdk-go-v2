@@ -46,6 +46,10 @@ type DeleteRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRevisionInput) operationName() string {
+	return "DeleteRevision"
+}
+
 type DeleteRevisionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,6 +77,10 @@ type UpdateAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssetPropertyInput) operationName() string {
+	return "UpdateAssetProperty"
+}
+
 type UpdateAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

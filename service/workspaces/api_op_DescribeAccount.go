@@ -37,6 +37,10 @@ type DescribeAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountInput) operationName() string {
+	return "DescribeAccount"
+}
+
 type DescribeAccountOutput struct {
 
 	// The IP address range, specified as an IPv4 CIDR block, used for the management

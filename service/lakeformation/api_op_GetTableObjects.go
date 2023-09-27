@@ -76,6 +76,10 @@ type GetTableObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableObjectsInput) operationName() string {
+	return "GetTableObjects"
+}
+
 type GetTableObjectsOutput struct {
 
 	// A continuation token indicating whether additional data is available.

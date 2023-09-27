@@ -42,6 +42,10 @@ type GetAgentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAgentConfigurationInput) operationName() string {
+	return "GetAgentConfiguration"
+}
+
 type GetAgentConfigurationOutput struct {
 
 	// UUID of agent.

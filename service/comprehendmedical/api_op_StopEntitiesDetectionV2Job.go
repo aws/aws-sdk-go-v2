@@ -41,6 +41,10 @@ type StopEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopEntitiesDetectionV2JobInput) operationName() string {
+	return "StopEntitiesDetectionV2Job"
+}
+
 type StopEntitiesDetectionV2JobOutput struct {
 
 	// The identifier of the medical entities detection job that was stopped.

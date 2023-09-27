@@ -46,6 +46,10 @@ type DisassociateWirelessDeviceFromFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateWirelessDeviceFromFuotaTaskInput) operationName() string {
+	return "DisassociateWirelessDeviceFromFuotaTask"
+}
+
 type DisassociateWirelessDeviceFromFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

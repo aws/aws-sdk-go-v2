@@ -47,6 +47,10 @@ type GetAnomalyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnomalyGroupInput) operationName() string {
+	return "GetAnomalyGroup"
+}
+
 type GetAnomalyGroupOutput struct {
 
 	// Details about the anomaly group.

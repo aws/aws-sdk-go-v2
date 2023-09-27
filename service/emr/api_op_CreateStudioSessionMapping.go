@@ -76,6 +76,10 @@ type CreateStudioSessionMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStudioSessionMappingInput) operationName() string {
+	return "CreateStudioSessionMapping"
+}
+
 type CreateStudioSessionMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type DescribePlaceIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePlaceIndexInput) operationName() string {
+	return "DescribePlaceIndex"
+}
+
 type DescribePlaceIndexOutput struct {
 
 	// The timestamp for when the place index resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)

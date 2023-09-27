@@ -76,6 +76,10 @@ type ShareDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ShareDirectoryInput) operationName() string {
+	return "ShareDirectory"
+}
+
 type ShareDirectoryOutput struct {
 
 	// Identifier of the directory that is stored in the directory consumer account

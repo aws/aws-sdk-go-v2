@@ -46,6 +46,10 @@ type UpdateCostAllocationTagsStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCostAllocationTagsStatusInput) operationName() string {
+	return "UpdateCostAllocationTagsStatus"
+}
+
 type UpdateCostAllocationTagsStatusOutput struct {
 
 	// A list of UpdateCostAllocationTagsStatusError objects with error details about

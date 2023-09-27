@@ -44,6 +44,10 @@ type GetAuthPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAuthPolicyInput) operationName() string {
+	return "GetAuthPolicy"
+}
+
 type GetAuthPolicyOutput struct {
 
 	// The date and time that the auth policy was created, specified in ISO-8601

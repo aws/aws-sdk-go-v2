@@ -47,6 +47,10 @@ type CancelDeploymentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelDeploymentJobInput) operationName() string {
+	return "CancelDeploymentJob"
+}
+
 type CancelDeploymentJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

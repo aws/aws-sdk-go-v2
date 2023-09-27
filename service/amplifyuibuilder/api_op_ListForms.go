@@ -53,6 +53,10 @@ type ListFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFormsInput) operationName() string {
+	return "ListForms"
+}
+
 type ListFormsOutput struct {
 
 	// The list of forms for the Amplify app.

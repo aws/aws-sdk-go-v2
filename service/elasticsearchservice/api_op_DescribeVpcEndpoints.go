@@ -44,6 +44,10 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointsInput) operationName() string {
+	return "DescribeVpcEndpoints"
+}
+
 // Container for response parameters to the DescribeVpcEndpoints operation.
 // Returns a list containing configuration details and status of the VPC Endpoints
 // as well as a list containing error responses of the endpoints that could not be

@@ -45,6 +45,10 @@ type DeleteFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFleetInput) operationName() string {
+	return "DeleteFleet"
+}
+
 type DeleteFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted fleet.

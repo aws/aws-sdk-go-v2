@@ -76,6 +76,10 @@ type SubscribeToShardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubscribeToShardInput) operationName() string {
+	return "SubscribeToShard"
+}
+
 type SubscribeToShardOutput struct {
 	eventStream *SubscribeToShardEventStream
 

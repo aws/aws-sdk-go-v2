@@ -122,6 +122,10 @@ type CreateCloudFormationChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCloudFormationChangeSetInput) operationName() string {
+	return "CreateCloudFormationChangeSet"
+}
+
 type CreateCloudFormationChangeSetOutput struct {
 
 	// The application Amazon Resource Name (ARN).

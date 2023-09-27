@@ -53,6 +53,10 @@ type CreateConnectClientAddInInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectClientAddInInput) operationName() string {
+	return "CreateConnectClientAddIn"
+}
+
 type CreateConnectClientAddInOutput struct {
 
 	// The client add-in identifier.

@@ -45,6 +45,10 @@ type GetVpcLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVpcLinksInput) operationName() string {
+	return "GetVpcLinks"
+}
+
 // The collection of VPC links under the caller's account in a region.
 type GetVpcLinksOutput struct {
 

@@ -70,6 +70,10 @@ type CreateDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDetectorInput) operationName() string {
+	return "CreateDetector"
+}
+
 type CreateDetectorOutput struct {
 
 	// The unique ID of the created detector.

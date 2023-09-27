@@ -56,6 +56,10 @@ type RemoveLayerVersionPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveLayerVersionPermissionInput) operationName() string {
+	return "RemoveLayerVersionPermission"
+}
+
 type RemoveLayerVersionPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

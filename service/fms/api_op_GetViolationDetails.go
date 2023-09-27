@@ -63,6 +63,10 @@ type GetViolationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetViolationDetailsInput) operationName() string {
+	return "GetViolationDetails"
+}
+
 type GetViolationDetailsOutput struct {
 
 	// Violation detail for a resource.

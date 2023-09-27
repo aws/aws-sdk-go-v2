@@ -47,6 +47,10 @@ type DescribeAuditFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAuditFindingInput) operationName() string {
+	return "DescribeAuditFinding"
+}
+
 type DescribeAuditFindingOutput struct {
 
 	// The findings (results) of the audit.

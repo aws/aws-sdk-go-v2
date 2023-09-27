@@ -81,6 +81,10 @@ type UpdateTaskProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTaskProtectionInput) operationName() string {
+	return "UpdateTaskProtection"
+}
+
 type UpdateTaskProtectionOutput struct {
 
 	// Any failures associated with the call.

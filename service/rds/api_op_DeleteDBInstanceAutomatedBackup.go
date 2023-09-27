@@ -48,6 +48,10 @@ type DeleteDBInstanceAutomatedBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBInstanceAutomatedBackupInput) operationName() string {
+	return "DeleteDBInstanceAutomatedBackup"
+}
+
 type DeleteDBInstanceAutomatedBackupOutput struct {
 
 	// An automated backup of a DB instance. It consists of system backups,

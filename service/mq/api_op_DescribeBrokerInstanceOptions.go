@@ -54,6 +54,10 @@ type DescribeBrokerInstanceOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBrokerInstanceOptionsInput) operationName() string {
+	return "DescribeBrokerInstanceOptions"
+}
+
 type DescribeBrokerInstanceOptionsOutput struct {
 
 	// List of available broker instance options.

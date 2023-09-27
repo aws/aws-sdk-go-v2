@@ -43,6 +43,10 @@ type UpdateGlobalSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGlobalSettingsInput) operationName() string {
+	return "UpdateGlobalSettings"
+}
+
 type UpdateGlobalSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

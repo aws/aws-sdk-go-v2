@@ -69,6 +69,10 @@ type CreateNetworkSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkSiteInput) operationName() string {
+	return "CreateNetworkSite"
+}
+
 type CreateNetworkSiteOutput struct {
 
 	// Information about the network site.

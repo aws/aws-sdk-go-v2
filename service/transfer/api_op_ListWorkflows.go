@@ -46,6 +46,10 @@ type ListWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkflowsInput) operationName() string {
+	return "ListWorkflows"
+}
+
 type ListWorkflowsOutput struct {
 
 	// Returns the Arn , WorkflowId , and Description for each workflow.

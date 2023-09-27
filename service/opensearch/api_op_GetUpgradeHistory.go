@@ -53,6 +53,10 @@ type GetUpgradeHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUpgradeHistoryInput) operationName() string {
+	return "GetUpgradeHistory"
+}
+
 // Container for the response returned by the GetUpgradeHistory operation.
 type GetUpgradeHistoryOutput struct {
 

@@ -66,6 +66,10 @@ type ExecuteCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteCommandInput) operationName() string {
+	return "ExecuteCommand"
+}
+
 type ExecuteCommandOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

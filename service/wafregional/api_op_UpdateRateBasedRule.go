@@ -92,6 +92,10 @@ type UpdateRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRateBasedRuleInput) operationName() string {
+	return "UpdateRateBasedRule"
+}
+
 type UpdateRateBasedRuleOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRateBasedRule request. You

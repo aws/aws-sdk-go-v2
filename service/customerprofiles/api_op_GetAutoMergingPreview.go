@@ -67,6 +67,10 @@ type GetAutoMergingPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAutoMergingPreviewInput) operationName() string {
+	return "GetAutoMergingPreview"
+}
+
 type GetAutoMergingPreviewOutput struct {
 
 	// The unique name of the domain.

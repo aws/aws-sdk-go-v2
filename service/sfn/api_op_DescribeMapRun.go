@@ -45,6 +45,10 @@ type DescribeMapRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMapRunInput) operationName() string {
+	return "DescribeMapRun"
+}
+
 type DescribeMapRunOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the execution in which the Map

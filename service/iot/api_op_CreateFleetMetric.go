@@ -81,6 +81,10 @@ type CreateFleetMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFleetMetricInput) operationName() string {
+	return "CreateFleetMetric"
+}
+
 type CreateFleetMetricOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new fleet metric.

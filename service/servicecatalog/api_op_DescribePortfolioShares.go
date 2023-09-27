@@ -64,6 +64,10 @@ type DescribePortfolioSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePortfolioSharesInput) operationName() string {
+	return "DescribePortfolioShares"
+}
+
 type DescribePortfolioSharesOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

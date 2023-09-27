@@ -64,6 +64,10 @@ type ApproveAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApproveAssignmentInput) operationName() string {
+	return "ApproveAssignment"
+}
+
 type ApproveAssignmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

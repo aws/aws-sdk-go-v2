@@ -54,6 +54,10 @@ type UpdateApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationVersionInput) operationName() string {
+	return "UpdateApplicationVersion"
+}
+
 // Result message wrapping a single description of an application version.
 type UpdateApplicationVersionOutput struct {
 

@@ -56,6 +56,10 @@ type ListSensorStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSensorStatisticsInput) operationName() string {
+	return "ListSensorStatistics"
+}
+
 type ListSensorStatisticsOutput struct {
 
 	// An opaque pagination token indicating where to continue the listing of sensor

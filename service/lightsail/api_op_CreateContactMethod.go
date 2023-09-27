@@ -73,6 +73,10 @@ type CreateContactMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContactMethodInput) operationName() string {
+	return "CreateContactMethod"
+}
+
 type CreateContactMethodOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

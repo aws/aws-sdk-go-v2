@@ -55,6 +55,10 @@ type DeleteNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNotificationInput) operationName() string {
+	return "DeleteNotification"
+}
+
 // Response of DeleteNotification
 type DeleteNotificationOutput struct {
 	// Metadata pertaining to the operation's result.

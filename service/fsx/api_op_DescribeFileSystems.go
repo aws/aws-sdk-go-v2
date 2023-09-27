@@ -70,6 +70,10 @@ type DescribeFileSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFileSystemsInput) operationName() string {
+	return "DescribeFileSystems"
+}
+
 // The response object for DescribeFileSystems operation.
 type DescribeFileSystemsOutput struct {
 

@@ -52,6 +52,10 @@ type CreateConnectionAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectionAliasInput) operationName() string {
+	return "CreateConnectionAlias"
+}
+
 type CreateConnectionAliasOutput struct {
 
 	// The identifier of the connection alias.

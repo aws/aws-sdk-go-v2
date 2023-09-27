@@ -50,6 +50,10 @@ type PurchaseReservedElasticsearchInstanceOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseReservedElasticsearchInstanceOfferingInput) operationName() string {
+	return "PurchaseReservedElasticsearchInstanceOffering"
+}
+
 // Represents the output of a PurchaseReservedElasticsearchInstanceOffering
 // operation.
 type PurchaseReservedElasticsearchInstanceOfferingOutput struct {

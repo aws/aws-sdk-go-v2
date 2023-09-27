@@ -59,6 +59,10 @@ type UpdateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFilterInput) operationName() string {
+	return "UpdateFilter"
+}
+
 type UpdateFilterOutput struct {
 
 	// The Amazon Resource Number (ARN) of the successfully updated filter.

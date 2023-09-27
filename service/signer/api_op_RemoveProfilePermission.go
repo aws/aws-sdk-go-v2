@@ -51,6 +51,10 @@ type RemoveProfilePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveProfilePermissionInput) operationName() string {
+	return "RemoveProfilePermission"
+}
+
 type RemoveProfilePermissionOutput struct {
 
 	// An identifier for the current revision of the profile permissions.

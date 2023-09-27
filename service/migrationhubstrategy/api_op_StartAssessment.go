@@ -51,6 +51,10 @@ type StartAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAssessmentInput) operationName() string {
+	return "StartAssessment"
+}
+
 type StartAssessmentOutput struct {
 
 	// The ID of the assessment.

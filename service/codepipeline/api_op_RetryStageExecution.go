@@ -67,6 +67,10 @@ type RetryStageExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetryStageExecutionInput) operationName() string {
+	return "RetryStageExecution"
+}
+
 // Represents the output of a RetryStageExecution action.
 type RetryStageExecutionOutput struct {
 

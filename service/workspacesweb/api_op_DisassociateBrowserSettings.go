@@ -41,6 +41,10 @@ type DisassociateBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateBrowserSettingsInput) operationName() string {
+	return "DisassociateBrowserSettings"
+}
+
 type DisassociateBrowserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

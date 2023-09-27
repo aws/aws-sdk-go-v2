@@ -50,6 +50,10 @@ type ListEvaluationFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEvaluationFormsInput) operationName() string {
+	return "ListEvaluationForms"
+}
+
 type ListEvaluationFormsOutput struct {
 
 	// Provides details about a list of evaluation forms belonging to an instance.

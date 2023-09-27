@@ -50,6 +50,10 @@ type BatchUpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdatePhoneNumberInput) operationName() string {
+	return "BatchUpdatePhoneNumber"
+}
+
 type BatchUpdatePhoneNumberOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list

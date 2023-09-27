@@ -54,6 +54,10 @@ type SearchDataSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchDataSetsInput) operationName() string {
+	return "SearchDataSets"
+}
+
 type SearchDataSetsOutput struct {
 
 	// A DataSetSummaries object that returns a summary of a dataset.

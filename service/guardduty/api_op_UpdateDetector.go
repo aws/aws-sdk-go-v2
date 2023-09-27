@@ -65,6 +65,10 @@ type UpdateDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDetectorInput) operationName() string {
+	return "UpdateDetector"
+}
+
 type UpdateDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

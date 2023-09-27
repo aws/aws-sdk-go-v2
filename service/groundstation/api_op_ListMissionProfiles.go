@@ -44,6 +44,10 @@ type ListMissionProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMissionProfilesInput) operationName() string {
+	return "ListMissionProfiles"
+}
+
 type ListMissionProfilesOutput struct {
 
 	// List of mission profiles.

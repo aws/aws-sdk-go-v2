@@ -56,6 +56,10 @@ type UpdateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIPSetInput) operationName() string {
+	return "UpdateIPSet"
+}
+
 type UpdateIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

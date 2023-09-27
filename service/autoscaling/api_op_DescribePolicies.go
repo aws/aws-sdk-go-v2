@@ -58,6 +58,10 @@ type DescribePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePoliciesInput) operationName() string {
+	return "DescribePolicies"
+}
+
 type DescribePoliciesOutput struct {
 
 	// A string that indicates that the response contains more items than can be

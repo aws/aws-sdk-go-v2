@@ -45,6 +45,10 @@ type BatchDeletePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeletePhoneNumberInput) operationName() string {
+	return "BatchDeletePhoneNumber"
+}
+
 type BatchDeletePhoneNumberOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list

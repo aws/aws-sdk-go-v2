@@ -57,6 +57,10 @@ type GetStorageLensConfigurationTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStorageLensConfigurationTaggingInput) operationName() string {
+	return "GetStorageLensConfigurationTagging"
+}
+
 type GetStorageLensConfigurationTaggingOutput struct {
 
 	// The tags of S3 Storage Lens configuration requested.

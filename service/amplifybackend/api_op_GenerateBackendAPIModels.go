@@ -52,6 +52,10 @@ type GenerateBackendAPIModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateBackendAPIModelsInput) operationName() string {
+	return "GenerateBackendAPIModels"
+}
+
 type GenerateBackendAPIModelsOutput struct {
 
 	// The app ID.

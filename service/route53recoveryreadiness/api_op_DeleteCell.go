@@ -41,6 +41,10 @@ type DeleteCellInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCellInput) operationName() string {
+	return "DeleteCell"
+}
+
 type DeleteCellOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

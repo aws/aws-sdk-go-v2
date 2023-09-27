@@ -57,6 +57,10 @@ type GetFileUploadURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFileUploadURLInput) operationName() string {
+	return "GetFileUploadURL"
+}
+
 type GetFileUploadURLOutput struct {
 
 	// A temporary URL for the file that the Worker uploaded for the answer.

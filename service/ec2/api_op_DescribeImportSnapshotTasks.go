@@ -60,6 +60,10 @@ type DescribeImportSnapshotTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImportSnapshotTasksInput) operationName() string {
+	return "DescribeImportSnapshotTasks"
+}
+
 type DescribeImportSnapshotTasksOutput struct {
 
 	// A list of zero or more import snapshot tasks that are currently active or were

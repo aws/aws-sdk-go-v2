@@ -133,6 +133,10 @@ type GetCostCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCostCategoriesInput) operationName() string {
+	return "GetCostCategories"
+}
+
 type GetCostCategoriesOutput struct {
 
 	// The number of objects that are returned.

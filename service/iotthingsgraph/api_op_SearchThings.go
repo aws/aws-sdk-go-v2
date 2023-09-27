@@ -61,6 +61,10 @@ type SearchThingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchThingsInput) operationName() string {
+	return "SearchThings"
+}
+
 type SearchThingsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.

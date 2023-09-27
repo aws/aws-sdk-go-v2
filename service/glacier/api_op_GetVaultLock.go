@@ -67,6 +67,10 @@ type GetVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVaultLockInput) operationName() string {
+	return "GetVaultLock"
+}
+
 // Contains the Amazon S3 Glacier response to your request.
 type GetVaultLockOutput struct {
 

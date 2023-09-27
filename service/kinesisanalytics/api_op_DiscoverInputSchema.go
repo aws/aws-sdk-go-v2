@@ -67,6 +67,10 @@ type DiscoverInputSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DiscoverInputSchemaInput) operationName() string {
+	return "DiscoverInputSchema"
+}
+
 type DiscoverInputSchemaOutput struct {
 
 	// Schema inferred from the streaming source. It identifies the format of the data

@@ -43,6 +43,10 @@ type BatchGetMemberEc2DeepInspectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetMemberEc2DeepInspectionStatusInput) operationName() string {
+	return "BatchGetMemberEc2DeepInspectionStatus"
+}
+
 type BatchGetMemberEc2DeepInspectionStatusOutput struct {
 
 	// An array of objects that provide details on the activation status of Amazon

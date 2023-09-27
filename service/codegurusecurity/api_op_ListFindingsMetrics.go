@@ -60,6 +60,10 @@ type ListFindingsMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsMetricsInput) operationName() string {
+	return "ListFindingsMetrics"
+}
+
 type ListFindingsMetricsOutput struct {
 
 	// A list of AccountFindingsMetric objects retrieved from the specified time

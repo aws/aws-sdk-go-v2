@@ -68,6 +68,10 @@ type DisassociateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateWebACLInput) operationName() string {
+	return "DisassociateWebACL"
+}
+
 type DisassociateWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type GetDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataQualityRulesetInput) operationName() string {
+	return "GetDataQualityRuleset"
+}
+
 type GetDataQualityRulesetOutput struct {
 
 	// A timestamp. The time and date that this data quality ruleset was created.

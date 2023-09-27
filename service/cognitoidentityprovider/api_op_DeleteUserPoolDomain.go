@@ -48,6 +48,10 @@ type DeleteUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserPoolDomainInput) operationName() string {
+	return "DeleteUserPoolDomain"
+}
+
 type DeleteUserPoolDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

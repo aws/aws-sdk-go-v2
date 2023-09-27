@@ -83,6 +83,10 @@ type UpdateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserSettingsInput) operationName() string {
+	return "UpdateUserSettings"
+}
+
 type UpdateUserSettingsOutput struct {
 
 	// The user settings.

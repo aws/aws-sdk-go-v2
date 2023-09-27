@@ -56,6 +56,10 @@ type CancelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelJobInput) operationName() string {
+	return "CancelJob"
+}
+
 type CancelJobOutput struct {
 
 	// A short text description of the job.

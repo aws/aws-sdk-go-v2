@@ -48,6 +48,10 @@ type DeleteRecommendationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRecommendationTemplateInput) operationName() string {
+	return "DeleteRecommendationTemplate"
+}
+
 type DeleteRecommendationTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) for a recommendation template.

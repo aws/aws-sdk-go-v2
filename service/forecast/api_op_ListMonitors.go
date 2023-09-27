@@ -61,6 +61,10 @@ type ListMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitorsInput) operationName() string {
+	return "ListMonitors"
+}
+
 type ListMonitorsOutput struct {
 
 	// An array of objects that summarize each monitor's properties.

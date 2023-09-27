@@ -46,6 +46,10 @@ type ListReportPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReportPlansInput) operationName() string {
+	return "ListReportPlans"
+}
+
 type ListReportPlansOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which

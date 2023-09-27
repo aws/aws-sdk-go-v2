@@ -55,6 +55,10 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComponentConfigurationRecommendationInput) operationName() string {
+	return "DescribeComponentConfigurationRecommendation"
+}
+
 type DescribeComponentConfigurationRecommendationOutput struct {
 
 	// The recommended configuration settings of the component. The value is the

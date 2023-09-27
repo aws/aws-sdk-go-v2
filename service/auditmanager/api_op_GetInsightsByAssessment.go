@@ -42,6 +42,10 @@ type GetInsightsByAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInsightsByAssessmentInput) operationName() string {
+	return "GetInsightsByAssessment"
+}
+
 type GetInsightsByAssessmentOutput struct {
 
 	// The assessment analytics data that the GetInsightsByAssessment API returned.

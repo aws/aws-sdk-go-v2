@@ -42,6 +42,10 @@ type ClaimDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClaimDeviceInput) operationName() string {
+	return "ClaimDevice"
+}
+
 // Placeholder documentation for ClaimDeviceResponse
 type ClaimDeviceOutput struct {
 	// Metadata pertaining to the operation's result.

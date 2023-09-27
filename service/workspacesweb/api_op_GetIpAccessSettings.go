@@ -42,6 +42,10 @@ type GetIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIpAccessSettingsInput) operationName() string {
+	return "GetIpAccessSettings"
+}
+
 type GetIpAccessSettingsOutput struct {
 
 	// The IP access settings.

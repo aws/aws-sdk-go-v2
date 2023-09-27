@@ -55,6 +55,10 @@ type EnableTransitGatewayRouteTablePropagationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableTransitGatewayRouteTablePropagationInput) operationName() string {
+	return "EnableTransitGatewayRouteTablePropagation"
+}
+
 type EnableTransitGatewayRouteTablePropagationOutput struct {
 
 	// Information about route propagation.

@@ -51,6 +51,10 @@ type GetBatchPredictionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBatchPredictionJobsInput) operationName() string {
+	return "GetBatchPredictionJobs"
+}
+
 type GetBatchPredictionJobsOutput struct {
 
 	// An array containing the details of each batch prediction job.

@@ -65,6 +65,10 @@ type UpdateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFilterInput) operationName() string {
+	return "UpdateFilter"
+}
+
 type UpdateFilterOutput struct {
 
 	// The name of the filter.

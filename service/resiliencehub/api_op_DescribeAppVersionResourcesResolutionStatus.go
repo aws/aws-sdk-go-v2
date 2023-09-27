@@ -55,6 +55,10 @@ type DescribeAppVersionResourcesResolutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppVersionResourcesResolutionStatusInput) operationName() string {
+	return "DescribeAppVersionResourcesResolutionStatus"
+}
+
 type DescribeAppVersionResourcesResolutionStatusOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

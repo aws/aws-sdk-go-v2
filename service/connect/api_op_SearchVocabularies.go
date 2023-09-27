@@ -61,6 +61,10 @@ type SearchVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchVocabulariesInput) operationName() string {
+	return "SearchVocabularies"
+}
+
 type SearchVocabulariesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

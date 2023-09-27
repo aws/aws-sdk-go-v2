@@ -49,6 +49,10 @@ type DescribeAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAgentStatusInput) operationName() string {
+	return "DescribeAgentStatus"
+}
+
 type DescribeAgentStatusOutput struct {
 
 	// The agent status.

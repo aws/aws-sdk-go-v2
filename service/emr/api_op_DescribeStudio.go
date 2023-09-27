@@ -43,6 +43,10 @@ type DescribeStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStudioInput) operationName() string {
+	return "DescribeStudio"
+}
+
 type DescribeStudioOutput struct {
 
 	// The Amazon EMR Studio details.

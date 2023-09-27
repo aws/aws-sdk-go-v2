@@ -47,6 +47,10 @@ type GetContainerImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerImagesInput) operationName() string {
+	return "GetContainerImages"
+}
+
 type GetContainerImagesOutput struct {
 
 	// An array of objects that describe container images that are registered to the

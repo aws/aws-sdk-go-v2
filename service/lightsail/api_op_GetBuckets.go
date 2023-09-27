@@ -57,6 +57,10 @@ type GetBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketsInput) operationName() string {
+	return "GetBuckets"
+}
+
 type GetBucketsOutput struct {
 
 	// An object that describes the synchronization status of the Amazon S3

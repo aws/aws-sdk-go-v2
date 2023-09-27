@@ -54,6 +54,10 @@ type SignPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SignPayloadInput) operationName() string {
+	return "SignPayload"
+}
+
 type SignPayloadOutput struct {
 
 	// Unique identifier of the signing job.

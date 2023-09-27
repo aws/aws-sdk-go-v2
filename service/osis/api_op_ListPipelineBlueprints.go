@@ -38,6 +38,10 @@ type ListPipelineBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelineBlueprintsInput) operationName() string {
+	return "ListPipelineBlueprints"
+}
+
 type ListPipelineBlueprintsOutput struct {
 
 	// A list of available blueprints for Data Prepper.

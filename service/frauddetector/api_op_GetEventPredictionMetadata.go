@@ -68,6 +68,10 @@ type GetEventPredictionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventPredictionMetadataInput) operationName() string {
+	return "GetEventPredictionMetadata"
+}
+
 type GetEventPredictionMetadataOutput struct {
 
 	// The detector ID.

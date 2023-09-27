@@ -54,6 +54,10 @@ type ListDashboardVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDashboardVersionsInput) operationName() string {
+	return "ListDashboardVersions"
+}
+
 type ListDashboardVersionsOutput struct {
 
 	// A structure that contains information about each version of the dashboard.

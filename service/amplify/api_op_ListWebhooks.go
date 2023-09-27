@@ -51,6 +51,10 @@ type ListWebhooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWebhooksInput) operationName() string {
+	return "ListWebhooks"
+}
+
 // The result structure for the list webhooks request.
 type ListWebhooksOutput struct {
 

@@ -63,6 +63,10 @@ type BatchEvaluateFeatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchEvaluateFeatureInput) operationName() string {
+	return "BatchEvaluateFeature"
+}
+
 type BatchEvaluateFeatureOutput struct {
 
 	// An array of structures, where each structure displays the results of one

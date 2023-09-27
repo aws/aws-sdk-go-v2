@@ -56,6 +56,10 @@ type DescribeGatewayCapabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGatewayCapabilityConfigurationInput) operationName() string {
+	return "DescribeGatewayCapabilityConfiguration"
+}
+
 type DescribeGatewayCapabilityConfigurationOutput struct {
 
 	// The JSON document that defines the gateway capability's configuration. For more

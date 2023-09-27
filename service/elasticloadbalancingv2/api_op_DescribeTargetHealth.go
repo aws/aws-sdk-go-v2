@@ -50,6 +50,10 @@ type DescribeTargetHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTargetHealthInput) operationName() string {
+	return "DescribeTargetHealth"
+}
+
 type DescribeTargetHealthOutput struct {
 
 	// Information about the health of the targets.

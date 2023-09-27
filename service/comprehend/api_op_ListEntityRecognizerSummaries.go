@@ -43,6 +43,10 @@ type ListEntityRecognizerSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntityRecognizerSummariesInput) operationName() string {
+	return "ListEntityRecognizerSummaries"
+}
+
 type ListEntityRecognizerSummariesOutput struct {
 
 	// The list entity recognizer summaries.

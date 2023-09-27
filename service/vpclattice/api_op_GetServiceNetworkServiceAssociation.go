@@ -44,6 +44,10 @@ type GetServiceNetworkServiceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceNetworkServiceAssociationInput) operationName() string {
+	return "GetServiceNetworkServiceAssociation"
+}
+
 type GetServiceNetworkServiceAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.

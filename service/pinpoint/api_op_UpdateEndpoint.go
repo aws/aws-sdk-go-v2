@@ -58,6 +58,10 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEndpointInput) operationName() string {
+	return "UpdateEndpoint"
+}
+
 type UpdateEndpointOutput struct {
 
 	// Provides information about an API request or response.

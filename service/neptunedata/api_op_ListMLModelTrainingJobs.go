@@ -49,6 +49,10 @@ type ListMLModelTrainingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMLModelTrainingJobsInput) operationName() string {
+	return "ListMLModelTrainingJobs"
+}
+
 type ListMLModelTrainingJobsOutput struct {
 
 	// A page of the list of model training job IDs.

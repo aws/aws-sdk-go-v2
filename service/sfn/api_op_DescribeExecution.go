@@ -51,6 +51,10 @@ type DescribeExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExecutionInput) operationName() string {
+	return "DescribeExecution"
+}
+
 type DescribeExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the execution.

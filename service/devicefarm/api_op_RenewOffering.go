@@ -52,6 +52,10 @@ type RenewOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RenewOfferingInput) operationName() string {
+	return "RenewOffering"
+}
+
 // The result of a renewal offering.
 type RenewOfferingOutput struct {
 

@@ -42,6 +42,10 @@ type GetAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssignmentInput) operationName() string {
+	return "GetAssignment"
+}
+
 type GetAssignmentOutput struct {
 
 	// The assignment. The response includes one Assignment element.

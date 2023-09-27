@@ -56,6 +56,10 @@ type ListPhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPhoneNumbersInput) operationName() string {
+	return "ListPhoneNumbers"
+}
+
 type ListPhoneNumbersOutput struct {
 
 	// The token to use to retrieve the next page of results.

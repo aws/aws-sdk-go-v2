@@ -46,6 +46,10 @@ type DescribeAuditMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAuditMitigationActionsTaskInput) operationName() string {
+	return "DescribeAuditMitigationActionsTask"
+}
+
 type DescribeAuditMitigationActionsTaskOutput struct {
 
 	// Specifies the mitigation actions and their parameters that are applied as part

@@ -45,6 +45,10 @@ type GetEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEvaluationInput) operationName() string {
+	return "GetEvaluation"
+}
+
 // Represents the output of a GetEvaluation operation and describes an Evaluation .
 type GetEvaluationOutput struct {
 

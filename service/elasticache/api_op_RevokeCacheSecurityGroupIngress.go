@@ -56,6 +56,10 @@ type RevokeCacheSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeCacheSecurityGroupIngressInput) operationName() string {
+	return "RevokeCacheSecurityGroupIngress"
+}
+
 type RevokeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:

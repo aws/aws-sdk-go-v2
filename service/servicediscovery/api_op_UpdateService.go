@@ -60,6 +60,10 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceInput) operationName() string {
+	return "UpdateService"
+}
+
 type UpdateServiceOutput struct {
 
 	// A value that you can use to determine whether the request completed

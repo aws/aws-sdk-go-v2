@@ -55,6 +55,10 @@ type GetQueryResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryResultsInput) operationName() string {
+	return "GetQueryResults"
+}
+
 type GetQueryResultsOutput struct {
 
 	// The error message returned if a query failed.

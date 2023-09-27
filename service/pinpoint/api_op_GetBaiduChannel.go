@@ -44,6 +44,10 @@ type GetBaiduChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBaiduChannelInput) operationName() string {
+	return "GetBaiduChannel"
+}
+
 type GetBaiduChannelOutput struct {
 
 	// Provides information about the status and settings of the Baidu (Baidu Cloud

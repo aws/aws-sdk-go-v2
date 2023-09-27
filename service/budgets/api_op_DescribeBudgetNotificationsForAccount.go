@@ -49,6 +49,10 @@ type DescribeBudgetNotificationsForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBudgetNotificationsForAccountInput) operationName() string {
+	return "DescribeBudgetNotificationsForAccount"
+}
+
 type DescribeBudgetNotificationsForAccountOutput struct {
 
 	// A list of budget names and associated notifications for an account.

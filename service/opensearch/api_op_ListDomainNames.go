@@ -42,6 +42,10 @@ type ListDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainNamesInput) operationName() string {
+	return "ListDomainNames"
+}
+
 // The results of a ListDomainNames operation. Contains the names of all domains
 // owned by this account and their respective engine types.
 type ListDomainNamesOutput struct {

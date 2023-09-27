@@ -53,6 +53,10 @@ type ModifyActivityStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyActivityStreamInput) operationName() string {
+	return "ModifyActivityStream"
+}
+
 type ModifyActivityStreamOutput struct {
 
 	// Indicates whether engine-native audit fields are included in the database

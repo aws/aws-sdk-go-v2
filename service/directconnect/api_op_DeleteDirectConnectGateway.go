@@ -44,6 +44,10 @@ type DeleteDirectConnectGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDirectConnectGatewayInput) operationName() string {
+	return "DeleteDirectConnectGateway"
+}
+
 type DeleteDirectConnectGatewayOutput struct {
 
 	// The Direct Connect gateway.

@@ -50,6 +50,10 @@ type CreateSbomExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSbomExportInput) operationName() string {
+	return "CreateSbomExport"
+}
+
 type CreateSbomExportOutput struct {
 
 	// The report ID for the software bill of materials (SBOM) report.

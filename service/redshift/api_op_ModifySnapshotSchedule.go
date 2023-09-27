@@ -50,6 +50,10 @@ type ModifySnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySnapshotScheduleInput) operationName() string {
+	return "ModifySnapshotSchedule"
+}
+
 // Describes a snapshot schedule. You can set a regular interval for creating
 // snapshots of a cluster. You can also schedule snapshots for specific dates.
 type ModifySnapshotScheduleOutput struct {

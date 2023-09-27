@@ -59,6 +59,10 @@ type ListPolicyAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPolicyAttachmentsInput) operationName() string {
+	return "ListPolicyAttachments"
+}
+
 type ListPolicyAttachmentsOutput struct {
 
 	// The pagination token.

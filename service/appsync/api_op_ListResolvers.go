@@ -54,6 +54,10 @@ type ListResolversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolversInput) operationName() string {
+	return "ListResolvers"
+}
+
 type ListResolversOutput struct {
 
 	// An identifier to pass in the next request to this operation to return the next

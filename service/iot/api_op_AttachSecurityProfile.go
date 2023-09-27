@@ -49,6 +49,10 @@ type AttachSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachSecurityProfileInput) operationName() string {
+	return "AttachSecurityProfile"
+}
+
 type AttachSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type DescribeProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProjectsInput) operationName() string {
+	return "DescribeProjects"
+}
+
 type DescribeProjectsOutput struct {
 
 	// If the previous response was incomplete (because there is more results to

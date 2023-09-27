@@ -54,6 +54,10 @@ type ListDefaultVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDefaultVocabulariesInput) operationName() string {
+	return "ListDefaultVocabularies"
+}
+
 type ListDefaultVocabulariesOutput struct {
 
 	// A list of default vocabularies.

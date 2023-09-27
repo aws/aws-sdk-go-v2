@@ -46,6 +46,10 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceInput) operationName() string {
+	return "GetService"
+}
+
 type GetServiceOutput struct {
 
 	// The detailed data of the requested service.

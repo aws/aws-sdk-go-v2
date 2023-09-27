@@ -114,6 +114,10 @@ type GetCurrentMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCurrentMetricDataInput) operationName() string {
+	return "GetCurrentMetricData"
+}
+
 type GetCurrentMetricDataOutput struct {
 
 	// The total count of the result, regardless of the current page size.

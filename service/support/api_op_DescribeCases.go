@@ -91,6 +91,10 @@ type DescribeCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCasesInput) operationName() string {
+	return "DescribeCases"
+}
+
 // Returns an array of CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
 // objects and a nextToken that defines a point for pagination in the result set.
 type DescribeCasesOutput struct {

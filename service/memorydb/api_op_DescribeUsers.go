@@ -55,6 +55,10 @@ type DescribeUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUsersInput) operationName() string {
+	return "DescribeUsers"
+}
+
 type DescribeUsersOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the

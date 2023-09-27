@@ -77,6 +77,10 @@ type UpdateScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScheduledActionInput) operationName() string {
+	return "UpdateScheduledAction"
+}
+
 type UpdateScheduledActionOutput struct {
 
 	// Information about the rescheduled action.

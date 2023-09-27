@@ -83,6 +83,10 @@ type UpdateRecipeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRecipeJobInput) operationName() string {
+	return "UpdateRecipeJob"
+}
+
 type UpdateRecipeJobOutput struct {
 
 	// The name of the job that you updated.

@@ -50,6 +50,10 @@ type GetSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSecurityPolicyInput) operationName() string {
+	return "GetSecurityPolicy"
+}
+
 type GetSecurityPolicyOutput struct {
 
 	// Details about the requested security policy.

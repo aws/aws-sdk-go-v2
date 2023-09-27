@@ -47,6 +47,10 @@ type DescribeStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStandardsInput) operationName() string {
+	return "DescribeStandards"
+}
+
 type DescribeStandardsOutput struct {
 
 	// The pagination token to use to request the next page of results.

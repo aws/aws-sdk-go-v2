@@ -62,6 +62,10 @@ type UpdateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWebhookInput) operationName() string {
+	return "UpdateWebhook"
+}
+
 type UpdateWebhookOutput struct {
 
 	// Information about a repository's webhook that is associated with a project in

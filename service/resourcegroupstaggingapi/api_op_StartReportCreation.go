@@ -49,6 +49,10 @@ type StartReportCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReportCreationInput) operationName() string {
+	return "StartReportCreation"
+}
+
 type StartReportCreationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

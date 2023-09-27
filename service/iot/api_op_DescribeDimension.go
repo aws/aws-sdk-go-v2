@@ -45,6 +45,10 @@ type DescribeDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDimensionInput) operationName() string {
+	return "DescribeDimension"
+}
+
 type DescribeDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the dimension.

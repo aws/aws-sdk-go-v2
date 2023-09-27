@@ -64,6 +64,10 @@ type DescribeClientVpnAuthorizationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientVpnAuthorizationRulesInput) operationName() string {
+	return "DescribeClientVpnAuthorizationRules"
+}
+
 type DescribeClientVpnAuthorizationRulesOutput struct {
 
 	// Information about the authorization rules.

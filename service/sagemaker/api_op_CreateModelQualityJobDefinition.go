@@ -84,6 +84,10 @@ type CreateModelQualityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelQualityJobDefinitionInput) operationName() string {
+	return "CreateModelQualityJobDefinition"
+}
+
 type CreateModelQualityJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model quality monitoring job.

@@ -57,6 +57,10 @@ type GetMobileDeviceAccessEffectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMobileDeviceAccessEffectInput) operationName() string {
+	return "GetMobileDeviceAccessEffect"
+}
+
 type GetMobileDeviceAccessEffectOutput struct {
 
 	// The effect of the simulated access, ALLOW or DENY , after evaluating mobile

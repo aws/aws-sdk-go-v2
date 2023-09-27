@@ -58,6 +58,10 @@ type SendSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendSSHPublicKeyInput) operationName() string {
+	return "SendSSHPublicKey"
+}
+
 type SendSSHPublicKeyOutput struct {
 
 	// The ID of the request. Please provide this ID when contacting AWS Support for

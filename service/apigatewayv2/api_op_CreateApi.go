@@ -108,6 +108,10 @@ type CreateApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApiInput) operationName() string {
+	return "CreateApi"
+}
+
 type CreateApiOutput struct {
 
 	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com.

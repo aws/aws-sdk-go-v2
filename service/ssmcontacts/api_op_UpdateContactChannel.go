@@ -49,6 +49,10 @@ type UpdateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContactChannelInput) operationName() string {
+	return "UpdateContactChannel"
+}
+
 type UpdateContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

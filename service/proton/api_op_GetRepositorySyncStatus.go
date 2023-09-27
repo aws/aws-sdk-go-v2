@@ -63,6 +63,10 @@ type GetRepositorySyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositorySyncStatusInput) operationName() string {
+	return "GetRepositorySyncStatus"
+}
+
 type GetRepositorySyncStatusOutput struct {
 
 	// The repository sync status detail data that's returned by Proton.

@@ -60,6 +60,10 @@ type DescribeDBProxyTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBProxyTargetGroupsInput) operationName() string {
+	return "DescribeDBProxyTargetGroups"
+}
+
 type DescribeDBProxyTargetGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

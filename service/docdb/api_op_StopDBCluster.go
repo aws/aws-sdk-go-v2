@@ -45,6 +45,10 @@ type StopDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDBClusterInput) operationName() string {
+	return "StopDBCluster"
+}
+
 type StopDBClusterOutput struct {
 
 	// Detailed information about a cluster.

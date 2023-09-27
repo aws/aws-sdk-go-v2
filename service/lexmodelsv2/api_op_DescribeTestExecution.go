@@ -43,6 +43,10 @@ type DescribeTestExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTestExecutionInput) operationName() string {
+	return "DescribeTestExecution"
+}
+
 type DescribeTestExecutionOutput struct {
 
 	// Indicates whether we use streaming or non-streaming APIs are used for the test

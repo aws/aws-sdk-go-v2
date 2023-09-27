@@ -44,6 +44,10 @@ type GetRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRestApiInput) operationName() string {
+	return "GetRestApi"
+}
+
 // Represents a REST API.
 type GetRestApiOutput struct {
 

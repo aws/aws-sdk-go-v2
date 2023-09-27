@@ -48,6 +48,10 @@ type ResetResourceLogLevelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetResourceLogLevelInput) operationName() string {
+	return "ResetResourceLogLevel"
+}
+
 type ResetResourceLogLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

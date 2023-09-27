@@ -64,6 +64,10 @@ type StartContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartContactEvaluationInput) operationName() string {
+	return "StartContactEvaluation"
+}
+
 type StartContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.

@@ -54,6 +54,10 @@ type CreatePublicIpv4PoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePublicIpv4PoolInput) operationName() string {
+	return "CreatePublicIpv4Pool"
+}
+
 type CreatePublicIpv4PoolOutput struct {
 
 	// The ID of the public IPv4 pool.

@@ -43,6 +43,10 @@ type StopAccessLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAccessLoggingInput) operationName() string {
+	return "StopAccessLogging"
+}
+
 type StopAccessLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

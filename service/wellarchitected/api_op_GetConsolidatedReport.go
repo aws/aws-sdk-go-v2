@@ -53,6 +53,10 @@ type GetConsolidatedReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConsolidatedReportInput) operationName() string {
+	return "GetConsolidatedReport"
+}
+
 type GetConsolidatedReportOutput struct {
 
 	// The Base64-encoded string representation of a lens review report. This data can

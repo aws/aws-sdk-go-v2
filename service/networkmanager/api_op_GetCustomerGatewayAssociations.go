@@ -52,6 +52,10 @@ type GetCustomerGatewayAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCustomerGatewayAssociationsInput) operationName() string {
+	return "GetCustomerGatewayAssociations"
+}
+
 type GetCustomerGatewayAssociationsOutput struct {
 
 	// The customer gateway associations.

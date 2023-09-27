@@ -49,6 +49,10 @@ type UpdateExpirationForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateExpirationForHITInput) operationName() string {
+	return "UpdateExpirationForHIT"
+}
+
 type UpdateExpirationForHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

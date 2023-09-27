@@ -58,6 +58,10 @@ type CreateUseCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUseCaseInput) operationName() string {
+	return "CreateUseCase"
+}
+
 type CreateUseCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) for the use case.

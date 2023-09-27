@@ -60,6 +60,10 @@ type PutServiceQuotaIncreaseRequestIntoTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutServiceQuotaIncreaseRequestIntoTemplateInput) operationName() string {
+	return "PutServiceQuotaIncreaseRequestIntoTemplate"
+}
+
 type PutServiceQuotaIncreaseRequestIntoTemplateOutput struct {
 
 	// Information about the quota increase request.

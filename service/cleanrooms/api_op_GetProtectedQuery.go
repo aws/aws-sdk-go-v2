@@ -47,6 +47,10 @@ type GetProtectedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProtectedQueryInput) operationName() string {
+	return "GetProtectedQuery"
+}
+
 type GetProtectedQueryOutput struct {
 
 	// The query processing metadata.

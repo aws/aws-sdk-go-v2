@@ -42,6 +42,10 @@ type DeleteVoiceConnectorEmergencyCallingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVoiceConnectorEmergencyCallingConfigurationInput) operationName() string {
+	return "DeleteVoiceConnectorEmergencyCallingConfiguration"
+}
+
 type DeleteVoiceConnectorEmergencyCallingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

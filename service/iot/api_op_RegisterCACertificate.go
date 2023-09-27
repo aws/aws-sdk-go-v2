@@ -81,6 +81,10 @@ type RegisterCACertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterCACertificateInput) operationName() string {
+	return "RegisterCACertificate"
+}
+
 // The output from the RegisterCACertificateResponse operation.
 type RegisterCACertificateOutput struct {
 

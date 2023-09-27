@@ -43,6 +43,10 @@ type ListCoreNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCoreNetworksInput) operationName() string {
+	return "ListCoreNetworks"
+}
+
 type ListCoreNetworksOutput struct {
 
 	// Describes the list of core networks.

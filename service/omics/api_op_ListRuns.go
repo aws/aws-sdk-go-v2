@@ -53,6 +53,10 @@ type ListRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRunsInput) operationName() string {
+	return "ListRuns"
+}
+
 type ListRunsOutput struct {
 
 	// A list of runs.

@@ -37,6 +37,10 @@ type StartContinuousExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartContinuousExportInput) operationName() string {
+	return "StartContinuousExport"
+}
+
 type StartContinuousExportOutput struct {
 
 	// The type of data collector used to gather this data (currently only offered for

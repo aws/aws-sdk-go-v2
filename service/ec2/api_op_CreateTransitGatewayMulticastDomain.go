@@ -57,6 +57,10 @@ type CreateTransitGatewayMulticastDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayMulticastDomainInput) operationName() string {
+	return "CreateTransitGatewayMulticastDomain"
+}
+
 type CreateTransitGatewayMulticastDomainOutput struct {
 
 	// Information about the transit gateway multicast domain.

@@ -88,6 +88,10 @@ type UpdateIntegrationResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIntegrationResponseInput) operationName() string {
+	return "UpdateIntegrationResponse"
+}
+
 type UpdateIntegrationResponseOutput struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload

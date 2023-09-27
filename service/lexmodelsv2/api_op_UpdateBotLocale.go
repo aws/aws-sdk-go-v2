@@ -70,6 +70,10 @@ type UpdateBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBotLocaleInput) operationName() string {
+	return "UpdateBotLocale"
+}
+
 type UpdateBotLocaleOutput struct {
 
 	// The identifier of the bot that contains the updated locale.

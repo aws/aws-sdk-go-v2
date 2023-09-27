@@ -54,6 +54,10 @@ type ListTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTableRestoreStatusInput) operationName() string {
+	return "ListTableRestoreStatus"
+}
+
 type ListTableRestoreStatusOutput struct {
 
 	// If your initial ListTableRestoreStatus operation returns a nextToken , you can

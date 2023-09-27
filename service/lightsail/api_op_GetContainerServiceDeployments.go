@@ -49,6 +49,10 @@ type GetContainerServiceDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerServiceDeploymentsInput) operationName() string {
+	return "GetContainerServiceDeployments"
+}
+
 type GetContainerServiceDeploymentsOutput struct {
 
 	// An array of objects that describe deployments for a container service.

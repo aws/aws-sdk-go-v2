@@ -61,6 +61,10 @@ type UpdateJobPriorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateJobPriorityInput) operationName() string {
+	return "UpdateJobPriority"
+}
+
 type UpdateJobPriorityOutput struct {
 
 	// The ID for the job whose priority Amazon S3 updated.

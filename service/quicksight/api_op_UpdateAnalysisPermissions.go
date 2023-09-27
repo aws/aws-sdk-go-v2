@@ -58,6 +58,10 @@ type UpdateAnalysisPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnalysisPermissionsInput) operationName() string {
+	return "UpdateAnalysisPermissions"
+}
+
 type UpdateAnalysisPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the analysis that you updated.

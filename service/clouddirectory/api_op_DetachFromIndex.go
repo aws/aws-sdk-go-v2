@@ -52,6 +52,10 @@ type DetachFromIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachFromIndexInput) operationName() string {
+	return "DetachFromIndex"
+}
+
 type DetachFromIndexOutput struct {
 
 	// The ObjectIdentifier of the object that was detached from the index.

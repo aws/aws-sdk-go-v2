@@ -70,6 +70,10 @@ type UpdateDataCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataCatalogInput) operationName() string {
+	return "UpdateDataCatalog"
+}
+
 type UpdateDataCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

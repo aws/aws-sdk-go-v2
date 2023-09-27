@@ -60,6 +60,10 @@ type UpdateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelInput) operationName() string {
+	return "UpdateModel"
+}
+
 type UpdateModelOutput struct {
 
 	// The content-type for the model, for example, "application/json".

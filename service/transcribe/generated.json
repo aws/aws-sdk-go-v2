@@ -48,6 +48,7 @@
         "api_op_UpdateMedicalVocabulary.go",
         "api_op_UpdateVocabulary.go",
         "api_op_UpdateVocabularyFilter.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

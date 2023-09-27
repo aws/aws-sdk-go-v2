@@ -55,6 +55,10 @@ type PurchaseOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseOfferingInput) operationName() string {
+	return "PurchaseOffering"
+}
+
 // The result of the purchase offering (for example, success or failure).
 type PurchaseOfferingOutput struct {
 

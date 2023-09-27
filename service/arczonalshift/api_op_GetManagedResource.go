@@ -49,6 +49,10 @@ type GetManagedResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetManagedResourceInput) operationName() string {
+	return "GetManagedResource"
+}
+
 type GetManagedResourceOutput struct {
 
 	// A collection of key-value pairs that indicate whether resources are active in

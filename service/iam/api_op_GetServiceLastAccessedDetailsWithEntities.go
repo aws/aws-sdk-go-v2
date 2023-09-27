@@ -88,6 +88,10 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceLastAccessedDetailsWithEntitiesInput) operationName() string {
+	return "GetServiceLastAccessedDetailsWithEntities"
+}
+
 type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 
 	// An EntityDetailsList object that contains details about when an IAM entity

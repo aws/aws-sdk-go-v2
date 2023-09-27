@@ -98,6 +98,10 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportAutoScalingGroupRecommendationsInput) operationName() string {
+	return "ExportAutoScalingGroupRecommendations"
+}
+
 type ExportAutoScalingGroupRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the

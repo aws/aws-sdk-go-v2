@@ -58,6 +58,10 @@ type GetComputeAuthTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComputeAuthTokenInput) operationName() string {
+	return "GetComputeAuthToken"
+}
+
 type GetComputeAuthTokenOutput struct {
 
 	// A valid temporary authentication token.

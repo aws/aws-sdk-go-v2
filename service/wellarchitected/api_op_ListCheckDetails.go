@@ -70,6 +70,10 @@ type ListCheckDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCheckDetailsInput) operationName() string {
+	return "ListCheckDetails"
+}
+
 type ListCheckDetailsOutput struct {
 
 	// The details about the Trusted Advisor checks related to the Well-Architected

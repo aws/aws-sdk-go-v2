@@ -44,6 +44,10 @@ type ListKnowledgeBasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKnowledgeBasesInput) operationName() string {
+	return "ListKnowledgeBases"
+}
+
 type ListKnowledgeBasesOutput struct {
 
 	// Information about the knowledge bases.

@@ -47,6 +47,10 @@ type ListResourceProfileArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceProfileArtifactsInput) operationName() string {
+	return "ListResourceProfileArtifacts"
+}
+
 type ListResourceProfileArtifactsOutput struct {
 
 	// An array of objects, one for each of 1-100 S3 objects that Amazon Macie

@@ -60,6 +60,10 @@ type RegisterRdsDbInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterRdsDbInstanceInput) operationName() string {
+	return "RegisterRdsDbInstance"
+}
+
 type RegisterRdsDbInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

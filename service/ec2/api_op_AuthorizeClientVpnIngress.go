@@ -75,6 +75,10 @@ type AuthorizeClientVpnIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeClientVpnIngressInput) operationName() string {
+	return "AuthorizeClientVpnIngress"
+}
+
 type AuthorizeClientVpnIngressOutput struct {
 
 	// The current state of the authorization rule.

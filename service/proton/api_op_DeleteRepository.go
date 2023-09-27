@@ -47,6 +47,10 @@ type DeleteRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRepositoryInput) operationName() string {
+	return "DeleteRepository"
+}
+
 type DeleteRepositoryOutput struct {
 
 	// The deleted repository link's detail data that's returned by Proton.

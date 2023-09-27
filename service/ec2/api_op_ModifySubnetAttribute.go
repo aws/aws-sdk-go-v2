@@ -102,6 +102,10 @@ type ModifySubnetAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySubnetAttributeInput) operationName() string {
+	return "ModifySubnetAttribute"
+}
+
 type ModifySubnetAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

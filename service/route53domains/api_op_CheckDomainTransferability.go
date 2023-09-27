@@ -57,6 +57,10 @@ type CheckDomainTransferabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckDomainTransferabilityInput) operationName() string {
+	return "CheckDomainTransferability"
+}
+
 // The CheckDomainTransferability response includes the following elements.
 type CheckDomainTransferabilityOutput struct {
 

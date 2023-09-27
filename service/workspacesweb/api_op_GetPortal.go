@@ -42,6 +42,10 @@ type GetPortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPortalInput) operationName() string {
+	return "GetPortal"
+}
+
 type GetPortalOutput struct {
 
 	// The web portal.

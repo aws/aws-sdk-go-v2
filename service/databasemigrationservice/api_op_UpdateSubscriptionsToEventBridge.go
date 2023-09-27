@@ -53,6 +53,10 @@ type UpdateSubscriptionsToEventBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubscriptionsToEventBridgeInput) operationName() string {
+	return "UpdateSubscriptionsToEventBridge"
+}
+
 type UpdateSubscriptionsToEventBridgeOutput struct {
 
 	// A string that indicates how many event subscriptions were migrated and how many

@@ -43,6 +43,10 @@ type DescribeRoleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRoleAliasInput) operationName() string {
+	return "DescribeRoleAlias"
+}
+
 type DescribeRoleAliasOutput struct {
 
 	// The role alias description.

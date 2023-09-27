@@ -114,6 +114,10 @@ type ModifyDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBInstanceInput) operationName() string {
+	return "ModifyDBInstance"
+}
+
 type ModifyDBInstanceOutput struct {
 
 	// Detailed information about an instance.

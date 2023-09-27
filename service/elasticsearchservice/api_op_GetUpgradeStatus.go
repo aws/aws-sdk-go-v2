@@ -47,6 +47,10 @@ type GetUpgradeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUpgradeStatusInput) operationName() string {
+	return "GetUpgradeStatus"
+}
+
 // Container for response returned by GetUpgradeStatus operation.
 type GetUpgradeStatusOutput struct {
 

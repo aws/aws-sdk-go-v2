@@ -64,6 +64,10 @@ type CreateCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCodeReviewInput) operationName() string {
+	return "CreateCodeReview"
+}
+
 type CreateCodeReviewOutput struct {
 
 	// Information about a code review. A code review belongs to the associated

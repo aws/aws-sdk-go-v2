@@ -61,6 +61,10 @@ type UpdateExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateExperimentTemplateInput) operationName() string {
+	return "UpdateExperimentTemplate"
+}
+
 type UpdateExperimentTemplateOutput struct {
 
 	// Information about the experiment template.

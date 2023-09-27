@@ -58,6 +58,10 @@ type CreateKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKxUserInput) operationName() string {
+	return "CreateKxUser"
+}
+
 type CreateKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.

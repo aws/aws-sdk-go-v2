@@ -49,6 +49,10 @@ type DeregisterGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterGatewayInstanceInput) operationName() string {
+	return "DeregisterGatewayInstance"
+}
+
 type DeregisterGatewayInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the instance.

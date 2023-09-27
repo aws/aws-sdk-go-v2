@@ -37,6 +37,10 @@ type GetDirectoryLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDirectoryLimitsInput) operationName() string {
+	return "GetDirectoryLimits"
+}
+
 // Contains the results of the GetDirectoryLimits operation.
 type GetDirectoryLimitsOutput struct {
 

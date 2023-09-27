@@ -55,6 +55,10 @@ type StopDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDeploymentInput) operationName() string {
+	return "StopDeployment"
+}
+
 type StopDeploymentOutput struct {
 
 	// The ID of the application that was deployed.

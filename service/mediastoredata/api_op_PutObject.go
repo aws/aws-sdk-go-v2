@@ -84,6 +84,10 @@ type PutObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectInput) operationName() string {
+	return "PutObject"
+}
+
 type PutObjectOutput struct {
 
 	// The SHA256 digest of the object that is persisted.

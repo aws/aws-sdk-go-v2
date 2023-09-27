@@ -60,6 +60,10 @@ type StartThingRegistrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartThingRegistrationTaskInput) operationName() string {
+	return "StartThingRegistrationTask"
+}
+
 type StartThingRegistrationTaskOutput struct {
 
 	// The bulk thing provisioning task ID.

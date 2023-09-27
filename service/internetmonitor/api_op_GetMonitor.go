@@ -46,6 +46,10 @@ type GetMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMonitorInput) operationName() string {
+	return "GetMonitor"
+}
+
 type GetMonitorOutput struct {
 
 	// The time when the monitor was created.

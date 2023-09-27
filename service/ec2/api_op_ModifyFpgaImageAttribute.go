@@ -75,6 +75,10 @@ type ModifyFpgaImageAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyFpgaImageAttributeInput) operationName() string {
+	return "ModifyFpgaImageAttribute"
+}
+
 type ModifyFpgaImageAttributeOutput struct {
 
 	// Information about the attribute.

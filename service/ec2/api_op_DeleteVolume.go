@@ -50,6 +50,10 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVolumeInput) operationName() string {
+	return "DeleteVolume"
+}
+
 type DeleteVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,6 +45,10 @@ type StartAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAppBlockBuilderInput) operationName() string {
+	return "StartAppBlockBuilder"
+}
+
 type StartAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.

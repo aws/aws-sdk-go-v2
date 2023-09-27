@@ -48,6 +48,10 @@ type UpdateMacieSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMacieSessionInput) operationName() string {
+	return "UpdateMacieSession"
+}
+
 type UpdateMacieSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

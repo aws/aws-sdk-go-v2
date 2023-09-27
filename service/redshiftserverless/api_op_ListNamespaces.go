@@ -46,6 +46,10 @@ type ListNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNamespacesInput) operationName() string {
+	return "ListNamespaces"
+}
+
 type ListNamespacesOutput struct {
 
 	// The list of returned namespaces.

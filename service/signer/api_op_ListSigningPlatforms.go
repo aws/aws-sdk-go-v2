@@ -60,6 +60,10 @@ type ListSigningPlatformsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSigningPlatformsInput) operationName() string {
+	return "ListSigningPlatforms"
+}
+
 type ListSigningPlatformsOutput struct {
 
 	// Value for specifying the next set of paginated results to return.

@@ -49,6 +49,10 @@ type ListScheduleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScheduleGroupsInput) operationName() string {
+	return "ListScheduleGroups"
+}
+
 type ListScheduleGroupsOutput struct {
 
 	// The schedule groups that match the specified criteria.

@@ -44,6 +44,10 @@ type GetApisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApisInput) operationName() string {
+	return "GetApis"
+}
+
 type GetApisOutput struct {
 
 	// The elements from this collection.

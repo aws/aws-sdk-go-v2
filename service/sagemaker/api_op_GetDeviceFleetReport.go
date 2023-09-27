@@ -43,6 +43,10 @@ type GetDeviceFleetReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceFleetReportInput) operationName() string {
+	return "GetDeviceFleetReport"
+}
+
 type GetDeviceFleetReportOutput struct {
 
 	// The Amazon Resource Name (ARN) of the device.

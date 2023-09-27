@@ -42,6 +42,10 @@ type DeleteLabelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLabelGroupInput) operationName() string {
+	return "DeleteLabelGroup"
+}
+
 type DeleteLabelGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

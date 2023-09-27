@@ -111,6 +111,10 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsInput) operationName() string {
+	return "ListFindings"
+}
+
 type ListFindingsOutput struct {
 
 	// The IDs of the findings that you're listing.

@@ -59,6 +59,10 @@ type DescribeVerifiedAccessGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVerifiedAccessGroupsInput) operationName() string {
+	return "DescribeVerifiedAccessGroups"
+}
+
 type DescribeVerifiedAccessGroupsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

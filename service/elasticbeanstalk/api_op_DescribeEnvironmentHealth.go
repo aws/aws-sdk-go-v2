@@ -53,6 +53,10 @@ type DescribeEnvironmentHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEnvironmentHealthInput) operationName() string {
+	return "DescribeEnvironmentHealth"
+}
+
 // Health details for an AWS Elastic Beanstalk environment.
 type DescribeEnvironmentHealthOutput struct {
 

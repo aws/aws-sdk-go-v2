@@ -47,6 +47,10 @@ type ListOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOfferingsInput) operationName() string {
+	return "ListOfferings"
+}
+
 // Represents the return values of the list of offerings.
 type ListOfferingsOutput struct {
 

@@ -63,6 +63,10 @@ type ExportApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportApiInput) operationName() string {
+	return "ExportApi"
+}
+
 type ExportApiOutput struct {
 
 	// Represents an exported definition of an API in a particular output format, for

@@ -37,6 +37,10 @@ type GetPortfolioSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPortfolioSummaryInput) operationName() string {
+	return "GetPortfolioSummary"
+}
+
 type GetPortfolioSummaryOutput struct {
 
 	// An assessment summary for the portfolio including the number of servers to

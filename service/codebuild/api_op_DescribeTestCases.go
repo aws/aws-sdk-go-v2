@@ -58,6 +58,10 @@ type DescribeTestCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTestCasesInput) operationName() string {
+	return "DescribeTestCases"
+}
+
 type DescribeTestCasesOutput struct {
 
 	// During a previous call, the maximum number of items that can be returned is the

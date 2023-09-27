@@ -53,6 +53,10 @@ type CreateInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInvitationsInput) operationName() string {
+	return "CreateInvitations"
+}
+
 type CreateInvitationsOutput struct {
 
 	// An array of objects, one for each account whose invitation hasn't been

@@ -78,6 +78,10 @@ type CreateAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAgentInput) operationName() string {
+	return "CreateAgent"
+}
+
 // CreateAgentResponse
 type CreateAgentOutput struct {
 

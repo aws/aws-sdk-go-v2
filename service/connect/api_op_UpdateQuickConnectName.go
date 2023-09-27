@@ -54,6 +54,10 @@ type UpdateQuickConnectNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQuickConnectNameInput) operationName() string {
+	return "UpdateQuickConnectName"
+}
+
 type UpdateQuickConnectNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

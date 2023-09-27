@@ -34,6 +34,7 @@
         "api_op_UpdateControlPanel.go",
         "api_op_UpdateRoutingControl.go",
         "api_op_UpdateSafetyRule.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

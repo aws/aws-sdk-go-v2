@@ -83,6 +83,10 @@ type UpdateFeatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFeatureInput) operationName() string {
+	return "UpdateFeature"
+}
+
 type UpdateFeatureOutput struct {
 
 	// A structure that contains information about the updated feature.

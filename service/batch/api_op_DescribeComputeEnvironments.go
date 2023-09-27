@@ -64,6 +64,10 @@ type DescribeComputeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComputeEnvironmentsInput) operationName() string {
+	return "DescribeComputeEnvironments"
+}
+
 type DescribeComputeEnvironmentsOutput struct {
 
 	// The list of compute environments.

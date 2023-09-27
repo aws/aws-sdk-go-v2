@@ -52,6 +52,10 @@ type GetAnomalySubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnomalySubscriptionsInput) operationName() string {
+	return "GetAnomalySubscriptions"
+}
+
 type GetAnomalySubscriptionsOutput struct {
 
 	// A list of cost anomaly subscriptions that includes the detailed metadata for

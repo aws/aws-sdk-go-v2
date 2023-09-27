@@ -56,6 +56,10 @@ type CreateTransitGatewayRouteTableAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayRouteTableAttachmentInput) operationName() string {
+	return "CreateTransitGatewayRouteTableAttachment"
+}
+
 type CreateTransitGatewayRouteTableAttachmentOutput struct {
 
 	// The route table associated with the create transit gateway route table

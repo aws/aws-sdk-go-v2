@@ -76,6 +76,10 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLogicallyAirGappedBackupVaultInput) operationName() string {
+	return "CreateLogicallyAirGappedBackupVault"
+}
+
 type CreateLogicallyAirGappedBackupVaultOutput struct {
 
 	// This is the ARN (Amazon Resource Name) of the vault being created.

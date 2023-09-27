@@ -48,6 +48,10 @@ type ModifyUserGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyUserGroupInput) operationName() string {
+	return "ModifyUserGroup"
+}
+
 type ModifyUserGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user group.

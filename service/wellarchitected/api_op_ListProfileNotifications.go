@@ -47,6 +47,10 @@ type ListProfileNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfileNotificationsInput) operationName() string {
+	return "ListProfileNotifications"
+}
+
 type ListProfileNotificationsOutput struct {
 
 	// The token to use to retrieve the next set of results.

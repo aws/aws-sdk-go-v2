@@ -92,6 +92,10 @@ type CreateHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHsmInput) operationName() string {
+	return "CreateHsm"
+}
+
 // Contains the output of the CreateHsm operation.
 type CreateHsmOutput struct {
 

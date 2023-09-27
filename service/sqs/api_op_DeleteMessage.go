@@ -63,6 +63,10 @@ type DeleteMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMessageInput) operationName() string {
+	return "DeleteMessage"
+}
+
 type DeleteMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

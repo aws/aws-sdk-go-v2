@@ -133,6 +133,10 @@ type UpdateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkspaceInput) operationName() string {
+	return "UpdateWorkspace"
+}
+
 type UpdateWorkspaceOutput struct {
 
 	// A structure containing data about the workspace that was created.

@@ -49,6 +49,10 @@ type ListSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSessionsInput) operationName() string {
+	return "ListSessions"
+}
+
 type ListSessionsOutput struct {
 
 	// Returns the ID of the session.

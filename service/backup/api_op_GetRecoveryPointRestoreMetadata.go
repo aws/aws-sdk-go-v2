@@ -55,6 +55,10 @@ type GetRecoveryPointRestoreMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecoveryPointRestoreMetadataInput) operationName() string {
+	return "GetRecoveryPointRestoreMetadata"
+}
+
 type GetRecoveryPointRestoreMetadataOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,

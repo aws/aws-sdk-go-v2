@@ -67,6 +67,10 @@ type ListCustomRoutingPortMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomRoutingPortMappingsInput) operationName() string {
+	return "ListCustomRoutingPortMappings"
+}
+
 type ListCustomRoutingPortMappingsOutput struct {
 
 	// The token for the next set of results. You receive this token from a previous

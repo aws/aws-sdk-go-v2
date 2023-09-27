@@ -86,6 +86,7 @@
         "api_op_UpdateSqlInjectionMatchSet.go",
         "api_op_UpdateWebACL.go",
         "api_op_UpdateXssMatchSet.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

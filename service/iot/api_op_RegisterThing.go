@@ -53,6 +53,10 @@ type RegisterThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterThingInput) operationName() string {
+	return "RegisterThing"
+}
+
 type RegisterThingOutput struct {
 
 	// The certificate data, in PEM format.

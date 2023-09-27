@@ -61,6 +61,10 @@ type ListStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStepsInput) operationName() string {
+	return "ListSteps"
+}
+
 // This output contains the list of steps returned in reverse order. This means
 // that the last step is the first element in the list.
 type ListStepsOutput struct {

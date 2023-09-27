@@ -52,6 +52,10 @@ type GetAssociatedResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssociatedResourceInput) operationName() string {
+	return "GetAssociatedResource"
+}
+
 type GetAssociatedResourceOutput struct {
 
 	// The resource associated with the application.

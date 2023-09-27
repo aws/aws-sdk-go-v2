@@ -65,6 +65,10 @@ type SearchInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchInsightsInput) operationName() string {
+	return "SearchInsights"
+}
+
 type SearchInsightsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

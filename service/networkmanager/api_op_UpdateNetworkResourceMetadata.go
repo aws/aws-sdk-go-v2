@@ -51,6 +51,10 @@ type UpdateNetworkResourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkResourceMetadataInput) operationName() string {
+	return "UpdateNetworkResourceMetadata"
+}
+
 type UpdateNetworkResourceMetadataOutput struct {
 
 	// The updated resource metadata.

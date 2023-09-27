@@ -104,6 +104,10 @@ type UpdateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuleGroupInput) operationName() string {
+	return "UpdateRuleGroup"
+}
+
 type UpdateRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup ,

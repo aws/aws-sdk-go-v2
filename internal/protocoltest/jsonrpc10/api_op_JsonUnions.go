@@ -34,6 +34,10 @@ type JsonUnionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*JsonUnionsInput) operationName() string {
+	return "JsonUnions"
+}
+
 type JsonUnionsOutput struct {
 
 	// A union with a representative set of types for members.

@@ -44,6 +44,10 @@ type BatchUpdateAutomationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateAutomationRulesInput) operationName() string {
+	return "BatchUpdateAutomationRules"
+}
+
 type BatchUpdateAutomationRulesOutput struct {
 
 	// A list of properly processed rule ARNs.

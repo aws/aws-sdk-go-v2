@@ -90,6 +90,10 @@ type CreateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKnowledgeBaseInput) operationName() string {
+	return "CreateKnowledgeBase"
+}
+
 type CreateKnowledgeBaseOutput struct {
 
 	// The knowledge base.

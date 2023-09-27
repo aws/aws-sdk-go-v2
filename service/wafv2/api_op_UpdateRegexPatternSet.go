@@ -100,6 +100,10 @@ type UpdateRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRegexPatternSetInput) operationName() string {
+	return "UpdateRegexPatternSet"
+}
+
 type UpdateRegexPatternSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update

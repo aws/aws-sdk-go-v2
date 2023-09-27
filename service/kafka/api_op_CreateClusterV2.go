@@ -51,6 +51,10 @@ type CreateClusterV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterV2Input) operationName() string {
+	return "CreateClusterV2"
+}
+
 type CreateClusterV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

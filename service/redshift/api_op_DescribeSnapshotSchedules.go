@@ -62,6 +62,10 @@ type DescribeSnapshotSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotSchedulesInput) operationName() string {
+	return "DescribeSnapshotSchedules"
+}
+
 type DescribeSnapshotSchedulesOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

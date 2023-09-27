@@ -105,6 +105,10 @@ type CreateDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBInstanceInput) operationName() string {
+	return "CreateDBInstance"
+}
+
 type CreateDBInstanceOutput struct {
 
 	// Detailed information about an instance.

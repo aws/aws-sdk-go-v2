@@ -49,6 +49,10 @@ type BatchGetRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetRepositoriesInput) operationName() string {
+	return "BatchGetRepositories"
+}
+
 // Represents the output of a batch get repositories operation.
 type BatchGetRepositoriesOutput struct {
 

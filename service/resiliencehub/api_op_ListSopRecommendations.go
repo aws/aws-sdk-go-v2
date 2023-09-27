@@ -54,6 +54,10 @@ type ListSopRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSopRecommendationsInput) operationName() string {
+	return "ListSopRecommendations"
+}
+
 type ListSopRecommendationsOutput struct {
 
 	// The standard operating procedure (SOP) recommendations for the Resilience Hub

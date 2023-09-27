@@ -50,6 +50,10 @@ type ModifyUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyUsageLimitInput) operationName() string {
+	return "ModifyUsageLimit"
+}
+
 // Describes a usage limit object for a cluster.
 type ModifyUsageLimitOutput struct {
 

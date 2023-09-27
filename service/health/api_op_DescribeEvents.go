@@ -71,6 +71,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsInput) operationName() string {
+	return "DescribeEvents"
+}
+
 type DescribeEventsOutput struct {
 
 	// The events that match the specified filter criteria.

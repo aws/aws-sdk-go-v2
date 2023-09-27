@@ -65,6 +65,10 @@ type GetPublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPublicAccessBlockInput) operationName() string {
+	return "GetPublicAccessBlock"
+}
+
 type GetPublicAccessBlockOutput struct {
 
 	// The PublicAccessBlock configuration currently in effect for this Amazon S3

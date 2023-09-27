@@ -47,6 +47,10 @@ type GetRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositoryInput) operationName() string {
+	return "GetRepository"
+}
+
 type GetRepositoryOutput struct {
 
 	// The repository link's detail data that's returned by Proton.

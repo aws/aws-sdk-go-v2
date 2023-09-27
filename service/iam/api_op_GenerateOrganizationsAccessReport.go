@@ -144,6 +144,10 @@ type GenerateOrganizationsAccessReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateOrganizationsAccessReportInput) operationName() string {
+	return "GenerateOrganizationsAccessReport"
+}
+
 type GenerateOrganizationsAccessReportOutput struct {
 
 	// The job identifier that you can use in the GetOrganizationsAccessReport

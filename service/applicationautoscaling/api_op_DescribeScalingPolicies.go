@@ -162,6 +162,10 @@ type DescribeScalingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalingPoliciesInput) operationName() string {
+	return "DescribeScalingPolicies"
+}
+
 type DescribeScalingPoliciesOutput struct {
 
 	// The token required to get the next set of results. This value is null if there

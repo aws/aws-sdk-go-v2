@@ -52,6 +52,10 @@ type ListSecurityControlDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecurityControlDefinitionsInput) operationName() string {
+	return "ListSecurityControlDefinitions"
+}
+
 type ListSecurityControlDefinitionsOutput struct {
 
 	// An array of controls that apply to the specified standard.

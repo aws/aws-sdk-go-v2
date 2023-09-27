@@ -53,6 +53,10 @@ type ListIPSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIPSetsInput) operationName() string {
+	return "ListIPSets"
+}
+
 type ListIPSetsOutput struct {
 
 	// The IDs of the IPSet resources.

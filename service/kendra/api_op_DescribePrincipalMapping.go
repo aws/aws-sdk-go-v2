@@ -59,6 +59,10 @@ type DescribePrincipalMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePrincipalMappingInput) operationName() string {
+	return "DescribePrincipalMapping"
+}
+
 type DescribePrincipalMappingOutput struct {
 
 	// Shows the identifier of the data source to see information on the processing of

@@ -71,6 +71,10 @@ type DescribeFleetUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetUtilizationInput) operationName() string {
+	return "DescribeFleetUtilization"
+}
+
 type DescribeFleetUtilizationOutput struct {
 
 	// A collection of objects containing utilization information for each requested

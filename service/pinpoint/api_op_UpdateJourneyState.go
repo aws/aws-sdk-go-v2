@@ -53,6 +53,10 @@ type UpdateJourneyStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateJourneyStateInput) operationName() string {
+	return "UpdateJourneyState"
+}
+
 type UpdateJourneyStateOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a

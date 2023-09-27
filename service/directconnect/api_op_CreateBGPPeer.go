@@ -58,6 +58,10 @@ type CreateBGPPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBGPPeerInput) operationName() string {
+	return "CreateBGPPeer"
+}
+
 type CreateBGPPeerOutput struct {
 
 	// The virtual interface.

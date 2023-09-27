@@ -55,6 +55,10 @@ type DeleteNetworkInterfacePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkInterfacePermissionInput) operationName() string {
+	return "DeleteNetworkInterfacePermission"
+}
+
 // Contains the output for DeleteNetworkInterfacePermission.
 type DeleteNetworkInterfacePermissionOutput struct {
 

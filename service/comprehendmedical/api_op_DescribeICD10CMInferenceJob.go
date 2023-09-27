@@ -44,6 +44,10 @@ type DescribeICD10CMInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeICD10CMInferenceJobInput) operationName() string {
+	return "DescribeICD10CMInferenceJob"
+}
+
 type DescribeICD10CMInferenceJobOutput struct {
 
 	// An object that contains the properties associated with a detection job.

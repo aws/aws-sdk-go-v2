@@ -48,6 +48,10 @@ type DeleteTransitGatewayConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayConnectPeerInput) operationName() string {
+	return "DeleteTransitGatewayConnectPeer"
+}
+
 type DeleteTransitGatewayConnectPeerOutput struct {
 
 	// Information about the deleted Connect peer.

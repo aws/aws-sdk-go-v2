@@ -54,6 +54,10 @@ type UnlinkIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnlinkIdentityInput) operationName() string {
+	return "UnlinkIdentity"
+}
+
 type UnlinkIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

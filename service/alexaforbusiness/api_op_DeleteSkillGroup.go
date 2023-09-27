@@ -41,6 +41,10 @@ type DeleteSkillGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSkillGroupInput) operationName() string {
+	return "DeleteSkillGroup"
+}
+
 type DeleteSkillGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

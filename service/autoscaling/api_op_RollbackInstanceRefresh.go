@@ -58,6 +58,10 @@ type RollbackInstanceRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RollbackInstanceRefreshInput) operationName() string {
+	return "RollbackInstanceRefresh"
+}
+
 type RollbackInstanceRefreshOutput struct {
 
 	// The instance refresh ID associated with the request. This is the unique ID

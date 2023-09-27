@@ -13,6 +13,7 @@
         "api_op_InvokeEndpoint.go",
         "api_op_InvokeEndpointAsync.go",
         "api_op_InvokeEndpointWithResponseStream.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

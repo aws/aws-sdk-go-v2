@@ -51,6 +51,10 @@ type ListIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIpRoutesInput) operationName() string {
+	return "ListIpRoutes"
+}
+
 type ListIpRoutesOutput struct {
 
 	// A list of IpRoute s.

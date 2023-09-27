@@ -50,6 +50,10 @@ type ListResourceSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceSetsInput) operationName() string {
+	return "ListResourceSets"
+}
+
 type ListResourceSetsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of

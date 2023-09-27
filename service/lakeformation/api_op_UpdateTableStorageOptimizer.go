@@ -54,6 +54,10 @@ type UpdateTableStorageOptimizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTableStorageOptimizerInput) operationName() string {
+	return "UpdateTableStorageOptimizer"
+}
+
 type UpdateTableStorageOptimizerOutput struct {
 
 	// A response indicating the success of failure of the operation.

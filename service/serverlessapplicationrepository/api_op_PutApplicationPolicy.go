@@ -49,6 +49,10 @@ type PutApplicationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutApplicationPolicyInput) operationName() string {
+	return "PutApplicationPolicy"
+}
+
 type PutApplicationPolicyOutput struct {
 
 	// An array of policy statements applied to the application.

@@ -47,6 +47,10 @@ type GetCompatibleElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCompatibleElasticsearchVersionsInput) operationName() string {
+	return "GetCompatibleElasticsearchVersions"
+}
+
 // Container for response returned by GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
 

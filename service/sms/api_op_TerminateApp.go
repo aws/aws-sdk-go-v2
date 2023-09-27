@@ -39,6 +39,10 @@ type TerminateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateAppInput) operationName() string {
+	return "TerminateApp"
+}
+
 type TerminateAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

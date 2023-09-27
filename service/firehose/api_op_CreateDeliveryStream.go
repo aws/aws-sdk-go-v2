@@ -159,6 +159,10 @@ type CreateDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeliveryStreamInput) operationName() string {
+	return "CreateDeliveryStream"
+}
+
 type CreateDeliveryStreamOutput struct {
 
 	// The ARN of the delivery stream.

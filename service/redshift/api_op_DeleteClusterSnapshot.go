@@ -56,6 +56,10 @@ type DeleteClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterSnapshotInput) operationName() string {
+	return "DeleteClusterSnapshot"
+}
+
 type DeleteClusterSnapshotOutput struct {
 
 	// Describes a snapshot.

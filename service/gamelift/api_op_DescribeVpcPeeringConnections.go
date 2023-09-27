@@ -47,6 +47,10 @@ type DescribeVpcPeeringConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcPeeringConnectionsInput) operationName() string {
+	return "DescribeVpcPeeringConnections"
+}
+
 type DescribeVpcPeeringConnectionsOutput struct {
 
 	// A collection of VPC peering connection records that match the request.

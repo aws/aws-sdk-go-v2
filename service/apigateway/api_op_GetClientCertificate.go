@@ -43,6 +43,10 @@ type GetClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClientCertificateInput) operationName() string {
+	return "GetClientCertificate"
+}
+
 // Represents a client certificate used to configure client-side SSL
 // authentication while sending requests to the integration endpoint.
 type GetClientCertificateOutput struct {

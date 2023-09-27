@@ -107,6 +107,10 @@ type RetrieveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetrieveInput) operationName() string {
+	return "Retrieve"
+}
+
 type RetrieveOutput struct {
 
 	// The identifier of query used for the search. You also use QueryId to identify

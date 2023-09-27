@@ -55,6 +55,10 @@ type UpdateRoutingProfileAgentAvailabilityTimerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoutingProfileAgentAvailabilityTimerInput) operationName() string {
+	return "UpdateRoutingProfileAgentAvailabilityTimer"
+}
+
 type UpdateRoutingProfileAgentAvailabilityTimerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

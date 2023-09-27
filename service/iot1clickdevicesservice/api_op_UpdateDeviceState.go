@@ -45,6 +45,10 @@ type UpdateDeviceStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeviceStateInput) operationName() string {
+	return "UpdateDeviceState"
+}
+
 type UpdateDeviceStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

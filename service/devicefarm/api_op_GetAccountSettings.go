@@ -38,6 +38,10 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSettingsInput) operationName() string {
+	return "GetAccountSettings"
+}
+
 // Represents the account settings return values from the GetAccountSettings
 // request.
 type GetAccountSettingsOutput struct {

@@ -49,6 +49,10 @@ type DescribeProvisioningTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProvisioningTemplateVersionInput) operationName() string {
+	return "DescribeProvisioningTemplateVersion"
+}
+
 type DescribeProvisioningTemplateVersionOutput struct {
 
 	// The date when the provisioning template version was created.

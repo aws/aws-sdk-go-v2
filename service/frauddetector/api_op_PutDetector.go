@@ -53,6 +53,10 @@ type PutDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDetectorInput) operationName() string {
+	return "PutDetector"
+}
+
 type PutDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

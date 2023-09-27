@@ -50,6 +50,10 @@ type ListApplicationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationVersionsInput) operationName() string {
+	return "ListApplicationVersions"
+}
+
 type ListApplicationVersionsOutput struct {
 
 	// The list of application versions.

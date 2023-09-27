@@ -51,6 +51,10 @@ type ListAccountIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountIntegrationsInput) operationName() string {
+	return "ListAccountIntegrations"
+}
+
 type ListAccountIntegrationsOutput struct {
 
 	// The list of ListAccountIntegration instances.

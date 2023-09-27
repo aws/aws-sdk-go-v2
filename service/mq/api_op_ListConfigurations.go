@@ -45,6 +45,10 @@ type ListConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationsInput) operationName() string {
+	return "ListConfigurations"
+}
+
 type ListConfigurationsOutput struct {
 
 	// The list of all revisions for the specified configuration.

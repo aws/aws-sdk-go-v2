@@ -55,6 +55,10 @@ type DeleteMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMLEndpointInput) operationName() string {
+	return "DeleteMLEndpoint"
+}
+
 type DeleteMLEndpointOutput struct {
 
 	// The status of the cancellation.

@@ -47,6 +47,10 @@ type BatchDeleteScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteScheduledActionInput) operationName() string {
+	return "BatchDeleteScheduledAction"
+}
+
 type BatchDeleteScheduledActionOutput struct {
 
 	// The names of the scheduled actions that could not be deleted, including an

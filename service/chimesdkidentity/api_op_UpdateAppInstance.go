@@ -51,6 +51,10 @@ type UpdateAppInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppInstanceInput) operationName() string {
+	return "UpdateAppInstance"
+}
+
 type UpdateAppInstanceOutput struct {
 
 	// The ARN of the AppInstance .

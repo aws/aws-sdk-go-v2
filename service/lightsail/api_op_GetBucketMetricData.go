@@ -106,6 +106,10 @@ type GetBucketMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketMetricDataInput) operationName() string {
+	return "GetBucketMetricData"
+}
+
 type GetBucketMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.

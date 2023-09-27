@@ -43,6 +43,10 @@ type GetSnapshotLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSnapshotLimitsInput) operationName() string {
+	return "GetSnapshotLimits"
+}
+
 // Contains the results of the GetSnapshotLimits operation.
 type GetSnapshotLimitsOutput struct {
 

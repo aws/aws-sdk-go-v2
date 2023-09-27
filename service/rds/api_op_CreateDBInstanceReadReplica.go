@@ -447,6 +447,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBInstanceReadReplicaInput) operationName() string {
+	return "CreateDBInstanceReadReplica"
+}
+
 type CreateDBInstanceReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

@@ -48,6 +48,10 @@ type UpdateRulesOfIpGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRulesOfIpGroupInput) operationName() string {
+	return "UpdateRulesOfIpGroup"
+}
+
 type UpdateRulesOfIpGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

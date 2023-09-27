@@ -43,6 +43,10 @@ type DescribeSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSecurityConfigurationInput) operationName() string {
+	return "DescribeSecurityConfiguration"
+}
+
 type DescribeSecurityConfigurationOutput struct {
 
 	// The date and time the security configuration was created

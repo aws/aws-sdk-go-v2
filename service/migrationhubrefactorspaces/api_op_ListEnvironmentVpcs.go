@@ -50,6 +50,10 @@ type ListEnvironmentVpcsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentVpcsInput) operationName() string {
+	return "ListEnvironmentVpcs"
+}
+
 type ListEnvironmentVpcsOutput struct {
 
 	// The list of EnvironmentVpc objects.

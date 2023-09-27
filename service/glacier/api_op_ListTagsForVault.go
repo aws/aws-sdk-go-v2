@@ -55,6 +55,10 @@ type ListTagsForVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForVaultInput) operationName() string {
+	return "ListTagsForVault"
+}
+
 // Contains the Amazon S3 Glacier response to your request.
 type ListTagsForVaultOutput struct {
 

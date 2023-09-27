@@ -48,6 +48,10 @@ type GetBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBranchInput) operationName() string {
+	return "GetBranch"
+}
+
 type GetBranchOutput struct {
 
 	// The branch for an Amplify app, which maps to a third-party repository branch.

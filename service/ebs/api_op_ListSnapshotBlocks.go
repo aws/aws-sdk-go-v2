@@ -63,6 +63,10 @@ type ListSnapshotBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSnapshotBlocksInput) operationName() string {
+	return "ListSnapshotBlocks"
+}
+
 type ListSnapshotBlocksOutput struct {
 
 	// The size of the blocks in the snapshot, in bytes.

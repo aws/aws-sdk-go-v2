@@ -76,6 +76,10 @@ type ListIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIntentsInput) operationName() string {
+	return "ListIntents"
+}
+
 type ListIntentsOutput struct {
 
 	// The identifier of the bot that contains the intent.
