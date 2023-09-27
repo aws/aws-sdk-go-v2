@@ -4,16 +4,12 @@ package s3control
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
-	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -57,6 +53,11 @@ type GetAccessPointForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *GetAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
 type GetAccessPointForObjectLambdaOutput struct {
 
 	// The alias of the Object Lambda Access Point.
@@ -79,6 +80,9 @@ type GetAccessPointForObjectLambdaOutput struct {
 }
 
 func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPointForObjectLambda{}, middleware.After)
 	if err != nil {
 		return err
@@ -87,6 +91,10 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccessPointForObjectLambda"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -108,9 +116,6 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addRetryMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
-		return err
-	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
 		return err
 	}
@@ -129,10 +134,10 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetAccessPointForObjectLambdaMiddleware(stack); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addGetAccessPointForObjectLambdaResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addEndpointPrefix_opGetAccessPointForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpGetAccessPointForObjectLambdaValidationMiddleware(stack); err != nil {
@@ -150,6 +155,9 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addGetAccessPointForObjectLambdaUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
+	if err = addStashOperationInput(stack); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,7 +167,10 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = s3controlcust.AddDisableHostPrefixMiddleware(stack); err != nil {
 		return err
 	}
 	return nil
@@ -172,11 +183,11 @@ func (*endpointPrefix_opGetAccessPointForObjectLambdaMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetAccessPointForObjectLambdaMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opGetAccessPointForObjectLambdaMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -184,9 +195,10 @@ func (m *endpointPrefix_opGetAccessPointForObjectLambdaMiddleware) HandleSeriali
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	input, ok := in.Parameters.(*GetAccessPointForObjectLambdaInput)
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*GetAccessPointForObjectLambdaInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
 	}
 
 	var prefix strings.Builder
@@ -200,17 +212,16 @@ func (m *endpointPrefix_opGetAccessPointForObjectLambdaMiddleware) HandleSeriali
 	prefix.WriteString(".")
 	req.URL.Host = prefix.String() + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 func addEndpointPrefix_opGetAccessPointForObjectLambdaMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetAccessPointForObjectLambdaMiddleware{}, `OperationSerializer`, middleware.After)
+	return stack.Finalize.Insert(&endpointPrefix_opGetAccessPointForObjectLambdaMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetAccessPointForObjectLambda(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "s3",
 		OperationName: "GetAccessPointForObjectLambda",
 	}
 }
@@ -222,6 +233,10 @@ func copyGetAccessPointForObjectLambdaInputForUpdateEndpoint(params interface{})
 	}
 	cpy := *input
 	return &cpy, nil
+}
+func (in *GetAccessPointForObjectLambdaInput) copy() interface{} {
+	v := *in
+	return &v
 }
 func backFillGetAccessPointForObjectLambdaAccountID(input interface{}, v string) error {
 	in := input.(*GetAccessPointForObjectLambdaInput)
@@ -246,139 +261,4 @@ func addGetAccessPointForObjectLambdaUpdateEndpoint(stack *middleware.Stack, opt
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
-}
-
-type opGetAccessPointForObjectLambdaResolveEndpointMiddleware struct {
-	EndpointResolver EndpointResolverV2
-	BuiltInResolver  builtInParameterResolver
-}
-
-func (*opGetAccessPointForObjectLambdaResolveEndpointMiddleware) ID() string {
-	return "ResolveEndpointV2"
-}
-
-func (m *opGetAccessPointForObjectLambdaResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	input, ok := in.Parameters.(*GetAccessPointForObjectLambdaInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointResolver == nil {
-		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
-	}
-
-	params := EndpointParameters{}
-
-	m.BuiltInResolver.ResolveBuiltIns(&params)
-
-	params.AccountId = input.AccountId
-
-	params.RequiresAccountId = ptr.Bool(true)
-
-	var resolvedEndpoint smithyendpoints.Endpoint
-	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
-	if err != nil {
-		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
-	}
-
-	req.URL = &resolvedEndpoint.URI
-
-	for k := range resolvedEndpoint.Headers {
-		req.Header.Set(
-			k,
-			resolvedEndpoint.Headers.Get(k),
-		)
-	}
-
-	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
-	if err != nil {
-		var nfe *internalauth.NoAuthenticationSchemesFoundError
-		if errors.As(err, &nfe) {
-			// if no auth scheme is found, default to sigv4
-			signingName := "s3"
-			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
-			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
-
-		}
-		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
-		if errors.As(err, &ue) {
-			return out, metadata, fmt.Errorf(
-				"This operation requests signer version(s) %v but the client only supports %v",
-				ue.UnsupportedSchemes,
-				internalauth.SupportedSchemes,
-			)
-		}
-	}
-
-	for _, authScheme := range authSchemes {
-		switch authScheme.(type) {
-		case *internalauth.AuthenticationSchemeV4:
-			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
-			var signingName, signingRegion string
-			if v4Scheme.SigningName == nil {
-				signingName = "s3"
-			} else {
-				signingName = *v4Scheme.SigningName
-			}
-			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
-			} else {
-				signingRegion = *v4Scheme.SigningRegion
-			}
-			if v4Scheme.DisableDoubleEncoding != nil {
-				// The signer sets an equivalent value at client initialization time.
-				// Setting this context value will cause the signer to extract it
-				// and override the value set at client initialization time.
-				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
-			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
-			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
-			break
-		case *internalauth.AuthenticationSchemeV4A:
-			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			if v4aScheme.SigningName == nil {
-				v4aScheme.SigningName = aws.String("s3")
-			}
-			if v4aScheme.DisableDoubleEncoding != nil {
-				// The signer sets an equivalent value at client initialization time.
-				// Setting this context value will cause the signer to extract it
-				// and override the value set at client initialization time.
-				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
-			}
-			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
-			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
-			break
-		case *internalauth.AuthenticationSchemeNone:
-			break
-		}
-	}
-
-	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
-
-	return next.HandleSerialize(ctx, in)
-}
-
-func addGetAccessPointForObjectLambdaResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opGetAccessPointForObjectLambdaResolveEndpointMiddleware{
-		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &builtInResolver{
-			Region:       options.Region,
-			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
-			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
-			Endpoint:     options.BaseEndpoint,
-			UseArnRegion: options.UseARNRegion,
-		},
-	}, "ResolveEndpoint", middleware.After)
 }
