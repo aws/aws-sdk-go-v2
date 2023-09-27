@@ -144,6 +144,10 @@ type ImportKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportKeyInput) operationName() string {
+	return "ImportKey"
+}
+
 type ImportKeyOutput struct {
 
 	// The KeyARN of the key material imported within Amazon Web Services Payment

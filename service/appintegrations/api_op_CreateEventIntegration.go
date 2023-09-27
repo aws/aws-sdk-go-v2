@@ -69,6 +69,10 @@ type CreateEventIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventIntegrationInput) operationName() string {
+	return "CreateEventIntegration"
+}
+
 type CreateEventIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the event integration.

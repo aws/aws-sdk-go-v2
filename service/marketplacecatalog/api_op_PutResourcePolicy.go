@@ -48,6 +48,10 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourcePolicyInput) operationName() string {
+	return "PutResourcePolicy"
+}
+
 type PutResourcePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

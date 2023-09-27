@@ -60,6 +60,10 @@ type CreateQuickConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQuickConnectInput) operationName() string {
+	return "CreateQuickConnect"
+}
+
 type CreateQuickConnectOutput struct {
 
 	// The Amazon Resource Name (ARN) for the quick connect.

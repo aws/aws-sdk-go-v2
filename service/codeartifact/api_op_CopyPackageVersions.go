@@ -100,6 +100,10 @@ type CopyPackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyPackageVersionsInput) operationName() string {
+	return "CopyPackageVersions"
+}
+
 type CopyPackageVersionsOutput struct {
 
 	// A map of package versions that failed to copy and their error codes. The

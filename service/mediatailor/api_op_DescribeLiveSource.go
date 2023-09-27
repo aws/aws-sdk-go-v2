@@ -48,6 +48,10 @@ type DescribeLiveSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLiveSourceInput) operationName() string {
+	return "DescribeLiveSource"
+}
+
 type DescribeLiveSourceOutput struct {
 
 	// The ARN of the live source.

@@ -62,6 +62,10 @@ type UpdateStorageSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStorageSystemInput) operationName() string {
+	return "UpdateStorageSystem"
+}
+
 type UpdateStorageSystemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

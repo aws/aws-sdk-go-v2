@@ -82,6 +82,10 @@ type GetNetworkResourceRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkResourceRelationshipsInput) operationName() string {
+	return "GetNetworkResourceRelationships"
+}
+
 type GetNetworkResourceRelationshipsOutput struct {
 
 	// The token for the next page of results.

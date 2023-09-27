@@ -51,6 +51,10 @@ type DeleteSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSessionInput) operationName() string {
+	return "DeleteSession"
+}
+
 type DeleteSessionOutput struct {
 
 	// The alias in use for the bot associated with the session data.

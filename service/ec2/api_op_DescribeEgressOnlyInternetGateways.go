@@ -65,6 +65,10 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEgressOnlyInternetGatewaysInput) operationName() string {
+	return "DescribeEgressOnlyInternetGateways"
+}
+
 type DescribeEgressOnlyInternetGatewaysOutput struct {
 
 	// Information about the egress-only internet gateways.

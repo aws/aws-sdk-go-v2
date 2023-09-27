@@ -46,6 +46,10 @@ type GetDataQualityMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataQualityMetricsInput) operationName() string {
+	return "GetDataQualityMetrics"
+}
+
 type GetDataQualityMetricsOutput struct {
 
 	// A list of the data quality metrics for the AnomalyDetectorArn that you

@@ -56,6 +56,10 @@ type GetOrganizationConfigRuleDetailedStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOrganizationConfigRuleDetailedStatusInput) operationName() string {
+	return "GetOrganizationConfigRuleDetailedStatus"
+}
+
 type GetOrganizationConfigRuleDetailedStatusOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next

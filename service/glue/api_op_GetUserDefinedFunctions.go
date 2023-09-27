@@ -57,6 +57,10 @@ type GetUserDefinedFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserDefinedFunctionsInput) operationName() string {
+	return "GetUserDefinedFunctions"
+}
+
 type GetUserDefinedFunctionsOutput struct {
 
 	// A continuation token, if the list of functions returned does not include the

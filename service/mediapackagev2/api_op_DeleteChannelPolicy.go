@@ -49,6 +49,10 @@ type DeleteChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChannelPolicyInput) operationName() string {
+	return "DeleteChannelPolicy"
+}
+
 type DeleteChannelPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

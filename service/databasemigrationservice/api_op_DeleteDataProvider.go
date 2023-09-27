@@ -44,6 +44,10 @@ type DeleteDataProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataProviderInput) operationName() string {
+	return "DeleteDataProvider"
+}
+
 type DeleteDataProviderOutput struct {
 
 	// The data provider that was deleted.

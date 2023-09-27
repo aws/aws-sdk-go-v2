@@ -68,6 +68,10 @@ type InputAndOutputWithHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InputAndOutputWithHeadersInput) operationName() string {
+	return "InputAndOutputWithHeaders"
+}
+
 type InputAndOutputWithHeadersOutput struct {
 	HeaderBooleanList []bool
 

@@ -48,6 +48,10 @@ type DeletePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePoolInput) operationName() string {
+	return "DeletePool"
+}
+
 type DeletePoolOutput struct {
 
 	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)

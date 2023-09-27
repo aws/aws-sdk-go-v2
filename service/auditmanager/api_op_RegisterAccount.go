@@ -43,6 +43,10 @@ type RegisterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterAccountInput) operationName() string {
+	return "RegisterAccount"
+}
+
 type RegisterAccountOutput struct {
 
 	// The status of the account registration request.

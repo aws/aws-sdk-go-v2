@@ -47,6 +47,10 @@ type DisassociateCustomerGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateCustomerGatewayInput) operationName() string {
+	return "DisassociateCustomerGateway"
+}
+
 type DisassociateCustomerGatewayOutput struct {
 
 	// Information about the customer gateway association.

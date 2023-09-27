@@ -85,6 +85,10 @@ type CreateDataSourceFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataSourceFromS3Input) operationName() string {
+	return "CreateDataSourceFromS3"
+}
+
 // Represents the output of a CreateDataSourceFromS3 operation, and is an
 // acknowledgement that Amazon ML received the request. The CreateDataSourceFromS3
 // operation is asynchronous. You can poll for updates by using the

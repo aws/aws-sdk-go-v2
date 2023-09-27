@@ -51,6 +51,10 @@ type ListDomainAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainAssociationsInput) operationName() string {
+	return "ListDomainAssociations"
+}
+
 // The result structure for the list domain association request.
 type ListDomainAssociationsOutput struct {
 

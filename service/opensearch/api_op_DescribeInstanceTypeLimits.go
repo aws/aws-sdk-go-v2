@@ -54,6 +54,10 @@ type DescribeInstanceTypeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceTypeLimitsInput) operationName() string {
+	return "DescribeInstanceTypeLimits"
+}
+
 // Container for the parameters received from the DescribeInstanceTypeLimits
 // operation.
 type DescribeInstanceTypeLimitsOutput struct {

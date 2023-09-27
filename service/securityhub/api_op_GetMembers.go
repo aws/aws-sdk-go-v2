@@ -47,6 +47,10 @@ type GetMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMembersInput) operationName() string {
+	return "GetMembers"
+}
+
 type GetMembersOutput struct {
 
 	// The list of details about the Security Hub member accounts.

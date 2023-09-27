@@ -54,6 +54,10 @@ type DeleteSuggesterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSuggesterInput) operationName() string {
+	return "DeleteSuggester"
+}
+
 // The result of a DeleteSuggester request. Contains the status of the deleted
 // suggester.
 type DeleteSuggesterOutput struct {

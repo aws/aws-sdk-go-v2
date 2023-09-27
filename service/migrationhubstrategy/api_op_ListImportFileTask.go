@@ -46,6 +46,10 @@ type ListImportFileTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportFileTaskInput) operationName() string {
+	return "ListImportFileTask"
+}
+
 type ListImportFileTaskOutput struct {
 
 	// The token you use to retrieve the next set of results, or null if there are no

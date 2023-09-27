@@ -58,6 +58,10 @@ type DisassociateClientVpnTargetNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateClientVpnTargetNetworkInput) operationName() string {
+	return "DisassociateClientVpnTargetNetwork"
+}
+
 type DisassociateClientVpnTargetNetworkOutput struct {
 
 	// The ID of the target network association.

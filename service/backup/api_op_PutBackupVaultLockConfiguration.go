@@ -94,6 +94,10 @@ type PutBackupVaultLockConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBackupVaultLockConfigurationInput) operationName() string {
+	return "PutBackupVaultLockConfiguration"
+}
+
 type PutBackupVaultLockConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

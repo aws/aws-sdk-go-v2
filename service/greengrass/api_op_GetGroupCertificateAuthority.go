@@ -46,6 +46,10 @@ type GetGroupCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupCertificateAuthorityInput) operationName() string {
+	return "GetGroupCertificateAuthority"
+}
+
 type GetGroupCertificateAuthorityOutput struct {
 
 	// The ARN of the certificate authority for the group.

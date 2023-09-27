@@ -57,6 +57,10 @@ type UpdateSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSiteInput) operationName() string {
+	return "UpdateSite"
+}
+
 type UpdateSiteOutput struct {
 
 	// Information about the site.

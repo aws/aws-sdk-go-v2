@@ -50,6 +50,10 @@ type GetObjectInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectInformationInput) operationName() string {
+	return "GetObjectInformation"
+}
+
 type GetObjectInformationOutput struct {
 
 	// The ObjectIdentifier of the specified object.

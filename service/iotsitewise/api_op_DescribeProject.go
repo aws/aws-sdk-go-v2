@@ -42,6 +42,10 @@ type DescribeProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProjectInput) operationName() string {
+	return "DescribeProject"
+}
+
 type DescribeProjectOutput struct {
 
 	// The ID of the portal that the project is in.

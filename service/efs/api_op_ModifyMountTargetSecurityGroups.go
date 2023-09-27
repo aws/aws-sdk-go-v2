@@ -55,6 +55,10 @@ type ModifyMountTargetSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyMountTargetSecurityGroupsInput) operationName() string {
+	return "ModifyMountTargetSecurityGroups"
+}
+
 type ModifyMountTargetSecurityGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

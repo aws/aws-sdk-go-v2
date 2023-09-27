@@ -56,6 +56,10 @@ type UpgradeElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpgradeElasticsearchDomainInput) operationName() string {
+	return "UpgradeElasticsearchDomain"
+}
+
 // Container for response returned by UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainOutput struct {
 

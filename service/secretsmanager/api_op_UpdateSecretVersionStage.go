@@ -83,6 +83,10 @@ type UpdateSecretVersionStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecretVersionStageInput) operationName() string {
+	return "UpdateSecretVersionStage"
+}
+
 type UpdateSecretVersionStageOutput struct {
 
 	// The ARN of the secret that was updated.

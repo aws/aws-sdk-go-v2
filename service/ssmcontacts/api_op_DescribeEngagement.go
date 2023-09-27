@@ -44,6 +44,10 @@ type DescribeEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEngagementInput) operationName() string {
+	return "DescribeEngagement"
+}
+
 type DescribeEngagementOutput struct {
 
 	// The ARN of the escalation plan or contacts involved in the engagement.

@@ -68,6 +68,10 @@ type ListMonitoringAlertHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitoringAlertHistoryInput) operationName() string {
+	return "ListMonitoringAlertHistory"
+}
+
 type ListMonitoringAlertHistoryOutput struct {
 
 	// An alert history for a model monitoring schedule.

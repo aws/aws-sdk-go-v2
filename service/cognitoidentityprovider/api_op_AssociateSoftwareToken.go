@@ -63,6 +63,10 @@ type AssociateSoftwareTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSoftwareTokenInput) operationName() string {
+	return "AssociateSoftwareToken"
+}
+
 type AssociateSoftwareTokenOutput struct {
 
 	// A unique generated shared secret code that is used in the TOTP algorithm to

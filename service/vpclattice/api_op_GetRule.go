@@ -55,6 +55,10 @@ type GetRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRuleInput) operationName() string {
+	return "GetRule"
+}
+
 type GetRuleOutput struct {
 
 	// The action for the default rule.

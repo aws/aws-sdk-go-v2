@@ -81,6 +81,10 @@ type UpdateAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccessControlConfigurationInput) operationName() string {
+	return "UpdateAccessControlConfiguration"
+}
+
 type UpdateAccessControlConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

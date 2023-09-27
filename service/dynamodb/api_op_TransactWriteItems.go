@@ -120,6 +120,10 @@ type TransactWriteItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TransactWriteItemsInput) operationName() string {
+	return "TransactWriteItems"
+}
+
 type TransactWriteItemsOutput struct {
 
 	// The capacity units consumed by the entire TransactWriteItems operation. The

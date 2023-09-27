@@ -65,6 +65,10 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainInput) operationName() string {
+	return "CreateDomain"
+}
+
 type CreateDomainOutput struct {
 
 	// Information about the newly created domain.

@@ -52,6 +52,10 @@ type UpdateMitigationActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMitigationActionInput) operationName() string {
+	return "UpdateMitigationAction"
+}
+
 type UpdateMitigationActionOutput struct {
 
 	// The ARN for the new mitigation action.

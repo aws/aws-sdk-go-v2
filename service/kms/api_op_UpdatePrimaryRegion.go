@@ -105,6 +105,10 @@ type UpdatePrimaryRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePrimaryRegionInput) operationName() string {
+	return "UpdatePrimaryRegion"
+}
+
 type UpdatePrimaryRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

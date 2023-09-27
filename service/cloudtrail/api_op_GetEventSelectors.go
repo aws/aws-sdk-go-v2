@@ -64,6 +64,10 @@ type GetEventSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventSelectorsInput) operationName() string {
+	return "GetEventSelectors"
+}
+
 type GetEventSelectorsOutput struct {
 
 	// The advanced event selectors that are configured for the trail.

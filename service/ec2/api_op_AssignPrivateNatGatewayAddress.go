@@ -57,6 +57,10 @@ type AssignPrivateNatGatewayAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssignPrivateNatGatewayAddressInput) operationName() string {
+	return "AssignPrivateNatGatewayAddress"
+}
+
 type AssignPrivateNatGatewayAddressOutput struct {
 
 	// NAT gateway IP addresses.

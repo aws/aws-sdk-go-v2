@@ -60,6 +60,10 @@ type ListTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplateVersionsInput) operationName() string {
+	return "ListTemplateVersions"
+}
+
 type ListTemplateVersionsOutput struct {
 
 	// Provides information about all the versions of a specific message template.

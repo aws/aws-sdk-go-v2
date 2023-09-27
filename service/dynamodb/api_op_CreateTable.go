@@ -184,6 +184,10 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTableInput) operationName() string {
+	return "CreateTable"
+}
+
 // Represents the output of a CreateTable operation.
 type CreateTableOutput struct {
 

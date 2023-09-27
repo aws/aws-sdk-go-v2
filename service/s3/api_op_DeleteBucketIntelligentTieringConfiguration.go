@@ -66,6 +66,10 @@ type DeleteBucketIntelligentTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketIntelligentTieringConfigurationInput) operationName() string {
+	return "DeleteBucketIntelligentTieringConfiguration"
+}
+
 type DeleteBucketIntelligentTieringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -79,6 +79,10 @@ type CreateEdgePackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEdgePackagingJobInput) operationName() string {
+	return "CreateEdgePackagingJob"
+}
+
 type CreateEdgePackagingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

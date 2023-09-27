@@ -50,6 +50,10 @@ type UpdateNetworkSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkSiteInput) operationName() string {
+	return "UpdateNetworkSite"
+}
+
 type UpdateNetworkSiteOutput struct {
 
 	// Information about the network site.

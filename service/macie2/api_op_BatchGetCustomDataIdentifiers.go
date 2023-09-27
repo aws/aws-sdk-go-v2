@@ -41,6 +41,10 @@ type BatchGetCustomDataIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCustomDataIdentifiersInput) operationName() string {
+	return "BatchGetCustomDataIdentifiers"
+}
+
 type BatchGetCustomDataIdentifiersOutput struct {
 
 	// An array of objects, one for each custom data identifier that matches the

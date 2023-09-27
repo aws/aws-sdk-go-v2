@@ -44,6 +44,10 @@ type StopConfigurationRecorderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopConfigurationRecorderInput) operationName() string {
+	return "StopConfigurationRecorder"
+}
+
 type StopConfigurationRecorderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

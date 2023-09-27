@@ -53,6 +53,10 @@ type UpdateParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateParameterGroupInput) operationName() string {
+	return "UpdateParameterGroup"
+}
+
 type UpdateParameterGroupOutput struct {
 
 	// The parameter group that has been modified.

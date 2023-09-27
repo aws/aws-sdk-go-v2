@@ -63,6 +63,10 @@ type CreateMeetingDialOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMeetingDialOutInput) operationName() string {
+	return "CreateMeetingDialOut"
+}
+
 type CreateMeetingDialOutOutput struct {
 
 	// Unique ID that tracks API calls.

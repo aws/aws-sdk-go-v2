@@ -43,6 +43,10 @@ type CreateCliTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCliTokenInput) operationName() string {
+	return "CreateCliToken"
+}
+
 type CreateCliTokenOutput struct {
 
 	// An Airflow CLI login token.

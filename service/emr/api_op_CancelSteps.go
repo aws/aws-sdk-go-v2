@@ -60,6 +60,10 @@ type CancelStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelStepsInput) operationName() string {
+	return "CancelSteps"
+}
+
 // The output for the CancelSteps operation.
 type CancelStepsOutput struct {
 

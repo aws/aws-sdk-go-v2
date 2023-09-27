@@ -48,6 +48,10 @@ type GetMedicalVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMedicalVocabularyInput) operationName() string {
+	return "GetMedicalVocabulary"
+}
+
 type GetMedicalVocabularyOutput struct {
 
 	// The S3 location where the specified custom medical vocabulary is stored; use

@@ -45,6 +45,10 @@ type GetEbsEncryptionByDefaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEbsEncryptionByDefaultInput) operationName() string {
+	return "GetEbsEncryptionByDefault"
+}
+
 type GetEbsEncryptionByDefaultOutput struct {
 
 	// Indicates whether encryption by default is enabled.

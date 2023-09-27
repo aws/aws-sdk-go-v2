@@ -48,6 +48,10 @@ type ListFlywheelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFlywheelsInput) operationName() string {
+	return "ListFlywheels"
+}
+
 type ListFlywheelsOutput struct {
 
 	// A list of flywheel properties retrieved by the service in response to the

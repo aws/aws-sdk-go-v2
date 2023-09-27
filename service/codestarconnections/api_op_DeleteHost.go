@@ -43,6 +43,10 @@ type DeleteHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHostInput) operationName() string {
+	return "DeleteHost"
+}
+
 type DeleteHostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,10 @@ type DetectStackResourceDriftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectStackResourceDriftInput) operationName() string {
+	return "DetectStackResourceDrift"
+}
+
 type DetectStackResourceDriftOutput struct {
 
 	// Information about whether the resource's actual configuration has drifted from

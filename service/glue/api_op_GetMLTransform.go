@@ -48,6 +48,10 @@ type GetMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLTransformInput) operationName() string {
+	return "GetMLTransform"
+}
+
 type GetMLTransformOutput struct {
 
 	// The date and time when the transform was created.

@@ -52,6 +52,10 @@ type UpdateAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAuthorizerInput) operationName() string {
+	return "UpdateAuthorizer"
+}
+
 // Represents an authorization layer for methods. If enabled on a method, API
 // Gateway will activate the authorizer when a client calls the method.
 type UpdateAuthorizerOutput struct {

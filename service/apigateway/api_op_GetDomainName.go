@@ -45,6 +45,10 @@ type GetDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainNameInput) operationName() string {
+	return "GetDomainName"
+}
+
 // Represents a custom domain name as a user-friendly host name of an API
 // (RestApi).
 type GetDomainNameOutput struct {

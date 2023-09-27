@@ -71,6 +71,10 @@ type ListDataQualityJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataQualityJobDefinitionsInput) operationName() string {
+	return "ListDataQualityJobDefinitions"
+}
+
 type ListDataQualityJobDefinitionsOutput struct {
 
 	// A list of data quality monitoring job definitions.

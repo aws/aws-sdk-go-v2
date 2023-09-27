@@ -49,6 +49,10 @@ type GetDiscoveredSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDiscoveredSchemaInput) operationName() string {
+	return "GetDiscoveredSchema"
+}
+
 type GetDiscoveredSchemaOutput struct {
 
 	// The source of the schema definition.

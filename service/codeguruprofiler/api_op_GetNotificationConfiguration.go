@@ -44,6 +44,10 @@ type GetNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNotificationConfigurationInput) operationName() string {
+	return "GetNotificationConfiguration"
+}
+
 // The structure representing the GetNotificationConfigurationResponse.
 type GetNotificationConfigurationOutput struct {
 

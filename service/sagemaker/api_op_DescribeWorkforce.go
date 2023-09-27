@@ -47,6 +47,10 @@ type DescribeWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkforceInput) operationName() string {
+	return "DescribeWorkforce"
+}
+
 type DescribeWorkforceOutput struct {
 
 	// A single private workforce, which is automatically created when you create your

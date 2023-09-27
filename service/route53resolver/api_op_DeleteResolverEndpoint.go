@@ -46,6 +46,10 @@ type DeleteResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResolverEndpointInput) operationName() string {
+	return "DeleteResolverEndpoint"
+}
+
 type DeleteResolverEndpointOutput struct {
 
 	// Information about the DeleteResolverEndpoint request, including the status of

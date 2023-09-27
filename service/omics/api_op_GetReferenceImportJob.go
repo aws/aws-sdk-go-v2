@@ -51,6 +51,10 @@ type GetReferenceImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReferenceImportJobInput) operationName() string {
+	return "GetReferenceImportJob"
+}
+
 type GetReferenceImportJobOutput struct {
 
 	// When the job was created.

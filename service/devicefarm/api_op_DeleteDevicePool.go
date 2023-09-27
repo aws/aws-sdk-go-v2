@@ -44,6 +44,10 @@ type DeleteDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDevicePoolInput) operationName() string {
+	return "DeleteDevicePool"
+}
+
 // Represents the result of a delete device pool request.
 type DeleteDevicePoolOutput struct {
 	// Metadata pertaining to the operation's result.

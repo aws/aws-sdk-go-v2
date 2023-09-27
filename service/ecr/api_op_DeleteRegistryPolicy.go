@@ -35,6 +35,10 @@ type DeleteRegistryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRegistryPolicyInput) operationName() string {
+	return "DeleteRegistryPolicy"
+}
+
 type DeleteRegistryPolicyOutput struct {
 
 	// The contents of the registry permissions policy that was deleted.

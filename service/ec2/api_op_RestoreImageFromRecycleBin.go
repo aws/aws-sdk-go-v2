@@ -48,6 +48,10 @@ type RestoreImageFromRecycleBinInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreImageFromRecycleBinInput) operationName() string {
+	return "RestoreImageFromRecycleBin"
+}
+
 type RestoreImageFromRecycleBinOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

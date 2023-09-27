@@ -84,6 +84,10 @@ type CreateBlueGreenDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBlueGreenDeploymentInput) operationName() string {
+	return "CreateBlueGreenDeployment"
+}
+
 type CreateBlueGreenDeploymentOutput struct {
 
 	// Details about a blue/green deployment. For more information, see Using Amazon

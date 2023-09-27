@@ -80,6 +80,10 @@ type DeletePrincipalMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePrincipalMappingInput) operationName() string {
+	return "DeletePrincipalMapping"
+}
+
 type DeletePrincipalMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

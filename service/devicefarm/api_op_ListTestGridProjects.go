@@ -43,6 +43,10 @@ type ListTestGridProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestGridProjectsInput) operationName() string {
+	return "ListTestGridProjects"
+}
+
 type ListTestGridProjectsOutput struct {
 
 	// Used for pagination. Pass into ListTestGridProjects to get more results in a

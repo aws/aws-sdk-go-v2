@@ -57,6 +57,10 @@ type ListServicesForAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicesForAutoScalingConfigurationInput) operationName() string {
+	return "ListServicesForAutoScalingConfiguration"
+}
+
 type ListServicesForAutoScalingConfigurationOutput struct {
 
 	// A list of service ARN records. In a paginated request, the request returns up

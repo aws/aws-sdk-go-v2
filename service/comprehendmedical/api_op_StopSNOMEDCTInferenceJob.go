@@ -41,6 +41,10 @@ type StopSNOMEDCTInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopSNOMEDCTInferenceJobInput) operationName() string {
+	return "StopSNOMEDCTInferenceJob"
+}
+
 type StopSNOMEDCTInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this

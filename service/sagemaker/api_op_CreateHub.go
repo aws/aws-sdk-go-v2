@@ -59,6 +59,10 @@ type CreateHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHubInput) operationName() string {
+	return "CreateHub"
+}
+
 type CreateHubOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hub.

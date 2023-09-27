@@ -57,6 +57,10 @@ type GetExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExportInput) operationName() string {
+	return "GetExport"
+}
+
 type GetExportOutput struct {
 
 	// The status of the export.

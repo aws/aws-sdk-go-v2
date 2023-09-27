@@ -89,6 +89,10 @@ type UpdateAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppBlockBuilderInput) operationName() string {
+	return "UpdateAppBlockBuilder"
+}
+
 type UpdateAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.

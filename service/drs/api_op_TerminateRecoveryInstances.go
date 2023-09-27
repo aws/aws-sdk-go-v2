@@ -44,6 +44,10 @@ type TerminateRecoveryInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateRecoveryInstancesInput) operationName() string {
+	return "TerminateRecoveryInstances"
+}
+
 type TerminateRecoveryInstancesOutput struct {
 
 	// The Job for terminating the Recovery Instances.

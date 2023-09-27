@@ -61,6 +61,10 @@ type DescribeMetadataModelAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetadataModelAssessmentsInput) operationName() string {
+	return "DescribeMetadataModelAssessments"
+}
+
 type DescribeMetadataModelAssessmentsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the

@@ -51,6 +51,10 @@ type UpdateTestSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTestSetInput) operationName() string {
+	return "UpdateTestSet"
+}
+
 type UpdateTestSetOutput struct {
 
 	// The creation date and time for the updated test set.

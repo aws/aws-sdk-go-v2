@@ -56,6 +56,10 @@ type ListModelPackagingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelPackagingJobsInput) operationName() string {
+	return "ListModelPackagingJobs"
+}
+
 type ListModelPackagingJobsOutput struct {
 
 	// A list of the model packaging jobs created for the specified Amazon Lookout for

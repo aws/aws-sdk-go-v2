@@ -52,6 +52,10 @@ type GetServerDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServerDetailsInput) operationName() string {
+	return "GetServerDetails"
+}
+
 type GetServerDetailsOutput struct {
 
 	// The associated application group the server belongs to, as defined in AWS

@@ -81,6 +81,10 @@ type UpdateLocationSmbInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLocationSmbInput) operationName() string {
+	return "UpdateLocationSmb"
+}
+
 type UpdateLocationSmbOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

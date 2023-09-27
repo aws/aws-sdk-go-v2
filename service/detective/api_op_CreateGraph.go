@@ -54,6 +54,10 @@ type CreateGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGraphInput) operationName() string {
+	return "CreateGraph"
+}
+
 type CreateGraphOutput struct {
 
 	// The ARN of the new behavior graph.

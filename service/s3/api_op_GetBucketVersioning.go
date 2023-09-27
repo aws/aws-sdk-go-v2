@@ -56,6 +56,10 @@ type GetBucketVersioningInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketVersioningInput) operationName() string {
+	return "GetBucketVersioning"
+}
+
 type GetBucketVersioningOutput struct {
 
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.

@@ -70,6 +70,10 @@ type ListHandshakesForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHandshakesForAccountInput) operationName() string {
+	return "ListHandshakesForAccount"
+}
+
 type ListHandshakesForAccountOutput struct {
 
 	// A list of Handshake objects with details about each of the handshakes that is

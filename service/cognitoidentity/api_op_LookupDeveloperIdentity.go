@@ -74,6 +74,10 @@ type LookupDeveloperIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LookupDeveloperIdentityInput) operationName() string {
+	return "LookupDeveloperIdentity"
+}
+
 // Returned in response to a successful LookupDeveloperIdentity action.
 type LookupDeveloperIdentityOutput struct {
 

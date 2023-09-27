@@ -49,6 +49,10 @@ type DescribeFeatureMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFeatureMetadataInput) operationName() string {
+	return "DescribeFeatureMetadata"
+}
+
 type DescribeFeatureMetadataOutput struct {
 
 	// A timestamp indicating when the feature was created.

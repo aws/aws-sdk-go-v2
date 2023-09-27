@@ -69,6 +69,10 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTimeSeriesServiceStatisticsInput) operationName() string {
+	return "GetTimeSeriesServiceStatistics"
+}
+
 type GetTimeSeriesServiceStatisticsOutput struct {
 
 	// A flag indicating whether or not a group's filter expression has been

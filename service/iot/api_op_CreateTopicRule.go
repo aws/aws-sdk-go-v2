@@ -57,6 +57,10 @@ type CreateTopicRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTopicRuleInput) operationName() string {
+	return "CreateTopicRule"
+}
+
 type CreateTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

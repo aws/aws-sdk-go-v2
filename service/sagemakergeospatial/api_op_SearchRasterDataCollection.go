@@ -56,6 +56,10 @@ type SearchRasterDataCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchRasterDataCollectionInput) operationName() string {
+	return "SearchRasterDataCollection"
+}
+
 type SearchRasterDataCollectionOutput struct {
 
 	// Approximate number of results in the response.

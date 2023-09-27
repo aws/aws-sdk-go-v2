@@ -72,6 +72,10 @@ type DetectFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectFacesInput) operationName() string {
+	return "DetectFaces"
+}
+
 type DetectFacesOutput struct {
 
 	// Details of each face found in the image.

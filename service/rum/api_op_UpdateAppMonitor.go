@@ -76,6 +76,10 @@ type UpdateAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppMonitorInput) operationName() string {
+	return "UpdateAppMonitor"
+}
+
 type UpdateAppMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

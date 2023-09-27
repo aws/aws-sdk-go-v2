@@ -44,6 +44,10 @@ type DescribeSMBSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSMBSettingsInput) operationName() string {
+	return "DescribeSMBSettings"
+}
+
 type DescribeSMBSettingsOutput struct {
 
 	// Indicates the status of a gateway that is a member of the Active Directory

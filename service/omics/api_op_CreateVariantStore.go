@@ -55,6 +55,10 @@ type CreateVariantStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVariantStoreInput) operationName() string {
+	return "CreateVariantStore"
+}
+
 type CreateVariantStoreOutput struct {
 
 	// When the store was created.

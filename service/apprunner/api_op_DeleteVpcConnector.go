@@ -44,6 +44,10 @@ type DeleteVpcConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcConnectorInput) operationName() string {
+	return "DeleteVpcConnector"
+}
+
 type DeleteVpcConnectorOutput struct {
 
 	// A description of the App Runner VPC connector that this request just deleted.

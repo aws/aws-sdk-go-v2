@@ -59,6 +59,10 @@ type DeleteTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTimeSeriesInput) operationName() string {
+	return "DeleteTimeSeries"
+}
+
 type DeleteTimeSeriesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

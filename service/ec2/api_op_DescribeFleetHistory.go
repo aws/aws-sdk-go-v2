@@ -73,6 +73,10 @@ type DescribeFleetHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetHistoryInput) operationName() string {
+	return "DescribeFleetHistory"
+}
+
 type DescribeFleetHistoryOutput struct {
 
 	// The ID of the EC Fleet.

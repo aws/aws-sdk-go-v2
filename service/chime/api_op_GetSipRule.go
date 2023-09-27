@@ -50,6 +50,10 @@ type GetSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSipRuleInput) operationName() string {
+	return "GetSipRule"
+}
+
 type GetSipRuleOutput struct {
 
 	// The SIP rule details.

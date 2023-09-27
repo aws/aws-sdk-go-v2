@@ -52,6 +52,10 @@ type DescribeDomainAutoTunesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainAutoTunesInput) operationName() string {
+	return "DescribeDomainAutoTunes"
+}
+
 // The result of DescribeDomainAutoTunes request. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 // for more information.
 type DescribeDomainAutoTunesOutput struct {

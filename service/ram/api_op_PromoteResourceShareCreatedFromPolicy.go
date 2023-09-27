@@ -55,6 +55,10 @@ type PromoteResourceShareCreatedFromPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PromoteResourceShareCreatedFromPolicyInput) operationName() string {
+	return "PromoteResourceShareCreatedFromPolicy"
+}
+
 type PromoteResourceShareCreatedFromPolicyOutput struct {
 
 	// A return value of true indicates that the request succeeded. A value of false

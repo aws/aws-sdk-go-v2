@@ -63,6 +63,10 @@ type CreateAssessmentReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssessmentReportInput) operationName() string {
+	return "CreateAssessmentReport"
+}
+
 type CreateAssessmentReportOutput struct {
 
 	// The new assessment report that the CreateAssessmentReport API returned.

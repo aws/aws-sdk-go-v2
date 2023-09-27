@@ -51,6 +51,10 @@ type AssociateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateBotInput) operationName() string {
+	return "AssociateBot"
+}
+
 type AssociateBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

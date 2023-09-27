@@ -53,6 +53,10 @@ type GetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentInput) operationName() string {
+	return "GetDeployment"
+}
+
 type GetDeploymentOutput struct {
 
 	// The ID of the application that was deployed.

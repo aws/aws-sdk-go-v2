@@ -44,6 +44,10 @@ type GetStackPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStackPolicyInput) operationName() string {
+	return "GetStackPolicy"
+}
+
 // The output for the GetStackPolicy action.
 type GetStackPolicyOutput struct {
 

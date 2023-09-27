@@ -47,6 +47,10 @@ type GetRegexMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegexMatchSetInput) operationName() string {
+	return "GetRegexMatchSet"
+}
+
 type GetRegexMatchSetOutput struct {
 
 	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet

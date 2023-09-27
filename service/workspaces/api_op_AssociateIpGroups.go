@@ -46,6 +46,10 @@ type AssociateIpGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateIpGroupsInput) operationName() string {
+	return "AssociateIpGroups"
+}
+
 type AssociateIpGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

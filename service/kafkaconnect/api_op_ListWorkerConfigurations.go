@@ -45,6 +45,10 @@ type ListWorkerConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkerConfigurationsInput) operationName() string {
+	return "ListWorkerConfigurations"
+}
+
 type ListWorkerConfigurationsOutput struct {
 
 	// If the response of a ListWorkerConfigurations operation is truncated, it will

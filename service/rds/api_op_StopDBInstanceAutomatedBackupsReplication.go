@@ -47,6 +47,10 @@ type StopDBInstanceAutomatedBackupsReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDBInstanceAutomatedBackupsReplicationInput) operationName() string {
+	return "StopDBInstanceAutomatedBackupsReplication"
+}
+
 type StopDBInstanceAutomatedBackupsReplicationOutput struct {
 
 	// An automated backup of a DB instance. It consists of system backups,

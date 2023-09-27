@@ -68,6 +68,10 @@ type CreateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigurationInput) operationName() string {
+	return "CreateConfiguration"
+}
+
 type CreateConfigurationOutput struct {
 
 	// Required. The Amazon Resource Name (ARN) of the configuration.

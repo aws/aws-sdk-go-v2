@@ -99,6 +99,10 @@ type TranslatePinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TranslatePinDataInput) operationName() string {
+	return "TranslatePinData"
+}
+
 type TranslatePinDataOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography

@@ -50,6 +50,10 @@ type ModifySelfservicePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySelfservicePermissionsInput) operationName() string {
+	return "ModifySelfservicePermissions"
+}
+
 type ModifySelfservicePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

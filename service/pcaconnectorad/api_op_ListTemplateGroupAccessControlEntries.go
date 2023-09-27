@@ -54,6 +54,10 @@ type ListTemplateGroupAccessControlEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplateGroupAccessControlEntriesInput) operationName() string {
+	return "ListTemplateGroupAccessControlEntries"
+}
+
 type ListTemplateGroupAccessControlEntriesOutput struct {
 
 	// An access control entry grants or denies permission to an Active Directory

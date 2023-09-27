@@ -127,6 +127,10 @@ type UpdateStackInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStackInstancesInput) operationName() string {
+	return "UpdateStackInstances"
+}
+
 type UpdateStackInstancesOutput struct {
 
 	// The unique identifier for this stack set operation.

@@ -43,6 +43,10 @@ type JsonIntEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*JsonIntEnumsInput) operationName() string {
+	return "JsonIntEnums"
+}
+
 type JsonIntEnumsOutput struct {
 	IntegerEnum1 types.IntegerEnum
 

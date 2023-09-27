@@ -54,6 +54,10 @@ type UpdateRoutingProfileConcurrencyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoutingProfileConcurrencyInput) operationName() string {
+	return "UpdateRoutingProfileConcurrency"
+}
+
 type UpdateRoutingProfileConcurrencyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -127,6 +127,10 @@ type UpdateMatchmakingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMatchmakingConfigurationInput) operationName() string {
+	return "UpdateMatchmakingConfiguration"
+}
+
 type UpdateMatchmakingConfigurationOutput struct {
 
 	// The updated matchmaking configuration.

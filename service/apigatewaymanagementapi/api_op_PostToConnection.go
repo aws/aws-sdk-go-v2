@@ -46,6 +46,10 @@ type PostToConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostToConnectionInput) operationName() string {
+	return "PostToConnection"
+}
+
 type PostToConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

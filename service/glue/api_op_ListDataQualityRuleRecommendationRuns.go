@@ -46,6 +46,10 @@ type ListDataQualityRuleRecommendationRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataQualityRuleRecommendationRunsInput) operationName() string {
+	return "ListDataQualityRuleRecommendationRuns"
+}
+
 type ListDataQualityRuleRecommendationRunsOutput struct {
 
 	// A pagination token, if more results are available.

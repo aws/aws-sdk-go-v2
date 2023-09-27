@@ -80,6 +80,10 @@ type ListModelPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelPackagesInput) operationName() string {
+	return "ListModelPackages"
+}
+
 type ListModelPackagesOutput struct {
 
 	// An array of ModelPackageSummary objects, each of which lists a model package.

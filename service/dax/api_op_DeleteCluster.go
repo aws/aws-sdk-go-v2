@@ -45,6 +45,10 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterInput) operationName() string {
+	return "DeleteCluster"
+}
+
 type DeleteClusterOutput struct {
 
 	// A description of the DAX cluster that is being deleted.

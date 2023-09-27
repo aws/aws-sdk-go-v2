@@ -45,6 +45,10 @@ type ListOfferingPromotionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOfferingPromotionsInput) operationName() string {
+	return "ListOfferingPromotions"
+}
+
 type ListOfferingPromotionsOutput struct {
 
 	// An identifier to be used in the next call to this operation, to return the next

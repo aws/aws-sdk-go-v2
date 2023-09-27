@@ -57,6 +57,10 @@ type GetCampaignVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignVersionsInput) operationName() string {
+	return "GetCampaignVersions"
+}
+
 type GetCampaignVersionsOutput struct {
 
 	// Provides information about the configuration and other settings for all the

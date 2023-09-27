@@ -41,6 +41,10 @@ type CancelMulticastGroupSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelMulticastGroupSessionInput) operationName() string {
+	return "CancelMulticastGroupSession"
+}
+
 type CancelMulticastGroupSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

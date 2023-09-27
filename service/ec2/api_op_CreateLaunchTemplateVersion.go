@@ -85,6 +85,10 @@ type CreateLaunchTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLaunchTemplateVersionInput) operationName() string {
+	return "CreateLaunchTemplateVersion"
+}
+
 type CreateLaunchTemplateVersionOutput struct {
 
 	// Information about the launch template version.

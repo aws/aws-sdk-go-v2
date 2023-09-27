@@ -66,6 +66,10 @@ type CreateRealtimeLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRealtimeLogConfigInput) operationName() string {
+	return "CreateRealtimeLogConfig"
+}
+
 type CreateRealtimeLogConfigOutput struct {
 
 	// A real-time log configuration.

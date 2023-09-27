@@ -70,6 +70,10 @@ type CreateVerifiedAccessGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVerifiedAccessGroupInput) operationName() string {
+	return "CreateVerifiedAccessGroup"
+}
+
 type CreateVerifiedAccessGroupOutput struct {
 
 	// The ID of the Verified Access group.

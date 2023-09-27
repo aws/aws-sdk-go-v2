@@ -57,6 +57,10 @@ type DescribeMaintenanceWindowsForTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMaintenanceWindowsForTargetInput) operationName() string {
+	return "DescribeMaintenanceWindowsForTarget"
+}
+
 type DescribeMaintenanceWindowsForTargetOutput struct {
 
 	// The token for the next set of items to return. (You use this token in the next

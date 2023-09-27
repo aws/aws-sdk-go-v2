@@ -48,6 +48,10 @@ type CreateAssociationBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssociationBatchInput) operationName() string {
+	return "CreateAssociationBatch"
+}
+
 type CreateAssociationBatchOutput struct {
 
 	// Information about the associations that failed.

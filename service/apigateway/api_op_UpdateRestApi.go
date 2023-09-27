@@ -48,6 +48,10 @@ type UpdateRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRestApiInput) operationName() string {
+	return "UpdateRestApi"
+}
+
 // Represents a REST API.
 type UpdateRestApiOutput struct {
 

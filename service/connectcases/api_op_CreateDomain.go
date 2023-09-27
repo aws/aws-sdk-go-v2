@@ -49,6 +49,10 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainInput) operationName() string {
+	return "CreateDomain"
+}
+
 type CreateDomainOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Cases domain.

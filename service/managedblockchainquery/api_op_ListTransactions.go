@@ -69,6 +69,10 @@ type ListTransactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTransactionsInput) operationName() string {
+	return "ListTransactions"
+}
+
 type ListTransactionsOutput struct {
 
 	// The array of transactions returned by the request.

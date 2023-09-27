@@ -62,6 +62,10 @@ type UpdateIntegrationResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIntegrationResponseInput) operationName() string {
+	return "UpdateIntegrationResponse"
+}
+
 // Represents an integration response. The status code must map to an existing
 // MethodResponse, and parameters and templates can be used to transform the
 // back-end response.

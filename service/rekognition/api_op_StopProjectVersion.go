@@ -46,6 +46,10 @@ type StopProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopProjectVersionInput) operationName() string {
+	return "StopProjectVersion"
+}
+
 type StopProjectVersionOutput struct {
 
 	// The current status of the stop operation.

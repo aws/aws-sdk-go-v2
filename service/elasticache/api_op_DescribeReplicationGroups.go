@@ -61,6 +61,10 @@ type DescribeReplicationGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationGroupsInput) operationName() string {
+	return "DescribeReplicationGroups"
+}
+
 // Represents the output of a DescribeReplicationGroups operation.
 type DescribeReplicationGroupsOutput struct {
 

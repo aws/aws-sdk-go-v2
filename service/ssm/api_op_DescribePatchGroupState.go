@@ -42,6 +42,10 @@ type DescribePatchGroupStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePatchGroupStateInput) operationName() string {
+	return "DescribePatchGroupState"
+}
+
 type DescribePatchGroupStateOutput struct {
 
 	// The number of managed nodes in the patch group.

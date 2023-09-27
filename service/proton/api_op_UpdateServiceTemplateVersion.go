@@ -71,6 +71,10 @@ type UpdateServiceTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceTemplateVersionInput) operationName() string {
+	return "UpdateServiceTemplateVersion"
+}
+
 type UpdateServiceTemplateVersionOutput struct {
 
 	// The service template version detail data that's returned by Proton.

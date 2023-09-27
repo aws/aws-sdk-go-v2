@@ -49,6 +49,10 @@ type DeleteBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBudgetInput) operationName() string {
+	return "DeleteBudget"
+}
+
 // Response of DeleteBudget
 type DeleteBudgetOutput struct {
 	// Metadata pertaining to the operation's result.

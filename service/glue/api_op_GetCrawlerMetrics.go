@@ -46,6 +46,10 @@ type GetCrawlerMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCrawlerMetricsInput) operationName() string {
+	return "GetCrawlerMetrics"
+}
+
 type GetCrawlerMetricsOutput struct {
 
 	// A list of metrics for the specified crawler.

@@ -68,6 +68,10 @@ type CreateGrantVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGrantVersionInput) operationName() string {
+	return "CreateGrantVersion"
+}
+
 type CreateGrantVersionOutput struct {
 
 	// Grant ARN.

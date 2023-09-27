@@ -44,6 +44,10 @@ type GetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateInput) operationName() string {
+	return "GetTemplate"
+}
+
 type GetTemplateOutput struct {
 
 	// The content of the email, composed of a subject line and either an HTML part or

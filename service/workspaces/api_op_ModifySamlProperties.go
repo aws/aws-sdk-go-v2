@@ -54,6 +54,10 @@ type ModifySamlPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySamlPropertiesInput) operationName() string {
+	return "ModifySamlProperties"
+}
+
 type ModifySamlPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

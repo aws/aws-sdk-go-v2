@@ -56,6 +56,10 @@ type CreateAssessmentTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssessmentTargetInput) operationName() string {
+	return "CreateAssessmentTarget"
+}
+
 type CreateAssessmentTargetOutput struct {
 
 	// The ARN that specifies the assessment target that is created.

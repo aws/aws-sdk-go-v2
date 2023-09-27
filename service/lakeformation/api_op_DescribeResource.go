@@ -43,6 +43,10 @@ type DescribeResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourceInput) operationName() string {
+	return "DescribeResource"
+}
+
 type DescribeResourceOutput struct {
 
 	// A structure containing information about an Lake Formation resource.

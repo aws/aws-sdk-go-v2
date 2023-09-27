@@ -66,6 +66,10 @@ type DescribeReservedInstancesListingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedInstancesListingsInput) operationName() string {
+	return "DescribeReservedInstancesListings"
+}
+
 // Contains the output of DescribeReservedInstancesListings.
 type DescribeReservedInstancesListingsOutput struct {
 

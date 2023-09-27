@@ -45,6 +45,10 @@ type DisassociateThirdPartyFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateThirdPartyFirewallInput) operationName() string {
+	return "DisassociateThirdPartyFirewall"
+}
+
 type DisassociateThirdPartyFirewallOutput struct {
 
 	// The current status for the disassociation of a Firewall Manager administrators

@@ -49,6 +49,10 @@ type DeleteNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkInterfaceInput) operationName() string {
+	return "DeleteNetworkInterface"
+}
+
 type DeleteNetworkInterfaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

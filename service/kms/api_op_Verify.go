@@ -139,6 +139,10 @@ type VerifyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyInput) operationName() string {
+	return "Verify"
+}
+
 type VerifyOutput struct {
 
 	// The Amazon Resource Name ( key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)

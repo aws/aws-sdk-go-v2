@@ -45,6 +45,10 @@ type PutConferencePreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConferencePreferenceInput) operationName() string {
+	return "PutConferencePreference"
+}
+
 type PutConferencePreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

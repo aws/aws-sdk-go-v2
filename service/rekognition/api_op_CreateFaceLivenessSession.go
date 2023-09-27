@@ -59,6 +59,10 @@ type CreateFaceLivenessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFaceLivenessSessionInput) operationName() string {
+	return "CreateFaceLivenessSession"
+}
+
 type CreateFaceLivenessSessionOutput struct {
 
 	// A unique 128-bit UUID identifying a Face Liveness session.

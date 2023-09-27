@@ -31,6 +31,10 @@ type HttpChecksumRequiredInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpChecksumRequiredInput) operationName() string {
+	return "HttpChecksumRequired"
+}
+
 type HttpChecksumRequiredOutput struct {
 	Foo *string
 

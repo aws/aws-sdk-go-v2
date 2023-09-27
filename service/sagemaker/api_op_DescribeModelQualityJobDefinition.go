@@ -44,6 +44,10 @@ type DescribeModelQualityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelQualityJobDefinitionInput) operationName() string {
+	return "DescribeModelQualityJobDefinition"
+}
+
 type DescribeModelQualityJobDefinitionOutput struct {
 
 	// The time at which the model quality job was created.

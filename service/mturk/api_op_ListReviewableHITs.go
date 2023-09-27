@@ -52,6 +52,10 @@ type ListReviewableHITsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReviewableHITsInput) operationName() string {
+	return "ListReviewableHITs"
+}
+
 type ListReviewableHITsOutput struct {
 
 	// The list of HIT elements returned by the query.

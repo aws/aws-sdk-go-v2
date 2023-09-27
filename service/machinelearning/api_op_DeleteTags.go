@@ -54,6 +54,10 @@ type DeleteTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTagsInput) operationName() string {
+	return "DeleteTags"
+}
+
 // Amazon ML returns the following elements.
 type DeleteTagsOutput struct {
 

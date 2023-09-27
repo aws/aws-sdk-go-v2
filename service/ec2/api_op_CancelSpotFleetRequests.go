@@ -63,6 +63,10 @@ type CancelSpotFleetRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelSpotFleetRequestsInput) operationName() string {
+	return "CancelSpotFleetRequests"
+}
+
 // Contains the output of CancelSpotFleetRequests.
 type CancelSpotFleetRequestsOutput struct {
 

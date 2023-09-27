@@ -79,6 +79,10 @@ type CreateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSnapshotInput) operationName() string {
+	return "CreateSnapshot"
+}
+
 // A JSON object containing the following fields:
 type CreateSnapshotOutput struct {
 

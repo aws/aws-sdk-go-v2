@@ -15,6 +15,7 @@
         "api_op_GetImages.go",
         "api_op_GetMediaForFragmentList.go",
         "api_op_ListFragments.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -74,6 +74,10 @@ type TagInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagInstanceProfileInput) operationName() string {
+	return "TagInstanceProfile"
+}
+
 type TagInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,6 +45,10 @@ type ListHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHostsInput) operationName() string {
+	return "ListHosts"
+}
+
 type ListHostsOutput struct {
 
 	// A list of hosts and the details for each host, such as status, endpoint, and

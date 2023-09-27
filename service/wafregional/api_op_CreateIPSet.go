@@ -69,6 +69,10 @@ type CreateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIPSetInput) operationName() string {
+	return "CreateIPSet"
+}
+
 type CreateIPSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateIPSet request. You can also

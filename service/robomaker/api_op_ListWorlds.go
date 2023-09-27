@@ -55,6 +55,10 @@ type ListWorldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorldsInput) operationName() string {
+	return "ListWorlds"
+}
+
 type ListWorldsOutput struct {
 
 	// If the previous paginated request did not return all of the remaining results,

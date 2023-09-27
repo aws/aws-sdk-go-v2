@@ -76,6 +76,10 @@ type StartFaceDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFaceDetectionInput) operationName() string {
+	return "StartFaceDetection"
+}
+
 type StartFaceDetectionOutput struct {
 
 	// The identifier for the face detection job. Use JobId to identify the job in a

@@ -47,6 +47,10 @@ type GetStudioMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStudioMemberInput) operationName() string {
+	return "GetStudioMember"
+}
+
 type GetStudioMemberOutput struct {
 
 	// The member.

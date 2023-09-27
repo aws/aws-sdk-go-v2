@@ -51,6 +51,10 @@ type SetTimeBasedAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTimeBasedAutoScalingInput) operationName() string {
+	return "SetTimeBasedAutoScaling"
+}
+
 type SetTimeBasedAutoScalingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,6 +53,10 @@ type ListDeliverabilityTestReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeliverabilityTestReportsInput) operationName() string {
+	return "ListDeliverabilityTestReports"
+}
+
 // A list of the predictive inbox placement test reports that are available for
 // your account, regardless of whether or not those tests are complete.
 type ListDeliverabilityTestReportsOutput struct {

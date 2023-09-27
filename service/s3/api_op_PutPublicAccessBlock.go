@@ -90,6 +90,10 @@ type PutPublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPublicAccessBlockInput) operationName() string {
+	return "PutPublicAccessBlock"
+}
+
 type PutPublicAccessBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

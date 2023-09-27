@@ -65,6 +65,10 @@ type GetDocumentationPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentationPartsInput) operationName() string {
+	return "GetDocumentationParts"
+}
+
 // The collection of documentation parts of an API.
 type GetDocumentationPartsOutput struct {
 

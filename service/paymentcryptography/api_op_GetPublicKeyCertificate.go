@@ -48,6 +48,10 @@ type GetPublicKeyCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPublicKeyCertificateInput) operationName() string {
+	return "GetPublicKeyCertificate"
+}
+
 type GetPublicKeyCertificateOutput struct {
 
 	// The public key component of the asymmetric key pair in a certificate (PEM)

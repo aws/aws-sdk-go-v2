@@ -41,6 +41,10 @@ type GetLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLifecyclePolicyInput) operationName() string {
+	return "GetLifecyclePolicy"
+}
+
 type GetLifecyclePolicyOutput struct {
 
 	// The object lifecycle policy that is assigned to the container.

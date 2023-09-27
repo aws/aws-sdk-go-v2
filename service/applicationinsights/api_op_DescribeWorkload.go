@@ -55,6 +55,10 @@ type DescribeWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkloadInput) operationName() string {
+	return "DescribeWorkload"
+}
+
 type DescribeWorkloadOutput struct {
 
 	// The configuration settings of the workload. The value is the escaped JSON of

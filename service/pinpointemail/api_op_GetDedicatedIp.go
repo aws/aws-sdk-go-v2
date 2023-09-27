@@ -47,6 +47,10 @@ type GetDedicatedIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDedicatedIpInput) operationName() string {
+	return "GetDedicatedIp"
+}
+
 // Information about a dedicated IP address.
 type GetDedicatedIpOutput struct {
 

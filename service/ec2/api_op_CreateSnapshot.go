@@ -96,6 +96,10 @@ type CreateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSnapshotInput) operationName() string {
+	return "CreateSnapshot"
+}
+
 // Describes a snapshot.
 type CreateSnapshotOutput struct {
 

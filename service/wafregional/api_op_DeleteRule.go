@@ -60,6 +60,10 @@ type DeleteRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRuleInput) operationName() string {
+	return "DeleteRule"
+}
+
 type DeleteRuleOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRule request. You can also

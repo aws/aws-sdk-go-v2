@@ -49,6 +49,10 @@ type GetMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLModelInput) operationName() string {
+	return "GetMLModel"
+}
+
 // Represents the output of a GetMLModel operation, and provides detailed
 // information about a MLModel .
 type GetMLModelOutput struct {

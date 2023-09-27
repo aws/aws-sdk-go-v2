@@ -53,6 +53,10 @@ type BatchPutFieldOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutFieldOptionsInput) operationName() string {
+	return "BatchPutFieldOptions"
+}
+
 type BatchPutFieldOptionsOutput struct {
 
 	// A list of field errors.

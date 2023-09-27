@@ -49,6 +49,10 @@ type ListSpeechSynthesisTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSpeechSynthesisTasksInput) operationName() string {
+	return "ListSpeechSynthesisTasks"
+}
+
 type ListSpeechSynthesisTasksOutput struct {
 
 	// An opaque pagination token returned from the previous List operation in this

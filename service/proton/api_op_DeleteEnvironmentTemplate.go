@@ -43,6 +43,10 @@ type DeleteEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEnvironmentTemplateInput) operationName() string {
+	return "DeleteEnvironmentTemplate"
+}
+
 type DeleteEnvironmentTemplateOutput struct {
 
 	// The detailed data of the environment template being deleted.

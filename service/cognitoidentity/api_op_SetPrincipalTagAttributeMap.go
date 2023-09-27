@@ -54,6 +54,10 @@ type SetPrincipalTagAttributeMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetPrincipalTagAttributeMapInput) operationName() string {
+	return "SetPrincipalTagAttributeMap"
+}
+
 type SetPrincipalTagAttributeMapOutput struct {
 
 	// The ID of the Identity Pool you want to set attribute mappings for.

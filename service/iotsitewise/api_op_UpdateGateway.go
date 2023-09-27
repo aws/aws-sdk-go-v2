@@ -46,6 +46,10 @@ type UpdateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGatewayInput) operationName() string {
+	return "UpdateGateway"
+}
+
 type UpdateGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

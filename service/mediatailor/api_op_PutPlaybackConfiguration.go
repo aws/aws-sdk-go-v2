@@ -115,6 +115,10 @@ type PutPlaybackConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPlaybackConfigurationInput) operationName() string {
+	return "PutPlaybackConfiguration"
+}
+
 type PutPlaybackConfigurationOutput struct {
 
 	// The URL for the ad decision server (ADS). This includes the specification of

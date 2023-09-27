@@ -42,6 +42,10 @@ type GetSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSecurityConfigurationInput) operationName() string {
+	return "GetSecurityConfiguration"
+}
+
 type GetSecurityConfigurationOutput struct {
 
 	// The requested security configuration.

@@ -44,6 +44,10 @@ type DescribeHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHumanLoopInput) operationName() string {
+	return "DescribeHumanLoop"
+}
+
 type DescribeHumanLoopOutput struct {
 
 	// The creation time when Amazon Augmented AI created the human loop.

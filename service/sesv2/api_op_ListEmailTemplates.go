@@ -54,6 +54,10 @@ type ListEmailTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEmailTemplatesInput) operationName() string {
+	return "ListEmailTemplates"
+}
+
 // The following elements are returned by the service.
 type ListEmailTemplatesOutput struct {
 

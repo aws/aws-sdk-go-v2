@@ -62,6 +62,10 @@ type DescribeCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCertificatesInput) operationName() string {
+	return "DescribeCertificates"
+}
+
 // Data returned by the DescribeCertificates action.
 type DescribeCertificatesOutput struct {
 

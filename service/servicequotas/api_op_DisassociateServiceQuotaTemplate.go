@@ -38,6 +38,10 @@ type DisassociateServiceQuotaTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateServiceQuotaTemplateInput) operationName() string {
+	return "DisassociateServiceQuotaTemplate"
+}
+
 type DisassociateServiceQuotaTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

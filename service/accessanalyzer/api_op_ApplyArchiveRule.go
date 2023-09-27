@@ -51,6 +51,10 @@ type ApplyArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplyArchiveRuleInput) operationName() string {
+	return "ApplyArchiveRule"
+}
+
 type ApplyArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

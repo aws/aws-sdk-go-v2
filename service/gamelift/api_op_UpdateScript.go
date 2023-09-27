@@ -78,6 +78,10 @@ type UpdateScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScriptInput) operationName() string {
+	return "UpdateScript"
+}
+
 type UpdateScriptOutput struct {
 
 	// The newly created script record with a unique script ID. The new script's

@@ -73,6 +73,10 @@ type PromoteReadReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PromoteReadReplicaInput) operationName() string {
+	return "PromoteReadReplica"
+}
+
 type PromoteReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

@@ -49,6 +49,10 @@ type DeleteConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfiguredTableAnalysisRuleInput) operationName() string {
+	return "DeleteConfiguredTableAnalysisRule"
+}
+
 // An empty response that indicates a successful delete.
 type DeleteConfiguredTableAnalysisRuleOutput struct {
 	// Metadata pertaining to the operation's result.

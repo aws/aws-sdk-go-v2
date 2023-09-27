@@ -46,6 +46,10 @@ type AssociateBudgetWithResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateBudgetWithResourceInput) operationName() string {
+	return "AssociateBudgetWithResource"
+}
+
 type AssociateBudgetWithResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -89,6 +89,10 @@ type CreateLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLaunchInput) operationName() string {
+	return "CreateLaunch"
+}
+
 type CreateLaunchOutput struct {
 
 	// A structure that contains the configuration of the launch that was created.

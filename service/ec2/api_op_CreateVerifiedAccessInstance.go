@@ -60,6 +60,10 @@ type CreateVerifiedAccessInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVerifiedAccessInstanceInput) operationName() string {
+	return "CreateVerifiedAccessInstance"
+}
+
 type CreateVerifiedAccessInstanceOutput struct {
 
 	// The ID of the Verified Access instance.

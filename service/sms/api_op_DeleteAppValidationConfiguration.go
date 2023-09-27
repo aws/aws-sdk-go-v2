@@ -41,6 +41,10 @@ type DeleteAppValidationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppValidationConfigurationInput) operationName() string {
+	return "DeleteAppValidationConfiguration"
+}
+
 type DeleteAppValidationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -68,6 +68,10 @@ type CompleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteSnapshotInput) operationName() string {
+	return "CompleteSnapshot"
+}
+
 type CompleteSnapshotOutput struct {
 
 	// The status of the snapshot.

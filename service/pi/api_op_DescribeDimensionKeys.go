@@ -135,6 +135,10 @@ type DescribeDimensionKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDimensionKeysInput) operationName() string {
+	return "DescribeDimensionKeys"
+}
+
 type DescribeDimensionKeysOutput struct {
 
 	// The end time for the returned dimension keys, after alignment to a granular

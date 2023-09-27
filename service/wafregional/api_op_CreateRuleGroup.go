@@ -74,6 +74,10 @@ type CreateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRuleGroupInput) operationName() string {
+	return "CreateRuleGroup"
+}
+
 type CreateRuleGroupOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRuleGroup request. You can

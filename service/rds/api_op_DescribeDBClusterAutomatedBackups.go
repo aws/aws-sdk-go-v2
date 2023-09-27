@@ -76,6 +76,10 @@ type DescribeDBClusterAutomatedBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterAutomatedBackupsInput) operationName() string {
+	return "DescribeDBClusterAutomatedBackups"
+}
+
 type DescribeDBClusterAutomatedBackupsOutput struct {
 
 	// A list of DBClusterAutomatedBackup backups.

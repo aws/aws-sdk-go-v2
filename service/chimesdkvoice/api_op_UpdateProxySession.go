@@ -55,6 +55,10 @@ type UpdateProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProxySessionInput) operationName() string {
+	return "UpdateProxySession"
+}
+
 type UpdateProxySessionOutput struct {
 
 	// The updated proxy session details.

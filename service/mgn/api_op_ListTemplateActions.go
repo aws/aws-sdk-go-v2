@@ -52,6 +52,10 @@ type ListTemplateActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplateActionsInput) operationName() string {
+	return "ListTemplateActions"
+}
+
 type ListTemplateActionsOutput struct {
 
 	// List of template post migration custom actions.

@@ -51,6 +51,10 @@ type DeleteResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResolverInput) operationName() string {
+	return "DeleteResolver"
+}
+
 type DeleteResolverOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

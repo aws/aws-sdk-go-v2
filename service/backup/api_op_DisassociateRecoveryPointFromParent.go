@@ -53,6 +53,10 @@ type DisassociateRecoveryPointFromParentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateRecoveryPointFromParentInput) operationName() string {
+	return "DisassociateRecoveryPointFromParent"
+}
+
 type DisassociateRecoveryPointFromParentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

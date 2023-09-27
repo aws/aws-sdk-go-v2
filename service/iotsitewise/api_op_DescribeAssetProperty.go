@@ -53,6 +53,10 @@ type DescribeAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssetPropertyInput) operationName() string {
+	return "DescribeAssetProperty"
+}
+
 type DescribeAssetPropertyOutput struct {
 
 	// The ID of the asset.

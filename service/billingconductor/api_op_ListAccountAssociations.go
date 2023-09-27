@@ -52,6 +52,10 @@ type ListAccountAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountAssociationsInput) operationName() string {
+	return "ListAccountAssociations"
+}
+
 type ListAccountAssociationsOutput struct {
 
 	// The list of linked accounts in the payer account.

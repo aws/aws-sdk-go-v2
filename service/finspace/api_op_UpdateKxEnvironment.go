@@ -52,6 +52,10 @@ type UpdateKxEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKxEnvironmentInput) operationName() string {
+	return "UpdateKxEnvironment"
+}
+
 type UpdateKxEnvironmentOutput struct {
 
 	// The identifier of the availability zones where subnets for the environment are

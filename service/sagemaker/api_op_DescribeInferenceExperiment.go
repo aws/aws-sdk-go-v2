@@ -43,6 +43,10 @@ type DescribeInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInferenceExperimentInput) operationName() string {
+	return "DescribeInferenceExperiment"
+}
+
 type DescribeInferenceExperimentOutput struct {
 
 	// The ARN of the inference experiment being described.

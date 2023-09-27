@@ -56,6 +56,10 @@ type DisassociateChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateChannelFlowInput) operationName() string {
+	return "DisassociateChannelFlow"
+}
+
 type DisassociateChannelFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

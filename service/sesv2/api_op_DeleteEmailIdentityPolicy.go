@@ -59,6 +59,10 @@ type DeleteEmailIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEmailIdentityPolicyInput) operationName() string {
+	return "DeleteEmailIdentityPolicy"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteEmailIdentityPolicyOutput struct {

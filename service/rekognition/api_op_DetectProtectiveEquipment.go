@@ -71,6 +71,10 @@ type DetectProtectiveEquipmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectProtectiveEquipmentInput) operationName() string {
+	return "DetectProtectiveEquipment"
+}
+
 type DetectProtectiveEquipmentOutput struct {
 
 	// An array of persons detected in the image (including persons not wearing PPE).

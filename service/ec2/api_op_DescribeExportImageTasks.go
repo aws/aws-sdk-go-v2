@@ -56,6 +56,10 @@ type DescribeExportImageTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportImageTasksInput) operationName() string {
+	return "DescribeExportImageTasks"
+}
+
 type DescribeExportImageTasksOutput struct {
 
 	// Information about the export image tasks.

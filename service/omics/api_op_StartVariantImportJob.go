@@ -58,6 +58,10 @@ type StartVariantImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartVariantImportJobInput) operationName() string {
+	return "StartVariantImportJob"
+}
+
 type StartVariantImportJobOutput struct {
 
 	// The job's ID.

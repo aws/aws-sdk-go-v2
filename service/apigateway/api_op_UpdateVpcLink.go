@@ -48,6 +48,10 @@ type UpdateVpcLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVpcLinkInput) operationName() string {
+	return "UpdateVpcLink"
+}
+
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
 // Private Cloud (VPC).
 type UpdateVpcLinkOutput struct {

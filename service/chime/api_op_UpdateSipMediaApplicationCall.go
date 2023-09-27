@@ -63,6 +63,10 @@ type UpdateSipMediaApplicationCallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSipMediaApplicationCallInput) operationName() string {
+	return "UpdateSipMediaApplicationCall"
+}
+
 type UpdateSipMediaApplicationCallOutput struct {
 
 	// A Call instance for a SIP media application.

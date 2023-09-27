@@ -43,6 +43,10 @@ type DescribeModelPackageGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelPackageGroupInput) operationName() string {
+	return "DescribeModelPackageGroup"
+}
+
 type DescribeModelPackageGroupOutput struct {
 
 	// Information about the user who created or modified an experiment, trial, trial

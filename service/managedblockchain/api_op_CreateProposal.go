@@ -79,6 +79,10 @@ type CreateProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProposalInput) operationName() string {
+	return "CreateProposal"
+}
+
 type CreateProposalOutput struct {
 
 	// The unique identifier of the proposal.

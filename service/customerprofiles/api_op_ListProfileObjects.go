@@ -63,6 +63,10 @@ type ListProfileObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfileObjectsInput) operationName() string {
+	return "ListProfileObjects"
+}
+
 type ListProfileObjectsOutput struct {
 
 	// The list of ListProfileObject instances.

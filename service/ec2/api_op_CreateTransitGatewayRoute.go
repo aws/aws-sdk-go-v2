@@ -60,6 +60,10 @@ type CreateTransitGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayRouteInput) operationName() string {
+	return "CreateTransitGatewayRoute"
+}
+
 type CreateTransitGatewayRouteOutput struct {
 
 	// Information about the route.

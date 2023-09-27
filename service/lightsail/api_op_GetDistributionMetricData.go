@@ -128,6 +128,10 @@ type GetDistributionMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDistributionMetricDataInput) operationName() string {
+	return "GetDistributionMetricData"
+}
+
 type GetDistributionMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.

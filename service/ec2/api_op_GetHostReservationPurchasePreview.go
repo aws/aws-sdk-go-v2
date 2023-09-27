@@ -50,6 +50,10 @@ type GetHostReservationPurchasePreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostReservationPurchasePreviewInput) operationName() string {
+	return "GetHostReservationPurchasePreview"
+}
+
 type GetHostReservationPurchasePreviewOutput struct {
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts are

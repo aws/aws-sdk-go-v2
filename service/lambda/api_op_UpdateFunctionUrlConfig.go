@@ -72,6 +72,10 @@ type UpdateFunctionUrlConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFunctionUrlConfigInput) operationName() string {
+	return "UpdateFunctionUrlConfig"
+}
+
 type UpdateFunctionUrlConfigOutput struct {
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you

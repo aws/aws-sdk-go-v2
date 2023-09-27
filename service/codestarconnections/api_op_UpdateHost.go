@@ -50,6 +50,10 @@ type UpdateHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHostInput) operationName() string {
+	return "UpdateHost"
+}
+
 type UpdateHostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

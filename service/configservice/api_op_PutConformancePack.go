@@ -79,6 +79,10 @@ type PutConformancePackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConformancePackInput) operationName() string {
+	return "PutConformancePack"
+}
+
 type PutConformancePackOutput struct {
 
 	// ARN of the conformance pack.

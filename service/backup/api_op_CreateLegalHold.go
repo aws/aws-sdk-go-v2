@@ -65,6 +65,10 @@ type CreateLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLegalHoldInput) operationName() string {
+	return "CreateLegalHold"
+}
+
 type CreateLegalHoldOutput struct {
 
 	// Time in number format when legal hold was created.

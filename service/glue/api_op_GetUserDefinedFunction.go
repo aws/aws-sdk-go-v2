@@ -51,6 +51,10 @@ type GetUserDefinedFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserDefinedFunctionInput) operationName() string {
+	return "GetUserDefinedFunction"
+}
+
 type GetUserDefinedFunctionOutput struct {
 
 	// The requested function definition.

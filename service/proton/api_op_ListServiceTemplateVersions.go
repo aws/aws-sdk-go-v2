@@ -55,6 +55,10 @@ type ListServiceTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceTemplateVersionsInput) operationName() string {
+	return "ListServiceTemplateVersions"
+}
+
 type ListServiceTemplateVersionsOutput struct {
 
 	// An array of major or minor versions of a service template with detail data.

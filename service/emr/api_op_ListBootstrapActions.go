@@ -46,6 +46,10 @@ type ListBootstrapActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBootstrapActionsInput) operationName() string {
+	return "ListBootstrapActions"
+}
+
 // This output contains the bootstrap actions detail.
 type ListBootstrapActionsOutput struct {
 

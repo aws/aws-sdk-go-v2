@@ -49,6 +49,10 @@ type DeleteLayerVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLayerVersionInput) operationName() string {
+	return "DeleteLayerVersion"
+}
+
 type DeleteLayerVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type DeleteQueuedReservedInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQueuedReservedInstancesInput) operationName() string {
+	return "DeleteQueuedReservedInstances"
+}
+
 type DeleteQueuedReservedInstancesOutput struct {
 
 	// Information about the queued purchases that could not be deleted.

@@ -96,6 +96,10 @@ type VerifyPinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyPinDataInput) operationName() string {
+	return "VerifyPinData"
+}
+
 type VerifyPinDataOutput struct {
 
 	// The keyARN of the PEK that Amazon Web Services Payment Cryptography uses for

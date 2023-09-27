@@ -119,6 +119,10 @@ type PutBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketReplicationInput) operationName() string {
+	return "PutBucketReplication"
+}
+
 type PutBucketReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

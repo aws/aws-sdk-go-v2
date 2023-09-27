@@ -41,6 +41,10 @@ type DeleteWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkflowInput) operationName() string {
+	return "DeleteWorkflow"
+}
+
 type DeleteWorkflowOutput struct {
 
 	// Name of the workflow specified in input.

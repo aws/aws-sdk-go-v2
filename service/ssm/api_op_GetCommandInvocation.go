@@ -69,6 +69,10 @@ type GetCommandInvocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCommandInvocationInput) operationName() string {
+	return "GetCommandInvocation"
+}
+
 type GetCommandInvocationOutput struct {
 
 	// Amazon CloudWatch Logs information where Systems Manager sent the command

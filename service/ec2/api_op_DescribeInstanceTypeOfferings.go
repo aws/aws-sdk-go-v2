@@ -65,6 +65,10 @@ type DescribeInstanceTypeOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceTypeOfferingsInput) operationName() string {
+	return "DescribeInstanceTypeOfferings"
+}
+
 type DescribeInstanceTypeOfferingsOutput struct {
 
 	// The instance types offered.

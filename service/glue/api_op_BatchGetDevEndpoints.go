@@ -47,6 +47,10 @@ type BatchGetDevEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetDevEndpointsInput) operationName() string {
+	return "BatchGetDevEndpoints"
+}
+
 type BatchGetDevEndpointsOutput struct {
 
 	// A list of DevEndpoint definitions.

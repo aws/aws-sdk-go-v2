@@ -64,6 +64,10 @@ type SetIdentityFeedbackForwardingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetIdentityFeedbackForwardingEnabledInput) operationName() string {
+	return "SetIdentityFeedbackForwardingEnabled"
+}
+
 // An empty element returned on a successful request.
 type SetIdentityFeedbackForwardingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.

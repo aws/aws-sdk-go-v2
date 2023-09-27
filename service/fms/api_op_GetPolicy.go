@@ -42,6 +42,10 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyInput) operationName() string {
+	return "GetPolicy"
+}
+
 type GetPolicyOutput struct {
 
 	// Information about the specified Firewall Manager policy.

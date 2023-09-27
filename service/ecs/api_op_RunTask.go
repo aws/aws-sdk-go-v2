@@ -204,6 +204,10 @@ type RunTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunTaskInput) operationName() string {
+	return "RunTask"
+}
+
 type RunTaskOutput struct {
 
 	// Any failures associated with the call.

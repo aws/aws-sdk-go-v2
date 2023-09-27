@@ -54,6 +54,10 @@ type DeleteContainerImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteContainerImageInput) operationName() string {
+	return "DeleteContainerImage"
+}
+
 type DeleteContainerImageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

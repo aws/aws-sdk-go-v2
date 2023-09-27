@@ -43,6 +43,10 @@ type DeleteRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRemoteAccessSessionInput) operationName() string {
+	return "DeleteRemoteAccessSession"
+}
+
 // The response from the server when a request is made to delete the remote access
 // session.
 type DeleteRemoteAccessSessionOutput struct {

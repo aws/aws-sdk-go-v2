@@ -53,6 +53,10 @@ type ListWatchlistsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWatchlistsInput) operationName() string {
+	return "ListWatchlists"
+}
+
 type ListWatchlistsOutput struct {
 
 	// If NextToken is returned, there are more results available. The value of

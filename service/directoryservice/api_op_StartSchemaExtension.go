@@ -60,6 +60,10 @@ type StartSchemaExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSchemaExtensionInput) operationName() string {
+	return "StartSchemaExtension"
+}
+
 type StartSchemaExtensionOutput struct {
 
 	// The identifier of the schema extension that will be applied.

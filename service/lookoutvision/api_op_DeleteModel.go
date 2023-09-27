@@ -63,6 +63,10 @@ type DeleteModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteModelInput) operationName() string {
+	return "DeleteModel"
+}
+
 type DeleteModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model that was deleted.

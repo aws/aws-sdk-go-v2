@@ -55,6 +55,10 @@ type UpdatePipelineStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePipelineStatusInput) operationName() string {
+	return "UpdatePipelineStatus"
+}
+
 // When you update status for a pipeline, Elastic Transcoder returns the values
 // that you specified in the request.
 type UpdatePipelineStatusOutput struct {

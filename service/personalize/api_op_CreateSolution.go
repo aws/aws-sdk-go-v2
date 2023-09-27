@@ -118,6 +118,10 @@ type CreateSolutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSolutionInput) operationName() string {
+	return "CreateSolution"
+}
+
 type CreateSolutionOutput struct {
 
 	// The ARN of the solution.

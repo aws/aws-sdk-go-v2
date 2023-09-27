@@ -120,6 +120,10 @@ type CreateCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCertificateAuthorityInput) operationName() string {
+	return "CreateCertificateAuthority"
+}
+
 type CreateCertificateAuthorityOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the certificate authority

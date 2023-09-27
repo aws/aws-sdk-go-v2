@@ -67,6 +67,10 @@ type GetLogGroupFieldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLogGroupFieldsInput) operationName() string {
+	return "GetLogGroupFields"
+}
+
 type GetLogGroupFieldsOutput struct {
 
 	// The array of fields found in the query. Each object in the array contains the

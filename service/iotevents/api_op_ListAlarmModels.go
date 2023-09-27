@@ -44,6 +44,10 @@ type ListAlarmModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAlarmModelsInput) operationName() string {
+	return "ListAlarmModels"
+}
+
 type ListAlarmModelsOutput struct {
 
 	// A list that summarizes each alarm model.

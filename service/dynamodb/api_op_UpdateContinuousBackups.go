@@ -56,6 +56,10 @@ type UpdateContinuousBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContinuousBackupsInput) operationName() string {
+	return "UpdateContinuousBackups"
+}
+
 type UpdateContinuousBackupsOutput struct {
 
 	// Represents the continuous backups and point in time recovery settings on the

@@ -79,6 +79,10 @@ type CreateMigrationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMigrationProjectInput) operationName() string {
+	return "CreateMigrationProject"
+}
+
 type CreateMigrationProjectOutput struct {
 
 	// The migration project that was created.

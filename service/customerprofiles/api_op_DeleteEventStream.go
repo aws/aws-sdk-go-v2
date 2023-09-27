@@ -46,6 +46,10 @@ type DeleteEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventStreamInput) operationName() string {
+	return "DeleteEventStream"
+}
+
 type DeleteEventStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

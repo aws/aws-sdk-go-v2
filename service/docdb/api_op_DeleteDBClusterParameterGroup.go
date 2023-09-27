@@ -46,6 +46,10 @@ type DeleteDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterParameterGroupInput) operationName() string {
+	return "DeleteDBClusterParameterGroup"
+}
+
 type DeleteDBClusterParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

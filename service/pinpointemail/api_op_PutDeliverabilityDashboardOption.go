@@ -64,6 +64,10 @@ type PutDeliverabilityDashboardOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDeliverabilityDashboardOptionInput) operationName() string {
+	return "PutDeliverabilityDashboardOption"
+}
+
 // A response that indicates whether the Deliverability dashboard is enabled for
 // your Amazon Pinpoint account.
 type PutDeliverabilityDashboardOptionOutput struct {

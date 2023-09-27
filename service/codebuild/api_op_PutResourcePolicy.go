@@ -49,6 +49,10 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourcePolicyInput) operationName() string {
+	return "PutResourcePolicy"
+}
+
 type PutResourcePolicyOutput struct {
 
 	// The ARN of the Project or ReportGroup resource that is associated with a

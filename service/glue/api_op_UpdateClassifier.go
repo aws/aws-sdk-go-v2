@@ -50,6 +50,10 @@ type UpdateClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClassifierInput) operationName() string {
+	return "UpdateClassifier"
+}
+
 type UpdateClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

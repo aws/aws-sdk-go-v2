@@ -78,6 +78,10 @@ type UpdateProvisionedProductPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProvisionedProductPropertiesInput) operationName() string {
+	return "UpdateProvisionedProductProperties"
+}
+
 type UpdateProvisionedProductPropertiesOutput struct {
 
 	// The provisioned product identifier.

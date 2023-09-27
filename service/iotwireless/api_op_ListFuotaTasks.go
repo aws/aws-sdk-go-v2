@@ -44,6 +44,10 @@ type ListFuotaTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFuotaTasksInput) operationName() string {
+	return "ListFuotaTasks"
+}
+
 type ListFuotaTasksOutput struct {
 
 	// Lists the FUOTA tasks registered to your AWS account.

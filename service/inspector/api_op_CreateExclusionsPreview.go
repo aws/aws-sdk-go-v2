@@ -44,6 +44,10 @@ type CreateExclusionsPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExclusionsPreviewInput) operationName() string {
+	return "CreateExclusionsPreview"
+}
+
 type CreateExclusionsPreviewOutput struct {
 
 	// Specifies the unique identifier of the requested exclusions preview. You can

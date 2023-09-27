@@ -44,6 +44,10 @@ type PutAppReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppReplicationConfigurationInput) operationName() string {
+	return "PutAppReplicationConfiguration"
+}
+
 type PutAppReplicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

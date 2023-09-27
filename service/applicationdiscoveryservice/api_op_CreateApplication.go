@@ -44,6 +44,10 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationInput) operationName() string {
+	return "CreateApplication"
+}
+
 type CreateApplicationOutput struct {
 
 	// Configuration ID of an application to be created.

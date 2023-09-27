@@ -55,6 +55,10 @@ type DescribeDBProxiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBProxiesInput) operationName() string {
+	return "DescribeDBProxies"
+}
+
 type DescribeDBProxiesOutput struct {
 
 	// A return value representing an arbitrary number of DBProxy data structures.

@@ -112,6 +112,10 @@ type PutLifecycleHookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLifecycleHookInput) operationName() string {
+	return "PutLifecycleHook"
+}
+
 type PutLifecycleHookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

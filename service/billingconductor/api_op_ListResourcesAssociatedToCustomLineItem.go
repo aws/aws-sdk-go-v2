@@ -56,6 +56,10 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesAssociatedToCustomLineItemInput) operationName() string {
+	return "ListResourcesAssociatedToCustomLineItem"
+}
+
 type ListResourcesAssociatedToCustomLineItemOutput struct {
 
 	// The custom line item ARN for which the resource associations are listed.

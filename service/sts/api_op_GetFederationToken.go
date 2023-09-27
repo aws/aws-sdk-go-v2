@@ -208,6 +208,10 @@ type GetFederationTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFederationTokenInput) operationName() string {
+	return "GetFederationToken"
+}
+
 // Contains the response to a successful GetFederationToken request, including
 // temporary Amazon Web Services credentials that can be used to make Amazon Web
 // Services requests.

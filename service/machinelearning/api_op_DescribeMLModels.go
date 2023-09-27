@@ -107,6 +107,10 @@ type DescribeMLModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMLModelsInput) operationName() string {
+	return "DescribeMLModels"
+}
+
 // Represents the output of a DescribeMLModels operation. The content is
 // essentially a list of MLModel .
 type DescribeMLModelsOutput struct {

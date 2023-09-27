@@ -125,6 +125,10 @@ type UpdateDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeploymentGroupInput) operationName() string {
+	return "UpdateDeploymentGroup"
+}
+
 // Represents the output of an UpdateDeploymentGroup operation.
 type UpdateDeploymentGroupOutput struct {
 

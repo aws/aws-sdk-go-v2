@@ -69,6 +69,7 @@
         "api_op_UpdateStorageSystem.go",
         "api_op_UpdateTask.go",
         "api_op_UpdateTaskExecution.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

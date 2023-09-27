@@ -37,6 +37,10 @@ type ListAvailableSolutionStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableSolutionStacksInput) operationName() string {
+	return "ListAvailableSolutionStacks"
+}
+
 // A list of available AWS Elastic Beanstalk solution stacks.
 type ListAvailableSolutionStacksOutput struct {
 

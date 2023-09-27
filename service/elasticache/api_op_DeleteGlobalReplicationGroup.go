@@ -60,6 +60,10 @@ type DeleteGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGlobalReplicationGroupInput) operationName() string {
+	return "DeleteGlobalReplicationGroup"
+}
+
 type DeleteGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary

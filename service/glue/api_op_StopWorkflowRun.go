@@ -46,6 +46,10 @@ type StopWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopWorkflowRunInput) operationName() string {
+	return "StopWorkflowRun"
+}
+
 type StopWorkflowRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type AssociateDataShareConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDataShareConsumerInput) operationName() string {
+	return "AssociateDataShareConsumer"
+}
+
 type AssociateDataShareConsumerOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly

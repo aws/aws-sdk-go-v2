@@ -58,6 +58,10 @@ type UpdateImageSetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateImageSetMetadataInput) operationName() string {
+	return "UpdateImageSetMetadata"
+}
+
 type UpdateImageSetMetadataOutput struct {
 
 	// The data store identifier.

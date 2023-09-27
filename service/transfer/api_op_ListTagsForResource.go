@@ -54,6 +54,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 type ListTagsForResourceOutput struct {
 
 	// The ARN you specified to list the tags of.

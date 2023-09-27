@@ -102,6 +102,10 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIndexInput) operationName() string {
+	return "CreateIndex"
+}
+
 type CreateIndexOutput struct {
 
 	// The identifier of the index. Use this identifier when you query an index, set

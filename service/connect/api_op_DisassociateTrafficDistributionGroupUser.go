@@ -54,6 +54,10 @@ type DisassociateTrafficDistributionGroupUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTrafficDistributionGroupUserInput) operationName() string {
+	return "DisassociateTrafficDistributionGroupUser"
+}
+
 type DisassociateTrafficDistributionGroupUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

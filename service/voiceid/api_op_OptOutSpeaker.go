@@ -52,6 +52,10 @@ type OptOutSpeakerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*OptOutSpeakerInput) operationName() string {
+	return "OptOutSpeaker"
+}
+
 type OptOutSpeakerOutput struct {
 
 	// Details about the opted-out speaker.

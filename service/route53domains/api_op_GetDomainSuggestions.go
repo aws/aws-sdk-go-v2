@@ -70,6 +70,10 @@ type GetDomainSuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainSuggestionsInput) operationName() string {
+	return "GetDomainSuggestions"
+}
+
 type GetDomainSuggestionsOutput struct {
 
 	// A list of possible domain names. If you specified true for OnlyAvailable in the

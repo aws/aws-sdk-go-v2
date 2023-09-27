@@ -48,6 +48,10 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourcePolicyInput) operationName() string {
+	return "DeleteResourcePolicy"
+}
+
 type DeleteResourcePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy

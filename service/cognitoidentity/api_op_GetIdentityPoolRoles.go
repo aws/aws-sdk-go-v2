@@ -44,6 +44,10 @@ type GetIdentityPoolRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityPoolRolesInput) operationName() string {
+	return "GetIdentityPoolRoles"
+}
+
 // Returned in response to a successful GetIdentityPoolRoles operation.
 type GetIdentityPoolRolesOutput struct {
 

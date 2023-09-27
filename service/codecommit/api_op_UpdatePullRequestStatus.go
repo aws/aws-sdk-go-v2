@@ -49,6 +49,10 @@ type UpdatePullRequestStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePullRequestStatusInput) operationName() string {
+	return "UpdatePullRequestStatus"
+}
+
 type UpdatePullRequestStatusOutput struct {
 
 	// Information about the pull request.

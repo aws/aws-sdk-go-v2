@@ -54,6 +54,10 @@ type ListTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTypesInput) operationName() string {
+	return "ListTypes"
+}
+
 type ListTypesOutput struct {
 
 	// An identifier to pass in the next request to this operation to return the next

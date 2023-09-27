@@ -59,6 +59,10 @@ type AdminUserGlobalSignOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminUserGlobalSignOutInput) operationName() string {
+	return "AdminUserGlobalSignOut"
+}
+
 // The global sign-out response, as an administrator.
 type AdminUserGlobalSignOutOutput struct {
 	// Metadata pertaining to the operation's result.

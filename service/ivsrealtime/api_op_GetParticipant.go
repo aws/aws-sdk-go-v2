@@ -53,6 +53,10 @@ type GetParticipantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParticipantInput) operationName() string {
+	return "GetParticipant"
+}
+
 type GetParticipantOutput struct {
 
 	// The participant that is returned.

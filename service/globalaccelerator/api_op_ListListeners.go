@@ -51,6 +51,10 @@ type ListListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListListenersInput) operationName() string {
+	return "ListListeners"
+}
+
 type ListListenersOutput struct {
 
 	// The list of listeners for an accelerator.

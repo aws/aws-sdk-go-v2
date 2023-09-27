@@ -198,6 +198,10 @@ type CreateEventSourceMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventSourceMappingInput) operationName() string {
+	return "CreateEventSourceMapping"
+}
+
 // A mapping between an Amazon Web Services resource and a Lambda function. For
 // details, see CreateEventSourceMapping .
 type CreateEventSourceMappingOutput struct {

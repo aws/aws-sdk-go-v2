@@ -42,6 +42,10 @@ type GetGameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGameInput) operationName() string {
+	return "GetGame"
+}
+
 type GetGameOutput struct {
 
 	// The details of the game.

@@ -132,6 +132,10 @@ type CreateFlowLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFlowLogsInput) operationName() string {
+	return "CreateFlowLogs"
+}
+
 type CreateFlowLogsOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

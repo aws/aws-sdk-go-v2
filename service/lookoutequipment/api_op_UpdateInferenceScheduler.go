@@ -72,6 +72,10 @@ type UpdateInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInferenceSchedulerInput) operationName() string {
+	return "UpdateInferenceScheduler"
+}
+
 type UpdateInferenceSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,6 +47,10 @@ type ListCollectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCollectorsInput) operationName() string {
+	return "ListCollectors"
+}
+
 type ListCollectorsOutput struct {
 
 	// The list of all the installed collectors.

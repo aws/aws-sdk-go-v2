@@ -61,6 +61,10 @@ type DescribeChannelModeratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelModeratorInput) operationName() string {
+	return "DescribeChannelModerator"
+}
+
 type DescribeChannelModeratorOutput struct {
 
 	// The details of the channel moderator.

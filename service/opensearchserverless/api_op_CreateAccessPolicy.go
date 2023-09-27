@@ -63,6 +63,10 @@ type CreateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessPolicyInput) operationName() string {
+	return "CreateAccessPolicy"
+}
+
 type CreateAccessPolicyOutput struct {
 
 	// Details about the created access policy.

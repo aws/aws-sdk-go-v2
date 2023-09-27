@@ -100,6 +100,10 @@ type UpdateFunctionCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFunctionCodeInput) operationName() string {
+	return "UpdateFunctionCode"
+}
+
 // Details about a function's configuration.
 type UpdateFunctionCodeOutput struct {
 

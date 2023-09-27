@@ -55,6 +55,10 @@ type ListGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGatewaysInput) operationName() string {
+	return "ListGateways"
+}
+
 type ListGatewaysOutput struct {
 
 	// An array of GatewayInfo objects.

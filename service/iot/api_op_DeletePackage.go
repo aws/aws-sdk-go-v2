@@ -49,6 +49,10 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackageInput) operationName() string {
+	return "DeletePackage"
+}
+
 type DeletePackageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

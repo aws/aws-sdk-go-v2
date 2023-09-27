@@ -51,6 +51,10 @@ type DissociateEntityFromThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DissociateEntityFromThingInput) operationName() string {
+	return "DissociateEntityFromThing"
+}
+
 type DissociateEntityFromThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

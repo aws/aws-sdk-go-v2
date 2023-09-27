@@ -49,6 +49,10 @@ type UpdateMonitoringScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMonitoringScheduleInput) operationName() string {
+	return "UpdateMonitoringSchedule"
+}
+
 type UpdateMonitoringScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitoring schedule.

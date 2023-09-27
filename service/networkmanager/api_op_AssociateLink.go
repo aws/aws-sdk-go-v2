@@ -54,6 +54,10 @@ type AssociateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateLinkInput) operationName() string {
+	return "AssociateLink"
+}
+
 type AssociateLinkOutput struct {
 
 	// The link association.

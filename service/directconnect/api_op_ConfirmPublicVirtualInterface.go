@@ -44,6 +44,10 @@ type ConfirmPublicVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmPublicVirtualInterfaceInput) operationName() string {
+	return "ConfirmPublicVirtualInterface"
+}
+
 type ConfirmPublicVirtualInterfaceOutput struct {
 
 	// The state of the virtual interface. The following are the possible values:

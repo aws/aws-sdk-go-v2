@@ -48,6 +48,10 @@ type AuthorizeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeVpcEndpointAccessInput) operationName() string {
+	return "AuthorizeVpcEndpointAccess"
+}
+
 type AuthorizeVpcEndpointAccessOutput struct {
 
 	// Information about the Amazon Web Services account or service that was provided

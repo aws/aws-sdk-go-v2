@@ -59,6 +59,10 @@ type EnableImageDeprecationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableImageDeprecationInput) operationName() string {
+	return "EnableImageDeprecation"
+}
+
 type EnableImageDeprecationOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

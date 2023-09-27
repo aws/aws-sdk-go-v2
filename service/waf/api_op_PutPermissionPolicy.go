@@ -67,6 +67,10 @@ type PutPermissionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPermissionPolicyInput) operationName() string {
+	return "PutPermissionPolicy"
+}
+
 type PutPermissionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

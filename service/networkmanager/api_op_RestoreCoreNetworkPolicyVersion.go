@@ -49,6 +49,10 @@ type RestoreCoreNetworkPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreCoreNetworkPolicyVersionInput) operationName() string {
+	return "RestoreCoreNetworkPolicyVersion"
+}
+
 type RestoreCoreNetworkPolicyVersionOutput struct {
 
 	// Describes the restored core network policy.

@@ -48,6 +48,10 @@ type DeactivateKeySigningKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateKeySigningKeyInput) operationName() string {
+	return "DeactivateKeySigningKey"
+}
+
 type DeactivateKeySigningKeyOutput struct {
 
 	// A complex type that describes change information about changes made to your

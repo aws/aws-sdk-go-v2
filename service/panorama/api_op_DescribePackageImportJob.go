@@ -43,6 +43,10 @@ type DescribePackageImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackageImportJobInput) operationName() string {
+	return "DescribePackageImportJob"
+}
+
 type DescribePackageImportJobOutput struct {
 
 	// When the job was created.

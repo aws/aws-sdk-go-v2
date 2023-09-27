@@ -49,6 +49,10 @@ type GetExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExperimentInput) operationName() string {
+	return "GetExperiment"
+}
+
 type GetExperimentOutput struct {
 
 	// A structure containing the configuration details of the experiment.

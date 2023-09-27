@@ -50,6 +50,10 @@ type SetSMBGuestPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetSMBGuestPasswordInput) operationName() string {
+	return "SetSMBGuestPassword"
+}
+
 type SetSMBGuestPasswordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

@@ -42,6 +42,10 @@ type DescribePageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePageInput) operationName() string {
+	return "DescribePage"
+}
+
 type DescribePageOutput struct {
 
 	// The ARN of the contact that was engaged.

@@ -44,6 +44,10 @@ type RotateEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RotateEncryptionKeyInput) operationName() string {
+	return "RotateEncryptionKey"
+}
+
 type RotateEncryptionKeyOutput struct {
 
 	// Describes a cluster.

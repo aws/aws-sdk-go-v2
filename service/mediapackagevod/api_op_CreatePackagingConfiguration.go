@@ -63,6 +63,10 @@ type CreatePackagingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePackagingConfigurationInput) operationName() string {
+	return "CreatePackagingConfiguration"
+}
+
 type CreatePackagingConfigurationOutput struct {
 
 	// The ARN of the PackagingConfiguration.

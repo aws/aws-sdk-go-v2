@@ -41,6 +41,10 @@ type GetConnectorDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectorDefinitionInput) operationName() string {
+	return "GetConnectorDefinition"
+}
+
 type GetConnectorDefinitionOutput struct {
 
 	// The ARN of the definition.

@@ -51,6 +51,10 @@ type ListPromptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPromptsInput) operationName() string {
+	return "ListPrompts"
+}
+
 type ListPromptsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

@@ -54,6 +54,10 @@ type TagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagInput) operationName() string {
+	return "Tag"
+}
+
 type TagOutput struct {
 
 	// The ARN of the tagged resource.

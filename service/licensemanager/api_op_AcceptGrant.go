@@ -42,6 +42,10 @@ type AcceptGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptGrantInput) operationName() string {
+	return "AcceptGrant"
+}
+
 type AcceptGrantOutput struct {
 
 	// Grant ARN.

@@ -142,6 +142,10 @@ type SendCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendCommandInput) operationName() string {
+	return "SendCommand"
+}
+
 type SendCommandOutput struct {
 
 	// The request as it was received by Systems Manager. Also provides the command ID

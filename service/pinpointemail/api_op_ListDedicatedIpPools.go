@@ -48,6 +48,10 @@ type ListDedicatedIpPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDedicatedIpPoolsInput) operationName() string {
+	return "ListDedicatedIpPools"
+}
+
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
 

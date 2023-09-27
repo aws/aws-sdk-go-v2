@@ -118,6 +118,10 @@ type UpdateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuleGroupInput) operationName() string {
+	return "UpdateRuleGroup"
+}
+
 type UpdateRuleGroupOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update

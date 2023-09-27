@@ -46,6 +46,10 @@ type UpdateEventActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEventActionInput) operationName() string {
+	return "UpdateEventAction"
+}
+
 type UpdateEventActionOutput struct {
 
 	// What occurs after a certain event.

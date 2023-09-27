@@ -68,6 +68,10 @@ type UpdateSourceControlFromJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSourceControlFromJobInput) operationName() string {
+	return "UpdateSourceControlFromJob"
+}
+
 type UpdateSourceControlFromJobOutput struct {
 
 	// The name of the Glue job.

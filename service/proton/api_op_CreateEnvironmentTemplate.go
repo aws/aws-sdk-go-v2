@@ -73,6 +73,10 @@ type CreateEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEnvironmentTemplateInput) operationName() string {
+	return "CreateEnvironmentTemplate"
+}
+
 type CreateEnvironmentTemplateOutput struct {
 
 	// The environment template detail data that's returned by Proton.

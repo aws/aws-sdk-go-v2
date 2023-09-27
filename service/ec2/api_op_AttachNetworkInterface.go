@@ -68,6 +68,10 @@ type AttachNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachNetworkInterfaceInput) operationName() string {
+	return "AttachNetworkInterface"
+}
+
 // Contains the output of AttachNetworkInterface.
 type AttachNetworkInterfaceOutput struct {
 

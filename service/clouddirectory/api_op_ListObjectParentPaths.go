@@ -62,6 +62,10 @@ type ListObjectParentPathsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectParentPathsInput) operationName() string {
+	return "ListObjectParentPaths"
+}
+
 type ListObjectParentPathsOutput struct {
 
 	// The pagination token.

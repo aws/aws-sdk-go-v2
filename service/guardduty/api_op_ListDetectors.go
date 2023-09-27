@@ -46,6 +46,10 @@ type ListDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDetectorsInput) operationName() string {
+	return "ListDetectors"
+}
+
 type ListDetectorsOutput struct {
 
 	// A list of detector IDs.

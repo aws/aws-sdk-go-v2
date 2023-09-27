@@ -60,6 +60,10 @@ type ImportHypervisorConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportHypervisorConfigurationInput) operationName() string {
+	return "ImportHypervisorConfiguration"
+}
+
 type ImportHypervisorConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor you disassociated.

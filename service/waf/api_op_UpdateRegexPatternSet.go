@@ -82,6 +82,10 @@ type UpdateRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRegexPatternSetInput) operationName() string {
+	return "UpdateRegexPatternSet"
+}
+
 type UpdateRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRegexPatternSet request. You

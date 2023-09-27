@@ -43,6 +43,10 @@ type DeleteDirectConnectGatewayAssociationProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDirectConnectGatewayAssociationProposalInput) operationName() string {
+	return "DeleteDirectConnectGatewayAssociationProposal"
+}
+
 type DeleteDirectConnectGatewayAssociationProposalOutput struct {
 
 	// The ID of the associated gateway.

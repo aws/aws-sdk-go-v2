@@ -50,6 +50,10 @@ type ImportGameConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportGameConfigurationInput) operationName() string {
+	return "ImportGameConfiguration"
+}
+
 type ImportGameConfigurationOutput struct {
 
 	// Details about the game configuration.

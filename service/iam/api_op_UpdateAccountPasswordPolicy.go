@@ -108,6 +108,10 @@ type UpdateAccountPasswordPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountPasswordPolicyInput) operationName() string {
+	return "UpdateAccountPasswordPolicy"
+}
+
 type UpdateAccountPasswordPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

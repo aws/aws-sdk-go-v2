@@ -47,6 +47,10 @@ type ListDataCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataCatalogsInput) operationName() string {
+	return "ListDataCatalogs"
+}
+
 type ListDataCatalogsOutput struct {
 
 	// A summary list of data catalogs.

@@ -45,6 +45,10 @@ type DescribeDominantLanguageDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDominantLanguageDetectionJobInput) operationName() string {
+	return "DescribeDominantLanguageDetectionJob"
+}
+
 type DescribeDominantLanguageDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a dominant language

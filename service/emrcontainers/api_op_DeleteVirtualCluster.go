@@ -45,6 +45,10 @@ type DeleteVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualClusterInput) operationName() string {
+	return "DeleteVirtualCluster"
+}
+
 type DeleteVirtualClusterOutput struct {
 
 	// This output contains the ID of the virtual cluster that will be deleted.

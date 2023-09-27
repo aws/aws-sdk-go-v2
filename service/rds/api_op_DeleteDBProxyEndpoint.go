@@ -45,6 +45,10 @@ type DeleteDBProxyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBProxyEndpointInput) operationName() string {
+	return "DeleteDBProxyEndpoint"
+}
+
 type DeleteDBProxyEndpointOutput struct {
 
 	// The data structure representing the details of the DB proxy endpoint that you

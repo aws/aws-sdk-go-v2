@@ -47,6 +47,10 @@ type DisableAWSOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableAWSOrganizationsAccessInput) operationName() string {
+	return "DisableAWSOrganizationsAccess"
+}
+
 type DisableAWSOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

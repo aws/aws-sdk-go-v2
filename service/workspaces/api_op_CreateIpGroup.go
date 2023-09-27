@@ -60,6 +60,10 @@ type CreateIpGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIpGroupInput) operationName() string {
+	return "CreateIpGroup"
+}
+
 type CreateIpGroupOutput struct {
 
 	// The identifier of the group.

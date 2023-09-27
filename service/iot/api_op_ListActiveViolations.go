@@ -61,6 +61,10 @@ type ListActiveViolationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListActiveViolationsInput) operationName() string {
+	return "ListActiveViolations"
+}
+
 type ListActiveViolationsOutput struct {
 
 	// The list of active violations.

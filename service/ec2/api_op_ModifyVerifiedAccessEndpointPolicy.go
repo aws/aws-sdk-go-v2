@@ -62,6 +62,10 @@ type ModifyVerifiedAccessEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVerifiedAccessEndpointPolicyInput) operationName() string {
+	return "ModifyVerifiedAccessEndpointPolicy"
+}
+
 type ModifyVerifiedAccessEndpointPolicyOutput struct {
 
 	// The Verified Access policy document.

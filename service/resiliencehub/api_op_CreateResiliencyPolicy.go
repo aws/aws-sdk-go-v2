@@ -70,6 +70,10 @@ type CreateResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResiliencyPolicyInput) operationName() string {
+	return "CreateResiliencyPolicy"
+}
+
 type CreateResiliencyPolicyOutput struct {
 
 	// The type of resiliency policy that was created, including the recovery time

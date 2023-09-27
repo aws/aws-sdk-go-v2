@@ -46,6 +46,10 @@ type StopCompilationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopCompilationJobInput) operationName() string {
+	return "StopCompilationJob"
+}
+
 type StopCompilationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

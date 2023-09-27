@@ -53,6 +53,10 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationSetsInput) operationName() string {
+	return "ListConfigurationSets"
+}
+
 // A list of configuration sets in your Amazon Pinpoint account in the current AWS
 // Region.
 type ListConfigurationSetsOutput struct {

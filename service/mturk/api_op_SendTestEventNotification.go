@@ -57,6 +57,10 @@ type SendTestEventNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendTestEventNotificationInput) operationName() string {
+	return "SendTestEventNotification"
+}
+
 type SendTestEventNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

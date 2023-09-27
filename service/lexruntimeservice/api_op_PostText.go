@@ -129,6 +129,10 @@ type PostTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostTextInput) operationName() string {
+	return "PostText"
+}
+
 type PostTextOutput struct {
 
 	// A list of active contexts for the session. A context can be set when an intent

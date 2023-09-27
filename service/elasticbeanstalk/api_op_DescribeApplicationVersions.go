@@ -56,6 +56,10 @@ type DescribeApplicationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationVersionsInput) operationName() string {
+	return "DescribeApplicationVersions"
+}
+
 // Result message wrapping a list of application version descriptions.
 type DescribeApplicationVersionsOutput struct {
 

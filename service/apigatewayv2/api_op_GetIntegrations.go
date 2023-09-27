@@ -49,6 +49,10 @@ type GetIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntegrationsInput) operationName() string {
+	return "GetIntegrations"
+}
+
 type GetIntegrationsOutput struct {
 
 	// The elements from this collection.

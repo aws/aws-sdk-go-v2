@@ -52,6 +52,10 @@ type OpenInstancePublicPortsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*OpenInstancePublicPortsInput) operationName() string {
+	return "OpenInstancePublicPorts"
+}
+
 type OpenInstancePublicPortsOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

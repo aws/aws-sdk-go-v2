@@ -96,6 +96,10 @@ type DescribeDBClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBClusterSnapshotsInput) operationName() string {
+	return "DescribeDBClusterSnapshots"
+}
+
 // Represents the output of DescribeDBClusterSnapshots .
 type DescribeDBClusterSnapshotsOutput struct {
 

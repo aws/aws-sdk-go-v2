@@ -53,6 +53,10 @@ type DeleteChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteChangeSetInput) operationName() string {
+	return "DeleteChangeSet"
+}
+
 // The output for the DeleteChangeSet action.
 type DeleteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.

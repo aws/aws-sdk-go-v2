@@ -43,6 +43,10 @@ type DescribeBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBrokerInput) operationName() string {
+	return "DescribeBroker"
+}
+
 type DescribeBrokerOutput struct {
 
 	// Actions required for a broker.

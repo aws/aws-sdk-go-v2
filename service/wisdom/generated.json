@@ -40,6 +40,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateContent.go",
         "api_op_UpdateKnowledgeBaseTemplateUri.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

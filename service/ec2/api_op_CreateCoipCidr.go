@@ -53,6 +53,10 @@ type CreateCoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCoipCidrInput) operationName() string {
+	return "CreateCoipCidr"
+}
+
 type CreateCoipCidrOutput struct {
 
 	// Information about a range of customer-owned IP addresses.

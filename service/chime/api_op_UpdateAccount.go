@@ -49,6 +49,10 @@ type UpdateAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountInput) operationName() string {
+	return "UpdateAccount"
+}
+
 type UpdateAccountOutput struct {
 
 	// The updated Amazon Chime account details.

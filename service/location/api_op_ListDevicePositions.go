@@ -51,6 +51,10 @@ type ListDevicePositionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevicePositionsInput) operationName() string {
+	return "ListDevicePositions"
+}
+
 type ListDevicePositionsOutput struct {
 
 	// Contains details about each device's last known position. These details

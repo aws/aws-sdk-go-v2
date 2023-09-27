@@ -96,6 +96,10 @@ type CreateLagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLagInput) operationName() string {
+	return "CreateLag"
+}
+
 // Information about a link aggregation group (LAG).
 type CreateLagOutput struct {
 

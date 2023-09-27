@@ -57,6 +57,10 @@ type GetLinkAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLinkAttributesInput) operationName() string {
+	return "GetLinkAttributes"
+}
+
 type GetLinkAttributesOutput struct {
 
 	// The attributes that are associated with the typed link.

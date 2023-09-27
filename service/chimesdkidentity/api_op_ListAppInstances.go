@@ -44,6 +44,10 @@ type ListAppInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppInstancesInput) operationName() string {
+	return "ListAppInstances"
+}
+
 type ListAppInstancesOutput struct {
 
 	// The information for each AppInstance .

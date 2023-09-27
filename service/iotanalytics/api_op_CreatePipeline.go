@@ -60,6 +60,10 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePipelineInput) operationName() string {
+	return "CreatePipeline"
+}
+
 type CreatePipelineOutput struct {
 
 	// The ARN of the pipeline.

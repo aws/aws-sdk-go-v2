@@ -53,6 +53,10 @@ type DeleteProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProjectInput) operationName() string {
+	return "DeleteProject"
+}
+
 type DeleteProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted project.

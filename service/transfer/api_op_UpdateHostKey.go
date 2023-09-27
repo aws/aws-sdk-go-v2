@@ -52,6 +52,10 @@ type UpdateHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHostKeyInput) operationName() string {
+	return "UpdateHostKey"
+}
+
 type UpdateHostKeyOutput struct {
 
 	// Returns the host key identifier for the updated host key.

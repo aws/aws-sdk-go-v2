@@ -59,6 +59,10 @@ type PurchaseOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseOfferingInput) operationName() string {
+	return "PurchaseOffering"
+}
+
 type PurchaseOfferingOutput struct {
 
 	// A pricing agreement for a discounted rate for a specific outbound bandwidth

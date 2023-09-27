@@ -62,6 +62,10 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentAccountConnectionInput) operationName() string {
+	return "UpdateEnvironmentAccountConnection"
+}
+
 type UpdateEnvironmentAccountConnectionOutput struct {
 
 	// The environment account connection detail data that's returned by Proton.

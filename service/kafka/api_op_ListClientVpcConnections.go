@@ -51,6 +51,10 @@ type ListClientVpcConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClientVpcConnectionsInput) operationName() string {
+	return "ListClientVpcConnections"
+}
+
 type ListClientVpcConnectionsOutput struct {
 
 	// List of client VPC connections.

@@ -49,6 +49,10 @@ type GetFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFolderInput) operationName() string {
+	return "GetFolder"
+}
+
 type GetFolderOutput struct {
 
 	// The custom metadata on the folder.

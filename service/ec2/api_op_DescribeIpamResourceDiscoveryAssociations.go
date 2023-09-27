@@ -59,6 +59,10 @@ type DescribeIpamResourceDiscoveryAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIpamResourceDiscoveryAssociationsInput) operationName() string {
+	return "DescribeIpamResourceDiscoveryAssociations"
+}
+
 type DescribeIpamResourceDiscoveryAssociationsOutput struct {
 
 	// The resource discovery associations.

@@ -64,6 +64,10 @@ type ActivateNetworkSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateNetworkSiteInput) operationName() string {
+	return "ActivateNetworkSite"
+}
+
 type ActivateNetworkSiteOutput struct {
 
 	// Information about the network site.

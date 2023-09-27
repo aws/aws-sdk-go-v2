@@ -51,6 +51,10 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationInput) operationName() string {
+	return "UpdateApplication"
+}
+
 type UpdateApplicationOutput struct {
 
 	// Application aggregated status.

@@ -52,6 +52,10 @@ type CancelMessageMoveTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelMessageMoveTaskInput) operationName() string {
+	return "CancelMessageMoveTask"
+}
+
 type CancelMessageMoveTaskOutput struct {
 
 	// The approximate number of messages already moved to the destination queue.

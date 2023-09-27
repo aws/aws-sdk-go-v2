@@ -41,6 +41,10 @@ type GetCalculationExecutionCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCalculationExecutionCodeInput) operationName() string {
+	return "GetCalculationExecutionCode"
+}
+
 type GetCalculationExecutionCodeOutput struct {
 
 	// The unencrypted code that was executed for the calculation.

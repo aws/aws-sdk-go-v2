@@ -58,6 +58,10 @@ type NotifyApplicationStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyApplicationStateInput) operationName() string {
+	return "NotifyApplicationState"
+}
+
 type NotifyApplicationStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,6 +63,10 @@ type ListDetectMitigationActionsExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDetectMitigationActionsExecutionsInput) operationName() string {
+	return "ListDetectMitigationActionsExecutions"
+}
+
 type ListDetectMitigationActionsExecutionsOutput struct {
 
 	// List of actions executions.

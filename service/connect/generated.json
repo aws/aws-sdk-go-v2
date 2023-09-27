@@ -219,6 +219,7 @@
         "api_op_UpdateUserSecurityProfiles.go",
         "api_op_UpdateViewContent.go",
         "api_op_UpdateViewMetadata.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

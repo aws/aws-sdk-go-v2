@@ -52,6 +52,10 @@ type ListSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSharesInput) operationName() string {
+	return "ListShares"
+}
+
 type ListSharesOutput struct {
 
 	// The shares available and their meta details.

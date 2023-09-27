@@ -44,6 +44,10 @@ type DescribeSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSentimentDetectionJobInput) operationName() string {
+	return "DescribeSentimentDetectionJob"
+}
+
 type DescribeSentimentDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a sentiment detection

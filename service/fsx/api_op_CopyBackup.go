@@ -100,6 +100,10 @@ type CopyBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyBackupInput) operationName() string {
+	return "CopyBackup"
+}
+
 type CopyBackupOutput struct {
 
 	// A backup of an Amazon FSx for Windows File Server, Amazon FSx for Lustre file

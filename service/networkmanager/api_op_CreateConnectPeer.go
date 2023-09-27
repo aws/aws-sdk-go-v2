@@ -66,6 +66,10 @@ type CreateConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectPeerInput) operationName() string {
+	return "CreateConnectPeer"
+}
+
 type CreateConnectPeerOutput struct {
 
 	// The response to the request.

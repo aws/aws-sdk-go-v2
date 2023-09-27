@@ -87,6 +87,10 @@ type GetKeyRotationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKeyRotationStatusInput) operationName() string {
+	return "GetKeyRotationStatus"
+}
+
 type GetKeyRotationStatusOutput struct {
 
 	// A Boolean value that specifies whether key rotation is enabled.

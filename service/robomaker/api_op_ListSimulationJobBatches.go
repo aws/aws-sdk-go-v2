@@ -54,6 +54,10 @@ type ListSimulationJobBatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSimulationJobBatchesInput) operationName() string {
+	return "ListSimulationJobBatches"
+}
+
 type ListSimulationJobBatchesOutput struct {
 
 	// If the previous paginated request did not return all of the remaining results,

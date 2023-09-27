@@ -75,6 +75,10 @@ type GetResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceInput) operationName() string {
+	return "GetResource"
+}
+
 type GetResourceOutput struct {
 
 	// Represents information about a provisioned resource.

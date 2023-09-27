@@ -57,6 +57,10 @@ type UpdateEventLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEventLabelInput) operationName() string {
+	return "UpdateEventLabel"
+}
+
 type UpdateEventLabelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

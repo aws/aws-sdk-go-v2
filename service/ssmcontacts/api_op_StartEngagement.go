@@ -74,6 +74,10 @@ type StartEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartEngagementInput) operationName() string {
+	return "StartEngagement"
+}
+
 type StartEngagementOutput struct {
 
 	// The ARN of the engagement.

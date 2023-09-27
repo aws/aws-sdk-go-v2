@@ -94,6 +94,10 @@ type GetLogEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLogEventsInput) operationName() string {
+	return "GetLogEvents"
+}
+
 type GetLogEventsOutput struct {
 
 	// The events.

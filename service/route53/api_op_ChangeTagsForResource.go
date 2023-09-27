@@ -62,6 +62,10 @@ type ChangeTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangeTagsForResourceInput) operationName() string {
+	return "ChangeTagsForResource"
+}
+
 // Empty response for the request.
 type ChangeTagsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.

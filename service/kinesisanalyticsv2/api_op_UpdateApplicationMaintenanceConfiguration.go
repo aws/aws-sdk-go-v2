@@ -63,6 +63,10 @@ type UpdateApplicationMaintenanceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationMaintenanceConfigurationInput) operationName() string {
+	return "UpdateApplicationMaintenanceConfiguration"
+}
+
 type UpdateApplicationMaintenanceConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.

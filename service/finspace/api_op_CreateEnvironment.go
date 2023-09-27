@@ -72,6 +72,10 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEnvironmentInput) operationName() string {
+	return "CreateEnvironment"
+}
+
 type CreateEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the FinSpace environment that you created.

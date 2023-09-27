@@ -46,6 +46,10 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterInput) operationName() string {
+	return "DeleteCluster"
+}
+
 type DeleteClusterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

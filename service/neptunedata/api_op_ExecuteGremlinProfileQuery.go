@@ -61,6 +61,10 @@ type ExecuteGremlinProfileQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteGremlinProfileQueryInput) operationName() string {
+	return "ExecuteGremlinProfileQuery"
+}
+
 type ExecuteGremlinProfileQueryOutput struct {
 
 	// A text blob containing the Gremlin Profile result. See Gremlin profile API in

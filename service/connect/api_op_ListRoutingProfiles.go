@@ -55,6 +55,10 @@ type ListRoutingProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoutingProfilesInput) operationName() string {
+	return "ListRoutingProfiles"
+}
+
 type ListRoutingProfilesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

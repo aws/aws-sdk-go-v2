@@ -137,6 +137,10 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserInput) operationName() string {
+	return "CreateUser"
+}
+
 type CreateUserOutput struct {
 
 	// The identifier of the server that the user is attached to.

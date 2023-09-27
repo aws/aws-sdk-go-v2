@@ -50,6 +50,10 @@ type CancelMLTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelMLTaskRunInput) operationName() string {
+	return "CancelMLTaskRun"
+}
+
 type CancelMLTaskRunOutput struct {
 
 	// The status for this run.

@@ -52,6 +52,10 @@ type CreateAlertManagerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAlertManagerDefinitionInput) operationName() string {
+	return "CreateAlertManagerDefinition"
+}
+
 // Represents the output of a CreateAlertManagerDefinition operation.
 type CreateAlertManagerDefinitionOutput struct {
 

@@ -40,6 +40,10 @@ type GetCustomRulePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCustomRulePolicyInput) operationName() string {
+	return "GetCustomRulePolicy"
+}
+
 type GetCustomRulePolicyOutput struct {
 
 	// The policy definition containing the logic for your Config Custom Policy rule.

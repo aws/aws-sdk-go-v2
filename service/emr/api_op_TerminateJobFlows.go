@@ -49,6 +49,10 @@ type TerminateJobFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateJobFlowsInput) operationName() string {
+	return "TerminateJobFlows"
+}
+
 type TerminateJobFlowsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

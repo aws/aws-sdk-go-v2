@@ -51,6 +51,10 @@ type AssociateServiceRoleToAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateServiceRoleToAccountInput) operationName() string {
+	return "AssociateServiceRoleToAccount"
+}
+
 type AssociateServiceRoleToAccountOutput struct {
 
 	// The time when the service role was associated with IoT Greengrass for your

@@ -53,6 +53,10 @@ type LogoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*LogoutInput) operationName() string {
+	return "Logout"
+}
+
 type LogoutOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

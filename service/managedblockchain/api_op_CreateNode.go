@@ -72,6 +72,10 @@ type CreateNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNodeInput) operationName() string {
+	return "CreateNode"
+}
+
 type CreateNodeOutput struct {
 
 	// The unique identifier of the node.

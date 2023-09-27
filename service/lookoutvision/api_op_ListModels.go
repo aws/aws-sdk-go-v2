@@ -55,6 +55,10 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelsInput) operationName() string {
+	return "ListModels"
+}
+
 type ListModelsOutput struct {
 
 	// A list of model versions in the specified project.

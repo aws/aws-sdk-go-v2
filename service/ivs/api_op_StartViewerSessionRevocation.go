@@ -56,6 +56,10 @@ type StartViewerSessionRevocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartViewerSessionRevocationInput) operationName() string {
+	return "StartViewerSessionRevocation"
+}
+
 type StartViewerSessionRevocationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

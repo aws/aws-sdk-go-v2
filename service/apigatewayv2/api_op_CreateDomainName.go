@@ -52,6 +52,10 @@ type CreateDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainNameInput) operationName() string {
+	return "CreateDomainName"
+}
+
 type CreateDomainNameOutput struct {
 
 	// The API mapping selection expression.

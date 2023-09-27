@@ -61,6 +61,10 @@ type DescribePrefixListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePrefixListsInput) operationName() string {
+	return "DescribePrefixLists"
+}
+
 type DescribePrefixListsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

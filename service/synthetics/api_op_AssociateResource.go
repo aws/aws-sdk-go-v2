@@ -50,6 +50,10 @@ type AssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateResourceInput) operationName() string {
+	return "AssociateResource"
+}
+
 type AssociateResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

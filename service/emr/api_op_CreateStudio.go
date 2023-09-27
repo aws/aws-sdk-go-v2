@@ -114,6 +114,10 @@ type CreateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStudioInput) operationName() string {
+	return "CreateStudio"
+}
+
 type CreateStudioOutput struct {
 
 	// The ID of the Amazon EMR Studio.

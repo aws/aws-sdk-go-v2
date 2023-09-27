@@ -47,6 +47,10 @@ type ListRuleBasedMatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRuleBasedMatchesInput) operationName() string {
+	return "ListRuleBasedMatches"
+}
+
 type ListRuleBasedMatchesOutput struct {
 
 	// The list of MatchIds for the given domain.

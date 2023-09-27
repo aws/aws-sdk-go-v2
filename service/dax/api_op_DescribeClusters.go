@@ -61,6 +61,10 @@ type DescribeClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClustersInput) operationName() string {
+	return "DescribeClusters"
+}
+
 type DescribeClustersOutput struct {
 
 	// The descriptions of your DAX clusters, in response to a DescribeClusters

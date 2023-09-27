@@ -58,6 +58,10 @@ type CancelServiceInstanceDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelServiceInstanceDeploymentInput) operationName() string {
+	return "CancelServiceInstanceDeployment"
+}
+
 type CancelServiceInstanceDeploymentOutput struct {
 
 	// The service instance summary data that's returned by Proton.

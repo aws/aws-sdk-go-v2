@@ -53,6 +53,10 @@ type DeregisterInstancesFromLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterInstancesFromLoadBalancerInput) operationName() string {
+	return "DeregisterInstancesFromLoadBalancer"
+}
+
 // Contains the output of DeregisterInstancesFromLoadBalancer.
 type DeregisterInstancesFromLoadBalancerOutput struct {
 

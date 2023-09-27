@@ -47,6 +47,10 @@ type ListServicePipelineProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicePipelineProvisionedResourcesInput) operationName() string {
+	return "ListServicePipelineProvisionedResources"
+}
+
 type ListServicePipelineProvisionedResourcesOutput struct {
 
 	// An array of provisioned resources for a service and pipeline.

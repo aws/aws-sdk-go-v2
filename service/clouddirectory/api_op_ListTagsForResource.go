@@ -53,6 +53,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 type ListTagsForResourceOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

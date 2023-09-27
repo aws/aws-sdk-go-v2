@@ -42,6 +42,10 @@ type DeleteHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHumanLoopInput) operationName() string {
+	return "DeleteHumanLoop"
+}
+
 type DeleteHumanLoopOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

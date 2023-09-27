@@ -43,6 +43,10 @@ type DescribeBackupJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBackupJobInput) operationName() string {
+	return "DescribeBackupJob"
+}
+
 type DescribeBackupJobOutput struct {
 
 	// Returns the account ID that owns the backup job.

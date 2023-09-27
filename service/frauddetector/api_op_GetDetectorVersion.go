@@ -47,6 +47,10 @@ type GetDetectorVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDetectorVersionInput) operationName() string {
+	return "GetDetectorVersion"
+}
+
 type GetDetectorVersionOutput struct {
 
 	// The detector version ARN.

@@ -43,6 +43,10 @@ type StartRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRecommenderInput) operationName() string {
+	return "StartRecommender"
+}
+
 type StartRecommenderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the recommender you started.

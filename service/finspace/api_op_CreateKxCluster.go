@@ -138,6 +138,10 @@ type CreateKxClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKxClusterInput) operationName() string {
+	return "CreateKxCluster"
+}
+
 type CreateKxClusterOutput struct {
 
 	// The configuration based on which FinSpace will scale in or scale out nodes in

@@ -41,6 +41,10 @@ type DeleteRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRulesetInput) operationName() string {
+	return "DeleteRuleset"
+}
+
 type DeleteRulesetOutput struct {
 
 	// The name of the deleted ruleset.

@@ -51,6 +51,10 @@ type ListHostKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHostKeysInput) operationName() string {
+	return "ListHostKeys"
+}
+
 type ListHostKeysOutput struct {
 
 	// Returns an array, where each item contains the details of a host key.

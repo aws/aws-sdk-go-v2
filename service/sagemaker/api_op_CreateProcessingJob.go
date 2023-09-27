@@ -92,6 +92,10 @@ type CreateProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProcessingJobInput) operationName() string {
+	return "CreateProcessingJob"
+}
+
 type CreateProcessingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the processing job.

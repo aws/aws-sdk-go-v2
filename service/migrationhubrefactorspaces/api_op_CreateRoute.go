@@ -131,6 +131,10 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRouteInput) operationName() string {
+	return "CreateRoute"
+}
+
 type CreateRouteOutput struct {
 
 	// The ID of the application in which the route is created.

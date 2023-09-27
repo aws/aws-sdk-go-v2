@@ -50,6 +50,10 @@ type ContainsPiiEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ContainsPiiEntitiesInput) operationName() string {
+	return "ContainsPiiEntities"
+}
+
 type ContainsPiiEntitiesOutput struct {
 
 	// The labels used in the document being analyzed. Individual labels represent

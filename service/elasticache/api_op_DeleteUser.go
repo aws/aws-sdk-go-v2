@@ -45,6 +45,10 @@ type DeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserInput) operationName() string {
+	return "DeleteUser"
+}
+
 type DeleteUserOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user.

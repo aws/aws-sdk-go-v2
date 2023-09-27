@@ -59,6 +59,10 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourcePolicyInput) operationName() string {
+	return "PutResourcePolicy"
+}
+
 type PutResourcePolicyOutput struct {
 
 	// ID of the current policy version.

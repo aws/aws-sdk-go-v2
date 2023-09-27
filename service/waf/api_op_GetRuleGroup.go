@@ -49,6 +49,10 @@ type GetRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRuleGroupInput) operationName() string {
+	return "GetRuleGroup"
+}
+
 type GetRuleGroupOutput struct {
 
 	// Information about the RuleGroup that you specified in the GetRuleGroup request.

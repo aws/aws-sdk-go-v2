@@ -68,6 +68,10 @@ type InitiateDocumentVersionUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateDocumentVersionUploadInput) operationName() string {
+	return "InitiateDocumentVersionUpload"
+}
+
 type InitiateDocumentVersionUploadOutput struct {
 
 	// The document metadata.

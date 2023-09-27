@@ -57,6 +57,10 @@ type StartDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDeploymentInput) operationName() string {
+	return "StartDeployment"
+}
+
 // The result structure for the start a deployment request.
 type StartDeploymentOutput struct {
 

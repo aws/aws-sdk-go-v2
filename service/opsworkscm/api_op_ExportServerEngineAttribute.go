@@ -72,6 +72,10 @@ type ExportServerEngineAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportServerEngineAttributeInput) operationName() string {
+	return "ExportServerEngineAttribute"
+}
+
 type ExportServerEngineAttributeOutput struct {
 
 	// The requested engine attribute pair with attribute name and value.

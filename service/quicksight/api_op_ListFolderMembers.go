@@ -53,6 +53,10 @@ type ListFolderMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFolderMembersInput) operationName() string {
+	return "ListFolderMembers"
+}
+
 type ListFolderMembersOutput struct {
 
 	// A structure that contains all of the folder members (dashboards, analyses, and

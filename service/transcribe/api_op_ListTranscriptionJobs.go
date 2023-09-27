@@ -60,6 +60,10 @@ type ListTranscriptionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTranscriptionJobsInput) operationName() string {
+	return "ListTranscriptionJobs"
+}
+
 type ListTranscriptionJobsOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are

@@ -56,6 +56,10 @@ type CreateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScheduleInput) operationName() string {
+	return "CreateSchedule"
+}
+
 type CreateScheduleOutput struct {
 
 	// The name of the schedule that was created.

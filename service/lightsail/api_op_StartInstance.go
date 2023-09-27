@@ -51,6 +51,10 @@ type StartInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInstanceInput) operationName() string {
+	return "StartInstance"
+}
+
 type StartInstanceOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

@@ -116,6 +116,10 @@ type CreateMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMaintenanceWindowInput) operationName() string {
+	return "CreateMaintenanceWindow"
+}
+
 type CreateMaintenanceWindowOutput struct {
 
 	// The ID of the created maintenance window.

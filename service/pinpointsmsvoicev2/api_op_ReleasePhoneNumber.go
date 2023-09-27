@@ -47,6 +47,10 @@ type ReleasePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleasePhoneNumberInput) operationName() string {
+	return "ReleasePhoneNumber"
+}
+
 type ReleasePhoneNumberOutput struct {
 
 	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)

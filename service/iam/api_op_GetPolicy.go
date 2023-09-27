@@ -58,6 +58,10 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyInput) operationName() string {
+	return "GetPolicy"
+}
+
 // Contains the response to a successful GetPolicy request.
 type GetPolicyOutput struct {
 

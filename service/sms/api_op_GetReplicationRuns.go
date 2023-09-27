@@ -50,6 +50,10 @@ type GetReplicationRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReplicationRunsInput) operationName() string {
+	return "GetReplicationRuns"
+}
+
 type GetReplicationRunsOutput struct {
 
 	// The token required to retrieve the next set of results. This value is null when

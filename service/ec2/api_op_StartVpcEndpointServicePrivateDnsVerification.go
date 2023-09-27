@@ -51,6 +51,10 @@ type StartVpcEndpointServicePrivateDnsVerificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartVpcEndpointServicePrivateDnsVerificationInput) operationName() string {
+	return "StartVpcEndpointServicePrivateDnsVerification"
+}
+
 type StartVpcEndpointServicePrivateDnsVerificationOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

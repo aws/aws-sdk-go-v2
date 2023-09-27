@@ -60,6 +60,10 @@ type UpdateBackendJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBackendJobInput) operationName() string {
+	return "UpdateBackendJob"
+}
+
 type UpdateBackendJobOutput struct {
 
 	// The app ID.

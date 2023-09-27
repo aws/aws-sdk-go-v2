@@ -48,6 +48,10 @@ type DisassociateAwsAccountFromPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateAwsAccountFromPartnerAccountInput) operationName() string {
+	return "DisassociateAwsAccountFromPartnerAccount"
+}
+
 type DisassociateAwsAccountFromPartnerAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

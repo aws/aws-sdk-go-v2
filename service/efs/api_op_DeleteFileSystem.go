@@ -56,6 +56,10 @@ type DeleteFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFileSystemInput) operationName() string {
+	return "DeleteFileSystem"
+}
+
 type DeleteFileSystemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

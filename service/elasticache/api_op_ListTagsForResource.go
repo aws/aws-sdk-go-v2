@@ -55,6 +55,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 // Represents the output from the AddTagsToResource , ListTagsForResource , and
 // RemoveTagsFromResource operations.
 type ListTagsForResourceOutput struct {

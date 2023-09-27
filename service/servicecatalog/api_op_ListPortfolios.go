@@ -49,6 +49,10 @@ type ListPortfoliosInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPortfoliosInput) operationName() string {
+	return "ListPortfolios"
+}
+
 type ListPortfoliosOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

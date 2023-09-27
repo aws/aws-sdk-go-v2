@@ -47,6 +47,10 @@ type StartRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRelationalDatabaseInput) operationName() string {
+	return "StartRelationalDatabase"
+}
+
 type StartRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

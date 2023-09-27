@@ -58,6 +58,10 @@ type ListViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListViewsInput) operationName() string {
+	return "ListViews"
+}
+
 type ListViewsOutput struct {
 
 	// If present, indicates that more output is available than is included in the

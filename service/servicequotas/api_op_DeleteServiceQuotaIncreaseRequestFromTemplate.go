@@ -55,6 +55,10 @@ type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServiceQuotaIncreaseRequestFromTemplateInput) operationName() string {
+	return "DeleteServiceQuotaIncreaseRequestFromTemplate"
+}
+
 type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

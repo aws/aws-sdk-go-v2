@@ -100,6 +100,10 @@ type PutBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketEncryptionInput) operationName() string {
+	return "PutBucketEncryption"
+}
+
 type PutBucketEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,6 +63,10 @@ type DescribePendingMaintenanceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePendingMaintenanceActionsInput) operationName() string {
+	return "DescribePendingMaintenanceActions"
+}
+
 // Represents the output of DescribePendingMaintenanceActions .
 type DescribePendingMaintenanceActionsOutput struct {
 

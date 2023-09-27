@@ -57,6 +57,10 @@ type ListTagsForStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForStreamInput) operationName() string {
+	return "ListTagsForStream"
+}
+
 // Represents the output for ListTagsForStream .
 type ListTagsForStreamOutput struct {
 

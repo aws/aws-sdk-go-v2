@@ -43,6 +43,10 @@ type DeleteDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDatastoreInput) operationName() string {
+	return "DeleteDatastore"
+}
+
 type DeleteDatastoreOutput struct {
 
 	// The data store identifier.

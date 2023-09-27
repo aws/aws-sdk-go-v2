@@ -70,6 +70,10 @@ type CreateServiceLinkedRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceLinkedRoleInput) operationName() string {
+	return "CreateServiceLinkedRole"
+}
+
 type CreateServiceLinkedRoleOutput struct {
 
 	// A Role object that contains details about the newly created role.

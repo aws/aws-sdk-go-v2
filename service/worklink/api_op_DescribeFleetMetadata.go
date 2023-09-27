@@ -47,6 +47,10 @@ type DescribeFleetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetMetadataInput) operationName() string {
+	return "DescribeFleetMetadata"
+}
+
 type DescribeFleetMetadataOutput struct {
 
 	// The identifier used by users to sign in to the Amazon WorkLink app.

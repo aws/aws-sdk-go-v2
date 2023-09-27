@@ -57,6 +57,10 @@ type RenderUiTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RenderUiTemplateInput) operationName() string {
+	return "RenderUiTemplate"
+}
+
 type RenderUiTemplateOutput struct {
 
 	// A list of one or more RenderingError objects if any were encountered while

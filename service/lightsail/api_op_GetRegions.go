@@ -48,6 +48,10 @@ type GetRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegionsInput) operationName() string {
+	return "GetRegions"
+}
+
 type GetRegionsOutput struct {
 
 	// An array of key-value pairs containing information about your get regions

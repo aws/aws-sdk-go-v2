@@ -63,6 +63,10 @@ type ListHealthEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHealthEventsInput) operationName() string {
+	return "ListHealthEvents"
+}
+
 type ListHealthEventsOutput struct {
 
 	// A list of health events.

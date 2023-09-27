@@ -60,6 +60,10 @@ type ResetInstanceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetInstanceAttributeInput) operationName() string {
+	return "ResetInstanceAttribute"
+}
+
 type ResetInstanceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

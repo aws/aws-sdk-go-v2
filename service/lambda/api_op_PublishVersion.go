@@ -69,6 +69,10 @@ type PublishVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishVersionInput) operationName() string {
+	return "PublishVersion"
+}
+
 // Details about a function's configuration.
 type PublishVersionOutput struct {
 

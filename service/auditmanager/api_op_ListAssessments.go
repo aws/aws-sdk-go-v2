@@ -46,6 +46,10 @@ type ListAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentsInput) operationName() string {
+	return "ListAssessments"
+}
+
 type ListAssessmentsOutput struct {
 
 	// The metadata that the ListAssessments API returns for each assessment.

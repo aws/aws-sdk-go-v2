@@ -36,6 +36,10 @@ type GetProfileTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProfileTemplateInput) operationName() string {
+	return "GetProfileTemplate"
+}
+
 type GetProfileTemplateOutput struct {
 
 	// The profile template.

@@ -49,6 +49,10 @@ type GetContentSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContentSummaryInput) operationName() string {
+	return "GetContentSummary"
+}
+
 type GetContentSummaryOutput struct {
 
 	// The content summary.

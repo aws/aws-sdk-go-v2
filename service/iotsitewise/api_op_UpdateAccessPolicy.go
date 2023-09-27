@@ -66,6 +66,10 @@ type UpdateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccessPolicyInput) operationName() string {
+	return "UpdateAccessPolicy"
+}
+
 type UpdateAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

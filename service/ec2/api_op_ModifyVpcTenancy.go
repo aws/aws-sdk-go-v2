@@ -60,6 +60,10 @@ type ModifyVpcTenancyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcTenancyInput) operationName() string {
+	return "ModifyVpcTenancy"
+}
+
 type ModifyVpcTenancyOutput struct {
 
 	// Returns true if the request succeeds; otherwise, returns an error.

@@ -83,6 +83,10 @@ type CreateSolutionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSolutionVersionInput) operationName() string {
+	return "CreateSolutionVersion"
+}
+
 type CreateSolutionVersionOutput struct {
 
 	// The ARN of the new solution version.

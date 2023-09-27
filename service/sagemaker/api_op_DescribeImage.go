@@ -47,6 +47,10 @@ type DescribeImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageInput) operationName() string {
+	return "DescribeImage"
+}
+
 type DescribeImageOutput struct {
 
 	// When the image was created.

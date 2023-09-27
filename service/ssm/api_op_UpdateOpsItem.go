@@ -124,6 +124,10 @@ type UpdateOpsItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOpsItemInput) operationName() string {
+	return "UpdateOpsItem"
+}
+
 type UpdateOpsItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

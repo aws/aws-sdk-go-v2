@@ -37,6 +37,10 @@ type GetKMSEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKMSEncryptionKeyInput) operationName() string {
+	return "GetKMSEncryptionKey"
+}
+
 type GetKMSEncryptionKeyOutput struct {
 
 	// The KMS encryption key.

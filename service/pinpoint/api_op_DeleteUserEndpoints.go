@@ -48,6 +48,10 @@ type DeleteUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserEndpointsInput) operationName() string {
+	return "DeleteUserEndpoints"
+}
+
 type DeleteUserEndpointsOutput struct {
 
 	// Provides information about all the endpoints that are associated with a user ID.

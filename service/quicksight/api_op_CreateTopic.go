@@ -57,6 +57,10 @@ type CreateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTopicInput) operationName() string {
+	return "CreateTopic"
+}
+
 type CreateTopicOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topic.

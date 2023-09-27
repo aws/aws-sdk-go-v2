@@ -48,6 +48,10 @@ type ListPiiEntitiesDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPiiEntitiesDetectionJobsInput) operationName() string {
+	return "ListPiiEntitiesDetectionJobs"
+}
+
 type ListPiiEntitiesDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.

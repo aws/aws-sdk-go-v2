@@ -74,6 +74,10 @@ type MergeDeveloperIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergeDeveloperIdentitiesInput) operationName() string {
+	return "MergeDeveloperIdentities"
+}
+
 // Returned in response to a successful MergeDeveloperIdentities action.
 type MergeDeveloperIdentitiesOutput struct {
 

@@ -76,6 +76,10 @@ type UpdateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDocumentInput) operationName() string {
+	return "UpdateDocument"
+}
+
 type UpdateDocumentOutput struct {
 
 	// A description of the document that was updated.

@@ -101,6 +101,10 @@ type CreateRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRemoteAccessSessionInput) operationName() string {
+	return "CreateRemoteAccessSession"
+}
+
 // Represents the server response from a request to create a remote access session.
 type CreateRemoteAccessSessionOutput struct {
 

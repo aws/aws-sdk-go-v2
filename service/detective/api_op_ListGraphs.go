@@ -50,6 +50,10 @@ type ListGraphsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGraphsInput) operationName() string {
+	return "ListGraphs"
+}
+
 type ListGraphsOutput struct {
 
 	// A list of behavior graphs that the account is an administrator account for.

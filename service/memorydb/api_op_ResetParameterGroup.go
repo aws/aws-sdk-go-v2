@@ -55,6 +55,10 @@ type ResetParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetParameterGroupInput) operationName() string {
+	return "ResetParameterGroup"
+}
+
 type ResetParameterGroupOutput struct {
 
 	// The parameter group being reset.

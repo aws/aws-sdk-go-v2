@@ -73,6 +73,10 @@ type CreateActivityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateActivityInput) operationName() string {
+	return "CreateActivity"
+}
+
 type CreateActivityOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the created activity.

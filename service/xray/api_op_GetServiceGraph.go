@@ -63,6 +63,10 @@ type GetServiceGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceGraphInput) operationName() string {
+	return "GetServiceGraph"
+}
+
 type GetServiceGraphOutput struct {
 
 	// A flag indicating whether the group's filter expression has been consistent, or

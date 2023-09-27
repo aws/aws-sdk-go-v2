@@ -42,6 +42,10 @@ type GetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaInput) operationName() string {
+	return "GetSchema"
+}
+
 type GetSchemaOutput struct {
 
 	// The date and time that the schema was originally created.

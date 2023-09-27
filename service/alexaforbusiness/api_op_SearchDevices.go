@@ -61,6 +61,10 @@ type SearchDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchDevicesInput) operationName() string {
+	return "SearchDevices"
+}
+
 type SearchDevicesOutput struct {
 
 	// The devices that meet the specified set of filter criteria, in sort order.

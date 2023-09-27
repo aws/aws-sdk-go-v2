@@ -71,6 +71,10 @@ type ListAvailableResourceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableResourceMetricsInput) operationName() string {
+	return "ListAvailableResourceMetrics"
+}
+
 type ListAvailableResourceMetricsOutput struct {
 
 	// An array of metrics available to query. Each array element contains the full

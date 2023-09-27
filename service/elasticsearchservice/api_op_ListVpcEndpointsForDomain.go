@@ -48,6 +48,10 @@ type ListVpcEndpointsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcEndpointsForDomainInput) operationName() string {
+	return "ListVpcEndpointsForDomain"
+}
+
 // Container for response parameters to the ListVpcEndpointsForDomain operation.
 // Returns a list containing summarized details of the VPC endpoints.
 type ListVpcEndpointsForDomainOutput struct {

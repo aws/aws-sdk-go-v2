@@ -42,6 +42,10 @@ type DescribeWorldTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorldTemplateInput) operationName() string {
+	return "DescribeWorldTemplate"
+}
+
 type DescribeWorldTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world template.

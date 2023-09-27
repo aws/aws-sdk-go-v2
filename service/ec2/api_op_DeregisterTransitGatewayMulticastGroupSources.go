@@ -53,6 +53,10 @@ type DeregisterTransitGatewayMulticastGroupSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterTransitGatewayMulticastGroupSourcesInput) operationName() string {
+	return "DeregisterTransitGatewayMulticastGroupSources"
+}
+
 type DeregisterTransitGatewayMulticastGroupSourcesOutput struct {
 
 	// Information about the deregistered group sources.

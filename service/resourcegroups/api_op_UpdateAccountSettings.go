@@ -44,6 +44,10 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountSettingsInput) operationName() string {
+	return "UpdateAccountSettings"
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// A structure that displays the status of the optional features in the account.

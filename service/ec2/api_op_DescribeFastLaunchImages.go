@@ -64,6 +64,10 @@ type DescribeFastLaunchImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFastLaunchImagesInput) operationName() string {
+	return "DescribeFastLaunchImages"
+}
+
 type DescribeFastLaunchImagesOutput struct {
 
 	// A collection of details about the fast-launch enabled Windows images that meet

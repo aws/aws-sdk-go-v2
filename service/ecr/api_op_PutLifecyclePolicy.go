@@ -53,6 +53,10 @@ type PutLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLifecyclePolicyInput) operationName() string {
+	return "PutLifecyclePolicy"
+}
+
 type PutLifecyclePolicyOutput struct {
 
 	// The JSON repository policy text.

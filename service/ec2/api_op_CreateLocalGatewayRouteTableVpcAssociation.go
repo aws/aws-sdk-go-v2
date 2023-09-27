@@ -56,6 +56,10 @@ type CreateLocalGatewayRouteTableVpcAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocalGatewayRouteTableVpcAssociationInput) operationName() string {
+	return "CreateLocalGatewayRouteTableVpcAssociation"
+}
+
 type CreateLocalGatewayRouteTableVpcAssociationOutput struct {
 
 	// Information about the association.

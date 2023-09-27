@@ -61,6 +61,10 @@ type DescribeCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCertificatesInput) operationName() string {
+	return "DescribeCertificates"
+}
+
 type DescribeCertificatesOutput struct {
 
 	// A list of certificates for this Amazon Web Services account.

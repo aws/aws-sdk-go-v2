@@ -66,6 +66,10 @@ type CreateCertificateAuthorityAuditReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCertificateAuthorityAuditReportInput) operationName() string {
+	return "CreateCertificateAuthorityAuditReport"
+}
+
 type CreateCertificateAuthorityAuditReportOutput struct {
 
 	// An alphanumeric string that contains a report identifier.

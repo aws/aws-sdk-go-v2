@@ -51,6 +51,10 @@ type GetAWSDefaultServiceQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAWSDefaultServiceQuotaInput) operationName() string {
+	return "GetAWSDefaultServiceQuota"
+}
+
 type GetAWSDefaultServiceQuotaOutput struct {
 
 	// Information about the quota.

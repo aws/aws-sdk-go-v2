@@ -44,6 +44,10 @@ type VerifyEmailAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyEmailAddressInput) operationName() string {
+	return "VerifyEmailAddress"
+}
+
 type VerifyEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

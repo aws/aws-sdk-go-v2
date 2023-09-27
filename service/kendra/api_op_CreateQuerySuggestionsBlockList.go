@@ -89,6 +89,10 @@ type CreateQuerySuggestionsBlockListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQuerySuggestionsBlockListInput) operationName() string {
+	return "CreateQuerySuggestionsBlockList"
+}
+
 type CreateQuerySuggestionsBlockListOutput struct {
 
 	// The identifier of the block list.

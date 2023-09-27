@@ -167,6 +167,10 @@ type CopyDBSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDBSnapshotInput) operationName() string {
+	return "CopyDBSnapshot"
+}
+
 type CopyDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a

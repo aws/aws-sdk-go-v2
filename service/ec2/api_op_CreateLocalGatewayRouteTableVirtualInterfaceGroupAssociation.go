@@ -57,6 +57,10 @@ type CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput) operationName() string {
+	return "CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+}
+
 type CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput struct {
 
 	// Information about the local gateway route table virtual interface group

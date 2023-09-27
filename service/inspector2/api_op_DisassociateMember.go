@@ -41,6 +41,10 @@ type DisassociateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateMemberInput) operationName() string {
+	return "DisassociateMember"
+}
+
 type DisassociateMemberOutput struct {
 
 	// The Amazon Web Services account ID of the successfully disassociated member.

@@ -69,6 +69,10 @@ type RestoreServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreServerInput) operationName() string {
+	return "RestoreServer"
+}
+
 type RestoreServerOutput struct {
 
 	// Describes a configuration management server.

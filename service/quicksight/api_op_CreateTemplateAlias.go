@@ -60,6 +60,10 @@ type CreateTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTemplateAliasInput) operationName() string {
+	return "CreateTemplateAlias"
+}
+
 type CreateTemplateAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

@@ -45,6 +45,10 @@ type ListAcceleratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAcceleratorsInput) operationName() string {
+	return "ListAccelerators"
+}
+
 type ListAcceleratorsOutput struct {
 
 	// The list of accelerators for a customer account.

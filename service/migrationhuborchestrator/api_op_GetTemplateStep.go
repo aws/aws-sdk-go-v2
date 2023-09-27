@@ -52,6 +52,10 @@ type GetTemplateStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateStepInput) operationName() string {
+	return "GetTemplateStep"
+}
+
 type GetTemplateStepOutput struct {
 
 	// The time at which the step was created.

@@ -59,6 +59,10 @@ type UpdateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServerInput) operationName() string {
+	return "UpdateServer"
+}
+
 type UpdateServerOutput struct {
 
 	// Contains the response to a UpdateServer request.

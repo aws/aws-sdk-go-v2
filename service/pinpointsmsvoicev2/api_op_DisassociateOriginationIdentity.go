@@ -62,6 +62,10 @@ type DisassociateOriginationIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateOriginationIdentityInput) operationName() string {
+	return "DisassociateOriginationIdentity"
+}
+
 type DisassociateOriginationIdentityOutput struct {
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.

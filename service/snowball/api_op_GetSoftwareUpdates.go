@@ -43,6 +43,10 @@ type GetSoftwareUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSoftwareUpdatesInput) operationName() string {
+	return "GetSoftwareUpdates"
+}
+
 type GetSoftwareUpdatesOutput struct {
 
 	// The Amazon S3 presigned URL for the update file associated with the specified

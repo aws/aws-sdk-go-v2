@@ -61,6 +61,10 @@ type CreateWorldGenerationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorldGenerationJobInput) operationName() string {
+	return "CreateWorldGenerationJob"
+}
+
 type CreateWorldGenerationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world generator job.

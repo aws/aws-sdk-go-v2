@@ -65,6 +65,10 @@ type CreateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMembersInput) operationName() string {
+	return "CreateMembers"
+}
+
 type CreateMembersOutput struct {
 
 	// A list of objects that include the accountIds of the unprocessed accounts and a

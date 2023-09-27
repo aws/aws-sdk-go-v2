@@ -62,6 +62,10 @@ type AddTagsToVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsToVaultInput) operationName() string {
+	return "AddTagsToVault"
+}
+
 type AddTagsToVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

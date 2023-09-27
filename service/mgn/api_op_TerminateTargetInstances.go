@@ -50,6 +50,10 @@ type TerminateTargetInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateTargetInstancesInput) operationName() string {
+	return "TerminateTargetInstances"
+}
+
 type TerminateTargetInstancesOutput struct {
 
 	// Terminate Target instance Job response.

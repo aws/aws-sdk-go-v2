@@ -158,6 +158,10 @@ type GetQueueAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueueAttributesInput) operationName() string {
+	return "GetQueueAttributes"
+}
+
 // A list of returned queue attributes.
 type GetQueueAttributesOutput struct {
 

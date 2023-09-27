@@ -54,6 +54,10 @@ type ListStreamingSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamingSessionsInput) operationName() string {
+	return "ListStreamingSessions"
+}
+
 type ListStreamingSessionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

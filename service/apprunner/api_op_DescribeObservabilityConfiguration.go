@@ -46,6 +46,10 @@ type DescribeObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeObservabilityConfigurationInput) operationName() string {
+	return "DescribeObservabilityConfiguration"
+}
+
 type DescribeObservabilityConfigurationOutput struct {
 
 	// A full description of the App Runner observability configuration that you

@@ -52,6 +52,10 @@ type UpdateAutomaticTapeCreationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAutomaticTapeCreationPolicyInput) operationName() string {
+	return "UpdateAutomaticTapeCreationPolicy"
+}
+
 type UpdateAutomaticTapeCreationPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

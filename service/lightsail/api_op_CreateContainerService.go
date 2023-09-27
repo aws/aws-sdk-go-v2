@@ -111,6 +111,10 @@ type CreateContainerServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContainerServiceInput) operationName() string {
+	return "CreateContainerService"
+}
+
 type CreateContainerServiceOutput struct {
 
 	// An object that describes a container service.

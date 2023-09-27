@@ -44,6 +44,10 @@ type InitiateDeviceClaimInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateDeviceClaimInput) operationName() string {
+	return "InitiateDeviceClaim"
+}
+
 type InitiateDeviceClaimOutput struct {
 
 	// The device's final claim state.

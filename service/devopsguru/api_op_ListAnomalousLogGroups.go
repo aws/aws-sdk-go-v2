@@ -50,6 +50,10 @@ type ListAnomalousLogGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnomalousLogGroupsInput) operationName() string {
+	return "ListAnomalousLogGroups"
+}
+
 type ListAnomalousLogGroupsOutput struct {
 
 	// The list of Amazon CloudWatch log groups that are related to an insight.

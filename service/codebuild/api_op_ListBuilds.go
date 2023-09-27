@@ -50,6 +50,10 @@ type ListBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBuildsInput) operationName() string {
+	return "ListBuilds"
+}
+
 type ListBuildsOutput struct {
 
 	// A list of build IDs, with each build ID representing a single build.

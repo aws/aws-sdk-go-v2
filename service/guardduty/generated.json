@@ -77,6 +77,7 @@
         "api_op_UpdateOrganizationConfiguration.go",
         "api_op_UpdatePublishingDestination.go",
         "api_op_UpdateThreatIntelSet.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

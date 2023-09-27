@@ -64,6 +64,10 @@ type AddCommunicationToCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddCommunicationToCaseInput) operationName() string {
+	return "AddCommunicationToCase"
+}
+
 // The result of the AddCommunicationToCase operation.
 type AddCommunicationToCaseOutput struct {
 

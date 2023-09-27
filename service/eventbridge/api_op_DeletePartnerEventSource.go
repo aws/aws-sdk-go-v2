@@ -52,6 +52,10 @@ type DeletePartnerEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePartnerEventSourceInput) operationName() string {
+	return "DeletePartnerEventSource"
+}
+
 type DeletePartnerEventSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

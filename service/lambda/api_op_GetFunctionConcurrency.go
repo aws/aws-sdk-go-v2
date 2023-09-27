@@ -47,6 +47,10 @@ type GetFunctionConcurrencyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionConcurrencyInput) operationName() string {
+	return "GetFunctionConcurrency"
+}
+
 type GetFunctionConcurrencyOutput struct {
 
 	// The number of simultaneous executions that are reserved for the function.

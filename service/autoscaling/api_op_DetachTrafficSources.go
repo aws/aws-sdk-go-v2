@@ -52,6 +52,10 @@ type DetachTrafficSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachTrafficSourcesInput) operationName() string {
+	return "DetachTrafficSources"
+}
+
 type DetachTrafficSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

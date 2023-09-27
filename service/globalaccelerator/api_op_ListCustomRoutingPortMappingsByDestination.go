@@ -60,6 +60,10 @@ type ListCustomRoutingPortMappingsByDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomRoutingPortMappingsByDestinationInput) operationName() string {
+	return "ListCustomRoutingPortMappingsByDestination"
+}
+
 type ListCustomRoutingPortMappingsByDestinationOutput struct {
 
 	// The port mappings for the endpoint IP address that you specified in the request.

@@ -48,6 +48,10 @@ type SendMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendMessagesInput) operationName() string {
+	return "SendMessages"
+}
+
 type SendMessagesOutput struct {
 
 	// Provides information about the results of a request to send a message to an

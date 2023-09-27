@@ -65,6 +65,10 @@ type DescribeAutoScalingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutoScalingGroupsInput) operationName() string {
+	return "DescribeAutoScalingGroups"
+}
+
 type DescribeAutoScalingGroupsOutput struct {
 
 	// The groups.

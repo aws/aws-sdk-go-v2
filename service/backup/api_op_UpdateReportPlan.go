@@ -67,6 +67,10 @@ type UpdateReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReportPlanInput) operationName() string {
+	return "UpdateReportPlan"
+}
+
 type UpdateReportPlanOutput struct {
 
 	// The date and time that a report plan is created, in Unix format and Coordinated

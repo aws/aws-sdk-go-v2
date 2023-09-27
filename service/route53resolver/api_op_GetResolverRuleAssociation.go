@@ -44,6 +44,10 @@ type GetResolverRuleAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverRuleAssociationInput) operationName() string {
+	return "GetResolverRuleAssociation"
+}
+
 type GetResolverRuleAssociationOutput struct {
 
 	// Information about the Resolver rule association that you specified in a

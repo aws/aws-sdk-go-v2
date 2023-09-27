@@ -49,6 +49,10 @@ type DeregisterVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterVolumeInput) operationName() string {
+	return "DeregisterVolume"
+}
+
 type DeregisterVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

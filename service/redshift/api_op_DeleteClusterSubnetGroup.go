@@ -41,6 +41,10 @@ type DeleteClusterSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterSubnetGroupInput) operationName() string {
+	return "DeleteClusterSubnetGroup"
+}
+
 type DeleteClusterSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

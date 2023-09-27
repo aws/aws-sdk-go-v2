@@ -49,6 +49,10 @@ type DeleteScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteScriptInput) operationName() string {
+	return "DeleteScript"
+}
+
 type DeleteScriptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

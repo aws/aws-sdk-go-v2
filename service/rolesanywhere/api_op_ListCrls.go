@@ -46,6 +46,10 @@ type ListCrlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCrlsInput) operationName() string {
+	return "ListCrls"
+}
+
 type ListCrlsOutput struct {
 
 	// A list of certificate revocation lists (CRL).

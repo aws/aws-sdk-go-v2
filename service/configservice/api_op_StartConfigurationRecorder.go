@@ -45,6 +45,10 @@ type StartConfigurationRecorderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartConfigurationRecorderInput) operationName() string {
+	return "StartConfigurationRecorder"
+}
+
 type StartConfigurationRecorderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

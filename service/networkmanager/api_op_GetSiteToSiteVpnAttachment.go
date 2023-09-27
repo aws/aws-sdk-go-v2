@@ -42,6 +42,10 @@ type GetSiteToSiteVpnAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSiteToSiteVpnAttachmentInput) operationName() string {
+	return "GetSiteToSiteVpnAttachment"
+}
+
 type GetSiteToSiteVpnAttachmentOutput struct {
 
 	// Describes the site-to-site attachment.

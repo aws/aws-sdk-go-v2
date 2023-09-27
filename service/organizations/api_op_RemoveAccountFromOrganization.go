@@ -63,6 +63,10 @@ type RemoveAccountFromOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveAccountFromOrganizationInput) operationName() string {
+	return "RemoveAccountFromOrganization"
+}
+
 type RemoveAccountFromOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

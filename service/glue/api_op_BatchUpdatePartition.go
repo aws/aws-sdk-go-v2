@@ -56,6 +56,10 @@ type BatchUpdatePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdatePartitionInput) operationName() string {
+	return "BatchUpdatePartition"
+}
+
 type BatchUpdatePartitionOutput struct {
 
 	// The errors encountered when trying to update the requested partitions. A list

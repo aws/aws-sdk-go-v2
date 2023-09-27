@@ -65,6 +65,10 @@ type BatchCreateChannelMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateChannelMembershipInput) operationName() string {
+	return "BatchCreateChannelMembership"
+}
+
 type BatchCreateChannelMembershipOutput struct {
 
 	// The list of channel memberships in the response.

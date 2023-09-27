@@ -51,6 +51,10 @@ type PutResourceSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourceSetInput) operationName() string {
+	return "PutResourceSet"
+}
+
 type PutResourceSetOutput struct {
 
 	// Details about the resource set.

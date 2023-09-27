@@ -66,6 +66,10 @@ type CreateLBCookieStickinessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLBCookieStickinessPolicyInput) operationName() string {
+	return "CreateLBCookieStickinessPolicy"
+}
+
 // Contains the output for CreateLBCookieStickinessPolicy.
 type CreateLBCookieStickinessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.

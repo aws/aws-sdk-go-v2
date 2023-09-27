@@ -46,6 +46,10 @@ type DescribeTLSInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTLSInspectionConfigurationInput) operationName() string {
+	return "DescribeTLSInspectionConfiguration"
+}
+
 type DescribeTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with

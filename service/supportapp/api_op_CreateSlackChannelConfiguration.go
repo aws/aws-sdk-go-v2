@@ -96,6 +96,10 @@ type CreateSlackChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSlackChannelConfigurationInput) operationName() string {
+	return "CreateSlackChannelConfiguration"
+}
+
 type CreateSlackChannelConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

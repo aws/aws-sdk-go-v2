@@ -63,6 +63,10 @@ type BatchPutAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutAssetPropertyValueInput) operationName() string {
+	return "BatchPutAssetPropertyValue"
+}
+
 type BatchPutAssetPropertyValueOutput struct {
 
 	// A list of the errors (if any) associated with the batch put request. Each error

@@ -52,6 +52,10 @@ type ListReadSetActivationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReadSetActivationJobsInput) operationName() string {
+	return "ListReadSetActivationJobs"
+}
+
 type ListReadSetActivationJobsOutput struct {
 
 	// A list of jobs.

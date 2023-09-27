@@ -49,6 +49,10 @@ type DeleteResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResiliencyPolicyInput) operationName() string {
+	return "DeleteResiliencyPolicy"
+}
+
 type DeleteResiliencyPolicyOutput struct {
 
 	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN

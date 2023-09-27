@@ -63,6 +63,10 @@ type CreateSamplingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSamplingRuleInput) operationName() string {
+	return "CreateSamplingRule"
+}
+
 type CreateSamplingRuleOutput struct {
 
 	// The saved rule definition and metadata.

@@ -49,6 +49,10 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDashboardsInput) operationName() string {
+	return "ListDashboards"
+}
+
 type ListDashboardsOutput struct {
 
 	// A structure that contains all of the dashboards in your Amazon Web Services

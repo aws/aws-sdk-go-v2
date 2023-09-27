@@ -42,6 +42,10 @@ type StopContinuousExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopContinuousExportInput) operationName() string {
+	return "StopContinuousExport"
+}
+
 type StopContinuousExportOutput struct {
 
 	// Timestamp that represents when this continuous export started collecting data.

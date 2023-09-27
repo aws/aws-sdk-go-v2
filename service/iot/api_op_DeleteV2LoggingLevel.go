@@ -48,6 +48,10 @@ type DeleteV2LoggingLevelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteV2LoggingLevelInput) operationName() string {
+	return "DeleteV2LoggingLevel"
+}
+
 type DeleteV2LoggingLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

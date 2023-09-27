@@ -57,6 +57,10 @@ type UpdateAssessmentControlSetStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssessmentControlSetStatusInput) operationName() string {
+	return "UpdateAssessmentControlSetStatus"
+}
+
 type UpdateAssessmentControlSetStatusOutput struct {
 
 	// The name of the updated control set that the UpdateAssessmentControlSetStatus

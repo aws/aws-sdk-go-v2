@@ -49,6 +49,10 @@ type BatchDeleteImportDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteImportDataInput) operationName() string {
+	return "BatchDeleteImportData"
+}
+
 type BatchDeleteImportDataOutput struct {
 
 	// Error messages returned for each import task that you deleted as a response for

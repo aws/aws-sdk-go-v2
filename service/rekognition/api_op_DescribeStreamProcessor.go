@@ -46,6 +46,10 @@ type DescribeStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStreamProcessorInput) operationName() string {
+	return "DescribeStreamProcessor"
+}
+
 type DescribeStreamProcessorOutput struct {
 
 	// Date and time the stream processor was created

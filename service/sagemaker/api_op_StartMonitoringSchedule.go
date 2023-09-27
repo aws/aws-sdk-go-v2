@@ -43,6 +43,10 @@ type StartMonitoringScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMonitoringScheduleInput) operationName() string {
+	return "StartMonitoringSchedule"
+}
+
 type StartMonitoringScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

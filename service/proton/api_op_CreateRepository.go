@@ -74,6 +74,10 @@ type CreateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRepositoryInput) operationName() string {
+	return "CreateRepository"
+}
+
 type CreateRepositoryOutput struct {
 
 	// The repository link's detail data that's returned by Proton.

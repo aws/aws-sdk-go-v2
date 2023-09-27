@@ -40,6 +40,10 @@ type DisassociateDefaultViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDefaultViewInput) operationName() string {
+	return "DisassociateDefaultView"
+}
+
 type DisassociateDefaultViewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -99,6 +99,10 @@ type GetPropertyValueHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPropertyValueHistoryInput) operationName() string {
+	return "GetPropertyValueHistory"
+}
+
 type GetPropertyValueHistoryOutput struct {
 
 	// An object that maps strings to the property definitions in the component type.

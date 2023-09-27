@@ -56,6 +56,10 @@ type ListAccountAssignmentDeletionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountAssignmentDeletionStatusInput) operationName() string {
+	return "ListAccountAssignmentDeletionStatus"
+}
+
 type ListAccountAssignmentDeletionStatusOutput struct {
 
 	// The status object for the account assignment deletion operation.

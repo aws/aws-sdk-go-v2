@@ -51,6 +51,10 @@ type DescribeModelPackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelPackagingJobInput) operationName() string {
+	return "DescribeModelPackagingJob"
+}
+
 type DescribeModelPackagingJobOutput struct {
 
 	// The description of the model packaging job.

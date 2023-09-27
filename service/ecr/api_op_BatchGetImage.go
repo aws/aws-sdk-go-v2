@@ -61,6 +61,10 @@ type BatchGetImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetImageInput) operationName() string {
+	return "BatchGetImage"
+}
+
 type BatchGetImageOutput struct {
 
 	// Any failures associated with the call.

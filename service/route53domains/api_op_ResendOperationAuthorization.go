@@ -41,6 +41,10 @@ type ResendOperationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResendOperationAuthorizationInput) operationName() string {
+	return "ResendOperationAuthorization"
+}
+
 type ResendOperationAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

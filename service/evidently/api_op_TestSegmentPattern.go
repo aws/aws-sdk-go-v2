@@ -52,6 +52,10 @@ type TestSegmentPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestSegmentPatternInput) operationName() string {
+	return "TestSegmentPattern"
+}
+
 type TestSegmentPatternOutput struct {
 
 	// Returns true if the pattern matches the payload.

@@ -60,6 +60,10 @@ type GetSdkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSdkInput) operationName() string {
+	return "GetSdk"
+}
+
 // The binary blob response to GetSdk, which contains the generated SDK.
 type GetSdkOutput struct {
 

@@ -73,6 +73,10 @@ type PutRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRecordInput) operationName() string {
+	return "PutRecord"
+}
+
 type PutRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

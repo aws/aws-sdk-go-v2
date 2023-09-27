@@ -46,6 +46,10 @@ type BatchStartRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchStartRecommendationsInput) operationName() string {
+	return "BatchStartRecommendations"
+}
+
 type BatchStartRecommendationsOutput struct {
 
 	// A list with error details about the analysis of each source database.

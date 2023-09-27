@@ -51,6 +51,10 @@ type DescribeBotVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBotVersionInput) operationName() string {
+	return "DescribeBotVersion"
+}
+
 type DescribeBotVersionOutput struct {
 
 	// The identifier of the bot that contains the version.

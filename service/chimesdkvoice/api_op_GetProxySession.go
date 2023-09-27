@@ -48,6 +48,10 @@ type GetProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProxySessionInput) operationName() string {
+	return "GetProxySession"
+}
+
 type GetProxySessionOutput struct {
 
 	// The proxy session details.

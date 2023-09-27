@@ -214,6 +214,10 @@ type CreateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServerInput) operationName() string {
+	return "CreateServer"
+}
+
 type CreateServerOutput struct {
 
 	// The service-assigned identifier of the server that is created.

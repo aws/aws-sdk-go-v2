@@ -52,6 +52,10 @@ type UpdateMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMLModelInput) operationName() string {
+	return "UpdateMLModel"
+}
+
 // Represents the output of an UpdateMLModel operation. You can see the updated
 // content by using the GetMLModel operation.
 type UpdateMLModelOutput struct {

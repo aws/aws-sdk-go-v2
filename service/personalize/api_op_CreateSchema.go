@@ -61,6 +61,10 @@ type CreateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSchemaInput) operationName() string {
+	return "CreateSchema"
+}
+
 type CreateSchemaOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created schema.

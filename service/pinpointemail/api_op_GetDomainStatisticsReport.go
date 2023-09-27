@@ -58,6 +58,10 @@ type GetDomainStatisticsReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainStatisticsReportInput) operationName() string {
+	return "GetDomainStatisticsReport"
+}
+
 // An object that includes statistics that are related to the domain that you
 // specified.
 type GetDomainStatisticsReportOutput struct {

@@ -44,6 +44,10 @@ type PublishRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishRecipeInput) operationName() string {
+	return "PublishRecipe"
+}
+
 type PublishRecipeOutput struct {
 
 	// The name of the recipe that you published.

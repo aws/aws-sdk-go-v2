@@ -54,6 +54,10 @@ type PutDataLakeSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDataLakeSettingsInput) operationName() string {
+	return "PutDataLakeSettings"
+}
+
 type PutDataLakeSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

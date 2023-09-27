@@ -45,6 +45,10 @@ type ListSensitivityInspectionTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSensitivityInspectionTemplatesInput) operationName() string {
+	return "ListSensitivityInspectionTemplates"
+}
+
 type ListSensitivityInspectionTemplatesOutput struct {
 
 	// The string to use in a subsequent request to get the next page of results in a

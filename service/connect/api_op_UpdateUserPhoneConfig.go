@@ -53,6 +53,10 @@ type UpdateUserPhoneConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserPhoneConfigInput) operationName() string {
+	return "UpdateUserPhoneConfig"
+}
+
 type UpdateUserPhoneConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

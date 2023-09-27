@@ -54,6 +54,10 @@ type ListEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntitlementsInput) operationName() string {
+	return "ListEntitlements"
+}
+
 type ListEntitlementsOutput struct {
 
 	// A list of entitlements that have been granted to you from other AWS accounts.

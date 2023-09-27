@@ -80,6 +80,10 @@ type ListSigningJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSigningJobsInput) operationName() string {
+	return "ListSigningJobs"
+}
+
 type ListSigningJobsOutput struct {
 
 	// A list of your signing jobs.

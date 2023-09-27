@@ -77,6 +77,10 @@ type UpdateVocabularyFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVocabularyFilterInput) operationName() string {
+	return "UpdateVocabularyFilter"
+}
+
 type UpdateVocabularyFilterOutput struct {
 
 	// The language code you selected for your custom vocabulary filter.

@@ -86,6 +86,10 @@ type CreateAutomationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAutomationRuleInput) operationName() string {
+	return "CreateAutomationRule"
+}
+
 type CreateAutomationRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the automation rule that you created.

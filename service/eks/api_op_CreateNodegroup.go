@@ -181,6 +181,10 @@ type CreateNodegroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNodegroupInput) operationName() string {
+	return "CreateNodegroup"
+}
+
 type CreateNodegroupOutput struct {
 
 	// The full description of your new node group.

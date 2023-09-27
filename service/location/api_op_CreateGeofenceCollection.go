@@ -77,6 +77,10 @@ type CreateGeofenceCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGeofenceCollectionInput) operationName() string {
+	return "CreateGeofenceCollection"
+}
+
 type CreateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when

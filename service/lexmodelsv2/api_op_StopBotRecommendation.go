@@ -60,6 +60,10 @@ type StopBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopBotRecommendationInput) operationName() string {
+	return "StopBotRecommendation"
+}
+
 type StopBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation that is

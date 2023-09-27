@@ -41,6 +41,10 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationsInput) operationName() string {
+	return "ListApplications"
+}
+
 // Represents the output of a ListApplications operation.
 type ListApplicationsOutput struct {
 

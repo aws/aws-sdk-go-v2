@@ -66,6 +66,10 @@ type UpdateSubnetChangeProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubnetChangeProtectionInput) operationName() string {
+	return "UpdateSubnetChangeProtection"
+}
+
 type UpdateSubnetChangeProtectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.

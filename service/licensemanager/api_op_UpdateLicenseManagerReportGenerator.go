@@ -76,6 +76,10 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLicenseManagerReportGeneratorInput) operationName() string {
+	return "UpdateLicenseManagerReportGenerator"
+}
+
 type UpdateLicenseManagerReportGeneratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

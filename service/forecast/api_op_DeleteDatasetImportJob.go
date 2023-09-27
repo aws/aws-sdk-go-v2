@@ -44,6 +44,10 @@ type DeleteDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDatasetImportJobInput) operationName() string {
+	return "DeleteDatasetImportJob"
+}
+
 type DeleteDatasetImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

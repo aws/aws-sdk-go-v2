@@ -142,6 +142,10 @@ type CreateIpamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIpamPoolInput) operationName() string {
+	return "CreateIpamPool"
+}
+
 type CreateIpamPoolOutput struct {
 
 	// Information about the IPAM pool created.

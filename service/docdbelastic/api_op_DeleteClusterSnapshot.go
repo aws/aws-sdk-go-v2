@@ -42,6 +42,10 @@ type DeleteClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterSnapshotInput) operationName() string {
+	return "DeleteClusterSnapshot"
+}
+
 type DeleteClusterSnapshotOutput struct {
 
 	// Returns information about the newly deleted Elastic DocumentDB snapshot.

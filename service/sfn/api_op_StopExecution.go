@@ -48,6 +48,10 @@ type StopExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopExecutionInput) operationName() string {
+	return "StopExecution"
+}
+
 type StopExecutionOutput struct {
 
 	// The date the execution is stopped.

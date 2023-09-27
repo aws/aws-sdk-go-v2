@@ -44,6 +44,10 @@ type DisableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableUserInput) operationName() string {
+	return "DisableUser"
+}
+
 type DisableUserOutput struct {
 
 	// The unique identifier for the deactivated user.

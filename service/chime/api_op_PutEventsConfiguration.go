@@ -55,6 +55,10 @@ type PutEventsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEventsConfigurationInput) operationName() string {
+	return "PutEventsConfiguration"
+}
+
 type PutEventsConfigurationOutput struct {
 
 	// The configuration that allows a bot to receive outgoing events. Can be an HTTPS

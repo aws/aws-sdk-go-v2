@@ -51,6 +51,10 @@ type ListTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTasksInput) operationName() string {
+	return "ListTasks"
+}
+
 // ListTasksResponse
 type ListTasksOutput struct {
 

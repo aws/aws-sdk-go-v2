@@ -46,6 +46,10 @@ type TerminateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateSessionInput) operationName() string {
+	return "TerminateSession"
+}
+
 type TerminateSessionOutput struct {
 
 	// The state of the session. A description of each state follows. CREATING - The

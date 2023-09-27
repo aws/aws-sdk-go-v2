@@ -79,6 +79,10 @@ type PutRuntimeManagementConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRuntimeManagementConfigInput) operationName() string {
+	return "PutRuntimeManagementConfig"
+}
+
 type PutRuntimeManagementConfigOutput struct {
 
 	// The ARN of the function

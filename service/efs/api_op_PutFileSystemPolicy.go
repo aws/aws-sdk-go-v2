@@ -69,6 +69,10 @@ type PutFileSystemPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutFileSystemPolicyInput) operationName() string {
+	return "PutFileSystemPolicy"
+}
+
 type PutFileSystemPolicyOutput struct {
 
 	// Specifies the EFS file system to which the FileSystemPolicy applies.

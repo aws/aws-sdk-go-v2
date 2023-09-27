@@ -47,6 +47,10 @@ type GetListsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetListsMetadataInput) operationName() string {
+	return "GetListsMetadata"
+}
+
 type GetListsMetadataOutput struct {
 
 	// The metadata of the specified list or all lists under the account.

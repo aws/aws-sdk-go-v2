@@ -51,6 +51,10 @@ type BatchUpdateRecommendationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateRecommendationStatusInput) operationName() string {
+	return "BatchUpdateRecommendationStatus"
+}
+
 type BatchUpdateRecommendationStatusOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

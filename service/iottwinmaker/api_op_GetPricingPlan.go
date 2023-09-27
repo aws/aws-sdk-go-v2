@@ -36,6 +36,10 @@ type GetPricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPricingPlanInput) operationName() string {
+	return "GetPricingPlan"
+}
+
 type GetPricingPlanOutput struct {
 
 	// The chosen pricing plan for the current billing cycle.

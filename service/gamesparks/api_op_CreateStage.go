@@ -63,6 +63,10 @@ type CreateStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStageInput) operationName() string {
+	return "CreateStage"
+}
+
 type CreateStageOutput struct {
 
 	// Properties that describe the stage.

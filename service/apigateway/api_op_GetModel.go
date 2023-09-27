@@ -52,6 +52,10 @@ type GetModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelInput) operationName() string {
+	return "GetModel"
+}
+
 // Represents the data structure of a method's request or response payload.
 type GetModelOutput struct {
 

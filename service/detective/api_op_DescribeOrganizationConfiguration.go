@@ -44,6 +44,10 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationConfigurationInput) operationName() string {
+	return "DescribeOrganizationConfiguration"
+}
+
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Indicates whether to automatically enable new organization accounts as member

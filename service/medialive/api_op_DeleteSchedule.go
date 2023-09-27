@@ -42,6 +42,10 @@ type DeleteScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteScheduleInput) operationName() string {
+	return "DeleteSchedule"
+}
+
 // Placeholder documentation for DeleteScheduleResponse
 type DeleteScheduleOutput struct {
 	// Metadata pertaining to the operation's result.

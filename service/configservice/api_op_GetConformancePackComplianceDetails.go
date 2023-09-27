@@ -54,6 +54,10 @@ type GetConformancePackComplianceDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConformancePackComplianceDetailsInput) operationName() string {
+	return "GetConformancePackComplianceDetails"
+}
+
 type GetConformancePackComplianceDetailsOutput struct {
 
 	// Name of the conformance pack.

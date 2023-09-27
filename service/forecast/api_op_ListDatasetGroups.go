@@ -50,6 +50,10 @@ type ListDatasetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetGroupsInput) operationName() string {
+	return "ListDatasetGroups"
+}
+
 type ListDatasetGroupsOutput struct {
 
 	// An array of objects that summarize each dataset group's properties.

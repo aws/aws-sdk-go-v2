@@ -41,6 +41,10 @@ type DeleteKeyspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKeyspaceInput) operationName() string {
+	return "DeleteKeyspace"
+}
+
 type DeleteKeyspaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

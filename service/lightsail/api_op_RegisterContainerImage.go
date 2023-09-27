@@ -70,6 +70,10 @@ type RegisterContainerImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterContainerImageInput) operationName() string {
+	return "RegisterContainerImage"
+}
+
 type RegisterContainerImageOutput struct {
 
 	// An object that describes a container image that is registered to a Lightsail

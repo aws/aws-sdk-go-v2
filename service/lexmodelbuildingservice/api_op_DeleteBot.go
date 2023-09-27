@@ -52,6 +52,10 @@ type DeleteBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBotInput) operationName() string {
+	return "DeleteBot"
+}
+
 type DeleteBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

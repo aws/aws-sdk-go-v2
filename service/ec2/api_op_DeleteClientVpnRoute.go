@@ -60,6 +60,10 @@ type DeleteClientVpnRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClientVpnRouteInput) operationName() string {
+	return "DeleteClientVpnRoute"
+}
+
 type DeleteClientVpnRouteOutput struct {
 
 	// The current state of the route.

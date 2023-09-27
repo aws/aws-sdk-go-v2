@@ -53,6 +53,10 @@ type AssignVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssignVolumeInput) operationName() string {
+	return "AssignVolume"
+}
+
 type AssignVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

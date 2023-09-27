@@ -60,6 +60,10 @@ type ModifyTrafficMirrorFilterNetworkServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTrafficMirrorFilterNetworkServicesInput) operationName() string {
+	return "ModifyTrafficMirrorFilterNetworkServices"
+}
+
 type ModifyTrafficMirrorFilterNetworkServicesOutput struct {
 
 	// The Traffic Mirror filter that the network service is associated with.

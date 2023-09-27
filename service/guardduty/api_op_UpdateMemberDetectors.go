@@ -59,6 +59,10 @@ type UpdateMemberDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMemberDetectorsInput) operationName() string {
+	return "UpdateMemberDetectors"
+}
+
 type UpdateMemberDetectorsOutput struct {
 
 	// A list of member account IDs that were unable to be processed along with an

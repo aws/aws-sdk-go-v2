@@ -55,6 +55,10 @@ type GetTokenBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTokenBalanceInput) operationName() string {
+	return "GetTokenBalance"
+}
+
 type GetTokenBalanceOutput struct {
 
 	// The container for time.

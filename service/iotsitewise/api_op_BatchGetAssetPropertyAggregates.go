@@ -55,6 +55,10 @@ type BatchGetAssetPropertyAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetAssetPropertyAggregatesInput) operationName() string {
+	return "BatchGetAssetPropertyAggregates"
+}
+
 type BatchGetAssetPropertyAggregatesOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error

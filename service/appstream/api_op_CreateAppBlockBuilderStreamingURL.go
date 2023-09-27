@@ -46,6 +46,10 @@ type CreateAppBlockBuilderStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppBlockBuilderStreamingURLInput) operationName() string {
+	return "CreateAppBlockBuilderStreamingURL"
+}
+
 type CreateAppBlockBuilderStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.

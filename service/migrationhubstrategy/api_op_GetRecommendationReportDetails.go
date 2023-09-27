@@ -43,6 +43,10 @@ type GetRecommendationReportDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecommendationReportDetailsInput) operationName() string {
+	return "GetRecommendationReportDetails"
+}
+
 type GetRecommendationReportDetailsOutput struct {
 
 	// The ID of the recommendation report generation task. See the response of

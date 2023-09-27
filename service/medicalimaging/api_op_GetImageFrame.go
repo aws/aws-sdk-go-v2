@@ -53,6 +53,10 @@ type GetImageFrameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImageFrameInput) operationName() string {
+	return "GetImageFrame"
+}
+
 type GetImageFrameOutput struct {
 
 	// The blob containing the aggregated image frame information.

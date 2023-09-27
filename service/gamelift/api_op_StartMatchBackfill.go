@@ -97,6 +97,10 @@ type StartMatchBackfillInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMatchBackfillInput) operationName() string {
+	return "StartMatchBackfill"
+}
+
 type StartMatchBackfillOutput struct {
 
 	// Ticket representing the backfill matchmaking request. This object includes the

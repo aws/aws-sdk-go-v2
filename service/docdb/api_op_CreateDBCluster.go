@@ -156,6 +156,10 @@ type CreateDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterInput) operationName() string {
+	return "CreateDBCluster"
+}
+
 type CreateDBClusterOutput struct {
 
 	// Detailed information about a cluster.

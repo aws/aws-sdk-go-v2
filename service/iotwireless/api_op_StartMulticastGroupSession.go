@@ -47,6 +47,10 @@ type StartMulticastGroupSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMulticastGroupSessionInput) operationName() string {
+	return "StartMulticastGroupSession"
+}
+
 type StartMulticastGroupSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

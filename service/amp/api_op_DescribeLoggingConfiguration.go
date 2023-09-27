@@ -43,6 +43,10 @@ type DescribeLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoggingConfigurationInput) operationName() string {
+	return "DescribeLoggingConfiguration"
+}
+
 // Represents the output of a DescribeLoggingConfiguration operation.
 type DescribeLoggingConfigurationOutput struct {
 

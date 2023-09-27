@@ -48,6 +48,10 @@ type ListTextTranslationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTextTranslationJobsInput) operationName() string {
+	return "ListTextTranslationJobs"
+}
+
 type ListTextTranslationJobsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

@@ -123,6 +123,10 @@ type CreateHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHostedZoneInput) operationName() string {
+	return "CreateHostedZone"
+}
+
 // A complex type containing the response information for the hosted zone.
 type CreateHostedZoneOutput struct {
 

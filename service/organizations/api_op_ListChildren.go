@@ -80,6 +80,10 @@ type ListChildrenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChildrenInput) operationName() string {
+	return "ListChildren"
+}
+
 type ListChildrenOutput struct {
 
 	// The list of children of the specified parent container.

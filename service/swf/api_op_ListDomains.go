@@ -76,6 +76,10 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainsInput) operationName() string {
+	return "ListDomains"
+}
+
 // Contains a paginated collection of DomainInfo structures.
 type ListDomainsOutput struct {
 

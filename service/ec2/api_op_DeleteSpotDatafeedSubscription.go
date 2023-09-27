@@ -43,6 +43,10 @@ type DeleteSpotDatafeedSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSpotDatafeedSubscriptionInput) operationName() string {
+	return "DeleteSpotDatafeedSubscription"
+}
+
 type DeleteSpotDatafeedSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

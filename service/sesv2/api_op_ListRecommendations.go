@@ -55,6 +55,10 @@ type ListRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecommendationsInput) operationName() string {
+	return "ListRecommendations"
+}
+
 // Contains the response to your request to retrieve the list of recommendations
 // for your account.
 type ListRecommendationsOutput struct {

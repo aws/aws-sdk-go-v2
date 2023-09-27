@@ -60,6 +60,10 @@ type ListCallAnalyticsJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCallAnalyticsJobsInput) operationName() string {
+	return "ListCallAnalyticsJobs"
+}
+
 type ListCallAnalyticsJobsOutput struct {
 
 	// Provides a summary of information about each result.

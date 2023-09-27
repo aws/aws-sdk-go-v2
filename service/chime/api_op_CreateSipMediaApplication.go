@@ -61,6 +61,10 @@ type CreateSipMediaApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSipMediaApplicationInput) operationName() string {
+	return "CreateSipMediaApplication"
+}
+
 type CreateSipMediaApplicationOutput struct {
 
 	// The SIP media application details.

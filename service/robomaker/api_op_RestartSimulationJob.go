@@ -41,6 +41,10 @@ type RestartSimulationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestartSimulationJobInput) operationName() string {
+	return "RestartSimulationJob"
+}
+
 type RestartSimulationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

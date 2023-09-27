@@ -76,6 +76,10 @@ type CreateVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVirtualRouterInput) operationName() string {
+	return "CreateVirtualRouter"
+}
+
 type CreateVirtualRouterOutput struct {
 
 	// The full description of your virtual router following the create call.

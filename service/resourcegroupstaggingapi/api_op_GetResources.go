@@ -142,6 +142,10 @@ type GetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcesInput) operationName() string {
+	return "GetResources"
+}
+
 type GetResourcesOutput struct {
 
 	// A string that indicates that there is more data available than this response

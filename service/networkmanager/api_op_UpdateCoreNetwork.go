@@ -45,6 +45,10 @@ type UpdateCoreNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCoreNetworkInput) operationName() string {
+	return "UpdateCoreNetwork"
+}
+
 type UpdateCoreNetworkOutput struct {
 
 	// Returns information about a core network update.

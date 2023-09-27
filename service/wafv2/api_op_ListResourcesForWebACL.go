@@ -53,6 +53,10 @@ type ListResourcesForWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesForWebACLInput) operationName() string {
+	return "ListResourcesForWebACL"
+}
+
 type ListResourcesForWebACLOutput struct {
 
 	// The array of Amazon Resource Names (ARNs) of the associated resources.

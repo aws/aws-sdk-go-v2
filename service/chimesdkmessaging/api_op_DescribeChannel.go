@@ -50,6 +50,10 @@ type DescribeChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelInput) operationName() string {
+	return "DescribeChannel"
+}
+
 type DescribeChannelOutput struct {
 
 	// The channel details.

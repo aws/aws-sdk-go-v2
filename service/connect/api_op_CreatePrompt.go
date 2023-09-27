@@ -61,6 +61,10 @@ type CreatePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePromptInput) operationName() string {
+	return "CreatePrompt"
+}
+
 type CreatePromptOutput struct {
 
 	// The Amazon Resource Name (ARN) of the prompt.

@@ -52,6 +52,10 @@ type GetWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowInput) operationName() string {
+	return "GetWorkflow"
+}
+
 type GetWorkflowOutput struct {
 
 	// The computational accelerator specified to run the workflow.

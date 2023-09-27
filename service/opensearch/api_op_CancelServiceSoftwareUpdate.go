@@ -48,6 +48,10 @@ type CancelServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelServiceSoftwareUpdateInput) operationName() string {
+	return "CancelServiceSoftwareUpdate"
+}
+
 // Container for the response to a CancelServiceSoftwareUpdate operation. Contains
 // the status of the update.
 type CancelServiceSoftwareUpdateOutput struct {

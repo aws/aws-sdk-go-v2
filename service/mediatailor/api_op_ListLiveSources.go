@@ -53,6 +53,10 @@ type ListLiveSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLiveSourcesInput) operationName() string {
+	return "ListLiveSources"
+}
+
 type ListLiveSourcesOutput struct {
 
 	// Lists the live sources.

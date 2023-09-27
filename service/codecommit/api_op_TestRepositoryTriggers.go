@@ -50,6 +50,10 @@ type TestRepositoryTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestRepositoryTriggersInput) operationName() string {
+	return "TestRepositoryTriggers"
+}
+
 // Represents the output of a test repository triggers operation.
 type TestRepositoryTriggersOutput struct {
 

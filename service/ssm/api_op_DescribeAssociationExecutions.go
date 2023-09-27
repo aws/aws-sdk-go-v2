@@ -53,6 +53,10 @@ type DescribeAssociationExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssociationExecutionsInput) operationName() string {
+	return "DescribeAssociationExecutions"
+}
+
 type DescribeAssociationExecutionsOutput struct {
 
 	// A list of the executions for the specified association ID.

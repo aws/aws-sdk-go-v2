@@ -63,6 +63,10 @@ type AddAttachmentsToSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddAttachmentsToSetInput) operationName() string {
+	return "AddAttachmentsToSet"
+}
+
 // The ID and expiry time of the attachment set returned by the AddAttachmentsToSet
 // operation.
 type AddAttachmentsToSetOutput struct {

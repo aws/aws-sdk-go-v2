@@ -42,6 +42,10 @@ type GetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProfileInput) operationName() string {
+	return "GetProfile"
+}
+
 type GetProfileOutput struct {
 
 	// The state of the profile after a read or write operation.

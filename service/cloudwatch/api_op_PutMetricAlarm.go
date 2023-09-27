@@ -312,6 +312,10 @@ type PutMetricAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMetricAlarmInput) operationName() string {
+	return "PutMetricAlarm"
+}
+
 type PutMetricAlarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

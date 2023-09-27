@@ -78,6 +78,10 @@ type UpdateLocationObjectStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLocationObjectStorageInput) operationName() string {
+	return "UpdateLocationObjectStorage"
+}
+
 type UpdateLocationObjectStorageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

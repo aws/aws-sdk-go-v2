@@ -45,6 +45,10 @@ type DescribeStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStacksInput) operationName() string {
+	return "DescribeStacks"
+}
+
 // Contains the response to a DescribeStacks request.
 type DescribeStacksOutput struct {
 

@@ -48,6 +48,10 @@ type DescribePortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePortfolioInput) operationName() string {
+	return "DescribePortfolio"
+}
+
 type DescribePortfolioOutput struct {
 
 	// Information about the associated budgets.

@@ -83,6 +83,10 @@ type DescribeLogStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLogStreamsInput) operationName() string {
+	return "DescribeLogStreams"
+}
+
 type DescribeLogStreamsOutput struct {
 
 	// The log streams.

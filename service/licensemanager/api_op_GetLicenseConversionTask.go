@@ -43,6 +43,10 @@ type GetLicenseConversionTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLicenseConversionTaskInput) operationName() string {
+	return "GetLicenseConversionTask"
+}
+
 type GetLicenseConversionTaskOutput struct {
 
 	// Information about the license type converted to.

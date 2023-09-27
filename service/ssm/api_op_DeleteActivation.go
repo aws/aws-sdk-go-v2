@@ -44,6 +44,10 @@ type DeleteActivationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteActivationInput) operationName() string {
+	return "DeleteActivation"
+}
+
 type DeleteActivationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

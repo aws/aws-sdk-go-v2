@@ -63,6 +63,10 @@ type ListReadSetUploadPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReadSetUploadPartsInput) operationName() string {
+	return "ListReadSetUploadParts"
+}
+
 type ListReadSetUploadPartsOutput struct {
 
 	// Next token returned in the response of a previous ListReadSetUploadParts call.

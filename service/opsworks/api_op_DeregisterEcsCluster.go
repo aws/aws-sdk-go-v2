@@ -47,6 +47,10 @@ type DeregisterEcsClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterEcsClusterInput) operationName() string {
+	return "DeregisterEcsCluster"
+}
+
 type DeregisterEcsClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

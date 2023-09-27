@@ -55,6 +55,10 @@ type SetDefaultMessageTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDefaultMessageTypeInput) operationName() string {
+	return "SetDefaultMessageType"
+}
+
 type SetDefaultMessageTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated configuration set.

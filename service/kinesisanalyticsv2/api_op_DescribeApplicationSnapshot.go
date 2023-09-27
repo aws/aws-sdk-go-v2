@@ -47,6 +47,10 @@ type DescribeApplicationSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationSnapshotInput) operationName() string {
+	return "DescribeApplicationSnapshot"
+}
+
 type DescribeApplicationSnapshotOutput struct {
 
 	// An object containing information about the application snapshot.

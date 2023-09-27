@@ -108,6 +108,10 @@ type StartExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartExecutionInput) operationName() string {
+	return "StartExecution"
+}
+
 type StartExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the execution.

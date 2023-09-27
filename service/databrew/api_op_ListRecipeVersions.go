@@ -48,6 +48,10 @@ type ListRecipeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecipeVersionsInput) operationName() string {
+	return "ListRecipeVersions"
+}
+
 type ListRecipeVersionsOutput struct {
 
 	// A list of versions for the specified recipe.

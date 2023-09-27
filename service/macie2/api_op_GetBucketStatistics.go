@@ -42,6 +42,10 @@ type GetBucketStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketStatisticsInput) operationName() string {
+	return "GetBucketStatistics"
+}
+
 type GetBucketStatisticsOutput struct {
 
 	// The total number of buckets.

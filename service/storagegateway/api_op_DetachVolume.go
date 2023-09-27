@@ -53,6 +53,10 @@ type DetachVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachVolumeInput) operationName() string {
+	return "DetachVolume"
+}
+
 // AttachVolumeOutput
 type DetachVolumeOutput struct {
 

@@ -49,6 +49,10 @@ type PutProjectEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutProjectEventsInput) operationName() string {
+	return "PutProjectEvents"
+}
+
 type PutProjectEventsOutput struct {
 
 	// A structure that contains Evidently's response to the sent events, including an

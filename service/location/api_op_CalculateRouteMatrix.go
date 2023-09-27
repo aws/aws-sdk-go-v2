@@ -138,6 +138,10 @@ type CalculateRouteMatrixInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CalculateRouteMatrixInput) operationName() string {
+	return "CalculateRouteMatrix"
+}
+
 // Returns the result of the route matrix calculation.
 type CalculateRouteMatrixOutput struct {
 

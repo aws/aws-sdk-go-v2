@@ -46,6 +46,10 @@ type AssociateWirelessGatewayWithThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateWirelessGatewayWithThingInput) operationName() string {
+	return "AssociateWirelessGatewayWithThing"
+}
+
 type AssociateWirelessGatewayWithThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

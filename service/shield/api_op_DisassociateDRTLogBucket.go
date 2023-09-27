@@ -42,6 +42,10 @@ type DisassociateDRTLogBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDRTLogBucketInput) operationName() string {
+	return "DisassociateDRTLogBucket"
+}
+
 type DisassociateDRTLogBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

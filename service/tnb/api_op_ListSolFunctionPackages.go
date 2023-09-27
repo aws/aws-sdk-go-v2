@@ -47,6 +47,10 @@ type ListSolFunctionPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSolFunctionPackagesInput) operationName() string {
+	return "ListSolFunctionPackages"
+}
+
 type ListSolFunctionPackagesOutput struct {
 
 	// Function packages. A function package is a .zip file in CSAR (Cloud Service

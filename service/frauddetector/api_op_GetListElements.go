@@ -47,6 +47,10 @@ type GetListElementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetListElementsInput) operationName() string {
+	return "GetListElements"
+}
+
 type GetListElementsOutput struct {
 
 	// The list elements.

@@ -41,6 +41,10 @@ type DeleteAppImageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppImageConfigInput) operationName() string {
+	return "DeleteAppImageConfig"
+}
+
 type DeleteAppImageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

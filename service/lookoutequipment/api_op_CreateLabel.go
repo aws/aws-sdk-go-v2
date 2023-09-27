@@ -80,6 +80,10 @@ type CreateLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLabelInput) operationName() string {
+	return "CreateLabel"
+}
+
 type CreateLabelOutput struct {
 
 	// The ID of the label that you have created.

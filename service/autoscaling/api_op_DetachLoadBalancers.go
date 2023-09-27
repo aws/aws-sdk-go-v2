@@ -57,6 +57,10 @@ type DetachLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachLoadBalancersInput) operationName() string {
+	return "DetachLoadBalancers"
+}
+
 type DetachLoadBalancersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

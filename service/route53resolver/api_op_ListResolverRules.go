@@ -56,6 +56,10 @@ type ListResolverRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolverRulesInput) operationName() string {
+	return "ListResolverRules"
+}
+
 type ListResolverRulesOutput struct {
 
 	// The value that you specified for MaxResults in the request.

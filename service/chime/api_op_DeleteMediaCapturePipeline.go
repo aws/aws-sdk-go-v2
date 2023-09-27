@@ -50,6 +50,10 @@ type DeleteMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMediaCapturePipelineInput) operationName() string {
+	return "DeleteMediaCapturePipeline"
+}
+
 type DeleteMediaCapturePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

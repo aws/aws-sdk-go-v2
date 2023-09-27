@@ -68,6 +68,10 @@ type TestRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestRoleInput) operationName() string {
+	return "TestRole"
+}
+
 // The TestRoleResponse structure.
 type TestRoleOutput struct {
 

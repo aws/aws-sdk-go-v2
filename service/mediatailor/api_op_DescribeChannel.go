@@ -45,6 +45,10 @@ type DescribeChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelInput) operationName() string {
+	return "DescribeChannel"
+}
+
 type DescribeChannelOutput struct {
 
 	// The log configuration for the channel.

@@ -48,6 +48,10 @@ type GetScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetScanInput) operationName() string {
+	return "GetScan"
+}
+
 type GetScanOutput struct {
 
 	// The type of analysis CodeGuru Security performed in the scan, either Security

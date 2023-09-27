@@ -42,6 +42,10 @@ type GetActiveNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetActiveNamesInput) operationName() string {
+	return "GetActiveNames"
+}
+
 type GetActiveNamesOutput struct {
 
 	// The list of active names returned by the get active names request.

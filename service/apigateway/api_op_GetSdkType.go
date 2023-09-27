@@ -43,6 +43,10 @@ type GetSdkTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSdkTypeInput) operationName() string {
+	return "GetSdkType"
+}
+
 // A type of SDK that API Gateway can generate.
 type GetSdkTypeOutput struct {
 

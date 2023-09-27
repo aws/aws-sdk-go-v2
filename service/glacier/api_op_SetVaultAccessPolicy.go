@@ -62,6 +62,10 @@ type SetVaultAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetVaultAccessPolicyInput) operationName() string {
+	return "SetVaultAccessPolicy"
+}
+
 type SetVaultAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

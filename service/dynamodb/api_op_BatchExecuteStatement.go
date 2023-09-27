@@ -62,6 +62,10 @@ type BatchExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchExecuteStatementInput) operationName() string {
+	return "BatchExecuteStatement"
+}
+
 type BatchExecuteStatementOutput struct {
 
 	// The capacity units consumed by the entire operation. The values of the list are

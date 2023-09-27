@@ -42,6 +42,10 @@ type StartAssociationsOnceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAssociationsOnceInput) operationName() string {
+	return "StartAssociationsOnce"
+}
+
 type StartAssociationsOnceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

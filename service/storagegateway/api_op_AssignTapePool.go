@@ -63,6 +63,10 @@ type AssignTapePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssignTapePoolInput) operationName() string {
+	return "AssignTapePool"
+}
+
 type AssignTapePoolOutput struct {
 
 	// The unique Amazon Resource Names (ARN) of the virtual tape that was added to

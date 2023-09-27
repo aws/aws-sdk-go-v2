@@ -54,6 +54,10 @@ type DescribeTopicRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTopicRefreshInput) operationName() string {
+	return "DescribeTopicRefresh"
+}
+
 type DescribeTopicRefreshOutput struct {
 
 	// Details of the refresh, which is performed when the topic is created or updated.

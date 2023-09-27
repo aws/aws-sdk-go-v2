@@ -68,6 +68,10 @@ type RestoreClusterFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreClusterFromSnapshotInput) operationName() string {
+	return "RestoreClusterFromSnapshot"
+}
+
 type RestoreClusterFromSnapshotOutput struct {
 
 	// Returns information about a the restored Elastic DocumentDB cluster.

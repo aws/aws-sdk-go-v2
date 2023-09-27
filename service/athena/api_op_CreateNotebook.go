@@ -56,6 +56,10 @@ type CreateNotebookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNotebookInput) operationName() string {
+	return "CreateNotebook"
+}
+
 type CreateNotebookOutput struct {
 
 	// A unique identifier for the notebook.

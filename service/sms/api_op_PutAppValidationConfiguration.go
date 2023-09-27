@@ -48,6 +48,10 @@ type PutAppValidationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppValidationConfigurationInput) operationName() string {
+	return "PutAppValidationConfiguration"
+}
+
 type PutAppValidationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,10 @@ type UpdateCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCallAnalyticsCategoryInput) operationName() string {
+	return "UpdateCallAnalyticsCategory"
+}
+
 type UpdateCallAnalyticsCategoryOutput struct {
 
 	// Provides you with the properties of the Call Analytics category you specified

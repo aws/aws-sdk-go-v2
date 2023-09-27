@@ -54,6 +54,10 @@ type UpdateConfigurationSetSendingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationSetSendingEnabledInput) operationName() string {
+	return "UpdateConfigurationSetSendingEnabled"
+}
+
 type UpdateConfigurationSetSendingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

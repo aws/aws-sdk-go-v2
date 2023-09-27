@@ -60,6 +60,10 @@ type UpdateInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInstanceStorageConfigInput) operationName() string {
+	return "UpdateInstanceStorageConfig"
+}
+
 type UpdateInstanceStorageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

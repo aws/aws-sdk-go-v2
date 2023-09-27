@@ -44,6 +44,10 @@ type DescribeLocationS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationS3Input) operationName() string {
+	return "DescribeLocationS3"
+}
+
 // DescribeLocationS3Response
 type DescribeLocationS3Output struct {
 

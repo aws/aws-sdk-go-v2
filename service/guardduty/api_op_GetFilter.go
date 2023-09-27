@@ -47,6 +47,10 @@ type GetFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFilterInput) operationName() string {
+	return "GetFilter"
+}
+
 type GetFilterOutput struct {
 
 	// Specifies the action that is to be applied to the findings that match the

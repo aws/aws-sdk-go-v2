@@ -67,6 +67,10 @@ type ListProtectionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProtectionGroupsInput) operationName() string {
+	return "ListProtectionGroups"
+}
+
 type ListProtectionGroupsOutput struct {
 
 	//

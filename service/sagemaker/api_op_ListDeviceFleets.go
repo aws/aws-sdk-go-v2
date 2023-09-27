@@ -66,6 +66,10 @@ type ListDeviceFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeviceFleetsInput) operationName() string {
+	return "ListDeviceFleets"
+}
+
 type ListDeviceFleetsOutput struct {
 
 	// Summary of the device fleet.

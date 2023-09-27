@@ -62,6 +62,10 @@ type GetColumnStatisticsForPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetColumnStatisticsForPartitionInput) operationName() string {
+	return "GetColumnStatisticsForPartition"
+}
+
 type GetColumnStatisticsForPartitionOutput struct {
 
 	// List of ColumnStatistics that failed to be retrieved.

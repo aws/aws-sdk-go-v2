@@ -70,6 +70,10 @@ type GetInstanceAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceAccessInput) operationName() string {
+	return "GetInstanceAccess"
+}
+
 type GetInstanceAccessOutput struct {
 
 	// The connection information for a fleet instance, including IP address and

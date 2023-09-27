@@ -46,6 +46,10 @@ type ListDataQualityResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataQualityResultsInput) operationName() string {
+	return "ListDataQualityResults"
+}
+
 type ListDataQualityResultsOutput struct {
 
 	// A list of DataQualityResultDescription objects.

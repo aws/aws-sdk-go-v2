@@ -44,6 +44,10 @@ type StartNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartNotebookInstanceInput) operationName() string {
+	return "StartNotebookInstance"
+}
+
 type StartNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

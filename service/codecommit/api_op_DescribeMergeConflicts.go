@@ -87,6 +87,10 @@ type DescribeMergeConflictsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMergeConflictsInput) operationName() string {
+	return "DescribeMergeConflicts"
+}
+
 type DescribeMergeConflictsOutput struct {
 
 	// Contains metadata about the conflicts found in the merge.

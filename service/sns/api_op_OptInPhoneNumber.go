@@ -44,6 +44,10 @@ type OptInPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*OptInPhoneNumberInput) operationName() string {
+	return "OptInPhoneNumber"
+}
+
 // The response for the OptInPhoneNumber action.
 type OptInPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.

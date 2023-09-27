@@ -175,6 +175,10 @@ type CreateNFSFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNFSFileShareInput) operationName() string {
+	return "CreateNFSFileShare"
+}
+
 // CreateNFSFileShareOutput
 type CreateNFSFileShareOutput struct {
 

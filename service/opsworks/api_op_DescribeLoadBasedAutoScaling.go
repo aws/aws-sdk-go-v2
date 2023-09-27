@@ -47,6 +47,10 @@ type DescribeLoadBasedAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoadBasedAutoScalingInput) operationName() string {
+	return "DescribeLoadBasedAutoScaling"
+}
+
 // Contains the response to a DescribeLoadBasedAutoScaling request.
 type DescribeLoadBasedAutoScalingOutput struct {
 

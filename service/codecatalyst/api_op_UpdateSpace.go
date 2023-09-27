@@ -43,6 +43,10 @@ type UpdateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSpaceInput) operationName() string {
+	return "UpdateSpace"
+}
+
 type UpdateSpaceOutput struct {
 
 	// The description of the space.

@@ -51,6 +51,10 @@ type DeleteSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSchemaVersionInput) operationName() string {
+	return "DeleteSchemaVersion"
+}
+
 type DeleteSchemaVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

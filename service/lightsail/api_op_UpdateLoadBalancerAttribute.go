@@ -75,6 +75,10 @@ type UpdateLoadBalancerAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLoadBalancerAttributeInput) operationName() string {
+	return "UpdateLoadBalancerAttribute"
+}
+
 type UpdateLoadBalancerAttributeOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

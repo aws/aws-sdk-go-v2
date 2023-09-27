@@ -49,6 +49,10 @@ type ListWavesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWavesInput) operationName() string {
+	return "ListWaves"
+}
+
 type ListWavesOutput struct {
 
 	// Waves list.

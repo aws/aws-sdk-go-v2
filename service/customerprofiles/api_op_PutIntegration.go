@@ -67,6 +67,10 @@ type PutIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutIntegrationInput) operationName() string {
+	return "PutIntegration"
+}
+
 type PutIntegrationOutput struct {
 
 	// The timestamp of when the domain was created.

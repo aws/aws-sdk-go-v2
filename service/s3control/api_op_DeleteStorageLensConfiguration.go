@@ -56,6 +56,10 @@ type DeleteStorageLensConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStorageLensConfigurationInput) operationName() string {
+	return "DeleteStorageLensConfiguration"
+}
+
 type DeleteStorageLensConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

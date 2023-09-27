@@ -57,6 +57,10 @@ type ListItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListItemsInput) operationName() string {
+	return "ListItems"
+}
+
 type ListItemsOutput struct {
 
 	// The metadata entries for the folders and objects at the requested path.

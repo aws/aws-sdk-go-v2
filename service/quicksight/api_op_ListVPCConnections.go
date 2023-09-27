@@ -50,6 +50,10 @@ type ListVPCConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVPCConnectionsInput) operationName() string {
+	return "ListVPCConnections"
+}
+
 type ListVPCConnectionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

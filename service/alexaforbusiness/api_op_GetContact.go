@@ -44,6 +44,10 @@ type GetContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactInput) operationName() string {
+	return "GetContact"
+}
+
 type GetContactOutput struct {
 
 	// The details of the requested contact.

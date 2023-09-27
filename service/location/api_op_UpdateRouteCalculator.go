@@ -52,6 +52,10 @@ type UpdateRouteCalculatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRouteCalculatorInput) operationName() string {
+	return "UpdateRouteCalculator"
+}
+
 type UpdateRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated route calculator resource. Used

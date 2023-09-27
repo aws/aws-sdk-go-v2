@@ -59,6 +59,10 @@ type DescribeClientAuthenticationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientAuthenticationSettingsInput) operationName() string {
+	return "DescribeClientAuthenticationSettings"
+}
+
 type DescribeClientAuthenticationSettingsOutput struct {
 
 	// Information about the type of client authentication for the specified

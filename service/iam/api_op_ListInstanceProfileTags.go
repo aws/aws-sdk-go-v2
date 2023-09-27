@@ -63,6 +63,10 @@ type ListInstanceProfileTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceProfileTagsInput) operationName() string {
+	return "ListInstanceProfileTags"
+}
+
 type ListInstanceProfileTagsOutput struct {
 
 	// The list of tags that are currently attached to the IAM instance profile. Each

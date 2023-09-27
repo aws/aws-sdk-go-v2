@@ -54,6 +54,10 @@ type CreateLogStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLogStreamInput) operationName() string {
+	return "CreateLogStream"
+}
+
 type CreateLogStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

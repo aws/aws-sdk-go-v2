@@ -47,6 +47,10 @@ type GetTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTriggersInput) operationName() string {
+	return "GetTriggers"
+}
+
 type GetTriggersOutput struct {
 
 	// A continuation token, if not all the requested triggers have yet been returned.

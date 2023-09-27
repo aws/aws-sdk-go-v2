@@ -48,6 +48,10 @@ type GetAccessPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPreviewInput) operationName() string {
+	return "GetAccessPreview"
+}
+
 type GetAccessPreviewOutput struct {
 
 	// An object that contains information about the access preview.

@@ -63,6 +63,10 @@ type ListRepositoriesInDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRepositoriesInDomainInput) operationName() string {
+	return "ListRepositoriesInDomain"
+}
+
 type ListRepositoriesInDomainOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

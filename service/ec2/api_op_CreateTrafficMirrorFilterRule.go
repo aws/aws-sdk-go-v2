@@ -96,6 +96,10 @@ type CreateTrafficMirrorFilterRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrafficMirrorFilterRuleInput) operationName() string {
+	return "CreateTrafficMirrorFilterRule"
+}
+
 type CreateTrafficMirrorFilterRuleOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

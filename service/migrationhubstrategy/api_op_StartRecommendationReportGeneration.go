@@ -44,6 +44,10 @@ type StartRecommendationReportGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRecommendationReportGenerationInput) operationName() string {
+	return "StartRecommendationReportGeneration"
+}
+
 type StartRecommendationReportGenerationOutput struct {
 
 	// The ID of the recommendation report generation task.

@@ -55,6 +55,10 @@ type DetachClassicLinkVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachClassicLinkVpcInput) operationName() string {
+	return "DetachClassicLinkVpc"
+}
+
 type DetachClassicLinkVpcOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

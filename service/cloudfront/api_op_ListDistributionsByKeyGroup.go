@@ -57,6 +57,10 @@ type ListDistributionsByKeyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionsByKeyGroupInput) operationName() string {
+	return "ListDistributionsByKeyGroup"
+}
+
 type ListDistributionsByKeyGroupOutput struct {
 
 	// A list of distribution IDs.

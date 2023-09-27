@@ -46,6 +46,10 @@ type ListVPCEConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVPCEConfigurationsInput) operationName() string {
+	return "ListVPCEConfigurations"
+}
+
 type ListVPCEConfigurationsOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which

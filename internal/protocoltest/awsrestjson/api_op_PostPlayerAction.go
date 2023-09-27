@@ -32,6 +32,10 @@ type PostPlayerActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostPlayerActionInput) operationName() string {
+	return "PostPlayerAction"
+}
+
 type PostPlayerActionOutput struct {
 
 	// This member is required.

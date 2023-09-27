@@ -75,6 +75,10 @@ type DeleteHostedZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHostedZoneInput) operationName() string {
+	return "DeleteHostedZone"
+}
+
 // A complex type that contains the response to a DeleteHostedZone request.
 type DeleteHostedZoneOutput struct {
 

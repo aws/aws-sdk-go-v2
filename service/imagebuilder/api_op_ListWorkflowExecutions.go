@@ -51,6 +51,10 @@ type ListWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkflowExecutionsInput) operationName() string {
+	return "ListWorkflowExecutions"
+}
+
 type ListWorkflowExecutionsOutput struct {
 
 	// The resource ARN of the image build version for which you requested a list of

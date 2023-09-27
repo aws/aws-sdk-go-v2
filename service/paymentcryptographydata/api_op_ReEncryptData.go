@@ -87,6 +87,10 @@ type ReEncryptDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReEncryptDataInput) operationName() string {
+	return "ReEncryptData"
+}
+
 type ReEncryptDataOutput struct {
 
 	// The encrypted ciphertext.

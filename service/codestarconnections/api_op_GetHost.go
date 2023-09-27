@@ -43,6 +43,10 @@ type GetHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostInput) operationName() string {
+	return "GetHost"
+}
+
 type GetHostOutput struct {
 
 	// The name of the requested host.

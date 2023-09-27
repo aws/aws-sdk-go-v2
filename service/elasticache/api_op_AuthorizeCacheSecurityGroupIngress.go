@@ -59,6 +59,10 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeCacheSecurityGroupIngressInput) operationName() string {
+	return "AuthorizeCacheSecurityGroupIngress"
+}
+
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:

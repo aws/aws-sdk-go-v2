@@ -75,6 +75,10 @@ type DescribeOptionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOptionGroupsInput) operationName() string {
+	return "DescribeOptionGroups"
+}
+
 // List of option groups.
 type DescribeOptionGroupsOutput struct {
 

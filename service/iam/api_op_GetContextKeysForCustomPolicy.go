@@ -60,6 +60,10 @@ type GetContextKeysForCustomPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContextKeysForCustomPolicyInput) operationName() string {
+	return "GetContextKeysForCustomPolicy"
+}
+
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
 // GetContextKeysForCustomPolicy request.
 type GetContextKeysForCustomPolicyOutput struct {

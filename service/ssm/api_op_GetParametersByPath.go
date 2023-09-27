@@ -77,6 +77,10 @@ type GetParametersByPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParametersByPathInput) operationName() string {
+	return "GetParametersByPath"
+}
+
 type GetParametersByPathOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

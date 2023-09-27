@@ -44,6 +44,10 @@ type DeregisterManagedInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterManagedInstanceInput) operationName() string {
+	return "DeregisterManagedInstance"
+}
+
 type DeregisterManagedInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

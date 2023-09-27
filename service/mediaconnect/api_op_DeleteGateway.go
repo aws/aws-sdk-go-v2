@@ -42,6 +42,10 @@ type DeleteGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGatewayInput) operationName() string {
+	return "DeleteGateway"
+}
+
 type DeleteGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway that was deleted.

@@ -62,6 +62,10 @@ type DescribeEventTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventTypesInput) operationName() string {
+	return "DescribeEventTypes"
+}
+
 type DescribeEventTypesOutput struct {
 
 	// A list of event types that match the filter criteria. Event types have a

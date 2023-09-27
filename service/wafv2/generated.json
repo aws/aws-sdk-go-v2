@@ -62,6 +62,7 @@
         "api_op_UpdateRegexPatternSet.go",
         "api_op_UpdateRuleGroup.go",
         "api_op_UpdateWebACL.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

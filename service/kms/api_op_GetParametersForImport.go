@@ -128,6 +128,10 @@ type GetParametersForImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParametersForImportInput) operationName() string {
+	return "GetParametersForImport"
+}
+
 type GetParametersForImportOutput struct {
 
 	// The import token to send in a subsequent ImportKeyMaterial request.

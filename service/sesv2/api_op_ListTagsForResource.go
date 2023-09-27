@@ -47,6 +47,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 type ListTagsForResourceOutput struct {
 
 	// An array that lists all the tags that are associated with the resource. Each

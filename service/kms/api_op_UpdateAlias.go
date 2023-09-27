@@ -93,6 +93,10 @@ type UpdateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAliasInput) operationName() string {
+	return "UpdateAlias"
+}
+
 type UpdateAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

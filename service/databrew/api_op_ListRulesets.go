@@ -51,6 +51,10 @@ type ListRulesetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRulesetsInput) operationName() string {
+	return "ListRulesets"
+}
+
 type ListRulesetsOutput struct {
 
 	// A list of RulesetItem. RulesetItem contains meta data of a ruleset.

@@ -42,6 +42,10 @@ type StopFailbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopFailbackInput) operationName() string {
+	return "StopFailback"
+}
+
 type StopFailbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

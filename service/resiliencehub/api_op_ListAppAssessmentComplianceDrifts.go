@@ -52,6 +52,10 @@ type ListAppAssessmentComplianceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppAssessmentComplianceDriftsInput) operationName() string {
+	return "ListAppAssessmentComplianceDrifts"
+}
+
 type ListAppAssessmentComplianceDriftsOutput struct {
 
 	// Indicates compliance drifts (recovery time objective (RTO) and recovery point

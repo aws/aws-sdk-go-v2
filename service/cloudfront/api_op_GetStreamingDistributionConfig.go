@@ -43,6 +43,10 @@ type GetStreamingDistributionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStreamingDistributionConfigInput) operationName() string {
+	return "GetStreamingDistributionConfig"
+}
+
 // The returned result of the corresponding request.
 type GetStreamingDistributionConfigOutput struct {
 

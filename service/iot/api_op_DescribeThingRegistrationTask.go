@@ -45,6 +45,10 @@ type DescribeThingRegistrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThingRegistrationTaskInput) operationName() string {
+	return "DescribeThingRegistrationTask"
+}
+
 type DescribeThingRegistrationTaskOutput struct {
 
 	// The task creation date.

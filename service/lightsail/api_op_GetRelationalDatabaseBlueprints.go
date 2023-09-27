@@ -45,6 +45,10 @@ type GetRelationalDatabaseBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseBlueprintsInput) operationName() string {
+	return "GetRelationalDatabaseBlueprints"
+}
+
 type GetRelationalDatabaseBlueprintsOutput struct {
 
 	// An object describing the result of your get relational database blueprints

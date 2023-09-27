@@ -67,6 +67,10 @@ type ListProtectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProtectionsInput) operationName() string {
+	return "ListProtections"
+}
+
 type ListProtectionsOutput struct {
 
 	// When you request a list of objects from Shield Advanced, if the response does

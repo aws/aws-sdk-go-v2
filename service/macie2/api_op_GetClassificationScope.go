@@ -42,6 +42,10 @@ type GetClassificationScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClassificationScopeInput) operationName() string {
+	return "GetClassificationScope"
+}
+
 type GetClassificationScopeOutput struct {
 
 	// The unique identifier for the classification scope.

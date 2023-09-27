@@ -51,6 +51,10 @@ type UpdateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCertificateInput) operationName() string {
+	return "UpdateCertificate"
+}
+
 type UpdateCertificateOutput struct {
 
 	// Returns the identifier of the certificate object that you are updating.

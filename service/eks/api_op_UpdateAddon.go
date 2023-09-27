@@ -85,6 +85,10 @@ type UpdateAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAddonInput) operationName() string {
+	return "UpdateAddon"
+}
+
 type UpdateAddonOutput struct {
 
 	// An object representing an asynchronous update.

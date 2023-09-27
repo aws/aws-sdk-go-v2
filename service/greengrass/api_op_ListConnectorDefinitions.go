@@ -44,6 +44,10 @@ type ListConnectorDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectorDefinitionsInput) operationName() string {
+	return "ListConnectorDefinitions"
+}
+
 type ListConnectorDefinitionsOutput struct {
 
 	// Information about a definition.

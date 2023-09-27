@@ -47,6 +47,10 @@ type DeleteRecipeVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRecipeVersionInput) operationName() string {
+	return "DeleteRecipeVersion"
+}
+
 type DeleteRecipeVersionOutput struct {
 
 	// The name of the recipe that was deleted.

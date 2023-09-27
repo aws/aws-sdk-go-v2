@@ -70,6 +70,10 @@ type ListEdgeDeploymentPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEdgeDeploymentPlansInput) operationName() string {
+	return "ListEdgeDeploymentPlans"
+}
+
 type ListEdgeDeploymentPlansOutput struct {
 
 	// List of summaries of edge deployment plans.

@@ -49,6 +49,10 @@ type ListFunctionDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFunctionDefinitionVersionsInput) operationName() string {
+	return "ListFunctionDefinitionVersions"
+}
+
 type ListFunctionDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional

@@ -51,6 +51,10 @@ type DescribeUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserInput) operationName() string {
+	return "DescribeUser"
+}
+
 type DescribeUserOutput struct {
 
 	// Information about the user account and configuration settings.

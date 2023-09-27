@@ -92,6 +92,10 @@ type UpdateProfileJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProfileJobInput) operationName() string {
+	return "UpdateProfileJob"
+}
+
 type UpdateProfileJobOutput struct {
 
 	// The name of the job that was updated.

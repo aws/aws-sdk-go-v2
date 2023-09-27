@@ -59,6 +59,10 @@ type CreateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserProfileInput) operationName() string {
+	return "CreateUserProfile"
+}
+
 // Contains the response to a CreateUserProfile request.
 type CreateUserProfileOutput struct {
 

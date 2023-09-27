@@ -48,6 +48,10 @@ type AddInstanceFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddInstanceFleetInput) operationName() string {
+	return "AddInstanceFleet"
+}
+
 type AddInstanceFleetOutput struct {
 
 	// The Amazon Resource Name of the cluster.

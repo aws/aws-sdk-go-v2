@@ -67,6 +67,10 @@ type UpdateTimeToLiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTimeToLiveInput) operationName() string {
+	return "UpdateTimeToLive"
+}
+
 type UpdateTimeToLiveOutput struct {
 
 	// Represents the output of an UpdateTimeToLive operation.

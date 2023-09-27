@@ -43,6 +43,10 @@ type GetSchemaMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaMappingInput) operationName() string {
+	return "GetSchemaMapping"
+}
+
 type GetSchemaMappingOutput struct {
 
 	// The timestamp of when the SchemaMapping was created.

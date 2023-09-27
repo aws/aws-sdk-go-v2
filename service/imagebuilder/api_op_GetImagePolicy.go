@@ -41,6 +41,10 @@ type GetImagePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImagePolicyInput) operationName() string {
+	return "GetImagePolicy"
+}
+
 type GetImagePolicyOutput struct {
 
 	// The image policy object.

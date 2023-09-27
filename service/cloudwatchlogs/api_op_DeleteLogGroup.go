@@ -42,6 +42,10 @@ type DeleteLogGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLogGroupInput) operationName() string {
+	return "DeleteLogGroup"
+}
+
 type DeleteLogGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -105,6 +105,10 @@ type CreateElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateElasticsearchDomainInput) operationName() string {
+	return "CreateElasticsearchDomain"
+}
+
 // The result of a CreateElasticsearchDomain operation. Contains the status of the
 // newly created Elasticsearch domain.
 type CreateElasticsearchDomainOutput struct {

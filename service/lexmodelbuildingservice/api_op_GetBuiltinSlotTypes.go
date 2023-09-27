@@ -57,6 +57,10 @@ type GetBuiltinSlotTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBuiltinSlotTypesInput) operationName() string {
+	return "GetBuiltinSlotTypes"
+}
+
 type GetBuiltinSlotTypesOutput struct {
 
 	// If the response is truncated, the response includes a pagination token that you

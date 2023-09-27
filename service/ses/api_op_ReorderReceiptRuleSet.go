@@ -54,6 +54,10 @@ type ReorderReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReorderReceiptRuleSetInput) operationName() string {
+	return "ReorderReceiptRuleSet"
+}
+
 // An empty element returned on a successful request.
 type ReorderReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.

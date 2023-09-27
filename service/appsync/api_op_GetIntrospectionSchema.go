@@ -51,6 +51,10 @@ type GetIntrospectionSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntrospectionSchemaInput) operationName() string {
+	return "GetIntrospectionSchema"
+}
+
 type GetIntrospectionSchemaOutput struct {
 
 	// The schema, in GraphQL Schema Definition Language (SDL) format. For more

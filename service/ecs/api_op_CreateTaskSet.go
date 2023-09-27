@@ -136,6 +136,10 @@ type CreateTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTaskSetInput) operationName() string {
+	return "CreateTaskSet"
+}
+
 type CreateTaskSetOutput struct {
 
 	// Information about a set of Amazon ECS tasks in either an CodeDeploy or an

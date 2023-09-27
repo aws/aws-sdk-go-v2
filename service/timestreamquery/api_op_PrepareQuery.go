@@ -52,6 +52,10 @@ type PrepareQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PrepareQueryInput) operationName() string {
+	return "PrepareQuery"
+}
+
 type PrepareQueryOutput struct {
 
 	// A list of SELECT clause columns of the submitted query string.

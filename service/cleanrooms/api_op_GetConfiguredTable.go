@@ -42,6 +42,10 @@ type GetConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfiguredTableInput) operationName() string {
+	return "GetConfiguredTable"
+}
+
 type GetConfiguredTableOutput struct {
 
 	// The retrieved configured table.

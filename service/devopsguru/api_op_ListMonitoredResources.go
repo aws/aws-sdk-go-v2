@@ -50,6 +50,10 @@ type ListMonitoredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitoredResourcesInput) operationName() string {
+	return "ListMonitoredResources"
+}
+
 type ListMonitoredResourcesOutput struct {
 
 	// Information about the resource that is being monitored, including the name of

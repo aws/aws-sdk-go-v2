@@ -58,6 +58,10 @@ type GetInventoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInventoryInput) operationName() string {
+	return "GetInventory"
+}
+
 type GetInventoryOutput struct {
 
 	// Collection of inventory entities such as a collection of managed node inventory.

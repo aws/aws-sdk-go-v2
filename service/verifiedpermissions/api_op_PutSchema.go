@@ -57,6 +57,10 @@ type PutSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSchemaInput) operationName() string {
+	return "PutSchema"
+}
+
 type PutSchemaOutput struct {
 
 	// The date and time that the schema was originally created.

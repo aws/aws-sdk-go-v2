@@ -64,6 +64,10 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledActionsInput) operationName() string {
+	return "DescribeScheduledActions"
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// A string that indicates that the response contains more items than can be

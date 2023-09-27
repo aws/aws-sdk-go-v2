@@ -57,6 +57,10 @@ type UpdateAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAttributeGroupInput) operationName() string {
+	return "UpdateAttributeGroup"
+}
+
 type UpdateAttributeGroupOutput struct {
 
 	// The updated information of the attribute group.

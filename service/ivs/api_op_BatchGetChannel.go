@@ -42,6 +42,10 @@ type BatchGetChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetChannelInput) operationName() string {
+	return "BatchGetChannel"
+}
+
 type BatchGetChannelOutput struct {
 
 	//

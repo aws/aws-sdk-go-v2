@@ -53,6 +53,10 @@ type AddListenerCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddListenerCertificatesInput) operationName() string {
+	return "AddListenerCertificates"
+}
+
 type AddListenerCertificatesOutput struct {
 
 	// Information about the certificates in the certificate list.

@@ -53,6 +53,10 @@ type DescribeJournalKinesisStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJournalKinesisStreamInput) operationName() string {
+	return "DescribeJournalKinesisStream"
+}
+
 type DescribeJournalKinesisStreamOutput struct {
 
 	// Information about the QLDB journal stream returned by a DescribeJournalS3Export

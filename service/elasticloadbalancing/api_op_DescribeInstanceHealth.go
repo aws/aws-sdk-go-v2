@@ -55,6 +55,10 @@ type DescribeInstanceHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceHealthInput) operationName() string {
+	return "DescribeInstanceHealth"
+}
+
 // Contains the output for DescribeInstanceHealth.
 type DescribeInstanceHealthOutput struct {
 

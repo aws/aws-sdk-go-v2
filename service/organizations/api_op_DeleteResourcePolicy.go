@@ -36,6 +36,10 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourcePolicyInput) operationName() string {
+	return "DeleteResourcePolicy"
+}
+
 type DeleteResourcePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

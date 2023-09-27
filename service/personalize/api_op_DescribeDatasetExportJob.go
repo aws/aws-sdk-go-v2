@@ -43,6 +43,10 @@ type DescribeDatasetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetExportJobInput) operationName() string {
+	return "DescribeDatasetExportJob"
+}
+
 type DescribeDatasetExportJobOutput struct {
 
 	// Information about the dataset export job, including the status. The status is

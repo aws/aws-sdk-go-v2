@@ -55,6 +55,10 @@ type SearchSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchSessionsInput) operationName() string {
+	return "SearchSessions"
+}
+
 type SearchSessionsOutput struct {
 
 	// Summary information about the sessions.

@@ -42,6 +42,10 @@ type EnableHostedZoneDNSSECInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableHostedZoneDNSSECInput) operationName() string {
+	return "EnableHostedZoneDNSSEC"
+}
+
 type EnableHostedZoneDNSSECOutput struct {
 
 	// A complex type that describes change information about changes made to your

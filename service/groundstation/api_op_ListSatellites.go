@@ -44,6 +44,10 @@ type ListSatellitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSatellitesInput) operationName() string {
+	return "ListSatellites"
+}
+
 type ListSatellitesOutput struct {
 
 	// Next token that can be supplied in the next call to get the next page of

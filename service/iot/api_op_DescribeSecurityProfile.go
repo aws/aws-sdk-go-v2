@@ -45,6 +45,10 @@ type DescribeSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSecurityProfileInput) operationName() string {
+	return "DescribeSecurityProfile"
+}
+
 type DescribeSecurityProfileOutput struct {
 
 	// Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.

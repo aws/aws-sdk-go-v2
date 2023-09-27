@@ -42,6 +42,10 @@ type GetWorldTemplateBodyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorldTemplateBodyInput) operationName() string {
+	return "GetWorldTemplateBody"
+}
+
 type GetWorldTemplateBodyOutput struct {
 
 	// The world template body.

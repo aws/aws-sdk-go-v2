@@ -51,6 +51,10 @@ type GetLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLabelsInput) operationName() string {
+	return "GetLabels"
+}
+
 type GetLabelsOutput struct {
 
 	// An array of labels.

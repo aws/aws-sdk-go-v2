@@ -36,6 +36,10 @@ type CreateUsageReportSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUsageReportSubscriptionInput) operationName() string {
+	return "CreateUsageReportSubscription"
+}
+
 type CreateUsageReportSubscriptionOutput struct {
 
 	// The Amazon S3 bucket where generated reports are stored. If you enabled

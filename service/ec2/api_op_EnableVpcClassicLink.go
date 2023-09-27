@@ -52,6 +52,10 @@ type EnableVpcClassicLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableVpcClassicLinkInput) operationName() string {
+	return "EnableVpcClassicLink"
+}
+
 type EnableVpcClassicLinkOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

@@ -111,6 +111,10 @@ type QueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryInput) operationName() string {
+	return "Query"
+}
+
 type QueryOutput struct {
 
 	// The column data types of the returned result set.

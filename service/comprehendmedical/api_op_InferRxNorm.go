@@ -45,6 +45,10 @@ type InferRxNormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InferRxNormInput) operationName() string {
+	return "InferRxNorm"
+}
+
 type InferRxNormOutput struct {
 
 	// The medication entities detected in the text linked to RxNorm concepts. If the

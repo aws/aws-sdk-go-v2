@@ -55,6 +55,10 @@ type DescribeChannelMembershipForAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelMembershipForAppInstanceUserInput) operationName() string {
+	return "DescribeChannelMembershipForAppInstanceUser"
+}
+
 type DescribeChannelMembershipForAppInstanceUserOutput struct {
 
 	// The channel to which a user belongs.

@@ -56,6 +56,10 @@ type UpdateExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateExtensionInput) operationName() string {
+	return "UpdateExtension"
+}
+
 type UpdateExtensionOutput struct {
 
 	// The actions defined in the extension.

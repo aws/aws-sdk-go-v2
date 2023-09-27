@@ -51,6 +51,10 @@ type GetGroupVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupVersionInput) operationName() string {
+	return "GetGroupVersion"
+}
+
 type GetGroupVersionOutput struct {
 
 	// The ARN of the group version.

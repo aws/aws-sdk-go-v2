@@ -44,6 +44,10 @@ type GetCognitoEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCognitoEventsInput) operationName() string {
+	return "GetCognitoEvents"
+}
+
 // The response from the GetCognitoEvents request
 type GetCognitoEventsOutput struct {
 

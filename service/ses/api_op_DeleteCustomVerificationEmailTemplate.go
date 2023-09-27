@@ -46,6 +46,10 @@ type DeleteCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomVerificationEmailTemplateInput) operationName() string {
+	return "DeleteCustomVerificationEmailTemplate"
+}
+
 type DeleteCustomVerificationEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

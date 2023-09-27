@@ -254,6 +254,10 @@ type UpdateHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHealthCheckInput) operationName() string {
+	return "UpdateHealthCheck"
+}
+
 // A complex type that contains the response to the UpdateHealthCheck request.
 type UpdateHealthCheckOutput struct {
 

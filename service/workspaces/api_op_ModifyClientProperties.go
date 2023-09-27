@@ -47,6 +47,10 @@ type ModifyClientPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClientPropertiesInput) operationName() string {
+	return "ModifyClientProperties"
+}
+
 type ModifyClientPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

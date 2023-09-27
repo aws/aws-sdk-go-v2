@@ -42,6 +42,10 @@ type GetConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectionInput) operationName() string {
+	return "GetConnection"
+}
+
 type GetConnectionOutput struct {
 
 	// The connection details, such as status, owner, and provider type.

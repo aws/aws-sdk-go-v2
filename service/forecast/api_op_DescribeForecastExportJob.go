@@ -49,6 +49,10 @@ type DescribeForecastExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeForecastExportJobInput) operationName() string {
+	return "DescribeForecastExportJob"
+}
+
 type DescribeForecastExportJobOutput struct {
 
 	// When the forecast export job was created.

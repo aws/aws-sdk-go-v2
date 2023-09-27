@@ -56,6 +56,10 @@ type CreateDirectConnectGatewayAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDirectConnectGatewayAssociationInput) operationName() string {
+	return "CreateDirectConnectGatewayAssociation"
+}
+
 type CreateDirectConnectGatewayAssociationOutput struct {
 
 	// The association to be created.

@@ -76,6 +76,10 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectionInput) operationName() string {
+	return "CreateConnection"
+}
+
 // Information about an Direct Connect connection.
 type CreateConnectionOutput struct {
 

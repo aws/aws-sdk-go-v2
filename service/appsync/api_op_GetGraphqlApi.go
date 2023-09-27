@@ -42,6 +42,10 @@ type GetGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGraphqlApiInput) operationName() string {
+	return "GetGraphqlApi"
+}
+
 type GetGraphqlApiOutput struct {
 
 	// The GraphqlApi object.

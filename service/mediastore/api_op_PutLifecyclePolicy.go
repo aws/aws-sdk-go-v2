@@ -52,6 +52,10 @@ type PutLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLifecyclePolicyInput) operationName() string {
+	return "PutLifecyclePolicy"
+}
+
 type PutLifecyclePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

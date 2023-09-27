@@ -47,6 +47,10 @@ type RegisterCertificateWithoutCAInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterCertificateWithoutCAInput) operationName() string {
+	return "RegisterCertificateWithoutCA"
+}
+
 type RegisterCertificateWithoutCAOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registered certificate.

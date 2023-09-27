@@ -50,6 +50,10 @@ type StartMetadataModelAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMetadataModelAssessmentInput) operationName() string {
+	return "StartMetadataModelAssessment"
+}
+
 type StartMetadataModelAssessmentOutput struct {
 
 	// The identifier for the assessment operation.

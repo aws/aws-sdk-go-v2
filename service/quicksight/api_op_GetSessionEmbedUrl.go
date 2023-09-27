@@ -82,6 +82,10 @@ type GetSessionEmbedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSessionEmbedUrlInput) operationName() string {
+	return "GetSessionEmbedUrl"
+}
+
 type GetSessionEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side web page to embed your

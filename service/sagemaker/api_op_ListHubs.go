@@ -67,6 +67,10 @@ type ListHubsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHubsInput) operationName() string {
+	return "ListHubs"
+}
+
 type ListHubsOutput struct {
 
 	// The summaries of the listed hubs.

@@ -49,6 +49,10 @@ type ListImpersonationRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImpersonationRolesInput) operationName() string {
+	return "ListImpersonationRoles"
+}
+
 type ListImpersonationRolesOutput struct {
 
 	// The token to retrieve the next page of results. The value is null when there

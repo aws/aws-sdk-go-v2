@@ -52,6 +52,10 @@ type RestoreSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreSecretInput) operationName() string {
+	return "RestoreSecret"
+}
+
 type RestoreSecretOutput struct {
 
 	// The ARN of the secret that was restored.

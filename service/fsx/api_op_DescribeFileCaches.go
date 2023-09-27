@@ -67,6 +67,10 @@ type DescribeFileCachesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFileCachesInput) operationName() string {
+	return "DescribeFileCaches"
+}
+
 type DescribeFileCachesOutput struct {
 
 	// The response object for the DescribeFileCaches operation.

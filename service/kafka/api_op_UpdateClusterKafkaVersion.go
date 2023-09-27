@@ -55,6 +55,10 @@ type UpdateClusterKafkaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterKafkaVersionInput) operationName() string {
+	return "UpdateClusterKafkaVersion"
+}
+
 type UpdateClusterKafkaVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

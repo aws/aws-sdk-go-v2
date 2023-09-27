@@ -47,6 +47,10 @@ type UpdateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkflowInput) operationName() string {
+	return "UpdateWorkflow"
+}
+
 type UpdateWorkflowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

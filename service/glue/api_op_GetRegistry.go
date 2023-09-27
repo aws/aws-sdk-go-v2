@@ -43,6 +43,10 @@ type GetRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegistryInput) operationName() string {
+	return "GetRegistry"
+}
+
 type GetRegistryOutput struct {
 
 	// The date and time the registry was created.

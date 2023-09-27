@@ -42,6 +42,10 @@ type DeleteCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCampaignInput) operationName() string {
+	return "DeleteCampaign"
+}
+
 type DeleteCampaignOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted campaign. The ARN isn’t returned

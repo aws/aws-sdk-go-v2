@@ -65,6 +65,10 @@ type ListReviewPolicyResultsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReviewPolicyResultsForHITInput) operationName() string {
+	return "ListReviewPolicyResultsForHIT"
+}
+
 type ListReviewPolicyResultsForHITOutput struct {
 
 	// The name of the Assignment-level Review Policy. This contains only the

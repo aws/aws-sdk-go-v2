@@ -96,6 +96,10 @@ type VerifyMacInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyMacInput) operationName() string {
+	return "VerifyMac"
+}
+
 type VerifyMacOutput struct {
 
 	// The HMAC KMS key used in the verification.

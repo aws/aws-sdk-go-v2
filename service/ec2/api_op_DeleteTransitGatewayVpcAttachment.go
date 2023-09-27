@@ -48,6 +48,10 @@ type DeleteTransitGatewayVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayVpcAttachmentInput) operationName() string {
+	return "DeleteTransitGatewayVpcAttachment"
+}
+
 type DeleteTransitGatewayVpcAttachmentOutput struct {
 
 	// Information about the deleted VPC attachment.

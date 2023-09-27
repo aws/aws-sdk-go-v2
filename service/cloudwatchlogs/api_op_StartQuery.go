@@ -99,6 +99,10 @@ type StartQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartQueryInput) operationName() string {
+	return "StartQuery"
+}
+
 type StartQueryOutput struct {
 
 	// The unique ID of the query.

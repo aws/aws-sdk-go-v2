@@ -77,6 +77,10 @@ type DescribeInternetGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInternetGatewaysInput) operationName() string {
+	return "DescribeInternetGateways"
+}
+
 type DescribeInternetGatewaysOutput struct {
 
 	// Information about one or more internet gateways.

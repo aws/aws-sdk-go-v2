@@ -54,6 +54,10 @@ type ListInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstancesInput) operationName() string {
+	return "ListInstances"
+}
+
 type ListInstancesOutput struct {
 
 	// Summary information about the instances that are associated with the specified

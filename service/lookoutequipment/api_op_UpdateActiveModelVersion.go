@@ -48,6 +48,10 @@ type UpdateActiveModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateActiveModelVersionInput) operationName() string {
+	return "UpdateActiveModelVersion"
+}
+
 type UpdateActiveModelVersionOutput struct {
 
 	// The version that is currently active of the machine learning model for which

@@ -46,6 +46,10 @@ type DescribeSourceNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSourceNetworksInput) operationName() string {
+	return "DescribeSourceNetworks"
+}
+
 type DescribeSourceNetworksOutput struct {
 
 	// An array of Source Networks.

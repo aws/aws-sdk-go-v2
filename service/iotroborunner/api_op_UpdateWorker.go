@@ -63,6 +63,10 @@ type UpdateWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkerInput) operationName() string {
+	return "UpdateWorker"
+}
+
 type UpdateWorkerOutput struct {
 
 	// Full ARN of the worker.

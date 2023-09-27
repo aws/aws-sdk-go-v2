@@ -98,6 +98,10 @@ type GetCostForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCostForecastInput) operationName() string {
+	return "GetCostForecast"
+}
+
 type GetCostForecastOutput struct {
 
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of

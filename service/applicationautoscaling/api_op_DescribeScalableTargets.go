@@ -155,6 +155,10 @@ type DescribeScalableTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalableTargetsInput) operationName() string {
+	return "DescribeScalableTargets"
+}
+
 type DescribeScalableTargetsOutput struct {
 
 	// The token required to get the next set of results. This value is null if there

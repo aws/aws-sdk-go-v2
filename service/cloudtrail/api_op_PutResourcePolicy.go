@@ -58,6 +58,10 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourcePolicyInput) operationName() string {
+	return "PutResourcePolicy"
+}
+
 type PutResourcePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the

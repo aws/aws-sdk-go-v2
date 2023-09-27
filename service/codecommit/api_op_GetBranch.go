@@ -46,6 +46,10 @@ type GetBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBranchInput) operationName() string {
+	return "GetBranch"
+}
+
 // Represents the output of a get branch operation.
 type GetBranchOutput struct {
 

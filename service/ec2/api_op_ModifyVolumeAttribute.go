@@ -57,6 +57,10 @@ type ModifyVolumeAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVolumeAttributeInput) operationName() string {
+	return "ModifyVolumeAttribute"
+}
+
 type ModifyVolumeAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

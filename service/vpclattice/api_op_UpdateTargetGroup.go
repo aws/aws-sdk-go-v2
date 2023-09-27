@@ -47,6 +47,10 @@ type UpdateTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTargetGroupInput) operationName() string {
+	return "UpdateTargetGroup"
+}
+
 type UpdateTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.

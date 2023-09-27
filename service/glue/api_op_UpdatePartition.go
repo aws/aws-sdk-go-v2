@@ -63,6 +63,10 @@ type UpdatePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePartitionInput) operationName() string {
+	return "UpdatePartition"
+}
+
 type UpdatePartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

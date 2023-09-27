@@ -48,6 +48,10 @@ type DeleteVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVocabularyInput) operationName() string {
+	return "DeleteVocabulary"
+}
+
 type DeleteVocabularyOutput struct {
 
 	// The current state of the custom vocabulary.

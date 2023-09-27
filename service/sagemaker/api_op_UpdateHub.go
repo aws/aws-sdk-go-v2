@@ -50,6 +50,10 @@ type UpdateHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHubInput) operationName() string {
+	return "UpdateHub"
+}
+
 type UpdateHubOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated hub.

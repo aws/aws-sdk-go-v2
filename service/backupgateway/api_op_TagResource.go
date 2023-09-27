@@ -47,6 +47,10 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagResourceInput) operationName() string {
+	return "TagResource"
+}
+
 type TagResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource you tagged.

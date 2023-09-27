@@ -58,6 +58,10 @@ type DeregisterImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterImageInput) operationName() string {
+	return "DeregisterImage"
+}
+
 type DeregisterImageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

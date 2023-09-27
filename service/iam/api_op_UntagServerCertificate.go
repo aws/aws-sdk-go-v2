@@ -56,6 +56,10 @@ type UntagServerCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagServerCertificateInput) operationName() string {
+	return "UntagServerCertificate"
+}
+
 type UntagServerCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

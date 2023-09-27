@@ -55,6 +55,10 @@ type RemoveClientIDFromOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveClientIDFromOpenIDConnectProviderInput) operationName() string {
+	return "RemoveClientIDFromOpenIDConnectProvider"
+}
+
 type RemoveClientIDFromOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

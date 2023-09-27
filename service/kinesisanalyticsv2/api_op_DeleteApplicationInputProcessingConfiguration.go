@@ -55,6 +55,10 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationInputProcessingConfigurationInput) operationName() string {
+	return "DeleteApplicationInputProcessingConfiguration"
+}
+
 type DeleteApplicationInputProcessingConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.

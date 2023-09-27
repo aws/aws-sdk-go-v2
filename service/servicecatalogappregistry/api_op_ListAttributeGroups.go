@@ -44,6 +44,10 @@ type ListAttributeGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttributeGroupsInput) operationName() string {
+	return "ListAttributeGroups"
+}
+
 type ListAttributeGroupsOutput struct {
 
 	// This list of attribute groups.

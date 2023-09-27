@@ -53,6 +53,10 @@ type ListResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesInput) operationName() string {
+	return "ListResources"
+}
+
 type ListResourcesOutput struct {
 
 	// The token used to paginate through all the organization's resources. While

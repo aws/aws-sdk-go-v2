@@ -46,6 +46,10 @@ type ListRecordingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecordingConfigurationsInput) operationName() string {
+	return "ListRecordingConfigurations"
+}
+
 type ListRecordingConfigurationsOutput struct {
 
 	// List of the matching recording configurations.

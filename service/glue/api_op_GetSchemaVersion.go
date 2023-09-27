@@ -54,6 +54,10 @@ type GetSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSchemaVersionInput) operationName() string {
+	return "GetSchemaVersion"
+}
+
 type GetSchemaVersionOutput struct {
 
 	// The date and time the schema version was created.

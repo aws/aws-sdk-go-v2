@@ -56,6 +56,10 @@ type AddThingToThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddThingToThingGroupInput) operationName() string {
+	return "AddThingToThingGroup"
+}
+
 type AddThingToThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

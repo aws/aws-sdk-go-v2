@@ -48,6 +48,10 @@ type UpdateCampaignDialerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCampaignDialerConfigInput) operationName() string {
+	return "UpdateCampaignDialerConfig"
+}
+
 type UpdateCampaignDialerConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,10 @@ type ListComplianceItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComplianceItemsInput) operationName() string {
+	return "ListComplianceItems"
+}
+
 type ListComplianceItemsOutput struct {
 
 	// A list of compliance information for the specified resource ID.

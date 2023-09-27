@@ -52,6 +52,10 @@ type CreatePhoneNumberOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePhoneNumberOrderInput) operationName() string {
+	return "CreatePhoneNumberOrder"
+}
+
 type CreatePhoneNumberOrderOutput struct {
 
 	// The phone number order details.

@@ -48,6 +48,10 @@ type DescribeProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProcessingJobInput) operationName() string {
+	return "DescribeProcessingJob"
+}
+
 type DescribeProcessingJobOutput struct {
 
 	// Configures the processing job to run a specified container image.

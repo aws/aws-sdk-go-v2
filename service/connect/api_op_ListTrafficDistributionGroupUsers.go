@@ -51,6 +51,10 @@ type ListTrafficDistributionGroupUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrafficDistributionGroupUsersInput) operationName() string {
+	return "ListTrafficDistributionGroupUsers"
+}
+
 type ListTrafficDistributionGroupUsersOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

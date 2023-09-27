@@ -47,6 +47,10 @@ type GetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupInput) operationName() string {
+	return "GetGroup"
+}
+
 type GetGroupOutput struct {
 
 	// A structure that contains the metadata details for the specified resource

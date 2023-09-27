@@ -52,6 +52,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type UntagResourceOutput struct {

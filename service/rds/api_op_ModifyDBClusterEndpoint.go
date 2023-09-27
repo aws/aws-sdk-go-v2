@@ -54,6 +54,10 @@ type ModifyDBClusterEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBClusterEndpointInput) operationName() string {
+	return "ModifyDBClusterEndpoint"
+}
+
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:

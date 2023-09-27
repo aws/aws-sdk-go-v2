@@ -54,6 +54,10 @@ type ListBonusPaymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBonusPaymentsInput) operationName() string {
+	return "ListBonusPayments"
+}
+
 type ListBonusPaymentsOutput struct {
 
 	// A successful request to the ListBonusPayments operation returns a list of

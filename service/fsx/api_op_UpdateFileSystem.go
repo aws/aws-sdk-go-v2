@@ -139,6 +139,10 @@ type UpdateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFileSystemInput) operationName() string {
+	return "UpdateFileSystem"
+}
+
 // The response object for the UpdateFileSystem operation.
 type UpdateFileSystemOutput struct {
 

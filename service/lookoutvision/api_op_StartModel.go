@@ -77,6 +77,10 @@ type StartModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartModelInput) operationName() string {
+	return "StartModel"
+}
+
 type StartModelOutput struct {
 
 	// The current running status of the model.

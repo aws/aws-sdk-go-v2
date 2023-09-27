@@ -55,6 +55,10 @@ type DetachObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachObjectInput) operationName() string {
+	return "DetachObject"
+}
+
 type DetachObjectOutput struct {
 
 	// The ObjectIdentifier that was detached from the object.

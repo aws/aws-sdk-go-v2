@@ -47,6 +47,10 @@ type CancelQuantumTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelQuantumTaskInput) operationName() string {
+	return "CancelQuantumTask"
+}
+
 type CancelQuantumTaskOutput struct {
 
 	// The status of the cancellation request.

@@ -45,6 +45,10 @@ type DescribeReturnShippingLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReturnShippingLabelInput) operationName() string {
+	return "DescribeReturnShippingLabel"
+}
+
 type DescribeReturnShippingLabelOutput struct {
 
 	// The expiration date of the current return shipping label.

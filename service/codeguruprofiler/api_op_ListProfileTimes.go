@@ -84,6 +84,10 @@ type ListProfileTimesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfileTimesInput) operationName() string {
+	return "ListProfileTimes"
+}
+
 // The structure representing the listProfileTimesResponse.
 type ListProfileTimesOutput struct {
 

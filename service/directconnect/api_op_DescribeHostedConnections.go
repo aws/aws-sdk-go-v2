@@ -44,6 +44,10 @@ type DescribeHostedConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHostedConnectionsInput) operationName() string {
+	return "DescribeHostedConnections"
+}
+
 type DescribeHostedConnectionsOutput struct {
 
 	// The connections.

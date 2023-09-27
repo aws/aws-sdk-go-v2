@@ -43,6 +43,10 @@ type ListNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotificationsInput) operationName() string {
+	return "ListNotifications"
+}
+
 type ListNotificationsOutput struct {
 
 	// The pagination token that's used to fetch the next set of results.

@@ -46,6 +46,10 @@ type CreateOrUpdateTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOrUpdateTagsInput) operationName() string {
+	return "CreateOrUpdateTags"
+}
+
 type CreateOrUpdateTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

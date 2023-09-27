@@ -45,6 +45,10 @@ type CreateAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAddressInput) operationName() string {
+	return "CreateAddress"
+}
+
 type CreateAddressOutput struct {
 
 	// The automatically generated ID for a specific address. You'll use this ID when

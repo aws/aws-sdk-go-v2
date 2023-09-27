@@ -67,6 +67,10 @@ type DescribeCanariesLastRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCanariesLastRunInput) operationName() string {
+	return "DescribeCanariesLastRun"
+}
+
 type DescribeCanariesLastRunOutput struct {
 
 	// An array that contains the information from the most recent run of each canary.

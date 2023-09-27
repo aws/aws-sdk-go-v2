@@ -70,6 +70,10 @@ type CreateRegexMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRegexMatchSetInput) operationName() string {
+	return "CreateRegexMatchSet"
+}
+
 type CreateRegexMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRegexMatchSet request. You

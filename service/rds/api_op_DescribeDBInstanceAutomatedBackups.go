@@ -86,6 +86,10 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBInstanceAutomatedBackupsInput) operationName() string {
+	return "DescribeDBInstanceAutomatedBackups"
+}
+
 // Contains the result of a successful invocation of the
 // DescribeDBInstanceAutomatedBackups action.
 type DescribeDBInstanceAutomatedBackupsOutput struct {

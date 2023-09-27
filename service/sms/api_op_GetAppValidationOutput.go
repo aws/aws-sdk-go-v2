@@ -42,6 +42,10 @@ type GetAppValidationOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppValidationOutputInput) operationName() string {
+	return "GetAppValidationOutput"
+}
+
 type GetAppValidationOutputOutput struct {
 
 	// The validation output.

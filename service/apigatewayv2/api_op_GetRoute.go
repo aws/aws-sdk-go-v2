@@ -47,6 +47,10 @@ type GetRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRouteInput) operationName() string {
+	return "GetRoute"
+}
+
 type GetRouteOutput struct {
 
 	// Specifies whether a route is managed by API Gateway. If you created an API

@@ -49,6 +49,10 @@ type DescribeNotificationSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNotificationSubscriptionsInput) operationName() string {
+	return "DescribeNotificationSubscriptions"
+}
+
 type DescribeNotificationSubscriptionsOutput struct {
 
 	// The marker to use when requesting the next set of results. If there are no

@@ -43,6 +43,10 @@ type ListProfileObjectTypeTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfileObjectTypeTemplatesInput) operationName() string {
+	return "ListProfileObjectTypeTemplates"
+}
+
 type ListProfileObjectTypeTemplatesOutput struct {
 
 	// The list of ListProfileObjectType template instances.

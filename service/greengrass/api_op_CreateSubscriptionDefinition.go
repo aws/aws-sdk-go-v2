@@ -51,6 +51,10 @@ type CreateSubscriptionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubscriptionDefinitionInput) operationName() string {
+	return "CreateSubscriptionDefinition"
+}
+
 type CreateSubscriptionDefinitionOutput struct {
 
 	// The ARN of the definition.

@@ -42,6 +42,10 @@ type GetContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactInput) operationName() string {
+	return "GetContact"
+}
+
 type GetContactOutput struct {
 
 	// The alias of the contact or escalation plan. The alias is unique and

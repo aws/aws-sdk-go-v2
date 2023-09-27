@@ -50,6 +50,10 @@ type GetConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigurationSetInput) operationName() string {
+	return "GetConfigurationSet"
+}
+
 // Information about a configuration set.
 type GetConfigurationSetOutput struct {
 

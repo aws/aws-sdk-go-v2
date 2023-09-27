@@ -43,6 +43,10 @@ type GetManagedScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetManagedScalingPolicyInput) operationName() string {
+	return "GetManagedScalingPolicy"
+}
+
 type GetManagedScalingPolicyOutput struct {
 
 	// Specifies the managed scaling policy that is attached to an Amazon EMR cluster.

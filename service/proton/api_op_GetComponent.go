@@ -48,6 +48,10 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentInput) operationName() string {
+	return "GetComponent"
+}
+
 type GetComponentOutput struct {
 
 	// The detailed data of the requested component.

@@ -59,6 +59,10 @@ type DeleteRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRouteInput) operationName() string {
+	return "DeleteRoute"
+}
+
 type DeleteRouteOutput struct {
 
 	// The route that was deleted.

@@ -49,6 +49,10 @@ type DescribeFlywheelIterationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFlywheelIterationInput) operationName() string {
+	return "DescribeFlywheelIteration"
+}
+
 type DescribeFlywheelIterationOutput struct {
 
 	// The configuration properties of a flywheel iteration.

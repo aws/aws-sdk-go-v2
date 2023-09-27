@@ -45,6 +45,10 @@ type ListCustomDataIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomDataIdentifiersInput) operationName() string {
+	return "ListCustomDataIdentifiers"
+}
+
 type ListCustomDataIdentifiersOutput struct {
 
 	// An array of objects, one for each custom data identifier.

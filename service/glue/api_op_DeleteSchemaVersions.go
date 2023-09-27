@@ -62,6 +62,10 @@ type DeleteSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSchemaVersionsInput) operationName() string {
+	return "DeleteSchemaVersions"
+}
+
 type DeleteSchemaVersionsOutput struct {
 
 	// A list of SchemaVersionErrorItem objects, each containing an error and schema

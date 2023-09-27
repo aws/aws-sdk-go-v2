@@ -345,6 +345,10 @@ type CreateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeyInput) operationName() string {
+	return "CreateKey"
+}
+
 type CreateKeyOutput struct {
 
 	// Metadata associated with the KMS key.

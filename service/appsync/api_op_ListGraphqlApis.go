@@ -51,6 +51,10 @@ type ListGraphqlApisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGraphqlApisInput) operationName() string {
+	return "ListGraphqlApis"
+}
+
 type ListGraphqlApisOutput struct {
 
 	// The GraphqlApi objects.

@@ -49,6 +49,10 @@ type UpdateControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateControlPanelInput) operationName() string {
+	return "UpdateControlPanel"
+}
+
 type UpdateControlPanelOutput struct {
 
 	// The control panel to update.

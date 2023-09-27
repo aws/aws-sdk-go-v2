@@ -58,6 +58,10 @@ type GetUsageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUsageStatisticsInput) operationName() string {
+	return "GetUsageStatistics"
+}
+
 type GetUsageStatisticsOutput struct {
 
 	// The string to use in a subsequent request to get the next page of results in a

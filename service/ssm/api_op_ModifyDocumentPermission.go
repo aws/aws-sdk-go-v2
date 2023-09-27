@@ -64,6 +64,10 @@ type ModifyDocumentPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDocumentPermissionInput) operationName() string {
+	return "ModifyDocumentPermission"
+}
+
 type ModifyDocumentPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

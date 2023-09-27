@@ -48,6 +48,10 @@ type UpdateSipMediaApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSipMediaApplicationInput) operationName() string {
+	return "UpdateSipMediaApplication"
+}
+
 type UpdateSipMediaApplicationOutput struct {
 
 	// The updated SIP media application’s details.

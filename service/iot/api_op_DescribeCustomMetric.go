@@ -45,6 +45,10 @@ type DescribeCustomMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomMetricInput) operationName() string {
+	return "DescribeCustomMetric"
+}
+
 type DescribeCustomMetricOutput struct {
 
 	// The creation date of the custom metric in milliseconds since epoch.

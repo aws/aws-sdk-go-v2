@@ -90,6 +90,10 @@ type StartTargetedSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTargetedSentimentDetectionJobInput) operationName() string {
+	return "StartTargetedSentimentDetectionJob"
+}
+
 type StartTargetedSentimentDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a

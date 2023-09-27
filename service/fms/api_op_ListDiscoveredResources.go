@@ -62,6 +62,10 @@ type ListDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDiscoveredResourcesInput) operationName() string {
+	return "ListDiscoveredResources"
+}
+
 type ListDiscoveredResourcesOutput struct {
 
 	// Details of the resources that were discovered.

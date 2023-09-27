@@ -62,6 +62,10 @@ type ListServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServersInput) operationName() string {
+	return "ListServers"
+}
+
 type ListServersOutput struct {
 
 	// The token you use to retrieve the next set of results, or null if there are no

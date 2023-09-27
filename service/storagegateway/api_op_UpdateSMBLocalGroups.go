@@ -50,6 +50,10 @@ type UpdateSMBLocalGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSMBLocalGroupsInput) operationName() string {
+	return "UpdateSMBLocalGroups"
+}
+
 type UpdateSMBLocalGroupsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

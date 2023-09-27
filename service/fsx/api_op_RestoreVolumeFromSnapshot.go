@@ -63,6 +63,10 @@ type RestoreVolumeFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreVolumeFromSnapshotInput) operationName() string {
+	return "RestoreVolumeFromSnapshot"
+}
+
 type RestoreVolumeFromSnapshotOutput struct {
 
 	// A list of administrative actions for the file system that are in process or

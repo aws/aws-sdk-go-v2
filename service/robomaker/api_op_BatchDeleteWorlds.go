@@ -41,6 +41,10 @@ type BatchDeleteWorldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteWorldsInput) operationName() string {
+	return "BatchDeleteWorlds"
+}
+
 type BatchDeleteWorldsOutput struct {
 
 	// A list of unprocessed worlds associated with the call. These worlds were not

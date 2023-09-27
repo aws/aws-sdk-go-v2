@@ -113,6 +113,10 @@ type RegisterTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterTypeInput) operationName() string {
+	return "RegisterType"
+}
+
 type RegisterTypeOutput struct {
 
 	// The identifier for this registration request. Use this registration token when

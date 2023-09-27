@@ -43,6 +43,10 @@ type DescribeUserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserProfilesInput) operationName() string {
+	return "DescribeUserProfiles"
+}
+
 // Contains the response to a DescribeUserProfiles request.
 type DescribeUserProfilesOutput struct {
 

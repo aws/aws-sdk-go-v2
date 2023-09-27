@@ -245,6 +245,10 @@ type RegisterScalableTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterScalableTargetInput) operationName() string {
+	return "RegisterScalableTarget"
+}
+
 type RegisterScalableTargetOutput struct {
 
 	// The ARN of the scalable target.

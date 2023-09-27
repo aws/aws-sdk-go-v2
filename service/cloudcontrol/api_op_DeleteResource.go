@@ -87,6 +87,10 @@ type DeleteResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourceInput) operationName() string {
+	return "DeleteResource"
+}
+
 type DeleteResourceOutput struct {
 
 	// Represents the current status of the resource deletion request. After you have

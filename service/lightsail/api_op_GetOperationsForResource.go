@@ -48,6 +48,10 @@ type GetOperationsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOperationsForResourceInput) operationName() string {
+	return "GetOperationsForResource"
+}
+
 type GetOperationsForResourceOutput struct {
 
 	// (Deprecated) Returns the number of pages of results that remain. In releases

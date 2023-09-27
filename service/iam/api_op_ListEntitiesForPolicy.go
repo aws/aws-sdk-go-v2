@@ -87,6 +87,10 @@ type ListEntitiesForPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntitiesForPolicyInput) operationName() string {
+	return "ListEntitiesForPolicy"
+}
+
 // Contains the response to a successful ListEntitiesForPolicy request.
 type ListEntitiesForPolicyOutput struct {
 

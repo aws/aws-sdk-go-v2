@@ -56,6 +56,10 @@ type UpdateServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceActionInput) operationName() string {
+	return "UpdateServiceAction"
+}
+
 type UpdateServiceActionOutput struct {
 
 	// Detailed information about the self-service action.

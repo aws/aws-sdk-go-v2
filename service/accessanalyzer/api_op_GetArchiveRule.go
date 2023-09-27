@@ -50,6 +50,10 @@ type GetArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetArchiveRuleInput) operationName() string {
+	return "GetArchiveRule"
+}
+
 // The response to the request.
 type GetArchiveRuleOutput struct {
 

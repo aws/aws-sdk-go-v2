@@ -64,6 +64,10 @@ type UpdateFirewallDescriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallDescriptionInput) operationName() string {
+	return "UpdateFirewallDescription"
+}
+
 type UpdateFirewallDescriptionOutput struct {
 
 	// A description of the firewall.

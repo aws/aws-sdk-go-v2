@@ -45,6 +45,10 @@ type BatchGetVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetVpcEndpointInput) operationName() string {
+	return "BatchGetVpcEndpoint"
+}
+
 type BatchGetVpcEndpointOutput struct {
 
 	// Details about the specified VPC endpoint.

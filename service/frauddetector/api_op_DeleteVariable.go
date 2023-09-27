@@ -46,6 +46,10 @@ type DeleteVariableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVariableInput) operationName() string {
+	return "DeleteVariable"
+}
+
 type DeleteVariableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

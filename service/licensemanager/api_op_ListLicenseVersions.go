@@ -48,6 +48,10 @@ type ListLicenseVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLicenseVersionsInput) operationName() string {
+	return "ListLicenseVersions"
+}
+
 type ListLicenseVersionsOutput struct {
 
 	// License details.

@@ -87,6 +87,10 @@ type UpdateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityProfileInput) operationName() string {
+	return "UpdateSecurityProfile"
+}
+
 type UpdateSecurityProfileOutput struct {
 
 	// Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead. A

@@ -51,6 +51,10 @@ type UpdateFieldLevelEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFieldLevelEncryptionConfigInput) operationName() string {
+	return "UpdateFieldLevelEncryptionConfig"
+}
+
 type UpdateFieldLevelEncryptionConfigOutput struct {
 
 	// The value of the ETag header that you received when updating the configuration.

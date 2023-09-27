@@ -56,6 +56,10 @@ type ListServiceSpecificCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceSpecificCredentialsInput) operationName() string {
+	return "ListServiceSpecificCredentials"
+}
+
 type ListServiceSpecificCredentialsOutput struct {
 
 	// A list of structures that each contain details about a service-specific

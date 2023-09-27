@@ -76,6 +76,10 @@ type DescribeScalingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalingPoliciesInput) operationName() string {
+	return "DescribeScalingPolicies"
+}
+
 type DescribeScalingPoliciesOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to

@@ -66,6 +66,10 @@ type ListProblemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProblemsInput) operationName() string {
+	return "ListProblems"
+}
+
 type ListProblemsOutput struct {
 
 	// The AWS account ID for the resource group owner.

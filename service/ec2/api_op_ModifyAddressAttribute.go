@@ -53,6 +53,10 @@ type ModifyAddressAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyAddressAttributeInput) operationName() string {
+	return "ModifyAddressAttribute"
+}
+
 type ModifyAddressAttributeOutput struct {
 
 	// Information about the Elastic IP address.

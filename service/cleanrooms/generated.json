@@ -54,6 +54,7 @@
         "api_op_UpdateConfiguredTableAssociation.go",
         "api_op_UpdateMembership.go",
         "api_op_UpdateProtectedQuery.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

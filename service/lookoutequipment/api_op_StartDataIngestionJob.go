@@ -61,6 +61,10 @@ type StartDataIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDataIngestionJobInput) operationName() string {
+	return "StartDataIngestionJob"
+}
+
 type StartDataIngestionJobOutput struct {
 
 	// Indicates the job ID of the data ingestion job.

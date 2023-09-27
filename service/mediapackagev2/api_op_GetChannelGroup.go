@@ -45,6 +45,10 @@ type GetChannelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelGroupInput) operationName() string {
+	return "GetChannelGroup"
+}
+
 type GetChannelGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the resource.

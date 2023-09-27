@@ -75,6 +75,10 @@ type ImportModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportModelInput) operationName() string {
+	return "ImportModel"
+}
+
 type ImportModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom model being imported.

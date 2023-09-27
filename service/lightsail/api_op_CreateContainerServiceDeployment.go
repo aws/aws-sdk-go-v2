@@ -59,6 +59,10 @@ type CreateContainerServiceDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContainerServiceDeploymentInput) operationName() string {
+	return "CreateContainerServiceDeployment"
+}
+
 type CreateContainerServiceDeploymentOutput struct {
 
 	// An object that describes a container service.

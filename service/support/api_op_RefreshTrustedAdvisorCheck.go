@@ -62,6 +62,10 @@ type RefreshTrustedAdvisorCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RefreshTrustedAdvisorCheckInput) operationName() string {
+	return "RefreshTrustedAdvisorCheck"
+}
+
 // The current refresh status of a Trusted Advisor check.
 type RefreshTrustedAdvisorCheckOutput struct {
 

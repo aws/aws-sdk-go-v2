@@ -47,6 +47,10 @@ type PutAccountSuppressionAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountSuppressionAttributesInput) operationName() string {
+	return "PutAccountSuppressionAttributes"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountSuppressionAttributesOutput struct {

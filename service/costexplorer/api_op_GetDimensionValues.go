@@ -222,6 +222,10 @@ type GetDimensionValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDimensionValuesInput) operationName() string {
+	return "GetDimensionValues"
+}
+
 type GetDimensionValuesOutput struct {
 
 	// The filters that you used to filter your request. Some dimensions are available

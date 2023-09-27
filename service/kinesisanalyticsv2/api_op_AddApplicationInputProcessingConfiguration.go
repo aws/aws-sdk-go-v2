@@ -66,6 +66,10 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationInputProcessingConfigurationInput) operationName() string {
+	return "AddApplicationInputProcessingConfiguration"
+}
+
 type AddApplicationInputProcessingConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.

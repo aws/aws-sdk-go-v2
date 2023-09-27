@@ -67,6 +67,10 @@ type CreateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessPolicyInput) operationName() string {
+	return "CreateAccessPolicy"
+}
+
 type CreateAccessPolicyOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

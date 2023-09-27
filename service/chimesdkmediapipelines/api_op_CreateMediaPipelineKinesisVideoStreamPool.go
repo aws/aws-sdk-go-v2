@@ -53,6 +53,10 @@ type CreateMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMediaPipelineKinesisVideoStreamPoolInput) operationName() string {
+	return "CreateMediaPipelineKinesisVideoStreamPool"
+}
+
 type CreateMediaPipelineKinesisVideoStreamPoolOutput struct {
 
 	// The configuration for the Kinesis video stream pool.

@@ -36,6 +36,7 @@
         "api_op_UpdateJob.go",
         "api_op_UpdateJobShipmentState.go",
         "api_op_UpdateLongTermPricing.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -51,6 +51,10 @@ type RedactConversationMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RedactConversationMessageInput) operationName() string {
+	return "RedactConversationMessage"
+}
+
 type RedactConversationMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

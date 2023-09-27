@@ -54,6 +54,10 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGroupInput) operationName() string {
+	return "CreateGroup"
+}
+
 type CreateGroupOutput struct {
 
 	// The ARN of the definition.

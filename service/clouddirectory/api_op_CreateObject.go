@@ -62,6 +62,10 @@ type CreateObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateObjectInput) operationName() string {
+	return "CreateObject"
+}
+
 type CreateObjectOutput struct {
 
 	// The identifier that is associated with the object.

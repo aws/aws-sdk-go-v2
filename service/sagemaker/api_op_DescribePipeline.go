@@ -43,6 +43,10 @@ type DescribePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePipelineInput) operationName() string {
+	return "DescribePipeline"
+}
+
 type DescribePipelineOutput struct {
 
 	// Information about the user who created or modified an experiment, trial, trial

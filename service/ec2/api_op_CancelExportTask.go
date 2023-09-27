@@ -44,6 +44,10 @@ type CancelExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelExportTaskInput) operationName() string {
+	return "CancelExportTask"
+}
+
 type CancelExportTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

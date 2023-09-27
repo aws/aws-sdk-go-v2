@@ -57,6 +57,10 @@ type ListSegmentReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSegmentReferencesInput) operationName() string {
+	return "ListSegmentReferences"
+}
+
 type ListSegmentReferencesOutput struct {
 
 	// The token to use in a subsequent ListSegmentReferences operation to return the

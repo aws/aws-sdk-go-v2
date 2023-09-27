@@ -48,6 +48,10 @@ type ListAssociatedRoute53HealthChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedRoute53HealthChecksInput) operationName() string {
+	return "ListAssociatedRoute53HealthChecks"
+}
+
 type ListAssociatedRoute53HealthChecksOutput struct {
 
 	// Identifiers for the health checks.

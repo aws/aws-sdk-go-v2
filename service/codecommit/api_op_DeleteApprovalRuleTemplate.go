@@ -42,6 +42,10 @@ type DeleteApprovalRuleTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApprovalRuleTemplateInput) operationName() string {
+	return "DeleteApprovalRuleTemplate"
+}
+
 type DeleteApprovalRuleTemplateOutput struct {
 
 	// The system-generated ID of the deleted approval rule template. If the template

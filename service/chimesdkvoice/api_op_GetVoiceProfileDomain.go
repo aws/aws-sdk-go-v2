@@ -42,6 +42,10 @@ type GetVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceProfileDomainInput) operationName() string {
+	return "GetVoiceProfileDomain"
+}
+
 type GetVoiceProfileDomainOutput struct {
 
 	// The details of the voice profile domain.

@@ -76,6 +76,10 @@ type CreateResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResolverQueryLogConfigInput) operationName() string {
+	return "CreateResolverQueryLogConfig"
+}
+
 type CreateResolverQueryLogConfigOutput struct {
 
 	// Information about the CreateResolverQueryLogConfig request, including the

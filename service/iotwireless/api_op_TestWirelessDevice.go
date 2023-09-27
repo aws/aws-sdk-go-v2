@@ -41,6 +41,10 @@ type TestWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestWirelessDeviceInput) operationName() string {
+	return "TestWirelessDevice"
+}
+
 type TestWirelessDeviceOutput struct {
 
 	// The result returned by the test.

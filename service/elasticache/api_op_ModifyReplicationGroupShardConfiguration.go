@@ -80,6 +80,10 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReplicationGroupShardConfigurationInput) operationName() string {
+	return "ModifyReplicationGroupShardConfiguration"
+}
+
 type ModifyReplicationGroupShardConfigurationOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

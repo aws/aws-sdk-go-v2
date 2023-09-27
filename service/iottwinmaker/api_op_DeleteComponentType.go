@@ -47,6 +47,10 @@ type DeleteComponentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteComponentTypeInput) operationName() string {
+	return "DeleteComponentType"
+}
+
 type DeleteComponentTypeOutput struct {
 
 	// The current state of the component type to be deleted.

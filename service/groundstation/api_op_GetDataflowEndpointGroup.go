@@ -42,6 +42,10 @@ type GetDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataflowEndpointGroupInput) operationName() string {
+	return "GetDataflowEndpointGroup"
+}
+
 type GetDataflowEndpointGroupOutput struct {
 
 	// Amount of time, in seconds, after a contact ends that the Ground Station

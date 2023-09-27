@@ -41,6 +41,10 @@ type DeleteSequenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSequenceStoreInput) operationName() string {
+	return "DeleteSequenceStore"
+}
+
 type DeleteSequenceStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

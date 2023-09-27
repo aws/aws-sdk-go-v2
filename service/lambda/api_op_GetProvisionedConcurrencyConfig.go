@@ -53,6 +53,10 @@ type GetProvisionedConcurrencyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProvisionedConcurrencyConfigInput) operationName() string {
+	return "GetProvisionedConcurrencyConfig"
+}
+
 type GetProvisionedConcurrencyConfigOutput struct {
 
 	// The amount of provisioned concurrency allocated. When a weighted alias is used

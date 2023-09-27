@@ -47,6 +47,10 @@ type DescribeFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFraudsterInput) operationName() string {
+	return "DescribeFraudster"
+}
+
 type DescribeFraudsterOutput struct {
 
 	// Information about the specified fraudster.

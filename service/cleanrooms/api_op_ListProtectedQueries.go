@@ -54,6 +54,10 @@ type ListProtectedQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProtectedQueriesInput) operationName() string {
+	return "ListProtectedQueries"
+}
+
 type ListProtectedQueriesOutput struct {
 
 	// A list of protected queries.

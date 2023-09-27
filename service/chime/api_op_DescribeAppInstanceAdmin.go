@@ -56,6 +56,10 @@ type DescribeAppInstanceAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInstanceAdminInput) operationName() string {
+	return "DescribeAppInstanceAdmin"
+}
+
 type DescribeAppInstanceAdminOutput struct {
 
 	// The ARN and name of the AppInstanceUser , the ARN of the AppInstance , and the

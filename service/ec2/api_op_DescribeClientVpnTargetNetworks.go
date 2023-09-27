@@ -65,6 +65,10 @@ type DescribeClientVpnTargetNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientVpnTargetNetworksInput) operationName() string {
+	return "DescribeClientVpnTargetNetworks"
+}
+
 type DescribeClientVpnTargetNetworksOutput struct {
 
 	// Information about the associated target networks.

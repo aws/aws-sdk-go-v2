@@ -45,6 +45,10 @@ type DeleteWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWebhookInput) operationName() string {
+	return "DeleteWebhook"
+}
+
 type DeleteWebhookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

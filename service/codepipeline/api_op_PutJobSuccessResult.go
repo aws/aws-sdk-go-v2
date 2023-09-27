@@ -65,6 +65,10 @@ type PutJobSuccessResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutJobSuccessResultInput) operationName() string {
+	return "PutJobSuccessResult"
+}
+
 type PutJobSuccessResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

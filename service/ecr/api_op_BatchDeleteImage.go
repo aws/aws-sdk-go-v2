@@ -59,6 +59,10 @@ type BatchDeleteImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteImageInput) operationName() string {
+	return "BatchDeleteImage"
+}
+
 type BatchDeleteImageOutput struct {
 
 	// Any failures associated with the call.

@@ -56,6 +56,10 @@ type GetDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentInput) operationName() string {
+	return "GetDocument"
+}
+
 type GetDocumentOutput struct {
 
 	// A description of the document attachments, including names, locations, sizes,

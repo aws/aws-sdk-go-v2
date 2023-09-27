@@ -43,6 +43,10 @@ type StopWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopWorkflowInput) operationName() string {
+	return "StopWorkflow"
+}
+
 type StopWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the migration workflow.

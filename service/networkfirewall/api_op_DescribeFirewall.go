@@ -46,6 +46,10 @@ type DescribeFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFirewallInput) operationName() string {
+	return "DescribeFirewall"
+}
+
 type DescribeFirewallOutput struct {
 
 	// The configuration settings for the firewall. These settings include the

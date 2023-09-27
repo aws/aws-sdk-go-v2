@@ -54,6 +54,10 @@ type ExportSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportSnapshotInput) operationName() string {
+	return "ExportSnapshot"
+}
+
 type ExportSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

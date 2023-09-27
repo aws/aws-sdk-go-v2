@@ -111,6 +111,10 @@ type InvokeEndpointWithResponseStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeEndpointWithResponseStreamInput) operationName() string {
+	return "InvokeEndpointWithResponseStream"
+}
+
 type InvokeEndpointWithResponseStreamOutput struct {
 
 	// The MIME type of the inference returned from the model container.

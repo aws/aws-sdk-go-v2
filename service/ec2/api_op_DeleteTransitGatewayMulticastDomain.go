@@ -48,6 +48,10 @@ type DeleteTransitGatewayMulticastDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayMulticastDomainInput) operationName() string {
+	return "DeleteTransitGatewayMulticastDomain"
+}
+
 type DeleteTransitGatewayMulticastDomainOutput struct {
 
 	// Information about the deleted transit gateway multicast domain.

@@ -80,6 +80,10 @@ type CreateBatchSegmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBatchSegmentJobInput) operationName() string {
+	return "CreateBatchSegmentJob"
+}
+
 type CreateBatchSegmentJobOutput struct {
 
 	// The ARN of the batch segment job.

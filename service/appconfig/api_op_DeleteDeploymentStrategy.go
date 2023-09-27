@@ -42,6 +42,10 @@ type DeleteDeploymentStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDeploymentStrategyInput) operationName() string {
+	return "DeleteDeploymentStrategy"
+}
+
 type DeleteDeploymentStrategyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

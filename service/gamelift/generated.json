@@ -113,6 +113,7 @@
         "api_op_UpdateRuntimeConfiguration.go",
         "api_op_UpdateScript.go",
         "api_op_ValidateMatchmakingRuleSet.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

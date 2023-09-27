@@ -59,6 +59,10 @@ type UpdateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubscriberInput) operationName() string {
+	return "UpdateSubscriber"
+}
+
 type UpdateSubscriberOutput struct {
 
 	// The updated subscriber information.

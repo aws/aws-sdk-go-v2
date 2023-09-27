@@ -68,6 +68,10 @@ type CreateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWebhookInput) operationName() string {
+	return "CreateWebhook"
+}
+
 type CreateWebhookOutput struct {
 
 	// Information about a webhook that connects repository events to a build project

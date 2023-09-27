@@ -43,6 +43,10 @@ type RegisterCrossAccountAccessRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterCrossAccountAccessRoleInput) operationName() string {
+	return "RegisterCrossAccountAccessRole"
+}
+
 type RegisterCrossAccountAccessRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

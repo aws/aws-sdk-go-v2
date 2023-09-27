@@ -45,6 +45,10 @@ type GetTraceGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTraceGraphInput) operationName() string {
+	return "GetTraceGraph"
+}
+
 type GetTraceGraphOutput struct {
 
 	// Pagination token.

@@ -56,6 +56,10 @@ type PutCodeBindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCodeBindingInput) operationName() string {
+	return "PutCodeBinding"
+}
+
 type PutCodeBindingOutput struct {
 
 	// The time and date that the code binding was created.

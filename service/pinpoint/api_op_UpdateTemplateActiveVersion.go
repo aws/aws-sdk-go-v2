@@ -57,6 +57,10 @@ type UpdateTemplateActiveVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTemplateActiveVersionInput) operationName() string {
+	return "UpdateTemplateActiveVersion"
+}
+
 type UpdateTemplateActiveVersionOutput struct {
 
 	// Provides information about an API request or response.

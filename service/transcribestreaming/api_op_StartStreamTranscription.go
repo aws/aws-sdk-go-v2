@@ -232,6 +232,10 @@ type StartStreamTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartStreamTranscriptionInput) operationName() string {
+	return "StartStreamTranscription"
+}
+
 type StartStreamTranscriptionOutput struct {
 
 	// Shows whether content identification was enabled for your transcription.

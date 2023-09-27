@@ -42,6 +42,10 @@ type GetExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExperimentTemplateInput) operationName() string {
+	return "GetExperimentTemplate"
+}
+
 type GetExperimentTemplateOutput struct {
 
 	// Information about the experiment template.

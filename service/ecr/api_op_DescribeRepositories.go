@@ -67,6 +67,10 @@ type DescribeRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRepositoriesInput) operationName() string {
+	return "DescribeRepositories"
+}
+
 type DescribeRepositoriesOutput struct {
 
 	// The nextToken value to include in a future DescribeRepositories request. When

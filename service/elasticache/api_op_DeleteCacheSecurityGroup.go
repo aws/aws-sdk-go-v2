@@ -44,6 +44,10 @@ type DeleteCacheSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCacheSecurityGroupInput) operationName() string {
+	return "DeleteCacheSecurityGroup"
+}
+
 type DeleteCacheSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

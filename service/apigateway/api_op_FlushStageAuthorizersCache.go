@@ -47,6 +47,10 @@ type FlushStageAuthorizersCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FlushStageAuthorizersCacheInput) operationName() string {
+	return "FlushStageAuthorizersCache"
+}
+
 type FlushStageAuthorizersCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

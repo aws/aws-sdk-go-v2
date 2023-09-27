@@ -99,6 +99,10 @@ type StartLabelDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartLabelDetectionInput) operationName() string {
+	return "StartLabelDetection"
+}
+
 type StartLabelDetectionOutput struct {
 
 	// The identifier for the label detection job. Use JobId to identify the job in a

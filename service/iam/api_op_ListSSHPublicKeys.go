@@ -67,6 +67,10 @@ type ListSSHPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSSHPublicKeysInput) operationName() string {
+	return "ListSSHPublicKeys"
+}
+
 // Contains the response to a successful ListSSHPublicKeys request.
 type ListSSHPublicKeysOutput struct {
 

@@ -44,6 +44,10 @@ type GetWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWirelessDeviceImportTaskInput) operationName() string {
+	return "GetWirelessDeviceImportTask"
+}
+
 type GetWirelessDeviceImportTaskOutput struct {
 
 	// The ARN (Amazon Resource Name) of the import task.

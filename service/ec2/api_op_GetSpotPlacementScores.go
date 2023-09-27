@@ -90,6 +90,10 @@ type GetSpotPlacementScoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSpotPlacementScoresInput) operationName() string {
+	return "GetSpotPlacementScores"
+}
+
 type GetSpotPlacementScoresOutput struct {
 
 	// The token to include in another request to get the next page of items. This

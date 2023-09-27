@@ -51,6 +51,10 @@ type UpdateOutpostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOutpostInput) operationName() string {
+	return "UpdateOutpost"
+}
+
 type UpdateOutpostOutput struct {
 
 	// Information about an Outpost.

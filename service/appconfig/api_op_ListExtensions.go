@@ -50,6 +50,10 @@ type ListExtensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExtensionsInput) operationName() string {
+	return "ListExtensions"
+}
+
 type ListExtensionsOutput struct {
 
 	// The list of available extensions. The list includes Amazon Web Services

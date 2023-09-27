@@ -62,6 +62,10 @@ type GetAggregateConformancePackComplianceSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAggregateConformancePackComplianceSummaryInput) operationName() string {
+	return "GetAggregateConformancePackComplianceSummary"
+}
+
 type GetAggregateConformancePackComplianceSummaryOutput struct {
 
 	// Returns a list of AggregateConformancePackComplianceSummary object.

@@ -50,6 +50,10 @@ type DescribeComponentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComponentConfigurationInput) operationName() string {
+	return "DescribeComponentConfiguration"
+}
+
 type DescribeComponentConfigurationOutput struct {
 
 	// The configuration settings of the component. The value is the escaped JSON of

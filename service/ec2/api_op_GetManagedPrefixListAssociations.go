@@ -56,6 +56,10 @@ type GetManagedPrefixListAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetManagedPrefixListAssociationsInput) operationName() string {
+	return "GetManagedPrefixListAssociations"
+}
+
 type GetManagedPrefixListAssociationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

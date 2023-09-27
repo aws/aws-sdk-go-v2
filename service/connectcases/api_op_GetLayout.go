@@ -47,6 +47,10 @@ type GetLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLayoutInput) operationName() string {
+	return "GetLayout"
+}
+
 type GetLayoutOutput struct {
 
 	// Information about which fields will be present in the layout, the order of the

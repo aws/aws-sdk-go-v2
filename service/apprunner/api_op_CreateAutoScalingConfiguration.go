@@ -94,6 +94,10 @@ type CreateAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAutoScalingConfigurationInput) operationName() string {
+	return "CreateAutoScalingConfiguration"
+}
+
 type CreateAutoScalingConfigurationOutput struct {
 
 	// A description of the App Runner auto scaling configuration that's created by

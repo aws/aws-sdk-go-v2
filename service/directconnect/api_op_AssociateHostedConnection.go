@@ -53,6 +53,10 @@ type AssociateHostedConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateHostedConnectionInput) operationName() string {
+	return "AssociateHostedConnection"
+}
+
 // Information about an Direct Connect connection.
 type AssociateHostedConnectionOutput struct {
 

@@ -84,6 +84,10 @@ type CreateFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFuotaTaskInput) operationName() string {
+	return "CreateFuotaTask"
+}
+
 type CreateFuotaTaskOutput struct {
 
 	// The arn of a FUOTA task.

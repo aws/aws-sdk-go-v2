@@ -71,6 +71,10 @@ type PublishLayerVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishLayerVersionInput) operationName() string {
+	return "PublishLayerVersion"
+}
+
 type PublishLayerVersionOutput struct {
 
 	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)

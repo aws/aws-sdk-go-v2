@@ -53,6 +53,10 @@ type GetCoreNetworkChangeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoreNetworkChangeEventsInput) operationName() string {
+	return "GetCoreNetworkChangeEvents"
+}
+
 type GetCoreNetworkChangeEventsOutput struct {
 
 	// The response to GetCoreNetworkChangeEventsRequest .

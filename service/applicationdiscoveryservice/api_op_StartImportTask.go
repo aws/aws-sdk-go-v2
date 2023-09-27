@@ -83,6 +83,10 @@ type StartImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImportTaskInput) operationName() string {
+	return "StartImportTask"
+}
+
 type StartImportTaskOutput struct {
 
 	// An array of information related to the import task request including status

@@ -66,6 +66,10 @@ type CreateAlertInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAlertInput) operationName() string {
+	return "CreateAlert"
+}
+
 type CreateAlertOutput struct {
 
 	// The ARN of the alert.

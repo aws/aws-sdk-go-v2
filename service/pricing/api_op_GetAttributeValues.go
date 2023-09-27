@@ -60,6 +60,10 @@ type GetAttributeValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAttributeValuesInput) operationName() string {
+	return "GetAttributeValues"
+}
+
 type GetAttributeValuesOutput struct {
 
 	// The list of values for an attribute. For example, Throughput Optimized HDD and

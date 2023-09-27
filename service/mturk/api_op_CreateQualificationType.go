@@ -99,6 +99,10 @@ type CreateQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQualificationTypeInput) operationName() string {
+	return "CreateQualificationType"
+}
+
 type CreateQualificationTypeOutput struct {
 
 	// The created Qualification type, returned as a QualificationType data structure.

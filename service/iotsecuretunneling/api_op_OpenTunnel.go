@@ -52,6 +52,10 @@ type OpenTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*OpenTunnelInput) operationName() string {
+	return "OpenTunnel"
+}
+
 type OpenTunnelOutput struct {
 
 	// The access token the destination local proxy uses to connect to IoT Secure

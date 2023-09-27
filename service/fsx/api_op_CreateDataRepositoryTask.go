@@ -119,6 +119,10 @@ type CreateDataRepositoryTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataRepositoryTaskInput) operationName() string {
+	return "CreateDataRepositoryTask"
+}
+
 type CreateDataRepositoryTaskOutput struct {
 
 	// The description of the data repository task that you just created.

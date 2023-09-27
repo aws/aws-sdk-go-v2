@@ -41,6 +41,10 @@ type DeleteInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInsightInput) operationName() string {
+	return "DeleteInsight"
+}
+
 type DeleteInsightOutput struct {
 
 	// The ARN of the insight that was deleted.

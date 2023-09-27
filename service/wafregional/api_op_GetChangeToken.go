@@ -49,6 +49,10 @@ type GetChangeTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChangeTokenInput) operationName() string {
+	return "GetChangeToken"
+}
+
 type GetChangeTokenOutput struct {
 
 	// The ChangeToken that you used in the request. Use this value in a

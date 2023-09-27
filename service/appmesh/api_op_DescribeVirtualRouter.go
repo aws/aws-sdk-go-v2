@@ -54,6 +54,10 @@ type DescribeVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualRouterInput) operationName() string {
+	return "DescribeVirtualRouter"
+}
+
 type DescribeVirtualRouterOutput struct {
 
 	// The full description of your virtual router.

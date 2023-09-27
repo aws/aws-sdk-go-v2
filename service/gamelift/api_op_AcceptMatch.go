@@ -75,6 +75,10 @@ type AcceptMatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptMatchInput) operationName() string {
+	return "AcceptMatch"
+}
+
 type AcceptMatchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

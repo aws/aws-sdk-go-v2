@@ -49,6 +49,10 @@ type DescribeGlobalNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGlobalNetworksInput) operationName() string {
+	return "DescribeGlobalNetworks"
+}
+
 type DescribeGlobalNetworksOutput struct {
 
 	// Information about the global networks.

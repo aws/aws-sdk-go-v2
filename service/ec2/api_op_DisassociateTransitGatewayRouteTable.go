@@ -53,6 +53,10 @@ type DisassociateTransitGatewayRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTransitGatewayRouteTableInput) operationName() string {
+	return "DisassociateTransitGatewayRouteTable"
+}
+
 type DisassociateTransitGatewayRouteTableOutput struct {
 
 	// Information about the association.

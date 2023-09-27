@@ -47,6 +47,10 @@ type DescribeCopyProductStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCopyProductStatusInput) operationName() string {
+	return "DescribeCopyProductStatus"
+}
+
 type DescribeCopyProductStatusOutput struct {
 
 	// The status of the copy product operation.

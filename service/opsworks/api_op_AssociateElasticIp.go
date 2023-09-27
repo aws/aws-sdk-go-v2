@@ -51,6 +51,10 @@ type AssociateElasticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateElasticIpInput) operationName() string {
+	return "AssociateElasticIp"
+}
+
 type AssociateElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

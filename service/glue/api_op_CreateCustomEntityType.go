@@ -59,6 +59,10 @@ type CreateCustomEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomEntityTypeInput) operationName() string {
+	return "CreateCustomEntityType"
+}
+
 type CreateCustomEntityTypeOutput struct {
 
 	// The name of the custom pattern you created.

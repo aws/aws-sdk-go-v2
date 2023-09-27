@@ -51,6 +51,10 @@ type RejectVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectVpcPeeringConnectionInput) operationName() string {
+	return "RejectVpcPeeringConnection"
+}
+
 type RejectVpcPeeringConnectionOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

@@ -44,6 +44,10 @@ type DescribeTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTunnelInput) operationName() string {
+	return "DescribeTunnel"
+}
+
 type DescribeTunnelOutput struct {
 
 	// The tunnel being described.

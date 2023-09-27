@@ -55,6 +55,10 @@ type PutRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRetentionSettingsInput) operationName() string {
+	return "PutRetentionSettings"
+}
+
 type PutRetentionSettingsOutput struct {
 
 	// The timestamp representing the time at which the specified items are

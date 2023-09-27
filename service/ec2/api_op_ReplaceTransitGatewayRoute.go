@@ -60,6 +60,10 @@ type ReplaceTransitGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceTransitGatewayRouteInput) operationName() string {
+	return "ReplaceTransitGatewayRoute"
+}
+
 type ReplaceTransitGatewayRouteOutput struct {
 
 	// Information about the modified route.

@@ -53,6 +53,10 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRulesInput) operationName() string {
+	return "ListRules"
+}
+
 type ListRulesOutput struct {
 
 	// Information about the rules.

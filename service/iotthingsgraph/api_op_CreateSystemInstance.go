@@ -84,6 +84,10 @@ type CreateSystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSystemInstanceInput) operationName() string {
+	return "CreateSystemInstance"
+}
+
 type CreateSystemInstanceOutput struct {
 
 	// The summary object that describes the new system instance.

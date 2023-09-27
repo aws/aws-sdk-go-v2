@@ -42,6 +42,10 @@ type DeleteDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDeploymentInput) operationName() string {
+	return "DeleteDeployment"
+}
+
 type DeleteDeploymentOutput struct {
 
 	// The detailed data of the deployment being deleted.

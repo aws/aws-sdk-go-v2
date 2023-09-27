@@ -67,6 +67,10 @@ type DeprecateActivityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprecateActivityTypeInput) operationName() string {
+	return "DeprecateActivityType"
+}
+
 type DeprecateActivityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

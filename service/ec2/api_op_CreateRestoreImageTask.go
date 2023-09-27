@@ -71,6 +71,10 @@ type CreateRestoreImageTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRestoreImageTaskInput) operationName() string {
+	return "CreateRestoreImageTask"
+}
+
 type CreateRestoreImageTaskOutput struct {
 
 	// The AMI ID.

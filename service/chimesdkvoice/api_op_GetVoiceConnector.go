@@ -43,6 +43,10 @@ type GetVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorInput) operationName() string {
+	return "GetVoiceConnector"
+}
+
 type GetVoiceConnectorOutput struct {
 
 	// The Voice Connector details.

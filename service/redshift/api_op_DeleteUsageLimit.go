@@ -41,6 +41,10 @@ type DeleteUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUsageLimitInput) operationName() string {
+	return "DeleteUsageLimit"
+}
+
 type DeleteUsageLimitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

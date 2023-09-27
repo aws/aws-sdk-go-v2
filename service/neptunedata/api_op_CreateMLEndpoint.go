@@ -83,6 +83,10 @@ type CreateMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMLEndpointInput) operationName() string {
+	return "CreateMLEndpoint"
+}
+
 type CreateMLEndpointOutput struct {
 
 	// The ARN for the new inference endpoint.

@@ -65,6 +65,10 @@ type GetServiceSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceSettingInput) operationName() string {
+	return "GetServiceSetting"
+}
+
 // The query result body of the GetServiceSetting API operation.
 type GetServiceSettingOutput struct {
 

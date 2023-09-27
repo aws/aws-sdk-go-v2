@@ -37,6 +37,10 @@ type GetAccountSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSummaryInput) operationName() string {
+	return "GetAccountSummary"
+}
+
 // Contains the response to a successful GetAccountSummary request.
 type GetAccountSummaryOutput struct {
 

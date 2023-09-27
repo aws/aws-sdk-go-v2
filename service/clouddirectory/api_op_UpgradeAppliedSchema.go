@@ -56,6 +56,10 @@ type UpgradeAppliedSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpgradeAppliedSchemaInput) operationName() string {
+	return "UpgradeAppliedSchema"
+}
+
 type UpgradeAppliedSchemaOutput struct {
 
 	// The ARN of the directory that is returned as part of the response.

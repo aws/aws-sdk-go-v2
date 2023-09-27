@@ -82,6 +82,10 @@ type CreateReservedInstancesListingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReservedInstancesListingInput) operationName() string {
+	return "CreateReservedInstancesListing"
+}
+
 // Contains the output of CreateReservedInstancesListing.
 type CreateReservedInstancesListingOutput struct {
 

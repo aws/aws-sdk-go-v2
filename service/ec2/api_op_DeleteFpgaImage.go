@@ -47,6 +47,10 @@ type DeleteFpgaImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFpgaImageInput) operationName() string {
+	return "DeleteFpgaImage"
+}
+
 type DeleteFpgaImageOutput struct {
 
 	// Is true if the request succeeds, and an error otherwise.

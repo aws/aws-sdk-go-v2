@@ -59,6 +59,10 @@ type DescribeStackSetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackSetOperationInput) operationName() string {
+	return "DescribeStackSetOperation"
+}
+
 type DescribeStackSetOperationOutput struct {
 
 	// The specified stack set operation.

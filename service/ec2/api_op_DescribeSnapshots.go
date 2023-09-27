@@ -128,6 +128,10 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotsInput) operationName() string {
+	return "DescribeSnapshots"
+}
+
 type DescribeSnapshotsOutput struct {
 
 	// The token to include in another request to return the next page of snapshots.

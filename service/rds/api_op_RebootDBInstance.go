@@ -58,6 +58,10 @@ type RebootDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootDBInstanceInput) operationName() string {
+	return "RebootDBInstance"
+}
+
 type RebootDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

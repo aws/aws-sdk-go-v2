@@ -43,6 +43,10 @@ type GetPolicyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyStoreInput) operationName() string {
+	return "GetPolicyStore"
+}
+
 type GetPolicyStoreOutput struct {
 
 	// The Amazon Resource Name (ARN) of the policy store.

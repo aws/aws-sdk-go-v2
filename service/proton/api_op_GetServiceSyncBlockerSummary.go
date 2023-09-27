@@ -48,6 +48,10 @@ type GetServiceSyncBlockerSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceSyncBlockerSummaryInput) operationName() string {
+	return "GetServiceSyncBlockerSummary"
+}
+
 type GetServiceSyncBlockerSummaryOutput struct {
 
 	// The detailed data of the requested service sync blocker summary.

@@ -95,6 +95,10 @@ type AnalyzeDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AnalyzeDocumentInput) operationName() string {
+	return "AnalyzeDocument"
+}
+
 type AnalyzeDocumentOutput struct {
 
 	// The version of the model used to analyze the document.

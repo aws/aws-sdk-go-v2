@@ -71,6 +71,10 @@ type ListSecretVersionIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecretVersionIdsInput) operationName() string {
+	return "ListSecretVersionIds"
+}
+
 type ListSecretVersionIdsOutput struct {
 
 	// The ARN of the secret.

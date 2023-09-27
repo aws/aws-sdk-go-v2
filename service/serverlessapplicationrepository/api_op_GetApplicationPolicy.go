@@ -42,6 +42,10 @@ type GetApplicationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationPolicyInput) operationName() string {
+	return "GetApplicationPolicy"
+}
+
 type GetApplicationPolicyOutput struct {
 
 	// An array of policy statements applied to the application.

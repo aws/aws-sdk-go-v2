@@ -42,6 +42,10 @@ type BatchGetMembershipDatasourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetMembershipDatasourcesInput) operationName() string {
+	return "BatchGetMembershipDatasources"
+}
+
 type BatchGetMembershipDatasourcesOutput struct {
 
 	// Details on the data source package history for an member of the behavior graph.

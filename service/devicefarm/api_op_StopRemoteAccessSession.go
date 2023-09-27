@@ -43,6 +43,10 @@ type StopRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopRemoteAccessSessionInput) operationName() string {
+	return "StopRemoteAccessSession"
+}
+
 // Represents the response from the server that describes the remote access
 // session when AWS Device Farm stops the session.
 type StopRemoteAccessSessionOutput struct {

@@ -54,6 +54,10 @@ type UpdateVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVpcIngressConnectionInput) operationName() string {
+	return "UpdateVpcIngressConnection"
+}
+
 type UpdateVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection resource that's updated

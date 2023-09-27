@@ -58,6 +58,10 @@ type GetLensReviewReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLensReviewReportInput) operationName() string {
+	return "GetLensReviewReport"
+}
+
 // Output of a get lens review report call.
 type GetLensReviewReportOutput struct {
 

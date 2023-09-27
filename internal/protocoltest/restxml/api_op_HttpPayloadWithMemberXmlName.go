@@ -33,6 +33,10 @@ type HttpPayloadWithMemberXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpPayloadWithMemberXmlNameInput) operationName() string {
+	return "HttpPayloadWithMemberXmlName"
+}
+
 type HttpPayloadWithMemberXmlNameOutput struct {
 	Nested *types.PayloadWithXmlName
 

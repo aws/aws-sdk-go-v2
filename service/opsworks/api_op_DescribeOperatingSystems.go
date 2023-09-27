@@ -36,6 +36,10 @@ type DescribeOperatingSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOperatingSystemsInput) operationName() string {
+	return "DescribeOperatingSystems"
+}
+
 // The response to a DescribeOperatingSystems request.
 type DescribeOperatingSystemsOutput struct {
 

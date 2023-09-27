@@ -83,6 +83,10 @@ type StartContentModerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartContentModerationInput) operationName() string {
+	return "StartContentModeration"
+}
+
 type StartContentModerationOutput struct {
 
 	// The identifier for the content analysis job. Use JobId to identify the job in a

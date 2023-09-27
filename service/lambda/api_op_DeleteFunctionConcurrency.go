@@ -46,6 +46,10 @@ type DeleteFunctionConcurrencyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFunctionConcurrencyInput) operationName() string {
+	return "DeleteFunctionConcurrency"
+}
+
 type DeleteFunctionConcurrencyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

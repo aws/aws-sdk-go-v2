@@ -44,6 +44,10 @@ type DeleteInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceProfileInput) operationName() string {
+	return "DeleteInstanceProfile"
+}
+
 type DeleteInstanceProfileOutput struct {
 
 	// The instance profile that was deleted.

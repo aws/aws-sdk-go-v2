@@ -43,6 +43,10 @@ type ListSecurityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSecurityConfigurationsInput) operationName() string {
+	return "ListSecurityConfigurations"
+}
+
 type ListSecurityConfigurationsOutput struct {
 
 	// A pagination token that indicates the next set of results to retrieve. Include

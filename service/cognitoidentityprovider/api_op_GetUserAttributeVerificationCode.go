@@ -92,6 +92,10 @@ type GetUserAttributeVerificationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserAttributeVerificationCodeInput) operationName() string {
+	return "GetUserAttributeVerificationCode"
+}
+
 // The verification code response returned by the server response to get the user
 // attribute verification code.
 type GetUserAttributeVerificationCodeOutput struct {

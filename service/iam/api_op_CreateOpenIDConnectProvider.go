@@ -114,6 +114,10 @@ type CreateOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOpenIDConnectProviderInput) operationName() string {
+	return "CreateOpenIDConnectProvider"
+}
+
 // Contains the response to a successful CreateOpenIDConnectProvider request.
 type CreateOpenIDConnectProviderOutput struct {
 

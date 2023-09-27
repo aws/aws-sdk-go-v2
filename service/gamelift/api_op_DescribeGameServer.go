@@ -53,6 +53,10 @@ type DescribeGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGameServerInput) operationName() string {
+	return "DescribeGameServer"
+}
+
 type DescribeGameServerOutput struct {
 
 	// Object that describes the requested game server.

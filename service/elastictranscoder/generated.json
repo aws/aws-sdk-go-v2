@@ -27,6 +27,7 @@
         "api_op_UpdatePipeline.go",
         "api_op_UpdatePipelineNotifications.go",
         "api_op_UpdatePipelineStatus.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

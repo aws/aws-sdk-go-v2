@@ -60,6 +60,10 @@ type GetRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecordInput) operationName() string {
+	return "GetRecord"
+}
+
 type GetRecordOutput struct {
 
 	// The ExpiresAt ISO string of the requested record.

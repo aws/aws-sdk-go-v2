@@ -43,6 +43,10 @@ type ListAssessmentReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentReportsInput) operationName() string {
+	return "ListAssessmentReports"
+}
+
 type ListAssessmentReportsOutput struct {
 
 	// The list of assessment reports that the ListAssessmentReports API returned.

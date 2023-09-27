@@ -36,6 +36,10 @@ type GetAccountSendingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSendingEnabledInput) operationName() string {
+	return "GetAccountSendingEnabled"
+}
+
 // Represents a request to return the email sending status for your Amazon SES
 // account in the current Amazon Web Services Region.
 type GetAccountSendingEnabledOutput struct {

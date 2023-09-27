@@ -55,6 +55,10 @@ type UntagSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagSAMLProviderInput) operationName() string {
+	return "UntagSAMLProvider"
+}
+
 type UntagSAMLProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

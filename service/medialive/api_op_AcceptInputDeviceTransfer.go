@@ -43,6 +43,10 @@ type AcceptInputDeviceTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptInputDeviceTransferInput) operationName() string {
+	return "AcceptInputDeviceTransfer"
+}
+
 // Placeholder documentation for AcceptInputDeviceTransferResponse
 type AcceptInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.

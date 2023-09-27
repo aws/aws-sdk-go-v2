@@ -44,6 +44,10 @@ type GetSMSSandboxAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSMSSandboxAccountStatusInput) operationName() string {
+	return "GetSMSSandboxAccountStatus"
+}
+
 type GetSMSSandboxAccountStatusOutput struct {
 
 	// Indicates whether the calling Amazon Web Services account is in the SMS sandbox.

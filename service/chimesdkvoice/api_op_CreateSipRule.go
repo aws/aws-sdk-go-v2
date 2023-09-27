@@ -69,6 +69,10 @@ type CreateSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSipRuleInput) operationName() string {
+	return "CreateSipRule"
+}
+
 type CreateSipRuleOutput struct {
 
 	// The SIP rule information, including the rule ID, triggers, and target

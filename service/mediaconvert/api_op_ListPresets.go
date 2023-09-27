@@ -59,6 +59,10 @@ type ListPresetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPresetsInput) operationName() string {
+	return "ListPresets"
+}
+
 type ListPresetsOutput struct {
 
 	// Use this string to request the next batch of presets.

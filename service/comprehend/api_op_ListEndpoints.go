@@ -50,6 +50,10 @@ type ListEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEndpointsInput) operationName() string {
+	return "ListEndpoints"
+}
+
 type ListEndpointsOutput struct {
 
 	// Displays a list of endpoint properties being retrieved by the service in

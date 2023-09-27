@@ -48,6 +48,10 @@ type UnassignInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnassignInstanceInput) operationName() string {
+	return "UnassignInstance"
+}
+
 type UnassignInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

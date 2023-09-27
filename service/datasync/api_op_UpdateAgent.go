@@ -45,6 +45,10 @@ type UpdateAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAgentInput) operationName() string {
+	return "UpdateAgent"
+}
+
 type UpdateAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

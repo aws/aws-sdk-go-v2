@@ -77,6 +77,10 @@ type SetTypeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTypeConfigurationInput) operationName() string {
+	return "SetTypeConfiguration"
+}
+
 type SetTypeConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the configuration data, in this account and

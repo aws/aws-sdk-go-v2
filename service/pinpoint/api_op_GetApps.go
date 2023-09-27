@@ -46,6 +46,10 @@ type GetAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppsInput) operationName() string {
+	return "GetApps"
+}
+
 type GetAppsOutput struct {
 
 	// Provides information about all of your applications.

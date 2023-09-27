@@ -74,6 +74,10 @@ type ListStackSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStackSetsInput) operationName() string {
+	return "ListStackSets"
+}
+
 type ListStackSetsOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to

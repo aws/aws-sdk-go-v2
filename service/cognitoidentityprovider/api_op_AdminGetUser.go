@@ -56,6 +56,10 @@ type AdminGetUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminGetUserInput) operationName() string {
+	return "AdminGetUser"
+}
+
 // Represents the response from the server from the request to get the specified
 // user as an administrator.
 type AdminGetUserOutput struct {

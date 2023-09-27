@@ -58,6 +58,10 @@ type CreateDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBClusterSnapshotInput) operationName() string {
+	return "CreateDBClusterSnapshot"
+}
+
 type CreateDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon Neptune DB cluster snapshot This data type

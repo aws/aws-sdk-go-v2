@@ -44,6 +44,10 @@ type DeleteVerifiedEmailAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVerifiedEmailAddressInput) operationName() string {
+	return "DeleteVerifiedEmailAddress"
+}
+
 type DeleteVerifiedEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

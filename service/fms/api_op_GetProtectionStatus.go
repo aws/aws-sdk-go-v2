@@ -75,6 +75,10 @@ type GetProtectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProtectionStatusInput) operationName() string {
+	return "GetProtectionStatus"
+}
+
 type GetProtectionStatusOutput struct {
 
 	// The ID of the Firewall Manager administrator account for this policy.

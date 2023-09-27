@@ -48,6 +48,10 @@ type StartUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartUserImportJobInput) operationName() string {
+	return "StartUserImportJob"
+}
+
 // Represents the response from the server to the request to start the user import
 // job.
 type StartUserImportJobOutput struct {

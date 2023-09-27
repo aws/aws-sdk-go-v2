@@ -86,6 +86,10 @@ type ListPackageVersionAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackageVersionAssetsInput) operationName() string {
+	return "ListPackageVersionAssets"
+}
+
 type ListPackageVersionAssetsOutput struct {
 
 	// The returned list of AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)

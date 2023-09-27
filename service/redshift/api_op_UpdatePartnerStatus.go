@@ -66,6 +66,10 @@ type UpdatePartnerStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePartnerStatusInput) operationName() string {
+	return "UpdatePartnerStatus"
+}
+
 type UpdatePartnerStatusOutput struct {
 
 	// The name of the database that receives data from the partner.

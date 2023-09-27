@@ -48,6 +48,10 @@ type DeleteConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfiguredTableAssociationInput) operationName() string {
+	return "DeleteConfiguredTableAssociation"
+}
+
 type DeleteConfiguredTableAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

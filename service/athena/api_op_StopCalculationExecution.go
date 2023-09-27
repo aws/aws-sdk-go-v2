@@ -48,6 +48,10 @@ type StopCalculationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopCalculationExecutionInput) operationName() string {
+	return "StopCalculationExecution"
+}
+
 type StopCalculationExecutionOutput struct {
 
 	// CREATING - The calculation is in the process of being created. CREATED - The

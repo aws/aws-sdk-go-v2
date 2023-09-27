@@ -43,6 +43,10 @@ type DescribeIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIndexInput) operationName() string {
+	return "DescribeIndex"
+}
+
 type DescribeIndexOutput struct {
 
 	// The index name.

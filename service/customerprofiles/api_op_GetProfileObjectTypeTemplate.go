@@ -46,6 +46,10 @@ type GetProfileObjectTypeTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProfileObjectTypeTemplateInput) operationName() string {
+	return "GetProfileObjectTypeTemplate"
+}
+
 type GetProfileObjectTypeTemplateOutput struct {
 
 	// Indicates whether a profile should be created when data is received if one

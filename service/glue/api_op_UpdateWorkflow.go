@@ -53,6 +53,10 @@ type UpdateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkflowInput) operationName() string {
+	return "UpdateWorkflow"
+}
+
 type UpdateWorkflowOutput struct {
 
 	// The name of the workflow which was specified in input.

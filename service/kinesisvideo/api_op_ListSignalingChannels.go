@@ -50,6 +50,10 @@ type ListSignalingChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSignalingChannelsInput) operationName() string {
+	return "ListSignalingChannels"
+}
+
 type ListSignalingChannelsOutput struct {
 
 	// An array of ChannelInfo objects.

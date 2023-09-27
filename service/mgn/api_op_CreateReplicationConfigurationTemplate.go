@@ -112,6 +112,10 @@ type CreateReplicationConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationConfigurationTemplateInput) operationName() string {
+	return "CreateReplicationConfigurationTemplate"
+}
+
 type CreateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template ID.

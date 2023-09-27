@@ -51,6 +51,10 @@ type DetectTargetedSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectTargetedSentimentInput) operationName() string {
+	return "DetectTargetedSentiment"
+}
+
 type DetectTargetedSentimentOutput struct {
 
 	// Targeted sentiment analysis for each of the entities identified in the input

@@ -44,6 +44,10 @@ type TimestampFormatHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TimestampFormatHeadersInput) operationName() string {
+	return "TimestampFormatHeaders"
+}
+
 type TimestampFormatHeadersOutput struct {
 	DefaultFormat *time.Time
 

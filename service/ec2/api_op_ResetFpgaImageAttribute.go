@@ -52,6 +52,10 @@ type ResetFpgaImageAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetFpgaImageAttributeInput) operationName() string {
+	return "ResetFpgaImageAttribute"
+}
+
 type ResetFpgaImageAttributeOutput struct {
 
 	// Is true if the request succeeds, and an error otherwise.

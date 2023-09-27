@@ -53,6 +53,10 @@ type GetVoiceToneAnalysisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceToneAnalysisTaskInput) operationName() string {
+	return "GetVoiceToneAnalysisTask"
+}
+
 type GetVoiceToneAnalysisTaskOutput struct {
 
 	// The details of the voice tone analysis task.

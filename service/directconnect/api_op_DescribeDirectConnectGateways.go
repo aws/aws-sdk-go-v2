@@ -49,6 +49,10 @@ type DescribeDirectConnectGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDirectConnectGatewaysInput) operationName() string {
+	return "DescribeDirectConnectGateways"
+}
+
 type DescribeDirectConnectGatewaysOutput struct {
 
 	// The Direct Connect gateways.

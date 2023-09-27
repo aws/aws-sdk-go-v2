@@ -88,6 +88,10 @@ type DescribeInstanceEventWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceEventWindowsInput) operationName() string {
+	return "DescribeInstanceEventWindows"
+}
+
 type DescribeInstanceEventWindowsOutput struct {
 
 	// Information about the event windows.

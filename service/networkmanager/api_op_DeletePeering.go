@@ -42,6 +42,10 @@ type DeletePeeringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePeeringInput) operationName() string {
+	return "DeletePeering"
+}
+
 type DeletePeeringOutput struct {
 
 	// Information about a deleted peering connection.

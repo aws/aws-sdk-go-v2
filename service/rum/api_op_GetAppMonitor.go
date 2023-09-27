@@ -42,6 +42,10 @@ type GetAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppMonitorInput) operationName() string {
+	return "GetAppMonitor"
+}
+
 type GetAppMonitorOutput struct {
 
 	// A structure containing all the configuration information for the app monitor.

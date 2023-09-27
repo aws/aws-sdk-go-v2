@@ -63,6 +63,10 @@ type ListUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUpdatesInput) operationName() string {
+	return "ListUpdates"
+}
+
 type ListUpdatesOutput struct {
 
 	// The nextToken value to include in a future ListUpdates request. When the

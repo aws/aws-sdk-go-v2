@@ -113,6 +113,10 @@ type CreateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScheduleInput) operationName() string {
+	return "CreateSchedule"
+}
+
 type CreateScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schedule.

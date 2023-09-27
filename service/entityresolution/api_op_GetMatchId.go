@@ -47,6 +47,10 @@ type GetMatchIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMatchIdInput) operationName() string {
+	return "GetMatchId"
+}
+
 type GetMatchIdOutput struct {
 
 	// The unique identifiers for this group of match records.

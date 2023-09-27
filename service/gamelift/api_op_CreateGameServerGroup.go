@@ -181,6 +181,10 @@ type CreateGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGameServerGroupInput) operationName() string {
+	return "CreateGameServerGroup"
+}
+
 type CreateGameServerGroupOutput struct {
 
 	// The newly created game server group object, including the new ARN value for the

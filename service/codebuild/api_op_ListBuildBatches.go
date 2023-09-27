@@ -55,6 +55,10 @@ type ListBuildBatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBuildBatchesInput) operationName() string {
+	return "ListBuildBatches"
+}
+
 type ListBuildBatchesOutput struct {
 
 	// An array of strings that contains the batch build identifiers.

@@ -54,6 +54,10 @@ type CreateConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfiguredTableAnalysisRuleInput) operationName() string {
+	return "CreateConfiguredTableAnalysisRule"
+}
+
 type CreateConfiguredTableAnalysisRuleOutput struct {
 
 	// The entire created analysis rule.

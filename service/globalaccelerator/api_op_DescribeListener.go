@@ -42,6 +42,10 @@ type DescribeListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeListenerInput) operationName() string {
+	return "DescribeListener"
+}
+
 type DescribeListenerOutput struct {
 
 	// The description of a listener.

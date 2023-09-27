@@ -41,6 +41,10 @@ type DeleteApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationsInput) operationName() string {
+	return "DeleteApplications"
+}
+
 type DeleteApplicationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,6 +72,10 @@ type SearchResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchResourcesInput) operationName() string {
+	return "SearchResources"
+}
+
 type SearchResourcesOutput struct {
 
 	// List of Documents, Folders, Comments, and Document Versions matching the query.

@@ -41,6 +41,10 @@ type DeleteTerminologyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTerminologyInput) operationName() string {
+	return "DeleteTerminology"
+}
+
 type DeleteTerminologyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

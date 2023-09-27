@@ -72,6 +72,10 @@ type DescribeKeyPairsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeKeyPairsInput) operationName() string {
+	return "DescribeKeyPairs"
+}
+
 type DescribeKeyPairsOutput struct {
 
 	// Information about the key pairs.

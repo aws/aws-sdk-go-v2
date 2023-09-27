@@ -55,6 +55,10 @@ type ListAccountRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountRolesInput) operationName() string {
+	return "ListAccountRoles"
+}
+
 type ListAccountRolesOutput struct {
 
 	// The page token client that is used to retrieve the list of accounts.

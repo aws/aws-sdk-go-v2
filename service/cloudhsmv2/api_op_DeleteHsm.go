@@ -55,6 +55,10 @@ type DeleteHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHsmInput) operationName() string {
+	return "DeleteHsm"
+}
+
 type DeleteHsmOutput struct {
 
 	// The identifier (ID) of the HSM that was deleted.

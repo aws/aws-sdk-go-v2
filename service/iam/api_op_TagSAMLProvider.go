@@ -77,6 +77,10 @@ type TagSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagSAMLProviderInput) operationName() string {
+	return "TagSAMLProvider"
+}
+
 type TagSAMLProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -88,6 +88,10 @@ type ListTrainingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrainingJobsInput) operationName() string {
+	return "ListTrainingJobs"
+}
+
 type ListTrainingJobsOutput struct {
 
 	// An array of TrainingJobSummary objects, each listing a training job.

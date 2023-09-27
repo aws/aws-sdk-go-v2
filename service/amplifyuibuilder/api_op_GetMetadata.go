@@ -46,6 +46,10 @@ type GetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetadataInput) operationName() string {
+	return "GetMetadata"
+}
+
 type GetMetadataOutput struct {
 
 	// Represents the configuration settings for the features metadata.

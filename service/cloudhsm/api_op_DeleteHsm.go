@@ -52,6 +52,10 @@ type DeleteHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHsmInput) operationName() string {
+	return "DeleteHsm"
+}
+
 // Contains the output of the DeleteHsm operation.
 type DeleteHsmOutput struct {
 

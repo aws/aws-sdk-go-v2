@@ -46,6 +46,10 @@ type GetSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSigningCertificateInput) operationName() string {
+	return "GetSigningCertificate"
+}
+
 // Response from Amazon Cognito for a signing certificate request.
 type GetSigningCertificateOutput struct {
 

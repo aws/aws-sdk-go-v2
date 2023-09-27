@@ -69,6 +69,10 @@ type UpgradeLensReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpgradeLensReviewInput) operationName() string {
+	return "UpgradeLensReview"
+}
+
 type UpgradeLensReviewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

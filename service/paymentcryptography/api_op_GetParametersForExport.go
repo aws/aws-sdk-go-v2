@@ -61,6 +61,10 @@ type GetParametersForExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParametersForExportInput) operationName() string {
+	return "GetParametersForExport"
+}
+
 type GetParametersForExportOutput struct {
 
 	// The export token to initiate key export from Amazon Web Services Payment

@@ -91,6 +91,10 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyNetworkInterfaceAttributeInput) operationName() string {
+	return "ModifyNetworkInterfaceAttribute"
+}
+
 type ModifyNetworkInterfaceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

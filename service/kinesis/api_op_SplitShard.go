@@ -96,6 +96,10 @@ type SplitShardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SplitShardInput) operationName() string {
+	return "SplitShard"
+}
+
 type SplitShardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

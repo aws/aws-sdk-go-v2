@@ -50,6 +50,10 @@ type ListMonitoringAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitoringAlertsInput) operationName() string {
+	return "ListMonitoringAlerts"
+}
+
 type ListMonitoringAlertsOutput struct {
 
 	// A JSON array where each element is a summary for a monitoring alert.

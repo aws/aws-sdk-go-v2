@@ -57,6 +57,10 @@ type ListStateMachinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStateMachinesInput) operationName() string {
+	return "ListStateMachines"
+}
+
 type ListStateMachinesOutput struct {
 
 	// This member is required.

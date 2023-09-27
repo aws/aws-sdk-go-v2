@@ -52,6 +52,10 @@ type DescribeACLsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeACLsInput) operationName() string {
+	return "DescribeACLs"
+}
+
 type DescribeACLsOutput struct {
 
 	// The list of ACLs

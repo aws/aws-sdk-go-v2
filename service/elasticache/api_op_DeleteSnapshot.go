@@ -45,6 +45,10 @@ type DeleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSnapshotInput) operationName() string {
+	return "DeleteSnapshot"
+}
+
 type DeleteSnapshotOutput struct {
 
 	// Represents a copy of an entire Redis cluster as of the time when the snapshot

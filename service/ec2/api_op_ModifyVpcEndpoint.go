@@ -95,6 +95,10 @@ type ModifyVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVpcEndpointInput) operationName() string {
+	return "ModifyVpcEndpoint"
+}
+
 type ModifyVpcEndpointOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

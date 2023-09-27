@@ -86,6 +86,10 @@ type UpdateRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRecordsInput) operationName() string {
+	return "UpdateRecords"
+}
+
 // Returned for a successful UpdateRecordsRequest.
 type UpdateRecordsOutput struct {
 

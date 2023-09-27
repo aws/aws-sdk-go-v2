@@ -51,6 +51,10 @@ type CreateACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateACLInput) operationName() string {
+	return "CreateACL"
+}
+
 type CreateACLOutput struct {
 
 	// The newly-created Access Control List.

@@ -42,6 +42,10 @@ type DeleteSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSignalCatalogInput) operationName() string {
+	return "DeleteSignalCatalog"
+}
+
 type DeleteSignalCatalogOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted signal catalog.

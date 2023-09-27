@@ -56,6 +56,10 @@ type ListNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNamespacesInput) operationName() string {
+	return "ListNamespaces"
+}
+
 type ListNamespacesOutput struct {
 
 	// The information about the namespaces in this Amazon Web Services account. The

@@ -42,6 +42,10 @@ type GetLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLifecyclePolicyInput) operationName() string {
+	return "GetLifecyclePolicy"
+}
+
 type GetLifecyclePolicyOutput struct {
 
 	// Detailed information about the lifecycle policy.

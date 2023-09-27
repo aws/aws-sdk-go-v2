@@ -74,6 +74,10 @@ type UpdateFeaturedResultsSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFeaturedResultsSetInput) operationName() string {
+	return "UpdateFeaturedResultsSet"
+}
+
 type UpdateFeaturedResultsSetOutput struct {
 
 	// Information on the set of featured results. This includes the identifier of the

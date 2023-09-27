@@ -46,6 +46,10 @@ type CancelOpenCypherQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelOpenCypherQueryInput) operationName() string {
+	return "CancelOpenCypherQuery"
+}
+
 type CancelOpenCypherQueryOutput struct {
 
 	// The cancelation payload for the openCypher query.

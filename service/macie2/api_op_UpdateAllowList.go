@@ -62,6 +62,10 @@ type UpdateAllowListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAllowListInput) operationName() string {
+	return "UpdateAllowList"
+}
+
 type UpdateAllowListOutput struct {
 
 	// The Amazon Resource Name (ARN) of the allow list.

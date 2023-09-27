@@ -58,6 +58,10 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsInput) operationName() string {
+	return "ListFindings"
+}
+
 type ListFindingsOutput struct {
 
 	// A list of ARNs that specifies the findings returned by the action.

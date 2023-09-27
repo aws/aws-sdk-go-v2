@@ -51,6 +51,10 @@ type CreateResourceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceDefinitionInput) operationName() string {
+	return "CreateResourceDefinition"
+}
+
 type CreateResourceDefinitionOutput struct {
 
 	// The ARN of the definition.

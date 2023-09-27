@@ -50,6 +50,10 @@ type ListEnvironmentOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentOutputsInput) operationName() string {
+	return "ListEnvironmentOutputs"
+}
+
 type ListEnvironmentOutputsOutput struct {
 
 	// An array of environment outputs with detail data.

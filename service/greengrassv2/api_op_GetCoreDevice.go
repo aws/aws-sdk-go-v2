@@ -57,6 +57,10 @@ type GetCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCoreDeviceInput) operationName() string {
+	return "GetCoreDevice"
+}
+
 type GetCoreDeviceOutput struct {
 
 	// The computer architecture of the core device.

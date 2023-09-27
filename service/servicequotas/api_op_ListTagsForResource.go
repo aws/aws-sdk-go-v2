@@ -46,6 +46,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 type ListTagsForResourceOutput struct {
 
 	// A complex data type that contains zero or more tag elements.

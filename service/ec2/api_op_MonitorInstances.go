@@ -52,6 +52,10 @@ type MonitorInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MonitorInstancesInput) operationName() string {
+	return "MonitorInstances"
+}
+
 type MonitorInstancesOutput struct {
 
 	// The monitoring information.

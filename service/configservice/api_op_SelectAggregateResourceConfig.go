@@ -70,6 +70,10 @@ type SelectAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SelectAggregateResourceConfigInput) operationName() string {
+	return "SelectAggregateResourceConfig"
+}
+
 type SelectAggregateResourceConfigOutput struct {
 
 	// The nextToken string returned in a previous request that you use to request the

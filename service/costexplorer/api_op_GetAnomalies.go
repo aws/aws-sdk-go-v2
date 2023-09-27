@@ -65,6 +65,10 @@ type GetAnomaliesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnomaliesInput) operationName() string {
+	return "GetAnomalies"
+}
+
 type GetAnomaliesOutput struct {
 
 	// A list of cost anomalies.

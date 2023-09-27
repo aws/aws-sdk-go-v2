@@ -77,6 +77,10 @@ type ListNotebookExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotebookExecutionsInput) operationName() string {
+	return "ListNotebookExecutions"
+}
+
 type ListNotebookExecutionsOutput struct {
 
 	// A pagination token that a subsequent ListNotebookExecutions can use to

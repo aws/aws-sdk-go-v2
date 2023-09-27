@@ -42,6 +42,10 @@ type GetEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEndpointAccessInput) operationName() string {
+	return "GetEndpointAccess"
+}
+
 type GetEndpointAccessOutput struct {
 
 	// The returned VPC endpoint.

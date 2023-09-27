@@ -70,6 +70,10 @@ type UpdateFirewallDeleteProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallDeleteProtectionInput) operationName() string {
+	return "UpdateFirewallDeleteProtection"
+}
+
 type UpdateFirewallDeleteProtectionOutput struct {
 
 	// A flag indicating whether it is possible to delete the firewall. A setting of

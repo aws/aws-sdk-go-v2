@@ -50,6 +50,10 @@ type DescribeEffectivePatchesForPatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEffectivePatchesForPatchBaselineInput) operationName() string {
+	return "DescribeEffectivePatchesForPatchBaseline"
+}
+
 type DescribeEffectivePatchesForPatchBaselineOutput struct {
 
 	// An array of patches and patch status.

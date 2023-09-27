@@ -86,6 +86,10 @@ type CreateExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExperimentTemplateInput) operationName() string {
+	return "CreateExperimentTemplate"
+}
+
 type CreateExperimentTemplateOutput struct {
 
 	// Information about the experiment template.

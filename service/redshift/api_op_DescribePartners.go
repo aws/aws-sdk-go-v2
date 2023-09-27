@@ -56,6 +56,10 @@ type DescribePartnersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePartnersInput) operationName() string {
+	return "DescribePartners"
+}
+
 type DescribePartnersOutput struct {
 
 	// A list of partner integrations.

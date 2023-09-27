@@ -35,6 +35,10 @@ type DescribeStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorageInput) operationName() string {
+	return "DescribeStorage"
+}
+
 type DescribeStorageOutput struct {
 
 	// The total amount of storage currently used for snapshots.

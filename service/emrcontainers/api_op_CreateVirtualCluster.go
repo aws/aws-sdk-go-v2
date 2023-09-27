@@ -59,6 +59,10 @@ type CreateVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVirtualClusterInput) operationName() string {
+	return "CreateVirtualCluster"
+}
+
 type CreateVirtualClusterOutput struct {
 
 	// This output contains the ARN of virtual cluster.

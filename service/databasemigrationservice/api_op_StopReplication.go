@@ -44,6 +44,10 @@ type StopReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopReplicationInput) operationName() string {
+	return "StopReplication"
+}
+
 type StopReplicationOutput struct {
 
 	// The replication that DMS stopped.

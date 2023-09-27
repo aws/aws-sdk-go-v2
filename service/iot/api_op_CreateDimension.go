@@ -71,6 +71,10 @@ type CreateDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDimensionInput) operationName() string {
+	return "CreateDimension"
+}
+
 type CreateDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created dimension.

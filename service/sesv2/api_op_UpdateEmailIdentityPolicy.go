@@ -67,6 +67,10 @@ type UpdateEmailIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEmailIdentityPolicyInput) operationName() string {
+	return "UpdateEmailIdentityPolicy"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type UpdateEmailIdentityPolicyOutput struct {

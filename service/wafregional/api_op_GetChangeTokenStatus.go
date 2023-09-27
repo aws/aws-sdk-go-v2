@@ -54,6 +54,10 @@ type GetChangeTokenStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChangeTokenStatusInput) operationName() string {
+	return "GetChangeTokenStatus"
+}
+
 type GetChangeTokenStatusOutput struct {
 
 	// The status of the change token.

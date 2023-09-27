@@ -59,6 +59,10 @@ type CreatePrivateVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePrivateVirtualInterfaceInput) operationName() string {
+	return "CreatePrivateVirtualInterface"
+}
+
 // Information about a virtual interface.
 type CreatePrivateVirtualInterfaceOutput struct {
 

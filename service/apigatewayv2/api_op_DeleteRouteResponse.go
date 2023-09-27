@@ -51,6 +51,10 @@ type DeleteRouteResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRouteResponseInput) operationName() string {
+	return "DeleteRouteResponse"
+}
+
 type DeleteRouteResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

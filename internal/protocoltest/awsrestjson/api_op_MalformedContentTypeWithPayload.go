@@ -32,6 +32,10 @@ type MalformedContentTypeWithPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedContentTypeWithPayloadInput) operationName() string {
+	return "MalformedContentTypeWithPayload"
+}
+
 type MalformedContentTypeWithPayloadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

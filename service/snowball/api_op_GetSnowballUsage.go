@@ -38,6 +38,10 @@ type GetSnowballUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSnowballUsageInput) operationName() string {
+	return "GetSnowballUsage"
+}
+
 type GetSnowballUsageOutput struct {
 
 	// The service limit for number of Snow devices this account can have at once. The

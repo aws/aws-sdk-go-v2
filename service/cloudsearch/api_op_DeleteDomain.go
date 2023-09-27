@@ -47,6 +47,10 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainInput) operationName() string {
+	return "DeleteDomain"
+}
+
 // The result of a DeleteDomain request. Contains the status of a newly deleted
 // domain, or no status if the domain has already been completely deleted.
 type DeleteDomainOutput struct {

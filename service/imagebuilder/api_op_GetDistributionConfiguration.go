@@ -43,6 +43,10 @@ type GetDistributionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDistributionConfigurationInput) operationName() string {
+	return "GetDistributionConfiguration"
+}
+
 type GetDistributionConfigurationOutput struct {
 
 	// The distribution configuration object.

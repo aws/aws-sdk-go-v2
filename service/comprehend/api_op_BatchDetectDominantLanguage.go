@@ -47,6 +47,10 @@ type BatchDetectDominantLanguageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDetectDominantLanguageInput) operationName() string {
+	return "BatchDetectDominantLanguage"
+}
+
 type BatchDetectDominantLanguageOutput struct {
 
 	// A list containing one object for each document that contained an error. The

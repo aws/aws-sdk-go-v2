@@ -102,6 +102,10 @@ type RotateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RotateSecretInput) operationName() string {
+	return "RotateSecret"
+}
+
 type RotateSecretOutput struct {
 
 	// The ARN of the secret.

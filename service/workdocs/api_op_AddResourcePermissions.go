@@ -56,6 +56,10 @@ type AddResourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddResourcePermissionsInput) operationName() string {
+	return "AddResourcePermissions"
+}
+
 type AddResourcePermissionsOutput struct {
 
 	// The share results.

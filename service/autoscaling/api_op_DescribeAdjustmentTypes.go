@@ -40,6 +40,10 @@ type DescribeAdjustmentTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAdjustmentTypesInput) operationName() string {
+	return "DescribeAdjustmentTypes"
+}
+
 type DescribeAdjustmentTypesOutput struct {
 
 	// The policy adjustment types.

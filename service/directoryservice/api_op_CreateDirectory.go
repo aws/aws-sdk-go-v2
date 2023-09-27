@@ -89,6 +89,10 @@ type CreateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDirectoryInput) operationName() string {
+	return "CreateDirectory"
+}
+
 // Contains the results of the CreateDirectory operation.
 type CreateDirectoryOutput struct {
 

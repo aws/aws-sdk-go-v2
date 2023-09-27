@@ -61,6 +61,10 @@ type CreateMilestoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMilestoneInput) operationName() string {
+	return "CreateMilestone"
+}
+
 // Output of a create milestone call.
 type CreateMilestoneOutput struct {
 

@@ -52,6 +52,10 @@ type ListGroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupResourcesInput) operationName() string {
+	return "ListGroupResources"
+}
+
 type ListGroupResourcesOutput struct {
 
 	// A token that indicates that there is more data available. You can use this

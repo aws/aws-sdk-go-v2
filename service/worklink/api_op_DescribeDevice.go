@@ -51,6 +51,10 @@ type DescribeDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeviceInput) operationName() string {
+	return "DescribeDevice"
+}
+
 type DescribeDeviceOutput struct {
 
 	// The date that the device first signed in to Amazon WorkLink.

@@ -61,6 +61,10 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTableInput) operationName() string {
+	return "CreateTable"
+}
+
 type CreateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

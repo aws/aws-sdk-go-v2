@@ -59,6 +59,10 @@ type UpdateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRouteInput) operationName() string {
+	return "UpdateRoute"
+}
+
 type UpdateRouteOutput struct {
 
 	// The ID of the application in which the route is being updated.

@@ -43,6 +43,10 @@ type DeleteEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEventBusInput) operationName() string {
+	return "DeleteEventBus"
+}
+
 type DeleteEventBusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,6 +42,10 @@ type PutRegistryCatalogDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRegistryCatalogDataInput) operationName() string {
+	return "PutRegistryCatalogData"
+}
+
 type PutRegistryCatalogDataOutput struct {
 
 	// The catalog data for the public registry.

@@ -48,6 +48,10 @@ type GetGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGeofenceInput) operationName() string {
+	return "GetGeofence"
+}
+
 type GetGeofenceOutput struct {
 
 	// The timestamp for when the geofence collection was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)

@@ -93,6 +93,10 @@ type ListRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecordsInput) operationName() string {
+	return "ListRecords"
+}
+
 // Returned for a successful ListRecordsRequest.
 type ListRecordsOutput struct {
 

@@ -70,6 +70,10 @@ type CreatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePortalInput) operationName() string {
+	return "CreatePortal"
+}
+
 type CreatePortalOutput struct {
 
 	// The ARN of the web portal.

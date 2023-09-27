@@ -47,6 +47,10 @@ type SubmitAttachmentStateChangesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitAttachmentStateChangesInput) operationName() string {
+	return "SubmitAttachmentStateChanges"
+}
+
 type SubmitAttachmentStateChangesOutput struct {
 
 	// Acknowledgement of the state change.

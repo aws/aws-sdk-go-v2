@@ -133,6 +133,10 @@ type IssueCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IssueCertificateInput) operationName() string {
+	return "IssueCertificate"
+}
+
 type IssueCertificateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the issued certificate and the certificate

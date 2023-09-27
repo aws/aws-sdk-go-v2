@@ -44,6 +44,10 @@ type DescribeLocationFsxWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationFsxWindowsInput) operationName() string {
+	return "DescribeLocationFsxWindows"
+}
+
 type DescribeLocationFsxWindowsOutput struct {
 
 	// The time that the FSx for Windows File Server location was created.

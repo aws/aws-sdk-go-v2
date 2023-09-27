@@ -59,6 +59,10 @@ type CreateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSnapshotInput) operationName() string {
+	return "CreateSnapshot"
+}
+
 type CreateSnapshotOutput struct {
 
 	// Represents a copy of an entire Redis cluster as of the time when the snapshot

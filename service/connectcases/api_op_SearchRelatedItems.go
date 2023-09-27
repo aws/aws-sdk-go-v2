@@ -58,6 +58,10 @@ type SearchRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchRelatedItemsInput) operationName() string {
+	return "SearchRelatedItems"
+}
+
 type SearchRelatedItemsOutput struct {
 
 	// A list of items related to a case.

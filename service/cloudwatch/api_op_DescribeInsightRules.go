@@ -48,6 +48,10 @@ type DescribeInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInsightRulesInput) operationName() string {
+	return "DescribeInsightRules"
+}
+
 type DescribeInsightRulesOutput struct {
 
 	// The rules returned by the operation.

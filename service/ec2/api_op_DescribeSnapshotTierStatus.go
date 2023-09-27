@@ -63,6 +63,10 @@ type DescribeSnapshotTierStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotTierStatusInput) operationName() string {
+	return "DescribeSnapshotTierStatus"
+}
+
 type DescribeSnapshotTierStatusOutput struct {
 
 	// The token to include in another request to get the next page of items. This

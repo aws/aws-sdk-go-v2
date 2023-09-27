@@ -55,6 +55,10 @@ type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDirectConnectGatewayAssociationProposalsInput) operationName() string {
+	return "DescribeDirectConnectGatewayAssociationProposals"
+}
+
 type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
 
 	// Describes the Direct Connect gateway association proposals.

@@ -48,6 +48,10 @@ type DeleteFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFacetInput) operationName() string {
+	return "DeleteFacet"
+}
+
 type DeleteFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

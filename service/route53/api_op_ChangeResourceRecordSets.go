@@ -103,6 +103,10 @@ type ChangeResourceRecordSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ChangeResourceRecordSetsInput) operationName() string {
+	return "ChangeResourceRecordSets"
+}
+
 // A complex type containing the response for the request.
 type ChangeResourceRecordSetsOutput struct {
 

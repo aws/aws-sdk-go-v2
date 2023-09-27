@@ -45,6 +45,10 @@ type ListPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPolicyVersionsInput) operationName() string {
+	return "ListPolicyVersions"
+}
+
 // The output from the ListPolicyVersions operation.
 type ListPolicyVersionsOutput struct {
 

@@ -55,6 +55,10 @@ type GetDataLakeSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataLakeSourcesInput) operationName() string {
+	return "GetDataLakeSources"
+}
+
 type GetDataLakeSourcesOutput struct {
 
 	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For

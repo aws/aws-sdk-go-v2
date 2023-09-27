@@ -89,6 +89,10 @@ type SendTextMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendTextMessageInput) operationName() string {
+	return "SendTextMessage"
+}
+
 type SendTextMessageOutput struct {
 
 	// The unique identifier for the message.

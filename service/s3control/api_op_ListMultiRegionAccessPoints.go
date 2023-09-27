@@ -65,6 +65,10 @@ type ListMultiRegionAccessPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMultiRegionAccessPointsInput) operationName() string {
+	return "ListMultiRegionAccessPoints"
+}
+
 type ListMultiRegionAccessPointsOutput struct {
 
 	// The list of Multi-Region Access Points associated with the user.

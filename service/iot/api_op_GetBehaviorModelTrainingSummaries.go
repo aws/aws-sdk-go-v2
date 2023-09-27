@@ -48,6 +48,10 @@ type GetBehaviorModelTrainingSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBehaviorModelTrainingSummariesInput) operationName() string {
+	return "GetBehaviorModelTrainingSummaries"
+}
+
 type GetBehaviorModelTrainingSummariesOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there

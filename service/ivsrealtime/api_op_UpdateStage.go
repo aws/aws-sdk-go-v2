@@ -45,6 +45,10 @@ type UpdateStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStageInput) operationName() string {
+	return "UpdateStage"
+}
+
 type UpdateStageOutput struct {
 
 	// The updated stage.

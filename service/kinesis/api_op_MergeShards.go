@@ -84,6 +84,10 @@ type MergeShardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergeShardsInput) operationName() string {
+	return "MergeShards"
+}
+
 type MergeShardsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

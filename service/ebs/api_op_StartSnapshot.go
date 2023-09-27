@@ -111,6 +111,10 @@ type StartSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSnapshotInput) operationName() string {
+	return "StartSnapshot"
+}
+
 type StartSnapshotOutput struct {
 
 	// The size of the blocks in the snapshot, in bytes.

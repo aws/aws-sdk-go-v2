@@ -56,6 +56,10 @@ type UpdateSecurityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSecurityInput) operationName() string {
+	return "UpdateSecurity"
+}
+
 type UpdateSecurityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

@@ -48,6 +48,10 @@ type UpdateACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateACLInput) operationName() string {
+	return "UpdateACL"
+}
+
 type UpdateACLOutput struct {
 
 	// The updated Access Control List

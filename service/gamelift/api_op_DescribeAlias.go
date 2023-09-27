@@ -46,6 +46,10 @@ type DescribeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAliasInput) operationName() string {
+	return "DescribeAlias"
+}
+
 type DescribeAliasOutput struct {
 
 	// The requested alias resource.

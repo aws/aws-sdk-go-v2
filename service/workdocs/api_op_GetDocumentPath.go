@@ -60,6 +60,10 @@ type GetDocumentPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentPathInput) operationName() string {
+	return "GetDocumentPath"
+}
+
 type GetDocumentPathOutput struct {
 
 	// The path information.

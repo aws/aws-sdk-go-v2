@@ -58,6 +58,10 @@ type ListMobileSdkReleasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMobileSdkReleasesInput) operationName() string {
+	return "ListMobileSdkReleases"
+}
+
 type ListMobileSdkReleasesOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of

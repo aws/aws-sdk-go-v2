@@ -51,6 +51,10 @@ type GetReadSetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReadSetExportJobInput) operationName() string {
+	return "GetReadSetExportJob"
+}
+
 type GetReadSetExportJobOutput struct {
 
 	// When the job was created.

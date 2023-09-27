@@ -60,6 +60,10 @@ type CreateVPCEConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVPCEConfigurationInput) operationName() string {
+	return "CreateVPCEConfiguration"
+}
+
 type CreateVPCEConfigurationOutput struct {
 
 	// An object that contains information about your VPC endpoint configuration.

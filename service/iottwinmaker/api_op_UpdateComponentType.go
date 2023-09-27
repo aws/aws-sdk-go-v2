@@ -71,6 +71,10 @@ type UpdateComponentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateComponentTypeInput) operationName() string {
+	return "UpdateComponentType"
+}
+
 type UpdateComponentTypeOutput struct {
 
 	// The ARN of the component type.

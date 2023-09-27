@@ -61,6 +61,10 @@ type RenewDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RenewDomainInput) operationName() string {
+	return "RenewDomain"
+}
+
 type RenewDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation

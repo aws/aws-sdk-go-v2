@@ -67,6 +67,10 @@ type PutBucketOwnershipControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketOwnershipControlsInput) operationName() string {
+	return "PutBucketOwnershipControls"
+}
+
 type PutBucketOwnershipControlsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,6 +65,10 @@ type CreateClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterSnapshotInput) operationName() string {
+	return "CreateClusterSnapshot"
+}
+
 type CreateClusterSnapshotOutput struct {
 
 	// Describes a snapshot.

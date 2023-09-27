@@ -84,6 +84,10 @@ type DescribeEC2InstanceLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEC2InstanceLimitsInput) operationName() string {
+	return "DescribeEC2InstanceLimits"
+}
+
 type DescribeEC2InstanceLimitsOutput struct {
 
 	// The maximum number of instances for the specified instance type.

@@ -61,6 +61,10 @@ type DescribeTransitGatewayMulticastDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransitGatewayMulticastDomainsInput) operationName() string {
+	return "DescribeTransitGatewayMulticastDomains"
+}
+
 type DescribeTransitGatewayMulticastDomainsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

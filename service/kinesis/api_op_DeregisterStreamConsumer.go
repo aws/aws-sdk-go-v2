@@ -60,6 +60,10 @@ type DeregisterStreamConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterStreamConsumerInput) operationName() string {
+	return "DeregisterStreamConsumer"
+}
+
 type DeregisterStreamConsumerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

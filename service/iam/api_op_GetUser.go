@@ -51,6 +51,10 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserInput) operationName() string {
+	return "GetUser"
+}
+
 // Contains the response to a successful GetUser request.
 type GetUserOutput struct {
 

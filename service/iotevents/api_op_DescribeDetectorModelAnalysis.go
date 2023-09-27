@@ -44,6 +44,10 @@ type DescribeDetectorModelAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDetectorModelAnalysisInput) operationName() string {
+	return "DescribeDetectorModelAnalysis"
+}
+
 type DescribeDetectorModelAnalysisOutput struct {
 
 	// The status of the analysis activity. The status can be one of the following

@@ -65,6 +65,10 @@ type AssociateQualificationWithWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateQualificationWithWorkerInput) operationName() string {
+	return "AssociateQualificationWithWorker"
+}
+
 type AssociateQualificationWithWorkerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

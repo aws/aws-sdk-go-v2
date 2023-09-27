@@ -54,6 +54,10 @@ type ListResourcesForTagOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesForTagOptionInput) operationName() string {
+	return "ListResourcesForTagOption"
+}
+
 type ListResourcesForTagOptionOutput struct {
 
 	// The page token for the next set of results. To retrieve the first set of

@@ -63,6 +63,10 @@ type GetReportGroupTrendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReportGroupTrendInput) operationName() string {
+	return "GetReportGroupTrend"
+}
+
 type GetReportGroupTrendOutput struct {
 
 	// An array that contains the raw data for each report.

@@ -50,6 +50,10 @@ type UpdateBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBridgeInput) operationName() string {
+	return "UpdateBridge"
+}
+
 type UpdateBridgeOutput struct {
 
 	// A Bridge is the connection between your datacenter's Instances and the AWS

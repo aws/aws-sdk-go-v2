@@ -55,6 +55,10 @@ type AssociateWebsiteAuthorizationProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateWebsiteAuthorizationProviderInput) operationName() string {
+	return "AssociateWebsiteAuthorizationProvider"
+}
+
 type AssociateWebsiteAuthorizationProviderOutput struct {
 
 	// A unique identifier for the authorization provider.

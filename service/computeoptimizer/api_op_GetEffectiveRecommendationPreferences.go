@@ -49,6 +49,10 @@ type GetEffectiveRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEffectiveRecommendationPreferencesInput) operationName() string {
+	return "GetEffectiveRecommendationPreferences"
+}
+
 type GetEffectiveRecommendationPreferencesOutput struct {
 
 	// The status of the enhanced infrastructure metrics recommendation preference.

@@ -42,6 +42,10 @@ type DeleteLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLinkInput) operationName() string {
+	return "DeleteLink"
+}
+
 type DeleteLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

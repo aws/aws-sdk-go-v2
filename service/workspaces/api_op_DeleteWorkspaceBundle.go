@@ -41,6 +41,10 @@ type DeleteWorkspaceBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkspaceBundleInput) operationName() string {
+	return "DeleteWorkspaceBundle"
+}
+
 type DeleteWorkspaceBundleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

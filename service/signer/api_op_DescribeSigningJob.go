@@ -47,6 +47,10 @@ type DescribeSigningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSigningJobInput) operationName() string {
+	return "DescribeSigningJob"
+}
+
 type DescribeSigningJobOutput struct {
 
 	// Date and time that the signing job was completed.

@@ -78,6 +78,10 @@ type UpdateApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApiCacheInput) operationName() string {
+	return "UpdateApiCache"
+}
+
 // Represents the output of a UpdateApiCache operation.
 type UpdateApiCacheOutput struct {
 

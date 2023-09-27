@@ -57,6 +57,10 @@ type AcceptPortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptPortfolioShareInput) operationName() string {
+	return "AcceptPortfolioShare"
+}
+
 type AcceptPortfolioShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

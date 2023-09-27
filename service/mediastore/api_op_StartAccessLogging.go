@@ -43,6 +43,10 @@ type StartAccessLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAccessLoggingInput) operationName() string {
+	return "StartAccessLogging"
+}
+
 type StartAccessLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

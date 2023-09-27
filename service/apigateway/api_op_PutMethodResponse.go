@@ -76,6 +76,10 @@ type PutMethodResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMethodResponseInput) operationName() string {
+	return "PutMethodResponse"
+}
+
 // Represents a method response of a given HTTP status code returned to the
 // client. The method response is passed from the back end through the associated
 // integration response that can be transformed using a mapping template.

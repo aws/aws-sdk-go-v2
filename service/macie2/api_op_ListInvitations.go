@@ -45,6 +45,10 @@ type ListInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInvitationsInput) operationName() string {
+	return "ListInvitations"
+}
+
 type ListInvitationsOutput struct {
 
 	// An array of objects, one for each invitation that was received by the account.

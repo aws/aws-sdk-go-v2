@@ -51,6 +51,10 @@ type DeleteRuleGroupsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRuleGroupsNamespaceInput) operationName() string {
+	return "DeleteRuleGroupsNamespace"
+}
+
 type DeleteRuleGroupsNamespaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

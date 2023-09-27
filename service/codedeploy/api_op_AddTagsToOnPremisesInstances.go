@@ -50,6 +50,10 @@ type AddTagsToOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsToOnPremisesInstancesInput) operationName() string {
+	return "AddTagsToOnPremisesInstances"
+}
+
 type AddTagsToOnPremisesInstancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

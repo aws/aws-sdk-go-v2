@@ -54,6 +54,10 @@ type DescribeCacheParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCacheParameterGroupsInput) operationName() string {
+	return "DescribeCacheParameterGroups"
+}
+
 // Represents the output of a DescribeCacheParameterGroups operation.
 type DescribeCacheParameterGroupsOutput struct {
 

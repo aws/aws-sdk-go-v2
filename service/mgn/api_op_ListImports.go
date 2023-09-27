@@ -47,6 +47,10 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportsInput) operationName() string {
+	return "ListImports"
+}
+
 // List import response.
 type ListImportsOutput struct {
 

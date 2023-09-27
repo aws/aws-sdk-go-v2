@@ -98,6 +98,10 @@ type CreateAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAgreementInput) operationName() string {
+	return "CreateAgreement"
+}
+
 type CreateAgreementOutput struct {
 
 	// The unique identifier for the agreement. Use this ID for deleting, or updating

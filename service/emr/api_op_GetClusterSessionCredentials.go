@@ -54,6 +54,10 @@ type GetClusterSessionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClusterSessionCredentialsInput) operationName() string {
+	return "GetClusterSessionCredentials"
+}
+
 type GetClusterSessionCredentialsOutput struct {
 
 	// The credentials that you can use to connect to cluster endpoints that support

@@ -61,6 +61,10 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcEndpointInput) operationName() string {
+	return "CreateVpcEndpoint"
+}
+
 type CreateVpcEndpointOutput struct {
 
 	// Details about the created interface VPC endpoint.

@@ -42,6 +42,10 @@ type GetAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssessmentInput) operationName() string {
+	return "GetAssessment"
+}
+
 type GetAssessmentOutput struct {
 
 	// List of criteria for assessment.

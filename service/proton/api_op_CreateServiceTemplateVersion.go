@@ -82,6 +82,10 @@ type CreateServiceTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceTemplateVersionInput) operationName() string {
+	return "CreateServiceTemplateVersion"
+}
+
 type CreateServiceTemplateVersionOutput struct {
 
 	// The service template version summary of detail data that's returned by Proton.

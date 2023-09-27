@@ -56,6 +56,10 @@ type ResetSnapshotAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetSnapshotAttributeInput) operationName() string {
+	return "ResetSnapshotAttribute"
+}
+
 type ResetSnapshotAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

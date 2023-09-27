@@ -70,6 +70,10 @@ type RunScheduledInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunScheduledInstancesInput) operationName() string {
+	return "RunScheduledInstances"
+}
+
 // Contains the output of RunScheduledInstances.
 type RunScheduledInstancesOutput struct {
 

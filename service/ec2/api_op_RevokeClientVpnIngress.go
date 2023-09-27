@@ -61,6 +61,10 @@ type RevokeClientVpnIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeClientVpnIngressInput) operationName() string {
+	return "RevokeClientVpnIngress"
+}
+
 type RevokeClientVpnIngressOutput struct {
 
 	// The current state of the authorization rule.

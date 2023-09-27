@@ -62,6 +62,10 @@ type ListCustomVocabularyItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomVocabularyItemsInput) operationName() string {
+	return "ListCustomVocabularyItems"
+}
+
 type ListCustomVocabularyItemsOutput struct {
 
 	// The identifier of the bot associated with this custom vocabulary.

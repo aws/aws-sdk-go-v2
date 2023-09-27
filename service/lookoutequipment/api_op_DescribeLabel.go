@@ -48,6 +48,10 @@ type DescribeLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLabelInput) operationName() string {
+	return "DescribeLabel"
+}
+
 type DescribeLabelOutput struct {
 
 	// The time at which the label was created.

@@ -55,6 +55,10 @@ type ListXssMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListXssMatchSetsInput) operationName() string {
+	return "ListXssMatchSets"
+}
+
 // The response to a ListXssMatchSets request.
 type ListXssMatchSetsOutput struct {
 

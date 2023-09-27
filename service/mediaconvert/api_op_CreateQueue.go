@@ -66,6 +66,10 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateQueueInput) operationName() string {
+	return "CreateQueue"
+}
+
 type CreateQueueOutput struct {
 
 	// You can use queues to manage the resources that are available to your AWS

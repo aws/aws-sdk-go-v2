@@ -57,6 +57,10 @@ type CreateCachePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCachePolicyInput) operationName() string {
+	return "CreateCachePolicy"
+}
+
 type CreateCachePolicyOutput struct {
 
 	// A cache policy.

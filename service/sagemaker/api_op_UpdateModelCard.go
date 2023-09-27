@@ -57,6 +57,10 @@ type UpdateModelCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelCardInput) operationName() string {
+	return "UpdateModelCard"
+}
+
 type UpdateModelCardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated model card.

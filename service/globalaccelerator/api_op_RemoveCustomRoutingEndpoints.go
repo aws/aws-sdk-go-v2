@@ -47,6 +47,10 @@ type RemoveCustomRoutingEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveCustomRoutingEndpointsInput) operationName() string {
+	return "RemoveCustomRoutingEndpoints"
+}
+
 type RemoveCustomRoutingEndpointsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,6 +49,10 @@ type UpdateHITTypeOfHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHITTypeOfHITInput) operationName() string {
+	return "UpdateHITTypeOfHIT"
+}
+
 type UpdateHITTypeOfHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

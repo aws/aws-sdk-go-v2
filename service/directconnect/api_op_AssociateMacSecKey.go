@@ -67,6 +67,10 @@ type AssociateMacSecKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateMacSecKeyInput) operationName() string {
+	return "AssociateMacSecKey"
+}
+
 type AssociateMacSecKeyOutput struct {
 
 	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG

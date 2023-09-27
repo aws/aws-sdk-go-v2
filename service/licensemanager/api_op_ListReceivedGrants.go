@@ -56,6 +56,10 @@ type ListReceivedGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReceivedGrantsInput) operationName() string {
+	return "ListReceivedGrants"
+}
+
 type ListReceivedGrantsOutput struct {
 
 	// Received grant details.

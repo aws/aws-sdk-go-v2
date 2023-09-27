@@ -47,6 +47,10 @@ type PutVoiceConnectorStreamingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorStreamingConfigurationInput) operationName() string {
+	return "PutVoiceConnectorStreamingConfiguration"
+}
+
 type PutVoiceConnectorStreamingConfigurationOutput struct {
 
 	// The updated streaming settings.

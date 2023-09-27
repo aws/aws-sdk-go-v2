@@ -52,6 +52,10 @@ type ListHapgsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHapgsInput) operationName() string {
+	return "ListHapgs"
+}
+
 type ListHapgsOutput struct {
 
 	// The list of high-availability partition groups.

@@ -61,6 +61,10 @@ type CreateAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessorInput) operationName() string {
+	return "CreateAccessor"
+}
+
 type CreateAccessorOutput struct {
 
 	// The unique identifier of the accessor.

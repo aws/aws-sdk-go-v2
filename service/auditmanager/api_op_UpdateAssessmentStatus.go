@@ -47,6 +47,10 @@ type UpdateAssessmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssessmentStatusInput) operationName() string {
+	return "UpdateAssessmentStatus"
+}
+
 type UpdateAssessmentStatusOutput struct {
 
 	// The name of the updated assessment that the UpdateAssessmentStatus API returned.

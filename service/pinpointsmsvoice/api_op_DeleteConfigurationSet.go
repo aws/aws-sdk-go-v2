@@ -41,6 +41,10 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetInput) operationName() string {
+	return "DeleteConfigurationSet"
+}
+
 // An empty object that indicates that the configuration set was deleted
 // successfully.
 type DeleteConfigurationSetOutput struct {

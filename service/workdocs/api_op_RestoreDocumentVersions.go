@@ -45,6 +45,10 @@ type RestoreDocumentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDocumentVersionsInput) operationName() string {
+	return "RestoreDocumentVersions"
+}
+
 type RestoreDocumentVersionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,6 +47,7 @@
         "api_op_UpdateAnomalySubscription.go",
         "api_op_UpdateCostAllocationTagsStatus.go",
         "api_op_UpdateCostCategoryDefinition.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

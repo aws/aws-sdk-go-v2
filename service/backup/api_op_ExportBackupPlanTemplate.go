@@ -41,6 +41,10 @@ type ExportBackupPlanTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportBackupPlanTemplateInput) operationName() string {
+	return "ExportBackupPlanTemplate"
+}
+
 type ExportBackupPlanTemplateOutput struct {
 
 	// The body of a backup plan template in JSON format. This is a signed JSON

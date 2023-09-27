@@ -44,6 +44,10 @@ type ListOrganizationServiceAccessStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrganizationServiceAccessStatusInput) operationName() string {
+	return "ListOrganizationServiceAccessStatus"
+}
+
 type ListOrganizationServiceAccessStatusOutput struct {
 
 	// The token for the next page of results.

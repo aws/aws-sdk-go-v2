@@ -49,6 +49,10 @@ type ListDataQualityRulesetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataQualityRulesetsInput) operationName() string {
+	return "ListDataQualityRulesets"
+}
+
 type ListDataQualityRulesetsOutput struct {
 
 	// A pagination token, if more results are available.

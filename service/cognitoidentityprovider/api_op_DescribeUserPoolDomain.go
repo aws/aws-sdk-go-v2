@@ -44,6 +44,10 @@ type DescribeUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserPoolDomainInput) operationName() string {
+	return "DescribeUserPoolDomain"
+}
+
 type DescribeUserPoolDomainOutput struct {
 
 	// A domain description object containing information about the domain.

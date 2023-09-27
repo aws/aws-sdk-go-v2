@@ -42,6 +42,10 @@ type GetDiskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDiskInput) operationName() string {
+	return "GetDisk"
+}
+
 type GetDiskOutput struct {
 
 	// An object containing information about the disk.

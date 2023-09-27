@@ -59,6 +59,10 @@ type AssociateDeviceWithPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDeviceWithPlacementInput) operationName() string {
+	return "AssociateDeviceWithPlacement"
+}
+
 type AssociateDeviceWithPlacementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type SearchQuickConnectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchQuickConnectsInput) operationName() string {
+	return "SearchQuickConnects"
+}
+
 type SearchQuickConnectsOutput struct {
 
 	// The total number of quick connects which matched your search query.

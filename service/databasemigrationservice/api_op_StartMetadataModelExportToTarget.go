@@ -51,6 +51,10 @@ type StartMetadataModelExportToTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMetadataModelExportToTargetInput) operationName() string {
+	return "StartMetadataModelExportToTarget"
+}
+
 type StartMetadataModelExportToTargetOutput struct {
 
 	// The identifier for the export operation.

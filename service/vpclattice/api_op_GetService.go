@@ -43,6 +43,10 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceInput) operationName() string {
+	return "GetService"
+}
+
 type GetServiceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service.

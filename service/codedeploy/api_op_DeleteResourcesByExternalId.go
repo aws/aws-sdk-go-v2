@@ -45,6 +45,10 @@ type DeleteResourcesByExternalIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourcesByExternalIdInput) operationName() string {
+	return "DeleteResourcesByExternalId"
+}
+
 type DeleteResourcesByExternalIdOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

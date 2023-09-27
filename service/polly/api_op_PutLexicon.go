@@ -53,6 +53,10 @@ type PutLexiconInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLexiconInput) operationName() string {
+	return "PutLexicon"
+}
+
 type PutLexiconOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

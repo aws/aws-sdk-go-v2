@@ -58,6 +58,10 @@ type GetStorageLensConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStorageLensConfigurationInput) operationName() string {
+	return "GetStorageLensConfiguration"
+}
+
 type GetStorageLensConfigurationOutput struct {
 
 	// The S3 Storage Lens configuration requested.

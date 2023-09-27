@@ -43,6 +43,10 @@ type GetTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTestInput) operationName() string {
+	return "GetTest"
+}
+
 // Represents the result of a get test request.
 type GetTestOutput struct {
 

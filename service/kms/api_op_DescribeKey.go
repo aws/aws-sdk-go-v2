@@ -101,6 +101,10 @@ type DescribeKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeKeyInput) operationName() string {
+	return "DescribeKey"
+}
+
 type DescribeKeyOutput struct {
 
 	// Metadata associated with the key.

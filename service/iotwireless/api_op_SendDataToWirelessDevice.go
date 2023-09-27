@@ -56,6 +56,10 @@ type SendDataToWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendDataToWirelessDeviceInput) operationName() string {
+	return "SendDataToWirelessDevice"
+}
+
 type SendDataToWirelessDeviceOutput struct {
 
 	// The ID of the message sent to the wireless device.

@@ -44,6 +44,10 @@ type RestoreBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreBackupInput) operationName() string {
+	return "RestoreBackup"
+}
+
 type RestoreBackupOutput struct {
 
 	// Information on the Backup object created.

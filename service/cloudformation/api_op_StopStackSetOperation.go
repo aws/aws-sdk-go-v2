@@ -61,6 +61,10 @@ type StopStackSetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopStackSetOperationInput) operationName() string {
+	return "StopStackSetOperation"
+}
+
 type StopStackSetOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,6 +53,10 @@ type GetRoomSkillParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRoomSkillParameterInput) operationName() string {
+	return "GetRoomSkillParameter"
+}
+
 type GetRoomSkillParameterOutput struct {
 
 	// The details of the room skill parameter requested. Required.

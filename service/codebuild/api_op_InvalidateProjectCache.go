@@ -41,6 +41,10 @@ type InvalidateProjectCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvalidateProjectCacheInput) operationName() string {
+	return "InvalidateProjectCache"
+}
+
 type InvalidateProjectCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

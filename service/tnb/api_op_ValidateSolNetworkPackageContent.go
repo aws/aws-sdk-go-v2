@@ -54,6 +54,10 @@ type ValidateSolNetworkPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateSolNetworkPackageContentInput) operationName() string {
+	return "ValidateSolNetworkPackageContent"
+}
+
 type ValidateSolNetworkPackageContentOutput struct {
 
 	// Network package ARN.

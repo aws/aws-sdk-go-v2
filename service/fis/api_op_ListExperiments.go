@@ -44,6 +44,10 @@ type ListExperimentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExperimentsInput) operationName() string {
+	return "ListExperiments"
+}
+
 type ListExperimentsOutput struct {
 
 	// The experiments.

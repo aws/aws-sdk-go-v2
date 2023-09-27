@@ -59,6 +59,10 @@ type DescribeDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDirectoriesInput) operationName() string {
+	return "DescribeDirectories"
+}
+
 // Contains the results of the DescribeDirectories operation.
 type DescribeDirectoriesOutput struct {
 

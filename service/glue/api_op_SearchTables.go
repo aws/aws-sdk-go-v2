@@ -80,6 +80,10 @@ type SearchTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchTablesInput) operationName() string {
+	return "SearchTables"
+}
+
 type SearchTablesOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.

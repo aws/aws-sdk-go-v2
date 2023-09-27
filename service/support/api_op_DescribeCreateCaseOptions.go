@@ -73,6 +73,10 @@ type DescribeCreateCaseOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCreateCaseOptionsInput) operationName() string {
+	return "DescribeCreateCaseOptions"
+}
+
 type DescribeCreateCaseOptionsOutput struct {
 
 	// A JSON-formatted array that contains the available communication type options,

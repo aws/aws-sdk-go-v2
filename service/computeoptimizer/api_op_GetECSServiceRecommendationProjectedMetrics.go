@@ -64,6 +64,10 @@ type GetECSServiceRecommendationProjectedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetECSServiceRecommendationProjectedMetricsInput) operationName() string {
+	return "GetECSServiceRecommendationProjectedMetrics"
+}
+
 type GetECSServiceRecommendationProjectedMetricsOutput struct {
 
 	// An array of objects that describes the projected metrics.

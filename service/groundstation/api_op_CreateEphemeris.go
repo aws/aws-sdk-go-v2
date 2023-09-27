@@ -71,6 +71,10 @@ type CreateEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEphemerisInput) operationName() string {
+	return "CreateEphemeris"
+}
+
 type CreateEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.

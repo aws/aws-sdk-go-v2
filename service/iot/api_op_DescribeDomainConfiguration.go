@@ -45,6 +45,10 @@ type DescribeDomainConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainConfigurationInput) operationName() string {
+	return "DescribeDomainConfiguration"
+}
+
 type DescribeDomainConfigurationOutput struct {
 
 	// An object that specifies the authorization service for a domain.

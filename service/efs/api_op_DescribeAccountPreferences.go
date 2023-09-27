@@ -49,6 +49,10 @@ type DescribeAccountPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountPreferencesInput) operationName() string {
+	return "DescribeAccountPreferences"
+}
+
 type DescribeAccountPreferencesOutput struct {
 
 	// Present if there are more records than returned in the response. You can use

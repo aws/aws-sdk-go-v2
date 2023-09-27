@@ -53,6 +53,10 @@ type DisassociateRoutingProfileQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateRoutingProfileQueuesInput) operationName() string {
+	return "DisassociateRoutingProfileQueues"
+}
+
 type DisassociateRoutingProfileQueuesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

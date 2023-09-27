@@ -65,6 +65,10 @@ type ResetServiceSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetServiceSettingInput) operationName() string {
+	return "ResetServiceSetting"
+}
+
 // The result body of the ResetServiceSetting API operation.
 type ResetServiceSettingOutput struct {
 

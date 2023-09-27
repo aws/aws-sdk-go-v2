@@ -50,6 +50,10 @@ type ListDeploymentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeploymentTargetsInput) operationName() string {
+	return "ListDeploymentTargets"
+}
+
 type ListDeploymentTargetsOutput struct {
 
 	// If a large amount of information is returned, a token identifier is also

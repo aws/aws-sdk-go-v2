@@ -71,6 +71,10 @@ type GetPredictiveScalingForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPredictiveScalingForecastInput) operationName() string {
+	return "GetPredictiveScalingForecast"
+}
+
 type GetPredictiveScalingForecastOutput struct {
 
 	// The capacity forecast.

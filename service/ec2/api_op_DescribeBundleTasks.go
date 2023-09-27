@@ -69,6 +69,10 @@ type DescribeBundleTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBundleTasksInput) operationName() string {
+	return "DescribeBundleTasks"
+}
+
 type DescribeBundleTasksOutput struct {
 
 	// Information about the bundle tasks.

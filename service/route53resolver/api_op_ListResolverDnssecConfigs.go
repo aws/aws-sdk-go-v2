@@ -53,6 +53,10 @@ type ListResolverDnssecConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolverDnssecConfigsInput) operationName() string {
+	return "ListResolverDnssecConfigs"
+}
+
 type ListResolverDnssecConfigsOutput struct {
 
 	// If a response includes the last of the DNSSEC configurations that are

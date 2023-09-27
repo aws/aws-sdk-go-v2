@@ -70,6 +70,10 @@ type CreateBulkImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBulkImportJobInput) operationName() string {
+	return "CreateBulkImportJob"
+}
+
 type CreateBulkImportJobOutput struct {
 
 	// The ID of the job.

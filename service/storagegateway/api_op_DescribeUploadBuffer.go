@@ -45,6 +45,10 @@ type DescribeUploadBufferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUploadBufferInput) operationName() string {
+	return "DescribeUploadBuffer"
+}
+
 type DescribeUploadBufferOutput struct {
 
 	// An array of the gateway's local disk IDs that are configured as working

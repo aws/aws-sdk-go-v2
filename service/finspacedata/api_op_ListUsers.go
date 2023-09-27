@@ -45,6 +45,10 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsersInput) operationName() string {
+	return "ListUsers"
+}
+
 type ListUsersOutput struct {
 
 	// A token that indicates where a results page should begin.

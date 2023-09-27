@@ -41,6 +41,10 @@ type GetGroupCertificateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupCertificateConfigurationInput) operationName() string {
+	return "GetGroupCertificateConfiguration"
+}
+
 type GetGroupCertificateConfigurationOutput struct {
 
 	// The amount of time remaining before the certificate authority expires, in

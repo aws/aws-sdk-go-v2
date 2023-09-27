@@ -48,6 +48,10 @@ type CreateDeviceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeviceDefinitionVersionInput) operationName() string {
+	return "CreateDeviceDefinitionVersion"
+}
+
 type CreateDeviceDefinitionVersionOutput struct {
 
 	// The ARN of the version.

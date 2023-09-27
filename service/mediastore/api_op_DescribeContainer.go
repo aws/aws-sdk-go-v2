@@ -45,6 +45,10 @@ type DescribeContainerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContainerInput) operationName() string {
+	return "DescribeContainer"
+}
+
 type DescribeContainerOutput struct {
 
 	// The name of the queried container.

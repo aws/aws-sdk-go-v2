@@ -92,6 +92,10 @@ type UpdateLocationHdfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLocationHdfsInput) operationName() string {
+	return "UpdateLocationHdfs"
+}
+
 type UpdateLocationHdfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

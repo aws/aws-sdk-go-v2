@@ -84,6 +84,10 @@ type PutWarmPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutWarmPoolInput) operationName() string {
+	return "PutWarmPool"
+}
+
 type PutWarmPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

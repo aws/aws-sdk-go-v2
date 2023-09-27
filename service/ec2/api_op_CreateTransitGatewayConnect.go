@@ -61,6 +61,10 @@ type CreateTransitGatewayConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTransitGatewayConnectInput) operationName() string {
+	return "CreateTransitGatewayConnect"
+}
+
 type CreateTransitGatewayConnectOutput struct {
 
 	// Information about the Connect attachment.

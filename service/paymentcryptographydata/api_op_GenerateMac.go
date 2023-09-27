@@ -71,6 +71,10 @@ type GenerateMacInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateMacInput) operationName() string {
+	return "GenerateMac"
+}
+
 type GenerateMacOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography

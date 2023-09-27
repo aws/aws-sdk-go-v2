@@ -67,6 +67,10 @@ type ImportInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportInstanceInput) operationName() string {
+	return "ImportInstance"
+}
+
 type ImportInstanceOutput struct {
 
 	// Information about the conversion task.

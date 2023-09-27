@@ -55,6 +55,10 @@ type CreateConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigurationSetInput) operationName() string {
+	return "CreateConfigurationSet"
+}
+
 type CreateConfigurationSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created configuration set.

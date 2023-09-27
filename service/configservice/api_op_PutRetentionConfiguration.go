@@ -48,6 +48,10 @@ type PutRetentionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRetentionConfigurationInput) operationName() string {
+	return "PutRetentionConfiguration"
+}
+
 type PutRetentionConfigurationOutput struct {
 
 	// Returns a retention configuration object.

@@ -67,6 +67,10 @@ type UpdateTypedLinkFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTypedLinkFacetInput) operationName() string {
+	return "UpdateTypedLinkFacet"
+}
+
 type UpdateTypedLinkFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

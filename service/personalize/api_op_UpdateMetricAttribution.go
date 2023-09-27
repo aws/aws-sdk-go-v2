@@ -49,6 +49,10 @@ type UpdateMetricAttributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMetricAttributionInput) operationName() string {
+	return "UpdateMetricAttribution"
+}
+
 type UpdateMetricAttributionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the metric attribution that you updated.

@@ -46,6 +46,10 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetInput) operationName() string {
+	return "DeleteConfigurationSet"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteConfigurationSetOutput struct {

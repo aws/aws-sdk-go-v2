@@ -54,6 +54,10 @@ type GetLaunchTemplateDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLaunchTemplateDataInput) operationName() string {
+	return "GetLaunchTemplateData"
+}
+
 type GetLaunchTemplateDataOutput struct {
 
 	// The instance data.

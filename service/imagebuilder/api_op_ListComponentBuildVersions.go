@@ -56,6 +56,10 @@ type ListComponentBuildVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentBuildVersionsInput) operationName() string {
+	return "ListComponentBuildVersions"
+}
+
 type ListComponentBuildVersionsOutput struct {
 
 	// The list of component summaries for the specified semantic version.

@@ -96,6 +96,10 @@ type CreateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIdentityProviderInput) operationName() string {
+	return "CreateIdentityProvider"
+}
+
 type CreateIdentityProviderOutput struct {
 
 	// The ARN of the identity provider.

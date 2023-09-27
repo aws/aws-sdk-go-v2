@@ -57,6 +57,10 @@ type SetDesiredCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDesiredCapacityInput) operationName() string {
+	return "SetDesiredCapacity"
+}
+
 type SetDesiredCapacityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

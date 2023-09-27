@@ -52,6 +52,10 @@ type RejectDomainTransferFromAnotherAwsAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectDomainTransferFromAnotherAwsAccountInput) operationName() string {
+	return "RejectDomainTransferFromAnotherAwsAccount"
+}
+
 // The RejectDomainTransferFromAnotherAwsAccount response includes the following
 // element.
 type RejectDomainTransferFromAnotherAwsAccountOutput struct {

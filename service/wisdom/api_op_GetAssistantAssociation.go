@@ -49,6 +49,10 @@ type GetAssistantAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssistantAssociationInput) operationName() string {
+	return "GetAssistantAssociation"
+}
+
 type GetAssistantAssociationOutput struct {
 
 	// The assistant association.

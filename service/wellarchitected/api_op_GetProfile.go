@@ -45,6 +45,10 @@ type GetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProfileInput) operationName() string {
+	return "GetProfile"
+}
+
 type GetProfileOutput struct {
 
 	// The profile.

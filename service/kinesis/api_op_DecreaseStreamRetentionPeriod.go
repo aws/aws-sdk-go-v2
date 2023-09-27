@@ -56,6 +56,10 @@ type DecreaseStreamRetentionPeriodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecreaseStreamRetentionPeriodInput) operationName() string {
+	return "DecreaseStreamRetentionPeriod"
+}
+
 type DecreaseStreamRetentionPeriodOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type GetColumnStatisticsForTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetColumnStatisticsForTableInput) operationName() string {
+	return "GetColumnStatisticsForTable"
+}
+
 type GetColumnStatisticsForTableOutput struct {
 
 	// List of ColumnStatistics.

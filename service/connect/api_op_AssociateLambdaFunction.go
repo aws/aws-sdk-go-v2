@@ -50,6 +50,10 @@ type AssociateLambdaFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateLambdaFunctionInput) operationName() string {
+	return "AssociateLambdaFunction"
+}
+
 type AssociateLambdaFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

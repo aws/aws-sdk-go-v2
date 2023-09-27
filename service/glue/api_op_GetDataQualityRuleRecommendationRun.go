@@ -43,6 +43,10 @@ type GetDataQualityRuleRecommendationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataQualityRuleRecommendationRunInput) operationName() string {
+	return "GetDataQualityRuleRecommendationRun"
+}
+
 type GetDataQualityRuleRecommendationRunOutput struct {
 
 	// The date and time when this run was completed.

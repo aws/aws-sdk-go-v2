@@ -62,6 +62,10 @@ type ListWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkflowsInput) operationName() string {
+	return "ListWorkflows"
+}
+
 type ListWorkflowsOutput struct {
 
 	// List containing workflow details.

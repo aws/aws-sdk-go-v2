@@ -53,6 +53,10 @@ type GetVpnTunnelReplacementStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVpnTunnelReplacementStatusInput) operationName() string {
+	return "GetVpnTunnelReplacementStatus"
+}
+
 type GetVpnTunnelReplacementStatusOutput struct {
 
 	// The ID of the customer gateway.

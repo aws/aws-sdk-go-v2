@@ -70,6 +70,10 @@ type CreateAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnalysisTemplateInput) operationName() string {
+	return "CreateAnalysisTemplate"
+}
+
 type CreateAnalysisTemplateOutput struct {
 
 	// The analysis template.

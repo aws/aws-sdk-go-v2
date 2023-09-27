@@ -63,6 +63,10 @@ type PutStorageLensConfigurationTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutStorageLensConfigurationTaggingInput) operationName() string {
+	return "PutStorageLensConfigurationTagging"
+}
+
 type PutStorageLensConfigurationTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

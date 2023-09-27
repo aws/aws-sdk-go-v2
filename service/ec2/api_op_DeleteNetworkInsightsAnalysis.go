@@ -47,6 +47,10 @@ type DeleteNetworkInsightsAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNetworkInsightsAnalysisInput) operationName() string {
+	return "DeleteNetworkInsightsAnalysis"
+}
+
 type DeleteNetworkInsightsAnalysisOutput struct {
 
 	// The ID of the network insights analysis.

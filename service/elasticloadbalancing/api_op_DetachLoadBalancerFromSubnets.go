@@ -50,6 +50,10 @@ type DetachLoadBalancerFromSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachLoadBalancerFromSubnetsInput) operationName() string {
+	return "DetachLoadBalancerFromSubnets"
+}
+
 // Contains the output of DetachLoadBalancerFromSubnets.
 type DetachLoadBalancerFromSubnetsOutput struct {
 

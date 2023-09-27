@@ -47,6 +47,10 @@ type RebuildEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebuildEnvironmentInput) operationName() string {
+	return "RebuildEnvironment"
+}
+
 type RebuildEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

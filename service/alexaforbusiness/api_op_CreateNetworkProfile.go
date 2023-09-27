@@ -86,6 +86,10 @@ type CreateNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkProfileInput) operationName() string {
+	return "CreateNetworkProfile"
+}
+
 type CreateNetworkProfileOutput struct {
 
 	// The ARN of the network profile associated with a device.

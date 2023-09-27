@@ -51,6 +51,10 @@ type StartInstanceOnboardingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInstanceOnboardingJobInput) operationName() string {
+	return "StartInstanceOnboardingJob"
+}
+
 // The response for StartInstanceOnboardingJob API.
 type StartInstanceOnboardingJobOutput struct {
 

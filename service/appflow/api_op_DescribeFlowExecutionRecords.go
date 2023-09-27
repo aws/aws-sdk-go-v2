@@ -50,6 +50,10 @@ type DescribeFlowExecutionRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFlowExecutionRecordsInput) operationName() string {
+	return "DescribeFlowExecutionRecords"
+}
+
 type DescribeFlowExecutionRecordsOutput struct {
 
 	// Returns a list of all instances when this flow was run.

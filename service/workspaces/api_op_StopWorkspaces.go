@@ -44,6 +44,10 @@ type StopWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopWorkspacesInput) operationName() string {
+	return "StopWorkspaces"
+}
+
 type StopWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be stopped.

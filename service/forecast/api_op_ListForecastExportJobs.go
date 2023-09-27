@@ -66,6 +66,10 @@ type ListForecastExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListForecastExportJobsInput) operationName() string {
+	return "ListForecastExportJobs"
+}
+
 type ListForecastExportJobsOutput struct {
 
 	// An array of objects that summarize each export job's properties.

@@ -49,6 +49,10 @@ type DescribeInstanceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceAttributeInput) operationName() string {
+	return "DescribeInstanceAttribute"
+}
+
 type DescribeInstanceAttributeOutput struct {
 
 	// The type of attribute.

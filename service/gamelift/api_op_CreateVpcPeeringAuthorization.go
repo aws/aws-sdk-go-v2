@@ -77,6 +77,10 @@ type CreateVpcPeeringAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcPeeringAuthorizationInput) operationName() string {
+	return "CreateVpcPeeringAuthorization"
+}
+
 type CreateVpcPeeringAuthorizationOutput struct {
 
 	// Details on the requested VPC peering authorization, including expiration.

@@ -43,6 +43,10 @@ type GetDeploymentTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentTargetInput) operationName() string {
+	return "GetDeploymentTarget"
+}
+
 type GetDeploymentTargetOutput struct {
 
 	// A deployment target that contains information about a deployment such as its

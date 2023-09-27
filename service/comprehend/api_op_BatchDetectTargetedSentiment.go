@@ -52,6 +52,10 @@ type BatchDetectTargetedSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDetectTargetedSentimentInput) operationName() string {
+	return "BatchDetectTargetedSentiment"
+}
+
 type BatchDetectTargetedSentimentOutput struct {
 
 	// List of errors that the operation can return.

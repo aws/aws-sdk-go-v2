@@ -58,6 +58,10 @@ type UpdateEnvironmentMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentMembershipInput) operationName() string {
+	return "UpdateEnvironmentMembership"
+}
+
 type UpdateEnvironmentMembershipOutput struct {
 
 	// Information about the environment member whose settings were changed.

@@ -42,6 +42,10 @@ type DeleteDetectorModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDetectorModelInput) operationName() string {
+	return "DeleteDetectorModel"
+}
+
 type DeleteDetectorModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

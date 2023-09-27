@@ -67,6 +67,10 @@ type AssociateCreatedArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateCreatedArtifactInput) operationName() string {
+	return "AssociateCreatedArtifact"
+}
+
 type AssociateCreatedArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

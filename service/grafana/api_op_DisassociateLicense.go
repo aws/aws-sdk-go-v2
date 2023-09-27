@@ -47,6 +47,10 @@ type DisassociateLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateLicenseInput) operationName() string {
+	return "DisassociateLicense"
+}
+
 type DisassociateLicenseOutput struct {
 
 	// A structure containing information about the workspace.

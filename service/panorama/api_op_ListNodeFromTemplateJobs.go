@@ -44,6 +44,10 @@ type ListNodeFromTemplateJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNodeFromTemplateJobsInput) operationName() string {
+	return "ListNodeFromTemplateJobs"
+}
+
 type ListNodeFromTemplateJobsOutput struct {
 
 	// A list of jobs.

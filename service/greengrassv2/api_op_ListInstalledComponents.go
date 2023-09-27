@@ -73,6 +73,10 @@ type ListInstalledComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstalledComponentsInput) operationName() string {
+	return "ListInstalledComponents"
+}
+
 type ListInstalledComponentsOutput struct {
 
 	// A list that summarizes each component on the core device. Greengrass nucleus

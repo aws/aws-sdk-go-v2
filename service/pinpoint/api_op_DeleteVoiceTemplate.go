@@ -63,6 +63,10 @@ type DeleteVoiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVoiceTemplateInput) operationName() string {
+	return "DeleteVoiceTemplate"
+}
+
 type DeleteVoiceTemplateOutput struct {
 
 	// Provides information about an API request or response.

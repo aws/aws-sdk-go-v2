@@ -44,6 +44,10 @@ type DeleteVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVocabularyInput) operationName() string {
+	return "DeleteVocabulary"
+}
+
 type DeleteVocabularyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

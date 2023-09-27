@@ -208,6 +208,10 @@ type CreateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStackInput) operationName() string {
+	return "CreateStack"
+}
+
 // The output for a CreateStack action.
 type CreateStackOutput struct {
 

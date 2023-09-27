@@ -46,6 +46,10 @@ type DeleteDataSetRefreshPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataSetRefreshPropertiesInput) operationName() string {
+	return "DeleteDataSetRefreshProperties"
+}
+
 type DeleteDataSetRefreshPropertiesOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

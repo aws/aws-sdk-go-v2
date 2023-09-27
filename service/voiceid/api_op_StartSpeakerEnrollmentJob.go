@@ -78,6 +78,10 @@ type StartSpeakerEnrollmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSpeakerEnrollmentJobInput) operationName() string {
+	return "StartSpeakerEnrollmentJob"
+}
+
 type StartSpeakerEnrollmentJobOutput struct {
 
 	// Details about the started speaker enrollment job.

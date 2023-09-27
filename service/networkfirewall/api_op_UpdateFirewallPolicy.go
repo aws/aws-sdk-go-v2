@@ -84,6 +84,10 @@ type UpdateFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallPolicyInput) operationName() string {
+	return "UpdateFirewallPolicy"
+}
+
 type UpdateFirewallPolicyOutput struct {
 
 	// The high-level properties of a firewall policy. This, along with the

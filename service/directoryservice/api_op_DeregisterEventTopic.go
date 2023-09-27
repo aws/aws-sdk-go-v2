@@ -51,6 +51,10 @@ type DeregisterEventTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterEventTopicInput) operationName() string {
+	return "DeregisterEventTopic"
+}
+
 // The result of a DeregisterEventTopic request.
 type DeregisterEventTopicOutput struct {
 	// Metadata pertaining to the operation's result.

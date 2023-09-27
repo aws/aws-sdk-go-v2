@@ -56,6 +56,10 @@ type DescribeInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceStorageConfigInput) operationName() string {
+	return "DescribeInstanceStorageConfig"
+}
+
 type DescribeInstanceStorageConfigOutput struct {
 
 	// A valid storage type.

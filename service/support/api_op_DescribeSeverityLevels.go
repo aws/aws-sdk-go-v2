@@ -52,6 +52,10 @@ type DescribeSeverityLevelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSeverityLevelsInput) operationName() string {
+	return "DescribeSeverityLevels"
+}
+
 // The list of severity levels returned by the DescribeSeverityLevels operation.
 type DescribeSeverityLevelsOutput struct {
 

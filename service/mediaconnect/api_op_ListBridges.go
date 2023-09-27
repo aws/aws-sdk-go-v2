@@ -58,6 +58,10 @@ type ListBridgesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBridgesInput) operationName() string {
+	return "ListBridges"
+}
+
 type ListBridgesOutput struct {
 
 	// A list of bridge summaries.

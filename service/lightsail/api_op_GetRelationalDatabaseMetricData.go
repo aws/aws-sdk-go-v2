@@ -122,6 +122,10 @@ type GetRelationalDatabaseMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseMetricDataInput) operationName() string {
+	return "GetRelationalDatabaseMetricData"
+}
+
 type GetRelationalDatabaseMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.

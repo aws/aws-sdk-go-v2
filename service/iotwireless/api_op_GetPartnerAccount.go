@@ -48,6 +48,10 @@ type GetPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPartnerAccountInput) operationName() string {
+	return "GetPartnerAccount"
+}
+
 type GetPartnerAccountOutput struct {
 
 	// Whether the partner account is linked to the AWS account.

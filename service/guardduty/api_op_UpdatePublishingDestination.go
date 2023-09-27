@@ -52,6 +52,10 @@ type UpdatePublishingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePublishingDestinationInput) operationName() string {
+	return "UpdatePublishingDestination"
+}
+
 type UpdatePublishingDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

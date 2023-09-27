@@ -44,6 +44,10 @@ type ListSlackChannelConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSlackChannelConfigurationsInput) operationName() string {
+	return "ListSlackChannelConfigurations"
+}
+
 type ListSlackChannelConfigurationsOutput struct {
 
 	// The configurations for a Slack channel.

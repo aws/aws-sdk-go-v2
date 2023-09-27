@@ -59,6 +59,10 @@ type GetAccessKeyInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessKeyInfoInput) operationName() string {
+	return "GetAccessKeyInfo"
+}
+
 type GetAccessKeyInfoOutput struct {
 
 	// The number used to identify the Amazon Web Services account.

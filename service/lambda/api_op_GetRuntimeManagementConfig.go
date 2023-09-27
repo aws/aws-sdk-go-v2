@@ -57,6 +57,10 @@ type GetRuntimeManagementConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRuntimeManagementConfigInput) operationName() string {
+	return "GetRuntimeManagementConfig"
+}
+
 type GetRuntimeManagementConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of your function.

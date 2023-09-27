@@ -51,6 +51,10 @@ type DeleteAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAssetInput) operationName() string {
+	return "DeleteAsset"
+}
+
 type DeleteAssetOutput struct {
 
 	// The status of the asset, which contains a state ( DELETING after successfully

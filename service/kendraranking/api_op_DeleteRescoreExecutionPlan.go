@@ -42,6 +42,10 @@ type DeleteRescoreExecutionPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRescoreExecutionPlanInput) operationName() string {
+	return "DeleteRescoreExecutionPlan"
+}
+
 type DeleteRescoreExecutionPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

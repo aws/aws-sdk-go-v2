@@ -45,6 +45,10 @@ type DeleteFolderContentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFolderContentsInput) operationName() string {
+	return "DeleteFolderContents"
+}
+
 type DeleteFolderContentsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

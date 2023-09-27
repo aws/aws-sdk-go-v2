@@ -58,6 +58,10 @@ type ListImageBuildVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImageBuildVersionsInput) operationName() string {
+	return "ListImageBuildVersions"
+}
+
 type ListImageBuildVersionsOutput struct {
 
 	// The list of image build versions.

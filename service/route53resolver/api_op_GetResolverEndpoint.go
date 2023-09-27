@@ -44,6 +44,10 @@ type GetResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverEndpointInput) operationName() string {
+	return "GetResolverEndpoint"
+}
+
 type GetResolverEndpointOutput struct {
 
 	// Information about the Resolver endpoint that you specified in a

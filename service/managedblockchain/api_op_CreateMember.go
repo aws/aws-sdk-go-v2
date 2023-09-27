@@ -63,6 +63,10 @@ type CreateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMemberInput) operationName() string {
+	return "CreateMember"
+}
+
 type CreateMemberOutput struct {
 
 	// The unique identifier of the member.

@@ -43,6 +43,10 @@ type DescribeDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetInput) operationName() string {
+	return "DescribeDataset"
+}
+
 type DescribeDatasetOutput struct {
 
 	// Represents information on how DataBrew can find data, in either the Glue Data

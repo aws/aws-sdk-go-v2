@@ -88,6 +88,10 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrustedAdvisorCheckResultInput) operationName() string {
+	return "DescribeTrustedAdvisorCheckResult"
+}
+
 // The result of the Trusted Advisor check returned by the
 // DescribeTrustedAdvisorCheckResult operation.
 type DescribeTrustedAdvisorCheckResultOutput struct {

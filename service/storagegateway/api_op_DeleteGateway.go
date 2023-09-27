@@ -55,6 +55,10 @@ type DeleteGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGatewayInput) operationName() string {
+	return "DeleteGateway"
+}
+
 // A JSON object containing the ID of the deleted gateway.
 type DeleteGatewayOutput struct {
 

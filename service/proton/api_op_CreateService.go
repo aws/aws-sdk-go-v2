@@ -93,6 +93,10 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceInput) operationName() string {
+	return "CreateService"
+}
+
 type CreateServiceOutput struct {
 
 	// The service detail data that's returned by Proton.

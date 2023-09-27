@@ -46,6 +46,10 @@ type ListVpcConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVpcConnectionsInput) operationName() string {
+	return "ListVpcConnections"
+}
+
 type ListVpcConnectionsOutput struct {
 
 	// The paginated results marker. When the result of a ListClientVpcConnections

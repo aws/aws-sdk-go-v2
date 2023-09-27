@@ -51,6 +51,10 @@ type GetAppInstanceStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppInstanceStreamingConfigurationsInput) operationName() string {
+	return "GetAppInstanceStreamingConfigurations"
+}
+
 type GetAppInstanceStreamingConfigurationsOutput struct {
 
 	// The streaming settings.

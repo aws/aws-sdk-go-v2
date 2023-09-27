@@ -76,6 +76,10 @@ type ListHyperParameterTuningJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHyperParameterTuningJobsInput) operationName() string {
+	return "ListHyperParameterTuningJobs"
+}
+
 type ListHyperParameterTuningJobsOutput struct {
 
 	// A list of HyperParameterTuningJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html)

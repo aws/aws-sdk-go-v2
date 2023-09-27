@@ -44,6 +44,10 @@ type StartDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDBClusterInput) operationName() string {
+	return "StartDBCluster"
+}
+
 type StartDBClusterOutput struct {
 
 	// Detailed information about a cluster.

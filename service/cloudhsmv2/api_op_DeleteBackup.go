@@ -45,6 +45,10 @@ type DeleteBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackupInput) operationName() string {
+	return "DeleteBackup"
+}
+
 type DeleteBackupOutput struct {
 
 	// Information on the Backup object deleted.

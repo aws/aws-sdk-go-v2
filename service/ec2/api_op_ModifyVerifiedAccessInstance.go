@@ -57,6 +57,10 @@ type ModifyVerifiedAccessInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVerifiedAccessInstanceInput) operationName() string {
+	return "ModifyVerifiedAccessInstance"
+}
+
 type ModifyVerifiedAccessInstanceOutput struct {
 
 	// The ID of the Verified Access instance.

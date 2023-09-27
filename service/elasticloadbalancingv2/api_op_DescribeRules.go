@@ -51,6 +51,10 @@ type DescribeRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRulesInput) operationName() string {
+	return "DescribeRules"
+}
+
 type DescribeRulesOutput struct {
 
 	// If there are additional results, this is the marker for the next set of

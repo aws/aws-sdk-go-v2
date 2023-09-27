@@ -73,6 +73,10 @@ type CopyProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyProductInput) operationName() string {
+	return "CopyProduct"
+}
+
 type CopyProductOutput struct {
 
 	// The token to use to track the progress of the operation.

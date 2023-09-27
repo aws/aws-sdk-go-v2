@@ -58,6 +58,10 @@ type EnableImageBlockPublicAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableImageBlockPublicAccessInput) operationName() string {
+	return "EnableImageBlockPublicAccess"
+}
+
 type EnableImageBlockPublicAccessOutput struct {
 
 	// Returns block-new-sharing if the request succeeds; otherwise, it returns an

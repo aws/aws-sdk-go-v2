@@ -63,6 +63,10 @@ type CopyFpgaImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyFpgaImageInput) operationName() string {
+	return "CopyFpgaImage"
+}
+
 type CopyFpgaImageOutput struct {
 
 	// The ID of the new AFI.

@@ -43,6 +43,10 @@ type ListMediaInsightsPipelineConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMediaInsightsPipelineConfigurationsInput) operationName() string {
+	return "ListMediaInsightsPipelineConfigurations"
+}
+
 type ListMediaInsightsPipelineConfigurationsOutput struct {
 
 	// The requested list of media insights pipeline configurations.

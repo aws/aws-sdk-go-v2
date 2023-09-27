@@ -78,6 +78,10 @@ type DescribeExportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportTasksInput) operationName() string {
+	return "DescribeExportTasks"
+}
+
 type DescribeExportTasksOutput struct {
 
 	// Information about an export of a snapshot or cluster to Amazon S3.

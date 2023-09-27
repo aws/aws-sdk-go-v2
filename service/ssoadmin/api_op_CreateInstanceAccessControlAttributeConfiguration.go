@@ -59,6 +59,10 @@ type CreateInstanceAccessControlAttributeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceAccessControlAttributeConfigurationInput) operationName() string {
+	return "CreateInstanceAccessControlAttributeConfiguration"
+}
+
 type CreateInstanceAccessControlAttributeConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

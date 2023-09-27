@@ -57,6 +57,10 @@ type StartNextPendingJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartNextPendingJobExecutionInput) operationName() string {
+	return "StartNextPendingJobExecution"
+}
+
 type StartNextPendingJobExecutionOutput struct {
 
 	// A JobExecution object.

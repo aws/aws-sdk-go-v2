@@ -44,6 +44,10 @@ type DescribeReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservationInput) operationName() string {
+	return "DescribeReservation"
+}
+
 type DescribeReservationOutput struct {
 
 	// A pricing agreement for a discounted rate for a specific outbound bandwidth

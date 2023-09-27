@@ -49,6 +49,10 @@ type ListFieldLevelEncryptionProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFieldLevelEncryptionProfilesInput) operationName() string {
+	return "ListFieldLevelEncryptionProfiles"
+}
+
 type ListFieldLevelEncryptionProfilesOutput struct {
 
 	// Returns a list of the field-level encryption profiles that have been created in

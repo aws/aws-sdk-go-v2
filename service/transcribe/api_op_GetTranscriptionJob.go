@@ -50,6 +50,10 @@ type GetTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTranscriptionJobInput) operationName() string {
+	return "GetTranscriptionJob"
+}
+
 type GetTranscriptionJobOutput struct {
 
 	// Provides detailed information about the specified transcription job, including

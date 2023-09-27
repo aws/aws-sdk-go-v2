@@ -63,6 +63,10 @@ type UpdateLaunchConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLaunchConfigurationTemplateInput) operationName() string {
+	return "UpdateLaunchConfigurationTemplate"
+}
+
 type UpdateLaunchConfigurationTemplateOutput struct {
 
 	// Updated Launch Configuration Template.

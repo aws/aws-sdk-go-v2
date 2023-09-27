@@ -42,6 +42,10 @@ type DeleteReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationSetInput) operationName() string {
+	return "DeleteReplicationSet"
+}
+
 type DeleteReplicationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

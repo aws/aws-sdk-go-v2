@@ -75,6 +75,10 @@ type CreateComponentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComponentTypeInput) operationName() string {
+	return "CreateComponentType"
+}
+
 type CreateComponentTypeOutput struct {
 
 	// The ARN of the component type.

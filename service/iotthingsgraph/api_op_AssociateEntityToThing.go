@@ -55,6 +55,10 @@ type AssociateEntityToThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateEntityToThingInput) operationName() string {
+	return "AssociateEntityToThing"
+}
+
 type AssociateEntityToThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

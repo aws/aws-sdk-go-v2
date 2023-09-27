@@ -351,6 +351,10 @@ type CreateMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMultipartUploadInput) operationName() string {
+	return "CreateMultipartUpload"
+}
+
 type CreateMultipartUploadOutput struct {
 
 	// If the bucket has a lifecycle rule configured with an action to abort

@@ -82,6 +82,10 @@ type TestFailoverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestFailoverInput) operationName() string {
+	return "TestFailover"
+}
+
 type TestFailoverOutput struct {
 
 	// Contains all of the attributes of a specific Redis replication group.

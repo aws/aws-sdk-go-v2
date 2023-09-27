@@ -54,6 +54,10 @@ type UpdateSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSAMLProviderInput) operationName() string {
+	return "UpdateSAMLProvider"
+}
+
 // Contains the response to a successful UpdateSAMLProvider request.
 type UpdateSAMLProviderOutput struct {
 

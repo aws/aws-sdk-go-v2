@@ -52,6 +52,10 @@ type BatchDisassociateProjectAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateProjectAssetsInput) operationName() string {
+	return "BatchDisassociateProjectAssets"
+}
+
 type BatchDisassociateProjectAssetsOutput struct {
 
 	// A list of associated error information, if any.

@@ -68,6 +68,10 @@ type PutMultiRegionAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMultiRegionAccessPointPolicyInput) operationName() string {
+	return "PutMultiRegionAccessPointPolicy"
+}
+
 type PutMultiRegionAccessPointPolicyOutput struct {
 
 	// The request token associated with the request. You can use this token with

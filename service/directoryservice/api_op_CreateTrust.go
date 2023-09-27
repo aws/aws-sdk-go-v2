@@ -83,6 +83,10 @@ type CreateTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrustInput) operationName() string {
+	return "CreateTrust"
+}
+
 // The result of a CreateTrust request.
 type CreateTrustOutput struct {
 

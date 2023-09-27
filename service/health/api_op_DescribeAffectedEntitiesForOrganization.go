@@ -75,6 +75,10 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAffectedEntitiesForOrganizationInput) operationName() string {
+	return "DescribeAffectedEntitiesForOrganization"
+}
+
 type DescribeAffectedEntitiesForOrganizationOutput struct {
 
 	// A JSON set of elements including the awsAccountId and its entityArn ,

@@ -58,6 +58,10 @@ type StartStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartStreamingSessionInput) operationName() string {
+	return "StartStreamingSession"
+}
+
 type StartStreamingSessionOutput struct {
 
 	// A streaming session is a virtual workstation created using a particular launch

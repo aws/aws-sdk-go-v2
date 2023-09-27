@@ -100,6 +100,10 @@ type CreateProfileJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfileJobInput) operationName() string {
+	return "CreateProfileJob"
+}
+
 type CreateProfileJobOutput struct {
 
 	// The name of the job that was created.

@@ -43,6 +43,10 @@ type DeleteWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWebhookInput) operationName() string {
+	return "DeleteWebhook"
+}
+
 // The result structure for the delete webhook request.
 type DeleteWebhookOutput struct {
 

@@ -63,6 +63,10 @@ type ViewBillingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ViewBillingInput) operationName() string {
+	return "ViewBilling"
+}
+
 // The ViewBilling response includes the following elements.
 type ViewBillingOutput struct {
 

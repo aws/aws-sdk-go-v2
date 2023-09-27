@@ -44,6 +44,10 @@ type CancelAuditMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelAuditMitigationActionsTaskInput) operationName() string {
+	return "CancelAuditMitigationActionsTask"
+}
+
 type CancelAuditMitigationActionsTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type ExportThemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportThemesInput) operationName() string {
+	return "ExportThemes"
+}
+
 type ExportThemesOutput struct {
 
 	// Represents the configuration of the exported themes.

@@ -41,6 +41,10 @@ type StopTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopTriggerInput) operationName() string {
+	return "StopTrigger"
+}
+
 type StopTriggerOutput struct {
 
 	// The name of the trigger that was stopped.

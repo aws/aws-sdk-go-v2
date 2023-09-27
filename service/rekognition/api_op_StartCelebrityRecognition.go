@@ -72,6 +72,10 @@ type StartCelebrityRecognitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCelebrityRecognitionInput) operationName() string {
+	return "StartCelebrityRecognition"
+}
+
 type StartCelebrityRecognitionOutput struct {
 
 	// The identifier for the celebrity recognition analysis job. Use JobId to

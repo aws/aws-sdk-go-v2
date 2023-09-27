@@ -53,6 +53,10 @@ type DeleteTransitGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayRouteInput) operationName() string {
+	return "DeleteTransitGatewayRoute"
+}
+
 type DeleteTransitGatewayRouteOutput struct {
 
 	// Information about the route.

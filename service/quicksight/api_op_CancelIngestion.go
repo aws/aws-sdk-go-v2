@@ -51,6 +51,10 @@ type CancelIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelIngestionInput) operationName() string {
+	return "CancelIngestion"
+}
+
 type CancelIngestionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the data ingestion.

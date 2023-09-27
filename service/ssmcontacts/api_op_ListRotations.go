@@ -49,6 +49,10 @@ type ListRotationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRotationsInput) operationName() string {
+	return "ListRotations"
+}
+
 type ListRotationsOutput struct {
 
 	// Information about rotations that meet the filter criteria.

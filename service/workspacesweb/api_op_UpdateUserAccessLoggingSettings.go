@@ -53,6 +53,10 @@ type UpdateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserAccessLoggingSettingsInput) operationName() string {
+	return "UpdateUserAccessLoggingSettings"
+}
+
 type UpdateUserAccessLoggingSettingsOutput struct {
 
 	// The user access logging settings.

@@ -55,6 +55,10 @@ type ListProposalVotesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProposalVotesInput) operationName() string {
+	return "ListProposalVotes"
+}
+
 type ListProposalVotesOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.

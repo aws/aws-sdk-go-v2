@@ -39,6 +39,10 @@ type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountAttributesInput) operationName() string {
+	return "DescribeAccountAttributes"
+}
+
 // Data returned by the DescribeAccountAttributes action.
 type DescribeAccountAttributesOutput struct {
 

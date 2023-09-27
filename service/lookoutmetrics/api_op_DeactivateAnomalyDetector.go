@@ -41,6 +41,10 @@ type DeactivateAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateAnomalyDetectorInput) operationName() string {
+	return "DeactivateAnomalyDetector"
+}
+
 type DeactivateAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

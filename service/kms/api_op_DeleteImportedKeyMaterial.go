@@ -61,6 +61,10 @@ type DeleteImportedKeyMaterialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImportedKeyMaterialInput) operationName() string {
+	return "DeleteImportedKeyMaterial"
+}
+
 type DeleteImportedKeyMaterialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type UpdateServiceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceNetworkInput) operationName() string {
+	return "UpdateServiceNetwork"
+}
+
 type UpdateServiceNetworkOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service network.

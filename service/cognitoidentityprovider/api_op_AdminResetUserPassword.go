@@ -97,6 +97,10 @@ type AdminResetUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AdminResetUserPasswordInput) operationName() string {
+	return "AdminResetUserPassword"
+}
+
 // Represents the response from the server to reset a user password as an
 // administrator.
 type AdminResetUserPasswordOutput struct {

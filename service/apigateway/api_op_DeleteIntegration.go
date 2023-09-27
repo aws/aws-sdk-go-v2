@@ -52,6 +52,10 @@ type DeleteIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIntegrationInput) operationName() string {
+	return "DeleteIntegration"
+}
+
 type DeleteIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

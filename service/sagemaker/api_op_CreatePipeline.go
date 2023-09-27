@@ -75,6 +75,10 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePipelineInput) operationName() string {
+	return "CreatePipeline"
+}
+
 type CreatePipelineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created pipeline.

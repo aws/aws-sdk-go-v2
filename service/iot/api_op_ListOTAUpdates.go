@@ -47,6 +47,10 @@ type ListOTAUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOTAUpdatesInput) operationName() string {
+	return "ListOTAUpdates"
+}
+
 type ListOTAUpdatesOutput struct {
 
 	// A token to use to get the next set of results.

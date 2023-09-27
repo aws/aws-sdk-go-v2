@@ -69,6 +69,10 @@ type ImportVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportVolumeInput) operationName() string {
+	return "ImportVolume"
+}
+
 type ImportVolumeOutput struct {
 
 	// Information about the conversion task.

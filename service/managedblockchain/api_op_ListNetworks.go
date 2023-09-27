@@ -55,6 +55,10 @@ type ListNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNetworksInput) operationName() string {
+	return "ListNetworks"
+}
+
 type ListNetworksOutput struct {
 
 	// An array of NetworkSummary objects that contain configuration properties for

@@ -165,6 +165,10 @@ type CreateNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNotebookInstanceInput) operationName() string {
+	return "CreateNotebookInstance"
+}
+
 type CreateNotebookInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notebook instance.

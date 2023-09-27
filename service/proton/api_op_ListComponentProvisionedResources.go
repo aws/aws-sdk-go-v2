@@ -49,6 +49,10 @@ type ListComponentProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentProvisionedResourcesInput) operationName() string {
+	return "ListComponentProvisionedResources"
+}
+
 type ListComponentProvisionedResourcesOutput struct {
 
 	// An array of provisioned resources for a component.

@@ -68,6 +68,10 @@ type CreateNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkSettingsInput) operationName() string {
+	return "CreateNetworkSettings"
+}
+
 type CreateNetworkSettingsOutput struct {
 
 	// The ARN of the network settings.

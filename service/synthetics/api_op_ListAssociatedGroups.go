@@ -52,6 +52,10 @@ type ListAssociatedGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedGroupsInput) operationName() string {
+	return "ListAssociatedGroups"
+}
+
 type ListAssociatedGroupsOutput struct {
 
 	// An array of structures that contain information about the groups that this

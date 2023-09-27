@@ -109,6 +109,10 @@ type CreateBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBuildInput) operationName() string {
+	return "CreateBuild"
+}
+
 type CreateBuildOutput struct {
 
 	// The newly created build resource, including a unique build IDs and status.

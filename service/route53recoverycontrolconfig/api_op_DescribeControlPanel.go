@@ -46,6 +46,10 @@ type DescribeControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeControlPanelInput) operationName() string {
+	return "DescribeControlPanel"
+}
+
 type DescribeControlPanelOutput struct {
 
 	// Information about the control panel.

@@ -46,6 +46,10 @@ type DescribeRecoveryInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRecoveryInstancesInput) operationName() string {
+	return "DescribeRecoveryInstances"
+}
+
 type DescribeRecoveryInstancesOutput struct {
 
 	// An array of Recovery Instances.

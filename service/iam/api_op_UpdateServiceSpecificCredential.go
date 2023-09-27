@@ -60,6 +60,10 @@ type UpdateServiceSpecificCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceSpecificCredentialInput) operationName() string {
+	return "UpdateServiceSpecificCredential"
+}
+
 type UpdateServiceSpecificCredentialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

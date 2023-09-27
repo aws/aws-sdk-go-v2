@@ -72,6 +72,10 @@ type DescribeAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddressesInput) operationName() string {
+	return "DescribeAddresses"
+}
+
 type DescribeAddressesOutput struct {
 
 	// Information about the Elastic IP addresses.

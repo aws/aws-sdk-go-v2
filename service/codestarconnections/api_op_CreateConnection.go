@@ -56,6 +56,10 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectionInput) operationName() string {
+	return "CreateConnection"
+}
+
 type CreateConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connection to be created. The ARN is used

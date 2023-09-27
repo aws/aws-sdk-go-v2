@@ -50,6 +50,10 @@ type ListAnnotationImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnnotationImportJobsInput) operationName() string {
+	return "ListAnnotationImportJobs"
+}
+
 type ListAnnotationImportJobsOutput struct {
 
 	// A list of jobs.

@@ -53,6 +53,10 @@ type ScanProvisionedProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ScanProvisionedProductsInput) operationName() string {
+	return "ScanProvisionedProducts"
+}
+
 type ScanProvisionedProductsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

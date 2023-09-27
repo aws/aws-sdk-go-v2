@@ -185,6 +185,10 @@ type HeadObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HeadObjectInput) operationName() string {
+	return "HeadObject"
+}
+
 type HeadObjectOutput struct {
 
 	// Indicates that a range of bytes was specified.

@@ -55,6 +55,10 @@ type UpdateNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNodeInput) operationName() string {
+	return "UpdateNode"
+}
+
 type UpdateNodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

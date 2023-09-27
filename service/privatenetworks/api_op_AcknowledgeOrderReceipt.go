@@ -42,6 +42,10 @@ type AcknowledgeOrderReceiptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcknowledgeOrderReceiptInput) operationName() string {
+	return "AcknowledgeOrderReceipt"
+}
+
 type AcknowledgeOrderReceiptOutput struct {
 
 	// Information about the order.

@@ -52,6 +52,10 @@ type GetResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverInput) operationName() string {
+	return "GetResolver"
+}
+
 type GetResolverOutput struct {
 
 	// The Resolver object.

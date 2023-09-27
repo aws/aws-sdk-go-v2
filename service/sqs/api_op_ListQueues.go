@@ -59,6 +59,10 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQueuesInput) operationName() string {
+	return "ListQueues"
+}
+
 // A list of your queues.
 type ListQueuesOutput struct {
 

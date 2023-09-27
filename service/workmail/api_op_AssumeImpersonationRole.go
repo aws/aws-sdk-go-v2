@@ -47,6 +47,10 @@ type AssumeImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssumeImpersonationRoleInput) operationName() string {
+	return "AssumeImpersonationRole"
+}
+
 type AssumeImpersonationRoleOutput struct {
 
 	// The authentication token's validity, in seconds.

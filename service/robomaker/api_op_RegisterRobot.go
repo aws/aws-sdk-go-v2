@@ -51,6 +51,10 @@ type RegisterRobotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterRobotInput) operationName() string {
+	return "RegisterRobot"
+}
+
 type RegisterRobotOutput struct {
 
 	// The Amazon Resource Name (ARN) of the fleet that the robot will join.

@@ -66,6 +66,10 @@ type CreateClusterSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterSubnetGroupInput) operationName() string {
+	return "CreateClusterSubnetGroup"
+}
+
 type CreateClusterSubnetGroupOutput struct {
 
 	// Describes a subnet group.

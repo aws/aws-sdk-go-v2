@@ -48,6 +48,10 @@ type DetachSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachSecurityProfileInput) operationName() string {
+	return "DetachSecurityProfile"
+}
+
 type DetachSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

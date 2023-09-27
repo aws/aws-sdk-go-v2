@@ -64,6 +64,10 @@ type DescribeConfigurationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationSettingsInput) operationName() string {
+	return "DescribeConfigurationSettings"
+}
+
 // The results from a request to change the configuration settings of an
 // environment.
 type DescribeConfigurationSettingsOutput struct {

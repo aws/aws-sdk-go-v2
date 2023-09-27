@@ -49,6 +49,10 @@ type ListStreamKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamKeysInput) operationName() string {
+	return "ListStreamKeys"
+}
+
 type ListStreamKeysOutput struct {
 
 	// List of stream keys.

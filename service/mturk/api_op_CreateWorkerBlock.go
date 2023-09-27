@@ -49,6 +49,10 @@ type CreateWorkerBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkerBlockInput) operationName() string {
+	return "CreateWorkerBlock"
+}
+
 type CreateWorkerBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

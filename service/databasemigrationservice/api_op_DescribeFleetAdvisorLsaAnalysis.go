@@ -47,6 +47,10 @@ type DescribeFleetAdvisorLsaAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetAdvisorLsaAnalysisInput) operationName() string {
+	return "DescribeFleetAdvisorLsaAnalysis"
+}
+
 type DescribeFleetAdvisorLsaAnalysisOutput struct {
 
 	// A list of FleetAdvisorLsaAnalysisResponse objects.

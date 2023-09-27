@@ -53,6 +53,10 @@ type CreateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInputInput) operationName() string {
+	return "CreateInput"
+}
+
 type CreateInputOutput struct {
 
 	// Information about the configuration of the input.

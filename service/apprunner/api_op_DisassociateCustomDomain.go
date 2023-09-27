@@ -53,6 +53,10 @@ type DisassociateCustomDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateCustomDomainInput) operationName() string {
+	return "DisassociateCustomDomain"
+}
+
 type DisassociateCustomDomainOutput struct {
 
 	// A description of the domain name that's being disassociated.

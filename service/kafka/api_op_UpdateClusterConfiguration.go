@@ -54,6 +54,10 @@ type UpdateClusterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateClusterConfigurationInput) operationName() string {
+	return "UpdateClusterConfiguration"
+}
+
 type UpdateClusterConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

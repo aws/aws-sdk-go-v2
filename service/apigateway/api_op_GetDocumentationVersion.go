@@ -48,6 +48,10 @@ type GetDocumentationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentationVersionInput) operationName() string {
+	return "GetDocumentationVersion"
+}
+
 // A snapshot of the documentation of an API.
 type GetDocumentationVersionOutput struct {
 

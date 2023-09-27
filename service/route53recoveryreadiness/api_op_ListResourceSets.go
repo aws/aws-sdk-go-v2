@@ -43,6 +43,10 @@ type ListResourceSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceSetsInput) operationName() string {
+	return "ListResourceSets"
+}
+
 type ListResourceSetsOutput struct {
 
 	// The token that identifies which batch of results you want to see.

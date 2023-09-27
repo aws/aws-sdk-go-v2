@@ -60,6 +60,10 @@ type DisassociateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateMembersInput) operationName() string {
+	return "DisassociateMembers"
+}
+
 type DisassociateMembersOutput struct {
 
 	// A list of objects that contain the unprocessed account and a result string that

@@ -40,6 +40,10 @@ type StartSavingsPlansPurchaseRecommendationGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSavingsPlansPurchaseRecommendationGenerationInput) operationName() string {
+	return "StartSavingsPlansPurchaseRecommendationGeneration"
+}
+
 type StartSavingsPlansPurchaseRecommendationGenerationOutput struct {
 
 	// The estimated time for when the recommendation generation will complete.

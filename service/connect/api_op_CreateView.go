@@ -79,6 +79,10 @@ type CreateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateViewInput) operationName() string {
+	return "CreateView"
+}
+
 type CreateViewOutput struct {
 
 	// A view resource object. Contains metadata and content necessary to render the

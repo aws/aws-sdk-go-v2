@@ -76,6 +76,10 @@ type ModifyInstanceEventWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceEventWindowInput) operationName() string {
+	return "ModifyInstanceEventWindow"
+}
+
 type ModifyInstanceEventWindowOutput struct {
 
 	// Information about the event window.

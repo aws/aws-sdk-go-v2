@@ -50,6 +50,10 @@ type ListTypedLinkFacetNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTypedLinkFacetNamesInput) operationName() string {
+	return "ListTypedLinkFacetNames"
+}
+
 type ListTypedLinkFacetNamesOutput struct {
 
 	// The names of typed link facets that exist within the schema.

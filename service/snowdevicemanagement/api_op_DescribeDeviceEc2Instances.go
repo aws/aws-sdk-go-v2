@@ -49,6 +49,10 @@ type DescribeDeviceEc2InstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeviceEc2InstancesInput) operationName() string {
+	return "DescribeDeviceEc2Instances"
+}
+
 type DescribeDeviceEc2InstancesOutput struct {
 
 	// A list of structures containing information about each instance.

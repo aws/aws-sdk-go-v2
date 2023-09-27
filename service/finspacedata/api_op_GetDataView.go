@@ -49,6 +49,10 @@ type GetDataViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataViewInput) operationName() string {
+	return "GetDataView"
+}
+
 // Response from retrieving a dataview, which includes details on the target
 // database and table name
 type GetDataViewOutput struct {

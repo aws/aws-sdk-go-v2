@@ -59,6 +59,10 @@ type DeprecateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprecateDomainInput) operationName() string {
+	return "DeprecateDomain"
+}
+
 type DeprecateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

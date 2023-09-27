@@ -44,6 +44,10 @@ type ListUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUserAccessLoggingSettingsInput) operationName() string {
+	return "ListUserAccessLoggingSettings"
+}
+
 type ListUserAccessLoggingSettingsOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this

@@ -72,6 +72,10 @@ type CreateCertificateFromCsrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCertificateFromCsrInput) operationName() string {
+	return "CreateCertificateFromCsr"
+}
+
 // The output from the CreateCertificateFromCsr operation.
 type CreateCertificateFromCsrOutput struct {
 

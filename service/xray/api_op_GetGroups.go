@@ -40,6 +40,10 @@ type GetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupsInput) operationName() string {
+	return "GetGroups"
+}
+
 type GetGroupsOutput struct {
 
 	// The collection of all active groups.

@@ -64,6 +64,10 @@ type ListVirtualMFADevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVirtualMFADevicesInput) operationName() string {
+	return "ListVirtualMFADevices"
+}
+
 // Contains the response to a successful ListVirtualMFADevices request.
 type ListVirtualMFADevicesOutput struct {
 

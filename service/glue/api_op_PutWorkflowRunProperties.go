@@ -53,6 +53,10 @@ type PutWorkflowRunPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutWorkflowRunPropertiesInput) operationName() string {
+	return "PutWorkflowRunProperties"
+}
+
 type PutWorkflowRunPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

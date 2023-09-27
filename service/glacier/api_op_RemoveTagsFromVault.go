@@ -58,6 +58,10 @@ type RemoveTagsFromVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveTagsFromVaultInput) operationName() string {
+	return "RemoveTagsFromVault"
+}
+
 type RemoveTagsFromVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

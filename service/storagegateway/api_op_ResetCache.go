@@ -52,6 +52,10 @@ type ResetCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetCacheInput) operationName() string {
+	return "ResetCache"
+}
+
 type ResetCacheOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

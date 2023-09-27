@@ -45,6 +45,10 @@ type GetQueryStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueryStateInput) operationName() string {
+	return "GetQueryState"
+}
+
 // A structure for the output.
 type GetQueryStateOutput struct {
 

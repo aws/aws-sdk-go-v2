@@ -42,6 +42,10 @@ type GetSbomExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSbomExportInput) operationName() string {
+	return "GetSbomExport"
+}
+
 type GetSbomExportOutput struct {
 
 	// An error code.

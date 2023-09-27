@@ -43,6 +43,10 @@ type ListStagingAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStagingAccountsInput) operationName() string {
+	return "ListStagingAccounts"
+}
+
 type ListStagingAccountsOutput struct {
 
 	// An array of staging AWS Accounts.

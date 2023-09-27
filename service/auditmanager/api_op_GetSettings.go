@@ -42,6 +42,10 @@ type GetSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSettingsInput) operationName() string {
+	return "GetSettings"
+}
+
 type GetSettingsOutput struct {
 
 	// The settings object that holds all supported Audit Manager settings.

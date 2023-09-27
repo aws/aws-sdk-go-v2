@@ -88,6 +88,10 @@ type ImportAsProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportAsProvisionedProductInput) operationName() string {
+	return "ImportAsProvisionedProduct"
+}
+
 type ImportAsProvisionedProductOutput struct {
 
 	// Information about a request operation.

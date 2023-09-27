@@ -50,6 +50,10 @@ type ListTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTargetGroupsInput) operationName() string {
+	return "ListTargetGroups"
+}
+
 type ListTargetGroupsOutput struct {
 
 	// Information about the target groups.

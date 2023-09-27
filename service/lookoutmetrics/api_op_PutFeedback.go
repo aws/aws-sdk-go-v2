@@ -47,6 +47,10 @@ type PutFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutFeedbackInput) operationName() string {
+	return "PutFeedback"
+}
+
 type PutFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type DescribeGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGroupsInput) operationName() string {
+	return "DescribeGroups"
+}
+
 type DescribeGroupsOutput struct {
 
 	// The list of groups.

@@ -56,6 +56,10 @@ type UpdateLinkAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLinkAttributesInput) operationName() string {
+	return "UpdateLinkAttributes"
+}
+
 type UpdateLinkAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

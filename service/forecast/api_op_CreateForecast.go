@@ -102,6 +102,10 @@ type CreateForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateForecastInput) operationName() string {
+	return "CreateForecast"
+}
+
 type CreateForecastOutput struct {
 
 	// The Amazon Resource Name (ARN) of the forecast.

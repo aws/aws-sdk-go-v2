@@ -45,6 +45,10 @@ type GetCloudFormationStackRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCloudFormationStackRecordsInput) operationName() string {
+	return "GetCloudFormationStackRecords"
+}
+
 type GetCloudFormationStackRecordsOutput struct {
 
 	// A list of objects describing the CloudFormation stack records.

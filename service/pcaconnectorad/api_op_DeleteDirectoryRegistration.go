@@ -44,6 +44,10 @@ type DeleteDirectoryRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDirectoryRegistrationInput) operationName() string {
+	return "DeleteDirectoryRegistration"
+}
+
 type DeleteDirectoryRegistrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

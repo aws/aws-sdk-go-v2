@@ -54,6 +54,10 @@ type GetComponentVersionArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentVersionArtifactInput) operationName() string {
+	return "GetComponentVersionArtifact"
+}
+
 type GetComponentVersionArtifactOutput struct {
 
 	// The URL of the artifact.

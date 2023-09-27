@@ -44,6 +44,10 @@ type DescribeValidDBInstanceModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeValidDBInstanceModificationsInput) operationName() string {
+	return "DescribeValidDBInstanceModifications"
+}
+
 type DescribeValidDBInstanceModificationsOutput struct {
 
 	// Information about valid modifications that you can make to your DB instance.

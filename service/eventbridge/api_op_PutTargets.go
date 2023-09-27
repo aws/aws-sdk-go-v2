@@ -141,6 +141,10 @@ type PutTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutTargetsInput) operationName() string {
+	return "PutTargets"
+}
+
 type PutTargetsOutput struct {
 
 	// The failed target entries.

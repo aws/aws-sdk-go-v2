@@ -46,6 +46,10 @@ type AssociateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateFleetInput) operationName() string {
+	return "AssociateFleet"
+}
+
 type AssociateFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

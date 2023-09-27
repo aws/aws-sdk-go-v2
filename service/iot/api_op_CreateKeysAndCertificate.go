@@ -49,6 +49,10 @@ type CreateKeysAndCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateKeysAndCertificateInput) operationName() string {
+	return "CreateKeysAndCertificate"
+}
+
 // The output of the CreateKeysAndCertificate operation.
 type CreateKeysAndCertificateOutput struct {
 

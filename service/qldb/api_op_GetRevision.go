@@ -61,6 +61,10 @@ type GetRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRevisionInput) operationName() string {
+	return "GetRevision"
+}
+
 type GetRevisionOutput struct {
 
 	// The document revision data object in Amazon Ion format.

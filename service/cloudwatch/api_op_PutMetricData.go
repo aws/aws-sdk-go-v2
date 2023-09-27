@@ -84,6 +84,10 @@ type PutMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMetricDataInput) operationName() string {
+	return "PutMetricData"
+}
+
 type PutMetricDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,6 +47,10 @@ type CreateDatasetContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetContentInput) operationName() string {
+	return "CreateDatasetContent"
+}
+
 type CreateDatasetContentOutput struct {
 
 	// The version ID of the dataset contents that are being created.

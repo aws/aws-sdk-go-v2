@@ -52,6 +52,10 @@ type GetVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorInput) operationName() string {
+	return "GetVoiceConnector"
+}
+
 type GetVoiceConnectorOutput struct {
 
 	// The Amazon Chime Voice Connector details.

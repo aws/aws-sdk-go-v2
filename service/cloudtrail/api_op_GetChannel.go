@@ -42,6 +42,10 @@ type GetChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelInput) operationName() string {
+	return "GetChannel"
+}
+
 type GetChannelOutput struct {
 
 	// The ARN of an channel returned by a GetChannel request.

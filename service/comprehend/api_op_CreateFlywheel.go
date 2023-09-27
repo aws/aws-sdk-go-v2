@@ -86,6 +86,10 @@ type CreateFlywheelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFlywheelInput) operationName() string {
+	return "CreateFlywheel"
+}
+
 type CreateFlywheelOutput struct {
 
 	// The Amazon Resource Number (ARN) of the active model version.

@@ -43,6 +43,10 @@ type GetContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactChannelInput) operationName() string {
+	return "GetContactChannel"
+}
+
 type GetContactChannelOutput struct {
 
 	// The ARN of the contact that the channel belongs to.

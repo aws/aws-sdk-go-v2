@@ -56,6 +56,10 @@ type DetachRolePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachRolePolicyInput) operationName() string {
+	return "DetachRolePolicy"
+}
+
 type DetachRolePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

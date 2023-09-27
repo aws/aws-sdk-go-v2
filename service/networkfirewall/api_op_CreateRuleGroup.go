@@ -120,6 +120,10 @@ type CreateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRuleGroupInput) operationName() string {
+	return "CreateRuleGroup"
+}
+
 type CreateRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup ,

@@ -78,6 +78,10 @@ type GetApplicationDateRangeKpiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationDateRangeKpiInput) operationName() string {
+	return "GetApplicationDateRangeKpi"
+}
+
 type GetApplicationDateRangeKpiOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard metric

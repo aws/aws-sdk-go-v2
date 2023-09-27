@@ -49,6 +49,10 @@ type GetContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContentInput) operationName() string {
+	return "GetContent"
+}
+
 type GetContentOutput struct {
 
 	// The content.

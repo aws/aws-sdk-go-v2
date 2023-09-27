@@ -62,6 +62,10 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountSettingsInput) operationName() string {
+	return "UpdateAccountSettings"
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The Proton pipeline service role and repository data shared across the Amazon

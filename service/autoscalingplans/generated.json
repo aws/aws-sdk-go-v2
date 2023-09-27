@@ -15,6 +15,7 @@
         "api_op_DescribeScalingPlans.go",
         "api_op_GetScalingPlanResourceForecastData.go",
         "api_op_UpdateScalingPlan.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

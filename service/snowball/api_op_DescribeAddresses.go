@@ -47,6 +47,10 @@ type DescribeAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddressesInput) operationName() string {
+	return "DescribeAddresses"
+}
+
 type DescribeAddressesOutput struct {
 
 	// The Snow device shipping addresses that were created for this account.

@@ -71,6 +71,10 @@ type RecordHandlerProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RecordHandlerProgressInput) operationName() string {
+	return "RecordHandlerProgress"
+}
+
 type RecordHandlerProgressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

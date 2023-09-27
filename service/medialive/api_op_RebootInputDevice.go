@@ -51,6 +51,10 @@ type RebootInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootInputDeviceInput) operationName() string {
+	return "RebootInputDevice"
+}
+
 // Placeholder documentation for RebootInputDeviceResponse
 type RebootInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.

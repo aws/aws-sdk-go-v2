@@ -55,6 +55,10 @@ type ReplaceVpnTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceVpnTunnelInput) operationName() string {
+	return "ReplaceVpnTunnel"
+}
+
 type ReplaceVpnTunnelOutput struct {
 
 	// Confirmation of replace tunnel operation.

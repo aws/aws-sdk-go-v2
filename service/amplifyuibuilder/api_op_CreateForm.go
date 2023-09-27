@@ -55,6 +55,10 @@ type CreateFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFormInput) operationName() string {
+	return "CreateForm"
+}
+
 type CreateFormOutput struct {
 
 	// Describes the configuration of the new form.

@@ -48,6 +48,10 @@ type ListStreamProcessorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamProcessorsInput) operationName() string {
+	return "ListStreamProcessors"
+}
+
 type ListStreamProcessorsOutput struct {
 
 	// If the response is truncated, Amazon Rekognition Video returns this token that

@@ -49,6 +49,10 @@ type DeleteFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFacesInput) operationName() string {
+	return "DeleteFaces"
+}
+
 type DeleteFacesOutput struct {
 
 	// An array of strings (face IDs) of the faces that were deleted.

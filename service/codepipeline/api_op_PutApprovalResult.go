@@ -68,6 +68,10 @@ type PutApprovalResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutApprovalResultInput) operationName() string {
+	return "PutApprovalResult"
+}
+
 // Represents the output of a PutApprovalResult action.
 type PutApprovalResultOutput struct {
 

@@ -37,6 +37,10 @@ type DescribeScalingProcessTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScalingProcessTypesInput) operationName() string {
+	return "DescribeScalingProcessTypes"
+}
+
 type DescribeScalingProcessTypesOutput struct {
 
 	// The names of the process types.

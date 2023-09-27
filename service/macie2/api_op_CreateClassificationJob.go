@@ -136,6 +136,10 @@ type CreateClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClassificationJobInput) operationName() string {
+	return "CreateClassificationJob"
+}
+
 type CreateClassificationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job.

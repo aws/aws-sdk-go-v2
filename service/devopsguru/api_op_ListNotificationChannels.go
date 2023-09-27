@@ -45,6 +45,10 @@ type ListNotificationChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotificationChannelsInput) operationName() string {
+	return "ListNotificationChannels"
+}
+
 type ListNotificationChannelsOutput struct {
 
 	// An array that contains the requested notification channels.

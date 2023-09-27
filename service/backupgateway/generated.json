@@ -34,6 +34,7 @@
         "api_op_UpdateGatewayInformation.go",
         "api_op_UpdateGatewaySoftwareNow.go",
         "api_op_UpdateHypervisor.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

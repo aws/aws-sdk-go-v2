@@ -74,6 +74,10 @@ type DescribeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLimitsInput) operationName() string {
+	return "DescribeLimits"
+}
+
 // Represents the output of a DescribeLimits operation.
 type DescribeLimitsOutput struct {
 

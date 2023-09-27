@@ -89,6 +89,10 @@ type CreateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVirtualNodeInput) operationName() string {
+	return "CreateVirtualNode"
+}
+
 type CreateVirtualNodeOutput struct {
 
 	// The full description of your virtual node following the create call.

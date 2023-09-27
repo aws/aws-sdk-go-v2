@@ -47,6 +47,10 @@ type UpdateGameConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGameConfigurationInput) operationName() string {
+	return "UpdateGameConfiguration"
+}
+
 type UpdateGameConfigurationOutput struct {
 
 	// Details about the game configuration.

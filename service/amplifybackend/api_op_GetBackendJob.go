@@ -51,6 +51,10 @@ type GetBackendJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackendJobInput) operationName() string {
+	return "GetBackendJob"
+}
+
 type GetBackendJobOutput struct {
 
 	// The app ID.

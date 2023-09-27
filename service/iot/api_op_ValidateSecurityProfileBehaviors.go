@@ -44,6 +44,10 @@ type ValidateSecurityProfileBehaviorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateSecurityProfileBehaviorsInput) operationName() string {
+	return "ValidateSecurityProfileBehaviors"
+}
+
 type ValidateSecurityProfileBehaviorsOutput struct {
 
 	// True if the behaviors were valid.

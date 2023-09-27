@@ -49,6 +49,10 @@ type ListAppInstanceAdminsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppInstanceAdminsInput) operationName() string {
+	return "ListAppInstanceAdmins"
+}
+
 type ListAppInstanceAdminsOutput struct {
 
 	// The information for each administrator.

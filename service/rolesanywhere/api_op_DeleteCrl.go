@@ -43,6 +43,10 @@ type DeleteCrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCrlInput) operationName() string {
+	return "DeleteCrl"
+}
+
 type DeleteCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write

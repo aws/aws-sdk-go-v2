@@ -63,6 +63,10 @@ type CreateServiceSpecificCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceSpecificCredentialInput) operationName() string {
+	return "CreateServiceSpecificCredential"
+}
+
 type CreateServiceSpecificCredentialOutput struct {
 
 	// A structure that contains information about the newly created service-specific

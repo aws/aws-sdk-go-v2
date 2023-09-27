@@ -47,6 +47,10 @@ type RestoreEventDataStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreEventDataStoreInput) operationName() string {
+	return "RestoreEventDataStore"
+}
+
 type RestoreEventDataStoreOutput struct {
 
 	// The advanced event selectors that were used to select events.

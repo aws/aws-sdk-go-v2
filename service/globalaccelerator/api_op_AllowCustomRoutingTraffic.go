@@ -76,6 +76,10 @@ type AllowCustomRoutingTrafficInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllowCustomRoutingTrafficInput) operationName() string {
+	return "AllowCustomRoutingTraffic"
+}
+
 type AllowCustomRoutingTrafficOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

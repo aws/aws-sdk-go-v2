@@ -50,6 +50,10 @@ type DeleteQuerySuggestionsBlockListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQuerySuggestionsBlockListInput) operationName() string {
+	return "DeleteQuerySuggestionsBlockList"
+}
+
 type DeleteQuerySuggestionsBlockListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type ListBackupSelectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupSelectionsInput) operationName() string {
+	return "ListBackupSelections"
+}
+
 type ListBackupSelectionsOutput struct {
 
 	// An array of backup selection list items containing metadata about each resource

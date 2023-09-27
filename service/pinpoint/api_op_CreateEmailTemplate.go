@@ -51,6 +51,10 @@ type CreateEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEmailTemplateInput) operationName() string {
+	return "CreateEmailTemplate"
+}
+
 type CreateEmailTemplateOutput struct {
 
 	// Provides information about a request to create a message template.

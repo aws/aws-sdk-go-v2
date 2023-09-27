@@ -49,6 +49,10 @@ type ListEffectiveDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEffectiveDeploymentsInput) operationName() string {
+	return "ListEffectiveDeployments"
+}
+
 type ListEffectiveDeploymentsOutput struct {
 
 	// A list that summarizes each deployment on the core device.

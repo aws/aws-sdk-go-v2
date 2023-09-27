@@ -48,6 +48,10 @@ type GetUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUserSettingsInput) operationName() string {
+	return "GetUserSettings"
+}
+
 type GetUserSettingsOutput struct {
 
 	// The user settings.

@@ -43,6 +43,10 @@ type GetInstanceOnboardingJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceOnboardingJobStatusInput) operationName() string {
+	return "GetInstanceOnboardingJobStatus"
+}
+
 // GetInstanceOnboardingJobStatusResponse
 type GetInstanceOnboardingJobStatusOutput struct {
 

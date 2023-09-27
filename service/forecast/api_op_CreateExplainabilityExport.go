@@ -83,6 +83,10 @@ type CreateExplainabilityExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExplainabilityExportInput) operationName() string {
+	return "CreateExplainabilityExport"
+}
+
 type CreateExplainabilityExportOutput struct {
 
 	// The Amazon Resource Name (ARN) of the export.

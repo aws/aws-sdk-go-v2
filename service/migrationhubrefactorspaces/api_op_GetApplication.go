@@ -48,6 +48,10 @@ type GetApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationInput) operationName() string {
+	return "GetApplication"
+}
+
 type GetApplicationOutput struct {
 
 	// The endpoint URL of the API Gateway proxy.

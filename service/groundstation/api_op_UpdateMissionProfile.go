@@ -72,6 +72,10 @@ type UpdateMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMissionProfileInput) operationName() string {
+	return "UpdateMissionProfile"
+}
+
 type UpdateMissionProfileOutput struct {
 
 	// UUID of a mission profile.

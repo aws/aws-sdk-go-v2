@@ -45,6 +45,10 @@ type DescribeLocationEfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationEfsInput) operationName() string {
+	return "DescribeLocationEfs"
+}
+
 // DescribeLocationEfsResponse
 type DescribeLocationEfsOutput struct {
 

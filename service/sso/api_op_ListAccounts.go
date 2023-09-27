@@ -53,6 +53,10 @@ type ListAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountsInput) operationName() string {
+	return "ListAccounts"
+}
+
 type ListAccountsOutput struct {
 
 	// A paginated response with the list of account information and the next token if

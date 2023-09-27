@@ -53,6 +53,10 @@ type PutRoomSkillParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRoomSkillParameterInput) operationName() string {
+	return "PutRoomSkillParameter"
+}
+
 type PutRoomSkillParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

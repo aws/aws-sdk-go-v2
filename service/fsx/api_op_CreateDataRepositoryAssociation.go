@@ -104,6 +104,10 @@ type CreateDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataRepositoryAssociationInput) operationName() string {
+	return "CreateDataRepositoryAssociation"
+}
+
 type CreateDataRepositoryAssociationOutput struct {
 
 	// The response object returned after the data repository association is created.

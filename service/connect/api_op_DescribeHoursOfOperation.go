@@ -49,6 +49,10 @@ type DescribeHoursOfOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHoursOfOperationInput) operationName() string {
+	return "DescribeHoursOfOperation"
+}
+
 type DescribeHoursOfOperationOutput struct {
 
 	// The hours of operation.

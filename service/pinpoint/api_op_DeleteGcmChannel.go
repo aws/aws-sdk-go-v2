@@ -44,6 +44,10 @@ type DeleteGcmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGcmChannelInput) operationName() string {
+	return "DeleteGcmChannel"
+}
+
 type DeleteGcmChannelOutput struct {
 
 	// Provides information about the status and settings of the GCM channel for an

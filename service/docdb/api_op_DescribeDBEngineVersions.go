@@ -77,6 +77,10 @@ type DescribeDBEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBEngineVersionsInput) operationName() string {
+	return "DescribeDBEngineVersions"
+}
+
 // Represents the output of DescribeDBEngineVersions .
 type DescribeDBEngineVersionsOutput struct {
 

@@ -38,6 +38,10 @@ type MalformedFloatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedFloatInput) operationName() string {
+	return "MalformedFloat"
+}
+
 type MalformedFloatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

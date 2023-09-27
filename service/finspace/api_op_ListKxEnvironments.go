@@ -43,6 +43,10 @@ type ListKxEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKxEnvironmentsInput) operationName() string {
+	return "ListKxEnvironments"
+}
+
 type ListKxEnvironmentsOutput struct {
 
 	// A list of environments in an account.

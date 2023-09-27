@@ -83,6 +83,10 @@ type StartCopyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCopyJobInput) operationName() string {
+	return "StartCopyJob"
+}
+
 type StartCopyJobOutput struct {
 
 	// Uniquely identifies a copy job.

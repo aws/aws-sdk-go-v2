@@ -41,6 +41,10 @@ type DeleteDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDeviceInput) operationName() string {
+	return "DeleteDevice"
+}
+
 type DeleteDeviceOutput struct {
 
 	// The device's ID.

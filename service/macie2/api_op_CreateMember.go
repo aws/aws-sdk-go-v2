@@ -48,6 +48,10 @@ type CreateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMemberInput) operationName() string {
+	return "CreateMember"
+}
+
 type CreateMemberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account that was associated with the

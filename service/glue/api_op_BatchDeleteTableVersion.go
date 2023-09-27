@@ -58,6 +58,10 @@ type BatchDeleteTableVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteTableVersionInput) operationName() string {
+	return "BatchDeleteTableVersion"
+}
+
 type BatchDeleteTableVersionOutput struct {
 
 	// A list of errors encountered while trying to delete the specified table

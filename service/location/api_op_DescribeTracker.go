@@ -43,6 +43,10 @@ type DescribeTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrackerInput) operationName() string {
+	return "DescribeTracker"
+}
+
 type DescribeTrackerOutput struct {
 
 	// The timestamp for when the tracker resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)

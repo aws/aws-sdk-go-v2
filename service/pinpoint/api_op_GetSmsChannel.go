@@ -44,6 +44,10 @@ type GetSmsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSmsChannelInput) operationName() string {
+	return "GetSmsChannel"
+}
+
 type GetSmsChannelOutput struct {
 
 	// Provides information about the status and settings of the SMS channel for an

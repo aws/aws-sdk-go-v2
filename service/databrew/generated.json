@@ -53,6 +53,7 @@
         "api_op_UpdateRecipeJob.go",
         "api_op_UpdateRuleset.go",
         "api_op_UpdateSchedule.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

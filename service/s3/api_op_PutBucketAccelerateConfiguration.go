@@ -87,6 +87,10 @@ type PutBucketAccelerateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketAccelerateConfigurationInput) operationName() string {
+	return "PutBucketAccelerateConfiguration"
+}
+
 type PutBucketAccelerateConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

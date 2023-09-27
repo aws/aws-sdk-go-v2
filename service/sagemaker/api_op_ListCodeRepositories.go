@@ -72,6 +72,10 @@ type ListCodeRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCodeRepositoriesInput) operationName() string {
+	return "ListCodeRepositories"
+}
+
 type ListCodeRepositoriesOutput struct {
 
 	// Gets a list of summaries of the Git repositories. Each summary specifies the

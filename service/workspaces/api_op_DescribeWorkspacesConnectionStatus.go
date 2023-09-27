@@ -44,6 +44,10 @@ type DescribeWorkspacesConnectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspacesConnectionStatusInput) operationName() string {
+	return "DescribeWorkspacesConnectionStatus"
+}
+
 type DescribeWorkspacesConnectionStatusOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

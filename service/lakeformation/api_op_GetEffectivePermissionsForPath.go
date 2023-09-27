@@ -57,6 +57,10 @@ type GetEffectivePermissionsForPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEffectivePermissionsForPathInput) operationName() string {
+	return "GetEffectivePermissionsForPath"
+}
+
 type GetEffectivePermissionsForPathOutput struct {
 
 	// A continuation token, if this is not the first call to retrieve this list.

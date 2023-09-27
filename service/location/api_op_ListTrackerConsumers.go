@@ -50,6 +50,10 @@ type ListTrackerConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrackerConsumersInput) operationName() string {
+	return "ListTrackerConsumers"
+}
+
 type ListTrackerConsumersOutput struct {
 
 	// Contains the list of geofence collection ARNs associated to the tracker

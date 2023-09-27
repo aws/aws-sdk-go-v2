@@ -47,6 +47,10 @@ type DeleteFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFraudsterInput) operationName() string {
+	return "DeleteFraudster"
+}
+
 type DeleteFraudsterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

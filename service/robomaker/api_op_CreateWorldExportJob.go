@@ -62,6 +62,10 @@ type CreateWorldExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorldExportJobInput) operationName() string {
+	return "CreateWorldExportJob"
+}
+
 type CreateWorldExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world export job.

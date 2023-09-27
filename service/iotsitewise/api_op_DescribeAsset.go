@@ -49,6 +49,10 @@ type DescribeAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssetInput) operationName() string {
+	return "DescribeAsset"
+}
+
 type DescribeAssetOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

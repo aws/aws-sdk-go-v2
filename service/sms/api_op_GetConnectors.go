@@ -45,6 +45,10 @@ type GetConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectorsInput) operationName() string {
+	return "GetConnectors"
+}
+
 type GetConnectorsOutput struct {
 
 	// Information about the registered connectors.

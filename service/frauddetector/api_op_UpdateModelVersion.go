@@ -67,6 +67,10 @@ type UpdateModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelVersionInput) operationName() string {
+	return "UpdateModelVersion"
+}
+
 type UpdateModelVersionOutput struct {
 
 	// The model ID.

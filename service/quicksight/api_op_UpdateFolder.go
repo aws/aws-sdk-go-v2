@@ -51,6 +51,10 @@ type UpdateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFolderInput) operationName() string {
+	return "UpdateFolder"
+}
+
 type UpdateFolderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the folder.

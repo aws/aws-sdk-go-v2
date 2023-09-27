@@ -195,6 +195,10 @@ type UpdateAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssociationInput) operationName() string {
+	return "UpdateAssociation"
+}
+
 type UpdateAssociationOutput struct {
 
 	// The description of the association that was updated.

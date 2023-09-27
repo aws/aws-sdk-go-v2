@@ -44,6 +44,10 @@ type DescribeInstanceEventNotificationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceEventNotificationAttributesInput) operationName() string {
+	return "DescribeInstanceEventNotificationAttributes"
+}
+
 type DescribeInstanceEventNotificationAttributesOutput struct {
 
 	// Information about the registered tag keys.

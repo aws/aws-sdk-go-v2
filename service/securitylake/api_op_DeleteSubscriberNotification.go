@@ -42,6 +42,10 @@ type DeleteSubscriberNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSubscriberNotificationInput) operationName() string {
+	return "DeleteSubscriberNotification"
+}
+
 type DeleteSubscriberNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

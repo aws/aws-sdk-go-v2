@@ -50,6 +50,10 @@ type StartCutoverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartCutoverInput) operationName() string {
+	return "StartCutover"
+}
+
 type StartCutoverOutput struct {
 
 	// Start Cutover Job response.

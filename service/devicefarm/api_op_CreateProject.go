@@ -51,6 +51,10 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProjectInput) operationName() string {
+	return "CreateProject"
+}
+
 // Represents the result of a create project request.
 type CreateProjectOutput struct {
 

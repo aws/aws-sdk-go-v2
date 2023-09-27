@@ -88,6 +88,10 @@ type ModifyInstancePlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstancePlacementInput) operationName() string {
+	return "ModifyInstancePlacement"
+}
+
 type ModifyInstancePlacementOutput struct {
 
 	// Is true if the request succeeds, and an error otherwise.

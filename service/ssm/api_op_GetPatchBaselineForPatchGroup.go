@@ -46,6 +46,10 @@ type GetPatchBaselineForPatchGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPatchBaselineForPatchGroupInput) operationName() string {
+	return "GetPatchBaselineForPatchGroup"
+}
+
 type GetPatchBaselineForPatchGroupOutput struct {
 
 	// The ID of the patch baseline that should be used for the patch group.

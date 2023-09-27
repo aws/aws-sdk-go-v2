@@ -45,6 +45,10 @@ type DeleteResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResolverRuleInput) operationName() string {
+	return "DeleteResolverRule"
+}
+
 type DeleteResolverRuleOutput struct {
 
 	// Information about the DeleteResolverRule request, including the status of the

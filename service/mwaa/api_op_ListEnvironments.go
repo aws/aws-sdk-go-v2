@@ -43,6 +43,10 @@ type ListEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEnvironmentsInput) operationName() string {
+	return "ListEnvironments"
+}
+
 type ListEnvironmentsOutput struct {
 
 	// Returns a list of Amazon MWAA environments.

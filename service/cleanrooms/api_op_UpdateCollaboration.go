@@ -50,6 +50,10 @@ type UpdateCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCollaborationInput) operationName() string {
+	return "UpdateCollaboration"
+}
+
 type UpdateCollaborationOutput struct {
 
 	// The entire collaboration that has been updated.

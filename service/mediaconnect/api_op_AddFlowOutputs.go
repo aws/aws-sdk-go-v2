@@ -48,6 +48,10 @@ type AddFlowOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddFlowOutputsInput) operationName() string {
+	return "AddFlowOutputs"
+}
+
 type AddFlowOutputsOutput struct {
 
 	// The ARN of the flow that these outputs were added to.

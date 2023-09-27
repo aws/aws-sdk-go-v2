@@ -55,6 +55,10 @@ type StartStudioSSOConfigurationRepairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartStudioSSOConfigurationRepairInput) operationName() string {
+	return "StartStudioSSOConfigurationRepair"
+}
+
 type StartStudioSSOConfigurationRepairOutput struct {
 
 	// Information about a studio.

@@ -44,6 +44,10 @@ type BatchDisableStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisableStandardsInput) operationName() string {
+	return "BatchDisableStandards"
+}
+
 type BatchDisableStandardsOutput struct {
 
 	// The details of the standards subscriptions that were disabled.

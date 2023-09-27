@@ -45,6 +45,10 @@ type UnarchiveWaveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnarchiveWaveInput) operationName() string {
+	return "UnarchiveWave"
+}
+
 type UnarchiveWaveOutput struct {
 
 	// Wave ARN.

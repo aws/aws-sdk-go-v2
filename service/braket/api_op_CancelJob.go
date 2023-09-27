@@ -42,6 +42,10 @@ type CancelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelJobInput) operationName() string {
+	return "CancelJob"
+}
+
 type CancelJobOutput struct {
 
 	// The status of the job cancellation request.

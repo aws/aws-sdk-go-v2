@@ -52,6 +52,10 @@ type DeleteOTAUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOTAUpdateInput) operationName() string {
+	return "DeleteOTAUpdate"
+}
+
 type DeleteOTAUpdateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type UpdateInstanceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInstanceAttributeInput) operationName() string {
+	return "UpdateInstanceAttribute"
+}
+
 type UpdateInstanceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

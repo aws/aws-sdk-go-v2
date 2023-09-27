@@ -36,6 +36,10 @@ type GetRegistryCatalogDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegistryCatalogDataInput) operationName() string {
+	return "GetRegistryCatalogData"
+}
+
 type GetRegistryCatalogDataOutput struct {
 
 	// The catalog metadata for the public registry.

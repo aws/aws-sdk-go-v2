@@ -111,6 +111,10 @@ type CreateEnvironmentEC2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEnvironmentEC2Input) operationName() string {
+	return "CreateEnvironmentEC2"
+}
+
 type CreateEnvironmentEC2Output struct {
 
 	// The ID of the environment that was created.

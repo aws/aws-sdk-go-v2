@@ -106,6 +106,10 @@ type UpdateNodegroupVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNodegroupVersionInput) operationName() string {
+	return "UpdateNodegroupVersion"
+}
+
 type UpdateNodegroupVersionOutput struct {
 
 	// An object representing an asynchronous update.

@@ -47,6 +47,10 @@ type GetIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntegrationInput) operationName() string {
+	return "GetIntegration"
+}
+
 type GetIntegrationOutput struct {
 
 	// The timestamp of when the domain was created.

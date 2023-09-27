@@ -65,6 +65,10 @@ type UpdateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGroupInput) operationName() string {
+	return "UpdateGroup"
+}
+
 type UpdateGroupOutput struct {
 
 	// The group object for the group.

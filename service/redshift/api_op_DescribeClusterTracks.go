@@ -51,6 +51,10 @@ type DescribeClusterTracksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClusterTracksInput) operationName() string {
+	return "DescribeClusterTracks"
+}
+
 type DescribeClusterTracksOutput struct {
 
 	// A list of maintenance tracks output by the DescribeClusterTracks operation.

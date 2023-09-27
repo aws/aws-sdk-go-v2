@@ -41,6 +41,10 @@ type GetPortalServiceProviderMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPortalServiceProviderMetadataInput) operationName() string {
+	return "GetPortalServiceProviderMetadata"
+}
+
 type GetPortalServiceProviderMetadataOutput struct {
 
 	// The ARN of the web portal.

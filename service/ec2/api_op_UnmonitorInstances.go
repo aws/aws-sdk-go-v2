@@ -50,6 +50,10 @@ type UnmonitorInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnmonitorInstancesInput) operationName() string {
+	return "UnmonitorInstances"
+}
+
 type UnmonitorInstancesOutput struct {
 
 	// The monitoring information.

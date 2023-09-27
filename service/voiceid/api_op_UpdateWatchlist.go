@@ -54,6 +54,10 @@ type UpdateWatchlistInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWatchlistInput) operationName() string {
+	return "UpdateWatchlist"
+}
+
 type UpdateWatchlistOutput struct {
 
 	// Details about the updated watchlist.

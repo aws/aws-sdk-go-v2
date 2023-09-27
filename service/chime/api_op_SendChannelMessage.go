@@ -81,6 +81,10 @@ type SendChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendChannelMessageInput) operationName() string {
+	return "SendChannelMessage"
+}
+
 type SendChannelMessageOutput struct {
 
 	// The ARN of the channel.

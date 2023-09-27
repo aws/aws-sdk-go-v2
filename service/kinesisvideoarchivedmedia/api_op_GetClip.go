@@ -80,6 +80,10 @@ type GetClipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClipInput) operationName() string {
+	return "GetClip"
+}
+
 type GetClipOutput struct {
 
 	// The content type of the media in the requested clip.

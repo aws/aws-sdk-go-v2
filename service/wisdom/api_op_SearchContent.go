@@ -56,6 +56,10 @@ type SearchContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchContentInput) operationName() string {
+	return "SearchContent"
+}
+
 type SearchContentOutput struct {
 
 	// Summary information about the content.

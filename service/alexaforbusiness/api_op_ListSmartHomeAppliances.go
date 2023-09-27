@@ -50,6 +50,10 @@ type ListSmartHomeAppliancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSmartHomeAppliancesInput) operationName() string {
+	return "ListSmartHomeAppliances"
+}
+
 type ListSmartHomeAppliancesOutput struct {
 
 	// The tokens used for pagination.

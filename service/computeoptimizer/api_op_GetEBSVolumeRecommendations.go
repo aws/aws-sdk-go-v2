@@ -63,6 +63,10 @@ type GetEBSVolumeRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEBSVolumeRecommendationsInput) operationName() string {
+	return "GetEBSVolumeRecommendations"
+}
+
 type GetEBSVolumeRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request. For example, an error

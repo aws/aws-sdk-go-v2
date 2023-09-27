@@ -73,6 +73,10 @@ type ListModelCardExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelCardExportJobsInput) operationName() string {
+	return "ListModelCardExportJobs"
+}
+
 type ListModelCardExportJobsOutput struct {
 
 	// The summaries of the listed model card export jobs.

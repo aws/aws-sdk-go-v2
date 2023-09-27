@@ -44,6 +44,10 @@ type DeleteSmsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSmsChannelInput) operationName() string {
+	return "DeleteSmsChannel"
+}
+
 type DeleteSmsChannelOutput struct {
 
 	// Provides information about the status and settings of the SMS channel for an

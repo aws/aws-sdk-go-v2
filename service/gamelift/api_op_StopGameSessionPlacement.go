@@ -44,6 +44,10 @@ type StopGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopGameSessionPlacementInput) operationName() string {
+	return "StopGameSessionPlacement"
+}
+
 type StopGameSessionPlacementOutput struct {
 
 	// Object that describes the canceled game session placement, with CANCELLED

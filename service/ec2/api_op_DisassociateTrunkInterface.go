@@ -54,6 +54,10 @@ type DisassociateTrunkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTrunkInterfaceInput) operationName() string {
+	return "DisassociateTrunkInterface"
+}
+
 type DisassociateTrunkInterfaceOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

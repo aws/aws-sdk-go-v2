@@ -45,6 +45,10 @@ type DescribeMitigationActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMitigationActionInput) operationName() string {
+	return "DescribeMitigationAction"
+}
+
 type DescribeMitigationActionOutput struct {
 
 	// The ARN that identifies this migration action.

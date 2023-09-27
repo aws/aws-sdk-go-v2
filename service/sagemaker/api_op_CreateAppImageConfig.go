@@ -52,6 +52,10 @@ type CreateAppImageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppImageConfigInput) operationName() string {
+	return "CreateAppImageConfig"
+}
+
 type CreateAppImageConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the AppImageConfig.

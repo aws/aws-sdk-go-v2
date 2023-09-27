@@ -85,6 +85,10 @@ type CreateProtectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProtectionGroupInput) operationName() string {
+	return "CreateProtectionGroup"
+}
+
 type CreateProtectionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

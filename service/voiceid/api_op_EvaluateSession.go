@@ -49,6 +49,10 @@ type EvaluateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EvaluateSessionInput) operationName() string {
+	return "EvaluateSession"
+}
+
 type EvaluateSessionOutput struct {
 
 	// Details resulting from the authentication process, such as authentication

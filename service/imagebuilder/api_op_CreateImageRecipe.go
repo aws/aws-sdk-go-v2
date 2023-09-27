@@ -92,6 +92,10 @@ type CreateImageRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImageRecipeInput) operationName() string {
+	return "CreateImageRecipe"
+}
+
 type CreateImageRecipeOutput struct {
 
 	// The idempotency token used to make this request idempotent.

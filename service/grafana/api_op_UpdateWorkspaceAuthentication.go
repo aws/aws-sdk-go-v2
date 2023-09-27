@@ -60,6 +60,10 @@ type UpdateWorkspaceAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkspaceAuthenticationInput) operationName() string {
+	return "UpdateWorkspaceAuthentication"
+}
+
 type UpdateWorkspaceAuthenticationOutput struct {
 
 	// A structure that describes the user authentication for this workspace after the

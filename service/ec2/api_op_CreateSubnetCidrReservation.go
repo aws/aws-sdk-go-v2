@@ -72,6 +72,10 @@ type CreateSubnetCidrReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubnetCidrReservationInput) operationName() string {
+	return "CreateSubnetCidrReservation"
+}
+
 type CreateSubnetCidrReservationOutput struct {
 
 	// Information about the created subnet CIDR reservation.

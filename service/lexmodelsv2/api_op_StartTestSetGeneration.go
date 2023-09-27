@@ -67,6 +67,10 @@ type StartTestSetGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTestSetGenerationInput) operationName() string {
+	return "StartTestSetGeneration"
+}
+
 type StartTestSetGenerationOutput struct {
 
 	// The creation date and time for the test set generation.

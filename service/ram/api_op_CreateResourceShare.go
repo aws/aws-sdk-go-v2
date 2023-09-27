@@ -99,6 +99,10 @@ type CreateResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceShareInput) operationName() string {
+	return "CreateResourceShare"
+}
+
 type CreateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

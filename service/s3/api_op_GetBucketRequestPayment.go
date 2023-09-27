@@ -53,6 +53,10 @@ type GetBucketRequestPaymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketRequestPaymentInput) operationName() string {
+	return "GetBucketRequestPayment"
+}
+
 type GetBucketRequestPaymentOutput struct {
 
 	// Specifies who pays for the download and request fees.

@@ -80,6 +80,10 @@ type CreateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateViewInput) operationName() string {
+	return "CreateView"
+}
+
 type CreateViewOutput struct {
 
 	// A structure that contains the details about the new view.

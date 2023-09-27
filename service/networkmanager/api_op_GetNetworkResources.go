@@ -100,6 +100,10 @@ type GetNetworkResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkResourcesInput) operationName() string {
+	return "GetNetworkResources"
+}
+
 type GetNetworkResourcesOutput struct {
 
 	// The network resources.

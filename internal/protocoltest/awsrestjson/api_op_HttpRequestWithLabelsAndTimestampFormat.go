@@ -53,6 +53,10 @@ type HttpRequestWithLabelsAndTimestampFormatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpRequestWithLabelsAndTimestampFormatInput) operationName() string {
+	return "HttpRequestWithLabelsAndTimestampFormat"
+}
+
 type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

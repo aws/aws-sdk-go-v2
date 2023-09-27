@@ -100,6 +100,10 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateJobInput) operationName() string {
+	return "CreateJob"
+}
+
 type CreateJobOutput struct {
 
 	// The ARN of the Amazon Braket job created.

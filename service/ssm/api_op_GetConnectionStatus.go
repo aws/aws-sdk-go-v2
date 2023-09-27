@@ -43,6 +43,10 @@ type GetConnectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectionStatusInput) operationName() string {
+	return "GetConnectionStatus"
+}
+
 type GetConnectionStatusOutput struct {
 
 	// The status of the connection to the managed node. For example, 'Connected' or

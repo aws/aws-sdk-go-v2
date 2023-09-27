@@ -169,6 +169,10 @@ type CreateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceInput) operationName() string {
+	return "CreateInstance"
+}
+
 // Contains the response to a CreateInstance request.
 type CreateInstanceOutput struct {
 

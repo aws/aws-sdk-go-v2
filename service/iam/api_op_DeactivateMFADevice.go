@@ -57,6 +57,10 @@ type DeactivateMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateMFADeviceInput) operationName() string {
+	return "DeactivateMFADevice"
+}
+
 type DeactivateMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

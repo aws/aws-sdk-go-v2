@@ -51,6 +51,10 @@ type GetResourceLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceLFTagsInput) operationName() string {
+	return "GetResourceLFTags"
+}
+
 type GetResourceLFTagsOutput struct {
 
 	// A list of LF-tags applied to a database resource.

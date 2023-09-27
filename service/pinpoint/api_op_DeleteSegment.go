@@ -48,6 +48,10 @@ type DeleteSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSegmentInput) operationName() string {
+	return "DeleteSegment"
+}
+
 type DeleteSegmentOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for

@@ -69,6 +69,10 @@ type DeletePermissionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePermissionVersionInput) operationName() string {
+	return "DeletePermissionVersion"
+}
+
 type DeletePermissionVersionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

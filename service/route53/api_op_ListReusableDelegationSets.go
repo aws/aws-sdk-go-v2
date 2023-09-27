@@ -54,6 +54,10 @@ type ListReusableDelegationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReusableDelegationSetsInput) operationName() string {
+	return "ListReusableDelegationSets"
+}
+
 // A complex type that contains information about the reusable delegation sets
 // that are associated with the current Amazon Web Services account.
 type ListReusableDelegationSetsOutput struct {

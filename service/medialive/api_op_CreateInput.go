@@ -81,6 +81,10 @@ type CreateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInputInput) operationName() string {
+	return "CreateInput"
+}
+
 // Placeholder documentation for CreateInputResponse
 type CreateInputOutput struct {
 

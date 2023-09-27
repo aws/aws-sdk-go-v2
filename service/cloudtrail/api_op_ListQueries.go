@@ -68,6 +68,10 @@ type ListQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQueriesInput) operationName() string {
+	return "ListQueries"
+}
+
 type ListQueriesOutput struct {
 
 	// A token you can use to get the next page of results.

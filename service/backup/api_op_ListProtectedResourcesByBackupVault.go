@@ -56,6 +56,10 @@ type ListProtectedResourcesByBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProtectedResourcesByBackupVaultInput) operationName() string {
+	return "ListProtectedResourcesByBackupVault"
+}
+
 type ListProtectedResourcesByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a

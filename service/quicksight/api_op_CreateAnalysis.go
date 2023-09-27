@@ -85,6 +85,10 @@ type CreateAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnalysisInput) operationName() string {
+	return "CreateAnalysis"
+}
+
 type CreateAnalysisOutput struct {
 
 	// The ID of the analysis.

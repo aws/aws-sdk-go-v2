@@ -44,6 +44,10 @@ type ListNetworkAnalyzerConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNetworkAnalyzerConfigurationsInput) operationName() string {
+	return "ListNetworkAnalyzerConfigurations"
+}
+
 type ListNetworkAnalyzerConfigurationsOutput struct {
 
 	// The list of network analyzer configurations.

@@ -45,6 +45,10 @@ type ListAssociatedStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedStacksInput) operationName() string {
+	return "ListAssociatedStacks"
+}
+
 type ListAssociatedStacksOutput struct {
 
 	// The name of the stack.

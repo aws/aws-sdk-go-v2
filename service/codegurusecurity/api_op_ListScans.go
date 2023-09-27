@@ -50,6 +50,10 @@ type ListScansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScansInput) operationName() string {
+	return "ListScans"
+}
+
 type ListScansOutput struct {
 
 	// A pagination token. You can use this in future calls to ListScans to continue

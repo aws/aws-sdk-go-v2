@@ -56,6 +56,10 @@ type IsMemberInGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IsMemberInGroupsInput) operationName() string {
+	return "IsMemberInGroups"
+}
+
 type IsMemberInGroupsOutput struct {
 
 	// A list containing the results of membership existence checks.

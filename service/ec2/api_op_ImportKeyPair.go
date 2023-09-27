@@ -64,6 +64,10 @@ type ImportKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportKeyPairInput) operationName() string {
+	return "ImportKeyPair"
+}
+
 type ImportKeyPairOutput struct {
 
 	//   - For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as

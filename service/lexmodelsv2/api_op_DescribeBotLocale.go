@@ -58,6 +58,10 @@ type DescribeBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBotLocaleInput) operationName() string {
+	return "DescribeBotLocale"
+}
+
 type DescribeBotLocaleOutput struct {
 
 	// The identifier of the bot associated with the locale.

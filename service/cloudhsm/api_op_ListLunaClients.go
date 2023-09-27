@@ -52,6 +52,10 @@ type ListLunaClientsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLunaClientsInput) operationName() string {
+	return "ListLunaClients"
+}
+
 type ListLunaClientsOutput struct {
 
 	// The list of clients.

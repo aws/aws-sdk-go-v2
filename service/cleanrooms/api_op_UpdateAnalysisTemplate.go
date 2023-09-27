@@ -50,6 +50,10 @@ type UpdateAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAnalysisTemplateInput) operationName() string {
+	return "UpdateAnalysisTemplate"
+}
+
 type UpdateAnalysisTemplateOutput struct {
 
 	// The analysis template.

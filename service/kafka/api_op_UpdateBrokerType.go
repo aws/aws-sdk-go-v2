@@ -53,6 +53,10 @@ type UpdateBrokerTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBrokerTypeInput) operationName() string {
+	return "UpdateBrokerType"
+}
+
 type UpdateBrokerTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

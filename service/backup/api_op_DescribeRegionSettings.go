@@ -39,6 +39,10 @@ type DescribeRegionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRegionSettingsInput) operationName() string {
+	return "DescribeRegionSettings"
+}
+
 type DescribeRegionSettingsOutput struct {
 
 	// Returns whether Backup fully manages the backups for a resource type. For the

@@ -53,6 +53,10 @@ type ListMigrationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMigrationTasksInput) operationName() string {
+	return "ListMigrationTasks"
+}
+
 type ListMigrationTasksOutput struct {
 
 	// Lists the migration task's summary which includes: MigrationTaskName ,

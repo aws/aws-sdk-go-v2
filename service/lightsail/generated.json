@@ -168,6 +168,7 @@
         "api_op_UpdateLoadBalancerAttribute.go",
         "api_op_UpdateRelationalDatabase.go",
         "api_op_UpdateRelationalDatabaseParameters.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

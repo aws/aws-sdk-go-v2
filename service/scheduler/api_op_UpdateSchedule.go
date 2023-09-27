@@ -122,6 +122,10 @@ type UpdateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScheduleInput) operationName() string {
+	return "UpdateSchedule"
+}
+
 type UpdateScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schedule that you updated.

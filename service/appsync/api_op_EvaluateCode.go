@@ -65,6 +65,10 @@ type EvaluateCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EvaluateCodeInput) operationName() string {
+	return "EvaluateCode"
+}
+
 type EvaluateCodeOutput struct {
 
 	// Contains the payload of the response error.

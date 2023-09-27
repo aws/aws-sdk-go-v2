@@ -63,6 +63,10 @@ type ModifyLocalGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyLocalGatewayRouteInput) operationName() string {
+	return "ModifyLocalGatewayRoute"
+}
+
 type ModifyLocalGatewayRouteOutput struct {
 
 	// Information about the local gateway route table.

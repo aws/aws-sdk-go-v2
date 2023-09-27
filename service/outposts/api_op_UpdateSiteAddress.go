@@ -55,6 +55,10 @@ type UpdateSiteAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSiteAddressInput) operationName() string {
+	return "UpdateSiteAddress"
+}
+
 type UpdateSiteAddressOutput struct {
 
 	// Information about an address.

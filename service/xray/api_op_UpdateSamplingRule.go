@@ -42,6 +42,10 @@ type UpdateSamplingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSamplingRuleInput) operationName() string {
+	return "UpdateSamplingRule"
+}
+
 type UpdateSamplingRuleOutput struct {
 
 	// The updated rule definition and metadata.

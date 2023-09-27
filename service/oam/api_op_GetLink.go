@@ -43,6 +43,10 @@ type GetLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLinkInput) operationName() string {
+	return "GetLink"
+}
+
 type GetLinkOutput struct {
 
 	// The ARN of the link.

@@ -49,6 +49,10 @@ type GetRotationOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRotationOverrideInput) operationName() string {
+	return "GetRotationOverride"
+}
+
 type GetRotationOverrideOutput struct {
 
 	// The date and time when the override was created.

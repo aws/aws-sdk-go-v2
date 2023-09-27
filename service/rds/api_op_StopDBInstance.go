@@ -52,6 +52,10 @@ type StopDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDBInstanceInput) operationName() string {
+	return "StopDBInstance"
+}
+
 type StopDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

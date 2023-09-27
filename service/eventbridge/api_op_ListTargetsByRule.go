@@ -54,6 +54,10 @@ type ListTargetsByRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTargetsByRuleInput) operationName() string {
+	return "ListTargetsByRule"
+}
+
 type ListTargetsByRuleOutput struct {
 
 	// Indicates whether there are additional results to retrieve. If there are no

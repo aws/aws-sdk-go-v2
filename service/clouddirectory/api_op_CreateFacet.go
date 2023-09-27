@@ -70,6 +70,10 @@ type CreateFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFacetInput) operationName() string {
+	return "CreateFacet"
+}
+
 type CreateFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

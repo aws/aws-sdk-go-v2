@@ -52,6 +52,10 @@ type GetTestGridSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTestGridSessionInput) operationName() string {
+	return "GetTestGridSession"
+}
+
 type GetTestGridSessionOutput struct {
 
 	// The TestGridSession that was requested.

@@ -77,6 +77,10 @@ type InitiateVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateVaultLockInput) operationName() string {
+	return "InitiateVaultLock"
+}
+
 // Contains the Amazon S3 Glacier response to your request.
 type InitiateVaultLockOutput struct {
 

@@ -43,6 +43,10 @@ type GetEarthObservationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEarthObservationJobInput) operationName() string {
+	return "GetEarthObservationJob"
+}
+
 type GetEarthObservationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Earth Observation job.

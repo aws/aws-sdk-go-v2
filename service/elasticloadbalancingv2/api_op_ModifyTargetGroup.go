@@ -87,6 +87,10 @@ type ModifyTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTargetGroupInput) operationName() string {
+	return "ModifyTargetGroup"
+}
+
 type ModifyTargetGroupOutput struct {
 
 	// Information about the modified target group.

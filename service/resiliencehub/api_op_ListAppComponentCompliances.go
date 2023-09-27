@@ -53,6 +53,10 @@ type ListAppComponentCompliancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppComponentCompliancesInput) operationName() string {
+	return "ListAppComponentCompliances"
+}
+
 type ListAppComponentCompliancesOutput struct {
 
 	// The compliances for an Resilience Hub Application Component, returned as an

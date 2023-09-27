@@ -49,6 +49,10 @@ type UpdateTagsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTagsForDomainInput) operationName() string {
+	return "UpdateTagsForDomain"
+}
+
 type UpdateTagsForDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

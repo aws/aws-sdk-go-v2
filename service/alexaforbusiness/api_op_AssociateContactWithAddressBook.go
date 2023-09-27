@@ -48,6 +48,10 @@ type AssociateContactWithAddressBookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateContactWithAddressBookInput) operationName() string {
+	return "AssociateContactWithAddressBook"
+}
+
 type AssociateContactWithAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

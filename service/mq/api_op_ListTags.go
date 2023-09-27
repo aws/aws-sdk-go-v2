@@ -41,6 +41,10 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsInput) operationName() string {
+	return "ListTags"
+}
+
 type ListTagsOutput struct {
 
 	// The key-value pair for the resource tag.

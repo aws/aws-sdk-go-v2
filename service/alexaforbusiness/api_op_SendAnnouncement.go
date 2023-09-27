@@ -60,6 +60,10 @@ type SendAnnouncementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendAnnouncementInput) operationName() string {
+	return "SendAnnouncement"
+}
+
 type SendAnnouncementOutput struct {
 
 	// The identifier of the announcement.

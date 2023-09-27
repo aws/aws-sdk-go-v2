@@ -42,6 +42,10 @@ type DescribeAppInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInstanceInput) operationName() string {
+	return "DescribeAppInstance"
+}
+
 type DescribeAppInstanceOutput struct {
 
 	// The ARN, metadata, created and last-updated timestamps, and the name of the

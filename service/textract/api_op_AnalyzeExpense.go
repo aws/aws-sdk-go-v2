@@ -61,6 +61,10 @@ type AnalyzeExpenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AnalyzeExpenseInput) operationName() string {
+	return "AnalyzeExpense"
+}
+
 type AnalyzeExpenseOutput struct {
 
 	// Information about the input document.

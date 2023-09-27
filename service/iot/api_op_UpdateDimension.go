@@ -54,6 +54,10 @@ type UpdateDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDimensionInput) operationName() string {
+	return "UpdateDimension"
+}
+
 type UpdateDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN)of the created dimension.

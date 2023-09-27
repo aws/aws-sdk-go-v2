@@ -52,6 +52,10 @@ type GetRelationalDatabaseParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseParametersInput) operationName() string {
+	return "GetRelationalDatabaseParameters"
+}
+
 type GetRelationalDatabaseParametersOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

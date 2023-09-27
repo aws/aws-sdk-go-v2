@@ -51,6 +51,10 @@ type GetPullRequestOverrideStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPullRequestOverrideStateInput) operationName() string {
+	return "GetPullRequestOverrideState"
+}
+
 type GetPullRequestOverrideStateOutput struct {
 
 	// A Boolean value that indicates whether a pull request has had its rules set

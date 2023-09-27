@@ -59,6 +59,10 @@ type ListAnomalyGroupTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnomalyGroupTimeSeriesInput) operationName() string {
+	return "ListAnomalyGroupTimeSeries"
+}
+
 type ListAnomalyGroupTimeSeriesOutput struct {
 
 	// The ID of the anomaly group.

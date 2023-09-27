@@ -48,6 +48,10 @@ type CreateSubscriptionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubscriptionDefinitionVersionInput) operationName() string {
+	return "CreateSubscriptionDefinitionVersion"
+}
+
 type CreateSubscriptionDefinitionVersionOutput struct {
 
 	// The ARN of the version.

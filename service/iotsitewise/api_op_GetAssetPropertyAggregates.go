@@ -96,6 +96,10 @@ type GetAssetPropertyAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssetPropertyAggregatesInput) operationName() string {
+	return "GetAssetPropertyAggregates"
+}
+
 type GetAssetPropertyAggregatesOutput struct {
 
 	// The requested aggregated values.

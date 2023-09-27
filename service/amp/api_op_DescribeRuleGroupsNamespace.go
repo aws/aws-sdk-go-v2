@@ -48,6 +48,10 @@ type DescribeRuleGroupsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRuleGroupsNamespaceInput) operationName() string {
+	return "DescribeRuleGroupsNamespace"
+}
+
 // Represents the output of a DescribeRuleGroupsNamespace operation.
 type DescribeRuleGroupsNamespaceOutput struct {
 

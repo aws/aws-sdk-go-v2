@@ -59,6 +59,10 @@ type GetLatestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLatestConfigurationInput) operationName() string {
+	return "GetLatestConfiguration"
+}
+
 type GetLatestConfigurationOutput struct {
 
 	// The data of the configuration. This may be empty if the client already has the

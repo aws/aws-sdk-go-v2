@@ -45,6 +45,10 @@ type GetEndpointAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEndpointAttributesInput) operationName() string {
+	return "GetEndpointAttributes"
+}
+
 // Response from GetEndpointAttributes of the EndpointArn.
 type GetEndpointAttributesOutput struct {
 

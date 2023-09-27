@@ -74,6 +74,10 @@ type DescribeBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBackupsInput) operationName() string {
+	return "DescribeBackups"
+}
+
 // Response object for the DescribeBackups operation.
 type DescribeBackupsOutput struct {
 

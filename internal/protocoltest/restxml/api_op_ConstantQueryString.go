@@ -36,6 +36,10 @@ type ConstantQueryStringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConstantQueryStringInput) operationName() string {
+	return "ConstantQueryString"
+}
+
 type ConstantQueryStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

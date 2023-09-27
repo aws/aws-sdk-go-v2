@@ -87,6 +87,10 @@ type PutLogEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutLogEventsInput) operationName() string {
+	return "PutLogEvents"
+}
+
 type PutLogEventsOutput struct {
 
 	// The next sequence token. This field has been deprecated. The sequence token is

@@ -41,6 +41,10 @@ type DeleteHsmClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHsmClientCertificateInput) operationName() string {
+	return "DeleteHsmClientCertificate"
+}
+
 type DeleteHsmClientCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

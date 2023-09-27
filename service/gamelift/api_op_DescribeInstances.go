@@ -79,6 +79,10 @@ type DescribeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstancesInput) operationName() string {
+	return "DescribeInstances"
+}
+
 type DescribeInstancesOutput struct {
 
 	// A collection of objects containing properties for each instance returned.

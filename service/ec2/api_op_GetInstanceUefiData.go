@@ -57,6 +57,10 @@ type GetInstanceUefiDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceUefiDataInput) operationName() string {
+	return "GetInstanceUefiData"
+}
+
 type GetInstanceUefiDataOutput struct {
 
 	// The ID of the instance from which to retrieve the UEFI data.

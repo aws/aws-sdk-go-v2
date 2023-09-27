@@ -44,6 +44,10 @@ type DisassociateSkillFromUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateSkillFromUsersInput) operationName() string {
+	return "DisassociateSkillFromUsers"
+}
+
 type DisassociateSkillFromUsersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

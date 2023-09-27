@@ -46,6 +46,10 @@ type AssociateMulticastGroupWithFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateMulticastGroupWithFuotaTaskInput) operationName() string {
+	return "AssociateMulticastGroupWithFuotaTask"
+}
+
 type AssociateMulticastGroupWithFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

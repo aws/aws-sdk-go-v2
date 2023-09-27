@@ -42,6 +42,10 @@ type GetLicenseUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLicenseUsageInput) operationName() string {
+	return "GetLicenseUsage"
+}
+
 type GetLicenseUsageOutput struct {
 
 	// License usage details.

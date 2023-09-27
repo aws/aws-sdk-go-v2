@@ -89,6 +89,10 @@ type MergeBranchesBySquashInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MergeBranchesBySquashInput) operationName() string {
+	return "MergeBranchesBySquash"
+}
+
 type MergeBranchesBySquashOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.

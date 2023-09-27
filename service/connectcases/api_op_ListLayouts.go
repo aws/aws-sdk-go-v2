@@ -50,6 +50,10 @@ type ListLayoutsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLayoutsInput) operationName() string {
+	return "ListLayouts"
+}
+
 type ListLayoutsOutput struct {
 
 	// The layouts for the domain.

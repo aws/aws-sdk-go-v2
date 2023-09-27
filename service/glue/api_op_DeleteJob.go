@@ -42,6 +42,10 @@ type DeleteJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteJobInput) operationName() string {
+	return "DeleteJob"
+}
+
 type DeleteJobOutput struct {
 
 	// The name of the job definition that was deleted.

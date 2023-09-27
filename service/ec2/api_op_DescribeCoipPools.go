@@ -60,6 +60,10 @@ type DescribeCoipPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCoipPoolsInput) operationName() string {
+	return "DescribeCoipPools"
+}
+
 type DescribeCoipPoolsOutput struct {
 
 	// Information about the address pools.

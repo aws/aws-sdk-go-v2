@@ -59,6 +59,10 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClustersInput) operationName() string {
+	return "ListClusters"
+}
+
 type ListClustersOutput struct {
 
 	// A list of all of the clusters for your account in the specified Region.

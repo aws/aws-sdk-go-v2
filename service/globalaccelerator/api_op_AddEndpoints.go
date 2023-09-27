@@ -61,6 +61,10 @@ type AddEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddEndpointsInput) operationName() string {
+	return "AddEndpoints"
+}
+
 type AddEndpointsOutput struct {
 
 	// The list of endpoint objects.

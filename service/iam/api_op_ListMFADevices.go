@@ -63,6 +63,10 @@ type ListMFADevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMFADevicesInput) operationName() string {
+	return "ListMFADevices"
+}
+
 // Contains the response to a successful ListMFADevices request.
 type ListMFADevicesOutput struct {
 

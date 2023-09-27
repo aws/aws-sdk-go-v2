@@ -41,6 +41,10 @@ type DescribeHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHubInput) operationName() string {
+	return "DescribeHub"
+}
+
 type DescribeHubOutput struct {
 
 	// Whether to automatically enable new controls when they are added to standards

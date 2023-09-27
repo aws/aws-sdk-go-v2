@@ -43,6 +43,10 @@ type GetLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoggingConfigurationInput) operationName() string {
+	return "GetLoggingConfiguration"
+}
+
 type GetLoggingConfigurationOutput struct {
 
 	// Logging-configuration ARN, from the request (if identifier was an ARN).

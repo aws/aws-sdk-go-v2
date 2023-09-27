@@ -172,6 +172,10 @@ type PutBucketAclInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutBucketAclInput) operationName() string {
+	return "PutBucketAcl"
+}
+
 type PutBucketAclOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

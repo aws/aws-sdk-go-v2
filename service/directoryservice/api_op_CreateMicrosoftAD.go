@@ -80,6 +80,10 @@ type CreateMicrosoftADInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMicrosoftADInput) operationName() string {
+	return "CreateMicrosoftAD"
+}
+
 // Result of a CreateMicrosoftAD request.
 type CreateMicrosoftADOutput struct {
 

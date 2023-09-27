@@ -123,6 +123,10 @@ type StartChatContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartChatContactInput) operationName() string {
+	return "StartChatContact"
+}
+
 type StartChatContactOutput struct {
 
 	// The identifier of this contact within the Amazon Connect instance.

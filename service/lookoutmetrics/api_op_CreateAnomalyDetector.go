@@ -57,6 +57,10 @@ type CreateAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnomalyDetectorInput) operationName() string {
+	return "CreateAnomalyDetector"
+}
+
 type CreateAnomalyDetectorOutput struct {
 
 	// The ARN of the detector.

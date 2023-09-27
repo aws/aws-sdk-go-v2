@@ -244,6 +244,10 @@ type CreateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStackInput) operationName() string {
+	return "CreateStack"
+}
+
 // Contains the response to a CreateStack request.
 type CreateStackOutput struct {
 

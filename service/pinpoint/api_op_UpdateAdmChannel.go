@@ -50,6 +50,10 @@ type UpdateAdmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAdmChannelInput) operationName() string {
+	return "UpdateAdmChannel"
+}
+
 type UpdateAdmChannelOutput struct {
 
 	// Provides information about the status and settings of the ADM (Amazon Device

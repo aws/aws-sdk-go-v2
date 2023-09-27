@@ -55,6 +55,10 @@ type ExecuteFastResetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteFastResetInput) operationName() string {
+	return "ExecuteFastReset"
+}
+
 type ExecuteFastResetOutput struct {
 
 	// The status is only returned for the performDatabaseReset action, and indicates

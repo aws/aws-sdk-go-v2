@@ -48,6 +48,10 @@ type DescribeChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChangeSetInput) operationName() string {
+	return "DescribeChangeSet"
+}
+
 type DescribeChangeSetOutput struct {
 
 	// An array of ChangeSummary objects.

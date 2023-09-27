@@ -47,6 +47,10 @@ type DeletePendingAggregationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePendingAggregationRequestInput) operationName() string {
+	return "DeletePendingAggregationRequest"
+}
+
 type DeletePendingAggregationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

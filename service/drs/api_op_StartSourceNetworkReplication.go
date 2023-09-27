@@ -43,6 +43,10 @@ type StartSourceNetworkReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSourceNetworkReplicationInput) operationName() string {
+	return "StartSourceNetworkReplication"
+}
+
 type StartSourceNetworkReplicationOutput struct {
 
 	// Source Network which was requested for replication.

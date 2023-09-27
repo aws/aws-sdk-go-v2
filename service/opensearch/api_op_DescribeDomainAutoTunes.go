@@ -55,6 +55,10 @@ type DescribeDomainAutoTunesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainAutoTunesInput) operationName() string {
+	return "DescribeDomainAutoTunes"
+}
+
 // The result of a DescribeDomainAutoTunes request.
 type DescribeDomainAutoTunesOutput struct {
 

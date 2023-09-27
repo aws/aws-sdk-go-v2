@@ -60,6 +60,10 @@ type GetObjectLockConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectLockConfigurationInput) operationName() string {
+	return "GetObjectLockConfiguration"
+}
+
 type GetObjectLockConfigurationOutput struct {
 
 	// The specified bucket's Object Lock configuration.

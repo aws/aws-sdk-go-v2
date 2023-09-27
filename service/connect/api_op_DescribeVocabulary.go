@@ -48,6 +48,10 @@ type DescribeVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVocabularyInput) operationName() string {
+	return "DescribeVocabulary"
+}
+
 type DescribeVocabularyOutput struct {
 
 	// A list of specific words that you want Contact Lens for Amazon Connect to

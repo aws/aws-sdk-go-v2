@@ -45,6 +45,10 @@ type ListBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBlueprintsInput) operationName() string {
+	return "ListBlueprints"
+}
+
 type ListBlueprintsOutput struct {
 
 	// List of names of blueprints in the account.

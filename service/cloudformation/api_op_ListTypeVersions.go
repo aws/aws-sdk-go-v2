@@ -76,6 +76,10 @@ type ListTypeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTypeVersionsInput) operationName() string {
+	return "ListTypeVersions"
+}
+
 type ListTypeVersionsOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to

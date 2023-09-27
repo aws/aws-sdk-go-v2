@@ -68,6 +68,10 @@ type DisableMetricsCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableMetricsCollectionInput) operationName() string {
+	return "DisableMetricsCollection"
+}
+
 type DisableMetricsCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

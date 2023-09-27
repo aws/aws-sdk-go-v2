@@ -46,6 +46,10 @@ type GetProtocolsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProtocolsListInput) operationName() string {
+	return "GetProtocolsList"
+}
+
 type GetProtocolsListOutput struct {
 
 	// Information about the specified Firewall Manager protocols list.

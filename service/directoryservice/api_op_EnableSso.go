@@ -58,6 +58,10 @@ type EnableSsoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableSsoInput) operationName() string {
+	return "EnableSso"
+}
+
 // Contains the results of the EnableSso operation.
 type EnableSsoOutput struct {
 	// Metadata pertaining to the operation's result.

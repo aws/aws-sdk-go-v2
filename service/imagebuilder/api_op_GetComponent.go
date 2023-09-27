@@ -43,6 +43,10 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentInput) operationName() string {
+	return "GetComponent"
+}
+
 type GetComponentOutput struct {
 
 	// The component object associated with the specified ARN.

@@ -49,6 +49,10 @@ type GetConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfiguredTableAnalysisRuleInput) operationName() string {
+	return "GetConfiguredTableAnalysisRule"
+}
+
 type GetConfiguredTableAnalysisRuleOutput struct {
 
 	// The entire analysis rule output.

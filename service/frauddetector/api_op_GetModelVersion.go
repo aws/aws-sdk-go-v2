@@ -52,6 +52,10 @@ type GetModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelVersionInput) operationName() string {
+	return "GetModelVersion"
+}
+
 type GetModelVersionOutput struct {
 
 	// The model version ARN.

@@ -59,6 +59,10 @@ type StartFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFlowInput) operationName() string {
+	return "StartFlow"
+}
+
 type StartFlowOutput struct {
 
 	// Returns the internal execution ID of an on-demand flow when the flow is

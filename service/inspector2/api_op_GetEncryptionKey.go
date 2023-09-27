@@ -47,6 +47,10 @@ type GetEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEncryptionKeyInput) operationName() string {
+	return "GetEncryptionKey"
+}
+
 type GetEncryptionKeyOutput struct {
 
 	// A kms key ID.

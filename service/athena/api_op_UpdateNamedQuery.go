@@ -54,6 +54,10 @@ type UpdateNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNamedQueryInput) operationName() string {
+	return "UpdateNamedQuery"
+}
+
 type UpdateNamedQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

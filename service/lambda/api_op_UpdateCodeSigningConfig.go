@@ -53,6 +53,10 @@ type UpdateCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCodeSigningConfigInput) operationName() string {
+	return "UpdateCodeSigningConfig"
+}
+
 type UpdateCodeSigningConfigOutput struct {
 
 	// The code signing configuration

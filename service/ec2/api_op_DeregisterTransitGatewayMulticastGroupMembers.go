@@ -53,6 +53,10 @@ type DeregisterTransitGatewayMulticastGroupMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterTransitGatewayMulticastGroupMembersInput) operationName() string {
+	return "DeregisterTransitGatewayMulticastGroupMembers"
+}
+
 type DeregisterTransitGatewayMulticastGroupMembersOutput struct {
 
 	// Information about the deregistered members.

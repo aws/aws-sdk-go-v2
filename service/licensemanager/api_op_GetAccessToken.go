@@ -45,6 +45,10 @@ type GetAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessTokenInput) operationName() string {
+	return "GetAccessToken"
+}
+
 type GetAccessTokenOutput struct {
 
 	// Temporary access token.

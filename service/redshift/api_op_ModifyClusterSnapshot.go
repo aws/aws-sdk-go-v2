@@ -54,6 +54,10 @@ type ModifyClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterSnapshotInput) operationName() string {
+	return "ModifyClusterSnapshot"
+}
+
 type ModifyClusterSnapshotOutput struct {
 
 	// Describes a snapshot.

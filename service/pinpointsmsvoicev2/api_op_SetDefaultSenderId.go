@@ -54,6 +54,10 @@ type SetDefaultSenderIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetDefaultSenderIdInput) operationName() string {
+	return "SetDefaultSenderId"
+}
+
 type SetDefaultSenderIdOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated configuration set.

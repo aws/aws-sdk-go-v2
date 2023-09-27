@@ -55,6 +55,10 @@ type BatchAssociateClientDeviceWithCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchAssociateClientDeviceWithCoreDeviceInput) operationName() string {
+	return "BatchAssociateClientDeviceWithCoreDevice"
+}
+
 type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
 
 	// The list of any errors for the entries in the request. Each error entry

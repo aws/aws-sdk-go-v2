@@ -58,6 +58,10 @@ type ListAssessmentRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentRunsInput) operationName() string {
+	return "ListAssessmentRuns"
+}
+
 type ListAssessmentRunsOutput struct {
 
 	// A list of ARNs that specifies the assessment runs that are returned by the

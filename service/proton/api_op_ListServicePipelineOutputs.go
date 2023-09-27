@@ -49,6 +49,10 @@ type ListServicePipelineOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicePipelineOutputsInput) operationName() string {
+	return "ListServicePipelineOutputs"
+}
+
 type ListServicePipelineOutputsOutput struct {
 
 	// An array of service pipeline Infrastructure as Code (IaC) outputs.

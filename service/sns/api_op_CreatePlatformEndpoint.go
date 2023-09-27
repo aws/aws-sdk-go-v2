@@ -72,6 +72,10 @@ type CreatePlatformEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePlatformEndpointInput) operationName() string {
+	return "CreatePlatformEndpoint"
+}
+
 // Response from CreateEndpoint action.
 type CreatePlatformEndpointOutput struct {
 

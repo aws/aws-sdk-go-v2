@@ -48,6 +48,10 @@ type DescribeMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMultiplexProgramInput) operationName() string {
+	return "DescribeMultiplexProgram"
+}
+
 // Placeholder documentation for DescribeMultiplexProgramResponse
 type DescribeMultiplexProgramOutput struct {
 

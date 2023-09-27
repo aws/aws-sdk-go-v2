@@ -49,6 +49,10 @@ type BatchWriteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchWriteInput) operationName() string {
+	return "BatchWrite"
+}
+
 type BatchWriteOutput struct {
 
 	// A list of all the responses for each batch write.

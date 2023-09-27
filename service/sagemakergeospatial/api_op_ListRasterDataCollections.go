@@ -44,6 +44,10 @@ type ListRasterDataCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRasterDataCollectionsInput) operationName() string {
+	return "ListRasterDataCollections"
+}
+
 type ListRasterDataCollectionsOutput struct {
 
 	// Contains summary information about the raster data collection.

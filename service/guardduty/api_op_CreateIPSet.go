@@ -75,6 +75,10 @@ type CreateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIPSetInput) operationName() string {
+	return "CreateIPSet"
+}
+
 type CreateIPSetOutput struct {
 
 	// The ID of the IPSet resource.

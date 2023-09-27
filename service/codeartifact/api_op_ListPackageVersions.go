@@ -92,6 +92,10 @@ type ListPackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackageVersionsInput) operationName() string {
+	return "ListPackageVersions"
+}
+
 type ListPackageVersionsOutput struct {
 
 	// The default package version to display. This depends on the package format:

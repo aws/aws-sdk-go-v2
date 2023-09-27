@@ -49,6 +49,10 @@ type UnshareDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnshareDirectoryInput) operationName() string {
+	return "UnshareDirectory"
+}
+
 type UnshareDirectoryOutput struct {
 
 	// Identifier of the directory stored in the directory consumer account that is to

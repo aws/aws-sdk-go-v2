@@ -45,6 +45,10 @@ type ListPickupLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPickupLocationsInput) operationName() string {
+	return "ListPickupLocations"
+}
+
 type ListPickupLocationsOutput struct {
 
 	// Information about the address of pickup locations.

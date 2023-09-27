@@ -43,6 +43,10 @@ type DeleteGeofenceCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGeofenceCollectionInput) operationName() string {
+	return "DeleteGeofenceCollection"
+}
+
 type DeleteGeofenceCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type ListPlatformApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPlatformApplicationsInput) operationName() string {
+	return "ListPlatformApplications"
+}
+
 // Response for ListPlatformApplications action.
 type ListPlatformApplicationsOutput struct {
 

@@ -50,6 +50,10 @@ type UpdateRoutingControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoutingControlInput) operationName() string {
+	return "UpdateRoutingControl"
+}
+
 type UpdateRoutingControlOutput struct {
 
 	// The routing control that was updated.

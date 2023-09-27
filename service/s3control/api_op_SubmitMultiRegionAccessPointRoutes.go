@@ -78,6 +78,10 @@ type SubmitMultiRegionAccessPointRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitMultiRegionAccessPointRoutesInput) operationName() string {
+	return "SubmitMultiRegionAccessPointRoutes"
+}
+
 type SubmitMultiRegionAccessPointRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

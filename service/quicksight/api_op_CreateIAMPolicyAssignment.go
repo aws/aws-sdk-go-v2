@@ -76,6 +76,10 @@ type CreateIAMPolicyAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIAMPolicyAssignmentInput) operationName() string {
+	return "CreateIAMPolicyAssignment"
+}
+
 type CreateIAMPolicyAssignmentOutput struct {
 
 	// The ID for the assignment.

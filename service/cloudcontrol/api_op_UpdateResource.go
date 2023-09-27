@@ -103,6 +103,10 @@ type UpdateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceInput) operationName() string {
+	return "UpdateResource"
+}
+
 type UpdateResourceOutput struct {
 
 	// Represents the current status of the resource update request. Use the

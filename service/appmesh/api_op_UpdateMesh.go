@@ -49,6 +49,10 @@ type UpdateMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMeshInput) operationName() string {
+	return "UpdateMesh"
+}
+
 type UpdateMeshOutput struct {
 
 	// An object that represents a service mesh returned by a describe operation.

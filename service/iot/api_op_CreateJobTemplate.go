@@ -93,6 +93,10 @@ type CreateJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateJobTemplateInput) operationName() string {
+	return "CreateJobTemplate"
+}
+
 type CreateJobTemplateOutput struct {
 
 	// The ARN of the job template.

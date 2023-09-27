@@ -44,6 +44,10 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationSetsInput) operationName() string {
+	return "ListConfigurationSets"
+}
+
 // An object that contains information about the configuration sets for your
 // account in the current region.
 type ListConfigurationSetsOutput struct {

@@ -44,6 +44,10 @@ type DescribeLocationSmbInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationSmbInput) operationName() string {
+	return "DescribeLocationSmb"
+}
+
 // DescribeLocationSmbResponse
 type DescribeLocationSmbOutput struct {
 

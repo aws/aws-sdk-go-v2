@@ -45,6 +45,10 @@ type ListCustomRoutingAcceleratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomRoutingAcceleratorsInput) operationName() string {
+	return "ListCustomRoutingAccelerators"
+}
+
 type ListCustomRoutingAcceleratorsOutput struct {
 
 	// The list of custom routing accelerators for a customer account.

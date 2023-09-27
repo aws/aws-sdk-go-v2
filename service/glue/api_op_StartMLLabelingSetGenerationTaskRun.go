@@ -56,6 +56,10 @@ type StartMLLabelingSetGenerationTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMLLabelingSetGenerationTaskRunInput) operationName() string {
+	return "StartMLLabelingSetGenerationTaskRun"
+}
+
 type StartMLLabelingSetGenerationTaskRunOutput struct {
 
 	// The unique run identifier that is associated with this task run.

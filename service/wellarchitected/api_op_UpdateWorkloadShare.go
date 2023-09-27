@@ -54,6 +54,10 @@ type UpdateWorkloadShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkloadShareInput) operationName() string {
+	return "UpdateWorkloadShare"
+}
+
 // Input for Update Workload Share
 type UpdateWorkloadShareOutput struct {
 

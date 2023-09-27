@@ -48,6 +48,10 @@ type BatchDeleteGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteGeofenceInput) operationName() string {
+	return "BatchDeleteGeofence"
+}
+
 type BatchDeleteGeofenceOutput struct {
 
 	// Contains error details for each geofence that failed to delete.

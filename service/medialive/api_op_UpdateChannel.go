@@ -72,6 +72,10 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChannelInput) operationName() string {
+	return "UpdateChannel"
+}
+
 // Placeholder documentation for UpdateChannelResponse
 type UpdateChannelOutput struct {
 

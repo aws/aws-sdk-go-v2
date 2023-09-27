@@ -48,6 +48,10 @@ type AddInstanceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddInstanceGroupsInput) operationName() string {
+	return "AddInstanceGroups"
+}
+
 // Output from an AddInstanceGroups call.
 type AddInstanceGroupsOutput struct {
 

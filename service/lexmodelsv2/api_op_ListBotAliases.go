@@ -52,6 +52,10 @@ type ListBotAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBotAliasesInput) operationName() string {
+	return "ListBotAliases"
+}
+
 type ListBotAliasesOutput struct {
 
 	// Summary information for the bot aliases that meet the filter criteria specified

@@ -50,6 +50,10 @@ type ListPipelineParametersForExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelineParametersForExecutionInput) operationName() string {
+	return "ListPipelineParametersForExecution"
+}
+
 type ListPipelineParametersForExecutionOutput struct {
 
 	// If the result of the previous ListPipelineParametersForExecution request was

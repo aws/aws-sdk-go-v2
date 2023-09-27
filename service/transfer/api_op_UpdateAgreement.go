@@ -94,6 +94,10 @@ type UpdateAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAgreementInput) operationName() string {
+	return "UpdateAgreement"
+}
+
 type UpdateAgreementOutput struct {
 
 	// A unique identifier for the agreement. This identifier is returned when you

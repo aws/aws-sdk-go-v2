@@ -67,6 +67,10 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetIdentityHeadersInNotificationsEnabledInput) operationName() string {
+	return "SetIdentityHeadersInNotificationsEnabled"
+}
+
 // An empty element returned on a successful request.
 type SetIdentityHeadersInNotificationsEnabledOutput struct {
 	// Metadata pertaining to the operation's result.

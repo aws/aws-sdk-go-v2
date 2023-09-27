@@ -47,6 +47,10 @@ type BatchGetTracesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetTracesInput) operationName() string {
+	return "BatchGetTraces"
+}
+
 type BatchGetTracesOutput struct {
 
 	// Pagination token.

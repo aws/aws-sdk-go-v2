@@ -57,6 +57,10 @@ type CreateViewVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateViewVersionInput) operationName() string {
+	return "CreateViewVersion"
+}
+
 type CreateViewVersionOutput struct {
 
 	// All view data is contained within the View object.

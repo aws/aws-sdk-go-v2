@@ -180,6 +180,10 @@ type ReceiveMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReceiveMessageInput) operationName() string {
+	return "ReceiveMessage"
+}
+
 // A list of received messages.
 type ReceiveMessageOutput struct {
 

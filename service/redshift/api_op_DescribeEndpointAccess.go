@@ -59,6 +59,10 @@ type DescribeEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEndpointAccessInput) operationName() string {
+	return "DescribeEndpointAccess"
+}
+
 type DescribeEndpointAccessOutput struct {
 
 	// The list of endpoints with access to the cluster.

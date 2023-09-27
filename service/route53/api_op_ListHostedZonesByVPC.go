@@ -85,6 +85,10 @@ type ListHostedZonesByVPCInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListHostedZonesByVPCInput) operationName() string {
+	return "ListHostedZonesByVPC"
+}
+
 type ListHostedZonesByVPCOutput struct {
 
 	// A list that contains one HostedZoneSummary element for each hosted zone that

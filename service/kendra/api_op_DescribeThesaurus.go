@@ -48,6 +48,10 @@ type DescribeThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThesaurusInput) operationName() string {
+	return "DescribeThesaurus"
+}
+
 type DescribeThesaurusOutput struct {
 
 	// The Unix timestamp when the thesaurus was created.

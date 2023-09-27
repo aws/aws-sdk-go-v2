@@ -49,6 +49,10 @@ type GetMLModelTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLModelTransformJobInput) operationName() string {
+	return "GetMLModelTransformJob"
+}
+
 type GetMLModelTransformJobOutput struct {
 
 	// The base data processing job.

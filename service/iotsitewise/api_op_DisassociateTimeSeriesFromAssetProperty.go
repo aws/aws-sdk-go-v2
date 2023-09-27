@@ -56,6 +56,10 @@ type DisassociateTimeSeriesFromAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTimeSeriesFromAssetPropertyInput) operationName() string {
+	return "DisassociateTimeSeriesFromAssetProperty"
+}
+
 type DisassociateTimeSeriesFromAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,6 +42,10 @@ type GetCrawlerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCrawlerInput) operationName() string {
+	return "GetCrawler"
+}
+
 type GetCrawlerOutput struct {
 
 	// The metadata for the specified crawler.

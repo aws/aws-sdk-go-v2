@@ -43,6 +43,10 @@ type StopAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAppBlockBuilderInput) operationName() string {
+	return "StopAppBlockBuilder"
+}
+
 type StopAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.

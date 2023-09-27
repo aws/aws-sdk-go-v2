@@ -53,6 +53,10 @@ type DeleteLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLaunchProfileInput) operationName() string {
+	return "DeleteLaunchProfile"
+}
+
 type DeleteLaunchProfileOutput struct {
 
 	// The launch profile.

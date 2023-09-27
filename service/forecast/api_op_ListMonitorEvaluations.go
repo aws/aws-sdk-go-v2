@@ -67,6 +67,10 @@ type ListMonitorEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitorEvaluationsInput) operationName() string {
+	return "ListMonitorEvaluations"
+}
+
 type ListMonitorEvaluationsOutput struct {
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve

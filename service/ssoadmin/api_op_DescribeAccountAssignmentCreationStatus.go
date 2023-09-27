@@ -50,6 +50,10 @@ type DescribeAccountAssignmentCreationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountAssignmentCreationStatusInput) operationName() string {
+	return "DescribeAccountAssignmentCreationStatus"
+}
+
 type DescribeAccountAssignmentCreationStatusOutput struct {
 
 	// The status object for the account assignment creation operation.

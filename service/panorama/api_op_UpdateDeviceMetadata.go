@@ -44,6 +44,10 @@ type UpdateDeviceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDeviceMetadataInput) operationName() string {
+	return "UpdateDeviceMetadata"
+}
+
 type UpdateDeviceMetadataOutput struct {
 
 	// The device's ID.

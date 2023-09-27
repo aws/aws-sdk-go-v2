@@ -43,6 +43,10 @@ type GetTrafficDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTrafficDistributionInput) operationName() string {
+	return "GetTrafficDistribution"
+}
+
 type GetTrafficDistributionOutput struct {
 
 	// The distribution of agents between the instance and its replica(s).

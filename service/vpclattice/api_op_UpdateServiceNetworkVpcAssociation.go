@@ -49,6 +49,10 @@ type UpdateServiceNetworkVpcAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServiceNetworkVpcAssociationInput) operationName() string {
+	return "UpdateServiceNetworkVpcAssociation"
+}
+
 type UpdateServiceNetworkVpcAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.

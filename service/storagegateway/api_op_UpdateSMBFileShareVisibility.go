@@ -48,6 +48,10 @@ type UpdateSMBFileShareVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSMBFileShareVisibilityInput) operationName() string {
+	return "UpdateSMBFileShareVisibility"
+}
+
 type UpdateSMBFileShareVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

@@ -63,6 +63,10 @@ type UpdateAssumeRolePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssumeRolePolicyInput) operationName() string {
+	return "UpdateAssumeRolePolicy"
+}
+
 type UpdateAssumeRolePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

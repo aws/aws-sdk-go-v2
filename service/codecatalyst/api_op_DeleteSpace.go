@@ -42,6 +42,10 @@ type DeleteSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSpaceInput) operationName() string {
+	return "DeleteSpace"
+}
+
 type DeleteSpaceOutput struct {
 
 	// The name of the space.

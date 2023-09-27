@@ -42,6 +42,10 @@ type DescribeFeatureTransformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFeatureTransformationInput) operationName() string {
+	return "DescribeFeatureTransformation"
+}
+
 type DescribeFeatureTransformationOutput struct {
 
 	// A listing of the FeatureTransformation properties.

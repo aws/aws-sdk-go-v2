@@ -81,6 +81,10 @@ type UpdateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBotInput) operationName() string {
+	return "UpdateBot"
+}
+
 type UpdateBotOutput struct {
 
 	// The unique identifier of the bot that was updated.

@@ -43,6 +43,10 @@ type DeleteForecastExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteForecastExportJobInput) operationName() string {
+	return "DeleteForecastExportJob"
+}
+
 type DeleteForecastExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

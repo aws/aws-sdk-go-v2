@@ -88,6 +88,10 @@ type UpdateJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateJobExecutionInput) operationName() string {
+	return "UpdateJobExecution"
+}
+
 type UpdateJobExecutionOutput struct {
 
 	// A JobExecutionState object.

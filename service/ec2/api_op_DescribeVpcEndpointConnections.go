@@ -63,6 +63,10 @@ type DescribeVpcEndpointConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcEndpointConnectionsInput) operationName() string {
+	return "DescribeVpcEndpointConnections"
+}
+
 type DescribeVpcEndpointConnectionsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

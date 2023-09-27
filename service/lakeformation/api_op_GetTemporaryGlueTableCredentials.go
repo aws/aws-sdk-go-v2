@@ -63,6 +63,10 @@ type GetTemporaryGlueTableCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemporaryGlueTableCredentialsInput) operationName() string {
+	return "GetTemporaryGlueTableCredentials"
+}
+
 type GetTemporaryGlueTableCredentialsOutput struct {
 
 	// The access key ID for the temporary credentials.

@@ -57,6 +57,10 @@ type ListSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemaVersionsInput) operationName() string {
+	return "ListSchemaVersions"
+}
+
 type ListSchemaVersionsOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if

@@ -42,6 +42,10 @@ type RemoveAutoTerminationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveAutoTerminationPolicyInput) operationName() string {
+	return "RemoveAutoTerminationPolicy"
+}
+
 type RemoveAutoTerminationPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

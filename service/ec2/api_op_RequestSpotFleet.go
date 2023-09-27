@@ -68,6 +68,10 @@ type RequestSpotFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestSpotFleetInput) operationName() string {
+	return "RequestSpotFleet"
+}
+
 // Contains the output of RequestSpotFleet.
 type RequestSpotFleetOutput struct {
 

@@ -46,6 +46,10 @@ type AcceptInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptInboundConnectionInput) operationName() string {
+	return "AcceptInboundConnection"
+}
+
 // Contains details about the accepted inbound connection.
 type AcceptInboundConnectionOutput struct {
 

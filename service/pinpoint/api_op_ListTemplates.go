@@ -57,6 +57,10 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplatesInput) operationName() string {
+	return "ListTemplates"
+}
+
 type ListTemplatesOutput struct {
 
 	// Provides information about all the message templates that are associated with

@@ -49,6 +49,10 @@ type DescribeElasticLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeElasticLoadBalancersInput) operationName() string {
+	return "DescribeElasticLoadBalancers"
+}
+
 // Contains the response to a DescribeElasticLoadBalancers request.
 type DescribeElasticLoadBalancersOutput struct {
 

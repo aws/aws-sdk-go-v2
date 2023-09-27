@@ -43,6 +43,10 @@ type GetDataQualityRulesetEvaluationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataQualityRulesetEvaluationRunInput) operationName() string {
+	return "GetDataQualityRulesetEvaluationRun"
+}
+
 type GetDataQualityRulesetEvaluationRunOutput struct {
 
 	// A map of reference strings to additional data sources you can specify for an

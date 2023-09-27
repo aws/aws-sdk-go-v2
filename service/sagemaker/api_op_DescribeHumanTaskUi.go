@@ -45,6 +45,10 @@ type DescribeHumanTaskUiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHumanTaskUiInput) operationName() string {
+	return "DescribeHumanTaskUi"
+}
+
 type DescribeHumanTaskUiOutput struct {
 
 	// The timestamp when the human task user interface was created.

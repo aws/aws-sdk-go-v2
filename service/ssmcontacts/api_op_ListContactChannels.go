@@ -48,6 +48,10 @@ type ListContactChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListContactChannelsInput) operationName() string {
+	return "ListContactChannels"
+}
+
 type ListContactChannelsOutput struct {
 
 	// A list of contact channels related to the specified contact.

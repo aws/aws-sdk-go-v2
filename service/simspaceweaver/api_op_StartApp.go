@@ -63,6 +63,10 @@ type StartAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAppInput) operationName() string {
+	return "StartApp"
+}
+
 type StartAppOutput struct {
 
 	// The name of the domain of the app.

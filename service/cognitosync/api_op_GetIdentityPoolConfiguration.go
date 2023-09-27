@@ -63,6 +63,10 @@ type GetIdentityPoolConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIdentityPoolConfigurationInput) operationName() string {
+	return "GetIdentityPoolConfiguration"
+}
+
 // The output for the GetIdentityPoolConfiguration operation.
 type GetIdentityPoolConfigurationOutput struct {
 

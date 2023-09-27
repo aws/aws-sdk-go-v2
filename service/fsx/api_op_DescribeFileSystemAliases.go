@@ -62,6 +62,10 @@ type DescribeFileSystemAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFileSystemAliasesInput) operationName() string {
+	return "DescribeFileSystemAliases"
+}
+
 // The response object for DescribeFileSystemAliases operation.
 type DescribeFileSystemAliasesOutput struct {
 

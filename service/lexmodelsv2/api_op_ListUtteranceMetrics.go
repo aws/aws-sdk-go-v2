@@ -119,6 +119,10 @@ type ListUtteranceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUtteranceMetricsInput) operationName() string {
+	return "ListUtteranceMetrics"
+}
+
 type ListUtteranceMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved utterance metrics.

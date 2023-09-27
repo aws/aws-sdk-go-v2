@@ -60,6 +60,10 @@ type ListOrdersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOrdersInput) operationName() string {
+	return "ListOrders"
+}
+
 type ListOrdersOutput struct {
 
 	// The token for the next page of results.

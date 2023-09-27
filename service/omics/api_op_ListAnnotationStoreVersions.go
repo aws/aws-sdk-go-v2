@@ -53,6 +53,10 @@ type ListAnnotationStoreVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnnotationStoreVersionsInput) operationName() string {
+	return "ListAnnotationStoreVersions"
+}
+
 type ListAnnotationStoreVersionsOutput struct {
 
 	// Lists all versions of an annotation store.

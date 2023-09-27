@@ -64,6 +64,10 @@ type StartAnnotationImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAnnotationImportJobInput) operationName() string {
+	return "StartAnnotationImportJob"
+}
+
 type StartAnnotationImportJobOutput struct {
 
 	// The job's ID.

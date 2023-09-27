@@ -63,6 +63,10 @@ type CreateNetworkInterfacePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkInterfacePermissionInput) operationName() string {
+	return "CreateNetworkInterfacePermission"
+}
+
 // Contains the output of CreateNetworkInterfacePermission.
 type CreateNetworkInterfacePermissionOutput struct {
 

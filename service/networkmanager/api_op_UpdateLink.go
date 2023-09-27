@@ -60,6 +60,10 @@ type UpdateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLinkInput) operationName() string {
+	return "UpdateLink"
+}
+
 type UpdateLinkOutput struct {
 
 	// Information about the link.

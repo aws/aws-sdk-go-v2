@@ -60,6 +60,10 @@ type ListPortfolioAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPortfolioAccessInput) operationName() string {
+	return "ListPortfolioAccess"
+}
+
 type ListPortfolioAccessOutput struct {
 
 	// Information about the Amazon Web Services accounts with access to the portfolio.

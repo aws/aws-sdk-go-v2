@@ -43,6 +43,10 @@ type GetVoiceConnectorTerminationHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorTerminationHealthInput) operationName() string {
+	return "GetVoiceConnectorTerminationHealth"
+}
+
 type GetVoiceConnectorTerminationHealthOutput struct {
 
 	// The termination health details.

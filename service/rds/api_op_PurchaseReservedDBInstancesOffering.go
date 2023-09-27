@@ -54,6 +54,10 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseReservedDBInstancesOfferingInput) operationName() string {
+	return "PurchaseReservedDBInstancesOffering"
+}
+
 type PurchaseReservedDBInstancesOfferingOutput struct {
 
 	// This data type is used as a response element in the DescribeReservedDBInstances

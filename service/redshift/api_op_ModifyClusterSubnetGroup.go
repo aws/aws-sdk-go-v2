@@ -53,6 +53,10 @@ type ModifyClusterSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterSubnetGroupInput) operationName() string {
+	return "ModifyClusterSubnetGroup"
+}
+
 type ModifyClusterSubnetGroupOutput struct {
 
 	// Describes a subnet group.

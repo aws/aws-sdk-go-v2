@@ -65,6 +65,10 @@ type GetCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCredentialsInput) operationName() string {
+	return "GetCredentials"
+}
+
 type GetCredentialsOutput struct {
 
 	// A temporary password that authorizes the user name returned by DbUser to log on

@@ -58,6 +58,10 @@ type GetAssessmentReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssessmentReportInput) operationName() string {
+	return "GetAssessmentReport"
+}
+
 type GetAssessmentReportOutput struct {
 
 	// Specifies the status of the request to generate an assessment report.

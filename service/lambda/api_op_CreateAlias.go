@@ -69,6 +69,10 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAliasInput) operationName() string {
+	return "CreateAlias"
+}
+
 // Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
 // .
 type CreateAliasOutput struct {

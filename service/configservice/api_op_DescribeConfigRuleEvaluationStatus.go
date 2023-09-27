@@ -55,6 +55,10 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigRuleEvaluationStatusInput) operationName() string {
+	return "DescribeConfigRuleEvaluationStatus"
+}
+
 type DescribeConfigRuleEvaluationStatusOutput struct {
 
 	// Status information about your Config managed rules.

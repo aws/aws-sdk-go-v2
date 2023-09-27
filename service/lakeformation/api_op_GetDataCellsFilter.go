@@ -57,6 +57,10 @@ type GetDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataCellsFilterInput) operationName() string {
+	return "GetDataCellsFilter"
+}
+
 type GetDataCellsFilterOutput struct {
 
 	// A structure that describes certain columns on certain rows.

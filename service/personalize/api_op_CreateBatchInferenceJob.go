@@ -83,6 +83,10 @@ type CreateBatchInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBatchInferenceJobInput) operationName() string {
+	return "CreateBatchInferenceJob"
+}
+
 type CreateBatchInferenceJobOutput struct {
 
 	// The ARN of the batch inference job.

@@ -47,6 +47,10 @@ type DeleteSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSchemaInput) operationName() string {
+	return "DeleteSchema"
+}
+
 type DeleteSchemaOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schema being deleted.

@@ -42,6 +42,10 @@ type RemoveKnowledgeBaseTemplateUriInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveKnowledgeBaseTemplateUriInput) operationName() string {
+	return "RemoveKnowledgeBaseTemplateUri"
+}
+
 type RemoveKnowledgeBaseTemplateUriOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,6 +41,10 @@ type ExportSourceNetworkCfnTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportSourceNetworkCfnTemplateInput) operationName() string {
+	return "ExportSourceNetworkCfnTemplate"
+}
+
 type ExportSourceNetworkCfnTemplateOutput struct {
 
 	// S3 bucket URL where the Source Network CloudFormation template was exported to.

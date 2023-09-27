@@ -49,6 +49,10 @@ type ListKeywordsForDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeywordsForDataSourceInput) operationName() string {
+	return "ListKeywordsForDataSource"
+}
+
 type ListKeywordsForDataSourceOutput struct {
 
 	// The list of keywords for the event mapping source.

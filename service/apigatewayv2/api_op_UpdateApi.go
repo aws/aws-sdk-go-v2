@@ -102,6 +102,10 @@ type UpdateApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApiInput) operationName() string {
+	return "UpdateApi"
+}
+
 type UpdateApiOutput struct {
 
 	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com.

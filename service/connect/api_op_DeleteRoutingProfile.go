@@ -47,6 +47,10 @@ type DeleteRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRoutingProfileInput) operationName() string {
+	return "DeleteRoutingProfile"
+}
+
 type DeleteRoutingProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

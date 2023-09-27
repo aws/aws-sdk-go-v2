@@ -75,6 +75,10 @@ type UpdateLedgerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLedgerInput) operationName() string {
+	return "UpdateLedger"
+}
+
 type UpdateLedgerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.

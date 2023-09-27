@@ -55,6 +55,10 @@ type ListPoolOriginationIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPoolOriginationIdentitiesInput) operationName() string {
+	return "ListPoolOriginationIdentities"
+}
+
 type ListPoolOriginationIdentitiesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is

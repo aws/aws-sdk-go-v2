@@ -45,6 +45,10 @@ type ListAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppsInput) operationName() string {
+	return "ListApps"
+}
+
 // The result structure for an Amplify app list request.
 type ListAppsOutput struct {
 

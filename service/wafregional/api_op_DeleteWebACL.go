@@ -57,6 +57,10 @@ type DeleteWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWebACLInput) operationName() string {
+	return "DeleteWebACL"
+}
+
 type DeleteWebACLOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteWebACL request. You can also

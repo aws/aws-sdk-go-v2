@@ -50,6 +50,10 @@ type GetRequestValidatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRequestValidatorsInput) operationName() string {
+	return "GetRequestValidators"
+}
+
 // A collection of RequestValidator resources of a given RestApi.
 type GetRequestValidatorsOutput struct {
 

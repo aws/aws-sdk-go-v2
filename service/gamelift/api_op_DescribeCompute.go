@@ -56,6 +56,10 @@ type DescribeComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeComputeInput) operationName() string {
+	return "DescribeCompute"
+}
+
 type DescribeComputeOutput struct {
 
 	// The set of properties for the requested compute resource.

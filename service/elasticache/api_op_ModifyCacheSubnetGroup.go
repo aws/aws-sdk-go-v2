@@ -51,6 +51,10 @@ type ModifyCacheSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCacheSubnetGroupInput) operationName() string {
+	return "ModifyCacheSubnetGroup"
+}
+
 type ModifyCacheSubnetGroupOutput struct {
 
 	// Represents the output of one of the following operations:

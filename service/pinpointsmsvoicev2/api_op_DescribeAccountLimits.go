@@ -50,6 +50,10 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountLimitsInput) operationName() string {
+	return "DescribeAccountLimits"
+}
+
 type DescribeAccountLimitsOutput struct {
 
 	// An array of AccountLimit objects that show the current spend limits.

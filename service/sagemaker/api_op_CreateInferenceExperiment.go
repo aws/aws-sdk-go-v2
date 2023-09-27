@@ -134,6 +134,10 @@ type CreateInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInferenceExperimentInput) operationName() string {
+	return "CreateInferenceExperiment"
+}
+
 type CreateInferenceExperimentOutput struct {
 
 	// The ARN for your inference experiment.

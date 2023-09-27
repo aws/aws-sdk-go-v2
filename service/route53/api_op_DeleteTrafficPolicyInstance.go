@@ -46,6 +46,10 @@ type DeleteTrafficPolicyInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrafficPolicyInstanceInput) operationName() string {
+	return "DeleteTrafficPolicyInstance"
+}
+
 // An empty element.
 type DeleteTrafficPolicyInstanceOutput struct {
 	// Metadata pertaining to the operation's result.

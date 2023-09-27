@@ -46,6 +46,10 @@ type ConfigureLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureLogsInput) operationName() string {
+	return "ConfigureLogs"
+}
+
 type ConfigureLogsOutput struct {
 
 	// The ARN of the PackagingGroup.

@@ -42,6 +42,10 @@ type GetStoredQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStoredQueryInput) operationName() string {
+	return "GetStoredQuery"
+}
+
 type GetStoredQueryOutput struct {
 
 	// Returns a StoredQuery object.

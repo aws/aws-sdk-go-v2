@@ -138,6 +138,10 @@ type CreateExplainabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExplainabilityInput) operationName() string {
+	return "CreateExplainability"
+}
+
 type CreateExplainabilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Explainability.

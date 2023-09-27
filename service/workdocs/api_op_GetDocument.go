@@ -49,6 +49,10 @@ type GetDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentInput) operationName() string {
+	return "GetDocument"
+}
+
 type GetDocumentOutput struct {
 
 	// The custom metadata on the document.

@@ -42,6 +42,10 @@ type DescribeImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImportInput) operationName() string {
+	return "DescribeImport"
+}
+
 type DescribeImportOutput struct {
 
 	// Represents the properties of the table created for the import, and parameters

@@ -67,6 +67,10 @@ type PutStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutStorageConfigurationInput) operationName() string {
+	return "PutStorageConfiguration"
+}
+
 type PutStorageConfigurationOutput struct {
 
 	// Contains current status information for the configuration.

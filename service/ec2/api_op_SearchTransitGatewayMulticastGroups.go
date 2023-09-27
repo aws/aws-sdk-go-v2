@@ -71,6 +71,10 @@ type SearchTransitGatewayMulticastGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchTransitGatewayMulticastGroupsInput) operationName() string {
+	return "SearchTransitGatewayMulticastGroups"
+}
+
 type SearchTransitGatewayMulticastGroupsOutput struct {
 
 	// Information about the transit gateway multicast group.

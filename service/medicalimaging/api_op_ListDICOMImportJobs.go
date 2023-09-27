@@ -51,6 +51,10 @@ type ListDICOMImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDICOMImportJobsInput) operationName() string {
+	return "ListDICOMImportJobs"
+}
+
 type ListDICOMImportJobsOutput struct {
 
 	// A list of job summaries.

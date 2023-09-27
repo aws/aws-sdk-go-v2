@@ -58,6 +58,10 @@ type ListSpeakerEnrollmentJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSpeakerEnrollmentJobsInput) operationName() string {
+	return "ListSpeakerEnrollmentJobs"
+}
+
 type ListSpeakerEnrollmentJobsOutput struct {
 
 	// A list containing details about each specified speaker enrollment job.

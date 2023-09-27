@@ -58,6 +58,10 @@ type CreateDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDestinationInput) operationName() string {
+	return "CreateDestination"
+}
+
 type CreateDestinationOutput struct {
 
 	// Destination ARN.

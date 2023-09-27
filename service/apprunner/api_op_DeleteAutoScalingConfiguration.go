@@ -55,6 +55,10 @@ type DeleteAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAutoScalingConfigurationInput) operationName() string {
+	return "DeleteAutoScalingConfiguration"
+}
+
 type DeleteAutoScalingConfigurationOutput struct {
 
 	// A description of the App Runner auto scaling configuration that this request

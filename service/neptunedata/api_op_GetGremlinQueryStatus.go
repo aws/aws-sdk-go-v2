@@ -42,6 +42,10 @@ type GetGremlinQueryStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGremlinQueryStatusInput) operationName() string {
+	return "GetGremlinQueryStatus"
+}
+
 type GetGremlinQueryStatusOutput struct {
 
 	// The evaluation status of the Gremlin query.

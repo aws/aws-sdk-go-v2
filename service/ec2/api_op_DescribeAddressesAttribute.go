@@ -58,6 +58,10 @@ type DescribeAddressesAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddressesAttributeInput) operationName() string {
+	return "DescribeAddressesAttribute"
+}
+
 type DescribeAddressesAttributeOutput struct {
 
 	// Information about the IP addresses.

@@ -55,6 +55,10 @@ type DecreaseReplicationFactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DecreaseReplicationFactorInput) operationName() string {
+	return "DecreaseReplicationFactor"
+}
+
 type DecreaseReplicationFactorOutput struct {
 
 	// A description of the DAX cluster, after you have decreased its replication

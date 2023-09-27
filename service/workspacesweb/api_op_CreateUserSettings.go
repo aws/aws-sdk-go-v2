@@ -99,6 +99,10 @@ type CreateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserSettingsInput) operationName() string {
+	return "CreateUserSettings"
+}
+
 type CreateUserSettingsOutput struct {
 
 	// The ARN of the user settings.

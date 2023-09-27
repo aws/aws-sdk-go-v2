@@ -97,6 +97,10 @@ type ModifyReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyReplicationTaskInput) operationName() string {
+	return "ModifyReplicationTask"
+}
+
 type ModifyReplicationTaskOutput struct {
 
 	// The replication task that was modified.

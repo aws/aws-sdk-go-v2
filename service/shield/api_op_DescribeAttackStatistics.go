@@ -44,6 +44,10 @@ type DescribeAttackStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAttackStatisticsInput) operationName() string {
+	return "DescribeAttackStatistics"
+}
+
 type DescribeAttackStatisticsOutput struct {
 
 	// The data that describes the attacks detected during the time period.

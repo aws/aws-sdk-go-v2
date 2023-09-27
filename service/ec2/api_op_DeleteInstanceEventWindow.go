@@ -54,6 +54,10 @@ type DeleteInstanceEventWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceEventWindowInput) operationName() string {
+	return "DeleteInstanceEventWindow"
+}
+
 type DeleteInstanceEventWindowOutput struct {
 
 	// The state of the event window.

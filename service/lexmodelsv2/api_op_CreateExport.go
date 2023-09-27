@@ -59,6 +59,10 @@ type CreateExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExportInput) operationName() string {
+	return "CreateExport"
+}
+
 type CreateExportOutput struct {
 
 	// The date and time that the request to export a bot was created.

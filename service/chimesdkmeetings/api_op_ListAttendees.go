@@ -50,6 +50,10 @@ type ListAttendeesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttendeesInput) operationName() string {
+	return "ListAttendees"
+}
+
 type ListAttendeesOutput struct {
 
 	// The Amazon Chime SDK attendee information.

@@ -37,6 +37,10 @@ type DescribeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLimitsInput) operationName() string {
+	return "DescribeLimits"
+}
+
 type DescribeLimitsOutput struct {
 
 	// Indicates the number of data streams with the on-demand capacity mode.

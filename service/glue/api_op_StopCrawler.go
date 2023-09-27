@@ -41,6 +41,10 @@ type StopCrawlerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopCrawlerInput) operationName() string {
+	return "StopCrawler"
+}
+
 type StopCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

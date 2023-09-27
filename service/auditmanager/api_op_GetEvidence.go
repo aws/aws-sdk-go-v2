@@ -57,6 +57,10 @@ type GetEvidenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEvidenceInput) operationName() string {
+	return "GetEvidence"
+}
+
 type GetEvidenceOutput struct {
 
 	// The evidence that the GetEvidence API returned.

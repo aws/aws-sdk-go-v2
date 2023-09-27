@@ -49,6 +49,10 @@ type ListTopicRefreshSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTopicRefreshSchedulesInput) operationName() string {
+	return "ListTopicRefreshSchedules"
+}
+
 type ListTopicRefreshSchedulesOutput struct {
 
 	// The list of topic refresh schedules.

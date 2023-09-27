@@ -49,6 +49,10 @@ type GetConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfiguredTableAssociationInput) operationName() string {
+	return "GetConfiguredTableAssociation"
+}
+
 type GetConfiguredTableAssociationOutput struct {
 
 	// The entire configured table association object.

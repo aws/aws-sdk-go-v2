@@ -62,6 +62,10 @@ type GetIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIPSetInput) operationName() string {
+	return "GetIPSet"
+}
+
 type GetIPSetOutput struct {
 
 	//

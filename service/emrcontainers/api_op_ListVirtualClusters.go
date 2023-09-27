@@ -65,6 +65,10 @@ type ListVirtualClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVirtualClustersInput) operationName() string {
+	return "ListVirtualClusters"
+}
+
 type ListVirtualClustersOutput struct {
 
 	// This output displays the token for the next set of virtual clusters.

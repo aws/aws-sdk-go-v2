@@ -76,6 +76,10 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeploymentInput) operationName() string {
+	return "CreateDeployment"
+}
+
 // Contains the response to a CreateDeployment request.
 type CreateDeploymentOutput struct {
 

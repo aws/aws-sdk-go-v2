@@ -72,6 +72,10 @@ type PutExternalModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutExternalModelInput) operationName() string {
+	return "PutExternalModel"
+}
+
 type PutExternalModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

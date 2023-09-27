@@ -69,6 +69,10 @@ type DescribeFolderContentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFolderContentsInput) operationName() string {
+	return "DescribeFolderContents"
+}
+
 type DescribeFolderContentsOutput struct {
 
 	// The documents in the specified folder.

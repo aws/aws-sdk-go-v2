@@ -45,6 +45,10 @@ type BatchGetOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetOnPremisesInstancesInput) operationName() string {
+	return "BatchGetOnPremisesInstances"
+}
+
 // Represents the output of a BatchGetOnPremisesInstances operation.
 type BatchGetOnPremisesInstancesOutput struct {
 

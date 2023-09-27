@@ -42,6 +42,10 @@ type DeleteSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSubnetGroupInput) operationName() string {
+	return "DeleteSubnetGroup"
+}
+
 type DeleteSubnetGroupOutput struct {
 
 	// A user-specified message for this action (i.e., a reason for deleting the

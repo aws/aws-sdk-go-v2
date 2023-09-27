@@ -87,6 +87,10 @@ type CreateNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNetworkInput) operationName() string {
+	return "CreateNetwork"
+}
+
 type CreateNetworkOutput struct {
 
 	// The unique identifier for the first member within the network.

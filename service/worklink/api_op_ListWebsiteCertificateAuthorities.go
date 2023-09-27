@@ -53,6 +53,10 @@ type ListWebsiteCertificateAuthoritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWebsiteCertificateAuthoritiesInput) operationName() string {
+	return "ListWebsiteCertificateAuthorities"
+}
+
 type ListWebsiteCertificateAuthoritiesOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this

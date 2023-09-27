@@ -74,6 +74,10 @@ type GetBucketAclInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketAclInput) operationName() string {
+	return "GetBucketAcl"
+}
+
 type GetBucketAclOutput struct {
 
 	// A list of grants.

@@ -61,6 +61,10 @@ type DescribePullRequestEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePullRequestEventsInput) operationName() string {
+	return "DescribePullRequestEvents"
+}
+
 type DescribePullRequestEventsOutput struct {
 
 	// Information about the pull request events.

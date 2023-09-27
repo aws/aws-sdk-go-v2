@@ -61,6 +61,10 @@ type AddTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsInput) operationName() string {
+	return "AddTags"
+}
+
 // Returns the objects or data if successful. Otherwise, returns an error.
 type AddTagsOutput struct {
 	// Metadata pertaining to the operation's result.

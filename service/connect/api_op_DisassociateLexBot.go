@@ -54,6 +54,10 @@ type DisassociateLexBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateLexBotInput) operationName() string {
+	return "DisassociateLexBot"
+}
+
 type DisassociateLexBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

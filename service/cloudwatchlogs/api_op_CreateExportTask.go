@@ -90,6 +90,10 @@ type CreateExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExportTaskInput) operationName() string {
+	return "CreateExportTask"
+}
+
 type CreateExportTaskOutput struct {
 
 	// The ID of the export task.

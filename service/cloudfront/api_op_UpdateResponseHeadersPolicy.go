@@ -61,6 +61,10 @@ type UpdateResponseHeadersPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResponseHeadersPolicyInput) operationName() string {
+	return "UpdateResponseHeadersPolicy"
+}
+
 type UpdateResponseHeadersPolicyOutput struct {
 
 	// The current version of the response headers policy.

@@ -41,6 +41,10 @@ type GetBootstrapBrokersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBootstrapBrokersInput) operationName() string {
+	return "GetBootstrapBrokers"
+}
+
 type GetBootstrapBrokersOutput struct {
 
 	// A string containing one or more hostname:port pairs.

@@ -49,6 +49,10 @@ type ListDataViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataViewsInput) operationName() string {
+	return "ListDataViews"
+}
+
 type ListDataViewsOutput struct {
 
 	// A list of Dataviews.

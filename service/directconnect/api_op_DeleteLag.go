@@ -43,6 +43,10 @@ type DeleteLagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLagInput) operationName() string {
+	return "DeleteLag"
+}
+
 // Information about a link aggregation group (LAG).
 type DeleteLagOutput struct {
 

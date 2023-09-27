@@ -81,6 +81,10 @@ type StartFaceSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFaceSearchInput) operationName() string {
+	return "StartFaceSearch"
+}
+
 type StartFaceSearchOutput struct {
 
 	// The identifier for the search job. Use JobId to identify the job in a

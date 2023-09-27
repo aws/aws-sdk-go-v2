@@ -68,6 +68,10 @@ type CreateModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelVersionInput) operationName() string {
+	return "CreateModelVersion"
+}
+
 type CreateModelVersionOutput struct {
 
 	// The model ID.

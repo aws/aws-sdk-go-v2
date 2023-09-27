@@ -64,6 +64,10 @@ type UpdateVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVirtualGatewayInput) operationName() string {
+	return "UpdateVirtualGateway"
+}
+
 type UpdateVirtualGatewayOutput struct {
 
 	// A full description of the virtual gateway that was updated.

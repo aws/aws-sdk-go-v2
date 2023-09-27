@@ -69,6 +69,10 @@ type CreateOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOutpostResolverInput) operationName() string {
+	return "CreateOutpostResolver"
+}
+
 type CreateOutpostResolverOutput struct {
 
 	// Information about the CreateOutpostResolver request, including the status of

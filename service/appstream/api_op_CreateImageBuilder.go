@@ -133,6 +133,10 @@ type CreateImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImageBuilderInput) operationName() string {
+	return "CreateImageBuilder"
+}
+
 type CreateImageBuilderOutput struct {
 
 	// Information about the image builder.

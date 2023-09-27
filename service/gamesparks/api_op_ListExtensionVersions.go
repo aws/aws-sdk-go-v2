@@ -58,6 +58,10 @@ type ListExtensionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExtensionVersionsInput) operationName() string {
+	return "ListExtensionVersions"
+}
+
 type ListExtensionVersionsOutput struct {
 
 	// The list of extension versions.

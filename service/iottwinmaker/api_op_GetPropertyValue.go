@@ -71,6 +71,10 @@ type GetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPropertyValueInput) operationName() string {
+	return "GetPropertyValue"
+}
+
 type GetPropertyValueOutput struct {
 
 	// The string that specifies the next page of results.

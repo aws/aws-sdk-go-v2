@@ -44,6 +44,10 @@ type DeleteTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrialComponentInput) operationName() string {
+	return "DeleteTrialComponent"
+}
+
 type DeleteTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the component is being deleted.

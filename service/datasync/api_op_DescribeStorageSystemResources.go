@@ -66,6 +66,10 @@ type DescribeStorageSystemResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStorageSystemResourcesInput) operationName() string {
+	return "DescribeStorageSystemResources"
+}
+
 type DescribeStorageSystemResourcesOutput struct {
 
 	// The opaque string that indicates the position to begin the next list of results

@@ -59,6 +59,10 @@ type CreateEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventStreamInput) operationName() string {
+	return "CreateEventStream"
+}
+
 type CreateEventStreamOutput struct {
 
 	// A unique identifier for the event stream.

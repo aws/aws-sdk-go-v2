@@ -69,6 +69,10 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartJobRunInput) operationName() string {
+	return "StartJobRun"
+}
+
 type StartJobRunOutput struct {
 
 	// This output displays the application ID on which the job run was submitted.

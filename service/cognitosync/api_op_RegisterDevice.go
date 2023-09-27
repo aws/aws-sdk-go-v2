@@ -76,6 +76,10 @@ type RegisterDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterDeviceInput) operationName() string {
+	return "RegisterDevice"
+}
+
 // Response to a RegisterDevice request.
 type RegisterDeviceOutput struct {
 

@@ -61,6 +61,10 @@ type StartStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartStreamProcessorInput) operationName() string {
+	return "StartStreamProcessor"
+}
+
 type StartStreamProcessorOutput struct {
 
 	// A unique identifier for the stream processing session.

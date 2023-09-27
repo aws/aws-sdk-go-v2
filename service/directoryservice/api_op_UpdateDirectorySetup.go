@@ -54,6 +54,10 @@ type UpdateDirectorySetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDirectorySetupInput) operationName() string {
+	return "UpdateDirectorySetup"
+}
+
 type UpdateDirectorySetupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

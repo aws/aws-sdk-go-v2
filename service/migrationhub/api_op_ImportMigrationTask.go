@@ -54,6 +54,10 @@ type ImportMigrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportMigrationTaskInput) operationName() string {
+	return "ImportMigrationTask"
+}
+
 type ImportMigrationTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

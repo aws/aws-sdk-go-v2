@@ -52,6 +52,10 @@ type DescribeHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHapgInput) operationName() string {
+	return "DescribeHapg"
+}
+
 // Contains the output of the DescribeHapg action.
 type DescribeHapgOutput struct {
 

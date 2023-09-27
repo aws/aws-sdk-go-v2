@@ -50,6 +50,10 @@ type ListImagePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImagePackagesInput) operationName() string {
+	return "ListImagePackages"
+}
+
 type ListImagePackagesOutput struct {
 
 	// The list of Image Packages returned in the response.

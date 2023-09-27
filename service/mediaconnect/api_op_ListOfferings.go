@@ -56,6 +56,10 @@ type ListOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOfferingsInput) operationName() string {
+	return "ListOfferings"
+}
+
 type ListOfferingsOutput struct {
 
 	// The token that identifies which batch of results that you want to see. For

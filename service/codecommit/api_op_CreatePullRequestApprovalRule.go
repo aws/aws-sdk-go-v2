@@ -74,6 +74,10 @@ type CreatePullRequestApprovalRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePullRequestApprovalRuleInput) operationName() string {
+	return "CreatePullRequestApprovalRule"
+}
+
 type CreatePullRequestApprovalRuleOutput struct {
 
 	// Information about the created approval rule.

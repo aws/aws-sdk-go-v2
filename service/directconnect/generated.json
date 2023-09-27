@@ -72,6 +72,7 @@
         "api_op_UpdateDirectConnectGatewayAssociation.go",
         "api_op_UpdateLag.go",
         "api_op_UpdateVirtualInterfaceAttributes.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

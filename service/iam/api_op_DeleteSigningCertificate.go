@@ -54,6 +54,10 @@ type DeleteSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSigningCertificateInput) operationName() string {
+	return "DeleteSigningCertificate"
+}
+
 type DeleteSigningCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,6 +46,10 @@ type ListTopicRuleDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTopicRuleDestinationsInput) operationName() string {
+	return "ListTopicRuleDestinations"
+}
+
 type ListTopicRuleDestinationsOutput struct {
 
 	// Information about a topic rule destination.

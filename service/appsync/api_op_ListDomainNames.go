@@ -44,6 +44,10 @@ type ListDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainNamesInput) operationName() string {
+	return "ListDomainNames"
+}
+
 type ListDomainNamesOutput struct {
 
 	// Lists configurations for multiple domain names.

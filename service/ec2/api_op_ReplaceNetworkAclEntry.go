@@ -93,6 +93,10 @@ type ReplaceNetworkAclEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceNetworkAclEntryInput) operationName() string {
+	return "ReplaceNetworkAclEntry"
+}
+
 type ReplaceNetworkAclEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

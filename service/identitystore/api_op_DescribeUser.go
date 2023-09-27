@@ -53,6 +53,10 @@ type DescribeUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserInput) operationName() string {
+	return "DescribeUser"
+}
+
 type DescribeUserOutput struct {
 
 	// The globally unique identifier for the identity store.

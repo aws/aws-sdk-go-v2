@@ -38,6 +38,10 @@ type DescribeDefaultAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDefaultAuthorizerInput) operationName() string {
+	return "DescribeDefaultAuthorizer"
+}
+
 type DescribeDefaultAuthorizerOutput struct {
 
 	// The default authorizer's description.

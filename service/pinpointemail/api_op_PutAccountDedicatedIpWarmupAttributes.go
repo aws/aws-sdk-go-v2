@@ -43,6 +43,10 @@ type PutAccountDedicatedIpWarmupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountDedicatedIpWarmupAttributesInput) operationName() string {
+	return "PutAccountDedicatedIpWarmupAttributes"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountDedicatedIpWarmupAttributesOutput struct {

@@ -41,6 +41,10 @@ type DeregisterWebhookWithThirdPartyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterWebhookWithThirdPartyInput) operationName() string {
+	return "DeregisterWebhookWithThirdParty"
+}
+
 type DeregisterWebhookWithThirdPartyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

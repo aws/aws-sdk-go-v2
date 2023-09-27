@@ -51,6 +51,10 @@ type DescribeNodegroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNodegroupInput) operationName() string {
+	return "DescribeNodegroup"
+}
+
 type DescribeNodegroupOutput struct {
 
 	// The full description of your node group.

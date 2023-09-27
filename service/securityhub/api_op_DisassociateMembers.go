@@ -44,6 +44,10 @@ type DisassociateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateMembersInput) operationName() string {
+	return "DisassociateMembers"
+}
+
 type DisassociateMembersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

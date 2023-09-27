@@ -42,6 +42,10 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApplicationsInput) operationName() string {
+	return "ListApplications"
+}
+
 type ListApplicationsOutput struct {
 
 	// An array of objects that provide summaries of information about the web

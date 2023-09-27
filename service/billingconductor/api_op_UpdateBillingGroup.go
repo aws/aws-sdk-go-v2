@@ -59,6 +59,10 @@ type UpdateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBillingGroupInput) operationName() string {
+	return "UpdateBillingGroup"
+}
+
 type UpdateBillingGroupOutput struct {
 
 	// Specifies if the billing group has automatic account association ( AutoAssociate

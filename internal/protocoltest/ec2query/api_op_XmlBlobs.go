@@ -29,6 +29,10 @@ type XmlBlobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*XmlBlobsInput) operationName() string {
+	return "XmlBlobs"
+}
+
 type XmlBlobsOutput struct {
 	Data []byte
 

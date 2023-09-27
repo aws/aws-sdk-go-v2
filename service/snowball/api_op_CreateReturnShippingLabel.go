@@ -50,6 +50,10 @@ type CreateReturnShippingLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReturnShippingLabelInput) operationName() string {
+	return "CreateReturnShippingLabel"
+}
+
 type CreateReturnShippingLabelOutput struct {
 
 	// The status information of the task on a Snow device that is being returned to

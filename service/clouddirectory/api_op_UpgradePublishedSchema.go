@@ -59,6 +59,10 @@ type UpgradePublishedSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpgradePublishedSchemaInput) operationName() string {
+	return "UpgradePublishedSchema"
+}
+
 type UpgradePublishedSchemaOutput struct {
 
 	// The ARN of the upgraded schema that is returned as part of the response.

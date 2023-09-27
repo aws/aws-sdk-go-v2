@@ -62,6 +62,10 @@ type GetAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointPolicyInput) operationName() string {
+	return "GetAccessPointPolicy"
+}
+
 type GetAccessPointPolicyOutput struct {
 
 	// The access point policy associated with the specified access point.

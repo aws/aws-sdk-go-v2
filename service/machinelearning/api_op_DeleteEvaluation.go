@@ -44,6 +44,10 @@ type DeleteEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEvaluationInput) operationName() string {
+	return "DeleteEvaluation"
+}
+
 // Represents the output of a DeleteEvaluation operation. The output indicates
 // that Amazon Machine Learning (Amazon ML) received the request. You can use the
 // GetEvaluation operation and check the value of the Status parameter to see

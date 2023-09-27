@@ -40,6 +40,10 @@ type ListResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcePoliciesInput) operationName() string {
+	return "ListResourcePolicies"
+}
+
 type ListResourcePoliciesOutput struct {
 
 	// Pagination token. Not currently supported.

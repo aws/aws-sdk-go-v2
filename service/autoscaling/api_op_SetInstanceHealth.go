@@ -58,6 +58,10 @@ type SetInstanceHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetInstanceHealthInput) operationName() string {
+	return "SetInstanceHealth"
+}
+
 type SetInstanceHealthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

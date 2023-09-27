@@ -58,6 +58,10 @@ type ListIncidentRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIncidentRecordsInput) operationName() string {
+	return "ListIncidentRecords"
+}
+
 type ListIncidentRecordsOutput struct {
 
 	// The details of each listed incident record.

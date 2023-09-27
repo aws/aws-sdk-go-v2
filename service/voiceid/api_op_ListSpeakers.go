@@ -53,6 +53,10 @@ type ListSpeakersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSpeakersInput) operationName() string {
+	return "ListSpeakers"
+}
+
 type ListSpeakersOutput struct {
 
 	// If NextToken is returned, there are more results available. The value of

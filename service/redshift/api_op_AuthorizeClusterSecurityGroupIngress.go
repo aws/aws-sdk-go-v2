@@ -67,6 +67,10 @@ type AuthorizeClusterSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeClusterSecurityGroupIngressInput) operationName() string {
+	return "AuthorizeClusterSecurityGroupIngress"
+}
+
 type AuthorizeClusterSecurityGroupIngressOutput struct {
 
 	// Describes a security group.

@@ -69,6 +69,10 @@ type GetTransitGatewayPrefixListReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransitGatewayPrefixListReferencesInput) operationName() string {
+	return "GetTransitGatewayPrefixListReferences"
+}
+
 type GetTransitGatewayPrefixListReferencesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

@@ -60,6 +60,10 @@ type DescribeChannelBanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelBanInput) operationName() string {
+	return "DescribeChannelBan"
+}
+
 type DescribeChannelBanOutput struct {
 
 	// The details of the ban.

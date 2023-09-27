@@ -48,6 +48,10 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelinesInput) operationName() string {
+	return "ListPipelines"
+}
+
 // A list of the pipelines associated with the current AWS account.
 type ListPipelinesOutput struct {
 

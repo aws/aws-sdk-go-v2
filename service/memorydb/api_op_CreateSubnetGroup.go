@@ -60,6 +60,10 @@ type CreateSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubnetGroupInput) operationName() string {
+	return "CreateSubnetGroup"
+}
+
 type CreateSubnetGroupOutput struct {
 
 	// The newly-created subnet group

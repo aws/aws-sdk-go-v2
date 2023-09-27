@@ -45,6 +45,10 @@ type BatchGetSecurityControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetSecurityControlsInput) operationName() string {
+	return "BatchGetSecurityControls"
+}
+
 type BatchGetSecurityControlsOutput struct {
 
 	// An array that returns the identifier, Amazon Resource Name (ARN), and other

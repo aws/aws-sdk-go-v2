@@ -62,6 +62,10 @@ type DisassociateResourceSharePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateResourceSharePermissionInput) operationName() string {
+	return "DisassociateResourceSharePermission"
+}
+
 type DisassociateResourceSharePermissionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

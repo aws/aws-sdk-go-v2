@@ -47,6 +47,10 @@ type EnableDomainAutoRenewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableDomainAutoRenewInput) operationName() string {
+	return "EnableDomainAutoRenew"
+}
+
 type EnableDomainAutoRenewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

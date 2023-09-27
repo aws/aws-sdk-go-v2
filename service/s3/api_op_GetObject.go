@@ -239,6 +239,10 @@ type GetObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectInput) operationName() string {
+	return "GetObject"
+}
+
 type GetObjectOutput struct {
 
 	// Indicates that a range of bytes was specified.

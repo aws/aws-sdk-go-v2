@@ -30,6 +30,7 @@
         "api_op_StopAssessment.go",
         "api_op_UpdateApplicationComponentConfig.go",
         "api_op_UpdateServerConfig.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

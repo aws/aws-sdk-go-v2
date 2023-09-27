@@ -69,6 +69,10 @@ type ModifyDataProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDataProviderInput) operationName() string {
+	return "ModifyDataProvider"
+}
+
 type ModifyDataProviderOutput struct {
 
 	// The data provider that was modified.

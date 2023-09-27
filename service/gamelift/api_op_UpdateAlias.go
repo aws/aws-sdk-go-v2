@@ -57,6 +57,10 @@ type UpdateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAliasInput) operationName() string {
+	return "UpdateAlias"
+}
+
 type UpdateAliasOutput struct {
 
 	// The updated alias resource.

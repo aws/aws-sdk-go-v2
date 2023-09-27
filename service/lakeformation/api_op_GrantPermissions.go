@@ -75,6 +75,10 @@ type GrantPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GrantPermissionsInput) operationName() string {
+	return "GrantPermissions"
+}
+
 type GrantPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

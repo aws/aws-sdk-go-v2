@@ -73,6 +73,10 @@ type CreateHostedConfigurationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHostedConfigurationVersionInput) operationName() string {
+	return "CreateHostedConfigurationVersion"
+}
+
 type CreateHostedConfigurationVersionOutput struct {
 
 	// The application ID.

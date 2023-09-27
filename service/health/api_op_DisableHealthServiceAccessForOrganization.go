@@ -47,6 +47,10 @@ type DisableHealthServiceAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableHealthServiceAccessForOrganizationInput) operationName() string {
+	return "DisableHealthServiceAccessForOrganization"
+}
+
 type DisableHealthServiceAccessForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

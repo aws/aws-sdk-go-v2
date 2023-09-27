@@ -52,6 +52,10 @@ type CreatePublicVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePublicVirtualInterfaceInput) operationName() string {
+	return "CreatePublicVirtualInterface"
+}
+
 // Information about a virtual interface.
 type CreatePublicVirtualInterfaceOutput struct {
 

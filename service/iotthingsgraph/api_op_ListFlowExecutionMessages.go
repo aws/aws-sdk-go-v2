@@ -52,6 +52,10 @@ type ListFlowExecutionMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFlowExecutionMessagesInput) operationName() string {
+	return "ListFlowExecutionMessages"
+}
+
 type ListFlowExecutionMessagesOutput struct {
 
 	// A list of objects that contain information about events in the specified flow

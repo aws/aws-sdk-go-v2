@@ -45,6 +45,10 @@ type StartElasticsearchServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartElasticsearchServiceSoftwareUpdateInput) operationName() string {
+	return "StartElasticsearchServiceSoftwareUpdate"
+}
+
 // The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains the
 // status of the update.
 type StartElasticsearchServiceSoftwareUpdateOutput struct {

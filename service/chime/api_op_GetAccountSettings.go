@@ -45,6 +45,10 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSettingsInput) operationName() string {
+	return "GetAccountSettings"
+}
+
 type GetAccountSettingsOutput struct {
 
 	// The Amazon Chime account settings.

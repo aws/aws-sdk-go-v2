@@ -46,6 +46,10 @@ type GetLoadBalancerTlsCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoadBalancerTlsCertificatesInput) operationName() string {
+	return "GetLoadBalancerTlsCertificates"
+}
+
 type GetLoadBalancerTlsCertificatesOutput struct {
 
 	// An array of LoadBalancerTlsCertificate objects describing your SSL/TLS

@@ -86,6 +86,10 @@ type UpdateServicePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServicePipelineInput) operationName() string {
+	return "UpdateServicePipeline"
+}
+
 type UpdateServicePipelineOutput struct {
 
 	// The pipeline details that are returned by Proton.

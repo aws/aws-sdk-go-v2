@@ -43,6 +43,10 @@ type StartTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTransactionInput) operationName() string {
+	return "StartTransaction"
+}
+
 type StartTransactionOutput struct {
 
 	// An opaque identifier for the transaction.

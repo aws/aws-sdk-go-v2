@@ -60,6 +60,10 @@ type DeleteSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSubscriberInput) operationName() string {
+	return "DeleteSubscriber"
+}
+
 // Response of DeleteSubscriber
 type DeleteSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.

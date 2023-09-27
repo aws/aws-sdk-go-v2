@@ -47,6 +47,10 @@ type PutConfigurationSetTrackingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationSetTrackingOptionsInput) operationName() string {
+	return "PutConfigurationSetTrackingOptions"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetTrackingOptionsOutput struct {

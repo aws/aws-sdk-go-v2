@@ -44,6 +44,10 @@ type ListVoiceConnectorGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVoiceConnectorGroupsInput) operationName() string {
+	return "ListVoiceConnectorGroups"
+}
+
 type ListVoiceConnectorGroupsOutput struct {
 
 	// The token used to return the next page of results.

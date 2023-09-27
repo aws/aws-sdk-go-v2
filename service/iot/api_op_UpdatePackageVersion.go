@@ -70,6 +70,10 @@ type UpdatePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePackageVersionInput) operationName() string {
+	return "UpdatePackageVersion"
+}
+
 type UpdatePackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

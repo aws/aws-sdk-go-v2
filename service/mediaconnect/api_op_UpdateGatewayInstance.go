@@ -49,6 +49,10 @@ type UpdateGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGatewayInstanceInput) operationName() string {
+	return "UpdateGatewayInstance"
+}
+
 type UpdateGatewayInstanceOutput struct {
 
 	// The availability of the instance to host new bridges. The bridgePlacement

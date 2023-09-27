@@ -50,6 +50,10 @@ type SearchFlowTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchFlowTemplatesInput) operationName() string {
+	return "SearchFlowTemplates"
+}
+
 type SearchFlowTemplatesOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.

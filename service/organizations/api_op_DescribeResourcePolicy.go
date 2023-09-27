@@ -38,6 +38,10 @@ type DescribeResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourcePolicyInput) operationName() string {
+	return "DescribeResourcePolicy"
+}
+
 type DescribeResourcePolicyOutput struct {
 
 	// A structure that contains details about the resource policy.

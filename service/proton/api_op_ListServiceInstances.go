@@ -60,6 +60,10 @@ type ListServiceInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceInstancesInput) operationName() string {
+	return "ListServiceInstances"
+}
+
 type ListServiceInstancesOutput struct {
 
 	// An array of service instances with summary data.

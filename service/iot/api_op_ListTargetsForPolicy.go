@@ -49,6 +49,10 @@ type ListTargetsForPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTargetsForPolicyInput) operationName() string {
+	return "ListTargetsForPolicy"
+}
+
 type ListTargetsForPolicyOutput struct {
 
 	// A marker used to get the next set of results.

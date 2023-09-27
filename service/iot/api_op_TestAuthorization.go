@@ -66,6 +66,10 @@ type TestAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestAuthorizationInput) operationName() string {
+	return "TestAuthorization"
+}
+
 type TestAuthorizationOutput struct {
 
 	// The authentication results.

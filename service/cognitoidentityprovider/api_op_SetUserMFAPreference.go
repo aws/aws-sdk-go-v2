@@ -63,6 +63,10 @@ type SetUserMFAPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetUserMFAPreferenceInput) operationName() string {
+	return "SetUserMFAPreference"
+}
+
 type SetUserMFAPreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,6 +54,10 @@ type BatchCreateRoomMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateRoomMembershipInput) operationName() string {
+	return "BatchCreateRoomMembership"
+}
+
 type BatchCreateRoomMembershipOutput struct {
 
 	// If the action fails for one or more of the member IDs in the request, a list of

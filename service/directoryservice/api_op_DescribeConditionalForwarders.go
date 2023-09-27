@@ -50,6 +50,10 @@ type DescribeConditionalForwardersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConditionalForwardersInput) operationName() string {
+	return "DescribeConditionalForwarders"
+}
+
 // The result of a DescribeConditionalForwarder request.
 type DescribeConditionalForwardersOutput struct {
 

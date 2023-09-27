@@ -76,6 +76,10 @@ type TagOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagOpenIDConnectProviderInput) operationName() string {
+	return "TagOpenIDConnectProvider"
+}
+
 type TagOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

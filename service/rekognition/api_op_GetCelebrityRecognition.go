@@ -93,6 +93,10 @@ type GetCelebrityRecognitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCelebrityRecognitionInput) operationName() string {
+	return "GetCelebrityRecognition"
+}
+
 type GetCelebrityRecognitionOutput struct {
 
 	// Array of celebrities recognized in the video.

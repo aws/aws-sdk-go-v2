@@ -46,6 +46,10 @@ type ListClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClusterSnapshotsInput) operationName() string {
+	return "ListClusterSnapshots"
+}
+
 type ListClusterSnapshotsOutput struct {
 
 	// The response will provide a nextToken if there is more data beyond the

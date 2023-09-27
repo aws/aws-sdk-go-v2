@@ -95,6 +95,10 @@ type WriteRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*WriteRecordsInput) operationName() string {
+	return "WriteRecords"
+}
+
 type WriteRecordsOutput struct {
 
 	// Information on the records ingested by this request.

@@ -51,6 +51,10 @@ type DeleteVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcPeeringConnectionInput) operationName() string {
+	return "DeleteVpcPeeringConnection"
+}
+
 type DeleteVpcPeeringConnectionOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

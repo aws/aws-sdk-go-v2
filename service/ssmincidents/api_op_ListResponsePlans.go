@@ -43,6 +43,10 @@ type ListResponsePlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResponsePlansInput) operationName() string {
+	return "ListResponsePlans"
+}
+
 type ListResponsePlansOutput struct {
 
 	// Details of each response plan.

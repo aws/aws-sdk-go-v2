@@ -104,6 +104,10 @@ type UpdateQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateQualificationTypeInput) operationName() string {
+	return "UpdateQualificationType"
+}
+
 type UpdateQualificationTypeOutput struct {
 
 	// Contains a QualificationType data structure.

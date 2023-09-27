@@ -52,6 +52,10 @@ type CreateLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoggingConfigurationInput) operationName() string {
+	return "CreateLoggingConfiguration"
+}
+
 // Represents the output of a CreateLoggingConfiguration operation.
 type CreateLoggingConfigurationOutput struct {
 

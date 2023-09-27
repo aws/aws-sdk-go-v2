@@ -44,6 +44,10 @@ type BatchSnoozeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchSnoozeAlarmInput) operationName() string {
+	return "BatchSnoozeAlarm"
+}
+
 type BatchSnoozeAlarmOutput struct {
 
 	// A list of errors associated with the request, or null if there are no errors.

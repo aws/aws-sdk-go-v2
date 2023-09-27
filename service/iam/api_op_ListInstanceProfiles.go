@@ -70,6 +70,10 @@ type ListInstanceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceProfilesInput) operationName() string {
+	return "ListInstanceProfiles"
+}
+
 // Contains the response to a successful ListInstanceProfiles request.
 type ListInstanceProfilesOutput struct {
 

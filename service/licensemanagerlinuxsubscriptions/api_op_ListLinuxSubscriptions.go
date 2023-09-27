@@ -59,6 +59,10 @@ type ListLinuxSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLinuxSubscriptionsInput) operationName() string {
+	return "ListLinuxSubscriptions"
+}
+
 type ListLinuxSubscriptionsOutput struct {
 
 	// Token for the next set of results.

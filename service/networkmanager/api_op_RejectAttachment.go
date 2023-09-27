@@ -42,6 +42,10 @@ type RejectAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectAttachmentInput) operationName() string {
+	return "RejectAttachment"
+}
+
 type RejectAttachmentOutput struct {
 
 	// Describes the rejected attachment request.

@@ -55,6 +55,10 @@ type DescribeByoipCidrsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeByoipCidrsInput) operationName() string {
+	return "DescribeByoipCidrs"
+}
+
 type DescribeByoipCidrsOutput struct {
 
 	// Information about your address ranges.

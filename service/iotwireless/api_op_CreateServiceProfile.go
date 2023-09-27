@@ -53,6 +53,10 @@ type CreateServiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceProfileInput) operationName() string {
+	return "CreateServiceProfile"
+}
+
 type CreateServiceProfileOutput struct {
 
 	// The Amazon Resource Name of the new resource.

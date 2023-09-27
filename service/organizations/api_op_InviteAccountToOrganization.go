@@ -88,6 +88,10 @@ type InviteAccountToOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InviteAccountToOrganizationInput) operationName() string {
+	return "InviteAccountToOrganization"
+}
+
 type InviteAccountToOrganizationOutput struct {
 
 	// A structure that contains details about the handshake that is created to

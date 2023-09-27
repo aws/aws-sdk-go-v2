@@ -37,6 +37,10 @@ type DescribeTerminationPolicyTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTerminationPolicyTypesInput) operationName() string {
+	return "DescribeTerminationPolicyTypes"
+}
+
 type DescribeTerminationPolicyTypesOutput struct {
 
 	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance ,

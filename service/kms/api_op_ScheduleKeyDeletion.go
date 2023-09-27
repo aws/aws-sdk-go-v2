@@ -99,6 +99,10 @@ type ScheduleKeyDeletionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ScheduleKeyDeletionInput) operationName() string {
+	return "ScheduleKeyDeletion"
+}
+
 type ScheduleKeyDeletionOutput struct {
 
 	// The date and time after which KMS deletes the KMS key. If the KMS key is a

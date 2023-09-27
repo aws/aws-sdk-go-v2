@@ -49,6 +49,10 @@ type AssociateApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateApplicationsInput) operationName() string {
+	return "AssociateApplications"
+}
+
 type AssociateApplicationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type ListVariantImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVariantImportJobsInput) operationName() string {
+	return "ListVariantImportJobs"
+}
+
 type ListVariantImportJobsOutput struct {
 
 	// A pagination token that's included if more results are available.

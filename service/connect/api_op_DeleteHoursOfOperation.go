@@ -48,6 +48,10 @@ type DeleteHoursOfOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHoursOfOperationInput) operationName() string {
+	return "DeleteHoursOfOperation"
+}
+
 type DeleteHoursOfOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

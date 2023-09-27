@@ -59,6 +59,10 @@ type GetFindingStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingStatisticsInput) operationName() string {
+	return "GetFindingStatistics"
+}
+
 type GetFindingStatisticsOutput struct {
 
 	// An array of objects, one for each group of findings that matches the filter

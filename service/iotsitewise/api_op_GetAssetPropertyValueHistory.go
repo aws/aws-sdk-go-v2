@@ -82,6 +82,10 @@ type GetAssetPropertyValueHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAssetPropertyValueHistoryInput) operationName() string {
+	return "GetAssetPropertyValueHistory"
+}
+
 type GetAssetPropertyValueHistoryOutput struct {
 
 	// The asset property's value history.

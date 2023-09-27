@@ -51,6 +51,10 @@ type UpdateFieldLevelEncryptionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFieldLevelEncryptionProfileInput) operationName() string {
+	return "UpdateFieldLevelEncryptionProfile"
+}
+
 type UpdateFieldLevelEncryptionProfileOutput struct {
 
 	// The result of the field-level encryption profile request.

@@ -64,6 +64,10 @@ type DescribeKeywordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeKeywordsInput) operationName() string {
+	return "DescribeKeywords"
+}
+
 type DescribeKeywordsOutput struct {
 
 	// An array of KeywordInformation objects that contain the results.

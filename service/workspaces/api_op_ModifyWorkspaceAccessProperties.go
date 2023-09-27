@@ -49,6 +49,10 @@ type ModifyWorkspaceAccessPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyWorkspaceAccessPropertiesInput) operationName() string {
+	return "ModifyWorkspaceAccessProperties"
+}
+
 type ModifyWorkspaceAccessPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

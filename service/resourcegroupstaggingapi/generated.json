@@ -17,6 +17,7 @@
         "api_op_StartReportCreation.go",
         "api_op_TagResources.go",
         "api_op_UntagResources.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -52,6 +52,10 @@ type TestRenderEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestRenderEmailTemplateInput) operationName() string {
+	return "TestRenderEmailTemplate"
+}
+
 // The following element is returned by the service.
 type TestRenderEmailTemplateOutput struct {
 

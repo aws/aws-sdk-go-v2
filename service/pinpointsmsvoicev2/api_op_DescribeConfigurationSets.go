@@ -57,6 +57,10 @@ type DescribeConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationSetsInput) operationName() string {
+	return "DescribeConfigurationSets"
+}
+
 type DescribeConfigurationSetsOutput struct {
 
 	// An array of ConfigurationSets objects.

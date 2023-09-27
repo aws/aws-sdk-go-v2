@@ -49,6 +49,10 @@ type PutEmailIdentityDkimAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEmailIdentityDkimAttributesInput) operationName() string {
+	return "PutEmailIdentityDkimAttributes"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutEmailIdentityDkimAttributesOutput struct {

@@ -71,6 +71,10 @@ type GetDevicePositionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevicePositionHistoryInput) operationName() string {
+	return "GetDevicePositionHistory"
+}
+
 type GetDevicePositionHistoryOutput struct {
 
 	// Contains the position history details for the requested device.

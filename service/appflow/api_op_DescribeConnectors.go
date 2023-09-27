@@ -52,6 +52,10 @@ type DescribeConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectorsInput) operationName() string {
+	return "DescribeConnectors"
+}
+
 type DescribeConnectorsOutput struct {
 
 	// The configuration that is applied to the connectors used in the flow.

@@ -51,6 +51,10 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamsInput) operationName() string {
+	return "ListStreams"
+}
+
 type ListStreamsOutput struct {
 
 	// If the response is truncated, the call returns this element with a token. To

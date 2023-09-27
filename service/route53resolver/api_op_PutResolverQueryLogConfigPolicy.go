@@ -58,6 +58,10 @@ type PutResolverQueryLogConfigPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResolverQueryLogConfigPolicyInput) operationName() string {
+	return "PutResolverQueryLogConfigPolicy"
+}
+
 // The response to a PutResolverQueryLogConfigPolicy request.
 type PutResolverQueryLogConfigPolicyOutput struct {
 

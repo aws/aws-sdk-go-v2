@@ -48,6 +48,10 @@ type DeleteBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBranchInput) operationName() string {
+	return "DeleteBranch"
+}
+
 // The result structure for the delete branch request.
 type DeleteBranchOutput struct {
 

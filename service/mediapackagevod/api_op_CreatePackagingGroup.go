@@ -52,6 +52,10 @@ type CreatePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePackagingGroupInput) operationName() string {
+	return "CreatePackagingGroup"
+}
+
 type CreatePackagingGroupOutput struct {
 
 	// The ARN of the PackagingGroup.

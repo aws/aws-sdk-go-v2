@@ -121,6 +121,10 @@ type StartMedicalStreamTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMedicalStreamTranscriptionInput) operationName() string {
+	return "StartMedicalStreamTranscription"
+}
+
 type StartMedicalStreamTranscriptionOutput struct {
 
 	// Shows whether content identification was enabled for your transcription.

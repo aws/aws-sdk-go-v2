@@ -41,6 +41,10 @@ type DescribeInboundDmarcSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInboundDmarcSettingsInput) operationName() string {
+	return "DescribeInboundDmarcSettings"
+}
+
 type DescribeInboundDmarcSettingsOutput struct {
 
 	// Lists the enforcement setting of the applied policy.

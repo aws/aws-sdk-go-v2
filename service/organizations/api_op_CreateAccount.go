@@ -159,6 +159,10 @@ type CreateAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccountInput) operationName() string {
+	return "CreateAccount"
+}
+
 type CreateAccountOutput struct {
 
 	// A structure that contains details about the request to create an account. This

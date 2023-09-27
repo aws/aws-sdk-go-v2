@@ -58,6 +58,10 @@ type DescribeDocumentPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDocumentPermissionInput) operationName() string {
+	return "DescribeDocumentPermission"
+}
+
 type DescribeDocumentPermissionOutput struct {
 
 	// The account IDs that have permission to use this document. The ID can be either

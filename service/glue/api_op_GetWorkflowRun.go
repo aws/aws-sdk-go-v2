@@ -50,6 +50,10 @@ type GetWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowRunInput) operationName() string {
+	return "GetWorkflowRun"
+}
+
 type GetWorkflowRunOutput struct {
 
 	// The requested workflow run metadata.

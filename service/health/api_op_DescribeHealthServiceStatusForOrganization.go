@@ -37,6 +37,10 @@ type DescribeHealthServiceStatusForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHealthServiceStatusForOrganizationInput) operationName() string {
+	return "DescribeHealthServiceStatusForOrganization"
+}
+
 type DescribeHealthServiceStatusForOrganizationOutput struct {
 
 	// Information about the status of enabling or disabling the Health organizational

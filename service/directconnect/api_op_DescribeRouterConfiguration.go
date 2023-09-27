@@ -47,6 +47,10 @@ type DescribeRouterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRouterConfigurationInput) operationName() string {
+	return "DescribeRouterConfiguration"
+}
+
 type DescribeRouterConfigurationOutput struct {
 
 	// The customer router configuration.

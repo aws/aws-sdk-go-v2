@@ -50,6 +50,10 @@ type ListTokensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTokensInput) operationName() string {
+	return "ListTokens"
+}
+
 type ListTokensOutput struct {
 
 	// Token for the next set of results.

@@ -55,6 +55,10 @@ type FinalizeCutoverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FinalizeCutoverInput) operationName() string {
+	return "FinalizeCutover"
+}
+
 type FinalizeCutoverOutput struct {
 
 	// Source server application ID.

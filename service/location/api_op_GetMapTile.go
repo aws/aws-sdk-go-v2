@@ -65,6 +65,10 @@ type GetMapTileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMapTileInput) operationName() string {
+	return "GetMapTile"
+}
+
 type GetMapTileOutput struct {
 
 	// Contains Mapbox Vector Tile (MVT) data.

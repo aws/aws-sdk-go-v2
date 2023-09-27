@@ -46,6 +46,10 @@ type ListRouteCalculatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRouteCalculatorsInput) operationName() string {
+	return "ListRouteCalculators"
+}
+
 type ListRouteCalculatorsOutput struct {
 
 	// Lists the route calculator resources that exist in your Amazon Web Services

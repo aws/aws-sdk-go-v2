@@ -43,6 +43,10 @@ type StopThingRegistrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopThingRegistrationTaskInput) operationName() string {
+	return "StopThingRegistrationTask"
+}
+
 type StopThingRegistrationTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

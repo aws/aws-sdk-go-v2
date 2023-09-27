@@ -48,6 +48,10 @@ type CreateRecoveryGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRecoveryGroupInput) operationName() string {
+	return "CreateRecoveryGroup"
+}
+
 type CreateRecoveryGroupOutput struct {
 
 	// A list of a cell's Amazon Resource Names (ARNs).

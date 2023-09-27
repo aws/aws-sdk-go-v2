@@ -50,6 +50,10 @@ type AssociateConnectionAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateConnectionAliasInput) operationName() string {
+	return "AssociateConnectionAlias"
+}
+
 type AssociateConnectionAliasOutput struct {
 
 	// The identifier of the connection alias association. You use the connection

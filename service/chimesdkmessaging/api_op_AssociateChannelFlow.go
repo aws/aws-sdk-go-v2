@@ -56,6 +56,10 @@ type AssociateChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateChannelFlowInput) operationName() string {
+	return "AssociateChannelFlow"
+}
+
 type AssociateChannelFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

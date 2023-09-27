@@ -64,6 +64,10 @@ type UpdateLagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLagInput) operationName() string {
+	return "UpdateLag"
+}
+
 // Information about a link aggregation group (LAG).
 type UpdateLagOutput struct {
 

@@ -50,6 +50,10 @@ type GetTrailStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTrailStatusInput) operationName() string {
+	return "GetTrailStatus"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type GetTrailStatusOutput struct {

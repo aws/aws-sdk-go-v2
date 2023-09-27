@@ -46,6 +46,10 @@ type ListConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationsInput) operationName() string {
+	return "ListConfigurations"
+}
+
 type ListConfigurationsOutput struct {
 
 	// An array of MSK configurations.

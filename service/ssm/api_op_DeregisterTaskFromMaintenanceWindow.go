@@ -46,6 +46,10 @@ type DeregisterTaskFromMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterTaskFromMaintenanceWindowInput) operationName() string {
+	return "DeregisterTaskFromMaintenanceWindow"
+}
+
 type DeregisterTaskFromMaintenanceWindowOutput struct {
 
 	// The ID of the maintenance window the task was removed from.

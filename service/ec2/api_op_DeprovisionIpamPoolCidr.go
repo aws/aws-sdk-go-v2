@@ -54,6 +54,10 @@ type DeprovisionIpamPoolCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprovisionIpamPoolCidrInput) operationName() string {
+	return "DeprovisionIpamPoolCidr"
+}
+
 type DeprovisionIpamPoolCidrOutput struct {
 
 	// The deprovisioned pool CIDR.

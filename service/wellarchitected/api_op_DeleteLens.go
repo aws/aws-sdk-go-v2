@@ -73,6 +73,10 @@ type DeleteLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLensInput) operationName() string {
+	return "DeleteLens"
+}
+
 type DeleteLensOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type StartIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartIngestionInput) operationName() string {
+	return "StartIngestion"
+}
+
 type StartIngestionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

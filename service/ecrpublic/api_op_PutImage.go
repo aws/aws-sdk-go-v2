@@ -70,6 +70,10 @@ type PutImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutImageInput) operationName() string {
+	return "PutImage"
+}
+
 type PutImageOutput struct {
 
 	// Details of the image uploaded.

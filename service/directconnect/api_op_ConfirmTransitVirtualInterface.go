@@ -50,6 +50,10 @@ type ConfirmTransitVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmTransitVirtualInterfaceInput) operationName() string {
+	return "ConfirmTransitVirtualInterface"
+}
+
 type ConfirmTransitVirtualInterfaceOutput struct {
 
 	// The state of the virtual interface. The following are the possible values:

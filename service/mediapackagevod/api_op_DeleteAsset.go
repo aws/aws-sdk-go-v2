@@ -41,6 +41,10 @@ type DeleteAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAssetInput) operationName() string {
+	return "DeleteAsset"
+}
+
 type DeleteAssetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

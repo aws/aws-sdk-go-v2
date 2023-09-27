@@ -41,6 +41,10 @@ type DeleteMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMulticastGroupInput) operationName() string {
+	return "DeleteMulticastGroup"
+}
+
 type DeleteMulticastGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

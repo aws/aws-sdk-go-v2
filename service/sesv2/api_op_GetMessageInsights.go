@@ -46,6 +46,10 @@ type GetMessageInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMessageInsightsInput) operationName() string {
+	return "GetMessageInsights"
+}
+
 // Information about a message.
 type GetMessageInsightsOutput struct {
 

@@ -42,6 +42,10 @@ type GetMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMissionProfileInput) operationName() string {
+	return "GetMissionProfile"
+}
+
 type GetMissionProfileOutput struct {
 
 	// Amount of time after a contact ends that you’d like to receive a CloudWatch

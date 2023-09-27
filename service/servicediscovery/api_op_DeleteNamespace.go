@@ -42,6 +42,10 @@ type DeleteNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNamespaceInput) operationName() string {
+	return "DeleteNamespace"
+}
+
 type DeleteNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed

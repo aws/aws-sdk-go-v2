@@ -98,6 +98,10 @@ type CreateAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppBlockBuilderInput) operationName() string {
+	return "CreateAppBlockBuilder"
+}
+
 type CreateAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.

@@ -47,6 +47,10 @@ type ListComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentsInput) operationName() string {
+	return "ListComponents"
+}
+
 type ListComponentsOutput struct {
 
 	// A list that summarizes each component.

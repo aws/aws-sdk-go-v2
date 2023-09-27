@@ -42,6 +42,10 @@ type ExportConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportConfigurationsInput) operationName() string {
+	return "ExportConfigurations"
+}
+
 type ExportConfigurationsOutput struct {
 
 	// A unique identifier that you can use to query the export status.

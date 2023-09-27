@@ -43,6 +43,10 @@ type DescribeOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOrganizationInput) operationName() string {
+	return "DescribeOrganization"
+}
+
 type DescribeOrganizationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the organization.

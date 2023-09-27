@@ -55,6 +55,10 @@ type DeleteCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCommentInput) operationName() string {
+	return "DeleteComment"
+}
+
 type DeleteCommentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
