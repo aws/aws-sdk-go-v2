@@ -82,6 +82,10 @@ type CreateMultipartReadSetUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMultipartReadSetUploadInput) operationName() string {
+	return "CreateMultipartReadSetUpload"
+}
+
 type CreateMultipartReadSetUploadOutput struct {
 
 	// The creation time of the multipart upload.

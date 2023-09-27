@@ -53,6 +53,10 @@ type UpdateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCampaignInput) operationName() string {
+	return "UpdateCampaign"
+}
+
 type UpdateCampaignOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a

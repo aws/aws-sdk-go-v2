@@ -42,6 +42,10 @@ type DeregisterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterAccountInput) operationName() string {
+	return "DeregisterAccount"
+}
+
 type DeregisterAccountOutput struct {
 
 	// The registration status of the account.

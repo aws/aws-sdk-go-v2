@@ -79,6 +79,10 @@ type RegisterComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterComputeInput) operationName() string {
+	return "RegisterCompute"
+}
+
 type RegisterComputeOutput struct {
 
 	// The details of the compute resource you registered.

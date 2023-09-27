@@ -150,6 +150,10 @@ type CreateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVolumeInput) operationName() string {
+	return "CreateVolume"
+}
+
 // Describes a volume.
 type CreateVolumeOutput struct {
 

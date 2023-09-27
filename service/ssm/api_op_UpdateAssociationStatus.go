@@ -56,6 +56,10 @@ type UpdateAssociationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssociationStatusInput) operationName() string {
+	return "UpdateAssociationStatus"
+}
+
 type UpdateAssociationStatusOutput struct {
 
 	// Information about the association.

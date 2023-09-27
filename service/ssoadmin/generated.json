@@ -46,6 +46,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateInstanceAccessControlAttributeConfiguration.go",
         "api_op_UpdatePermissionSet.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

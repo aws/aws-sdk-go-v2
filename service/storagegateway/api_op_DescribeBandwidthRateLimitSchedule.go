@@ -56,6 +56,10 @@ type DescribeBandwidthRateLimitScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBandwidthRateLimitScheduleInput) operationName() string {
+	return "DescribeBandwidthRateLimitSchedule"
+}
+
 type DescribeBandwidthRateLimitScheduleOutput struct {
 
 	// An array that contains the bandwidth rate limit intervals for a tape or volume

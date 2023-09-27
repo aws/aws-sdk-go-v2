@@ -62,6 +62,10 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSessionInput) operationName() string {
+	return "GetSession"
+}
+
 type GetSessionOutput struct {
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's

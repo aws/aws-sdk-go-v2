@@ -49,6 +49,10 @@ type GetSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSystemTemplateInput) operationName() string {
+	return "GetSystemTemplate"
+}
+
 type GetSystemTemplateOutput struct {
 
 	// An object that contains summary data about the system.

@@ -46,6 +46,10 @@ type StopDiscoveryJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDiscoveryJobInput) operationName() string {
+	return "StopDiscoveryJob"
+}
+
 type StopDiscoveryJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

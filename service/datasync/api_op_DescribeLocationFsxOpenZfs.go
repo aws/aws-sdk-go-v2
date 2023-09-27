@@ -45,6 +45,10 @@ type DescribeLocationFsxOpenZfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationFsxOpenZfsInput) operationName() string {
+	return "DescribeLocationFsxOpenZfs"
+}
+
 type DescribeLocationFsxOpenZfsOutput struct {
 
 	// The time that the FSx for OpenZFS location was created.

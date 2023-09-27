@@ -43,6 +43,10 @@ type GetSMSAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSMSAttributesInput) operationName() string {
+	return "GetSMSAttributes"
+}
+
 // The response from the GetSMSAttributes request.
 type GetSMSAttributesOutput struct {
 

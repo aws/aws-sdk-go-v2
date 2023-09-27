@@ -48,6 +48,10 @@ type BatchAssociateScramSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchAssociateScramSecretInput) operationName() string {
+	return "BatchAssociateScramSecret"
+}
+
 type BatchAssociateScramSecretOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

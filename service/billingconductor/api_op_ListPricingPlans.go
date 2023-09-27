@@ -51,6 +51,10 @@ type ListPricingPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPricingPlansInput) operationName() string {
+	return "ListPricingPlans"
+}
+
 type ListPricingPlansOutput struct {
 
 	// The billing period for which the described pricing plans are applicable.

@@ -56,6 +56,10 @@ type ModifyDBProxyTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBProxyTargetGroupInput) operationName() string {
+	return "ModifyDBProxyTargetGroup"
+}
+
 type ModifyDBProxyTargetGroupOutput struct {
 
 	// The settings of the modified DBProxyTarget .

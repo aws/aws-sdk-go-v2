@@ -68,6 +68,10 @@ type CreateConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfiguredTableInput) operationName() string {
+	return "CreateConfiguredTable"
+}
+
 type CreateConfiguredTableOutput struct {
 
 	// The created configured table.

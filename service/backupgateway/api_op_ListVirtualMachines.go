@@ -50,6 +50,10 @@ type ListVirtualMachinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVirtualMachinesInput) operationName() string {
+	return "ListVirtualMachines"
+}
+
 type ListVirtualMachinesOutput struct {
 
 	// The next item following a partial list of returned resources. For example, if a

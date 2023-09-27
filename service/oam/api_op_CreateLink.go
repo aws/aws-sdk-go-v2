@@ -77,6 +77,10 @@ type CreateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLinkInput) operationName() string {
+	return "CreateLink"
+}
+
 type CreateLinkOutput struct {
 
 	// The ARN of the link that is newly created.

@@ -42,6 +42,10 @@ type DeleteSinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSinkInput) operationName() string {
+	return "DeleteSink"
+}
+
 type DeleteSinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

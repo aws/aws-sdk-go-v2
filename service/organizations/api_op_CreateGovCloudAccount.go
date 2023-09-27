@@ -202,6 +202,10 @@ type CreateGovCloudAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGovCloudAccountInput) operationName() string {
+	return "CreateGovCloudAccount"
+}
+
 type CreateGovCloudAccountOutput struct {
 
 	// Contains the status about a CreateAccount or CreateGovCloudAccount request to

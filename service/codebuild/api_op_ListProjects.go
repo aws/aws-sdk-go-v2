@@ -61,6 +61,10 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectsInput) operationName() string {
+	return "ListProjects"
+}
+
 type ListProjectsOutput struct {
 
 	// If there are more than 100 items in the list, only the first 100 items are

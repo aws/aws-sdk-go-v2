@@ -50,6 +50,10 @@ type BatchGetResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetResourceConfigInput) operationName() string {
+	return "BatchGetResourceConfig"
+}
+
 type BatchGetResourceConfigOutput struct {
 
 	// A list that contains the current configuration of one or more resources.

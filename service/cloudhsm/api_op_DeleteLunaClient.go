@@ -50,6 +50,10 @@ type DeleteLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLunaClientInput) operationName() string {
+	return "DeleteLunaClient"
+}
+
 type DeleteLunaClientOutput struct {
 
 	// The status of the action.

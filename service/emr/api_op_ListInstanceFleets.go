@@ -47,6 +47,10 @@ type ListInstanceFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceFleetsInput) operationName() string {
+	return "ListInstanceFleets"
+}
+
 type ListInstanceFleetsOutput struct {
 
 	// The list of instance fleets for the cluster and given filters.

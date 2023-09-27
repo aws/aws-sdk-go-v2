@@ -48,6 +48,10 @@ type ListCoreNetworkPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCoreNetworkPolicyVersionsInput) operationName() string {
+	return "ListCoreNetworkPolicyVersions"
+}
+
 type ListCoreNetworkPolicyVersionsOutput struct {
 
 	// Describes core network policy versions.

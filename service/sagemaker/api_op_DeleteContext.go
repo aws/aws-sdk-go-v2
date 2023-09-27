@@ -41,6 +41,10 @@ type DeleteContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteContextInput) operationName() string {
+	return "DeleteContext"
+}
+
 type DeleteContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.

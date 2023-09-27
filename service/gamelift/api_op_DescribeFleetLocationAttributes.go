@@ -69,6 +69,10 @@ type DescribeFleetLocationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetLocationAttributesInput) operationName() string {
+	return "DescribeFleetLocationAttributes"
+}
+
 type DescribeFleetLocationAttributesOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

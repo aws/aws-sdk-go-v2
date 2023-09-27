@@ -47,6 +47,10 @@ type ImportKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportKeyPairInput) operationName() string {
+	return "ImportKeyPair"
+}
+
 type ImportKeyPairOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

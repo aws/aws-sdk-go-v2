@@ -32,6 +32,10 @@ type PostUnionWithJsonNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PostUnionWithJsonNameInput) operationName() string {
+	return "PostUnionWithJsonName"
+}
+
 type PostUnionWithJsonNameOutput struct {
 
 	// This member is required.

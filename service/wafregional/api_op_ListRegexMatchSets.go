@@ -55,6 +55,10 @@ type ListRegexMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRegexMatchSetsInput) operationName() string {
+	return "ListRegexMatchSets"
+}
+
 type ListRegexMatchSetsOutput struct {
 
 	// If you have more RegexMatchSet objects than the number that you specified for

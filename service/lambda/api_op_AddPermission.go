@@ -117,6 +117,10 @@ type AddPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddPermissionInput) operationName() string {
+	return "AddPermission"
+}
+
 type AddPermissionOutput struct {
 
 	// The permission statement that's added to the function policy.

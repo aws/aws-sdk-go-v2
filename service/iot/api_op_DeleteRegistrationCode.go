@@ -38,6 +38,10 @@ type DeleteRegistrationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRegistrationCodeInput) operationName() string {
+	return "DeleteRegistrationCode"
+}
+
 // The output for the DeleteRegistrationCode operation.
 type DeleteRegistrationCodeOutput struct {
 	// Metadata pertaining to the operation's result.

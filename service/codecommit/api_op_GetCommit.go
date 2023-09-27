@@ -49,6 +49,10 @@ type GetCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCommitInput) operationName() string {
+	return "GetCommit"
+}
+
 // Represents the output of a get commit operation.
 type GetCommitOutput struct {
 

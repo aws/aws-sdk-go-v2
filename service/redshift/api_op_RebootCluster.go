@@ -47,6 +47,10 @@ type RebootClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootClusterInput) operationName() string {
+	return "RebootCluster"
+}
+
 type RebootClusterOutput struct {
 
 	// Describes a cluster.

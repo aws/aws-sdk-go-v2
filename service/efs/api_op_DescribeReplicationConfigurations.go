@@ -51,6 +51,10 @@ type DescribeReplicationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationConfigurationsInput) operationName() string {
+	return "DescribeReplicationConfigurations"
+}
+
 type DescribeReplicationConfigurationsOutput struct {
 
 	// You can use the NextToken from the previous response in a subsequent request to

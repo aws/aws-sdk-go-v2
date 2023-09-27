@@ -68,6 +68,10 @@ type ListFHIRImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFHIRImportJobsInput) operationName() string {
+	return "ListFHIRImportJobs"
+}
+
 type ListFHIRImportJobsOutput struct {
 
 	// The properties of a listed FHIR import jobs, including the ID, ARN, name, and

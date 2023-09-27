@@ -157,6 +157,10 @@ type CreateHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHITInput) operationName() string {
+	return "CreateHIT"
+}
+
 type CreateHITOutput struct {
 
 	// Contains the newly created HIT data. For a description of the HIT data

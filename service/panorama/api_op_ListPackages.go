@@ -44,6 +44,10 @@ type ListPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackagesInput) operationName() string {
+	return "ListPackages"
+}
+
 type ListPackagesOutput struct {
 
 	// A pagination token that's included if more results are available.

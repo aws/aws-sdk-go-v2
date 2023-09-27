@@ -50,6 +50,10 @@ type ListElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListElasticsearchVersionsInput) operationName() string {
+	return "ListElasticsearchVersions"
+}
+
 // Container for the parameters for response received from
 // ListElasticsearchVersions operation.
 type ListElasticsearchVersionsOutput struct {

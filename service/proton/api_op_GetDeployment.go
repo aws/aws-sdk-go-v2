@@ -55,6 +55,10 @@ type GetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeploymentInput) operationName() string {
+	return "GetDeployment"
+}
+
 type GetDeploymentOutput struct {
 
 	// The detailed data of the requested deployment.

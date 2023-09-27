@@ -48,6 +48,10 @@ type DeleteInstanceConnectEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceConnectEndpointInput) operationName() string {
+	return "DeleteInstanceConnectEndpoint"
+}
+
 type DeleteInstanceConnectEndpointOutput struct {
 
 	// Information about the EC2 Instance Connect Endpoint.

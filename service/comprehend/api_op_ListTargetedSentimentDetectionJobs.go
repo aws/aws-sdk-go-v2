@@ -48,6 +48,10 @@ type ListTargetedSentimentDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTargetedSentimentDetectionJobsInput) operationName() string {
+	return "ListTargetedSentimentDetectionJobs"
+}
+
 type ListTargetedSentimentDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.

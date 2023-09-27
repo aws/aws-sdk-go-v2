@@ -61,6 +61,10 @@ type PutGatewayResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutGatewayResponseInput) operationName() string {
+	return "PutGatewayResponse"
+}
+
 // A gateway response of a given response type and status code, with optional
 // response parameters and mapping templates.
 type PutGatewayResponseOutput struct {

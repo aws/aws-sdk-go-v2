@@ -144,6 +144,10 @@ type ModifyInstanceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceAttributeInput) operationName() string {
+	return "ModifyInstanceAttribute"
+}
+
 type ModifyInstanceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

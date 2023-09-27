@@ -48,6 +48,10 @@ type GetRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRateBasedRuleInput) operationName() string {
+	return "GetRateBasedRule"
+}
+
 type GetRateBasedRuleOutput struct {
 
 	// Information about the RateBasedRule that you specified in the GetRateBasedRule

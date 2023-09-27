@@ -60,6 +60,10 @@ type GetRoutingControlStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRoutingControlStateInput) operationName() string {
+	return "GetRoutingControlState"
+}
+
 type GetRoutingControlStateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the response.

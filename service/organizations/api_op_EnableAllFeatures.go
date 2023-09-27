@@ -58,6 +58,10 @@ type EnableAllFeaturesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableAllFeaturesInput) operationName() string {
+	return "EnableAllFeatures"
+}
+
 type EnableAllFeaturesOutput struct {
 
 	// A structure that contains details about the handshake created to support this

@@ -55,6 +55,10 @@ type DetachCustomerManagedPolicyReferenceFromPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachCustomerManagedPolicyReferenceFromPermissionSetInput) operationName() string {
+	return "DetachCustomerManagedPolicyReferenceFromPermissionSet"
+}
+
 type DetachCustomerManagedPolicyReferenceFromPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

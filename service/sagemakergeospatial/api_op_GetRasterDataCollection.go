@@ -42,6 +42,10 @@ type GetRasterDataCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRasterDataCollectionInput) operationName() string {
+	return "GetRasterDataCollection"
+}
+
 type GetRasterDataCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the raster data collection.

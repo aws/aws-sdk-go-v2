@@ -43,6 +43,10 @@ type StopQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopQueryInput) operationName() string {
+	return "StopQuery"
+}
+
 type StopQueryOutput struct {
 
 	// This is true if the query was stopped by the StopQuery operation.

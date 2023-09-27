@@ -52,6 +52,10 @@ type UpdateListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateListenerInput) operationName() string {
+	return "UpdateListener"
+}
+
 type UpdateListenerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the listener.

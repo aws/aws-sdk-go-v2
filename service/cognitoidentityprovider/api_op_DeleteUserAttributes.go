@@ -54,6 +54,10 @@ type DeleteUserAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserAttributesInput) operationName() string {
+	return "DeleteUserAttributes"
+}
+
 // Represents the response from the server to delete user attributes.
 type DeleteUserAttributesOutput struct {
 	// Metadata pertaining to the operation's result.

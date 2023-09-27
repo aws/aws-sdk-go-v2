@@ -44,6 +44,10 @@ type EnableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableUserInput) operationName() string {
+	return "EnableUser"
+}
+
 type EnableUserOutput struct {
 
 	// The unique identifier for the active user.

@@ -64,6 +64,10 @@ type AddTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddTagsToResourceInput) operationName() string {
+	return "AddTagsToResource"
+}
+
 // AddTagsToResourceOutput
 type AddTagsToResourceOutput struct {
 

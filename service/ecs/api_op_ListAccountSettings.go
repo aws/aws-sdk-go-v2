@@ -74,6 +74,10 @@ type ListAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountSettingsInput) operationName() string {
+	return "ListAccountSettings"
+}
+
 type ListAccountSettingsOutput struct {
 
 	// The nextToken value to include in a future ListAccountSettings request. When

@@ -49,6 +49,10 @@ type DescribeRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRepositoryAssociationInput) operationName() string {
+	return "DescribeRepositoryAssociation"
+}
+
 type DescribeRepositoryAssociationOutput struct {
 
 	// Information about the repository association.

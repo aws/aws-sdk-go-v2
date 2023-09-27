@@ -46,6 +46,10 @@ type StartReportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReportJobInput) operationName() string {
+	return "StartReportJob"
+}
+
 type StartReportJobOutput struct {
 
 	// The identifier of the report job. A unique, randomly generated, Unicode, UTF-8

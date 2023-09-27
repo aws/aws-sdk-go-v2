@@ -42,6 +42,10 @@ type DescribeProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProfileInput) operationName() string {
+	return "DescribeProfile"
+}
+
 type DescribeProfileOutput struct {
 
 	// The details of the specified profile, returned as an object.

@@ -85,6 +85,10 @@ type CreatePredictorBacktestExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePredictorBacktestExportJobInput) operationName() string {
+	return "CreatePredictorBacktestExportJob"
+}
+
 type CreatePredictorBacktestExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the predictor backtest export job that you

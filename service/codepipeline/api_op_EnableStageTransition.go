@@ -57,6 +57,10 @@ type EnableStageTransitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableStageTransitionInput) operationName() string {
+	return "EnableStageTransition"
+}
+
 type EnableStageTransitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

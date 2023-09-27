@@ -70,6 +70,10 @@ type RequestCancelWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestCancelWorkflowExecutionInput) operationName() string {
+	return "RequestCancelWorkflowExecution"
+}
+
 type RequestCancelWorkflowExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

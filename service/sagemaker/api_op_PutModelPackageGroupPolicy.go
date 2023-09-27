@@ -48,6 +48,10 @@ type PutModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutModelPackageGroupPolicyInput) operationName() string {
+	return "PutModelPackageGroupPolicy"
+}
+
 type PutModelPackageGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model package group.

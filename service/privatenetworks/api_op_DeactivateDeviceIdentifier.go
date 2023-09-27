@@ -47,6 +47,10 @@ type DeactivateDeviceIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateDeviceIdentifierInput) operationName() string {
+	return "DeactivateDeviceIdentifier"
+}
+
 type DeactivateDeviceIdentifierOutput struct {
 
 	// Information about the device identifier.

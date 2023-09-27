@@ -65,6 +65,10 @@ type ListGroupsOlderThanOrderingIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupsOlderThanOrderingIdInput) operationName() string {
+	return "ListGroupsOlderThanOrderingId"
+}
+
 type ListGroupsOlderThanOrderingIdOutput struct {
 
 	// Summary information for list of groups that are mapped to users before a given

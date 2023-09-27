@@ -31,6 +31,10 @@ type XmlMapsXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*XmlMapsXmlNameInput) operationName() string {
+	return "XmlMapsXmlName"
+}
+
 type XmlMapsXmlNameOutput struct {
 	MyMap map[string]types.GreetingStruct
 

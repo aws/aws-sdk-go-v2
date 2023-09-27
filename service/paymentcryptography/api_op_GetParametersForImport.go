@@ -61,6 +61,10 @@ type GetParametersForImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetParametersForImportInput) operationName() string {
+	return "GetParametersForImport"
+}
+
 type GetParametersForImportOutput struct {
 
 	// The import token to initiate key import into Amazon Web Services Payment

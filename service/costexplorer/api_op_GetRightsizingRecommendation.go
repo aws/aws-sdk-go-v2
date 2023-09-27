@@ -116,6 +116,10 @@ type GetRightsizingRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRightsizingRecommendationInput) operationName() string {
+	return "GetRightsizingRecommendation"
+}
+
 type GetRightsizingRecommendationOutput struct {
 
 	// You can use Configuration to customize recommendations across two attributes.

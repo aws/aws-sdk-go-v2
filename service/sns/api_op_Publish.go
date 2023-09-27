@@ -140,6 +140,10 @@ type PublishInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishInput) operationName() string {
+	return "Publish"
+}
+
 // Response for Publish action.
 type PublishOutput struct {
 

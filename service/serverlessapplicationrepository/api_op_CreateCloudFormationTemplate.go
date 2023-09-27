@@ -45,6 +45,10 @@ type CreateCloudFormationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCloudFormationTemplateInput) operationName() string {
+	return "CreateCloudFormationTemplate"
+}
+
 type CreateCloudFormationTemplateOutput struct {
 
 	// The application Amazon Resource Name (ARN).

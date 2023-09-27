@@ -54,6 +54,10 @@ type ListSuiteRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSuiteRunsInput) operationName() string {
+	return "ListSuiteRuns"
+}
+
 type ListSuiteRunsOutput struct {
 
 	// A token to retrieve the next set of results.

@@ -60,6 +60,10 @@ type ListLanguageModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLanguageModelsInput) operationName() string {
+	return "ListLanguageModels"
+}
+
 type ListLanguageModelsOutput struct {
 
 	// Provides information about the custom language models that match the criteria

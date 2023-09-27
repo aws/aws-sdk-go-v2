@@ -53,6 +53,10 @@ type UpdatePrivateDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePrivateDnsNamespaceInput) operationName() string {
+	return "UpdatePrivateDnsNamespace"
+}
+
 type UpdatePrivateDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed

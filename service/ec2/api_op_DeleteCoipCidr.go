@@ -53,6 +53,10 @@ type DeleteCoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCoipCidrInput) operationName() string {
+	return "DeleteCoipCidr"
+}
+
 type DeleteCoipCidrOutput struct {
 
 	// Information about a range of customer-owned IP addresses.

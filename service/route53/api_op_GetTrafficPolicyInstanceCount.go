@@ -38,6 +38,10 @@ type GetTrafficPolicyInstanceCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTrafficPolicyInstanceCountInput) operationName() string {
+	return "GetTrafficPolicyInstanceCount"
+}
+
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
 type GetTrafficPolicyInstanceCountOutput struct {

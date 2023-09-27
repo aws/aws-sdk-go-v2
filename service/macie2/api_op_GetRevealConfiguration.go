@@ -37,6 +37,10 @@ type GetRevealConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRevealConfigurationInput) operationName() string {
+	return "GetRevealConfiguration"
+}
+
 type GetRevealConfigurationOutput struct {
 
 	// The current configuration settings and the status of the configuration for the

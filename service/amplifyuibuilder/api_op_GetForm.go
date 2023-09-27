@@ -52,6 +52,10 @@ type GetFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFormInput) operationName() string {
+	return "GetForm"
+}
+
 type GetFormOutput struct {
 
 	// Represents the configuration settings for the form.

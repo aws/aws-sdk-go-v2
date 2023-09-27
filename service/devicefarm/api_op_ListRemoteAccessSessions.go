@@ -48,6 +48,10 @@ type ListRemoteAccessSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRemoteAccessSessionsInput) operationName() string {
+	return "ListRemoteAccessSessions"
+}
+
 // Represents the response from the server after AWS Device Farm makes a request
 // to return information about the remote access session.
 type ListRemoteAccessSessionsOutput struct {

@@ -30,6 +30,10 @@ type XmlMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*XmlMapsInput) operationName() string {
+	return "XmlMaps"
+}
+
 type XmlMapsOutput struct {
 	MyMap map[string]types.GreetingStruct
 

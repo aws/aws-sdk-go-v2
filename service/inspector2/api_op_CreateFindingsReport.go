@@ -52,6 +52,10 @@ type CreateFindingsReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFindingsReportInput) operationName() string {
+	return "CreateFindingsReport"
+}
+
 type CreateFindingsReportOutput struct {
 
 	// The ID of the report.

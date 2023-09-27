@@ -50,6 +50,10 @@ type UpdateLongTermPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLongTermPricingInput) operationName() string {
+	return "UpdateLongTermPricing"
+}
+
 type UpdateLongTermPricingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

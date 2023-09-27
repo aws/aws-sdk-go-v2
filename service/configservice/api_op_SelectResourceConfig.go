@@ -53,6 +53,10 @@ type SelectResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SelectResourceConfigInput) operationName() string {
+	return "SelectResourceConfig"
+}
+
 type SelectResourceConfigOutput struct {
 
 	// The nextToken string returned in a previous request that you use to request the

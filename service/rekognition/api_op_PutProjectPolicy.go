@@ -75,6 +75,10 @@ type PutProjectPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutProjectPolicyInput) operationName() string {
+	return "PutProjectPolicy"
+}
+
 type PutProjectPolicyOutput struct {
 
 	// The ID of the project policy.

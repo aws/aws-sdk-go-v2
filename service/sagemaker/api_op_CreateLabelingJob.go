@@ -190,6 +190,10 @@ type CreateLabelingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLabelingJobInput) operationName() string {
+	return "CreateLabelingJob"
+}
+
 type CreateLabelingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the labeling job. You use this ARN to

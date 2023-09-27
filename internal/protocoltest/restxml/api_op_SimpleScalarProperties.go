@@ -48,6 +48,10 @@ type SimpleScalarPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SimpleScalarPropertiesInput) operationName() string {
+	return "SimpleScalarProperties"
+}
+
 type SimpleScalarPropertiesOutput struct {
 	ByteValue *int8
 

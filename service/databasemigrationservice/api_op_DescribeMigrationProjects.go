@@ -56,6 +56,10 @@ type DescribeMigrationProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMigrationProjectsInput) operationName() string {
+	return "DescribeMigrationProjects"
+}
+
 type DescribeMigrationProjectsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the

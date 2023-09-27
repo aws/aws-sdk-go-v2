@@ -44,6 +44,10 @@ type GetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateInput) operationName() string {
+	return "GetTemplate"
+}
+
 type GetTemplateOutput struct {
 
 	// A certificate template that the connector uses to issue certificates from a

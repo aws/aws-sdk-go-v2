@@ -63,6 +63,10 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClusterInput) operationName() string {
+	return "CreateCluster"
+}
+
 type CreateClusterOutput struct {
 
 	// Information about the cluster that was created.

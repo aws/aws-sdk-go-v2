@@ -73,6 +73,10 @@ type DescribeNetworkInsightsPathsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkInsightsPathsInput) operationName() string {
+	return "DescribeNetworkInsightsPaths"
+}
+
 type DescribeNetworkInsightsPathsOutput struct {
 
 	// Information about the paths.

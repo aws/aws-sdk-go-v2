@@ -65,6 +65,10 @@ type ListTableRowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTableRowsInput) operationName() string {
+	return "ListTableRows"
+}
+
 type ListTableRowsOutput struct {
 
 	// The list of columns in the table whose row data is returned in the result.

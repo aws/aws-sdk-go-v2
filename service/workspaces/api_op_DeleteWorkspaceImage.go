@@ -43,6 +43,10 @@ type DeleteWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkspaceImageInput) operationName() string {
+	return "DeleteWorkspaceImage"
+}
+
 type DeleteWorkspaceImageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

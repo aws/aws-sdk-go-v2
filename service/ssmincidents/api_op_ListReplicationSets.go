@@ -42,6 +42,10 @@ type ListReplicationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReplicationSetsInput) operationName() string {
+	return "ListReplicationSets"
+}
+
 type ListReplicationSetsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the list replication set.

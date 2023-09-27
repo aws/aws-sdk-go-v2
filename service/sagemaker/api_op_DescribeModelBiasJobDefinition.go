@@ -44,6 +44,10 @@ type DescribeModelBiasJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelBiasJobDefinitionInput) operationName() string {
+	return "DescribeModelBiasJobDefinition"
+}
+
 type DescribeModelBiasJobDefinitionOutput struct {
 
 	// The time at which the model bias job was created.

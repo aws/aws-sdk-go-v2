@@ -43,6 +43,10 @@ type GetAppInstanceRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppInstanceRetentionSettingsInput) operationName() string {
+	return "GetAppInstanceRetentionSettings"
+}
+
 type GetAppInstanceRetentionSettingsOutput struct {
 
 	// The retention settings for the AppInstance .

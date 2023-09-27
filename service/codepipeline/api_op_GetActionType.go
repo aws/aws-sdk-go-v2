@@ -68,6 +68,10 @@ type GetActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetActionTypeInput) operationName() string {
+	return "GetActionType"
+}
+
 type GetActionTypeOutput struct {
 
 	// The action type information for the requested action type, such as the action

@@ -42,6 +42,10 @@ type DeleteImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImportInput) operationName() string {
+	return "DeleteImport"
+}
+
 type DeleteImportOutput struct {
 
 	// The unique identifier of the deleted import.

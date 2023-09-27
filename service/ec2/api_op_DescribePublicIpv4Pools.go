@@ -56,6 +56,10 @@ type DescribePublicIpv4PoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePublicIpv4PoolsInput) operationName() string {
+	return "DescribePublicIpv4Pools"
+}
+
 type DescribePublicIpv4PoolsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

@@ -50,6 +50,10 @@ type ListDirectoryRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDirectoryRegistrationsInput) operationName() string {
+	return "ListDirectoryRegistrations"
+}
+
 type ListDirectoryRegistrationsOutput struct {
 
 	// Summary information about each directory registration you have created.

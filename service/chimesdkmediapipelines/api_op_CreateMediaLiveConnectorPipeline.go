@@ -53,6 +53,10 @@ type CreateMediaLiveConnectorPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMediaLiveConnectorPipelineInput) operationName() string {
+	return "CreateMediaLiveConnectorPipeline"
+}
+
 type CreateMediaLiveConnectorPipelineOutput struct {
 
 	// The new media live connector pipeline.

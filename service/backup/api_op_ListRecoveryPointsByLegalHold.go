@@ -52,6 +52,10 @@ type ListRecoveryPointsByLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecoveryPointsByLegalHoldInput) operationName() string {
+	return "ListRecoveryPointsByLegalHold"
+}
+
 type ListRecoveryPointsByLegalHoldOutput struct {
 
 	// This return is the next item following a partial list of returned resources.

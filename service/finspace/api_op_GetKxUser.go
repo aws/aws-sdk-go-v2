@@ -46,6 +46,10 @@ type GetKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKxUserInput) operationName() string {
+	return "GetKxUser"
+}
+
 type GetKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.

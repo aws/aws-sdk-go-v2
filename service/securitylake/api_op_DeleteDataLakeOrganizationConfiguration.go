@@ -47,6 +47,10 @@ type DeleteDataLakeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataLakeOrganizationConfigurationInput) operationName() string {
+	return "DeleteDataLakeOrganizationConfiguration"
+}
+
 type DeleteDataLakeOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

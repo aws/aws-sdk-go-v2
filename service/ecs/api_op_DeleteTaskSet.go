@@ -60,6 +60,10 @@ type DeleteTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTaskSetInput) operationName() string {
+	return "DeleteTaskSet"
+}
+
 type DeleteTaskSetOutput struct {
 
 	// Details about the task set.

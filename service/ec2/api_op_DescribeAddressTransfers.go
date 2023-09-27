@@ -62,6 +62,10 @@ type DescribeAddressTransfersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddressTransfersInput) operationName() string {
+	return "DescribeAddressTransfers"
+}
+
 type DescribeAddressTransfersOutput struct {
 
 	// The Elastic IP address transfer.

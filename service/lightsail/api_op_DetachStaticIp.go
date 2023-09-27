@@ -42,6 +42,10 @@ type DetachStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetachStaticIpInput) operationName() string {
+	return "DetachStaticIp"
+}
+
 type DetachStaticIpOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

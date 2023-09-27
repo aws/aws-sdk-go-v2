@@ -50,6 +50,10 @@ type GetBackupSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackupSelectionInput) operationName() string {
+	return "GetBackupSelection"
+}
+
 type GetBackupSelectionOutput struct {
 
 	// Uniquely identifies a backup plan.

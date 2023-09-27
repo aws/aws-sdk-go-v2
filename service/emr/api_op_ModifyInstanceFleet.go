@@ -51,6 +51,10 @@ type ModifyInstanceFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceFleetInput) operationName() string {
+	return "ModifyInstanceFleet"
+}
+
 type ModifyInstanceFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,6 +54,10 @@ type ListSizeConstraintSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSizeConstraintSetsInput) operationName() string {
+	return "ListSizeConstraintSets"
+}
+
 type ListSizeConstraintSetsOutput struct {
 
 	// If you have more SizeConstraintSet objects than the number that you specified

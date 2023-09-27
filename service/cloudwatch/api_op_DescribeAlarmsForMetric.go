@@ -68,6 +68,10 @@ type DescribeAlarmsForMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlarmsForMetricInput) operationName() string {
+	return "DescribeAlarmsForMetric"
+}
+
 type DescribeAlarmsForMetricOutput struct {
 
 	// The information for each alarm with the specified metric.

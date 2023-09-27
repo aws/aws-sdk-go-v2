@@ -74,6 +74,10 @@ type CreateSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSegmentInput) operationName() string {
+	return "CreateSegment"
+}
+
 type CreateSegmentOutput struct {
 
 	// A structure that contains the complete information about the segment that was

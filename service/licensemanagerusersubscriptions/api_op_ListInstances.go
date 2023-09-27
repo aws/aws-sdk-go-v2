@@ -47,6 +47,10 @@ type ListInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstancesInput) operationName() string {
+	return "ListInstances"
+}
+
 type ListInstancesOutput struct {
 
 	// Metadata that describes the list instances operation.

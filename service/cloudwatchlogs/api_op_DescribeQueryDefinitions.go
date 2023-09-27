@@ -50,6 +50,10 @@ type DescribeQueryDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeQueryDefinitionsInput) operationName() string {
+	return "DescribeQueryDefinitions"
+}
+
 type DescribeQueryDefinitionsOutput struct {
 
 	// The token for the next set of items to return. The token expires after 24 hours.

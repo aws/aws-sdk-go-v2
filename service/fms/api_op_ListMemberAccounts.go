@@ -52,6 +52,10 @@ type ListMemberAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMemberAccountsInput) operationName() string {
+	return "ListMemberAccounts"
+}
+
 type ListMemberAccountsOutput struct {
 
 	// An array of account IDs.

@@ -45,6 +45,10 @@ type ListInstanceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceProfilesInput) operationName() string {
+	return "ListInstanceProfiles"
+}
+
 type ListInstanceProfilesOutput struct {
 
 	// An object that contains information about your instance profiles.

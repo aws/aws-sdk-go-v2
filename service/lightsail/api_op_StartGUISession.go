@@ -44,6 +44,10 @@ type StartGUISessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartGUISessionInput) operationName() string {
+	return "StartGUISession"
+}
+
 type StartGUISessionOutput struct {
 
 	// The available API operations.

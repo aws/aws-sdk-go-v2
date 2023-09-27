@@ -43,6 +43,10 @@ type DescribeGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGatewayInput) operationName() string {
+	return "DescribeGateway"
+}
+
 type DescribeGatewayOutput struct {
 
 	// The settings for a gateway, including its networks.

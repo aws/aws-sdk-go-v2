@@ -47,6 +47,10 @@ type StartOnDemandReplicationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartOnDemandReplicationRunInput) operationName() string {
+	return "StartOnDemandReplicationRun"
+}
+
 type StartOnDemandReplicationRunOutput struct {
 
 	// The ID of the replication run.

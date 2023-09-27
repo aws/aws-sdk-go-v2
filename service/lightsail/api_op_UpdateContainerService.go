@@ -80,6 +80,10 @@ type UpdateContainerServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateContainerServiceInput) operationName() string {
+	return "UpdateContainerService"
+}
+
 type UpdateContainerServiceOutput struct {
 
 	// An object that describes a container service.

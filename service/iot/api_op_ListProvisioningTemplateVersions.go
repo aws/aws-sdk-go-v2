@@ -50,6 +50,10 @@ type ListProvisioningTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProvisioningTemplateVersionsInput) operationName() string {
+	return "ListProvisioningTemplateVersions"
+}
+
 type ListProvisioningTemplateVersionsOutput struct {
 
 	// A token to retrieve the next set of results.

@@ -62,6 +62,10 @@ type GetAccessControlEffectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessControlEffectInput) operationName() string {
+	return "GetAccessControlEffect"
+}
+
 type GetAccessControlEffectOutput struct {
 
 	// The rule effect.

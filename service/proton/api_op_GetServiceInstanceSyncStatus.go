@@ -47,6 +47,10 @@ type GetServiceInstanceSyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServiceInstanceSyncStatusInput) operationName() string {
+	return "GetServiceInstanceSyncStatus"
+}
+
 type GetServiceInstanceSyncStatusOutput struct {
 
 	// The service instance sync desired state that's returned by Proton

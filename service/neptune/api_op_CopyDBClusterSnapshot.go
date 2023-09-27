@@ -92,6 +92,10 @@ type CopyDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDBClusterSnapshotInput) operationName() string {
+	return "CopyDBClusterSnapshot"
+}
+
 type CopyDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon Neptune DB cluster snapshot This data type

@@ -62,6 +62,10 @@ type PutOriginEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutOriginEndpointPolicyInput) operationName() string {
+	return "PutOriginEndpointPolicy"
+}
+
 type PutOriginEndpointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

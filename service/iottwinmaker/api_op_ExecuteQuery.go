@@ -55,6 +55,10 @@ type ExecuteQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteQueryInput) operationName() string {
+	return "ExecuteQuery"
+}
+
 type ExecuteQueryOutput struct {
 
 	// A list of ColumnDescription objects.

@@ -62,6 +62,10 @@ type ListPredictorBacktestExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPredictorBacktestExportJobsInput) operationName() string {
+	return "ListPredictorBacktestExportJobs"
+}
+
 type ListPredictorBacktestExportJobsOutput struct {
 
 	// Returns this token if the response is truncated. To retrieve the next set of

@@ -64,6 +64,10 @@ type ListBuiltInIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBuiltInIntentsInput) operationName() string {
+	return "ListBuiltInIntents"
+}
+
 type ListBuiltInIntentsOutput struct {
 
 	// Summary information for the built-in intents that meet the filter criteria

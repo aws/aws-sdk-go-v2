@@ -41,6 +41,10 @@ type DeletePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackagingGroupInput) operationName() string {
+	return "DeletePackagingGroup"
+}
+
 type DeletePackagingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

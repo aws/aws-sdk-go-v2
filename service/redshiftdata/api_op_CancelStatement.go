@@ -46,6 +46,10 @@ type CancelStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelStatementInput) operationName() string {
+	return "CancelStatement"
+}
+
 type CancelStatementOutput struct {
 
 	// A value that indicates whether the cancel statement succeeded (true).

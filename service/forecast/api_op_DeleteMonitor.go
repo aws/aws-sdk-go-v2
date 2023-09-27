@@ -42,6 +42,10 @@ type DeleteMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMonitorInput) operationName() string {
+	return "DeleteMonitor"
+}
+
 type DeleteMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

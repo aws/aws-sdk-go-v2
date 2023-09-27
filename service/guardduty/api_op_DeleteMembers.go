@@ -51,6 +51,10 @@ type DeleteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMembersInput) operationName() string {
+	return "DeleteMembers"
+}
+
 type DeleteMembersOutput struct {
 
 	// The accounts that could not be processed.

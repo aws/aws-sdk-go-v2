@@ -43,6 +43,10 @@ type GetVoiceConnectorProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorProxyInput) operationName() string {
+	return "GetVoiceConnectorProxy"
+}
+
 type GetVoiceConnectorProxyOutput struct {
 
 	// The proxy configuration details.

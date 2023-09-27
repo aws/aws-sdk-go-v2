@@ -60,6 +60,10 @@ type GetMigrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMigrationsInput) operationName() string {
+	return "GetMigrations"
+}
+
 type GetMigrationsOutput struct {
 
 	// An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To

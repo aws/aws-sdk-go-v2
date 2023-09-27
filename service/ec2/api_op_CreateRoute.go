@@ -108,6 +108,10 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRouteInput) operationName() string {
+	return "CreateRoute"
+}
+
 type CreateRouteOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

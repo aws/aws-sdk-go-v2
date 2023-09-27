@@ -52,6 +52,10 @@ type CreateShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateShareInput) operationName() string {
+	return "CreateShare"
+}
+
 type CreateShareOutput struct {
 
 	// An ID generated for the share.

@@ -50,6 +50,10 @@ type DescribeAddonConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAddonConfigurationInput) operationName() string {
+	return "DescribeAddonConfiguration"
+}
+
 type DescribeAddonConfigurationOutput struct {
 
 	// The name of the add-on.

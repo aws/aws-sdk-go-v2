@@ -97,6 +97,10 @@ type BatchCreateRumMetricDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateRumMetricDefinitionsInput) operationName() string {
+	return "BatchCreateRumMetricDefinitions"
+}
+
 type BatchCreateRumMetricDefinitionsOutput struct {
 
 	// An array of error objects, if the operation caused any errors.

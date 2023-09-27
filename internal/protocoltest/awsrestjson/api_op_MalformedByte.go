@@ -38,6 +38,10 @@ type MalformedByteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedByteInput) operationName() string {
+	return "MalformedByte"
+}
+
 type MalformedByteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

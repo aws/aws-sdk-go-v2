@@ -53,6 +53,10 @@ type CreateRequestValidatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRequestValidatorInput) operationName() string {
+	return "CreateRequestValidator"
+}
+
 // A set of validation rules for incoming Method requests.
 type CreateRequestValidatorOutput struct {
 

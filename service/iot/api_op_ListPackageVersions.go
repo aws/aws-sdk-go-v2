@@ -55,6 +55,10 @@ type ListPackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackageVersionsInput) operationName() string {
+	return "ListPackageVersions"
+}
+
 type ListPackageVersionsOutput struct {
 
 	// The token for the next set of results.

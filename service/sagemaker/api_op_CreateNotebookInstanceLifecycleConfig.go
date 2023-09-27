@@ -63,6 +63,10 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNotebookInstanceLifecycleConfigInput) operationName() string {
+	return "CreateNotebookInstanceLifecycleConfig"
+}
+
 type CreateNotebookInstanceLifecycleConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lifecycle configuration.

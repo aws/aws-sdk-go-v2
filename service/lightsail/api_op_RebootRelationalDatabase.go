@@ -46,6 +46,10 @@ type RebootRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootRelationalDatabaseInput) operationName() string {
+	return "RebootRelationalDatabase"
+}
+
 type RebootRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

@@ -80,6 +80,10 @@ type CreateResourceDataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceDataSyncInput) operationName() string {
+	return "CreateResourceDataSync"
+}
+
 type CreateResourceDataSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type GetEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventStreamInput) operationName() string {
+	return "GetEventStream"
+}
+
 type GetEventStreamOutput struct {
 
 	// The timestamp of when the export was created.

@@ -68,6 +68,10 @@ type ListDeploymentInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDeploymentInstancesInput) operationName() string {
+	return "ListDeploymentInstances"
+}
+
 // Represents the output of a ListDeploymentInstances operation.
 type ListDeploymentInstancesOutput struct {
 

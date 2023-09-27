@@ -42,6 +42,10 @@ type DeleteRotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRotationInput) operationName() string {
+	return "DeleteRotation"
+}
+
 type DeleteRotationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

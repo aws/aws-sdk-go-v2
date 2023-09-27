@@ -47,6 +47,10 @@ type DescribeEventCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventCategoriesInput) operationName() string {
+	return "DescribeEventCategories"
+}
+
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event categories.

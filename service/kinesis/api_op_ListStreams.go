@@ -59,6 +59,10 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStreamsInput) operationName() string {
+	return "ListStreams"
+}
+
 // Represents the output for ListStreams .
 type ListStreamsOutput struct {
 

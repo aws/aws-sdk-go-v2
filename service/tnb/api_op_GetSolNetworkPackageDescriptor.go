@@ -45,6 +45,10 @@ type GetSolNetworkPackageDescriptorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSolNetworkPackageDescriptorInput) operationName() string {
+	return "GetSolNetworkPackageDescriptor"
+}
+
 type GetSolNetworkPackageDescriptorOutput struct {
 
 	// Indicates the media type of the resource.

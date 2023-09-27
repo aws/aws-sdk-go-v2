@@ -45,6 +45,10 @@ type DeleteCACertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCACertificateInput) operationName() string {
+	return "DeleteCACertificate"
+}
+
 // The output for the DeleteCACertificate operation.
 type DeleteCACertificateOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -55,6 +55,10 @@ type ProvisionDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ProvisionDeviceInput) operationName() string {
+	return "ProvisionDevice"
+}
+
 type ProvisionDeviceOutput struct {
 
 	// The device's ARN.

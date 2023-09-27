@@ -50,6 +50,10 @@ type CreateSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSystemTemplateInput) operationName() string {
+	return "CreateSystemTemplate"
+}
+
 type CreateSystemTemplateOutput struct {
 
 	// The summary object that describes the created system.

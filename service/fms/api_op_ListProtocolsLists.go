@@ -56,6 +56,10 @@ type ListProtocolsListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProtocolsListsInput) operationName() string {
+	return "ListProtocolsLists"
+}
+
 type ListProtocolsListsOutput struct {
 
 	// If you specify a value for MaxResults in your list request, and you have more

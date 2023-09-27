@@ -48,6 +48,10 @@ type DeleteMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteMultiplexProgramInput) operationName() string {
+	return "DeleteMultiplexProgram"
+}
+
 // Placeholder documentation for DeleteMultiplexProgramResponse
 type DeleteMultiplexProgramOutput struct {
 

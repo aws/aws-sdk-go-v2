@@ -50,6 +50,10 @@ type StopRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopRelationalDatabaseInput) operationName() string {
+	return "StopRelationalDatabase"
+}
+
 type StopRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

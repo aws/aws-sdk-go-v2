@@ -43,6 +43,10 @@ type AssociateSkillWithUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSkillWithUsersInput) operationName() string {
+	return "AssociateSkillWithUsers"
+}
+
 type AssociateSkillWithUsersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

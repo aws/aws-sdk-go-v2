@@ -43,6 +43,10 @@ type GetNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNetworkInput) operationName() string {
+	return "GetNetwork"
+}
+
 type GetNetworkOutput struct {
 
 	// An object containing network configuration parameters.

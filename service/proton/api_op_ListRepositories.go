@@ -44,6 +44,10 @@ type ListRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRepositoriesInput) operationName() string {
+	return "ListRepositories"
+}
+
 type ListRepositoriesOutput struct {
 
 	// An array of repository links.

@@ -42,6 +42,10 @@ type BatchDescribeSimulationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDescribeSimulationJobInput) operationName() string {
+	return "BatchDescribeSimulationJob"
+}
+
 type BatchDescribeSimulationJobOutput struct {
 
 	// A list of simulation jobs.

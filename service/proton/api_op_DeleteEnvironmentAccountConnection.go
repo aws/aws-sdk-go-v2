@@ -49,6 +49,10 @@ type DeleteEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEnvironmentAccountConnectionInput) operationName() string {
+	return "DeleteEnvironmentAccountConnection"
+}
+
 type DeleteEnvironmentAccountConnectionOutput struct {
 
 	// The detailed data of the environment account connection being deleted.

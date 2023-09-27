@@ -42,6 +42,10 @@ type RemoveManagedScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveManagedScalingPolicyInput) operationName() string {
+	return "RemoveManagedScalingPolicy"
+}
+
 type RemoveManagedScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

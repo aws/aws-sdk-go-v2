@@ -41,6 +41,10 @@ type DeleteCustomEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomEntityTypeInput) operationName() string {
+	return "DeleteCustomEntityType"
+}
+
 type DeleteCustomEntityTypeOutput struct {
 
 	// The name of the custom pattern you deleted.

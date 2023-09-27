@@ -57,6 +57,10 @@ type DeregisterPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterPackageVersionInput) operationName() string {
+	return "DeregisterPackageVersion"
+}
+
 type DeregisterPackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,6 +41,10 @@ type GetCatalogImportStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCatalogImportStatusInput) operationName() string {
+	return "GetCatalogImportStatus"
+}
+
 type GetCatalogImportStatusOutput struct {
 
 	// The status of the specified catalog migration.

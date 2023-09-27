@@ -168,6 +168,7 @@
         "api_op_UploadSSHPublicKey.go",
         "api_op_UploadServerCertificate.go",
         "api_op_UploadSigningCertificate.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

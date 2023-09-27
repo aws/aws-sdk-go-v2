@@ -76,6 +76,10 @@ type QueryLineageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryLineageInput) operationName() string {
+	return "QueryLineage"
+}
+
 type QueryLineageOutput struct {
 
 	// A list of edges that connect vertices in the response.

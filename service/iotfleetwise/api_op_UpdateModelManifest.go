@@ -58,6 +58,10 @@ type UpdateModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelManifestInput) operationName() string {
+	return "UpdateModelManifest"
+}
+
 type UpdateModelManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated vehicle model.

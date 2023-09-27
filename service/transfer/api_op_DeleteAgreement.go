@@ -47,6 +47,10 @@ type DeleteAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAgreementInput) operationName() string {
+	return "DeleteAgreement"
+}
+
 type DeleteAgreementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

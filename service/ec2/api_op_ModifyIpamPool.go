@@ -92,6 +92,10 @@ type ModifyIpamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyIpamPoolInput) operationName() string {
+	return "ModifyIpamPool"
+}
+
 type ModifyIpamPoolOutput struct {
 
 	// The results of the modification.

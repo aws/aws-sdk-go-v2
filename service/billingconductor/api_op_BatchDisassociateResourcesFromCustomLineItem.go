@@ -50,6 +50,10 @@ type BatchDisassociateResourcesFromCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDisassociateResourcesFromCustomLineItemInput) operationName() string {
+	return "BatchDisassociateResourcesFromCustomLineItem"
+}
+
 type BatchDisassociateResourcesFromCustomLineItemOutput struct {
 
 	// A list of DisassociateResourceResponseElement for each resource that failed

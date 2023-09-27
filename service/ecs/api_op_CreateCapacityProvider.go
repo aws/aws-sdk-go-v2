@@ -74,6 +74,10 @@ type CreateCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCapacityProviderInput) operationName() string {
+	return "CreateCapacityProvider"
+}
+
 type CreateCapacityProviderOutput struct {
 
 	// The full description of the new capacity provider.

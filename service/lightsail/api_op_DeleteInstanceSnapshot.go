@@ -46,6 +46,10 @@ type DeleteInstanceSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceSnapshotInput) operationName() string {
+	return "DeleteInstanceSnapshot"
+}
+
 type DeleteInstanceSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

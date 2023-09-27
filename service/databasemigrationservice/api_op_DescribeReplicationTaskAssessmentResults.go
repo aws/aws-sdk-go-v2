@@ -57,6 +57,10 @@ type DescribeReplicationTaskAssessmentResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReplicationTaskAssessmentResultsInput) operationName() string {
+	return "DescribeReplicationTaskAssessmentResults"
+}
+
 type DescribeReplicationTaskAssessmentResultsOutput struct {
 
 	// - The Amazon S3 bucket where the task assessment report is located.

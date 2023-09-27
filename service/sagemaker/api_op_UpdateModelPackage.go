@@ -62,6 +62,10 @@ type UpdateModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelPackageInput) operationName() string {
+	return "UpdateModelPackage"
+}
+
 type UpdateModelPackageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model.

@@ -44,6 +44,10 @@ type ListTrailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrailsInput) operationName() string {
+	return "ListTrails"
+}
+
 type ListTrailsOutput struct {
 
 	// The token to use to get the next page of results after a previous API call. If

@@ -48,6 +48,10 @@ type ListImportFailuresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportFailuresInput) operationName() string {
+	return "ListImportFailures"
+}
+
 type ListImportFailuresOutput struct {
 
 	// Contains information about the import failures.

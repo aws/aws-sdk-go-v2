@@ -35,6 +35,10 @@ type GetRegistryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegistryPolicyInput) operationName() string {
+	return "GetRegistryPolicy"
+}
+
 type GetRegistryPolicyOutput struct {
 
 	// The JSON text of the permissions policy for a registry.

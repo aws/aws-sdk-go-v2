@@ -47,6 +47,10 @@ type GetDICOMImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDICOMImportJobInput) operationName() string {
+	return "GetDICOMImportJob"
+}
+
 type GetDICOMImportJobOutput struct {
 
 	// The properties of the import job.

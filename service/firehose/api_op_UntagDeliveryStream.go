@@ -49,6 +49,10 @@ type UntagDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagDeliveryStreamInput) operationName() string {
+	return "UntagDeliveryStream"
+}
+
 type UntagDeliveryStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

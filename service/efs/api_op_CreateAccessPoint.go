@@ -90,6 +90,10 @@ type CreateAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessPointInput) operationName() string {
+	return "CreateAccessPoint"
+}
+
 // Provides a description of an EFS file system access point.
 type CreateAccessPointOutput struct {
 

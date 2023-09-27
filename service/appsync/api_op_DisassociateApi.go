@@ -41,6 +41,10 @@ type DisassociateApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateApiInput) operationName() string {
+	return "DisassociateApi"
+}
+
 type DisassociateApiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

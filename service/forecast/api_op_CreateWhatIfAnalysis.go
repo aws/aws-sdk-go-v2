@@ -78,6 +78,10 @@ type CreateWhatIfAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWhatIfAnalysisInput) operationName() string {
+	return "CreateWhatIfAnalysis"
+}
+
 type CreateWhatIfAnalysisOutput struct {
 
 	// The Amazon Resource Name (ARN) of the what-if analysis.

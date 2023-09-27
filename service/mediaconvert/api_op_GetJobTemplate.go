@@ -42,6 +42,10 @@ type GetJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobTemplateInput) operationName() string {
+	return "GetJobTemplate"
+}
+
 type GetJobTemplateOutput struct {
 
 	// A job template is a pre-made set of encoding instructions that you can use to

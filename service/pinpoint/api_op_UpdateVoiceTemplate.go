@@ -78,6 +78,10 @@ type UpdateVoiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceTemplateInput) operationName() string {
+	return "UpdateVoiceTemplate"
+}
+
 type UpdateVoiceTemplateOutput struct {
 
 	// Provides information about an API request or response.

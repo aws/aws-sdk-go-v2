@@ -54,6 +54,10 @@ type CreateCustomDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomDomainAssociationInput) operationName() string {
+	return "CreateCustomDomainAssociation"
+}
+
 type CreateCustomDomainAssociationOutput struct {
 
 	// The identifier of the cluster that the custom domain is associated with.

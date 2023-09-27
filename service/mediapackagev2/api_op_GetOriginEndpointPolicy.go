@@ -57,6 +57,10 @@ type GetOriginEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOriginEndpointPolicyInput) operationName() string {
+	return "GetOriginEndpointPolicy"
+}
+
 type GetOriginEndpointPolicyOutput struct {
 
 	// The name that describes the channel group. The name is the primary identifier

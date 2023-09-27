@@ -91,6 +91,10 @@ type IsAuthorizedWithTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IsAuthorizedWithTokenInput) operationName() string {
+	return "IsAuthorizedWithToken"
+}
+
 type IsAuthorizedWithTokenOutput struct {
 
 	// An authorization decision that indicates if the authorization request should be

@@ -69,6 +69,10 @@ type PutConfigurationAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationAggregatorInput) operationName() string {
+	return "PutConfigurationAggregator"
+}
+
 type PutConfigurationAggregatorOutput struct {
 
 	// Returns a ConfigurationAggregator object.

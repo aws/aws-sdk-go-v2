@@ -75,6 +75,10 @@ type CreateVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVirtualServiceInput) operationName() string {
+	return "CreateVirtualService"
+}
+
 type CreateVirtualServiceOutput struct {
 
 	// The full description of your virtual service following the create call.

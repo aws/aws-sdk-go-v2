@@ -43,6 +43,10 @@ type GetSinkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSinkPolicyInput) operationName() string {
+	return "GetSinkPolicy"
+}
+
 type GetSinkPolicyOutput struct {
 
 	// The policy that you specified, in JSON format.

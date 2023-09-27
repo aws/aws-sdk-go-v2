@@ -55,6 +55,10 @@ type DeleteFargateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFargateProfileInput) operationName() string {
+	return "DeleteFargateProfile"
+}
+
 type DeleteFargateProfileOutput struct {
 
 	// The deleted Fargate profile.

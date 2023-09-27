@@ -98,6 +98,10 @@ type CreateApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationVersionInput) operationName() string {
+	return "CreateApplicationVersion"
+}
+
 // Result message wrapping a single description of an application version.
 type CreateApplicationVersionOutput struct {
 

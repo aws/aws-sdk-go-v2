@@ -44,6 +44,10 @@ type UpdateGatewaySoftwareNowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGatewaySoftwareNowInput) operationName() string {
+	return "UpdateGatewaySoftwareNow"
+}
+
 type UpdateGatewaySoftwareNowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you updated.

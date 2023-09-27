@@ -53,6 +53,10 @@ type ListIngestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIngestionsInput) operationName() string {
+	return "ListIngestions"
+}
+
 type ListIngestionsOutput struct {
 
 	// A list of the ingestions.

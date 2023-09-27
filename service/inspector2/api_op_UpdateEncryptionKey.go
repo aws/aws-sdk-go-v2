@@ -53,6 +53,10 @@ type UpdateEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEncryptionKeyInput) operationName() string {
+	return "UpdateEncryptionKey"
+}
+
 type UpdateEncryptionKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

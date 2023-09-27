@@ -62,6 +62,10 @@ type GetObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectAttributesInput) operationName() string {
+	return "GetObjectAttributes"
+}
+
 type GetObjectAttributesOutput struct {
 
 	// The attributes that are associated with the object.

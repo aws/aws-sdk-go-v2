@@ -43,6 +43,10 @@ type GetDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDomainInput) operationName() string {
+	return "GetDomain"
+}
+
 type GetDomainOutput struct {
 
 	// The timestamp of when the domain was created.

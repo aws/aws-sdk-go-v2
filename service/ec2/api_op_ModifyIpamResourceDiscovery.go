@@ -61,6 +61,10 @@ type ModifyIpamResourceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyIpamResourceDiscoveryInput) operationName() string {
+	return "ModifyIpamResourceDiscovery"
+}
+
 type ModifyIpamResourceDiscoveryOutput struct {
 
 	// A resource discovery.

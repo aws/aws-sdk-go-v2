@@ -42,6 +42,10 @@ type DeleteUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUploadInput) operationName() string {
+	return "DeleteUpload"
+}
+
 // Represents the result of a delete upload request.
 type DeleteUploadOutput struct {
 	// Metadata pertaining to the operation's result.

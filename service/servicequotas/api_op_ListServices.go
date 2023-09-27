@@ -55,6 +55,10 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServicesInput) operationName() string {
+	return "ListServices"
+}
+
 type ListServicesOutput struct {
 
 	// If present, indicates that more output is available than is included in the

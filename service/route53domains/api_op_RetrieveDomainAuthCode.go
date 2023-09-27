@@ -44,6 +44,10 @@ type RetrieveDomainAuthCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetrieveDomainAuthCodeInput) operationName() string {
+	return "RetrieveDomainAuthCode"
+}
+
 // The RetrieveDomainAuthCode response includes the following element.
 type RetrieveDomainAuthCodeOutput struct {
 

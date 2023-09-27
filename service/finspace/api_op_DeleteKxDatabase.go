@@ -53,6 +53,10 @@ type DeleteKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKxDatabaseInput) operationName() string {
+	return "DeleteKxDatabase"
+}
+
 type DeleteKxDatabaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

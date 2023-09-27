@@ -48,6 +48,10 @@ type CancelElasticsearchServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelElasticsearchServiceSoftwareUpdateInput) operationName() string {
+	return "CancelElasticsearchServiceSoftwareUpdate"
+}
+
 // The result of a CancelElasticsearchServiceSoftwareUpdate operation. Contains
 // the status of the update.
 type CancelElasticsearchServiceSoftwareUpdateOutput struct {

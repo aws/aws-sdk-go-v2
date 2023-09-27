@@ -41,6 +41,10 @@ type CancelFindingsReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelFindingsReportInput) operationName() string {
+	return "CancelFindingsReport"
+}
+
 type CancelFindingsReportOutput struct {
 
 	// The ID of the canceled report.

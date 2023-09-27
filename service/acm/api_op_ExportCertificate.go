@@ -60,6 +60,10 @@ type ExportCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportCertificateInput) operationName() string {
+	return "ExportCertificate"
+}
+
 type ExportCertificateOutput struct {
 
 	// The base64 PEM-encoded certificate.

@@ -44,6 +44,10 @@ type DeleteLanguageModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLanguageModelInput) operationName() string {
+	return "DeleteLanguageModel"
+}
+
 type DeleteLanguageModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

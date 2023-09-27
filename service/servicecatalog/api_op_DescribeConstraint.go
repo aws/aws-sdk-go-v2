@@ -47,6 +47,10 @@ type DescribeConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConstraintInput) operationName() string {
+	return "DescribeConstraint"
+}
+
 type DescribeConstraintOutput struct {
 
 	// Information about the constraint.

@@ -65,6 +65,10 @@ type DeleteIpamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIpamInput) operationName() string {
+	return "DeleteIpam"
+}
+
 type DeleteIpamOutput struct {
 
 	// Information about the results of the deletion.

@@ -42,6 +42,10 @@ type DisableDelegatedAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableDelegatedAdminAccountInput) operationName() string {
+	return "DisableDelegatedAdminAccount"
+}
+
 type DisableDelegatedAdminAccountOutput struct {
 
 	// The Amazon Web Services account ID of the successfully disabled delegated

@@ -64,6 +64,10 @@ type UpdateLensReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLensReviewInput) operationName() string {
+	return "UpdateLensReview"
+}
+
 // Output of a update lens review call.
 type UpdateLensReviewOutput struct {
 

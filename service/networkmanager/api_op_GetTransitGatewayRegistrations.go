@@ -53,6 +53,10 @@ type GetTransitGatewayRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransitGatewayRegistrationsInput) operationName() string {
+	return "GetTransitGatewayRegistrations"
+}
+
 type GetTransitGatewayRegistrationsOutput struct {
 
 	// The token for the next page of results.

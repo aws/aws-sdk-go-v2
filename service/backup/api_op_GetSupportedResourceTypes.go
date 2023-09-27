@@ -35,6 +35,10 @@ type GetSupportedResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSupportedResourceTypesInput) operationName() string {
+	return "GetSupportedResourceTypes"
+}
+
 type GetSupportedResourceTypesOutput struct {
 
 	// Contains a string with the supported Amazon Web Services resource types:

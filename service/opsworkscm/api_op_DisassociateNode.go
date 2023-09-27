@@ -60,6 +60,10 @@ type DisassociateNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateNodeInput) operationName() string {
+	return "DisassociateNode"
+}
+
 type DisassociateNodeOutput struct {
 
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus API

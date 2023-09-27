@@ -49,6 +49,10 @@ type DeleteDefaultMessageTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDefaultMessageTypeInput) operationName() string {
+	return "DeleteDefaultMessageType"
+}
+
 type DeleteDefaultMessageTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.

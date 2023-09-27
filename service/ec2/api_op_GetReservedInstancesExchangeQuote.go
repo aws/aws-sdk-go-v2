@@ -57,6 +57,10 @@ type GetReservedInstancesExchangeQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReservedInstancesExchangeQuoteInput) operationName() string {
+	return "GetReservedInstancesExchangeQuote"
+}
+
 // Contains the output of GetReservedInstancesExchangeQuote.
 type GetReservedInstancesExchangeQuoteOutput struct {
 

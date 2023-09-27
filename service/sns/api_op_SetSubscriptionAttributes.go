@@ -80,6 +80,10 @@ type SetSubscriptionAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetSubscriptionAttributesInput) operationName() string {
+	return "SetSubscriptionAttributes"
+}
+
 type SetSubscriptionAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,6 +61,10 @@ type StartFHIRExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFHIRExportJobInput) operationName() string {
+	return "StartFHIRExportJob"
+}
+
 type StartFHIRExportJobOutput struct {
 
 	// The AWS generated ID for an export job.

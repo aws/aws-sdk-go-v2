@@ -59,6 +59,10 @@ type TerminateWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateWorkspacesInput) operationName() string {
+	return "TerminateWorkspaces"
+}
+
 type TerminateWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be terminated.

@@ -95,6 +95,10 @@ type PublishInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishInput) operationName() string {
+	return "Publish"
+}
+
 type PublishOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

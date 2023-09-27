@@ -45,6 +45,10 @@ type DescribeObservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeObservationInput) operationName() string {
+	return "DescribeObservation"
+}
+
 type DescribeObservationOutput struct {
 
 	// Information about the observation.

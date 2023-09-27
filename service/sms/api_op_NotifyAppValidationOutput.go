@@ -46,6 +46,10 @@ type NotifyAppValidationOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyAppValidationOutputInput) operationName() string {
+	return "NotifyAppValidationOutput"
+}
+
 type NotifyAppValidationOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

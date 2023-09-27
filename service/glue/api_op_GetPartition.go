@@ -56,6 +56,10 @@ type GetPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPartitionInput) operationName() string {
+	return "GetPartition"
+}
+
 type GetPartitionOutput struct {
 
 	// The requested information, in the form of a Partition object.

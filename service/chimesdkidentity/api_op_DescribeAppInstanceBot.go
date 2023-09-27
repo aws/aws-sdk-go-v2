@@ -42,6 +42,10 @@ type DescribeAppInstanceBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInstanceBotInput) operationName() string {
+	return "DescribeAppInstanceBot"
+}
+
 type DescribeAppInstanceBotOutput struct {
 
 	// The detials of the AppInstanceBot .

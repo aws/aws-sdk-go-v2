@@ -47,6 +47,10 @@ type RemoveFlowMediaStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveFlowMediaStreamInput) operationName() string {
+	return "RemoveFlowMediaStream"
+}
+
 type RemoveFlowMediaStreamOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow.

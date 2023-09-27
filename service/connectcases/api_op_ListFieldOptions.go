@@ -57,6 +57,10 @@ type ListFieldOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFieldOptionsInput) operationName() string {
+	return "ListFieldOptions"
+}
+
 type ListFieldOptionsOutput struct {
 
 	// A list of FieldOption objects.

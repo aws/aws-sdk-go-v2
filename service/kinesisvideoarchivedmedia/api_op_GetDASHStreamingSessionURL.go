@@ -229,6 +229,10 @@ type GetDASHStreamingSessionURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDASHStreamingSessionURLInput) operationName() string {
+	return "GetDASHStreamingSessionURL"
+}
+
 type GetDASHStreamingSessionURLOutput struct {
 
 	// The URL (containing the session token) that a media player can use to retrieve

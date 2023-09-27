@@ -42,6 +42,10 @@ type CancelTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelTransactionInput) operationName() string {
+	return "CancelTransaction"
+}
+
 type CancelTransactionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

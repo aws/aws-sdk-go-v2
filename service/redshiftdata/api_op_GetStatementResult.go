@@ -57,6 +57,10 @@ type GetStatementResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStatementResultInput) operationName() string {
+	return "GetStatementResult"
+}
+
 type GetStatementResultOutput struct {
 
 	// The results of the SQL statement.

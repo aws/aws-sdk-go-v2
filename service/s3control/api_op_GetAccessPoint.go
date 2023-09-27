@@ -72,6 +72,10 @@ type GetAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessPointInput) operationName() string {
+	return "GetAccessPoint"
+}
+
 type GetAccessPointOutput struct {
 
 	// The ARN of the access point.

@@ -153,6 +153,10 @@ type IndexFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IndexFacesInput) operationName() string {
+	return "IndexFaces"
+}
+
 type IndexFacesOutput struct {
 
 	// The version number of the face detection model that's associated with the input

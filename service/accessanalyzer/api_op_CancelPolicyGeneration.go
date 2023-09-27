@@ -43,6 +43,10 @@ type CancelPolicyGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelPolicyGenerationInput) operationName() string {
+	return "CancelPolicyGeneration"
+}
+
 type CancelPolicyGenerationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

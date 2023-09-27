@@ -47,6 +47,10 @@ type DescribeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlarmInput) operationName() string {
+	return "DescribeAlarm"
+}
+
 type DescribeAlarmOutput struct {
 
 	// Contains information about an alarm.

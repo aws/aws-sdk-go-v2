@@ -62,6 +62,10 @@ type DeleteBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBucketEncryptionInput) operationName() string {
+	return "DeleteBucketEncryption"
+}
+
 type DeleteBucketEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

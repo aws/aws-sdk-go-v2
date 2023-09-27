@@ -107,6 +107,10 @@ type SynthesizeSpeechInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SynthesizeSpeechInput) operationName() string {
+	return "SynthesizeSpeech"
+}
+
 type SynthesizeSpeechOutput struct {
 
 	// Stream containing the synthesized speech.

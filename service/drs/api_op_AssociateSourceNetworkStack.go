@@ -49,6 +49,10 @@ type AssociateSourceNetworkStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSourceNetworkStackInput) operationName() string {
+	return "AssociateSourceNetworkStack"
+}
+
 type AssociateSourceNetworkStackOutput struct {
 
 	// The Source Network association Job.

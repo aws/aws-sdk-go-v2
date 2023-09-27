@@ -49,6 +49,10 @@ type PutConfigurationSetReputationOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationSetReputationOptionsInput) operationName() string {
+	return "PutConfigurationSetReputationOptions"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetReputationOptionsOutput struct {

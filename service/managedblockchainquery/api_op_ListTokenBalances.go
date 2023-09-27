@@ -63,6 +63,10 @@ type ListTokenBalancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTokenBalancesInput) operationName() string {
+	return "ListTokenBalances"
+}
+
 type ListTokenBalancesOutput struct {
 
 	// An array of TokenBalance objects. Each object contains details about the token

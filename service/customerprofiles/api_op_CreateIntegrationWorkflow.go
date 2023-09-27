@@ -68,6 +68,10 @@ type CreateIntegrationWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIntegrationWorkflowInput) operationName() string {
+	return "CreateIntegrationWorkflow"
+}
+
 type CreateIntegrationWorkflowOutput struct {
 
 	// A message indicating create request was received.

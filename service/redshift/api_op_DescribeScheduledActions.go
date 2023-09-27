@@ -74,6 +74,10 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledActionsInput) operationName() string {
+	return "DescribeScheduledActions"
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of

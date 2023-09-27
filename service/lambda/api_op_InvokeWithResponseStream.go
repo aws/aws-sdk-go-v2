@@ -78,6 +78,10 @@ type InvokeWithResponseStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InvokeWithResponseStreamInput) operationName() string {
+	return "InvokeWithResponseStream"
+}
+
 type InvokeWithResponseStreamOutput struct {
 
 	// The version of the function that executed. When you invoke a function with an

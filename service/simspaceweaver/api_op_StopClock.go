@@ -41,6 +41,10 @@ type StopClockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopClockInput) operationName() string {
+	return "StopClock"
+}
+
 type StopClockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

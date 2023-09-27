@@ -48,6 +48,10 @@ type UpdateCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCollectionInput) operationName() string {
+	return "UpdateCollection"
+}
+
 type UpdateCollectionOutput struct {
 
 	// Details about the updated collection.

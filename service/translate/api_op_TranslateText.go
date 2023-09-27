@@ -78,6 +78,10 @@ type TranslateTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TranslateTextInput) operationName() string {
+	return "TranslateText"
+}
+
 type TranslateTextOutput struct {
 
 	// The language code for the language of the source text.

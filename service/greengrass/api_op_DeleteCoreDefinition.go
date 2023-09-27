@@ -41,6 +41,10 @@ type DeleteCoreDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCoreDefinitionInput) operationName() string {
+	return "DeleteCoreDefinition"
+}
+
 type DeleteCoreDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

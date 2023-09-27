@@ -53,6 +53,10 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTablesInput) operationName() string {
+	return "ListTables"
+}
+
 type ListTablesOutput struct {
 
 	// A token to specify where to start paginating. This is the NextToken from a

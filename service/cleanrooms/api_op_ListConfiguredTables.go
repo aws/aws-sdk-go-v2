@@ -44,6 +44,10 @@ type ListConfiguredTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfiguredTablesInput) operationName() string {
+	return "ListConfiguredTables"
+}
+
 type ListConfiguredTablesOutput struct {
 
 	// The configured tables listed by the request.

@@ -70,6 +70,10 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransitGatewayPeeringAttachmentsInput) operationName() string {
+	return "DescribeTransitGatewayPeeringAttachments"
+}
+
 type DescribeTransitGatewayPeeringAttachmentsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

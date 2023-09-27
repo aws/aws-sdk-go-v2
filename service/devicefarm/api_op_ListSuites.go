@@ -47,6 +47,10 @@ type ListSuitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSuitesInput) operationName() string {
+	return "ListSuites"
+}
+
 // Represents the result of a list suites request.
 type ListSuitesOutput struct {
 

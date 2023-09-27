@@ -60,6 +60,10 @@ type StartProductSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartProductSubscriptionInput) operationName() string {
+	return "StartProductSubscription"
+}
+
 type StartProductSubscriptionOutput struct {
 
 	// Metadata that describes the start product subscription operation.

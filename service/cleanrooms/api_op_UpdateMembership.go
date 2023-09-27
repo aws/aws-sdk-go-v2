@@ -50,6 +50,10 @@ type UpdateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMembershipInput) operationName() string {
+	return "UpdateMembership"
+}
+
 type UpdateMembershipOutput struct {
 
 	// The membership object.

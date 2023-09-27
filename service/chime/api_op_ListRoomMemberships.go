@@ -54,6 +54,10 @@ type ListRoomMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoomMembershipsInput) operationName() string {
+	return "ListRoomMemberships"
+}
+
 type ListRoomMembershipsOutput struct {
 
 	// The token to use to retrieve the next page of results.

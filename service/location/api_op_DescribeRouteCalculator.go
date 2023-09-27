@@ -43,6 +43,10 @@ type DescribeRouteCalculatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRouteCalculatorInput) operationName() string {
+	return "DescribeRouteCalculator"
+}
+
 type DescribeRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN

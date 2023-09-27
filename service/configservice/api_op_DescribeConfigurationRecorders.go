@@ -44,6 +44,10 @@ type DescribeConfigurationRecordersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationRecordersInput) operationName() string {
+	return "DescribeConfigurationRecorders"
+}
+
 // The output for the DescribeConfigurationRecorders action.
 type DescribeConfigurationRecordersOutput struct {
 

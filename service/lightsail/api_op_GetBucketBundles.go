@@ -44,6 +44,10 @@ type GetBucketBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketBundlesInput) operationName() string {
+	return "GetBucketBundles"
+}
+
 type GetBucketBundlesOutput struct {
 
 	// An object that describes bucket bundles.

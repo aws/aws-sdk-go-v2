@@ -54,6 +54,10 @@ type GetRoleCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRoleCredentialsInput) operationName() string {
+	return "GetRoleCredentials"
+}
+
 type GetRoleCredentialsOutput struct {
 
 	// The credentials for the role that is assigned to the user.

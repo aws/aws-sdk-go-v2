@@ -55,6 +55,10 @@ type ListRevisionAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRevisionAssetsInput) operationName() string {
+	return "ListRevisionAssets"
+}
+
 type ListRevisionAssetsOutput struct {
 
 	// The asset objects listed by the request.

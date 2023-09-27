@@ -68,6 +68,10 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApplicationInput) operationName() string {
+	return "UpdateApplication"
+}
+
 type UpdateApplicationOutput struct {
 
 	// Describes an application in the application catalog.

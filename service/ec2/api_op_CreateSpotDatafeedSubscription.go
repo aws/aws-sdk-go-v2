@@ -57,6 +57,10 @@ type CreateSpotDatafeedSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSpotDatafeedSubscriptionInput) operationName() string {
+	return "CreateSpotDatafeedSubscription"
+}
+
 // Contains the output of CreateSpotDatafeedSubscription.
 type CreateSpotDatafeedSubscriptionOutput struct {
 

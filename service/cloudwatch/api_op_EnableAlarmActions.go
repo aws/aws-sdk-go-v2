@@ -41,6 +41,10 @@ type EnableAlarmActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableAlarmActionsInput) operationName() string {
+	return "EnableAlarmActions"
+}
+
 type EnableAlarmActionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

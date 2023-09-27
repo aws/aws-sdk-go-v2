@@ -55,6 +55,10 @@ type GetFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFolderInput) operationName() string {
+	return "GetFolder"
+}
+
 type GetFolderOutput struct {
 
 	// The full commit ID used as a reference for the returned version of the folder

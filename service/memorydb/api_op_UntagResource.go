@@ -48,6 +48,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 type UntagResourceOutput struct {
 
 	// The list of tags removed

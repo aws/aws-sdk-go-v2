@@ -43,6 +43,10 @@ type ListLexiconsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLexiconsInput) operationName() string {
+	return "ListLexicons"
+}
+
 type ListLexiconsOutput struct {
 
 	// A list of lexicon names and attributes.

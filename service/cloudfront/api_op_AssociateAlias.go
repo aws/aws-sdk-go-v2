@@ -56,6 +56,10 @@ type AssociateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAliasInput) operationName() string {
+	return "AssociateAlias"
+}
+
 type AssociateAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

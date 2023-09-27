@@ -43,6 +43,10 @@ type DescribeConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectorInput) operationName() string {
+	return "DescribeConnector"
+}
+
 type DescribeConnectorOutput struct {
 
 	// Information about the capacity of the connector, whether it is auto scaled or

@@ -48,6 +48,10 @@ type DeleteLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLinkInput) operationName() string {
+	return "DeleteLink"
+}
+
 type DeleteLinkOutput struct {
 
 	// Information about the link.

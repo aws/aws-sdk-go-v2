@@ -43,6 +43,10 @@ type GetApplicationComponentStrategiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationComponentStrategiesInput) operationName() string {
+	return "GetApplicationComponentStrategies"
+}
+
 type GetApplicationComponentStrategiesOutput struct {
 
 	// A list of application component strategy recommendations.

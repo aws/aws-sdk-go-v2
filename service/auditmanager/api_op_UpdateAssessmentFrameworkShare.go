@@ -52,6 +52,10 @@ type UpdateAssessmentFrameworkShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssessmentFrameworkShareInput) operationName() string {
+	return "UpdateAssessmentFrameworkShare"
+}
+
 type UpdateAssessmentFrameworkShareOutput struct {
 
 	// The updated share request that's returned by the UpdateAssessmentFrameworkShare

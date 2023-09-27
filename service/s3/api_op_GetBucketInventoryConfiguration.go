@@ -64,6 +64,10 @@ type GetBucketInventoryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketInventoryConfigurationInput) operationName() string {
+	return "GetBucketInventoryConfiguration"
+}
+
 type GetBucketInventoryConfigurationOutput struct {
 
 	// Specifies the inventory configuration.

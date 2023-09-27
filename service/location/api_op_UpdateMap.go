@@ -56,6 +56,10 @@ type UpdateMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMapInput) operationName() string {
+	return "UpdateMap"
+}
+
 type UpdateMapOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated map resource. Used to specify a

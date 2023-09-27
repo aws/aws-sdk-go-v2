@@ -47,6 +47,10 @@ type ListProvisionedCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProvisionedCapacityInput) operationName() string {
+	return "ListProvisionedCapacity"
+}
+
 type ListProvisionedCapacityOutput struct {
 
 	// The response body contains the following JSON fields.

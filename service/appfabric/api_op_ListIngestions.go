@@ -55,6 +55,10 @@ type ListIngestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIngestionsInput) operationName() string {
+	return "ListIngestions"
+}
+
 type ListIngestionsOutput struct {
 
 	// Contains a list of ingestion summaries.

@@ -53,6 +53,10 @@ type GetGroupIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupIdInput) operationName() string {
+	return "GetGroupId"
+}
+
 type GetGroupIdOutput struct {
 
 	// The identifier for a group in the identity store.

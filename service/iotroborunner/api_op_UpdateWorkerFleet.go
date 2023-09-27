@@ -48,6 +48,10 @@ type UpdateWorkerFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkerFleetInput) operationName() string {
+	return "UpdateWorkerFleet"
+}
+
 type UpdateWorkerFleetOutput struct {
 
 	// Full ARN of the worker fleet.

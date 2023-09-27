@@ -33,6 +33,10 @@ type PutAndGetInlineDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAndGetInlineDocumentsInput) operationName() string {
+	return "PutAndGetInlineDocuments"
+}
+
 type PutAndGetInlineDocumentsOutput struct {
 	InlineDocument document.Interface
 

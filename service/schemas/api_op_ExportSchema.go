@@ -51,6 +51,10 @@ type ExportSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportSchemaInput) operationName() string {
+	return "ExportSchema"
+}
+
 type ExportSchemaOutput struct {
 	Content *string
 

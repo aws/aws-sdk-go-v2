@@ -47,6 +47,10 @@ type GetStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStageInput) operationName() string {
+	return "GetStage"
+}
+
 type GetStageOutput struct {
 
 	// Properties that provide details of the stage.

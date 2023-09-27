@@ -91,6 +91,10 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRuleInput) operationName() string {
+	return "CreateRule"
+}
+
 type CreateRuleOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRule request. You can also

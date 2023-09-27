@@ -50,6 +50,10 @@ type DescribeUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUsersInput) operationName() string {
+	return "DescribeUsers"
+}
+
 type DescribeUsersOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

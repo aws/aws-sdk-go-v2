@@ -44,6 +44,10 @@ type DescribeFileSystemAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFileSystemAssociationsInput) operationName() string {
+	return "DescribeFileSystemAssociations"
+}
+
 type DescribeFileSystemAssociationsOutput struct {
 
 	// An array containing the FileSystemAssociationInfo data type of each file system

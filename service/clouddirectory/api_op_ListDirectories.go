@@ -47,6 +47,10 @@ type ListDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDirectoriesInput) operationName() string {
+	return "ListDirectories"
+}
+
 type ListDirectoriesOutput struct {
 
 	// Lists all directories that are associated with your account in pagination

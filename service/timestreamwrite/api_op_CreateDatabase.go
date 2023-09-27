@@ -57,6 +57,10 @@ type CreateDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatabaseInput) operationName() string {
+	return "CreateDatabase"
+}
+
 type CreateDatabaseOutput struct {
 
 	// The newly created Timestream database.

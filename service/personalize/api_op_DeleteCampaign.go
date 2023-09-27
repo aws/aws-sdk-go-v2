@@ -45,6 +45,10 @@ type DeleteCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCampaignInput) operationName() string {
+	return "DeleteCampaign"
+}
+
 type DeleteCampaignOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

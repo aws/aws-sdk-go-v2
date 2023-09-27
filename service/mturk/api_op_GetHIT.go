@@ -42,6 +42,10 @@ type GetHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHITInput) operationName() string {
+	return "GetHIT"
+}
+
 type GetHITOutput struct {
 
 	// Contains the requested HIT data.

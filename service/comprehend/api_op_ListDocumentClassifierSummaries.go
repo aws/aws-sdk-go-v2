@@ -43,6 +43,10 @@ type ListDocumentClassifierSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDocumentClassifierSummariesInput) operationName() string {
+	return "ListDocumentClassifierSummaries"
+}
+
 type ListDocumentClassifierSummariesOutput struct {
 
 	// The list of summaries of document classifiers.

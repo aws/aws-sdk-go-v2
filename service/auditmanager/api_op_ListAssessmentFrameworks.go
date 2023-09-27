@@ -49,6 +49,10 @@ type ListAssessmentFrameworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentFrameworksInput) operationName() string {
+	return "ListAssessmentFrameworks"
+}
+
 type ListAssessmentFrameworksOutput struct {
 
 	// A list of metadata that the ListAssessmentFrameworks API returns for each

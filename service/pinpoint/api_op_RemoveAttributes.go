@@ -64,6 +64,10 @@ type RemoveAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveAttributesInput) operationName() string {
+	return "RemoveAttributes"
+}
+
 type RemoveAttributesOutput struct {
 
 	// Provides information about the type and the names of attributes that were

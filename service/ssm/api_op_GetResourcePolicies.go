@@ -49,6 +49,10 @@ type GetResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcePoliciesInput) operationName() string {
+	return "GetResourcePolicies"
+}
+
 type GetResourcePoliciesOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

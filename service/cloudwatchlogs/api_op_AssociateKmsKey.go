@@ -99,6 +99,10 @@ type AssociateKmsKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateKmsKeyInput) operationName() string {
+	return "AssociateKmsKey"
+}
+
 type AssociateKmsKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

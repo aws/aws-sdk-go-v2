@@ -59,6 +59,10 @@ type DeleteVaultAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVaultAccessPolicyInput) operationName() string {
+	return "DeleteVaultAccessPolicy"
+}
+
 type DeleteVaultAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

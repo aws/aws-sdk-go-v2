@@ -51,6 +51,10 @@ type GetSourceApiAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSourceApiAssociationInput) operationName() string {
+	return "GetSourceApiAssociation"
+}
+
 type GetSourceApiAssociationOutput struct {
 
 	// The SourceApiAssociation object data.

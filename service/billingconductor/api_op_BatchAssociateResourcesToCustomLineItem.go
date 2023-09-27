@@ -50,6 +50,10 @@ type BatchAssociateResourcesToCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchAssociateResourcesToCustomLineItemInput) operationName() string {
+	return "BatchAssociateResourcesToCustomLineItem"
+}
+
 type BatchAssociateResourcesToCustomLineItemOutput struct {
 
 	// A list of AssociateResourceResponseElement for each resource that failed

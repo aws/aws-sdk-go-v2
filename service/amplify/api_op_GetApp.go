@@ -43,6 +43,10 @@ type GetAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppInput) operationName() string {
+	return "GetApp"
+}
+
 type GetAppOutput struct {
 
 	// Represents the different branches of a repository for building, deploying, and

@@ -82,6 +82,10 @@ type UpdateProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProductInput) operationName() string {
+	return "UpdateProduct"
+}
+
 type UpdateProductOutput struct {
 
 	// Information about the product view.

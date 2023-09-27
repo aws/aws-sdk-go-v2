@@ -50,6 +50,10 @@ type CreateAwsLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAwsLogSourceInput) operationName() string {
+	return "CreateAwsLogSource"
+}
+
 type CreateAwsLogSourceOutput struct {
 
 	// Lists all accounts in which enabling a natively supported Amazon Web Service as

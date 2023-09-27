@@ -64,6 +64,10 @@ type CreateAppInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInstanceInput) operationName() string {
+	return "CreateAppInstance"
+}
+
 type CreateAppInstanceOutput struct {
 
 	// The Amazon Resource Number (ARN) of the AppInstance .

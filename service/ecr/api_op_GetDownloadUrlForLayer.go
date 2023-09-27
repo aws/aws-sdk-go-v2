@@ -56,6 +56,10 @@ type GetDownloadUrlForLayerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDownloadUrlForLayerInput) operationName() string {
+	return "GetDownloadUrlForLayer"
+}
+
 type GetDownloadUrlForLayerOutput struct {
 
 	// The pre-signed Amazon S3 download URL for the requested layer.

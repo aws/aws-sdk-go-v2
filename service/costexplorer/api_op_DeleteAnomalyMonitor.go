@@ -41,6 +41,10 @@ type DeleteAnomalyMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnomalyMonitorInput) operationName() string {
+	return "DeleteAnomalyMonitor"
+}
+
 type DeleteAnomalyMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

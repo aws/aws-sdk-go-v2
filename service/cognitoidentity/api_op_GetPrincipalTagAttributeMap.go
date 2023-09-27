@@ -48,6 +48,10 @@ type GetPrincipalTagAttributeMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPrincipalTagAttributeMapInput) operationName() string {
+	return "GetPrincipalTagAttributeMap"
+}
+
 type GetPrincipalTagAttributeMapOutput struct {
 
 	// You can use this operation to get the ID of the Identity Pool you setup

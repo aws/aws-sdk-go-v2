@@ -63,6 +63,10 @@ type DescribeRemediationExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRemediationExceptionsInput) operationName() string {
+	return "DescribeRemediationExceptions"
+}
+
 type DescribeRemediationExceptionsOutput struct {
 
 	// The nextToken string returned in a previous request that you use to request the

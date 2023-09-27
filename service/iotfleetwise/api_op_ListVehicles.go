@@ -54,6 +54,10 @@ type ListVehiclesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVehiclesInput) operationName() string {
+	return "ListVehicles"
+}
+
 type ListVehiclesOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

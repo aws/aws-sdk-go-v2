@@ -58,6 +58,10 @@ type CreateBotVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBotVersionInput) operationName() string {
+	return "CreateBotVersion"
+}
+
 type CreateBotVersionOutput struct {
 
 	// The message that Amazon Lex uses to cancel a conversation. For more

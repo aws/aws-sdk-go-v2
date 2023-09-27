@@ -52,6 +52,10 @@ type PutResourcePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourcePermissionInput) operationName() string {
+	return "PutResourcePermission"
+}
+
 type PutResourcePermissionOutput struct {
 
 	//

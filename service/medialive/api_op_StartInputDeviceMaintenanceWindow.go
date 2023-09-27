@@ -50,6 +50,10 @@ type StartInputDeviceMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInputDeviceMaintenanceWindowInput) operationName() string {
+	return "StartInputDeviceMaintenanceWindow"
+}
+
 // Placeholder documentation for StartInputDeviceMaintenanceWindowResponse
 type StartInputDeviceMaintenanceWindowOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -52,6 +52,10 @@ type TestMetricFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestMetricFilterInput) operationName() string {
+	return "TestMetricFilter"
+}
+
 type TestMetricFilterOutput struct {
 
 	// The matched events.

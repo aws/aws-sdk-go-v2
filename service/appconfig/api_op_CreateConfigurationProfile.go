@@ -119,6 +119,10 @@ type CreateConfigurationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigurationProfileInput) operationName() string {
+	return "CreateConfigurationProfile"
+}
+
 type CreateConfigurationProfileOutput struct {
 
 	// The application ID.

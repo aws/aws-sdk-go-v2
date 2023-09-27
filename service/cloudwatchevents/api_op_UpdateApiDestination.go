@@ -58,6 +58,10 @@ type UpdateApiDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApiDestinationInput) operationName() string {
+	return "UpdateApiDestination"
+}
+
 type UpdateApiDestinationOutput struct {
 
 	// The ARN of the API destination that was updated.

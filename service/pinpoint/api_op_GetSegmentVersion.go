@@ -54,6 +54,10 @@ type GetSegmentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSegmentVersionInput) operationName() string {
+	return "GetSegmentVersion"
+}
+
 type GetSegmentVersionOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for

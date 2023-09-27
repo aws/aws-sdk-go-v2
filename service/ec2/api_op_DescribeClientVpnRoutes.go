@@ -63,6 +63,10 @@ type DescribeClientVpnRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientVpnRoutesInput) operationName() string {
+	return "DescribeClientVpnRoutes"
+}
+
 type DescribeClientVpnRoutesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

@@ -110,6 +110,10 @@ type ListSessionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSessionMetricsInput) operationName() string {
+	return "ListSessionMetrics"
+}
+
 type ListSessionMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved session metrics.

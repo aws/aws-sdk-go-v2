@@ -37,6 +37,10 @@ type GetSagemakerServicecatalogPortfolioStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSagemakerServicecatalogPortfolioStatusInput) operationName() string {
+	return "GetSagemakerServicecatalogPortfolioStatus"
+}
+
 type GetSagemakerServicecatalogPortfolioStatusOutput struct {
 
 	// Whether Service Catalog is enabled or disabled in SageMaker.

@@ -68,6 +68,10 @@ type DeleteVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVaultInput) operationName() string {
+	return "DeleteVault"
+}
+
 type DeleteVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

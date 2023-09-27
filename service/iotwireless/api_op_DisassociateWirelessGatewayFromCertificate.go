@@ -41,6 +41,10 @@ type DisassociateWirelessGatewayFromCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateWirelessGatewayFromCertificateInput) operationName() string {
+	return "DisassociateWirelessGatewayFromCertificate"
+}
+
 type DisassociateWirelessGatewayFromCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

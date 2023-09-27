@@ -49,6 +49,10 @@ type DescribeChapCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChapCredentialsInput) operationName() string {
+	return "DescribeChapCredentials"
+}
+
 // A JSON object containing the following fields:
 type DescribeChapCredentialsOutput struct {
 

@@ -53,6 +53,7 @@
         "api_op_UpdateProgram.go",
         "api_op_UpdateSourceLocation.go",
         "api_op_UpdateVodSource.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

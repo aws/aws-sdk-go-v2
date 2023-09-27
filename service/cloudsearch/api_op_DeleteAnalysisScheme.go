@@ -55,6 +55,10 @@ type DeleteAnalysisSchemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnalysisSchemeInput) operationName() string {
+	return "DeleteAnalysisScheme"
+}
+
 // The result of a DeleteAnalysisScheme request. Contains the status of the
 // deleted analysis scheme.
 type DeleteAnalysisSchemeOutput struct {

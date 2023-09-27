@@ -43,6 +43,10 @@ type GetRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRunInput) operationName() string {
+	return "GetRun"
+}
+
 // Represents the result of a get run request.
 type GetRunOutput struct {
 

@@ -94,6 +94,10 @@ type AssociateVpcCidrBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateVpcCidrBlockInput) operationName() string {
+	return "AssociateVpcCidrBlock"
+}
+
 type AssociateVpcCidrBlockOutput struct {
 
 	// Information about the IPv4 CIDR block association.

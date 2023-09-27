@@ -46,6 +46,10 @@ type GetQuantumTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQuantumTaskInput) operationName() string {
+	return "GetQuantumTask"
+}
+
 type GetQuantumTaskOutput struct {
 
 	// The time at which the task was created.

@@ -85,6 +85,7 @@
         "api_op_UpdateFleet.go",
         "api_op_UpdateImagePermissions.go",
         "api_op_UpdateStack.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

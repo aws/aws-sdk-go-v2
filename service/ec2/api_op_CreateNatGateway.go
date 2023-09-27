@@ -104,6 +104,10 @@ type CreateNatGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNatGatewayInput) operationName() string {
+	return "CreateNatGateway"
+}
+
 type CreateNatGatewayOutput struct {
 
 	// Unique, case-sensitive identifier to ensure the idempotency of the request.

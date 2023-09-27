@@ -51,6 +51,10 @@ type ListSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSnapshotsInput) operationName() string {
+	return "ListSnapshots"
+}
+
 type ListSnapshotsOutput struct {
 
 	// The token that indicates the start of the next sequential page of results. Use

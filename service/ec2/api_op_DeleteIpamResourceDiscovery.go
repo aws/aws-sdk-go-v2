@@ -50,6 +50,10 @@ type DeleteIpamResourceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIpamResourceDiscoveryInput) operationName() string {
+	return "DeleteIpamResourceDiscovery"
+}
+
 type DeleteIpamResourceDiscoveryOutput struct {
 
 	// The IPAM resource discovery.

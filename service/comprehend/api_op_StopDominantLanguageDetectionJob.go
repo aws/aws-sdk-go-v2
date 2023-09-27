@@ -49,6 +49,10 @@ type StopDominantLanguageDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDominantLanguageDetectionJobInput) operationName() string {
+	return "StopDominantLanguageDetectionJob"
+}
+
 type StopDominantLanguageDetectionJobOutput struct {
 
 	// The identifier of the dominant language detection job to stop.

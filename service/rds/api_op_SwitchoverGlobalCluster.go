@@ -66,6 +66,10 @@ type SwitchoverGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SwitchoverGlobalClusterInput) operationName() string {
+	return "SwitchoverGlobalCluster"
+}
+
 type SwitchoverGlobalClusterOutput struct {
 
 	// A data type representing an Aurora global database.

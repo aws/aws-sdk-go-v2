@@ -61,6 +61,10 @@ type DeleteCustomActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomActionTypeInput) operationName() string {
+	return "DeleteCustomActionType"
+}
+
 type DeleteCustomActionTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

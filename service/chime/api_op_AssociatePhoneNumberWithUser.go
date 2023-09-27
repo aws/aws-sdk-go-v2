@@ -51,6 +51,10 @@ type AssociatePhoneNumberWithUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePhoneNumberWithUserInput) operationName() string {
+	return "AssociatePhoneNumberWithUser"
+}
+
 type AssociatePhoneNumberWithUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,6 +71,10 @@ type CreateDeploymentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeploymentJobInput) operationName() string {
+	return "CreateDeploymentJob"
+}
+
 type CreateDeploymentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deployment job.

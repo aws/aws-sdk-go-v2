@@ -62,6 +62,10 @@ type ListSuppressedDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSuppressedDestinationsInput) operationName() string {
+	return "ListSuppressedDestinations"
+}
+
 // A list of suppressed email addresses.
 type ListSuppressedDestinationsOutput struct {
 

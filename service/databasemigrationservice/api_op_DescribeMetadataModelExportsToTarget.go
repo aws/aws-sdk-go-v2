@@ -60,6 +60,10 @@ type DescribeMetadataModelExportsToTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetadataModelExportsToTargetInput) operationName() string {
+	return "DescribeMetadataModelExportsToTarget"
+}
+
 type DescribeMetadataModelExportsToTargetOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the

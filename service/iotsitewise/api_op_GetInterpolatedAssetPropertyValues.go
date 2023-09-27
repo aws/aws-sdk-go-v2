@@ -136,6 +136,10 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInterpolatedAssetPropertyValuesInput) operationName() string {
+	return "GetInterpolatedAssetPropertyValues"
+}
+
 type GetInterpolatedAssetPropertyValuesOutput struct {
 
 	// The requested interpolated values.

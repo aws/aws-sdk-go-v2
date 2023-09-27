@@ -57,6 +57,10 @@ type DisassociateServiceActionFromProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateServiceActionFromProvisioningArtifactInput) operationName() string {
+	return "DisassociateServiceActionFromProvisioningArtifact"
+}
+
 type DisassociateServiceActionFromProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

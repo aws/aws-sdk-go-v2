@@ -51,6 +51,10 @@ type DescribeApplicationFleetAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicationFleetAssociationsInput) operationName() string {
+	return "DescribeApplicationFleetAssociations"
+}
+
 type DescribeApplicationFleetAssociationsOutput struct {
 
 	// The application fleet associations in the list.

@@ -196,6 +196,10 @@ type UpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStackInput) operationName() string {
+	return "UpdateStack"
+}
+
 type UpdateStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

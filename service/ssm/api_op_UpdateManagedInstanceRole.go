@@ -54,6 +54,10 @@ type UpdateManagedInstanceRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateManagedInstanceRoleInput) operationName() string {
+	return "UpdateManagedInstanceRole"
+}
+
 type UpdateManagedInstanceRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

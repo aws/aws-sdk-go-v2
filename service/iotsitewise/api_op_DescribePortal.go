@@ -46,6 +46,10 @@ type DescribePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePortalInput) operationName() string {
+	return "DescribePortal"
+}
+
 type DescribePortalOutput struct {
 
 	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

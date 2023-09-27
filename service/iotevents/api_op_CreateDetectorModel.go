@@ -70,6 +70,10 @@ type CreateDetectorModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDetectorModelInput) operationName() string {
+	return "CreateDetectorModel"
+}
+
 type CreateDetectorModelOutput struct {
 
 	// Information about how the detector model is configured.

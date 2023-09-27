@@ -54,6 +54,10 @@ type ListFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFlowsInput) operationName() string {
+	return "ListFlows"
+}
+
 type ListFlowsOutput struct {
 
 	// A list of flow summaries.

@@ -47,6 +47,10 @@ type RejectEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectEnvironmentAccountConnectionInput) operationName() string {
+	return "RejectEnvironmentAccountConnection"
+}
+
 type RejectEnvironmentAccountConnectionOutput struct {
 
 	// The environment connection account detail data that's returned by Proton.

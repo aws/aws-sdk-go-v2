@@ -94,6 +94,10 @@ type StartNetworkResourceUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartNetworkResourceUpdateInput) operationName() string {
+	return "StartNetworkResourceUpdate"
+}
+
 type StartNetworkResourceUpdateOutput struct {
 
 	// The network resource.

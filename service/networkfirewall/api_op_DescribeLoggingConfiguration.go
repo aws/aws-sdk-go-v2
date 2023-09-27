@@ -46,6 +46,10 @@ type DescribeLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoggingConfigurationInput) operationName() string {
+	return "DescribeLoggingConfiguration"
+}
+
 type DescribeLoggingConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.

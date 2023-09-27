@@ -32,6 +32,7 @@
         "api_op_UpdateBroker.go",
         "api_op_UpdateConfiguration.go",
         "api_op_UpdateUser.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

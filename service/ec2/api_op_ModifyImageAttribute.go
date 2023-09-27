@@ -102,6 +102,10 @@ type ModifyImageAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyImageAttributeInput) operationName() string {
+	return "ModifyImageAttribute"
+}
+
 type ModifyImageAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

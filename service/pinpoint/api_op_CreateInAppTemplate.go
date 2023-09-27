@@ -50,6 +50,10 @@ type CreateInAppTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInAppTemplateInput) operationName() string {
+	return "CreateInAppTemplate"
+}
+
 type CreateInAppTemplateOutput struct {
 
 	// Provides information about a request to create a message template.

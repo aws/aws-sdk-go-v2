@@ -47,6 +47,10 @@ type DeleteRepositoryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRepositoryPolicyInput) operationName() string {
+	return "DeleteRepositoryPolicy"
+}
+
 type DeleteRepositoryPolicyOutput struct {
 
 	// The JSON repository policy that was deleted from the repository.

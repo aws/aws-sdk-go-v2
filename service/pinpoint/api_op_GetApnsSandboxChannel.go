@@ -44,6 +44,10 @@ type GetApnsSandboxChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApnsSandboxChannelInput) operationName() string {
+	return "GetApnsSandboxChannel"
+}
+
 type GetApnsSandboxChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push

@@ -86,6 +86,10 @@ type RefreshCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RefreshCacheInput) operationName() string {
+	return "RefreshCache"
+}
+
 // RefreshCacheOutput
 type RefreshCacheOutput struct {
 

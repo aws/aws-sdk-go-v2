@@ -60,6 +60,10 @@ type UpdateDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDatabaseInput) operationName() string {
+	return "UpdateDatabase"
+}
+
 type UpdateDatabaseOutput struct {
 
 	// A top-level container for a table. Databases and tables are the fundamental

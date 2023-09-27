@@ -65,6 +65,10 @@ type UpdateScheduledAuditInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateScheduledAuditInput) operationName() string {
+	return "UpdateScheduledAudit"
+}
+
 type UpdateScheduledAuditOutput struct {
 
 	// The ARN of the scheduled audit.

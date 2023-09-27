@@ -42,6 +42,10 @@ type DescribeFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFilterInput) operationName() string {
+	return "DescribeFilter"
+}
+
 type DescribeFilterOutput struct {
 
 	// The filter's details.

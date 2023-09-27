@@ -47,6 +47,10 @@ type DeleteConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConstraintInput) operationName() string {
+	return "DeleteConstraint"
+}
+
 type DeleteConstraintOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

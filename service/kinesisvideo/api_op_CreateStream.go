@@ -79,6 +79,10 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamInput) operationName() string {
+	return "CreateStream"
+}
+
 type CreateStreamOutput struct {
 
 	// The Amazon Resource Name (ARN) of the stream.

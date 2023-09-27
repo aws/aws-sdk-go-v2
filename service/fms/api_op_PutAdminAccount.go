@@ -63,6 +63,10 @@ type PutAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAdminAccountInput) operationName() string {
+	return "PutAdminAccount"
+}
+
 type PutAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

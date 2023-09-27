@@ -45,6 +45,10 @@ type DescribeModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelInput) operationName() string {
+	return "DescribeModel"
+}
+
 type DescribeModelOutput struct {
 
 	// Indicates the end time of the inference data that has been accumulated.

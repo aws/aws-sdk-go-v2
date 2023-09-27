@@ -46,6 +46,10 @@ type GetDataIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataIntegrationInput) operationName() string {
+	return "GetDataIntegration"
+}
+
 type GetDataIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the DataIntegration.

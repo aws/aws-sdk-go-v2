@@ -57,6 +57,10 @@ type GetConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectionsInput) operationName() string {
+	return "GetConnections"
+}
+
 type GetConnectionsOutput struct {
 
 	// A list of requested connection definitions.

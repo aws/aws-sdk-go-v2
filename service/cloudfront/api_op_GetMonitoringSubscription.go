@@ -43,6 +43,10 @@ type GetMonitoringSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMonitoringSubscriptionInput) operationName() string {
+	return "GetMonitoringSubscription"
+}
+
 type GetMonitoringSubscriptionOutput struct {
 
 	// A monitoring subscription. This structure contains information about whether

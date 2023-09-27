@@ -57,6 +57,10 @@ type DescribeStreamConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStreamConsumerInput) operationName() string {
+	return "DescribeStreamConsumer"
+}
+
 type DescribeStreamConsumerOutput struct {
 
 	// An object that represents the details of the consumer.

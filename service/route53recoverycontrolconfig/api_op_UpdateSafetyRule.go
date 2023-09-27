@@ -47,6 +47,10 @@ type UpdateSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSafetyRuleInput) operationName() string {
+	return "UpdateSafetyRule"
+}
+
 type UpdateSafetyRuleOutput struct {
 
 	// The assertion rule updated.

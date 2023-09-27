@@ -48,6 +48,10 @@ type AddAttributesToFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddAttributesToFindingsInput) operationName() string {
+	return "AddAttributesToFindings"
+}
+
 type AddAttributesToFindingsOutput struct {
 
 	// Attribute details that cannot be described. An error code is provided for each

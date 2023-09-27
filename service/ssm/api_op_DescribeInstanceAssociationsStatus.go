@@ -50,6 +50,10 @@ type DescribeInstanceAssociationsStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceAssociationsStatusInput) operationName() string {
+	return "DescribeInstanceAssociationsStatus"
+}
+
 type DescribeInstanceAssociationsStatusOutput struct {
 
 	// Status information about the association.

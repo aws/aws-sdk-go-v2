@@ -53,6 +53,10 @@ type DeleteVerifiedAccessGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVerifiedAccessGroupInput) operationName() string {
+	return "DeleteVerifiedAccessGroup"
+}
+
 type DeleteVerifiedAccessGroupOutput struct {
 
 	// The ID of the Verified Access group.

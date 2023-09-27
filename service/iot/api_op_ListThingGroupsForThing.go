@@ -51,6 +51,10 @@ type ListThingGroupsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThingGroupsForThingInput) operationName() string {
+	return "ListThingGroupsForThing"
+}
+
 type ListThingGroupsForThingOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

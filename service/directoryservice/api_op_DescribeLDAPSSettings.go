@@ -52,6 +52,10 @@ type DescribeLDAPSSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLDAPSSettingsInput) operationName() string {
+	return "DescribeLDAPSSettings"
+}
+
 type DescribeLDAPSSettingsOutput struct {
 
 	// Information about LDAP security for the specified directory, including status

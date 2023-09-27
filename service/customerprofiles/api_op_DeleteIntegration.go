@@ -46,6 +46,10 @@ type DeleteIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteIntegrationInput) operationName() string {
+	return "DeleteIntegration"
+}
+
 type DeleteIntegrationOutput struct {
 
 	// A message that indicates the delete request is done.

@@ -60,6 +60,10 @@ type ExportLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportLensInput) operationName() string {
+	return "ExportLens"
+}
+
 type ExportLensOutput struct {
 
 	// The JSON representation of a lens.

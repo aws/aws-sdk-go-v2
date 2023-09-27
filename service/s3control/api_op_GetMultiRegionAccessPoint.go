@@ -65,6 +65,10 @@ type GetMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMultiRegionAccessPointInput) operationName() string {
+	return "GetMultiRegionAccessPoint"
+}
+
 type GetMultiRegionAccessPointOutput struct {
 
 	// A container element containing the details of the requested Multi-Region Access

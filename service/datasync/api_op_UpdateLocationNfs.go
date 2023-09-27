@@ -59,6 +59,10 @@ type UpdateLocationNfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLocationNfsInput) operationName() string {
+	return "UpdateLocationNfs"
+}
+
 type UpdateLocationNfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

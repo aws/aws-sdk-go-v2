@@ -76,6 +76,10 @@ type DisassociateKmsKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateKmsKeyInput) operationName() string {
+	return "DisassociateKmsKey"
+}
+
 type DisassociateKmsKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

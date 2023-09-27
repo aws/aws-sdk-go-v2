@@ -51,6 +51,10 @@ type ListTestGridSessionArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestGridSessionArtifactsInput) operationName() string {
+	return "ListTestGridSessionArtifacts"
+}
+
 type ListTestGridSessionArtifactsOutput struct {
 
 	// A list of test grid session artifacts for a TestGridSession .

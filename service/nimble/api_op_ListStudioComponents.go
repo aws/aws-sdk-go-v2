@@ -54,6 +54,10 @@ type ListStudioComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStudioComponentsInput) operationName() string {
+	return "ListStudioComponents"
+}
+
 type ListStudioComponentsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

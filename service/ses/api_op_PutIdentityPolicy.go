@@ -70,6 +70,10 @@ type PutIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutIdentityPolicyInput) operationName() string {
+	return "PutIdentityPolicy"
+}
+
 // An empty element returned on a successful request.
 type PutIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.

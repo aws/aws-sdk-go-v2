@@ -58,6 +58,10 @@ type DeleteProfileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProfileShareInput) operationName() string {
+	return "DeleteProfileShare"
+}
+
 type DeleteProfileShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

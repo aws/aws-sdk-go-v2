@@ -64,6 +64,10 @@ type DescribeScheduledInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeScheduledInstancesInput) operationName() string {
+	return "DescribeScheduledInstances"
+}
+
 // Contains the output of DescribeScheduledInstances.
 type DescribeScheduledInstancesOutput struct {
 

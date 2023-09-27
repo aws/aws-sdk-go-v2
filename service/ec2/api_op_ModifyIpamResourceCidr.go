@@ -79,6 +79,10 @@ type ModifyIpamResourceCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyIpamResourceCidrInput) operationName() string {
+	return "ModifyIpamResourceCidr"
+}
+
 type ModifyIpamResourceCidrOutput struct {
 
 	// The CIDR of the resource.

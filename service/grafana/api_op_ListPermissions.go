@@ -64,6 +64,10 @@ type ListPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPermissionsInput) operationName() string {
+	return "ListPermissions"
+}
+
 type ListPermissionsOutput struct {
 
 	// The permissions returned by the operation.

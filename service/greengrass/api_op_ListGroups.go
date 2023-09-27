@@ -44,6 +44,10 @@ type ListGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupsInput) operationName() string {
+	return "ListGroups"
+}
+
 type ListGroupsOutput struct {
 
 	// Information about a group.

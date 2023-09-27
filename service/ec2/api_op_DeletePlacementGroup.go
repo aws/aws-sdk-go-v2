@@ -50,6 +50,10 @@ type DeletePlacementGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePlacementGroupInput) operationName() string {
+	return "DeletePlacementGroup"
+}
+
 type DeletePlacementGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

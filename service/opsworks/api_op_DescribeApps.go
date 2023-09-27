@@ -54,6 +54,10 @@ type DescribeAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppsInput) operationName() string {
+	return "DescribeApps"
+}
+
 // Contains the response to a DescribeApps request.
 type DescribeAppsOutput struct {
 

@@ -46,6 +46,10 @@ type DisassociateTagOptionFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTagOptionFromResourceInput) operationName() string {
+	return "DisassociateTagOptionFromResource"
+}
+
 type DisassociateTagOptionFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

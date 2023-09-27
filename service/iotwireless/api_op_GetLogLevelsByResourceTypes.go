@@ -38,6 +38,10 @@ type GetLogLevelsByResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLogLevelsByResourceTypesInput) operationName() string {
+	return "GetLogLevelsByResourceTypes"
+}
+
 type GetLogLevelsByResourceTypesOutput struct {
 
 	// The log level for a log message. The log levels can be disabled, or set to ERROR

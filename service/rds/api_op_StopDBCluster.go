@@ -47,6 +47,10 @@ type StopDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDBClusterInput) operationName() string {
+	return "StopDBCluster"
+}
+
 type StopDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For

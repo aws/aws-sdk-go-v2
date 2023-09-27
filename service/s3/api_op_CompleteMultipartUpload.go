@@ -185,6 +185,10 @@ type CompleteMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteMultipartUploadInput) operationName() string {
+	return "CompleteMultipartUpload"
+}
+
 type CompleteMultipartUploadOutput struct {
 
 	// The name of the bucket that contains the newly created object. Does not return

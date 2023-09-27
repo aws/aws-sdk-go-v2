@@ -48,6 +48,10 @@ type BatchGetDevicePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetDevicePositionInput) operationName() string {
+	return "BatchGetDevicePosition"
+}
+
 type BatchGetDevicePositionOutput struct {
 
 	// Contains device position details such as the device ID, position, and

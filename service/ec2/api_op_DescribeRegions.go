@@ -64,6 +64,10 @@ type DescribeRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRegionsInput) operationName() string {
+	return "DescribeRegions"
+}
+
 type DescribeRegionsOutput struct {
 
 	// Information about the Regions.

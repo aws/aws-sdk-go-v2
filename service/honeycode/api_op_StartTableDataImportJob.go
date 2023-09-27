@@ -81,6 +81,10 @@ type StartTableDataImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTableDataImportJobInput) operationName() string {
+	return "StartTableDataImportJob"
+}
+
 type StartTableDataImportJobOutput struct {
 
 	// The id that is assigned to this import job. Future requests to find out the

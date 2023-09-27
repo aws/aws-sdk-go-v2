@@ -44,6 +44,10 @@ type GetAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccessorInput) operationName() string {
+	return "GetAccessor"
+}
+
 type GetAccessorOutput struct {
 
 	// The properties of the accessor.

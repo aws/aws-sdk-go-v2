@@ -47,6 +47,10 @@ type BatchDeleteDelegationByAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteDelegationByAssessmentInput) operationName() string {
+	return "BatchDeleteDelegationByAssessment"
+}
+
 type BatchDeleteDelegationByAssessmentOutput struct {
 
 	// A list of errors that the BatchDeleteDelegationByAssessment API returned.

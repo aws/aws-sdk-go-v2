@@ -47,6 +47,10 @@ type GetVerifiedAccessEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVerifiedAccessEndpointPolicyInput) operationName() string {
+	return "GetVerifiedAccessEndpointPolicy"
+}
+
 type GetVerifiedAccessEndpointPolicyOutput struct {
 
 	// The Verified Access policy document.

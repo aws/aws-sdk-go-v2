@@ -47,6 +47,10 @@ type DescribeEnvironmentManagedActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEnvironmentManagedActionsInput) operationName() string {
+	return "DescribeEnvironmentManagedActions"
+}
+
 // The result message containing a list of managed actions.
 type DescribeEnvironmentManagedActionsOutput struct {
 

@@ -51,6 +51,10 @@ type ListServiceNetworkVpcAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceNetworkVpcAssociationsInput) operationName() string {
+	return "ListServiceNetworkVpcAssociations"
+}
+
 type ListServiceNetworkVpcAssociationsOutput struct {
 
 	// Information about the associations.

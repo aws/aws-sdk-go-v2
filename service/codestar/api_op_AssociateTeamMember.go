@@ -62,6 +62,10 @@ type AssociateTeamMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTeamMemberInput) operationName() string {
+	return "AssociateTeamMember"
+}
+
 type AssociateTeamMemberOutput struct {
 
 	// The user- or system-generated token from the initial request that can be used

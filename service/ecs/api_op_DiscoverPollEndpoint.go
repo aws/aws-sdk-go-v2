@@ -47,6 +47,10 @@ type DiscoverPollEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DiscoverPollEndpointInput) operationName() string {
+	return "DiscoverPollEndpoint"
+}
+
 type DiscoverPollEndpointOutput struct {
 
 	// The endpoint for the Amazon ECS agent to poll.

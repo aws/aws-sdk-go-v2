@@ -49,6 +49,10 @@ type UpdateReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReservationInput) operationName() string {
+	return "UpdateReservation"
+}
+
 // Placeholder documentation for UpdateReservationResponse
 type UpdateReservationOutput struct {
 

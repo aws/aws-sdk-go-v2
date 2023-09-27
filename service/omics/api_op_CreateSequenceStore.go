@@ -59,6 +59,10 @@ type CreateSequenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSequenceStoreInput) operationName() string {
+	return "CreateSequenceStore"
+}
+
 type CreateSequenceStoreOutput struct {
 
 	// The store's ARN.

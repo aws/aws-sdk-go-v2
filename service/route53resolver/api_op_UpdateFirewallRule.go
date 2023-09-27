@@ -90,6 +90,10 @@ type UpdateFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallRuleInput) operationName() string {
+	return "UpdateFirewallRule"
+}
+
 type UpdateFirewallRuleOutput struct {
 
 	// The firewall rule that you just updated.

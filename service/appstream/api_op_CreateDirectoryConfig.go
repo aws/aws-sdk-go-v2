@@ -64,6 +64,10 @@ type CreateDirectoryConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDirectoryConfigInput) operationName() string {
+	return "CreateDirectoryConfig"
+}
+
 type CreateDirectoryConfigOutput struct {
 
 	// Information about the directory configuration.

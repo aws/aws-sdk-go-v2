@@ -80,6 +80,10 @@ type DescribeStoreImageTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStoreImageTasksInput) operationName() string {
+	return "DescribeStoreImageTasks"
+}
+
 type DescribeStoreImageTasksOutput struct {
 
 	// The token to include in another request to get the next page of items. This

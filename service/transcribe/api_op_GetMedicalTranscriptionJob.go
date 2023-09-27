@@ -48,6 +48,10 @@ type GetMedicalTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMedicalTranscriptionJobInput) operationName() string {
+	return "GetMedicalTranscriptionJob"
+}
+
 type GetMedicalTranscriptionJobOutput struct {
 
 	// Provides detailed information about the specified medical transcription job,

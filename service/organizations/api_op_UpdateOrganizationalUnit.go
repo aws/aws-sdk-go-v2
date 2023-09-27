@@ -55,6 +55,10 @@ type UpdateOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOrganizationalUnitInput) operationName() string {
+	return "UpdateOrganizationalUnit"
+}
+
 type UpdateOrganizationalUnitOutput struct {
 
 	// A structure that contains the details about the specified OU, including its new

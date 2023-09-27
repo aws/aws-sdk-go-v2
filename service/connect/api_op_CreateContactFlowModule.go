@@ -66,6 +66,10 @@ type CreateContactFlowModuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContactFlowModuleInput) operationName() string {
+	return "CreateContactFlowModule"
+}
+
 type CreateContactFlowModuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow module.

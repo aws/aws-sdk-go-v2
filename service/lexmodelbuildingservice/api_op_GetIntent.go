@@ -50,6 +50,10 @@ type GetIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIntentInput) operationName() string {
+	return "GetIntent"
+}
+
 type GetIntentOutput struct {
 
 	// Checksum of the intent.

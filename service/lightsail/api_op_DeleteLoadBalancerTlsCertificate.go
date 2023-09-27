@@ -57,6 +57,10 @@ type DeleteLoadBalancerTlsCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLoadBalancerTlsCertificateInput) operationName() string {
+	return "DeleteLoadBalancerTlsCertificate"
+}
+
 type DeleteLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

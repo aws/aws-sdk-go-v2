@@ -47,6 +47,10 @@ type ListInfrastructureConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInfrastructureConfigurationsInput) operationName() string {
+	return "ListInfrastructureConfigurations"
+}
+
 type ListInfrastructureConfigurationsOutput struct {
 
 	// The list of infrastructure configurations.

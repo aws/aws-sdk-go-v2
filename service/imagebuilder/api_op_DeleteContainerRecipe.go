@@ -41,6 +41,10 @@ type DeleteContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteContainerRecipeInput) operationName() string {
+	return "DeleteContainerRecipe"
+}
+
 type DeleteContainerRecipeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the container recipe that was deleted.

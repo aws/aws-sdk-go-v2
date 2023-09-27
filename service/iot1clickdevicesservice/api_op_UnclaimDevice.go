@@ -41,6 +41,10 @@ type UnclaimDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnclaimDeviceInput) operationName() string {
+	return "UnclaimDevice"
+}
+
 type UnclaimDeviceOutput struct {
 
 	// The device's final claim state.

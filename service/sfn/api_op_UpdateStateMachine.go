@@ -96,6 +96,10 @@ type UpdateStateMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStateMachineInput) operationName() string {
+	return "UpdateStateMachine"
+}
+
 type UpdateStateMachineOutput struct {
 
 	// The date and time the state machine was updated.

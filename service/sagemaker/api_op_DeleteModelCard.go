@@ -41,6 +41,10 @@ type DeleteModelCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteModelCardInput) operationName() string {
+	return "DeleteModelCard"
+}
+
 type DeleteModelCardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

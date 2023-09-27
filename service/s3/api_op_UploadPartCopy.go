@@ -243,6 +243,10 @@ type UploadPartCopyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadPartCopyInput) operationName() string {
+	return "UploadPartCopy"
+}
+
 type UploadPartCopyOutput struct {
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side

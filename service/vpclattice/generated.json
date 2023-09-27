@@ -61,6 +61,7 @@
         "api_op_UpdateServiceNetwork.go",
         "api_op_UpdateServiceNetworkVpcAssociation.go",
         "api_op_UpdateTargetGroup.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -59,6 +59,10 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListQueuesInput) operationName() string {
+	return "ListQueues"
+}
+
 type ListQueuesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

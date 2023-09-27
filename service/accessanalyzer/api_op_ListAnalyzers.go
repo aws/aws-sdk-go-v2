@@ -47,6 +47,10 @@ type ListAnalyzersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAnalyzersInput) operationName() string {
+	return "ListAnalyzers"
+}
+
 // The response to the request.
 type ListAnalyzersOutput struct {
 

@@ -42,6 +42,10 @@ type DeleteAlarmModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAlarmModelInput) operationName() string {
+	return "DeleteAlarmModel"
+}
+
 type DeleteAlarmModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

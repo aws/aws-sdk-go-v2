@@ -153,6 +153,10 @@ type DeleteScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteScheduledActionInput) operationName() string {
+	return "DeleteScheduledAction"
+}
+
 type DeleteScheduledActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

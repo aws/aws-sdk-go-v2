@@ -52,6 +52,10 @@ type RemoveFromGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveFromGlobalClusterInput) operationName() string {
+	return "RemoveFromGlobalCluster"
+}
+
 type RemoveFromGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.

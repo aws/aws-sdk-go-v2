@@ -47,6 +47,10 @@ type DeleteNodegroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNodegroupInput) operationName() string {
+	return "DeleteNodegroup"
+}
+
 type DeleteNodegroupOutput struct {
 
 	// The full description of your deleted node group.

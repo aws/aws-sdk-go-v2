@@ -48,6 +48,10 @@ type GetChangesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChangesetInput) operationName() string {
+	return "GetChangeset"
+}
+
 // The response from a describe changeset operation
 type GetChangesetOutput struct {
 

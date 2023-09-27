@@ -47,6 +47,10 @@ type ListFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFiltersInput) operationName() string {
+	return "ListFilters"
+}
+
 type ListFiltersOutput struct {
 
 	// A list of returned filters.

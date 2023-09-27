@@ -41,6 +41,10 @@ type GetCheckerIpRangesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCheckerIpRangesInput) operationName() string {
+	return "GetCheckerIpRanges"
+}
+
 // A complex type that contains the CheckerIpRanges element.
 type GetCheckerIpRangesOutput struct {
 

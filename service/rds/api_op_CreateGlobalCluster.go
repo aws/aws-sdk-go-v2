@@ -88,6 +88,10 @@ type CreateGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGlobalClusterInput) operationName() string {
+	return "CreateGlobalCluster"
+}
+
 type CreateGlobalClusterOutput struct {
 
 	// A data type representing an Aurora global database.

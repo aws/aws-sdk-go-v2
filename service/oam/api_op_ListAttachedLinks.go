@@ -53,6 +53,10 @@ type ListAttachedLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttachedLinksInput) operationName() string {
+	return "ListAttachedLinks"
+}
+
 type ListAttachedLinksOutput struct {
 
 	// An array of structures that contain the information about the attached links.

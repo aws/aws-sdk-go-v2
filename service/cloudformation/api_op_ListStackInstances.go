@@ -81,6 +81,10 @@ type ListStackInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStackInstancesInput) operationName() string {
+	return "ListStackInstances"
+}
+
 type ListStackInstancesOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a

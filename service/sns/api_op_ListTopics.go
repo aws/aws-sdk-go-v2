@@ -43,6 +43,10 @@ type ListTopicsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTopicsInput) operationName() string {
+	return "ListTopics"
+}
+
 // Response for ListTopics action.
 type ListTopicsOutput struct {
 

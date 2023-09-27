@@ -82,6 +82,10 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterTargetWithMaintenanceWindowInput) operationName() string {
+	return "RegisterTargetWithMaintenanceWindow"
+}
+
 type RegisterTargetWithMaintenanceWindowOutput struct {
 
 	// The ID of the target definition in this maintenance window.

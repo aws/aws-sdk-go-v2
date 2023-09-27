@@ -60,6 +60,7 @@
         "api_op_UpdateChannelFlow.go",
         "api_op_UpdateChannelMessage.go",
         "api_op_UpdateChannelReadMarker.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

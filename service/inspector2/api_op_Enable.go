@@ -48,6 +48,10 @@ type EnableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableInput) operationName() string {
+	return "Enable"
+}
+
 type EnableOutput struct {
 
 	// Information on the accounts that have had Amazon Inspector scans successfully

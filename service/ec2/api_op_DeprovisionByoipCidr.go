@@ -53,6 +53,10 @@ type DeprovisionByoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeprovisionByoipCidrInput) operationName() string {
+	return "DeprovisionByoipCidr"
+}
+
 type DeprovisionByoipCidrOutput struct {
 
 	// Information about the address range.

@@ -89,6 +89,10 @@ type UpdateFleetCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFleetCapacityInput) operationName() string {
+	return "UpdateFleetCapacity"
+}
+
 type UpdateFleetCapacityOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

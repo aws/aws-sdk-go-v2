@@ -54,6 +54,10 @@ type GetTaskTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTaskTemplateInput) operationName() string {
+	return "GetTaskTemplate"
+}
+
 type GetTaskTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN).

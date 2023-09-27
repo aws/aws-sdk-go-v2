@@ -57,6 +57,10 @@ type DescribeRuleGroupMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRuleGroupMetadataInput) operationName() string {
+	return "DescribeRuleGroupMetadata"
+}
+
 type DescribeRuleGroupMetadataOutput struct {
 
 	// The descriptive name of the rule group. You can't change the name of a rule

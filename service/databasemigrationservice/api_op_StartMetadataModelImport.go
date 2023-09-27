@@ -57,6 +57,10 @@ type StartMetadataModelImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMetadataModelImportInput) operationName() string {
+	return "StartMetadataModelImport"
+}
+
 type StartMetadataModelImportOutput struct {
 
 	// The identifier for the import operation.

@@ -36,6 +36,10 @@ type GetLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLoggingOptionsInput) operationName() string {
+	return "GetLoggingOptions"
+}
+
 type GetLoggingOptionsOutput struct {
 
 	// Returns information about log delivery to Amazon CloudWatch Logs.

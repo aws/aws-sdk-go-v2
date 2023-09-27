@@ -60,6 +60,10 @@ type UpdateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVolumeInput) operationName() string {
+	return "UpdateVolume"
+}
+
 type UpdateVolumeOutput struct {
 
 	// A description of the volume just updated. Returned after a successful

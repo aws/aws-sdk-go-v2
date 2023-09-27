@@ -53,6 +53,10 @@ type GetWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowStepInput) operationName() string {
+	return "GetWorkflowStep"
+}
+
 type GetWorkflowStepOutput struct {
 
 	// The time at which the step was created.

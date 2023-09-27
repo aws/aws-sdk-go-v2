@@ -55,6 +55,10 @@ type CreateCoreNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCoreNetworkInput) operationName() string {
+	return "CreateCoreNetwork"
+}
+
 type CreateCoreNetworkOutput struct {
 
 	// Returns details about a core network.

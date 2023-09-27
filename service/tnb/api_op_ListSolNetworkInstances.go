@@ -45,6 +45,10 @@ type ListSolNetworkInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSolNetworkInstancesInput) operationName() string {
+	return "ListSolNetworkInstances"
+}
+
 type ListSolNetworkInstancesOutput struct {
 
 	// Lists network instances.

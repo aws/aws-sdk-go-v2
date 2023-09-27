@@ -102,6 +102,10 @@ type ConfirmSignUpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmSignUpInput) operationName() string {
+	return "ConfirmSignUp"
+}
+
 // Represents the response from the server for the registration confirmation.
 type ConfirmSignUpOutput struct {
 	// Metadata pertaining to the operation's result.

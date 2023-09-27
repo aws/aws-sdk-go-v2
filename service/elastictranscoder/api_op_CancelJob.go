@@ -47,6 +47,10 @@ type CancelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelJobInput) operationName() string {
+	return "CancelJob"
+}
+
 // The response body contains a JSON object. If the job is successfully canceled,
 // the value of Success is true .
 type CancelJobOutput struct {

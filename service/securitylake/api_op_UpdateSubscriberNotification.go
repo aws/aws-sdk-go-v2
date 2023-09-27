@@ -48,6 +48,10 @@ type UpdateSubscriberNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSubscriberNotificationInput) operationName() string {
+	return "UpdateSubscriberNotification"
+}
+
 type UpdateSubscriberNotificationOutput struct {
 
 	// The subscriber endpoint to which exception messages are posted.

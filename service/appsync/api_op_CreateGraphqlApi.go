@@ -88,6 +88,10 @@ type CreateGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGraphqlApiInput) operationName() string {
+	return "CreateGraphqlApi"
+}
+
 type CreateGraphqlApiOutput struct {
 
 	// The GraphqlApi .

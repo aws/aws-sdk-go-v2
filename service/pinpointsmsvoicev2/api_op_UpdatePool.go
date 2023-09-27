@@ -72,6 +72,10 @@ type UpdatePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePoolInput) operationName() string {
+	return "UpdatePool"
+}
+
 type UpdatePoolOutput struct {
 
 	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)

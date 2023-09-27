@@ -45,6 +45,10 @@ type BatchDescribeTypeConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDescribeTypeConfigurationsInput) operationName() string {
+	return "BatchDescribeTypeConfigurations"
+}
+
 type BatchDescribeTypeConfigurationsOutput struct {
 
 	// A list of information concerning any errors generated during the setting of the

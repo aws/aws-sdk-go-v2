@@ -53,6 +53,10 @@ type UpdateObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateObjectAttributesInput) operationName() string {
+	return "UpdateObjectAttributes"
+}
+
 type UpdateObjectAttributesOutput struct {
 
 	// The ObjectIdentifier of the updated object.

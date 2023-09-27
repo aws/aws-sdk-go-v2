@@ -80,6 +80,10 @@ type ExecuteChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteChangeSetInput) operationName() string {
+	return "ExecuteChangeSet"
+}
+
 // The output for the ExecuteChangeSet action.
 type ExecuteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.

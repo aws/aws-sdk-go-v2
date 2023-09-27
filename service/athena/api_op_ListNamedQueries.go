@@ -54,6 +54,10 @@ type ListNamedQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNamedQueriesInput) operationName() string {
+	return "ListNamedQueries"
+}
+
 type ListNamedQueriesOutput struct {
 
 	// The list of unique query IDs.

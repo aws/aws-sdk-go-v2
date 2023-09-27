@@ -62,6 +62,10 @@ type CreateCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCodeRepositoryInput) operationName() string {
+	return "CreateCodeRepository"
+}
+
 type CreateCodeRepositoryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new repository.

@@ -69,6 +69,10 @@ type ListIncomingTypedLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIncomingTypedLinksInput) operationName() string {
+	return "ListIncomingTypedLinks"
+}
+
 type ListIncomingTypedLinksOutput struct {
 
 	// Returns one or more typed link specifiers as output.

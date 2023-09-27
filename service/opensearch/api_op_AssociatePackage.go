@@ -51,6 +51,10 @@ type AssociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePackageInput) operationName() string {
+	return "AssociatePackage"
+}
+
 // Container for the response returned by the AssociatePackage operation.
 type AssociatePackageOutput struct {
 

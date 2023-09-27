@@ -62,6 +62,10 @@ type CreateAnomalySubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAnomalySubscriptionInput) operationName() string {
+	return "CreateAnomalySubscription"
+}
+
 type CreateAnomalySubscriptionOutput struct {
 
 	// The unique identifier of your newly created cost anomaly subscription.

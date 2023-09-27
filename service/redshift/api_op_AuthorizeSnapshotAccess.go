@@ -58,6 +58,10 @@ type AuthorizeSnapshotAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeSnapshotAccessInput) operationName() string {
+	return "AuthorizeSnapshotAccess"
+}
+
 type AuthorizeSnapshotAccessOutput struct {
 
 	// Describes a snapshot.

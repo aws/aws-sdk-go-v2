@@ -45,6 +45,10 @@ type DeleteDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBParameterGroupInput) operationName() string {
+	return "DeleteDBParameterGroup"
+}
+
 type DeleteDBParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,6 +64,10 @@ type UpdateDynamicThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDynamicThingGroupInput) operationName() string {
+	return "UpdateDynamicThingGroup"
+}
+
 type UpdateDynamicThingGroupOutput struct {
 
 	// The dynamic thing group version.

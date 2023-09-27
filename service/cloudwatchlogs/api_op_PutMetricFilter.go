@@ -71,6 +71,10 @@ type PutMetricFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutMetricFilterInput) operationName() string {
+	return "PutMetricFilter"
+}
+
 type PutMetricFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

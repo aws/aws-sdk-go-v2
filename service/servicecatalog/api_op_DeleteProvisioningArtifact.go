@@ -55,6 +55,10 @@ type DeleteProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProvisioningArtifactInput) operationName() string {
+	return "DeleteProvisioningArtifact"
+}
+
 type DeleteProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type PutPartnerEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPartnerEventsInput) operationName() string {
+	return "PutPartnerEvents"
+}
+
 type PutPartnerEventsOutput struct {
 
 	// The list of events from this operation that were successfully written to the

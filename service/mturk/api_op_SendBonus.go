@@ -75,6 +75,10 @@ type SendBonusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendBonusInput) operationName() string {
+	return "SendBonus"
+}
+
 type SendBonusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -82,6 +82,7 @@
         "api_op_UpdateRulesOfIpGroup.go",
         "api_op_UpdateWorkspaceBundle.go",
         "api_op_UpdateWorkspaceImagePermission.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

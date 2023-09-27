@@ -41,6 +41,10 @@ type DeleteFleetAdvisorCollectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFleetAdvisorCollectorInput) operationName() string {
+	return "DeleteFleetAdvisorCollector"
+}
+
 type DeleteFleetAdvisorCollectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

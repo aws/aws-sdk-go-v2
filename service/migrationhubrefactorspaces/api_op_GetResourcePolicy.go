@@ -41,6 +41,10 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcePolicyInput) operationName() string {
+	return "GetResourcePolicy"
+}
+
 type GetResourcePolicyOutput struct {
 
 	// A JSON-formatted string for an Amazon Web Services resource-based policy.

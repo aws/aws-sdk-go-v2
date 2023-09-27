@@ -58,6 +58,10 @@ type DisassociatePersonasFromEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociatePersonasFromEntitiesInput) operationName() string {
+	return "DisassociatePersonasFromEntities"
+}
+
 type DisassociatePersonasFromEntitiesOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that

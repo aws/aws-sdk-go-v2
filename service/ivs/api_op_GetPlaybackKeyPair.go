@@ -46,6 +46,10 @@ type GetPlaybackKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPlaybackKeyPairInput) operationName() string {
+	return "GetPlaybackKeyPair"
+}
+
 type GetPlaybackKeyPairOutput struct {
 
 	//

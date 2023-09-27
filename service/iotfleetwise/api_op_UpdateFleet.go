@@ -46,6 +46,10 @@ type UpdateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFleetInput) operationName() string {
+	return "UpdateFleet"
+}
+
 type UpdateFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated fleet.

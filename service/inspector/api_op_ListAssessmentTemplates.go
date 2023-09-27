@@ -58,6 +58,10 @@ type ListAssessmentTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentTemplatesInput) operationName() string {
+	return "ListAssessmentTemplates"
+}
+
 type ListAssessmentTemplatesOutput struct {
 
 	// A list of ARNs that specifies the assessment templates returned by the action.

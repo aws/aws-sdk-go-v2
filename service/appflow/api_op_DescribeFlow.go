@@ -44,6 +44,10 @@ type DescribeFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFlowInput) operationName() string {
+	return "DescribeFlow"
+}
+
 type DescribeFlowOutput struct {
 
 	// Specifies when the flow was created.

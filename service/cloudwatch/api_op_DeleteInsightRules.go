@@ -46,6 +46,10 @@ type DeleteInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInsightRulesInput) operationName() string {
+	return "DeleteInsightRules"
+}
+
 type DeleteInsightRulesOutput struct {
 
 	// An array listing the rules that could not be deleted. You cannot delete

@@ -42,6 +42,10 @@ type DeleteSuppressedDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSuppressedDestinationInput) operationName() string {
+	return "DeleteSuppressedDestination"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteSuppressedDestinationOutput struct {

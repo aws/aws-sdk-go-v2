@@ -75,6 +75,10 @@ type DenyCustomRoutingTrafficInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DenyCustomRoutingTrafficInput) operationName() string {
+	return "DenyCustomRoutingTraffic"
+}
+
 type DenyCustomRoutingTrafficOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

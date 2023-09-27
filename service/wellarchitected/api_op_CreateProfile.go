@@ -67,6 +67,10 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProfileInput) operationName() string {
+	return "CreateProfile"
+}
+
 type CreateProfileOutput struct {
 
 	// The profile ARN.

@@ -74,6 +74,10 @@ type GetGeoLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGeoLocationInput) operationName() string {
+	return "GetGeoLocation"
+}
+
 // A complex type that contains the response information for the specified
 // geolocation code.
 type GetGeoLocationOutput struct {

@@ -112,6 +112,10 @@ type GetResourceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceMetricsInput) operationName() string {
+	return "GetResourceMetrics"
+}
+
 type GetResourceMetricsOutput struct {
 
 	// The end time for the returned metrics, after alignment to a granular boundary

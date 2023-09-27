@@ -69,6 +69,10 @@ type CreateCacheParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCacheParameterGroupInput) operationName() string {
+	return "CreateCacheParameterGroup"
+}
+
 type CreateCacheParameterGroupOutput struct {
 
 	// Represents the output of a CreateCacheParameterGroup operation.

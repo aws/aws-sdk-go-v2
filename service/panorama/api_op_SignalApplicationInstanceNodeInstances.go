@@ -47,6 +47,10 @@ type SignalApplicationInstanceNodeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SignalApplicationInstanceNodeInstancesInput) operationName() string {
+	return "SignalApplicationInstanceNodeInstances"
+}
+
 type SignalApplicationInstanceNodeInstancesOutput struct {
 
 	// An application instance ID.

@@ -52,6 +52,10 @@ type GetPositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPositionInput) operationName() string {
+	return "GetPosition"
+}
+
 type GetPositionOutput struct {
 
 	// The accuracy of the estimated position in meters. An empty value indicates that

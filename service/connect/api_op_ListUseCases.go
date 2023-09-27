@@ -57,6 +57,10 @@ type ListUseCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUseCasesInput) operationName() string {
+	return "ListUseCases"
+}
+
 type ListUseCasesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

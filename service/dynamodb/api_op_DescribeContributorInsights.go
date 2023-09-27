@@ -47,6 +47,10 @@ type DescribeContributorInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContributorInsightsInput) operationName() string {
+	return "DescribeContributorInsights"
+}
+
 type DescribeContributorInsightsOutput struct {
 
 	// List of names of the associated contributor insights rules.

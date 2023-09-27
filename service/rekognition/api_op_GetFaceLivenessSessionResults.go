@@ -50,6 +50,10 @@ type GetFaceLivenessSessionResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFaceLivenessSessionResultsInput) operationName() string {
+	return "GetFaceLivenessSessionResults"
+}
+
 type GetFaceLivenessSessionResultsOutput struct {
 
 	// The sessionId for which this request was called.

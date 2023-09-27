@@ -48,6 +48,10 @@ type ExitStandbyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExitStandbyInput) operationName() string {
+	return "ExitStandby"
+}
+
 type ExitStandbyOutput struct {
 
 	// The activities related to moving instances out of Standby mode.

@@ -67,6 +67,10 @@ type CreateImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImpersonationRoleInput) operationName() string {
+	return "CreateImpersonationRole"
+}
+
 type CreateImpersonationRoleOutput struct {
 
 	// The new impersonation role ID.

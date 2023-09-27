@@ -61,4 +61,5 @@ software.amazon.smithy.aws.go.codegen.customization.S3SerializeImmutableHostname
 software.amazon.smithy.aws.go.codegen.customization.S3UpdateOutpostArn
 software.amazon.smithy.aws.go.codegen.LegacyEndpointContextSetter
 software.amazon.smithy.aws.go.codegen.customization.DisableEndpointHostPrefix
+software.amazon.smithy.aws.go.codegen.customization.AwsAuthResolution
 

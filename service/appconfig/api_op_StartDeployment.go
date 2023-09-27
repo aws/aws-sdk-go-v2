@@ -77,6 +77,10 @@ type StartDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDeploymentInput) operationName() string {
+	return "StartDeployment"
+}
+
 type StartDeploymentOutput struct {
 
 	// The ID of the application that was deployed.

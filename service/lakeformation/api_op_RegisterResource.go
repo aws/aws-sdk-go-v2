@@ -70,6 +70,10 @@ type RegisterResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterResourceInput) operationName() string {
+	return "RegisterResource"
+}
+
 type RegisterResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

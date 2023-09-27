@@ -43,6 +43,10 @@ type DisableApplicationLayerAutomaticResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableApplicationLayerAutomaticResponseInput) operationName() string {
+	return "DisableApplicationLayerAutomaticResponse"
+}
+
 type DisableApplicationLayerAutomaticResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

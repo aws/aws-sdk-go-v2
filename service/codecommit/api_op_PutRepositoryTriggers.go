@@ -48,6 +48,10 @@ type PutRepositoryTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRepositoryTriggersInput) operationName() string {
+	return "PutRepositoryTriggers"
+}
+
 // Represents the output of a put repository triggers operation.
 type PutRepositoryTriggersOutput struct {
 

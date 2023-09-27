@@ -49,6 +49,10 @@ type ListPHIDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPHIDetectionJobsInput) operationName() string {
+	return "ListPHIDetectionJobs"
+}
+
 type ListPHIDetectionJobsOutput struct {
 
 	// A list containing the properties of each job returned.

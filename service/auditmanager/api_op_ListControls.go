@@ -48,6 +48,10 @@ type ListControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListControlsInput) operationName() string {
+	return "ListControls"
+}
+
 type ListControlsOutput struct {
 
 	// A list of metadata that the ListControls API returns for each control.

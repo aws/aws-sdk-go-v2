@@ -36,6 +36,10 @@ type GetPropertygraphStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPropertygraphStatisticsInput) operationName() string {
+	return "GetPropertygraphStatistics"
+}
+
 type GetPropertygraphStatisticsOutput struct {
 
 	// Statistics for property-graph data.

@@ -80,6 +80,10 @@ type CreateMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMapInput) operationName() string {
+	return "CreateMap"
+}
+
 type CreateMapOutput struct {
 
 	// The timestamp for when the map resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)

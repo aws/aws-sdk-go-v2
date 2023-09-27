@@ -46,6 +46,10 @@ type UpdateAccessLogSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccessLogSubscriptionInput) operationName() string {
+	return "UpdateAccessLogSubscription"
+}
+
 type UpdateAccessLogSubscriptionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the access log subscription.

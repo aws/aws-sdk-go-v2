@@ -72,6 +72,10 @@ type DeleteRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRegexPatternSetInput) operationName() string {
+	return "DeleteRegexPatternSet"
+}
+
 type DeleteRegexPatternSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

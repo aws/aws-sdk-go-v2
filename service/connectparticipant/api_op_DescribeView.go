@@ -48,6 +48,10 @@ type DescribeViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeViewInput) operationName() string {
+	return "DescribeView"
+}
+
 type DescribeViewOutput struct {
 
 	// A view resource object. Contains metadata and content necessary to render the

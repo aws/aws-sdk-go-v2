@@ -55,6 +55,10 @@ type DeleteExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExpressionInput) operationName() string {
+	return "DeleteExpression"
+}
+
 // The result of a DeleteExpression request. Specifies the expression being
 // deleted.
 type DeleteExpressionOutput struct {

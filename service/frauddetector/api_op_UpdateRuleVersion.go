@@ -64,6 +64,10 @@ type UpdateRuleVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuleVersionInput) operationName() string {
+	return "UpdateRuleVersion"
+}
+
 type UpdateRuleVersionOutput struct {
 
 	// The new rule version that was created.

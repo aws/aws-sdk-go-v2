@@ -97,6 +97,10 @@ type CreateDBProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBProxyInput) operationName() string {
+	return "CreateDBProxy"
+}
+
 type CreateDBProxyOutput struct {
 
 	// The DBProxy structure corresponding to the new proxy.

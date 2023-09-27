@@ -47,6 +47,10 @@ type GetAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnalysisTemplateInput) operationName() string {
+	return "GetAnalysisTemplate"
+}
+
 type GetAnalysisTemplateOutput struct {
 
 	// The analysis template.

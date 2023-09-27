@@ -51,6 +51,10 @@ type GetQueueUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetQueueUrlInput) operationName() string {
+	return "GetQueueUrl"
+}
+
 // For more information, see Interpreting Responses (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
 // in the Amazon SQS Developer Guide.
 type GetQueueUrlOutput struct {

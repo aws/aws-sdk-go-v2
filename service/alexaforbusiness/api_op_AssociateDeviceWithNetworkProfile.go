@@ -48,6 +48,10 @@ type AssociateDeviceWithNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDeviceWithNetworkProfileInput) operationName() string {
+	return "AssociateDeviceWithNetworkProfile"
+}
+
 type AssociateDeviceWithNetworkProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

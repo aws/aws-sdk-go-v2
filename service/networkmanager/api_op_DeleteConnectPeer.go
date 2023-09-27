@@ -42,6 +42,10 @@ type DeleteConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectPeerInput) operationName() string {
+	return "DeleteConnectPeer"
+}
+
 type DeleteConnectPeerOutput struct {
 
 	// Information about the deleted Connect peer.

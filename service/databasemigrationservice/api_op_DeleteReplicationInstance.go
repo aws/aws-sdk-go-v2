@@ -43,6 +43,10 @@ type DeleteReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationInstanceInput) operationName() string {
+	return "DeleteReplicationInstance"
+}
+
 type DeleteReplicationInstanceOutput struct {
 
 	// The replication instance that was deleted.

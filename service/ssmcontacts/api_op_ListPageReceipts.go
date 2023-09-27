@@ -48,6 +48,10 @@ type ListPageReceiptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPageReceiptsInput) operationName() string {
+	return "ListPageReceipts"
+}
+
 type ListPageReceiptsOutput struct {
 
 	// The pagination token to continue to the next page of results.

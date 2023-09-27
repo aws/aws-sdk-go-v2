@@ -41,6 +41,10 @@ type GetAppliedSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppliedSchemaVersionInput) operationName() string {
+	return "GetAppliedSchemaVersion"
+}
+
 type GetAppliedSchemaVersionOutput struct {
 
 	// Current applied schema ARN, including the minor version in use if one was

@@ -95,6 +95,10 @@ type DeleteSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSecretInput) operationName() string {
+	return "DeleteSecret"
+}
+
 type DeleteSecretOutput struct {
 
 	// The ARN of the secret.

@@ -44,6 +44,10 @@ type DescribeBatchInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBatchInferenceJobInput) operationName() string {
+	return "DescribeBatchInferenceJob"
+}
+
 type DescribeBatchInferenceJobOutput struct {
 
 	// Information on the specified batch inference job.

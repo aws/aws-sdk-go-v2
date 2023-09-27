@@ -65,6 +65,10 @@ type ListIdentitySourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentitySourcesInput) operationName() string {
+	return "ListIdentitySources"
+}
+
 type ListIdentitySourcesOutput struct {
 
 	// The list of identity sources stored in the specified policy store.

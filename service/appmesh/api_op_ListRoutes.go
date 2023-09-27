@@ -69,6 +69,10 @@ type ListRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoutesInput) operationName() string {
+	return "ListRoutes"
+}
+
 type ListRoutesOutput struct {
 
 	// The list of existing routes for the specified service mesh and virtual router.

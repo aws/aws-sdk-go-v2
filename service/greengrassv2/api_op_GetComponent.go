@@ -46,6 +46,10 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentInput) operationName() string {
+	return "GetComponent"
+}
+
 type GetComponentOutput struct {
 
 	// The recipe of the component version.

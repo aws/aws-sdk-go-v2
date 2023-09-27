@@ -44,6 +44,10 @@ type DeleteCorsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCorsPolicyInput) operationName() string {
+	return "DeleteCorsPolicy"
+}
+
 type DeleteCorsPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

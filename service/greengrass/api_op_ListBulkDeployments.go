@@ -44,6 +44,10 @@ type ListBulkDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBulkDeploymentsInput) operationName() string {
+	return "ListBulkDeployments"
+}
+
 type ListBulkDeploymentsOutput struct {
 
 	// A list of bulk deployments.

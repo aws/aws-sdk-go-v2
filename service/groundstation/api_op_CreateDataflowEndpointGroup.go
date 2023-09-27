@@ -61,6 +61,10 @@ type CreateDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataflowEndpointGroupInput) operationName() string {
+	return "CreateDataflowEndpointGroup"
+}
+
 type CreateDataflowEndpointGroupOutput struct {
 
 	// UUID of a dataflow endpoint group.

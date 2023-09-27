@@ -67,6 +67,10 @@ type ReleasePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleasePhoneNumberInput) operationName() string {
+	return "ReleasePhoneNumber"
+}
+
 type ReleasePhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

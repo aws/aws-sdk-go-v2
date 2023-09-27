@@ -58,6 +58,10 @@ type ListFlowDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFlowDefinitionsInput) operationName() string {
+	return "ListFlowDefinitions"
+}
+
 type ListFlowDefinitionsOutput struct {
 
 	// An array of objects describing the flow definitions.

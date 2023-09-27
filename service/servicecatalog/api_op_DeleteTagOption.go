@@ -42,6 +42,10 @@ type DeleteTagOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTagOptionInput) operationName() string {
+	return "DeleteTagOption"
+}
+
 type DeleteTagOptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

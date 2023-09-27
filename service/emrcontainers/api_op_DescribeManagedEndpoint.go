@@ -49,6 +49,10 @@ type DescribeManagedEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeManagedEndpointInput) operationName() string {
+	return "DescribeManagedEndpoint"
+}
+
 type DescribeManagedEndpointOutput struct {
 
 	// This output displays information about a managed endpoint.

@@ -66,6 +66,10 @@ type CreateConferenceProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConferenceProviderInput) operationName() string {
+	return "CreateConferenceProvider"
+}
+
 type CreateConferenceProviderOutput struct {
 
 	// The ARN of the newly-created conference provider.

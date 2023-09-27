@@ -46,6 +46,10 @@ type DeleteCustomMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomMetricInput) operationName() string {
+	return "DeleteCustomMetric"
+}
+
 type DeleteCustomMetricOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

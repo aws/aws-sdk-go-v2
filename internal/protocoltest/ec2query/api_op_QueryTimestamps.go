@@ -40,6 +40,10 @@ type QueryTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryTimestampsInput) operationName() string {
+	return "QueryTimestamps"
+}
+
 type QueryTimestampsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

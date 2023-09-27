@@ -49,6 +49,10 @@ type ListComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListComponentsInput) operationName() string {
+	return "ListComponents"
+}
+
 type ListComponentsOutput struct {
 
 	// List of components registered with AWS System Manager for SAP.

@@ -52,6 +52,10 @@ type AttachLoadBalancerToSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachLoadBalancerToSubnetsInput) operationName() string {
+	return "AttachLoadBalancerToSubnets"
+}
+
 // Contains the output of AttachLoadBalancerToSubnets.
 type AttachLoadBalancerToSubnetsOutput struct {
 

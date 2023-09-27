@@ -81,6 +81,10 @@ type CreateMeetingWithAttendeesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMeetingWithAttendeesInput) operationName() string {
+	return "CreateMeetingWithAttendees"
+}
+
 type CreateMeetingWithAttendeesOutput struct {
 
 	// The attendee information, including attendees IDs and join tokens.

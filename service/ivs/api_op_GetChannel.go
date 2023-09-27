@@ -43,6 +43,10 @@ type GetChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelInput) operationName() string {
+	return "GetChannel"
+}
+
 type GetChannelOutput struct {
 
 	//

@@ -60,6 +60,10 @@ type AttachTrafficSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachTrafficSourcesInput) operationName() string {
+	return "AttachTrafficSources"
+}
+
 type AttachTrafficSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

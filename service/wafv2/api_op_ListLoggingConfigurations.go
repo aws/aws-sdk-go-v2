@@ -61,6 +61,10 @@ type ListLoggingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLoggingConfigurationsInput) operationName() string {
+	return "ListLoggingConfigurations"
+}
+
 type ListLoggingConfigurationsOutput struct {
 
 	// Array of logging configurations. If you specified a Limit in your request, this

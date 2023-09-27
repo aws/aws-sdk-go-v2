@@ -44,6 +44,10 @@ type GetApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationInput) operationName() string {
+	return "GetApplication"
+}
+
 // Represents the output of a GetApplication operation.
 type GetApplicationOutput struct {
 

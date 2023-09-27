@@ -53,6 +53,10 @@ type AssociateRoutingProfileQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateRoutingProfileQueuesInput) operationName() string {
+	return "AssociateRoutingProfileQueues"
+}
+
 type AssociateRoutingProfileQueuesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

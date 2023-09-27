@@ -80,6 +80,10 @@ type UpdateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConnectorInput) operationName() string {
+	return "UpdateConnector"
+}
+
 type UpdateConnectorOutput struct {
 
 	// Returns the identifier of the connector object that you are updating.

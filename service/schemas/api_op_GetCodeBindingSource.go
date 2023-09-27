@@ -54,6 +54,10 @@ type GetCodeBindingSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCodeBindingSourceInput) operationName() string {
+	return "GetCodeBindingSource"
+}
+
 type GetCodeBindingSourceOutput struct {
 	Body []byte
 

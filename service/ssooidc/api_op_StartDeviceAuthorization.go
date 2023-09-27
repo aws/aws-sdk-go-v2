@@ -56,6 +56,10 @@ type StartDeviceAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDeviceAuthorizationInput) operationName() string {
+	return "StartDeviceAuthorization"
+}
+
 type StartDeviceAuthorizationOutput struct {
 
 	// The short-lived code that is used by the device when polling for a session

@@ -76,6 +76,10 @@ type UpdateTaskTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTaskTemplateInput) operationName() string {
+	return "UpdateTaskTemplate"
+}
+
 type UpdateTaskTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) for the task template resource.

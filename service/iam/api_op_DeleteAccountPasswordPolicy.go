@@ -36,6 +36,10 @@ type DeleteAccountPasswordPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAccountPasswordPolicyInput) operationName() string {
+	return "DeleteAccountPasswordPolicy"
+}
+
 type DeleteAccountPasswordPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type BatchPutMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutMetricsInput) operationName() string {
+	return "BatchPutMetrics"
+}
+
 type BatchPutMetricsOutput struct {
 
 	// Lists any errors that occur when inserting metric data.

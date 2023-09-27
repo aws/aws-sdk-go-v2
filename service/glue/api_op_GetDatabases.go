@@ -56,6 +56,10 @@ type GetDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDatabasesInput) operationName() string {
+	return "GetDatabases"
+}
+
 type GetDatabasesOutput struct {
 
 	// A list of Database objects from the specified catalog.

@@ -56,6 +56,10 @@ type ListEndpointsByPlatformApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEndpointsByPlatformApplicationInput) operationName() string {
+	return "ListEndpointsByPlatformApplication"
+}
+
 // Response for ListEndpointsByPlatformApplication action.
 type ListEndpointsByPlatformApplicationOutput struct {
 

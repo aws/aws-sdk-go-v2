@@ -50,6 +50,10 @@ type TerminateSolNetworkInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateSolNetworkInstanceInput) operationName() string {
+	return "TerminateSolNetworkInstance"
+}
+
 type TerminateSolNetworkInstanceOutput struct {
 
 	// The identifier of the network operation.

@@ -52,6 +52,10 @@ type InviteUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InviteUsersInput) operationName() string {
+	return "InviteUsers"
+}
+
 type InviteUsersOutput struct {
 
 	// The email invitation details.

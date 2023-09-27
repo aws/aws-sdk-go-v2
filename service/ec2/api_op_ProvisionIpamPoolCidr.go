@@ -71,6 +71,10 @@ type ProvisionIpamPoolCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ProvisionIpamPoolCidrInput) operationName() string {
+	return "ProvisionIpamPoolCidr"
+}
+
 type ProvisionIpamPoolCidrOutput struct {
 
 	// Information about the provisioned CIDR.

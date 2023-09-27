@@ -50,6 +50,10 @@ type GetTerminologyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTerminologyInput) operationName() string {
+	return "GetTerminology"
+}
+
 type GetTerminologyOutput struct {
 
 	// The Amazon S3 location of a file that provides any errors or warnings that were

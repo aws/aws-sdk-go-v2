@@ -66,6 +66,10 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocalGatewayRouteTableVpcAssociationsInput) operationName() string {
+	return "DescribeLocalGatewayRouteTableVpcAssociations"
+}
+
 type DescribeLocalGatewayRouteTableVpcAssociationsOutput struct {
 
 	// Information about the associations.

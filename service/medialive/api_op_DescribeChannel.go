@@ -47,6 +47,10 @@ type DescribeChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeChannelInput) operationName() string {
+	return "DescribeChannel"
+}
+
 // Placeholder documentation for DescribeChannelResponse
 type DescribeChannelOutput struct {
 

@@ -51,6 +51,10 @@ type DeleteSlotTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSlotTypeInput) operationName() string {
+	return "DeleteSlotType"
+}
+
 type DeleteSlotTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

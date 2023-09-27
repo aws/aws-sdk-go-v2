@@ -55,6 +55,10 @@ type ResetImageAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetImageAttributeInput) operationName() string {
+	return "ResetImageAttribute"
+}
+
 type ResetImageAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

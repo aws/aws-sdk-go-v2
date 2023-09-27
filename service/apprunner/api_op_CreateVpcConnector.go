@@ -62,6 +62,10 @@ type CreateVpcConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcConnectorInput) operationName() string {
+	return "CreateVpcConnector"
+}
+
 type CreateVpcConnectorOutput struct {
 
 	// A description of the App Runner VPC connector that's created by this request.

@@ -47,6 +47,10 @@ type ListSequenceStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSequenceStoresInput) operationName() string {
+	return "ListSequenceStores"
+}
+
 type ListSequenceStoresOutput struct {
 
 	// A list of sequence stores.

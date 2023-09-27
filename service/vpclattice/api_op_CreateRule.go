@@ -83,6 +83,10 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRuleInput) operationName() string {
+	return "CreateRule"
+}
+
 type CreateRuleOutput struct {
 
 	// The rule action. Each rule must include exactly one of the following types of

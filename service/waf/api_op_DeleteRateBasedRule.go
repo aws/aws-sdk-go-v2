@@ -60,6 +60,10 @@ type DeleteRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRateBasedRuleInput) operationName() string {
+	return "DeleteRateBasedRule"
+}
+
 type DeleteRateBasedRuleOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRateBasedRule request. You

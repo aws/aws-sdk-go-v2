@@ -47,6 +47,10 @@ type CreateParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateParameterGroupInput) operationName() string {
+	return "CreateParameterGroup"
+}
+
 type CreateParameterGroupOutput struct {
 
 	// Represents the output of a CreateParameterGroup action.

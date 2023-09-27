@@ -59,6 +59,10 @@ type SearchSkillGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchSkillGroupsInput) operationName() string {
+	return "SearchSkillGroups"
+}
+
 type SearchSkillGroupsOutput struct {
 
 	// The token returned to indicate that there is more data available.

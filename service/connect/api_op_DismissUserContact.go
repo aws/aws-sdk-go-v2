@@ -56,6 +56,10 @@ type DismissUserContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DismissUserContactInput) operationName() string {
+	return "DismissUserContact"
+}
+
 type DismissUserContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

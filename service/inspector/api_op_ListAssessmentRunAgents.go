@@ -59,6 +59,10 @@ type ListAssessmentRunAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentRunAgentsInput) operationName() string {
+	return "ListAssessmentRunAgents"
+}
+
 type ListAssessmentRunAgentsOutput struct {
 
 	// A list of ARNs that specifies the agents returned by the action.

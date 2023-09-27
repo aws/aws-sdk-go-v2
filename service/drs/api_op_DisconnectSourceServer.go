@@ -53,6 +53,10 @@ type DisconnectSourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisconnectSourceServerInput) operationName() string {
+	return "DisconnectSourceServer"
+}
+
 type DisconnectSourceServerOutput struct {
 
 	// The ARN of the Source Server.

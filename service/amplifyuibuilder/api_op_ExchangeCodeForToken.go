@@ -48,6 +48,10 @@ type ExchangeCodeForTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExchangeCodeForTokenInput) operationName() string {
+	return "ExchangeCodeForToken"
+}
+
 type ExchangeCodeForTokenOutput struct {
 
 	// The access token.

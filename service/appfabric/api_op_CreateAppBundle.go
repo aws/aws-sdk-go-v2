@@ -55,6 +55,10 @@ type CreateAppBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppBundleInput) operationName() string {
+	return "CreateAppBundle"
+}
+
 type CreateAppBundleOutput struct {
 
 	// Contains information about an app bundle.

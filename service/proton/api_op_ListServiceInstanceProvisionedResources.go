@@ -52,6 +52,10 @@ type ListServiceInstanceProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceInstanceProvisionedResourcesInput) operationName() string {
+	return "ListServiceInstanceProvisionedResources"
+}
+
 type ListServiceInstanceProvisionedResourcesOutput struct {
 
 	// An array of provisioned resources for a service instance.

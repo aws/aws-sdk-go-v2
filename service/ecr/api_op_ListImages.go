@@ -72,6 +72,10 @@ type ListImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImagesInput) operationName() string {
+	return "ListImages"
+}
+
 type ListImagesOutput struct {
 
 	// The list of image IDs for the requested repository.

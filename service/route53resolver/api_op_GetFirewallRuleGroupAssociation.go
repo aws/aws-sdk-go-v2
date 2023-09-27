@@ -44,6 +44,10 @@ type GetFirewallRuleGroupAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFirewallRuleGroupAssociationInput) operationName() string {
+	return "GetFirewallRuleGroupAssociation"
+}
+
 type GetFirewallRuleGroupAssociationOutput struct {
 
 	// The association that you requested.

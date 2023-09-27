@@ -58,6 +58,10 @@ type SearchResourceTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchResourceTagsInput) operationName() string {
+	return "SearchResourceTags"
+}
+
 type SearchResourceTagsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

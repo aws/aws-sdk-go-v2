@@ -46,6 +46,10 @@ type DescribeExclusionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExclusionsInput) operationName() string {
+	return "DescribeExclusions"
+}
+
 type DescribeExclusionsOutput struct {
 
 	// Information about the exclusions.

@@ -43,6 +43,10 @@ type DisassociateIamInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateIamInstanceProfileInput) operationName() string {
+	return "DisassociateIamInstanceProfile"
+}
+
 type DisassociateIamInstanceProfileOutput struct {
 
 	// Information about the IAM instance profile association.

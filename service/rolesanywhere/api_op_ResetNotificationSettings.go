@@ -49,6 +49,10 @@ type ResetNotificationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetNotificationSettingsInput) operationName() string {
+	return "ResetNotificationSettings"
+}
+
 type ResetNotificationSettingsOutput struct {
 
 	// The state of the trust anchor after a read or write operation.

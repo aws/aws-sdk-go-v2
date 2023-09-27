@@ -80,6 +80,10 @@ type RegisterDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterDomainInput) operationName() string {
+	return "RegisterDomain"
+}
+
 type RegisterDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

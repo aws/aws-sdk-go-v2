@@ -46,6 +46,10 @@ type GetBucketAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketAccessKeysInput) operationName() string {
+	return "GetBucketAccessKeys"
+}
+
 type GetBucketAccessKeysOutput struct {
 
 	// An object that describes the access keys for the specified bucket.

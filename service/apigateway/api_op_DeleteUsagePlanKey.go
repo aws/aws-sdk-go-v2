@@ -50,6 +50,10 @@ type DeleteUsagePlanKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUsagePlanKeyInput) operationName() string {
+	return "DeleteUsagePlanKey"
+}
+
 type DeleteUsagePlanKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

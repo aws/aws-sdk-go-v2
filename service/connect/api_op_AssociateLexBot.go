@@ -50,6 +50,10 @@ type AssociateLexBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateLexBotInput) operationName() string {
+	return "AssociateLexBot"
+}
+
 type AssociateLexBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

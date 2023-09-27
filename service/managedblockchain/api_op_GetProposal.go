@@ -48,6 +48,10 @@ type GetProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProposalInput) operationName() string {
+	return "GetProposal"
+}
+
 type GetProposalOutput struct {
 
 	// Information about a proposal.

@@ -84,6 +84,10 @@ type ListSessionAnalyticsDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSessionAnalyticsDataInput) operationName() string {
+	return "ListSessionAnalyticsData"
+}
+
 type ListSessionAnalyticsDataOutput struct {
 
 	// The unique identifier of the bot that the sessions belong to.

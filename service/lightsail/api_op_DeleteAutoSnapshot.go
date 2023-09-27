@@ -51,6 +51,10 @@ type DeleteAutoSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAutoSnapshotInput) operationName() string {
+	return "DeleteAutoSnapshot"
+}
+
 type DeleteAutoSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

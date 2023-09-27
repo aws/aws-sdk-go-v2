@@ -51,6 +51,10 @@ type CreateWaveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWaveInput) operationName() string {
+	return "CreateWave"
+}
+
 type CreateWaveOutput struct {
 
 	// Wave ARN.

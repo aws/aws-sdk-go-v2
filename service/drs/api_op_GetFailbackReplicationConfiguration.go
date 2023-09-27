@@ -42,6 +42,10 @@ type GetFailbackReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFailbackReplicationConfigurationInput) operationName() string {
+	return "GetFailbackReplicationConfiguration"
+}
+
 type GetFailbackReplicationConfigurationOutput struct {
 
 	// The ID of the Recovery Instance.

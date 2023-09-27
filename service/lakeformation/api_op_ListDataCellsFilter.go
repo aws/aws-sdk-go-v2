@@ -46,6 +46,10 @@ type ListDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataCellsFilterInput) operationName() string {
+	return "ListDataCellsFilter"
+}
+
 type ListDataCellsFilterOutput struct {
 
 	// A list of DataCellFilter structures.

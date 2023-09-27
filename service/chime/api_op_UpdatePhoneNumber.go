@@ -55,6 +55,10 @@ type UpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePhoneNumberInput) operationName() string {
+	return "UpdatePhoneNumber"
+}
+
 type UpdatePhoneNumberOutput struct {
 
 	// The updated phone number details.

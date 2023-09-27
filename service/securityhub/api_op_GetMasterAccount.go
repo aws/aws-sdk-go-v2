@@ -47,6 +47,10 @@ type GetMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMasterAccountInput) operationName() string {
+	return "GetMasterAccount"
+}
+
 type GetMasterAccountOutput struct {
 
 	// A list of details about the Security Hub administrator account for the current

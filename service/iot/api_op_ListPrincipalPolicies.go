@@ -62,6 +62,10 @@ type ListPrincipalPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPrincipalPoliciesInput) operationName() string {
+	return "ListPrincipalPolicies"
+}
+
 // The output from the ListPrincipalPolicies operation.
 type ListPrincipalPoliciesOutput struct {
 

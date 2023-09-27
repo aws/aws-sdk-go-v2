@@ -48,6 +48,10 @@ type DeleteJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteJourneyInput) operationName() string {
+	return "DeleteJourney"
+}
+
 type DeleteJourneyOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a

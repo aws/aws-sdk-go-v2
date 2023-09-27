@@ -48,6 +48,10 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProfileInput) operationName() string {
+	return "UpdateProfile"
+}
+
 type UpdateProfileOutput struct {
 
 	// The profile.

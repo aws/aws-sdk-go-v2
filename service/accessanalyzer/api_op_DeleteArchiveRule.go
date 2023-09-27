@@ -50,6 +50,10 @@ type DeleteArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteArchiveRuleInput) operationName() string {
+	return "DeleteArchiveRule"
+}
+
 type DeleteArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

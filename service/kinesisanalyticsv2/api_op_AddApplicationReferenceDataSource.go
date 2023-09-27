@@ -64,6 +64,10 @@ type AddApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationReferenceDataSourceInput) operationName() string {
+	return "AddApplicationReferenceDataSource"
+}
+
 type AddApplicationReferenceDataSourceOutput struct {
 
 	// The application Amazon Resource Name (ARN).

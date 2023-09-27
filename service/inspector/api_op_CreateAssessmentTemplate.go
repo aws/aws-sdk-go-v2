@@ -72,6 +72,10 @@ type CreateAssessmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAssessmentTemplateInput) operationName() string {
+	return "CreateAssessmentTemplate"
+}
+
 type CreateAssessmentTemplateOutput struct {
 
 	// The ARN that specifies the assessment template that is created.

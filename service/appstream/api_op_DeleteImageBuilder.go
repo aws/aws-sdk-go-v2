@@ -42,6 +42,10 @@ type DeleteImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteImageBuilderInput) operationName() string {
+	return "DeleteImageBuilder"
+}
+
 type DeleteImageBuilderOutput struct {
 
 	// Information about the image builder.

@@ -36,6 +36,10 @@ type GetOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOrganizationAdminAccountInput) operationName() string {
+	return "GetOrganizationAdminAccount"
+}
+
 type GetOrganizationAdminAccountOutput struct {
 
 	// The identifier for the administrator account.

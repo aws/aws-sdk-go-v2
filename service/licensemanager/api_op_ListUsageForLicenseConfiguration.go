@@ -62,6 +62,10 @@ type ListUsageForLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsageForLicenseConfigurationInput) operationName() string {
+	return "ListUsageForLicenseConfiguration"
+}
+
 type ListUsageForLicenseConfigurationOutput struct {
 
 	// Information about the license configurations.

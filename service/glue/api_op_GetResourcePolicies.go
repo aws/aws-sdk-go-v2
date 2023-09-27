@@ -47,6 +47,10 @@ type GetResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourcePoliciesInput) operationName() string {
+	return "GetResourcePolicies"
+}
+
 type GetResourcePoliciesOutput struct {
 
 	// A list of the individual resource policies and the account-level resource

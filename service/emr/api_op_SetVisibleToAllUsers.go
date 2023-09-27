@@ -63,6 +63,10 @@ type SetVisibleToAllUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetVisibleToAllUsersInput) operationName() string {
+	return "SetVisibleToAllUsers"
+}
+
 type SetVisibleToAllUsersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

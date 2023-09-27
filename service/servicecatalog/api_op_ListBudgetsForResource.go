@@ -54,6 +54,10 @@ type ListBudgetsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBudgetsForResourceInput) operationName() string {
+	return "ListBudgetsForResource"
+}
+
 type ListBudgetsForResourceOutput struct {
 
 	// Information about the associated budgets.

@@ -46,6 +46,10 @@ type DisassociateApplicationFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateApplicationFleetInput) operationName() string {
+	return "DisassociateApplicationFleet"
+}
+
 type DisassociateApplicationFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

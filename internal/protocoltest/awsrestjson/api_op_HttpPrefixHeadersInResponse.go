@@ -29,6 +29,10 @@ type HttpPrefixHeadersInResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HttpPrefixHeadersInResponseInput) operationName() string {
+	return "HttpPrefixHeadersInResponse"
+}
+
 type HttpPrefixHeadersInResponseOutput struct {
 
 	// Map keys will be normalized to lower-case.

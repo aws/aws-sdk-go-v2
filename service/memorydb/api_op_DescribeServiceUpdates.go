@@ -58,6 +58,10 @@ type DescribeServiceUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceUpdatesInput) operationName() string {
+	return "DescribeServiceUpdates"
+}
+
 type DescribeServiceUpdatesOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the

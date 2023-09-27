@@ -130,6 +130,10 @@ type DeleteObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteObjectsInput) operationName() string {
+	return "DeleteObjects"
+}
+
 type DeleteObjectsOutput struct {
 
 	// Container element for a successful delete. It identifies the object that was

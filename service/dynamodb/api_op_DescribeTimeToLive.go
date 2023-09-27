@@ -43,6 +43,10 @@ type DescribeTimeToLiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTimeToLiveInput) operationName() string {
+	return "DescribeTimeToLive"
+}
+
 type DescribeTimeToLiveOutput struct {
 
 	//

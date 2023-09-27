@@ -57,6 +57,10 @@ type ConfirmSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmSubscriptionInput) operationName() string {
+	return "ConfirmSubscription"
+}
+
 // Response for ConfirmSubscriptions action.
 type ConfirmSubscriptionOutput struct {
 

@@ -73,6 +73,10 @@ type DescribeVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVaultInput) operationName() string {
+	return "DescribeVault"
+}
+
 // Contains the Amazon S3 Glacier response to your request.
 type DescribeVaultOutput struct {
 

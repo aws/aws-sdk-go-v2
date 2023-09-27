@@ -41,6 +41,10 @@ type ManagePropertygraphStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ManagePropertygraphStatisticsInput) operationName() string {
+	return "ManagePropertygraphStatistics"
+}
+
 type ManagePropertygraphStatisticsOutput struct {
 
 	// The HTTP return code of the request. If the request succeeded, the code is 200.

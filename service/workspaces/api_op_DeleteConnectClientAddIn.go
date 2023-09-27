@@ -47,6 +47,10 @@ type DeleteConnectClientAddInInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConnectClientAddInInput) operationName() string {
+	return "DeleteConnectClientAddIn"
+}
+
 type DeleteConnectClientAddInOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

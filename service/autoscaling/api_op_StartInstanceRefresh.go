@@ -91,6 +91,10 @@ type StartInstanceRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartInstanceRefreshInput) operationName() string {
+	return "StartInstanceRefresh"
+}
+
 type StartInstanceRefreshOutput struct {
 
 	// A unique ID for tracking the progress of the instance refresh.

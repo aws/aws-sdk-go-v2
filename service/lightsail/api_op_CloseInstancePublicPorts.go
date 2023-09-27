@@ -51,6 +51,10 @@ type CloseInstancePublicPortsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CloseInstancePublicPortsInput) operationName() string {
+	return "CloseInstancePublicPorts"
+}
+
 type CloseInstancePublicPortsOutput struct {
 
 	// An object that describes the result of the action, such as the status of the

@@ -51,6 +51,10 @@ type CreateClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateClassifierInput) operationName() string {
+	return "CreateClassifier"
+}
+
 type CreateClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

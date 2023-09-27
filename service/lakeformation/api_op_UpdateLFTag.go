@@ -58,6 +58,10 @@ type UpdateLFTagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateLFTagInput) operationName() string {
+	return "UpdateLFTag"
+}
+
 type UpdateLFTagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,10 @@ type AssociateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateWebACLInput) operationName() string {
+	return "AssociateWebACL"
+}
+
 type AssociateWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

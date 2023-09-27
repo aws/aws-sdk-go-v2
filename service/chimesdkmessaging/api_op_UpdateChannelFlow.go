@@ -52,6 +52,10 @@ type UpdateChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateChannelFlowInput) operationName() string {
+	return "UpdateChannelFlow"
+}
+
 type UpdateChannelFlowOutput struct {
 
 	// The ARN of the channel flow.

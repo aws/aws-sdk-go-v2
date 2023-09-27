@@ -49,6 +49,10 @@ type EnableAddOnInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableAddOnInput) operationName() string {
+	return "EnableAddOn"
+}
+
 type EnableAddOnOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

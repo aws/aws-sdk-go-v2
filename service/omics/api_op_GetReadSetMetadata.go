@@ -48,6 +48,10 @@ type GetReadSetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReadSetMetadataInput) operationName() string {
+	return "GetReadSetMetadata"
+}
+
 type GetReadSetMetadataOutput struct {
 
 	// The read set's ARN.

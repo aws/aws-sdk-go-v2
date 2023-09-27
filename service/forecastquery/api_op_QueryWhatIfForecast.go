@@ -64,6 +64,10 @@ type QueryWhatIfForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryWhatIfForecastInput) operationName() string {
+	return "QueryWhatIfForecast"
+}
+
 type QueryWhatIfForecastOutput struct {
 
 	// Provides information about a forecast. Returned as part of the QueryForecast

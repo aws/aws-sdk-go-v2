@@ -42,6 +42,10 @@ type DescribeAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAssetInput) operationName() string {
+	return "DescribeAsset"
+}
+
 type DescribeAssetOutput struct {
 
 	// The ARN of the Asset.

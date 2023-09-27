@@ -49,6 +49,10 @@ type ListTeamMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTeamMembersInput) operationName() string {
+	return "ListTeamMembers"
+}
+
 type ListTeamMembersOutput struct {
 
 	// A list of team member objects for the project.

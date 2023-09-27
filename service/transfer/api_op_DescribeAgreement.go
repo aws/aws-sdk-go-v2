@@ -48,6 +48,10 @@ type DescribeAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAgreementInput) operationName() string {
+	return "DescribeAgreement"
+}
+
 type DescribeAgreementOutput struct {
 
 	// The details for the specified agreement, returned as a DescribedAgreement

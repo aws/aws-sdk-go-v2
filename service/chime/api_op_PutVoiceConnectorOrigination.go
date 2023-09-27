@@ -58,6 +58,10 @@ type PutVoiceConnectorOriginationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVoiceConnectorOriginationInput) operationName() string {
+	return "PutVoiceConnectorOrigination"
+}
+
 type PutVoiceConnectorOriginationOutput struct {
 
 	// The updated origination setting details.

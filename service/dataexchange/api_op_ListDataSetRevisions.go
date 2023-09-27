@@ -50,6 +50,10 @@ type ListDataSetRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataSetRevisionsInput) operationName() string {
+	return "ListDataSetRevisions"
+}
+
 type ListDataSetRevisionsOutput struct {
 
 	// The token value retrieved from a previous call to access the next page of

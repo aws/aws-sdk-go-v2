@@ -58,6 +58,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// Returns the FinSpace environment object.

@@ -48,6 +48,10 @@ type ListTemplateStepGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTemplateStepGroupsInput) operationName() string {
+	return "ListTemplateStepGroups"
+}
+
 type ListTemplateStepGroupsOutput struct {
 
 	// The summary of the step group in the template.

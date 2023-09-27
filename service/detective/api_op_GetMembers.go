@@ -51,6 +51,10 @@ type GetMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMembersInput) operationName() string {
+	return "GetMembers"
+}
+
 type GetMembersOutput struct {
 
 	// The member account details that Detective is returning in response to the

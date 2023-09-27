@@ -55,6 +55,10 @@ type ListTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTimeSeriesInput) operationName() string {
+	return "ListTimeSeries"
+}
+
 type ListTimeSeriesOutput struct {
 
 	// One or more time series summaries to list.

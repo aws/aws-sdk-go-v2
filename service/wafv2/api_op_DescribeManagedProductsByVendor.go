@@ -57,6 +57,10 @@ type DescribeManagedProductsByVendorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeManagedProductsByVendorInput) operationName() string {
+	return "DescribeManagedProductsByVendor"
+}
+
 type DescribeManagedProductsByVendorOutput struct {
 
 	// High-level information for the managed rule groups owned by the specified

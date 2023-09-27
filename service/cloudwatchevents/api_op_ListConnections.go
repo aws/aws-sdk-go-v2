@@ -50,6 +50,10 @@ type ListConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConnectionsInput) operationName() string {
+	return "ListConnections"
+}
+
 type ListConnectionsOutput struct {
 
 	// An array of connections objects that include details about the connections.

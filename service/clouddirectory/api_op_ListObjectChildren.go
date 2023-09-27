@@ -61,6 +61,10 @@ type ListObjectChildrenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectChildrenInput) operationName() string {
+	return "ListObjectChildren"
+}
+
 type ListObjectChildrenOutput struct {
 
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier

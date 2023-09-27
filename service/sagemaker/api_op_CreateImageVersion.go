@@ -96,6 +96,10 @@ type CreateImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateImageVersionInput) operationName() string {
+	return "CreateImageVersion"
+}
+
 type CreateImageVersionOutput struct {
 
 	// The ARN of the image version.

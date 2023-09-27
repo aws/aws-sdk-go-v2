@@ -56,6 +56,10 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateGatewayInput) operationName() string {
+	return "CreateGateway"
+}
+
 type CreateGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you create.

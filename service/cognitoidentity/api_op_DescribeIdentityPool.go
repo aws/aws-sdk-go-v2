@@ -45,6 +45,10 @@ type DescribeIdentityPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityPoolInput) operationName() string {
+	return "DescribeIdentityPool"
+}
+
 // An object representing an Amazon Cognito identity pool.
 type DescribeIdentityPoolOutput struct {
 

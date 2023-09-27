@@ -50,6 +50,10 @@ type DescribeConfigurationAggregatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationAggregatorsInput) operationName() string {
+	return "DescribeConfigurationAggregators"
+}
+
 type DescribeConfigurationAggregatorsOutput struct {
 
 	// Returns a ConfigurationAggregators object.

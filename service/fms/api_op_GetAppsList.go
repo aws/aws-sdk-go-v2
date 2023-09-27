@@ -46,6 +46,10 @@ type GetAppsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAppsListInput) operationName() string {
+	return "GetAppsList"
+}
+
 type GetAppsListOutput struct {
 
 	// Information about the specified Firewall Manager applications list.

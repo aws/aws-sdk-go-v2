@@ -123,6 +123,10 @@ type CopyDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyDBClusterSnapshotInput) operationName() string {
+	return "CopyDBClusterSnapshot"
+}
+
 type CopyDBClusterSnapshotOutput struct {
 
 	// Detailed information about a cluster snapshot.

@@ -43,6 +43,10 @@ type DeleteConferenceProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConferenceProviderInput) operationName() string {
+	return "DeleteConferenceProvider"
+}
+
 type DeleteConferenceProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

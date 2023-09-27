@@ -83,6 +83,10 @@ type CreateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResolverRuleInput) operationName() string {
+	return "CreateResolverRule"
+}
+
 type CreateResolverRuleOutput struct {
 
 	// Information about the CreateResolverRule request, including the status of the

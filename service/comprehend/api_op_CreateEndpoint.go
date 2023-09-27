@@ -75,6 +75,10 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEndpointInput) operationName() string {
+	return "CreateEndpoint"
+}
+
 type CreateEndpointOutput struct {
 
 	// The Amazon Resource Number (ARN) of the endpoint being created.

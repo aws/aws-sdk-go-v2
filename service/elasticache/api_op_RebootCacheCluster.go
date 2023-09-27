@@ -59,6 +59,10 @@ type RebootCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootCacheClusterInput) operationName() string {
+	return "RebootCacheCluster"
+}
+
 type RebootCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.

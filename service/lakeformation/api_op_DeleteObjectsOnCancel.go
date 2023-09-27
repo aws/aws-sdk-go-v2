@@ -69,6 +69,10 @@ type DeleteObjectsOnCancelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteObjectsOnCancelInput) operationName() string {
+	return "DeleteObjectsOnCancel"
+}
+
 type DeleteObjectsOnCancelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

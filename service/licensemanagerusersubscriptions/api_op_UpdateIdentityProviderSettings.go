@@ -58,6 +58,10 @@ type UpdateIdentityProviderSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIdentityProviderSettingsInput) operationName() string {
+	return "UpdateIdentityProviderSettings"
+}
+
 type UpdateIdentityProviderSettingsOutput struct {
 
 	// Describes an identity provider.

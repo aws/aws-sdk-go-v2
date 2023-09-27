@@ -98,6 +98,10 @@ type UpdateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIPSetInput) operationName() string {
+	return "UpdateIPSet"
+}
+
 type UpdateIPSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateIPSet request. You can also

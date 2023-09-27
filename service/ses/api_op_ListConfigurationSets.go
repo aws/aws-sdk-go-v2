@@ -57,6 +57,10 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationSetsInput) operationName() string {
+	return "ListConfigurationSets"
+}
+
 // A list of configuration sets associated with your Amazon Web Services account.
 // Configuration sets enable you to publish email sending events. For information
 // about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)

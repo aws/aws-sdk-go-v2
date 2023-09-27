@@ -31,6 +31,10 @@ type IgnoresWrappingXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*IgnoresWrappingXmlNameInput) operationName() string {
+	return "IgnoresWrappingXmlName"
+}
+
 type IgnoresWrappingXmlNameOutput struct {
 	Foo *string
 

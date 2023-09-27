@@ -43,6 +43,10 @@ type DescribeGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGatewayInput) operationName() string {
+	return "DescribeGateway"
+}
+
 type DescribeGatewayOutput struct {
 
 	// The date the gateway was created, in Unix epoch time.

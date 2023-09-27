@@ -48,6 +48,10 @@ type DeactivateEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeactivateEventSourceInput) operationName() string {
+	return "DeactivateEventSource"
+}
+
 type DeactivateEventSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,6 +47,10 @@ type DeleteEgressOnlyInternetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEgressOnlyInternetGatewayInput) operationName() string {
+	return "DeleteEgressOnlyInternetGateway"
+}
+
 type DeleteEgressOnlyInternetGatewayOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

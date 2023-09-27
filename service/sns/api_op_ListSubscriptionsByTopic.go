@@ -50,6 +50,10 @@ type ListSubscriptionsByTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSubscriptionsByTopicInput) operationName() string {
+	return "ListSubscriptionsByTopic"
+}
+
 // Response for ListSubscriptionsByTopic action.
 type ListSubscriptionsByTopicOutput struct {
 

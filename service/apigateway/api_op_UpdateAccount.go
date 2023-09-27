@@ -42,6 +42,10 @@ type UpdateAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountInput) operationName() string {
+	return "UpdateAccount"
+}
+
 // Represents an AWS account that is associated with API Gateway.
 type UpdateAccountOutput struct {
 

@@ -46,6 +46,10 @@ type UntagProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagProjectInput) operationName() string {
+	return "UntagProject"
+}
+
 type UntagProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

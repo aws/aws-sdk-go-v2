@@ -45,6 +45,10 @@ type ListApprovalRuleTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListApprovalRuleTemplatesInput) operationName() string {
+	return "ListApprovalRuleTemplates"
+}
+
 type ListApprovalRuleTemplatesOutput struct {
 
 	// The names of all the approval rule templates found in the Amazon Web Services

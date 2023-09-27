@@ -54,6 +54,10 @@ type ListWorkforcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkforcesInput) operationName() string {
+	return "ListWorkforces"
+}
+
 type ListWorkforcesOutput struct {
 
 	// A list containing information about your workforce.

@@ -70,6 +70,10 @@ type AssociateTrunkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTrunkInterfaceInput) operationName() string {
+	return "AssociateTrunkInterface"
+}
+
 type AssociateTrunkInterfaceOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

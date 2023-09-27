@@ -45,6 +45,10 @@ type DescribeHyperParameterTuningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHyperParameterTuningJobInput) operationName() string {
+	return "DescribeHyperParameterTuningJob"
+}
+
 type DescribeHyperParameterTuningJobOutput struct {
 
 	// The date and time that the tuning job started.

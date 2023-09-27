@@ -42,6 +42,10 @@ type GetDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDestinationInput) operationName() string {
+	return "GetDestination"
+}
+
 type GetDestinationOutput struct {
 
 	// The Amazon Resource Name of the resource.

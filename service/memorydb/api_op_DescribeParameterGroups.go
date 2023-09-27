@@ -53,6 +53,10 @@ type DescribeParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeParameterGroupsInput) operationName() string {
+	return "DescribeParameterGroups"
+}
+
 type DescribeParameterGroupsOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the

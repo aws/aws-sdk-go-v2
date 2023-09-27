@@ -83,6 +83,10 @@ type DescribePlayerSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePlayerSessionsInput) operationName() string {
+	return "DescribePlayerSessions"
+}
+
 type DescribePlayerSessionsOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to

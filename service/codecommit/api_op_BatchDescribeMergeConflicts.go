@@ -86,6 +86,10 @@ type BatchDescribeMergeConflictsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDescribeMergeConflictsInput) operationName() string {
+	return "BatchDescribeMergeConflicts"
+}
+
 type BatchDescribeMergeConflictsOutput struct {
 
 	// A list of conflicts for each file, including the conflict metadata and the

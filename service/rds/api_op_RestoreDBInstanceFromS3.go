@@ -357,6 +357,10 @@ type RestoreDBInstanceFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDBInstanceFromS3Input) operationName() string {
+	return "RestoreDBInstanceFromS3"
+}
+
 type RestoreDBInstanceFromS3Output struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

@@ -51,6 +51,10 @@ type DescribeAccountOverviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountOverviewInput) operationName() string {
+	return "DescribeAccountOverview"
+}
+
 type DescribeAccountOverviewOutput struct {
 
 	// The Mean Time to Recover (MTTR) for all closed insights that were created

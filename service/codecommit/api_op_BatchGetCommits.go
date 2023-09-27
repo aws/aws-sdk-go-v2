@@ -48,6 +48,10 @@ type BatchGetCommitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCommitsInput) operationName() string {
+	return "BatchGetCommits"
+}
+
 type BatchGetCommitsOutput struct {
 
 	// An array of commit data type objects, each of which contains information about

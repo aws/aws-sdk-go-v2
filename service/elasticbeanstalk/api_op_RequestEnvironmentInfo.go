@@ -65,6 +65,10 @@ type RequestEnvironmentInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestEnvironmentInfoInput) operationName() string {
+	return "RequestEnvironmentInfo"
+}
+
 type RequestEnvironmentInfoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

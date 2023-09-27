@@ -61,6 +61,10 @@ type UpdateVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceConnectorInput) operationName() string {
+	return "UpdateVoiceConnector"
+}
+
 type UpdateVoiceConnectorOutput struct {
 
 	// The updated Amazon Chime Voice Connector details.

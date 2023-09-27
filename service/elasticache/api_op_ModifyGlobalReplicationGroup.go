@@ -68,6 +68,10 @@ type ModifyGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyGlobalReplicationGroupInput) operationName() string {
+	return "ModifyGlobalReplicationGroup"
+}
+
 type ModifyGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary

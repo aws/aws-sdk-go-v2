@@ -96,6 +96,10 @@ type ExportJournalToS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportJournalToS3Input) operationName() string {
+	return "ExportJournalToS3"
+}
+
 type ExportJournalToS3Output struct {
 
 	// The UUID (represented in Base62-encoded text) that QLDB assigns to each journal

@@ -58,6 +58,10 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePackageInput) operationName() string {
+	return "CreatePackage"
+}
+
 // Container for the response returned by the CreatePackage operation.
 type CreatePackageOutput struct {
 

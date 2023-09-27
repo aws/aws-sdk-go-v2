@@ -98,6 +98,10 @@ type ImportComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportComponentInput) operationName() string {
+	return "ImportComponent"
+}
+
 type ImportComponentOutput struct {
 
 	// The idempotency token used to make this request idempotent.

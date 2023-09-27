@@ -51,6 +51,10 @@ type UpdateMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMulticastGroupInput) operationName() string {
+	return "UpdateMulticastGroup"
+}
+
 type UpdateMulticastGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

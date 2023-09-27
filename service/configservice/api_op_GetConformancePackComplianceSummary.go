@@ -50,6 +50,10 @@ type GetConformancePackComplianceSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConformancePackComplianceSummaryInput) operationName() string {
+	return "GetConformancePackComplianceSummary"
+}
+
 type GetConformancePackComplianceSummaryOutput struct {
 
 	// A list of ConformancePackComplianceSummary objects.

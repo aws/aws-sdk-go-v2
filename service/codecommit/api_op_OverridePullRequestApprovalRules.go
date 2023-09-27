@@ -58,6 +58,10 @@ type OverridePullRequestApprovalRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*OverridePullRequestApprovalRulesInput) operationName() string {
+	return "OverridePullRequestApprovalRules"
+}
+
 type OverridePullRequestApprovalRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

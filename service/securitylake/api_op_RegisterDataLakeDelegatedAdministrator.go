@@ -44,6 +44,10 @@ type RegisterDataLakeDelegatedAdministratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterDataLakeDelegatedAdministratorInput) operationName() string {
+	return "RegisterDataLakeDelegatedAdministrator"
+}
+
 type RegisterDataLakeDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

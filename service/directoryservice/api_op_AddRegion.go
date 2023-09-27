@@ -53,6 +53,10 @@ type AddRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddRegionInput) operationName() string {
+	return "AddRegion"
+}
+
 type AddRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

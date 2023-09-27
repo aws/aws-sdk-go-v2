@@ -49,6 +49,10 @@ type CreateCellInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCellInput) operationName() string {
+	return "CreateCell"
+}
+
 type CreateCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.

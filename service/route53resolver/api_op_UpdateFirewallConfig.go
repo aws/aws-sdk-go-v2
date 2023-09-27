@@ -57,6 +57,10 @@ type UpdateFirewallConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFirewallConfigInput) operationName() string {
+	return "UpdateFirewallConfig"
+}
+
 type UpdateFirewallConfigOutput struct {
 
 	// Configuration of the firewall behavior provided by DNS Firewall for a single

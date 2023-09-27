@@ -55,6 +55,10 @@ type DescribeGlobalReplicationGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGlobalReplicationGroupsInput) operationName() string {
+	return "DescribeGlobalReplicationGroups"
+}
+
 type DescribeGlobalReplicationGroupsOutput struct {
 
 	// Indicates the slot configuration and global identifier for each slice group.

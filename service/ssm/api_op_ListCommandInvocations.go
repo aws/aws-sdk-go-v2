@@ -64,6 +64,10 @@ type ListCommandInvocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCommandInvocationsInput) operationName() string {
+	return "ListCommandInvocations"
+}
+
 type ListCommandInvocationsOutput struct {
 
 	// (Optional) A list of all invocations.

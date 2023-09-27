@@ -62,6 +62,10 @@ type CreateNotificationSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNotificationSubscriptionInput) operationName() string {
+	return "CreateNotificationSubscription"
+}
+
 type CreateNotificationSubscriptionOutput struct {
 
 	// The subscription.

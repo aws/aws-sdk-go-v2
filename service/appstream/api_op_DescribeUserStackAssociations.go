@@ -59,6 +59,10 @@ type DescribeUserStackAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUserStackAssociationsInput) operationName() string {
+	return "DescribeUserStackAssociations"
+}
+
 type DescribeUserStackAssociationsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

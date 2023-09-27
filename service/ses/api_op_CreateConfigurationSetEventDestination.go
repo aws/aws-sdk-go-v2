@@ -63,6 +63,10 @@ type CreateConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigurationSetEventDestinationInput) operationName() string {
+	return "CreateConfigurationSetEventDestination"
+}
+
 // An empty element returned on a successful request.
 type CreateConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -59,6 +59,10 @@ type ReplaceRouteTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplaceRouteTableAssociationInput) operationName() string {
+	return "ReplaceRouteTableAssociation"
+}
+
 type ReplaceRouteTableAssociationOutput struct {
 
 	// The state of the association.

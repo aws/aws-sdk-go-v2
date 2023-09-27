@@ -45,6 +45,10 @@ type DeleteOptOutListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOptOutListInput) operationName() string {
+	return "DeleteOptOutList"
+}
+
 type DeleteOptOutListOutput struct {
 
 	// The time when the OptOutList was created, in UNIX epoch time (https://www.epochconverter.com/)

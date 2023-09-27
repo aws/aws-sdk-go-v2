@@ -90,6 +90,10 @@ type CreateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStackInput) operationName() string {
+	return "CreateStack"
+}
+
 type CreateStackOutput struct {
 
 	// Information about the stack.

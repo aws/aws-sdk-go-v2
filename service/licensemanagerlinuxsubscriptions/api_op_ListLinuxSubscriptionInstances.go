@@ -65,6 +65,10 @@ type ListLinuxSubscriptionInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLinuxSubscriptionInstancesInput) operationName() string {
+	return "ListLinuxSubscriptionInstances"
+}
+
 type ListLinuxSubscriptionInstancesOutput struct {
 
 	// An array that contains instance objects.

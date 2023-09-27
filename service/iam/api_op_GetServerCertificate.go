@@ -49,6 +49,10 @@ type GetServerCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServerCertificateInput) operationName() string {
+	return "GetServerCertificate"
+}
+
 // Contains the response to a successful GetServerCertificate request.
 type GetServerCertificateOutput struct {
 

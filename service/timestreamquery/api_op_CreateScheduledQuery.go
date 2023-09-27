@@ -108,6 +108,10 @@ type CreateScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateScheduledQueryInput) operationName() string {
+	return "CreateScheduledQuery"
+}
+
 type CreateScheduledQueryOutput struct {
 
 	// ARN for the created scheduled query.

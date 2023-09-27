@@ -61,6 +61,10 @@ type DescribeFleetPortSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetPortSettingsInput) operationName() string {
+	return "DescribeFleetPortSettings"
+}
+
 type DescribeFleetPortSettingsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

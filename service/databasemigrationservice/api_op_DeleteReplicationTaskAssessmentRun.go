@@ -45,6 +45,10 @@ type DeleteReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationTaskAssessmentRunInput) operationName() string {
+	return "DeleteReplicationTaskAssessmentRun"
+}
+
 type DeleteReplicationTaskAssessmentRunOutput struct {
 
 	// The ReplicationTaskAssessmentRun object for the deleted assessment run.

@@ -83,6 +83,10 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeApplicableIndividualAssessmentsInput) operationName() string {
+	return "DescribeApplicableIndividualAssessments"
+}
+
 type DescribeApplicableIndividualAssessmentsOutput struct {
 
 	// List of names for the individual assessments supported by the premigration

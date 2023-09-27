@@ -47,6 +47,10 @@ type GetVerifiedAccessGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVerifiedAccessGroupPolicyInput) operationName() string {
+	return "GetVerifiedAccessGroupPolicy"
+}
+
 type GetVerifiedAccessGroupPolicyOutput struct {
 
 	// The Verified Access policy document.

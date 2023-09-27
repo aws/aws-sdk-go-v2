@@ -48,6 +48,10 @@ type GetTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransactionInput) operationName() string {
+	return "GetTransaction"
+}
+
 type GetTransactionOutput struct {
 
 	// Contains the details of the transaction.

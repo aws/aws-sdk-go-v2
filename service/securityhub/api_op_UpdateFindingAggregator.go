@@ -73,6 +73,10 @@ type UpdateFindingAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFindingAggregatorInput) operationName() string {
+	return "UpdateFindingAggregator"
+}
+
 type UpdateFindingAggregatorOutput struct {
 
 	// The aggregation Region.

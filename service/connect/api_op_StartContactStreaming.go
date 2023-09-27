@@ -65,6 +65,10 @@ type StartContactStreamingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartContactStreamingInput) operationName() string {
+	return "StartContactStreaming"
+}
+
 type StartContactStreamingOutput struct {
 
 	// The identifier of the streaming configuration enabled.

@@ -42,6 +42,10 @@ type DeleteRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRetrainingSchedulerInput) operationName() string {
+	return "DeleteRetrainingScheduler"
+}
+
 type DeleteRetrainingSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

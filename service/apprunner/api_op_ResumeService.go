@@ -46,6 +46,10 @@ type ResumeServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeServiceInput) operationName() string {
+	return "ResumeService"
+}
+
 type ResumeServiceOutput struct {
 
 	// A description of the App Runner service that this request just resumed.

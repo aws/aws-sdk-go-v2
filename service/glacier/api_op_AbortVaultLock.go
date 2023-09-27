@@ -65,6 +65,10 @@ type AbortVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AbortVaultLockInput) operationName() string {
+	return "AbortVaultLock"
+}
+
 type AbortVaultLockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

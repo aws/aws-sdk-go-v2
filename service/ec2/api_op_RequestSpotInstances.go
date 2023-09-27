@@ -127,6 +127,10 @@ type RequestSpotInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestSpotInstancesInput) operationName() string {
+	return "RequestSpotInstances"
+}
+
 // Contains the output of RequestSpotInstances.
 type RequestSpotInstancesOutput struct {
 

@@ -70,6 +70,10 @@ type UpdateBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBotAliasInput) operationName() string {
+	return "UpdateBotAlias"
+}
+
 type UpdateBotAliasOutput struct {
 
 	// The identifier of the updated bot alias.

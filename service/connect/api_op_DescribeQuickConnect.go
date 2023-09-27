@@ -48,6 +48,10 @@ type DescribeQuickConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeQuickConnectInput) operationName() string {
+	return "DescribeQuickConnect"
+}
+
 type DescribeQuickConnectOutput struct {
 
 	// Information about the quick connect.

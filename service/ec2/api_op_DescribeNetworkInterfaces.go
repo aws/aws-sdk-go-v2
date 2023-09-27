@@ -138,6 +138,10 @@ type DescribeNetworkInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkInterfacesInput) operationName() string {
+	return "DescribeNetworkInterfaces"
+}
+
 type DescribeNetworkInterfacesOutput struct {
 
 	// Information about one or more network interfaces.

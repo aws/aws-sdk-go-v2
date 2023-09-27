@@ -43,6 +43,10 @@ type DeleteInterconnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInterconnectInput) operationName() string {
+	return "DeleteInterconnect"
+}
+
 type DeleteInterconnectOutput struct {
 
 	// The state of the interconnect. The following are the possible values:

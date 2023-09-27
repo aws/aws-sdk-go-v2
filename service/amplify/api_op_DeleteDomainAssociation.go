@@ -48,6 +48,10 @@ type DeleteDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainAssociationInput) operationName() string {
+	return "DeleteDomainAssociation"
+}
+
 type DeleteDomainAssociationOutput struct {
 
 	// Describes a domain association that associates a custom domain with an Amplify

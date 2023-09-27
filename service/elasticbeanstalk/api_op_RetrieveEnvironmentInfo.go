@@ -57,6 +57,10 @@ type RetrieveEnvironmentInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RetrieveEnvironmentInfoInput) operationName() string {
+	return "RetrieveEnvironmentInfo"
+}
+
 // Result message containing a description of the requested environment info.
 type RetrieveEnvironmentInfoOutput struct {
 

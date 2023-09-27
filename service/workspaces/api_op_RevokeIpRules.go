@@ -46,6 +46,10 @@ type RevokeIpRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeIpRulesInput) operationName() string {
+	return "RevokeIpRules"
+}
+
 type RevokeIpRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

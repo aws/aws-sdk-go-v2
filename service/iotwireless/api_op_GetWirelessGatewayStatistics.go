@@ -42,6 +42,10 @@ type GetWirelessGatewayStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWirelessGatewayStatisticsInput) operationName() string {
+	return "GetWirelessGatewayStatistics"
+}
+
 type GetWirelessGatewayStatisticsOutput struct {
 
 	// The connection status of the wireless gateway.

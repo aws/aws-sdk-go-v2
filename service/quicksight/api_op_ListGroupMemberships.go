@@ -60,6 +60,10 @@ type ListGroupMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroupMembershipsInput) operationName() string {
+	return "ListGroupMemberships"
+}
+
 type ListGroupMembershipsOutput struct {
 
 	// The list of the members of the group.

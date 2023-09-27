@@ -92,6 +92,10 @@ type CreateFeatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFeatureInput) operationName() string {
+	return "CreateFeature"
+}
+
 type CreateFeatureOutput struct {
 
 	// A structure that contains information about the new feature.

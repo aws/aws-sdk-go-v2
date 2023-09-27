@@ -246,6 +246,10 @@ type GetMetricDataV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricDataV2Input) operationName() string {
+	return "GetMetricDataV2"
+}
+
 type GetMetricDataV2Output struct {
 
 	// Information about the metrics requested in the API request If no grouping is

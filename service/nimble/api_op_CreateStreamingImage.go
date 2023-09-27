@@ -65,6 +65,10 @@ type CreateStreamingImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamingImageInput) operationName() string {
+	return "CreateStreamingImage"
+}
+
 type CreateStreamingImageOutput struct {
 
 	// The streaming image.

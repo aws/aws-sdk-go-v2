@@ -46,6 +46,10 @@ type DeleteThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteThreatIntelSetInput) operationName() string {
+	return "DeleteThreatIntelSet"
+}
+
 type DeleteThreatIntelSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

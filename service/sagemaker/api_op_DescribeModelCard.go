@@ -48,6 +48,10 @@ type DescribeModelCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelCardInput) operationName() string {
+	return "DescribeModelCard"
+}
+
 type DescribeModelCardOutput struct {
 
 	// The content of the model card.

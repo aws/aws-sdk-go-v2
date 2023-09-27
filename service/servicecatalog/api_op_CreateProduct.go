@@ -98,6 +98,10 @@ type CreateProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProductInput) operationName() string {
+	return "CreateProduct"
+}
+
 type CreateProductOutput struct {
 
 	// Information about the product view.

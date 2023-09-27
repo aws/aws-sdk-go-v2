@@ -56,6 +56,10 @@ type DisableSsoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableSsoInput) operationName() string {
+	return "DisableSso"
+}
+
 // Contains the results of the DisableSso operation.
 type DisableSsoOutput struct {
 	// Metadata pertaining to the operation's result.

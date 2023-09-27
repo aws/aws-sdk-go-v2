@@ -47,6 +47,10 @@ type VerifyOTPMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyOTPMessageInput) operationName() string {
+	return "VerifyOTPMessage"
+}
+
 type VerifyOTPMessageOutput struct {
 
 	// Verify OTP Message Response.

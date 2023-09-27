@@ -77,6 +77,10 @@ type EncryptDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EncryptDataInput) operationName() string {
+	return "EncryptData"
+}
+
 type EncryptDataOutput struct {
 
 	// The encrypted ciphertext.

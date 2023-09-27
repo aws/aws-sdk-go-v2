@@ -44,6 +44,10 @@ type GetTopicRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTopicRuleInput) operationName() string {
+	return "GetTopicRule"
+}
+
 // The output from the GetTopicRule operation.
 type GetTopicRuleOutput struct {
 

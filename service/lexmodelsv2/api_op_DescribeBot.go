@@ -46,6 +46,10 @@ type DescribeBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBotInput) operationName() string {
+	return "DescribeBot"
+}
+
 type DescribeBotOutput struct {
 
 	// The unique identifier of the bot.

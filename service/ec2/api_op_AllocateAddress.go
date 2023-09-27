@@ -86,6 +86,10 @@ type AllocateAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateAddressInput) operationName() string {
+	return "AllocateAddress"
+}
+
 type AllocateAddressOutput struct {
 
 	// The ID that represents the allocation of the Elastic IP address.

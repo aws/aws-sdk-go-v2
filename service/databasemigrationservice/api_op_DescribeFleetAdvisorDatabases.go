@@ -58,6 +58,10 @@ type DescribeFleetAdvisorDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFleetAdvisorDatabasesInput) operationName() string {
+	return "DescribeFleetAdvisorDatabases"
+}
+
 type DescribeFleetAdvisorDatabasesOutput struct {
 
 	// Provides descriptions of the Fleet Advisor collector databases, including the

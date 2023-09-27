@@ -67,6 +67,10 @@ type CheckoutBorrowLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckoutBorrowLicenseInput) operationName() string {
+	return "CheckoutBorrowLicense"
+}
+
 type CheckoutBorrowLicenseOutput struct {
 
 	// Information about constraints.

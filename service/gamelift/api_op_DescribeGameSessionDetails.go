@@ -86,6 +86,10 @@ type DescribeGameSessionDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGameSessionDetailsInput) operationName() string {
+	return "DescribeGameSessionDetails"
+}
+
 type DescribeGameSessionDetailsOutput struct {
 
 	// A collection of properties for each game session that matches the request.

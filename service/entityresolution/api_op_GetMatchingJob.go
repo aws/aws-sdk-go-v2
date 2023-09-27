@@ -49,6 +49,10 @@ type GetMatchingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMatchingJobInput) operationName() string {
+	return "GetMatchingJob"
+}
+
 type GetMatchingJobOutput struct {
 
 	// The ID of the job.

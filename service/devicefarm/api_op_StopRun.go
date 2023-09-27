@@ -47,6 +47,10 @@ type StopRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopRunInput) operationName() string {
+	return "StopRun"
+}
+
 // Represents the results of your stop run attempt.
 type StopRunOutput struct {
 

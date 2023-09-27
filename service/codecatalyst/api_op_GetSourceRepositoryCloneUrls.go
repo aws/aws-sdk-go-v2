@@ -51,6 +51,10 @@ type GetSourceRepositoryCloneUrlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSourceRepositoryCloneUrlsInput) operationName() string {
+	return "GetSourceRepositoryCloneUrls"
+}
+
 type GetSourceRepositoryCloneUrlsOutput struct {
 
 	// The HTTPS URL to use when cloning the source repository.

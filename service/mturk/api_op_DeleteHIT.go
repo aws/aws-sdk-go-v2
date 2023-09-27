@@ -54,6 +54,10 @@ type DeleteHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHITInput) operationName() string {
+	return "DeleteHIT"
+}
+
 type DeleteHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type DescribeLayersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLayersInput) operationName() string {
+	return "DescribeLayers"
+}
+
 // Contains the response to a DescribeLayers request.
 type DescribeLayersOutput struct {
 

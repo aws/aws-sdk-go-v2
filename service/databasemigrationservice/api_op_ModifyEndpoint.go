@@ -226,6 +226,10 @@ type ModifyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyEndpointInput) operationName() string {
+	return "ModifyEndpoint"
+}
+
 type ModifyEndpointOutput struct {
 
 	// The modified endpoint.

@@ -69,6 +69,10 @@ type CreateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInstanceInput) operationName() string {
+	return "CreateInstance"
+}
+
 type CreateInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the instance.

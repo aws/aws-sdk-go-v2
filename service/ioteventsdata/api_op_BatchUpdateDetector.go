@@ -43,6 +43,10 @@ type BatchUpdateDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateDetectorInput) operationName() string {
+	return "BatchUpdateDetector"
+}
+
 type BatchUpdateDetectorOutput struct {
 
 	// A list of those detector updates that resulted in errors. (If an error is

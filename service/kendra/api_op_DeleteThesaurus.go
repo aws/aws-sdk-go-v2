@@ -46,6 +46,10 @@ type DeleteThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteThesaurusInput) operationName() string {
+	return "DeleteThesaurus"
+}
+
 type DeleteThesaurusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

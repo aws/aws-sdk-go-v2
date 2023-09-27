@@ -56,6 +56,10 @@ type StartMetadataModelExportAsScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMetadataModelExportAsScriptInput) operationName() string {
+	return "StartMetadataModelExportAsScript"
+}
+
 type StartMetadataModelExportAsScriptOutput struct {
 
 	// The identifier for the export operation.

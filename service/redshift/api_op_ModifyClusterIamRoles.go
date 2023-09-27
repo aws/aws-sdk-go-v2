@@ -58,6 +58,10 @@ type ModifyClusterIamRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterIamRolesInput) operationName() string {
+	return "ModifyClusterIamRoles"
+}
+
 type ModifyClusterIamRolesOutput struct {
 
 	// Describes a cluster.

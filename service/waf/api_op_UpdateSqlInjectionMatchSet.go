@@ -91,6 +91,10 @@ type UpdateSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSqlInjectionMatchSetInput) operationName() string {
+	return "UpdateSqlInjectionMatchSet"
+}
+
 // The response to an UpdateSqlInjectionMatchSets request.
 type UpdateSqlInjectionMatchSetOutput struct {
 

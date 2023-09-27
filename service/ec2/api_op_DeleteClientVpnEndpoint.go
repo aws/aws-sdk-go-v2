@@ -49,6 +49,10 @@ type DeleteClientVpnEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClientVpnEndpointInput) operationName() string {
+	return "DeleteClientVpnEndpoint"
+}
+
 type DeleteClientVpnEndpointOutput struct {
 
 	// The current state of the Client VPN endpoint.

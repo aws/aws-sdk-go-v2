@@ -57,6 +57,10 @@ type ResumeGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResumeGameServerGroupInput) operationName() string {
+	return "ResumeGameServerGroup"
+}
+
 type ResumeGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource, with the

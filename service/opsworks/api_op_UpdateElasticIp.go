@@ -50,6 +50,10 @@ type UpdateElasticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateElasticIpInput) operationName() string {
+	return "UpdateElasticIp"
+}
+
 type UpdateElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

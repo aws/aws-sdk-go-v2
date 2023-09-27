@@ -164,6 +164,10 @@ type ImportKeyMaterialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportKeyMaterialInput) operationName() string {
+	return "ImportKeyMaterial"
+}
+
 type ImportKeyMaterialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

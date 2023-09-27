@@ -47,6 +47,10 @@ type DescribePlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePlacementInput) operationName() string {
+	return "DescribePlacement"
+}
+
 type DescribePlacementOutput struct {
 
 	// An object describing the placement.

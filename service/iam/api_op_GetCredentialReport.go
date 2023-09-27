@@ -39,6 +39,10 @@ type GetCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCredentialReportInput) operationName() string {
+	return "GetCredentialReport"
+}
+
 // Contains the response to a successful GetCredentialReport request.
 type GetCredentialReportOutput struct {
 

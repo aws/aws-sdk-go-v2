@@ -50,6 +50,10 @@ type DescribeProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProgramInput) operationName() string {
+	return "DescribeProgram"
+}
+
 type DescribeProgramOutput struct {
 
 	// The ad break configuration settings.

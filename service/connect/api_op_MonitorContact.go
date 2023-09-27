@@ -66,6 +66,10 @@ type MonitorContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MonitorContactInput) operationName() string {
+	return "MonitorContact"
+}
+
 type MonitorContactOutput struct {
 
 	// The ARN of the contact.

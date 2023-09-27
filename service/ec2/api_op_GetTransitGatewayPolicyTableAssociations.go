@@ -58,6 +58,10 @@ type GetTransitGatewayPolicyTableAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransitGatewayPolicyTableAssociationsInput) operationName() string {
+	return "GetTransitGatewayPolicyTableAssociations"
+}
+
 type GetTransitGatewayPolicyTableAssociationsOutput struct {
 
 	// Returns details about the transit gateway policy table association.

@@ -100,6 +100,10 @@ type UpdatePatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePatchBaselineInput) operationName() string {
+	return "UpdatePatchBaseline"
+}
+
 type UpdatePatchBaselineOutput struct {
 
 	// A set of rules used to include patches in the baseline.

@@ -99,6 +99,10 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePolicyInput) operationName() string {
+	return "CreatePolicy"
+}
+
 // Contains the response to a successful CreatePolicy request.
 type CreatePolicyOutput struct {
 

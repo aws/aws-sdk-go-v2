@@ -54,6 +54,10 @@ type ListCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCoverageInput) operationName() string {
+	return "ListCoverage"
+}
+
 type ListCoverageOutput struct {
 
 	// An object that contains details on the covered resources in your environment.

@@ -56,6 +56,10 @@ type StartBgpFailoverTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBgpFailoverTestInput) operationName() string {
+	return "StartBgpFailoverTest"
+}
+
 type StartBgpFailoverTestOutput struct {
 
 	// Information about the virtual interface failover test.

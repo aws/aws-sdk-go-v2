@@ -88,6 +88,10 @@ type StartAssetBundleExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAssetBundleExportJobInput) operationName() string {
+	return "StartAssetBundleExportJob"
+}
+
 type StartAssetBundleExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the export job.

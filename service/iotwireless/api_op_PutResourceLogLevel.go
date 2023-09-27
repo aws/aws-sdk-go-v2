@@ -57,6 +57,10 @@ type PutResourceLogLevelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutResourceLogLevelInput) operationName() string {
+	return "PutResourceLogLevel"
+}
+
 type PutResourceLogLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

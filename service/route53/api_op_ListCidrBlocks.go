@@ -52,6 +52,10 @@ type ListCidrBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCidrBlocksInput) operationName() string {
+	return "ListCidrBlocks"
+}
+
 type ListCidrBlocksOutput struct {
 
 	// A complex type that contains information about the CIDR blocks.

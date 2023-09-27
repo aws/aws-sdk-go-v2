@@ -47,6 +47,10 @@ type GetBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBlobInput) operationName() string {
+	return "GetBlob"
+}
+
 // Represents the output of a get blob operation.
 type GetBlobOutput struct {
 

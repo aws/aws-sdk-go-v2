@@ -62,6 +62,10 @@ type CreatePlayerSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePlayerSessionInput) operationName() string {
+	return "CreatePlayerSession"
+}
+
 type CreatePlayerSessionOutput struct {
 
 	// Object that describes the newly created player session record.

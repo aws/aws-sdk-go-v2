@@ -45,6 +45,10 @@ type DeleteACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteACLInput) operationName() string {
+	return "DeleteACL"
+}
+
 type DeleteACLOutput struct {
 
 	// The Access Control List object that has been deleted.

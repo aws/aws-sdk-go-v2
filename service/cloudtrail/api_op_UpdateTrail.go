@@ -130,6 +130,10 @@ type UpdateTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrailInput) operationName() string {
+	return "UpdateTrail"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type UpdateTrailOutput struct {

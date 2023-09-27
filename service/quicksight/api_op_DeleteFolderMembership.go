@@ -57,6 +57,10 @@ type DeleteFolderMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFolderMembershipInput) operationName() string {
+	return "DeleteFolderMembership"
+}
+
 type DeleteFolderMembershipOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

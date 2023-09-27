@@ -64,6 +64,10 @@ type ListEphemeridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEphemeridesInput) operationName() string {
+	return "ListEphemerides"
+}
+
 type ListEphemeridesOutput struct {
 
 	// List of ephemerides.

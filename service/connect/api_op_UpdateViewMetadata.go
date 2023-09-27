@@ -54,6 +54,10 @@ type UpdateViewMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateViewMetadataInput) operationName() string {
+	return "UpdateViewMetadata"
+}
+
 type UpdateViewMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

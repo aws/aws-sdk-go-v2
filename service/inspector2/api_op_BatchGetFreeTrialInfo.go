@@ -42,6 +42,10 @@ type BatchGetFreeTrialInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetFreeTrialInfoInput) operationName() string {
+	return "BatchGetFreeTrialInfo"
+}
+
 type BatchGetFreeTrialInfoOutput struct {
 
 	// An array of objects that provide Amazon Inspector free trial details for each

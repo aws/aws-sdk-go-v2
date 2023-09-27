@@ -56,6 +56,10 @@ type DescribeLoaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoaInput) operationName() string {
+	return "DescribeLoa"
+}
+
 // Information about a Letter of Authorization - Connecting Facility Assignment
 // (LOA-CFA) for a connection.
 type DescribeLoaOutput struct {

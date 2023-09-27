@@ -48,6 +48,10 @@ type DescribeInventoryDeletionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInventoryDeletionsInput) operationName() string {
+	return "DescribeInventoryDeletions"
+}
+
 type DescribeInventoryDeletionsOutput struct {
 
 	// A list of status items for deleted inventory.

@@ -42,6 +42,10 @@ type GetRelationalDatabaseSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseSnapshotInput) operationName() string {
+	return "GetRelationalDatabaseSnapshot"
+}
+
 type GetRelationalDatabaseSnapshotOutput struct {
 
 	// An object describing the specified database snapshot.

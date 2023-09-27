@@ -42,6 +42,10 @@ type GetWorkerFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkerFleetInput) operationName() string {
+	return "GetWorkerFleet"
+}
+
 type GetWorkerFleetOutput struct {
 
 	// Full ARN of the worker fleet.

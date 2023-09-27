@@ -52,6 +52,10 @@ type GetRouteResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRouteResponseInput) operationName() string {
+	return "GetRouteResponse"
+}
+
 type GetRouteResponseOutput struct {
 
 	// Represents the model selection expression of a route response. Supported only

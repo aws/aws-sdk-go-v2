@@ -47,6 +47,10 @@ type ListGroundStationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGroundStationsInput) operationName() string {
+	return "ListGroundStations"
+}
+
 type ListGroundStationsOutput struct {
 
 	// List of ground stations.

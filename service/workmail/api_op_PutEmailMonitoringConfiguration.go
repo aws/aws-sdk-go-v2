@@ -54,6 +54,10 @@ type PutEmailMonitoringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEmailMonitoringConfigurationInput) operationName() string {
+	return "PutEmailMonitoringConfiguration"
+}
+
 type PutEmailMonitoringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

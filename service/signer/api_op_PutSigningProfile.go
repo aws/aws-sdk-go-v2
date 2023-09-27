@@ -68,6 +68,10 @@ type PutSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSigningProfileInput) operationName() string {
+	return "PutSigningProfile"
+}
+
 type PutSigningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the signing profile created.

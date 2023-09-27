@@ -52,6 +52,10 @@ type GetMaintenanceWindowTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMaintenanceWindowTaskInput) operationName() string {
+	return "GetMaintenanceWindowTask"
+}
+
 type GetMaintenanceWindowTaskOutput struct {
 
 	// The details for the CloudWatch alarm you applied to your maintenance window

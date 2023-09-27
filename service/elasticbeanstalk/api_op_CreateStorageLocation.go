@@ -39,6 +39,10 @@ type CreateStorageLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStorageLocationInput) operationName() string {
+	return "CreateStorageLocation"
+}
+
 // Results of a CreateStorageLocationResult call.
 type CreateStorageLocationOutput struct {
 

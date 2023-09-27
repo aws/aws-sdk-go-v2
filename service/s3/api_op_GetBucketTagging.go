@@ -58,6 +58,10 @@ type GetBucketTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketTaggingInput) operationName() string {
+	return "GetBucketTagging"
+}
+
 type GetBucketTaggingOutput struct {
 
 	// Contains the tag set.

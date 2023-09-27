@@ -62,6 +62,10 @@ type CopyOptionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyOptionGroupInput) operationName() string {
+	return "CopyOptionGroup"
+}
+
 type CopyOptionGroupOutput struct {
 
 	//

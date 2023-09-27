@@ -39,6 +39,10 @@ type DescribeServiceIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceIntegrationInput) operationName() string {
+	return "DescribeServiceIntegration"
+}
+
 type DescribeServiceIntegrationOutput struct {
 
 	// Information about the integration of DevOps Guru with another Amazon Web

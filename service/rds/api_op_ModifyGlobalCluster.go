@@ -79,6 +79,10 @@ type ModifyGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyGlobalClusterInput) operationName() string {
+	return "ModifyGlobalCluster"
+}
+
 type ModifyGlobalClusterOutput struct {
 
 	// A data type representing an Aurora global database.

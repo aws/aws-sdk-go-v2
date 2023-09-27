@@ -50,6 +50,10 @@ type ListSchemaExtensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchemaExtensionsInput) operationName() string {
+	return "ListSchemaExtensions"
+}
+
 type ListSchemaExtensionsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken

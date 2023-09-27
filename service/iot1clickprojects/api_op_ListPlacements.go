@@ -49,6 +49,10 @@ type ListPlacementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPlacementsInput) operationName() string {
+	return "ListPlacements"
+}
+
 type ListPlacementsOutput struct {
 
 	// An object listing the requested placements.

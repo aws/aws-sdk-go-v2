@@ -63,6 +63,10 @@ type GetAccountLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountLimitInput) operationName() string {
+	return "GetAccountLimit"
+}
+
 // A complex type that contains the requested limit.
 type GetAccountLimitOutput struct {
 

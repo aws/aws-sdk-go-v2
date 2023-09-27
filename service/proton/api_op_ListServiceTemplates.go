@@ -44,6 +44,10 @@ type ListServiceTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceTemplatesInput) operationName() string {
+	return "ListServiceTemplates"
+}
+
 type ListServiceTemplatesOutput struct {
 
 	// An array of service templates with detail data.

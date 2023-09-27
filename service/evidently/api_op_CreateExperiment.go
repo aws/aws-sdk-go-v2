@@ -107,6 +107,10 @@ type CreateExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExperimentInput) operationName() string {
+	return "CreateExperiment"
+}
+
 type CreateExperimentOutput struct {
 
 	// A structure containing the configuration details of the experiment that you

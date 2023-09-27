@@ -59,6 +59,10 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClustersInput) operationName() string {
+	return "ListClusters"
+}
+
 // This contains a ClusterSummaryList with the cluster details; for example, the
 // cluster IDs, names, and status.
 type ListClustersOutput struct {

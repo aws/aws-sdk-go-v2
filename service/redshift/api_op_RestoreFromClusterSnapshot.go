@@ -240,6 +240,10 @@ type RestoreFromClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreFromClusterSnapshotInput) operationName() string {
+	return "RestoreFromClusterSnapshot"
+}
+
 type RestoreFromClusterSnapshotOutput struct {
 
 	// Describes a cluster.

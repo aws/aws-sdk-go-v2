@@ -46,6 +46,10 @@ type DescribeConnectionsOnInterconnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConnectionsOnInterconnectInput) operationName() string {
+	return "DescribeConnectionsOnInterconnect"
+}
+
 type DescribeConnectionsOnInterconnectOutput struct {
 
 	// The connections.

@@ -100,6 +100,10 @@ type DescribeDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSourcesInput) operationName() string {
+	return "DescribeDataSources"
+}
+
 // Represents the query results from a DescribeDataSources operation. The content
 // is essentially a list of DataSource .
 type DescribeDataSourcesOutput struct {

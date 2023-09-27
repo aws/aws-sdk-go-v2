@@ -48,6 +48,10 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetComponentInput) operationName() string {
+	return "GetComponent"
+}
+
 type GetComponentOutput struct {
 
 	// The component of an application registered with AWS Systems Manager for SAP.

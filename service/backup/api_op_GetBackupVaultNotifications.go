@@ -45,6 +45,10 @@ type GetBackupVaultNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBackupVaultNotificationsInput) operationName() string {
+	return "GetBackupVaultNotifications"
+}
+
 type GetBackupVaultNotificationsOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for

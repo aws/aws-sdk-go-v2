@@ -46,6 +46,10 @@ type DeregisterOrganizationDelegatedAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterOrganizationDelegatedAdminInput) operationName() string {
+	return "DeregisterOrganizationDelegatedAdmin"
+}
+
 // Returns the following response if successful. Otherwise, returns an error.
 type DeregisterOrganizationDelegatedAdminOutput struct {
 	// Metadata pertaining to the operation's result.

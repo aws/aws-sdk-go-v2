@@ -60,6 +60,10 @@ type ListRotationOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRotationOverridesInput) operationName() string {
+	return "ListRotationOverrides"
+}
+
 type ListRotationOverridesOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

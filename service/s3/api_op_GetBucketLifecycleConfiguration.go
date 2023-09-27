@@ -73,6 +73,10 @@ type GetBucketLifecycleConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketLifecycleConfigurationInput) operationName() string {
+	return "GetBucketLifecycleConfiguration"
+}
+
 type GetBucketLifecycleConfigurationOutput struct {
 
 	// Container for a lifecycle rule.

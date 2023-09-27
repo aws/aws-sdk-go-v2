@@ -66,6 +66,10 @@ type StopFleetActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopFleetActionsInput) operationName() string {
+	return "StopFleetActions"
+}
+
 type StopFleetActionsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

@@ -42,6 +42,10 @@ type GetStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStaticIpInput) operationName() string {
+	return "GetStaticIp"
+}
+
 type GetStaticIpOutput struct {
 
 	// An array of key-value pairs containing information about the requested static

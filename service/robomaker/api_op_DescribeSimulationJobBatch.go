@@ -43,6 +43,10 @@ type DescribeSimulationJobBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSimulationJobBatchInput) operationName() string {
+	return "DescribeSimulationJobBatch"
+}
+
 type DescribeSimulationJobBatchOutput struct {
 
 	// The Amazon Resource Name (ARN) of the batch.

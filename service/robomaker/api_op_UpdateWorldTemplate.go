@@ -52,6 +52,10 @@ type UpdateWorldTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorldTemplateInput) operationName() string {
+	return "UpdateWorldTemplate"
+}
+
 type UpdateWorldTemplateOutput struct {
 
 	// The Amazon Resource Name (arn) of the world template.

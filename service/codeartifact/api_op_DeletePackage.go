@@ -74,6 +74,10 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackageInput) operationName() string {
+	return "DeletePackage"
+}
+
 type DeletePackageOutput struct {
 
 	// Details about a package, including its format, namespace, and name.

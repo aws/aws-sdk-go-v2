@@ -45,6 +45,10 @@ type GetMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMasterAccountInput) operationName() string {
+	return "GetMasterAccount"
+}
+
 type GetMasterAccountOutput struct {
 
 	// The administrator account details.

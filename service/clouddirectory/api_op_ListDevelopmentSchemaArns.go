@@ -42,6 +42,10 @@ type ListDevelopmentSchemaArnsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevelopmentSchemaArnsInput) operationName() string {
+	return "ListDevelopmentSchemaArns"
+}
+
 type ListDevelopmentSchemaArnsOutput struct {
 
 	// The pagination token.

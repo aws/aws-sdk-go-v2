@@ -40,6 +40,10 @@ type ConfirmCustomerAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmCustomerAgreementInput) operationName() string {
+	return "ConfirmCustomerAgreement"
+}
+
 type ConfirmCustomerAgreementOutput struct {
 
 	// The status of the customer agreement when the connection was created. This will

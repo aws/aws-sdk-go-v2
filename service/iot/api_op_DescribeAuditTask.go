@@ -45,6 +45,10 @@ type DescribeAuditTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAuditTaskInput) operationName() string {
+	return "DescribeAuditTask"
+}
+
 type DescribeAuditTaskOutput struct {
 
 	// Detailed information about each check performed during this audit.

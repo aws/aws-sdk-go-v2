@@ -44,6 +44,10 @@ type DeleteJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteJobTemplateInput) operationName() string {
+	return "DeleteJobTemplate"
+}
+
 type DeleteJobTemplateOutput struct {
 
 	// This output contains the ID of the job template that was deleted.

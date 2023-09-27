@@ -56,6 +56,10 @@ type DescribeStackResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStackResourceInput) operationName() string {
+	return "DescribeStackResource"
+}
+
 // The output for a DescribeStackResource action.
 type DescribeStackResourceOutput struct {
 

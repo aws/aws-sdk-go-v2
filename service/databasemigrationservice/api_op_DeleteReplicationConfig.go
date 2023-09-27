@@ -46,6 +46,10 @@ type DeleteReplicationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationConfigInput) operationName() string {
+	return "DeleteReplicationConfig"
+}
+
 type DeleteReplicationConfigOutput struct {
 
 	// Configuration parameters returned for the DMS Serverless replication after it

@@ -51,6 +51,10 @@ type ListDelegatedAdminAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDelegatedAdminAccountsInput) operationName() string {
+	return "ListDelegatedAdminAccounts"
+}
+
 type ListDelegatedAdminAccountsOutput struct {
 
 	// Details of the Amazon Inspector delegated administrator of your organization.

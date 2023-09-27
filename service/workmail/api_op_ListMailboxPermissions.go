@@ -62,6 +62,10 @@ type ListMailboxPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMailboxPermissionsInput) operationName() string {
+	return "ListMailboxPermissions"
+}
+
 type ListMailboxPermissionsOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is "null" when

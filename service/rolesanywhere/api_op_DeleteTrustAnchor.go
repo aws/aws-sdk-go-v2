@@ -42,6 +42,10 @@ type DeleteTrustAnchorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrustAnchorInput) operationName() string {
+	return "DeleteTrustAnchor"
+}
+
 type DeleteTrustAnchorOutput struct {
 
 	// The state of the trust anchor after a read or write operation.

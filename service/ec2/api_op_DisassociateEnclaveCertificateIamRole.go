@@ -57,6 +57,10 @@ type DisassociateEnclaveCertificateIamRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateEnclaveCertificateIamRoleInput) operationName() string {
+	return "DisassociateEnclaveCertificateIamRole"
+}
+
 type DisassociateEnclaveCertificateIamRoleOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

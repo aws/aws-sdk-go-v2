@@ -78,6 +78,10 @@ type CreateBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBotAliasInput) operationName() string {
+	return "CreateBotAlias"
+}
+
 type CreateBotAliasOutput struct {
 
 	// The unique identifier of the bot alias.

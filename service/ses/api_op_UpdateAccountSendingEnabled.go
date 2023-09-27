@@ -47,6 +47,10 @@ type UpdateAccountSendingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccountSendingEnabledInput) operationName() string {
+	return "UpdateAccountSendingEnabled"
+}
+
 type UpdateAccountSendingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

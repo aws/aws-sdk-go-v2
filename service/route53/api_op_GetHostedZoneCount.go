@@ -38,6 +38,10 @@ type GetHostedZoneCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostedZoneCountInput) operationName() string {
+	return "GetHostedZoneCount"
+}
+
 // A complex type that contains the response to a GetHostedZoneCount request.
 type GetHostedZoneCountOutput struct {
 

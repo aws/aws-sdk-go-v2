@@ -56,6 +56,10 @@ type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOutboundCrossClusterSearchConnectionsInput) operationName() string {
+	return "DescribeOutboundCrossClusterSearchConnections"
+}
+
 // The result of a DescribeOutboundCrossClusterSearchConnections request. Contains
 // the list of connections matching the filter criteria.
 type DescribeOutboundCrossClusterSearchConnectionsOutput struct {

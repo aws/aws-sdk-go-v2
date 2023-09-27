@@ -58,6 +58,10 @@ type ListFirewallsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFirewallsInput) operationName() string {
+	return "ListFirewalls"
+}
+
 type ListFirewallsOutput struct {
 
 	// The firewall metadata objects for the VPCs that you specified. Depending on

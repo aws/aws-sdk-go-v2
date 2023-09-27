@@ -58,6 +58,10 @@ type QuerySchemaVersionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QuerySchemaVersionMetadataInput) operationName() string {
+	return "QuerySchemaVersionMetadata"
+}
+
 type QuerySchemaVersionMetadataOutput struct {
 
 	// A map of a metadata key and associated values.

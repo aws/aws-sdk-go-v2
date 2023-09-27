@@ -46,6 +46,10 @@ type GetStagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStagesInput) operationName() string {
+	return "GetStages"
+}
+
 // A list of Stage resources that are associated with the ApiKey resource.
 type GetStagesOutput struct {
 

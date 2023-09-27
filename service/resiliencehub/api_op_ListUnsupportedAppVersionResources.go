@@ -63,6 +63,10 @@ type ListUnsupportedAppVersionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUnsupportedAppVersionResourcesInput) operationName() string {
+	return "ListUnsupportedAppVersionResources"
+}
+
 type ListUnsupportedAppVersionResourcesOutput struct {
 
 	// The identifier for a specific resolution.

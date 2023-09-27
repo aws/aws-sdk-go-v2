@@ -43,6 +43,10 @@ type GetOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOutpostResolverInput) operationName() string {
+	return "GetOutpostResolver"
+}
+
 type GetOutpostResolverOutput struct {
 
 	// Information about the GetOutpostResolver request, including the status of the

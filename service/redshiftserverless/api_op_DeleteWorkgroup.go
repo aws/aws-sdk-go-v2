@@ -42,6 +42,10 @@ type DeleteWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkgroupInput) operationName() string {
+	return "DeleteWorkgroup"
+}
+
 type DeleteWorkgroupOutput struct {
 
 	// The deleted workgroup object.

@@ -103,6 +103,10 @@ type PutEventSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEventSelectorsInput) operationName() string {
+	return "PutEventSelectors"
+}
+
 type PutEventSelectorsOutput struct {
 
 	// Specifies the advanced event selectors configured for your trail.

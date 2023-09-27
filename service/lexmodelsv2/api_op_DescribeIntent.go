@@ -60,6 +60,10 @@ type DescribeIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIntentInput) operationName() string {
+	return "DescribeIntent"
+}
+
 type DescribeIntentOutput struct {
 
 	// The identifier of the bot associated with the intent.

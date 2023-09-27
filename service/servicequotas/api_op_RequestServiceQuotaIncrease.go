@@ -60,6 +60,10 @@ type RequestServiceQuotaIncreaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RequestServiceQuotaIncreaseInput) operationName() string {
+	return "RequestServiceQuotaIncrease"
+}
+
 type RequestServiceQuotaIncreaseOutput struct {
 
 	// Information about the quota increase request.

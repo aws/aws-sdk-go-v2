@@ -42,6 +42,10 @@ type GetTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableRestoreStatusInput) operationName() string {
+	return "GetTableRestoreStatus"
+}
+
 type GetTableRestoreStatusOutput struct {
 
 	// The returned TableRestoreStatus object that contains information about the

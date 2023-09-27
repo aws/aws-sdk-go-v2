@@ -88,6 +88,10 @@ type GetResourceSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceSharesInput) operationName() string {
+	return "GetResourceShares"
+}
+
 type GetResourceSharesOutput struct {
 
 	// If present, this value indicates that more output is available than is included

@@ -45,6 +45,10 @@ type GetImageBlockPublicAccessStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImageBlockPublicAccessStateInput) operationName() string {
+	return "GetImageBlockPublicAccessState"
+}
+
 type GetImageBlockPublicAccessStateOutput struct {
 
 	// The current state of block public access for AMIs at the account level in the

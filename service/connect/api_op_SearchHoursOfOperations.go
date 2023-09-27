@@ -57,6 +57,10 @@ type SearchHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchHoursOfOperationsInput) operationName() string {
+	return "SearchHoursOfOperations"
+}
+
 type SearchHoursOfOperationsOutput struct {
 
 	// The total number of hours of operations which matched your search query.

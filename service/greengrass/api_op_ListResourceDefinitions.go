@@ -44,6 +44,10 @@ type ListResourceDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceDefinitionsInput) operationName() string {
+	return "ListResourceDefinitions"
+}
+
 type ListResourceDefinitionsOutput struct {
 
 	// Information about a definition.

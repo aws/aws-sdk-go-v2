@@ -47,6 +47,10 @@ type AssociatePricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociatePricingRulesInput) operationName() string {
+	return "AssociatePricingRules"
+}
+
 type AssociatePricingRulesOutput struct {
 
 	// The PricingPlanArn that the PricingRuleArns are associated with.

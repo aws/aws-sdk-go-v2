@@ -116,6 +116,10 @@ type GetDashboardEmbedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDashboardEmbedUrlInput) operationName() string {
+	return "GetDashboardEmbedUrl"
+}
+
 // Output returned from the GetDashboardEmbedUrl operation.
 type GetDashboardEmbedUrlOutput struct {
 

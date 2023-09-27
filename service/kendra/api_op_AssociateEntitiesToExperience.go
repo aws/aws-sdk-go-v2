@@ -56,6 +56,10 @@ type AssociateEntitiesToExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateEntitiesToExperienceInput) operationName() string {
+	return "AssociateEntitiesToExperience"
+}
+
 type AssociateEntitiesToExperienceOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that

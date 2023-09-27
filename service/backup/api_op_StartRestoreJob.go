@@ -104,6 +104,10 @@ type StartRestoreJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartRestoreJobInput) operationName() string {
+	return "StartRestoreJob"
+}
+
 type StartRestoreJobOutput struct {
 
 	// Uniquely identifies the job that restores a recovery point.

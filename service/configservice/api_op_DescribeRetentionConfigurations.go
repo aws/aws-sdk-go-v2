@@ -50,6 +50,10 @@ type DescribeRetentionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRetentionConfigurationsInput) operationName() string {
+	return "DescribeRetentionConfigurations"
+}
+
 type DescribeRetentionConfigurationsOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next

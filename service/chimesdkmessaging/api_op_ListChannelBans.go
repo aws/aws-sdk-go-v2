@@ -56,6 +56,10 @@ type ListChannelBansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelBansInput) operationName() string {
+	return "ListChannelBans"
+}
+
 type ListChannelBansOutput struct {
 
 	// The ARN of the channel.

@@ -50,6 +50,10 @@ type StartUserAccessTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartUserAccessTasksInput) operationName() string {
+	return "StartUserAccessTasks"
+}
+
 type StartUserAccessTasksOutput struct {
 
 	// Contains a list of user access task information.

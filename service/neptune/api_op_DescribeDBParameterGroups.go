@@ -57,6 +57,10 @@ type DescribeDBParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDBParameterGroupsInput) operationName() string {
+	return "DescribeDBParameterGroups"
+}
+
 type DescribeDBParameterGroupsOutput struct {
 
 	// A list of DBParameterGroup instances.

@@ -61,6 +61,10 @@ type AttachObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachObjectInput) operationName() string {
+	return "AttachObject"
+}
+
 type AttachObjectOutput struct {
 
 	// The attached ObjectIdentifier , which is the child ObjectIdentifier .

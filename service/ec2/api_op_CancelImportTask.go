@@ -48,6 +48,10 @@ type CancelImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelImportTaskInput) operationName() string {
+	return "CancelImportTask"
+}
+
 type CancelImportTaskOutput struct {
 
 	// The ID of the task being canceled.

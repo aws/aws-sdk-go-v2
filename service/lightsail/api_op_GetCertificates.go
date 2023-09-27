@@ -62,6 +62,10 @@ type GetCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCertificatesInput) operationName() string {
+	return "GetCertificates"
+}
+
 type GetCertificatesOutput struct {
 
 	// An object that describes certificates.

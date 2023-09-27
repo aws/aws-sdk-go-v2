@@ -49,6 +49,10 @@ type RestoreDomainAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreDomainAccessInput) operationName() string {
+	return "RestoreDomainAccess"
+}
+
 type RestoreDomainAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

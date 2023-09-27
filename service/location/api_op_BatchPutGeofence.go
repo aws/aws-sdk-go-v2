@@ -49,6 +49,10 @@ type BatchPutGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchPutGeofenceInput) operationName() string {
+	return "BatchPutGeofence"
+}
+
 type BatchPutGeofenceOutput struct {
 
 	// Contains additional error details for each geofence that failed to be stored in

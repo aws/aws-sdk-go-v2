@@ -54,6 +54,10 @@ type DescribeConversionTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConversionTasksInput) operationName() string {
+	return "DescribeConversionTasks"
+}
+
 type DescribeConversionTasksOutput struct {
 
 	// Information about the conversion tasks.

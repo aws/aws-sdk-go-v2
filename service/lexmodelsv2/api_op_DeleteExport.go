@@ -42,6 +42,10 @@ type DeleteExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExportInput) operationName() string {
+	return "DeleteExport"
+}
+
 type DeleteExportOutput struct {
 
 	// The unique identifier of the deleted export.

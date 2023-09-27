@@ -62,6 +62,10 @@ type StartSingleWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSingleWirelessDeviceImportTaskInput) operationName() string {
+	return "StartSingleWirelessDeviceImportTask"
+}
+
 type StartSingleWirelessDeviceImportTaskOutput struct {
 
 	// The ARN (Amazon Resource Name) of the import task.

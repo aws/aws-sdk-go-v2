@@ -65,6 +65,10 @@ type ListKxClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKxClustersInput) operationName() string {
+	return "ListKxClusters"
+}
+
 type ListKxClustersOutput struct {
 
 	// Lists the cluster details.

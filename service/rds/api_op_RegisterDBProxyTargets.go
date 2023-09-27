@@ -51,6 +51,10 @@ type RegisterDBProxyTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterDBProxyTargetsInput) operationName() string {
+	return "RegisterDBProxyTargets"
+}
+
 type RegisterDBProxyTargetsOutput struct {
 
 	// One or more DBProxyTarget objects that are created when you register targets

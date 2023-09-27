@@ -51,6 +51,10 @@ type ListNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNotificationsInput) operationName() string {
+	return "ListNotifications"
+}
+
 type ListNotificationsOutput struct {
 
 	// The token to use to retrieve the next set of results.

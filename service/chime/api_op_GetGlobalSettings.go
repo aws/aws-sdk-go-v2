@@ -37,6 +37,10 @@ type GetGlobalSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGlobalSettingsInput) operationName() string {
+	return "GetGlobalSettings"
+}
+
 type GetGlobalSettingsOutput struct {
 
 	// The Amazon Chime Business Calling settings.

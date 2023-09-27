@@ -64,6 +64,10 @@ type PutRolePermissionsBoundaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRolePermissionsBoundaryInput) operationName() string {
+	return "PutRolePermissionsBoundary"
+}
+
 type PutRolePermissionsBoundaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

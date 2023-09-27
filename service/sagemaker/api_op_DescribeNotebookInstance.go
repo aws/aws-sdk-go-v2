@@ -47,6 +47,10 @@ type DescribeNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNotebookInstanceInput) operationName() string {
+	return "DescribeNotebookInstance"
+}
+
 type DescribeNotebookInstanceOutput struct {
 
 	// A list of the Elastic Inference (EI) instance types associated with this

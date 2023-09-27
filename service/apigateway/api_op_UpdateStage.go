@@ -53,6 +53,10 @@ type UpdateStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStageInput) operationName() string {
+	return "UpdateStage"
+}
+
 // Represents a unique identifier for a version of a deployed RestApi that is
 // callable by users.
 type UpdateStageOutput struct {

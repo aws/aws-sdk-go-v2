@@ -148,6 +148,10 @@ type GetMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMetricDataInput) operationName() string {
+	return "GetMetricData"
+}
+
 type GetMetricDataOutput struct {
 
 	// Contains a message about this GetMetricData operation, if the operation results

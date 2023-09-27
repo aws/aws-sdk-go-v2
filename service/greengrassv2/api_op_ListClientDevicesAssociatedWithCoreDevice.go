@@ -49,6 +49,10 @@ type ListClientDevicesAssociatedWithCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClientDevicesAssociatedWithCoreDeviceInput) operationName() string {
+	return "ListClientDevicesAssociatedWithCoreDevice"
+}
+
 type ListClientDevicesAssociatedWithCoreDeviceOutput struct {
 
 	// A list that describes the client devices that are associated with the core

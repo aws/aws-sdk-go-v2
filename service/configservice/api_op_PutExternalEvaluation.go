@@ -48,6 +48,10 @@ type PutExternalEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutExternalEvaluationInput) operationName() string {
+	return "PutExternalEvaluation"
+}
+
 type PutExternalEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

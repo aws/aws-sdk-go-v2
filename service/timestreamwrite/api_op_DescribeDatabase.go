@@ -47,6 +47,10 @@ type DescribeDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatabaseInput) operationName() string {
+	return "DescribeDatabase"
+}
+
 type DescribeDatabaseOutput struct {
 
 	// The name of the Timestream table.

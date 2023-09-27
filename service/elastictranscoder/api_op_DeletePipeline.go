@@ -45,6 +45,10 @@ type DeletePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePipelineInput) operationName() string {
+	return "DeletePipeline"
+}
+
 // The DeletePipelineResponse structure.
 type DeletePipelineOutput struct {
 	// Metadata pertaining to the operation's result.

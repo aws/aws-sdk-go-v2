@@ -85,6 +85,10 @@ type AssignPrivateIpAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssignPrivateIpAddressesInput) operationName() string {
+	return "AssignPrivateIpAddresses"
+}
+
 type AssignPrivateIpAddressesOutput struct {
 
 	// The IPv4 prefixes that are assigned to the network interface.

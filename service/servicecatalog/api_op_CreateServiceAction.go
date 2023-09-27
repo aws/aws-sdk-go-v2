@@ -78,6 +78,10 @@ type CreateServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateServiceActionInput) operationName() string {
+	return "CreateServiceAction"
+}
+
 type CreateServiceActionOutput struct {
 
 	// An object containing information about the self-service action.

@@ -66,6 +66,10 @@ type CreatePermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePermissionSetInput) operationName() string {
+	return "CreatePermissionSet"
+}
+
 type CreatePermissionSetOutput struct {
 
 	// Defines the level of access on an Amazon Web Services account.

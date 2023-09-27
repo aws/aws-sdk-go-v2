@@ -51,6 +51,10 @@ type ListMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMembersInput) operationName() string {
+	return "ListMembers"
+}
+
 type ListMembersOutput struct {
 
 	// An array of objects, one for each account that's associated with the

@@ -43,6 +43,10 @@ type GetInstanceSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceSnapshotsInput) operationName() string {
+	return "GetInstanceSnapshots"
+}
+
 type GetInstanceSnapshotsOutput struct {
 
 	// An array of key-value pairs containing information about the results of your

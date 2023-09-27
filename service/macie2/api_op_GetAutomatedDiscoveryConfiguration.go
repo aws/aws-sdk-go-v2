@@ -38,6 +38,10 @@ type GetAutomatedDiscoveryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAutomatedDiscoveryConfigurationInput) operationName() string {
+	return "GetAutomatedDiscoveryConfiguration"
+}
+
 type GetAutomatedDiscoveryConfigurationOutput struct {
 
 	// The unique identifier for the classification scope that's used when performing

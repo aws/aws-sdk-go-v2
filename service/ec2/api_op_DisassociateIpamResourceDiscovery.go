@@ -50,6 +50,10 @@ type DisassociateIpamResourceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateIpamResourceDiscoveryInput) operationName() string {
+	return "DisassociateIpamResourceDiscovery"
+}
+
 type DisassociateIpamResourceDiscoveryOutput struct {
 
 	// A resource discovery association.

@@ -59,6 +59,10 @@ type UpdateServicePrimaryTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateServicePrimaryTaskSetInput) operationName() string {
+	return "UpdateServicePrimaryTaskSet"
+}
+
 type UpdateServicePrimaryTaskSetOutput struct {
 
 	// The details about the task set.

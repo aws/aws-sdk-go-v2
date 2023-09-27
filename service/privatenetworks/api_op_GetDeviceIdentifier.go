@@ -42,6 +42,10 @@ type GetDeviceIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceIdentifierInput) operationName() string {
+	return "GetDeviceIdentifier"
+}
+
 type GetDeviceIdentifierOutput struct {
 
 	// Information about the device identifier.

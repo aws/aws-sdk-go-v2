@@ -54,6 +54,10 @@ type RegisterPublisherInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterPublisherInput) operationName() string {
+	return "RegisterPublisher"
+}
+
 type RegisterPublisherOutput struct {
 
 	// The ID assigned this account by CloudFormation for publishing extensions.

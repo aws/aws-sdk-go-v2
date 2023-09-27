@@ -48,6 +48,10 @@ type DeleteVpcEndpointConnectionNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVpcEndpointConnectionNotificationsInput) operationName() string {
+	return "DeleteVpcEndpointConnectionNotifications"
+}
+
 type DeleteVpcEndpointConnectionNotificationsOutput struct {
 
 	// Information about the notifications that could not be deleted successfully.

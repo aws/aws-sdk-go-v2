@@ -59,6 +59,10 @@ type TagLogGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagLogGroupInput) operationName() string {
+	return "TagLogGroup"
+}
+
 type TagLogGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

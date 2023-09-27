@@ -75,6 +75,10 @@ type GetSavingsPlansUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSavingsPlansUtilizationInput) operationName() string {
+	return "GetSavingsPlansUtilization"
+}
+
 type GetSavingsPlansUtilizationOutput struct {
 
 	// The total amount of cost/commitment that you used your Savings Plans,

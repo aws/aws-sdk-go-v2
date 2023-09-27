@@ -66,6 +66,10 @@ type ListRequestedServiceQuotaChangeHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRequestedServiceQuotaChangeHistoryInput) operationName() string {
+	return "ListRequestedServiceQuotaChangeHistory"
+}
+
 type ListRequestedServiceQuotaChangeHistoryOutput struct {
 
 	// If present, indicates that more output is available than is included in the

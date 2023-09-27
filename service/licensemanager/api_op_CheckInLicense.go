@@ -44,6 +44,10 @@ type CheckInLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckInLicenseInput) operationName() string {
+	return "CheckInLicense"
+}
+
 type CheckInLicenseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

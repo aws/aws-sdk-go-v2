@@ -106,6 +106,10 @@ type DetectCustomLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectCustomLabelsInput) operationName() string {
+	return "DetectCustomLabels"
+}
+
 type DetectCustomLabelsOutput struct {
 
 	// An array of custom labels detected in the input image.

@@ -55,6 +55,10 @@ type ListReleaseLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListReleaseLabelsInput) operationName() string {
+	return "ListReleaseLabels"
+}
+
 type ListReleaseLabelsOutput struct {
 
 	// Used to paginate the next page of results if specified in the next

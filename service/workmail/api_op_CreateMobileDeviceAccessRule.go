@@ -84,6 +84,10 @@ type CreateMobileDeviceAccessRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMobileDeviceAccessRuleInput) operationName() string {
+	return "CreateMobileDeviceAccessRule"
+}
+
 type CreateMobileDeviceAccessRuleOutput struct {
 
 	// The identifier for the newly created mobile device access rule.

@@ -53,6 +53,10 @@ type RejectCertificateTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectCertificateTransferInput) operationName() string {
+	return "RejectCertificateTransfer"
+}
+
 type RejectCertificateTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

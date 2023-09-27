@@ -95,6 +95,10 @@ type CreateDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetImportJobInput) operationName() string {
+	return "CreateDatasetImportJob"
+}
+
 type CreateDatasetImportJobOutput struct {
 
 	// The ARN of the dataset import job.

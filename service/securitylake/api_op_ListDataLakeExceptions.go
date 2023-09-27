@@ -51,6 +51,10 @@ type ListDataLakeExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDataLakeExceptionsInput) operationName() string {
+	return "ListDataLakeExceptions"
+}
+
 type ListDataLakeExceptionsOutput struct {
 
 	// Lists the failures that cannot be retried in the current Region.

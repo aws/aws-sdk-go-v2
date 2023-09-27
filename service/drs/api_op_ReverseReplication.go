@@ -44,6 +44,10 @@ type ReverseReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReverseReplicationInput) operationName() string {
+	return "ReverseReplication"
+}
+
 type ReverseReplicationOutput struct {
 
 	// ARN of created SourceServer.

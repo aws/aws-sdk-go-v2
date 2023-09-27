@@ -89,6 +89,10 @@ type CreateIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIdentitySourceInput) operationName() string {
+	return "CreateIdentitySource"
+}
+
 type CreateIdentitySourceOutput struct {
 
 	// The date and time the identity source was originally created.

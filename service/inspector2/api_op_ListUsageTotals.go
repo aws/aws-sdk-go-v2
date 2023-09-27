@@ -53,6 +53,10 @@ type ListUsageTotalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsageTotalsInput) operationName() string {
+	return "ListUsageTotals"
+}
+
 type ListUsageTotalsOutput struct {
 
 	// The pagination parameter to be used on the next list operation to retrieve more

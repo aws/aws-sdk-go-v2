@@ -30,6 +30,10 @@ type FractionalSecondsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FractionalSecondsInput) operationName() string {
+	return "FractionalSeconds"
+}
+
 type FractionalSecondsOutput struct {
 	Datetime *time.Time
 

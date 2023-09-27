@@ -53,6 +53,10 @@ type ListFlywheelIterationHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFlywheelIterationHistoryInput) operationName() string {
+	return "ListFlywheelIterationHistory"
+}
+
 type ListFlywheelIterationHistoryOutput struct {
 
 	// List of flywheel iteration properties

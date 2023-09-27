@@ -76,6 +76,10 @@ type StartEventsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartEventsDetectionJobInput) operationName() string {
+	return "StartEventsDetectionJob"
+}
+
 type StartEventsDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the events detection job. It is a unique,

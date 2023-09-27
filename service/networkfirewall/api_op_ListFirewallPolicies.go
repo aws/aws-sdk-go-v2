@@ -52,6 +52,10 @@ type ListFirewallPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFirewallPoliciesInput) operationName() string {
+	return "ListFirewallPolicies"
+}
+
 type ListFirewallPoliciesOutput struct {
 
 	// The metadata for the firewall policies. Depending on your setting for max

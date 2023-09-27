@@ -53,6 +53,10 @@ type CreateAddressBookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAddressBookInput) operationName() string {
+	return "CreateAddressBook"
+}
+
 type CreateAddressBookOutput struct {
 
 	// The ARN of the newly created address book.

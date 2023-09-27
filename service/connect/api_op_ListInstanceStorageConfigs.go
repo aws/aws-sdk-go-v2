@@ -57,6 +57,10 @@ type ListInstanceStorageConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceStorageConfigsInput) operationName() string {
+	return "ListInstanceStorageConfigs"
+}
+
 type ListInstanceStorageConfigsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

@@ -41,6 +41,10 @@ type DeleteJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteJobTemplateInput) operationName() string {
+	return "DeleteJobTemplate"
+}
+
 type DeleteJobTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

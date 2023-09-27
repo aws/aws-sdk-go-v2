@@ -48,6 +48,10 @@ type ListProposalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProposalsInput) operationName() string {
+	return "ListProposals"
+}
+
 type ListProposalsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.

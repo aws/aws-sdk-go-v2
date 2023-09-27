@@ -60,6 +60,10 @@ type CreateModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateModelManifestInput) operationName() string {
+	return "CreateModelManifest"
+}
+
 type CreateModelManifestOutput struct {
 
 	// The ARN of the created vehicle model.

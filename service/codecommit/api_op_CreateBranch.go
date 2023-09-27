@@ -54,6 +54,10 @@ type CreateBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBranchInput) operationName() string {
+	return "CreateBranch"
+}
+
 type CreateBranchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

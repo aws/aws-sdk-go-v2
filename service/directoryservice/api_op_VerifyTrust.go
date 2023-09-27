@@ -45,6 +45,10 @@ type VerifyTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifyTrustInput) operationName() string {
+	return "VerifyTrust"
+}
+
 // Result of a VerifyTrust request.
 type VerifyTrustOutput struct {
 

@@ -67,6 +67,10 @@ type UpdateEnrollmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnrollmentStatusInput) operationName() string {
+	return "UpdateEnrollmentStatus"
+}
+
 type UpdateEnrollmentStatusOutput struct {
 
 	// The enrollment status of the account.

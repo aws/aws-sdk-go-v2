@@ -46,6 +46,10 @@ type ListInstanceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstanceGroupsInput) operationName() string {
+	return "ListInstanceGroups"
+}
+
 // This input determines which instance groups to retrieve.
 type ListInstanceGroupsOutput struct {
 

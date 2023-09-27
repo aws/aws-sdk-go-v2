@@ -102,6 +102,10 @@ type PutObjectRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectRetentionInput) operationName() string {
+	return "PutObjectRetention"
+}
+
 type PutObjectRetentionOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

@@ -95,6 +95,10 @@ type CreateResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResolverEndpointInput) operationName() string {
+	return "CreateResolverEndpoint"
+}
+
 type CreateResolverEndpointOutput struct {
 
 	// Information about the CreateResolverEndpoint request, including the status of

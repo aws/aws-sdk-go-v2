@@ -50,6 +50,10 @@ type ListResolverConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolverConfigsInput) operationName() string {
+	return "ListResolverConfigs"
+}
+
 type ListResolverConfigsOutput struct {
 
 	// If a response includes the last of the Resolver configurations that are

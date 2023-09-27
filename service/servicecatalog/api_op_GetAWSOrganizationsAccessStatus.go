@@ -38,6 +38,10 @@ type GetAWSOrganizationsAccessStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAWSOrganizationsAccessStatusInput) operationName() string {
+	return "GetAWSOrganizationsAccessStatus"
+}
+
 type GetAWSOrganizationsAccessStatusOutput struct {
 
 	// The status of the portfolio share feature.

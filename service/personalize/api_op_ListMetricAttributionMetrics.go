@@ -48,6 +48,10 @@ type ListMetricAttributionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMetricAttributionMetricsInput) operationName() string {
+	return "ListMetricAttributionMetrics"
+}
+
 type ListMetricAttributionMetricsOutput struct {
 
 	// The metrics for the specified metric attribution.

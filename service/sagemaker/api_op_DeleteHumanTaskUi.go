@@ -46,6 +46,10 @@ type DeleteHumanTaskUiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteHumanTaskUiInput) operationName() string {
+	return "DeleteHumanTaskUi"
+}
+
 type DeleteHumanTaskUiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

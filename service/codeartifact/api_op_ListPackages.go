@@ -91,6 +91,10 @@ type ListPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPackagesInput) operationName() string {
+	return "ListPackages"
+}
+
 type ListPackagesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.

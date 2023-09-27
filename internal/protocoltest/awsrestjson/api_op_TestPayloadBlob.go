@@ -37,6 +37,10 @@ type TestPayloadBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestPayloadBlobInput) operationName() string {
+	return "TestPayloadBlob"
+}
+
 type TestPayloadBlobOutput struct {
 	ContentType *string
 

@@ -62,6 +62,10 @@ type CheckDomainAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckDomainAvailabilityInput) operationName() string {
+	return "CheckDomainAvailability"
+}
+
 // The CheckDomainAvailability response includes the following elements.
 type CheckDomainAvailabilityOutput struct {
 

@@ -42,6 +42,10 @@ type DescribeNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNotebookExecutionInput) operationName() string {
+	return "DescribeNotebookExecution"
+}
+
 type DescribeNotebookExecutionOutput struct {
 
 	// Properties of the notebook execution.

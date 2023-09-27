@@ -49,6 +49,10 @@ type CreateConnectorDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectorDefinitionVersionInput) operationName() string {
+	return "CreateConnectorDefinitionVersion"
+}
+
 type CreateConnectorDefinitionVersionOutput struct {
 
 	// The ARN of the version.

@@ -51,6 +51,10 @@ type CreateUserDefinedFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserDefinedFunctionInput) operationName() string {
+	return "CreateUserDefinedFunction"
+}
+
 type CreateUserDefinedFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

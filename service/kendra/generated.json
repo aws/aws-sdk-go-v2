@@ -75,6 +75,7 @@
         "api_op_UpdateQuerySuggestionsBlockList.go",
         "api_op_UpdateQuerySuggestionsConfig.go",
         "api_op_UpdateThesaurus.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "document/doc.go",

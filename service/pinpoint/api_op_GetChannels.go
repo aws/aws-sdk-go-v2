@@ -44,6 +44,10 @@ type GetChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChannelsInput) operationName() string {
+	return "GetChannels"
+}
+
 type GetChannelsOutput struct {
 
 	// Provides information about the general settings and status of all channels for

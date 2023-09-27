@@ -47,6 +47,10 @@ type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeInstanceAccessControlAttributeConfigurationInput) operationName() string {
+	return "DescribeInstanceAccessControlAttributeConfiguration"
+}
+
 type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 
 	// Gets the list of IAM Identity Center identity store attributes that have been

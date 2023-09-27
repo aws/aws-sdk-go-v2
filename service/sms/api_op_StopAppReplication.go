@@ -40,6 +40,10 @@ type StopAppReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAppReplicationInput) operationName() string {
+	return "StopAppReplication"
+}
+
 type StopAppReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

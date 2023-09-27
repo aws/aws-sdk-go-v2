@@ -56,6 +56,10 @@ type ListStageDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStageDeploymentsInput) operationName() string {
+	return "ListStageDeployments"
+}
+
 type ListStageDeploymentsOutput struct {
 
 	// The token that indicates the start of the next sequential page of results. Use

@@ -86,6 +86,10 @@ type UpdateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFlowInput) operationName() string {
+	return "UpdateFlow"
+}
+
 type UpdateFlowOutput struct {
 
 	// Indicates the current status of the flow.

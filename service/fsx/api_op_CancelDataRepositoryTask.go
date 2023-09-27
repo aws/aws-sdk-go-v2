@@ -52,6 +52,10 @@ type CancelDataRepositoryTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelDataRepositoryTaskInput) operationName() string {
+	return "CancelDataRepositoryTask"
+}
+
 type CancelDataRepositoryTaskOutput struct {
 
 	// The lifecycle status of the data repository task, as follows:

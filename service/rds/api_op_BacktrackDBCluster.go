@@ -72,6 +72,10 @@ type BacktrackDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BacktrackDBClusterInput) operationName() string {
+	return "BacktrackDBCluster"
+}
+
 // This data type is used as a response element in the DescribeDBClusterBacktracks
 // action.
 type BacktrackDBClusterOutput struct {

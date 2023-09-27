@@ -48,6 +48,10 @@ type ModifyClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterInput) operationName() string {
+	return "ModifyCluster"
+}
+
 type ModifyClusterOutput struct {
 
 	// Contains information about an AWS CloudHSM cluster.

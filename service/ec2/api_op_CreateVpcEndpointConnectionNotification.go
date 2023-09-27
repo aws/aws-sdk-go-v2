@@ -70,6 +70,10 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcEndpointConnectionNotificationInput) operationName() string {
+	return "CreateVpcEndpointConnectionNotification"
+}
+
 type CreateVpcEndpointConnectionNotificationOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

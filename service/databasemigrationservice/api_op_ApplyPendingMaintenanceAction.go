@@ -60,6 +60,10 @@ type ApplyPendingMaintenanceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplyPendingMaintenanceActionInput) operationName() string {
+	return "ApplyPendingMaintenanceAction"
+}
+
 type ApplyPendingMaintenanceActionOutput struct {
 
 	// The DMS resource that the pending maintenance action will be applied to.

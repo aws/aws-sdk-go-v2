@@ -49,6 +49,10 @@ type RefreshSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RefreshSchemasInput) operationName() string {
+	return "RefreshSchemas"
+}
+
 type RefreshSchemasOutput struct {
 
 	// The status of the refreshed schema.

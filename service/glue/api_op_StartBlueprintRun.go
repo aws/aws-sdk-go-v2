@@ -49,6 +49,10 @@ type StartBlueprintRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartBlueprintRunInput) operationName() string {
+	return "StartBlueprintRun"
+}
+
 type StartBlueprintRunOutput struct {
 
 	// The run ID for this blueprint run.

@@ -57,6 +57,10 @@ type GetJobTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobTaggingInput) operationName() string {
+	return "GetJobTagging"
+}
+
 type GetJobTaggingOutput struct {
 
 	// The set of tags associated with the S3 Batch Operations job.

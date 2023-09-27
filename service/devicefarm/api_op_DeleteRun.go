@@ -43,6 +43,10 @@ type DeleteRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRunInput) operationName() string {
+	return "DeleteRun"
+}
+
 // Represents the result of a delete run request.
 type DeleteRunOutput struct {
 	// Metadata pertaining to the operation's result.

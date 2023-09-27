@@ -49,6 +49,10 @@ type ListStageSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStageSessionsInput) operationName() string {
+	return "ListStageSessions"
+}
+
 type ListStageSessionsOutput struct {
 
 	// List of matching stage sessions.

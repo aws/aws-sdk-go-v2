@@ -47,6 +47,10 @@ type DescribeEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEngineVersionsInput) operationName() string {
+	return "DescribeEngineVersions"
+}
+
 type DescribeEngineVersionsOutput struct {
 
 	// Returned EngineVersion objects that describe the replication instance engine

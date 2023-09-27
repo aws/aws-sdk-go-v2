@@ -110,6 +110,10 @@ type ExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteStatementInput) operationName() string {
+	return "ExecuteStatement"
+}
+
 type ExecuteStatementOutput struct {
 
 	// The cluster identifier. This element is not returned when connecting to a

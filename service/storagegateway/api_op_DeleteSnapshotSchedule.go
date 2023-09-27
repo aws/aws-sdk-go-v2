@@ -48,6 +48,10 @@ type DeleteSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSnapshotScheduleInput) operationName() string {
+	return "DeleteSnapshotSchedule"
+}
+
 type DeleteSnapshotScheduleOutput struct {
 
 	// The volume which snapshot schedule was deleted.

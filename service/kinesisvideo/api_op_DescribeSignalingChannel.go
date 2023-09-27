@@ -45,6 +45,10 @@ type DescribeSignalingChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSignalingChannelInput) operationName() string {
+	return "DescribeSignalingChannel"
+}
+
 type DescribeSignalingChannelOutput struct {
 
 	// A structure that encapsulates the specified signaling channel's metadata and

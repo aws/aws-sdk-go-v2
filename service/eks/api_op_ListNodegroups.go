@@ -58,6 +58,10 @@ type ListNodegroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListNodegroupsInput) operationName() string {
+	return "ListNodegroups"
+}
+
 type ListNodegroupsOutput struct {
 
 	// The nextToken value to include in a future ListNodegroups request. When the

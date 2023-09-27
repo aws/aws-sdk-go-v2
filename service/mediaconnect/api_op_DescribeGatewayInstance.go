@@ -43,6 +43,10 @@ type DescribeGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGatewayInstanceInput) operationName() string {
+	return "DescribeGatewayInstance"
+}
+
 type DescribeGatewayInstanceOutput struct {
 
 	// The settings for an instance in a gateway.

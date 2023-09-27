@@ -42,6 +42,10 @@ type StopBuildBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopBuildBatchInput) operationName() string {
+	return "StopBuildBatch"
+}
+
 type StopBuildBatchOutput struct {
 
 	// Contains information about a batch build.

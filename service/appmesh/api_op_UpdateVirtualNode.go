@@ -63,6 +63,10 @@ type UpdateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVirtualNodeInput) operationName() string {
+	return "UpdateVirtualNode"
+}
+
 type UpdateVirtualNodeOutput struct {
 
 	// A full description of the virtual node that was updated.

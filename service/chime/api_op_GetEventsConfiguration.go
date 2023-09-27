@@ -48,6 +48,10 @@ type GetEventsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventsConfigurationInput) operationName() string {
+	return "GetEventsConfiguration"
+}
+
 type GetEventsConfigurationOutput struct {
 
 	// The events configuration details.

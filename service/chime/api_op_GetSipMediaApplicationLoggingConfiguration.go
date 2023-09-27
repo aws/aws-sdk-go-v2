@@ -51,6 +51,10 @@ type GetSipMediaApplicationLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSipMediaApplicationLoggingConfigurationInput) operationName() string {
+	return "GetSipMediaApplicationLoggingConfiguration"
+}
+
 type GetSipMediaApplicationLoggingConfigurationOutput struct {
 
 	// The actual logging configuration.

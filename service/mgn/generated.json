@@ -79,6 +79,7 @@
         "api_op_UpdateSourceServer.go",
         "api_op_UpdateSourceServerReplicationType.go",
         "api_op_UpdateWave.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

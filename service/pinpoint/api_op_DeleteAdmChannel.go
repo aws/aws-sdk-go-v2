@@ -44,6 +44,10 @@ type DeleteAdmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAdmChannelInput) operationName() string {
+	return "DeleteAdmChannel"
+}
+
 type DeleteAdmChannelOutput struct {
 
 	// Provides information about the status and settings of the ADM (Amazon Device

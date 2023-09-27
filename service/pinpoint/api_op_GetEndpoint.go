@@ -49,6 +49,10 @@ type GetEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEndpointInput) operationName() string {
+	return "GetEndpoint"
+}
+
 type GetEndpointOutput struct {
 
 	// Provides information about the channel type and other settings for an endpoint.

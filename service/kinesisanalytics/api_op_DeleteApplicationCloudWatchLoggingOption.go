@@ -59,6 +59,10 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationCloudWatchLoggingOptionInput) operationName() string {
+	return "DeleteApplicationCloudWatchLoggingOption"
+}
+
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

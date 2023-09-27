@@ -48,6 +48,10 @@ type GetMapStyleDescriptorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMapStyleDescriptorInput) operationName() string {
+	return "GetMapStyleDescriptor"
+}
+
 type GetMapStyleDescriptorOutput struct {
 
 	// Contains the body of the style descriptor.

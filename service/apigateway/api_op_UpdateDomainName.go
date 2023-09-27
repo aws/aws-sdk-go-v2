@@ -48,6 +48,10 @@ type UpdateDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainNameInput) operationName() string {
+	return "UpdateDomainName"
+}
+
 // Represents a custom domain name as a user-friendly host name of an API
 // (RestApi).
 type UpdateDomainNameOutput struct {

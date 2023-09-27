@@ -129,6 +129,10 @@ type ListPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPartsInput) operationName() string {
+	return "ListParts"
+}
+
 type ListPartsOutput struct {
 
 	// If the bucket has a lifecycle rule configured with an action to abort

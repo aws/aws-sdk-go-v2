@@ -90,6 +90,10 @@ type PutAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAnomalyDetectorInput) operationName() string {
+	return "PutAnomalyDetector"
+}
+
 type PutAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

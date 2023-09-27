@@ -51,6 +51,10 @@ type UpdateRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRoomInput) operationName() string {
+	return "UpdateRoom"
+}
+
 type UpdateRoomOutput struct {
 
 	// The room details.

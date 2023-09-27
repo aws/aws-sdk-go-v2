@@ -49,6 +49,10 @@ type UpdateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataSetInput) operationName() string {
+	return "UpdateDataSet"
+}
+
 type UpdateDataSetOutput struct {
 
 	// The ARN for the data set.

@@ -60,6 +60,10 @@ type CreateLoadBalancerPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoadBalancerPolicyInput) operationName() string {
+	return "CreateLoadBalancerPolicy"
+}
+
 // Contains the output of CreateLoadBalancerPolicy.
 type CreateLoadBalancerPolicyOutput struct {
 	// Metadata pertaining to the operation's result.

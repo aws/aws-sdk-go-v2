@@ -50,6 +50,10 @@ type ExportClientVpnClientConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportClientVpnClientConfigurationInput) operationName() string {
+	return "ExportClientVpnClientConfiguration"
+}
+
 type ExportClientVpnClientConfigurationOutput struct {
 
 	// The contents of the Client VPN endpoint configuration file.

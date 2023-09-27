@@ -84,6 +84,10 @@ type GenerateRandomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateRandomInput) operationName() string {
+	return "GenerateRandom"
+}
+
 type GenerateRandomOutput struct {
 
 	// The plaintext random bytes encrypted with the public key from the Nitro

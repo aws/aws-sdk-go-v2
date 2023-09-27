@@ -55,6 +55,10 @@ type ListRecordHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecordHistoryInput) operationName() string {
+	return "ListRecordHistory"
+}
+
 type ListRecordHistoryOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

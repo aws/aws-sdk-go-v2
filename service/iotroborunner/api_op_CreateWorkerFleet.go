@@ -54,6 +54,10 @@ type CreateWorkerFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkerFleetInput) operationName() string {
+	return "CreateWorkerFleet"
+}
+
 type CreateWorkerFleetOutput struct {
 
 	// Full ARN of the worker fleet.

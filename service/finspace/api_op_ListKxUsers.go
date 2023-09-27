@@ -48,6 +48,10 @@ type ListKxUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKxUsersInput) operationName() string {
+	return "ListKxUsers"
+}
+
 type ListKxUsersOutput struct {
 
 	// A token that indicates where a results page should begin.

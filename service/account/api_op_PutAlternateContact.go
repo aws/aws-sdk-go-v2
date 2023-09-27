@@ -87,6 +87,10 @@ type PutAlternateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAlternateContactInput) operationName() string {
+	return "PutAlternateContact"
+}
+
 type PutAlternateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

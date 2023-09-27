@@ -49,6 +49,10 @@ type DescribeLoadBalancerPolicyTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLoadBalancerPolicyTypesInput) operationName() string {
+	return "DescribeLoadBalancerPolicyTypes"
+}
+
 // Contains the output of DescribeLoadBalancerPolicyTypes.
 type DescribeLoadBalancerPolicyTypesOutput struct {
 

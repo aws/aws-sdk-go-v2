@@ -53,6 +53,10 @@ type DescribeNetworkInterfaceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkInterfaceAttributeInput) operationName() string {
+	return "DescribeNetworkInterfaceAttribute"
+}
+
 // Contains the output of DescribeNetworkInterfaceAttribute.
 type DescribeNetworkInterfaceAttributeOutput struct {
 

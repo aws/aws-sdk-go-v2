@@ -57,6 +57,10 @@ type DescribeTableDataImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTableDataImportJobInput) operationName() string {
+	return "DescribeTableDataImportJob"
+}
+
 type DescribeTableDataImportJobOutput struct {
 
 	// The metadata about the job that was submitted for import.

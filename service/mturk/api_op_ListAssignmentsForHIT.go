@@ -63,6 +63,10 @@ type ListAssignmentsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssignmentsForHITInput) operationName() string {
+	return "ListAssignmentsForHIT"
+}
+
 type ListAssignmentsForHITOutput struct {
 
 	// The collection of Assignment data structures returned by this call.

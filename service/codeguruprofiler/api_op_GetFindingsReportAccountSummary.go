@@ -62,6 +62,10 @@ type GetFindingsReportAccountSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingsReportAccountSummaryInput) operationName() string {
+	return "GetFindingsReportAccountSummary"
+}
+
 // The structure representing the GetFindingsReportAccountSummaryResponse.
 type GetFindingsReportAccountSummaryOutput struct {
 

@@ -51,6 +51,10 @@ type PutVerificationStateOnViolationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutVerificationStateOnViolationInput) operationName() string {
+	return "PutVerificationStateOnViolation"
+}
+
 type PutVerificationStateOnViolationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

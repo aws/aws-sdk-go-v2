@@ -44,6 +44,10 @@ type DeleteCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCollectionInput) operationName() string {
+	return "DeleteCollection"
+}
+
 type DeleteCollectionOutput struct {
 
 	// HTTP status code that indicates the result of the operation.

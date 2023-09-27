@@ -77,6 +77,10 @@ type GetObjectLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetObjectLegalHoldInput) operationName() string {
+	return "GetObjectLegalHold"
+}
+
 type GetObjectLegalHoldOutput struct {
 
 	// The current legal hold status for the specified object.

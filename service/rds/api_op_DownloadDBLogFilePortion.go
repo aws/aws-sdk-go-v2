@@ -73,6 +73,10 @@ type DownloadDBLogFilePortionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DownloadDBLogFilePortionInput) operationName() string {
+	return "DownloadDBLogFilePortion"
+}
+
 // This data type is used as a response element to DownloadDBLogFilePortion .
 type DownloadDBLogFilePortionOutput struct {
 

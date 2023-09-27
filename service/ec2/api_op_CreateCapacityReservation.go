@@ -154,6 +154,10 @@ type CreateCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCapacityReservationInput) operationName() string {
+	return "CreateCapacityReservation"
+}
+
 type CreateCapacityReservationOutput struct {
 
 	// Information about the Capacity Reservation.

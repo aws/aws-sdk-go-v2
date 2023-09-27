@@ -44,6 +44,10 @@ type SkipWaitTimeForInstanceTerminationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SkipWaitTimeForInstanceTerminationInput) operationName() string {
+	return "SkipWaitTimeForInstanceTermination"
+}
+
 type SkipWaitTimeForInstanceTerminationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

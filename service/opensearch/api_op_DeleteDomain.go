@@ -44,6 +44,10 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainInput) operationName() string {
+	return "DeleteDomain"
+}
+
 // The results of a DeleteDomain request. Contains the status of the pending
 // deletion, or a "domain not found" error if the domain and all of its resources
 // have been deleted.

@@ -58,6 +58,10 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConnectionInput) operationName() string {
+	return "CreateConnection"
+}
+
 type CreateConnectionOutput struct {
 
 	// The ARN of the connection that was created by the request.

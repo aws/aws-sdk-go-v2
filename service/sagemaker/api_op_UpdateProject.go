@@ -65,6 +65,10 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProjectInput) operationName() string {
+	return "UpdateProject"
+}
+
 type UpdateProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) of the project.

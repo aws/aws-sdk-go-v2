@@ -60,6 +60,10 @@ type ListBuiltInSlotTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBuiltInSlotTypesInput) operationName() string {
+	return "ListBuiltInSlotTypes"
+}
+
 type ListBuiltInSlotTypesOutput struct {
 
 	// Summary information for the built-in slot types that meet the filter criteria

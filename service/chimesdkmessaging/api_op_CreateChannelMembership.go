@@ -79,6 +79,10 @@ type CreateChannelMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChannelMembershipInput) operationName() string {
+	return "CreateChannelMembership"
+}
+
 type CreateChannelMembershipOutput struct {
 
 	// The ARN of the channel.

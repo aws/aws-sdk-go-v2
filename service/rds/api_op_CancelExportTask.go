@@ -45,6 +45,10 @@ type CancelExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelExportTaskInput) operationName() string {
+	return "CancelExportTask"
+}
+
 // Contains the details of a snapshot or cluster export to Amazon S3. This data
 // type is used as a response element in the DescribeExportTasks operation.
 type CancelExportTaskOutput struct {

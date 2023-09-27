@@ -57,6 +57,10 @@ type DeleteGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGroupPolicyInput) operationName() string {
+	return "DeleteGroupPolicy"
+}
+
 type DeleteGroupPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

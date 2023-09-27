@@ -64,6 +64,10 @@ type UpdateFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFunctionInput) operationName() string {
+	return "UpdateFunction"
+}
+
 type UpdateFunctionOutput struct {
 
 	// The version identifier for the current version of the CloudFront function.

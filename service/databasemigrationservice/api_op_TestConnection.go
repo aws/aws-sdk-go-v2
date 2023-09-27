@@ -47,6 +47,10 @@ type TestConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestConnectionInput) operationName() string {
+	return "TestConnection"
+}
+
 type TestConnectionOutput struct {
 
 	// The connection tested.

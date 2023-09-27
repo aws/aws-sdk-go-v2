@@ -49,6 +49,10 @@ type UpdateBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBlueprintInput) operationName() string {
+	return "UpdateBlueprint"
+}
+
 type UpdateBlueprintOutput struct {
 
 	// Returns the name of the blueprint that was updated.

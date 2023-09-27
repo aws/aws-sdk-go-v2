@@ -41,6 +41,10 @@ type DeleteWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkteamInput) operationName() string {
+	return "DeleteWorkteam"
+}
+
 type DeleteWorkteamOutput struct {
 
 	// Returns true if the work team was successfully deleted; otherwise, returns false

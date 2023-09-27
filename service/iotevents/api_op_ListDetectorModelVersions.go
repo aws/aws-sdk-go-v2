@@ -49,6 +49,10 @@ type ListDetectorModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDetectorModelVersionsInput) operationName() string {
+	return "ListDetectorModelVersions"
+}
+
 type ListDetectorModelVersionsOutput struct {
 
 	// Summary information about the detector model versions.

@@ -36,6 +36,10 @@ type GetConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigurationInput) operationName() string {
+	return "GetConfiguration"
+}
+
 type GetConfigurationOutput struct {
 
 	// Retrieves TagKey configuration from an account.

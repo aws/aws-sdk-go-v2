@@ -59,6 +59,10 @@ type ListCostAllocationTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCostAllocationTagsInput) operationName() string {
+	return "ListCostAllocationTags"
+}
+
 type ListCostAllocationTagsOutput struct {
 
 	// A list of cost allocation tags that includes the detailed metadata for each one.

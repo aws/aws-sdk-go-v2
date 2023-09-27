@@ -48,6 +48,10 @@ type StopEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopEntitiesDetectionJobInput) operationName() string {
+	return "StopEntitiesDetectionJob"
+}
+
 type StopEntitiesDetectionJobOutput struct {
 
 	// The identifier of the entities detection job to stop.

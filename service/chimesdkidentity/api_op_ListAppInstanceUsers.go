@@ -48,6 +48,10 @@ type ListAppInstanceUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppInstanceUsersInput) operationName() string {
+	return "ListAppInstanceUsers"
+}
+
 type ListAppInstanceUsersOutput struct {
 
 	// The ARN of the AppInstance .

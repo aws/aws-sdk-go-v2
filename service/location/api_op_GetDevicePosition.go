@@ -49,6 +49,10 @@ type GetDevicePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevicePositionInput) operationName() string {
+	return "GetDevicePosition"
+}
+
 type GetDevicePositionOutput struct {
 
 	// The last known device position.

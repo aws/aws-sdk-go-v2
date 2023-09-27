@@ -84,6 +84,10 @@ type ListMonitoringSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMonitoringSchedulesInput) operationName() string {
+	return "ListMonitoringSchedules"
+}
+
 type ListMonitoringSchedulesOutput struct {
 
 	// A JSON array in which each element is a summary for a monitoring schedule.

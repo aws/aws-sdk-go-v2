@@ -62,6 +62,10 @@ type CreateNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNotificationInput) operationName() string {
+	return "CreateNotification"
+}
+
 // Response of CreateNotification
 type CreateNotificationOutput struct {
 	// Metadata pertaining to the operation's result.

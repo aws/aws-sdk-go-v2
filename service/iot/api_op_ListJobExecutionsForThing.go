@@ -63,6 +63,10 @@ type ListJobExecutionsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobExecutionsForThingInput) operationName() string {
+	return "ListJobExecutionsForThing"
+}
+
 type ListJobExecutionsForThingOutput struct {
 
 	// A list of job execution summaries.

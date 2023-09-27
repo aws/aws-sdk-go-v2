@@ -49,6 +49,10 @@ type ListOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpsMetadataInput) operationName() string {
+	return "ListOpsMetadata"
+}
+
 type ListOpsMetadataOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

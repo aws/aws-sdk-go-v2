@@ -50,6 +50,10 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchAssociateApprovalRuleTemplateWithRepositoriesInput) operationName() string {
+	return "BatchAssociateApprovalRuleTemplateWithRepositories"
+}
+
 type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
 
 	// A list of names of the repositories that have been associated with the template.

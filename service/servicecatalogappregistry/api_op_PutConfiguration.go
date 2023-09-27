@@ -42,6 +42,10 @@ type PutConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationInput) operationName() string {
+	return "PutConfiguration"
+}
+
 type PutConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

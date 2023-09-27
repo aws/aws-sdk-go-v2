@@ -44,6 +44,10 @@ type StartDetectorModelAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDetectorModelAnalysisInput) operationName() string {
+	return "StartDetectorModelAnalysis"
+}
+
 type StartDetectorModelAnalysisOutput struct {
 
 	// The ID that you can use to retrieve the analysis result.

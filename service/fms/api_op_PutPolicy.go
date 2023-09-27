@@ -64,6 +64,10 @@ type PutPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPolicyInput) operationName() string {
+	return "PutPolicy"
+}
+
 type PutPolicyOutput struct {
 
 	// The details of the Firewall Manager policy.

@@ -54,6 +54,10 @@ type DescribeModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelVersionsInput) operationName() string {
+	return "DescribeModelVersions"
+}
+
 type DescribeModelVersionsOutput struct {
 
 	// The model version details.

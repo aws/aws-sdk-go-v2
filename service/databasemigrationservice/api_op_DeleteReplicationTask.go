@@ -42,6 +42,10 @@ type DeleteReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReplicationTaskInput) operationName() string {
+	return "DeleteReplicationTask"
+}
+
 type DeleteReplicationTaskOutput struct {
 
 	// The deleted replication task.

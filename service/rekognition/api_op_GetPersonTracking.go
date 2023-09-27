@@ -80,6 +80,10 @@ type GetPersonTrackingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPersonTrackingInput) operationName() string {
+	return "GetPersonTracking"
+}
+
 type GetPersonTrackingOutput struct {
 
 	// Job identifier for the person tracking operation for which you want to obtain

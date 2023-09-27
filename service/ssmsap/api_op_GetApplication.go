@@ -47,6 +47,10 @@ type GetApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetApplicationInput) operationName() string {
+	return "GetApplication"
+}
+
 type GetApplicationOutput struct {
 
 	// Returns all of the metadata of an application registered with AWS Systems

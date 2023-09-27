@@ -60,6 +60,10 @@ type UpdateAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAuthorizerInput) operationName() string {
+	return "UpdateAuthorizer"
+}
+
 type UpdateAuthorizerOutput struct {
 
 	// The authorizer ARN.

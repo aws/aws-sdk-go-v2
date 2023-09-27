@@ -72,6 +72,10 @@ type DescribePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePackageInput) operationName() string {
+	return "DescribePackage"
+}
+
 type DescribePackageOutput struct {
 
 	// A PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)

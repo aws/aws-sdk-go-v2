@@ -46,6 +46,10 @@ type GetOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOperationsInput) operationName() string {
+	return "GetOperations"
+}
+
 type GetOperationsOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

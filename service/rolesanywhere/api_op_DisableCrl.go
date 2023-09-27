@@ -43,6 +43,10 @@ type DisableCrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableCrlInput) operationName() string {
+	return "DisableCrl"
+}
+
 type DisableCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write

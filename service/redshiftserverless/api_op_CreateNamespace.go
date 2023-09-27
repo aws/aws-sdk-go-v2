@@ -82,6 +82,10 @@ type CreateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNamespaceInput) operationName() string {
+	return "CreateNamespace"
+}
+
 type CreateNamespaceOutput struct {
 
 	// The created namespace object.

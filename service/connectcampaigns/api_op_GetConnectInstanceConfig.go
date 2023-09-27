@@ -43,6 +43,10 @@ type GetConnectInstanceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectInstanceConfigInput) operationName() string {
+	return "GetConnectInstanceConfig"
+}
+
 // GetConnectInstanceConfigResponse
 type GetConnectInstanceConfigOutput struct {
 

@@ -59,6 +59,10 @@ type UpdateRescoreExecutionPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRescoreExecutionPlanInput) operationName() string {
+	return "UpdateRescoreExecutionPlan"
+}
+
 type UpdateRescoreExecutionPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

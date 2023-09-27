@@ -38,6 +38,10 @@ type GetNamespaceDeletionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetNamespaceDeletionStatusInput) operationName() string {
+	return "GetNamespaceDeletionStatus"
+}
+
 type GetNamespaceDeletionStatusOutput struct {
 
 	// An error code returned by the namespace deletion task.

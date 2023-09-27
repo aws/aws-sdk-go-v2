@@ -59,6 +59,10 @@ type DescribeGlobalClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGlobalClustersInput) operationName() string {
+	return "DescribeGlobalClusters"
+}
+
 type DescribeGlobalClustersOutput struct {
 
 	// The list of global clusters returned by this request.

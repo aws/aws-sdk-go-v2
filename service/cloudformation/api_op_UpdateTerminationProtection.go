@@ -53,6 +53,10 @@ type UpdateTerminationProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTerminationProtectionInput) operationName() string {
+	return "UpdateTerminationProtection"
+}
+
 type UpdateTerminationProtectionOutput struct {
 
 	// The unique ID of the stack.

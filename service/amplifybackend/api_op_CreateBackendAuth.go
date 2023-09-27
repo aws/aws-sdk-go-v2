@@ -58,6 +58,10 @@ type CreateBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBackendAuthInput) operationName() string {
+	return "CreateBackendAuth"
+}
+
 type CreateBackendAuthOutput struct {
 
 	// The app ID.

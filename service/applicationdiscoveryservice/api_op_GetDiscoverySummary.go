@@ -38,6 +38,10 @@ type GetDiscoverySummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDiscoverySummaryInput) operationName() string {
+	return "GetDiscoverySummary"
+}
+
 type GetDiscoverySummaryOutput struct {
 
 	// Details about discovered agents, including agent status and health.

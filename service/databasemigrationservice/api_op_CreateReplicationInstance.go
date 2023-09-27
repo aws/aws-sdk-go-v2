@@ -142,6 +142,10 @@ type CreateReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReplicationInstanceInput) operationName() string {
+	return "CreateReplicationInstance"
+}
+
 type CreateReplicationInstanceOutput struct {
 
 	// The replication instance that was created.

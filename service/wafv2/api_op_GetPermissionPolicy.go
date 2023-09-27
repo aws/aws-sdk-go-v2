@@ -43,6 +43,10 @@ type GetPermissionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPermissionPolicyInput) operationName() string {
+	return "GetPermissionPolicy"
+}
+
 type GetPermissionPolicyOutput struct {
 
 	// The IAM policy that is attached to the specified rule group.

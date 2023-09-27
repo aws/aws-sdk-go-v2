@@ -51,6 +51,10 @@ type BatchDetectSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDetectSentimentInput) operationName() string {
+	return "BatchDetectSentiment"
+}
+
 type BatchDetectSentimentOutput struct {
 
 	// A list containing one object for each document that contained an error. The

@@ -56,6 +56,10 @@ type PutAppInstanceStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppInstanceStreamingConfigurationsInput) operationName() string {
+	return "PutAppInstanceStreamingConfigurations"
+}
+
 type PutAppInstanceStreamingConfigurationsOutput struct {
 
 	// The streaming configurations of an AppInstance .

@@ -61,6 +61,10 @@ type DeleteColumnStatisticsForPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteColumnStatisticsForPartitionInput) operationName() string {
+	return "DeleteColumnStatisticsForPartition"
+}
+
 type DeleteColumnStatisticsForPartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,10 @@ type DescribeImageAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageAttributeInput) operationName() string {
+	return "DescribeImageAttribute"
+}
+
 // Describes an image attribute.
 type DescribeImageAttributeOutput struct {
 

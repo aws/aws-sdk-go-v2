@@ -59,6 +59,10 @@ type GetGroupsForCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupsForCapacityReservationInput) operationName() string {
+	return "GetGroupsForCapacityReservation"
+}
+
 type GetGroupsForCapacityReservationOutput struct {
 
 	// Information about the resource groups to which the Capacity Reservation has

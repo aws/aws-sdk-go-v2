@@ -71,6 +71,10 @@ type CreateExtensionAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateExtensionAssociationInput) operationName() string {
+	return "CreateExtensionAssociation"
+}
+
 type CreateExtensionAssociationOutput struct {
 
 	// The system-generated Amazon Resource Name (ARN) for the extension.

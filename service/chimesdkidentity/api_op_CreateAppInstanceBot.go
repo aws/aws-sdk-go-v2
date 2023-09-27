@@ -63,6 +63,10 @@ type CreateAppInstanceBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInstanceBotInput) operationName() string {
+	return "CreateAppInstanceBot"
+}
+
 type CreateAppInstanceBotOutput struct {
 
 	// The ARN of the AppinstanceBot .

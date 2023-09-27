@@ -77,6 +77,10 @@ type SendBounceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendBounceInput) operationName() string {
+	return "SendBounce"
+}
+
 // Represents a unique message ID.
 type SendBounceOutput struct {
 

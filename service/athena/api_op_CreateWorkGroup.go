@@ -60,6 +60,10 @@ type CreateWorkGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkGroupInput) operationName() string {
+	return "CreateWorkGroup"
+}
+
 type CreateWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

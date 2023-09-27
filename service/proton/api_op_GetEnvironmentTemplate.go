@@ -42,6 +42,10 @@ type GetEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnvironmentTemplateInput) operationName() string {
+	return "GetEnvironmentTemplate"
+}
+
 type GetEnvironmentTemplateOutput struct {
 
 	// The detailed data of the requested environment template.

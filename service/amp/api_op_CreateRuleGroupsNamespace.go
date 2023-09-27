@@ -60,6 +60,10 @@ type CreateRuleGroupsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRuleGroupsNamespaceInput) operationName() string {
+	return "CreateRuleGroupsNamespace"
+}
+
 // Represents the output of a CreateRuleGroupsNamespace operation.
 type CreateRuleGroupsNamespaceOutput struct {
 

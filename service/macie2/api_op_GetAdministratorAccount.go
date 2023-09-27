@@ -37,6 +37,10 @@ type GetAdministratorAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAdministratorAccountInput) operationName() string {
+	return "GetAdministratorAccount"
+}
+
 type GetAdministratorAccountOutput struct {
 
 	// The Amazon Web Services account ID for the administrator account. If the

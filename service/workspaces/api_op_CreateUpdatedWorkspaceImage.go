@@ -68,6 +68,10 @@ type CreateUpdatedWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUpdatedWorkspaceImageInput) operationName() string {
+	return "CreateUpdatedWorkspaceImage"
+}
+
 type CreateUpdatedWorkspaceImageOutput struct {
 
 	// The identifier of the new updated WorkSpace image.

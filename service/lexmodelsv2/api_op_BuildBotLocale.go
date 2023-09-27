@@ -61,6 +61,10 @@ type BuildBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BuildBotLocaleInput) operationName() string {
+	return "BuildBotLocale"
+}
+
 type BuildBotLocaleOutput struct {
 
 	// The identifier of the specified bot.

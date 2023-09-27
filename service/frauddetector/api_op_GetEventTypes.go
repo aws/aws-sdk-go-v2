@@ -51,6 +51,10 @@ type GetEventTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventTypesInput) operationName() string {
+	return "GetEventTypes"
+}
+
 type GetEventTypesOutput struct {
 
 	// An array of event types.

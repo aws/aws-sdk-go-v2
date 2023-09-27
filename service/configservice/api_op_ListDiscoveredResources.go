@@ -76,6 +76,10 @@ type ListDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDiscoveredResourcesInput) operationName() string {
+	return "ListDiscoveredResources"
+}
+
 type ListDiscoveredResourcesOutput struct {
 
 	// The string that you use in a subsequent request to get the next page of results

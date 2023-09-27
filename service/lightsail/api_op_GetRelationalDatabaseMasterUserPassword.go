@@ -53,6 +53,10 @@ type GetRelationalDatabaseMasterUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseMasterUserPasswordInput) operationName() string {
+	return "GetRelationalDatabaseMasterUserPassword"
+}
+
 type GetRelationalDatabaseMasterUserPasswordOutput struct {
 
 	// The timestamp when the specified version of the master user password was

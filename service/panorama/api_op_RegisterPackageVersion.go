@@ -57,6 +57,10 @@ type RegisterPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterPackageVersionInput) operationName() string {
+	return "RegisterPackageVersion"
+}
+
 type RegisterPackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

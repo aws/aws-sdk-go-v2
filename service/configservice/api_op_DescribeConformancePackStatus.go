@@ -48,6 +48,10 @@ type DescribeConformancePackStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConformancePackStatusInput) operationName() string {
+	return "DescribeConformancePackStatus"
+}
+
 type DescribeConformancePackStatusOutput struct {
 
 	// A list of ConformancePackStatusDetail objects.

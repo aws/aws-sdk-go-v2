@@ -62,6 +62,10 @@ type BatchCreateCustomVocabularyItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateCustomVocabularyItemInput) operationName() string {
+	return "BatchCreateCustomVocabularyItem"
+}
+
 type BatchCreateCustomVocabularyItemOutput struct {
 
 	// The identifier of the bot associated with this custom vocabulary.

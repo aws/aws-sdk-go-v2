@@ -73,6 +73,10 @@ type CreateWhatIfForecastExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWhatIfForecastExportInput) operationName() string {
+	return "CreateWhatIfForecastExport"
+}
+
 type CreateWhatIfForecastExportOutput struct {
 
 	// The Amazon Resource Name (ARN) of the what-if forecast.

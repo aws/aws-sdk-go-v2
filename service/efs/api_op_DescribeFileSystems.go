@@ -73,6 +73,10 @@ type DescribeFileSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFileSystemsInput) operationName() string {
+	return "DescribeFileSystems"
+}
+
 type DescribeFileSystemsOutput struct {
 
 	// An array of file system descriptions.

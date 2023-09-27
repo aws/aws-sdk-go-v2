@@ -49,6 +49,10 @@ type ListKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKeysInput) operationName() string {
+	return "ListKeys"
+}
+
 type ListKeysOutput struct {
 
 	// Contains API key resources in your Amazon Web Services account. Details include

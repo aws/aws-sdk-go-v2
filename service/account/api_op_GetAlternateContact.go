@@ -67,6 +67,10 @@ type GetAlternateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAlternateContactInput) operationName() string {
+	return "GetAlternateContact"
+}
+
 type GetAlternateContactOutput struct {
 
 	// A structure that contains the details for the specified alternate contact.

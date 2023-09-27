@@ -52,6 +52,10 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUsersInput) operationName() string {
+	return "ListUsers"
+}
+
 type ListUsersOutput struct {
 
 	// A pagination token to be used with the subsequent request if the response is

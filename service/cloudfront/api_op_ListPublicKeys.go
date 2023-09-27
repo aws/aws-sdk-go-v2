@@ -47,6 +47,10 @@ type ListPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPublicKeysInput) operationName() string {
+	return "ListPublicKeys"
+}
+
 type ListPublicKeysOutput struct {
 
 	// Returns a list of all public keys that have been added to CloudFront for this

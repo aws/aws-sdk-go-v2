@@ -52,6 +52,10 @@ type DescribeEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEntitlementsInput) operationName() string {
+	return "DescribeEntitlements"
+}
+
 type DescribeEntitlementsOutput struct {
 
 	// The entitlements.

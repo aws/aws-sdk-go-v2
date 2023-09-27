@@ -44,6 +44,10 @@ type PutAccountVdmAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountVdmAttributesInput) operationName() string {
+	return "PutAccountVdmAttributes"
+}
+
 type PutAccountVdmAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

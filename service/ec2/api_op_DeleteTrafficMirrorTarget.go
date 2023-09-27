@@ -48,6 +48,10 @@ type DeleteTrafficMirrorTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrafficMirrorTargetInput) operationName() string {
+	return "DeleteTrafficMirrorTarget"
+}
+
 type DeleteTrafficMirrorTargetOutput struct {
 
 	// The ID of the deleted Traffic Mirror target.

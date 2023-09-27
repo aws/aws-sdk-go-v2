@@ -44,6 +44,10 @@ type GetConfigurationSetEventDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigurationSetEventDestinationsInput) operationName() string {
+	return "GetConfigurationSetEventDestinations"
+}
+
 // An object that contains information about an event destination.
 type GetConfigurationSetEventDestinationsOutput struct {
 

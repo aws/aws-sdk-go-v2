@@ -53,6 +53,10 @@ type DescribeDirectoryConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDirectoryConfigsInput) operationName() string {
+	return "DescribeDirectoryConfigs"
+}
+
 type DescribeDirectoryConfigsOutput struct {
 
 	// Information about the directory configurations. Note that although the response

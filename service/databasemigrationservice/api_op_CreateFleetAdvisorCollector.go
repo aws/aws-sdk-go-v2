@@ -55,6 +55,10 @@ type CreateFleetAdvisorCollectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFleetAdvisorCollectorInput) operationName() string {
+	return "CreateFleetAdvisorCollector"
+}
+
 type CreateFleetAdvisorCollectorOutput struct {
 
 	// The name of the new Fleet Advisor collector.

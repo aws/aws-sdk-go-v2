@@ -79,6 +79,10 @@ type UpdateIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIncidentRecordInput) operationName() string {
+	return "UpdateIncidentRecord"
+}
+
 type UpdateIncidentRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,6 +49,10 @@ type ListFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFleetsInput) operationName() string {
+	return "ListFleets"
+}
+
 type ListFleetsOutput struct {
 
 	// A list of information for each fleet.

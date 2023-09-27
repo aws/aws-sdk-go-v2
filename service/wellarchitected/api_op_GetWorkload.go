@@ -44,6 +44,10 @@ type GetWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkloadInput) operationName() string {
+	return "GetWorkload"
+}
+
 // Output of a get workload call.
 type GetWorkloadOutput struct {
 

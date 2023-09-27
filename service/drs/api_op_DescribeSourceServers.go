@@ -46,6 +46,10 @@ type DescribeSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSourceServersInput) operationName() string {
+	return "DescribeSourceServers"
+}
+
 type DescribeSourceServersOutput struct {
 
 	// An array of Source Servers.

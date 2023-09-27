@@ -50,6 +50,10 @@ type DeleteQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQualificationTypeInput) operationName() string {
+	return "DeleteQualificationType"
+}
+
 type DeleteQualificationTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

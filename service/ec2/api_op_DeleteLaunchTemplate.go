@@ -52,6 +52,10 @@ type DeleteLaunchTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLaunchTemplateInput) operationName() string {
+	return "DeleteLaunchTemplate"
+}
+
 type DeleteLaunchTemplateOutput struct {
 
 	// Information about the launch template.

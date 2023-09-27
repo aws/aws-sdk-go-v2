@@ -53,6 +53,10 @@ type ModifyDBSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBSubnetGroupInput) operationName() string {
+	return "ModifyDBSubnetGroup"
+}
+
 type ModifyDBSubnetGroupOutput struct {
 
 	// Contains the details of an Amazon RDS DB subnet group. This data type is used

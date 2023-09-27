@@ -41,6 +41,10 @@ type DeleteLoggerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLoggerDefinitionInput) operationName() string {
+	return "DeleteLoggerDefinition"
+}
+
 type DeleteLoggerDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,6 +60,10 @@ type SendDiagnosticInterruptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendDiagnosticInterruptInput) operationName() string {
+	return "SendDiagnosticInterrupt"
+}
+
 type SendDiagnosticInterruptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,6 +55,10 @@ type ModifyClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterParameterGroupInput) operationName() string {
+	return "ModifyClusterParameterGroup"
+}
+
 type ModifyClusterParameterGroupOutput struct {
 
 	// The name of the cluster parameter group.

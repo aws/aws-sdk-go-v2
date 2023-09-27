@@ -54,6 +54,10 @@ type PublishFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PublishFunctionInput) operationName() string {
+	return "PublishFunction"
+}
+
 type PublishFunctionOutput struct {
 
 	// Contains configuration information and metadata about a CloudFront function.

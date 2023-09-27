@@ -41,6 +41,10 @@ type DeleteControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteControlPanelInput) operationName() string {
+	return "DeleteControlPanel"
+}
+
 type DeleteControlPanelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type DisassociateProductFromPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateProductFromPortfolioInput) operationName() string {
+	return "DisassociateProductFromPortfolio"
+}
+
 type DisassociateProductFromPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

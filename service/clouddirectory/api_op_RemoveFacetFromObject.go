@@ -52,6 +52,10 @@ type RemoveFacetFromObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveFacetFromObjectInput) operationName() string {
+	return "RemoveFacetFromObject"
+}
+
 type RemoveFacetFromObjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

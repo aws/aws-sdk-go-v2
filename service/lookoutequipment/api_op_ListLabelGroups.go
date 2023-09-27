@@ -47,6 +47,10 @@ type ListLabelGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLabelGroupsInput) operationName() string {
+	return "ListLabelGroups"
+}
+
 type ListLabelGroupsOutput struct {
 
 	// A summary of the label groups.

@@ -48,6 +48,10 @@ type DeleteAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnalyzerInput) operationName() string {
+	return "DeleteAnalyzer"
+}
+
 type DeleteAnalyzerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

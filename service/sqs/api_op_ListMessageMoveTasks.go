@@ -55,6 +55,10 @@ type ListMessageMoveTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMessageMoveTasksInput) operationName() string {
+	return "ListMessageMoveTasks"
+}
+
 type ListMessageMoveTasksOutput struct {
 
 	// A list of message movement tasks and their attributes.

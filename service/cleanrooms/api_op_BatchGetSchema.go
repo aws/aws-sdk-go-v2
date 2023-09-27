@@ -48,6 +48,10 @@ type BatchGetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetSchemaInput) operationName() string {
+	return "BatchGetSchema"
+}
+
 type BatchGetSchemaOutput struct {
 
 	// Error reasons for schemas that could not be retrieved. One error is returned

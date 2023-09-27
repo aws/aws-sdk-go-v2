@@ -232,6 +232,10 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEndpointInput) operationName() string {
+	return "CreateEndpoint"
+}
+
 type CreateEndpointOutput struct {
 
 	// The endpoint that was created.

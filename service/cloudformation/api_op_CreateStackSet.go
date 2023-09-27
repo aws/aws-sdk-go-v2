@@ -176,6 +176,10 @@ type CreateStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStackSetInput) operationName() string {
+	return "CreateStackSet"
+}
+
 type CreateStackSetOutput struct {
 
 	// The ID of the stack set that you're creating.

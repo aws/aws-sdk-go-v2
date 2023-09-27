@@ -43,6 +43,10 @@ type DescribeThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThingGroupInput) operationName() string {
+	return "DescribeThingGroup"
+}
+
 type DescribeThingGroupOutput struct {
 
 	// The dynamic thing group index name.

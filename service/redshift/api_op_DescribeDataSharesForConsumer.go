@@ -61,6 +61,10 @@ type DescribeDataSharesForConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDataSharesForConsumerInput) operationName() string {
+	return "DescribeDataSharesForConsumer"
+}
+
 type DescribeDataSharesForConsumerOutput struct {
 
 	// Shows the results of datashares available for consumers.

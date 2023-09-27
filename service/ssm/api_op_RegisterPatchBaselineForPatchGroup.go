@@ -46,6 +46,10 @@ type RegisterPatchBaselineForPatchGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterPatchBaselineForPatchGroupInput) operationName() string {
+	return "RegisterPatchBaselineForPatchGroup"
+}
+
 type RegisterPatchBaselineForPatchGroupOutput struct {
 
 	// The ID of the patch baseline the patch group was registered with.

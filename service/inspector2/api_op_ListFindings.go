@@ -56,6 +56,10 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsInput) operationName() string {
+	return "ListFindings"
+}
+
 type ListFindingsOutput struct {
 
 	// Contains details on the findings in your environment.

@@ -59,6 +59,10 @@ type CreateIntentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIntentVersionInput) operationName() string {
+	return "CreateIntentVersion"
+}
+
 type CreateIntentVersionOutput struct {
 
 	// Checksum of the intent version created.

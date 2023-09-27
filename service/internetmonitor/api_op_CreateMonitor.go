@@ -105,6 +105,10 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMonitorInput) operationName() string {
+	return "CreateMonitor"
+}
+
 type CreateMonitorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitor.

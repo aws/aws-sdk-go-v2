@@ -51,6 +51,10 @@ type DescribeBandwidthRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBandwidthRateLimitInput) operationName() string {
+	return "DescribeBandwidthRateLimit"
+}
+
 // A JSON object containing the following fields:
 type DescribeBandwidthRateLimitOutput struct {
 

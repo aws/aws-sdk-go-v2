@@ -61,6 +61,10 @@ type ListTableStorageOptimizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTableStorageOptimizersInput) operationName() string {
+	return "ListTableStorageOptimizers"
+}
+
 type ListTableStorageOptimizersOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if

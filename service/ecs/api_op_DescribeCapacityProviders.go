@@ -64,6 +64,10 @@ type DescribeCapacityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCapacityProvidersInput) operationName() string {
+	return "DescribeCapacityProviders"
+}
+
 type DescribeCapacityProvidersOutput struct {
 
 	// The list of capacity providers.

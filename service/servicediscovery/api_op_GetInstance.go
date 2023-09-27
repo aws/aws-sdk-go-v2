@@ -47,6 +47,10 @@ type GetInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceInput) operationName() string {
+	return "GetInstance"
+}
+
 type GetInstanceOutput struct {
 
 	// A complex type that contains information about a specified instance.

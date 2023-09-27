@@ -43,6 +43,10 @@ type DescribeDeviceFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDeviceFleetInput) operationName() string {
+	return "DescribeDeviceFleet"
+}
+
 type DescribeDeviceFleetOutput struct {
 
 	// Timestamp of when the device fleet was created.

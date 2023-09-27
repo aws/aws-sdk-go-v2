@@ -56,6 +56,10 @@ type PutImageTagMutabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutImageTagMutabilityInput) operationName() string {
+	return "PutImageTagMutability"
+}
+
 type PutImageTagMutabilityOutput struct {
 
 	// The image tag mutability setting for the repository.

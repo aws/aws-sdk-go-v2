@@ -44,6 +44,10 @@ type GetLexiconInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLexiconInput) operationName() string {
+	return "GetLexicon"
+}
+
 type GetLexiconOutput struct {
 
 	// Lexicon object that provides name and the string content of the lexicon.

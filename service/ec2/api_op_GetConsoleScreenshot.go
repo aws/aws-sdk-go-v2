@@ -52,6 +52,10 @@ type GetConsoleScreenshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConsoleScreenshotInput) operationName() string {
+	return "GetConsoleScreenshot"
+}
+
 type GetConsoleScreenshotOutput struct {
 
 	// The data that comprises the image.

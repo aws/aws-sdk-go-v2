@@ -51,6 +51,10 @@ type UnsubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnsubscribeInput) operationName() string {
+	return "Unsubscribe"
+}
+
 type UnsubscribeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

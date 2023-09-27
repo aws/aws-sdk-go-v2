@@ -57,6 +57,10 @@ type DescribeImportImageTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImportImageTasksInput) operationName() string {
+	return "DescribeImportImageTasks"
+}
+
 type DescribeImportImageTasksOutput struct {
 
 	// A list of zero or more import image tasks that are currently active or were

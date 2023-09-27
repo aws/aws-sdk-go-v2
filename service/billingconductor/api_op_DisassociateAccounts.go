@@ -47,6 +47,10 @@ type DisassociateAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateAccountsInput) operationName() string {
+	return "DisassociateAccounts"
+}
+
 type DisassociateAccountsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the billing group that the array of account

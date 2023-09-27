@@ -301,6 +301,10 @@ type QueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryInput) operationName() string {
+	return "Query"
+}
+
 // Represents the output of a Query operation.
 type QueryOutput struct {
 

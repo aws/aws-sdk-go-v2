@@ -56,6 +56,10 @@ type ListExperienceEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListExperienceEntitiesInput) operationName() string {
+	return "ListExperienceEntities"
+}
+
 type ListExperienceEntitiesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token, which you can

@@ -78,6 +78,10 @@ type UpdateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTemplateInput) operationName() string {
+	return "UpdateTemplate"
+}
+
 type UpdateTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) for the template.

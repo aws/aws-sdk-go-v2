@@ -44,6 +44,10 @@ type DeleteAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAttributeGroupInput) operationName() string {
+	return "DeleteAttributeGroup"
+}
+
 type DeleteAttributeGroupOutput struct {
 
 	// Information about the deleted attribute group.

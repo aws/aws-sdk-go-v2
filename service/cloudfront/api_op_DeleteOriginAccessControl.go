@@ -47,6 +47,10 @@ type DeleteOriginAccessControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOriginAccessControlInput) operationName() string {
+	return "DeleteOriginAccessControl"
+}
+
 type DeleteOriginAccessControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

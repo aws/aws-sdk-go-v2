@@ -69,6 +69,10 @@ type CreatePlacementGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePlacementGroupInput) operationName() string {
+	return "CreatePlacementGroup"
+}
+
 type CreatePlacementGroupOutput struct {
 
 	// Information about the placement group.

@@ -44,6 +44,10 @@ type GetReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReportDefinitionInput) operationName() string {
+	return "GetReportDefinition"
+}
+
 type GetReportDefinitionOutput struct {
 
 	// Timestamp (milliseconds) when this report definition was created.

@@ -39,6 +39,10 @@ type DescribeEventConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventConfigurationsInput) operationName() string {
+	return "DescribeEventConfigurations"
+}
+
 type DescribeEventConfigurationsOutput struct {
 
 	// The creation date of the event configuration.

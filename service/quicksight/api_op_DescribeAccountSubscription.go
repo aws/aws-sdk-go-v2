@@ -46,6 +46,10 @@ type DescribeAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountSubscriptionInput) operationName() string {
+	return "DescribeAccountSubscription"
+}
+
 type DescribeAccountSubscriptionOutput struct {
 
 	// A structure that contains the following elements:

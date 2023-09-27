@@ -101,6 +101,10 @@ type CreateConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConstraintInput) operationName() string {
+	return "CreateConstraint"
+}
+
 type CreateConstraintOutput struct {
 
 	// Information about the constraint.

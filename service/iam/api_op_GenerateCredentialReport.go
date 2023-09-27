@@ -38,6 +38,10 @@ type GenerateCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GenerateCredentialReportInput) operationName() string {
+	return "GenerateCredentialReport"
+}
+
 // Contains the response to a successful GenerateCredentialReport request.
 type GenerateCredentialReportOutput struct {
 

@@ -71,6 +71,10 @@ type CreateChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChannelFlowInput) operationName() string {
+	return "CreateChannelFlow"
+}
+
 type CreateChannelFlowOutput struct {
 
 	// The ARN of the channel flow.

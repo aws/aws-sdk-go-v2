@@ -52,6 +52,10 @@ type GetLaunchProfileMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLaunchProfileMemberInput) operationName() string {
+	return "GetLaunchProfileMember"
+}
+
 type GetLaunchProfileMemberOutput struct {
 
 	// The member.

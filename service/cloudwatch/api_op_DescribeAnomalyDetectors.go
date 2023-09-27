@@ -70,6 +70,10 @@ type DescribeAnomalyDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAnomalyDetectorsInput) operationName() string {
+	return "DescribeAnomalyDetectors"
+}
+
 type DescribeAnomalyDetectorsOutput struct {
 
 	// The list of anomaly detection models returned by the operation.

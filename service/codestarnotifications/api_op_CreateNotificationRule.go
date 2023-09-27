@@ -89,6 +89,10 @@ type CreateNotificationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateNotificationRuleInput) operationName() string {
+	return "CreateNotificationRule"
+}
+
 type CreateNotificationRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notification rule.

@@ -49,6 +49,10 @@ type GetInstanceAccessDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceAccessDetailsInput) operationName() string {
+	return "GetInstanceAccessDetails"
+}
+
 type GetInstanceAccessDetailsOutput struct {
 
 	// An array of key-value pairs containing information about a get instance access

@@ -49,6 +49,10 @@ type ListRepositoriesForApprovalRuleTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRepositoriesForApprovalRuleTemplateInput) operationName() string {
+	return "ListRepositoriesForApprovalRuleTemplate"
+}
+
 type ListRepositoriesForApprovalRuleTemplateOutput struct {
 
 	// An enumeration token that allows the operation to batch the next results of the

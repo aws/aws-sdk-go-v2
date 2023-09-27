@@ -42,6 +42,10 @@ type StopFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopFlowInput) operationName() string {
+	return "StopFlow"
+}
+
 type StopFlowOutput struct {
 
 	// The ARN of the flow that you stopped.

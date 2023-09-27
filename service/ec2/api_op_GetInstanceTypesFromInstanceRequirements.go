@@ -80,6 +80,10 @@ type GetInstanceTypesFromInstanceRequirementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceTypesFromInstanceRequirementsInput) operationName() string {
+	return "GetInstanceTypesFromInstanceRequirements"
+}
+
 type GetInstanceTypesFromInstanceRequirementsOutput struct {
 
 	// The instance types with the specified instance attributes.

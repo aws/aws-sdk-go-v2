@@ -78,6 +78,10 @@ type RegisterInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterInstanceInput) operationName() string {
+	return "RegisterInstance"
+}
+
 // Contains the response to a RegisterInstanceResult request.
 type RegisterInstanceOutput struct {
 

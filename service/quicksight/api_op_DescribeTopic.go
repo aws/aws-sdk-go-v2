@@ -48,6 +48,10 @@ type DescribeTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTopicInput) operationName() string {
+	return "DescribeTopic"
+}
+
 type DescribeTopicOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topic.

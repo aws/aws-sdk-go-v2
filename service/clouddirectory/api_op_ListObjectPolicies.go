@@ -59,6 +59,10 @@ type ListObjectPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListObjectPoliciesInput) operationName() string {
+	return "ListObjectPolicies"
+}
+
 type ListObjectPoliciesOutput struct {
 
 	// A list of policy ObjectIdentifiers , that are attached to the object.

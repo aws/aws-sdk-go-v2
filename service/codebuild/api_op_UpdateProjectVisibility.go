@@ -80,6 +80,10 @@ type UpdateProjectVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProjectVisibilityInput) operationName() string {
+	return "UpdateProjectVisibility"
+}
+
 type UpdateProjectVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the build project.

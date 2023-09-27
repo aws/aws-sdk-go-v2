@@ -53,6 +53,10 @@ type DescribeVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVolumesInput) operationName() string {
+	return "DescribeVolumes"
+}
+
 type DescribeVolumesOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).

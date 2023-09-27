@@ -43,6 +43,10 @@ type GetMaintenanceWindowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMaintenanceWindowExecutionInput) operationName() string {
+	return "GetMaintenanceWindowExecution"
+}
+
 type GetMaintenanceWindowExecutionOutput struct {
 
 	// The time the maintenance window finished running.

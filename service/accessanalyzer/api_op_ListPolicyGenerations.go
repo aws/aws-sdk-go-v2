@@ -48,6 +48,10 @@ type ListPolicyGenerationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPolicyGenerationsInput) operationName() string {
+	return "ListPolicyGenerations"
+}
+
 type ListPolicyGenerationsOutput struct {
 
 	// A PolicyGeneration object that contains details about the generated policy.

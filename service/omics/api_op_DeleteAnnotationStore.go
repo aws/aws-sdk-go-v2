@@ -45,6 +45,10 @@ type DeleteAnnotationStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAnnotationStoreInput) operationName() string {
+	return "DeleteAnnotationStore"
+}
+
 type DeleteAnnotationStoreOutput struct {
 
 	// The store's status.

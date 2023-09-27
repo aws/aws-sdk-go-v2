@@ -84,6 +84,10 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchInput) operationName() string {
+	return "Search"
+}
+
 type SearchOutput struct {
 
 	// The number of resources that match the query.

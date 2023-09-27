@@ -49,6 +49,10 @@ type ListAssessmentFrameworkShareRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssessmentFrameworkShareRequestsInput) operationName() string {
+	return "ListAssessmentFrameworkShareRequests"
+}
+
 type ListAssessmentFrameworkShareRequestsOutput struct {
 
 	// The list of share requests that the ListAssessmentFrameworkShareRequests API

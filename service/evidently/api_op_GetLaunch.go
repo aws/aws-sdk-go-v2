@@ -49,6 +49,10 @@ type GetLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLaunchInput) operationName() string {
+	return "GetLaunch"
+}
+
 type GetLaunchOutput struct {
 
 	// A structure containing the configuration details of the launch.

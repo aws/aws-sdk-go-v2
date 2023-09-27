@@ -56,6 +56,10 @@ type StartDevEnvironmentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDevEnvironmentSessionInput) operationName() string {
+	return "StartDevEnvironmentSession"
+}
+
 type StartDevEnvironmentSessionOutput struct {
 
 	// Information about connection details for a Dev Environment.

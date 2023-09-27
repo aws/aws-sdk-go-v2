@@ -51,6 +51,10 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListImportsInput) operationName() string {
+	return "ListImports"
+}
+
 type ListImportsOutput struct {
 
 	// A list of stack names that are importing the specified exported output value.

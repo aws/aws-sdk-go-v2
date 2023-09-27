@@ -62,6 +62,10 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamInput) operationName() string {
+	return "CreateStream"
+}
+
 type CreateStreamOutput struct {
 
 	// A description of the stream.

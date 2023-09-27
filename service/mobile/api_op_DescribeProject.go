@@ -48,6 +48,10 @@ type DescribeProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProjectInput) operationName() string {
+	return "DescribeProject"
+}
+
 // Result structure used for requests of project details.
 type DescribeProjectOutput struct {
 

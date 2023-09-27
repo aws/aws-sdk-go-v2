@@ -71,6 +71,10 @@ type DeleteDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDistributionInput) operationName() string {
+	return "DeleteDistribution"
+}
+
 type DeleteDistributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

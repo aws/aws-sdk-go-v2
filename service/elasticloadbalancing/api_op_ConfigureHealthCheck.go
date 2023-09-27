@@ -51,6 +51,10 @@ type ConfigureHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureHealthCheckInput) operationName() string {
+	return "ConfigureHealthCheck"
+}
+
 // Contains the output of ConfigureHealthCheck.
 type ConfigureHealthCheckOutput struct {
 

@@ -51,6 +51,10 @@ type ListStagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStagesInput) operationName() string {
+	return "ListStages"
+}
+
 type ListStagesOutput struct {
 
 	// The token that indicates the start of the next sequential page of results. Use

@@ -49,6 +49,10 @@ type ListEventConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventConfigurationsInput) operationName() string {
+	return "ListEventConfigurations"
+}
+
 type ListEventConfigurationsOutput struct {
 
 	// Event configurations of all events for a single resource.

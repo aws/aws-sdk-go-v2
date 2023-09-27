@@ -48,6 +48,10 @@ type AddBridgeSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddBridgeSourcesInput) operationName() string {
+	return "AddBridgeSources"
+}
+
 type AddBridgeSourcesOutput struct {
 
 	// The Amazon Resource Number (ARN) of the bridge.

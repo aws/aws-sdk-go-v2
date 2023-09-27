@@ -50,6 +50,10 @@ type ListAvailabilityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailabilityConfigurationsInput) operationName() string {
+	return "ListAvailabilityConfigurations"
+}
+
 type ListAvailabilityConfigurationsOutput struct {
 
 	// The list of AvailabilityConfiguration 's that exist for the specified WorkMail

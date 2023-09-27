@@ -46,6 +46,10 @@ type StopAutomationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopAutomationExecutionInput) operationName() string {
+	return "StopAutomationExecution"
+}
+
 type StopAutomationExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

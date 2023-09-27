@@ -45,6 +45,10 @@ type GetVocabularyFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVocabularyFilterInput) operationName() string {
+	return "GetVocabularyFilter"
+}
+
 type GetVocabularyFilterOutput struct {
 
 	// The Amazon S3 location where the custom vocabulary filter is stored; use this

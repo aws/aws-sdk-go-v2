@@ -48,6 +48,10 @@ type DeleteCoipPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCoipPoolInput) operationName() string {
+	return "DeleteCoipPool"
+}
+
 type DeleteCoipPoolOutput struct {
 
 	// Information about the CoIP address pool.

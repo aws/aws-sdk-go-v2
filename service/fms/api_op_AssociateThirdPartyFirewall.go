@@ -45,6 +45,10 @@ type AssociateThirdPartyFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateThirdPartyFirewallInput) operationName() string {
+	return "AssociateThirdPartyFirewall"
+}
+
 type AssociateThirdPartyFirewallOutput struct {
 
 	// The current status for setting a Firewall Manager policy administrator's

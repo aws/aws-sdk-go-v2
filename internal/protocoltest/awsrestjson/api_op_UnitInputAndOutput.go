@@ -29,6 +29,10 @@ type UnitInputAndOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnitInputAndOutputInput) operationName() string {
+	return "UnitInputAndOutput"
+}
+
 type UnitInputAndOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

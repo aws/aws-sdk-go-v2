@@ -48,6 +48,10 @@ type GetOutpostInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOutpostInstanceTypesInput) operationName() string {
+	return "GetOutpostInstanceTypes"
+}
+
 type GetOutpostInstanceTypesOutput struct {
 
 	// Information about the instance types.

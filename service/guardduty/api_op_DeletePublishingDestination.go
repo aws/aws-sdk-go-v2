@@ -47,6 +47,10 @@ type DeletePublishingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePublishingDestinationInput) operationName() string {
+	return "DeletePublishingDestination"
+}
+
 type DeletePublishingDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

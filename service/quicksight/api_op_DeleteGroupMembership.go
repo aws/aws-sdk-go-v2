@@ -58,6 +58,10 @@ type DeleteGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGroupMembershipInput) operationName() string {
+	return "DeleteGroupMembership"
+}
+
 type DeleteGroupMembershipOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

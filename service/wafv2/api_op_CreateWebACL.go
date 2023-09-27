@@ -126,6 +126,10 @@ type CreateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWebACLInput) operationName() string {
+	return "CreateWebACL"
+}
+
 type CreateWebACLOutput struct {
 
 	// High-level information about a WebACL , returned by operations like create and

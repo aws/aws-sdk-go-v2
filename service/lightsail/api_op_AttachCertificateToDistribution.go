@@ -63,6 +63,10 @@ type AttachCertificateToDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachCertificateToDistributionInput) operationName() string {
+	return "AttachCertificateToDistribution"
+}
+
 type AttachCertificateToDistributionOutput struct {
 
 	// An object that describes the result of the action, such as the status of the

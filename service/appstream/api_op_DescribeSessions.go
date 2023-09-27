@@ -67,6 +67,10 @@ type DescribeSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSessionsInput) operationName() string {
+	return "DescribeSessions"
+}
+
 type DescribeSessionsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

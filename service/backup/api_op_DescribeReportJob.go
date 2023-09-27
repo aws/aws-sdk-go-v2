@@ -45,6 +45,10 @@ type DescribeReportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReportJobInput) operationName() string {
+	return "DescribeReportJob"
+}
+
 type DescribeReportJobOutput struct {
 
 	// A list of information about a report job, including its completion and creation

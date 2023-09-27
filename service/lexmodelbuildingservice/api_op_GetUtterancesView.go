@@ -71,6 +71,10 @@ type GetUtterancesViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUtterancesViewInput) operationName() string {
+	return "GetUtterancesView"
+}
+
 type GetUtterancesViewOutput struct {
 
 	// The name of the bot for which utterance information was returned.

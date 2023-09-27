@@ -42,6 +42,10 @@ type StopBgpFailoverTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopBgpFailoverTestInput) operationName() string {
+	return "StopBgpFailoverTest"
+}
+
 type StopBgpFailoverTestOutput struct {
 
 	// Information about the virtual interface failover test.

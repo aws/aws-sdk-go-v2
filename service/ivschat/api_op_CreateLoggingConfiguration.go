@@ -56,6 +56,10 @@ type CreateLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLoggingConfigurationInput) operationName() string {
+	return "CreateLoggingConfiguration"
+}
+
 type CreateLoggingConfigurationOutput struct {
 
 	// Logging-configuration ARN, assigned by the system.

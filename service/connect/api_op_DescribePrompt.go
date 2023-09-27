@@ -48,6 +48,10 @@ type DescribePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePromptInput) operationName() string {
+	return "DescribePrompt"
+}
+
 type DescribePromptOutput struct {
 
 	// Information about the prompt.

@@ -64,6 +64,10 @@ type ListRoleTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoleTagsInput) operationName() string {
+	return "ListRoleTags"
+}
+
 type ListRoleTagsOutput struct {
 
 	// The list of tags that are currently attached to the role. Each tag consists of

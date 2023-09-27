@@ -47,6 +47,10 @@ type StartAvailabilityMonitorTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartAvailabilityMonitorTestInput) operationName() string {
+	return "StartAvailabilityMonitorTest"
+}
+
 type StartAvailabilityMonitorTestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation

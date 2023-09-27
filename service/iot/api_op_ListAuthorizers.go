@@ -51,6 +51,10 @@ type ListAuthorizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAuthorizersInput) operationName() string {
+	return "ListAuthorizers"
+}
+
 type ListAuthorizersOutput struct {
 
 	// The authorizers.

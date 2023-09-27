@@ -54,6 +54,10 @@ type ListResolversByFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResolversByFunctionInput) operationName() string {
+	return "ListResolversByFunction"
+}
+
 type ListResolversByFunctionOutput struct {
 
 	// An identifier that you can use to return the next set of items in the list.

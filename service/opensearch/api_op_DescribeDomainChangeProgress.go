@@ -51,6 +51,10 @@ type DescribeDomainChangeProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainChangeProgressInput) operationName() string {
+	return "DescribeDomainChangeProgress"
+}
+
 // The result of a DescribeDomainChangeProgress request. Contains progress
 // information for the requested domain change.
 type DescribeDomainChangeProgressOutput struct {

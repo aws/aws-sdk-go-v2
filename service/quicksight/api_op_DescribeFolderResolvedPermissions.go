@@ -57,6 +57,10 @@ type DescribeFolderResolvedPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFolderResolvedPermissionsInput) operationName() string {
+	return "DescribeFolderResolvedPermissions"
+}
+
 type DescribeFolderResolvedPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the folder.

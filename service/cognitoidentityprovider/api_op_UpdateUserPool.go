@@ -161,6 +161,10 @@ type UpdateUserPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserPoolInput) operationName() string {
+	return "UpdateUserPool"
+}
+
 // Represents the response from the server when you make a request to update the
 // user pool.
 type UpdateUserPoolOutput struct {

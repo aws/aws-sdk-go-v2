@@ -282,6 +282,10 @@ type AssumeRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssumeRoleInput) operationName() string {
+	return "AssumeRole"
+}
+
 // Contains the response to a successful AssumeRole request, including temporary
 // Amazon Web Services credentials that can be used to make Amazon Web Services
 // requests.

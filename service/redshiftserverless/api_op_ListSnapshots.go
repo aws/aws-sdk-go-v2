@@ -63,6 +63,10 @@ type ListSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSnapshotsInput) operationName() string {
+	return "ListSnapshots"
+}
+
 type ListSnapshotsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of

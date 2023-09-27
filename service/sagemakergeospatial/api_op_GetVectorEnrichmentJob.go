@@ -44,6 +44,10 @@ type GetVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVectorEnrichmentJobInput) operationName() string {
+	return "GetVectorEnrichmentJob"
+}
+
 type GetVectorEnrichmentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Vector Enrichment job.

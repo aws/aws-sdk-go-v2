@@ -61,6 +61,10 @@ type ListMobileDeviceAccessOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMobileDeviceAccessOverridesInput) operationName() string {
+	return "ListMobileDeviceAccessOverrides"
+}
+
 type ListMobileDeviceAccessOverridesOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is “null” when

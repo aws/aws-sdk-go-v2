@@ -54,6 +54,10 @@ type DescribeProvisionedProductPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeProvisionedProductPlanInput) operationName() string {
+	return "DescribeProvisionedProductPlan"
+}
+
 type DescribeProvisionedProductPlanOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

@@ -49,6 +49,10 @@ type DisableIpamOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableIpamOrganizationAdminAccountInput) operationName() string {
+	return "DisableIpamOrganizationAdminAccount"
+}
+
 type DisableIpamOrganizationAdminAccountOutput struct {
 
 	// The result of disabling the IPAM account.

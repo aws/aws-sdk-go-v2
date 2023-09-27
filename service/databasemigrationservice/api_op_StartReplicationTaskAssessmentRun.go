@@ -102,6 +102,10 @@ type StartReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartReplicationTaskAssessmentRunInput) operationName() string {
+	return "StartReplicationTaskAssessmentRun"
+}
+
 type StartReplicationTaskAssessmentRunOutput struct {
 
 	// The premigration assessment run that was started.

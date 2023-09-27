@@ -58,6 +58,10 @@ type CreateEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEventBusInput) operationName() string {
+	return "CreateEventBus"
+}
+
 type CreateEventBusOutput struct {
 
 	// The ARN of the new event bus.

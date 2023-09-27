@@ -48,6 +48,10 @@ type UpdateVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateVoiceProfileDomainInput) operationName() string {
+	return "UpdateVoiceProfileDomain"
+}
+
 type UpdateVoiceProfileDomainOutput struct {
 
 	// The updated details of the voice profile domain.

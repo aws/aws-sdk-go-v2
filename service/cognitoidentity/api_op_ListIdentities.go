@@ -57,6 +57,10 @@ type ListIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentitiesInput) operationName() string {
+	return "ListIdentities"
+}
+
 // The response to a ListIdentities request.
 type ListIdentitiesOutput struct {
 

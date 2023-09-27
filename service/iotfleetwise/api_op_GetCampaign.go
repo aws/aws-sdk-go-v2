@@ -43,6 +43,10 @@ type GetCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCampaignInput) operationName() string {
+	return "GetCampaign"
+}
+
 type GetCampaignOutput struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.

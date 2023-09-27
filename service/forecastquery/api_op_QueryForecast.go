@@ -72,6 +72,10 @@ type QueryForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*QueryForecastInput) operationName() string {
+	return "QueryForecast"
+}
+
 type QueryForecastOutput struct {
 
 	// The forecast.

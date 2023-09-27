@@ -54,6 +54,10 @@ type GetKxConnectionStringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKxConnectionStringInput) operationName() string {
+	return "GetKxConnectionString"
+}
+
 type GetKxConnectionStringOutput struct {
 
 	// The signed connection string that you can use to connect to clusters.

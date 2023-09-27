@@ -55,6 +55,10 @@ type DeletePartitionIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePartitionIndexInput) operationName() string {
+	return "DeletePartitionIndex"
+}
+
 type DeletePartitionIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

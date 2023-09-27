@@ -41,6 +41,10 @@ type GetDeviceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceDefinitionInput) operationName() string {
+	return "GetDeviceDefinition"
+}
+
 type GetDeviceDefinitionOutput struct {
 
 	// The ARN of the definition.

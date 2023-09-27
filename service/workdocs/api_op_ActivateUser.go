@@ -46,6 +46,10 @@ type ActivateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateUserInput) operationName() string {
+	return "ActivateUser"
+}
+
 type ActivateUserOutput struct {
 
 	// The user information.

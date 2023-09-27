@@ -56,6 +56,10 @@ type AssociateTimeSeriesToAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateTimeSeriesToAssetPropertyInput) operationName() string {
+	return "AssociateTimeSeriesToAssetProperty"
+}
+
 type AssociateTimeSeriesToAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

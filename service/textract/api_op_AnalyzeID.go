@@ -45,6 +45,10 @@ type AnalyzeIDInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AnalyzeIDInput) operationName() string {
+	return "AnalyzeID"
+}
+
 type AnalyzeIDOutput struct {
 
 	// The version of the AnalyzeIdentity API being used to process documents.

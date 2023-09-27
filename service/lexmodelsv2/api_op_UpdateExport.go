@@ -50,6 +50,10 @@ type UpdateExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateExportInput) operationName() string {
+	return "UpdateExport"
+}
+
 type UpdateExportOutput struct {
 
 	// The date and time that the export was created.

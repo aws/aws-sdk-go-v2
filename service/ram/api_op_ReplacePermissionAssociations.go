@@ -76,6 +76,10 @@ type ReplacePermissionAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReplacePermissionAssociationsInput) operationName() string {
+	return "ReplacePermissionAssociations"
+}
+
 type ReplacePermissionAssociationsOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

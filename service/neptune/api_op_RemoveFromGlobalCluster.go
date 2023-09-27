@@ -51,6 +51,10 @@ type RemoveFromGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveFromGlobalClusterInput) operationName() string {
+	return "RemoveFromGlobalCluster"
+}
+
 type RemoveFromGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database. This data type is

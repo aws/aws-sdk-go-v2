@@ -44,6 +44,10 @@ type CancelZonalShiftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelZonalShiftInput) operationName() string {
+	return "CancelZonalShift"
+}
+
 type CancelZonalShiftOutput struct {
 
 	// The Availability Zone that traffic is moved away from for a resource when you

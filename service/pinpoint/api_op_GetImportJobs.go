@@ -52,6 +52,10 @@ type GetImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImportJobsInput) operationName() string {
+	return "GetImportJobs"
+}
+
 type GetImportJobsOutput struct {
 
 	// Provides information about the status and settings of all the import jobs that

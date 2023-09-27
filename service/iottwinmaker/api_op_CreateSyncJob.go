@@ -57,6 +57,10 @@ type CreateSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSyncJobInput) operationName() string {
+	return "CreateSyncJob"
+}
+
 type CreateSyncJobOutput struct {
 
 	// The SyncJob ARN.

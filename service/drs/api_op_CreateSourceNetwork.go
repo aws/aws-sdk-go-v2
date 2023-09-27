@@ -54,6 +54,10 @@ type CreateSourceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSourceNetworkInput) operationName() string {
+	return "CreateSourceNetwork"
+}
+
 type CreateSourceNetworkOutput struct {
 
 	// ID of the created Source Network.

@@ -55,6 +55,10 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAliasesInput) operationName() string {
+	return "ListAliases"
+}
+
 type ListAliasesOutput struct {
 
 	// A token for getting the next set of aliases, if more aliases exist.

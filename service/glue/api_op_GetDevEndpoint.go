@@ -45,6 +45,10 @@ type GetDevEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDevEndpointInput) operationName() string {
+	return "GetDevEndpoint"
+}
+
 type GetDevEndpointOutput struct {
 
 	// A DevEndpoint definition.

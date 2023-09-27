@@ -46,6 +46,10 @@ type TagProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TagProjectInput) operationName() string {
+	return "TagProject"
+}
+
 type TagProjectOutput struct {
 
 	// The tags for the project.

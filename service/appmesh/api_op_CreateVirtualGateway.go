@@ -76,6 +76,10 @@ type CreateVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVirtualGatewayInput) operationName() string {
+	return "CreateVirtualGateway"
+}
+
 type CreateVirtualGatewayOutput struct {
 
 	// The full description of your virtual gateway following the create call.

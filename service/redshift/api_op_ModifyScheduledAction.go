@@ -70,6 +70,10 @@ type ModifyScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyScheduledActionInput) operationName() string {
+	return "ModifyScheduledAction"
+}
+
 // Describes a scheduled action. You can use a scheduled action to trigger some
 // Amazon Redshift API operations on a schedule. For information about which API
 // operations can be scheduled, see ScheduledActionType .

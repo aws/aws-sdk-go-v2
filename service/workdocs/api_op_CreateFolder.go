@@ -49,6 +49,10 @@ type CreateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFolderInput) operationName() string {
+	return "CreateFolder"
+}
+
 type CreateFolderOutput struct {
 
 	// The metadata of the folder.

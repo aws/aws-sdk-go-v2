@@ -50,6 +50,10 @@ type ListSkillsStoreSkillsByCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSkillsStoreSkillsByCategoryInput) operationName() string {
+	return "ListSkillsStoreSkillsByCategory"
+}
+
 type ListSkillsStoreSkillsByCategoryOutput struct {
 
 	// The tokens used for pagination.

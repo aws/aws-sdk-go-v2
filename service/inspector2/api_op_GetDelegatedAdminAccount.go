@@ -37,6 +37,10 @@ type GetDelegatedAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDelegatedAdminAccountInput) operationName() string {
+	return "GetDelegatedAdminAccount"
+}
+
 type GetDelegatedAdminAccountOutput struct {
 
 	// The Amazon Web Services account ID of the Amazon Inspector delegated

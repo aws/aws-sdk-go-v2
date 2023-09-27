@@ -61,6 +61,10 @@ type ExportEarthObservationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportEarthObservationJobInput) operationName() string {
+	return "ExportEarthObservationJob"
+}
+
 type ExportEarthObservationJobOutput struct {
 
 	// The output Amazon Resource Name (ARN) of the Earth Observation job being

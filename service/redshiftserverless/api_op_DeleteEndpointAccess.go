@@ -42,6 +42,10 @@ type DeleteEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEndpointAccessInput) operationName() string {
+	return "DeleteEndpointAccess"
+}
+
 type DeleteEndpointAccessOutput struct {
 
 	// The deleted VPC endpoint.

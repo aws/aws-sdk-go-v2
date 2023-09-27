@@ -61,6 +61,10 @@ type SearchFlowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchFlowExecutionsInput) operationName() string {
+	return "SearchFlowExecutions"
+}
+
 type SearchFlowExecutionsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.

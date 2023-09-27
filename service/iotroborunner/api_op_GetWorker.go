@@ -43,6 +43,10 @@ type GetWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkerInput) operationName() string {
+	return "GetWorker"
+}
+
 type GetWorkerOutput struct {
 
 	// Full ARN of the worker.

@@ -63,6 +63,10 @@ type CreateFleetLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFleetLocationsInput) operationName() string {
+	return "CreateFleetLocations"
+}
+
 type CreateFleetLocationsOutput struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)

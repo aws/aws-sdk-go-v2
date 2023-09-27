@@ -55,6 +55,10 @@ type GetChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChangeInput) operationName() string {
+	return "GetChange"
+}
+
 // A complex type that contains the ChangeInfo element.
 type GetChangeOutput struct {
 

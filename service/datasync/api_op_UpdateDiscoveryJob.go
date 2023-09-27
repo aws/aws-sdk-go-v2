@@ -49,6 +49,10 @@ type UpdateDiscoveryJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDiscoveryJobInput) operationName() string {
+	return "UpdateDiscoveryJob"
+}
+
 type UpdateDiscoveryJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

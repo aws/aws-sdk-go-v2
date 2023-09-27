@@ -45,6 +45,10 @@ type ValidateMatchmakingRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ValidateMatchmakingRuleSetInput) operationName() string {
+	return "ValidateMatchmakingRuleSet"
+}
+
 type ValidateMatchmakingRuleSetOutput struct {
 
 	// A response indicating whether the rule set is valid.

@@ -45,6 +45,10 @@ type DisableSerialConsoleAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableSerialConsoleAccessInput) operationName() string {
+	return "DisableSerialConsoleAccess"
+}
+
 type DisableSerialConsoleAccessOutput struct {
 
 	// If true , access to the EC2 serial console of all instances is enabled for your

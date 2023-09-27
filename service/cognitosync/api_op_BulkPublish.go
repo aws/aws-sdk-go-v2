@@ -49,6 +49,10 @@ type BulkPublishInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BulkPublishInput) operationName() string {
+	return "BulkPublish"
+}
+
 // The output for the BulkPublish operation.
 type BulkPublishOutput struct {
 

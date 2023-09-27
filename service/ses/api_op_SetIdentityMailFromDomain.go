@@ -69,6 +69,10 @@ type SetIdentityMailFromDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetIdentityMailFromDomainInput) operationName() string {
+	return "SetIdentityMailFromDomain"
+}
+
 // An empty element returned on a successful request.
 type SetIdentityMailFromDomainOutput struct {
 	// Metadata pertaining to the operation's result.

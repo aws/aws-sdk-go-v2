@@ -165,6 +165,10 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutScalingPolicyInput) operationName() string {
+	return "PutScalingPolicy"
+}
+
 type PutScalingPolicyOutput struct {
 
 	// A descriptive label that is associated with a fleet's scaling policy. Policy

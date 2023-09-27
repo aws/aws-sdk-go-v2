@@ -207,6 +207,10 @@ type AssumeRoleWithSAMLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssumeRoleWithSAMLInput) operationName() string {
+	return "AssumeRoleWithSAML"
+}
+
 // Contains the response to a successful AssumeRoleWithSAML request, including
 // temporary Amazon Web Services credentials that can be used to make Amazon Web
 // Services requests.

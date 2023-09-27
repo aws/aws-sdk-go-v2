@@ -52,6 +52,10 @@ type ListDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDestinationsInput) operationName() string {
+	return "ListDestinations"
+}
+
 type ListDestinationsOutput struct {
 
 	// List of destinations.

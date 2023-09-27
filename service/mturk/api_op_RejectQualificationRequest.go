@@ -48,6 +48,10 @@ type RejectQualificationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectQualificationRequestInput) operationName() string {
+	return "RejectQualificationRequest"
+}
+
 type RejectQualificationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

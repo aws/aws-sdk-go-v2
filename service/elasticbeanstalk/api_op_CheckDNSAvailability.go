@@ -42,6 +42,10 @@ type CheckDNSAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckDNSAvailabilityInput) operationName() string {
+	return "CheckDNSAvailability"
+}
+
 // Indicates if the specified CNAME is available.
 type CheckDNSAvailabilityOutput struct {
 

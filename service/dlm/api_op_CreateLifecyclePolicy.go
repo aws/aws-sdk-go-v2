@@ -63,6 +63,10 @@ type CreateLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLifecyclePolicyInput) operationName() string {
+	return "CreateLifecyclePolicy"
+}
+
 type CreateLifecyclePolicyOutput struct {
 
 	// The identifier of the lifecycle policy.

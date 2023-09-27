@@ -50,6 +50,10 @@ type DeleteFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFileShareInput) operationName() string {
+	return "DeleteFileShare"
+}
+
 // DeleteFileShareOutput
 type DeleteFileShareOutput struct {
 

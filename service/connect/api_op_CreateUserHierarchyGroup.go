@@ -55,6 +55,10 @@ type CreateUserHierarchyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserHierarchyGroupInput) operationName() string {
+	return "CreateUserHierarchyGroup"
+}
+
 type CreateUserHierarchyGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hierarchy group.

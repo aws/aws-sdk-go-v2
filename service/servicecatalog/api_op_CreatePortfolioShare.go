@@ -90,6 +90,10 @@ type CreatePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePortfolioShareInput) operationName() string {
+	return "CreatePortfolioShare"
+}
+
 type CreatePortfolioShareOutput struct {
 
 	// The portfolio shares a unique identifier that only returns if the portfolio is

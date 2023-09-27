@@ -51,6 +51,10 @@ type DeleteFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFormInput) operationName() string {
+	return "DeleteForm"
+}
+
 type DeleteFormOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

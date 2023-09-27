@@ -59,6 +59,10 @@ type RevokeSnapshotAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeSnapshotAccessInput) operationName() string {
+	return "RevokeSnapshotAccess"
+}
+
 type RevokeSnapshotAccessOutput struct {
 
 	// Describes a snapshot.

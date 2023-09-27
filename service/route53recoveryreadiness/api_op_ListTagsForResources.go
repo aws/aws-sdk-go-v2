@@ -41,6 +41,10 @@ type ListTagsForResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourcesInput) operationName() string {
+	return "ListTagsForResources"
+}
+
 type ListTagsForResourcesOutput struct {
 
 	//

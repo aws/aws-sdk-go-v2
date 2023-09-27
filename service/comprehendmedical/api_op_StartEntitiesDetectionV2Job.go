@@ -76,6 +76,10 @@ type StartEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartEntitiesDetectionV2JobInput) operationName() string {
+	return "StartEntitiesDetectionV2Job"
+}
+
 type StartEntitiesDetectionV2JobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this

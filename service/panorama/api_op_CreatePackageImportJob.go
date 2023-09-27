@@ -60,6 +60,10 @@ type CreatePackageImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePackageImportJobInput) operationName() string {
+	return "CreatePackageImportJob"
+}
+
 type CreatePackageImportJobOutput struct {
 
 	// The job's ID.

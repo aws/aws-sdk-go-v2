@@ -95,6 +95,10 @@ type PutObjectLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutObjectLegalHoldInput) operationName() string {
+	return "PutObjectLegalHold"
+}
+
 type PutObjectLegalHoldOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

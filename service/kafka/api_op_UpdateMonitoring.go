@@ -61,6 +61,10 @@ type UpdateMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMonitoringInput) operationName() string {
+	return "UpdateMonitoring"
+}
+
 type UpdateMonitoringOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.

@@ -74,6 +74,10 @@ type DescribeTransitGatewayAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTransitGatewayAttachmentsInput) operationName() string {
+	return "DescribeTransitGatewayAttachments"
+}
+
 type DescribeTransitGatewayAttachmentsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when

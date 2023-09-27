@@ -68,6 +68,10 @@ type GetIpamPoolAllocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetIpamPoolAllocationsInput) operationName() string {
+	return "GetIpamPoolAllocations"
+}
+
 type GetIpamPoolAllocationsOutput struct {
 
 	// The IPAM pool allocations you want information on.

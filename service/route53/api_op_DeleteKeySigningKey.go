@@ -52,6 +52,10 @@ type DeleteKeySigningKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKeySigningKeyInput) operationName() string {
+	return "DeleteKeySigningKey"
+}
+
 type DeleteKeySigningKeyOutput struct {
 
 	// A complex type that describes change information about changes made to your

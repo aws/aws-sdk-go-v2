@@ -56,6 +56,10 @@ type DescribeNetworkInsightsAccessScopesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNetworkInsightsAccessScopesInput) operationName() string {
+	return "DescribeNetworkInsightsAccessScopes"
+}
+
 type DescribeNetworkInsightsAccessScopesOutput struct {
 
 	// The Network Access Scopes.

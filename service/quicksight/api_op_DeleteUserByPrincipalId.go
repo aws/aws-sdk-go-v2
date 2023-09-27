@@ -53,6 +53,10 @@ type DeleteUserByPrincipalIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserByPrincipalIdInput) operationName() string {
+	return "DeleteUserByPrincipalId"
+}
+
 type DeleteUserByPrincipalIdOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

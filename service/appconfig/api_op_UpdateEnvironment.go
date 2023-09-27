@@ -56,6 +56,10 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEnvironmentInput) operationName() string {
+	return "UpdateEnvironment"
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The application ID.

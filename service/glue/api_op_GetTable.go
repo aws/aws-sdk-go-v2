@@ -62,6 +62,10 @@ type GetTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableInput) operationName() string {
+	return "GetTable"
+}
+
 type GetTableOutput struct {
 
 	// The Table object that defines the specified table.

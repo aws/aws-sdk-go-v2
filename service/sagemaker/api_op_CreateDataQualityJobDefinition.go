@@ -85,6 +85,10 @@ type CreateDataQualityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataQualityJobDefinitionInput) operationName() string {
+	return "CreateDataQualityJobDefinition"
+}
+
 type CreateDataQualityJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job definition.

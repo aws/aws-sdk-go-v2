@@ -52,6 +52,10 @@ type ListAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAlertsInput) operationName() string {
+	return "ListAlerts"
+}
+
 type ListAlertsOutput struct {
 
 	// A list of alerts that are associated with this resource.

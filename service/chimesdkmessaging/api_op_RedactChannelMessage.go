@@ -58,6 +58,10 @@ type RedactChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RedactChannelMessageInput) operationName() string {
+	return "RedactChannelMessage"
+}
+
 type RedactChannelMessageOutput struct {
 
 	// The ARN of the channel containing the messages that you want to redact.

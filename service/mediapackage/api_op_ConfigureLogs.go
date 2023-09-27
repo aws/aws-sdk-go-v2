@@ -49,6 +49,10 @@ type ConfigureLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfigureLogsInput) operationName() string {
+	return "ConfigureLogs"
+}
+
 type ConfigureLogsOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.

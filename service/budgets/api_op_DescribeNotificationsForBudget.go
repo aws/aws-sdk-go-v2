@@ -57,6 +57,10 @@ type DescribeNotificationsForBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNotificationsForBudgetInput) operationName() string {
+	return "DescribeNotificationsForBudget"
+}
+
 // Response of GetNotificationsForBudget
 type DescribeNotificationsForBudgetOutput struct {
 

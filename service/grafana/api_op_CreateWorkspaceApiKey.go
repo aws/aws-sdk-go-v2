@@ -60,6 +60,10 @@ type CreateWorkspaceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkspaceApiKeyInput) operationName() string {
+	return "CreateWorkspaceApiKey"
+}
+
 type CreateWorkspaceApiKeyOutput struct {
 
 	// The key token. Use this value as a bearer token to authenticate HTTP requests

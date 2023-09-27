@@ -56,6 +56,10 @@ type DescribeTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTargetGroupsInput) operationName() string {
+	return "DescribeTargetGroups"
+}
+
 type DescribeTargetGroupsOutput struct {
 
 	// If there are additional results, this is the marker for the next set of

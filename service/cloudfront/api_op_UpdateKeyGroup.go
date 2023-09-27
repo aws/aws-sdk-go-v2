@@ -58,6 +58,10 @@ type UpdateKeyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateKeyGroupInput) operationName() string {
+	return "UpdateKeyGroup"
+}
+
 type UpdateKeyGroupOutput struct {
 
 	// The identifier for this version of the key group.

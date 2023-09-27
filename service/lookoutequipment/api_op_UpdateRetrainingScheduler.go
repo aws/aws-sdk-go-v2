@@ -67,6 +67,10 @@ type UpdateRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRetrainingSchedulerInput) operationName() string {
+	return "UpdateRetrainingScheduler"
+}
+
 type UpdateRetrainingSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

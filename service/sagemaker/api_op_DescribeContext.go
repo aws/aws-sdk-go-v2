@@ -43,6 +43,10 @@ type DescribeContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContextInput) operationName() string {
+	return "DescribeContext"
+}
+
 type DescribeContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.

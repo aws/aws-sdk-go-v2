@@ -37,6 +37,10 @@ type GetAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAdminAccountInput) operationName() string {
+	return "GetAdminAccount"
+}
+
 type GetAdminAccountOutput struct {
 
 	// The account that is set as the Firewall Manager default administrator.

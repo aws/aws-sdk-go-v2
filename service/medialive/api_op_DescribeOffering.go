@@ -43,6 +43,10 @@ type DescribeOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeOfferingInput) operationName() string {
+	return "DescribeOffering"
+}
+
 // Placeholder documentation for DescribeOfferingResponse
 type DescribeOfferingOutput struct {
 

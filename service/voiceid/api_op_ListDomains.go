@@ -48,6 +48,10 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDomainsInput) operationName() string {
+	return "ListDomains"
+}
+
 type ListDomainsOutput struct {
 
 	// A list containing details about each domain in the Amazon Web Services account.

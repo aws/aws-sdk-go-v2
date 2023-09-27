@@ -53,6 +53,10 @@ type DescribeThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeThemeAliasInput) operationName() string {
+	return "DescribeThemeAlias"
+}
+
 type DescribeThemeAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

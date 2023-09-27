@@ -47,6 +47,10 @@ type DetectMetricSetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectMetricSetConfigInput) operationName() string {
+	return "DetectMetricSetConfig"
+}
+
 type DetectMetricSetConfigOutput struct {
 
 	// The inferred dataset configuration for the datasource.

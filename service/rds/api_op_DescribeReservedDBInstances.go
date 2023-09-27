@@ -86,6 +86,10 @@ type DescribeReservedDBInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeReservedDBInstancesInput) operationName() string {
+	return "DescribeReservedDBInstances"
+}
+
 // Contains the result of a successful invocation of the
 // DescribeReservedDBInstances action.
 type DescribeReservedDBInstancesOutput struct {

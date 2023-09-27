@@ -49,6 +49,10 @@ type UpdateEmailChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEmailChannelInput) operationName() string {
+	return "UpdateEmailChannel"
+}
+
 type UpdateEmailChannelOutput struct {
 
 	// Provides information about the status and settings of the email channel for an

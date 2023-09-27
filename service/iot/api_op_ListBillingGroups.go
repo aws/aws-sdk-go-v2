@@ -49,6 +49,10 @@ type ListBillingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBillingGroupsInput) operationName() string {
+	return "ListBillingGroups"
+}
+
 type ListBillingGroupsOutput struct {
 
 	// The list of billing groups.

@@ -61,6 +61,10 @@ type DeleteRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRecommendationPreferencesInput) operationName() string {
+	return "DeleteRecommendationPreferences"
+}
+
 type DeleteRecommendationPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

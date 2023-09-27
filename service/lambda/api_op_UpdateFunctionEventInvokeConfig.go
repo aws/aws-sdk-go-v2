@@ -68,6 +68,10 @@ type UpdateFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFunctionEventInvokeConfigInput) operationName() string {
+	return "UpdateFunctionEventInvokeConfig"
+}
+
 type UpdateFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for

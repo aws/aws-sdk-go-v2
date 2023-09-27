@@ -45,6 +45,10 @@ type CancelTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelTaskInput) operationName() string {
+	return "CancelTask"
+}
+
 type CancelTaskOutput struct {
 
 	// The ID of the task that you are attempting to cancel.

@@ -49,6 +49,10 @@ type StartDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDeploymentInput) operationName() string {
+	return "StartDeployment"
+}
+
 type StartDeploymentOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can

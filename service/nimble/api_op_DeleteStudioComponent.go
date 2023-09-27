@@ -53,6 +53,10 @@ type DeleteStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStudioComponentInput) operationName() string {
+	return "DeleteStudioComponent"
+}
+
 type DeleteStudioComponentOutput struct {
 
 	// Information about the studio component.

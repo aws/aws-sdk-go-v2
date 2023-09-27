@@ -58,6 +58,10 @@ type TerminateClientVpnConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateClientVpnConnectionsInput) operationName() string {
+	return "TerminateClientVpnConnections"
+}
+
 type TerminateClientVpnConnectionsOutput struct {
 
 	// The ID of the Client VPN endpoint.

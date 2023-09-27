@@ -46,6 +46,10 @@ type DescribeFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFindingsInput) operationName() string {
+	return "DescribeFindings"
+}
+
 type DescribeFindingsOutput struct {
 
 	// Finding details that cannot be described. An error code is provided for each

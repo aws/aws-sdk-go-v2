@@ -52,6 +52,10 @@ type ListEntityRecognizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntityRecognizersInput) operationName() string {
+	return "ListEntityRecognizers"
+}
+
 type ListEntityRecognizersOutput struct {
 
 	// The list of properties of an entity recognizer.

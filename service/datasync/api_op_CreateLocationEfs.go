@@ -78,6 +78,10 @@ type CreateLocationEfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocationEfsInput) operationName() string {
+	return "CreateLocationEfs"
+}
+
 // CreateLocationEfs
 type CreateLocationEfsOutput struct {
 

@@ -51,6 +51,10 @@ type GetReadSetActivationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReadSetActivationJobInput) operationName() string {
+	return "GetReadSetActivationJob"
+}
+
 type GetReadSetActivationJobOutput struct {
 
 	// When the job was created.

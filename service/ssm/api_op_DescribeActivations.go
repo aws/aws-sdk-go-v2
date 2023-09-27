@@ -50,6 +50,10 @@ type DescribeActivationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeActivationsInput) operationName() string {
+	return "DescribeActivations"
+}
+
 type DescribeActivationsOutput struct {
 
 	// A list of activations for your Amazon Web Services account.

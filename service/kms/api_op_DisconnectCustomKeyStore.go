@@ -67,6 +67,10 @@ type DisconnectCustomKeyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisconnectCustomKeyStoreInput) operationName() string {
+	return "DisconnectCustomKeyStore"
+}
+
 type DisconnectCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

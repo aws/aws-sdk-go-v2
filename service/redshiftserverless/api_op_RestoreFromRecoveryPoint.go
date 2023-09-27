@@ -52,6 +52,10 @@ type RestoreFromRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreFromRecoveryPointInput) operationName() string {
+	return "RestoreFromRecoveryPoint"
+}
+
 type RestoreFromRecoveryPointOutput struct {
 
 	// The namespace that data was restored into.

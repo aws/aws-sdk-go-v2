@@ -55,6 +55,10 @@ type CreateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSpaceInput) operationName() string {
+	return "CreateSpace"
+}
+
 type CreateSpaceOutput struct {
 
 	// The space's Amazon Resource Name (ARN).

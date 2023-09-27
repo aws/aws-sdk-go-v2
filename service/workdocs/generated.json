@@ -53,6 +53,7 @@
         "api_op_UpdateDocumentVersion.go",
         "api_op_UpdateFolder.go",
         "api_op_UpdateUser.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

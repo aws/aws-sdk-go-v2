@@ -49,6 +49,10 @@ type GetCellReadinessSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCellReadinessSummaryInput) operationName() string {
+	return "GetCellReadinessSummary"
+}
+
 type GetCellReadinessSummaryOutput struct {
 
 	// The token that identifies which batch of results you want to see.

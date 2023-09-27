@@ -71,6 +71,10 @@ type UpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePhoneNumberInput) operationName() string {
+	return "UpdatePhoneNumber"
+}
+
 type UpdatePhoneNumberOutput struct {
 
 	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)

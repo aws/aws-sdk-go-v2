@@ -14,6 +14,7 @@
         "api_op_GetControlOperation.go",
         "api_op_GetEnabledControl.go",
         "api_op_ListEnabledControls.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

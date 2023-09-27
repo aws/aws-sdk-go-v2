@@ -46,6 +46,10 @@ type AssociateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateMemberInput) operationName() string {
+	return "AssociateMember"
+}
+
 type AssociateMemberOutput struct {
 
 	// The Amazon Web Services account ID of the successfully associated member

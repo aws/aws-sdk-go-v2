@@ -55,6 +55,10 @@ type DescribeSubscriptionFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSubscriptionFiltersInput) operationName() string {
+	return "DescribeSubscriptionFilters"
+}
+
 type DescribeSubscriptionFiltersOutput struct {
 
 	// The token for the next set of items to return. The token expires after 24 hours.

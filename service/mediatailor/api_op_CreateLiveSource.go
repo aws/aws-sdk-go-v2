@@ -59,6 +59,10 @@ type CreateLiveSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLiveSourceInput) operationName() string {
+	return "CreateLiveSource"
+}
+
 type CreateLiveSourceOutput struct {
 
 	// The ARN to assign to the live source.

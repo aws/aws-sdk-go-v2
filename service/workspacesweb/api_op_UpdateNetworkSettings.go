@@ -62,6 +62,10 @@ type UpdateNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNetworkSettingsInput) operationName() string {
+	return "UpdateNetworkSettings"
+}
+
 type UpdateNetworkSettingsOutput struct {
 
 	// The network settings.

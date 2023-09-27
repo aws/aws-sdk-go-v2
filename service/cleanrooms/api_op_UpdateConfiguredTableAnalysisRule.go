@@ -54,6 +54,10 @@ type UpdateConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfiguredTableAnalysisRuleInput) operationName() string {
+	return "UpdateConfiguredTableAnalysisRule"
+}
+
 type UpdateConfiguredTableAnalysisRuleOutput struct {
 
 	// The entire updated analysis rule.

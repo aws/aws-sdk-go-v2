@@ -68,6 +68,10 @@ type ListEventPredictionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventPredictionsInput) operationName() string {
+	return "ListEventPredictions"
+}
+
 type ListEventPredictionsOutput struct {
 
 	// The summary of the past predictions.

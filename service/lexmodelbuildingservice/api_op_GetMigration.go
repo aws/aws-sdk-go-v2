@@ -46,6 +46,10 @@ type GetMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMigrationInput) operationName() string {
+	return "GetMigration"
+}
+
 type GetMigrationOutput struct {
 
 	// A list of alerts and warnings that indicate issues with the migration for the

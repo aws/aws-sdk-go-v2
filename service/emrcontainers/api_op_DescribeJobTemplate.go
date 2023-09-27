@@ -46,6 +46,10 @@ type DescribeJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeJobTemplateInput) operationName() string {
+	return "DescribeJobTemplate"
+}
+
 type DescribeJobTemplateOutput struct {
 
 	// This output displays information about the specified job template.

@@ -57,6 +57,10 @@ type GetGroupMembershipIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGroupMembershipIdInput) operationName() string {
+	return "GetGroupMembershipId"
+}
+
 type GetGroupMembershipIdOutput struct {
 
 	// The globally unique identifier for the identity store.

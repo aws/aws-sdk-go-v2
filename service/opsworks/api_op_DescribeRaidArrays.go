@@ -54,6 +54,10 @@ type DescribeRaidArraysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRaidArraysInput) operationName() string {
+	return "DescribeRaidArrays"
+}
+
 // Contains the response to a DescribeRaidArrays request.
 type DescribeRaidArraysOutput struct {
 

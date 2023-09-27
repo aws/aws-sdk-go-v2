@@ -55,6 +55,10 @@ type ListPlatformVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPlatformVersionsInput) operationName() string {
+	return "ListPlatformVersions"
+}
+
 type ListPlatformVersionsOutput struct {
 
 	// In a paginated request, if this value isn't null , it's the token that you can

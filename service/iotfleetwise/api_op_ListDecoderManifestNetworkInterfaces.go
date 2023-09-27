@@ -54,6 +54,10 @@ type ListDecoderManifestNetworkInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDecoderManifestNetworkInterfacesInput) operationName() string {
+	return "ListDecoderManifestNetworkInterfaces"
+}
+
 type ListDecoderManifestNetworkInterfacesOutput struct {
 
 	// A list of information about network interfaces.

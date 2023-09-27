@@ -37,6 +37,10 @@ type GetAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountInput) operationName() string {
+	return "GetAccount"
+}
+
 // Represents an AWS account that is associated with API Gateway.
 type GetAccountOutput struct {
 

@@ -57,6 +57,10 @@ type ListConstraintsForPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConstraintsForPortfolioInput) operationName() string {
+	return "ListConstraintsForPortfolio"
+}
+
 type ListConstraintsForPortfolioOutput struct {
 
 	// Information about the constraints.

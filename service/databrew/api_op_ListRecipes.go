@@ -49,6 +49,10 @@ type ListRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecipesInput) operationName() string {
+	return "ListRecipes"
+}
+
 type ListRecipesOutput struct {
 
 	// A list of recipes that are defined.

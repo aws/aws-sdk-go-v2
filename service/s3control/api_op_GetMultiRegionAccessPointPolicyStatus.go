@@ -63,6 +63,10 @@ type GetMultiRegionAccessPointPolicyStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMultiRegionAccessPointPolicyStatusInput) operationName() string {
+	return "GetMultiRegionAccessPointPolicyStatus"
+}
+
 type GetMultiRegionAccessPointPolicyStatusOutput struct {
 
 	// Indicates whether this access point policy is public. For more information

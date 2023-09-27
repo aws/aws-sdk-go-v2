@@ -43,6 +43,10 @@ type BatchGetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetFindingsInput) operationName() string {
+	return "BatchGetFindings"
+}
+
 type BatchGetFindingsOutput struct {
 
 	// A list of errors for individual findings which were not fetched. Each

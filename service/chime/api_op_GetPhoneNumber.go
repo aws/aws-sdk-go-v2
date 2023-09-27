@@ -43,6 +43,10 @@ type GetPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPhoneNumberInput) operationName() string {
+	return "GetPhoneNumber"
+}
+
 type GetPhoneNumberOutput struct {
 
 	// The phone number details.

@@ -36,6 +36,10 @@ type GetFindingsPublicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFindingsPublicationConfigurationInput) operationName() string {
+	return "GetFindingsPublicationConfiguration"
+}
+
 type GetFindingsPublicationConfigurationOutput struct {
 
 	// The configuration settings that determine which findings are published to

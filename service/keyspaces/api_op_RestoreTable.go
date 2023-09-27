@@ -122,6 +122,10 @@ type RestoreTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreTableInput) operationName() string {
+	return "RestoreTable"
+}
+
 type RestoreTableOutput struct {
 
 	// The Amazon Resource Name (ARN) of the restored table.

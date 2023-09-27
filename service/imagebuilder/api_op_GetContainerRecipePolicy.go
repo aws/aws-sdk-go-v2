@@ -42,6 +42,10 @@ type GetContainerRecipePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerRecipePolicyInput) operationName() string {
+	return "GetContainerRecipePolicy"
+}
+
 type GetContainerRecipePolicyOutput struct {
 
 	// The container recipe policy object that is returned.

@@ -46,6 +46,10 @@ type CreateApplicationSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationSnapshotInput) operationName() string {
+	return "CreateApplicationSnapshot"
+}
+
 type CreateApplicationSnapshotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

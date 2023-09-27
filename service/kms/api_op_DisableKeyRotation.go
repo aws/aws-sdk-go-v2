@@ -72,6 +72,10 @@ type DisableKeyRotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableKeyRotationInput) operationName() string {
+	return "DisableKeyRotation"
+}
+
 type DisableKeyRotationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

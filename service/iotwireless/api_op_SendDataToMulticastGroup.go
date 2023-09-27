@@ -52,6 +52,10 @@ type SendDataToMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendDataToMulticastGroupInput) operationName() string {
+	return "SendDataToMulticastGroup"
+}
+
 type SendDataToMulticastGroupOutput struct {
 
 	// ID of a multicast group message.

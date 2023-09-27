@@ -48,6 +48,10 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDashboardsInput) operationName() string {
+	return "ListDashboards"
+}
+
 type ListDashboardsOutput struct {
 
 	// A list that summarizes each dashboard in the project.

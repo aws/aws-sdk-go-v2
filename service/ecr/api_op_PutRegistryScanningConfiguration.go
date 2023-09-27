@@ -53,6 +53,10 @@ type PutRegistryScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRegistryScanningConfigurationInput) operationName() string {
+	return "PutRegistryScanningConfiguration"
+}
+
 type PutRegistryScanningConfigurationOutput struct {
 
 	// The scanning configuration for your registry.

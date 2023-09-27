@@ -41,6 +41,10 @@ type DeleteBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBrowserSettingsInput) operationName() string {
+	return "DeleteBrowserSettings"
+}
+
 type DeleteBrowserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

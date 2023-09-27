@@ -72,6 +72,10 @@ type GetBucketNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketNotificationConfigurationInput) operationName() string {
+	return "GetBucketNotificationConfiguration"
+}
+
 // A container for specifying the notification configuration of the bucket. If
 // this element is empty, notifications are turned off for the bucket.
 type GetBucketNotificationConfigurationOutput struct {

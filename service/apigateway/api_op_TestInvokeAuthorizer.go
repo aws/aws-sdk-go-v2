@@ -71,6 +71,10 @@ type TestInvokeAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestInvokeAuthorizerInput) operationName() string {
+	return "TestInvokeAuthorizer"
+}
+
 // Represents the response of the test invoke request for a custom Authorizer
 type TestInvokeAuthorizerOutput struct {
 

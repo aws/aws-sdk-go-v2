@@ -57,6 +57,10 @@ type NotifyWorkersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*NotifyWorkersInput) operationName() string {
+	return "NotifyWorkers"
+}
+
 type NotifyWorkersOutput struct {
 
 	// When MTurk sends notifications to the list of Workers, it returns back any

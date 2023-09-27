@@ -49,6 +49,10 @@ type AuthorizeIpRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeIpRulesInput) operationName() string {
+	return "AuthorizeIpRules"
+}
+
 type AuthorizeIpRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

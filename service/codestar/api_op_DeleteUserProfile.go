@@ -44,6 +44,10 @@ type DeleteUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserProfileInput) operationName() string {
+	return "DeleteUserProfile"
+}
+
 type DeleteUserProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.

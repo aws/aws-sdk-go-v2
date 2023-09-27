@@ -41,6 +41,10 @@ type DeleteRoutingControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRoutingControlInput) operationName() string {
+	return "DeleteRoutingControl"
+}
+
 type DeleteRoutingControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

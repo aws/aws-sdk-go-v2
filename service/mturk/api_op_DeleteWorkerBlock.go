@@ -50,6 +50,10 @@ type DeleteWorkerBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkerBlockInput) operationName() string {
+	return "DeleteWorkerBlock"
+}
+
 type DeleteWorkerBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

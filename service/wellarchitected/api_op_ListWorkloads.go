@@ -48,6 +48,10 @@ type ListWorkloadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkloadsInput) operationName() string {
+	return "ListWorkloads"
+}
+
 // Output of a list workloads call.
 type ListWorkloadsOutput struct {
 

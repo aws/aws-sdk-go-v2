@@ -53,6 +53,10 @@ type ListBatchLoadTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBatchLoadTasksInput) operationName() string {
+	return "ListBatchLoadTasks"
+}
+
 type ListBatchLoadTasksOutput struct {
 
 	// A list of batch load task details.

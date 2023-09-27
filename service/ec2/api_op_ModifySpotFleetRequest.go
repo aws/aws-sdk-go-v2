@@ -85,6 +85,10 @@ type ModifySpotFleetRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySpotFleetRequestInput) operationName() string {
+	return "ModifySpotFleetRequest"
+}
+
 // Contains the output of ModifySpotFleetRequest.
 type ModifySpotFleetRequestOutput struct {
 

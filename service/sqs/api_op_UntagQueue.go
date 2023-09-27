@@ -51,6 +51,10 @@ type UntagQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagQueueInput) operationName() string {
+	return "UntagQueue"
+}
+
 type UntagQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

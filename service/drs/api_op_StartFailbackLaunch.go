@@ -47,6 +47,10 @@ type StartFailbackLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartFailbackLaunchInput) operationName() string {
+	return "StartFailbackLaunch"
+}
+
 type StartFailbackLaunchOutput struct {
 
 	// The failback launch Job.

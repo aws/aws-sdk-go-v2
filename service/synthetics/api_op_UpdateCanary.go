@@ -109,6 +109,10 @@ type UpdateCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCanaryInput) operationName() string {
+	return "UpdateCanary"
+}
+
 type UpdateCanaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

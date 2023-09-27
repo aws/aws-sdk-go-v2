@@ -66,6 +66,10 @@ type CreatePerformanceAnalysisReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePerformanceAnalysisReportInput) operationName() string {
+	return "CreatePerformanceAnalysisReport"
+}
+
 type CreatePerformanceAnalysisReportOutput struct {
 
 	// A unique identifier for the created analysis report.

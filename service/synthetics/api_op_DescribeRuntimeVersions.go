@@ -49,6 +49,10 @@ type DescribeRuntimeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRuntimeVersionsInput) operationName() string {
+	return "DescribeRuntimeVersions"
+}
+
 type DescribeRuntimeVersionsOutput struct {
 
 	// A token that indicates that there is more data available. You can use this

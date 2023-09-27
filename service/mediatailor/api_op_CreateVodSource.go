@@ -59,6 +59,10 @@ type CreateVodSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVodSourceInput) operationName() string {
+	return "CreateVodSource"
+}
+
 type CreateVodSourceOutput struct {
 
 	// The ARN to assign to this VOD source.

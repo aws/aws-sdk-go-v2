@@ -35,6 +35,10 @@ type GetLatestAssessmentIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLatestAssessmentIdInput) operationName() string {
+	return "GetLatestAssessmentId"
+}
+
 type GetLatestAssessmentIdOutput struct {
 
 	// The latest ID for the specific assessment task.

@@ -60,6 +60,10 @@ type UpdateResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourceShareInput) operationName() string {
+	return "UpdateResourceShare"
+}
+
 type UpdateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

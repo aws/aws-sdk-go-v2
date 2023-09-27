@@ -76,6 +76,10 @@ type GetRelationalDatabaseLogEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseLogEventsInput) operationName() string {
+	return "GetRelationalDatabaseLogEvents"
+}
+
 type GetRelationalDatabaseLogEventsOutput struct {
 
 	// A token used for advancing to the previous page of results from your get

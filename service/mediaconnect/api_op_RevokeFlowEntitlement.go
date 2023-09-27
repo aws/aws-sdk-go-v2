@@ -47,6 +47,10 @@ type RevokeFlowEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RevokeFlowEntitlementInput) operationName() string {
+	return "RevokeFlowEntitlement"
+}
+
 type RevokeFlowEntitlementOutput struct {
 
 	// The ARN of the entitlement that was revoked.

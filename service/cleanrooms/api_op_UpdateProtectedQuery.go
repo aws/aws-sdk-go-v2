@@ -53,6 +53,10 @@ type UpdateProtectedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProtectedQueryInput) operationName() string {
+	return "UpdateProtectedQuery"
+}
+
 type UpdateProtectedQueryOutput struct {
 
 	// The protected query output.

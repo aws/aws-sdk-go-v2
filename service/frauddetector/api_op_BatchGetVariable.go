@@ -42,6 +42,10 @@ type BatchGetVariableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetVariableInput) operationName() string {
+	return "BatchGetVariable"
+}
+
 type BatchGetVariableOutput struct {
 
 	// The errors from the request.

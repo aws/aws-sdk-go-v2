@@ -48,6 +48,10 @@ type RegisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterTargetsInput) operationName() string {
+	return "RegisterTargets"
+}
+
 type RegisterTargetsOutput struct {
 
 	// The targets that were successfully registered.

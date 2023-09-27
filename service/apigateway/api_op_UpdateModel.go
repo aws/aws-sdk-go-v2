@@ -52,6 +52,10 @@ type UpdateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateModelInput) operationName() string {
+	return "UpdateModel"
+}
+
 // Represents the data structure of a method's request or response payload.
 type UpdateModelOutput struct {
 

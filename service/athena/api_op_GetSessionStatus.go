@@ -42,6 +42,10 @@ type GetSessionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSessionStatusInput) operationName() string {
+	return "GetSessionStatus"
+}
+
 type GetSessionStatusOutput struct {
 
 	// The session ID.

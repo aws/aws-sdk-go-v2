@@ -36,6 +36,10 @@ type GetSparqlStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSparqlStatisticsInput) operationName() string {
+	return "GetSparqlStatistics"
+}
+
 type GetSparqlStatisticsOutput struct {
 
 	// Statistics for RDF data.

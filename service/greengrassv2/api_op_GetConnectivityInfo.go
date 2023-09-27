@@ -49,6 +49,10 @@ type GetConnectivityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConnectivityInfoInput) operationName() string {
+	return "GetConnectivityInfo"
+}
+
 type GetConnectivityInfoOutput struct {
 
 	// The connectivity information for the core device.

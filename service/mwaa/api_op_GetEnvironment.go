@@ -42,6 +42,10 @@ type GetEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnvironmentInput) operationName() string {
+	return "GetEnvironment"
+}
+
 type GetEnvironmentOutput struct {
 
 	// An object containing all available details about the environment.

@@ -70,6 +70,10 @@ type GetManagedEndpointSessionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetManagedEndpointSessionCredentialsInput) operationName() string {
+	return "GetManagedEndpointSessionCredentials"
+}
+
 type GetManagedEndpointSessionCredentialsOutput struct {
 
 	// The structure containing the session credentials.

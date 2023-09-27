@@ -53,6 +53,10 @@ type UpdateHttpNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateHttpNamespaceInput) operationName() string {
+	return "UpdateHttpNamespace"
+}
+
 type UpdateHttpNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed

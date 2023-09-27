@@ -47,6 +47,10 @@ type DisassociateIpGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateIpGroupsInput) operationName() string {
+	return "DisassociateIpGroups"
+}
+
 type DisassociateIpGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

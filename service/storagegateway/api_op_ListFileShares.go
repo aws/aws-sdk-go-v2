@@ -54,6 +54,10 @@ type ListFileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFileSharesInput) operationName() string {
+	return "ListFileShares"
+}
+
 // ListFileShareOutput
 type ListFileSharesOutput struct {
 

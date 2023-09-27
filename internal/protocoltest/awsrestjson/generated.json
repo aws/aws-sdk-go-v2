@@ -160,6 +160,7 @@
         "api_op_TimestampFormatHeaders_test.go",
         "api_op_UnitInputAndOutput.go",
         "api_op_UnitInputAndOutput_test.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "document/doc.go",

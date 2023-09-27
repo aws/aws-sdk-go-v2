@@ -48,6 +48,10 @@ type DescribeContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeContactEvaluationInput) operationName() string {
+	return "DescribeContactEvaluation"
+}
+
 type DescribeContactEvaluationOutput struct {
 
 	// Information about the evaluation form completed for a specific contact.

@@ -43,6 +43,10 @@ type DescribeKinesisStreamingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeKinesisStreamingDestinationInput) operationName() string {
+	return "DescribeKinesisStreamingDestination"
+}
+
 type DescribeKinesisStreamingDestinationOutput struct {
 
 	// The list of replica structures for the table being described.

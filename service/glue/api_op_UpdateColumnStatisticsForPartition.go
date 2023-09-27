@@ -62,6 +62,10 @@ type UpdateColumnStatisticsForPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateColumnStatisticsForPartitionInput) operationName() string {
+	return "UpdateColumnStatisticsForPartition"
+}
+
 type UpdateColumnStatisticsForPartitionOutput struct {
 
 	// Error occurred during updating column statistics data.

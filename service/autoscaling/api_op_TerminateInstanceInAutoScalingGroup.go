@@ -60,6 +60,10 @@ type TerminateInstanceInAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateInstanceInAutoScalingGroupInput) operationName() string {
+	return "TerminateInstanceInAutoScalingGroup"
+}
+
 type TerminateInstanceInAutoScalingGroupOutput struct {
 
 	// A scaling activity.

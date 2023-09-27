@@ -207,6 +207,10 @@ type CreateSMBFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSMBFileShareInput) operationName() string {
+	return "CreateSMBFileShare"
+}
+
 // CreateSMBFileShareOutput
 type CreateSMBFileShareOutput struct {
 

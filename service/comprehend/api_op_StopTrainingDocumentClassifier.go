@@ -47,6 +47,10 @@ type StopTrainingDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopTrainingDocumentClassifierInput) operationName() string {
+	return "StopTrainingDocumentClassifier"
+}
+
 type StopTrainingDocumentClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

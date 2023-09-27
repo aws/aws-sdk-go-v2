@@ -61,6 +61,10 @@ type ListAWSDefaultServiceQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAWSDefaultServiceQuotasInput) operationName() string {
+	return "ListAWSDefaultServiceQuotas"
+}
+
 type ListAWSDefaultServiceQuotasOutput struct {
 
 	// If present, indicates that more output is available than is included in the

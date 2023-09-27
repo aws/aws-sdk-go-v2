@@ -49,6 +49,10 @@ type ListArchiveRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListArchiveRulesInput) operationName() string {
+	return "ListArchiveRules"
+}
+
 // The response to the request.
 type ListArchiveRulesOutput struct {
 

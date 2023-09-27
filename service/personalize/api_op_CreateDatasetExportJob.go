@@ -80,6 +80,10 @@ type CreateDatasetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDatasetExportJobInput) operationName() string {
+	return "CreateDatasetExportJob"
+}
+
 type CreateDatasetExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset export job.

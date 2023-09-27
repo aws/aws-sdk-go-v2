@@ -56,6 +56,10 @@ type DisconnectFromServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisconnectFromServiceInput) operationName() string {
+	return "DisconnectFromService"
+}
+
 type DisconnectFromServiceOutput struct {
 
 	// Source server application ID.

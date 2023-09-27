@@ -58,6 +58,10 @@ type GetFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFunctionInput) operationName() string {
+	return "GetFunction"
+}
+
 type GetFunctionOutput struct {
 
 	// The deployment package of the function or version.

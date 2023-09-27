@@ -42,6 +42,10 @@ type BatchGetAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetAccountStatusInput) operationName() string {
+	return "BatchGetAccountStatus"
+}
+
 type BatchGetAccountStatusOutput struct {
 
 	// An array of objects that provide details on the status of Amazon Inspector for

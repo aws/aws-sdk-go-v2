@@ -70,6 +70,10 @@ type StartMessageMoveTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMessageMoveTaskInput) operationName() string {
+	return "StartMessageMoveTask"
+}
+
 type StartMessageMoveTaskOutput struct {
 
 	// An identifier associated with a message movement task. You can use this

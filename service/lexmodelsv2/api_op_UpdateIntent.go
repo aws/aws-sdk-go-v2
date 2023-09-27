@@ -106,6 +106,10 @@ type UpdateIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIntentInput) operationName() string {
+	return "UpdateIntent"
+}
+
 type UpdateIntentOutput struct {
 
 	// The identifier of the bot that contains the intent.

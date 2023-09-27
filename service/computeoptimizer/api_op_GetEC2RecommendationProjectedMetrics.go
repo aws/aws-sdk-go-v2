@@ -74,6 +74,10 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEC2RecommendationProjectedMetricsInput) operationName() string {
+	return "GetEC2RecommendationProjectedMetrics"
+}
+
 type GetEC2RecommendationProjectedMetricsOutput struct {
 
 	// An array of objects that describes projected metrics.

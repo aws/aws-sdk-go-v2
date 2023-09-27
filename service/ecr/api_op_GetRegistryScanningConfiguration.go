@@ -36,6 +36,10 @@ type GetRegistryScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRegistryScanningConfigurationInput) operationName() string {
+	return "GetRegistryScanningConfiguration"
+}
+
 type GetRegistryScanningConfigurationOutput struct {
 
 	// The ID of the registry.

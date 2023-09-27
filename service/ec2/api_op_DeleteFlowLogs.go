@@ -48,6 +48,10 @@ type DeleteFlowLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFlowLogsInput) operationName() string {
+	return "DeleteFlowLogs"
+}
+
 type DeleteFlowLogsOutput struct {
 
 	// Information about the flow logs that could not be deleted successfully.

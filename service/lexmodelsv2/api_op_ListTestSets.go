@@ -49,6 +49,10 @@ type ListTestSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestSetsInput) operationName() string {
+	return "ListTestSets"
+}
+
 type ListTestSetsOutput struct {
 
 	// A token that indicates whether there are more results to return in a response

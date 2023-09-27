@@ -48,6 +48,10 @@ type ListMemberAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMemberAccountsInput) operationName() string {
+	return "ListMemberAccounts"
+}
+
 type ListMemberAccountsOutput struct {
 
 	// (Discontinued) A list of the Amazon Macie Classic member accounts returned by

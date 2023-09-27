@@ -54,6 +54,10 @@ type CreateBackendEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBackendEnvironmentInput) operationName() string {
+	return "CreateBackendEnvironment"
+}
+
 // The result structure for the create backend environment request.
 type CreateBackendEnvironmentOutput struct {
 

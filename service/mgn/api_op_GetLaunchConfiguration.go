@@ -45,6 +45,10 @@ type GetLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetLaunchConfigurationInput) operationName() string {
+	return "GetLaunchConfiguration"
+}
+
 type GetLaunchConfigurationOutput struct {
 
 	// Launch configuration boot mode.

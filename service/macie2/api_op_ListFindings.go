@@ -50,6 +50,10 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsInput) operationName() string {
+	return "ListFindings"
+}
+
 type ListFindingsOutput struct {
 
 	// An array of strings, where each string is the unique identifier for a finding

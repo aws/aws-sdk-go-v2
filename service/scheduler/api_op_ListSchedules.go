@@ -56,6 +56,10 @@ type ListSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSchedulesInput) operationName() string {
+	return "ListSchedules"
+}
+
 type ListSchedulesOutput struct {
 
 	// The schedules that match the specified criteria.

@@ -51,6 +51,10 @@ type DeleteReceiptRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteReceiptRuleInput) operationName() string {
+	return "DeleteReceiptRule"
+}
+
 // An empty element returned on a successful request.
 type DeleteReceiptRuleOutput struct {
 	// Metadata pertaining to the operation's result.

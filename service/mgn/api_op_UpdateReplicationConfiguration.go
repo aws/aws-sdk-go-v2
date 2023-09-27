@@ -91,6 +91,10 @@ type UpdateReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateReplicationConfigurationInput) operationName() string {
+	return "UpdateReplicationConfiguration"
+}
+
 type UpdateReplicationConfigurationOutput struct {
 
 	// Replication Configuration associate default Application Migration Service

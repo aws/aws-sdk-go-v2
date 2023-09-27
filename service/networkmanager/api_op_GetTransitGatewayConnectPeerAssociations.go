@@ -52,6 +52,10 @@ type GetTransitGatewayConnectPeerAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransitGatewayConnectPeerAssociationsInput) operationName() string {
+	return "GetTransitGatewayConnectPeerAssociations"
+}
+
 type GetTransitGatewayConnectPeerAssociationsOutput struct {
 
 	// The token to use for the next page of results.

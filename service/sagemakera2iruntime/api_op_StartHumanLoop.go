@@ -57,6 +57,10 @@ type StartHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartHumanLoopInput) operationName() string {
+	return "StartHumanLoop"
+}
+
 type StartHumanLoopOutput struct {
 
 	// The Amazon Resource Name (ARN) of the human loop.

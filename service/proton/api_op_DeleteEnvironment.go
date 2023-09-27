@@ -42,6 +42,10 @@ type DeleteEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteEnvironmentInput) operationName() string {
+	return "DeleteEnvironment"
+}
+
 type DeleteEnvironmentOutput struct {
 
 	// The detailed data of the environment being deleted.

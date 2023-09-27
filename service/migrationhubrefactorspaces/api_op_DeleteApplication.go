@@ -50,6 +50,10 @@ type DeleteApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationInput) operationName() string {
+	return "DeleteApplication"
+}
+
 type DeleteApplicationOutput struct {
 
 	// The ID of the application.

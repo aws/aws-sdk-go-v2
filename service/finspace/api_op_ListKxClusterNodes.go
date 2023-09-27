@@ -53,6 +53,10 @@ type ListKxClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListKxClusterNodesInput) operationName() string {
+	return "ListKxClusterNodes"
+}
+
 type ListKxClusterNodesOutput struct {
 
 	// A token that indicates where a results page should begin.

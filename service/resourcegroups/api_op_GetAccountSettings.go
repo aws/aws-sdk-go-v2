@@ -36,6 +36,10 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSettingsInput) operationName() string {
+	return "GetAccountSettings"
+}
+
 type GetAccountSettingsOutput struct {
 
 	// The current settings for the optional features in Resource Groups.

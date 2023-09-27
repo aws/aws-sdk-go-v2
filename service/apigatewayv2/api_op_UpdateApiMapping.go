@@ -58,6 +58,10 @@ type UpdateApiMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateApiMappingInput) operationName() string {
+	return "UpdateApiMapping"
+}
+
 type UpdateApiMappingOutput struct {
 
 	// The API identifier.

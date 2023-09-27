@@ -111,6 +111,10 @@ type SendEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendEmailInput) operationName() string {
+	return "SendEmail"
+}
+
 // A unique message ID that you receive when an email is accepted for sending.
 type SendEmailOutput struct {
 

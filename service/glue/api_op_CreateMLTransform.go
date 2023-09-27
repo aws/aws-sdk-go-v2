@@ -143,6 +143,10 @@ type CreateMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMLTransformInput) operationName() string {
+	return "CreateMLTransform"
+}
+
 type CreateMLTransformOutput struct {
 
 	// A unique identifier that is generated for the transform.

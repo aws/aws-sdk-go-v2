@@ -42,6 +42,10 @@ type GetRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecoveryPointInput) operationName() string {
+	return "GetRecoveryPoint"
+}
+
 type GetRecoveryPointOutput struct {
 
 	// The returned recovery point object.

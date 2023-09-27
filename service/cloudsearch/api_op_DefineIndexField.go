@@ -59,6 +59,10 @@ type DefineIndexFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DefineIndexFieldInput) operationName() string {
+	return "DefineIndexField"
+}
+
 // The result of a DefineIndexField request. Contains the status of the
 // newly-configured index field.
 type DefineIndexFieldOutput struct {

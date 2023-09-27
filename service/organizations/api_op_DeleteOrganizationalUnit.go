@@ -48,6 +48,10 @@ type DeleteOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOrganizationalUnitInput) operationName() string {
+	return "DeleteOrganizationalUnit"
+}
+
 type DeleteOrganizationalUnitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

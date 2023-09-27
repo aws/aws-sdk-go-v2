@@ -48,6 +48,10 @@ type DeleteVoiceConnectorTerminationCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVoiceConnectorTerminationCredentialsInput) operationName() string {
+	return "DeleteVoiceConnectorTerminationCredentials"
+}
+
 type DeleteVoiceConnectorTerminationCredentialsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

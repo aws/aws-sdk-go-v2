@@ -42,6 +42,10 @@ type BatchDeleteAutomationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteAutomationRulesInput) operationName() string {
+	return "BatchDeleteAutomationRules"
+}
+
 type BatchDeleteAutomationRulesOutput struct {
 
 	// A list of properly processed rule ARNs.

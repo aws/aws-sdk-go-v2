@@ -41,6 +41,10 @@ type BatchGetViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetViewInput) operationName() string {
+	return "BatchGetView"
+}
+
 type BatchGetViewOutput struct {
 
 	// If any of the specified ARNs result in an error, then this structure describes

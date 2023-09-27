@@ -44,6 +44,10 @@ type ListMatchingWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMatchingWorkflowsInput) operationName() string {
+	return "ListMatchingWorkflows"
+}
+
 type ListMatchingWorkflowsOutput struct {
 
 	// The pagination token from the previous API call.

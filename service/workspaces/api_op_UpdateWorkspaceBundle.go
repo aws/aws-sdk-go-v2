@@ -47,6 +47,10 @@ type UpdateWorkspaceBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkspaceBundleInput) operationName() string {
+	return "UpdateWorkspaceBundle"
+}
+
 type UpdateWorkspaceBundleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

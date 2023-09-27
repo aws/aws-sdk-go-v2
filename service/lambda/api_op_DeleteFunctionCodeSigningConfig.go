@@ -46,6 +46,10 @@ type DeleteFunctionCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFunctionCodeSigningConfigInput) operationName() string {
+	return "DeleteFunctionCodeSigningConfig"
+}
+
 type DeleteFunctionCodeSigningConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

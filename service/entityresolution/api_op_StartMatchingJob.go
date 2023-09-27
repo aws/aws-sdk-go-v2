@@ -42,6 +42,10 @@ type StartMatchingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMatchingJobInput) operationName() string {
+	return "StartMatchingJob"
+}
+
 type StartMatchingJobOutput struct {
 
 	// The ID of the job.

@@ -64,6 +64,10 @@ type GetInstancesHealthStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstancesHealthStatusInput) operationName() string {
+	return "GetInstancesHealthStatus"
+}
+
 type GetInstancesHealthStatusOutput struct {
 
 	// If more than MaxResults instances match the specified criteria, you can submit

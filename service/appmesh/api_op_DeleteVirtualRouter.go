@@ -55,6 +55,10 @@ type DeleteVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVirtualRouterInput) operationName() string {
+	return "DeleteVirtualRouter"
+}
+
 type DeleteVirtualRouterOutput struct {
 
 	// The virtual router that was deleted.

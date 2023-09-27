@@ -48,6 +48,10 @@ type ListEventStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEventStreamsInput) operationName() string {
+	return "ListEventStreams"
+}
+
 type ListEventStreamsOutput struct {
 
 	// Contains summary information about an EventStream.

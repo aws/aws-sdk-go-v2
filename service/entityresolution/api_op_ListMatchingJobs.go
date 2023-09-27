@@ -48,6 +48,10 @@ type ListMatchingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMatchingJobsInput) operationName() string {
+	return "ListMatchingJobs"
+}
+
 type ListMatchingJobsOutput struct {
 
 	// A list of JobSummary objects, each of which contain the ID, status, start time,

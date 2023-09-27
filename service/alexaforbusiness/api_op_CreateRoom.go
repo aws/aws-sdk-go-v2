@@ -59,6 +59,10 @@ type CreateRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoomInput) operationName() string {
+	return "CreateRoom"
+}
+
 type CreateRoomOutput struct {
 
 	// The ARN of the newly created room in the response.

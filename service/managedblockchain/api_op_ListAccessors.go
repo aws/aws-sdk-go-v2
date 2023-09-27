@@ -45,6 +45,10 @@ type ListAccessorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessorsInput) operationName() string {
+	return "ListAccessors"
+}
+
 type ListAccessorsOutput struct {
 
 	// An array of AccessorSummary objects that contain configuration properties for

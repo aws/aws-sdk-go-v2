@@ -68,6 +68,10 @@ type AddApplicationVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationVpcConfigurationInput) operationName() string {
+	return "AddApplicationVpcConfiguration"
+}
+
 type AddApplicationVpcConfigurationOutput struct {
 
 	// The ARN of the application.

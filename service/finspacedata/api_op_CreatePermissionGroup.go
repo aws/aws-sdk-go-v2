@@ -69,6 +69,10 @@ type CreatePermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePermissionGroupInput) operationName() string {
+	return "CreatePermissionGroup"
+}
+
 type CreatePermissionGroupOutput struct {
 
 	// The unique identifier for the permission group.

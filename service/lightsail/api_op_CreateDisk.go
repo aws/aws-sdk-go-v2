@@ -66,6 +66,10 @@ type CreateDiskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDiskInput) operationName() string {
+	return "CreateDisk"
+}
+
 type CreateDiskOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

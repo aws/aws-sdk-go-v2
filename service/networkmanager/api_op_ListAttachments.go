@@ -55,6 +55,10 @@ type ListAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttachmentsInput) operationName() string {
+	return "ListAttachments"
+}
+
 type ListAttachmentsOutput struct {
 
 	// Describes the list of attachments.

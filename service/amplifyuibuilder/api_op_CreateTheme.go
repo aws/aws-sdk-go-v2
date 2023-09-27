@@ -55,6 +55,10 @@ type CreateThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateThemeInput) operationName() string {
+	return "CreateTheme"
+}
+
 type CreateThemeOutput struct {
 
 	// Describes the configuration of the new theme.

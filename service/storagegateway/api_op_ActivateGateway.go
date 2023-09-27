@@ -112,6 +112,10 @@ type ActivateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ActivateGatewayInput) operationName() string {
+	return "ActivateGateway"
+}
+
 // Storage Gateway returns the Amazon Resource Name (ARN) of the activated
 // gateway. It is a string made of information such as your account, gateway name,
 // and Amazon Web Services Region. This ARN is used to reference the gateway in

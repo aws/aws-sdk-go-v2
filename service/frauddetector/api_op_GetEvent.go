@@ -48,6 +48,10 @@ type GetEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventInput) operationName() string {
+	return "GetEvent"
+}
+
 type GetEventOutput struct {
 
 	// The details of the event.

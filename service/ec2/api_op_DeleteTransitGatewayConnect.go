@@ -49,6 +49,10 @@ type DeleteTransitGatewayConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTransitGatewayConnectInput) operationName() string {
+	return "DeleteTransitGatewayConnect"
+}
+
 type DeleteTransitGatewayConnectOutput struct {
 
 	// Information about the deleted Connect attachment.

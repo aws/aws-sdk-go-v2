@@ -63,6 +63,10 @@ type AddProfilePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddProfilePermissionInput) operationName() string {
+	return "AddProfilePermission"
+}
+
 type AddProfilePermissionOutput struct {
 
 	// A unique identifier for the current profile revision.

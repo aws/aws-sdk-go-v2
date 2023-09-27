@@ -67,6 +67,10 @@ type ListModelCardVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListModelCardVersionsInput) operationName() string {
+	return "ListModelCardVersions"
+}
+
 type ListModelCardVersionsOutput struct {
 
 	// The summaries of the listed versions of the model card.

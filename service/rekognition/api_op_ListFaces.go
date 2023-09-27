@@ -60,6 +60,10 @@ type ListFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFacesInput) operationName() string {
+	return "ListFaces"
+}
+
 type ListFacesOutput struct {
 
 	// Version number of the face detection model associated with the input collection

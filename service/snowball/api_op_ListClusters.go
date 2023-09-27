@@ -47,6 +47,10 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListClustersInput) operationName() string {
+	return "ListClusters"
+}
+
 type ListClustersOutput struct {
 
 	// Each ClusterListEntry object contains a cluster's state, a cluster's ID, and

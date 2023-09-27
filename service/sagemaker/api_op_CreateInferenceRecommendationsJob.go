@@ -85,6 +85,10 @@ type CreateInferenceRecommendationsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateInferenceRecommendationsJobInput) operationName() string {
+	return "CreateInferenceRecommendationsJob"
+}
+
 type CreateInferenceRecommendationsJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the recommendation job.

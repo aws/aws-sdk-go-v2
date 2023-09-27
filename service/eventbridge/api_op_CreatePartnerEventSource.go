@@ -69,6 +69,10 @@ type CreatePartnerEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePartnerEventSourceInput) operationName() string {
+	return "CreatePartnerEventSource"
+}
+
 type CreatePartnerEventSourceOutput struct {
 
 	// The ARN of the partner event source.

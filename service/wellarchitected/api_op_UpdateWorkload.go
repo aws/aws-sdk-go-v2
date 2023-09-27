@@ -128,6 +128,10 @@ type UpdateWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkloadInput) operationName() string {
+	return "UpdateWorkload"
+}
+
 // Output of an update workload call.
 type UpdateWorkloadOutput struct {
 

@@ -48,6 +48,10 @@ type GetInAppMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInAppMessagesInput) operationName() string {
+	return "GetInAppMessages"
+}
+
 type GetInAppMessagesOutput struct {
 
 	// Get in-app messages response object.

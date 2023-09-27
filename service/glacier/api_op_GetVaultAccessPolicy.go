@@ -59,6 +59,10 @@ type GetVaultAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVaultAccessPolicyInput) operationName() string {
+	return "GetVaultAccessPolicy"
+}
+
 // Output for GetVaultAccessPolicy.
 type GetVaultAccessPolicyOutput struct {
 

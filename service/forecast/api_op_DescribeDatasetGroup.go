@@ -49,6 +49,10 @@ type DescribeDatasetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetGroupInput) operationName() string {
+	return "DescribeDatasetGroup"
+}
+
 type DescribeDatasetGroupOutput struct {
 
 	// When the dataset group was created.

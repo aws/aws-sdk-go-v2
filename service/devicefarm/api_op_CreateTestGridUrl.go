@@ -49,6 +49,10 @@ type CreateTestGridUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTestGridUrlInput) operationName() string {
+	return "CreateTestGridUrl"
+}
+
 type CreateTestGridUrlOutput struct {
 
 	// The number of seconds the URL from CreateTestGridUrlResult$url stays active.

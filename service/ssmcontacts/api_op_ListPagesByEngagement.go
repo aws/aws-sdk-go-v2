@@ -49,6 +49,10 @@ type ListPagesByEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPagesByEngagementInput) operationName() string {
+	return "ListPagesByEngagement"
+}
+
 type ListPagesByEngagementOutput struct {
 
 	// The list of engagements to contact channels.

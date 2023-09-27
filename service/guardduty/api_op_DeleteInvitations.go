@@ -44,6 +44,10 @@ type DeleteInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInvitationsInput) operationName() string {
+	return "DeleteInvitations"
+}
+
 type DeleteInvitationsOutput struct {
 
 	// A list of objects that contain the unprocessed account and a result string that

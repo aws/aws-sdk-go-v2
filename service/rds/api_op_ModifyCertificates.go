@@ -65,6 +65,10 @@ type ModifyCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyCertificatesInput) operationName() string {
+	return "ModifyCertificates"
+}
+
 type ModifyCertificatesOutput struct {
 
 	// A CA certificate for an Amazon Web Services account. For more information, see

@@ -77,6 +77,10 @@ type CreateCalculatedAttributeDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCalculatedAttributeDefinitionInput) operationName() string {
+	return "CreateCalculatedAttributeDefinition"
+}
+
 type CreateCalculatedAttributeDefinitionOutput struct {
 
 	// Mathematical expression and a list of attribute items specified in that

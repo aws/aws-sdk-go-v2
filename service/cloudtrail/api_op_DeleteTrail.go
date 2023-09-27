@@ -46,6 +46,10 @@ type DeleteTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrailInput) operationName() string {
+	return "DeleteTrail"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type DeleteTrailOutput struct {

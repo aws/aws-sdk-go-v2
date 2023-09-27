@@ -62,6 +62,10 @@ type ListFindingAggregationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingAggregationsInput) operationName() string {
+	return "ListFindingAggregations"
+}
+
 type ListFindingAggregationsOutput struct {
 
 	// The type of aggregation to perform.

@@ -43,6 +43,10 @@ type GetImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImportInput) operationName() string {
+	return "GetImport"
+}
+
 type GetImportOutput struct {
 
 	// The timestamp of the import's creation.

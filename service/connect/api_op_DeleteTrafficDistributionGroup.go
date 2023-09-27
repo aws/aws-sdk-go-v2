@@ -46,6 +46,10 @@ type DeleteTrafficDistributionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTrafficDistributionGroupInput) operationName() string {
+	return "DeleteTrafficDistributionGroup"
+}
+
 type DeleteTrafficDistributionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

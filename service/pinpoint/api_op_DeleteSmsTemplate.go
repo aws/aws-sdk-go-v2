@@ -62,6 +62,10 @@ type DeleteSmsTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSmsTemplateInput) operationName() string {
+	return "DeleteSmsTemplate"
+}
+
 type DeleteSmsTemplateOutput struct {
 
 	// Provides information about an API request or response.

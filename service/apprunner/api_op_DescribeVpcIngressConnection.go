@@ -43,6 +43,10 @@ type DescribeVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcIngressConnectionInput) operationName() string {
+	return "DescribeVpcIngressConnection"
+}
+
 type DescribeVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection that you specified in

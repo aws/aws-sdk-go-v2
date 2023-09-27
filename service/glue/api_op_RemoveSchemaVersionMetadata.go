@@ -53,6 +53,10 @@ type RemoveSchemaVersionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveSchemaVersionMetadataInput) operationName() string {
+	return "RemoveSchemaVersionMetadata"
+}
+
 type RemoveSchemaVersionMetadataOutput struct {
 
 	// The latest version of the schema.

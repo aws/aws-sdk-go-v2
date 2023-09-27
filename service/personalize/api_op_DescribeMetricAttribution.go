@@ -42,6 +42,10 @@ type DescribeMetricAttributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMetricAttributionInput) operationName() string {
+	return "DescribeMetricAttribution"
+}
+
 type DescribeMetricAttributionOutput struct {
 
 	// The details of the metric attribution.

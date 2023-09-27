@@ -70,6 +70,10 @@ type RespondActivityTaskCanceledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RespondActivityTaskCanceledInput) operationName() string {
+	return "RespondActivityTaskCanceled"
+}
+
 type RespondActivityTaskCanceledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

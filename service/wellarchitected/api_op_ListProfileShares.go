@@ -55,6 +55,10 @@ type ListProfileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProfileSharesInput) operationName() string {
+	return "ListProfileShares"
+}
+
 type ListProfileSharesOutput struct {
 
 	// The token to use to retrieve the next set of results.

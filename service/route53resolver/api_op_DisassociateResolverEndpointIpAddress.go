@@ -52,6 +52,10 @@ type DisassociateResolverEndpointIpAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateResolverEndpointIpAddressInput) operationName() string {
+	return "DisassociateResolverEndpointIpAddress"
+}
+
 type DisassociateResolverEndpointIpAddressOutput struct {
 
 	// The response to an DisassociateResolverEndpointIpAddress request.

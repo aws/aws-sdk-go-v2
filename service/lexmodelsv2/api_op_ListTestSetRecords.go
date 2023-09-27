@@ -52,6 +52,10 @@ type ListTestSetRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestSetRecordsInput) operationName() string {
+	return "ListTestSetRecords"
+}
+
 type ListTestSetRecordsOutput struct {
 
 	// A token that indicates whether there are more records to return in a response

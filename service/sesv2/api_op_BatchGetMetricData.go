@@ -45,6 +45,10 @@ type BatchGetMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetMetricDataInput) operationName() string {
+	return "BatchGetMetricData"
+}
+
 // Represents the result of processing your metric data batch request
 type BatchGetMetricDataOutput struct {
 

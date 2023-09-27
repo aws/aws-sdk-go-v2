@@ -68,6 +68,10 @@ type BatchDeleteTableRowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteTableRowsInput) operationName() string {
+	return "BatchDeleteTableRows"
+}
+
 type BatchDeleteTableRowsOutput struct {
 
 	// The updated workbook cursor after deleting the rows from the table.

@@ -47,6 +47,10 @@ type ExecuteCoreNetworkChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteCoreNetworkChangeSetInput) operationName() string {
+	return "ExecuteCoreNetworkChangeSet"
+}
+
 type ExecuteCoreNetworkChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

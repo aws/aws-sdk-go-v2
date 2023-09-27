@@ -80,6 +80,10 @@ type GetFaceSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFaceSearchInput) operationName() string {
+	return "GetFaceSearch"
+}
+
 type GetFaceSearchOutput struct {
 
 	// Job identifier for the face search operation for which you want to obtain

@@ -52,6 +52,10 @@ type GetGeneratedCodeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetGeneratedCodeJobInput) operationName() string {
+	return "GetGeneratedCodeJob"
+}
+
 type GetGeneratedCodeJobOutput struct {
 
 	// Details about the generated code job.

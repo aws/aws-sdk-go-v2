@@ -69,6 +69,10 @@ type DetectAnomaliesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DetectAnomaliesInput) operationName() string {
+	return "DetectAnomalies"
+}
+
 type DetectAnomaliesOutput struct {
 
 	// The results of the DetectAnomalies operation.

@@ -69,6 +69,10 @@ type DescribeCacheEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCacheEngineVersionsInput) operationName() string {
+	return "DescribeCacheEngineVersions"
+}
+
 // Represents the output of a DescribeCacheEngineVersions operation.
 type DescribeCacheEngineVersionsOutput struct {
 

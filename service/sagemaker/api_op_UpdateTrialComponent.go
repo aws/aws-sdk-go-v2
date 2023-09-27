@@ -80,6 +80,10 @@ type UpdateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrialComponentInput) operationName() string {
+	return "UpdateTrialComponent"
+}
+
 type UpdateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial component.

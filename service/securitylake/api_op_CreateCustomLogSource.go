@@ -91,6 +91,10 @@ type CreateCustomLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomLogSourceInput) operationName() string {
+	return "CreateCustomLogSource"
+}
+
 type CreateCustomLogSourceOutput struct {
 
 	// The created third-party custom source.

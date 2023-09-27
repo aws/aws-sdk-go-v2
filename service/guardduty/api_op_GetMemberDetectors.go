@@ -51,6 +51,10 @@ type GetMemberDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMemberDetectorsInput) operationName() string {
+	return "GetMemberDetectors"
+}
+
 type GetMemberDetectorsOutput struct {
 
 	// An object that describes which data sources are enabled for a member account.

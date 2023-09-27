@@ -46,6 +46,10 @@ type DeleteDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDBClusterSnapshotInput) operationName() string {
+	return "DeleteDBClusterSnapshot"
+}
+
 type DeleteDBClusterSnapshotOutput struct {
 
 	// Detailed information about a cluster snapshot.

@@ -54,6 +54,10 @@ type ListRoomsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoomsInput) operationName() string {
+	return "ListRooms"
+}
+
 type ListRoomsOutput struct {
 
 	// List of the matching rooms (summary information only).

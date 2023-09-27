@@ -83,6 +83,10 @@ type ClaimGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ClaimGameServerInput) operationName() string {
+	return "ClaimGameServer"
+}
+
 type ClaimGameServerOutput struct {
 
 	// Object that describes the newly claimed game server.

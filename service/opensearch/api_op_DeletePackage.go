@@ -47,6 +47,10 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePackageInput) operationName() string {
+	return "DeletePackage"
+}
+
 // Container for the response parameters to the DeletePackage operation.
 type DeletePackageOutput struct {
 

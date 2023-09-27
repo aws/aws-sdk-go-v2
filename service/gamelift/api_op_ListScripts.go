@@ -48,6 +48,10 @@ type ListScriptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScriptsInput) operationName() string {
+	return "ListScripts"
+}
+
 type ListScriptsOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to

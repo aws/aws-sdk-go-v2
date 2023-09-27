@@ -84,6 +84,10 @@ type ListDatasetEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetEntriesInput) operationName() string {
+	return "ListDatasetEntries"
+}
+
 type ListDatasetEntriesOutput struct {
 
 	// A list of entries (images) in the dataset.

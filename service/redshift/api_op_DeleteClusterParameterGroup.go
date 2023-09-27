@@ -44,6 +44,10 @@ type DeleteClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteClusterParameterGroupInput) operationName() string {
+	return "DeleteClusterParameterGroup"
+}
+
 type DeleteClusterParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

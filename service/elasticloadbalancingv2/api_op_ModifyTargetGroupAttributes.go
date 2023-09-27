@@ -47,6 +47,10 @@ type ModifyTargetGroupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyTargetGroupAttributesInput) operationName() string {
+	return "ModifyTargetGroupAttributes"
+}
+
 type ModifyTargetGroupAttributesOutput struct {
 
 	// Information about the attributes.

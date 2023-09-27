@@ -44,6 +44,10 @@ type DescribePortfolioShareStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePortfolioShareStatusInput) operationName() string {
+	return "DescribePortfolioShareStatus"
+}
+
 type DescribePortfolioShareStatusOutput struct {
 
 	// Organization node identifier. It can be either account id, organizational unit

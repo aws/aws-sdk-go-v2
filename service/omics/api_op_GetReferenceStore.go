@@ -43,6 +43,10 @@ type GetReferenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReferenceStoreInput) operationName() string {
+	return "GetReferenceStore"
+}
+
 type GetReferenceStoreOutput struct {
 
 	// The store's ARN.

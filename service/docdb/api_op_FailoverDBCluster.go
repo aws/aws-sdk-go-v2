@@ -53,6 +53,10 @@ type FailoverDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverDBClusterInput) operationName() string {
+	return "FailoverDBCluster"
+}
+
 type FailoverDBClusterOutput struct {
 
 	// Detailed information about a cluster.

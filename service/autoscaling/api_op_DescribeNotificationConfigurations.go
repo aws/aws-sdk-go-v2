@@ -49,6 +49,10 @@ type DescribeNotificationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeNotificationConfigurationsInput) operationName() string {
+	return "DescribeNotificationConfigurations"
+}
+
 type DescribeNotificationConfigurationsOutput struct {
 
 	// The notification configurations.

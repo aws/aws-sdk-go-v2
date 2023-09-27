@@ -49,6 +49,10 @@ type DeleteStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteStorageVirtualMachineInput) operationName() string {
+	return "DeleteStorageVirtualMachine"
+}
+
 type DeleteStorageVirtualMachineOutput struct {
 
 	// Describes the lifecycle state of the SVM being deleted.

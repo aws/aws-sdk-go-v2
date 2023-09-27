@@ -49,6 +49,10 @@ type DisableAddOnInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableAddOnInput) operationName() string {
+	return "DisableAddOn"
+}
+
 type DisableAddOnOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

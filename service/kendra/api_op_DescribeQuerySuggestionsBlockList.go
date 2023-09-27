@@ -51,6 +51,10 @@ type DescribeQuerySuggestionsBlockListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeQuerySuggestionsBlockListInput) operationName() string {
+	return "DescribeQuerySuggestionsBlockList"
+}
+
 type DescribeQuerySuggestionsBlockListOutput struct {
 
 	// The Unix timestamp when a block list for query suggestions was created.

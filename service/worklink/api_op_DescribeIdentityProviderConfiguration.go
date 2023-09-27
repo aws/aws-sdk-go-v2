@@ -45,6 +45,10 @@ type DescribeIdentityProviderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityProviderConfigurationInput) operationName() string {
+	return "DescribeIdentityProviderConfiguration"
+}
+
 type DescribeIdentityProviderConfigurationOutput struct {
 
 	// The SAML metadata document provided by the user’s identity provider.

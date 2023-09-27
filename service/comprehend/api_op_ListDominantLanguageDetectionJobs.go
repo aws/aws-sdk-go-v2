@@ -48,6 +48,10 @@ type ListDominantLanguageDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDominantLanguageDetectionJobsInput) operationName() string {
+	return "ListDominantLanguageDetectionJobs"
+}
+
 type ListDominantLanguageDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.

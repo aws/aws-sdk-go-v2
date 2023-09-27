@@ -49,6 +49,10 @@ type DeleteTagsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTagsForDomainInput) operationName() string {
+	return "DeleteTagsForDomain"
+}
+
 type DeleteTagsForDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

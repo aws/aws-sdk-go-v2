@@ -55,6 +55,10 @@ type AddDraftAppVersionResourceMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddDraftAppVersionResourceMappingsInput) operationName() string {
+	return "AddDraftAppVersionResourceMappings"
+}
+
 type AddDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

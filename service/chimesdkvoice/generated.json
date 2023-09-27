@@ -102,6 +102,7 @@
         "api_op_UpdateVoiceProfile.go",
         "api_op_UpdateVoiceProfileDomain.go",
         "api_op_ValidateE911Address.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

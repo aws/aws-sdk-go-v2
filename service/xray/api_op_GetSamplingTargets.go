@@ -44,6 +44,10 @@ type GetSamplingTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSamplingTargetsInput) operationName() string {
+	return "GetSamplingTargets"
+}
+
 type GetSamplingTargetsOutput struct {
 
 	// The last time a user changed the sampling rule configuration. If the sampling

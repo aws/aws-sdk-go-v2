@@ -50,6 +50,10 @@ type DeletePublicIpv4PoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePublicIpv4PoolInput) operationName() string {
+	return "DeletePublicIpv4Pool"
+}
+
 type DeletePublicIpv4PoolOutput struct {
 
 	// Information about the result of deleting the public IPv4 pool.

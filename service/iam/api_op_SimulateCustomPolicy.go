@@ -205,6 +205,10 @@ type SimulateCustomPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SimulateCustomPolicyInput) operationName() string {
+	return "SimulateCustomPolicy"
+}
+
 // Contains the response to a successful SimulatePrincipalPolicy or
 // SimulateCustomPolicy request.
 type SimulateCustomPolicyOutput struct {

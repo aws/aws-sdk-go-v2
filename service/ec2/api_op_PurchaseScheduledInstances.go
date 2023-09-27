@@ -61,6 +61,10 @@ type PurchaseScheduledInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PurchaseScheduledInstancesInput) operationName() string {
+	return "PurchaseScheduledInstances"
+}
+
 // Contains the output of PurchaseScheduledInstances.
 type PurchaseScheduledInstancesOutput struct {
 

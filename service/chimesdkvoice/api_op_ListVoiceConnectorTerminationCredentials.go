@@ -41,6 +41,10 @@ type ListVoiceConnectorTerminationCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVoiceConnectorTerminationCredentialsInput) operationName() string {
+	return "ListVoiceConnectorTerminationCredentials"
+}
+
 type ListVoiceConnectorTerminationCredentialsOutput struct {
 
 	// A list of user names.

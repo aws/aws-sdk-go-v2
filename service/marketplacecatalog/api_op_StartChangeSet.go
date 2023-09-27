@@ -73,6 +73,10 @@ type StartChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartChangeSetInput) operationName() string {
+	return "StartChangeSet"
+}
+
 type StartChangeSetOutput struct {
 
 	// The ARN associated to the unique identifier generated for the request.

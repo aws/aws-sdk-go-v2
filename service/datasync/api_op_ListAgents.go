@@ -57,6 +57,10 @@ type ListAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAgentsInput) operationName() string {
+	return "ListAgents"
+}
+
 // ListAgentsResponse
 type ListAgentsOutput struct {
 

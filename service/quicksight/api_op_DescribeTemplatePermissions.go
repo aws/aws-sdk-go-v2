@@ -48,6 +48,10 @@ type DescribeTemplatePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTemplatePermissionsInput) operationName() string {
+	return "DescribeTemplatePermissions"
+}
+
 type DescribeTemplatePermissionsOutput struct {
 
 	// A list of resource permissions to be set on the template.

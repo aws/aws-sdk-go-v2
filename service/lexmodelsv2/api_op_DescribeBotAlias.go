@@ -51,6 +51,10 @@ type DescribeBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBotAliasInput) operationName() string {
+	return "DescribeBotAlias"
+}
+
 type DescribeBotAliasOutput struct {
 
 	// A list of events that affect a bot alias. For example, an event is recorded

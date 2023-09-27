@@ -42,6 +42,10 @@ type DeleteDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDirectoryInput) operationName() string {
+	return "DeleteDirectory"
+}
+
 type DeleteDirectoryOutput struct {
 
 	// The ARN of the deleted directory.

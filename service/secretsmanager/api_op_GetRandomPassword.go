@@ -78,6 +78,10 @@ type GetRandomPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRandomPasswordInput) operationName() string {
+	return "GetRandomPassword"
+}
+
 type GetRandomPasswordOutput struct {
 
 	// A string with the password.

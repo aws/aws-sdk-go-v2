@@ -45,6 +45,10 @@ type CancelReservedInstancesListingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelReservedInstancesListingInput) operationName() string {
+	return "CancelReservedInstancesListing"
+}
+
 // Contains the output of CancelReservedInstancesListing.
 type CancelReservedInstancesListingOutput struct {
 

@@ -98,6 +98,10 @@ type GetPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPublicKeyInput) operationName() string {
+	return "GetPublicKey"
+}
+
 type GetPublicKeyOutput struct {
 
 	// Instead, use the KeySpec field in the GetPublicKey response. The KeySpec and

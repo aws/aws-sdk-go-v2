@@ -123,6 +123,10 @@ type UpdateNFSFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateNFSFileShareInput) operationName() string {
+	return "UpdateNFSFileShare"
+}
+
 // UpdateNFSFileShareOutput
 type UpdateNFSFileShareOutput struct {
 

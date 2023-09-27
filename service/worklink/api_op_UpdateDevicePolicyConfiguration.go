@@ -48,6 +48,10 @@ type UpdateDevicePolicyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDevicePolicyConfigurationInput) operationName() string {
+	return "UpdateDevicePolicyConfiguration"
+}
+
 type UpdateDevicePolicyConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,6 +56,10 @@ type PutNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutNotificationChannelInput) operationName() string {
+	return "PutNotificationChannel"
+}
+
 type PutNotificationChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

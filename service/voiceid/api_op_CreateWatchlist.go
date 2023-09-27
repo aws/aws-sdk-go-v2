@@ -57,6 +57,10 @@ type CreateWatchlistInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWatchlistInput) operationName() string {
+	return "CreateWatchlist"
+}
+
 type CreateWatchlistOutput struct {
 
 	// Information about the newly created watchlist.

@@ -54,6 +54,10 @@ type PutGroupConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutGroupConfigurationInput) operationName() string {
+	return "PutGroupConfiguration"
+}
+
 type PutGroupConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

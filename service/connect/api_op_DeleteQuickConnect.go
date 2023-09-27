@@ -47,6 +47,10 @@ type DeleteQuickConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteQuickConnectInput) operationName() string {
+	return "DeleteQuickConnect"
+}
+
 type DeleteQuickConnectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,6 +63,10 @@ type ImportResourcesToDraftAppVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportResourcesToDraftAppVersionInput) operationName() string {
+	return "ImportResourcesToDraftAppVersion"
+}
+
 type ImportResourcesToDraftAppVersionOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for

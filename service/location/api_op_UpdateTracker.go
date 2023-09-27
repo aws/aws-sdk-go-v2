@@ -87,6 +87,10 @@ type UpdateTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrackerInput) operationName() string {
+	return "UpdateTracker"
+}
+
 type UpdateTrackerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated tracker resource. Used to specify

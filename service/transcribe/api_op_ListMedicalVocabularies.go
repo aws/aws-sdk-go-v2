@@ -62,6 +62,10 @@ type ListMedicalVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMedicalVocabulariesInput) operationName() string {
+	return "ListMedicalVocabularies"
+}
+
 type ListMedicalVocabulariesOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are

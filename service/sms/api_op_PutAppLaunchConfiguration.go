@@ -52,6 +52,10 @@ type PutAppLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAppLaunchConfigurationInput) operationName() string {
+	return "PutAppLaunchConfiguration"
+}
+
 type PutAppLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

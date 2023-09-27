@@ -42,6 +42,10 @@ type DeleteOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteOutpostResolverInput) operationName() string {
+	return "DeleteOutpostResolver"
+}
+
 type DeleteOutpostResolverOutput struct {
 
 	// Information about the DeleteOutpostResolver request, including the status of

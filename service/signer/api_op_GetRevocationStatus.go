@@ -66,6 +66,10 @@ type GetRevocationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRevocationStatusInput) operationName() string {
+	return "GetRevocationStatus"
+}
+
 type GetRevocationStatusOutput struct {
 
 	// A list of revoked entities (including one or more of the signing profile ARN,

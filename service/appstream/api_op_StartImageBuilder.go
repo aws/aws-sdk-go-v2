@@ -46,6 +46,10 @@ type StartImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartImageBuilderInput) operationName() string {
+	return "StartImageBuilder"
+}
+
 type StartImageBuilderOutput struct {
 
 	// Information about the image builder.

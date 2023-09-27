@@ -47,6 +47,10 @@ type DiscoverInstancesRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DiscoverInstancesRevisionInput) operationName() string {
+	return "DiscoverInstancesRevision"
+}
+
 type DiscoverInstancesRevisionOutput struct {
 
 	// The increasing revision associated to the response Instances list. If a new

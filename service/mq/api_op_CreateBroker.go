@@ -177,6 +177,10 @@ type CreateBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBrokerInput) operationName() string {
+	return "CreateBroker"
+}
+
 type CreateBrokerOutput struct {
 
 	// The broker's Amazon Resource Name (ARN).

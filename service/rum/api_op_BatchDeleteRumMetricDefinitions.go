@@ -65,6 +65,10 @@ type BatchDeleteRumMetricDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDeleteRumMetricDefinitionsInput) operationName() string {
+	return "BatchDeleteRumMetricDefinitions"
+}
+
 type BatchDeleteRumMetricDefinitionsOutput struct {
 
 	// An array of error objects, if the operation caused any errors.

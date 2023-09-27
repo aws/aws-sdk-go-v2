@@ -181,6 +181,10 @@ type CreateComputeEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateComputeEnvironmentInput) operationName() string {
+	return "CreateComputeEnvironment"
+}
+
 type CreateComputeEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.

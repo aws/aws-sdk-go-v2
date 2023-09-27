@@ -46,6 +46,10 @@ type GetHostnameSuggestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetHostnameSuggestionInput) operationName() string {
+	return "GetHostnameSuggestion"
+}
+
 // Contains the response to a GetHostnameSuggestion request.
 type GetHostnameSuggestionOutput struct {
 

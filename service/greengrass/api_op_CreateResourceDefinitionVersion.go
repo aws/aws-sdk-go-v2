@@ -48,6 +48,10 @@ type CreateResourceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceDefinitionVersionInput) operationName() string {
+	return "CreateResourceDefinitionVersion"
+}
+
 type CreateResourceDefinitionVersionOutput struct {
 
 	// The ARN of the version.

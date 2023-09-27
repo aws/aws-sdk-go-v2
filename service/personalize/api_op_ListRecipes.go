@@ -53,6 +53,10 @@ type ListRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecipesInput) operationName() string {
+	return "ListRecipes"
+}
+
 type ListRecipesOutput struct {
 
 	// A token for getting the next set of recipes.

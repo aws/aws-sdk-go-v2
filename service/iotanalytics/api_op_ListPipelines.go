@@ -44,6 +44,10 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPipelinesInput) operationName() string {
+	return "ListPipelines"
+}
+
 type ListPipelinesOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

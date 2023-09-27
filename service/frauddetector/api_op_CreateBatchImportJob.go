@@ -70,6 +70,10 @@ type CreateBatchImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBatchImportJobInput) operationName() string {
+	return "CreateBatchImportJob"
+}
+
 type CreateBatchImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

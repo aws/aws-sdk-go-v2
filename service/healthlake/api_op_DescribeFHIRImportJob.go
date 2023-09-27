@@ -48,6 +48,10 @@ type DescribeFHIRImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFHIRImportJobInput) operationName() string {
+	return "DescribeFHIRImportJob"
+}
+
 type DescribeFHIRImportJobOutput struct {
 
 	// The properties of the Import job request, including the ID, ARN, name, and the

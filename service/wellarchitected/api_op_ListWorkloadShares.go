@@ -57,6 +57,10 @@ type ListWorkloadSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkloadSharesInput) operationName() string {
+	return "ListWorkloadShares"
+}
+
 // Input for List Workload Share
 type ListWorkloadSharesOutput struct {
 

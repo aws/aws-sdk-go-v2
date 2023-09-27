@@ -49,6 +49,10 @@ type PutInventoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutInventoryInput) operationName() string {
+	return "PutInventory"
+}
+
 type PutInventoryOutput struct {
 
 	// Information about the request.

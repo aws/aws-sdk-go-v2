@@ -60,6 +60,10 @@ type ListSimulationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSimulationJobsInput) operationName() string {
+	return "ListSimulationJobs"
+}
+
 type ListSimulationJobsOutput struct {
 
 	// A list of simulation job summaries that meet the criteria of the request.

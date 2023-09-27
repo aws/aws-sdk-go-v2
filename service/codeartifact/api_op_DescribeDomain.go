@@ -47,6 +47,10 @@ type DescribeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainInput) operationName() string {
+	return "DescribeDomain"
+}
+
 type DescribeDomainOutput struct {
 
 	// Information about a domain. A domain is a container for repositories. When you

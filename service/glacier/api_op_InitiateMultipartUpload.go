@@ -88,6 +88,10 @@ type InitiateMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitiateMultipartUploadInput) operationName() string {
+	return "InitiateMultipartUpload"
+}
+
 // The Amazon S3 Glacier response to your request.
 type InitiateMultipartUploadOutput struct {
 

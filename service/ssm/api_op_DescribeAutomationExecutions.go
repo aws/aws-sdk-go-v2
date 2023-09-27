@@ -48,6 +48,10 @@ type DescribeAutomationExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAutomationExecutionsInput) operationName() string {
+	return "DescribeAutomationExecutions"
+}
+
 type DescribeAutomationExecutionsOutput struct {
 
 	// The list of details about each automation execution which has occurred which

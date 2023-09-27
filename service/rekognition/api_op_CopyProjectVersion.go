@@ -100,6 +100,10 @@ type CopyProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CopyProjectVersionInput) operationName() string {
+	return "CopyProjectVersion"
+}
+
 type CopyProjectVersionOutput struct {
 
 	// The ARN of the copied model version in the destination project.

@@ -50,6 +50,10 @@ type DescribeServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServersInput) operationName() string {
+	return "DescribeServers"
+}
+
 type DescribeServersOutput struct {
 
 	// This is not currently implemented for DescribeServers requests.

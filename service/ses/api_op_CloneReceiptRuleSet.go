@@ -59,6 +59,10 @@ type CloneReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CloneReceiptRuleSetInput) operationName() string {
+	return "CloneReceiptRuleSet"
+}
+
 // An empty element returned on a successful request.
 type CloneReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.

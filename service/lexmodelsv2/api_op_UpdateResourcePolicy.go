@@ -58,6 +58,10 @@ type UpdateResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateResourcePolicyInput) operationName() string {
+	return "UpdateResourcePolicy"
+}
+
 type UpdateResourcePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy

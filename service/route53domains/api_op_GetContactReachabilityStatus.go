@@ -44,6 +44,10 @@ type GetContactReachabilityStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContactReachabilityStatusInput) operationName() string {
+	return "GetContactReachabilityStatus"
+}
+
 type GetContactReachabilityStatusOutput struct {
 
 	// The domain name for which you requested the reachability status.

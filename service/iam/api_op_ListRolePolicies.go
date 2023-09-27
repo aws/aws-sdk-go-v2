@@ -65,6 +65,10 @@ type ListRolePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRolePoliciesInput) operationName() string {
+	return "ListRolePolicies"
+}
+
 // Contains the response to a successful ListRolePolicies request.
 type ListRolePoliciesOutput struct {
 

@@ -46,6 +46,10 @@ type ListSipRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSipRulesInput) operationName() string {
+	return "ListSipRules"
+}
+
 type ListSipRulesOutput struct {
 
 	// The token used to return the next page of results.

@@ -44,6 +44,10 @@ type DeleteParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteParameterGroupInput) operationName() string {
+	return "DeleteParameterGroup"
+}
+
 type DeleteParameterGroupOutput struct {
 
 	// The parameter group that has been deleted.

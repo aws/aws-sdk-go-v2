@@ -48,6 +48,10 @@ type DescribeHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeHostKeyInput) operationName() string {
+	return "DescribeHostKey"
+}
+
 type DescribeHostKeyOutput struct {
 
 	// Returns the details for the specified host key.

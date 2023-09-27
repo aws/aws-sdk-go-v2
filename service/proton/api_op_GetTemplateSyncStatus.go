@@ -52,6 +52,10 @@ type GetTemplateSyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTemplateSyncStatusInput) operationName() string {
+	return "GetTemplateSyncStatus"
+}
+
 type GetTemplateSyncStatusOutput struct {
 
 	// The template sync desired state that's returned by Proton.

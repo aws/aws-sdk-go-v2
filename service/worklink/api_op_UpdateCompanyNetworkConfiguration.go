@@ -60,6 +60,10 @@ type UpdateCompanyNetworkConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCompanyNetworkConfigurationInput) operationName() string {
+	return "UpdateCompanyNetworkConfiguration"
+}
+
 type UpdateCompanyNetworkConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

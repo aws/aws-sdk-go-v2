@@ -160,6 +160,10 @@ type CreateWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkloadInput) operationName() string {
+	return "CreateWorkload"
+}
+
 // Output of a create workload call.
 type CreateWorkloadOutput struct {
 

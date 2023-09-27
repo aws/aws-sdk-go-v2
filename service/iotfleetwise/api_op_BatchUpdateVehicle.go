@@ -46,6 +46,10 @@ type BatchUpdateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateVehicleInput) operationName() string {
+	return "BatchUpdateVehicle"
+}
+
 type BatchUpdateVehicleOutput struct {
 
 	// A list of information about errors returned while updating a batch of vehicles,

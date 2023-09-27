@@ -63,6 +63,10 @@ type CompleteLayerUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CompleteLayerUploadInput) operationName() string {
+	return "CompleteLayerUpload"
+}
+
 type CompleteLayerUploadOutput struct {
 
 	// The sha256 digest of the image layer.

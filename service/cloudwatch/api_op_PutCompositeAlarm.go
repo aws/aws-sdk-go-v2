@@ -160,6 +160,10 @@ type PutCompositeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutCompositeAlarmInput) operationName() string {
+	return "PutCompositeAlarm"
+}
+
 type PutCompositeAlarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

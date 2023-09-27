@@ -45,6 +45,10 @@ type DeletePipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePipeInput) operationName() string {
+	return "DeletePipe"
+}
+
 type DeletePipeOutput struct {
 
 	// The ARN of the pipe.

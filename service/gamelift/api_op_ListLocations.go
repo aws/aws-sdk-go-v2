@@ -49,6 +49,10 @@ type ListLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLocationsInput) operationName() string {
+	return "ListLocations"
+}
+
 type ListLocationsOutput struct {
 
 	// A collection of locations.

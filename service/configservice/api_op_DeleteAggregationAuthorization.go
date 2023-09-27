@@ -47,6 +47,10 @@ type DeleteAggregationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAggregationAuthorizationInput) operationName() string {
+	return "DeleteAggregationAuthorization"
+}
+
 type DeleteAggregationAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

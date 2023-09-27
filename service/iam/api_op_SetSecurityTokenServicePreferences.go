@@ -66,6 +66,10 @@ type SetSecurityTokenServicePreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetSecurityTokenServicePreferencesInput) operationName() string {
+	return "SetSecurityTokenServicePreferences"
+}
+
 type SetSecurityTokenServicePreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

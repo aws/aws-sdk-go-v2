@@ -89,6 +89,10 @@ type PutDataProtectionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutDataProtectionPolicyInput) operationName() string {
+	return "PutDataProtectionPolicy"
+}
+
 type PutDataProtectionPolicyOutput struct {
 
 	// The date and time that this policy was most recently updated.

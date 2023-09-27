@@ -48,6 +48,10 @@ type AssociateApplicationFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateApplicationFleetInput) operationName() string {
+	return "AssociateApplicationFleet"
+}
+
 type AssociateApplicationFleetOutput struct {
 
 	// If fleet name is specified, this returns the list of applications that are

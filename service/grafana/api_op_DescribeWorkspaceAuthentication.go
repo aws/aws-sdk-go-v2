@@ -43,6 +43,10 @@ type DescribeWorkspaceAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceAuthenticationInput) operationName() string {
+	return "DescribeWorkspaceAuthentication"
+}
+
 type DescribeWorkspaceAuthenticationOutput struct {
 
 	// A structure containing information about the authentication methods used in the

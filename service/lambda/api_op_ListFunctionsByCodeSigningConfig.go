@@ -50,6 +50,10 @@ type ListFunctionsByCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFunctionsByCodeSigningConfigInput) operationName() string {
+	return "ListFunctionsByCodeSigningConfig"
+}
+
 type ListFunctionsByCodeSigningConfigOutput struct {
 
 	// The function ARNs.

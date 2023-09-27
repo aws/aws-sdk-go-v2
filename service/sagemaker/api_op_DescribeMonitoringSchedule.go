@@ -43,6 +43,10 @@ type DescribeMonitoringScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMonitoringScheduleInput) operationName() string {
+	return "DescribeMonitoringSchedule"
+}
+
 type DescribeMonitoringScheduleOutput struct {
 
 	// The time at which the monitoring job was created.

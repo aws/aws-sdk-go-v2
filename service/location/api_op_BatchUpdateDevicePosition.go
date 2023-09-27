@@ -64,6 +64,10 @@ type BatchUpdateDevicePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpdateDevicePositionInput) operationName() string {
+	return "BatchUpdateDevicePosition"
+}
+
 type BatchUpdateDevicePositionOutput struct {
 
 	// Contains error details for each device that failed to update its position.

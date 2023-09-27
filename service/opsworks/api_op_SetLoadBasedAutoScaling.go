@@ -64,6 +64,10 @@ type SetLoadBasedAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetLoadBasedAutoScalingInput) operationName() string {
+	return "SetLoadBasedAutoScaling"
+}
+
 type SetLoadBasedAutoScalingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

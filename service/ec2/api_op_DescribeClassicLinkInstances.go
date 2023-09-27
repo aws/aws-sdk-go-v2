@@ -72,6 +72,10 @@ type DescribeClassicLinkInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClassicLinkInstancesInput) operationName() string {
+	return "DescribeClassicLinkInstances"
+}
+
 type DescribeClassicLinkInstancesOutput struct {
 
 	// Information about one or more linked EC2-Classic instances.

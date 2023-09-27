@@ -43,6 +43,7 @@
         "api_op_UpdateKxEnvironment.go",
         "api_op_UpdateKxEnvironmentNetwork.go",
         "api_op_UpdateKxUser.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

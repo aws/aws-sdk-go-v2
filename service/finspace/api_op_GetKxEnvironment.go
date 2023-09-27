@@ -43,6 +43,10 @@ type GetKxEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetKxEnvironmentInput) operationName() string {
+	return "GetKxEnvironment"
+}
+
 type GetKxEnvironmentOutput struct {
 
 	// The identifier of the availability zones where subnets for the environment are

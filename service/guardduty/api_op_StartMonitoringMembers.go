@@ -51,6 +51,10 @@ type StartMonitoringMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMonitoringMembersInput) operationName() string {
+	return "StartMonitoringMembers"
+}
+
 type StartMonitoringMembersOutput struct {
 
 	// A list of objects that contain the unprocessed account and a result string that

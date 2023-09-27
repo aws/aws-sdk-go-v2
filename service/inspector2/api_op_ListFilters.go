@@ -56,6 +56,10 @@ type ListFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFiltersInput) operationName() string {
+	return "ListFilters"
+}
+
 type ListFiltersOutput struct {
 
 	// Contains details on the filters associated with your account.

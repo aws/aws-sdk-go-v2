@@ -49,6 +49,10 @@ type PutPortfolioPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutPortfolioPreferencesInput) operationName() string {
+	return "PutPortfolioPreferences"
+}
+
 type PutPortfolioPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,6 +58,10 @@ type GetRecommendationSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecommendationSummariesInput) operationName() string {
+	return "GetRecommendationSummaries"
+}
+
 type GetRecommendationSummariesOutput struct {
 
 	// The token to use to advance to the next page of recommendation summaries. This

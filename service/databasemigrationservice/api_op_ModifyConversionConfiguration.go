@@ -47,6 +47,10 @@ type ModifyConversionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyConversionConfigurationInput) operationName() string {
+	return "ModifyConversionConfiguration"
+}
+
 type ModifyConversionConfigurationOutput struct {
 
 	// The name or Amazon Resource Name (ARN) of the modified configuration.

@@ -148,6 +148,10 @@ type CreateAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccountSubscriptionInput) operationName() string {
+	return "CreateAccountSubscription"
+}
+
 type CreateAccountSubscriptionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

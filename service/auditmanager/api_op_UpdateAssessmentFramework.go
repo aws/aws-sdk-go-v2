@@ -59,6 +59,10 @@ type UpdateAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssessmentFrameworkInput) operationName() string {
+	return "UpdateAssessmentFramework"
+}
+
 type UpdateAssessmentFrameworkOutput struct {
 
 	// The name of the framework.

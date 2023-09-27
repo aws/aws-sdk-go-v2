@@ -52,6 +52,10 @@ type UpdatePolicyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePolicyStoreInput) operationName() string {
+	return "UpdatePolicyStore"
+}
+
 type UpdatePolicyStoreOutput struct {
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

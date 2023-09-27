@@ -58,6 +58,10 @@ type CreateRelationalDatabaseSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRelationalDatabaseSnapshotInput) operationName() string {
+	return "CreateRelationalDatabaseSnapshot"
+}
+
 type CreateRelationalDatabaseSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

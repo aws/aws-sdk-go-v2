@@ -52,6 +52,10 @@ type ListAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccountsInput) operationName() string {
+	return "ListAccounts"
+}
+
 type ListAccountsOutput struct {
 
 	// List of Amazon Chime accounts and account details.

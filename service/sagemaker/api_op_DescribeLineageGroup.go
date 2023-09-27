@@ -45,6 +45,10 @@ type DescribeLineageGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLineageGroupInput) operationName() string {
+	return "DescribeLineageGroup"
+}
+
 type DescribeLineageGroupOutput struct {
 
 	// Information about the user who created or modified an experiment, trial, trial

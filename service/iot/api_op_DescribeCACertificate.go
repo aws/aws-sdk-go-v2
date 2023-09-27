@@ -45,6 +45,10 @@ type DescribeCACertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCACertificateInput) operationName() string {
+	return "DescribeCACertificate"
+}
+
 // The output from the DescribeCACertificate operation.
 type DescribeCACertificateOutput struct {
 

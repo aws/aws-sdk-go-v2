@@ -51,6 +51,10 @@ type GetInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetInstanceProfileInput) operationName() string {
+	return "GetInstanceProfile"
+}
+
 // Contains the response to a successful GetInstanceProfile request.
 type GetInstanceProfileOutput struct {
 

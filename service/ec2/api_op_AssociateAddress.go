@@ -81,6 +81,10 @@ type AssociateAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateAddressInput) operationName() string {
+	return "AssociateAddress"
+}
+
 type AssociateAddressOutput struct {
 
 	// The ID that represents the association of the Elastic IP address with an

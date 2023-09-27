@@ -62,6 +62,10 @@ type ModifyPrivateDnsNameOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyPrivateDnsNameOptionsInput) operationName() string {
+	return "ModifyPrivateDnsNameOptions"
+}
+
 type ModifyPrivateDnsNameOptionsOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

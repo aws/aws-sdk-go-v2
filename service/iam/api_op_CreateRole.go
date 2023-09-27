@@ -115,6 +115,10 @@ type CreateRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoleInput) operationName() string {
+	return "CreateRole"
+}
+
 // Contains the response to a successful CreateRole request.
 type CreateRoleOutput struct {
 

@@ -61,6 +61,10 @@ type EnableFastSnapshotRestoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EnableFastSnapshotRestoresInput) operationName() string {
+	return "EnableFastSnapshotRestores"
+}
+
 type EnableFastSnapshotRestoresOutput struct {
 
 	// Information about the snapshots for which fast snapshot restores were

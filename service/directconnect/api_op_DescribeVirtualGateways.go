@@ -38,6 +38,10 @@ type DescribeVirtualGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVirtualGatewaysInput) operationName() string {
+	return "DescribeVirtualGateways"
+}
+
 type DescribeVirtualGatewaysOutput struct {
 
 	// The virtual private gateways.

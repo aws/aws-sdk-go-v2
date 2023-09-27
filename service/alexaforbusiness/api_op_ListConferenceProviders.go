@@ -45,6 +45,10 @@ type ListConferenceProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConferenceProvidersInput) operationName() string {
+	return "ListConferenceProviders"
+}
+
 type ListConferenceProvidersOutput struct {
 
 	// The conference providers.

@@ -62,6 +62,10 @@ type UpdateAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAppAuthorizationInput) operationName() string {
+	return "UpdateAppAuthorization"
+}
+
 type UpdateAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.

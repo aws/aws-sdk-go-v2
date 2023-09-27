@@ -64,6 +64,10 @@ type CreateVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVoiceProfileDomainInput) operationName() string {
+	return "CreateVoiceProfileDomain"
+}
+
 type CreateVoiceProfileDomainOutput struct {
 
 	// The requested voice profile domain.

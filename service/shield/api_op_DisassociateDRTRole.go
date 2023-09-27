@@ -36,6 +36,10 @@ type DisassociateDRTRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDRTRoleInput) operationName() string {
+	return "DisassociateDRTRole"
+}
+
 type DisassociateDRTRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

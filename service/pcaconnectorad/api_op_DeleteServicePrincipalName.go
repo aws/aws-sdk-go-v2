@@ -50,6 +50,10 @@ type DeleteServicePrincipalNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServicePrincipalNameInput) operationName() string {
+	return "DeleteServicePrincipalName"
+}
+
 type DeleteServicePrincipalNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

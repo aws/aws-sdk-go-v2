@@ -49,6 +49,10 @@ type CreateProgressUpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateProgressUpdateStreamInput) operationName() string {
+	return "CreateProgressUpdateStream"
+}
+
 type CreateProgressUpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -48,6 +48,10 @@ type UpdateDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDataQualityRulesetInput) operationName() string {
+	return "UpdateDataQualityRuleset"
+}
+
 type UpdateDataQualityRulesetOutput struct {
 
 	// A description of the ruleset.

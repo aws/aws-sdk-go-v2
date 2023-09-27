@@ -119,6 +119,10 @@ type CreateFileCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFileCacheInput) operationName() string {
+	return "CreateFileCache"
+}
+
 type CreateFileCacheOutput struct {
 
 	// A description of the cache that was created.

@@ -92,6 +92,10 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationInput) operationName() string {
+	return "CreateApplication"
+}
+
 type CreateApplicationOutput struct {
 
 	// Describes an application in the application catalog.

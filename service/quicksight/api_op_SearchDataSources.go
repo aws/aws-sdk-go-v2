@@ -54,6 +54,10 @@ type SearchDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchDataSourcesInput) operationName() string {
+	return "SearchDataSources"
+}
+
 type SearchDataSourcesOutput struct {
 
 	// A DataSourceSummaries object that returns a summary of a data source.

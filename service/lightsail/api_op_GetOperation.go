@@ -44,6 +44,10 @@ type GetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOperationInput) operationName() string {
+	return "GetOperation"
+}
+
 type GetOperationOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

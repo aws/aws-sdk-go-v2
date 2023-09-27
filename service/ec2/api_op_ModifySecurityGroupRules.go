@@ -53,6 +53,10 @@ type ModifySecurityGroupRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySecurityGroupRulesInput) operationName() string {
+	return "ModifySecurityGroupRules"
+}
+
 type ModifySecurityGroupRulesOutput struct {
 
 	// Returns true if the request succeeds; otherwise, returns an error.

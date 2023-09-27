@@ -114,6 +114,10 @@ type PutRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRuleInput) operationName() string {
+	return "PutRule"
+}
+
 type PutRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the rule.

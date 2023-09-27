@@ -39,6 +39,10 @@ type DescribeVpcPeeringAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVpcPeeringAuthorizationsInput) operationName() string {
+	return "DescribeVpcPeeringAuthorizations"
+}
+
 type DescribeVpcPeeringAuthorizationsOutput struct {
 
 	// A collection of objects that describe all valid VPC peering operations for the

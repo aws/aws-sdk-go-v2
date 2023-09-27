@@ -46,6 +46,10 @@ type GetEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEmailTemplateInput) operationName() string {
+	return "GetEmailTemplate"
+}
+
 // The following element is returned by the service.
 type GetEmailTemplateOutput struct {
 

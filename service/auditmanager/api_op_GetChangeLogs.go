@@ -54,6 +54,10 @@ type GetChangeLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetChangeLogsInput) operationName() string {
+	return "GetChangeLogs"
+}
+
 type GetChangeLogsOutput struct {
 
 	// The list of user activity for the control.

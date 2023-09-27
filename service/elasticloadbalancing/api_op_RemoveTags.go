@@ -49,6 +49,10 @@ type RemoveTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveTagsInput) operationName() string {
+	return "RemoveTags"
+}
+
 // Contains the output of RemoveTags.
 type RemoveTagsOutput struct {
 	// Metadata pertaining to the operation's result.

@@ -56,6 +56,10 @@ type ListAttachedPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAttachedPoliciesInput) operationName() string {
+	return "ListAttachedPolicies"
+}
+
 type ListAttachedPoliciesOutput struct {
 
 	// The token to retrieve the next set of results, or ``null`` if there are no more

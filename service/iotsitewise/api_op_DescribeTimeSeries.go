@@ -54,6 +54,10 @@ type DescribeTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTimeSeriesInput) operationName() string {
+	return "DescribeTimeSeries"
+}
+
 type DescribeTimeSeriesOutput struct {
 
 	// The data type of the time series. If you specify STRUCT , you must also specify

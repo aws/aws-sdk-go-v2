@@ -56,6 +56,10 @@ type CreateAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccessKeyInput) operationName() string {
+	return "CreateAccessKey"
+}
+
 // Contains the response to a successful CreateAccessKey request.
 type CreateAccessKeyOutput struct {
 

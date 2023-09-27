@@ -41,6 +41,10 @@ type DeleteVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteVectorEnrichmentJobInput) operationName() string {
+	return "DeleteVectorEnrichmentJob"
+}
+
 type DeleteVectorEnrichmentJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

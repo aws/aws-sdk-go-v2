@@ -56,6 +56,10 @@ type DeleteAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAddonInput) operationName() string {
+	return "DeleteAddon"
+}
+
 type DeleteAddonOutput struct {
 
 	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)

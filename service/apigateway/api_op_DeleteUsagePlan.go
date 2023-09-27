@@ -42,6 +42,10 @@ type DeleteUsagePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUsagePlanInput) operationName() string {
+	return "DeleteUsagePlan"
+}
+
 type DeleteUsagePlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

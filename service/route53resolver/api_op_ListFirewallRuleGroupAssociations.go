@@ -72,6 +72,10 @@ type ListFirewallRuleGroupAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFirewallRuleGroupAssociationsInput) operationName() string {
+	return "ListFirewallRuleGroupAssociations"
+}
+
 type ListFirewallRuleGroupAssociationsOutput struct {
 
 	// A list of your firewall rule group associations. This might be a partial list

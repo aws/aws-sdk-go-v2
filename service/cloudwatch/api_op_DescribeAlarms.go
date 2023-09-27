@@ -107,6 +107,10 @@ type DescribeAlarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAlarmsInput) operationName() string {
+	return "DescribeAlarms"
+}
+
 type DescribeAlarmsOutput struct {
 
 	// The information about any composite alarms returned by the operation.

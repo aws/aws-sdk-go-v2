@@ -88,6 +88,10 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventsInput) operationName() string {
+	return "DescribeEvents"
+}
+
 // Result message wrapping a list of event descriptions.
 type DescribeEventsOutput struct {
 

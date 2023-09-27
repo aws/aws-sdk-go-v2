@@ -54,6 +54,10 @@ type GetPrefetchScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPrefetchScheduleInput) operationName() string {
+	return "GetPrefetchSchedule"
+}
+
 type GetPrefetchScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the prefetch schedule.

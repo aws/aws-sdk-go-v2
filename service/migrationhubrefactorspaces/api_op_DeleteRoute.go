@@ -53,6 +53,10 @@ type DeleteRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRouteInput) operationName() string {
+	return "DeleteRoute"
+}
+
 type DeleteRouteOutput struct {
 
 	// The ID of the application that the route belongs to.

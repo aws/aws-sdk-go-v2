@@ -42,6 +42,10 @@ type ListSupportedPhoneNumberCountriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSupportedPhoneNumberCountriesInput) operationName() string {
+	return "ListSupportedPhoneNumberCountries"
+}
+
 type ListSupportedPhoneNumberCountriesOutput struct {
 
 	// The supported phone number countries.

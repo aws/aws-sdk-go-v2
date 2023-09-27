@@ -79,6 +79,10 @@ type BatchUpsertTableRowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchUpsertTableRowsInput) operationName() string {
+	return "BatchUpsertTableRows"
+}
+
 type BatchUpsertTableRowsOutput struct {
 
 	// A map with the batch item id as the key and the result of the upsert operation

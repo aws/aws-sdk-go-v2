@@ -48,6 +48,10 @@ type ListScheduledQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListScheduledQueriesInput) operationName() string {
+	return "ListScheduledQueries"
+}
+
 type ListScheduledQueriesOutput struct {
 
 	// A list of scheduled queries.

@@ -42,6 +42,10 @@ type GetSatelliteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSatelliteInput) operationName() string {
+	return "GetSatellite"
+}
+
 type GetSatelliteOutput struct {
 
 	// The current ephemeris being used to compute the trajectory of the satellite.

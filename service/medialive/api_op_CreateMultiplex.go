@@ -61,6 +61,10 @@ type CreateMultiplexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMultiplexInput) operationName() string {
+	return "CreateMultiplex"
+}
+
 // Placeholder documentation for CreateMultiplexResponse
 type CreateMultiplexOutput struct {
 

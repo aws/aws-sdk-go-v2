@@ -64,6 +64,10 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAliasesInput) operationName() string {
+	return "ListAliases"
+}
+
 type ListAliasesOutput struct {
 
 	// A collection of alias resources that match the request parameters.

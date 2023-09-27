@@ -51,6 +51,10 @@ type DescribeConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeConfigurationSetInput) operationName() string {
+	return "DescribeConfigurationSet"
+}
+
 // Represents the details of a configuration set. Configuration sets enable you to
 // publish email sending events. For information about using configuration sets,
 // see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)

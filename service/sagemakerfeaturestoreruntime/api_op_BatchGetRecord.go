@@ -49,6 +49,10 @@ type BatchGetRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetRecordInput) operationName() string {
+	return "BatchGetRecord"
+}
+
 type BatchGetRecordOutput struct {
 
 	// A list of errors that have occurred when retrieving a batch of Records.

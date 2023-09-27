@@ -53,6 +53,10 @@ type PutContainerPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutContainerPolicyInput) operationName() string {
+	return "PutContainerPolicy"
+}
+
 type PutContainerPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

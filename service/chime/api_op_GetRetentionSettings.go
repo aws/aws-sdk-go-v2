@@ -46,6 +46,10 @@ type GetRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRetentionSettingsInput) operationName() string {
+	return "GetRetentionSettings"
+}
+
 type GetRetentionSettingsOutput struct {
 
 	// The timestamp representing the time at which the specified items are

@@ -56,6 +56,10 @@ type ListAppsListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppsListsInput) operationName() string {
+	return "ListAppsLists"
+}
+
 type ListAppsListsOutput struct {
 
 	// An array of AppsListDataSummary objects.

@@ -45,6 +45,10 @@ type BatchCreateVariableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateVariableInput) operationName() string {
+	return "BatchCreateVariable"
+}
+
 type BatchCreateVariableOutput struct {
 
 	// Provides the errors for the BatchCreateVariable request.

@@ -59,6 +59,10 @@ type GetDeployablePatchSnapshotForInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeployablePatchSnapshotForInstanceInput) operationName() string {
+	return "GetDeployablePatchSnapshotForInstance"
+}
+
 type GetDeployablePatchSnapshotForInstanceOutput struct {
 
 	// The managed node ID.

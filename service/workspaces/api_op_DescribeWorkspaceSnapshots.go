@@ -42,6 +42,10 @@ type DescribeWorkspaceSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceSnapshotsInput) operationName() string {
+	return "DescribeWorkspaceSnapshots"
+}
+
 type DescribeWorkspaceSnapshotsOutput struct {
 
 	// Information about the snapshots that can be used to rebuild a WorkSpace. These

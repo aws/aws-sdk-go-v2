@@ -90,6 +90,10 @@ type GeneratePinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GeneratePinDataInput) operationName() string {
+	return "GeneratePinData"
+}
+
 type GeneratePinDataOutput struct {
 
 	// The PIN block encrypted under PEK from Amazon Web Services Payment

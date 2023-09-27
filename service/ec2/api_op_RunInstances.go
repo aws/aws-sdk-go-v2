@@ -332,6 +332,10 @@ type RunInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RunInstancesInput) operationName() string {
+	return "RunInstances"
+}
+
 // Describes a launch request for one or more instances, and includes owner,
 // requester, and security group information that applies to all instances in the
 // launch request.

@@ -50,6 +50,10 @@ type GetPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyVersionInput) operationName() string {
+	return "GetPolicyVersion"
+}
+
 // The output from the GetPolicyVersion operation.
 type GetPolicyVersionOutput struct {
 

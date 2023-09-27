@@ -45,6 +45,10 @@ type DeleteViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteViewInput) operationName() string {
+	return "DeleteView"
+}
+
 type DeleteViewOutput struct {
 
 	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

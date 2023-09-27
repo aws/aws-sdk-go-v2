@@ -57,6 +57,10 @@ type DescribePhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePhoneNumbersInput) operationName() string {
+	return "DescribePhoneNumbers"
+}
+
 type DescribePhoneNumbersOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is

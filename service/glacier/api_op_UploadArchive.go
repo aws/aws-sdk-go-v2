@@ -89,6 +89,10 @@ type UploadArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UploadArchiveInput) operationName() string {
+	return "UploadArchive"
+}
+
 // Contains the Amazon S3 Glacier response to your request. For information about
 // the underlying REST API, see Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html)
 // . For conceptual information, see Working with Archives in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)

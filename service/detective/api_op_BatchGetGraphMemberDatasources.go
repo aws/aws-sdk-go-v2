@@ -48,6 +48,10 @@ type BatchGetGraphMemberDatasourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetGraphMemberDatasourcesInput) operationName() string {
+	return "BatchGetGraphMemberDatasources"
+}
+
 type BatchGetGraphMemberDatasourcesOutput struct {
 
 	// Details on the status of data source packages for members of the behavior graph.

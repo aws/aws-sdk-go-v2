@@ -48,6 +48,10 @@ type DeleteRealtimeLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRealtimeLogConfigInput) operationName() string {
+	return "DeleteRealtimeLogConfig"
+}
+
 type DeleteRealtimeLogConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

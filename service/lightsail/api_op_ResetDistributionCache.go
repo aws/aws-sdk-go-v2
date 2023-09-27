@@ -44,6 +44,10 @@ type ResetDistributionCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetDistributionCacheInput) operationName() string {
+	return "ResetDistributionCache"
+}
+
 type ResetDistributionCacheOutput struct {
 
 	// The timestamp of the reset cache request (e.g., 1479734909.17 ) in Unix time

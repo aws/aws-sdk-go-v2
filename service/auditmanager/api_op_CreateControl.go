@@ -62,6 +62,10 @@ type CreateControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateControlInput) operationName() string {
+	return "CreateControl"
+}
+
 type CreateControlOutput struct {
 
 	// The new control that the CreateControl API returned.

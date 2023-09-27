@@ -43,6 +43,10 @@ type GetResolverConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResolverConfigInput) operationName() string {
+	return "GetResolverConfig"
+}
+
 type GetResolverConfigOutput struct {
 
 	// Information about the behavior configuration of Route 53 Resolver behavior for

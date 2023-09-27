@@ -50,6 +50,10 @@ type ListDatasourcePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasourcePackagesInput) operationName() string {
+	return "ListDatasourcePackages"
+}
+
 type ListDatasourcePackagesOutput struct {
 
 	// Details on the data source packages active in the behavior graph.

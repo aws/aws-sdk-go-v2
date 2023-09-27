@@ -44,6 +44,10 @@ type StopQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopQueryExecutionInput) operationName() string {
+	return "StopQueryExecution"
+}
+
 type StopQueryExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

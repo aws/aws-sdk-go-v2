@@ -50,6 +50,10 @@ type ListManagedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListManagedResourcesInput) operationName() string {
+	return "ListManagedResources"
+}
+
 type ListManagedResourcesOutput struct {
 
 	// The items in the response list.

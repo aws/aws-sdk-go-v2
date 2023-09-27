@@ -59,6 +59,10 @@ type DisableFastLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableFastLaunchInput) operationName() string {
+	return "DisableFastLaunch"
+}
+
 type DisableFastLaunchOutput struct {
 
 	// The ID of the image for which faster-launching has been turned off.

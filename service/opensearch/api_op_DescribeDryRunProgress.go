@@ -52,6 +52,10 @@ type DescribeDryRunProgressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDryRunProgressInput) operationName() string {
+	return "DescribeDryRunProgress"
+}
+
 type DescribeDryRunProgressOutput struct {
 
 	// Details about the changes you're planning to make on the domain.

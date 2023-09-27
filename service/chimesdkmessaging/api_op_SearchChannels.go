@@ -56,6 +56,10 @@ type SearchChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SearchChannelsInput) operationName() string {
+	return "SearchChannels"
+}
+
 type SearchChannelsOutput struct {
 
 	// A list of the channels in the request.

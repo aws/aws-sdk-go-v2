@@ -47,6 +47,10 @@ type DeletePermissionsBoundaryFromPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeletePermissionsBoundaryFromPermissionSetInput) operationName() string {
+	return "DeletePermissionsBoundaryFromPermissionSet"
+}
+
 type DeletePermissionsBoundaryFromPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

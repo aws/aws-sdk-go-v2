@@ -76,6 +76,10 @@ type CreateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateContactChannelInput) operationName() string {
+	return "CreateContactChannel"
+}
+
 type CreateContactChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the contact channel.

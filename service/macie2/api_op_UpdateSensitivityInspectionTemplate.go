@@ -58,6 +58,10 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSensitivityInspectionTemplateInput) operationName() string {
+	return "UpdateSensitivityInspectionTemplate"
+}
+
 type UpdateSensitivityInspectionTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -99,6 +99,10 @@ type CreateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAppInput) operationName() string {
+	return "CreateApp"
+}
+
 // Contains the response to a CreateApp request.
 type CreateAppOutput struct {
 

@@ -43,6 +43,10 @@ type GetCellInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCellInput) operationName() string {
+	return "GetCell"
+}
+
 type GetCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.

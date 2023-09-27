@@ -63,6 +63,10 @@ type CreateVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVpcIngressConnectionInput) operationName() string {
+	return "CreateVpcIngressConnection"
+}
+
 type CreateVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection resource that's created

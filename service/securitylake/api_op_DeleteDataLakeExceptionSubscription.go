@@ -36,6 +36,10 @@ type DeleteDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataLakeExceptionSubscriptionInput) operationName() string {
+	return "DeleteDataLakeExceptionSubscription"
+}
+
 type DeleteDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

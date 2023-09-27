@@ -45,6 +45,10 @@ type GetSpeechSynthesisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSpeechSynthesisTaskInput) operationName() string {
+	return "GetSpeechSynthesisTask"
+}
+
 type GetSpeechSynthesisTaskOutput struct {
 
 	// SynthesisTask object that provides information from the requested task,

@@ -50,6 +50,10 @@ type UpdateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateInputInput) operationName() string {
+	return "UpdateInput"
+}
+
 type UpdateInputOutput struct {
 
 	// Information about the configuration of the input.

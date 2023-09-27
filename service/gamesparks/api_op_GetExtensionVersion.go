@@ -52,6 +52,10 @@ type GetExtensionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetExtensionVersionInput) operationName() string {
+	return "GetExtensionVersion"
+}
+
 type GetExtensionVersionOutput struct {
 
 	// The version of the extension.

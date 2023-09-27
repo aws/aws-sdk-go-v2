@@ -42,6 +42,10 @@ type BatchDescribeModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchDescribeModelPackageInput) operationName() string {
+	return "BatchDescribeModelPackage"
+}
+
 type BatchDescribeModelPackageOutput struct {
 
 	// A map of the resource and BatchDescribeModelPackageError objects reporting the

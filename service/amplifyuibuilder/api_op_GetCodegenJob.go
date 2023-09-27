@@ -53,6 +53,10 @@ type GetCodegenJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCodegenJobInput) operationName() string {
+	return "GetCodegenJob"
+}
+
 type GetCodegenJobOutput struct {
 
 	// The configuration settings for the code generation job.

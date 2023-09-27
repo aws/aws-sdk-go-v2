@@ -42,6 +42,10 @@ type StopDataCollectionByAgentIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopDataCollectionByAgentIdsInput) operationName() string {
+	return "StopDataCollectionByAgentIds"
+}
+
 type StopDataCollectionByAgentIdsOutput struct {
 
 	// Information about the agents that were instructed to stop collecting data.

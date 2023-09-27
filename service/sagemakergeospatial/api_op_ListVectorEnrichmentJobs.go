@@ -54,6 +54,10 @@ type ListVectorEnrichmentJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListVectorEnrichmentJobsInput) operationName() string {
+	return "ListVectorEnrichmentJobs"
+}
+
 type ListVectorEnrichmentJobsOutput struct {
 
 	// Contains summary information about the Vector Enrichment jobs.

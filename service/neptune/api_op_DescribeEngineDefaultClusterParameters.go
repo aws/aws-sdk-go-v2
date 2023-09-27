@@ -59,6 +59,10 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEngineDefaultClusterParametersInput) operationName() string {
+	return "DescribeEngineDefaultClusterParameters"
+}
+
 type DescribeEngineDefaultClusterParametersOutput struct {
 
 	// Contains the result of a successful invocation of the

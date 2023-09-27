@@ -54,6 +54,10 @@ type GetCertificateAuthorityCsrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCertificateAuthorityCsrInput) operationName() string {
+	return "GetCertificateAuthorityCsr"
+}
+
 type GetCertificateAuthorityCsrOutput struct {
 
 	// The base64 PEM-encoded certificate signing request (CSR) for your private CA

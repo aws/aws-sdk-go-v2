@@ -58,6 +58,10 @@ type DeleteAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAttendeeInput) operationName() string {
+	return "DeleteAttendee"
+}
+
 type DeleteAttendeeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

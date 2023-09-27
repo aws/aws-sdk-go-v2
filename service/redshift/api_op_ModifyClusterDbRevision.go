@@ -50,6 +50,10 @@ type ModifyClusterDbRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyClusterDbRevisionInput) operationName() string {
+	return "ModifyClusterDbRevision"
+}
+
 type ModifyClusterDbRevisionOutput struct {
 
 	// Describes a cluster.

@@ -58,6 +58,10 @@ type DescribeCommentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCommentsInput) operationName() string {
+	return "DescribeComments"
+}
+
 type DescribeCommentsOutput struct {
 
 	// The list of comments for the specified document version.

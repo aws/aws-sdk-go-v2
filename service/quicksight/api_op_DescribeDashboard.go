@@ -55,6 +55,10 @@ type DescribeDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDashboardInput) operationName() string {
+	return "DescribeDashboard"
+}
+
 type DescribeDashboardOutput struct {
 
 	// Information about the dashboard.

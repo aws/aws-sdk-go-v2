@@ -47,6 +47,10 @@ type DescribeClientBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeClientBrandingInput) operationName() string {
+	return "DescribeClientBranding"
+}
+
 type DescribeClientBrandingOutput struct {
 
 	// The branding information for Android devices.

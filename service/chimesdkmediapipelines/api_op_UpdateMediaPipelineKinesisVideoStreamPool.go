@@ -45,6 +45,10 @@ type UpdateMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMediaPipelineKinesisVideoStreamPoolInput) operationName() string {
+	return "UpdateMediaPipelineKinesisVideoStreamPool"
+}
+
 type UpdateMediaPipelineKinesisVideoStreamPoolOutput struct {
 
 	// The video stream pool configuration object.

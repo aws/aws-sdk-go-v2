@@ -50,6 +50,10 @@ type BatchGetCollaborationAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetCollaborationAnalysisTemplateInput) operationName() string {
+	return "BatchGetCollaborationAnalysisTemplate"
+}
+
 type BatchGetCollaborationAnalysisTemplateOutput struct {
 
 	// The retrieved list of analysis templates within a collaboration.

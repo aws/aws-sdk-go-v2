@@ -78,6 +78,10 @@ type CreateAccountCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAccountCustomizationInput) operationName() string {
+	return "CreateAccountCustomization"
+}
+
 type CreateAccountCustomizationOutput struct {
 
 	// The Amazon QuickSight customizations you're adding in the current Amazon Web

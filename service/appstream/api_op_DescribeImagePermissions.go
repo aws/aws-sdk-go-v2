@@ -55,6 +55,10 @@ type DescribeImagePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImagePermissionsInput) operationName() string {
+	return "DescribeImagePermissions"
+}
+
 type DescribeImagePermissionsOutput struct {
 
 	// The name of the private image.

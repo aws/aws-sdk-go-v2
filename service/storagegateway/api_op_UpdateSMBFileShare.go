@@ -153,6 +153,10 @@ type UpdateSMBFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSMBFileShareInput) operationName() string {
+	return "UpdateSMBFileShare"
+}
+
 // UpdateSMBFileShareOutput
 type UpdateSMBFileShareOutput struct {
 

@@ -73,6 +73,10 @@ type CreateTemplateSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTemplateSyncConfigInput) operationName() string {
+	return "CreateTemplateSyncConfig"
+}
+
 type CreateTemplateSyncConfigOutput struct {
 
 	// The template sync configuration detail data that's returned by Proton.

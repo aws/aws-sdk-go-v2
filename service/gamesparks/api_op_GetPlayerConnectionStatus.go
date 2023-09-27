@@ -54,6 +54,10 @@ type GetPlayerConnectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPlayerConnectionStatusInput) operationName() string {
+	return "GetPlayerConnectionStatus"
+}
+
 type GetPlayerConnectionStatusOutput struct {
 
 	// The list of connection ids, one for each connection in use by the player.

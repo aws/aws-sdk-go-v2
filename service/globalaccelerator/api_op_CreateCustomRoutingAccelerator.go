@@ -91,6 +91,10 @@ type CreateCustomRoutingAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomRoutingAcceleratorInput) operationName() string {
+	return "CreateCustomRoutingAccelerator"
+}
+
 type CreateCustomRoutingAcceleratorOutput struct {
 
 	// The accelerator that is created.

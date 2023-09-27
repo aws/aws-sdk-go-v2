@@ -56,6 +56,10 @@ type GetStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetStatisticsInput) operationName() string {
+	return "GetStatistics"
+}
+
 type GetStatisticsOutput struct {
 
 	// The statistics returned by the Fleet Indexing service based on the query and

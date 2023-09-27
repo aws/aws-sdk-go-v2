@@ -48,6 +48,10 @@ type PutAuthPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAuthPolicyInput) operationName() string {
+	return "PutAuthPolicy"
+}
+
 type PutAuthPolicyOutput struct {
 
 	// The auth policy.

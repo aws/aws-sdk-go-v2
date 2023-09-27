@@ -60,6 +60,10 @@ type SetRepositoryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetRepositoryPolicyInput) operationName() string {
+	return "SetRepositoryPolicy"
+}
+
 type SetRepositoryPolicyOutput struct {
 
 	// The JSON repository policy text that's applied to the repository.

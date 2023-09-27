@@ -80,6 +80,10 @@ type GetMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMediaInput) operationName() string {
+	return "GetMedia"
+}
+
 type GetMediaOutput struct {
 
 	// The content type of the requested media.

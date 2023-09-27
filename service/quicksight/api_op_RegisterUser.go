@@ -145,6 +145,10 @@ type RegisterUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterUserInput) operationName() string {
+	return "RegisterUser"
+}
+
 type RegisterUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

@@ -59,6 +59,10 @@ type GetMLTaskRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLTaskRunsInput) operationName() string {
+	return "GetMLTaskRuns"
+}
+
 type GetMLTaskRunsOutput struct {
 
 	// A pagination token, if more results are available.

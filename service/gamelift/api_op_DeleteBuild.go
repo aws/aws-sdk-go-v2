@@ -47,6 +47,10 @@ type DeleteBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBuildInput) operationName() string {
+	return "DeleteBuild"
+}
+
 type DeleteBuildOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

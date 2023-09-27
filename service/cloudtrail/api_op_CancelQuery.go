@@ -53,6 +53,10 @@ type CancelQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelQueryInput) operationName() string {
+	return "CancelQuery"
+}
+
 type CancelQueryOutput struct {
 
 	// The ID of the canceled query.

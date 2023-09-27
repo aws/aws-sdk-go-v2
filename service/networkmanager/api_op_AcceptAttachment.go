@@ -44,6 +44,10 @@ type AcceptAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptAttachmentInput) operationName() string {
+	return "AcceptAttachment"
+}
+
 type AcceptAttachmentOutput struct {
 
 	// The response to the attachment request.

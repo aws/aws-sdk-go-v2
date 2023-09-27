@@ -62,6 +62,10 @@ type PutGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutGeofenceInput) operationName() string {
+	return "PutGeofence"
+}
+
 type PutGeofenceOutput struct {
 
 	// The timestamp for when the geofence was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)

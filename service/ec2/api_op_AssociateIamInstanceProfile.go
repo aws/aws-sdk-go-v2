@@ -48,6 +48,10 @@ type AssociateIamInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateIamInstanceProfileInput) operationName() string {
+	return "AssociateIamInstanceProfile"
+}
+
 type AssociateIamInstanceProfileOutput struct {
 
 	// Information about the IAM instance profile association.

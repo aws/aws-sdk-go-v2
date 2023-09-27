@@ -46,6 +46,10 @@ type GetAnnotationImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAnnotationImportJobInput) operationName() string {
+	return "GetAnnotationImportJob"
+}
+
 type GetAnnotationImportJobOutput struct {
 
 	// When the job completed.

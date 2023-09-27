@@ -50,6 +50,10 @@ type ListCustomRoutingListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomRoutingListenersInput) operationName() string {
+	return "ListCustomRoutingListeners"
+}
+
 type ListCustomRoutingListenersOutput struct {
 
 	// The list of listeners for a custom routing accelerator.

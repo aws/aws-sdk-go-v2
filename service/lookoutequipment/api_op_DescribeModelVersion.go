@@ -48,6 +48,10 @@ type DescribeModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeModelVersionInput) operationName() string {
+	return "DescribeModelVersion"
+}
+
 type DescribeModelVersionOutput struct {
 
 	// Indicates whether the model version was promoted to be the active version after

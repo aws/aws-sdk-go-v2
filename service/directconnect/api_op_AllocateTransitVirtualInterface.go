@@ -60,6 +60,10 @@ type AllocateTransitVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AllocateTransitVirtualInterfaceInput) operationName() string {
+	return "AllocateTransitVirtualInterface"
+}
+
 type AllocateTransitVirtualInterfaceOutput struct {
 
 	// Information about a virtual interface.

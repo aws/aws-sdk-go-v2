@@ -42,6 +42,10 @@ type GetCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCapacityReservationInput) operationName() string {
+	return "GetCapacityReservation"
+}
+
 type GetCapacityReservationOutput struct {
 
 	// The requested capacity reservation structure.

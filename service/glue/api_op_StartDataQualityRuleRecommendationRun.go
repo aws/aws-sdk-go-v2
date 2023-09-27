@@ -65,6 +65,10 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDataQualityRuleRecommendationRunInput) operationName() string {
+	return "StartDataQualityRuleRecommendationRun"
+}
+
 type StartDataQualityRuleRecommendationRunOutput struct {
 
 	// The unique run identifier associated with this run.

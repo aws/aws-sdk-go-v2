@@ -59,6 +59,10 @@ type ListDatasetContentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetContentsInput) operationName() string {
+	return "ListDatasetContents"
+}
+
 type ListDatasetContentsOutput struct {
 
 	// Summary information about dataset contents that have been created.

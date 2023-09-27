@@ -111,6 +111,10 @@ type UpdateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWebACLInput) operationName() string {
+	return "UpdateWebACL"
+}
+
 type UpdateWebACLOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateWebACL request. You can also

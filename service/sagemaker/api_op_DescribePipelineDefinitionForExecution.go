@@ -42,6 +42,10 @@ type DescribePipelineDefinitionForExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePipelineDefinitionForExecutionInput) operationName() string {
+	return "DescribePipelineDefinitionForExecution"
+}
+
 type DescribePipelineDefinitionForExecutionOutput struct {
 
 	// The time when the pipeline was created.

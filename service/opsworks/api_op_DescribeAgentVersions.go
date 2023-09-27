@@ -45,6 +45,10 @@ type DescribeAgentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAgentVersionsInput) operationName() string {
+	return "DescribeAgentVersions"
+}
+
 // Contains the response to a DescribeAgentVersions request.
 type DescribeAgentVersionsOutput struct {
 

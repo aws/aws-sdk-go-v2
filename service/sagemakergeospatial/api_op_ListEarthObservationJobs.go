@@ -55,6 +55,10 @@ type ListEarthObservationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEarthObservationJobsInput) operationName() string {
+	return "ListEarthObservationJobs"
+}
+
 type ListEarthObservationJobsOutput struct {
 
 	// Contains summary information about the Earth Observation jobs.

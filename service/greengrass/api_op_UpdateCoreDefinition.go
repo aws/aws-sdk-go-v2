@@ -44,6 +44,10 @@ type UpdateCoreDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCoreDefinitionInput) operationName() string {
+	return "UpdateCoreDefinition"
+}
+
 type UpdateCoreDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,6 +50,10 @@ type StartTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartTestInput) operationName() string {
+	return "StartTest"
+}
+
 type StartTestOutput struct {
 
 	// Start Test Job response.

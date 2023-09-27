@@ -51,6 +51,10 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProjectsInput) operationName() string {
+	return "ListProjects"
+}
+
 type ListProjectsOutput struct {
 
 	// If the response is truncated, Amazon Lookout for Vision returns this token that

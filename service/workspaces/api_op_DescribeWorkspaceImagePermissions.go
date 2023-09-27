@@ -50,6 +50,10 @@ type DescribeWorkspaceImagePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWorkspaceImagePermissionsInput) operationName() string {
+	return "DescribeWorkspaceImagePermissions"
+}
+
 type DescribeWorkspaceImagePermissionsOutput struct {
 
 	// The identifier of the image.

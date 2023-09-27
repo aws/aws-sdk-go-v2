@@ -49,6 +49,10 @@ type RegisterOnPremisesInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterOnPremisesInstanceInput) operationName() string {
+	return "RegisterOnPremisesInstance"
+}
+
 type RegisterOnPremisesInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,6 +54,10 @@ type DeleteCustomRoutingAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteCustomRoutingAcceleratorInput) operationName() string {
+	return "DeleteCustomRoutingAccelerator"
+}
+
 type DeleteCustomRoutingAcceleratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

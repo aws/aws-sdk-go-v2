@@ -57,6 +57,10 @@ type UpdateConfigurationSetTrackingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationSetTrackingOptionsInput) operationName() string {
+	return "UpdateConfigurationSetTrackingOptions"
+}
+
 // An empty element returned on a successful request.
 type UpdateConfigurationSetTrackingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.

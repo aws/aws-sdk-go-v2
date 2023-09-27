@@ -59,6 +59,10 @@ type SetEndpointAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetEndpointAttributesInput) operationName() string {
+	return "SetEndpointAttributes"
+}
+
 type SetEndpointAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

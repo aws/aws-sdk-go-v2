@@ -44,6 +44,10 @@ type UpdateEventSourcesConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEventSourcesConfigInput) operationName() string {
+	return "UpdateEventSourcesConfig"
+}
+
 type UpdateEventSourcesConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

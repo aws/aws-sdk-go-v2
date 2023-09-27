@@ -58,6 +58,10 @@ type PutActionRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutActionRevisionInput) operationName() string {
+	return "PutActionRevision"
+}
+
 // Represents the output of a PutActionRevision action.
 type PutActionRevisionOutput struct {
 

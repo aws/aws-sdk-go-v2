@@ -99,6 +99,10 @@ type UpdateMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateMLTransformInput) operationName() string {
+	return "UpdateMLTransform"
+}
+
 type UpdateMLTransformOutput struct {
 
 	// The unique identifier for the transform that was updated.

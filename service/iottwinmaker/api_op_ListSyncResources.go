@@ -61,6 +61,10 @@ type ListSyncResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSyncResourcesInput) operationName() string {
+	return "ListSyncResources"
+}
+
 type ListSyncResourcesOutput struct {
 
 	// The string that specifies the next page of results.

@@ -52,6 +52,10 @@ type ListSMSSandboxPhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSMSSandboxPhoneNumbersInput) operationName() string {
+	return "ListSMSSandboxPhoneNumbers"
+}
+
 type ListSMSSandboxPhoneNumbersOutput struct {
 
 	// A list of the calling account's pending and verified phone numbers.

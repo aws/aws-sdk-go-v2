@@ -43,6 +43,10 @@ type TestConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TestConnectionInput) operationName() string {
+	return "TestConnection"
+}
+
 type TestConnectionOutput struct {
 
 	// Returns the identifier of the connector object that you are testing.

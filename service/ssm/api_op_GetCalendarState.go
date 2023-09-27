@@ -60,6 +60,10 @@ type GetCalendarStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCalendarStateInput) operationName() string {
+	return "GetCalendarState"
+}
+
 type GetCalendarStateOutput struct {
 
 	// The time, as an ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) string, that

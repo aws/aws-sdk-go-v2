@@ -56,6 +56,10 @@ type GetSignalingChannelEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSignalingChannelEndpointInput) operationName() string {
+	return "GetSignalingChannelEndpoint"
+}
+
 type GetSignalingChannelEndpointOutput struct {
 
 	// A list of endpoints for the specified signaling channel.

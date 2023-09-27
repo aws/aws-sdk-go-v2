@@ -43,6 +43,10 @@ type GetViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetViewInput) operationName() string {
+	return "GetView"
+}
+
 type GetViewOutput struct {
 
 	// Tag key and value pairs that are attached to the view.

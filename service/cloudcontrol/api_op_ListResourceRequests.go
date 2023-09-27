@@ -57,6 +57,10 @@ type ListResourceRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceRequestsInput) operationName() string {
+	return "ListResourceRequests"
+}
+
 type ListResourceRequestsOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to

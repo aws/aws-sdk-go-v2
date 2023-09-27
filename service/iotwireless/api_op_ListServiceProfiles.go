@@ -44,6 +44,10 @@ type ListServiceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListServiceProfilesInput) operationName() string {
+	return "ListServiceProfiles"
+}
+
 type ListServiceProfilesOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

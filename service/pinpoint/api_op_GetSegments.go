@@ -52,6 +52,10 @@ type GetSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSegmentsInput) operationName() string {
+	return "GetSegments"
+}
+
 type GetSegmentsOutput struct {
 
 	// Provides information about all the segments that are associated with an

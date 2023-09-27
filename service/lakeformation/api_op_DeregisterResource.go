@@ -43,6 +43,10 @@ type DeregisterResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterResourceInput) operationName() string {
+	return "DeregisterResource"
+}
+
 type DeregisterResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

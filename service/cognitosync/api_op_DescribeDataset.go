@@ -64,6 +64,10 @@ type DescribeDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDatasetInput) operationName() string {
+	return "DescribeDataset"
+}
+
 // Response to a successful DescribeDataset request.
 type DescribeDatasetOutput struct {
 

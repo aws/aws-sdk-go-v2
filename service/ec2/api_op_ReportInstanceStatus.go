@@ -85,6 +85,10 @@ type ReportInstanceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReportInstanceStatusInput) operationName() string {
+	return "ReportInstanceStatus"
+}
+
 type ReportInstanceStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

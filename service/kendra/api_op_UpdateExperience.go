@@ -65,6 +65,10 @@ type UpdateExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateExperienceInput) operationName() string {
+	return "UpdateExperience"
+}
+
 type UpdateExperienceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

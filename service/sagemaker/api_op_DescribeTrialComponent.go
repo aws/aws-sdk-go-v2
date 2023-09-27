@@ -43,6 +43,10 @@ type DescribeTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTrialComponentInput) operationName() string {
+	return "DescribeTrialComponent"
+}
+
 type DescribeTrialComponentOutput struct {
 
 	// Who created the trial component.

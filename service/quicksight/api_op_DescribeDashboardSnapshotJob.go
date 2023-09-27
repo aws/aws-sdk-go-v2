@@ -57,6 +57,10 @@ type DescribeDashboardSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDashboardSnapshotJobInput) operationName() string {
+	return "DescribeDashboardSnapshotJob"
+}
+
 type DescribeDashboardSnapshotJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated

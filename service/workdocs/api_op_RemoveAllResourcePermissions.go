@@ -45,6 +45,10 @@ type RemoveAllResourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveAllResourcePermissionsInput) operationName() string {
+	return "RemoveAllResourcePermissions"
+}
+
 type RemoveAllResourcePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

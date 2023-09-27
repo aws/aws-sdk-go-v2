@@ -46,6 +46,10 @@ type ListMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMapsInput) operationName() string {
+	return "ListMaps"
+}
+
 type ListMapsOutput struct {
 
 	// Contains a list of maps in your Amazon Web Services account

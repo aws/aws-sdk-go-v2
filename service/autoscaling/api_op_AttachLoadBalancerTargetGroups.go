@@ -69,6 +69,10 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachLoadBalancerTargetGroupsInput) operationName() string {
+	return "AttachLoadBalancerTargetGroups"
+}
+
 type AttachLoadBalancerTargetGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

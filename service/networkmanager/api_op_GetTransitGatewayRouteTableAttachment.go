@@ -42,6 +42,10 @@ type GetTransitGatewayRouteTableAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTransitGatewayRouteTableAttachmentInput) operationName() string {
+	return "GetTransitGatewayRouteTableAttachment"
+}
+
 type GetTransitGatewayRouteTableAttachmentOutput struct {
 
 	// Returns information about the transit gateway route table attachment.

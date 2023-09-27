@@ -59,6 +59,10 @@ type UpdateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCampaignInput) operationName() string {
+	return "UpdateCampaign"
+}
+
 type UpdateCampaignOutput struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.

@@ -45,6 +45,10 @@ type DescribeAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppInput) operationName() string {
+	return "DescribeApp"
+}
+
 type DescribeAppOutput struct {
 
 	// The specified application, returned as an object with details including

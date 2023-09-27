@@ -61,6 +61,10 @@ type CreateApplicationPresignedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateApplicationPresignedUrlInput) operationName() string {
+	return "CreateApplicationPresignedUrl"
+}
+
 type CreateApplicationPresignedUrlOutput struct {
 
 	// The URL of the extension.

@@ -49,6 +49,10 @@ type GetFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFlowTemplateInput) operationName() string {
+	return "GetFlowTemplate"
+}
+
 type GetFlowTemplateOutput struct {
 
 	// The object that describes the specified workflow.

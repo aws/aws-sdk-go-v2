@@ -81,6 +81,10 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIndexInput) operationName() string {
+	return "CreateIndex"
+}
+
 type CreateIndexOutput struct {
 
 	// The ARN of the new local index for the Region. You can reference this ARN in

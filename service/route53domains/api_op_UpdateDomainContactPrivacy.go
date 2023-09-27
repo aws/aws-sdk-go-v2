@@ -87,6 +87,10 @@ type UpdateDomainContactPrivacyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDomainContactPrivacyInput) operationName() string {
+	return "UpdateDomainContactPrivacy"
+}
+
 // The UpdateDomainContactPrivacy response includes the following element.
 type UpdateDomainContactPrivacyOutput struct {
 

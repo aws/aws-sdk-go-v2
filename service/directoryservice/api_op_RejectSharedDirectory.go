@@ -43,6 +43,10 @@ type RejectSharedDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RejectSharedDirectoryInput) operationName() string {
+	return "RejectSharedDirectory"
+}
+
 type RejectSharedDirectoryOutput struct {
 
 	// Identifier of the shared directory in the directory consumer account.

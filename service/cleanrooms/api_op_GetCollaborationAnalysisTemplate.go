@@ -49,6 +49,10 @@ type GetCollaborationAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetCollaborationAnalysisTemplateInput) operationName() string {
+	return "GetCollaborationAnalysisTemplate"
+}
+
 type GetCollaborationAnalysisTemplateOutput struct {
 
 	// The analysis template within a collaboration.

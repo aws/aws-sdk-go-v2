@@ -54,6 +54,10 @@ type GetAuthorizationTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAuthorizationTokenInput) operationName() string {
+	return "GetAuthorizationToken"
+}
+
 type GetAuthorizationTokenOutput struct {
 
 	// A list of authorization token data objects that correspond to the registryIds

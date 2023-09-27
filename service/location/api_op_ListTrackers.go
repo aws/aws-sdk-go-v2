@@ -46,6 +46,10 @@ type ListTrackersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTrackersInput) operationName() string {
+	return "ListTrackers"
+}
+
 type ListTrackersOutput struct {
 
 	// Contains tracker resources in your Amazon Web Services account. Details include

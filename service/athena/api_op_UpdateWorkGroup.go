@@ -52,6 +52,10 @@ type UpdateWorkGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkGroupInput) operationName() string {
+	return "UpdateWorkGroup"
+}
+
 type UpdateWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -120,6 +120,10 @@ type UpdateAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAccessInput) operationName() string {
+	return "UpdateAccess"
+}
+
 type UpdateAccessOutput struct {
 
 	// The external identifier of the group whose users have access to your Amazon S3

@@ -48,6 +48,10 @@ type ListProvisioningArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListProvisioningArtifactsInput) operationName() string {
+	return "ListProvisioningArtifacts"
+}
+
 type ListProvisioningArtifactsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no

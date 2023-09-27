@@ -48,6 +48,10 @@ type ListWirelessGatewayTaskDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWirelessGatewayTaskDefinitionsInput) operationName() string {
+	return "ListWirelessGatewayTaskDefinitions"
+}
+
 type ListWirelessGatewayTaskDefinitionsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

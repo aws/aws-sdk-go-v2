@@ -84,6 +84,10 @@ type UpdatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePortalInput) operationName() string {
+	return "UpdatePortal"
+}
+
 type UpdatePortalOutput struct {
 
 	// The status of the portal, which contains a state ( UPDATING after successfully

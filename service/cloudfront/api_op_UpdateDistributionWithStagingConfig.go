@@ -64,6 +64,10 @@ type UpdateDistributionWithStagingConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDistributionWithStagingConfigInput) operationName() string {
+	return "UpdateDistributionWithStagingConfig"
+}
+
 type UpdateDistributionWithStagingConfigOutput struct {
 
 	// A distribution tells CloudFront where you want content to be delivered from,

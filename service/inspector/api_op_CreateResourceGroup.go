@@ -47,6 +47,10 @@ type CreateResourceGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateResourceGroupInput) operationName() string {
+	return "CreateResourceGroup"
+}
+
 type CreateResourceGroupOutput struct {
 
 	// The ARN that specifies the resource group that is created.

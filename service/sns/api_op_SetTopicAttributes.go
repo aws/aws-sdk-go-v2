@@ -144,6 +144,10 @@ type SetTopicAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetTopicAttributesInput) operationName() string {
+	return "SetTopicAttributes"
+}
+
 type SetTopicAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

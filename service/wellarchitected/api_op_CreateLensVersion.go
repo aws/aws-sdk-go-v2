@@ -71,6 +71,10 @@ type CreateLensVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLensVersionInput) operationName() string {
+	return "CreateLensVersion"
+}
+
 type CreateLensVersionOutput struct {
 
 	// The ARN for the lens.

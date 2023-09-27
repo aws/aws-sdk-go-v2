@@ -52,6 +52,10 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteResourcePolicyInput) operationName() string {
+	return "DeleteResourcePolicy"
+}
+
 type DeleteResourcePolicyOutput struct {
 
 	// The ARN of the secret that the resource-based policy was deleted for.

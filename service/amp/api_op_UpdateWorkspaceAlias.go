@@ -49,6 +49,10 @@ type UpdateWorkspaceAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkspaceAliasInput) operationName() string {
+	return "UpdateWorkspaceAlias"
+}
+
 type UpdateWorkspaceAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

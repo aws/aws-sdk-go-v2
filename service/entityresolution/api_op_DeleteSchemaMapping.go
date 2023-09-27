@@ -44,6 +44,10 @@ type DeleteSchemaMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteSchemaMappingInput) operationName() string {
+	return "DeleteSchemaMapping"
+}
+
 type DeleteSchemaMappingOutput struct {
 
 	// A successful operation message.

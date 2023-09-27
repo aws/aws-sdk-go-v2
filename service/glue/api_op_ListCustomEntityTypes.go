@@ -46,6 +46,10 @@ type ListCustomEntityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomEntityTypesInput) operationName() string {
+	return "ListCustomEntityTypes"
+}
+
 type ListCustomEntityTypesOutput struct {
 
 	// A list of CustomEntityType objects representing custom patterns.

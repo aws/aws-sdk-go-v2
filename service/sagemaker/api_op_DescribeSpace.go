@@ -48,6 +48,10 @@ type DescribeSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpaceInput) operationName() string {
+	return "DescribeSpace"
+}
+
 type DescribeSpaceOutput struct {
 
 	// The creation time.

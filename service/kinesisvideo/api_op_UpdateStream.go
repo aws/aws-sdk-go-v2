@@ -67,6 +67,10 @@ type UpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStreamInput) operationName() string {
+	return "UpdateStream"
+}
+
 type UpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

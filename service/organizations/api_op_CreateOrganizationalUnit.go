@@ -72,6 +72,10 @@ type CreateOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateOrganizationalUnitInput) operationName() string {
+	return "CreateOrganizationalUnit"
+}
+
 type CreateOrganizationalUnitOutput struct {
 
 	// A structure that contains details about the newly created OU.

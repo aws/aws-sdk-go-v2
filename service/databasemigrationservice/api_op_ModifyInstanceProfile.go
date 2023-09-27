@@ -83,6 +83,10 @@ type ModifyInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyInstanceProfileInput) operationName() string {
+	return "ModifyInstanceProfile"
+}
+
 type ModifyInstanceProfileOutput struct {
 
 	// The instance profile that was modified.

@@ -107,6 +107,10 @@ type CreateStackInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStackInstancesInput) operationName() string {
+	return "CreateStackInstances"
+}
+
 type CreateStackInstancesOutput struct {
 
 	// The unique identifier for this stack set operation.

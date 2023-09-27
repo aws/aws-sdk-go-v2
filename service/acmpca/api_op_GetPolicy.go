@@ -64,6 +64,10 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPolicyInput) operationName() string {
+	return "GetPolicy"
+}
+
 type GetPolicyOutput struct {
 
 	// The policy attached to the private CA as a JSON document.

@@ -53,6 +53,10 @@ type ListTestRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestRecommendationsInput) operationName() string {
+	return "ListTestRecommendations"
+}
+
 type ListTestRecommendationsOutput struct {
 
 	// The test recommendations for the Resilience Hub application.

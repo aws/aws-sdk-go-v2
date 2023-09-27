@@ -46,6 +46,10 @@ type RemoveIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveIpRoutesInput) operationName() string {
+	return "RemoveIpRoutes"
+}
+
 type RemoveIpRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

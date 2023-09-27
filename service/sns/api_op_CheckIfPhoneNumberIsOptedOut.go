@@ -45,6 +45,10 @@ type CheckIfPhoneNumberIsOptedOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CheckIfPhoneNumberIsOptedOutInput) operationName() string {
+	return "CheckIfPhoneNumberIsOptedOut"
+}
+
 // The response from the CheckIfPhoneNumberIsOptedOut action.
 type CheckIfPhoneNumberIsOptedOutOutput struct {
 

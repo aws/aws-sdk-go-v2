@@ -53,6 +53,10 @@ type ListMeshesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListMeshesInput) operationName() string {
+	return "ListMeshes"
+}
+
 type ListMeshesOutput struct {
 
 	// The list of existing service meshes.

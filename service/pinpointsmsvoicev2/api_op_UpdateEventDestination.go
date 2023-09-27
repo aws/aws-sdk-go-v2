@@ -71,6 +71,10 @@ type UpdateEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEventDestinationInput) operationName() string {
+	return "UpdateEventDestination"
+}
+
 type UpdateEventDestinationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ConfigurationSet that was updated.

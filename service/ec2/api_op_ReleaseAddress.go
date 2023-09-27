@@ -64,6 +64,10 @@ type ReleaseAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ReleaseAddressInput) operationName() string {
+	return "ReleaseAddress"
+}
+
 type ReleaseAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

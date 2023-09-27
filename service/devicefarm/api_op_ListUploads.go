@@ -83,6 +83,10 @@ type ListUploadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListUploadsInput) operationName() string {
+	return "ListUploads"
+}
+
 // Represents the result of a list uploads request.
 type ListUploadsOutput struct {
 

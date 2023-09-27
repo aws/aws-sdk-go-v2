@@ -123,6 +123,10 @@ type CreateFeatureGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFeatureGroupInput) operationName() string {
+	return "CreateFeatureGroup"
+}
+
 type CreateFeatureGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the FeatureGroup . This is a unique identifier

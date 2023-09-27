@@ -48,6 +48,10 @@ type StopKeyPhrasesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopKeyPhrasesDetectionJobInput) operationName() string {
+	return "StopKeyPhrasesDetectionJob"
+}
+
 type StopKeyPhrasesDetectionJobOutput struct {
 
 	// The identifier of the key phrases detection job to stop.

@@ -54,6 +54,10 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutConfigurationSetSuppressionOptionsInput) operationName() string {
+	return "PutConfigurationSetSuppressionOptions"
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetSuppressionOptionsOutput struct {

@@ -50,6 +50,10 @@ type ListChannelFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListChannelFlowsInput) operationName() string {
+	return "ListChannelFlows"
+}
+
 type ListChannelFlowsOutput struct {
 
 	// The information about each channel flow.

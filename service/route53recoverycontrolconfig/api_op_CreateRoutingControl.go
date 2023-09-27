@@ -60,6 +60,10 @@ type CreateRoutingControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRoutingControlInput) operationName() string {
+	return "CreateRoutingControl"
+}
+
 type CreateRoutingControlOutput struct {
 
 	// The routing control that is created.

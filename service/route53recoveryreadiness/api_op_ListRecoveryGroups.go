@@ -43,6 +43,10 @@ type ListRecoveryGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRecoveryGroupsInput) operationName() string {
+	return "ListRecoveryGroups"
+}
+
 type ListRecoveryGroupsOutput struct {
 
 	// The token that identifies which batch of results you want to see.

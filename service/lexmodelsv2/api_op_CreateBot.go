@@ -85,6 +85,10 @@ type CreateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBotInput) operationName() string {
+	return "CreateBot"
+}
+
 type CreateBotOutput struct {
 
 	// A unique identifier for a particular bot. You use this to identify the bot when

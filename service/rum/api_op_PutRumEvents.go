@@ -67,6 +67,10 @@ type PutRumEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutRumEventsInput) operationName() string {
+	return "PutRumEvents"
+}
+
 type PutRumEventsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

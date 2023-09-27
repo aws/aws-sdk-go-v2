@@ -45,6 +45,10 @@ type DescribeStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeStacksInput) operationName() string {
+	return "DescribeStacks"
+}
+
 type DescribeStacksOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this

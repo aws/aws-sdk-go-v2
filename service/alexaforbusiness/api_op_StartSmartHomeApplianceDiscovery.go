@@ -43,6 +43,10 @@ type StartSmartHomeApplianceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSmartHomeApplianceDiscoveryInput) operationName() string {
+	return "StartSmartHomeApplianceDiscovery"
+}
+
 type StartSmartHomeApplianceDiscoveryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

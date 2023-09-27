@@ -52,6 +52,10 @@ type GetVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetVoiceConnectorGroupInput) operationName() string {
+	return "GetVoiceConnectorGroup"
+}
+
 type GetVoiceConnectorGroupOutput struct {
 
 	// The Amazon Chime Voice Connector group details.

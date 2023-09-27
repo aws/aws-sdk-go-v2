@@ -40,6 +40,10 @@ type DescribeAccountAuditConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountAuditConfigurationInput) operationName() string {
+	return "DescribeAccountAuditConfiguration"
+}
+
 type DescribeAccountAuditConfigurationOutput struct {
 
 	// Which audit checks are enabled and disabled for this account.

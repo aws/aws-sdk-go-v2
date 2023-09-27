@@ -51,6 +51,10 @@ type CreateConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateConfigInput) operationName() string {
+	return "CreateConfig"
+}
+
 type CreateConfigOutput struct {
 
 	// ARN of a Config .

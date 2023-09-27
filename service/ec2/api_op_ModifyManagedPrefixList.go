@@ -70,6 +70,10 @@ type ModifyManagedPrefixListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyManagedPrefixListInput) operationName() string {
+	return "ModifyManagedPrefixList"
+}
+
 type ModifyManagedPrefixListOutput struct {
 
 	// Information about the prefix list.

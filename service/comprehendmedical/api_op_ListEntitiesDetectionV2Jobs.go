@@ -48,6 +48,10 @@ type ListEntitiesDetectionV2JobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEntitiesDetectionV2JobsInput) operationName() string {
+	return "ListEntitiesDetectionV2Jobs"
+}
+
 type ListEntitiesDetectionV2JobsOutput struct {
 
 	// A list containing the properties of each job returned.

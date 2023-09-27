@@ -59,6 +59,10 @@ type GetMobileDeviceAccessOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMobileDeviceAccessOverrideInput) operationName() string {
+	return "GetMobileDeviceAccessOverride"
+}
+
 type GetMobileDeviceAccessOverrideOutput struct {
 
 	// The date the override was first created.

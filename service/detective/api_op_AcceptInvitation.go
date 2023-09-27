@@ -45,6 +45,10 @@ type AcceptInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptInvitationInput) operationName() string {
+	return "AcceptInvitation"
+}
+
 type AcceptInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

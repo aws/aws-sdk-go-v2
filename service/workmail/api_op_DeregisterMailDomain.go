@@ -49,6 +49,10 @@ type DeregisterMailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterMailDomainInput) operationName() string {
+	return "DeregisterMailDomain"
+}
+
 type DeregisterMailDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

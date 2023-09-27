@@ -62,6 +62,10 @@ type AttachDiskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AttachDiskInput) operationName() string {
+	return "AttachDisk"
+}
+
 type AttachDiskOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

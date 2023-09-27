@@ -55,6 +55,10 @@ type DeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteUserInput) operationName() string {
+	return "DeleteUser"
+}
+
 type DeleteUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

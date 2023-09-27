@@ -74,6 +74,10 @@ type ListConfigurationHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfigurationHistoryInput) operationName() string {
+	return "ListConfigurationHistory"
+}
+
 type ListConfigurationHistoryOutput struct {
 
 	// The list of configuration events and their corresponding details.

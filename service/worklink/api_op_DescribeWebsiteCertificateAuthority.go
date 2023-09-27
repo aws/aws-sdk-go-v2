@@ -50,6 +50,10 @@ type DescribeWebsiteCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeWebsiteCertificateAuthorityInput) operationName() string {
+	return "DescribeWebsiteCertificateAuthority"
+}
+
 type DescribeWebsiteCertificateAuthorityOutput struct {
 
 	// The root certificate of the certificate authority.

@@ -65,6 +65,10 @@ type UpdateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDistributionInput) operationName() string {
+	return "UpdateDistribution"
+}
+
 type UpdateDistributionOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

@@ -47,6 +47,10 @@ type DeauthorizeConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeauthorizeConnectionInput) operationName() string {
+	return "DeauthorizeConnection"
+}
+
 type DeauthorizeConnectionOutput struct {
 
 	// The ARN of the connection that authorization was removed from.

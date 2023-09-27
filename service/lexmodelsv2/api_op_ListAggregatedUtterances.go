@@ -97,6 +97,10 @@ type ListAggregatedUtterancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAggregatedUtterancesInput) operationName() string {
+	return "ListAggregatedUtterances"
+}
+
 type ListAggregatedUtterancesOutput struct {
 
 	// Summaries of the aggregated utterance data. Each response contains information

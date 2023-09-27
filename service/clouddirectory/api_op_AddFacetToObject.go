@@ -58,6 +58,10 @@ type AddFacetToObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddFacetToObjectInput) operationName() string {
+	return "AddFacetToObject"
+}
+
 type AddFacetToObjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

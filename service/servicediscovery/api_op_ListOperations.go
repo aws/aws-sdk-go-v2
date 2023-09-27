@@ -57,6 +57,10 @@ type ListOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOperationsInput) operationName() string {
+	return "ListOperations"
+}
+
 type ListOperationsOutput struct {
 
 	// If the response contains NextToken , submit another ListOperations request to

@@ -54,6 +54,10 @@ type DeleteInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteInstanceInput) operationName() string {
+	return "DeleteInstance"
+}
+
 type DeleteInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

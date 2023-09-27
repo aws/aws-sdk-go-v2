@@ -59,6 +59,10 @@ type DescribeGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGatewayRouteInput) operationName() string {
+	return "DescribeGatewayRoute"
+}
+
 type DescribeGatewayRouteOutput struct {
 
 	// The full description of your gateway route.

@@ -67,6 +67,10 @@ type UpdateJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateJobStatusInput) operationName() string {
+	return "UpdateJobStatus"
+}
+
 type UpdateJobStatusOutput struct {
 
 	// The ID for the job whose status was updated.

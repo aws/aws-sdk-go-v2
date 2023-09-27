@@ -56,6 +56,10 @@ type DeleteProfileKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteProfileKeyInput) operationName() string {
+	return "DeleteProfileKey"
+}
+
 type DeleteProfileKeyOutput struct {
 
 	// A message that indicates the delete request is done.

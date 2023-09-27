@@ -48,6 +48,10 @@ type ResetEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ResetEncryptionKeyInput) operationName() string {
+	return "ResetEncryptionKey"
+}
+
 type ResetEncryptionKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,6 +43,10 @@ type RemoveRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemoveRegionInput) operationName() string {
+	return "RemoveRegion"
+}
+
 type RemoveRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,6 +47,10 @@ type ListOutpostsWithS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOutpostsWithS3Input) operationName() string {
+	return "ListOutpostsWithS3"
+}
+
 type ListOutpostsWithS3Output struct {
 
 	// Returns a token that you can use to call ListOutpostsWithS3 again and receive

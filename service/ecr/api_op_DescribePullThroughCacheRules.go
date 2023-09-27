@@ -65,6 +65,10 @@ type DescribePullThroughCacheRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribePullThroughCacheRulesInput) operationName() string {
+	return "DescribePullThroughCacheRules"
+}
+
 type DescribePullThroughCacheRulesOutput struct {
 
 	// The nextToken value to include in a future DescribePullThroughCacheRulesRequest

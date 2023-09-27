@@ -105,6 +105,10 @@ type DescribeRouteTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeRouteTablesInput) operationName() string {
+	return "DescribeRouteTables"
+}
+
 // Contains the output of DescribeRouteTables.
 type DescribeRouteTablesOutput struct {
 

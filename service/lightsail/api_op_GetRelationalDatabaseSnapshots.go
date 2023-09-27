@@ -43,6 +43,10 @@ type GetRelationalDatabaseSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRelationalDatabaseSnapshotsInput) operationName() string {
+	return "GetRelationalDatabaseSnapshots"
+}
+
 type GetRelationalDatabaseSnapshotsOutput struct {
 
 	// The token to advance to the next page of results from your request. A next page

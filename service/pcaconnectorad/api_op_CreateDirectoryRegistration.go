@@ -48,6 +48,10 @@ type CreateDirectoryRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDirectoryRegistrationInput) operationName() string {
+	return "CreateDirectoryRegistration"
+}
+
 type CreateDirectoryRegistrationOutput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called

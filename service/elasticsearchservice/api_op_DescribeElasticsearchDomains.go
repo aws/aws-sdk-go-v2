@@ -45,6 +45,10 @@ type DescribeElasticsearchDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeElasticsearchDomainsInput) operationName() string {
+	return "DescribeElasticsearchDomains"
+}
+
 // The result of a DescribeElasticsearchDomains request. Contains the status of
 // the specified domains or all domains owned by the account.
 type DescribeElasticsearchDomainsOutput struct {

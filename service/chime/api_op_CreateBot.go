@@ -50,6 +50,10 @@ type CreateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBotInput) operationName() string {
+	return "CreateBot"
+}
+
 type CreateBotOutput struct {
 
 	// The bot details.

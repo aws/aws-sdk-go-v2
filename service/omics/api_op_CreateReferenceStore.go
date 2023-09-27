@@ -56,6 +56,10 @@ type CreateReferenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateReferenceStoreInput) operationName() string {
+	return "CreateReferenceStore"
+}
+
 type CreateReferenceStoreOutput struct {
 
 	// The store's ARN.

@@ -49,6 +49,10 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJobsInput) operationName() string {
+	return "ListJobs"
+}
+
 type ListJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value that

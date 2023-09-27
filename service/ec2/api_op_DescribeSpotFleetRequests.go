@@ -58,6 +58,10 @@ type DescribeSpotFleetRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSpotFleetRequestsInput) operationName() string {
+	return "DescribeSpotFleetRequests"
+}
+
 // Contains the output of DescribeSpotFleetRequests.
 type DescribeSpotFleetRequestsOutput struct {
 

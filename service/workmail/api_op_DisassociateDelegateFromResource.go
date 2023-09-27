@@ -62,6 +62,10 @@ type DisassociateDelegateFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateDelegateFromResourceInput) operationName() string {
+	return "DisassociateDelegateFromResource"
+}
+
 type DisassociateDelegateFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

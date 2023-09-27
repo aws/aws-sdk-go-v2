@@ -56,6 +56,10 @@ type ListAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAppsInput) operationName() string {
+	return "ListApps"
+}
+
 type ListAppsOutput struct {
 
 	// The list of apps for the given simulation and domain.

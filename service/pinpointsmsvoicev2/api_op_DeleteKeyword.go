@@ -56,6 +56,10 @@ type DeleteKeywordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteKeywordInput) operationName() string {
+	return "DeleteKeyword"
+}
+
 type DeleteKeywordOutput struct {
 
 	// The keyword that was deleted.

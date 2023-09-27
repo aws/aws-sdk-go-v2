@@ -31,6 +31,10 @@ type MalformedUnionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*MalformedUnionInput) operationName() string {
+	return "MalformedUnion"
+}
+
 type MalformedUnionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

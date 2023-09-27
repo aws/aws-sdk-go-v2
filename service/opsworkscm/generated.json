@@ -29,6 +29,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateServer.go",
         "api_op_UpdateServerEngineAttributes.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

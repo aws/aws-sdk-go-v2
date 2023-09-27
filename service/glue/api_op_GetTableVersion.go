@@ -56,6 +56,10 @@ type GetTableVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTableVersionInput) operationName() string {
+	return "GetTableVersion"
+}
+
 type GetTableVersionOutput struct {
 
 	// The requested table version.

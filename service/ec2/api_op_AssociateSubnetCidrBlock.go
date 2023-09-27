@@ -49,6 +49,10 @@ type AssociateSubnetCidrBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSubnetCidrBlockInput) operationName() string {
+	return "AssociateSubnetCidrBlock"
+}
+
 type AssociateSubnetCidrBlockOutput struct {
 
 	// Information about the IPv6 association.

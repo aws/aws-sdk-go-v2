@@ -60,6 +60,10 @@ type CreateHttpNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateHttpNamespaceInput) operationName() string {
+	return "CreateHttpNamespace"
+}
+
 type CreateHttpNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed

@@ -56,6 +56,10 @@ type ListLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListLFTagsInput) operationName() string {
+	return "ListLFTags"
+}
+
 type ListLFTagsOutput struct {
 
 	// A list of LF-tags that the requested has permission to view.

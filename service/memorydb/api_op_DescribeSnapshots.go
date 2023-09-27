@@ -68,6 +68,10 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSnapshotsInput) operationName() string {
+	return "DescribeSnapshots"
+}
+
 type DescribeSnapshotsOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the

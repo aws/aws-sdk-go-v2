@@ -50,6 +50,10 @@ type CreatePartnerInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePartnerInputInput) operationName() string {
+	return "CreatePartnerInput"
+}
+
 // Placeholder documentation for CreatePartnerInputResponse
 type CreatePartnerInputOutput struct {
 

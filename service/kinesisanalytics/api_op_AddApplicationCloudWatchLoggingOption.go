@@ -61,6 +61,10 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AddApplicationCloudWatchLoggingOptionInput) operationName() string {
+	return "AddApplicationCloudWatchLoggingOption"
+}
+
 type AddApplicationCloudWatchLoggingOptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

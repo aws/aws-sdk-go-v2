@@ -90,6 +90,10 @@ type CreateRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateRestApiInput) operationName() string {
+	return "CreateRestApi"
+}
+
 // Represents a REST API.
 type CreateRestApiOutput struct {
 

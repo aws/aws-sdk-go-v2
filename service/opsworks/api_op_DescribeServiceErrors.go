@@ -54,6 +54,10 @@ type DescribeServiceErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceErrorsInput) operationName() string {
+	return "DescribeServiceErrors"
+}
+
 // Contains the response to a DescribeServiceErrors request.
 type DescribeServiceErrorsOutput struct {
 

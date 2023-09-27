@@ -47,6 +47,10 @@ type AssociateDeviceWithRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDeviceWithRoomInput) operationName() string {
+	return "AssociateDeviceWithRoom"
+}
+
 type AssociateDeviceWithRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

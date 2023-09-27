@@ -59,6 +59,10 @@ type UpdateAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAvailabilityConfigurationInput) operationName() string {
+	return "UpdateAvailabilityConfiguration"
+}
+
 type UpdateAvailabilityConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

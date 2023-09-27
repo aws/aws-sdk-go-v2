@@ -46,6 +46,10 @@ type UpdateEmergencyContactSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEmergencyContactSettingsInput) operationName() string {
+	return "UpdateEmergencyContactSettings"
+}
+
 type UpdateEmergencyContactSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

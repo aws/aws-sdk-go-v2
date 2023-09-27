@@ -53,6 +53,10 @@ type ListBackupPlanVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListBackupPlanVersionsInput) operationName() string {
+	return "ListBackupPlanVersions"
+}
+
 type ListBackupPlanVersionsOutput struct {
 
 	// An array of version list items containing metadata about your backup plans.

@@ -44,6 +44,10 @@ type GetResourceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetResourceProfileInput) operationName() string {
+	return "GetResourceProfile"
+}
+
 type GetResourceProfileOutput struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most

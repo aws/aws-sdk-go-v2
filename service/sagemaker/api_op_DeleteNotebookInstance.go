@@ -45,6 +45,10 @@ type DeleteNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteNotebookInstanceInput) operationName() string {
+	return "DeleteNotebookInstance"
+}
+
 type DeleteNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

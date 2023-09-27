@@ -150,6 +150,10 @@ type DeregisterScalableTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterScalableTargetInput) operationName() string {
+	return "DeregisterScalableTarget"
+}
+
 type DeregisterScalableTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

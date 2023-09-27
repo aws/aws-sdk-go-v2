@@ -74,6 +74,10 @@ type CreateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateUserProfileInput) operationName() string {
+	return "CreateUserProfile"
+}
+
 type CreateUserProfileOutput struct {
 
 	// The user profile Amazon Resource Name (ARN).

@@ -84,6 +84,10 @@ type AssociateResourceSharePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateResourceSharePermissionInput) operationName() string {
+	return "AssociateResourceSharePermission"
+}
+
 type AssociateResourceSharePermissionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat

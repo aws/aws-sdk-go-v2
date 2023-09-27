@@ -40,6 +40,10 @@ type GetAccountPasswordPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountPasswordPolicyInput) operationName() string {
+	return "GetAccountPasswordPolicy"
+}
+
 // Contains the response to a successful GetAccountPasswordPolicy request.
 type GetAccountPasswordPolicyOutput struct {
 

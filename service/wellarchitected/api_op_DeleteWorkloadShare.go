@@ -60,6 +60,10 @@ type DeleteWorkloadShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteWorkloadShareInput) operationName() string {
+	return "DeleteWorkloadShare"
+}
+
 type DeleteWorkloadShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,10 @@ type DescribeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDomainInput) operationName() string {
+	return "DescribeDomain"
+}
+
 type DescribeDomainOutput struct {
 
 	// The ARN of an issued ACM certificate that is valid for the domain being

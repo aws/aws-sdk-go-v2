@@ -68,6 +68,10 @@ type UpdateConfigurationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateConfigurationProfileInput) operationName() string {
+	return "UpdateConfigurationProfile"
+}
+
 type UpdateConfigurationProfileOutput struct {
 
 	// The application ID.

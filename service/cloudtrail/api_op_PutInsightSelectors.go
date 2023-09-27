@@ -61,6 +61,10 @@ type PutInsightSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutInsightSelectorsInput) operationName() string {
+	return "PutInsightSelectors"
+}
+
 type PutInsightSelectorsOutput struct {
 
 	// A JSON string that contains the Insights event types that you want to log on a

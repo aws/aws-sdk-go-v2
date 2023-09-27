@@ -92,6 +92,10 @@ type CreatePricingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePricingRuleInput) operationName() string {
+	return "CreatePricingRule"
+}
+
 type CreatePricingRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created pricing rule.

@@ -54,6 +54,10 @@ type ListDatasetExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDatasetExportJobsInput) operationName() string {
+	return "ListDatasetExportJobs"
+}
+
 type ListDatasetExportJobsOutput struct {
 
 	// The list of dataset export jobs.

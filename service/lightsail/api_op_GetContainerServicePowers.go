@@ -38,6 +38,10 @@ type GetContainerServicePowersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetContainerServicePowersInput) operationName() string {
+	return "GetContainerServicePowers"
+}
+
 type GetContainerServicePowersOutput struct {
 
 	// An array of objects that describe the powers that can be specified for a

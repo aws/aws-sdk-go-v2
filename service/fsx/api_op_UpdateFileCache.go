@@ -51,6 +51,10 @@ type UpdateFileCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateFileCacheInput) operationName() string {
+	return "UpdateFileCache"
+}
+
 type UpdateFileCacheOutput struct {
 
 	// A description of the cache that was updated.

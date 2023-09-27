@@ -53,6 +53,10 @@ type RebootDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootDBInstanceInput) operationName() string {
+	return "RebootDBInstance"
+}
+
 type RebootDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used

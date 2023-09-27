@@ -51,6 +51,10 @@ type ListRoutingControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListRoutingControlsInput) operationName() string {
+	return "ListRoutingControls"
+}
+
 type ListRoutingControlsOutput struct {
 
 	// The token that identifies which batch of results you want to see.

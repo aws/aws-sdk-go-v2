@@ -45,6 +45,10 @@ type BatchGetApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetApplicationsInput) operationName() string {
+	return "BatchGetApplications"
+}
+
 // Represents the output of a BatchGetApplications operation.
 type BatchGetApplicationsOutput struct {
 

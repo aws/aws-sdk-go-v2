@@ -44,6 +44,10 @@ type DeleteDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDecoderManifestInput) operationName() string {
+	return "DeleteDecoderManifest"
+}
+
 type DeleteDecoderManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted decoder manifest.

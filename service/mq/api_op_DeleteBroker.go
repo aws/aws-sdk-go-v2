@@ -41,6 +41,10 @@ type DeleteBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBrokerInput) operationName() string {
+	return "DeleteBroker"
+}
+
 type DeleteBrokerOutput struct {
 
 	// The unique ID that Amazon MQ generates for the broker.

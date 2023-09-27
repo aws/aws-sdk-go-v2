@@ -73,6 +73,10 @@ type CreateDomainConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDomainConfigurationInput) operationName() string {
+	return "CreateDomainConfiguration"
+}
+
 type CreateDomainConfigurationOutput struct {
 
 	// The ARN of the domain configuration.

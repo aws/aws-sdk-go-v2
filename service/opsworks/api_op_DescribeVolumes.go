@@ -58,6 +58,10 @@ type DescribeVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeVolumesInput) operationName() string {
+	return "DescribeVolumes"
+}
+
 // Contains the response to a DescribeVolumes request.
 type DescribeVolumesOutput struct {
 

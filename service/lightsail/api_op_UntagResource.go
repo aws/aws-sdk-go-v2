@@ -56,6 +56,10 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagResourceInput) operationName() string {
+	return "UntagResource"
+}
+
 type UntagResourceOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status

@@ -45,6 +45,10 @@ type ListSolNetworkPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListSolNetworkPackagesInput) operationName() string {
+	return "ListSolNetworkPackages"
+}
+
 type ListSolNetworkPackagesOutput struct {
 
 	// Network packages. A network package is a .zip file in CSAR (Cloud Service

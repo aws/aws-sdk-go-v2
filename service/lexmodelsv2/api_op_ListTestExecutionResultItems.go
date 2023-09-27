@@ -58,6 +58,10 @@ type ListTestExecutionResultItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestExecutionResultItemsInput) operationName() string {
+	return "ListTestExecutionResultItems"
+}
+
 type ListTestExecutionResultItemsOutput struct {
 
 	// A token that indicates whether there are more results to return in a response

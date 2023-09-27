@@ -44,6 +44,10 @@ type GetWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetWorkflowExecutionInput) operationName() string {
+	return "GetWorkflowExecution"
+}
+
 type GetWorkflowExecutionOutput struct {
 
 	// The timestamp when the specified runtime instance of the workflow finished.

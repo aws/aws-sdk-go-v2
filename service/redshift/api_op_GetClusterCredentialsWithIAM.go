@@ -63,6 +63,10 @@ type GetClusterCredentialsWithIAMInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetClusterCredentialsWithIAMInput) operationName() string {
+	return "GetClusterCredentialsWithIAM"
+}
+
 type GetClusterCredentialsWithIAMOutput struct {
 
 	// A temporary password that you provide when you connect to a database.

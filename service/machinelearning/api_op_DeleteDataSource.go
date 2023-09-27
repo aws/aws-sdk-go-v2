@@ -44,6 +44,10 @@ type DeleteDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataSourceInput) operationName() string {
+	return "DeleteDataSource"
+}
+
 // Represents the output of a DeleteDataSource operation.
 type DeleteDataSourceOutput struct {
 

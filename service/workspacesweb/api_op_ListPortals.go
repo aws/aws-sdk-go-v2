@@ -44,6 +44,10 @@ type ListPortalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPortalsInput) operationName() string {
+	return "ListPortals"
+}
+
 type ListPortalsOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this

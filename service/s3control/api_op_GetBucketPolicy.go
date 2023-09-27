@@ -83,6 +83,10 @@ type GetBucketPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketPolicyInput) operationName() string {
+	return "GetBucketPolicy"
+}
+
 type GetBucketPolicyOutput struct {
 
 	// The policy of the Outposts bucket.

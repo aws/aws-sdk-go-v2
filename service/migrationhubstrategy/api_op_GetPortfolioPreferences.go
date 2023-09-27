@@ -36,6 +36,10 @@ type GetPortfolioPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPortfolioPreferencesInput) operationName() string {
+	return "GetPortfolioPreferences"
+}
+
 type GetPortfolioPreferencesOutput struct {
 
 	// The classification for application component types.

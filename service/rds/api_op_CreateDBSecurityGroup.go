@@ -64,6 +64,10 @@ type CreateDBSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDBSecurityGroupInput) operationName() string {
+	return "CreateDBSecurityGroup"
+}
+
 type CreateDBSecurityGroupOutput struct {
 
 	// Contains the details for an Amazon RDS DB security group. This data type is

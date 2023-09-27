@@ -100,6 +100,10 @@ type CreateTapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTapesInput) operationName() string {
+	return "CreateTapes"
+}
+
 // CreateTapeOutput
 type CreateTapesOutput struct {
 

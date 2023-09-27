@@ -93,6 +93,10 @@ type GetDocumentAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDocumentAnalysisInput) operationName() string {
+	return "GetDocumentAnalysis"
+}
+
 type GetDocumentAnalysisOutput struct {
 
 	//

@@ -43,6 +43,10 @@ type TerminateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*TerminateSessionInput) operationName() string {
+	return "TerminateSession"
+}
+
 type TerminateSessionOutput struct {
 
 	// The ID of the session that has been terminated.

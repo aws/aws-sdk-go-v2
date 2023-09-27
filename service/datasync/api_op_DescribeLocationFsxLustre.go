@@ -43,6 +43,10 @@ type DescribeLocationFsxLustreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocationFsxLustreInput) operationName() string {
+	return "DescribeLocationFsxLustre"
+}
+
 type DescribeLocationFsxLustreOutput struct {
 
 	// The time that the FSx for Lustre location was created.

@@ -42,6 +42,10 @@ type GetImageRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetImageRecipeInput) operationName() string {
+	return "GetImageRecipe"
+}
+
 type GetImageRecipeOutput struct {
 
 	// The image recipe object.

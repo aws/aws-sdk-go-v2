@@ -52,6 +52,10 @@ type ListAdminsManagingAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAdminsManagingAccountInput) operationName() string {
+	return "ListAdminsManagingAccount"
+}
+
 type ListAdminsManagingAccountOutput struct {
 
 	// The list of accounts who manage member accounts within their AdminScope .

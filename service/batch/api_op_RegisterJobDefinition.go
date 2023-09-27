@@ -123,6 +123,10 @@ type RegisterJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterJobDefinitionInput) operationName() string {
+	return "RegisterJobDefinition"
+}
+
 type RegisterJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job definition.

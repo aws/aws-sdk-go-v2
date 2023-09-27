@@ -62,6 +62,10 @@ type DeleteTaskDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteTaskDefinitionsInput) operationName() string {
+	return "DeleteTaskDefinitions"
+}
+
 type DeleteTaskDefinitionsOutput struct {
 
 	// Any failures associated with the call.

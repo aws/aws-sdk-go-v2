@@ -44,6 +44,10 @@ type GetSolNetworkInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSolNetworkInstanceInput) operationName() string {
+	return "GetSolNetworkInstance"
+}
+
 type GetSolNetworkInstanceOutput struct {
 
 	// Network instance ARN.

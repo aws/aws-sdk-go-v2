@@ -54,6 +54,10 @@ type ListAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAccessPoliciesInput) operationName() string {
+	return "ListAccessPolicies"
+}
+
 type ListAccessPoliciesOutput struct {
 
 	// Details about the requested access policies.

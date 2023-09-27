@@ -49,6 +49,10 @@ type GetPullRequestApprovalStatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPullRequestApprovalStatesInput) operationName() string {
+	return "GetPullRequestApprovalStates"
+}
+
 type GetPullRequestApprovalStatesOutput struct {
 
 	// Information about users who have approved the pull request.

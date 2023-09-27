@@ -158,6 +158,10 @@ type CreateAutoPredictorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateAutoPredictorInput) operationName() string {
+	return "CreateAutoPredictor"
+}
+
 type CreateAutoPredictorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the predictor.

@@ -61,6 +61,10 @@ type ApplyPendingMaintenanceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ApplyPendingMaintenanceActionInput) operationName() string {
+	return "ApplyPendingMaintenanceAction"
+}
+
 type ApplyPendingMaintenanceActionOutput struct {
 
 	// Represents the output of ApplyPendingMaintenanceAction .

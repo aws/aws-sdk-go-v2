@@ -53,6 +53,10 @@ type DescribeImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeImageVersionInput) operationName() string {
+	return "DescribeImageVersion"
+}
+
 type DescribeImageVersionOutput struct {
 
 	// The registry path of the container image on which this image version is based.

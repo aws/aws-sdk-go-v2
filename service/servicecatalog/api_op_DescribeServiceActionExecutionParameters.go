@@ -53,6 +53,10 @@ type DescribeServiceActionExecutionParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeServiceActionExecutionParametersInput) operationName() string {
+	return "DescribeServiceActionExecutionParameters"
+}
+
 type DescribeServiceActionExecutionParametersOutput struct {
 
 	// The parameters of the self-service action.

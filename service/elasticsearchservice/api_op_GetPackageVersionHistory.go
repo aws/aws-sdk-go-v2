@@ -51,6 +51,10 @@ type GetPackageVersionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPackageVersionHistoryInput) operationName() string {
+	return "GetPackageVersionHistory"
+}
+
 // Container for response returned by GetPackageVersionHistory operation.
 type GetPackageVersionHistoryOutput struct {
 	NextToken *string

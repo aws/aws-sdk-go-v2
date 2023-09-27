@@ -633,6 +633,10 @@ type ModifyDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyDBInstanceInput) operationName() string {
+	return "ModifyDBInstance"
+}
+
 type ModifyDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a

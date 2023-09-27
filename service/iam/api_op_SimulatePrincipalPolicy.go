@@ -221,6 +221,10 @@ type SimulatePrincipalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SimulatePrincipalPolicyInput) operationName() string {
+	return "SimulatePrincipalPolicy"
+}
+
 // Contains the response to a successful SimulatePrincipalPolicy or
 // SimulateCustomPolicy request.
 type SimulatePrincipalPolicyOutput struct {

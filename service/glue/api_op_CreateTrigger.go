@@ -82,6 +82,10 @@ type CreateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTriggerInput) operationName() string {
+	return "CreateTrigger"
+}
+
 type CreateTriggerOutput struct {
 
 	// The name of the trigger.

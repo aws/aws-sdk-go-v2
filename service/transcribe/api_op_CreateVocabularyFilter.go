@@ -104,6 +104,10 @@ type CreateVocabularyFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateVocabularyFilterInput) operationName() string {
+	return "CreateVocabularyFilter"
+}
+
 type CreateVocabularyFilterOutput struct {
 
 	// The language code you selected for your custom vocabulary filter.

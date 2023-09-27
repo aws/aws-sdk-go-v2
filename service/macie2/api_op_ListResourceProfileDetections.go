@@ -50,6 +50,10 @@ type ListResourceProfileDetectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceProfileDetectionsInput) operationName() string {
+	return "ListResourceProfileDetections"
+}
+
 type ListResourceProfileDetectionsOutput struct {
 
 	// An array of objects, one for each type of sensitive data that Amazon Macie

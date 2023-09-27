@@ -43,6 +43,10 @@ type GetFirewallConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFirewallConfigInput) operationName() string {
+	return "GetFirewallConfig"
+}
+
 type GetFirewallConfigOutput struct {
 
 	// Configuration of the firewall behavior provided by DNS Firewall for a single

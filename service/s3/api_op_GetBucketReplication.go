@@ -62,6 +62,10 @@ type GetBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetBucketReplicationInput) operationName() string {
+	return "GetBucketReplication"
+}
+
 type GetBucketReplicationOutput struct {
 
 	// A container for replication rules. You can add up to 1,000 rules. The maximum

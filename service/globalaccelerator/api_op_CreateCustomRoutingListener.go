@@ -58,6 +58,10 @@ type CreateCustomRoutingListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCustomRoutingListenerInput) operationName() string {
+	return "CreateCustomRoutingListener"
+}
+
 type CreateCustomRoutingListenerOutput struct {
 
 	// The listener that you've created for a custom routing accelerator.

@@ -121,6 +121,10 @@ type CreateTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateTrailInput) operationName() string {
+	return "CreateTrail"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type CreateTrailOutput struct {

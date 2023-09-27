@@ -59,6 +59,10 @@ type GetManagedPrefixListEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetManagedPrefixListEntriesInput) operationName() string {
+	return "GetManagedPrefixListEntries"
+}
+
 type GetManagedPrefixListEntriesOutput struct {
 
 	// Information about the prefix list entries.

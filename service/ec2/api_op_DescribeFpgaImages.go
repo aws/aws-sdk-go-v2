@@ -78,6 +78,10 @@ type DescribeFpgaImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeFpgaImagesInput) operationName() string {
+	return "DescribeFpgaImages"
+}
+
 type DescribeFpgaImagesOutput struct {
 
 	// Information about the FPGA images.

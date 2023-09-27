@@ -89,6 +89,10 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeploymentInput) operationName() string {
+	return "CreateDeployment"
+}
+
 type CreateDeploymentOutput struct {
 
 	// The ID of the deployment.

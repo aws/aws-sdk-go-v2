@@ -69,6 +69,10 @@ type CreateDataLakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataLakeInput) operationName() string {
+	return "CreateDataLake"
+}
+
 type CreateDataLakeOutput struct {
 
 	// The created Security Lake configuration object.

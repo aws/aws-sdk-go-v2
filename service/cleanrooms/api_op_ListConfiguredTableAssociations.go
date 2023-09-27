@@ -50,6 +50,10 @@ type ListConfiguredTableAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListConfiguredTableAssociationsInput) operationName() string {
+	return "ListConfiguredTableAssociations"
+}
+
 type ListConfiguredTableAssociationsOutput struct {
 
 	// The retrieved list of configured table associations.

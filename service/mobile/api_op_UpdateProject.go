@@ -48,6 +48,10 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateProjectInput) operationName() string {
+	return "UpdateProject"
+}
+
 // Result structure used for requests to updated project configuration.
 type UpdateProjectOutput struct {
 

@@ -44,6 +44,10 @@ type DeleteBackupPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackupPlanInput) operationName() string {
+	return "DeleteBackupPlan"
+}
+
 type DeleteBackupPlanOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for

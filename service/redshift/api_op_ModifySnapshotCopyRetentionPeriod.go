@@ -72,6 +72,10 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifySnapshotCopyRetentionPeriodInput) operationName() string {
+	return "ModifySnapshotCopyRetentionPeriod"
+}
+
 type ModifySnapshotCopyRetentionPeriodOutput struct {
 
 	// Describes a cluster.

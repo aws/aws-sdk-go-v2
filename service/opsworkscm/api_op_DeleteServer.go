@@ -48,6 +48,10 @@ type DeleteServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteServerInput) operationName() string {
+	return "DeleteServer"
+}
+
 type DeleteServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

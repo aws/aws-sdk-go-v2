@@ -46,6 +46,10 @@ type ExportSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportSnapshotInput) operationName() string {
+	return "ExportSnapshot"
+}
+
 type ExportSnapshotOutput struct {
 
 	// The presigned URL for the snapshot data. This URL will be available for 10

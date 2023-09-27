@@ -56,6 +56,10 @@ type GetDeviceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDeviceDefinitionVersionInput) operationName() string {
+	return "GetDeviceDefinitionVersion"
+}
+
 type GetDeviceDefinitionVersionOutput struct {
 
 	// The ARN of the device definition version.

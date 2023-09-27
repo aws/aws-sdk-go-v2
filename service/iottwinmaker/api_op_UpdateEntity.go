@@ -61,6 +61,10 @@ type UpdateEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateEntityInput) operationName() string {
+	return "UpdateEntity"
+}
+
 type UpdateEntityOutput struct {
 
 	// The current state of the entity update.

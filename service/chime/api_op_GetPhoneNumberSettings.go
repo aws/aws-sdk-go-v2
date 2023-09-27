@@ -37,6 +37,10 @@ type GetPhoneNumberSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPhoneNumberSettingsInput) operationName() string {
+	return "GetPhoneNumberSettings"
+}
+
 type GetPhoneNumberSettingsOutput struct {
 
 	// The default outbound calling name for the account.

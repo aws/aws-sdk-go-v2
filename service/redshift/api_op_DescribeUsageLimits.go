@@ -88,6 +88,10 @@ type DescribeUsageLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeUsageLimitsInput) operationName() string {
+	return "DescribeUsageLimits"
+}
+
 type DescribeUsageLimitsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

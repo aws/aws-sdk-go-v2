@@ -58,6 +58,10 @@ type ListResourceDataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceDataSyncInput) operationName() string {
+	return "ListResourceDataSync"
+}
+
 type ListResourceDataSyncOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

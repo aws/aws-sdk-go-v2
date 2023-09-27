@@ -56,6 +56,10 @@ type CreateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateFleetInput) operationName() string {
+	return "CreateFleet"
+}
+
 type CreateFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the fleet.

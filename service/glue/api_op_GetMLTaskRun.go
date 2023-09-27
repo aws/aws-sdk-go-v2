@@ -52,6 +52,10 @@ type GetMLTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLTaskRunInput) operationName() string {
+	return "GetMLTaskRun"
+}
+
 type GetMLTaskRunOutput struct {
 
 	// The date and time when this task run was completed.

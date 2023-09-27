@@ -50,6 +50,10 @@ type DeleteConfigurationSetTrackingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationSetTrackingOptionsInput) operationName() string {
+	return "DeleteConfigurationSetTrackingOptions"
+}
+
 // An empty element returned on a successful request.
 type DeleteConfigurationSetTrackingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.

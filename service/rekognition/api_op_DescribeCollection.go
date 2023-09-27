@@ -46,6 +46,10 @@ type DescribeCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCollectionInput) operationName() string {
+	return "DescribeCollection"
+}
+
 type DescribeCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the collection.

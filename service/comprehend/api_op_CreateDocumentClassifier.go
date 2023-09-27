@@ -125,6 +125,10 @@ type CreateDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDocumentClassifierInput) operationName() string {
+	return "CreateDocumentClassifier"
+}
+
 type CreateDocumentClassifierOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the document classifier.

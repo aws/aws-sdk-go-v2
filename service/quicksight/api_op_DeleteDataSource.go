@@ -48,6 +48,10 @@ type DeleteDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataSourceInput) operationName() string {
+	return "DeleteDataSource"
+}
+
 type DeleteDataSourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source that you deleted.

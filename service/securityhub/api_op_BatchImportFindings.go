@@ -76,6 +76,10 @@ type BatchImportFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchImportFindingsInput) operationName() string {
+	return "BatchImportFindings"
+}
+
 type BatchImportFindingsOutput struct {
 
 	// The number of findings that failed to import.

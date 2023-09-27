@@ -45,6 +45,10 @@ type BatchGetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchGetDeploymentsInput) operationName() string {
+	return "BatchGetDeployments"
+}
+
 // Represents the output of a BatchGetDeployments operation.
 type BatchGetDeploymentsOutput struct {
 

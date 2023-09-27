@@ -39,6 +39,10 @@ type DescribeEventSourcesConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEventSourcesConfigInput) operationName() string {
+	return "DescribeEventSourcesConfig"
+}
+
 type DescribeEventSourcesConfigOutput struct {
 
 	// Lists the event sources in the configuration.

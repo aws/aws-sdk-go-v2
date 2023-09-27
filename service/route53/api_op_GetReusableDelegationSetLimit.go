@@ -53,6 +53,10 @@ type GetReusableDelegationSetLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetReusableDelegationSetLimitInput) operationName() string {
+	return "GetReusableDelegationSetLimit"
+}
+
 // A complex type that contains the requested limit.
 type GetReusableDelegationSetLimitOutput struct {
 

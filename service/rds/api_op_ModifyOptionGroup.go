@@ -56,6 +56,10 @@ type ModifyOptionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyOptionGroupInput) operationName() string {
+	return "ModifyOptionGroup"
+}
+
 type ModifyOptionGroupOutput struct {
 
 	//

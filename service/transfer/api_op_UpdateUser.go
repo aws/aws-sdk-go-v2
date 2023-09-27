@@ -119,6 +119,10 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateUserInput) operationName() string {
+	return "UpdateUser"
+}
+
 // UpdateUserResponse returns the user name and identifier for the request to
 // update a user's properties.
 type UpdateUserOutput struct {

@@ -60,6 +60,10 @@ type DescribeResourceCollectionHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeResourceCollectionHealthInput) operationName() string {
+	return "DescribeResourceCollectionHealth"
+}
+
 type DescribeResourceCollectionHealthOutput struct {
 
 	// The returned CloudFormationHealthOverview object that contains an

@@ -46,6 +46,10 @@ type ListEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListEngineVersionsInput) operationName() string {
+	return "ListEngineVersions"
+}
+
 type ListEngineVersionsOutput struct {
 
 	// A list of engine versions that are available to choose from.

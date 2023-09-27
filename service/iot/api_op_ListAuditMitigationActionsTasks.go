@@ -69,6 +69,10 @@ type ListAuditMitigationActionsTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAuditMitigationActionsTasksInput) operationName() string {
+	return "ListAuditMitigationActionsTasks"
+}
+
 type ListAuditMitigationActionsTasksOutput struct {
 
 	// The token for the next set of results.

@@ -51,6 +51,10 @@ type DeleteApplicationFromEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteApplicationFromEnvironmentInput) operationName() string {
+	return "DeleteApplicationFromEnvironment"
+}
+
 type DeleteApplicationFromEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

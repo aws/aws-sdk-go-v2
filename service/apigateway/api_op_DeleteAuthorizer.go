@@ -47,6 +47,10 @@ type DeleteAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAuthorizerInput) operationName() string {
+	return "DeleteAuthorizer"
+}
+
 type DeleteAuthorizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

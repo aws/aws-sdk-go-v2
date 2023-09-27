@@ -54,6 +54,10 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDomainInput) operationName() string {
+	return "DeleteDomain"
+}
+
 type DeleteDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation

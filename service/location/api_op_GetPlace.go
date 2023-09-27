@@ -69,6 +69,10 @@ type GetPlaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPlaceInput) operationName() string {
+	return "GetPlace"
+}
+
 type GetPlaceOutput struct {
 
 	// Details about the result, such as its address and position.

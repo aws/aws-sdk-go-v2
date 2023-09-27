@@ -46,6 +46,10 @@ type DescribeExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeExportInput) operationName() string {
+	return "DescribeExport"
+}
+
 type DescribeExportOutput struct {
 
 	// The date and time that the export was created.

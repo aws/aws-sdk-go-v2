@@ -42,6 +42,10 @@ type DescribeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEnvironmentsInput) operationName() string {
+	return "DescribeEnvironments"
+}
+
 type DescribeEnvironmentsOutput struct {
 
 	// Information about the environments that are returned.

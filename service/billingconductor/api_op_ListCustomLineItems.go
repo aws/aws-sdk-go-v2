@@ -53,6 +53,10 @@ type ListCustomLineItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCustomLineItemsInput) operationName() string {
+	return "ListCustomLineItems"
+}
+
 type ListCustomLineItemsOutput struct {
 
 	// A list of FreeFormLineItemListElements received.

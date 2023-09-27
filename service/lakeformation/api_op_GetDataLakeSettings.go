@@ -44,6 +44,10 @@ type GetDataLakeSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataLakeSettingsInput) operationName() string {
+	return "GetDataLakeSettings"
+}
+
 type GetDataLakeSettingsOutput struct {
 
 	// A structure representing a list of Lake Formation principals designated as data

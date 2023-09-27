@@ -56,6 +56,10 @@ type GetProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetProductsInput) operationName() string {
+	return "GetProducts"
+}
+
 type GetProductsOutput struct {
 
 	// The format version of the response. For example, aws_v1.

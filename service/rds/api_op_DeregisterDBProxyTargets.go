@@ -51,6 +51,10 @@ type DeregisterDBProxyTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterDBProxyTargetsInput) operationName() string {
+	return "DeregisterDBProxyTargets"
+}
+
 type DeregisterDBProxyTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

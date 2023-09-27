@@ -47,6 +47,10 @@ type GetPromptFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPromptFileInput) operationName() string {
+	return "GetPromptFile"
+}
+
 type GetPromptFileOutput struct {
 
 	// A generated URL to the prompt that can be given to an unauthorized user so they

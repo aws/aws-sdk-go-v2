@@ -85,6 +85,10 @@ type UpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateRuleInput) operationName() string {
+	return "UpdateRule"
+}
+
 type UpdateRuleOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRule request. You can also

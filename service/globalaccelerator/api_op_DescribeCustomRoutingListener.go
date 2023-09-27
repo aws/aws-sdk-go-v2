@@ -42,6 +42,10 @@ type DescribeCustomRoutingListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomRoutingListenerInput) operationName() string {
+	return "DescribeCustomRoutingListener"
+}
+
 type DescribeCustomRoutingListenerOutput struct {
 
 	// The description of a listener for a custom routing accelerator.

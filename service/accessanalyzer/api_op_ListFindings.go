@@ -59,6 +59,10 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFindingsInput) operationName() string {
+	return "ListFindings"
+}
+
 // The response to the request.
 type ListFindingsOutput struct {
 

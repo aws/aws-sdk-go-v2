@@ -37,6 +37,7 @@
         "api_op_UpdateCrl.go",
         "api_op_UpdateProfile.go",
         "api_op_UpdateTrustAnchor.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

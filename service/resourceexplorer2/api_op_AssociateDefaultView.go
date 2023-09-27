@@ -50,6 +50,10 @@ type AssociateDefaultViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateDefaultViewInput) operationName() string {
+	return "AssociateDefaultView"
+}
+
 type AssociateDefaultViewOutput struct {
 
 	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)

@@ -42,6 +42,10 @@ type GetRecordingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRecordingConfigurationInput) operationName() string {
+	return "GetRecordingConfiguration"
+}
+
 type GetRecordingConfigurationOutput struct {
 
 	//

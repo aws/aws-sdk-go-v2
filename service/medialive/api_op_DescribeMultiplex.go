@@ -47,6 +47,10 @@ type DescribeMultiplexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMultiplexInput) operationName() string {
+	return "DescribeMultiplex"
+}
+
 // Placeholder documentation for DescribeMultiplexResponse
 type DescribeMultiplexOutput struct {
 

@@ -49,6 +49,10 @@ type DescribeTopicPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTopicPermissionsInput) operationName() string {
+	return "DescribeTopicPermissions"
+}
+
 type DescribeTopicPermissionsOutput struct {
 
 	// A list of resource permissions that are configured to the topic.

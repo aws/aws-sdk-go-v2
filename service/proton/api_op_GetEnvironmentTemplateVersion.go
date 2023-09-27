@@ -57,6 +57,10 @@ type GetEnvironmentTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEnvironmentTemplateVersionInput) operationName() string {
+	return "GetEnvironmentTemplateVersion"
+}
+
 type GetEnvironmentTemplateVersionOutput struct {
 
 	// The detailed data of the requested environment template version.

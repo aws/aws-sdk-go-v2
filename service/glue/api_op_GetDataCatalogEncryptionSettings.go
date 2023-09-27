@@ -41,6 +41,10 @@ type GetDataCatalogEncryptionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDataCatalogEncryptionSettingsInput) operationName() string {
+	return "GetDataCatalogEncryptionSettings"
+}
+
 type GetDataCatalogEncryptionSettingsOutput struct {
 
 	// The requested security configuration.

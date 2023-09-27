@@ -42,6 +42,10 @@ type ExportNotebookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportNotebookInput) operationName() string {
+	return "ExportNotebook"
+}
+
 type ExportNotebookOutput struct {
 
 	// The notebook metadata, including notebook ID, notebook name, and workgroup name.

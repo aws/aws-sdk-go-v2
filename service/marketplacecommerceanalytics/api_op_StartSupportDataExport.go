@@ -99,6 +99,10 @@ type StartSupportDataExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartSupportDataExportInput) operationName() string {
+	return "StartSupportDataExport"
+}
+
 // Container for the result of the StartSupportDataExport operation.
 type StartSupportDataExportOutput struct {
 

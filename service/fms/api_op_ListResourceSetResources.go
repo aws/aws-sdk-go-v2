@@ -56,6 +56,10 @@ type ListResourceSetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourceSetResourcesInput) operationName() string {
+	return "ListResourceSetResources"
+}
+
 type ListResourceSetResourcesOutput struct {
 
 	// An array of the associated resources' uniform resource identifiers (URI).

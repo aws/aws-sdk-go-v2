@@ -71,6 +71,10 @@ type RespondActivityTaskCompletedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RespondActivityTaskCompletedInput) operationName() string {
+	return "RespondActivityTaskCompleted"
+}
+
 type RespondActivityTaskCompletedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

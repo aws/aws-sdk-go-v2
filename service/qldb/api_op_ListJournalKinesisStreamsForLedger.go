@@ -57,6 +57,10 @@ type ListJournalKinesisStreamsForLedgerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListJournalKinesisStreamsForLedgerInput) operationName() string {
+	return "ListJournalKinesisStreamsForLedger"
+}
+
 type ListJournalKinesisStreamsForLedgerOutput struct {
 
 	//   - If NextToken is empty, the last page of results has been processed and there

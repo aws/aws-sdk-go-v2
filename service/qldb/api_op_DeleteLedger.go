@@ -44,6 +44,10 @@ type DeleteLedgerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteLedgerInput) operationName() string {
+	return "DeleteLedger"
+}
+
 type DeleteLedgerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

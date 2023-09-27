@@ -65,6 +65,10 @@ type ImportBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportBackendAuthInput) operationName() string {
+	return "ImportBackendAuth"
+}
+
 type ImportBackendAuthOutput struct {
 
 	// The app ID.

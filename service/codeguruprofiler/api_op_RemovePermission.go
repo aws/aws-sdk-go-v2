@@ -63,6 +63,10 @@ type RemovePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RemovePermissionInput) operationName() string {
+	return "RemovePermission"
+}
+
 // The structure representing the removePermissionResponse .
 type RemovePermissionOutput struct {
 

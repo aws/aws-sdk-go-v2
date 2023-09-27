@@ -43,6 +43,10 @@ type DeleteModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteModelManifestInput) operationName() string {
+	return "DeleteModelManifest"
+}
+
 type DeleteModelManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted model manifest.

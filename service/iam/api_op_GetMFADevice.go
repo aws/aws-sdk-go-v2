@@ -47,6 +47,10 @@ type GetMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMFADeviceInput) operationName() string {
+	return "GetMFADevice"
+}
+
 type GetMFADeviceOutput struct {
 
 	// Serial number that uniquely identifies the MFA device. For this API, we only

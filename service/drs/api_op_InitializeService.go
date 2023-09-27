@@ -35,6 +35,10 @@ type InitializeServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*InitializeServiceInput) operationName() string {
+	return "InitializeService"
+}
+
 type InitializeServiceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

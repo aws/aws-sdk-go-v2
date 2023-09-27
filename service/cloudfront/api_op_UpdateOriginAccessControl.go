@@ -51,6 +51,10 @@ type UpdateOriginAccessControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateOriginAccessControlInput) operationName() string {
+	return "UpdateOriginAccessControl"
+}
+
 type UpdateOriginAccessControlOutput struct {
 
 	// The new version of the origin access control after it has been updated.

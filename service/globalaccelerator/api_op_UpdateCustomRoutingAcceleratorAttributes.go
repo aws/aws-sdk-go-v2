@@ -62,6 +62,10 @@ type UpdateCustomRoutingAcceleratorAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateCustomRoutingAcceleratorAttributesInput) operationName() string {
+	return "UpdateCustomRoutingAcceleratorAttributes"
+}
+
 type UpdateCustomRoutingAcceleratorAttributesOutput struct {
 
 	// Updated custom routing accelerator.

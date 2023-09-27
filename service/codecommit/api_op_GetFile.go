@@ -54,6 +54,10 @@ type GetFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFileInput) operationName() string {
+	return "GetFile"
+}
+
 type GetFileOutput struct {
 
 	// The blob ID of the object that represents the file content.

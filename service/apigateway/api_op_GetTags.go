@@ -50,6 +50,10 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetTagsInput) operationName() string {
+	return "GetTags"
+}
+
 // The collection of tags. Each tag element is associated with a given resource.
 type GetTagsOutput struct {
 

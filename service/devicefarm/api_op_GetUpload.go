@@ -43,6 +43,10 @@ type GetUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUploadInput) operationName() string {
+	return "GetUpload"
+}
+
 // Represents the result of a get upload request.
 type GetUploadOutput struct {
 

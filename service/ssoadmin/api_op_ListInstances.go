@@ -44,6 +44,10 @@ type ListInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInstancesInput) operationName() string {
+	return "ListInstances"
+}
+
 type ListInstancesOutput struct {
 
 	// Lists the IAM Identity Center instances that the caller has access to.

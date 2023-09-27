@@ -43,6 +43,10 @@ type BatchStartViewerSessionRevocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchStartViewerSessionRevocationInput) operationName() string {
+	return "BatchStartViewerSessionRevocation"
+}
+
 type BatchStartViewerSessionRevocationOutput struct {
 
 	// Each error object is related to a specific channelArn and viewerId pair in the

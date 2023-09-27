@@ -47,6 +47,10 @@ type ListWebhooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWebhooksInput) operationName() string {
+	return "ListWebhooks"
+}
+
 type ListWebhooksOutput struct {
 
 	// If the amount of returned information is significantly large, an identifier is

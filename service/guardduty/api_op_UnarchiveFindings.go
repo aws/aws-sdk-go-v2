@@ -46,6 +46,10 @@ type UnarchiveFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnarchiveFindingsInput) operationName() string {
+	return "UnarchiveFindings"
+}
+
 type UnarchiveFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,6 +53,10 @@ type ListDevicePoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDevicePoolsInput) operationName() string {
+	return "ListDevicePools"
+}
+
 // Represents the result of a list device pools request.
 type ListDevicePoolsOutput struct {
 

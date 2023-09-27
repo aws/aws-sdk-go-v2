@@ -60,6 +60,10 @@ type ListDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDocumentsInput) operationName() string {
+	return "ListDocuments"
+}
+
 type ListDocumentsOutput struct {
 
 	// The names of the SSM documents.

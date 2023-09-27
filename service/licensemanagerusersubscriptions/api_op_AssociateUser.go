@@ -60,6 +60,10 @@ type AssociateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateUserInput) operationName() string {
+	return "AssociateUser"
+}
+
 type AssociateUserOutput struct {
 
 	// Metadata that describes the associate user operation.

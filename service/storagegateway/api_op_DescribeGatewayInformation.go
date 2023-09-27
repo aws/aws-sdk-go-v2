@@ -46,6 +46,10 @@ type DescribeGatewayInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGatewayInformationInput) operationName() string {
+	return "DescribeGatewayInformation"
+}
+
 // A JSON object containing the following fields:
 type DescribeGatewayInformationOutput struct {
 

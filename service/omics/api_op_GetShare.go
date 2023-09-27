@@ -42,6 +42,10 @@ type GetShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetShareInput) operationName() string {
+	return "GetShare"
+}
+
 type GetShareOutput struct {
 
 	// An analytic store share details object. contains status, resourceArn, ownerId,

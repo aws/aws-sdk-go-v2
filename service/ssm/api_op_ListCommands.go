@@ -58,6 +58,10 @@ type ListCommandsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListCommandsInput) operationName() string {
+	return "ListCommands"
+}
+
 type ListCommandsOutput struct {
 
 	// (Optional) The list of commands requested by the user.

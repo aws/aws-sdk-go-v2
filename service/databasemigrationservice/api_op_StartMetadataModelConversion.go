@@ -47,6 +47,10 @@ type StartMetadataModelConversionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartMetadataModelConversionInput) operationName() string {
+	return "StartMetadataModelConversion"
+}
+
 type StartMetadataModelConversionOutput struct {
 
 	// The identifier for the conversion operation.

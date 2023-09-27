@@ -53,6 +53,10 @@ type GetMLTransformsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetMLTransformsInput) operationName() string {
+	return "GetMLTransforms"
+}
+
 type GetMLTransformsOutput struct {
 
 	// A list of machine learning transforms.

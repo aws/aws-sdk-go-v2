@@ -48,6 +48,10 @@ type UnsubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnsubscribeInput) operationName() string {
+	return "Unsubscribe"
+}
+
 type UnsubscribeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the the notification rule from which you have

@@ -73,6 +73,10 @@ type DeleteRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteRuleGroupInput) operationName() string {
+	return "DeleteRuleGroup"
+}
+
 type DeleteRuleGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

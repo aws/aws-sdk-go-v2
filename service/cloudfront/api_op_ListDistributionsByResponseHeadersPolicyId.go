@@ -58,6 +58,10 @@ type ListDistributionsByResponseHeadersPolicyIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDistributionsByResponseHeadersPolicyIdInput) operationName() string {
+	return "ListDistributionsByResponseHeadersPolicyId"
+}
+
 type ListDistributionsByResponseHeadersPolicyIdOutput struct {
 
 	// A list of distribution IDs.

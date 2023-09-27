@@ -55,6 +55,10 @@ type GetSystemTemplateRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSystemTemplateRevisionsInput) operationName() string {
+	return "GetSystemTemplateRevisions"
+}
+
 type GetSystemTemplateRevisionsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.

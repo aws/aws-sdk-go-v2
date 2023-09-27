@@ -47,6 +47,10 @@ type DeregisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeregisterTargetsInput) operationName() string {
+	return "DeregisterTargets"
+}
+
 type DeregisterTargetsOutput struct {
 
 	// The targets that were successfully deregistered.

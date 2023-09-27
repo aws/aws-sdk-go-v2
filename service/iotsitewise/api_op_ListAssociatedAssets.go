@@ -67,6 +67,10 @@ type ListAssociatedAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAssociatedAssetsInput) operationName() string {
+	return "ListAssociatedAssets"
+}
+
 type ListAssociatedAssetsOutput struct {
 
 	// A list that summarizes the associated assets.

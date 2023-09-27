@@ -36,6 +36,10 @@ type GetConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetConfigurationInput) operationName() string {
+	return "GetConfiguration"
+}
+
 type GetConfigurationOutput struct {
 
 	// Specifies how the ECR automated re-scan duration is currently configured for

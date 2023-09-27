@@ -48,6 +48,10 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSchemaInput) operationName() string {
+	return "UpdateSchema"
+}
+
 type UpdateSchemaOutput struct {
 
 	// The ARN that is associated with the updated schema. For more information, see

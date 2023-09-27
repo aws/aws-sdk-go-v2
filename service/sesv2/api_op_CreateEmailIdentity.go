@@ -84,6 +84,10 @@ type CreateEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEmailIdentityInput) operationName() string {
+	return "CreateEmailIdentity"
+}
+
 // If the email identity is a domain, this object contains information about the
 // DKIM verification status for the domain. If the email identity is an email
 // address, this object is empty.

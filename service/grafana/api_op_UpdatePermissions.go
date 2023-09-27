@@ -47,6 +47,10 @@ type UpdatePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePermissionsInput) operationName() string {
+	return "UpdatePermissions"
+}
+
 type UpdatePermissionsOutput struct {
 
 	// An array of structures that contain the errors from the operation, if any.

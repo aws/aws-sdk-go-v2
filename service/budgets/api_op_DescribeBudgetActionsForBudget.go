@@ -55,6 +55,10 @@ type DescribeBudgetActionsForBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeBudgetActionsForBudgetInput) operationName() string {
+	return "DescribeBudgetActionsForBudget"
+}
+
 type DescribeBudgetActionsForBudgetOutput struct {
 
 	// A list of the budget action resources information.

@@ -58,6 +58,10 @@ type DescribeTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTemplateInput) operationName() string {
+	return "DescribeTemplate"
+}
+
 type DescribeTemplateOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

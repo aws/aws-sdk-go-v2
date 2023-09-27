@@ -52,6 +52,10 @@ type PutManagedScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutManagedScalingPolicyInput) operationName() string {
+	return "PutManagedScalingPolicy"
+}
+
 type PutManagedScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

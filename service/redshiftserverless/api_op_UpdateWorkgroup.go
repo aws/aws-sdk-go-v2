@@ -76,6 +76,10 @@ type UpdateWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateWorkgroupInput) operationName() string {
+	return "UpdateWorkgroup"
+}
+
 type UpdateWorkgroupOutput struct {
 
 	// The updated workgroup object.

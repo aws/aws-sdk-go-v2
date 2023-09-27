@@ -56,6 +56,10 @@ type PutAuditEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAuditEventsInput) operationName() string {
+	return "PutAuditEvents"
+}
+
 type PutAuditEventsOutput struct {
 
 	// Lists events in the provided event payload that could not be ingested into

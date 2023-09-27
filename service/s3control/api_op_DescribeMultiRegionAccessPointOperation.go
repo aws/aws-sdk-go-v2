@@ -63,6 +63,10 @@ type DescribeMultiRegionAccessPointOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMultiRegionAccessPointOperationInput) operationName() string {
+	return "DescribeMultiRegionAccessPointOperation"
+}
+
 type DescribeMultiRegionAccessPointOperationOutput struct {
 
 	// A container element containing the details of the asynchronous operation.

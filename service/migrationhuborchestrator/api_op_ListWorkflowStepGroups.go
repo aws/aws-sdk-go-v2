@@ -48,6 +48,10 @@ type ListWorkflowStepGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListWorkflowStepGroupsInput) operationName() string {
+	return "ListWorkflowStepGroups"
+}
+
 type ListWorkflowStepGroupsOutput struct {
 
 	// The summary of step groups in a migration workflow.

@@ -68,6 +68,10 @@ type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput struct
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput) operationName() string {
+	return "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
+}
+
 type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput struct {
 
 	// Information about the associations.

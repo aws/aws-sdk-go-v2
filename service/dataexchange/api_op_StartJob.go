@@ -41,6 +41,10 @@ type StartJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartJobInput) operationName() string {
+	return "StartJob"
+}
+
 type StartJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

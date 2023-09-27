@@ -47,6 +47,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTagsForResourceInput) operationName() string {
+	return "ListTagsForResource"
+}
+
 // If the action is successful, the service sends back an HTTP 200 response.
 type ListTagsForResourceOutput struct {
 

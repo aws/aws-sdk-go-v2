@@ -64,6 +64,10 @@ type CreateChannelBanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateChannelBanInput) operationName() string {
+	return "CreateChannelBan"
+}
+
 type CreateChannelBanOutput struct {
 
 	// The ARN of the response to the ban request.

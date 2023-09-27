@@ -38,6 +38,10 @@ type StreamingTraitsWithMediaTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StreamingTraitsWithMediaTypeInput) operationName() string {
+	return "StreamingTraitsWithMediaType"
+}
+
 type StreamingTraitsWithMediaTypeOutput struct {
 
 	// This value conforms to the media type: text/plain

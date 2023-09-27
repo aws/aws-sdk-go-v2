@@ -59,6 +59,10 @@ type ModifyAvailabilityZoneGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyAvailabilityZoneGroupInput) operationName() string {
+	return "ModifyAvailabilityZoneGroup"
+}
+
 type ModifyAvailabilityZoneGroupOutput struct {
 
 	// Is true if the request succeeds, and an error otherwise.

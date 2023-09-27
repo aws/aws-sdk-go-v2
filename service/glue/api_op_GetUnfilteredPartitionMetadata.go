@@ -67,6 +67,10 @@ type GetUnfilteredPartitionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetUnfilteredPartitionMetadataInput) operationName() string {
+	return "GetUnfilteredPartitionMetadata"
+}
+
 type GetUnfilteredPartitionMetadataOutput struct {
 
 	// A list of column names that the user has been granted access to.

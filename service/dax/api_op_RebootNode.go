@@ -49,6 +49,10 @@ type RebootNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RebootNodeInput) operationName() string {
+	return "RebootNode"
+}
+
 type RebootNodeOutput struct {
 
 	// A description of the DAX cluster after a node has been rebooted.

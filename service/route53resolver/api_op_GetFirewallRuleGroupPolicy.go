@@ -43,6 +43,10 @@ type GetFirewallRuleGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetFirewallRuleGroupPolicyInput) operationName() string {
+	return "GetFirewallRuleGroupPolicy"
+}
+
 type GetFirewallRuleGroupPolicyOutput struct {
 
 	// The Identity and Access Management (Amazon Web Services IAM) policy for sharing

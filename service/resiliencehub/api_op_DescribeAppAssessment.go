@@ -45,6 +45,10 @@ type DescribeAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAppAssessmentInput) operationName() string {
+	return "DescribeAppAssessment"
+}
+
 type DescribeAppAssessmentOutput struct {
 
 	// The assessment for an Resilience Hub application, returned as an object. This

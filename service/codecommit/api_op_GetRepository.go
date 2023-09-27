@@ -48,6 +48,10 @@ type GetRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositoryInput) operationName() string {
+	return "GetRepository"
+}
+
 // Represents the output of a get repository operation.
 type GetRepositoryOutput struct {
 

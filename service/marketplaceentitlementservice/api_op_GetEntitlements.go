@@ -61,6 +61,10 @@ type GetEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEntitlementsInput) operationName() string {
+	return "GetEntitlements"
+}
+
 // The GetEntitlementsRequest contains results from the GetEntitlements operation.
 type GetEntitlementsOutput struct {
 

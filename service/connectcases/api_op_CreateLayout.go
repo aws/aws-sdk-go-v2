@@ -59,6 +59,10 @@ type CreateLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLayoutInput) operationName() string {
+	return "CreateLayout"
+}
+
 type CreateLayoutOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created layout.

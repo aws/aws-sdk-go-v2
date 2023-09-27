@@ -43,6 +43,10 @@ type GetAutoTerminationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAutoTerminationPolicyInput) operationName() string {
+	return "GetAutoTerminationPolicy"
+}
+
 type GetAutoTerminationPolicyOutput struct {
 
 	// Specifies the auto-termination policy that is attached to an Amazon EMR cluster.

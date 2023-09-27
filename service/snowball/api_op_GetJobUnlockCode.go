@@ -53,6 +53,10 @@ type GetJobUnlockCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobUnlockCodeInput) operationName() string {
+	return "GetJobUnlockCode"
+}
+
 type GetJobUnlockCodeOutput struct {
 
 	// The UnlockCode value for the specified job. The UnlockCode value can be

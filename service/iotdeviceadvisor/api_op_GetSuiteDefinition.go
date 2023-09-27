@@ -48,6 +48,10 @@ type GetSuiteDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSuiteDefinitionInput) operationName() string {
+	return "GetSuiteDefinition"
+}
+
 type GetSuiteDefinitionOutput struct {
 
 	// Date (in Unix epoch time) when the suite definition was created.

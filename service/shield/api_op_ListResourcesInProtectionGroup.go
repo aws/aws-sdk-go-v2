@@ -63,6 +63,10 @@ type ListResourcesInProtectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListResourcesInProtectionGroupInput) operationName() string {
+	return "ListResourcesInProtectionGroup"
+}
+
 type ListResourcesInProtectionGroupOutput struct {
 
 	// The Amazon Resource Names (ARNs) of the resources that are included in the

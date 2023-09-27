@@ -50,6 +50,10 @@ type GetServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetServersInput) operationName() string {
+	return "GetServers"
+}
+
 type GetServersOutput struct {
 
 	// The time when the server was last modified.

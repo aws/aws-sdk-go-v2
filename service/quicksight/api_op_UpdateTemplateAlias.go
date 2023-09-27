@@ -61,6 +61,10 @@ type UpdateTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTemplateAliasInput) operationName() string {
+	return "UpdateTemplateAlias"
+}
+
 type UpdateTemplateAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.

@@ -59,6 +59,10 @@ type UpdateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateIpAccessSettingsInput) operationName() string {
+	return "UpdateIpAccessSettings"
+}
+
 type UpdateIpAccessSettingsOutput struct {
 
 	// The IP access settings.

@@ -68,6 +68,10 @@ type CreateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateEvaluationInput) operationName() string {
+	return "CreateEvaluation"
+}
+
 // Represents the output of a CreateEvaluation operation, and is an
 // acknowledgement that Amazon ML received the request. CreateEvaluation operation
 // is asynchronous. You can poll for status updates by using the GetEvcaluation

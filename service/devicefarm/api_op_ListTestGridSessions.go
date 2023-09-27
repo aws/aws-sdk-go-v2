@@ -64,6 +64,10 @@ type ListTestGridSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTestGridSessionsInput) operationName() string {
+	return "ListTestGridSessions"
+}
+
 type ListTestGridSessionsOutput struct {
 
 	// Pagination token.

@@ -144,6 +144,10 @@ type CreateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateWorkspaceInput) operationName() string {
+	return "CreateWorkspace"
+}
+
 type CreateWorkspaceOutput struct {
 
 	// A structure containing data about the workspace that was created.

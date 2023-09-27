@@ -54,6 +54,10 @@ type UntagOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UntagOpenIDConnectProviderInput) operationName() string {
+	return "UntagOpenIDConnectProvider"
+}
+
 type UntagOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

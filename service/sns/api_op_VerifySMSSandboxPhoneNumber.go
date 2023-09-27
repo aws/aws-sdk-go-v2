@@ -56,6 +56,10 @@ type VerifySMSSandboxPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*VerifySMSSandboxPhoneNumberInput) operationName() string {
+	return "VerifySMSSandboxPhoneNumber"
+}
+
 // The destination phone number's verification status.
 type VerifySMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.

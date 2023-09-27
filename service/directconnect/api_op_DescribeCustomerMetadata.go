@@ -37,6 +37,10 @@ type DescribeCustomerMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeCustomerMetadataInput) operationName() string {
+	return "DescribeCustomerMetadata"
+}
+
 type DescribeCustomerMetadataOutput struct {
 
 	// The list of customer agreements.

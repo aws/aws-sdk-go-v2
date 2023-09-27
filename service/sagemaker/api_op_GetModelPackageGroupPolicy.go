@@ -43,6 +43,10 @@ type GetModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetModelPackageGroupPolicyInput) operationName() string {
+	return "GetModelPackageGroupPolicy"
+}
+
 type GetModelPackageGroupPolicyOutput struct {
 
 	// The resource policy for the model group.

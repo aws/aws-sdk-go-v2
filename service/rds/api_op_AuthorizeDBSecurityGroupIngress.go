@@ -79,6 +79,10 @@ type AuthorizeDBSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AuthorizeDBSecurityGroupIngressInput) operationName() string {
+	return "AuthorizeDBSecurityGroupIngress"
+}
+
 type AuthorizeDBSecurityGroupIngressOutput struct {
 
 	// Contains the details for an Amazon RDS DB security group. This data type is

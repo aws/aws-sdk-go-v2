@@ -58,6 +58,10 @@ type StopLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopLaunchInput) operationName() string {
+	return "StopLaunch"
+}
+
 type StopLaunchOutput struct {
 
 	// The date and time that the launch stopped.

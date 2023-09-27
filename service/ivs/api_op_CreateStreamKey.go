@@ -53,6 +53,10 @@ type CreateStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateStreamKeyInput) operationName() string {
+	return "CreateStreamKey"
+}
+
 type CreateStreamKeyOutput struct {
 
 	// Stream key used to authenticate an RTMPS stream for ingestion.

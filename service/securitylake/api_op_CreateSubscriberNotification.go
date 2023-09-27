@@ -50,6 +50,10 @@ type CreateSubscriberNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateSubscriberNotificationInput) operationName() string {
+	return "CreateSubscriberNotification"
+}
+
 type CreateSubscriberNotificationOutput struct {
 
 	// The subscriber endpoint to which exception messages are posted.

@@ -55,6 +55,10 @@ type DeleteBandwidthRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBandwidthRateLimitInput) operationName() string {
+	return "DeleteBandwidthRateLimit"
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // bandwidth rate information was deleted.
 type DeleteBandwidthRateLimitOutput struct {

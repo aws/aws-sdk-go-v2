@@ -44,6 +44,10 @@ type DescribeLedgerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLedgerInput) operationName() string {
+	return "DescribeLedger"
+}
+
 type DescribeLedgerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.

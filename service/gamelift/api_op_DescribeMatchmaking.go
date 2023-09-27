@@ -53,6 +53,10 @@ type DescribeMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeMatchmakingInput) operationName() string {
+	return "DescribeMatchmaking"
+}
+
 type DescribeMatchmakingOutput struct {
 
 	// A collection of existing matchmaking ticket objects matching the request.

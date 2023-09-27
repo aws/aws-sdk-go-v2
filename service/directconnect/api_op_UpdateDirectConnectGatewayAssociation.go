@@ -47,6 +47,10 @@ type UpdateDirectConnectGatewayAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateDirectConnectGatewayAssociationInput) operationName() string {
+	return "UpdateDirectConnectGatewayAssociation"
+}
+
 type UpdateDirectConnectGatewayAssociationOutput struct {
 
 	// Information about an association between a Direct Connect gateway and a virtual

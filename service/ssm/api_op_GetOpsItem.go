@@ -53,6 +53,10 @@ type GetOpsItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetOpsItemInput) operationName() string {
+	return "GetOpsItem"
+}
+
 type GetOpsItemOutput struct {
 
 	// The OpsItem.

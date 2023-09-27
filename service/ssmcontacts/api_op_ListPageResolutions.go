@@ -49,6 +49,10 @@ type ListPageResolutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListPageResolutionsInput) operationName() string {
+	return "ListPageResolutions"
+}
+
 type ListPageResolutionsOutput struct {
 
 	// Information about the resolution for an engagement.

@@ -52,6 +52,10 @@ type DisassociateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisassociateTrialComponentInput) operationName() string {
+	return "DisassociateTrialComponent"
+}
+
 type DisassociateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.

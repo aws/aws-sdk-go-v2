@@ -42,6 +42,10 @@ type DeleteAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppBlockBuilderInput) operationName() string {
+	return "DeleteAppBlockBuilder"
+}
+
 type DeleteAppBlockBuilderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

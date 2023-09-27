@@ -48,6 +48,10 @@ type GetPreparedStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetPreparedStatementInput) operationName() string {
+	return "GetPreparedStatement"
+}
+
 type GetPreparedStatementOutput struct {
 
 	// The name of the prepared statement that was retrieved.

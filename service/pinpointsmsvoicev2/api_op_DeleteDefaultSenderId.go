@@ -45,6 +45,10 @@ type DeleteDefaultSenderIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDefaultSenderIdInput) operationName() string {
+	return "DeleteDefaultSenderId"
+}
+
 type DeleteDefaultSenderIdOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.

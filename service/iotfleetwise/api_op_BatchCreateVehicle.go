@@ -46,6 +46,10 @@ type BatchCreateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreateVehicleInput) operationName() string {
+	return "BatchCreateVehicle"
+}
+
 type BatchCreateVehicleOutput struct {
 
 	// A list of information about creation errors, or an empty list if there aren't

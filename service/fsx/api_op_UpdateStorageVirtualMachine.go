@@ -53,6 +53,10 @@ type UpdateStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateStorageVirtualMachineInput) operationName() string {
+	return "UpdateStorageVirtualMachine"
+}
+
 type UpdateStorageVirtualMachineOutput struct {
 
 	// Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)

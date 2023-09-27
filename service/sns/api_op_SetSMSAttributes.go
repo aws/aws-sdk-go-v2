@@ -97,6 +97,10 @@ type SetSMSAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SetSMSAttributesInput) operationName() string {
+	return "SetSMSAttributes"
+}
+
 // The response for the SetSMSAttributes action.
 type SetSMSAttributesOutput struct {
 	// Metadata pertaining to the operation's result.

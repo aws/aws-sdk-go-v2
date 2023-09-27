@@ -48,6 +48,10 @@ type GetRepositoryCatalogDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetRepositoryCatalogDataInput) operationName() string {
+	return "GetRepositoryCatalogData"
+}
+
 type GetRepositoryCatalogDataOutput struct {
 
 	// The catalog metadata for the repository.

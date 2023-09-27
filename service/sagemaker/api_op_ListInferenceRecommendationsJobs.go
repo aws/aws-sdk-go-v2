@@ -81,6 +81,10 @@ type ListInferenceRecommendationsJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListInferenceRecommendationsJobsInput) operationName() string {
+	return "ListInferenceRecommendationsJobs"
+}
+
 type ListInferenceRecommendationsJobsOutput struct {
 
 	// The recommendations created from the Amazon SageMaker Inference Recommender job.

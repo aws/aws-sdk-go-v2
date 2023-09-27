@@ -115,6 +115,10 @@ type GetJobOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetJobOutputInput) operationName() string {
+	return "GetJobOutput"
+}
+
 // Contains the Amazon S3 Glacier response to your request.
 type GetJobOutputOutput struct {
 

@@ -61,6 +61,10 @@ type UpdateBusinessReportScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateBusinessReportScheduleInput) operationName() string {
+	return "UpdateBusinessReportSchedule"
+}
+
 type UpdateBusinessReportScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

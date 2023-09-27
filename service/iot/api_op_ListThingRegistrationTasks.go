@@ -49,6 +49,10 @@ type ListThingRegistrationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListThingRegistrationTasksInput) operationName() string {
+	return "ListThingRegistrationTasks"
+}
+
 type ListThingRegistrationTasksOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no

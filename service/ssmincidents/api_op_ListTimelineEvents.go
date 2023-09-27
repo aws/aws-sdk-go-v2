@@ -66,6 +66,10 @@ type ListTimelineEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListTimelineEventsInput) operationName() string {
+	return "ListTimelineEvents"
+}
+
 type ListTimelineEventsOutput struct {
 
 	// Details about each event that occurred during the incident.

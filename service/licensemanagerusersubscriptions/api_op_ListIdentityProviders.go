@@ -43,6 +43,10 @@ type ListIdentityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListIdentityProvidersInput) operationName() string {
+	return "ListIdentityProviders"
+}
+
 type ListIdentityProvidersOutput struct {
 
 	// Metadata that describes the list identity providers operation.

@@ -40,6 +40,10 @@ type DeleteGitHubAccountTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteGitHubAccountTokenInput) operationName() string {
+	return "DeleteGitHubAccountToken"
+}
+
 // Represents the output of a DeleteGitHubAccountToken operation.
 type DeleteGitHubAccountTokenOutput struct {
 

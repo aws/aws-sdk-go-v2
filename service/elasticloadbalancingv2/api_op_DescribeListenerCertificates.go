@@ -54,6 +54,10 @@ type DescribeListenerCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeListenerCertificatesInput) operationName() string {
+	return "DescribeListenerCertificates"
+}
+
 type DescribeListenerCertificatesOutput struct {
 
 	// Information about the certificates.

@@ -101,6 +101,10 @@ type CreateBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateBranchInput) operationName() string {
+	return "CreateBranch"
+}
+
 // The result structure for create branch request.
 type CreateBranchOutput struct {
 

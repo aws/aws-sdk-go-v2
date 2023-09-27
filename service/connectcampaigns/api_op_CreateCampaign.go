@@ -62,6 +62,10 @@ type CreateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateCampaignInput) operationName() string {
+	return "CreateCampaign"
+}
+
 // The response for Create Campaign API
 type CreateCampaignOutput struct {
 

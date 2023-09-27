@@ -54,6 +54,10 @@ type CreateLocalGatewayRouteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLocalGatewayRouteTableInput) operationName() string {
+	return "CreateLocalGatewayRouteTable"
+}
+
 type CreateLocalGatewayRouteTableOutput struct {
 
 	// Information about the local gateway route table.

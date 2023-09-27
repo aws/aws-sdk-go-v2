@@ -46,6 +46,10 @@ type RestoreWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RestoreWorkspaceInput) operationName() string {
+	return "RestoreWorkspace"
+}
+
 type RestoreWorkspaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

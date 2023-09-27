@@ -58,6 +58,10 @@ type ImportClientVpnClientCertificateRevocationListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportClientVpnClientCertificateRevocationListInput) operationName() string {
+	return "ImportClientVpnClientCertificateRevocationList"
+}
+
 type ImportClientVpnClientCertificateRevocationListOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.

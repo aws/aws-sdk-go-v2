@@ -183,6 +183,10 @@ type CreateLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLaunchConfigurationInput) operationName() string {
+	return "CreateLaunchConfiguration"
+}
+
 type CreateLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

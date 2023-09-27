@@ -52,6 +52,10 @@ type BatchReadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchReadInput) operationName() string {
+	return "BatchRead"
+}
+
 type BatchReadOutput struct {
 
 	// A list of all the responses for each batch read.

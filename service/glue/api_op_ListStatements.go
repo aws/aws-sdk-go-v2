@@ -48,6 +48,10 @@ type ListStatementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListStatementsInput) operationName() string {
+	return "ListStatements"
+}
+
 type ListStatementsOutput struct {
 
 	// A continuation token, if not all statements have yet been returned.

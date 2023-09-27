@@ -44,6 +44,10 @@ type DescribeDocumentClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeDocumentClassificationJobInput) operationName() string {
+	return "DescribeDocumentClassificationJob"
+}
+
 type DescribeDocumentClassificationJobOutput struct {
 
 	// An object that describes the properties associated with the document

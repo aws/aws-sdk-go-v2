@@ -65,6 +65,10 @@ type CreatePortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreatePortfolioInput) operationName() string {
+	return "CreatePortfolio"
+}
+
 type CreatePortfolioOutput struct {
 
 	// Information about the portfolio.

@@ -51,6 +51,10 @@ type UpdateGcmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateGcmChannelInput) operationName() string {
+	return "UpdateGcmChannel"
+}
+
 type UpdateGcmChannelOutput struct {
 
 	// Provides information about the status and settings of the GCM channel for an

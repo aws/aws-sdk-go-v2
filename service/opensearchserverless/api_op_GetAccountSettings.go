@@ -36,6 +36,10 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetAccountSettingsInput) operationName() string {
+	return "GetAccountSettings"
+}
+
 type GetAccountSettingsOutput struct {
 
 	// OpenSearch Serverless-related details for the current account.

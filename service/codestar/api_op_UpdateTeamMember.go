@@ -60,6 +60,10 @@ type UpdateTeamMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTeamMemberInput) operationName() string {
+	return "UpdateTeamMember"
+}
+
 type UpdateTeamMemberOutput struct {
 
 	// The project role granted to the user.

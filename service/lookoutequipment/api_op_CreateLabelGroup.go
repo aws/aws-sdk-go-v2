@@ -59,6 +59,10 @@ type CreateLabelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateLabelGroupInput) operationName() string {
+	return "CreateLabelGroup"
+}
+
 type CreateLabelGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the label group that you have created.

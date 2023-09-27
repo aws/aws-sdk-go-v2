@@ -56,6 +56,10 @@ type DescribeAccountPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeAccountPoliciesInput) operationName() string {
+	return "DescribeAccountPolicies"
+}
+
 type DescribeAccountPoliciesOutput struct {
 
 	// An array of structures that contain information about the CloudWatch Logs

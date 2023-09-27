@@ -59,6 +59,10 @@ type ModifyVerifiedAccessInstanceLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ModifyVerifiedAccessInstanceLoggingConfigurationInput) operationName() string {
+	return "ModifyVerifiedAccessInstanceLoggingConfiguration"
+}
+
 type ModifyVerifiedAccessInstanceLoggingConfigurationOutput struct {
 
 	// The logging configuration for the Verified Access instance.

@@ -50,6 +50,10 @@ type ListOpsItemEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListOpsItemEventsInput) operationName() string {
+	return "ListOpsItemEvents"
+}
+
 type ListOpsItemEventsOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next

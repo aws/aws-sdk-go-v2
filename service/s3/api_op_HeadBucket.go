@@ -92,6 +92,10 @@ type HeadBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*HeadBucketInput) operationName() string {
+	return "HeadBucket"
+}
+
 type HeadBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,6 +52,10 @@ type ListDecoderManifestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListDecoderManifestsInput) operationName() string {
+	return "ListDecoderManifests"
+}
+
 type ListDecoderManifestsOutput struct {
 
 	// The token to retrieve the next set of results, or null if there are no more

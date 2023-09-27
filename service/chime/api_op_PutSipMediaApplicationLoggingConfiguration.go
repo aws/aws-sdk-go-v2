@@ -54,6 +54,10 @@ type PutSipMediaApplicationLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutSipMediaApplicationLoggingConfigurationInput) operationName() string {
+	return "PutSipMediaApplicationLoggingConfiguration"
+}
+
 type PutSipMediaApplicationLoggingConfigurationOutput struct {
 
 	// The logging configuration of the SIP media application.

@@ -46,6 +46,10 @@ type DeleteBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBackendInput) operationName() string {
+	return "DeleteBackend"
+}
+
 type DeleteBackendOutput struct {
 
 	// The app ID.

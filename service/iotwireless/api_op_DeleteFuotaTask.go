@@ -41,6 +41,10 @@ type DeleteFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteFuotaTaskInput) operationName() string {
+	return "DeleteFuotaTask"
+}
+
 type DeleteFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

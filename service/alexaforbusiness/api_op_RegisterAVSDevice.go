@@ -75,6 +75,10 @@ type RegisterAVSDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*RegisterAVSDeviceInput) operationName() string {
+	return "RegisterAVSDevice"
+}
+
 type RegisterAVSDeviceOutput struct {
 
 	// The ARN of the device.

@@ -41,6 +41,10 @@ type StopRxNormInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopRxNormInferenceJobInput) operationName() string {
+	return "StopRxNormInferenceJob"
+}
+
 type StopRxNormInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this

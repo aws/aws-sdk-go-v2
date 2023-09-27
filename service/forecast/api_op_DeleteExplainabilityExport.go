@@ -41,6 +41,10 @@ type DeleteExplainabilityExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteExplainabilityExportInput) operationName() string {
+	return "DeleteExplainabilityExport"
+}
+
 type DeleteExplainabilityExportOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

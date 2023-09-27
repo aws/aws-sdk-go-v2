@@ -70,6 +70,10 @@ type AssociateSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AssociateSubnetsInput) operationName() string {
+	return "AssociateSubnets"
+}
+
 type AssociateSubnetsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.

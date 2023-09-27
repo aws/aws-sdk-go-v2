@@ -74,6 +74,10 @@ type CreateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateMembersInput) operationName() string {
+	return "CreateMembers"
+}
+
 type CreateMembersOutput struct {
 
 	// The list of Amazon Web Services accounts that were not processed. For each

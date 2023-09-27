@@ -72,6 +72,10 @@ type StartDICOMImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StartDICOMImportJobInput) operationName() string {
+	return "StartDICOMImportJob"
+}
+
 type StartDICOMImportJobOutput struct {
 
 	// The data store identifier.

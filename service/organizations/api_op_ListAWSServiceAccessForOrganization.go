@@ -63,6 +63,10 @@ type ListAWSServiceAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAWSServiceAccessForOrganizationInput) operationName() string {
+	return "ListAWSServiceAccessForOrganization"
+}
+
 type ListAWSServiceAccessForOrganizationOutput struct {
 
 	// A list of the service principals for the services that are enabled to integrate

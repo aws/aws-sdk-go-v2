@@ -57,6 +57,10 @@ type ExecuteGremlinQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExecuteGremlinQueryInput) operationName() string {
+	return "ExecuteGremlinQuery"
+}
+
 type ExecuteGremlinQueryOutput struct {
 
 	// Metadata about the Gremlin query.

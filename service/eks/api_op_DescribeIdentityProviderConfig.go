@@ -47,6 +47,10 @@ type DescribeIdentityProviderConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeIdentityProviderConfigInput) operationName() string {
+	return "DescribeIdentityProviderConfig"
+}
+
 type DescribeIdentityProviderConfigOutput struct {
 
 	// The object that represents an OpenID Connect (OIDC) identity provider

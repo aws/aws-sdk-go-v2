@@ -47,6 +47,10 @@ type DeleteDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteDataSetInput) operationName() string {
+	return "DeleteDataSet"
+}
+
 type DeleteDataSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.

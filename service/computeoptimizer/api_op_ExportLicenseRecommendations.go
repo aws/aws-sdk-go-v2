@@ -91,6 +91,10 @@ type ExportLicenseRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ExportLicenseRecommendationsInput) operationName() string {
+	return "ExportLicenseRecommendations"
+}
+
 type ExportLicenseRecommendationsOutput struct {
 
 	// The identification number of the export job. To view the status of an export

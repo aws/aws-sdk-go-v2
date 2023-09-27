@@ -40,6 +40,10 @@ type GetSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSpaceInput) operationName() string {
+	return "GetSpace"
+}
+
 type GetSpaceOutput struct {
 
 	// The name of the space.

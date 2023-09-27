@@ -148,6 +148,10 @@ type CreateIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateIntentInput) operationName() string {
+	return "CreateIntent"
+}
+
 type CreateIntentOutput struct {
 
 	// The identifier of the bot associated with the intent.

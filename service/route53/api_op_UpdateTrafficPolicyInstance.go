@@ -80,6 +80,10 @@ type UpdateTrafficPolicyInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateTrafficPolicyInstanceInput) operationName() string {
+	return "UpdateTrafficPolicyInstance"
+}
+
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
 type UpdateTrafficPolicyInstanceOutput struct {

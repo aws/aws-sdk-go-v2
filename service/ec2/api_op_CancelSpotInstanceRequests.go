@@ -50,6 +50,10 @@ type CancelSpotInstanceRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CancelSpotInstanceRequestsInput) operationName() string {
+	return "CancelSpotInstanceRequests"
+}
+
 // Contains the output of CancelSpotInstanceRequests.
 type CancelSpotInstanceRequestsOutput struct {
 

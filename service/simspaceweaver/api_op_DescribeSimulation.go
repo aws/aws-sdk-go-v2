@@ -43,6 +43,10 @@ type DescribeSimulationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSimulationInput) operationName() string {
+	return "DescribeSimulation"
+}
+
 type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about

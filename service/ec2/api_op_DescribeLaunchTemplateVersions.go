@@ -113,6 +113,10 @@ type DescribeLaunchTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeLaunchTemplateVersionsInput) operationName() string {
+	return "DescribeLaunchTemplateVersions"
+}
+
 type DescribeLaunchTemplateVersionsOutput struct {
 
 	// Information about the launch template versions.

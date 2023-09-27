@@ -63,6 +63,10 @@ type DisableRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DisableRegionInput) operationName() string {
+	return "DisableRegion"
+}
+
 type DisableRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

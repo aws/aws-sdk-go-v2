@@ -42,6 +42,10 @@ type GetDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetDatastoreInput) operationName() string {
+	return "GetDatastore"
+}
+
 type GetDatastoreOutput struct {
 
 	// The data store properties.

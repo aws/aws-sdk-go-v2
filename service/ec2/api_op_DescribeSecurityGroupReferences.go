@@ -49,6 +49,10 @@ type DescribeSecurityGroupReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeSecurityGroupReferencesInput) operationName() string {
+	return "DescribeSecurityGroupReferences"
+}
+
 type DescribeSecurityGroupReferencesOutput struct {
 
 	// Information about the VPCs with the referencing security groups.

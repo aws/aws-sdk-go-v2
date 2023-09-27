@@ -52,6 +52,10 @@ type PutEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutEventsInput) operationName() string {
+	return "PutEvents"
+}
+
 type PutEventsOutput struct {
 
 	// The successfully and unsuccessfully ingested events results. If the ingestion

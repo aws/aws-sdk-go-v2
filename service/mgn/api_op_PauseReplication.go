@@ -45,6 +45,10 @@ type PauseReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PauseReplicationInput) operationName() string {
+	return "PauseReplication"
+}
+
 type PauseReplicationOutput struct {
 
 	// Source server application ID.

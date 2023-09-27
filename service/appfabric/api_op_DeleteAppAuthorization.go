@@ -49,6 +49,10 @@ type DeleteAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAppAuthorizationInput) operationName() string {
+	return "DeleteAppAuthorization"
+}
+
 type DeleteAppAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

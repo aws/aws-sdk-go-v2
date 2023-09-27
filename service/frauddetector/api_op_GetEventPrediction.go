@@ -90,6 +90,10 @@ type GetEventPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEventPredictionInput) operationName() string {
+	return "GetEventPrediction"
+}
+
 type GetEventPredictionOutput struct {
 
 	// The model scores for Amazon SageMaker models.

@@ -45,6 +45,10 @@ type GetEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetEmailIdentityInput) operationName() string {
+	return "GetEmailIdentity"
+}
+
 // Details about an email identity.
 type GetEmailIdentityOutput struct {
 

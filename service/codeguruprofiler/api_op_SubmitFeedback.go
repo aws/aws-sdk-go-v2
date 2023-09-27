@@ -58,6 +58,10 @@ type SubmitFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SubmitFeedbackInput) operationName() string {
+	return "SubmitFeedback"
+}
+
 // The structure representing the SubmitFeedbackResponse.
 type SubmitFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.

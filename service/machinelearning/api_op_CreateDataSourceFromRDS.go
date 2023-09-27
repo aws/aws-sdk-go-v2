@@ -104,6 +104,10 @@ type CreateDataSourceFromRDSInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDataSourceFromRDSInput) operationName() string {
+	return "CreateDataSourceFromRDS"
+}
+
 // Represents the output of a CreateDataSourceFromRDS operation, and is an
 // acknowledgement that Amazon ML received the request. The CreateDataSourceFromRDS
 // > operation is asynchronous. You can poll for updates by using the

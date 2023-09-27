@@ -44,6 +44,10 @@ type SendActivationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*SendActivationCodeInput) operationName() string {
+	return "SendActivationCode"
+}
+
 type SendActivationCodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

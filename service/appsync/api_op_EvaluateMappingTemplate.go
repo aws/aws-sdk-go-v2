@@ -54,6 +54,10 @@ type EvaluateMappingTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*EvaluateMappingTemplateInput) operationName() string {
+	return "EvaluateMappingTemplate"
+}
+
 type EvaluateMappingTemplateOutput struct {
 
 	// The ErrorDetail object.

@@ -58,6 +58,10 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*CreateDeploymentInput) operationName() string {
+	return "CreateDeployment"
+}
+
 type CreateDeploymentOutput struct {
 
 	// The ARN of the deployment.

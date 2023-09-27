@@ -56,6 +56,10 @@ type GetSubscriptionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSubscriptionDefinitionVersionInput) operationName() string {
+	return "GetSubscriptionDefinitionVersion"
+}
+
 type GetSubscriptionDefinitionVersionOutput struct {
 
 	// The ARN of the subscription definition version.

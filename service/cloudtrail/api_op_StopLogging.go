@@ -52,6 +52,10 @@ type StopLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*StopLoggingInput) operationName() string {
+	return "StopLogging"
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type StopLoggingOutput struct {

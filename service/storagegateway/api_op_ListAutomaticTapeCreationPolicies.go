@@ -43,6 +43,10 @@ type ListAutomaticTapeCreationPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAutomaticTapeCreationPoliciesInput) operationName() string {
+	return "ListAutomaticTapeCreationPolicies"
+}
+
 type ListAutomaticTapeCreationPoliciesOutput struct {
 
 	// Gets a listing of information about the gateway's automatic tape creation

@@ -53,6 +53,10 @@ type DescribeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeGroupInput) operationName() string {
+	return "DescribeGroup"
+}
+
 type DescribeGroupOutput struct {
 
 	// The date and time when a user was deregistered from WorkMail, in UNIX epoch

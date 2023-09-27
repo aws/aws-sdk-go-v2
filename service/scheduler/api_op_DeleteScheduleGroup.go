@@ -52,6 +52,10 @@ type DeleteScheduleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteScheduleGroupInput) operationName() string {
+	return "DeleteScheduleGroup"
+}
+
 type DeleteScheduleGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

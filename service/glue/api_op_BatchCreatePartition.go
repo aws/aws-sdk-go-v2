@@ -56,6 +56,10 @@ type BatchCreatePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*BatchCreatePartitionInput) operationName() string {
+	return "BatchCreatePartition"
+}
+
 type BatchCreatePartitionOutput struct {
 
 	// The errors encountered when trying to create the requested partitions.

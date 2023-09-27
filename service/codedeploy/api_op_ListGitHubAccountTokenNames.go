@@ -41,6 +41,10 @@ type ListGitHubAccountTokenNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListGitHubAccountTokenNamesInput) operationName() string {
+	return "ListGitHubAccountTokenNames"
+}
+
 // Represents the output of a ListGitHubAccountTokenNames operation.
 type ListGitHubAccountTokenNamesOutput struct {
 

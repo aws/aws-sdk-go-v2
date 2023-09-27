@@ -64,6 +64,10 @@ type UpdateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateAssetInput) operationName() string {
+	return "UpdateAsset"
+}
+
 type UpdateAssetOutput struct {
 
 	// The ARN for the asset.

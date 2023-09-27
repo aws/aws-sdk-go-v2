@@ -73,6 +73,10 @@ type ListAvailableManagedRuleGroupVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListAvailableManagedRuleGroupVersionsInput) operationName() string {
+	return "ListAvailableManagedRuleGroupVersions"
+}
+
 type ListAvailableManagedRuleGroupVersionsOutput struct {
 
 	// The name of the version that's currently set as the default.

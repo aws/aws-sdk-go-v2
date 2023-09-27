@@ -54,6 +54,10 @@ type UpdatePreparedStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdatePreparedStatementInput) operationName() string {
+	return "UpdatePreparedStatement"
+}
+
 type UpdatePreparedStatementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

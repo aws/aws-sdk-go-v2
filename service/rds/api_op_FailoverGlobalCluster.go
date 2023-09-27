@@ -95,6 +95,10 @@ type FailoverGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*FailoverGlobalClusterInput) operationName() string {
+	return "FailoverGlobalCluster"
+}
+
 type FailoverGlobalClusterOutput struct {
 
 	// A data type representing an Aurora global database.

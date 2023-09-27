@@ -42,6 +42,10 @@ type DeleteConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteConfigurationInput) operationName() string {
+	return "DeleteConfiguration"
+}
+
 type DeleteConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.

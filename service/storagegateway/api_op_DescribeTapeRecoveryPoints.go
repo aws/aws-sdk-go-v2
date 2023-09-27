@@ -56,6 +56,10 @@ type DescribeTapeRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeTapeRecoveryPointsInput) operationName() string {
+	return "DescribeTapeRecoveryPoints"
+}
+
 // DescribeTapeRecoveryPointsOutput
 type DescribeTapeRecoveryPointsOutput struct {
 

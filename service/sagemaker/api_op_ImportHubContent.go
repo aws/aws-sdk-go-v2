@@ -82,6 +82,10 @@ type ImportHubContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ImportHubContentInput) operationName() string {
+	return "ImportHubContent"
+}
+
 type ImportHubContentOutput struct {
 
 	// The ARN of the hub that the content was imported into.

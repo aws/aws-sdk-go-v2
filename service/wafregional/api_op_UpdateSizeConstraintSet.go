@@ -97,6 +97,10 @@ type UpdateSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*UpdateSizeConstraintSetInput) operationName() string {
+	return "UpdateSizeConstraintSet"
+}
+
 type UpdateSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateSizeConstraintSet request.

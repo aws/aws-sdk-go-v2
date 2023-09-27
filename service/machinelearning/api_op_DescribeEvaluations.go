@@ -104,6 +104,10 @@ type DescribeEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DescribeEvaluationsInput) operationName() string {
+	return "DescribeEvaluations"
+}
+
 // Represents the query results from a DescribeEvaluations operation. The content
 // is essentially a list of Evaluation .
 type DescribeEvaluationsOutput struct {

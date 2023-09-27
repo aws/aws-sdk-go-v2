@@ -50,6 +50,10 @@ type DeleteAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteAttributesInput) operationName() string {
+	return "DeleteAttributes"
+}
+
 type DeleteAttributesOutput struct {
 
 	// A list of attribute objects that were successfully deleted from your resource.

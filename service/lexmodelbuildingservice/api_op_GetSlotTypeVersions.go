@@ -58,6 +58,10 @@ type GetSlotTypeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*GetSlotTypeVersionsInput) operationName() string {
+	return "GetSlotTypeVersions"
+}
+
 type GetSlotTypeVersionsOutput struct {
 
 	// A pagination token for fetching the next page of slot type versions. If the

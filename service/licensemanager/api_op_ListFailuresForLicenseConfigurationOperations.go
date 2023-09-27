@@ -48,6 +48,10 @@ type ListFailuresForLicenseConfigurationOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ListFailuresForLicenseConfigurationOperationsInput) operationName() string {
+	return "ListFailuresForLicenseConfigurationOperations"
+}
+
 type ListFailuresForLicenseConfigurationOperationsOutput struct {
 
 	// License configuration operations that failed.

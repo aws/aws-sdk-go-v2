@@ -47,6 +47,10 @@ type ConfirmTopicRuleDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*ConfirmTopicRuleDestinationInput) operationName() string {
+	return "ConfirmTopicRuleDestination"
+}
+
 type ConfirmTopicRuleDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,6 +44,10 @@ type DeleteBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*DeleteBatchPredictionInput) operationName() string {
+	return "DeleteBatchPrediction"
+}
+
 // Represents the output of a DeleteBatchPrediction operation. You can use the
 // GetBatchPrediction operation and check the value of the Status parameter to see
 // whether a BatchPrediction is marked as DELETED .

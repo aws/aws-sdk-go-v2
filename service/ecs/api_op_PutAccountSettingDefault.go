@@ -82,6 +82,10 @@ type PutAccountSettingDefaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*PutAccountSettingDefaultInput) operationName() string {
+	return "PutAccountSettingDefault"
+}
+
 type PutAccountSettingDefaultOutput struct {
 
 	// The current setting for a resource.

@@ -51,6 +51,10 @@ type AcceptEulasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (*AcceptEulasInput) operationName() string {
+	return "AcceptEulas"
+}
+
 type AcceptEulasOutput struct {
 
 	// A collection of EULA acceptances.
