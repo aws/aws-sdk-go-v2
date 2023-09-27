@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3control/internal/endpoints"
 	smithy "github.com/aws/smithy-go"
@@ -202,78 +204,6 @@ func resolveEndpointResolverV2(options *Options) {
 	if options.EndpointResolverV2 == nil {
 		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 	}
-}
-
-// Utility function to aid with translating pseudo-regions to classical regions
-// with the appropriate setting indicated by the pseudo-region
-func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
-	const fipsInfix = "-fips-"
-	const fipsPrefix = "fips-"
-	const fipsSuffix = "-fips"
-
-	if strings.Contains(pr, fipsInfix) ||
-		strings.Contains(pr, fipsPrefix) ||
-		strings.Contains(pr, fipsSuffix) {
-		region = strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(
-			pr, fipsInfix, "-"), fipsPrefix, ""), fipsSuffix, "")
-		fips = aws.FIPSEndpointStateEnabled
-	} else {
-		region = pr
-	}
-
-	return region, fips
-}
-
-// builtInParameterResolver is the interface responsible for resolving BuiltIn
-// values during the sourcing of EndpointParameters
-type builtInParameterResolver interface {
-	ResolveBuiltIns(*EndpointParameters) error
-}
-
-// builtInResolver resolves modeled BuiltIn values using only the members defined
-// below.
-type builtInResolver struct {
-	// The AWS region used to dispatch the request.
-	Region string
-
-	// Sourced BuiltIn value in a historical enabled or disabled state.
-	UseFIPS aws.FIPSEndpointState
-
-	// Sourced BuiltIn value in a historical enabled or disabled state.
-	UseDualStack aws.DualStackEndpointState
-
-	// Base endpoint that can potentially be modified during Endpoint resolution.
-	Endpoint *string
-
-	// When an Access Point ARN is provided and this flag is enabled, the SDK MUST use
-	// the ARN's region when constructing the endpoint instead of the client's
-	// configured region.
-	UseArnRegion bool
-}
-
-// Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
-// each BuiltIn value is generated.
-func (b *builtInResolver) ResolveBuiltIns(params *EndpointParameters) error {
-
-	region, _ := mapPseudoRegion(b.Region)
-	if len(region) == 0 {
-		return fmt.Errorf("Could not resolve AWS::Region")
-	} else {
-		params.Region = aws.String(region)
-	}
-	if b.UseFIPS == aws.FIPSEndpointStateEnabled {
-		params.UseFIPS = aws.Bool(true)
-	} else {
-		params.UseFIPS = aws.Bool(false)
-	}
-	if b.UseDualStack == aws.DualStackEndpointStateEnabled {
-		params.UseDualStack = aws.Bool(true)
-	} else {
-		params.UseDualStack = aws.Bool(false)
-	}
-	params.Endpoint = b.Endpoint
-	params.UseArnRegion = aws.Bool(b.UseArnRegion)
-	return nil
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are
@@ -1525,4 +1455,567 @@ func (r *resolver) ResolveEndpoint(
 		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "Region must be set")
+}
+
+type endpointParamsBinder interface {
+	bindEndpointParams(*EndpointParameters)
+}
+
+func bindEndpointParams(input endpointParamsBinder, options Options) *EndpointParameters {
+	params := &EndpointParameters{}
+
+	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
+	params.UseArnRegion = aws.Bool(options.UseARNRegion)
+
+	input.bindEndpointParams(params)
+
+	return params
+}
+
+func (in *CreateAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *CreateAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *CreateBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+	p.OutpostId = in.OutpostId
+
+}
+
+func (in *CreateJobInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *CreateMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.AccessPointName = in.Name
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.AccessPointName = in.Name
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteAccessPointPolicyForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeletePublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DeleteStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DescribeJobInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *DescribeMultiRegionAccessPointOperationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.AccessPointName = in.Name
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointConfigurationForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.AccessPointName = in.Name
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointPolicyForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointPolicyStatusInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.AccessPointName = in.Name
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetAccessPointPolicyStatusForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetMultiRegionAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetMultiRegionAccessPointPolicyStatusInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetMultiRegionAccessPointRoutesInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *GetStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *ListAccessPointsInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *ListAccessPointsForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *ListJobsInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *ListMultiRegionAccessPointsInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *ListRegionalBucketsInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.OutpostId = in.OutpostId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *ListStorageLensConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutAccessPointConfigurationForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.AccessPointName = in.Name
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutAccessPointPolicyForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.Bucket = in.Bucket
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutMultiRegionAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *PutStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *SubmitMultiRegionAccessPointRoutesInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *UpdateJobPriorityInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+func (in *UpdateJobStatusInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+
+	p.RequiresAccountId = ptr.Bool(true)
+}
+
+type resolveEndpointV2Middleware struct {
+	options  Options
+	resolver EndpointResolverV2
+}
+
+func (*resolveEndpointV2Middleware) ID() string {
+	return "ResolveEndpointV2"
+}
+
+func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, md middleware.Metadata, err error,
+) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, md, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.resolver == nil {
+		return out, md, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := bindEndpointParams(in.Parameters.(endpointParamsBinder), m.options)
+	resolvedEndpoint, err := m.resolver.ResolveEndpoint(ctx, *params)
+	if err != nil {
+		return out, md, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(k, resolvedEndpoint.Headers.Get(k))
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil {
+		var nfe *internalauth.NoAuthenticationSchemesFoundError
+		if errors.As(err, &nfe) {
+			// if no auth scheme is found, default to sigv4
+			signingName := "s3"
+			signingRegion := *params.Region
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+
+		}
+		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
+		if errors.As(err, &ue) {
+			return out, md, fmt.Errorf(
+				"This operation requests signer version(s) %v but the client only supports %v",
+				ue.UnsupportedSchemes,
+				internalauth.SupportedSchemes,
+			)
+		}
+	}
+
+	for _, authScheme := range authSchemes {
+		switch authScheme.(type) {
+		case *internalauth.AuthenticationSchemeV4:
+			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+			var signingName, signingRegion string
+			if v4Scheme.SigningName == nil {
+				signingName = "s3"
+			} else {
+				signingName = *v4Scheme.SigningName
+			}
+			if v4Scheme.SigningRegion == nil {
+				signingRegion = *params.Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
+			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			break
+		case *internalauth.AuthenticationSchemeV4A:
+			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+			if v4aScheme.SigningName == nil {
+				v4aScheme.SigningName = aws.String("s3")
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+			break
+		case *internalauth.AuthenticationSchemeNone:
+			break
+		}
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addResolveEndpointV2Middleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&resolveEndpointV2Middleware{
+		options:  options,
+		resolver: options.EndpointResolverV2,
+	}, "ResolveEndpoint", middleware.After)
 }

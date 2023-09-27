@@ -8,7 +8,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
+	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
 	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
@@ -202,96 +206,6 @@ func resolveEndpointResolverV2(options *Options) {
 	if options.EndpointResolverV2 == nil {
 		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 	}
-}
-
-// Utility function to aid with translating pseudo-regions to classical regions
-// with the appropriate setting indicated by the pseudo-region
-func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
-	const fipsInfix = "-fips-"
-	const fipsPrefix = "fips-"
-	const fipsSuffix = "-fips"
-
-	if strings.Contains(pr, fipsInfix) ||
-		strings.Contains(pr, fipsPrefix) ||
-		strings.Contains(pr, fipsSuffix) {
-		region = strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(
-			pr, fipsInfix, "-"), fipsPrefix, ""), fipsSuffix, "")
-		fips = aws.FIPSEndpointStateEnabled
-	} else {
-		region = pr
-	}
-
-	return region, fips
-}
-
-// builtInParameterResolver is the interface responsible for resolving BuiltIn
-// values during the sourcing of EndpointParameters
-type builtInParameterResolver interface {
-	ResolveBuiltIns(*EndpointParameters) error
-}
-
-// builtInResolver resolves modeled BuiltIn values using only the members defined
-// below.
-type builtInResolver struct {
-	// The AWS region used to dispatch the request.
-	Region string
-
-	// Sourced BuiltIn value in a historical enabled or disabled state.
-	UseFIPS aws.FIPSEndpointState
-
-	// Sourced BuiltIn value in a historical enabled or disabled state.
-	UseDualStack aws.DualStackEndpointState
-
-	// Base endpoint that can potentially be modified during Endpoint resolution.
-	Endpoint *string
-
-	// When true, force a path-style endpoint to be used where the bucket name is part
-	// of the path.
-	ForcePathStyle bool
-
-	// When true, use S3 Accelerate. NOTE: Not all regions support S3 accelerate.
-	Accelerate bool
-
-	// Whether the global endpoint should be used, rather then the regional endpoint
-	// for us-east-1.
-	UseGlobalEndpoint bool
-
-	// Whether multi-region access points (MRAP) should be disabled.
-	DisableMultiRegionAccessPoints bool
-
-	// When an Access Point ARN is provided and this flag is enabled, the SDK MUST use
-	// the ARN's region when constructing the endpoint instead of the client's
-	// configured region.
-	UseArnRegion bool
-}
-
-// Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
-// each BuiltIn value is generated.
-func (b *builtInResolver) ResolveBuiltIns(params *EndpointParameters) error {
-
-	region, _ := mapPseudoRegion(b.Region)
-	if len(region) == 0 {
-		return fmt.Errorf("Could not resolve AWS::Region")
-	} else {
-		params.Region = aws.String(region)
-	}
-	if b.UseFIPS == aws.FIPSEndpointStateEnabled {
-		params.UseFIPS = aws.Bool(true)
-	} else {
-		params.UseFIPS = aws.Bool(false)
-	}
-	if b.UseDualStack == aws.DualStackEndpointStateEnabled {
-		params.UseDualStack = aws.Bool(true)
-	} else {
-		params.UseDualStack = aws.Bool(false)
-	}
-	params.Endpoint = b.Endpoint
-	params.ForcePathStyle = aws.Bool(b.ForcePathStyle)
-	params.Accelerate = aws.Bool(b.Accelerate)
-	params.UseGlobalEndpoint = aws.Bool(b.UseGlobalEndpoint)
-	params.DisableMultiRegionAccessPoints = aws.Bool(b.DisableMultiRegionAccessPoints)
-	params.UseArnRegion = aws.Bool(b.UseArnRegion)
-	return nil
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are
@@ -4324,4 +4238,602 @@ func (r *resolver) ResolveEndpoint(
 		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "A region must be set when sending requests to S3.")
+}
+
+type endpointParamsBinder interface {
+	bindEndpointParams(*EndpointParameters)
+}
+
+func bindEndpointParams(input endpointParamsBinder, options Options) *EndpointParameters {
+	params := &EndpointParameters{}
+
+	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
+	params.ForcePathStyle = aws.Bool(options.UsePathStyle)
+	params.Accelerate = aws.Bool(options.UseAccelerate)
+	params.DisableMultiRegionAccessPoints = aws.Bool(options.DisableMultiRegionAccessPoints)
+	params.UseArnRegion = aws.Bool(options.UseARNRegion)
+
+	input.bindEndpointParams(params)
+
+	return params
+}
+
+func (in *AbortMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *CompleteMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *CopyObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *CreateBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+	p.DisableAccessPoints = ptr.Bool(true)
+}
+
+func (in *CreateMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketAnalyticsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketInventoryConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketLifecycleInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketMetricsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteObjectsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeleteObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *DeletePublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketAccelerateConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketAnalyticsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketInventoryConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketLocationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketLoggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketMetricsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketNotificationConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketPolicyStatusInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketRequestPaymentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectAttributesInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectLegalHoldInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectLockConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectRetentionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetObjectTorrentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *GetPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *HeadBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *HeadObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListBucketAnalyticsConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListBucketIntelligentTieringConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListBucketInventoryConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListBucketMetricsConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListBucketsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListMultipartUploadsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListObjectsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListObjectsV2Input) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListObjectVersionsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *ListPartsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketAccelerateConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketAnalyticsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketInventoryConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketLoggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketMetricsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketNotificationConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketRequestPaymentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutObjectAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutObjectLegalHoldInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutObjectLockConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutObjectRetentionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *PutPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *RestoreObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *SelectObjectContentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *UploadPartInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *UploadPartCopyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
+func (in *WriteGetObjectResponseInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.UseObjectLambdaEndpoint = ptr.Bool(true)
+}
+
+type resolveEndpointV2Middleware struct {
+	options  Options
+	resolver EndpointResolverV2
+}
+
+func (*resolveEndpointV2Middleware) ID() string {
+	return "ResolveEndpointV2"
+}
+
+func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, md middleware.Metadata, err error,
+) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, md, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.resolver == nil {
+		return out, md, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := bindEndpointParams(in.Parameters.(endpointParamsBinder), m.options)
+	resolvedEndpoint, err := m.resolver.ResolveEndpoint(ctx, *params)
+	if err != nil {
+		return out, md, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(k, resolvedEndpoint.Headers.Get(k))
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil {
+		var nfe *internalauth.NoAuthenticationSchemesFoundError
+		if errors.As(err, &nfe) {
+			// if no auth scheme is found, default to sigv4
+			signingName := "s3"
+			signingRegion := *params.Region
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			ctx = s3cust.SetSignerVersion(ctx, internalauth.SigV4)
+		}
+		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
+		if errors.As(err, &ue) {
+			return out, md, fmt.Errorf(
+				"This operation requests signer version(s) %v but the client only supports %v",
+				ue.UnsupportedSchemes,
+				internalauth.SupportedSchemes,
+			)
+		}
+	}
+
+	for _, authScheme := range authSchemes {
+		switch authScheme.(type) {
+		case *internalauth.AuthenticationSchemeV4:
+			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+			var signingName, signingRegion string
+			if v4Scheme.SigningName == nil {
+				signingName = "s3"
+			} else {
+				signingName = *v4Scheme.SigningName
+			}
+			if v4Scheme.SigningRegion == nil {
+				signingRegion = *params.Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
+			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			ctx = s3cust.SetSignerVersion(ctx, v4Scheme.Name)
+			break
+		case *internalauth.AuthenticationSchemeV4A:
+			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+			if v4aScheme.SigningName == nil {
+				v4aScheme.SigningName = aws.String("s3")
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+			ctx = s3cust.SetSignerVersion(ctx, v4a.Version)
+			break
+		case *internalauth.AuthenticationSchemeNone:
+			break
+		}
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addResolveEndpointV2Middleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&resolveEndpointV2Middleware{
+		options:  options,
+		resolver: options.EndpointResolverV2,
+	}, "ResolveEndpoint", middleware.After)
 }

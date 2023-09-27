@@ -8,7 +8,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
+	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/endpoints"
 	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
@@ -194,72 +198,6 @@ func resolveEndpointResolverV2(options *Options) {
 	if options.EndpointResolverV2 == nil {
 		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 	}
-}
-
-// Utility function to aid with translating pseudo-regions to classical regions
-// with the appropriate setting indicated by the pseudo-region
-func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
-	const fipsInfix = "-fips-"
-	const fipsPrefix = "fips-"
-	const fipsSuffix = "-fips"
-
-	if strings.Contains(pr, fipsInfix) ||
-		strings.Contains(pr, fipsPrefix) ||
-		strings.Contains(pr, fipsSuffix) {
-		region = strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(
-			pr, fipsInfix, "-"), fipsPrefix, ""), fipsSuffix, "")
-		fips = aws.FIPSEndpointStateEnabled
-	} else {
-		region = pr
-	}
-
-	return region, fips
-}
-
-// builtInParameterResolver is the interface responsible for resolving BuiltIn
-// values during the sourcing of EndpointParameters
-type builtInParameterResolver interface {
-	ResolveBuiltIns(*EndpointParameters) error
-}
-
-// builtInResolver resolves modeled BuiltIn values using only the members defined
-// below.
-type builtInResolver struct {
-	// The AWS region used to dispatch the request.
-	Region string
-
-	// Sourced BuiltIn value in a historical enabled or disabled state.
-	UseDualStack aws.DualStackEndpointState
-
-	// Sourced BuiltIn value in a historical enabled or disabled state.
-	UseFIPS aws.FIPSEndpointState
-
-	// Base endpoint that can potentially be modified during Endpoint resolution.
-	Endpoint *string
-}
-
-// Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
-// each BuiltIn value is generated.
-func (b *builtInResolver) ResolveBuiltIns(params *EndpointParameters) error {
-
-	region, _ := mapPseudoRegion(b.Region)
-	if len(region) == 0 {
-		return fmt.Errorf("Could not resolve AWS::Region")
-	} else {
-		params.Region = aws.String(region)
-	}
-	if b.UseDualStack == aws.DualStackEndpointStateEnabled {
-		params.UseDualStack = aws.Bool(true)
-	} else {
-		params.UseDualStack = aws.Bool(false)
-	}
-	if b.UseFIPS == aws.FIPSEndpointStateEnabled {
-		params.UseFIPS = aws.Bool(true)
-	} else {
-		params.UseFIPS = aws.Bool(false)
-	}
-	params.Endpoint = b.Endpoint
-	return nil
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are
@@ -623,4 +561,358 @@ func (r *resolver) ResolveEndpoint(
 		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
+}
+
+type endpointParamsBinder interface {
+	bindEndpointParams(*EndpointParameters)
+}
+
+func bindEndpointParams(input endpointParamsBinder, options Options) *EndpointParameters {
+	params := &EndpointParameters{}
+
+	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
+	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
+
+	input.bindEndpointParams(params)
+
+	return params
+}
+
+func (in *ActivateEventSourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CancelReplayInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CreateApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CreateArchiveInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CreateConnectionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CreateEndpointInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CreateEventBusInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *CreatePartnerEventSourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeactivateEventSourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeauthorizeConnectionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeleteApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeleteArchiveInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeleteConnectionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeleteEndpointInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeleteEventBusInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeletePartnerEventSourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DeleteRuleInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeArchiveInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeConnectionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeEndpointInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeEventBusInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeEventSourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribePartnerEventSourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeReplayInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DescribeRuleInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *DisableRuleInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *EnableRuleInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListApiDestinationsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListArchivesInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListConnectionsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListEndpointsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListEventBusesInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListEventSourcesInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListPartnerEventSourceAccountsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListPartnerEventSourcesInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListReplaysInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListRuleNamesByTargetInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListRulesInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListTagsForResourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *ListTargetsByRuleInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *PutEventsInput) bindEndpointParams(p *EndpointParameters) {
+	p.EndpointId = in.EndpointId
+
+}
+
+func (in *PutPartnerEventsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *PutPermissionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *PutRuleInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *PutTargetsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *RemovePermissionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *RemoveTargetsInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *StartReplayInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *TestEventPatternInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *UntagResourceInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *UpdateApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *UpdateArchiveInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *UpdateConnectionInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+func (in *UpdateEndpointInput) bindEndpointParams(p *EndpointParameters) {
+
+}
+
+type resolveEndpointV2Middleware struct {
+	options  Options
+	resolver EndpointResolverV2
+}
+
+func (*resolveEndpointV2Middleware) ID() string {
+	return "ResolveEndpointV2"
+}
+
+func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, md middleware.Metadata, err error,
+) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, md, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.resolver == nil {
+		return out, md, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := bindEndpointParams(in.Parameters.(endpointParamsBinder), m.options)
+	resolvedEndpoint, err := m.resolver.ResolveEndpoint(ctx, *params)
+	if err != nil {
+		return out, md, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(k, resolvedEndpoint.Headers.Get(k))
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil {
+		var nfe *internalauth.NoAuthenticationSchemesFoundError
+		if errors.As(err, &nfe) {
+			// if no auth scheme is found, default to sigv4
+			signingName := "events"
+			signingRegion := *params.Region
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			ctx = ebcust.SetSignerVersion(ctx, internalauth.SigV4)
+		}
+		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
+		if errors.As(err, &ue) {
+			return out, md, fmt.Errorf(
+				"This operation requests signer version(s) %v but the client only supports %v",
+				ue.UnsupportedSchemes,
+				internalauth.SupportedSchemes,
+			)
+		}
+	}
+
+	for _, authScheme := range authSchemes {
+		switch authScheme.(type) {
+		case *internalauth.AuthenticationSchemeV4:
+			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+			var signingName, signingRegion string
+			if v4Scheme.SigningName == nil {
+				signingName = "events"
+			} else {
+				signingName = *v4Scheme.SigningName
+			}
+			if v4Scheme.SigningRegion == nil {
+				signingRegion = *params.Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
+			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			ctx = ebcust.SetSignerVersion(ctx, v4Scheme.Name)
+			break
+		case *internalauth.AuthenticationSchemeV4A:
+			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+			if v4aScheme.SigningName == nil {
+				v4aScheme.SigningName = aws.String("events")
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+			ctx = ebcust.SetSignerVersion(ctx, v4a.Version)
+			break
+		case *internalauth.AuthenticationSchemeNone:
+			break
+		}
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addResolveEndpointV2Middleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&resolveEndpointV2Middleware{
+		options:  options,
+		resolver: options.EndpointResolverV2,
+	}, "ResolveEndpoint", middleware.After)
 }
