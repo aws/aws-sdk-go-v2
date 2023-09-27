@@ -802,26 +802,23 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 								t.Fatalf("expect build error, got none")
 							}
 
-							if !m.buildHandlerRun {
-								t.Fatalf("expect build handler run")
-							}
 							return out, metadata, err
 						},
 					), middleware.After)
 
 					// Build middleware
-					stack.Build.Add(m, middleware.After)
+					stack.Finalize.Add(m, middleware.After)
 
 					// Validate defer to finalize was performed as expected
-					stack.Build.Add(middleware.BuildMiddlewareFunc(
+					stack.Finalize.Add(middleware.FinalizeMiddlewareFunc(
 						"assert-defer-to-finalize",
-						func(ctx context.Context, input middleware.BuildInput, next middleware.BuildHandler) (
-							out middleware.BuildOutput, metadata middleware.Metadata, err error,
+						func(ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler) (
+							out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 						) {
-							if e, a := c.expectDeferToFinalize, m.deferToFinalizeHandler; e != a {
+							if e, a := c.expectDeferToFinalize, m.useTrailer; e != a {
 								t.Fatalf("expect %v defer to finalize, got %v", e, a)
 							}
-							return next.HandleBuild(ctx, input)
+							return next.HandleFinalize(ctx, input)
 						},
 					), middleware.After)
 

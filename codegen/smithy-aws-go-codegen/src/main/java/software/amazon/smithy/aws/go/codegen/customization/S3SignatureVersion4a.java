@@ -62,15 +62,6 @@ public class S3SignatureVersion4a implements GoIntegration {
                             return AwsSignatureVersion4.isSupportedAuthentication(model, serviceShape);
                         })
                         .build(),
-                // Add HTTPSigner middleware to operation stack
-                RuntimeClientPlugin.builder()
-                        .servicePredicate(S3SignatureVersion4a::isS3Service)
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        AwsSignatureVersion4aUtils.REGISTER_MIDDLEWARE_FUNCTION).build())
-                                .useClientOptions()
-                                .build())
-                        .build(),
                 RuntimeClientPlugin.builder()
                         .servicePredicate(S3SignatureVersion4a::isS3Service)
                         .addConfigFieldResolver(

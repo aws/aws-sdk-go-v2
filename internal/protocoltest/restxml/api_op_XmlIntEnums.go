@@ -4,6 +4,7 @@ package restxml
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/aws/smithy-go/middleware"
@@ -62,6 +63,9 @@ type XmlIntEnumsOutput struct {
 }
 
 func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlIntEnums{}, middleware.After)
 	if err != nil {
 		return err
@@ -70,6 +74,10 @@ func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlIntEnums"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -103,6 +111,9 @@ func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlIntEnums(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -118,7 +129,7 @@ func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, opt
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

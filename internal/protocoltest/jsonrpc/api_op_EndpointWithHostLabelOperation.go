@@ -44,6 +44,9 @@ type EndpointWithHostLabelOperationOutput struct {
 }
 
 func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEndpointWithHostLabelOperation{}, middleware.After)
 	if err != nil {
 		return err
@@ -52,6 +55,10 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "EndpointWithHostLabelOperation"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -73,9 +80,6 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err = addRetryMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
-		return err
-	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
 		return err
 	}
@@ -89,6 +93,9 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addEndpointPrefix_opEndpointWithHostLabelOperationMiddleware(stack); err != nil {
@@ -112,7 +119,7 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -125,11 +132,11 @@ func (*endpointPrefix_opEndpointWithHostLabelOperationMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opEndpointWithHostLabelOperationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opEndpointWithHostLabelOperationMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -137,9 +144,10 @@ func (m *endpointPrefix_opEndpointWithHostLabelOperationMiddleware) HandleSerial
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	input, ok := in.Parameters.(*EndpointWithHostLabelOperationInput)
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*EndpointWithHostLabelOperationInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
 	}
 
 	var prefix strings.Builder
@@ -154,17 +162,16 @@ func (m *endpointPrefix_opEndpointWithHostLabelOperationMiddleware) HandleSerial
 	prefix.WriteString(".")
 	req.URL.Host = prefix.String() + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 func addEndpointPrefix_opEndpointWithHostLabelOperationMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opEndpointWithHostLabelOperationMiddleware{}, `OperationSerializer`, middleware.After)
+	return stack.Finalize.Insert(&endpointPrefix_opEndpointWithHostLabelOperationMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opEndpointWithHostLabelOperation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "foo",
 		OperationName: "EndpointWithHostLabelOperation",
 	}
 }

@@ -1,3 +1,4 @@
+software.amazon.smithy.aws.go.codegen.customization.auth.BackfillSigV4aTrait
 software.amazon.smithy.aws.go.codegen.AddProtocols
 software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode
 software.amazon.smithy.aws.go.codegen.AddAwsConfigFields
@@ -50,10 +51,8 @@ software.amazon.smithy.aws.go.codegen.customization.S3100Continue
 software.amazon.smithy.aws.go.codegen.customization.LambdaRecursionDetection
 software.amazon.smithy.aws.go.codegen.customization.SQSCustomizations
 software.amazon.smithy.aws.go.codegen.AwsEndpointResolverInitializerGenerator
-software.amazon.smithy.aws.go.codegen.AwsEndpointResolverBuiltInGenerator
 software.amazon.smithy.aws.go.codegen.customization.S3HttpPathBucketFilterIntegration
 software.amazon.smithy.aws.go.codegen.customization.S3HttpLabelBucketFilterIntegration
-software.amazon.smithy.aws.go.codegen.AwsEndpointAuthSchemeGenerator
 software.amazon.smithy.aws.go.codegen.EndpointDisableHttps
 software.amazon.smithy.aws.go.codegen.customization.S3Bucketer
 software.amazon.smithy.aws.go.codegen.customization.S3SerializeImmutableHostnameBucket
@@ -61,4 +60,10 @@ software.amazon.smithy.aws.go.codegen.customization.S3UpdateOutpostArn
 software.amazon.smithy.aws.go.codegen.LegacyEndpointContextSetter
 software.amazon.smithy.aws.go.codegen.customization.DisableEndpointHostPrefix
 software.amazon.smithy.aws.go.codegen.AwsEndpointConfigTestGenerator
-
+software.amazon.smithy.aws.go.codegen.customization.AwsAuthResolution
+software.amazon.smithy.aws.go.codegen.customization.AwsEndpointBuiltins
+software.amazon.smithy.aws.go.codegen.customization.auth.AwsSigV4AuthScheme
+software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme
+software.amazon.smithy.aws.go.codegen.customization.auth.EndpointAuthResolution
+software.amazon.smithy.aws.go.codegen.customization.auth.AwsSigV4aAuthScheme
+software.amazon.smithy.aws.go.codegen.customization.auth.LegacyAuthContextOverride

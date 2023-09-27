@@ -15,134 +15,113 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
-import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
+import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
-import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.endpoints.EndpointMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
-import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.knowledge.TopDownIndex;
-import software.amazon.smithy.model.shapes.OperationShape;
-import software.amazon.smithy.model.shapes.ToShapeId;
+import software.amazon.smithy.utils.ListUtils;
 
-/*
+import static software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator.createFinalizeStepMiddleware;
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
+
+/**
  * Adds support for non-SSL endpoints during endpoint resolution.
  * The new Rules Engine endpoint resolution doesnt support non-SSL endpoints.
  * So this middleware exists for backwards compatibility with legacy
- * endpoint resolution. It is operation specific because it is being inserted
- * directly after the operation-specific endpoint resolution middleware.
+ * endpoint resolution.
  */
 public class EndpointDisableHttps implements GoIntegration {
+    public static final String MIDDLEWARE_NAME = "disableHTTPSMiddleware";
+    public static final String MIDDLEWARE_ID = "disableHTTPS";
+    public static final String MIDDLEWARE_ADDER = "addDisableHTTPSMiddleware";
 
-        private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
+    private static final MiddlewareRegistrar DISABLE_HTTPS_MIDDLEWARE =
+            MiddlewareRegistrar.builder()
+                    .resolvedFunction(buildPackageSymbol(MIDDLEWARE_ADDER))
+                    .useClientOptions()
+                    .build();
 
-        public static final String MIDDLEWARE_ID = "endpointDisableHTTPSMiddleware";
-        public static final String MIDDLEWARE_ADDER = String.format("add%s", MIDDLEWARE_ID);
+    /**
+     * Gets the sort order of the customization from -128 to 127, with lowest
+     * executed first. Needs to execute after Rules Engine endpoint
+     * resolution middleware insertion.
+     *
+     * @return Returns the sort order, defaults to 127.
+     */
+    @Override
+    public byte getOrder() {
+        return 127;
+    }
 
-        /**
-         * Gets the sort order of the customization from -128 to 127, with lowest
-         * executed first. Needs to execute after Rules Engine endpoint
-         * resolution middleware insertion.
-         *
-         * @return Returns the sort order, defaults to 127.
-         */
-        @Override
-        public byte getOrder() {
-                return 127;
-        }
+    @Override
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        return ListUtils.of(
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(DISABLE_HTTPS_MIDDLEWARE)
+                        .build()
+        );
+    }
 
-        @Override
-        public List<RuntimeClientPlugin> getClientPlugins() {
-                return runtimeClientPlugins;
-        }
+    @Override
+    public void writeAdditionalFiles(
+            GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
+    ) {
+        var serviceShape = settings.getService(model);
+        goDelegator.useShapeWriter(serviceShape, writer -> {
+            writer.write(generateMiddleware());
+            writer.write("");
+            writer.write("""
+                    func $L(stack $P, o Options) error {
+                        return stack.Finalize.Insert(&$L{
+                            DisableHTTPS: o.EndpointOptions.DisableHTTPS,
+                        }, $S, $T)
+                    }
+                    """,
+                    MIDDLEWARE_ADDER,
+                    SmithyGoTypes.Middleware.Stack,
+                    MIDDLEWARE_NAME,
+                    EndpointMiddlewareGenerator.MIDDLEWARE_ID,
+                    SmithyGoTypes.Middleware.After);
+        });
+    }
 
-        @Override
-        public void processFinalizedModel(GoSettings settings, Model model) {
+    private GoWriter.Writable generateMiddleware() {
+        return createFinalizeStepMiddleware(MIDDLEWARE_NAME, MiddlewareIdentifier.string(MIDDLEWARE_ID))
+                .asWritable(generateBody(), generateFields());
+    }
 
-                var serviceShape = settings.getService(model);
+    private GoWriter.Writable generateFields() {
+        return goTemplate("""
+                DisableHTTPS bool
+                """);
+    }
 
-                runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                                .servicePredicate((m, s) -> s.equals(serviceShape))
-                                .registerMiddleware(MiddlewareRegistrar.builder()
-                                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                                MIDDLEWARE_ADDER)
-                                                                .build())
-                                                .useClientOptions()
-                                                .build())
-                                .build());
+    private GoWriter.Writable generateBody() {
+        return goTemplate("""
+                req, ok := in.Request.($P)
+                if !ok {
+                    return out, metadata, $T("unknown transport type %T", in.Request)
+                }
 
-        }
+                if m.DisableHTTPS && !$T(ctx) {
+                    req.URL.Scheme = "http"
+                }
 
-        @Override
-        public void writeAdditionalFiles(
-                        GoSettings settings,
-                        Model model,
-                        SymbolProvider symbolProvider,
-                        GoDelegator goDelegator) {
-
-                var serviceShape = settings.getService(model);
-                goDelegator.useShapeWriter(serviceShape, writer -> {
-
-
-                        GoStackStepMiddlewareGenerator middleware = GoStackStepMiddlewareGenerator
-                                        .createSerializeStepMiddleware(
-                                                        MIDDLEWARE_ID,
-                                                        MiddlewareIdentifier.string(MIDDLEWARE_ID));
-                        middleware.writeMiddleware(writer, this::generateMiddlewareResolverBody,
-                                        this::generateMiddlewareStructureMembers);
-
-                        writer.write(
-                                        """
-                                                                func $L(stack $P, o Options) error {
-                                                                        return stack.Serialize.Insert(&$L{
-                                                                                EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-                                                                        }, \"$L\", middleware.Before)
-                                                                }
-                                                        """,
-                                        MIDDLEWARE_ADDER,
-                                        SymbolUtils.createPointableSymbolBuilder("Stack",
-                                                        SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
-                                        MIDDLEWARE_ID,
-                                        ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID);
-                        writer.write("");
-                });
-        }
-
-        private void generateMiddlewareResolverBody(GoStackStepMiddlewareGenerator g, GoWriter writer) {
-                writer.write(
-                                """
-                                                        req, ok := in.Request.($P)
-                                                        if !ok {
-                                                                return out, metadata, $T(\"unknown transport type %T\", in.Request)
-                                                        }
-
-                                                        if m.EndpointDisableHTTPS && !$T(ctx) {
-                                                                req.URL.Scheme = \"http\"
-                                                        }
-
-                                                        return next.HandleSerialize(ctx, in)
-                                                """,
-                                SymbolUtils.createPointableSymbolBuilder("Request",
-                                                SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
-                                SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build(),
-                                SymbolUtils.createValueSymbolBuilder("GetHostnameImmutable", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build()
-                                );
-        }
-
-        private void generateMiddlewareStructureMembers(GoStackStepMiddlewareGenerator g, GoWriter writer) {
-                writer.write("EndpointDisableHTTPS $L", "bool");
-        }
-
+                return next.HandleFinalize(ctx, in)
+                """,
+                SmithyGoTypes.Transport.Http.Request,
+                GoStdlibTypes.Fmt.Errorf,
+                SmithyGoTypes.Transport.Http.GetHostnameImmutable);
+    }
 }

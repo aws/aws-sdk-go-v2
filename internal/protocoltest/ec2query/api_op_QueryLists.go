@@ -4,6 +4,7 @@ package ec2query
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
 	"github.com/aws/smithy-go/middleware"
@@ -48,6 +49,9 @@ type QueryListsOutput struct {
 }
 
 func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsEc2query_serializeOpQueryLists{}, middleware.After)
 	if err != nil {
 		return err
@@ -56,6 +60,10 @@ func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, opti
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryLists"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -89,6 +97,9 @@ func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -104,7 +115,7 @@ func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, opti
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
