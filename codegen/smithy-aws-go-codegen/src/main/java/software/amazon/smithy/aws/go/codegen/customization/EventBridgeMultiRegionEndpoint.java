@@ -106,21 +106,6 @@ public class EventBridgeMultiRegionEndpoint implements GoIntegration {
                                 .documentation("Signature Version 4a (SigV4a) Signer")
                                 .build())
                         .build(),
-                // Add HTTPSigner middleware to operation stack
-                RuntimeClientPlugin.builder()
-                        .servicePredicate(EventBridgeMultiRegionEndpoint::isEventBridgeService)
-                        .operationPredicate((model, service, operation) -> {
-                            if (!isEventBridgeService(model, service)) {
-                                return false;
-                            }
-                            return SUPPORTED_OPERATIONS.containsKey(operation.toShapeId());
-                        })
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        AwsSignatureVersion4aUtils.REGISTER_MIDDLEWARE_FUNCTION).build())
-                                .useClientOptions()
-                                .build())
-                        .build(),
                 RuntimeClientPlugin.builder()
                         .servicePredicate(EventBridgeMultiRegionEndpoint::isEventBridgeService)
                         .addConfigFieldResolver(

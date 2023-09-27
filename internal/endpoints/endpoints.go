@@ -181,3 +181,21 @@ func getByPriority(s []string, p []string, def string) string {
 
 	return s[0]
 }
+
+// MapFIPSRegion extracts the intrinsic AWS region from one that may have an
+// embedded FIPS microformat.
+func MapFIPSRegion(region string) string {
+	const fipsInfix = "-fips-"
+	const fipsPrefix = "fips-"
+	const fipsSuffix = "-fips"
+
+	if strings.Contains(region, fipsInfix) ||
+		strings.Contains(region, fipsPrefix) ||
+		strings.Contains(region, fipsSuffix) {
+		region = strings.ReplaceAll(region, fipsInfix, "-")
+		region = strings.ReplaceAll(region, fipsPrefix, "")
+		region = strings.ReplaceAll(region, fipsSuffix, "")
+	}
+
+	return region
+}

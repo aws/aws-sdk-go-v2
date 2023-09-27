@@ -23,20 +23,23 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.logging.Logger;
+
+import software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
-import software.amazon.smithy.go.codegen.integration.auth.HttpBearerAuth;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.traits.HttpBearerAuthTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 /**
@@ -171,11 +174,10 @@ public class AddAwsConfigFields implements GoIntegration {
             AwsConfigField.builder()
                     // TOKEN_PROVIDER_OPTION_NAME added API Client's Options by HttpBearerAuth. Only
                     // need to add NewFromConfig resolver from aws#Config type.
-                    .name(HttpBearerAuth.TOKEN_PROVIDER_OPTION_NAME)
-                    .type(SymbolUtils.createValueSymbolBuilder("TokenProvider",
-                            SmithyGoDependency.SMITHY_AUTH_BEARER).build())
+                    .name(AwsHttpBearerAuthScheme.TOKEN_PROVIDER_OPTION_NAME)
+                    .type(SmithyGoTypes.Auth.Bearer.TokenProvider)
                     .documentation("The bearer authentication token provider for authentication requests.")
-                    .servicePredicate(HttpBearerAuth::isSupportedAuthentication)
+                    .servicePredicate(AddAwsConfigFields::isHttpBearerService)
                     .generatedOnClient(false)
                     .build(),
             AwsConfigField.builder()
@@ -665,6 +667,10 @@ public class AddAwsConfigFields implements GoIntegration {
                     writer.write("return New(opts, optFns...)");
                 });
         writer.write("");
+    }
+
+    private static boolean isHttpBearerService(Model model, ServiceShape service) {
+        return service.hasTrait(HttpBearerAuthTrait.class);
     }
 
     /**

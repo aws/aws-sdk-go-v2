@@ -2,15 +2,16 @@ package customizations_test
 
 import (
 	"context"
+	"strings"
+	"testing"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"strings"
-	"testing"
 )
 
 func TestPutEventsUpdateEndpoint(t *testing.T) {
@@ -200,17 +201,20 @@ func TestPutEventsUpdateEndpoint(t *testing.T) {
 				EndpointId: tt.EndpointId,
 			}, func(o *eventbridge.Options) {
 				o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-					return stack.Deserialize.Add(middleware.DeserializeMiddlewareFunc("loopback", func(
-						ctx context.Context, input middleware.DeserializeInput, handler middleware.DeserializeHandler,
+					return stack.Finalize.Add(middleware.FinalizeMiddlewareFunc("loopback", func(
+						ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
 					) (
-						out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+						out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 					) {
-						request = input.Request.(*smithyhttp.Request)
-						signingName = awsmiddleware.GetSigningName(ctx)
-						signingRegion = awsmiddleware.GetSigningRegion(ctx)
+						request = in.Request.(*smithyhttp.Request)
+
+						parsed := awstesting.ParseSigV4Signature(request.Header)
+						signingName = parsed.SigningName
+						signingRegion = parsed.SigningRegion
+
 						out.Result = &eventbridge.PutEventsOutput{}
-						return out, metadata, nil
-					}), middleware.Before)
+						return next.HandleFinalize(ctx, in)
+					}), middleware.After)
 				})
 			})
 
