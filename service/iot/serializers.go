@@ -21832,6 +21832,13 @@ func awsRestjson1_serializeDocumentKafkaAction(v *types.KafkaAction, value smith
 		ok.String(*v.DestinationArn)
 	}
 
+	if v.Headers != nil {
+		ok := object.Key("headers")
+		if err := awsRestjson1_serializeDocumentKafkaHeaders(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Key != nil {
 		ok := object.Key("key")
 		ok.String(*v.Key)
@@ -21847,6 +21854,36 @@ func awsRestjson1_serializeDocumentKafkaAction(v *types.KafkaAction, value smith
 		ok.String(*v.Topic)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaActionHeader(v *types.KafkaActionHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaHeaders(v []types.KafkaActionHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKafkaActionHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -53,10 +53,10 @@ type UpdatePackageVersionInput struct {
 	Action types.PackageVersionAction
 
 	// Metadata that can be used to define a package version’s configuration. For
-	// example, the S3 file location, configuration options that are being sent to the
-	// device or fleet. Note: Attributes can be updated only when the package version
-	// is in a draft state. The combined size of all the attributes on a package
-	// version is limited to 3KB.
+	// example, the Amazon S3 file location, configuration options that are being sent
+	// to the device or fleet. Note: Attributes can be updated only when the package
+	// version is in a draft state. The combined size of all the attributes on a
+	// package version is limited to 3KB.
 	Attributes map[string]string
 
 	// A unique case-sensitive identifier that you can provide to ensure the

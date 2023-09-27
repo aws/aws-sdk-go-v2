@@ -36,7 +36,7 @@ func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVer
 
 type ListPackageVersionsInput struct {
 
-	// The name of the target package.
+	// The name of the target software package.
 	//
 	// This member is required.
 	PackageName *string

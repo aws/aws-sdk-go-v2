@@ -57,12 +57,12 @@ type CreateJobTemplateInput struct {
 	// The job document. Required if you don't specify a value for documentSource .
 	Document *string
 
-	// An S3 link to the job document to use in the template. Required if you don't
-	// specify a value for document . If the job document resides in an S3 bucket, you
-	// must use a placeholder link when specifying the document. The placeholder link
-	// is of the following form:
-	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key} where bucket is
-	// your bucket name and key is the object in the bucket to which you are linking.
+	// An S3 link, or S3 object URL, to the job document. The link is an Amazon S3
+	// object URL and is required if you don't specify a value for document . For
+	// example, --document-source
+	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0 For
+	// more information, see Methods for accessing a bucket (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
+	// .
 	DocumentSource *string
 
 	// The ARN of the job to use as the basis for the job template.

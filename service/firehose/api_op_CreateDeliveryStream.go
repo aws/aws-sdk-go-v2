@@ -132,6 +132,10 @@ type CreateDeliveryStreamInput struct {
 	// Resource Name (ARN) and the role ARN for the source stream.
 	KinesisStreamSourceConfiguration *types.KinesisStreamSourceConfiguration
 
+	// The configuration for the Amazon MSK cluster to be used as the source for a
+	// delivery stream.
+	MSKSourceConfiguration *types.MSKSourceConfiguration
+
 	// The destination in Amazon Redshift. You can specify only one destination.
 	RedshiftDestinationConfiguration *types.RedshiftDestinationConfiguration
 

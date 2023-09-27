@@ -71,7 +71,7 @@ type Block struct {
 	//   - SELECTION_ELEMENT - A selection element such as an option button (radio
 	//   button) or a check box that's detected on a document page. Use the value of
 	//   SelectionStatus to determine the status of the selection element.
-	//   - SIGNATURE - The location and confidene score of a signature detected on a
+	//   - SIGNATURE - The location and confidence score of a signature detected on a
 	//   document page. Can be returned as part of a Key-Value pair or a detected cell.
 	//   - QUERY - A question asked during the call of AnalyzeDocument. Contains an
 	//   alias and an ID that attaches it to its answer.
@@ -126,9 +126,7 @@ type Block struct {
 	// multipage documents that are in PDF or TIFF format. A scanned image (JPEG/PNG)
 	// provided to an asynchronous operation, even if it contains multiple document
 	// pages, is considered a single-page document. This means that for scanned images
-	// the value of Page is always 1. Synchronous operations will also return a Page
-	// value of 1 because every input document is considered to be a single-page
-	// document.
+	// the value of Page is always 1.
 	Page *int32
 
 	//

@@ -37,7 +37,7 @@ func (c *Client) CreatePackageVersion(ctx context.Context, params *CreatePackage
 
 type CreatePackageVersionInput struct {
 
-	// The name of the associated package.
+	// The name of the associated software package.
 	//
 	// This member is required.
 	PackageName *string
@@ -80,7 +80,7 @@ type CreatePackageVersionOutput struct {
 	// Error reason for a package version failure during creation or update.
 	ErrorReason *string
 
-	// The name of the associated package.
+	// The name of the associated software package.
 	PackageName *string
 
 	// The Amazon Resource Name (ARN) for the package.

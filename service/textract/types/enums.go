@@ -6,20 +6,30 @@ type BlockType string
 
 // Enum values for BlockType
 const (
-	BlockTypeKeyValueSet      BlockType = "KEY_VALUE_SET"
-	BlockTypePage             BlockType = "PAGE"
-	BlockTypeLine             BlockType = "LINE"
-	BlockTypeWord             BlockType = "WORD"
-	BlockTypeTable            BlockType = "TABLE"
-	BlockTypeCell             BlockType = "CELL"
-	BlockTypeSelectionElement BlockType = "SELECTION_ELEMENT"
-	BlockTypeMergedCell       BlockType = "MERGED_CELL"
-	BlockTypeTitle            BlockType = "TITLE"
-	BlockTypeQuery            BlockType = "QUERY"
-	BlockTypeQueryResult      BlockType = "QUERY_RESULT"
-	BlockTypeSignature        BlockType = "SIGNATURE"
-	BlockTypeTableTitle       BlockType = "TABLE_TITLE"
-	BlockTypeTableFooter      BlockType = "TABLE_FOOTER"
+	BlockTypeKeyValueSet         BlockType = "KEY_VALUE_SET"
+	BlockTypePage                BlockType = "PAGE"
+	BlockTypeLine                BlockType = "LINE"
+	BlockTypeWord                BlockType = "WORD"
+	BlockTypeTable               BlockType = "TABLE"
+	BlockTypeCell                BlockType = "CELL"
+	BlockTypeSelectionElement    BlockType = "SELECTION_ELEMENT"
+	BlockTypeMergedCell          BlockType = "MERGED_CELL"
+	BlockTypeTitle               BlockType = "TITLE"
+	BlockTypeQuery               BlockType = "QUERY"
+	BlockTypeQueryResult         BlockType = "QUERY_RESULT"
+	BlockTypeSignature           BlockType = "SIGNATURE"
+	BlockTypeTableTitle          BlockType = "TABLE_TITLE"
+	BlockTypeTableFooter         BlockType = "TABLE_FOOTER"
+	BlockTypeLayoutText          BlockType = "LAYOUT_TEXT"
+	BlockTypeLayoutTitle         BlockType = "LAYOUT_TITLE"
+	BlockTypeLayoutHeader        BlockType = "LAYOUT_HEADER"
+	BlockTypeLayoutFooter        BlockType = "LAYOUT_FOOTER"
+	BlockTypeLayoutSectionHeader BlockType = "LAYOUT_SECTION_HEADER"
+	BlockTypeLayoutPageNumber    BlockType = "LAYOUT_PAGE_NUMBER"
+	BlockTypeLayoutList          BlockType = "LAYOUT_LIST"
+	BlockTypeLayoutFigure        BlockType = "LAYOUT_FIGURE"
+	BlockTypeLayoutTable         BlockType = "LAYOUT_TABLE"
+	BlockTypeLayoutKeyValue      BlockType = "LAYOUT_KEY_VALUE"
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded
@@ -41,6 +51,16 @@ func (BlockType) Values() []BlockType {
 		"SIGNATURE",
 		"TABLE_TITLE",
 		"TABLE_FOOTER",
+		"LAYOUT_TEXT",
+		"LAYOUT_TITLE",
+		"LAYOUT_HEADER",
+		"LAYOUT_FOOTER",
+		"LAYOUT_SECTION_HEADER",
+		"LAYOUT_PAGE_NUMBER",
+		"LAYOUT_LIST",
+		"LAYOUT_FIGURE",
+		"LAYOUT_TABLE",
+		"LAYOUT_KEY_VALUE",
 	}
 }
 
@@ -102,6 +122,7 @@ const (
 	FeatureTypeForms      FeatureType = "FORMS"
 	FeatureTypeQueries    FeatureType = "QUERIES"
 	FeatureTypeSignatures FeatureType = "SIGNATURES"
+	FeatureTypeLayout     FeatureType = "LAYOUT"
 )
 
 // Values returns all known values for FeatureType. Note that this can be expanded
@@ -113,6 +134,7 @@ func (FeatureType) Values() []FeatureType {
 		"FORMS",
 		"QUERIES",
 		"SIGNATURES",
+		"LAYOUT",
 	}
 }
 

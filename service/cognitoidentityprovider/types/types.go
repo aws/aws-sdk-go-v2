@@ -1673,6 +1673,8 @@ type UserPoolDescriptionType struct {
 	Name *string
 
 	// The user pool status in a user pool description.
+	//
+	// Deprecated: This property is no longer available.
 	Status StatusType
 
 	noSmithyDocumentSerde
@@ -1823,6 +1825,8 @@ type UserPoolType struct {
 	SmsVerificationMessage *string
 
 	// The status of a user pool.
+	//
+	// Deprecated: This property is no longer available.
 	Status StatusType
 
 	// The settings for updates to user attributes. These settings include the

@@ -388,6 +388,22 @@ type AmazonopensearchserviceRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The authentication configuration of the Amazon MSK cluster.
+type AuthenticationConfiguration struct {
+
+	// The type of connectivity used to access the Amazon MSK cluster.
+	//
+	// This member is required.
+	Connectivity Connectivity
+
+	// The ARN of the role used to access the Amazon MSK cluster.
+	//
+	// This member is required.
+	RoleARN *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes hints for the buffering to perform before delivering data to the
 // destination. These options are treated as hints, and therefore Kinesis Data
 // Firehose might choose to use different values when it is optimal. The SizeInMBs
@@ -1524,6 +1540,48 @@ type KMSEncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the Amazon MSK cluster to be used as the source for a
+// delivery stream.
+type MSKSourceConfiguration struct {
+
+	// The authentication configuration of the Amazon MSK cluster.
+	//
+	// This member is required.
+	AuthenticationConfiguration *AuthenticationConfiguration
+
+	// The ARN of the Amazon MSK cluster.
+	//
+	// This member is required.
+	MSKClusterARN *string
+
+	// The topic name within the Amazon MSK cluster.
+	//
+	// This member is required.
+	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the Amazon MSK cluster used as the source for a Kinesis Data
+// Firehose delivery stream.
+type MSKSourceDescription struct {
+
+	// The authentication configuration of the Amazon MSK cluster.
+	AuthenticationConfiguration *AuthenticationConfiguration
+
+	// Kinesis Data Firehose starts retrieving records from the topic within the
+	// Amazon MSK cluster starting with this timestamp.
+	DeliveryStartTimestamp *time.Time
+
+	// The ARN of the Amazon MSK cluster.
+	MSKClusterARN *string
+
+	// The topic name within the Amazon MSK cluster.
+	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
 // The OpenX SerDe. Used by Kinesis Data Firehose for deserializing data, which
 // means converting it from the JSON format in preparation for serializing it to
 // the Parquet or ORC format. This is one of two deserializers you can choose,
@@ -2136,6 +2194,10 @@ type SourceDescription struct {
 
 	// The KinesisStreamSourceDescription value for the source Kinesis data stream.
 	KinesisStreamSourceDescription *KinesisStreamSourceDescription
+
+	// The configuration description for the Amazon MSK cluster to be used as the
+	// source for a delivery stream.
+	MSKSourceDescription *MSKSourceDescription
 
 	noSmithyDocumentSerde
 }

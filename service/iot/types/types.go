@@ -778,7 +778,8 @@ type Behavior struct {
 	Name *string
 
 	// The criteria that determine if a device is behaving normally in regard to the
-	// metric .
+	// metric . In the IoT console, you can choose to be sent an alert through Amazon
+	// SNS when IoT Device Defender detects that a device is behaving anomalously.
 	Criteria *BehaviorCriteria
 
 	// What is measured by the behavior.
@@ -2237,11 +2238,34 @@ type KafkaAction struct {
 	// This member is required.
 	Topic *string
 
+	// The list of Kafka headers that you specify.
+	Headers []KafkaActionHeader
+
 	// The Kafka message key.
 	Key *string
 
 	// The Kafka message partition.
 	Partition *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Kafka header using key-value pairs when you create a Rule’s Kafka
+// Action. You can use these headers to route data from IoT clients to downstream
+// Kafka clusters without modifying your message payload. For more information
+// about Rule's Kafka action, see Apache Kafka (https://docs.aws.amazon.com/iot/latest/developerguide/apache-kafka-rule-action.html)
+// .
+type KafkaActionHeader struct {
+
+	// The key of the Kafka header.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the Kafka header.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -2687,7 +2711,8 @@ type OpenSearchAction struct {
 // Describes a file to be associated with an OTA update.
 type OTAUpdateFile struct {
 
-	// A list of name/attribute pairs.
+	// A list of name-attribute pairs. They won't be sent to devices as a part of the
+	// Job document.
 	Attributes map[string]string
 
 	// The code signing method of the file.
@@ -2822,7 +2847,7 @@ type PackageSummary struct {
 	// The date that the package was last updated.
 	LastModifiedDate *time.Time
 
-	// The name for the target package.
+	// The name for the target software package.
 	PackageName *string
 
 	noSmithyDocumentSerde
@@ -3323,7 +3348,9 @@ type SchedulingConfig struct {
 	// current time. The minimum duration between startTime and endTime is thirty
 	// minutes. The maximum duration between startTime and endTime is two years. The
 	// date and time format for the endTime is YYYY-MM-DD for the date and HH:MM for
-	// the time.
+	// the time. For more information on the syntax for endTime when using an API
+	// command or the Command Line Interface, see Timestamp (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
+	// .
 	EndTime *string
 
 	// An optional configuration within the SchedulingConfig to setup a recurring
@@ -3335,7 +3362,9 @@ type SchedulingConfig struct {
 	// target group for a job. The startTime can be scheduled up to a year in advance
 	// and must be scheduled a minimum of thirty minutes from the current time. The
 	// date and time format for the startTime is YYYY-MM-DD for the date and HH:MM for
-	// the time.
+	// the time. For more information on the syntax for startTime when using an API
+	// command or the Command Line Interface, see Timestamp (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
+	// .
 	StartTime *string
 
 	noSmithyDocumentSerde

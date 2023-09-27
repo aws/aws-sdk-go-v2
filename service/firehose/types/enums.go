@@ -89,6 +89,24 @@ func (CompressionFormat) Values() []CompressionFormat {
 	}
 }
 
+type Connectivity string
+
+// Enum values for Connectivity
+const (
+	ConnectivityPublic  Connectivity = "PUBLIC"
+	ConnectivityPrivate Connectivity = "PRIVATE"
+)
+
+// Values returns all known values for Connectivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Connectivity) Values() []Connectivity {
+	return []Connectivity{
+		"PUBLIC",
+		"PRIVATE",
+	}
+}
+
 type ContentEncoding string
 
 // Enum values for ContentEncoding
@@ -226,6 +244,7 @@ type DeliveryStreamType string
 const (
 	DeliveryStreamTypeDirectPut             DeliveryStreamType = "DirectPut"
 	DeliveryStreamTypeKinesisStreamAsSource DeliveryStreamType = "KinesisStreamAsSource"
+	DeliveryStreamTypeMSKAsSource           DeliveryStreamType = "MSKAsSource"
 )
 
 // Values returns all known values for DeliveryStreamType. Note that this can be
@@ -235,6 +254,7 @@ func (DeliveryStreamType) Values() []DeliveryStreamType {
 	return []DeliveryStreamType{
 		"DirectPut",
 		"KinesisStreamAsSource",
+		"MSKAsSource",
 	}
 }
 
@@ -440,6 +460,7 @@ const (
 	ProcessorParameterNameBufferIntervalInSeconds ProcessorParameterName = "BufferIntervalInSeconds"
 	ProcessorParameterNameSubRecordType           ProcessorParameterName = "SubRecordType"
 	ProcessorParameterNameDelimiter               ProcessorParameterName = "Delimiter"
+	ProcessorParameterNameCompressionFormat       ProcessorParameterName = "CompressionFormat"
 )
 
 // Values returns all known values for ProcessorParameterName. Note that this can
@@ -456,6 +477,7 @@ func (ProcessorParameterName) Values() []ProcessorParameterName {
 		"BufferIntervalInSeconds",
 		"SubRecordType",
 		"Delimiter",
+		"CompressionFormat",
 	}
 }
 
@@ -464,6 +486,7 @@ type ProcessorType string
 // Enum values for ProcessorType
 const (
 	ProcessorTypeRecordDeAggregation     ProcessorType = "RecordDeAggregation"
+	ProcessorTypeDecompression           ProcessorType = "Decompression"
 	ProcessorTypeLambda                  ProcessorType = "Lambda"
 	ProcessorTypeMetadataExtraction      ProcessorType = "MetadataExtraction"
 	ProcessorTypeAppendDelimiterToRecord ProcessorType = "AppendDelimiterToRecord"
@@ -475,6 +498,7 @@ const (
 func (ProcessorType) Values() []ProcessorType {
 	return []ProcessorType{
 		"RecordDeAggregation",
+		"Decompression",
 		"Lambda",
 		"MetadataExtraction",
 		"AppendDelimiterToRecord",

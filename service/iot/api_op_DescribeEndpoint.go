@@ -46,7 +46,8 @@ type DescribeEndpointInput struct {
 	//   - iot:Jobs - Returns an IoT device management Jobs API endpoint.
 	// We strongly recommend that customers use the newer iot:Data-ATS endpoint type
 	// to avoid issues related to the widespread distrust of Symantec certificate
-	// authorities.
+	// authorities. ATS Signed Certificates are more secure and are trusted by most
+	// popular browsers.
 	EndpointType *string
 
 	noSmithyDocumentSerde

@@ -36,7 +36,7 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 
 type CreatePackageInput struct {
 
-	// The name of the new package.
+	// The name of the new software package.
 	//
 	// This member is required.
 	PackageName *string
@@ -64,7 +64,7 @@ type CreatePackageOutput struct {
 	// The Amazon Resource Name (ARN) for the package.
 	PackageArn *string
 
-	// The name of the package.
+	// The name of the software package.
 	PackageName *string
 
 	// Metadata pertaining to the operation's result.

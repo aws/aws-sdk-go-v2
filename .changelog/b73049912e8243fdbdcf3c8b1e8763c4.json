@@ -1,0 +1,8 @@
+{
+    "id": "b7304991-2e82-43fd-bdcf-3c8b1e8763c4",
+    "type": "feature",
+    "description": "Features : Adding support for new data ingestion source to Kinesis Firehose - AWS Managed Services Kafka.",
+    "modules": [
+        "service/firehose"
+    ]
+}

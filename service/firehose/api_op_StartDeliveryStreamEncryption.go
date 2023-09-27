@@ -34,14 +34,17 @@ import (
 // old CMK is of type CUSTOMER_MANAGED_CMK , Kinesis Data Firehose schedules the
 // grant it had on the old CMK for retirement. If the new CMK is of type
 // CUSTOMER_MANAGED_CMK , Kinesis Data Firehose creates a grant that enables it to
-// use the new CMK to encrypt and decrypt data and to manage the grant. If a
-// delivery stream already has encryption enabled and then you invoke this
-// operation to change the ARN of the CMK or both its type and ARN and you get
-// ENABLING_FAILED , this only means that the attempt to change the CMK failed. In
-// this case, encryption remains enabled with the old CMK. If the encryption status
-// of your delivery stream is ENABLING_FAILED , you can invoke this operation again
-// with a valid CMK. The CMK must be enabled and the key policy mustn't explicitly
-// deny the permission for Kinesis Data Firehose to invoke KMS encrypt and decrypt
+// use the new CMK to encrypt and decrypt data and to manage the grant. For the KMS
+// grant creation to be successful, Kinesis Data Firehose APIs
+// StartDeliveryStreamEncryption and CreateDeliveryStream should not be called
+// with session credentials that are more than 6 hours old. If a delivery stream
+// already has encryption enabled and then you invoke this operation to change the
+// ARN of the CMK or both its type and ARN and you get ENABLING_FAILED , this only
+// means that the attempt to change the CMK failed. In this case, encryption
+// remains enabled with the old CMK. If the encryption status of your delivery
+// stream is ENABLING_FAILED , you can invoke this operation again with a valid
+// CMK. The CMK must be enabled and the key policy mustn't explicitly deny the
+// permission for Kinesis Data Firehose to invoke KMS encrypt and decrypt
 // operations. You can enable SSE for a delivery stream only if it's a delivery
 // stream that uses DirectPut as its source. The StartDeliveryStreamEncryption and
 // StopDeliveryStreamEncryption operations have a combined limit of 25 calls per

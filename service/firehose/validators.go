@@ -398,6 +398,24 @@ func validateAmazonopensearchserviceDestinationUpdate(v *types.Amazonopensearchs
 	}
 }
 
+func validateAuthenticationConfiguration(v *types.AuthenticationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthenticationConfiguration"}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
+	if len(v.Connectivity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Connectivity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCopyCommand(v *types.CopyCommand) error {
 	if v == nil {
 		return nil
@@ -747,6 +765,31 @@ func validateKMSEncryptionConfig(v *types.KMSEncryptionConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KMSEncryptionConfig"}
 	if v.AWSKMSKeyARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AWSKMSKeyARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMSKSourceConfiguration(v *types.MSKSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSKSourceConfiguration"}
+	if v.MSKClusterARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MSKClusterARN"))
+	}
+	if v.TopicName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicName"))
+	}
+	if v.AuthenticationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationConfiguration"))
+	} else if v.AuthenticationConfiguration != nil {
+		if err := validateAuthenticationConfiguration(v.AuthenticationConfiguration); err != nil {
+			invalidParams.AddNested("AuthenticationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1165,6 +1208,11 @@ func validateOpCreateDeliveryStreamInput(v *CreateDeliveryStreamInput) error {
 	if v.AmazonOpenSearchServerlessDestinationConfiguration != nil {
 		if err := validateAmazonOpenSearchServerlessDestinationConfiguration(v.AmazonOpenSearchServerlessDestinationConfiguration); err != nil {
 			invalidParams.AddNested("AmazonOpenSearchServerlessDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MSKSourceConfiguration != nil {
+		if err := validateMSKSourceConfiguration(v.MSKSourceConfiguration); err != nil {
+			invalidParams.AddNested("MSKSourceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

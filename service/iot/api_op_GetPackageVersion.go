@@ -68,7 +68,7 @@ type GetPackageVersionOutput struct {
 	// The date when the package version was last updated.
 	LastModifiedDate *time.Time
 
-	// The name of the package.
+	// The name of the software package.
 	PackageName *string
 
 	// The ARN for the package version.

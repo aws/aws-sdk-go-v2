@@ -36,7 +36,7 @@ func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, 
 
 type DeletePackageInput struct {
 
-	// The name of the target package.
+	// The name of the target software package.
 	//
 	// This member is required.
 	PackageName *string

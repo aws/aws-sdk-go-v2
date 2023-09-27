@@ -58,7 +58,8 @@ type CreateOTAUpdateInput struct {
 	// This member is required.
 	Targets []string
 
-	// A list of additional OTA update parameters which are name-value pairs.
+	// A list of additional OTA update parameters, which are name-value pairs. They
+	// won't be sent to devices as a part of the Job document.
 	AdditionalParameters map[string]string
 
 	// The criteria that determine when and how a job abort takes place.

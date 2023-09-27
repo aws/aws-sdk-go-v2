@@ -16,8 +16,8 @@ import (
 )
 
 // Deletes a specific version from a software package. Note: If a package version
-// is designated as default, you must remove the designation from the package using
-// the UpdatePackage action.
+// is designated as default, you must remove the designation from the software
+// package using the UpdatePackage action.
 func (c *Client) DeletePackageVersion(ctx context.Context, params *DeletePackageVersionInput, optFns ...func(*Options)) (*DeletePackageVersionOutput, error) {
 	if params == nil {
 		params = &DeletePackageVersionInput{}
@@ -35,7 +35,7 @@ func (c *Client) DeletePackageVersion(ctx context.Context, params *DeletePackage
 
 type DeletePackageVersionInput struct {
 
-	// The name of the associated package.
+	// The name of the associated software package.
 	//
 	// This member is required.
 	PackageName *string

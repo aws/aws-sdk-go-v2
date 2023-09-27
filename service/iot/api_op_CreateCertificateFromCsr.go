@@ -18,9 +18,9 @@ import (
 // Creates an X.509 certificate using the specified certificate signing request.
 // Requires permission to access the CreateCertificateFromCsr (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action. The CSR must include a public key that is either an RSA key with a
-// length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.
-// For supported certificates, consult Certificate signing algorithms supported by
-// IoT (https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms)
+// length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST
+// P-521 curves. For supported certificates, consult Certificate signing
+// algorithms supported by IoT (https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms)
 // . Reusing the same certificate signing request (CSR) results in a distinct
 // certificate. You can create multiple certificates in a batch by creating a
 // directory, copying multiple .csr files into that directory, and then specifying

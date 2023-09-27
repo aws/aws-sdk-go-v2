@@ -15,8 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the supported fields for a specific package. Requires permission to
-// access the UpdatePackage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Updates the supported fields for a specific software package. Requires
+// permission to access the UpdatePackage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // and GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // actions.
 func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, optFns ...func(*Options)) (*UpdatePackageOutput, error) {
@@ -36,7 +36,7 @@ func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, 
 
 type UpdatePackageInput struct {
 
-	// The name of the target package.
+	// The name of the target software package.
 	//
 	// This member is required.
 	PackageName *string

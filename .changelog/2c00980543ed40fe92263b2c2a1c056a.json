@@ -1,0 +1,8 @@
+{
+    "id": "2c009805-43ed-40fe-9226-3b2c2a1c056a",
+    "type": "feature",
+    "description": "Added support for IoT Rules Engine Kafka Action Headers",
+    "modules": [
+        "service/iot"
+    ]
+}

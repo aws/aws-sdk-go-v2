@@ -36,7 +36,7 @@ func (c *Client) GetPackage(ctx context.Context, params *GetPackageInput, optFns
 
 type GetPackageInput struct {
 
-	// The name of the target package.
+	// The name of the target software package.
 	//
 	// This member is required.
 	PackageName *string
@@ -61,7 +61,7 @@ type GetPackageOutput struct {
 	// The ARN for the package.
 	PackageArn *string
 
-	// The name of the package.
+	// The name of the software package.
 	PackageName *string
 
 	// Metadata pertaining to the operation's result.

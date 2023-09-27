@@ -1039,11 +1039,13 @@ type LogTargetType string
 
 // Enum values for LogTargetType
 const (
-	LogTargetTypeDefault     LogTargetType = "DEFAULT"
-	LogTargetTypeThingGroup  LogTargetType = "THING_GROUP"
-	LogTargetTypeClientId    LogTargetType = "CLIENT_ID"
-	LogTargetTypeSourceIp    LogTargetType = "SOURCE_IP"
-	LogTargetTypePrincipalId LogTargetType = "PRINCIPAL_ID"
+	LogTargetTypeDefault        LogTargetType = "DEFAULT"
+	LogTargetTypeThingGroup     LogTargetType = "THING_GROUP"
+	LogTargetTypeClientId       LogTargetType = "CLIENT_ID"
+	LogTargetTypeSourceIp       LogTargetType = "SOURCE_IP"
+	LogTargetTypePrincipalId    LogTargetType = "PRINCIPAL_ID"
+	LogTargetTypeEventType      LogTargetType = "EVENT_TYPE"
+	LogTargetTypeDeviceDefender LogTargetType = "DEVICE_DEFENDER"
 )
 
 // Values returns all known values for LogTargetType. Note that this can be
@@ -1056,6 +1058,8 @@ func (LogTargetType) Values() []LogTargetType {
 		"CLIENT_ID",
 		"SOURCE_IP",
 		"PRINCIPAL_ID",
+		"EVENT_TYPE",
+		"DEVICE_DEFENDER",
 	}
 }
 

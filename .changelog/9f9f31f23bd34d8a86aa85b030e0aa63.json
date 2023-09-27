@@ -1,0 +1,8 @@
+{
+    "id": "9f9f31f2-3bd3-4d8a-86aa-85b030e0aa63",
+    "type": "feature",
+    "description": "The UserPoolType Status field is no longer used.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

@@ -1029,6 +1029,23 @@ func awsAwsjson11_serializeDocumentAmazonopensearchserviceRetryOptions(v *types.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAuthenticationConfiguration(v *types.AuthenticationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Connectivity) > 0 {
+		ok := object.Key("Connectivity")
+		ok.String(string(v.Connectivity))
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBufferingHints(v *types.BufferingHints, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1901,6 +1918,30 @@ func awsAwsjson11_serializeDocumentListOfNonEmptyStringsWithoutWhitespace(v []st
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMSKSourceConfiguration(v *types.MSKSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthenticationConfiguration != nil {
+		ok := object.Key("AuthenticationConfiguration")
+		if err := awsAwsjson11_serializeDocumentAuthenticationConfiguration(v.AuthenticationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MSKClusterARN != nil {
+		ok := object.Key("MSKClusterARN")
+		ok.String(*v.MSKClusterARN)
+	}
+
+	if v.TopicName != nil {
+		ok := object.Key("TopicName")
+		ok.String(*v.TopicName)
+	}
+
 	return nil
 }
 
@@ -2799,6 +2840,13 @@ func awsAwsjson11_serializeOpDocumentCreateDeliveryStreamInput(v *CreateDelivery
 	if v.KinesisStreamSourceConfiguration != nil {
 		ok := object.Key("KinesisStreamSourceConfiguration")
 		if err := awsAwsjson11_serializeDocumentKinesisStreamSourceConfiguration(v.KinesisStreamSourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MSKSourceConfiguration != nil {
+		ok := object.Key("MSKSourceConfiguration")
+		if err := awsAwsjson11_serializeDocumentMSKSourceConfiguration(v.MSKSourceConfiguration, ok); err != nil {
 			return err
 		}
 	}

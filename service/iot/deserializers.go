@@ -48307,6 +48307,11 @@ func awsRestjson1_deserializeDocumentKafkaAction(v **types.KafkaAction, value in
 				sv.DestinationArn = ptr.String(jtv)
 			}
 
+		case "headers":
+			if err := awsRestjson1_deserializeDocumentKafkaHeaders(&sv.Headers, value); err != nil {
+				return err
+			}
+
 		case "key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48340,6 +48345,89 @@ func awsRestjson1_deserializeDocumentKafkaAction(v **types.KafkaAction, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaActionHeader(v **types.KafkaActionHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaActionHeader
+	if *v == nil {
+		sv = &types.KafkaActionHeader{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaHeaderKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaHeaderValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaHeaders(v *[]types.KafkaActionHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.KafkaActionHeader
+	if *v == nil {
+		cv = []types.KafkaActionHeader{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.KafkaActionHeader
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentKafkaActionHeader(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
