@@ -1,3 +1,7 @@
+# v1.20.1 (2023-09-27)
+
+* No change notes available for this release.
+
 # v1.20.0 (2023-08-29)
 
 * **Feature**: Adds support for the new Export and Message Insights features: create, get, list and cancel export jobs; get message insights.

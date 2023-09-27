@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.31.0
@@ -43,14 +43,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/emr v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.22.0
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/glue v1.62.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/iot v1.39.5
+	github.com/aws/aws-sdk-go-v2/service/iot v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.39.5
@@ -58,7 +58,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.0
+	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.54.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.5
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.3
-	github.com/aws/aws-sdk-go-v2/service/ses v1.16.7
+	github.com/aws/aws-sdk-go-v2/service/ses v1.16.8
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/shield v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.21.5

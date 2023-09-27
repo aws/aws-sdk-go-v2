@@ -1,3 +1,7 @@
+# v1.24.0 (2023-09-27)
+
+* **Feature**: This release adds new feature - Layout to Analyze Document API which can automatically extract layout elements such as titles, paragraphs, headers, section headers, lists, page numbers, footers, table areas, key-value areas and figure areas and order the elements as a human would read.
+
 # v1.23.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

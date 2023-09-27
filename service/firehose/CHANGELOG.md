@@ -1,3 +1,7 @@
+# v1.19.0 (2023-09-27)
+
+* **Feature**: Features : Adding support for new data ingestion source to Kinesis Firehose - AWS Managed Services Kafka.
+
 # v1.18.0 (2023-09-13)
 
 * **Feature**: DocumentIdOptions has been added for the Amazon OpenSearch destination.

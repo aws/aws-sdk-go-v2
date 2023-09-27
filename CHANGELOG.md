@@ -1,3 +1,15 @@
+# Release (2023-09-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.27.0](service/cognitoidentityprovider/CHANGELOG.md#v1270-2023-09-27)
+  * **Feature**: The UserPoolType Status field is no longer used.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.19.0](service/firehose/CHANGELOG.md#v1190-2023-09-27)
+  * **Feature**: Features : Adding support for new data ingestion source to Kinesis Firehose - AWS Managed Services Kafka.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.40.0](service/iot/CHANGELOG.md#v1400-2023-09-27)
+  * **Feature**: Added support for IoT Rules Engine Kafka Action Headers
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.24.0](service/textract/CHANGELOG.md#v1240-2023-09-27)
+  * **Feature**: This release adds new feature - Layout to Analyze Document API which can automatically extract layout elements such as titles, paragraphs, headers, section headers, lists, page numbers, footers, table areas, key-value areas and figure areas and order the elements as a human would read.
+
 # Release (2023-09-26)
 
 ## General Highlights

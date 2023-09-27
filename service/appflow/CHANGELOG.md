@@ -1,3 +1,7 @@
+# v1.35.1 (2023-09-27)
+
+* No change notes available for this release.
+
 # v1.35.0 (2023-09-06)
 
 * **Feature**: Adding OAuth2.0 support for servicenow connector.

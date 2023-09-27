@@ -1,3 +1,7 @@
+# v1.40.0 (2023-09-27)
+
+* **Feature**: Added support for IoT Rules Engine Kafka Action Headers
+
 # v1.39.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
