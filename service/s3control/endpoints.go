@@ -1920,7 +1920,7 @@ func (*resolveEndpointV2Middleware) ID() string {
 }
 
 func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, md middleware.Metadata, err error,
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
 		return next.HandleSerialize(ctx, in)
@@ -1928,17 +1928,17 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, md, fmt.Errorf("unknown transport type %T", in.Request)
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
 	if m.resolver == nil {
-		return out, md, fmt.Errorf("expected endpoint resolver to not be nil")
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
 	}
 
 	params := bindEndpointParams(in.Parameters.(endpointParamsBinder), m.options)
 	resolvedEndpoint, err := m.resolver.ResolveEndpoint(ctx, *params)
 	if err != nil {
-		return out, md, fmt.Errorf("failed to resolve service endpoint, %w", err)
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
 
 	req.URL = &resolvedEndpoint.URI
@@ -1959,7 +1959,7 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 		}
 		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
 		if errors.As(err, &ue) {
-			return out, md, fmt.Errorf(
+			return out, metadata, fmt.Errorf(
 				"This operation requests signer version(s) %v but the client only supports %v",
 				ue.UnsupportedSchemes,
 				internalauth.SupportedSchemes,
@@ -2011,6 +2011,7 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 	}
 
 	return next.HandleSerialize(ctx, in)
+
 }
 
 func addResolveEndpointV2Middleware(stack *middleware.Stack, options Options) error {
