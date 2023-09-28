@@ -39,8 +39,8 @@ type DescribeBudgetNotificationsForAccountInput struct {
 	// This member is required.
 	AccountId *string
 
-	// An integer that shows how many budget name entries a paginated response
-	// contains.
+	// An integer that represents how many budgets a paginated response contains. The
+	// default is 50.
 	MaxResults *int32
 
 	// A generic string.
@@ -149,8 +149,8 @@ var _ DescribeBudgetNotificationsForAccountAPIClient = (*Client)(nil)
 // DescribeBudgetNotificationsForAccountPaginatorOptions is the paginator options
 // for DescribeBudgetNotificationsForAccount
 type DescribeBudgetNotificationsForAccountPaginatorOptions struct {
-	// An integer that shows how many budget name entries a paginated response
-	// contains.
+	// An integer that represents how many budgets a paginated response contains. The
+	// default is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

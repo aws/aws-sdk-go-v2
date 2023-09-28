@@ -16697,9 +16697,6 @@ func validateOpModifyVerifiedAccessEndpointPolicyInput(v *ModifyVerifiedAccessEn
 	if v.VerifiedAccessEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VerifiedAccessEndpointId"))
 	}
-	if v.PolicyEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyEnabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16729,9 +16726,6 @@ func validateOpModifyVerifiedAccessGroupPolicyInput(v *ModifyVerifiedAccessGroup
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyVerifiedAccessGroupPolicyInput"}
 	if v.VerifiedAccessGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VerifiedAccessGroupId"))
-	}
-	if v.PolicyEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

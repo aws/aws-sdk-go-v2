@@ -50,8 +50,8 @@ type CreateVerifiedAccessInstanceInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Choose to enable or disable support for Federal Information Processing
-	// Standards (FIPS) on the instance.
+	// Enable or disable support for Federal Information Processing Standards (FIPS)
+	// on the instance.
 	FIPSEnabled *bool
 
 	// The tags to assign to the Verified Access instance.

@@ -39052,6 +39052,46 @@ func awsAwsjson11_deserializeDocumentCognitoMemberDefinition(v **types.CognitoMe
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCollectionConfig(v *types.CollectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CollectionConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "VectorConfig":
+			var mv types.VectorConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentVectorConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CollectionConfigMemberVectorConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCollectionConfiguration(v **types.CollectionConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45452,6 +45492,20 @@ func awsAwsjson11_deserializeDocumentFeatureDefinition(v **types.FeatureDefiniti
 
 	for key, value := range shape {
 		switch key {
+		case "CollectionConfig":
+			if err := awsAwsjson11_deserializeDocumentCollectionConfig(&sv.CollectionConfig, value); err != nil {
+				return err
+			}
+
+		case "CollectionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CollectionType to be of type string, got %T instead", value)
+				}
+				sv.CollectionType = types.CollectionType(jtv)
+			}
+
 		case "FeatureName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -60105,6 +60159,15 @@ func awsAwsjson11_deserializeDocumentOnlineStoreConfig(v **types.OnlineStoreConf
 				return err
 			}
 
+		case "StorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = types.StorageType(jtv)
+			}
+
 		case "TtlDuration":
 			if err := awsAwsjson11_deserializeDocumentTtlDuration(&sv.TtlDuration, value); err != nil {
 				return err
@@ -73621,6 +73684,50 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 		case "TensorBoardAppSettings":
 			if err := awsAwsjson11_deserializeDocumentTensorBoardAppSettings(&sv.TensorBoardAppSettings, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVectorConfig(v **types.VectorConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VectorConfig
+	if *v == nil {
+		sv = &types.VectorConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Dimension":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Dimension to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Dimension = ptr.Int32(int32(i64))
 			}
 
 		default:

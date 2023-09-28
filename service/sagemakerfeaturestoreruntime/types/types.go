@@ -90,12 +90,16 @@ type FeatureValue struct {
 	// This member is required.
 	FeatureName *string
 
-	// The value associated with a feature, in string format. Note that features types
-	// can be String, Integral, or Fractional. This value represents all three types as
-	// a string.
-	//
-	// This member is required.
+	// The value in string format associated with a feature. Used when your
+	// CollectionType is None . Note that features types can be String , Integral , or
+	// Fractional . This value represents all three types as a string.
 	ValueAsString *string
+
+	// The list of values in string format associated with a feature. Used when your
+	// CollectionType is a List , Set , or Vector . Note that features types can be
+	// String , Integral , or Fractional . These values represents all three types as a
+	// string.
+	ValueAsStringList []string
 
 	noSmithyDocumentSerde
 }

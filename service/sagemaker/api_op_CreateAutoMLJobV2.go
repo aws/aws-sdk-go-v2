@@ -23,9 +23,9 @@ import (
 // and DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
 // which offer backward compatibility. CreateAutoMLJobV2 can manage tabular
 // problem types identical to those of its previous version CreateAutoMLJob , as
-// well as non-tabular problem types such as image or text classification. Find
-// guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in
-// Migrate a CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
+// well as time-series forecasting, and non-tabular problem types such as image or
+// text classification. Find guidelines about how to migrate a CreateAutoMLJob to
+// CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
 // . For the list of available problem types supported by CreateAutoMLJobV2 , see
 // AutoMLProblemTypeConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html)
 // . You can find the best-performing model after you run an AutoML job V2 by

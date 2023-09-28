@@ -74,8 +74,8 @@ type ListModelExplainabilityJobDefinitionsOutput struct {
 	// This member is required.
 	JobDefinitionSummaries []types.MonitoringJobDefinitionSummary
 
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of jobs, use it in the subsequent request.
+	// The token returned if the response is truncated. To retrieve the next set of
+	// job executions, use it in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

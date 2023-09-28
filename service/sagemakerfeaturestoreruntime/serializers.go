@@ -426,6 +426,13 @@ func awsRestjson1_serializeDocumentFeatureValue(v *types.FeatureValue, value smi
 		ok.String(*v.ValueAsString)
 	}
 
+	if v.ValueAsStringList != nil {
+		ok := object.Key("ValueAsStringList")
+		if err := awsRestjson1_serializeDocumentValueAsStringList(v.ValueAsStringList, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -478,5 +485,16 @@ func awsRestjson1_serializeDocumentTtlDuration(v *types.TtlDuration, value smith
 		ok.Integer(*v.Value)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValueAsStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }

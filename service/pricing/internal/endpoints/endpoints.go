@@ -171,6 +171,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
@@ -178,6 +181,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
@@ -185,6 +191,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 			{
 				Variant: 0,
@@ -192,10 +201,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "cn-northwest-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso",

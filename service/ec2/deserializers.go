@@ -127258,6 +127258,12 @@ func awsEc2query_deserializeDocumentVerifiedAccessEndpoint(v **types.VerifiedAcc
 				return err
 			}
 
+		case strings.EqualFold("sseSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentVerifiedAccessSseSpecificationResponse(&sv.SseSpecification, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("status", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentVerifiedAccessEndpointStatus(&sv.Status, nodeDecoder); err != nil {
@@ -127782,6 +127788,12 @@ func awsEc2query_deserializeDocumentVerifiedAccessGroup(v **types.VerifiedAccess
 			{
 				xtv := string(val)
 				sv.Owner = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("sseSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentVerifiedAccessSseSpecificationResponse(&sv.SseSpecification, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):
@@ -128602,6 +128614,71 @@ func awsEc2query_deserializeDocumentVerifiedAccessLogS3Destination(v **types.Ver
 	return nil
 }
 
+func awsEc2query_deserializeDocumentVerifiedAccessSseSpecificationResponse(v **types.VerifiedAccessSseSpecificationResponse, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.VerifiedAccessSseSpecificationResponse
+	if *v == nil {
+		sv = &types.VerifiedAccessSseSpecificationResponse{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("customerManagedKeyEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.CustomerManagedKeyEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("kmsKeyArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.KmsKeyArn = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentVerifiedAccessTrustProvider(v **types.VerifiedAccessTrustProvider, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -128699,6 +128776,12 @@ func awsEc2query_deserializeDocumentVerifiedAccessTrustProvider(v **types.Verifi
 			{
 				xtv := string(val)
 				sv.PolicyReferenceName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("sseSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentVerifiedAccessSseSpecificationResponse(&sv.SseSpecification, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):
@@ -159072,6 +159155,12 @@ func awsEc2query_deserializeOpDocumentModifyVerifiedAccessEndpointPolicyOutput(v
 				sv.PolicyEnabled = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("sseSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentVerifiedAccessSseSpecificationResponse(&sv.SseSpecification, nodeDecoder); err != nil {
+				return err
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -159177,6 +159266,12 @@ func awsEc2query_deserializeOpDocumentModifyVerifiedAccessGroupPolicyOutput(v **
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.PolicyEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("sseSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentVerifiedAccessSseSpecificationResponse(&sv.SseSpecification, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:

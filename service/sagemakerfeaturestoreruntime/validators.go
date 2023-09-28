@@ -149,9 +149,6 @@ func validateFeatureValue(v *types.FeatureValue) error {
 	if v.FeatureName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
 	}
-	if v.ValueAsString == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ValueAsString"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

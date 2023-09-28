@@ -6887,6 +6887,25 @@ func validateCognitoMemberDefinition(v *types.CognitoMemberDefinition) error {
 	}
 }
 
+func validateCollectionConfig(v types.CollectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CollectionConfig"}
+	switch uv := v.(type) {
+	case *types.CollectionConfigMemberVectorConfig:
+		if err := validateVectorConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[VectorConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerDefinition(v *types.ContainerDefinition) error {
 	if v == nil {
 		return nil
@@ -7731,6 +7750,57 @@ func validateExplainerConfig(v *types.ExplainerConfig) error {
 	if v.ClarifyExplainerConfig != nil {
 		if err := validateClarifyExplainerConfig(v.ClarifyExplainerConfig); err != nil {
 			invalidParams.AddNested("ClarifyExplainerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFeatureAdditions(v []types.FeatureDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FeatureAdditions"}
+	for i := range v {
+		if err := validateFeatureDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFeatureDefinition(v *types.FeatureDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FeatureDefinition"}
+	if v.CollectionConfig != nil {
+		if err := validateCollectionConfig(v.CollectionConfig); err != nil {
+			invalidParams.AddNested("CollectionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFeatureDefinitions(v []types.FeatureDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FeatureDefinitions"}
+	for i := range v {
+		if err := validateFeatureDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11301,6 +11371,21 @@ func validateVariantPropertyList(v []types.VariantProperty) error {
 	}
 }
 
+func validateVectorConfig(v *types.VectorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VectorConfig"}
+	if v.Dimension == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVpcConfig(v *types.VpcConfig) error {
 	if v == nil {
 		return nil
@@ -12079,6 +12164,10 @@ func validateOpCreateFeatureGroupInput(v *CreateFeatureGroupInput) error {
 	}
 	if v.FeatureDefinitions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureDefinitions"))
+	} else if v.FeatureDefinitions != nil {
+		if err := validateFeatureDefinitions(v.FeatureDefinitions); err != nil {
+			invalidParams.AddNested("FeatureDefinitions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OfflineStoreConfig != nil {
 		if err := validateOfflineStoreConfig(v.OfflineStoreConfig); err != nil {
@@ -16026,6 +16115,11 @@ func validateOpUpdateFeatureGroupInput(v *UpdateFeatureGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFeatureGroupInput"}
 	if v.FeatureGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.FeatureAdditions != nil {
+		if err := validateFeatureAdditions(v.FeatureAdditions); err != nil {
+			invalidParams.AddNested("FeatureAdditions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

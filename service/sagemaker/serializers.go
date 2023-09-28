@@ -18404,6 +18404,24 @@ func awsAwsjson11_serializeDocumentCognitoMemberDefinition(v *types.CognitoMembe
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCollectionConfig(v types.CollectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CollectionConfigMemberVectorConfig:
+		av := object.Key("VectorConfig")
+		if err := awsAwsjson11_serializeDocumentVectorConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCollectionConfiguration(v *types.CollectionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19787,6 +19805,18 @@ func awsAwsjson11_serializeDocumentFeatureAdditions(v []types.FeatureDefinition,
 func awsAwsjson11_serializeDocumentFeatureDefinition(v *types.FeatureDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CollectionConfig != nil {
+		ok := object.Key("CollectionConfig")
+		if err := awsAwsjson11_serializeDocumentCollectionConfig(v.CollectionConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CollectionType) > 0 {
+		ok := object.Key("CollectionType")
+		ok.String(string(v.CollectionType))
+	}
 
 	if v.FeatureName != nil {
 		ok := object.Key("FeatureName")
@@ -22961,6 +22991,11 @@ func awsAwsjson11_serializeDocumentOnlineStoreConfig(v *types.OnlineStoreConfig,
 		if err := awsAwsjson11_serializeDocumentOnlineStoreSecurityConfig(v.SecurityConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.StorageType) > 0 {
+		ok := object.Key("StorageType")
+		ok.String(string(v.StorageType))
 	}
 
 	if v.TtlDuration != nil {
@@ -26148,6 +26183,18 @@ func awsAwsjson11_serializeDocumentVariantPropertyList(v []types.VariantProperty
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVectorConfig(v *types.VectorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimension != nil {
+		ok := object.Key("Dimension")
+		ok.Integer(*v.Dimension)
+	}
+
 	return nil
 }
 

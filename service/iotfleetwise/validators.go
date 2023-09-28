@@ -650,6 +650,26 @@ func (m *validateOpListVehiclesInFleet) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutEncryptionConfiguration struct {
+}
+
+func (*validateOpPutEncryptionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutEncryptionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutEncryptionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutEncryptionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutLoggingOptions struct {
 }
 
@@ -976,6 +996,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListVehiclesInFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListVehiclesInFleet{}, middleware.After)
+}
+
+func addOpPutEncryptionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutEncryptionConfiguration{}, middleware.After)
 }
 
 func addOpPutLoggingOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -2256,6 +2280,21 @@ func validateOpListVehiclesInFleetInput(v *ListVehiclesInFleetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListVehiclesInFleetInput"}
 	if v.FleetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutEncryptionConfigurationInput(v *PutEncryptionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutEncryptionConfigurationInput"}
+	if len(v.EncryptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

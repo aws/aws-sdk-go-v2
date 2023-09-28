@@ -47,7 +47,7 @@ type DescribeNotificationsForBudgetInput struct {
 	BudgetName *string
 
 	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
+	// contains.
 	MaxResults *int32
 
 	// The pagination token that you include in your request to indicate the next set
@@ -160,7 +160,7 @@ var _ DescribeNotificationsForBudgetAPIClient = (*Client)(nil)
 // DescribeNotificationsForBudget
 type DescribeNotificationsForBudgetPaginatorOptions struct {
 	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
+	// contains.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

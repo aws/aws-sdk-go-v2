@@ -72,8 +72,11 @@ type CreateCampaignInput struct {
 	// be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of
 	// data storage and provides additional mechanisms to use vehicle data, such as
 	// data lakes, centralized data storage, data processing pipelines, and analytics.
-	// You can use Amazon Timestream to access and analyze time series data, and
-	// Timestream to query vehicle data so that you can identify trends and patterns.
+	// Amazon Web Services IoT FleetWise supports at-least-once file delivery to S3.
+	// Your vehicle data is stored on multiple Amazon Web Services IoT FleetWise
+	// servers for redundancy and high availability. You can use Amazon Timestream to
+	// access and analyze time series data, and Timestream to query vehicle data so
+	// that you can identify trends and patterns.
 	DataDestinationConfigs []types.DataDestinationConfig
 
 	// (Optional) A list of vehicle attributes to associate with a campaign. Enrich

@@ -2062,11 +2062,12 @@ type CapacitySize struct {
 }
 
 // Configuration specifying how to treat different headers. If no headers are
-// specified SageMaker will by default base64 encode when capturing the data.
+// specified Amazon SageMaker will by default base64 encode when capturing the
+// data.
 type CaptureContentTypeHeader struct {
 
-	// The list of all content type headers that SageMaker will treat as CSV and
-	// capture accordingly.
+	// The list of all content type headers that Amazon SageMaker will treat as CSV
+	// and capture accordingly.
 	CsvContentTypes []string
 
 	// The list of all content type headers that SageMaker will treat as JSON and
@@ -2571,6 +2572,25 @@ type CognitoMemberDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for your collection.
+//
+// The following types satisfy this interface:
+//
+//	CollectionConfigMemberVectorConfig
+type CollectionConfig interface {
+	isCollectionConfig()
+}
+
+// Configuration for your vector collection type.
+//   - Dimension : The number of elements in your vector.
+type CollectionConfigMemberVectorConfig struct {
+	Value VectorConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CollectionConfigMemberVectorConfig) isCollectionConfig() {}
+
 // Configuration information for the Amazon SageMaker Debugger output tensor
 // collections.
 type CollectionConfiguration struct {
@@ -2897,9 +2917,9 @@ type DataCaptureConfig struct {
 	// Whether data capture should be enabled or disabled (defaults to enabled).
 	EnableCapture bool
 
-	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
-	// key that SageMaker uses to encrypt the captured data at rest using Amazon S3
-	// server-side encryption. The KmsKeyId can be any of the following formats:
+	// The Amazon Resource Name (ARN) of an Key Management Service key that SageMaker
+	// uses to encrypt the captured data at rest using Amazon S3 server-side
+	// encryption. The KmsKeyId can be any of the following formats:
 	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//   - Key ARN:
 	//   arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
@@ -3032,9 +3052,9 @@ type DataQualityAppSpecification struct {
 	PostAnalyticsProcessorSourceUri *string
 
 	// An Amazon S3 URI to a script that is called per row prior to running analysis.
-	// It can base64 decode the payload and convert it into a flatted json so that the
-	// built-in container can use the converted data. Applicable only for the built-in
-	// (first party) containers.
+	// It can base64 decode the payload and convert it into a flattened JSON so that
+	// the built-in container can use the converted data. Applicable only for the
+	// built-in (first party) containers.
 	RecordPreprocessorSourceUri *string
 
 	noSmithyDocumentSerde
@@ -4133,7 +4153,7 @@ type EndpointInput struct {
 	ProbabilityThresholdAttribute *float64
 
 	// Whether input data distributed in Amazon S3 is fully replicated or sharded by
-	// an S3 key. Defaults to FullyReplicated
+	// an Amazon S3 key. Defaults to FullyReplicated
 	S3DataDistributionType ProcessingS3DataDistributionType
 
 	// Whether the Pipe or File is used as the input mode for transferring data for
@@ -4463,6 +4483,18 @@ type FailStepMetadata struct {
 // A list of features. You must include FeatureName and FeatureType . Valid feature
 // FeatureType s are Integral , Fractional and String .
 type FeatureDefinition struct {
+
+	// Configuration for your collection.
+	CollectionConfig CollectionConfig
+
+	// A grouping of elements where each element within the collection must have the
+	// same feature type ( String , Integral , or Fractional ).
+	//   - List : An ordered collection of elements.
+	//   - Set : An unordered collection of unique elements.
+	//   - Vector : A specialized list that represents a fixed-size array of elements.
+	//   The vector dimension is determined by you. Must have elements with fractional
+	//   feature types.
+	CollectionType CollectionType
 
 	// The name of a feature. The type must be a string. FeatureName cannot be any of
 	// the following: is_deleted , write_time , api_invocation_time .
@@ -4897,7 +4929,7 @@ type GitConfigForUpdate struct {
 type HolidayConfigAttributes struct {
 
 	// The country code for the holiday calendar. For the list of public holiday
-	// calendars supported by AutoML job V2, see Country Codes (https://docs.aws.amazon.com/forecast/latest/dg/holidays.html#holidays-country-codes)
+	// calendars supported by AutoML job V2, see Country Codes (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-timeseries-forecasting-holiday-calendars.html#holiday-country-codes)
 	// . Use the country code corresponding to the country of your choice.
 	CountryCode *string
 
@@ -6700,7 +6732,8 @@ type InferenceExperimentDataStorageConfig struct {
 	Destination *string
 
 	// Configuration specifying how to treat different headers. If no headers are
-	// specified SageMaker will by default base64 encode when capturing the data.
+	// specified Amazon SageMaker will by default base64 encode when capturing the
+	// data.
 	ContentType *CaptureContentTypeHeader
 
 	// The Amazon Web Services Key Management Service key that Amazon SageMaker uses
@@ -8328,7 +8361,7 @@ type ModelDigests struct {
 // Docker container image configuration object for the model explainability job.
 type ModelExplainabilityAppSpecification struct {
 
-	// JSON formatted S3 file that defines explainability parameters. For more
+	// JSON formatted Amazon S3 file that defines explainability parameters. For more
 	// information on this JSON configuration file, see Configure model explainability
 	// parameters (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html)
 	// .
@@ -8865,9 +8898,9 @@ type ModelQualityAppSpecification struct {
 	ProblemType MonitoringProblemType
 
 	// An Amazon S3 URI to a script that is called per row prior to running analysis.
-	// It can base64 decode the payload and convert it into a flatted json so that the
-	// built-in container can use the converted data. Applicable only for the built-in
-	// (first party) containers.
+	// It can base64 decode the payload and convert it into a flattened JSON so that
+	// the built-in container can use the converted data. Applicable only for the
+	// built-in (first party) containers.
 	RecordPreprocessorSourceUri *string
 
 	noSmithyDocumentSerde
@@ -8887,7 +8920,7 @@ type ModelQualityBaselineConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The input for the model quality monitoring job. Currently endponts are
+// The input for the model quality monitoring job. Currently endpoints are
 // supported for input for model quality monitoring jobs.
 type ModelQualityJobInput struct {
 
@@ -9107,9 +9140,9 @@ type MonitoringAppSpecification struct {
 	PostAnalyticsProcessorSourceUri *string
 
 	// An Amazon S3 URI to a script that is called per row prior to running analysis.
-	// It can base64 decode the payload and convert it into a flatted json so that the
-	// built-in container can use the converted data. Applicable only for the built-in
-	// (first party) containers.
+	// It can base64 decode the payload and convert it into a flattened JSON so that
+	// the built-in container can use the converted data. Applicable only for the
+	// built-in (first party) containers.
 	RecordPreprocessorSourceUri *string
 
 	noSmithyDocumentSerde
@@ -9155,9 +9188,9 @@ type MonitoringClusterConfig struct {
 	// This member is required.
 	VolumeSizeInGB *int32
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
-	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
-	// ML compute instance(s) that run the model monitoring job.
+	// The Key Management Service (KMS) key that Amazon SageMaker uses to encrypt data
+	// on the storage volume attached to the ML compute instance(s) that run the model
+	// monitoring job.
 	VolumeKmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -9277,8 +9310,7 @@ type MonitoringJobDefinition struct {
 	// This member is required.
 	MonitoringInputs []MonitoringInput
 
-	// The array of outputs from the monitoring job to be uploaded to Amazon Simple
-	// Storage Service (Amazon S3).
+	// The array of outputs from the monitoring job to be uploaded to Amazon S3.
 	//
 	// This member is required.
 	MonitoringOutputConfig *MonitoringOutputConfig
@@ -9341,7 +9373,7 @@ type MonitoringJobDefinitionSummary struct {
 // Represents the JSON dataset format used when running a monitoring job.
 type MonitoringJsonDatasetFormat struct {
 
-	// Indicates if the file should be read as a json object per line.
+	// Indicates if the file should be read as a JSON object per line.
 	Line bool
 
 	noSmithyDocumentSerde
@@ -9390,9 +9422,8 @@ type MonitoringOutputConfig struct {
 	// This member is required.
 	MonitoringOutputs []MonitoringOutput
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
-	// that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon
-	// S3 server-side encryption.
+	// The Key Management Service (KMS) key that Amazon SageMaker uses to encrypt the
+	// model artifacts at rest using Amazon S3 server-side encryption.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -9934,6 +9965,12 @@ type OnlineStoreConfig struct {
 	// Use to specify KMS Key ID ( KMSKeyId ) for at-rest encryption of your
 	// OnlineStore .
 	SecurityConfig *OnlineStoreSecurityConfig
+
+	// Option for different tiers of low latency storage for real-time data retrieval.
+	//   - Standard : A managed low latency data store for feature groups.
+	//   - InMemory : A managed data store for feature groups that supports very low
+	//   latency retrieval.
+	StorageType StorageType
 
 	// Time to live duration, where the record is hard deleted after the expiration
 	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
@@ -12616,6 +12653,8 @@ type ScheduleConfig struct {
 	//   - If you want to set the job to start every hour, use the following: Hourly:
 	//   cron(0 * ? * * *)
 	//   - If you want to start the job daily: cron(0 [00-23] ? * * *)
+	//   - If you want to run the job one time, immediately, use the following
+	//   keyword: NOW
 	// For example, the following are valid cron expressions:
 	//   - Daily at noon UTC: cron(0 12 ? * * *)
 	//   - Daily at midnight UTC: cron(0 0 ? * * *)
@@ -13509,8 +13548,8 @@ type TimeSeriesForecastingJobConfig struct {
 	// and p90 as default.
 	ForecastQuantiles []string
 
-	// The collection of holidays featurization attributes used to incorporate
-	// national holiday information into your forecasting model.
+	// The collection of holiday featurization attributes used to incorporate national
+	// holiday information into your forecasting model.
 	HolidayConfig []HolidayConfigAttributes
 
 	// The transformations modifying specific attributes of the time-series, such as
@@ -15019,6 +15058,17 @@ type VariantProperty struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for your vector collection type.
+type VectorConfig struct {
+
+	// The number of elements in your vector.
+	//
+	// This member is required.
+	Dimension *int32
+
+	noSmithyDocumentSerde
+}
+
 // A lineage entity connected to the starting entity(ies).
 type Vertex struct {
 
@@ -15262,6 +15312,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAutoMLProblemTypeConfig()             {}
 func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes() {}
+func (*UnknownUnionMember) isCollectionConfig()                    {}
 func (*UnknownUnionMember) isMetricSpecification()                 {}
 func (*UnknownUnionMember) isScalingPolicy()                       {}
 func (*UnknownUnionMember) isTrialComponentParameterValue()        {}

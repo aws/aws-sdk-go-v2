@@ -55,6 +55,24 @@ func ExampleAutoMLProblemTypeResolvedAttributes_outputUsage() {
 
 var _ *types.TabularResolvedAttributes
 
+func ExampleCollectionConfig_outputUsage() {
+	var union types.CollectionConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CollectionConfigMemberVectorConfig:
+		_ = v.Value // Value is types.VectorConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VectorConfig
+
 func ExampleMetricSpecification_outputUsage() {
 	var union types.MetricSpecification
 	// type switches can be used to check the union value

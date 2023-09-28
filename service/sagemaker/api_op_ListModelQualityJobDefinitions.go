@@ -63,7 +63,8 @@ type ListModelQualityJobDefinitionsInput struct {
 	// The field to sort results by. The default is CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
-	// The sort order for results. The default is Descending .
+	// Whether to sort the results in Ascending or Descending order. The default is
+	// Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde

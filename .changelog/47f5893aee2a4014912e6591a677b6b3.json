@@ -1,0 +1,8 @@
+{
+    "id": "47f5893a-ee2a-4014-912e-6591a677b6b3",
+    "type": "documentation",
+    "description": "Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

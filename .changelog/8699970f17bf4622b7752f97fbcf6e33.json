@@ -1,0 +1,8 @@
+{
+    "id": "8699970f-17bf-4622-b775-2f97fbcf6e33",
+    "type": "feature",
+    "description": "Adds support for Customer Managed Key encryption for Amazon Verified Access resources",
+    "modules": [
+        "service/ec2"
+    ]
+}

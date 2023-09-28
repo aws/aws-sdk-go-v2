@@ -1,0 +1,8 @@
+{
+    "id": "97a04518-c966-4a4a-ada1-6359d11b63ea",
+    "type": "feature",
+    "description": "AWS IoT FleetWise now supports encryption through a customer managed AWS KMS key. The PutEncryptionConfiguration and GetEncryptionConfiguration APIs were added.",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

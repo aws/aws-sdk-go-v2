@@ -1254,6 +1254,26 @@ func (CodeRepositorySortOrder) Values() []CodeRepositorySortOrder {
 	}
 }
 
+type CollectionType string
+
+// Enum values for CollectionType
+const (
+	CollectionTypeList   CollectionType = "List"
+	CollectionTypeSet    CollectionType = "Set"
+	CollectionTypeVector CollectionType = "Vector"
+)
+
+// Values returns all known values for CollectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CollectionType) Values() []CollectionType {
+	return []CollectionType{
+		"List",
+		"Set",
+		"Vector",
+	}
+}
+
 type CompilationJobStatus string
 
 // Enum values for CompilationJobStatus
@@ -5453,6 +5473,24 @@ func (StepStatus) Values() []StepStatus {
 		"Stopped",
 		"Failed",
 		"Succeeded",
+	}
+}
+
+type StorageType string
+
+// Enum values for StorageType
+const (
+	StorageTypeStandard StorageType = "Standard"
+	StorageTypeInMemory StorageType = "InMemory"
+)
+
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"Standard",
+		"InMemory",
 	}
 }
 

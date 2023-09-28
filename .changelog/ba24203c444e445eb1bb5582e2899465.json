@@ -1,0 +1,8 @@
+{
+    "id": "ba24203c-444e-445e-b1bb-5582e2899465",
+    "type": "feature",
+    "description": "Feature Store supports read/write of records with collection type features.",
+    "modules": [
+        "service/sagemakerfeaturestoreruntime"
+    ]
+}

@@ -46764,6 +46764,23 @@ func awsEc2query_serializeDocumentVerifiedAccessLogS3DestinationOptions(v *types
 	return nil
 }
 
+func awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v *types.VerifiedAccessSseSpecificationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CustomerManagedKeyEnabled != nil {
+		objectKey := object.Key("CustomerManagedKeyEnabled")
+		objectKey.Boolean(*v.CustomerManagedKeyEnabled)
+	}
+
+	if v.KmsKeyArn != nil {
+		objectKey := object.Key("KmsKeyArn")
+		objectKey.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentVerifiedAccessTrustProviderIdList(v []string, value query.Value) error {
 	array := value.Array("Item")
 
@@ -51738,6 +51755,13 @@ func awsEc2query_serializeOpDocumentCreateVerifiedAccessEndpointInput(v *CreateV
 		}
 	}
 
+	if v.SseSpecification != nil {
+		objectKey := object.Key("SseSpecification")
+		if err := awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v.SseSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TagSpecifications != nil {
 		objectKey := object.FlatKey("TagSpecification")
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
@@ -51775,6 +51799,13 @@ func awsEc2query_serializeOpDocumentCreateVerifiedAccessGroupInput(v *CreateVeri
 	if v.PolicyDocument != nil {
 		objectKey := object.Key("PolicyDocument")
 		objectKey.String(*v.PolicyDocument)
+	}
+
+	if v.SseSpecification != nil {
+		objectKey := object.Key("SseSpecification")
+		if err := awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v.SseSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TagSpecifications != nil {
@@ -51867,6 +51898,13 @@ func awsEc2query_serializeOpDocumentCreateVerifiedAccessTrustProviderInput(v *Cr
 	if v.PolicyReferenceName != nil {
 		objectKey := object.Key("PolicyReferenceName")
 		objectKey.String(*v.PolicyReferenceName)
+	}
+
+	if v.SseSpecification != nil {
+		objectKey := object.Key("SseSpecification")
+		if err := awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v.SseSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TagSpecifications != nil {
@@ -63357,6 +63395,13 @@ func awsEc2query_serializeOpDocumentModifyVerifiedAccessEndpointPolicyInput(v *M
 		objectKey.Boolean(*v.PolicyEnabled)
 	}
 
+	if v.SseSpecification != nil {
+		objectKey := object.Key("SseSpecification")
+		if err := awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v.SseSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.VerifiedAccessEndpointId != nil {
 		objectKey := object.Key("VerifiedAccessEndpointId")
 		objectKey.String(*v.VerifiedAccessEndpointId)
@@ -63419,6 +63464,13 @@ func awsEc2query_serializeOpDocumentModifyVerifiedAccessGroupPolicyInput(v *Modi
 	if v.PolicyEnabled != nil {
 		objectKey := object.Key("PolicyEnabled")
 		objectKey.Boolean(*v.PolicyEnabled)
+	}
+
+	if v.SseSpecification != nil {
+		objectKey := object.Key("SseSpecification")
+		if err := awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v.SseSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.VerifiedAccessGroupId != nil {
@@ -63507,6 +63559,13 @@ func awsEc2query_serializeOpDocumentModifyVerifiedAccessTrustProviderInput(v *Mo
 	if v.OidcOptions != nil {
 		objectKey := object.Key("OidcOptions")
 		if err := awsEc2query_serializeDocumentModifyVerifiedAccessTrustProviderOidcOptions(v.OidcOptions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.SseSpecification != nil {
+		objectKey := object.Key("SseSpecification")
+		if err := awsEc2query_serializeDocumentVerifiedAccessSseSpecificationRequest(v.SseSpecification, objectKey); err != nil {
 			return err
 		}
 	}
