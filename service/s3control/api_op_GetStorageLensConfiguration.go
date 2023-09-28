@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -55,6 +56,11 @@ type GetStorageLensConfigurationInput struct {
 
 func (*GetStorageLensConfigurationInput) operationName() string {
 	return "GetStorageLensConfiguration"
+}
+
+func (in *GetStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type GetStorageLensConfigurationOutput struct {

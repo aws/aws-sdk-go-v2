@@ -64,6 +64,11 @@ func (*DeleteBucketPolicyInput) operationName() string {
 	return "DeleteBucketPolicy"
 }
 
+func (in *DeleteBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

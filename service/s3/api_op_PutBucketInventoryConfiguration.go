@@ -98,6 +98,11 @@ func (*PutBucketInventoryConfigurationInput) operationName() string {
 	return "PutBucketInventoryConfiguration"
 }
 
+func (in *PutBucketInventoryConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketInventoryConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

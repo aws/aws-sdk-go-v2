@@ -67,6 +67,11 @@ func (*GetBucketMetricsConfigurationInput) operationName() string {
 	return "GetBucketMetricsConfiguration"
 }
 
+func (in *GetBucketMetricsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketMetricsConfigurationOutput struct {
 
 	// Specifies the metrics configuration.

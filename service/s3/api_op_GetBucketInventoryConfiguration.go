@@ -62,6 +62,11 @@ func (*GetBucketInventoryConfigurationInput) operationName() string {
 	return "GetBucketInventoryConfiguration"
 }
 
+func (in *GetBucketInventoryConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketInventoryConfigurationOutput struct {
 
 	// Specifies the inventory configuration.

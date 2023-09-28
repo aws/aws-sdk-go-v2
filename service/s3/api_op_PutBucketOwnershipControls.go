@@ -65,6 +65,11 @@ func (*PutBucketOwnershipControlsInput) operationName() string {
 	return "PutBucketOwnershipControls"
 }
 
+func (in *PutBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketOwnershipControlsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

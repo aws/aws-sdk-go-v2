@@ -71,6 +71,11 @@ func (*ListBucketInventoryConfigurationsInput) operationName() string {
 	return "ListBucketInventoryConfigurations"
 }
 
+func (in *ListBucketInventoryConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListBucketInventoryConfigurationsOutput struct {
 
 	// If sent in the request, the marker that is used as a starting point for this

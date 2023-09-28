@@ -76,6 +76,11 @@ func (*DeleteObjectTaggingInput) operationName() string {
 	return "DeleteObjectTagging"
 }
 
+func (in *DeleteObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteObjectTaggingOutput struct {
 
 	// The versionId of the object the tag-set was removed from.

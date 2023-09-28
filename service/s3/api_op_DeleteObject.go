@@ -107,6 +107,11 @@ func (*DeleteObjectInput) operationName() string {
 	return "DeleteObject"
 }
 
+func (in *DeleteObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteObjectOutput struct {
 
 	// Indicates whether the specified object version that was permanently deleted was

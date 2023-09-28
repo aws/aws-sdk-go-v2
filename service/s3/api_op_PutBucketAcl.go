@@ -170,6 +170,11 @@ func (*PutBucketAclInput) operationName() string {
 	return "PutBucketAcl"
 }
 
+func (in *PutBucketAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketAclOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

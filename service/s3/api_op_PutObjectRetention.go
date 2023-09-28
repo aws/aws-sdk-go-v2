@@ -100,6 +100,11 @@ func (*PutObjectRetentionInput) operationName() string {
 	return "PutObjectRetention"
 }
 
+func (in *PutObjectRetentionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutObjectRetentionOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

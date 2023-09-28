@@ -166,6 +166,11 @@ func (*GetObjectAttributesInput) operationName() string {
 	return "GetObjectAttributes"
 }
 
+func (in *GetObjectAttributesInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetObjectAttributesOutput struct {
 
 	// The checksum or digest of the object.

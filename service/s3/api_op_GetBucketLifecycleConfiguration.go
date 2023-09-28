@@ -71,6 +71,11 @@ func (*GetBucketLifecycleConfigurationInput) operationName() string {
 	return "GetBucketLifecycleConfiguration"
 }
 
+func (in *GetBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketLifecycleConfigurationOutput struct {
 
 	// Container for a lifecycle rule.

@@ -52,6 +52,11 @@ func (*DeleteBucketOwnershipControlsInput) operationName() string {
 	return "DeleteBucketOwnershipControls"
 }
 
+func (in *DeleteBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketOwnershipControlsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

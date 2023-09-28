@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -280,6 +281,11 @@ type WriteGetObjectResponseInput struct {
 
 func (*WriteGetObjectResponseInput) operationName() string {
 	return "WriteGetObjectResponse"
+}
+
+func (in *WriteGetObjectResponseInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.UseObjectLambdaEndpoint = ptr.Bool(true)
 }
 
 type WriteGetObjectResponseOutput struct {

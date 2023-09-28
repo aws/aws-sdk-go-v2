@@ -241,6 +241,11 @@ func (*UploadPartCopyInput) operationName() string {
 	return "UploadPartCopy"
 }
 
+func (in *UploadPartCopyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type UploadPartCopyOutput struct {
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side

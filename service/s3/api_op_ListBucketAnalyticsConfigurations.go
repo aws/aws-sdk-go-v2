@@ -70,6 +70,11 @@ func (*ListBucketAnalyticsConfigurationsInput) operationName() string {
 	return "ListBucketAnalyticsConfigurations"
 }
 
+func (in *ListBucketAnalyticsConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListBucketAnalyticsConfigurationsOutput struct {
 
 	// The list of analytics configurations for a bucket.

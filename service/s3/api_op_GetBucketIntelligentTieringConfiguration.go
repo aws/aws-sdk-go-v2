@@ -65,6 +65,11 @@ func (*GetBucketIntelligentTieringConfigurationInput) operationName() string {
 	return "GetBucketIntelligentTieringConfiguration"
 }
 
+func (in *GetBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketIntelligentTieringConfigurationOutput struct {
 
 	// Container for S3 Intelligent-Tiering configuration.

@@ -95,6 +95,11 @@ func (*PutBucketAnalyticsConfigurationInput) operationName() string {
 	return "PutBucketAnalyticsConfiguration"
 }
 
+func (in *PutBucketAnalyticsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketAnalyticsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -126,6 +126,11 @@ func (*PutObjectTaggingInput) operationName() string {
 	return "PutObjectTagging"
 }
 
+func (in *PutObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutObjectTaggingOutput struct {
 
 	// The versionId of the object the tag-set was added to.

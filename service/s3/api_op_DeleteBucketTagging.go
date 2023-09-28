@@ -51,6 +51,11 @@ func (*DeleteBucketTaggingInput) operationName() string {
 	return "DeleteBucketTagging"
 }
 
+func (in *DeleteBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

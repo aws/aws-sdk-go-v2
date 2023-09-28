@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -54,6 +55,11 @@ type GetJobTaggingInput struct {
 
 func (*GetJobTaggingInput) operationName() string {
 	return "GetJobTagging"
+}
+
+func (in *GetJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type GetJobTaggingOutput struct {

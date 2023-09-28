@@ -92,6 +92,11 @@ func (*HeadBucketInput) operationName() string {
 	return "HeadBucket"
 }
 
+func (in *HeadBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type HeadBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

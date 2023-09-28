@@ -98,6 +98,11 @@ func (*PutBucketEncryptionInput) operationName() string {
 	return "PutBucketEncryption"
 }
 
+func (in *PutBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

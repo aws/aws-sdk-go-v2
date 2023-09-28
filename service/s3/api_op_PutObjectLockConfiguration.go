@@ -86,6 +86,11 @@ func (*PutObjectLockConfigurationInput) operationName() string {
 	return "PutObjectLockConfiguration"
 }
 
+func (in *PutObjectLockConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutObjectLockConfigurationOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

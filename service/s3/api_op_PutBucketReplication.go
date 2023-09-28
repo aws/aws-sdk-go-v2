@@ -114,6 +114,11 @@ func (*PutBucketReplicationInput) operationName() string {
 	return "PutBucketReplication"
 }
 
+func (in *PutBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

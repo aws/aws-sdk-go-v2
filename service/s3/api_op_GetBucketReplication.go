@@ -60,6 +60,11 @@ func (*GetBucketReplicationInput) operationName() string {
 	return "GetBucketReplication"
 }
 
+func (in *GetBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketReplicationOutput struct {
 
 	// A container for replication rules. You can add up to 1,000 rules. The maximum

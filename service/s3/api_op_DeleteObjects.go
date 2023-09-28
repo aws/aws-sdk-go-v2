@@ -128,6 +128,11 @@ func (*DeleteObjectsInput) operationName() string {
 	return "DeleteObjects"
 }
 
+func (in *DeleteObjectsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteObjectsOutput struct {
 
 	// Container element for a successful delete. It identifies the object that was

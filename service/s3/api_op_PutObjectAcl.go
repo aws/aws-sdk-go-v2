@@ -211,6 +211,11 @@ func (*PutObjectAclInput) operationName() string {
 	return "PutObjectAcl"
 }
 
+func (in *PutObjectAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutObjectAclOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

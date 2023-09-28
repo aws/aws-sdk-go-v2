@@ -73,6 +73,11 @@ func (*ListBucketMetricsConfigurationsInput) operationName() string {
 	return "ListBucketMetricsConfigurations"
 }
 
+func (in *ListBucketMetricsConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListBucketMetricsConfigurationsOutput struct {
 
 	// The marker that is used as a starting point for this metrics configuration list

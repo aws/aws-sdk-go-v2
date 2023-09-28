@@ -89,6 +89,11 @@ func (*PutBucketPolicyInput) operationName() string {
 	return "PutBucketPolicy"
 }
 
+func (in *PutBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

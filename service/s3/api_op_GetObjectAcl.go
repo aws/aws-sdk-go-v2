@@ -87,6 +87,11 @@ func (*GetObjectAclInput) operationName() string {
 	return "GetObjectAcl"
 }
 
+func (in *GetObjectAclInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetObjectAclOutput struct {
 
 	// A list of grants.

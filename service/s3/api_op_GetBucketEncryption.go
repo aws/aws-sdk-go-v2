@@ -61,6 +61,11 @@ func (*GetBucketEncryptionInput) operationName() string {
 	return "GetBucketEncryption"
 }
 
+func (in *GetBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketEncryptionOutput struct {
 
 	// Specifies the default server-side-encryption configuration.

@@ -52,6 +52,11 @@ func (*DeleteBucketCorsInput) operationName() string {
 	return "DeleteBucketCors"
 }
 
+func (in *DeleteBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketCorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

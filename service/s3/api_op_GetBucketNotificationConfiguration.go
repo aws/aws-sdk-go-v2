@@ -70,6 +70,11 @@ func (*GetBucketNotificationConfigurationInput) operationName() string {
 	return "GetBucketNotificationConfiguration"
 }
 
+func (in *GetBucketNotificationConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 // A container for specifying the notification configuration of the bucket. If
 // this element is empty, notifications are turned off for the bucket.
 type GetBucketNotificationConfigurationOutput struct {

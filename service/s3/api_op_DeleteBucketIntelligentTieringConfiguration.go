@@ -64,6 +64,11 @@ func (*DeleteBucketIntelligentTieringConfigurationInput) operationName() string 
 	return "DeleteBucketIntelligentTieringConfiguration"
 }
 
+func (in *DeleteBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketIntelligentTieringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

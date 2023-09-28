@@ -185,6 +185,11 @@ func (*HeadObjectInput) operationName() string {
 	return "HeadObject"
 }
 
+func (in *HeadObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type HeadObjectOutput struct {
 
 	// Indicates that a range of bytes was specified.

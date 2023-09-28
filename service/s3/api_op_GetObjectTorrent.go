@@ -68,6 +68,11 @@ func (*GetObjectTorrentInput) operationName() string {
 	return "GetObjectTorrent"
 }
 
+func (in *GetObjectTorrentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetObjectTorrentOutput struct {
 
 	// A Bencoded dictionary as defined by the BitTorrent specification

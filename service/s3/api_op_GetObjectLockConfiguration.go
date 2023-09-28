@@ -58,6 +58,11 @@ func (*GetObjectLockConfigurationInput) operationName() string {
 	return "GetObjectLockConfiguration"
 }
 
+func (in *GetObjectLockConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetObjectLockConfigurationOutput struct {
 
 	// The specified bucket's Object Lock configuration.

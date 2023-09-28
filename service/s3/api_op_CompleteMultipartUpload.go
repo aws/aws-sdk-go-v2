@@ -183,6 +183,11 @@ func (*CompleteMultipartUploadInput) operationName() string {
 	return "CompleteMultipartUpload"
 }
 
+func (in *CompleteMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type CompleteMultipartUploadOutput struct {
 
 	// The name of the bucket that contains the newly created object. Does not return

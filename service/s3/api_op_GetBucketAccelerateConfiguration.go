@@ -74,6 +74,11 @@ func (*GetBucketAccelerateConfigurationInput) operationName() string {
 	return "GetBucketAccelerateConfiguration"
 }
 
+func (in *GetBucketAccelerateConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketAccelerateConfigurationOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

@@ -82,6 +82,11 @@ func (*PutBucketIntelligentTieringConfigurationInput) operationName() string {
 	return "PutBucketIntelligentTieringConfiguration"
 }
 
+func (in *PutBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketIntelligentTieringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

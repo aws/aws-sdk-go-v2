@@ -9,6 +9,7 @@ import (
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -140,6 +141,11 @@ type CreateBucketInput struct {
 
 func (*CreateBucketInput) operationName() string {
 	return "CreateBucket"
+}
+
+func (in *CreateBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+	p.DisableAccessPoints = ptr.Bool(true)
 }
 
 type CreateBucketOutput struct {

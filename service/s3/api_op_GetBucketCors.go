@@ -67,6 +67,11 @@ func (*GetBucketCorsInput) operationName() string {
 	return "GetBucketCors"
 }
 
+func (in *GetBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketCorsOutput struct {
 
 	// A set of origins and methods (cross-origin access that you want to allow). You

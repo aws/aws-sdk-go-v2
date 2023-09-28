@@ -101,6 +101,12 @@ func (*CreateBucketInput) operationName() string {
 	return "CreateBucket"
 }
 
+func (in *CreateBucketInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+	p.OutpostId = in.OutpostId
+
+}
+
 type CreateBucketOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bucket. For using this parameter with

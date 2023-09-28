@@ -76,6 +76,11 @@ func (*GetBucketLocationInput) operationName() string {
 	return "GetBucketLocation"
 }
 
+func (in *GetBucketLocationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketLocationOutput struct {
 
 	// Specifies the Region where the bucket resides. For a list of all the Amazon S3

@@ -64,6 +64,11 @@ func (*ListBucketIntelligentTieringConfigurationsInput) operationName() string {
 	return "ListBucketIntelligentTieringConfigurations"
 }
 
+func (in *ListBucketIntelligentTieringConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListBucketIntelligentTieringConfigurationsOutput struct {
 
 	// The ContinuationToken that represents a placeholder from where this request

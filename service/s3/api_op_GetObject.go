@@ -237,6 +237,11 @@ func (*GetObjectInput) operationName() string {
 	return "GetObject"
 }
 
+func (in *GetObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetObjectOutput struct {
 
 	// Indicates that a range of bytes was specified.

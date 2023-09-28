@@ -60,6 +60,11 @@ func (*DeleteBucketEncryptionInput) operationName() string {
 	return "DeleteBucketEncryption"
 }
 
+func (in *DeleteBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

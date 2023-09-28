@@ -119,6 +119,11 @@ func (*ListObjectsV2Input) operationName() string {
 	return "ListObjectsV2"
 }
 
+func (in *ListObjectsV2Input) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListObjectsV2Output struct {
 
 	// All of the keys (up to 1,000) rolled up into a common prefix count as a single

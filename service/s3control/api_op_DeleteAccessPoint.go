@@ -10,6 +10,7 @@ import (
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -65,6 +66,12 @@ type DeleteAccessPointInput struct {
 
 func (*DeleteAccessPointInput) operationName() string {
 	return "DeleteAccessPoint"
+}
+
+func (in *DeleteAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.AccessPointName = in.Name
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type DeleteAccessPointOutput struct {

@@ -50,6 +50,11 @@ func (*PutEventsInput) operationName() string {
 	return "PutEvents"
 }
 
+func (in *PutEventsInput) bindEndpointParams(p *EndpointParameters) {
+	p.EndpointId = in.EndpointId
+
+}
+
 type PutEventsOutput struct {
 
 	// The successfully and unsuccessfully ingested events results. If the ingestion

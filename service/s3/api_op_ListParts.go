@@ -128,6 +128,11 @@ func (*ListPartsInput) operationName() string {
 	return "ListParts"
 }
 
+func (in *ListPartsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListPartsOutput struct {
 
 	// If the bucket has a lifecycle rule configured with an action to abort

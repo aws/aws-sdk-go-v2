@@ -100,6 +100,11 @@ func (*PutBucketLoggingInput) operationName() string {
 	return "PutBucketLogging"
 }
 
+func (in *PutBucketLoggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -110,6 +110,11 @@ func (*PutBucketLifecycleConfigurationInput) operationName() string {
 	return "PutBucketLifecycleConfiguration"
 }
 
+func (in *PutBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketLifecycleConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

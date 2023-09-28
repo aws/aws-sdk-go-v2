@@ -10,6 +10,7 @@ import (
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -47,6 +48,11 @@ type DeletePublicAccessBlockInput struct {
 
 func (*DeletePublicAccessBlockInput) operationName() string {
 	return "DeletePublicAccessBlock"
+}
+
+func (in *DeletePublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type DeletePublicAccessBlockOutput struct {

@@ -51,6 +51,11 @@ func (*GetBucketLoggingInput) operationName() string {
 	return "GetBucketLogging"
 }
 
+func (in *GetBucketLoggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketLoggingOutput struct {
 
 	// Describes where logs are stored and the prefix that Amazon S3 assigns to all

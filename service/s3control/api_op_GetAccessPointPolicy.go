@@ -10,6 +10,7 @@ import (
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -59,6 +60,12 @@ type GetAccessPointPolicyInput struct {
 
 func (*GetAccessPointPolicyInput) operationName() string {
 	return "GetAccessPointPolicy"
+}
+
+func (in *GetAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.AccessPointName = in.Name
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type GetAccessPointPolicyOutput struct {

@@ -567,7 +567,7 @@ type endpointParamsBinder interface {
 	bindEndpointParams(*EndpointParameters)
 }
 
-func bindEndpointParams(input endpointParamsBinder, options Options) *EndpointParameters {
+func bindEndpointParams(input interface{}, options Options) *EndpointParameters {
 	params := &EndpointParameters{}
 
 	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
@@ -575,239 +575,15 @@ func bindEndpointParams(input endpointParamsBinder, options Options) *EndpointPa
 	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	params.Endpoint = options.BaseEndpoint
 
-	input.bindEndpointParams(params)
+	if b, ok := input.(endpointParamsBinder); ok {
+		b.bindEndpointParams(params)
+	}
 
 	return params
 }
 
-func (in *ActivateEventSourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CancelReplayInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CreateApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CreateArchiveInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CreateConnectionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CreateEndpointInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CreateEventBusInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *CreatePartnerEventSourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeactivateEventSourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeauthorizeConnectionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeleteApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeleteArchiveInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeleteConnectionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeleteEndpointInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeleteEventBusInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeletePartnerEventSourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DeleteRuleInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeArchiveInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeConnectionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeEndpointInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeEventBusInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeEventSourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribePartnerEventSourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeReplayInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DescribeRuleInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *DisableRuleInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *EnableRuleInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListApiDestinationsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListArchivesInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListConnectionsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListEndpointsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListEventBusesInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListEventSourcesInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListPartnerEventSourceAccountsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListPartnerEventSourcesInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListReplaysInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListRuleNamesByTargetInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListRulesInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListTagsForResourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *ListTargetsByRuleInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *PutEventsInput) bindEndpointParams(p *EndpointParameters) {
-	p.EndpointId = in.EndpointId
-
-}
-
-func (in *PutPartnerEventsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *PutPermissionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *PutRuleInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *PutTargetsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *RemovePermissionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *RemoveTargetsInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *StartReplayInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *TestEventPatternInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *UntagResourceInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *UpdateApiDestinationInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *UpdateArchiveInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *UpdateConnectionInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
-func (in *UpdateEndpointInput) bindEndpointParams(p *EndpointParameters) {
-
-}
-
 type resolveEndpointV2Middleware struct {
-	options  Options
-	resolver EndpointResolverV2
+	options Options
 }
 
 func (*resolveEndpointV2Middleware) ID() string {
@@ -826,12 +602,12 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	if m.resolver == nil {
+	if m.options.EndpointResolverV2 == nil {
 		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
 	}
 
 	params := bindEndpointParams(in.Parameters.(endpointParamsBinder), m.options)
-	resolvedEndpoint, err := m.resolver.ResolveEndpoint(ctx, *params)
+	resolvedEndpoint, err := m.options.EndpointResolverV2.ResolveEndpoint(ctx, *params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
@@ -913,7 +689,6 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 
 func addResolveEndpointV2Middleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&resolveEndpointV2Middleware{
-		options:  options,
-		resolver: options.EndpointResolverV2,
+		options: options,
 	}, "ResolveEndpoint", middleware.After)
 }

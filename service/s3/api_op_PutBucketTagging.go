@@ -101,6 +101,11 @@ func (*PutBucketTaggingInput) operationName() string {
 	return "PutBucketTagging"
 }
 
+func (in *PutBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,6 +54,11 @@ func (*GetBucketVersioningInput) operationName() string {
 	return "GetBucketVersioning"
 }
 
+func (in *GetBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketVersioningOutput struct {
 
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.

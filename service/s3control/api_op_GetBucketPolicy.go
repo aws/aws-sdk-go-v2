@@ -10,6 +10,7 @@ import (
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -80,6 +81,12 @@ type GetBucketPolicyInput struct {
 
 func (*GetBucketPolicyInput) operationName() string {
 	return "GetBucketPolicy"
+}
+
+func (in *GetBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.Bucket = in.Bucket
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type GetBucketPolicyOutput struct {

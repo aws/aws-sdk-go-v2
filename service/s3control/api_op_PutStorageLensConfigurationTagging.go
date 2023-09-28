@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -60,6 +61,11 @@ type PutStorageLensConfigurationTaggingInput struct {
 
 func (*PutStorageLensConfigurationTaggingInput) operationName() string {
 	return "PutStorageLensConfigurationTagging"
+}
+
+func (in *PutStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type PutStorageLensConfigurationTaggingOutput struct {

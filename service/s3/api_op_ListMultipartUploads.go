@@ -135,6 +135,11 @@ func (*ListMultipartUploadsInput) operationName() string {
 	return "ListMultipartUploads"
 }
 
+func (in *ListMultipartUploadsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type ListMultipartUploadsOutput struct {
 
 	// The name of the bucket to which the multipart upload was initiated. Does not

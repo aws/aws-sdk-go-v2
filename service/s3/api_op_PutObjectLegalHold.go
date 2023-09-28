@@ -93,6 +93,11 @@ func (*PutObjectLegalHoldInput) operationName() string {
 	return "PutObjectLegalHold"
 }
 
+func (in *PutObjectLegalHoldInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutObjectLegalHoldOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

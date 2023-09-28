@@ -337,6 +337,11 @@ func (*PutObjectInput) operationName() string {
 	return "PutObject"
 }
 
+func (in *PutObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutObjectOutput struct {
 
 	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side

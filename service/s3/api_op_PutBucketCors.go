@@ -99,6 +99,11 @@ func (*PutBucketCorsInput) operationName() string {
 	return "PutBucketCors"
 }
 
+func (in *PutBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketCorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,6 +53,11 @@ func (*GetBucketOwnershipControlsInput) operationName() string {
 	return "GetBucketOwnershipControls"
 }
 
+func (in *GetBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketOwnershipControlsOutput struct {
 
 	// The OwnershipControls (BucketOwnerEnforced, BucketOwnerPreferred, or

@@ -56,6 +56,11 @@ func (*GetBucketTaggingInput) operationName() string {
 	return "GetBucketTagging"
 }
 
+func (in *GetBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketTaggingOutput struct {
 
 	// Contains the tag set.

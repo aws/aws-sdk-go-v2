@@ -59,6 +59,11 @@ func (*DeleteBucketWebsiteInput) operationName() string {
 	return "DeleteBucketWebsite"
 }
 
+func (in *DeleteBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketWebsiteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

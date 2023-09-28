@@ -88,6 +88,11 @@ func (*PutPublicAccessBlockInput) operationName() string {
 	return "PutPublicAccessBlock"
 }
 
+func (in *PutPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutPublicAccessBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

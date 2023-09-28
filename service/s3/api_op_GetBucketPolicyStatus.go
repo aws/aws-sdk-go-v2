@@ -57,6 +57,11 @@ func (*GetBucketPolicyStatusInput) operationName() string {
 	return "GetBucketPolicyStatus"
 }
 
+func (in *GetBucketPolicyStatusInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketPolicyStatusOutput struct {
 
 	// The policy status for the specified bucket.

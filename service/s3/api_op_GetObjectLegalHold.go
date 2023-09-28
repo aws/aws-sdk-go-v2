@@ -75,6 +75,11 @@ func (*GetObjectLegalHoldInput) operationName() string {
 	return "GetObjectLegalHold"
 }
 
+func (in *GetObjectLegalHoldInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetObjectLegalHoldOutput struct {
 
 	// The current legal hold status for the specified object.

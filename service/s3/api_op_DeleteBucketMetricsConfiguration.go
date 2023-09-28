@@ -66,6 +66,11 @@ func (*DeleteBucketMetricsConfigurationInput) operationName() string {
 	return "DeleteBucketMetricsConfiguration"
 }
 
+func (in *DeleteBucketMetricsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketMetricsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

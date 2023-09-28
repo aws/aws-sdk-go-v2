@@ -55,6 +55,11 @@ func (*DeletePublicAccessBlockInput) operationName() string {
 	return "DeletePublicAccessBlock"
 }
 
+func (in *DeletePublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeletePublicAccessBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

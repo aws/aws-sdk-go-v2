@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -50,6 +51,11 @@ type GetAccessPointPolicyStatusForObjectLambdaInput struct {
 
 func (*GetAccessPointPolicyStatusForObjectLambdaInput) operationName() string {
 	return "GetAccessPointPolicyStatusForObjectLambda"
+}
+
+func (in *GetAccessPointPolicyStatusForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+	p.AccountId = in.AccountId
+	p.RequiresAccountId = ptr.Bool(true)
 }
 
 type GetAccessPointPolicyStatusForObjectLambdaOutput struct {

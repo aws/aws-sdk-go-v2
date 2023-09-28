@@ -57,6 +57,11 @@ func (*DeleteBucketReplicationInput) operationName() string {
 	return "DeleteBucketReplication"
 }
 
+func (in *DeleteBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

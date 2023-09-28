@@ -76,6 +76,11 @@ func (*GetBucketPolicyInput) operationName() string {
 	return "GetBucketPolicy"
 }
 
+func (in *GetBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketPolicyOutput struct {
 
 	// The bucket policy as a JSON document.

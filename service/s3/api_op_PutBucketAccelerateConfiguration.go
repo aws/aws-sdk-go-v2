@@ -85,6 +85,11 @@ func (*PutBucketAccelerateConfigurationInput) operationName() string {
 	return "PutBucketAccelerateConfiguration"
 }
 
+func (in *PutBucketAccelerateConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketAccelerateConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

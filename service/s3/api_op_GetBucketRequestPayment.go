@@ -51,6 +51,11 @@ func (*GetBucketRequestPaymentInput) operationName() string {
 	return "GetBucketRequestPayment"
 }
 
+func (in *GetBucketRequestPaymentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketRequestPaymentOutput struct {
 
 	// Specifies who pays for the download and request fees.

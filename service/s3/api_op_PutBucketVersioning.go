@@ -94,6 +94,11 @@ func (*PutBucketVersioningInput) operationName() string {
 	return "PutBucketVersioning"
 }
 
+func (in *PutBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketVersioningOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

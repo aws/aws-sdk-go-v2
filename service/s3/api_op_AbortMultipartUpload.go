@@ -96,6 +96,11 @@ func (*AbortMultipartUploadInput) operationName() string {
 	return "AbortMultipartUpload"
 }
 
+func (in *AbortMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type AbortMultipartUploadOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the

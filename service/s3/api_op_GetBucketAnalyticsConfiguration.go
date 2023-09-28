@@ -65,6 +65,11 @@ func (*GetBucketAnalyticsConfigurationInput) operationName() string {
 	return "GetBucketAnalyticsConfiguration"
 }
 
+func (in *GetBucketAnalyticsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketAnalyticsConfigurationOutput struct {
 
 	// The configuration and any analyses for the analytics filter.

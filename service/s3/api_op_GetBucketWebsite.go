@@ -56,6 +56,11 @@ func (*GetBucketWebsiteInput) operationName() string {
 	return "GetBucketWebsite"
 }
 
+func (in *GetBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetBucketWebsiteOutput struct {
 
 	// The object key name of the website error document to use for 4XX class errors.

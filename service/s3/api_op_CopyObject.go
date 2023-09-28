@@ -401,6 +401,11 @@ func (*CopyObjectInput) operationName() string {
 	return "CopyObject"
 }
 
+func (in *CopyObjectInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type CopyObjectOutput struct {
 
 	// Indicates whether the copied object uses an S3 Bucket Key for server-side

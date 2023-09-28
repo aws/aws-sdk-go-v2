@@ -63,6 +63,11 @@ func (*GetPublicAccessBlockInput) operationName() string {
 	return "GetPublicAccessBlock"
 }
 
+func (in *GetPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type GetPublicAccessBlockOutput struct {
 
 	// The PublicAccessBlock configuration currently in effect for this Amazon S3

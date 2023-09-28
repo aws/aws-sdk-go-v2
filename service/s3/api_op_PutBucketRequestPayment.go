@@ -76,6 +76,11 @@ func (*PutBucketRequestPaymentInput) operationName() string {
 	return "PutBucketRequestPayment"
 }
 
+func (in *PutBucketRequestPaymentInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketRequestPaymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

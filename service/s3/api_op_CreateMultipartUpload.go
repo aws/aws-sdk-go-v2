@@ -349,6 +349,11 @@ func (*CreateMultipartUploadInput) operationName() string {
 	return "CreateMultipartUpload"
 }
 
+func (in *CreateMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type CreateMultipartUploadOutput struct {
 
 	// If the bucket has a lifecycle rule configured with an action to abort

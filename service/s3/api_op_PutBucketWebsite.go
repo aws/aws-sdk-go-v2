@@ -112,6 +112,11 @@ func (*PutBucketWebsiteInput) operationName() string {
 	return "PutBucketWebsite"
 }
 
+func (in *PutBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type PutBucketWebsiteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

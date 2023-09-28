@@ -58,6 +58,11 @@ func (*DeleteBucketLifecycleInput) operationName() string {
 	return "DeleteBucketLifecycle"
 }
 
+func (in *DeleteBucketLifecycleInput) bindEndpointParams(p *EndpointParameters) {
+	p.Bucket = in.Bucket
+
+}
+
 type DeleteBucketLifecycleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
