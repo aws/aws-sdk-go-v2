@@ -911,7 +911,7 @@
                 "dataDestinationConfigs": {
                     "target": "com.amazonaws.iotfleetwise#DataDestinationConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n        <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p>\n        <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
+                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n        <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. Amazon Web Services IoT FleetWise supports at-least-once file delivery to S3. Your vehicle data is stored on multiple Amazon Web Services IoT FleetWise servers for redundancy and high availability.</p>\n        <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
                     }
                 }
             }
@@ -2165,6 +2165,40 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotfleetwise#EncryptionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILURE",
+                        "name": "FAILURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotfleetwise#EncryptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KMS_BASED_ENCRYPTION",
+                        "name": "KMS_BASED_ENCRYPTION"
+                    },
+                    {
+                        "value": "FLEETWISE_DEFAULT_ENCRYPTION",
+                        "name": "FLEETWISE_DEFAULT_ENCRYPTION"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotfleetwise#FleetAssociationResource": {
             "type": "resource",
             "identifiers": {
@@ -2554,6 +2588,94 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.iotfleetwise#GetEncryptionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleetwise#GetEncryptionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleetwise#GetEncryptionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleetwise#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the encryption configuration for resources and data in Amazon Web Services IoT FleetWise.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/encryptionConfiguration",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.iotfleetwise#GetEncryptionConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotfleetwise#GetEncryptionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key that is used for encryption.</p>"
+                    }
+                },
+                "encryptionStatus": {
+                    "target": "com.amazonaws.iotfleetwise#EncryptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionType": {
+                    "target": "com.amazonaws.iotfleetwise#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS_BASED_ENCRYPTION</code> to use an KMS key that you own and manage. Set to <code>FLEETWISE_DEFAULT_ENCRYPTION</code> to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.iotfleetwise#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that describes why encryption settings couldn't be configured, if applicable.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.iotfleetwise#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when encryption was configured in seconds since epoch (January 1, 1970 at midnight UTC time).</p>"
+                    }
+                },
+                "lastModificationTime": {
+                    "target": "com.amazonaws.iotfleetwise#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when encryption was last updated in seconds since epoch (January 1, 1970 at midnight UTC time).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotfleetwise#GetFleet": {
@@ -3547,6 +3669,9 @@
                     "target": "com.amazonaws.iotfleetwise#BatchUpdateVehicle"
                 },
                 {
+                    "target": "com.amazonaws.iotfleetwise#GetEncryptionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.iotfleetwise#GetLoggingOptions"
                 },
                 {
@@ -3557,6 +3682,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotfleetwise#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#PutEncryptionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iotfleetwise#PutLoggingOptions"
@@ -5994,6 +6122,92 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.iotfleetwise#PutEncryptionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleetwise#PutEncryptionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleetwise#PutEncryptionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleetwise#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the encryption configuration. Amazon Web Services IoT FleetWise can encrypt your data and resources using an Amazon Web Services managed key. Or, you can use a KMS key that you own and manage. For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/data-encryption.html\">Data encryption</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/encryptionConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#PutEncryptionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key that is used for encryption.</p>"
+                    }
+                },
+                "encryptionType": {
+                    "target": "com.amazonaws.iotfleetwise#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption. Choose <code>KMS_BASED_ENCRYPTION</code> to use a KMS key or <code>FLEETWISE_DEFAULT_ENCRYPTION</code> to use an Amazon Web Services managed key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotfleetwise#PutEncryptionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key that is used for encryption.</p>"
+                    }
+                },
+                "encryptionStatus": {
+                    "target": "com.amazonaws.iotfleetwise#EncryptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionType": {
+                    "target": "com.amazonaws.iotfleetwise#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS_BASED_ENCRYPTION</code> to use an KMS key that you own and manage. Set to <code>FLEETWISE_DEFAULT_ENCRYPTION</code> to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotfleetwise#PutLoggingOptions": {

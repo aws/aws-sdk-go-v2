@@ -1406,7 +1406,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 50
+                    "max": 1000
                 }
             }
         },
@@ -2756,7 +2756,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.budgets#MaxResultsBudgetNotifications",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn integer that shows how many budget name entries a paginated response contains.\n\t\t</p>"
+                        "smithy.api#documentation": "<p> An integer that represents how many budgets a paginated response contains. The default is\n\t\t\t50. </p>"
                     }
                 },
                 "NextToken": {
@@ -2958,14 +2958,14 @@
                 "AccountId": {
                     "target": "com.amazonaws.budgets#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>accountId</code> that is associated with the budgets that you want descriptions of.</p>",
+                        "smithy.api#documentation": "<p>The <code>accountId</code> that is associated with the budgets that you want to\n         describe.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.budgets#MaxResults",
+                    "target": "com.amazonaws.budgets#MaxResultsDescribeBudgets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional integer that represents how many entries a paginated response contains. The maximum is 100.</p>"
+                        "smithy.api#documentation": "<p>An integer that represents how many budgets a paginated response contains. The default is\n         100.</p>"
                     }
                 },
                 "NextToken": {
@@ -3048,7 +3048,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.budgets#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>accountId</code> that is associated with the budget whose notifications you want descriptions of.</p>",
+                        "smithy.api#documentation": "<p>The <code>accountId</code> that is associated with the budget whose notifications you want\n         descriptions of.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3062,7 +3062,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.budgets#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional integer that represents how many entries a paginated response contains. The maximum is 100.</p>"
+                        "smithy.api#documentation": "<p>An optional integer that represents how many entries a paginated response contains.</p>"
                     }
                 },
                 "NextToken": {
@@ -3166,7 +3166,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.budgets#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional integer that represents how many entries a paginated response contains. The maximum is 100.</p>"
+                        "smithy.api#documentation": "<p>An optional integer that represents how many entries a paginated response contains.</p>"
                     }
                 },
                 "NextToken": {
@@ -3577,7 +3577,16 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 50
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.budgets#MaxResultsDescribeBudgets": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
                 }
             }
         },
@@ -3861,13 +3870,13 @@
                 "Unit": {
                     "target": "com.amazonaws.budgets#UnitValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of measurement that's used for the budget forecast, actual spend, or budget\n\t\t\tthreshold, such as USD or GBP.</p>",
+                        "smithy.api#documentation": "<p>The unit of measurement that's used for the budget forecast, actual spend, or budget\n\t\t\tthreshold.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The amount of cost or usage that's measured for a budget.</p>\n         <p>For example, a <code>Spend</code> for <code>3 GB</code> of S3 usage has the following\n\t\t\tparameters:</p>\n         <ul>\n            <li>\n               <p>An <code>Amount</code> of <code>3</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>unit</code> of <code>GB</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The amount of cost or usage that's measured for a budget.</p>\n         <p>\n            <i>Cost example:</i> A <code>Spend</code> for <code>3 USD</code> of\n\t\t\tcosts has the following parameters:</p>\n         <ul>\n            <li>\n               <p>An <code>Amount</code> of <code>3</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>Unit</code> of <code>USD</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <i>Usage example:</i> A <code>Spend</code> for <code>3 GB</code> of S3\n\t\t\tusage has the following parameters:</p>\n         <ul>\n            <li>\n               <p>An <code>Amount</code> of <code>3</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>Unit</code> of <code>GB</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.budgets#SsmActionDefinition": {

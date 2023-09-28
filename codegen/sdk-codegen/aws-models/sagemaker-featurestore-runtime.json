@@ -1075,8 +1075,13 @@
                 "ValueAsString": {
                     "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value associated with a feature, in string format. Note that features types can be\n         String, Integral, or Fractional. This value represents all three types as a string.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The value in string format associated with a feature. Used when your\n            <code>CollectionType</code> is <code>None</code>. Note that features types can be\n            <code>String</code>, <code>Integral</code>, or <code>Fractional</code>. This value\n         represents all three types as a string.</p>"
+                    }
+                },
+                "ValueAsStringList": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of values in string format associated with a feature. Used when your\n            <code>CollectionType</code> is a <code>List</code>, <code>Set</code>, or\n            <code>Vector</code>. Note that features types can be <code>String</code>,\n            <code>Integral</code>, or <code>Fractional</code>. These values represents all three\n         types as a string.</p>"
                     }
                 }
             },
@@ -1439,6 +1444,18 @@
                     "max": 358400
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 358400
+                }
             }
         }
     }
