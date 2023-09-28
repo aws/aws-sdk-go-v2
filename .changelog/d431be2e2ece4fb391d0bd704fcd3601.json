@@ -1,8 +1,0 @@
-{
-    "id": "d431be2e-2ece-4fb3-91d0-bd704fcd3601",
-    "type": "feature",
-    "description": "Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

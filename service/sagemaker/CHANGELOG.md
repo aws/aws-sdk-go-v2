@@ -1,3 +1,7 @@
+# v1.108.0 (2023-09-28)
+
+* **Feature**: Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.
+
 # v1.107.0 (2023-09-19)
 
 * **Feature**: This release adds support for one-time model monitoring schedules that are executed immediately without delay, explicit data analysis windows for model monitoring schedules and exclude features attributes to remove features from model monitor analysis.

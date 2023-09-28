@@ -1,8 +1,0 @@
-{
-    "id": "ba8fc3cc-454f-4f69-bae9-cbc614064ca7",
-    "type": "feature",
-    "description": "Model Invocation logging added to enable or disable logs in customer account. Model listing and description support added. Provisioned Throughput feature added. Custom model support added for creating custom models. Also includes list, and delete functions for custom model.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

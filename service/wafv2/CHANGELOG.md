@@ -1,3 +1,7 @@
+# v1.39.1 (2023-09-28)
+
+* **Documentation**: Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.
+
 # v1.39.0 (2023-09-25)
 
 * **Feature**: You can now perform an exact match against the web request's JA3 fingerprint.

@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.22.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.121.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.122.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.7
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.39.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.30.0
 	github.com/aws/smithy-go v1.14.2
 	github.com/google/go-cmp v0.5.8

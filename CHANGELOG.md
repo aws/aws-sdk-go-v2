@@ -1,3 +1,25 @@
+# Release (2023-09-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.0.0](service/bedrock/CHANGELOG.md#v100-2023-09-28)
+  * **Release**: New AWS service client module
+  * **Feature**: Model Invocation logging added to enable or disable logs in customer account. Model listing and description support added. Provisioned Throughput feature added. Custom model support added for creating custom models. Also includes list, and delete functions for custom model.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.0.0](service/bedrockruntime/CHANGELOG.md#v100-2023-09-28)
+  * **Release**: New AWS service client module
+  * **Feature**: Run Inference: Added support to run the inference on models.  Includes set of APIs for running inference in streaming and non-streaming mode.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.17.0](service/budgets/CHANGELOG.md#v1170-2023-09-28)
+  * **Feature**: Update DescribeBudgets and DescribeBudgetNotificationsForAccount MaxResults limit to 1000.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.122.0](service/ec2/CHANGELOG.md#v11220-2023-09-28)
+  * **Feature**: Adds support for Customer Managed Key encryption for Amazon Verified Access resources
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.6.0](service/iotfleetwise/CHANGELOG.md#v160-2023-09-28)
+  * **Feature**: AWS IoT FleetWise now supports encryption through a customer managed AWS KMS key. The PutEncryptionConfiguration and GetEncryptionConfiguration APIs were added.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.108.0](service/sagemaker/CHANGELOG.md#v11080-2023-09-28)
+  * **Feature**: Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.18.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1180-2023-09-28)
+  * **Feature**: Feature Store supports read/write of records with collection type features.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.39.1](service/wafv2/CHANGELOG.md#v1391-2023-09-28)
+  * **Documentation**: Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.
+
 # Release (2023-09-27)
 
 ## Module Highlights

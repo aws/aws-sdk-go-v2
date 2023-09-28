@@ -1,3 +1,7 @@
+# v1.30.1 (2023-09-28)
+
+* No change notes available for this release.
+
 # v1.30.0 (2023-08-30)
 
 * **Feature**: Network Firewall increasing pagination token string length

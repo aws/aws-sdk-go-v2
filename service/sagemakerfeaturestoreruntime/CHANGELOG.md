@@ -1,3 +1,7 @@
+# v1.18.0 (2023-09-28)
+
+* **Feature**: Feature Store supports read/write of records with collection type features.
+
 # v1.17.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

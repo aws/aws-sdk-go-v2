@@ -1,3 +1,7 @@
+# v1.122.0 (2023-09-28)
+
+* **Feature**: Adds support for Customer Managed Key encryption for Amazon Verified Access resources
+
 # v1.121.0 (2023-09-26)
 
 * **Feature**: The release includes AWS verified access to support FIPs compliance in North America regions

@@ -1,8 +1,0 @@
-{
-    "id": "56b79ee9-8847-43a4-9e10-8c6898673975",
-    "type": "feature",
-    "description": "Run Inference: Added support to run the inference on models.  Includes set of APIs for running inference in streaming and non-streaming mode.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9222dcb0-b58c-4f72-b830-10327af9a363",
-    "type": "feature",
-    "description": "Update DescribeBudgets and DescribeBudgetNotificationsForAccount MaxResults limit to 1000.",
-    "modules": [
-        "service/budgets"
-    ]
-}
