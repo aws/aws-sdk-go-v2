@@ -262,3 +262,47 @@ func TestCanceledError(t *testing.T) {
 		})
 	}
 }
+
+func TestDNSError(t *testing.T) {
+	cases := map[string]struct {
+		Err    error
+		Expect aws.Ternary
+	}{
+		"IsNotFound": {
+			Err: &net.DNSError{
+				IsNotFound: true,
+			},
+			Expect: aws.FalseTernary,
+		},
+		"Temporary (IsTimeout)": {
+			Err: &net.DNSError{
+				IsTimeout: true,
+			},
+			Expect: aws.TrueTernary,
+		},
+		"Temporary (IsTemporary)": {
+			Err: &net.DNSError{
+				IsTemporary: true,
+			},
+			Expect: aws.TrueTernary,
+		},
+		"Temporary() == false but it falls through": {
+			Err: &net.OpError{
+				Op:  "dial",
+				Err: &net.DNSError{},
+			},
+			Expect: aws.TrueTernary,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var r RetryableConnectionError
+
+			retryable := r.IsErrorRetryable(c.Err)
+			if e, a := c.Expect, retryable; e != a {
+				t.Errorf("expect %v retryable, got %v", e, a)
+			}
+		})
+	}
+}

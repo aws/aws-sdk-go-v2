@@ -1,0 +1,8 @@
+{
+    "id": "63caeb72-930c-4d84-bbab-8d36fe10d4b5",
+    "type": "bugfix",
+    "description": "Improve recognition of retryable DNS errors.",
+    "modules": [
+        "."
+    ]
+}
