@@ -439,6 +439,23 @@ func TestNewEnvConfig(t *testing.T) {
 				IgnoreConfiguredEndpoints: ptr.Bool(true),
 			},
 		},
+		40: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_V1_DISABLED": "tRuE",
+			},
+			Config: EnvConfig{
+				EC2IMDSv1Disabled: aws.Bool(true),
+			},
+		},
+		41: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_V1_DISABLED": "invalid",
+			},
+			Config: EnvConfig{
+				EC2IMDSv1Disabled: aws.Bool(false), // setBoolPtrFromEnvVal new()s the bool even if it errors
+			},
+			WantErr: true,
+		},
 	}
 
 	for i, c := range cases {
