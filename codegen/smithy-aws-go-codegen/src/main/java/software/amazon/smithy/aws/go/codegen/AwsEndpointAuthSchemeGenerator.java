@@ -25,7 +25,6 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 
 
@@ -37,9 +36,7 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
 
     @Override
-    public void renderPostEndpointResolutionHook(
-        GoSettings settings, GoWriter writer, Model model, Optional<OperationShape> operation
-    ) {
+    public void renderPostEndpointResolutionHook(GoSettings settings, GoWriter writer, Model model) {
         ServiceShape serviceShape = settings.getService(model);
         writer.write(
             """
@@ -100,7 +97,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         if $T(err, &nfe) {
                             // if no auth scheme is found, default to sigv4
                             signingName := \"$L\"
-                            signingRegion := m.BuiltInResolver.(*$L).Region
+                            signingRegion := *params.Region
                             ctx = $T(ctx, signingName)
                             ctx = $T(ctx, signingRegion)
                             $W
@@ -119,7 +116,6 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                 SymbolUtils.createPointableSymbolBuilder("NoAuthenticationSchemesFoundError", AwsGoDependency.INTERNAL_AUTH).build(),
                 SymbolUtils.createValueSymbolBuilder("As", SmithyGoDependency.ERRORS).build(),
                 signingNameDefault,
-                AwsEndpointResolverBuiltInGenerator.BUILTIN_RESOLVER_IMPLEMENTATION_TYPE,
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningRegion", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 signerVersion,
@@ -165,7 +161,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         signingName = *v4Scheme.SigningName
                     }
                     if v4Scheme.SigningRegion == nil {
-                        signingRegion = m.BuiltInResolver.(*$L).Region
+                        signingRegion = *params.Region
                     } else {
                         signingRegion = *v4Scheme.SigningRegion
                     }
@@ -181,7 +177,6 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                 """,
                 SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeV4", AwsGoDependency.INTERNAL_AUTH).build(),
                 signingNameDefault,
-                AwsEndpointResolverBuiltInGenerator.BUILTIN_RESOLVER_IMPLEMENTATION_TYPE,
                 SymbolUtils.createValueSymbolBuilder("SetDisableDoubleEncoding", AwsGoDependency.INTERNAL_AUTH).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningRegion", AwsGoDependency.AWS_MIDDLEWARE).build(),
