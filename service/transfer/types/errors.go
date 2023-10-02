@@ -61,8 +61,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when an error occurs in the Amazon Web
-// ServicesTransfer Family service.
+// This exception is thrown when an error occurs in the Transfer Family service.
 type InternalServiceError struct {
 	Message *string
 
@@ -140,7 +139,8 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested resource does not exist.
+// The requested resource does not exist, or exists in a region other than the one
+// specified for the command.
 type ResourceExistsException struct {
 	Message *string
 

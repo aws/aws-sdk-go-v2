@@ -3563,6 +3563,14 @@ const (
 	InstanceTypeC7i24xlarge     InstanceType = "c7i.24xlarge"
 	InstanceTypeC7i48xlarge     InstanceType = "c7i.48xlarge"
 	InstanceTypeMac2M2proMetal  InstanceType = "mac2-m2pro.metal"
+	InstanceTypeR7izLarge       InstanceType = "r7iz.large"
+	InstanceTypeR7izXlarge      InstanceType = "r7iz.xlarge"
+	InstanceTypeR7iz2xlarge     InstanceType = "r7iz.2xlarge"
+	InstanceTypeR7iz4xlarge     InstanceType = "r7iz.4xlarge"
+	InstanceTypeR7iz8xlarge     InstanceType = "r7iz.8xlarge"
+	InstanceTypeR7iz12xlarge    InstanceType = "r7iz.12xlarge"
+	InstanceTypeR7iz16xlarge    InstanceType = "r7iz.16xlarge"
+	InstanceTypeR7iz32xlarge    InstanceType = "r7iz.32xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4311,6 +4319,14 @@ func (InstanceType) Values() []InstanceType {
 		"c7i.24xlarge",
 		"c7i.48xlarge",
 		"mac2-m2pro.metal",
+		"r7iz.large",
+		"r7iz.xlarge",
+		"r7iz.2xlarge",
+		"r7iz.4xlarge",
+		"r7iz.8xlarge",
+		"r7iz.12xlarge",
+		"r7iz.16xlarge",
+		"r7iz.32xlarge",
 	}
 }
 

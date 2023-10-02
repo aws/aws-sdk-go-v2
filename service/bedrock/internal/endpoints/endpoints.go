@@ -138,6 +138,97 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "ap-southeast-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "bedrock-ap-southeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-fips-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-fips-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-ap-southeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-fips-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-fips-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",

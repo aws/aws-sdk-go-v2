@@ -1,0 +1,8 @@
+{
+    "id": "541a71eb-336f-48a1-a000-00eee6bb77e9",
+    "type": "feature",
+    "description": "Add model timeout exception for InvokeModelWithResponseStream API and update validator for invoke model identifier.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

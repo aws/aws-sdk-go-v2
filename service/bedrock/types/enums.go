@@ -2,6 +2,24 @@
 
 package types
 
+type CommitmentDuration string
+
+// Enum values for CommitmentDuration
+const (
+	CommitmentDurationOneMonth  CommitmentDuration = "OneMonth"
+	CommitmentDurationSixMonths CommitmentDuration = "SixMonths"
+)
+
+// Values returns all known values for CommitmentDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommitmentDuration) Values() []CommitmentDuration {
+	return []CommitmentDuration{
+		"OneMonth",
+		"SixMonths",
+	}
+}
+
 type FineTuningJobStatus string
 
 // Enum values for FineTuningJobStatus
@@ -101,6 +119,44 @@ func (ModelModality) Values() []ModelModality {
 		"TEXT",
 		"IMAGE",
 		"EMBEDDING",
+	}
+}
+
+type ProvisionedModelStatus string
+
+// Enum values for ProvisionedModelStatus
+const (
+	ProvisionedModelStatusCreating  ProvisionedModelStatus = "Creating"
+	ProvisionedModelStatusInService ProvisionedModelStatus = "InService"
+	ProvisionedModelStatusUpdating  ProvisionedModelStatus = "Updating"
+	ProvisionedModelStatusFailed    ProvisionedModelStatus = "Failed"
+)
+
+// Values returns all known values for ProvisionedModelStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisionedModelStatus) Values() []ProvisionedModelStatus {
+	return []ProvisionedModelStatus{
+		"Creating",
+		"InService",
+		"Updating",
+		"Failed",
+	}
+}
+
+type SortByProvisionedModels string
+
+// Enum values for SortByProvisionedModels
+const (
+	SortByProvisionedModelsCreationTime SortByProvisionedModels = "CreationTime"
+)
+
+// Values returns all known values for SortByProvisionedModels. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortByProvisionedModels) Values() []SortByProvisionedModels {
+	return []SortByProvisionedModels{
+		"CreationTime",
 	}
 }
 

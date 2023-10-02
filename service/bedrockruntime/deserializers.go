@@ -343,6 +343,9 @@ func awsRestjson1_deserializeEventStreamExceptionResponseStream(msg *eventstream
 	case strings.EqualFold("modelStreamErrorException", exceptionType.String()):
 		return awsRestjson1_deserializeEventMessageExceptionModelStreamErrorException(msg)
 
+	case strings.EqualFold("modelTimeoutException", exceptionType.String()):
+		return awsRestjson1_deserializeEventMessageExceptionModelTimeoutException(msg)
+
 	case strings.EqualFold("throttlingException", exceptionType.String()):
 		return awsRestjson1_deserializeEventMessageExceptionThrottlingException(msg)
 
@@ -557,6 +560,41 @@ func awsRestjson1_deserializeEventMessageExceptionThrottlingException(msg *event
 	return v
 }
 
+func awsRestjson1_deserializeEventMessageExceptionModelTimeoutException(msg *eventstream.Message) error {
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	v := &types.ModelTimeoutException{}
+	if err := awsRestjson1_deserializeDocumentModelTimeoutException(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return v
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -648,6 +686,46 @@ func awsRestjson1_deserializeDocumentModelStreamErrorException(v **types.ModelSt
 					return err
 				}
 				sv.OriginalStatusCode = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelTimeoutException(v **types.ModelTimeoutException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelTimeoutException
+	if *v == nil {
+		sv = &types.ModelTimeoutException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonBlankString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1261,46 +1339,6 @@ func awsRestjson1_deserializeDocumentModelNotReadyException(v **types.ModelNotRe
 	var sv *types.ModelNotReadyException
 	if *v == nil {
 		sv = &types.ModelNotReadyException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonBlankString to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentModelTimeoutException(v **types.ModelTimeoutException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.ModelTimeoutException
-	if *v == nil {
-		sv = &types.ModelTimeoutException{}
 	} else {
 		sv = *v
 	}

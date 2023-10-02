@@ -38,7 +38,6 @@ type DeleteNodeInput struct {
 	// networks have the following NetworkId s:
 	//   - n-ethereum-mainnet
 	//   - n-ethereum-goerli
-	//   - n-ethereum-rinkeby
 	//
 	// This member is required.
 	NetworkId *string

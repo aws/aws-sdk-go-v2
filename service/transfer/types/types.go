@@ -212,7 +212,8 @@ type DescribedAccess struct {
 	ExternalId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory .
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -229,10 +230,14 @@ type DescribedAccess struct {
 
 	// The type of landing directory (folder) that you want your users' home directory
 	// to be when they log in to the server. If you set it to PATH , the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL , you need to provide mappings in the
+	// the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer
+	// protocol clients. If you set it to LOGICAL , you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// visible to your users. If HomeDirectoryType is LOGICAL , you must provide
+	// mappings, using the HomeDirectoryMappings parameter. If, on the other hand,
+	// HomeDirectoryType is PATH , you provide an absolute path using the HomeDirectory
+	// parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your
+	// template.
 	HomeDirectoryType HomeDirectoryType
 
 	// A session policy for your user so that you can use the same Identity and Access
@@ -738,7 +743,8 @@ type DescribedUser struct {
 	Arn *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory .
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -755,10 +761,14 @@ type DescribedUser struct {
 
 	// The type of landing directory (folder) that you want your users' home directory
 	// to be when they log in to the server. If you set it to PATH , the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL , you need to provide mappings in the
+	// the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer
+	// protocol clients. If you set it to LOGICAL , you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// visible to your users. If HomeDirectoryType is LOGICAL , you must provide
+	// mappings, using the HomeDirectoryMappings parameter. If, on the other hand,
+	// HomeDirectoryType is PATH , you provide an absolute path using the HomeDirectory
+	// parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your
+	// template.
 	HomeDirectoryType HomeDirectoryType
 
 	// A session policy for your user so that you can use the same Identity and Access
@@ -1050,15 +1060,20 @@ type ListedAccess struct {
 	ExternalId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory .
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
 	HomeDirectory *string
 
 	// The type of landing directory (folder) that you want your users' home directory
 	// to be when they log in to the server. If you set it to PATH , the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL , you need to provide mappings in the
+	// the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer
+	// protocol clients. If you set it to LOGICAL , you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// visible to your users. If HomeDirectoryType is LOGICAL , you must provide
+	// mappings, using the HomeDirectoryMappings parameter. If, on the other hand,
+	// HomeDirectoryType is PATH , you provide an absolute path using the HomeDirectory
+	// parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your
+	// template.
 	HomeDirectoryType HomeDirectoryType
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
@@ -1297,15 +1312,20 @@ type ListedUser struct {
 	Arn *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory .
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
 	HomeDirectory *string
 
 	// The type of landing directory (folder) that you want your users' home directory
 	// to be when they log in to the server. If you set it to PATH , the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL , you need to provide mappings in the
+	// the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer
+	// protocol clients. If you set it to LOGICAL , you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// visible to your users. If HomeDirectoryType is LOGICAL , you must provide
+	// mappings, using the HomeDirectoryMappings parameter. If, on the other hand,
+	// HomeDirectoryType is PATH , you provide an absolute path using the HomeDirectory
+	// parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your
+	// template.
 	HomeDirectoryType HomeDirectoryType
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
@@ -1539,8 +1559,9 @@ type SftpConnectorConfig struct {
 	// user to the external server to which you are connecting. You can use the
 	// ssh-keyscan command against the SFTP server to retrieve the necessary key. The
 	// three standard SSH public key format elements are , , and an optional , with
-	// spaces between each element. For the trusted host key, Transfer Family accepts
-	// RSA and ECDSA keys.
+	// spaces between each element. Specify only the and : do not enter the  portion
+	// of the key. For the trusted host key, Transfer Family accepts RSA and ECDSA
+	// keys.
 	//   - For RSA keys, the key type is ssh-rsa .
 	//   - For ECDSA keys, the key type is either ecdsa-sha2-nistp256 ,
 	//   ecdsa-sha2-nistp384 , or ecdsa-sha2-nistp521 , depending on the size of the

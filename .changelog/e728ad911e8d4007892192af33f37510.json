@@ -1,0 +1,8 @@
+{
+    "id": "e728ad91-1e8d-4007-8921-92af33f37510",
+    "type": "feature",
+    "description": "STS API updates for assumeRole",
+    "modules": [
+        "service/sts"
+    ]
+}

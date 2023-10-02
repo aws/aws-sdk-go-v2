@@ -60,7 +60,7 @@ type ModifyDBClusterInput struct {
 	AllowEngineModeChange bool
 
 	// Specifies whether major version upgrades are allowed. Valid for Cluster Type:
-	// Aurora DB clusters only Constraints:
+	// Aurora DB clusters and Multi-AZ DB clusters Constraints:
 	//   - You must allow major version upgrades when specifying a value for the
 	//   EngineVersion parameter that is a different major version than the DB
 	//   cluster's current version.

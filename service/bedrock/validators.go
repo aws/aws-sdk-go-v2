@@ -30,6 +30,26 @@ func (m *validateOpCreateModelCustomizationJob) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateProvisionedModelThroughput struct {
+}
+
+func (*validateOpCreateProvisionedModelThroughput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProvisionedModelThroughput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProvisionedModelThroughputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProvisionedModelThroughputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCustomModel struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpDeleteCustomModel) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCustomModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProvisionedModelThroughput struct {
+}
+
+func (*validateOpDeleteProvisionedModelThroughput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProvisionedModelThroughput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProvisionedModelThroughputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProvisionedModelThroughputInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -105,6 +145,26 @@ func (m *validateOpGetModelCustomizationJob) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetModelCustomizationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetProvisionedModelThroughput struct {
+}
+
+func (*validateOpGetProvisionedModelThroughput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProvisionedModelThroughput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProvisionedModelThroughputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProvisionedModelThroughputInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,12 +270,40 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProvisionedModelThroughput struct {
+}
+
+func (*validateOpUpdateProvisionedModelThroughput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProvisionedModelThroughput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProvisionedModelThroughputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProvisionedModelThroughputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateModelCustomizationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModelCustomizationJob{}, middleware.After)
 }
 
+func addOpCreateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProvisionedModelThroughput{}, middleware.After)
+}
+
 func addOpDeleteCustomModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomModel{}, middleware.After)
+}
+
+func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProvisionedModelThroughput{}, middleware.After)
 }
 
 func addOpGetCustomModelValidationMiddleware(stack *middleware.Stack) error {
@@ -228,6 +316,10 @@ func addOpGetFoundationModelValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetModelCustomizationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelCustomizationJob{}, middleware.After)
+}
+
+func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -248,6 +340,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProvisionedModelThroughput{}, middleware.After)
 }
 
 func validateCloudWatchConfig(v *types.CloudWatchConfig) error {
@@ -505,6 +601,32 @@ func validateOpCreateModelCustomizationJobInput(v *CreateModelCustomizationJobIn
 	}
 }
 
+func validateOpCreateProvisionedModelThroughputInput(v *CreateProvisionedModelThroughputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProvisionedModelThroughputInput"}
+	if v.ModelUnits == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelUnits"))
+	}
+	if v.ProvisionedModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedModelName"))
+	}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomModelInput(v *DeleteCustomModelInput) error {
 	if v == nil {
 		return nil
@@ -512,6 +634,21 @@ func validateOpDeleteCustomModelInput(v *DeleteCustomModelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomModelInput"}
 	if v.ModelIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProvisionedModelThroughputInput(v *DeleteProvisionedModelThroughputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProvisionedModelThroughputInput"}
+	if v.ProvisionedModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -557,6 +694,21 @@ func validateOpGetModelCustomizationJobInput(v *GetModelCustomizationJobInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetModelCustomizationJobInput"}
 	if v.JobIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProvisionedModelThroughputInput"}
+	if v.ProvisionedModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -646,6 +798,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProvisionedModelThroughputInput(v *UpdateProvisionedModelThroughputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProvisionedModelThroughputInput"}
+	if v.ProvisionedModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

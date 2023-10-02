@@ -206,6 +206,68 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Set of fields associated with a provisioned throughput.
+type ProvisionedModelSummary struct {
+
+	// The time that this provisioned throughput was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Desired model ARN.
+	//
+	// This member is required.
+	DesiredModelArn *string
+
+	// Desired model units.
+	//
+	// This member is required.
+	DesiredModelUnits *int32
+
+	// Foundation model ARN.
+	//
+	// This member is required.
+	FoundationModelArn *string
+
+	// The time that this provisioned throughput was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The ARN of the model associated with this provisioned throughput.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The number of model units allocated.
+	//
+	// This member is required.
+	ModelUnits *int32
+
+	// The ARN of the provisioned throughput.
+	//
+	// This member is required.
+	ProvisionedModelArn *string
+
+	// The name of the provisioned throughput.
+	//
+	// This member is required.
+	ProvisionedModelName *string
+
+	// Status of the provisioned throughput.
+	//
+	// This member is required.
+	Status ProvisionedModelStatus
+
+	// Commitment duration for the provisioned throughput.
+	CommitmentDuration CommitmentDuration
+
+	// Commitment expiration time for the provisioned throughput.
+	CommitmentExpirationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // S3 configuration for storing log data.
 type S3Config struct {
 

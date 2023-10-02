@@ -50787,6 +50787,19 @@ func awsAwsquery_deserializeOpDocumentDescribeCertificatesOutput(v **DescribeCer
 				return err
 			}
 
+		case strings.EqualFold("DefaultCertificateForNewLaunches", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DefaultCertificateForNewLaunches = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Marker", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

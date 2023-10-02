@@ -16,9 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the set of CA certificates provided by Amazon RDS for this Amazon Web
-// Services account. For more information, see Using SSL/TLS to encrypt a
-// connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// Lists the set of certificate authority (CA) certificates provided by Amazon RDS
+// for this Amazon Web Services account. For more information, see Using SSL/TLS
+// to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
 // in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
 // cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 // in the Amazon Aurora User Guide.
@@ -67,6 +67,12 @@ type DescribeCertificatesOutput struct {
 
 	// The list of Certificate objects for the Amazon Web Services account.
 	Certificates []types.Certificate
+
+	// The default root CA for new databases created by your Amazon Web Services
+	// account. This is either the root CA override set on your Amazon Web Services
+	// account or the system default CA for the Region if no override exists. To
+	// override the default CA, use the ModifyCertificates operation.
+	DefaultCertificateForNewLaunches *string
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records

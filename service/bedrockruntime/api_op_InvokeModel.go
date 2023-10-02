@@ -17,9 +17,9 @@ import (
 
 // Invokes the specified Bedrock model to run inference using the input provided
 // in the request body. You use InvokeModel to run inference for text models, image
-// models, and embedding models. For more information about invoking models, see
-// Using the API in the Bedrock User Guide (https://d2eo22ngex1n9g.cloudfront.net/Documentation/BedrockUserGuide.pdf)
-// . For example requests, see Examples (after the Errors section).
+// models, and embedding models. For more information, see Run inference (https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html)
+// in the Bedrock User Guide. For example requests, see Examples (after the Errors
+// section).
 func (c *Client) InvokeModel(ctx context.Context, params *InvokeModelInput, optFns ...func(*Options)) (*InvokeModelOutput, error) {
 	if params == nil {
 		params = &InvokeModelInput{}

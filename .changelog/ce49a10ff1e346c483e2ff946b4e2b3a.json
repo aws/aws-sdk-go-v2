@@ -1,0 +1,8 @@
+{
+    "id": "ce49a10f-f1e3-46c4-83e2-ff946b4e2b3a",
+    "type": "feature",
+    "description": "Fix FIPS Endpoints in aws-us-gov.",
+    "modules": [
+        "service/sso"
+    ]
+}

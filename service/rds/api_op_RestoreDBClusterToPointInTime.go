@@ -78,9 +78,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
 	DBClusterInstanceClass *string
 
-	// The name of the DB cluster parameter group to associate with this DB cluster.
-	// If this argument is omitted, the default DB cluster parameter group for the
-	// specified engine is used. Constraints:
+	// The name of the custom DB cluster parameter group to associate with this DB
+	// cluster. If the DBClusterParameterGroupName parameter is omitted, the default
+	// DB cluster parameter group for the specified engine is used. Constraints:
 	//   - If supplied, must match the name of an existing DB cluster parameter group.
 	//   - Must be 1 to 255 letters, numbers, or hyphens.
 	//   - First character must be a letter.

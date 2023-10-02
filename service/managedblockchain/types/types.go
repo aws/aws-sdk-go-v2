@@ -472,7 +472,6 @@ type NetworkEthereumAttributes struct {
 	// follows:
 	//   - mainnet = 1
 	//   - goerli = 5
-	//   - rinkeby = 4
 	ChainId *string
 
 	noSmithyDocumentSerde
