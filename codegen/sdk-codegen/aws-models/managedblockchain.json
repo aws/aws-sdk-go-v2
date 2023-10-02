@@ -612,7 +612,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.managedblockchain#ResourceIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the network for the node.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the network for the node.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -927,7 +927,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.managedblockchain#ResourceIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2694,7 +2694,7 @@
                 "ChainId": {
                     "target": "com.amazonaws.managedblockchain#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p>\n         <ul>\n            <li>\n               <p>mainnet = <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>goerli = <code>5</code>\n               </p>\n            </li>\n            <li>\n               <p>rinkeby = <code>4</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p>\n         <ul>\n            <li>\n               <p>mainnet = <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>goerli = <code>5</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },

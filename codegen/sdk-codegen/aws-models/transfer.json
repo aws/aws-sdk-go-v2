@@ -433,13 +433,13 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -973,13 +973,13 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -2465,7 +2465,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -2477,7 +2477,7 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "Policy": {
@@ -3061,7 +3061,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -3073,7 +3073,7 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "Policy": {
@@ -4056,7 +4056,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when an error occurs in the Amazon Web ServicesTransfer Family service.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when an error occurs in the Transfer Family service.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -4952,7 +4952,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.transfer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you can get additional results from the <code>ListUsers</code> call, a\n        <code>NextToken</code> parameter is returned in the output. You can then pass in a\n      subsequent command to the <code>NextToken</code> parameter to continue listing additional\n      users.</p>"
+                        "smithy.api#documentation": "<p>If there are additional results from the <code>ListUsers</code> call, a\n        <code>NextToken</code> parameter is returned in the output. You can then pass \n      the <code>NextToken</code> to a subsequent <code>ListUsers</code> command, to continue listing additional\n      users.</p>"
                     }
                 },
                 "ServerId": {
@@ -5074,13 +5074,13 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "Role": {
@@ -5459,13 +5459,13 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "Role": {
@@ -5931,7 +5931,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested resource does not exist.</p>",
+                "smithy.api#documentation": "<p>The requested resource does not exist, or exists in a region other than the one specified for the command.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -6385,7 +6385,7 @@
                 "TrustedHostKeys": {
                     "target": "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n      <code><body base64></code>, and  an optional <code><comment></code>, with spaces\n      between each element.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n          <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and an optional <code><comment></code>, with spaces\n      between each element. Specify only the  <code><key type></code> and <code><body\n        base64></code>: do not enter the <code><comment></code> portion of the key.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n          <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6947,7 +6947,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tests whether your SFTP connector is set up successfully. We highly recommend that you call this\n    operation to test your ability to transfer files between a Transfer Family server and a trading partner's\n    SFTP server.</p>"
+                "smithy.api#documentation": "<p>Tests whether your SFTP connector is set up successfully. We highly recommend that you call this\n    operation to test your ability to transfer files between local Amazon Web Services storage and a trading partner's\n    SFTP server.</p>"
             }
         },
         "com.amazonaws.transfer#TestConnectionRequest": {
@@ -6983,7 +6983,7 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.transfer#Message",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns <code>Connection succeeded</code> if the test is successful. Or, returns a descriptive error message \n    if the test fails. The following list provides the details for some error messages and troubleshooting steps for each.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Unable to access secrets manager</b>: Verify that your secret name aligns with the one in\n          Transfer Role permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Unknown Host/Connection failed</b>: Verify the server URL in the connector\n          configuration , and\n          verify that the login credentials work successfully outside of the connector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Private key not found</b>: Verify that the secret exists and is formatted correctly.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Invalid trusted host keys</b>: Verify that the trusted host key in the connector\n          configuration matches the <code>ssh-keyscan</code> output.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Returns <code>Connection succeeded</code> if the test is successful. Or, returns a descriptive error message \n    if the test fails. The following list provides troubleshooting details, depending on the error message that you receive.</p>\n         <ul>\n            <li>\n               <p>Verify that your secret name aligns with the one in\n          Transfer Role permissions.</p>\n            </li>\n            <li>\n               <p>Verify the server URL in the connector\n          configuration , and verify that the login credentials work successfully outside of the connector.</p>\n            </li>\n            <li>\n               <p>Verify that the secret exists and is formatted correctly.</p>\n            </li>\n            <li>\n               <p>Verify that the trusted host key in the connector\n          configuration matches the <code>ssh-keyscan</code> output.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -8404,13 +8404,13 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -9075,13 +9075,13 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer \n    protocol clients. If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) that you want your users' home directory to be when they log in to the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer \n    protocol clients. If you set it to <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for \n    how you want to make Amazon S3 or Amazon EFS paths visible to your users.</p>\n         <note>\n            <p>If <code>HomeDirectoryType</code> is <code>LOGICAL</code>, you must provide mappings,\n            using the <code>HomeDirectoryMappings</code> parameter. If, on the other hand,\n               <code>HomeDirectoryType</code> is <code>PATH</code>, you provide an absolute path\n            using the <code>HomeDirectory</code> parameter. You cannot have both\n               <code>HomeDirectory</code> and <code>HomeDirectoryMappings</code> in your\n            template.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
