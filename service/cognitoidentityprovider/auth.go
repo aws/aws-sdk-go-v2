@@ -2,6 +2,12 @@
 
 package cognitoidentityprovider
 
+import (
+	"context"
+	"github.com/aws/smithy-go/auth"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
 func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {
 	params.Region = options.Region
 }
@@ -28,4 +34,188 @@ func bindAuthResolverParams(input interface{}, options Options) *AuthResolverPar
 	bindAuthParamsRegion(params, input, options)
 
 	return params
+}
+
+// AuthSchemeResolver returns a set of possible authentication options for an
+// operation.
+type AuthSchemeResolver interface {
+	ResolveAuthSchemes(context.Context, *AuthResolverParameters) ([]*auth.Option, error)
+}
+
+type defaultAuthSchemeResolver struct{}
+
+var _ AuthSchemeResolver = (*defaultAuthSchemeResolver)(nil)
+
+func (*defaultAuthSchemeResolver) ResolveAuthSchemes(ctx context.Context, params *AuthResolverParameters) ([]*auth.Option, error) {
+	if overrides, ok := operationAuthOptions[params.Operation]; ok {
+		return overrides(params), nil
+	}
+	return serviceAuthOptions(params), nil
+}
+
+var operationAuthOptions = map[string]func(*AuthResolverParameters) []*auth.Option{
+	"AssociateSoftwareToken": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ChangePassword": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ConfirmDevice": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ConfirmForgotPassword": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ConfirmSignUp": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"DeleteUser": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"DeleteUserAttributes": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ForgetDevice": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ForgotPassword": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"GetDevice": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"GetUser": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"GetUserAttributeVerificationCode": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"GlobalSignOut": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"InitiateAuth": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ListDevices": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"ResendConfirmationCode": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"RespondToAuthChallenge": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"RevokeToken": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"SetUserMFAPreference": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"SetUserSettings": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"SignUp": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"UpdateAuthEventFeedback": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"UpdateDeviceStatus": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"UpdateUserAttributes": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"VerifySoftwareToken": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+
+	"VerifyUserAttribute": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewAnonymousOption(),
+		}
+	},
+}
+
+func serviceAuthOptions(params *AuthResolverParameters) []*auth.Option {
+	return []*auth.Option{
+		smithyhttp.NewSigV4Option(func(props *smithyhttp.SigV4Properties) {
+			props.SigningName = "cognito-idp"
+			props.SigningRegion = params.Region
+		}),
+	}
 }
