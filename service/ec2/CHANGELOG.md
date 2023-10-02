@@ -1,3 +1,7 @@
+# v1.123.0 (2023-10-02)
+
+* **Feature**: Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances.
+
 # v1.122.0 (2023-09-28)
 
 * **Feature**: Adds support for Customer Managed Key encryption for Amazon Verified Access resources

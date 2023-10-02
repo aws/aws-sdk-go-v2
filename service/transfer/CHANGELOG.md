@@ -1,3 +1,7 @@
+# v1.33.9 (2023-10-02)
+
+* **Documentation**: Documentation updates for AWS Transfer Family
+
 # v1.33.8 (2023-09-05)
 
 * No change notes available for this release.

@@ -1,3 +1,26 @@
+# Release (2023-10-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.1.0](service/bedrock/CHANGELOG.md#v110-2023-10-02)
+  * **Feature**: Provisioned throughput feature with Amazon and third-party base models, and update validators for model identifier and taggable resource ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.1.0](service/bedrockruntime/CHANGELOG.md#v110-2023-10-02)
+  * **Feature**: Add model timeout exception for InvokeModelWithResponseStream API and update validator for invoke model identifier.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.123.0](service/ec2/CHANGELOG.md#v11230-2023-10-02)
+  * **Feature**: Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.16.6](service/managedblockchain/CHANGELOG.md#v1166-2023-10-02)
+  * **Documentation**: Remove Rinkeby as option from Ethereum APIs
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.55.0](service/rds/CHANGELOG.md#v1550-2023-10-02)
+  * **Feature**: Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response.
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.15.0](service/sso/CHANGELOG.md#v1150-2023-10-02)
+  * **Feature**: Fix FIPS Endpoints in aws-us-gov.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.23.0](service/sts/CHANGELOG.md#v1230-2023-10-02)
+  * **Feature**: STS API updates for assumeRole
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.33.9](service/transfer/CHANGELOG.md#v1339-2023-10-02)
+  * **Documentation**: Documentation updates for AWS Transfer Family
+
 # Release (2023-09-28)
 
 ## Module Highlights

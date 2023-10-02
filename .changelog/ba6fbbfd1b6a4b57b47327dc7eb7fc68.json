@@ -1,8 +1,0 @@
-{
-    "id": "ba6fbbfd-1b6a-4b57-b473-27dc7eb7fc68",
-    "type": "documentation",
-    "description": "Remove Rinkeby as option from Ethereum APIs",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}

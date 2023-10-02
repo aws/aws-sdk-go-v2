@@ -1,3 +1,7 @@
+# v1.16.6 (2023-10-02)
+
+* **Documentation**: Remove Rinkeby as option from Ethereum APIs
+
 # v1.16.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.21.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.42
+	github.com/aws/aws-sdk-go-v2/config v1.18.43
 	github.com/aws/aws-sdk-go-v2/service/acm v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.5
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.22.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.122.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.123.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.7
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.54.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.55.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.29.5
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sns v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.38.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/sts v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.11.0

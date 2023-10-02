@@ -1,8 +1,0 @@
-{
-    "id": "6b42f2f3-6e6e-4638-a164-29ad07ec8fb8",
-    "type": "feature",
-    "description": "Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response.",
-    "modules": [
-        "service/rds"
-    ]
-}

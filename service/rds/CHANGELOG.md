@@ -1,3 +1,7 @@
+# v1.55.0 (2023-10-02)
+
+* **Feature**: Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response.
+
 # v1.54.0 (2023-09-05)
 
 * **Feature**: Add support for feature integration with AWS Backup.

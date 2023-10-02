@@ -1,8 +1,0 @@
-{
-    "id": "d834f6e9-eb51-4259-9d7c-c235a86c02c8",
-    "type": "feature",
-    "description": "Provisioned throughput feature with Amazon and third-party base models, and update validators for model identifier and taggable resource ARNs.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

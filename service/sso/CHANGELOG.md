@@ -1,3 +1,7 @@
+# v1.15.0 (2023-10-02)
+
+* **Feature**: Fix FIPS Endpoints in aws-us-gov.
+
 # v1.14.1 (2023-09-22)
 
 * No change notes available for this release.
