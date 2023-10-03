@@ -3551,7 +3551,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the flow.</p>"
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>"
                     }
                 },
                 "Tags": {
@@ -3604,7 +3604,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowModuleContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the flow module.</p>"
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 256000.</p>"
                     }
                 },
                 "Description": {
@@ -4405,7 +4405,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the flow. </p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 256000.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5553,7 +5553,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates a security profile.</p>",
+                "smithy.api#documentation": "<p>Creates a security profile.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/security-profiles/{InstanceId}",
@@ -6238,7 +6238,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new view with the possible status of <code>SAVED</code> or <code>PUBLISHED</code>.</p>\n         <p>The views will have a unique name for each connect instance.</p>\n         <p>It performs basic content validation if the status is <code>SAVED</code> or full content validation if the status \n   is set to <code>PUBLISHED</code>. An error is returned if validation fails. It associates either \n   the <code>$SAVED</code> qualifier or both of the <code>$SAVED</code> and <code>$LATEST</code> qualifiers with the \n   provided view content based on the status. The view is idempotent if ClientToken is provided.</p>",
+                "smithy.api#documentation": "<p>Creates a new view with the possible status of <code>SAVED</code> or\n   <code>PUBLISHED</code>.</p>\n         <p>The views will have a unique name for each connect instance.</p>\n         <p>It performs basic content validation if the status is <code>SAVED</code> or full content\n   validation if the status is set to <code>PUBLISHED</code>. An error is returned if validation\n   fails. It associates either the <code>$SAVED</code> qualifier or both of the <code>$SAVED</code>\n   and <code>$LATEST</code> qualifiers with the provided view content based on the status. The view\n   is idempotent if ClientToken is provided.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/views/{InstanceId}",
@@ -6253,7 +6253,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of \n   the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6261,20 +6261,20 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ViewsClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique Id for each create view request to avoid duplicate view creation. For example, the view \n   is idempotent ClientToken is provided.</p>"
+                        "smithy.api#documentation": "<p>A unique Id for each create view request to avoid duplicate view creation. For example, the\n   view is idempotent ClientToken is provided.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>",
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ViewInputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input\n   data.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6294,7 +6294,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the view resource (not specific to view version).These tags can be used \n   to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags associated with the view resource (not specific to view version).These tags can be\n   used to organize, track, or control access for this resource. For example, { \"tags\":\n   {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6351,7 +6351,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Publishes a new version of the view identifier.</p>\n         <p>Versions are immutable and monotonically increasing.</p>\n         <p>It returns the highest version if there is no change in content compared to that version. An error \n   is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of the \n   <code>$LATEST</code> alias.</p>",
+                "smithy.api#documentation": "<p>Publishes a new version of the view identifier.</p>\n         <p>Versions are immutable and monotonically increasing.</p>\n         <p>It returns the highest version if there is no change in content compared to that version. An\n   error is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of\n   the <code>$LATEST</code> alias.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/views/{InstanceId}/{ViewId}/versions",
@@ -6366,7 +6366,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6374,7 +6374,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7681,7 +7681,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Deletes a security profile.</p>",
+                "smithy.api#documentation": "<p>Deletes a security profile.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/security-profiles/{InstanceId}/{SecurityProfileId}",
@@ -8049,7 +8049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the view entirely. It deletes the view and all associated qualifiers (versions and aliases).</p>",
+                "smithy.api#documentation": "<p>Deletes the view entirely. It deletes the view and all associated qualifiers (versions and\n   aliases).</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/views/{InstanceId}/{ViewId}",
@@ -8063,7 +8063,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8071,7 +8071,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8134,7 +8134,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8142,7 +8142,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9439,7 +9439,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Gets basic information about the security profle.</p>",
+                "smithy.api#documentation": "<p>Gets basic information about the security profle.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles/{InstanceId}/{SecurityProfileId}",
@@ -9786,7 +9786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the view for the specified Amazon Connect instance and view identifier.</p>\n         <p>The view identifier can be supplied as a ViewId or ARN.</p>\n         <p>\n            <code>$SAVED</code> needs to be supplied if a view is unpublished.</p>\n         <p>The view identifier can contain an optional qualifier, for example, <code><view-id>:$SAVED</code>, which \n   is either an actual version number or an Amazon Connect managed qualifier <code>$SAVED | $LATEST</code>. \n   If it is not supplied, then <code>$LATEST</code> is assumed for customer managed views and an error is \n   returned if there is no published content available. Version 1 is assumed for Amazon Web Services managed views.</p>",
+                "smithy.api#documentation": "<p>Retrieves the view for the specified Amazon Connect instance and view identifier.</p>\n         <p>The view identifier can be supplied as a ViewId or ARN.</p>\n         <p>\n            <code>$SAVED</code> needs to be supplied if a view is unpublished.</p>\n         <p>The view identifier can contain an optional qualifier, for example,\n    <code><view-id>:$SAVED</code>, which is either an actual version number or an Amazon Connect managed qualifier <code>$SAVED | $LATEST</code>. If it is not supplied, then\n    <code>$LATEST</code> is assumed for customer managed views and an error is returned if there is\n   no published content available. Version 1 is assumed for Amazon Web Services managed views.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/views/{InstanceId}/{ViewId}",
@@ -9800,7 +9800,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12815,7 +12815,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for the last 35 days, in 24-hour\n   intervals.</p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics\n    definitions</a> in the <i>Amazon Connect Administrator's Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for the last 3 months, at varying intervals. </p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics\n    definitions</a> in the <i>Amazon Connect Administrator's Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/data",
@@ -12841,15 +12841,21 @@
                 "StartTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the\n   retrieval of historical metrics data. The time must be before the end time timestamp. The time\n   range between the start and end time must be less than 24 hours. The start time cannot be earlier\n   than 35 days before the time of the request. Historical metrics are available for 35 days.</p>",
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the\n   retrieval of historical metrics data. The time must be before the end time timestamp. The start\n   and end time depends on the <code>IntervalPeriod</code> selected. By default the time range between\n   start and end time is 35 days. Historical metrics are available for 3 months.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time timestamp. It\n   cannot be later than the current timestamp.</p>\n         <p>The time range between the start and end time must be less than 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the\n   retrieval of historical metrics data. The time must be later than the start time timestamp. It\n   cannot be later than the current timestamp.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.connect#IntervalDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval period and timezone to apply to returned metrics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IntervalPeriod</code>: An aggregated grouping applied to request metrics. Valid\n      <code>IntervalPeriod</code> values are: <code>FIFTEEN_MIN</code> | <code>THIRTY_MIN</code> |\n      <code>HOUR</code> | <code>DAY</code> | <code>WEEK</code> | <code>TOTAL</code>. </p>\n               <p>For example, if <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n      <code>StartTime</code> and <code>EndTime</code> differs by 1 day, then Amazon Connect\n     returns 48 results in the response. Each result is aggregated by the THIRTY_MIN period. By\n     default Amazon Connect aggregates results based on the <code>TOTAL</code> interval period. </p>\n               <p>The following list describes restrictions on <code>StartTime</code> and\n      <code>EndTime</code> based on which <code>IntervalPeriod</code> is requested. </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>FIFTEEN_MIN</code>: The difference between <code>StartTime</code> and <code>EndTime</code> must be less than 3\n       days.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>THIRTY_MIN</code>: The difference between <code>StartTime</code> and\n        <code>EndTime</code> must be less than 3 days.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>HOUR</code>: The difference between <code>StartTime</code> and\n        <code>EndTime</code> must be less than 3 days.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DAY</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n       must be less than 35 days.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WEEK</code>: The difference between <code>StartTime</code> and\n        <code>EndTime</code> must be less than 35 days.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TOTAL</code>: The difference between <code>StartTime</code> and\n        <code>EndTime</code> must be less than 35 days.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>TimeZone</code>: The timezone applied to requested metrics.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filters": {
@@ -12868,7 +12874,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.connect#MetricsV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_CONTACT_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_CONVERSATION_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_GREETING_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLDS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERRUPTIONS_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERRUPTION_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_NON_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_TALK_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_TALK_TIME_CUSTOMER</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>ABANDONMENT_RATE</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>Data for this metric is available starting from October 1, 2023 0:00:00 GMT.</p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <note>\n                  <p>The <code>Negate</code> key in Metric Level Filters is not applicable for this metric.</p>\n               </note>\n            </dd>\n            <dt>AVG_CONTACT_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_CONVERSATION_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_GREETING_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME_ALL_CONTACTS</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_HOLDS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERRUPTIONS_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_INTERRUPTION_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_NON_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_RESOLUTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>AVG_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_TALK_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>AVG_TALK_TIME_CUSTOMER</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_RESOLVED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code> enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\").</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature</p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14703,6 +14709,67 @@
                 "smithy.api#documentation": "<p>Request processing failed because of an error or failure with the service.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.connect#IntervalDetails": {
+            "type": "structure",
+            "members": {
+                "TimeZone": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone applied to requested metrics.</p>"
+                    }
+                },
+                "IntervalPeriod": {
+                    "target": "com.amazonaws.connect#IntervalPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>IntervalPeriod</code>: An aggregated grouping applied to request metrics. Valid\n    <code>IntervalPeriod</code> values are: <code>FIFTEEN_MIN</code> | <code>THIRTY_MIN</code> |\n    <code>HOUR</code> | <code>DAY</code> | <code>WEEK</code> | <code>TOTAL</code>. </p>\n         <p>For example, if <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n    <code>StartTime</code> and <code>EndTime</code> differs by 1 day, then Amazon Connect\n   returns 48 results in the response. Each result is aggregated by the THIRTY_MIN period. By\n   default Amazon Connect aggregates results based on the <code>TOTAL</code> interval period. </p>\n         <p>The following list describes restrictions on <code>StartTime</code> and <code>EndTime</code>\n   based on what <code>IntervalPeriod</code> is requested. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIFTEEN_MIN</code>: The\n     difference between <code>StartTime</code> and <code>EndTime</code> must be less than 3\n     days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THIRTY_MIN</code>: The difference between <code>StartTime</code> and\n      <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOUR</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAY</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEEK</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOTAL</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the interval period to use for returning results.</p>"
+            }
+        },
+        "com.amazonaws.connect#IntervalPeriod": {
+            "type": "enum",
+            "members": {
+                "FIFTEEN_MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIFTEEN_MIN"
+                    }
+                },
+                "THIRTY_MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRTY_MIN"
+                    }
+                },
+                "HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOUR"
+                    }
+                },
+                "DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY"
+                    }
+                },
+                "WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEK"
+                    }
+                },
+                "TOTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOTAL"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#InvalidContactFlowException": {
@@ -17674,7 +17741,7 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the third party application's metadata.</p>"
+                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third party application's metadata.</p>"
                     }
                 },
                 "NextToken": {
@@ -17714,7 +17781,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Lists the permissions granted to a security profile.</p>",
+                "smithy.api#documentation": "<p>Lists the permissions granted to a security profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles-permissions/{InstanceId}/{SecurityProfileId}",
@@ -18533,7 +18600,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all the available versions for the specified Amazon Connect instance and view identifier.</p>\n         <p>Results will be sorted from highest to lowest.</p>",
+                "smithy.api#documentation": "<p>Returns all the available versions for the specified Amazon Connect instance and view\n   identifier.</p>\n         <p>Results will be sorted from highest to lowest.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/views/{InstanceId}/{ViewId}/versions",
@@ -18553,7 +18620,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18561,7 +18628,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18569,7 +18636,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -18598,7 +18665,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>"
                     }
                 }
             },
@@ -18655,7 +18722,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18670,7 +18737,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -18699,7 +18766,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>"
                     }
                 }
             },
@@ -18881,6 +18948,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The values to use for filtering data. </p>\n         <p>Valid metric filter values for <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n    <code>OUTBOUND</code> | <code>TRANSFER</code> | <code>QUEUE_TRANSFER</code> |\n    <code>CALLBACK</code> | <code>API</code>\n         </p>\n         <p>Valid metric filter values for <code>DISCONNECT_REASON</code>:\n    <code>CUSTOMER_DISCONNECT</code> | <code>AGENT_DISCONNECT</code> |\n    <code>THIRD_PARTY_DISCONNECT</code> | <code>TELECOM_PROBLEM</code> | <code>BARGED</code> |\n    <code>CONTACT_FLOW_DISCONNECT</code> | <code>OTHER</code> | <code>EXPIRED</code> |\n    <code>API</code>\n         </p>"
                     }
+                },
+                "Negate": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The flag to use to filter on requested metric filter values or to not filter on requested\n   metric filter values. By default the negate is <code>false</code>, which indicates to filter on\n   the requested metric filter. </p>"
+                    }
                 }
             },
             "traits": {
@@ -18911,6 +18985,32 @@
                 }
             }
         },
+        "com.amazonaws.connect#MetricInterval": {
+            "type": "structure",
+            "members": {
+                "Interval": {
+                    "target": "com.amazonaws.connect#IntervalPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval period provided in the API request. </p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format. Start time is based on the interval period\n   selected. </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format. End time is based on the interval period selected.\n   For example, If <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n    <code>StartTime</code> and <code>EndTime</code> in the API request differs by 1 day, then 48\n   results are returned in the response. Each result is aggregated by the 30 minutes period, with\n   each <code>StartTime</code> and <code>EndTime</code> differing by 30 minutes. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The interval period with the start and end time for the metrics.</p>"
+            }
+        },
         "com.amazonaws.connect#MetricNameV2": {
             "type": "string"
         },
@@ -18921,6 +19021,12 @@
                     "target": "com.amazonaws.connect#DimensionsV2Map",
                     "traits": {
                         "smithy.api#documentation": "<p>The dimension for the metrics.</p>"
+                    }
+                },
+                "MetricInterval": {
+                    "target": "com.amazonaws.connect#MetricInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval period with the start and end time for the metrics.</p>"
                     }
                 },
                 "Collections": {
@@ -23231,7 +23337,7 @@
                 "SendNotificationAction": {
                     "target": "com.amazonaws.connect#SendNotificationActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the send notification action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |\n   <code>OnMetricDataUpdate</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Information about the send notification action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |\n    <code>OnMetricDataUpdate</code>\n         </p>"
                     }
                 }
             },
@@ -27631,7 +27737,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 256000.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -27792,7 +27898,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowModuleContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the flow module.</p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -29667,7 +29773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates a security profile.</p>",
+                "smithy.api#documentation": "<p>Updates a security profile.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/security-profiles/{InstanceId}/{SecurityProfileId}",
@@ -30474,7 +30580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the view content of the given view identifier in the specified Amazon Connect instance.</p>\n         <p>It performs content validation if <code>Status</code> is set to <code>SAVED</code> and performs full content validation if \n   <code>Status</code> is <code>PUBLISHED</code>. Note that the <code>$SAVED</code> alias' content will always be updated, \n   but the <code>$LATEST</code> alias' content will only be updated if <code>Status</code> is <code>PUBLISHED</code>.</p>",
+                "smithy.api#documentation": "<p>Updates the view content of the given view identifier in the specified Amazon Connect\n   instance.</p>\n         <p>It performs content validation if <code>Status</code> is set to <code>SAVED</code> and\n   performs full content validation if <code>Status</code> is <code>PUBLISHED</code>. Note that the\n    <code>$SAVED</code> alias' content will always be updated, but the <code>$LATEST</code> alias'\n   content will only be updated if <code>Status</code> is <code>PUBLISHED</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/views/{InstanceId}/{ViewId}",
@@ -30488,7 +30594,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -30496,7 +30602,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -30504,14 +30610,14 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>",
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ViewInputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data \n   and the runtime input schema, which is auto-generated by this operation.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data\n   and the runtime input schema, which is auto-generated by this operation.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30569,7 +30675,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the view metadata. Note that either <code>Name</code> or <code>Description</code> \n   must be provided.</p>",
+                "smithy.api#documentation": "<p>Updates the view metadata. Note that either <code>Name</code> or <code>Description</code>\n   must be provided.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/views/{InstanceId}/{ViewId}/metadata",
@@ -30583,7 +30689,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -30591,7 +30697,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -31240,7 +31346,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>"
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>"
                     }
                 },
                 "Type": {
@@ -31271,7 +31377,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ViewContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input\n   data.</p>"
                     }
                 },
                 "Tags": {
@@ -31289,7 +31395,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest timestamp of the <code>UpdateViewContent</code> or <code>CreateViewVersion</code> operations.</p>"
+                        "smithy.api#documentation": "<p>Latest timestamp of the <code>UpdateViewContent</code> or <code>CreateViewVersion</code>\n   operations.</p>"
                     }
                 },
                 "ViewContentSha256": {
@@ -31343,7 +31449,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input\n   data.</p>"
             }
         },
         "com.amazonaws.connect#ViewContentSha256": {
@@ -31393,7 +31499,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except \n   for runtime input data and the runtime input schema, which is auto-generated \n   by this operation.</p>"
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data\n   and the runtime input schema, which is auto-generated by this operation.</p>"
             }
         },
         "com.amazonaws.connect#ViewInputSchema": {
@@ -31460,7 +31566,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>"
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>"
                     }
                 },
                 "Description": {

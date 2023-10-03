@@ -45859,6 +45859,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.inf2.48xlarge"
                     }
+                },
+                "ML_P5_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5.48xlarge"
+                    }
                 }
             }
         },
@@ -51639,8 +51645,7 @@
                 "SourcePipelineExecutionArn": {
                     "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>\n         <p>This field is required if the steps you specify for\n          <code>SelectedSteps</code> depend on output collaterals from any non-specified pipeline\n          steps. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html\">Selective\n          Execution for Pipeline Steps</a>.</p>"
                     }
                 },
                 "SelectedSteps": {

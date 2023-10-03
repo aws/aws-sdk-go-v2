@@ -2160,6 +2160,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to enable position <code>UPDATE</code> events from this tracker to be sent to \n            EventBridge.</p>\n         <note>\n            <p>You do not need enable this feature to get <code>ENTER</code> and \n                <code>EXIT</code> events for geofences with this tracker. Those events are\n                always sent to EventBridge.</p>\n         </note>"
                     }
+                },
+                "KmsKeyEnableGeospatialQueries": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables <code>GeospatialQueries</code> for a tracker that uses a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services\n            KMS customer managed key</a>.</p>\n         <p>This parameter is only used if you are using a KMS customer managed key.</p>\n         <note>\n            <p>If you wish to encrypt your data using your own KMS customer managed key, then the Bounding Polygon Queries feature will be disabled by default. \n                This is because by using this feature, a representation of your device positions will not be encrypted using the your KMS managed key. The exact device position, however; is still encrypted using your managed key.</p>\n            <p>You can choose to opt-in to the Bounding Polygon Quseries feature. This is done by setting the <code>KmsKeyEnableGeospatialQueries</code> parameter to \n                true when creating or updating a Tracker.</p>\n         </note>"
+                    }
                 }
             }
         },
@@ -2648,6 +2654,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp for when the geofence collection was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "GeofenceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of geofences in the geofence collection.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
                     }
                 }
             }
@@ -3250,6 +3265,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether <code>UPDATE</code> events from this tracker in EventBridge are\n            enabled. If set to <code>true</code> these events will be sent to EventBridge.</p>"
+                    }
+                },
+                "KmsKeyEnableGeospatialQueries": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables <code>GeospatialQueries</code> for a tracker that uses a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services\n            KMS customer managed key</a>.</p>\n         <p>This parameter is only used if you are using a KMS customer managed key.</p>\n         <note>\n            <p>If you wish to encrypt your data using your own KMS customer managed key, then the Bounding Polygon Queries feature will be disabled by default. \n                This is because by using this feature, a representation of your device positions will not be encrypted using the your KMS managed key. The exact device position, however; is still encrypted using your managed key.</p>\n            <p>You can choose to opt-in to the Bounding Polygon Quseries feature. This is done by setting the <code>KmsKeyEnableGeospatialQueries</code> parameter to \n                true when creating or updating a Tracker.</p>\n         </note>"
                     }
                 }
             }
@@ -3934,7 +3955,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n         <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n         <ul>\n            <li>\n               <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorGrabStandardLight, VectorGrabStandardDark – \n                    <code>Noto Sans Regular</code> |\n                    <code>Noto Sans Medium</code> |\n                    <code>Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorOpenDataStandardLight, VectorOpenDataStandardDark,\n                    VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code> |\n                    <code>Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular</code> |\n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic \n                        Condensed Bold</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic \n                        Regular</code> |\n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic \n                        Condensed Regular</code> |\n                    <code>Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The fonts used by the Open Data map styles are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n         <ul>\n            <li>\n               <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorGrabStandardLight, VectorGrabStandardDark – \n                    <code>Noto Sans Regular</code> |\n                    <code>Noto Sans Medium</code> |\n                    <code>Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorOpenDataStandardLight, VectorOpenDataStandardDark,\n                    VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code> |\n                    <code>Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular</code> |\n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic \n                        Condensed Bold</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic \n                        Regular</code> |\n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic \n                        Condensed Regular</code> |\n                    <code>Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The fonts used by the Open Data map styles are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4607,6 +4628,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token specifying which page of results to return in the response. If no\n            token is provided, the default page is the first page.</p>\n         <p>Default value: <code>null</code>\n         </p>"
                     }
+                },
+                "FilterGeometry": {
+                    "target": "com.amazonaws.location#TrackingFilterGeometry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geomerty used to filter device positions.</p>"
+                    }
                 }
             }
         },
@@ -4616,7 +4643,7 @@
                 "Entries": {
                     "target": "com.amazonaws.location#ListDevicePositionsResponseEntryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about each device's last known position. These details includes the device ID,\n            the time when the position was sampled on the device, the time that the service received the update, and the most recent coordinates.</p>",
+                        "smithy.api#documentation": "<p>Contains details about each device's last known position.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8103,6 +8130,20 @@
                 "aws.iam#disableConditionKeyInference": {}
             }
         },
+        "com.amazonaws.location#TrackingFilterGeometry": {
+            "type": "structure",
+            "members": {
+                "Polygon": {
+                    "target": "com.amazonaws.location#LinearRings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of arrays which define the polygon. A polygon can have between 4 and 1000 vertices.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geomerty used to filter device positions.</p>"
+            }
+        },
         "com.amazonaws.location#TravelMode": {
             "type": "string",
             "traits": {
@@ -8831,6 +8872,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to enable position <code>UPDATE</code> events from this tracker to be sent to \n            EventBridge.</p>\n         <note>\n            <p>You do not need enable this feature to get <code>ENTER</code> and \n                <code>EXIT</code> events for geofences with this tracker. Those events are\n                always sent to EventBridge.</p>\n         </note>"
+                    }
+                },
+                "KmsKeyEnableGeospatialQueries": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables <code>GeospatialQueries</code> for a tracker that uses a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services\n            KMS customer managed key</a>.</p>\n         <p>This parameter is only used if you are using a KMS customer managed key.</p>"
                     }
                 }
             }
