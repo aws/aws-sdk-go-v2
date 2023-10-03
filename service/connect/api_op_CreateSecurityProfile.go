@@ -16,7 +16,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Creates a security profile.
 func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecurityProfileInput, optFns ...func(*Options)) (*CreateSecurityProfileOutput, error) {
 	if params == nil {

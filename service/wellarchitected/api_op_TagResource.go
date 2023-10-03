@@ -16,7 +16,7 @@ import (
 )
 
 // Adds one or more tags to the specified resource. The WorkloadArn parameter can
-// be a workload ARN, a custom lens ARN, or a profile ARN.
+// be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

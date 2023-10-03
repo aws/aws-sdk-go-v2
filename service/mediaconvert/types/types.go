@@ -3133,6 +3133,12 @@ type H264Settings struct {
 	// use the same number B-frames for all types of content: Choose Static.
 	DynamicSubGop H264DynamicSubGop
 
+	// Optionally include or suppress markers at the end of your output that signal
+	// the end of the video stream. To include end of stream markers: Leave blank or
+	// keep the default value, Include. To not include end of stream markers: Choose
+	// Suppress. This is useful when your output will be inserted into another stream.
+	EndOfStreamMarkers H264EndOfStreamMarkers
+
 	// Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
 	EntropyEncoding H264EntropyEncoding
 
@@ -3523,6 +3529,12 @@ type H265Settings struct {
 	// limited by the value that you choose for B-frames between reference frames. To
 	// use the same number B-frames for all types of content: Choose Static.
 	DynamicSubGop H265DynamicSubGop
+
+	// Optionally include or suppress markers at the end of your output that signal
+	// the end of the video stream. To include end of stream markers: Leave blank or
+	// keep the default value, Include. To not include end of stream markers: Choose
+	// Suppress. This is useful when your output will be inserted into another stream.
+	EndOfStreamMarkers H265EndOfStreamMarkers
 
 	// Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears
 	// as a visual flicker that can arise when the encoder saves bits by copying some
@@ -4526,6 +4538,9 @@ type Input struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
 	VideoGenerator *InputVideoGenerator
 
+	// Contains an array of video overlays.
+	VideoOverlays []VideoOverlay
+
 	// Input video selectors contain the video settings for the input. Each of your
 	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
@@ -4725,6 +4740,9 @@ type InputTemplate struct {
 	// under the input settings, to Specified start. For more information about
 	// timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeStart *string
+
+	// Contains an array of video overlays.
+	VideoOverlays []VideoOverlay
 
 	// Input video selectors contain the video settings for the input. Each of your
 	// inputs can have up to one video selector.
@@ -4983,14 +5001,6 @@ type JobSettings struct {
 	// Content Advisory.
 	ExtendedDataServices *ExtendedDataServices
 
-	// Specifies which input metadata to use for the default "Follow input" option for
-	// the following settings: resolution, frame rate, and pixel aspect ratio. In the
-	// simplest case, specify which input is used based on its index in the job. For
-	// example if you specify 3, then the fourth input will be used from each input. If
-	// the job does not have a fourth input, then the first input will be used. If no
-	// followInputIndex is specified, then 0 will be chosen automatically.
-	FollowInputIndex *int32
-
 	// Use Inputs to define source file used in the transcode job. There can be
 	// multiple inputs add in a job. These inputs will be concantenated together to
 	// create the output.
@@ -5126,14 +5136,6 @@ type JobTemplateSettings struct {
 	// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 	// Content Advisory.
 	ExtendedDataServices *ExtendedDataServices
-
-	// Specifies which input metadata to use for the default "Follow input" option for
-	// the following settings: resolution, frame rate, and pixel aspect ratio. In the
-	// simplest case, specify which input is used based on its index in the job. For
-	// example if you specify 3, then the fourth input will be used from each input. If
-	// the job does not have a fourth input, then the first input will be used. If no
-	// followInputIndex is specified, then 0 will be chosen automatically.
-	FollowInputIndex *int32
 
 	// Use Inputs to define the source file used in the transcode job. There can only
 	// be one input in a job template. Using the API, you can include multiple inputs
@@ -7731,6 +7733,84 @@ type VideoDetail struct {
 
 	// Width in pixels for the output
 	WidthInPx int32
+
+	noSmithyDocumentSerde
+}
+
+// Overlay one or more videos on top of your input video.
+type VideoOverlay struct {
+
+	// Enter the end timecode in the underlying input video for this overlay. Your
+	// overlay will be active through this frame. To display your video overlay for the
+	// duration of the underlying video: Leave blank. Use the format HH:MM:SS:FF or
+	// HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is
+	// the frame number. When entering this value, take into account your choice for
+	// the underlying Input timecode source. For example, if you have embedded
+	// timecodes that start at 01:00:00:00 and you want your overlay to end ten minutes
+	// into the video, enter 01:10:00:00.
+	EndTimecode *string
+
+	// Input settings for Video overlay. You can include one or more video overlays in
+	// sequence at different times that you specify.
+	Input *VideoOverlayInput
+
+	// Enter the start timecode in the underlying input video for this overlay. Your
+	// overlay will be active starting with this frame. To display your video overlay
+	// starting at the beginning of the underlying video: Leave blank. Use the format
+	// HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the
+	// second, and FF is the frame number. When entering this value, take into account
+	// your choice for the underlying Input timecode source. For example, if you have
+	// embedded timecodes that start at 01:00:00:00 and you want your overlay to begin
+	// five minutes into the video, enter 01:05:00:00.
+	StartTimecode *string
+
+	noSmithyDocumentSerde
+}
+
+// Input settings for Video overlay. You can include one or more video overlays in
+// sequence at different times that you specify.
+type VideoOverlayInput struct {
+
+	// Specify the input file S3, HTTP, or HTTPS URI for your video overlay. For
+	// consistency in color and formatting in your output video image, we recommend
+	// that you specify a video with similar characteristics as the underlying input
+	// video.
+	FileInput *string
+
+	// Specify one or more clips to use from your video overlay. When you include an
+	// input clip, you must also specify its start timecode, end timecode, or both
+	// start and end timecode.
+	InputClippings []VideoOverlayInputClipping
+
+	// Specify the starting timecode for your video overlay. To use the timecode
+	// present in your video overlay: Choose Embedded. To use a zerobased timecode:
+	// Choose Start at 0. To choose a timecode: Choose Specified start. When you do,
+	// enter the starting timecode in Start timecode. If you don't specify a value for
+	// Timecode source, MediaConvert uses Embedded by default.
+	TimecodeSource InputTimecodeSource
+
+	// Specify the starting timecode for this video overlay. To use this setting, you
+	// must set Timecode source to Specified start.
+	TimecodeStart *string
+
+	noSmithyDocumentSerde
+}
+
+// To transcode only portions of your video overlay, include one input clip for
+// each part of your video overlay that you want in your output.
+type VideoOverlayInputClipping struct {
+
+	// Specify the timecode of the last frame to include in your video overlay's clip.
+	// Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the
+	// minute, SS is the second, and FF is the frame number. When entering this value,
+	// take into account your choice for Timecode source.
+	EndTimecode *string
+
+	// Specify the timecode of the first frame to include in your video overlay's
+	// clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the
+	// minute, SS is the second, and FF is the frame number. When entering this value,
+	// take into account your choice for Timecode source.
+	StartTimecode *string
 
 	noSmithyDocumentSerde
 }

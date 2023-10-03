@@ -23,6 +23,8 @@ import (
 //   - Metrics - Specify with AWS::CloudWatch::Metric
 //   - Log groups - Specify with AWS::Logs::LogGroup
 //   - Traces - Specify with AWS::XRay::Trace
+//   - Application Insights - Applications - Specify with
+//     AWS::ApplicationInsights::Application
 //
 // See the examples in this section to see how to specify permitted source
 // accounts and data types.

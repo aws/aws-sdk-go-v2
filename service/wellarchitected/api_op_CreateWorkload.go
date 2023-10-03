@@ -23,7 +23,12 @@ import (
 // in the Well-Architected Tool User Guide. Either AwsRegions , NonAwsRegions , or
 // both must be specified when creating a workload. You also must specify
 // ReviewOwner , even though the parameter is listed as not being required in the
-// following section.
+// following section. When creating a workload using a review template, you must
+// have the following IAM permissions:
+//   - wellarchitected:GetReviewTemplate
+//   - wellarchitected:GetReviewTemplateAnswer
+//   - wellarchitected:ListReviewTemplateAnswers
+//   - wellarchitected:GetReviewTemplateLensReview
 func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput, optFns ...func(*Options)) (*CreateWorkloadOutput, error) {
 	if params == nil {
 		params = &CreateWorkloadInput{}
@@ -65,7 +70,9 @@ type CreateWorkloadInput struct {
 	Environment types.WorkloadEnvironment
 
 	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias .
+	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
+	// the workload, those lenses are applied to the workload in addition to these
+	// lenses.
 	//
 	// This member is required.
 	Lenses []string
@@ -129,7 +136,8 @@ type CreateWorkloadInput struct {
 	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	Notes *string
 
 	// The priorities of the pillars, which are used to order items in the improvement
@@ -142,6 +150,9 @@ type CreateWorkloadInput struct {
 	// The review owner of the workload. The name, email address, or identifier for
 	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string
+
+	// The list of review template ARNs to associate with the workload.
+	ReviewTemplateArns []string
 
 	// The tags to be associated with the workload.
 	Tags map[string]string

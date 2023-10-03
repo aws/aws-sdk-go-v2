@@ -40,7 +40,8 @@ type ListProfilesInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// Prefix for profile name.
+	// An optional string added to the beginning of each profile name returned in the
+	// results.
 	ProfileNamePrefix *string
 
 	// Profile owner type.

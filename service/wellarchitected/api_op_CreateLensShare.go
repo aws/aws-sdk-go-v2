@@ -68,8 +68,8 @@ type CreateLensShareInput struct {
 	// This member is required.
 	LensAlias *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
 	//
 	// This member is required.
 	SharedWith *string

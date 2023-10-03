@@ -6,9 +6,10 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAwsCloudwatchMetric ResourceType = "AWS::CloudWatch::Metric"
-	ResourceTypeAwsLogsLoggroup     ResourceType = "AWS::Logs::LogGroup"
-	ResourceTypeAwsXrayTrace        ResourceType = "AWS::XRay::Trace"
+	ResourceTypeAwsCloudwatchMetric               ResourceType = "AWS::CloudWatch::Metric"
+	ResourceTypeAwsLogsLoggroup                   ResourceType = "AWS::Logs::LogGroup"
+	ResourceTypeAwsXrayTrace                      ResourceType = "AWS::XRay::Trace"
+	ResourceTypeAwsApplicationinsightsApplication ResourceType = "AWS::ApplicationInsights::Application"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -19,5 +20,6 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::CloudWatch::Metric",
 		"AWS::Logs::LogGroup",
 		"AWS::XRay::Trace",
+		"AWS::ApplicationInsights::Application",
 	}
 }

@@ -108,7 +108,8 @@ type UpdateWorkloadInput struct {
 	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	Notes *string
 
 	// The priorities of the pillars, which are used to order items in the improvement

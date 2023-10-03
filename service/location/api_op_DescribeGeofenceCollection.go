@@ -75,6 +75,9 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// The number of geofences in the geofence collection.
+	GeofenceCount *int32
+
 	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// assigned to the Amazon Location resource
 	KmsKeyId *string

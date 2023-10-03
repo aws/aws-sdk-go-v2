@@ -34,7 +34,7 @@ func (c *Client) GetMapGlyphs(ctx context.Context, params *GetMapGlyphsInput, op
 type GetMapGlyphsInput struct {
 
 	// A comma-separated list of fonts to load glyphs from in order of preference. For
-	// example, Noto Sans Regular, Arial Unicode . Valid fonts stacks for Esri (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
+	// example, Noto Sans Regular, Arial Unicode . Valid font stacks for Esri (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
 	// styles:
 	//   - VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu
 	//   Italic | Ubuntu Regular | Ubuntu Bold

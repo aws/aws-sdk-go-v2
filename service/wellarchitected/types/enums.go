@@ -396,6 +396,24 @@ func (ProfileOwnerType) Values() []ProfileOwnerType {
 	}
 }
 
+type Question string
+
+// Enum values for Question
+const (
+	QuestionUnanswered Question = "UNANSWERED"
+	QuestionAnswered   Question = "ANSWERED"
+)
+
+// Values returns all known values for Question. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Question) Values() []Question {
+	return []Question{
+		"UNANSWERED",
+		"ANSWERED",
+	}
+}
+
 type QuestionPriority string
 
 // Enum values for QuestionPriority
@@ -450,6 +468,42 @@ func (ReportFormat) Values() []ReportFormat {
 	}
 }
 
+type ReviewTemplateAnswerStatus string
+
+// Enum values for ReviewTemplateAnswerStatus
+const (
+	ReviewTemplateAnswerStatusUnanswered ReviewTemplateAnswerStatus = "UNANSWERED"
+	ReviewTemplateAnswerStatusAnswered   ReviewTemplateAnswerStatus = "ANSWERED"
+)
+
+// Values returns all known values for ReviewTemplateAnswerStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewTemplateAnswerStatus) Values() []ReviewTemplateAnswerStatus {
+	return []ReviewTemplateAnswerStatus{
+		"UNANSWERED",
+		"ANSWERED",
+	}
+}
+
+type ReviewTemplateUpdateStatus string
+
+// Enum values for ReviewTemplateUpdateStatus
+const (
+	ReviewTemplateUpdateStatusCurrent        ReviewTemplateUpdateStatus = "CURRENT"
+	ReviewTemplateUpdateStatusLensNotCurrent ReviewTemplateUpdateStatus = "LENS_NOT_CURRENT"
+)
+
+// Values returns all known values for ReviewTemplateUpdateStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewTemplateUpdateStatus) Values() []ReviewTemplateUpdateStatus {
+	return []ReviewTemplateUpdateStatus{
+		"CURRENT",
+		"LENS_NOT_CURRENT",
+	}
+}
+
 type Risk string
 
 // Enum values for Risk
@@ -499,6 +553,7 @@ const (
 	ShareResourceTypeWorkload ShareResourceType = "WORKLOAD"
 	ShareResourceTypeLens     ShareResourceType = "LENS"
 	ShareResourceTypeProfile  ShareResourceType = "PROFILE"
+	ShareResourceTypeTemplate ShareResourceType = "TEMPLATE"
 )
 
 // Values returns all known values for ShareResourceType. Note that this can be
@@ -509,6 +564,7 @@ func (ShareResourceType) Values() []ShareResourceType {
 		"WORKLOAD",
 		"LENS",
 		"PROFILE",
+		"TEMPLATE",
 	}
 }
 

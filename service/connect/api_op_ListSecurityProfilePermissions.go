@@ -15,7 +15,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Lists the permissions granted to a security profile.
 func (c *Client) ListSecurityProfilePermissions(ctx context.Context, params *ListSecurityProfilePermissionsInput, optFns ...func(*Options)) (*ListSecurityProfilePermissionsOutput, error) {
 	if params == nil {

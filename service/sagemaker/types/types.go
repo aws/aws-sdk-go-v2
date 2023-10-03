@@ -12883,9 +12883,11 @@ type SelectiveExecutionConfig struct {
 
 	// The ARN from a reference execution of the current pipeline. Used to copy input
 	// collaterals needed for the selected steps to run. The execution status of the
-	// pipeline can be either Failed or Success .
-	//
-	// This member is required.
+	// pipeline can be either Failed or Success . This field is required if the steps
+	// you specify for SelectedSteps depend on output collaterals from any
+	// non-specified pipeline steps. For more information, see Selective Execution for
+	// Pipeline Steps (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html)
+	// .
 	SourcePipelineExecutionArn *string
 
 	noSmithyDocumentSerde

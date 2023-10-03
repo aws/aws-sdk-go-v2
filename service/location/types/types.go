@@ -1423,6 +1423,16 @@ type TimeZone struct {
 	noSmithyDocumentSerde
 }
 
+// The geomerty used to filter device positions.
+type TrackingFilterGeometry struct {
+
+	// The set of arrays which define the polygon. A polygon can have between 4 and
+	// 1000 vertices.
+	Polygon [][][]float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the truck dimensions in the unit of measurement that you
 // specify. Used to filter out roads that can't support or allow the specified
 // dimensions for requests that specify TravelMode as Truck .

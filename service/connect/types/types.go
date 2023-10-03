@@ -399,7 +399,9 @@ type ContactFlow struct {
 	// The Amazon Resource Name (ARN) of the flow.
 	Arn *string
 
-	// The content of the flow.
+	// The JSON string that represents the content of the flow. For an example, see
+	// Example contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// .
 	Content *string
 
 	// The description of the flow.
@@ -432,7 +434,9 @@ type ContactFlowModule struct {
 	// The Amazon Resource Name (ARN).
 	Arn *string
 
-	// The content of the flow module.
+	// The JSON string that represents the content of the flow. For an example, see
+	// Example contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// . Length Constraints: Minimum length of 1. Maximum length of 256000.
 	Content *string
 
 	// The description of the flow module.
@@ -1926,6 +1930,37 @@ type IntegrationAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the interval period to use for returning results.
+type IntervalDetails struct {
+
+	// IntervalPeriod : An aggregated grouping applied to request metrics. Valid
+	// IntervalPeriod values are: FIFTEEN_MIN | THIRTY_MIN | HOUR | DAY | WEEK | TOTAL
+	// . For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and EndTime
+	// differs by 1 day, then Amazon Connect returns 48 results in the response. Each
+	// result is aggregated by the THIRTY_MIN period. By default Amazon Connect
+	// aggregates results based on the TOTAL interval period. The following list
+	// describes restrictions on StartTime and EndTime based on what IntervalPeriod is
+	// requested.
+	//   - FIFTEEN_MIN : The difference between StartTime and EndTime must be less than
+	//   3 days.
+	//   - THIRTY_MIN : The difference between StartTime and EndTime must be less than
+	//   3 days.
+	//   - HOUR : The difference between StartTime and EndTime must be less than 3
+	//   days.
+	//   - DAY : The difference between StartTime and EndTime must be less than 35
+	//   days.
+	//   - WEEK : The difference between StartTime and EndTime must be less than 35
+	//   days.
+	//   - TOTAL : The difference between StartTime and EndTime must be less than 35
+	//   days.
+	IntervalPeriod IntervalPeriod
+
+	// The timezone applied to requested metrics.
+	TimeZone *string
+
+	noSmithyDocumentSerde
+}
+
 // A field that is invisible to an agent.
 type InvisibleFieldInfo struct {
 
@@ -2101,6 +2136,31 @@ type MetricFilterV2 struct {
 	// CONTACT_FLOW_DISCONNECT | OTHER | EXPIRED | API
 	MetricFilterValues []string
 
+	// The flag to use to filter on requested metric filter values or to not filter on
+	// requested metric filter values. By default the negate is false , which indicates
+	// to filter on the requested metric filter.
+	Negate bool
+
+	noSmithyDocumentSerde
+}
+
+// The interval period with the start and end time for the metrics.
+type MetricInterval struct {
+
+	// The timestamp, in UNIX Epoch time format. End time is based on the interval
+	// period selected. For example, If IntervalPeriod is selected THIRTY_MIN ,
+	// StartTime and EndTime in the API request differs by 1 day, then 48 results are
+	// returned in the response. Each result is aggregated by the 30 minutes period,
+	// with each StartTime and EndTime differing by 30 minutes.
+	EndTime *time.Time
+
+	// The interval period provided in the API request.
+	Interval IntervalPeriod
+
+	// The timestamp, in UNIX Epoch time format. Start time is based on the interval
+	// period selected.
+	StartTime *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -2112,6 +2172,9 @@ type MetricResultV2 struct {
 
 	// The dimension for the metrics.
 	Dimensions map[string]string
+
+	// The interval period with the start and end time for the metrics.
+	MetricInterval *MetricInterval
 
 	noSmithyDocumentSerde
 }

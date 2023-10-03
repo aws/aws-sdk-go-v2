@@ -47,8 +47,8 @@ type ListWorkloadSharesInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload is shared.
 	SharedWithPrefix *string
 
 	// The status of the share request.

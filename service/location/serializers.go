@@ -1509,6 +1509,11 @@ func awsRestjson1_serializeOpDocumentCreateTrackerInput(v *CreateTrackerInput, v
 		ok.Boolean(*v.EventBridgeEnabled)
 	}
 
+	if v.KmsKeyEnableGeospatialQueries != nil {
+		ok := object.Key("KmsKeyEnableGeospatialQueries")
+		ok.Boolean(*v.KmsKeyEnableGeospatialQueries)
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -3149,6 +3154,13 @@ func awsRestjson1_serializeOpHttpBindingsListDevicePositionsInput(v *ListDeviceP
 func awsRestjson1_serializeOpDocumentListDevicePositionsInput(v *ListDevicePositionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FilterGeometry != nil {
+		ok := object.Key("FilterGeometry")
+		if err := awsRestjson1_serializeDocumentTrackingFilterGeometry(v.FilterGeometry, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
@@ -5123,6 +5135,11 @@ func awsRestjson1_serializeOpDocumentUpdateTrackerInput(v *UpdateTrackerInput, v
 		ok.Boolean(*v.EventBridgeEnabled)
 	}
 
+	if v.KmsKeyEnableGeospatialQueries != nil {
+		ok := object.Key("KmsKeyEnableGeospatialQueries")
+		ok.Boolean(*v.KmsKeyEnableGeospatialQueries)
+	}
+
 	if len(v.PositionFiltering) > 0 {
 		ok := object.Key("PositionFiltering")
 		ok.String(string(v.PositionFiltering))
@@ -5630,6 +5647,20 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrackingFilterGeometry(v *types.TrackingFilterGeometry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Polygon != nil {
+		ok := object.Key("Polygon")
+		if err := awsRestjson1_serializeDocumentLinearRings(v.Polygon, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

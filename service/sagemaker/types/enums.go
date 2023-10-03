@@ -4304,6 +4304,7 @@ const (
 	ProductionVariantInstanceTypeMlInf28xlarge  ProductionVariantInstanceType = "ml.inf2.8xlarge"
 	ProductionVariantInstanceTypeMlInf224xlarge ProductionVariantInstanceType = "ml.inf2.24xlarge"
 	ProductionVariantInstanceTypeMlInf248xlarge ProductionVariantInstanceType = "ml.inf2.48xlarge"
+	ProductionVariantInstanceTypeMlP548xlarge   ProductionVariantInstanceType = "ml.p5.48xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -4459,6 +4460,7 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.inf2.8xlarge",
 		"ml.inf2.24xlarge",
 		"ml.inf2.48xlarge",
+		"ml.p5.48xlarge",
 	}
 }
 

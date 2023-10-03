@@ -10645,9 +10645,6 @@ func validateSelectiveExecutionConfig(v *types.SelectiveExecutionConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SelectiveExecutionConfig"}
-	if v.SourcePipelineExecutionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourcePipelineExecutionArn"))
-	}
 	if v.SelectedSteps == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SelectedSteps"))
 	} else if v.SelectedSteps != nil {

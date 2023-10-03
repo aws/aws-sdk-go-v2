@@ -3577,6 +3577,24 @@ func (H264DynamicSubGop) Values() []H264DynamicSubGop {
 	}
 }
 
+type H264EndOfStreamMarkers string
+
+// Enum values for H264EndOfStreamMarkers
+const (
+	H264EndOfStreamMarkersInclude  H264EndOfStreamMarkers = "INCLUDE"
+	H264EndOfStreamMarkersSuppress H264EndOfStreamMarkers = "SUPPRESS"
+)
+
+// Values returns all known values for H264EndOfStreamMarkers. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264EndOfStreamMarkers) Values() []H264EndOfStreamMarkers {
+	return []H264EndOfStreamMarkers{
+		"INCLUDE",
+		"SUPPRESS",
+	}
+}
+
 type H264EntropyEncoding string
 
 // Enum values for H264EntropyEncoding
@@ -4095,6 +4113,24 @@ func (H265DynamicSubGop) Values() []H265DynamicSubGop {
 	return []H265DynamicSubGop{
 		"ADAPTIVE",
 		"STATIC",
+	}
+}
+
+type H265EndOfStreamMarkers string
+
+// Enum values for H265EndOfStreamMarkers
+const (
+	H265EndOfStreamMarkersInclude  H265EndOfStreamMarkers = "INCLUDE"
+	H265EndOfStreamMarkersSuppress H265EndOfStreamMarkers = "SUPPRESS"
+)
+
+// Values returns all known values for H265EndOfStreamMarkers. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265EndOfStreamMarkers) Values() []H265EndOfStreamMarkers {
+	return []H265EndOfStreamMarkers{
+		"INCLUDE",
+		"SUPPRESS",
 	}
 }
 

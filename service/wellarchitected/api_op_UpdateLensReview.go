@@ -52,10 +52,13 @@ type UpdateLensReviewInput struct {
 	// This member is required.
 	WorkloadId *string
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	LensNotes *string
 
-	// List of pillar notes of a lens review in a workload.
+	// List of pillar notes of a lens review in a workload. For a review template,
+	// these are the notes that will be associated with the workload when the template
+	// is applied.
 	PillarNotes map[string]string
 
 	noSmithyDocumentSerde

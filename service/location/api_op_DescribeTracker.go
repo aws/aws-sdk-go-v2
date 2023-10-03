@@ -78,6 +78,19 @@ type DescribeTrackerOutput struct {
 	// true these events will be sent to EventBridge.
 	EventBridgeEnabled *bool
 
+	// Enables GeospatialQueries for a tracker that uses a Amazon Web Services KMS
+	// customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
+	// . This parameter is only used if you are using a KMS customer managed key. If
+	// you wish to encrypt your data using your own KMS customer managed key, then the
+	// Bounding Polygon Queries feature will be disabled by default. This is because by
+	// using this feature, a representation of your device positions will not be
+	// encrypted using the your KMS managed key. The exact device position, however; is
+	// still encrypted using your managed key. You can choose to opt-in to the Bounding
+	// Polygon Quseries feature. This is done by setting the
+	// KmsKeyEnableGeospatialQueries parameter to true when creating or updating a
+	// Tracker.
+	KmsKeyEnableGeospatialQueries *bool
+
 	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// assigned to the Amazon Location resource.
 	KmsKeyId *string

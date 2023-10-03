@@ -39,6 +39,9 @@ type ListDevicePositionsInput struct {
 	// This member is required.
 	TrackerName *string
 
+	// The geomerty used to filter device positions.
+	FilterGeometry *types.TrackingFilterGeometry
+
 	// An optional limit for the number of entries returned in a single call. Default
 	// value: 100
 	MaxResults *int32
@@ -53,9 +56,7 @@ type ListDevicePositionsInput struct {
 
 type ListDevicePositionsOutput struct {
 
-	// Contains details about each device's last known position. These details
-	// includes the device ID, the time when the position was sampled on the device,
-	// the time that the service received the update, and the most recent coordinates.
+	// Contains details about each device's last known position.
 	//
 	// This member is required.
 	Entries []types.ListDevicePositionsResponseEntry

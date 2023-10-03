@@ -48,6 +48,11 @@ type UpdateTrackerInput struct {
 	// for geofences with this tracker. Those events are always sent to EventBridge.
 	EventBridgeEnabled *bool
 
+	// Enables GeospatialQueries for a tracker that uses a Amazon Web Services KMS
+	// customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
+	// . This parameter is only used if you are using a KMS customer managed key.
+	KmsKeyEnableGeospatialQueries *bool
+
 	// Updates the position filtering for the tracker resource. Valid values:
 	//   - TimeBased - Location updates are evaluated against linked geofence
 	//   collections, but not every location update is stored. If your update frequency

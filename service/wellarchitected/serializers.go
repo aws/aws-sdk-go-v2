@@ -670,6 +670,203 @@ func awsRestjson1_serializeOpDocumentCreateProfileShareInput(v *CreateProfileSha
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateReviewTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpCreateReviewTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateReviewTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateReviewTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateReviewTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateReviewTemplateInput(v *CreateReviewTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateReviewTemplateInput(v *CreateReviewTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Lenses != nil {
+		ok := object.Key("Lenses")
+		if err := awsRestjson1_serializeDocumentReviewTemplateLenses(v.Lenses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Notes != nil {
+		ok := object.Key("Notes")
+		ok.String(*v.Notes)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateName != nil {
+		ok := object.Key("TemplateName")
+		ok.String(*v.TemplateName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateTemplateShare struct {
+}
+
+func (*awsRestjson1_serializeOpCreateTemplateShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateTemplateShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateTemplateShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/templates/shares/{TemplateArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateTemplateShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateTemplateShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateTemplateShareInput(v *CreateTemplateShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateTemplateShareInput(v *CreateTemplateShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.SharedWith != nil {
+		ok := object.Key("SharedWith")
+		ok.String(*v.SharedWith)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateWorkload struct {
 }
 
@@ -831,6 +1028,13 @@ func awsRestjson1_serializeOpDocumentCreateWorkloadInput(v *CreateWorkloadInput,
 	if v.ReviewOwner != nil {
 		ok := object.Key("ReviewOwner")
 		ok.String(*v.ReviewOwner)
+	}
+
+	if v.ReviewTemplateArns != nil {
+		ok := object.Key("ReviewTemplateArns")
+		if err := awsRestjson1_serializeDocumentReviewTemplateArns(v.ReviewTemplateArns, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -1237,6 +1441,153 @@ func awsRestjson1_serializeOpHttpBindingsDeleteProfileShareInput(v *DeleteProfil
 	}
 	if v.ShareId != nil {
 		if err := encoder.SetURI("ShareId").String(*v.ShareId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteReviewTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteReviewTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteReviewTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteReviewTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteReviewTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteReviewTemplateInput(v *DeleteReviewTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientRequestToken != nil {
+		encoder.SetQuery("ClientRequestToken").String(*v.ClientRequestToken)
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteTemplateShare struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteTemplateShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteTemplateShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTemplateShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/templates/shares/{TemplateArn}/{ShareId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteTemplateShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteTemplateShareInput(v *DeleteTemplateShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientRequestToken != nil {
+		encoder.SetQuery("ClientRequestToken").String(*v.ClientRequestToken)
+	}
+
+	if v.ShareId == nil || len(*v.ShareId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ShareId must not be empty")}
+	}
+	if v.ShareId != nil {
+		if err := encoder.SetURI("ShareId").String(*v.ShareId); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
 			return err
 		}
 	}
@@ -2289,6 +2640,228 @@ func awsRestjson1_serializeOpHttpBindingsGetProfileTemplateInput(v *GetProfileTe
 	return nil
 }
 
+type awsRestjson1_serializeOpGetReviewTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpGetReviewTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetReviewTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetReviewTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetReviewTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetReviewTemplateInput(v *GetReviewTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetReviewTemplateAnswer struct {
+}
+
+func (*awsRestjson1_serializeOpGetReviewTemplateAnswer) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetReviewTemplateAnswer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetReviewTemplateAnswerInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/answers/{QuestionId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetReviewTemplateAnswerInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetReviewTemplateAnswerInput(v *GetReviewTemplateAnswerInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.QuestionId == nil || len(*v.QuestionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member QuestionId must not be empty")}
+	}
+	if v.QuestionId != nil {
+		if err := encoder.SetURI("QuestionId").String(*v.QuestionId); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetReviewTemplateLensReview struct {
+}
+
+func (*awsRestjson1_serializeOpGetReviewTemplateLensReview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetReviewTemplateLensReview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetReviewTemplateLensReviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetReviewTemplateLensReviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetReviewTemplateLensReviewInput(v *GetReviewTemplateLensReviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetWorkload struct {
 }
 
@@ -3264,6 +3837,11 @@ func awsRestjson1_serializeOpDocumentListNotificationsInput(v *ListNotifications
 		ok.String(*v.NextToken)
 	}
 
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
 	if v.WorkloadId != nil {
 		ok := object.Key("WorkloadId")
 		ok.String(*v.WorkloadId)
@@ -3493,6 +4071,156 @@ func awsRestjson1_serializeOpHttpBindingsListProfileSharesInput(v *ListProfileSh
 	return nil
 }
 
+type awsRestjson1_serializeOpListReviewTemplateAnswers struct {
+}
+
+func (*awsRestjson1_serializeOpListReviewTemplateAnswers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListReviewTemplateAnswers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListReviewTemplateAnswersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/answers")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListReviewTemplateAnswersInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListReviewTemplateAnswersInput(v *ListReviewTemplateAnswersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.PillarId != nil {
+		encoder.SetQuery("PillarId").String(*v.PillarId)
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListReviewTemplates struct {
+}
+
+func (*awsRestjson1_serializeOpListReviewTemplates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListReviewTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListReviewTemplatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListReviewTemplatesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListReviewTemplatesInput(v *ListReviewTemplatesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListShareInvitations struct {
 }
 
@@ -3566,6 +4294,10 @@ func awsRestjson1_serializeOpHttpBindingsListShareInvitationsInput(v *ListShareI
 		encoder.SetQuery("ShareResourceType").String(string(v.ShareResourceType))
 	}
 
+	if v.TemplateNamePrefix != nil {
+		encoder.SetQuery("TemplateNamePrefix").String(*v.TemplateNamePrefix)
+	}
+
 	if v.WorkloadNamePrefix != nil {
 		encoder.SetQuery("WorkloadNamePrefix").String(*v.WorkloadNamePrefix)
 	}
@@ -3631,6 +4363,87 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	}
 	if v.WorkloadArn != nil {
 		if err := encoder.SetURI("WorkloadArn").String(*v.WorkloadArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListTemplateShares struct {
+}
+
+func (*awsRestjson1_serializeOpListTemplateShares) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListTemplateShares) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListTemplateSharesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/templates/shares/{TemplateArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListTemplateSharesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListTemplateSharesInput(v *ListTemplateSharesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.SharedWithPrefix != nil {
+		encoder.SetQuery("SharedWithPrefix").String(*v.SharedWithPrefix)
+	}
+
+	if len(v.Status) > 0 {
+		encoder.SetQuery("Status").String(string(v.Status))
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
 			return err
 		}
 	}
@@ -4374,6 +5187,352 @@ func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateReviewTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateReviewTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateReviewTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateReviewTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateReviewTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateReviewTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateReviewTemplateInput(v *UpdateReviewTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateReviewTemplateInput(v *UpdateReviewTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.LensesToAssociate != nil {
+		ok := object.Key("LensesToAssociate")
+		if err := awsRestjson1_serializeDocumentReviewTemplateLensAliases(v.LensesToAssociate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LensesToDisassociate != nil {
+		ok := object.Key("LensesToDisassociate")
+		if err := awsRestjson1_serializeDocumentReviewTemplateLensAliases(v.LensesToDisassociate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Notes != nil {
+		ok := object.Key("Notes")
+		ok.String(*v.Notes)
+	}
+
+	if v.TemplateName != nil {
+		ok := object.Key("TemplateName")
+		ok.String(*v.TemplateName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateReviewTemplateAnswer struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateReviewTemplateAnswer) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateReviewTemplateAnswer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateReviewTemplateAnswerInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/answers/{QuestionId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateReviewTemplateAnswerInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateReviewTemplateAnswerInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateReviewTemplateAnswerInput(v *UpdateReviewTemplateAnswerInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.QuestionId == nil || len(*v.QuestionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member QuestionId must not be empty")}
+	}
+	if v.QuestionId != nil {
+		if err := encoder.SetURI("QuestionId").String(*v.QuestionId); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateReviewTemplateAnswerInput(v *UpdateReviewTemplateAnswerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChoiceUpdates != nil {
+		ok := object.Key("ChoiceUpdates")
+		if err := awsRestjson1_serializeDocumentChoiceUpdates(v.ChoiceUpdates, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IsApplicable {
+		ok := object.Key("IsApplicable")
+		ok.Boolean(v.IsApplicable)
+	}
+
+	if v.Notes != nil {
+		ok := object.Key("Notes")
+		ok.String(*v.Notes)
+	}
+
+	if len(v.Reason) > 0 {
+		ok := object.Key("Reason")
+		ok.String(string(v.Reason))
+	}
+
+	if v.SelectedChoices != nil {
+		ok := object.Key("SelectedChoices")
+		if err := awsRestjson1_serializeDocumentSelectedChoices(v.SelectedChoices, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateReviewTemplateLensReview struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateReviewTemplateLensReview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateReviewTemplateLensReview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateReviewTemplateLensReviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateReviewTemplateLensReviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateReviewTemplateLensReviewInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateReviewTemplateLensReviewInput(v *UpdateReviewTemplateLensReviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateReviewTemplateLensReviewInput(v *UpdateReviewTemplateLensReviewInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LensNotes != nil {
+		ok := object.Key("LensNotes")
+		ok.String(*v.LensNotes)
+	}
+
+	if v.PillarNotes != nil {
+		ok := object.Key("PillarNotes")
+		if err := awsRestjson1_serializeDocumentPillarNotes(v.PillarNotes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateShareInvitation struct {
 }
 
@@ -4938,6 +6097,103 @@ func awsRestjson1_serializeOpDocumentUpgradeProfileVersionInput(v *UpgradeProfil
 	return nil
 }
 
+type awsRestjson1_serializeOpUpgradeReviewTemplateLensReview struct {
+}
+
+func (*awsRestjson1_serializeOpUpgradeReviewTemplateLensReview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpgradeReviewTemplateLensReview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpgradeReviewTemplateLensReviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/upgrade")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpgradeReviewTemplateLensReviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpgradeReviewTemplateLensReviewInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpgradeReviewTemplateLensReviewInput(v *UpgradeReviewTemplateLensReviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateArn == nil || len(*v.TemplateArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateArn must not be empty")}
+	}
+	if v.TemplateArn != nil {
+		if err := encoder.SetURI("TemplateArn").String(*v.TemplateArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpgradeReviewTemplateLensReviewInput(v *UpgradeReviewTemplateLensReviewInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChoiceUpdate(v *types.ChoiceUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5035,6 +6291,39 @@ func awsRestjson1_serializeDocumentProfileQuestionUpdates(v []types.ProfileQuest
 		if err := awsRestjson1_serializeDocumentProfileQuestionUpdate(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReviewTemplateArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReviewTemplateLensAliases(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReviewTemplateLenses(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

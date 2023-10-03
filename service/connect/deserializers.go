@@ -38503,6 +38503,15 @@ func awsRestjson1_deserializeDocumentMetricFilterV2(v **types.MetricFilterV2, va
 				return err
 			}
 
+		case "Negate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Negate = jtv
+			}
+
 		default:
 			_, _ = key, value
 
@@ -38545,6 +38554,78 @@ func awsRestjson1_deserializeDocumentMetricFilterValueList(v *[]string, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetricInterval(v **types.MetricInterval, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricInterval
+	if *v == nil {
+		sv = &types.MetricInterval{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Interval":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IntervalPeriod to be of type string, got %T instead", value)
+				}
+				sv.Interval = types.IntervalPeriod(jtv)
+			}
+
+		case "StartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -38611,6 +38692,11 @@ func awsRestjson1_deserializeDocumentMetricResultV2(v **types.MetricResultV2, va
 
 		case "Dimensions":
 			if err := awsRestjson1_deserializeDocumentDimensionsV2Map(&sv.Dimensions, value); err != nil {
+				return err
+			}
+
+		case "MetricInterval":
+			if err := awsRestjson1_deserializeDocumentMetricInterval(&sv.MetricInterval, value); err != nil {
 				return err
 			}
 

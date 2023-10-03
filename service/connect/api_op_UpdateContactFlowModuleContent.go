@@ -38,7 +38,9 @@ type UpdateContactFlowModuleContentInput struct {
 	// This member is required.
 	ContactFlowModuleId *string
 
-	// The content of the flow module.
+	// The JSON string that represents the content of the flow. For an example, see
+	// Example contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// .
 	//
 	// This member is required.
 	Content *string

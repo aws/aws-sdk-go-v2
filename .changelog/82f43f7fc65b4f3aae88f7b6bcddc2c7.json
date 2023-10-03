@@ -1,0 +1,8 @@
+{
+    "id": "82f43f7f-c65b-4f3a-ae88-f7b6bcddc2c7",
+    "type": "feature",
+    "description": "This release adds the ability to replace video frames without modifying the audio essence.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

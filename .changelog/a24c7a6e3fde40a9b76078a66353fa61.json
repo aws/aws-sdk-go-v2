@@ -1,0 +1,8 @@
+{
+    "id": "a24c7a6e-3fde-40a9-b760-78a66353fa61",
+    "type": "feature",
+    "description": "Amazon Location Service adds support for bounding polygon queries. Additionally, the GeofenceCount field has been added to the DescribeGeofenceCollection API response.",
+    "modules": [
+        "service/location"
+    ]
+}

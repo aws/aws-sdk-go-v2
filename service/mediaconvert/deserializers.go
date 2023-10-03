@@ -5626,6 +5626,74 @@ func awsRestjson1_deserializeDocument__listOfTeletextPageType(v *[]types.Teletex
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfVideoOverlay(v *[]types.VideoOverlay, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VideoOverlay
+	if *v == nil {
+		cv = []types.VideoOverlay{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VideoOverlay
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVideoOverlay(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfVideoOverlayInputClipping(v *[]types.VideoOverlayInputClipping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VideoOverlayInputClipping
+	if *v == nil {
+		cv = []types.VideoOverlayInputClipping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VideoOverlayInputClipping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVideoOverlayInputClipping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfWarningGroup(v *[]types.WarningGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12184,6 +12252,15 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.DynamicSubGop = types.H264DynamicSubGop(jtv)
 			}
 
+		case "endOfStreamMarkers":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H264EndOfStreamMarkers to be of type string, got %T instead", value)
+				}
+				sv.EndOfStreamMarkers = types.H264EndOfStreamMarkers(jtv)
+			}
+
 		case "entropyEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12768,6 +12845,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return fmt.Errorf("expected H265DynamicSubGop to be of type string, got %T instead", value)
 				}
 				sv.DynamicSubGop = types.H265DynamicSubGop(jtv)
+			}
+
+		case "endOfStreamMarkers":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265EndOfStreamMarkers to be of type string, got %T instead", value)
+				}
+				sv.EndOfStreamMarkers = types.H265EndOfStreamMarkers(jtv)
 			}
 
 		case "flickerAdaptiveQuantization":
@@ -14641,6 +14727,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				return err
 			}
 
+		case "videoOverlays":
+			if err := awsRestjson1_deserializeDocument__listOfVideoOverlay(&sv.VideoOverlays, value); err != nil {
+				return err
+			}
+
 		case "videoSelector":
 			if err := awsRestjson1_deserializeDocumentVideoSelector(&sv.VideoSelector, value); err != nil {
 				return err
@@ -14938,6 +15029,11 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 					return fmt.Errorf("expected __stringMin11Max11Pattern01D20305D205D to be of type string, got %T instead", value)
 				}
 				sv.TimecodeStart = ptr.String(jtv)
+			}
+
+		case "videoOverlays":
+			if err := awsRestjson1_deserializeDocument__listOfVideoOverlay(&sv.VideoOverlays, value); err != nil {
+				return err
 			}
 
 		case "videoSelector":
@@ -15556,19 +15652,6 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
-		case "followInputIndex":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected __integerMin0Max149 to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.FollowInputIndex = ptr.Int32(int32(i64))
-			}
-
 		case "inputs":
 			if err := awsRestjson1_deserializeDocument__listOfInput(&sv.Inputs, value); err != nil {
 				return err
@@ -15820,19 +15903,6 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 		case "extendedDataServices":
 			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
 				return err
-			}
-
-		case "followInputIndex":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected __integerMin0Max149 to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.FollowInputIndex = ptr.Int32(int32(i64))
 			}
 
 		case "inputs":
@@ -21571,6 +21641,172 @@ func awsRestjson1_deserializeDocumentVideoDetail(v **types.VideoDetail, value in
 					return err
 				}
 				sv.WidthInPx = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoOverlay(v **types.VideoOverlay, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoOverlay
+	if *v == nil {
+		sv = &types.VideoOverlay{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTimecode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
+				}
+				sv.EndTimecode = ptr.String(jtv)
+			}
+
+		case "input":
+			if err := awsRestjson1_deserializeDocumentVideoOverlayInput(&sv.Input, value); err != nil {
+				return err
+			}
+
+		case "startTimecode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
+				}
+				sv.StartTimecode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoOverlayInput(v **types.VideoOverlayInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoOverlayInput
+	if *v == nil {
+		sv = &types.VideoOverlayInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fileInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3Https to be of type string, got %T instead", value)
+				}
+				sv.FileInput = ptr.String(jtv)
+			}
+
+		case "inputClippings":
+			if err := awsRestjson1_deserializeDocument__listOfVideoOverlayInputClipping(&sv.InputClippings, value); err != nil {
+				return err
+			}
+
+		case "timecodeSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputTimecodeSource to be of type string, got %T instead", value)
+				}
+				sv.TimecodeSource = types.InputTimecodeSource(jtv)
+			}
+
+		case "timecodeStart":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin11Max11Pattern01D20305D205D to be of type string, got %T instead", value)
+				}
+				sv.TimecodeStart = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoOverlayInputClipping(v **types.VideoOverlayInputClipping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoOverlayInputClipping
+	if *v == nil {
+		sv = &types.VideoOverlayInputClipping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTimecode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
+				}
+				sv.EndTimecode = ptr.String(jtv)
+			}
+
+		case "startTimecode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
+				}
+				sv.StartTimecode = ptr.String(jtv)
 			}
 
 		default:

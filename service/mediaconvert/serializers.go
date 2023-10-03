@@ -2677,6 +2677,32 @@ func awsRestjson1_serializeDocument__listOfTeletextPageType(v []types.TeletextPa
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfVideoOverlay(v []types.VideoOverlay, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVideoOverlay(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfVideoOverlayInputClipping(v []types.VideoOverlayInputClipping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVideoOverlayInputClipping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5583,6 +5609,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.String(string(v.DynamicSubGop))
 	}
 
+	if len(v.EndOfStreamMarkers) > 0 {
+		ok := object.Key("endOfStreamMarkers")
+		ok.String(string(v.EndOfStreamMarkers))
+	}
+
 	if len(v.EntropyEncoding) > 0 {
 		ok := object.Key("entropyEncoding")
 		ok.String(string(v.EntropyEncoding))
@@ -5855,6 +5886,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if len(v.DynamicSubGop) > 0 {
 		ok := object.Key("dynamicSubGop")
 		ok.String(string(v.DynamicSubGop))
+	}
+
+	if len(v.EndOfStreamMarkers) > 0 {
+		ok := object.Key("endOfStreamMarkers")
+		ok.String(string(v.EndOfStreamMarkers))
 	}
 
 	if len(v.FlickerAdaptiveQuantization) > 0 {
@@ -6748,6 +6784,13 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 		}
 	}
 
+	if v.VideoOverlays != nil {
+		ok := object.Key("videoOverlays")
+		if err := awsRestjson1_serializeDocument__listOfVideoOverlay(v.VideoOverlays, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VideoSelector != nil {
 		ok := object.Key("videoSelector")
 		if err := awsRestjson1_serializeDocumentVideoSelector(v.VideoSelector, ok); err != nil {
@@ -6917,6 +6960,13 @@ func awsRestjson1_serializeDocumentInputTemplate(v *types.InputTemplate, value s
 		ok.String(*v.TimecodeStart)
 	}
 
+	if v.VideoOverlays != nil {
+		ok := object.Key("videoOverlays")
+		if err := awsRestjson1_serializeDocument__listOfVideoOverlay(v.VideoOverlays, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VideoSelector != nil {
 		ok := object.Key("videoSelector")
 		if err := awsRestjson1_serializeDocumentVideoSelector(v.VideoSelector, ok); err != nil {
@@ -7031,11 +7081,6 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 		}
 	}
 
-	if v.FollowInputIndex != nil {
-		ok := object.Key("followInputIndex")
-		ok.Integer(*v.FollowInputIndex)
-	}
-
 	if v.Inputs != nil {
 		ok := object.Key("inputs")
 		if err := awsRestjson1_serializeDocument__listOfInput(v.Inputs, ok); err != nil {
@@ -7123,11 +7168,6 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 		if err := awsRestjson1_serializeDocumentExtendedDataServices(v.ExtendedDataServices, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.FollowInputIndex != nil {
-		ok := object.Key("followInputIndex")
-		ok.Integer(*v.FollowInputIndex)
 	}
 
 	if v.Inputs != nil {
@@ -9409,6 +9449,76 @@ func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, v
 	if v.Width != 0 {
 		ok := object.Key("width")
 		ok.Integer(v.Width)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverlay(v *types.VideoOverlay, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTimecode != nil {
+		ok := object.Key("endTimecode")
+		ok.String(*v.EndTimecode)
+	}
+
+	if v.Input != nil {
+		ok := object.Key("input")
+		if err := awsRestjson1_serializeDocumentVideoOverlayInput(v.Input, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartTimecode != nil {
+		ok := object.Key("startTimecode")
+		ok.String(*v.StartTimecode)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverlayInput(v *types.VideoOverlayInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileInput != nil {
+		ok := object.Key("fileInput")
+		ok.String(*v.FileInput)
+	}
+
+	if v.InputClippings != nil {
+		ok := object.Key("inputClippings")
+		if err := awsRestjson1_serializeDocument__listOfVideoOverlayInputClipping(v.InputClippings, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TimecodeSource) > 0 {
+		ok := object.Key("timecodeSource")
+		ok.String(string(v.TimecodeSource))
+	}
+
+	if v.TimecodeStart != nil {
+		ok := object.Key("timecodeStart")
+		ok.String(*v.TimecodeStart)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverlayInputClipping(v *types.VideoOverlayInputClipping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTimecode != nil {
+		ok := object.Key("endTimecode")
+		ok.String(*v.EndTimecode)
+	}
+
+	if v.StartTimecode != nil {
+		ok := object.Key("startTimecode")
+		ok.String(*v.StartTimecode)
 	}
 
 	return nil

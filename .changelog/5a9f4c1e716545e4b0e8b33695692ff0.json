@@ -1,0 +1,8 @@
+{
+    "id": "5a9f4c1e-7165-45e4-b0e8-b33695692ff0",
+    "type": "feature",
+    "description": "AWS Well-Architected now supports Review Templates that allows you to create templates with pre-filled answers for Well-Architected and Custom Lens best practices.",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

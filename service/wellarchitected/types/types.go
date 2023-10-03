@@ -48,7 +48,8 @@ type Answer struct {
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable bool
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	Notes *string
 
 	// The ID used to identify a pillar, for example, security . A pillar is identified
@@ -452,7 +453,8 @@ type LensReview struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	Notes *string
 
 	// List of pillar review summaries of lens review in a workload.
@@ -541,8 +543,8 @@ type LensShareSummary struct {
 	// The ID associated with the share.
 	ShareId *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
 	SharedWith *string
 
 	// The status of the share request.
@@ -616,6 +618,14 @@ type LensUpgradeSummary struct {
 
 	// The ARN for the lens.
 	LensArn *string
+
+	// ResourceArn of the lens being upgraded
+	ResourceArn *string
+
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
+	ResourceName *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
 	// Services Region.
@@ -717,7 +727,8 @@ type PillarMetric struct {
 // A pillar review summary of a lens review.
 type PillarReviewSummary struct {
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	Notes *string
 
 	// The ID used to identify a pillar, for example, security . A pillar is identified
@@ -862,8 +873,8 @@ type ProfileShareSummary struct {
 	// The ID associated with the share.
 	ShareId *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
 	SharedWith *string
 
 	// The status of the share request.
@@ -990,6 +1001,233 @@ type QuestionMetric struct {
 	noSmithyDocumentSerde
 }
 
+// A review template.
+type ReviewTemplate struct {
+
+	// The review template description.
+	Description *string
+
+	// The lenses applied to the review template.
+	Lenses []string
+
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
+	Notes *string
+
+	// An Amazon Web Services account ID.
+	Owner *string
+
+	// A count of how many total questions are answered and unanswered in the review
+	// template.
+	QuestionCounts map[string]int32
+
+	// The ID assigned to the template share invitation.
+	ShareInvitationId *string
+
+	// The tags assigned to the review template.
+	Tags map[string]string
+
+	// The review template ARN.
+	TemplateArn *string
+
+	// The name of the review template.
+	TemplateName *string
+
+	// The latest status of a review template.
+	UpdateStatus ReviewTemplateUpdateStatus
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An answer of the question.
+type ReviewTemplateAnswer struct {
+
+	// The status of whether or not this question has been answered.
+	AnswerStatus ReviewTemplateAnswerStatus
+
+	// A list of selected choices to a question in your review template.
+	ChoiceAnswers []ChoiceAnswer
+
+	// List of choices available for a question.
+	Choices []Choice
+
+	// The helpful resource text to be displayed for a custom lens. This field does
+	// not apply to Amazon Web Services official lenses.
+	HelpfulResourceDisplayText *string
+
+	// The helpful resource URL. For Amazon Web Services official lenses, this is the
+	// helpful resource URL for a question or choice. For custom lenses, this is the
+	// helpful resource URL for a question and is only provided if
+	// HelpfulResourceDisplayText was specified for the question.
+	HelpfulResourceUrl *string
+
+	// The improvement plan URL for a question in an Amazon Web Services official
+	// lenses. This value is only available if the question has been answered. This
+	// value does not apply to custom lenses.
+	ImprovementPlanUrl *string
+
+	// Defines whether this question is applicable to a lens review.
+	IsApplicable bool
+
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
+	Notes *string
+
+	// The ID used to identify a pillar, for example, security . A pillar is identified
+	// by its PillarReviewSummary$PillarId .
+	PillarId *string
+
+	// The description of the question.
+	QuestionDescription *string
+
+	// The ID of the question.
+	QuestionId *string
+
+	// The title of the question.
+	QuestionTitle *string
+
+	// The reason why the question is not applicable to your review template.
+	Reason AnswerReason
+
+	// List of selected choice IDs in a question answer. The values entered replace
+	// the previously selected choices.
+	SelectedChoices []string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of review template answers.
+type ReviewTemplateAnswerSummary struct {
+
+	// The status of whether or not this question has been answered.
+	AnswerStatus ReviewTemplateAnswerStatus
+
+	// A list of selected choices to a question in the review template.
+	ChoiceAnswerSummaries []ChoiceAnswerSummary
+
+	// List of choices available for a question.
+	Choices []Choice
+
+	// Defines whether this question is applicable to a lens review.
+	IsApplicable bool
+
+	// The ID used to identify a pillar, for example, security . A pillar is identified
+	// by its PillarReviewSummary$PillarId .
+	PillarId *string
+
+	// The ID of the question.
+	QuestionId *string
+
+	// The title of the question.
+	QuestionTitle *string
+
+	// The type of question.
+	QuestionType QuestionType
+
+	// The reason why a choice is not-applicable to a question in the review template.
+	Reason AnswerReason
+
+	// List of selected choice IDs in a question answer. The values entered replace
+	// the previously selected choices.
+	SelectedChoices []string
+
+	noSmithyDocumentSerde
+}
+
+// The lens review of a review template.
+type ReviewTemplateLensReview struct {
+
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless , or the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
+	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
+	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
+	// . Each lens is identified by its LensSummary$LensAlias .
+	LensAlias *string
+
+	// The lens ARN.
+	LensArn *string
+
+	// The full name of the lens.
+	LensName *string
+
+	// The status of the lens.
+	LensStatus LensStatus
+
+	// The version of the lens.
+	LensVersion *string
+
+	// The token to use to retrieve the next set of results.
+	NextToken *string
+
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
+	Notes *string
+
+	// Pillar review summaries of a lens review.
+	PillarReviewSummaries []ReviewTemplatePillarReviewSummary
+
+	// A count of how many questions are answered and unanswered in the lens review.
+	QuestionCounts map[string]int32
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a review template.
+type ReviewTemplatePillarReviewSummary struct {
+
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
+	Notes *string
+
+	// The ID used to identify a pillar, for example, security . A pillar is identified
+	// by its PillarReviewSummary$PillarId .
+	PillarId *string
+
+	// The name of the pillar.
+	PillarName *string
+
+	// A count of how many questions are answered and unanswered in the requested
+	// pillar of the lens review.
+	QuestionCounts map[string]int32
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a review template.
+type ReviewTemplateSummary struct {
+
+	// Description of the review template.
+	Description *string
+
+	// Lenses associated with the review template.
+	Lenses []string
+
+	// An Amazon Web Services account ID.
+	Owner *string
+
+	// The review template ARN.
+	TemplateArn *string
+
+	// The name of the review template.
+	TemplateName *string
+
+	// The latest status of a review template.
+	UpdateStatus ReviewTemplateUpdateStatus
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The share invitation.
 type ShareInvitation struct {
 
@@ -1013,6 +1251,9 @@ type ShareInvitation struct {
 
 	// The resource type of the share invitation.
 	ShareResourceType ShareResourceType
+
+	// The review template ARN.
+	TemplateArn *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
 	// Services Region.
@@ -1048,9 +1289,15 @@ type ShareInvitationSummary struct {
 	// An Amazon Web Services account ID.
 	SharedBy *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
 	SharedWith *string
+
+	// The review template ARN.
+	TemplateArn *string
+
+	// The name of the review template.
+	TemplateName *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
 	// Services Region.
@@ -1060,6 +1307,25 @@ type ShareInvitationSummary struct {
 	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
 	// for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a review template share.
+type TemplateShareSummary struct {
+
+	// The ID associated with the share.
+	ShareId *string
+
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
+	SharedWith *string
+
+	// The status of the share request.
+	Status ShareStatus
+
+	// Review template share invitation status message.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -1158,13 +1424,16 @@ type Workload struct {
 	IsReviewOwnerUpdateAcknowledged bool
 
 	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias .
+	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
+	// the workload, those lenses are applied to the workload in addition to these
+	// lenses.
 	Lenses []string
 
 	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
-	// The notes associated with the workload.
+	// The notes associated with the workload. For a review template, these are the
+	// notes that will be associated with the workload when the template is applied.
 	Notes *string
 
 	// An Amazon Web Services account ID.
@@ -1251,8 +1520,8 @@ type WorkloadShare struct {
 	// An Amazon Web Services account ID.
 	SharedBy *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
 	SharedWith *string
 
 	// The status of the share request.
@@ -1279,8 +1548,8 @@ type WorkloadShareSummary struct {
 	// The ID associated with the share.
 	ShareId *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	// The Amazon Web Services account ID, organization ID, or organizational unit
+	// (OU) ID with which the workload, lens, profile, or review template is shared.
 	SharedWith *string
 
 	// The status of the share request.
@@ -1299,7 +1568,9 @@ type WorkloadSummary struct {
 	ImprovementStatus WorkloadImprovementStatus
 
 	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias .
+	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
+	// the workload, those lenses are applied to the workload in addition to these
+	// lenses.
 	Lenses []string
 
 	// An Amazon Web Services account ID.

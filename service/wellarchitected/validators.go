@@ -150,6 +150,46 @@ func (m *validateOpCreateProfileShare) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateReviewTemplate struct {
+}
+
+func (*validateOpCreateReviewTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReviewTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReviewTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReviewTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateTemplateShare struct {
+}
+
+func (*validateOpCreateTemplateShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTemplateShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTemplateShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTemplateShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkload struct {
 }
 
@@ -265,6 +305,46 @@ func (m *validateOpDeleteProfileShare) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProfileShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteReviewTemplate struct {
+}
+
+func (*validateOpDeleteReviewTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteReviewTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteReviewTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteReviewTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTemplateShare struct {
+}
+
+func (*validateOpDeleteTemplateShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTemplateShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTemplateShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTemplateShareInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +610,66 @@ func (m *validateOpGetProfile) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetReviewTemplateAnswer struct {
+}
+
+func (*validateOpGetReviewTemplateAnswer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReviewTemplateAnswer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReviewTemplateAnswerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReviewTemplateAnswerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetReviewTemplate struct {
+}
+
+func (*validateOpGetReviewTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReviewTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReviewTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReviewTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetReviewTemplateLensReview struct {
+}
+
+func (*validateOpGetReviewTemplateLensReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReviewTemplateLensReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReviewTemplateLensReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReviewTemplateLensReviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkload struct {
 }
 
@@ -730,6 +870,26 @@ func (m *validateOpListProfileShares) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListReviewTemplateAnswers struct {
+}
+
+func (*validateOpListReviewTemplateAnswers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListReviewTemplateAnswers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListReviewTemplateAnswersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListReviewTemplateAnswersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -745,6 +905,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTemplateShares struct {
+}
+
+func (*validateOpListTemplateShares) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTemplateShares) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTemplateSharesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTemplateSharesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +1050,66 @@ func (m *validateOpUpdateProfile) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateReviewTemplateAnswer struct {
+}
+
+func (*validateOpUpdateReviewTemplateAnswer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateReviewTemplateAnswer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateReviewTemplateAnswerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateReviewTemplateAnswerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateReviewTemplate struct {
+}
+
+func (*validateOpUpdateReviewTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateReviewTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateReviewTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateReviewTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateReviewTemplateLensReview struct {
+}
+
+func (*validateOpUpdateReviewTemplateLensReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateReviewTemplateLensReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateReviewTemplateLensReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateReviewTemplateLensReviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateShareInvitation struct {
 }
 
@@ -970,6 +1210,26 @@ func (m *validateOpUpgradeProfileVersion) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpgradeReviewTemplateLensReview struct {
+}
+
+func (*validateOpUpgradeReviewTemplateLensReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpgradeReviewTemplateLensReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpgradeReviewTemplateLensReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpgradeReviewTemplateLensReviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateLensesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateLenses{}, middleware.After)
 }
@@ -998,6 +1258,14 @@ func addOpCreateProfileShareValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateProfileShare{}, middleware.After)
 }
 
+func addOpCreateReviewTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReviewTemplate{}, middleware.After)
+}
+
+func addOpCreateTemplateShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTemplateShare{}, middleware.After)
+}
+
 func addOpCreateWorkloadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkload{}, middleware.After)
 }
@@ -1020,6 +1288,14 @@ func addOpDeleteProfileValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteProfileShareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProfileShare{}, middleware.After)
+}
+
+func addOpDeleteReviewTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteReviewTemplate{}, middleware.After)
+}
+
+func addOpDeleteTemplateShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTemplateShare{}, middleware.After)
 }
 
 func addOpDeleteWorkloadValidationMiddleware(stack *middleware.Stack) error {
@@ -1074,6 +1350,18 @@ func addOpGetProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProfile{}, middleware.After)
 }
 
+func addOpGetReviewTemplateAnswerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReviewTemplateAnswer{}, middleware.After)
+}
+
+func addOpGetReviewTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReviewTemplate{}, middleware.After)
+}
+
+func addOpGetReviewTemplateLensReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReviewTemplateLensReview{}, middleware.After)
+}
+
 func addOpGetWorkloadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkload{}, middleware.After)
 }
@@ -1114,8 +1402,16 @@ func addOpListProfileSharesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProfileShares{}, middleware.After)
 }
 
+func addOpListReviewTemplateAnswersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListReviewTemplateAnswers{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTemplateSharesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTemplateShares{}, middleware.After)
 }
 
 func addOpListWorkloadSharesValidationMiddleware(stack *middleware.Stack) error {
@@ -1142,6 +1438,18 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
 }
 
+func addOpUpdateReviewTemplateAnswerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateReviewTemplateAnswer{}, middleware.After)
+}
+
+func addOpUpdateReviewTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateReviewTemplate{}, middleware.After)
+}
+
+func addOpUpdateReviewTemplateLensReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateReviewTemplateLensReview{}, middleware.After)
+}
+
 func addOpUpdateShareInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateShareInvitation{}, middleware.After)
 }
@@ -1160,6 +1468,10 @@ func addOpUpgradeLensReviewValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpgradeProfileVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpgradeProfileVersion{}, middleware.After)
+}
+
+func addOpUpgradeReviewTemplateLensReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpgradeReviewTemplateLensReview{}, middleware.After)
 }
 
 func validateChoiceUpdate(v *types.ChoiceUpdate) error {
@@ -1339,6 +1651,51 @@ func validateOpCreateProfileShareInput(v *CreateProfileShareInput) error {
 	}
 }
 
+func validateOpCreateReviewTemplateInput(v *CreateReviewTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReviewTemplateInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.Lenses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Lenses"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTemplateShareInput(v *CreateTemplateShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTemplateShareInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.SharedWith == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedWith"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkloadInput(v *CreateWorkloadInput) error {
 	if v == nil {
 		return nil
@@ -1460,6 +1817,45 @@ func validateOpDeleteProfileShareInput(v *DeleteProfileShareInput) error {
 	}
 	if v.ProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteReviewTemplateInput(v *DeleteReviewTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteReviewTemplateInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTemplateShareInput(v *DeleteTemplateShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTemplateShareInput"}
+	if v.ShareId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareId"))
+	}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
@@ -1693,6 +2089,60 @@ func validateOpGetProfileInput(v *GetProfileInput) error {
 	}
 }
 
+func validateOpGetReviewTemplateAnswerInput(v *GetReviewTemplateAnswerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReviewTemplateAnswerInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if v.QuestionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReviewTemplateInput(v *GetReviewTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReviewTemplateInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReviewTemplateLensReviewInput(v *GetReviewTemplateLensReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReviewTemplateLensReviewInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWorkloadInput(v *GetWorkloadInput) error {
 	if v == nil {
 		return nil
@@ -1876,6 +2326,24 @@ func validateOpListProfileSharesInput(v *ListProfileSharesInput) error {
 	}
 }
 
+func validateOpListReviewTemplateAnswersInput(v *ListReviewTemplateAnswersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListReviewTemplateAnswersInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1883,6 +2351,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.WorkloadArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTemplateSharesInput(v *ListTemplateSharesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTemplateSharesInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2001,6 +2484,65 @@ func validateOpUpdateProfileInput(v *UpdateProfileInput) error {
 	}
 }
 
+func validateOpUpdateReviewTemplateAnswerInput(v *UpdateReviewTemplateAnswerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateReviewTemplateAnswerInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if v.QuestionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if v.ChoiceUpdates != nil {
+		if err := validateChoiceUpdates(v.ChoiceUpdates); err != nil {
+			invalidParams.AddNested("ChoiceUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateReviewTemplateInput(v *UpdateReviewTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateReviewTemplateInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateReviewTemplateLensReviewInput(v *UpdateReviewTemplateLensReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateReviewTemplateLensReviewInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateShareInvitationInput(v *UpdateShareInvitationInput) error {
 	if v == nil {
 		return nil
@@ -2086,6 +2628,24 @@ func validateOpUpgradeProfileVersionInput(v *UpgradeProfileVersionInput) error {
 	}
 	if v.ProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpgradeReviewTemplateLensReviewInput(v *UpgradeReviewTemplateLensReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpgradeReviewTemplateLensReviewInput"}
+	if v.TemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateArn"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -22,9 +22,9 @@ import (
 // , the previous version of this API. It has new metrics, offers filtering at a
 // metric level, and offers the ability to filter and group data by channels,
 // queues, routing profiles, agents, and agent hierarchy levels. It can retrieve
-// historical data for the last 35 days, in 24-hour intervals. For a description of
-// the historical metrics that are supported by GetMetricDataV2 and GetMetricData ,
-// see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+// historical data for the last 3 months, at varying intervals. For a description
+// of the historical metrics that are supported by GetMetricDataV2 and
+// GetMetricData , see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 // in the Amazon Connect Administrator's Guide.
 func (c *Client) GetMetricDataV2(ctx context.Context, params *GetMetricDataV2Input, optFns ...func(*Options)) (*GetMetricDataV2Output, error) {
 	if params == nil {
@@ -46,7 +46,6 @@ type GetMetricDataV2Input struct {
 	// The timestamp, in UNIX Epoch time format, at which to end the reporting
 	// interval for the retrieval of historical metrics data. The time must be later
 	// than the start time timestamp. It cannot be later than the current timestamp.
-	// The time range between the start and end time must be less than 24 hours.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -83,15 +82,19 @@ type GetMetricDataV2Input struct {
 	// The metrics to retrieve. Specify the name, groupings, and filters for each
 	// metric. The following historical metrics are available. For a description of
 	// each metric, see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
-	// in the Amazon Connect Administrator's Guide. AGENT_ADHERENT_TIME This metric is
-	// available only in Amazon Web Services Regions where Forecasting, capacity
-	// planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
+	// in the Amazon Connect Administrator's Guide. ABANDONMENT_RATE Unit: Percent
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy AGENT_ADHERENT_TIME This metric is available only in Amazon Web
+	// Services Regions where Forecasting, capacity planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
 	// is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing
 	// Profile, Agent, Agent Hierarchy AGENT_NON_RESPONSE Unit: Count Valid groupings
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// AGENT_OCCUPANCY Unit: Percentage Valid groupings and filters: Routing Profile,
-	// Agent, Agent Hierarchy AGENT_SCHEDULE_ADHERENCE This metric is available only in
-	// Amazon Web Services Regions where Forecasting, capacity planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
+	// AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS Unit: Count Valid groupings and
+	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy Data for this
+	// metric is available starting from October 1, 2023 0:00:00 GMT. AGENT_OCCUPANCY
+	// Unit: Percentage Valid groupings and filters: Routing Profile, Agent, Agent
+	// Hierarchy AGENT_SCHEDULE_ADHERENCE This metric is available only in Amazon Web
+	// Services Regions where Forecasting, capacity planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
 	// is available. Unit: Percent Valid groupings and filters: Queue, Channel, Routing
 	// Profile, Agent, Agent Hierarchy AGENT_SCHEDULED_TIME This metric is available
 	// only in Amazon Web Services Regions where Forecasting, capacity planning, and
@@ -105,10 +108,7 @@ type GetMetricDataV2Input struct {
 	// metric filter key: INITIATION_METHOD . For now, this metric only supports the
 	// following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid
 	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// AVG_AGENT_CONNECTING_TIME Unit: Seconds Valid metric filter key:
-	// INITIATION_METHOD . For now, this metric only supports the following as
-	// INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// The Negate key in Metric Level Filters is not applicable for this metric.
 	// AVG_CONTACT_DURATION Unit: Seconds Valid groupings and filters: Queue, Channel,
 	// Routing Profile, Agent, Agent Hierarchy, Feature Feature is a valid filter but
 	// not a valid grouping. AVG_CONVERSATION_DURATION Unit: Seconds Valid groupings
@@ -120,23 +120,26 @@ type GetMetricDataV2Input struct {
 	// Agent, Agent Hierarchy, Feature Feature is a valid filter but not a valid
 	// grouping. AVG_HOLD_TIME Unit: Seconds Valid groupings and filters: Queue,
 	// Channel, Routing Profile, Agent, Agent Hierarchy, Feature Feature is a valid
-	// filter but not a valid grouping. AVG_HOLDS Unit: Count Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature
-	// Feature is a valid filter but not a valid grouping.
-	// AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_INTERACTION_TIME Unit:
-	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Feature
-	// Feature is a valid filter but not a valid grouping. AVG_INTERRUPTIONS_AGENT This
-	// metric is available only for contacts analyzed by Contact Lens conversational
-	// analytics. Unit: Count Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy AVG_INTERRUPTION_TIME_AGENT This metric is
-	// available only for contacts analyzed by Contact Lens conversational analytics.
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy AVG_NON_TALK_TIME This metric is available only for
-	// contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid
+	// filter but not a valid grouping. AVG_HOLD_TIME_ALL_CONTACTS Unit: Seconds Valid
 	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// AVG_QUEUE_ANSWER_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
+	// AVG_HOLDS Unit: Count Valid groupings and filters: Queue, Channel, Routing
+	// Profile, Agent, Agent Hierarchy, Feature Feature is a valid filter but not a
+	// valid grouping. AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and
+	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// AVG_INTERACTION_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
 	// Routing Profile, Feature Feature is a valid filter but not a valid grouping.
+	// AVG_INTERRUPTIONS_AGENT This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics. Unit: Count Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// AVG_INTERRUPTION_TIME_AGENT This metric is available only for contacts analyzed
+	// by Contact Lens conversational analytics. Unit: Seconds Valid groupings and
+	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// AVG_NON_TALK_TIME This metric is available only for contacts analyzed by Contact
+	// Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_QUEUE_ANSWER_TIME Unit:
+	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Feature
+	// Feature is a valid filter but not a valid grouping. AVG_RESOLUTION_TIME Unit:
+	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile
 	// AVG_TALK_TIME This metric is available only for contacts analyzed by Contact
 	// Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue,
 	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_TALK_TIME_AGENT This metric
@@ -155,9 +158,12 @@ type GetMetricDataV2Input struct {
 	// filter but not a valid grouping. CONTACTS_HOLD_ABANDONS Unit: Count Valid
 	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// CONTACTS_QUEUED Unit: Count Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy CONTACTS_TRANSFERRED_OUT Unit: Count Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// Feature Feature is a valid filter but not a valid grouping.
+	// Profile, Agent, Agent Hierarchy CONTACTS_RESOLVED_IN_X Unit: Count Valid
+	// groupings and filters: Queue, Channel, Routing Profile Threshold: For
+	// ThresholdValue enter any whole number from 1 to 604800 (inclusive), in seconds.
+	// For Comparison , you must enter LT (for "Less than"). CONTACTS_TRANSFERRED_OUT
+	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+	// Agent Hierarchy, Feature Feature is a valid filter but not a valid grouping.
 	// CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit: Count Valid groupings and filters:
 	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: Count Valid groupings and filters:
@@ -189,9 +195,9 @@ type GetMetricDataV2Input struct {
 
 	// The timestamp, in UNIX Epoch time format, at which to start the reporting
 	// interval for the retrieval of historical metrics data. The time must be before
-	// the end time timestamp. The time range between the start and end time must be
-	// less than 24 hours. The start time cannot be earlier than 35 days before the
-	// time of the request. Historical metrics are available for 35 days.
+	// the end time timestamp. The start and end time depends on the IntervalPeriod
+	// selected. By default the time range between start and end time is 35 days.
+	// Historical metrics are available for 3 months.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -205,6 +211,30 @@ type GetMetricDataV2Input struct {
 	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
 	// AGENT_HIERARCHY_LEVEL_FIVE
 	Groupings []string
+
+	// The interval period and timezone to apply to returned metrics.
+	//   - IntervalPeriod : An aggregated grouping applied to request metrics. Valid
+	//   IntervalPeriod values are: FIFTEEN_MIN | THIRTY_MIN | HOUR | DAY | WEEK |
+	//   TOTAL . For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and
+	//   EndTime differs by 1 day, then Amazon Connect returns 48 results in the
+	//   response. Each result is aggregated by the THIRTY_MIN period. By default Amazon
+	//   Connect aggregates results based on the TOTAL interval period. The following
+	//   list describes restrictions on StartTime and EndTime based on which
+	//   IntervalPeriod is requested.
+	//   - FIFTEEN_MIN : The difference between StartTime and EndTime must be less than
+	//   3 days.
+	//   - THIRTY_MIN : The difference between StartTime and EndTime must be less than
+	//   3 days.
+	//   - HOUR : The difference between StartTime and EndTime must be less than 3
+	//   days.
+	//   - DAY : The difference between StartTime and EndTime must be less than 35
+	//   days.
+	//   - WEEK : The difference between StartTime and EndTime must be less than 35
+	//   days.
+	//   - TOTAL : The difference between StartTime and EndTime must be less than 35
+	//   days.
+	//   - TimeZone : The timezone applied to requested metrics.
+	Interval *types.IntervalDetails
 
 	// The maximum number of results to return per page.
 	MaxResults *int32

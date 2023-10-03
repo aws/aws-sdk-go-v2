@@ -747,6 +747,32 @@ func (IntegrationType) Values() []IntegrationType {
 	}
 }
 
+type IntervalPeriod string
+
+// Enum values for IntervalPeriod
+const (
+	IntervalPeriodFifteenMin IntervalPeriod = "FIFTEEN_MIN"
+	IntervalPeriodThirtyMin  IntervalPeriod = "THIRTY_MIN"
+	IntervalPeriodHour       IntervalPeriod = "HOUR"
+	IntervalPeriodDay        IntervalPeriod = "DAY"
+	IntervalPeriodWeek       IntervalPeriod = "WEEK"
+	IntervalPeriodTotal      IntervalPeriod = "TOTAL"
+)
+
+// Values returns all known values for IntervalPeriod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntervalPeriod) Values() []IntervalPeriod {
+	return []IntervalPeriod{
+		"FIFTEEN_MIN",
+		"THIRTY_MIN",
+		"HOUR",
+		"DAY",
+		"WEEK",
+		"TOTAL",
+	}
+}
+
 type LexVersion string
 
 // Enum values for LexVersion

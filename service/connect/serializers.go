@@ -8491,6 +8491,13 @@ func awsRestjson1_serializeOpDocumentGetMetricDataV2Input(v *GetMetricDataV2Inpu
 		}
 	}
 
+	if v.Interval != nil {
+		ok := object.Key("Interval")
+		if err := awsRestjson1_serializeDocumentIntervalDetails(v.Interval, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -20111,6 +20118,23 @@ func awsRestjson1_serializeDocumentInstanceStorageConfig(v *types.InstanceStorag
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIntervalDetails(v *types.IntervalDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalPeriod) > 0 {
+		ok := object.Key("IntervalPeriod")
+		ok.String(string(v.IntervalPeriod))
+	}
+
+	if v.TimeZone != nil {
+		ok := object.Key("TimeZone")
+		ok.String(*v.TimeZone)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInvisibleFieldInfo(v *types.InvisibleFieldInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20279,6 +20303,11 @@ func awsRestjson1_serializeDocumentMetricFilterV2(v *types.MetricFilterV2, value
 		if err := awsRestjson1_serializeDocumentMetricFilterValueList(v.MetricFilterValues, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Negate {
+		ok := object.Key("Negate")
+		ok.Boolean(v.Negate)
 	}
 
 	return nil

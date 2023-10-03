@@ -16,7 +16,7 @@ import (
 )
 
 // List the tags for a resource. The WorkloadArn parameter can be a workload ARN,
-// a custom lens ARN, or a profile ARN.
+// a custom lens ARN, a profile ARN, or review template ARN.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
