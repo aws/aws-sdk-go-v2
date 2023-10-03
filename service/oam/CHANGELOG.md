@@ -1,3 +1,7 @@
+# v1.4.0 (2023-10-03)
+
+* **Feature**: This release adds support for sharing AWS::ApplicationInsights::Application resources.
+
 # v1.3.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

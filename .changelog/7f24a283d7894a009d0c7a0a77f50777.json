@@ -1,8 +1,0 @@
-{
-    "id": "7f24a283-d789-4a00-9d0c-7a0a77f50777",
-    "type": "feature",
-    "description": "This release adds support for sharing AWS::ApplicationInsights::Application resources.",
-    "modules": [
-        "service/oam"
-    ]
-}

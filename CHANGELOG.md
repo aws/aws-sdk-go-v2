@@ -1,3 +1,19 @@
+# Release (2023-10-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.69.0](service/connect/CHANGELOG.md#v1690-2023-10-03)
+  * **Feature**: GetMetricDataV2 API: Update to include new metrics CONTACTS_RESOLVED_IN_X , AVG_HOLD_TIME_ALL_CONTACTS , AVG_RESOLUTION_TIME , ABANDONMENT_RATE , AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS with added features: Interval Period, TimeZone, Negate MetricFilters, Extended date time range.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.27.0](service/location/CHANGELOG.md#v1270-2023-10-03)
+  * **Feature**: Amazon Location Service adds support for bounding polygon queries. Additionally, the GeofenceCount field has been added to the DescribeGeofenceCollection API response.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.43.0](service/mediaconvert/CHANGELOG.md#v1430-2023-10-03)
+  * **Feature**: This release adds the ability to replace video frames without modifying the audio essence.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.4.0](service/oam/CHANGELOG.md#v140-2023-10-03)
+  * **Feature**: This release adds support for sharing AWS::ApplicationInsights::Application resources.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.109.0](service/sagemaker/CHANGELOG.md#v11090-2023-10-03)
+  * **Feature**: This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.23.0](service/wellarchitected/CHANGELOG.md#v1230-2023-10-03)
+  * **Feature**: AWS Well-Architected now supports Review Templates that allows you to create templates with pre-filled answers for Well-Architected and Custom Lens best practices.
+
 # Release (2023-10-02)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "f912fe52-7a81-47b7-975b-7c1369545966",
-    "type": "feature",
-    "description": "This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

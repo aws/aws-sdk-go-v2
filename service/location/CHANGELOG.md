@@ -1,3 +1,7 @@
+# v1.27.0 (2023-10-03)
+
+* **Feature**: Amazon Location Service adds support for bounding polygon queries. Additionally, the GeofenceCount field has been added to the DescribeGeofenceCollection API response.
+
 # v1.26.6 (2023-09-06)
 
 * No change notes available for this release.

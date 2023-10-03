@@ -1,3 +1,7 @@
+# v1.43.0 (2023-10-03)
+
+* **Feature**: This release adds the ability to replace video frames without modifying the audio essence.
+
 # v1.42.0 (2023-09-22)
 
 * **Feature**: This release supports the creation of of audio-only tracks in CMAF output groups.

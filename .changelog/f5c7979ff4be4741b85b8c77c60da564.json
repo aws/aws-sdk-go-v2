@@ -1,8 +1,0 @@
-{
-    "id": "f5c7979f-f4be-4741-b85b-8c77c60da564",
-    "type": "feature",
-    "description": "GetMetricDataV2 API: Update to include new metrics CONTACTS_RESOLVED_IN_X , AVG_HOLD_TIME_ALL_CONTACTS , AVG_RESOLUTION_TIME , ABANDONMENT_RATE , AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS with added features: Interval Period, TimeZone, Negate MetricFilters, Extended date time range.",
-    "modules": [
-        "service/connect"
-    ]
-}

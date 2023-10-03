@@ -1,3 +1,7 @@
+# v1.109.0 (2023-10-03)
+
+* **Feature**: This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.
+
 # v1.108.0 (2023-09-28)
 
 * **Feature**: Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.
