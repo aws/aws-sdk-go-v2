@@ -2,6 +2,12 @@
 
 package codecatalyst
 
+import (
+	"context"
+	"github.com/aws/smithy-go/auth"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
 // AuthResolverParameters contains the set of inputs necessary for auth scheme
 // resolution.
 type AuthResolverParameters struct {
@@ -19,4 +25,29 @@ func bindAuthResolverParams(input interface{}, options Options) *AuthResolverPar
 	}
 
 	return params
+}
+
+// AuthSchemeResolver returns a set of possible authentication options for an
+// operation.
+type AuthSchemeResolver interface {
+	ResolveAuthSchemes(context.Context, *AuthResolverParameters) ([]*auth.Option, error)
+}
+
+type defaultAuthSchemeResolver struct{}
+
+var _ AuthSchemeResolver = (*defaultAuthSchemeResolver)(nil)
+
+func (*defaultAuthSchemeResolver) ResolveAuthSchemes(ctx context.Context, params *AuthResolverParameters) ([]*auth.Option, error) {
+	if overrides, ok := operationAuthOptions[params.Operation]; ok {
+		return overrides(params), nil
+	}
+	return serviceAuthOptions(params), nil
+}
+
+var operationAuthOptions = map[string]func(*AuthResolverParameters) []*auth.Option{}
+
+func serviceAuthOptions(params *AuthResolverParameters) []*auth.Option {
+	return []*auth.Option{
+		smithyhttp.NewBearerOption(),
+	}
 }

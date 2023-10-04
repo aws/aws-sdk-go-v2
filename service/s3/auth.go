@@ -2,6 +2,12 @@
 
 package s3
 
+import (
+	"context"
+	"github.com/aws/smithy-go/auth"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
 func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {
 	params.Region = options.Region
 }
@@ -32,4 +38,42 @@ func bindAuthResolverParams(input interface{}, options Options) *AuthResolverPar
 	bindAuthParamsRegion(params, input, options)
 
 	return params
+}
+
+// AuthSchemeResolver returns a set of possible authentication options for an
+// operation.
+type AuthSchemeResolver interface {
+	ResolveAuthSchemes(context.Context, *AuthResolverParameters) ([]*auth.Option, error)
+}
+
+type defaultAuthSchemeResolver struct{}
+
+var _ AuthSchemeResolver = (*defaultAuthSchemeResolver)(nil)
+
+func (*defaultAuthSchemeResolver) ResolveAuthSchemes(ctx context.Context, params *AuthResolverParameters) ([]*auth.Option, error) {
+	if overrides, ok := operationAuthOptions[params.Operation]; ok {
+		return overrides(params), nil
+	}
+	return serviceAuthOptions(params), nil
+}
+
+var operationAuthOptions = map[string]func(*AuthResolverParameters) []*auth.Option{
+	"WriteGetObjectResponse": func(params *AuthResolverParameters) []*auth.Option {
+		return []*auth.Option{
+			smithyhttp.NewSigV4Option(func(props *smithyhttp.SigV4Properties) {
+				props.SigningName = "s3"
+				props.SigningRegion = params.Region
+				props.IsUnsignedPayload = true
+			}),
+		}
+	},
+}
+
+func serviceAuthOptions(params *AuthResolverParameters) []*auth.Option {
+	return []*auth.Option{
+		smithyhttp.NewSigV4Option(func(props *smithyhttp.SigV4Properties) {
+			props.SigningName = "s3"
+			props.SigningRegion = params.Region
+		}),
+	}
 }
