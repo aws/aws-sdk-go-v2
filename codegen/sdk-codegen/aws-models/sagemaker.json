@@ -371,6 +371,45 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AdditionalS3DataSource": {
+            "type": "structure",
+            "members": {
+                "S3DataType": {
+                    "target": "com.amazonaws.sagemaker#AdditionalS3DataSourceDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the additional data source that you specify for use in inference or\n            training. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uniform resource identifier (URI) used to identify an additional data source used\n            in inference or training.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompressionType": {
+                    "target": "com.amazonaws.sagemaker#CompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of compression used for an additional data source used in inference or\n            training. Specify <code>None</code> if your additional data source is not compressed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A data source used for training or inference that is in addition to the input dataset\n            or model data.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AdditionalS3DataSourceDataType": {
+            "type": "enum",
+            "members": {
+                "S3OBJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3Object"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AgentVersion": {
             "type": "structure",
             "members": {
@@ -4293,7 +4332,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy.\n        You can specify your batches as either instance count or the overall percentage or your fleet.</p>\n         <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker\n        uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>"
+                "smithy.api#documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a blue/green\n            deployment, a rolling deployment, or a rollback strategy. You can specify your batches\n            as either instance count or the overall percentage or your fleet.</p>\n         <p>For a rollback strategy, if you don't specify the fields in this object, or if you set\n            the <code>Value</code> to 100%, then SageMaker uses a blue/green rollback strategy and rolls\n            all traffic back to the blue fleet.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacitySizeType": {
@@ -6183,7 +6222,7 @@
                 "ModelDataSource": {
                     "target": "com.amazonaws.sagemaker#ModelDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjunction with\n                SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjunction with SageMaker\n                batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
                     }
                 }
             },
@@ -16055,7 +16094,7 @@
                 "EndpointStatus": {
                     "target": "com.amazonaws.sagemaker#EndpointStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the endpoint.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OutOfService</code>: Endpoint is not available to take incoming\n                    requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Creating</code>: <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html\">CreateEndpoint</a> is executing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Updating</code>: <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html\">UpdateEndpoint</a> or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html\">UpdateEndpointWeightsAndCapacities</a> is executing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be\n                    updated or deleted or re-scaled until it has completed. This maintenance\n                    operation does not change any customer-specified values such as VPC config, KMS\n                    encryption, model, instance type, or instance count.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RollingBack</code>: Endpoint fails to scale up or down or change its\n                    variant weight and is in the process of rolling back to its previous\n                    configuration. Once the rollback completes, endpoint returns to an\n                        <code>InService</code> status. This transitional status only applies to an\n                    endpoint that has autoscaling enabled and is undergoing variant weight or\n                    capacity changes as part of an <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html\">UpdateEndpointWeightsAndCapacities</a> call or when the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html\">UpdateEndpointWeightsAndCapacities</a> operation is called\n                    explicitly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code>: Endpoint is available to process incoming\n                    requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html\">DeleteEndpoint</a> is executing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use\n                    the <code>FailureReason</code> value returned by <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html\">DescribeEndpoint</a> for information about the failure. <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html\">DeleteEndpoint</a> is the only operation that can be performed on a\n                    failed endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRollbackFailed</code>: Both the rolling deployment and auto-rollback failed. Your endpoint\n                is in service with a mix of the old and new endpoint configurations. For information about how to remedy\n                this issue and restore the endpoint's status to <code>InService</code>, see\n                    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html\">Rolling Deployments</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the endpoint.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OutOfService</code>: Endpoint is not available to take incoming\n                    requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Creating</code>: <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html\">CreateEndpoint</a> is executing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Updating</code>: <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html\">UpdateEndpoint</a> or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html\">UpdateEndpointWeightsAndCapacities</a> is executing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be\n                    updated or deleted or re-scaled until it has completed. This maintenance\n                    operation does not change any customer-specified values such as VPC config, KMS\n                    encryption, model, instance type, or instance count.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RollingBack</code>: Endpoint fails to scale up or down or change its\n                    variant weight and is in the process of rolling back to its previous\n                    configuration. Once the rollback completes, endpoint returns to an\n                        <code>InService</code> status. This transitional status only applies to an\n                    endpoint that has autoscaling enabled and is undergoing variant weight or\n                    capacity changes as part of an <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html\">UpdateEndpointWeightsAndCapacities</a> call or when the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html\">UpdateEndpointWeightsAndCapacities</a> operation is called\n                    explicitly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code>: Endpoint is available to process incoming\n                    requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html\">DeleteEndpoint</a> is executing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use\n                    the <code>FailureReason</code> value returned by <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html\">DescribeEndpoint</a> for information about the failure. <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html\">DeleteEndpoint</a> is the only operation that can be performed on a\n                    failed endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRollbackFailed</code>: Both the rolling deployment and\n                    auto-rollback failed. Your endpoint is in service with a mix of the old and new\n                    endpoint configurations. For information about how to remedy this issue and\n                    restore the endpoint's status to <code>InService</code>, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html\">Rolling\n                        Deployments</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -26776,7 +26815,7 @@
                     "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of instances of the type specified by <code>InstanceType</code>. Choose an\n            instance count larger than 1 for distributed training algorithms. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html\">Step 2:\n                Launch a SageMaker Distributed Training Job Using the SageMaker Python SDK</a> for more information.</p>",
+                        "smithy.api#documentation": "<p>The number of instances of the type specified by <code>InstanceType</code>. Choose an\n            instance count larger than 1 for distributed training algorithms. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html\">Step 2:\n                Launch a SageMaker Distributed Training Job Using the SageMaker Python SDK</a> for more\n            information.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -38931,7 +38970,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy. If specified, you must specify\n            one and only one of the available data sources.</p>"
+                "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy. If specified, you must specify one\n            and only one of the available data sources.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelDeployConfig": {
@@ -39567,6 +39606,12 @@
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a pre-trained machine learning benchmarked by \n           Amazon SageMaker Inference Recommender model that matches your model. \n           You can find a list of benchmarked models by calling <code>ListModelMetadata</code>.</p>"
+                    }
+                },
+                "AdditionalS3DataSource": {
+                    "target": "com.amazonaws.sagemaker#AdditionalS3DataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional data source that is used during inference in the Docker container for\n            your model package.</p>"
                     }
                 }
             },
@@ -42665,7 +42710,7 @@
                 "CompressionType": {
                     "target": "com.amazonaws.sagemaker#OutputCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model output compression type. Select <code>None</code> to output an uncompressed model, recommended for large model outputs. Defaults to gzip.</p>"
+                        "smithy.api#documentation": "<p>The model output compression type. Select <code>None</code> to output an uncompressed\n            model, recommended for large model outputs. Defaults to gzip.</p>"
                     }
                 }
             },
@@ -48780,7 +48825,7 @@
                 "WaitIntervalInSeconds": {
                     "target": "com.amazonaws.sagemaker#WaitIntervalInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.</p>",
+                        "smithy.api#documentation": "<p>The length of the baking period, during which SageMaker monitors alarms for each batch on\n            the new fleet.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48793,7 +48838,7 @@
                 "RollbackMaximumBatchSize": {
                     "target": "com.amazonaws.sagemaker#CapacitySize",
                     "traits": {
-                        "smithy.api#documentation": "<p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision\n            capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new\n            endpoint fleet. If this field is absent, the default value will be set to 100% of total\n            capacity which means to bring up the whole capacity of the old fleet at once during rollback.</p>"
+                        "smithy.api#documentation": "<p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision\n            capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the\n            new endpoint fleet. If this field is absent, the default value will be set to 100% of\n            total capacity which means to bring up the whole capacity of the old fleet at once\n            during rollback.</p>"
                     }
                 }
             },
@@ -48984,7 +49029,7 @@
                 "CompressionType": {
                     "target": "com.amazonaws.sagemaker#ModelCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object\n            during model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under which\n            all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code> by\n                    slash (/), and use the last part as the filename of the file holding the content\n                    of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by <code>S3Uri</code>,\n                    SageMaker will trim its key by the prefix, and use the remainder as the path\n                    (relative to <code>/opt/ml/model</code>) of the file holding the content of the\n                    S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as\n                    directory names and the last part as filename of the file holding the content of\n                    the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example,\n                    if your uncompressed ML model consists of two S3 objects\n                    <code>s3://mybucket/model/weights</code> and <code>s3://mybucket/model/weights/part1</code>\n                    and you specify <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                    <code>S3Prefix</code> as the value of <code>S3DataType</code>, then it will result in name\n                    clash between <code>/opt/ml/model/weights</code> (a regular file) and\n                    <code>/opt/ml/model/weights/</code> (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using folders</a>.\n                    When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the\n                    folder name you provide. They key of the 0-byte object ends with a slash (/) which violates\n                    SageMaker restrictions on model artifact file names, leading to model deployment failure.\n                </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n                <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object during\n            model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n                <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n                <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under\n            which all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code>\n                    by slash (/), and use the last part as the filename of the file holding the\n                    content of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by\n                        <code>S3Uri</code>, SageMaker will trim its key by the prefix, and use the\n                    remainder as the path (relative to <code>/opt/ml/model</code>) of the file\n                    holding the content of the S3 object. SageMaker will split the remainder by slash\n                    (/), using intermediate parts as directory names and the last part as filename\n                    of the file holding the content of the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example, if\n                    your uncompressed ML model consists of two S3 objects\n                        <code>s3://mybucket/model/weights</code> and\n                        <code>s3://mybucket/model/weights/part1</code> and you specify\n                        <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                        <code>S3Prefix</code> as the value of <code>S3DataType</code>, then it will\n                    result in name clash between <code>/opt/ml/model/weights</code> (a regular file)\n                    and <code>/opt/ml/model/weights/</code> (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using\n                        folders</a>. When you create a folder in S3 console, S3 creates a 0-byte\n                    object with a key set to the folder name you provide. They key of the 0-byte\n                    object ends with a slash (/) which violates SageMaker restrictions on model artifact\n                    file names, leading to model deployment failure. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -51645,7 +51690,7 @@
                 "SourcePipelineExecutionArn": {
                     "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>\n         <p>This field is required if the steps you specify for\n          <code>SelectedSteps</code> depend on output collaterals from any non-specified pipeline\n          steps. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html\">Selective\n          Execution for Pipeline Steps</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>"
                     }
                 },
                 "SelectedSteps": {
@@ -55851,6 +55896,12 @@
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobObjectives",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the metrics that the algorithm emits that can be used as the objective\n            metric in a hyperparameter tuning job.</p>"
+                    }
+                },
+                "AdditionalS3DataSource": {
+                    "target": "com.amazonaws.sagemaker#AdditionalS3DataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional data source used during the training job.</p>"
                     }
                 }
             },

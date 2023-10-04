@@ -95,6 +95,31 @@
                 "target": "com.amazonaws.mediatailor#KeyValuePair"
             }
         },
+        "com.amazonaws.mediatailor#AdBreakOpportunities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#AdBreakOpportunity"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of ad break opportunities detected within the VOD source.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#AdBreakOpportunity": {
+            "type": "structure",
+            "members": {
+                "OffsetMillis": {
+                    "target": "com.amazonaws.mediatailor#__long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The offset in milliseconds from the start of the VOD source at which an ad marker was detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A location at which a zero-duration ad marker was detected in a VOD source manifest.</p>"
+            }
+        },
         "com.amazonaws.mediatailor#AdMarkerPassthrough": {
             "type": "structure",
             "members": {
@@ -2205,6 +2230,12 @@
         "com.amazonaws.mediatailor#DescribeVodSourceResponse": {
             "type": "structure",
             "members": {
+                "AdBreakOpportunities": {
+                    "target": "com.amazonaws.mediatailor#AdBreakOpportunities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ad break opportunities within the VOD source.</p>"
+                    }
+                },
                 "Arn": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
