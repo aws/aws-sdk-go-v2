@@ -1,3 +1,7 @@
+# v1.21.0 (2023-10-04)
+
+* **Feature**: AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.
+
 # v1.20.0 (2023-09-20)
 
 * **Feature**: Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors

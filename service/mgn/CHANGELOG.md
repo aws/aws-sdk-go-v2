@@ -1,3 +1,7 @@
+# v1.21.0 (2023-10-04)
+
+* **Feature**: This release includes the following new APIs: ListConnectors, CreateConnector,  UpdateConnector, DeleteConnector and UpdateSourceServer to support the source action framework feature.
+
 # v1.20.6 (2023-08-22)
 
 * No change notes available for this release.

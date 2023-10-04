@@ -1,3 +1,7 @@
+# v1.1.1 (2023-10-04)
+
+* No change notes available for this release.
+
 # v1.1.0 (2023-10-02)
 
 * **Feature**: Provisioned throughput feature with Amazon and third-party base models, and update validators for model identifier and taggable resource ARNs.

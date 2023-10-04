@@ -1,3 +1,7 @@
+# v1.110.0 (2023-10-04)
+
+* **Feature**: Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.
+
 # v1.109.0 (2023-10-03)
 
 * **Feature**: This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.

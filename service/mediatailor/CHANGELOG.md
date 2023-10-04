@@ -1,3 +1,7 @@
+# v1.28.0 (2023-10-04)
+
+* **Feature**: Updates DescribeVodSource to include a list of ad break opportunities in the response
+
 # v1.27.0 (2023-08-24)
 
 * **Feature**: Adds new source location AUTODETECT_SIGV4 access type.

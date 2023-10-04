@@ -1,3 +1,18 @@
+# Release (2023-10-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.21.0](service/appconfig/CHANGELOG.md#v1210-2023-10-04)
+  * **Feature**: AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.0.0](service/datazone/CHANGELOG.md#v100-2023-10-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Amazon DataZone
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.28.0](service/mediatailor/CHANGELOG.md#v1280-2023-10-04)
+  * **Feature**: Updates DescribeVodSource to include a list of ad break opportunities in the response
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.21.0](service/mgn/CHANGELOG.md#v1210-2023-10-04)
+  * **Feature**: This release includes the following new APIs: ListConnectors, CreateConnector,  UpdateConnector, DeleteConnector and UpdateSourceServer to support the source action framework feature.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.110.0](service/sagemaker/CHANGELOG.md#v11100-2023-10-04)
+  * **Feature**: Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.
+
 # Release (2023-10-03)
 
 ## Module Highlights
