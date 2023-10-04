@@ -3304,6 +3304,11 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 
 	for key, value := range shape {
 		switch key {
+		case "AdBreakOpportunities":
+			if err := awsRestjson1_deserializeDocumentAdBreakOpportunities(&sv.AdBreakOpportunities, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7826,6 +7831,84 @@ func awsRestjson1_deserializeDocumentAdBreakMetadataList(v *[]types.KeyValuePair
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdBreakOpportunities(v *[]types.AdBreakOpportunity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdBreakOpportunity
+	if *v == nil {
+		cv = []types.AdBreakOpportunity{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdBreakOpportunity
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAdBreakOpportunity(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdBreakOpportunity(v **types.AdBreakOpportunity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdBreakOpportunity
+	if *v == nil {
+		sv = &types.AdBreakOpportunity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OffsetMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OffsetMillis = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

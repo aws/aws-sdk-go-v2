@@ -70,6 +70,51 @@ type ChangeServerLifeCycleStateSourceServerLifecycle struct {
 	noSmithyDocumentSerde
 }
 
+type Connector struct {
+
+	// Connector arn.
+	Arn *string
+
+	// Connector ID.
+	ConnectorID *string
+
+	// Connector name.
+	Name *string
+
+	// Connector SSM command config.
+	SsmCommandConfig *ConnectorSsmCommandConfig
+
+	// Connector SSM instance ID.
+	SsmInstanceID *string
+
+	// Connector tags.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Connector SSM command config.
+type ConnectorSsmCommandConfig struct {
+
+	// Connector SSM command config CloudWatch output enabled.
+	//
+	// This member is required.
+	CloudWatchOutputEnabled *bool
+
+	// Connector SSM command config S3 output enabled.
+	//
+	// This member is required.
+	S3OutputEnabled *bool
+
+	// Connector SSM command config CloudWatch log group name.
+	CloudWatchLogGroupName *string
+
+	// Connector SSM command config output S3 bucket name.
+	OutputS3BucketName *string
+
+	noSmithyDocumentSerde
+}
+
 // Source server CPU information.
 type CPU struct {
 
@@ -764,6 +809,15 @@ type ListApplicationsRequestFilters struct {
 	noSmithyDocumentSerde
 }
 
+// List Connectors Request Filters.
+type ListConnectorsRequestFilters struct {
+
+	// List Connectors Request Filters connector IDs.
+	ConnectorIDs []string
+
+	noSmithyDocumentSerde
+}
+
 // List exports request filters.
 type ListExportsRequestFilters struct {
 
@@ -1015,6 +1069,9 @@ type SourceServer struct {
 	// Source server ARN.
 	Arn *string
 
+	// Source Server connector action.
+	ConnectorAction *SourceServerConnectorAction
+
 	// Source server data replication info.
 	DataReplicationInfo *DataReplicationInfo
 
@@ -1097,6 +1154,18 @@ type SourceServerActionsRequestFilters struct {
 
 	// Action IDs to filter source server post migration custom actions by.
 	ActionIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Source Server connector action.
+type SourceServerConnectorAction struct {
+
+	// Source Server connector action connector arn.
+	ConnectorArn *string
+
+	// Source Server connector action credentials secret arn.
+	CredentialsSecretArn *string
 
 	noSmithyDocumentSerde
 }

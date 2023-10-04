@@ -63,6 +63,9 @@ type FinalizeCutoverOutput struct {
 	// Source server ARN.
 	Arn *string
 
+	// Source Server connector action.
+	ConnectorAction *types.SourceServerConnectorAction
+
 	// Source server data replication info.
 	DataReplicationInfo *types.DataReplicationInfo
 

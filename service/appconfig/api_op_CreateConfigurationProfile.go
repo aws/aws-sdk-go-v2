@@ -86,6 +86,14 @@ type CreateConfigurationProfileInput struct {
 	// A description of the configuration profile.
 	Description *string
 
+	// The identifier for an Key Management Service key to encrypt new configuration
+	// data versions in the AppConfig hosted configuration store. This attribute is
+	// only used for hosted configuration types. The identifier can be an KMS key ID,
+	// alias, or the Amazon Resource Name (ARN) of the key ID or alias. To encrypt data
+	// managed in other configuration stores, see the documentation for how to specify
+	// an KMS key for that particular service.
+	KmsKeyIdentifier *string
+
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri . A retrieval role ARN is not required for configurations
 	// stored in the AppConfig hosted configuration store. It is required for all other
@@ -121,6 +129,17 @@ type CreateConfigurationProfileOutput struct {
 
 	// The configuration profile ID.
 	Id *string
+
+	// The Amazon Resource Name of the Key Management Service key to encrypt new
+	// configuration data versions in the AppConfig hosted configuration store. This
+	// attribute is only used for hosted configuration types. To encrypt data managed
+	// in other configuration stores, see the documentation for how to specify an KMS
+	// key for that particular service.
+	KmsKeyArn *string
+
+	// The Key Management Service key identifier (key ID, key alias, or key ARN)
+	// provided when the resource was created or updated.
+	KmsKeyIdentifier *string
 
 	// The URI location of the configuration.
 	LocationUri *string

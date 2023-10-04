@@ -5920,6 +5920,24 @@ func validateAdditionalInferenceSpecifications(v []types.AdditionalInferenceSpec
 	}
 }
 
+func validateAdditionalS3DataSource(v *types.AdditionalS3DataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalS3DataSource"}
+	if len(v.S3DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataType"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
 	if v == nil {
 		return nil
@@ -9099,6 +9117,11 @@ func validateModelPackageContainerDefinition(v *types.ModelPackageContainerDefin
 			invalidParams.AddNested("ModelInput", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AdditionalS3DataSource != nil {
+		if err := validateAdditionalS3DataSource(v.AdditionalS3DataSource); err != nil {
+			invalidParams.AddNested("AdditionalS3DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11130,6 +11153,11 @@ func validateTrainingSpecification(v *types.TrainingSpecification) error {
 	if v.SupportedTuningJobObjectiveMetrics != nil {
 		if err := validateHyperParameterTuningJobObjectives(v.SupportedTuningJobObjectiveMetrics); err != nil {
 			invalidParams.AddNested("SupportedTuningJobObjectiveMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalS3DataSource != nil {
+		if err := validateAdditionalS3DataSource(v.AdditionalS3DataSource); err != nil {
+			invalidParams.AddNested("AdditionalS3DataSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

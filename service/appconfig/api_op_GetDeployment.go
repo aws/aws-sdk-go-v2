@@ -114,8 +114,8 @@ type GetDeploymentOutput struct {
 	// string parameters stored in Amazon Web Services Systems Manager Parameter Store.
 	KmsKeyArn *string
 
-	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID
-	// to encrypt the configuration data using a customer managed key.
+	// The Key Management Service key identifier (key ID, key alias, or key ARN)
+	// provided when the resource was created or updated.
 	KmsKeyIdentifier *string
 
 	// The percentage of targets for which the deployment is available.

@@ -1,0 +1,8 @@
+{
+    "id": "a0362db6-3e80-47e2-8da4-1c37ef214d98",
+    "type": "feature",
+    "description": "Updates DescribeVodSource to include a list of ad break opportunities in the response",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

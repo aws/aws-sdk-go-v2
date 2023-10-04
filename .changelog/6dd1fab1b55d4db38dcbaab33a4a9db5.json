@@ -1,0 +1,8 @@
+{
+    "id": "6dd1fab1-b55d-4db3-8dcb-aab33a4a9db5",
+    "type": "feature",
+    "description": "AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.",
+    "modules": [
+        "service/appconfig"
+    ]
+}

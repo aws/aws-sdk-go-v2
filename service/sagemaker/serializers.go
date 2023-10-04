@@ -16834,6 +16834,28 @@ func awsAwsjson11_serializeDocumentAdditionalInferenceSpecifications(v []types.A
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAdditionalS3DataSource(v *types.AdditionalS3DataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CompressionType) > 0 {
+		ok := object.Key("CompressionType")
+		ok.String(string(v.CompressionType))
+	}
+
+	if len(v.S3DataType) > 0 {
+		ok := object.Key("S3DataType")
+		ok.String(string(v.S3DataType))
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAggregationTransformations(v map[string]types.AggregationTransformationValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21967,6 +21989,13 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalS3DataSource != nil {
+		ok := object.Key("AdditionalS3DataSource")
+		if err := awsAwsjson11_serializeDocumentAdditionalS3DataSource(v.AdditionalS3DataSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ContainerHostname != nil {
 		ok := object.Key("ContainerHostname")
 		ok.String(*v.ContainerHostname)
@@ -25654,6 +25683,13 @@ func awsAwsjson11_serializeDocumentTrainingRepositoryAuthConfig(v *types.Trainin
 func awsAwsjson11_serializeDocumentTrainingSpecification(v *types.TrainingSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalS3DataSource != nil {
+		ok := object.Key("AdditionalS3DataSource")
+		if err := awsAwsjson11_serializeDocumentAdditionalS3DataSource(v.AdditionalS3DataSource, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MetricDefinitions != nil {
 		ok := object.Key("MetricDefinitions")

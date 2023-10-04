@@ -47,6 +47,14 @@ type UpdateConfigurationProfileInput struct {
 	// A description of the configuration profile.
 	Description *string
 
+	// The identifier for a Key Management Service key to encrypt new configuration
+	// data versions in the AppConfig hosted configuration store. This attribute is
+	// only used for hosted configuration types. The identifier can be an KMS key ID,
+	// alias, or the Amazon Resource Name (ARN) of the key ID or alias. To encrypt data
+	// managed in other configuration stores, see the documentation for how to specify
+	// an KMS key for that particular service.
+	KmsKeyIdentifier *string
+
 	// The name of the configuration profile.
 	Name *string
 
@@ -70,6 +78,17 @@ type UpdateConfigurationProfileOutput struct {
 
 	// The configuration profile ID.
 	Id *string
+
+	// The Amazon Resource Name of the Key Management Service key to encrypt new
+	// configuration data versions in the AppConfig hosted configuration store. This
+	// attribute is only used for hosted configuration types. To encrypt data managed
+	// in other configuration stores, see the documentation for how to specify an KMS
+	// key for that particular service.
+	KmsKeyArn *string
+
+	// The Key Management Service key identifier (key ID, key alias, or key ARN)
+	// provided when the resource was created or updated.
+	KmsKeyIdentifier *string
 
 	// The URI location of the configuration.
 	LocationUri *string

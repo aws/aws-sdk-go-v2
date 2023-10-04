@@ -366,6 +366,24 @@ func awsRestjson1_deserializeOpDocumentCreateConfigurationProfileOutput(v **Crea
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		case "KmsKeyIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyIdentifier to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyIdentifier = ptr.String(jtv)
+			}
+
 		case "LocationUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1416,6 +1434,11 @@ func awsRestjson1_deserializeOpHttpBindingsCreateHostedConfigurationVersionOutpu
 	if headerValues := response.Header.Values("Description"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.Description = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("KmsKeyArn"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.KmsKeyArn = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("VersionLabel"); len(headerValues) != 0 {
@@ -2606,6 +2629,24 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationProfileOutput(v **GetConf
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		case "KmsKeyIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyIdentifier to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyIdentifier = ptr.String(jtv)
+			}
+
 		case "LocationUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2985,7 +3026,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Identifier to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKeyIdentifier to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyIdentifier = ptr.String(jtv)
 			}
@@ -4046,6 +4087,11 @@ func awsRestjson1_deserializeOpHttpBindingsGetHostedConfigurationVersionOutput(v
 	if headerValues := response.Header.Values("Description"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.Description = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("KmsKeyArn"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.KmsKeyArn = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("VersionLabel"); len(headerValues) != 0 {
@@ -5855,7 +5901,7 @@ func awsRestjson1_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Identifier to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKeyIdentifier to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyIdentifier = ptr.String(jtv)
 			}
@@ -6263,7 +6309,7 @@ func awsRestjson1_deserializeOpDocumentStopDeploymentOutput(v **StopDeploymentOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Identifier to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKeyIdentifier to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyIdentifier = ptr.String(jtv)
 			}
@@ -6871,6 +6917,24 @@ func awsRestjson1_deserializeOpDocumentUpdateConfigurationProfileOutput(v **Upda
 					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		case "KmsKeyIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyIdentifier to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyIdentifier = ptr.String(jtv)
 			}
 
 		case "LocationUri":
@@ -9700,6 +9764,15 @@ func awsRestjson1_deserializeDocumentHostedConfigurationVersionSummary(v **types
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		case "VersionLabel":

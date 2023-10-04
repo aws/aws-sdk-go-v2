@@ -51,6 +51,9 @@ type DescribeVodSourceInput struct {
 
 type DescribeVodSourceOutput struct {
 
+	// The ad break opportunities within the VOD source.
+	AdBreakOpportunities []types.AdBreakOpportunity
+
 	// The ARN of the VOD source.
 	Arn *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "440cfee2-a4dd-44e1-9505-4a47f519ba89",
+    "type": "feature",
+    "description": "Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

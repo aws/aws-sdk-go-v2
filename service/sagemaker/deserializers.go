@@ -33047,6 +33047,64 @@ func awsAwsjson11_deserializeDocumentAdditionalInferenceSpecifications(v *[]type
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAdditionalS3DataSource(v **types.AdditionalS3DataSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdditionalS3DataSource
+	if *v == nil {
+		sv = &types.AdditionalS3DataSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CompressionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CompressionType to be of type string, got %T instead", value)
+				}
+				sv.CompressionType = types.CompressionType(jtv)
+			}
+
+		case "S3DataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdditionalS3DataSourceDataType to be of type string, got %T instead", value)
+				}
+				sv.S3DataType = types.AdditionalS3DataSourceDataType(jtv)
+			}
+
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAgentVersion(v **types.AgentVersion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -55950,6 +56008,11 @@ func awsAwsjson11_deserializeDocumentModelPackageContainerDefinition(v **types.M
 
 	for key, value := range shape {
 		switch key {
+		case "AdditionalS3DataSource":
+			if err := awsAwsjson11_deserializeDocumentAdditionalS3DataSource(&sv.AdditionalS3DataSource, value); err != nil {
+				return err
+			}
+
 		case "ContainerHostname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -70727,6 +70790,11 @@ func awsAwsjson11_deserializeDocumentTrainingSpecification(v **types.TrainingSpe
 
 	for key, value := range shape {
 		switch key {
+		case "AdditionalS3DataSource":
+			if err := awsAwsjson11_deserializeDocumentAdditionalS3DataSource(&sv.AdditionalS3DataSource, value); err != nil {
+				return err
+			}
+
 		case "MetricDefinitions":
 			if err := awsAwsjson11_deserializeDocumentMetricDefinitionList(&sv.MetricDefinitions, value); err != nil {
 				return err

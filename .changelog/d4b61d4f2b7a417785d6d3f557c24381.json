@@ -1,0 +1,8 @@
+{
+    "id": "d4b61d4f-2b7a-4177-85d6-d3f557c24381",
+    "type": "feature",
+    "description": "Initial release of Amazon DataZone",
+    "modules": [
+        "service/datazone"
+    ]
+}

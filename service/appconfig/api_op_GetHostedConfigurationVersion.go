@@ -70,6 +70,11 @@ type GetHostedConfigurationVersionOutput struct {
 	// A description of the configuration.
 	Description *string
 
+	// The Amazon Resource Name of the Key Management Service key that was used to
+	// encrypt this specific version of the configuration data in the AppConfig hosted
+	// configuration store.
+	KmsKeyArn *string
+
 	// A user-defined label for an AppConfig hosted configuration version.
 	VersionLabel *string
 

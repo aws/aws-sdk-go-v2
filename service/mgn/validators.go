@@ -130,6 +130,26 @@ func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnector struct {
+}
+
+func (*validateOpCreateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLaunchConfigurationTemplate struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnector struct {
+}
+
+func (*validateOpDeleteConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1010,26 @@ func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnector struct {
+}
+
+func (*validateOpUpdateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLaunchConfiguration struct {
 }
 
@@ -1050,6 +1110,26 @@ func (m *validateOpUpdateReplicationConfigurationTemplate) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSourceServer struct {
+}
+
+func (*validateOpUpdateSourceServer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSourceServer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSourceServerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSourceServerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSourceServerReplicationType struct {
 }
 
@@ -1114,6 +1194,10 @@ func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
 
+func addOpCreateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnector{}, middleware.After)
+}
+
 func addOpCreateLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLaunchConfigurationTemplate{}, middleware.After)
 }
@@ -1128,6 +1212,10 @@ func addOpCreateWaveValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
+}
+
+func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
 }
 
 func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1282,6 +1370,10 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
+func addOpUpdateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnector{}, middleware.After)
+}
+
 func addOpUpdateLaunchConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLaunchConfiguration{}, middleware.After)
 }
@@ -1296,6 +1388,10 @@ func addOpUpdateReplicationConfigurationValidationMiddleware(stack *middleware.S
 
 func addOpUpdateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateReplicationConfigurationTemplate{}, middleware.After)
+}
+
+func addOpUpdateSourceServerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSourceServer{}, middleware.After)
 }
 
 func addOpUpdateSourceServerReplicationTypeValidationMiddleware(stack *middleware.Stack) error {
@@ -1313,6 +1409,24 @@ func validateChangeServerLifeCycleStateSourceServerLifecycle(v *types.ChangeServ
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeServerLifeCycleStateSourceServerLifecycle"}
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorSsmCommandConfig(v *types.ConnectorSsmCommandConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorSsmCommandConfig"}
+	if v.S3OutputEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputEnabled"))
+	}
+	if v.CloudWatchOutputEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchOutputEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1551,6 +1665,29 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	}
 }
 
+func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SsmInstanceID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SsmInstanceID"))
+	}
+	if v.SsmCommandConfig != nil {
+		if err := validateConnectorSsmCommandConfig(v.SsmCommandConfig); err != nil {
+			invalidParams.AddNested("SsmCommandConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLaunchConfigurationTemplateInput(v *CreateLaunchConfigurationTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1632,6 +1769,21 @@ func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
 	if v.ApplicationID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
+	if v.ConnectorID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2263,6 +2415,26 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	}
 }
 
+func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorInput"}
+	if v.ConnectorID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorID"))
+	}
+	if v.SsmCommandConfig != nil {
+		if err := validateConnectorSsmCommandConfig(v.SsmCommandConfig); err != nil {
+			invalidParams.AddNested("SsmCommandConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLaunchConfigurationInput(v *UpdateLaunchConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2325,6 +2497,21 @@ func validateOpUpdateReplicationConfigurationTemplateInput(v *UpdateReplicationC
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateReplicationConfigurationTemplateInput"}
 	if v.ReplicationConfigurationTemplateID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigurationTemplateID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSourceServerInput(v *UpdateSourceServerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSourceServerInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

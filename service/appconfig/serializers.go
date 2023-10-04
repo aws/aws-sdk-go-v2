@@ -187,6 +187,11 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationProfileInput(v *CreateCo
 		ok.String(*v.Description)
 	}
 
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
+	}
+
 	if v.LocationUri != nil {
 		ok := object.Key("LocationUri")
 		ok.String(*v.LocationUri)
@@ -3137,6 +3142,11 @@ func awsRestjson1_serializeOpDocumentUpdateConfigurationProfileInput(v *UpdateCo
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
 	}
 
 	if v.Name != nil {

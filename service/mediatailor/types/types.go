@@ -87,6 +87,19 @@ type AdBreak struct {
 	noSmithyDocumentSerde
 }
 
+// A location at which a zero-duration ad marker was detected in a VOD source
+// manifest.
+type AdBreakOpportunity struct {
+
+	// The offset in milliseconds from the start of the VOD source at which an ad
+	// marker was detected.
+	//
+	// This member is required.
+	OffsetMillis int64
+
+	noSmithyDocumentSerde
+}
+
 // For HLS, when set to true , MediaTailor passes through EXT-X-CUE-IN ,
 // EXT-X-CUE-OUT , and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin
 // manifest to the MediaTailor personalized manifest. No logic is applied to these
