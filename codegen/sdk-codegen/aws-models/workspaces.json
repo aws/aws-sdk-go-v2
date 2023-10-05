@@ -164,6 +164,35 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#ApplicationAssociatedResourceType": {
+            "type": "enum",
+            "members": {
+                "WORKSPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKSPACE"
+                    }
+                },
+                "BUNDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUNDLE"
+                    }
+                },
+                "IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ApplicationAssociatedResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#ApplicationAssociatedResourceType"
+            }
+        },
         "com.amazonaws.workspaces#ApplicationList": {
             "type": "list",
             "member": {
@@ -174,6 +203,70 @@
                     "min": 1,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.workspaces#ApplicationNotSupportedException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The specified application is not supported.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.workspaces#ApplicationResourceAssociation": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application.</p>"
+                    }
+                },
+                "AssociatedResourceId": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the associated resource.</p>"
+                    }
+                },
+                "AssociatedResourceType": {
+                    "target": "com.amazonaws.workspaces#ApplicationAssociatedResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the associated resource.</p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association status was last updated.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#AssociationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the application resource association.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.workspaces#AssociationStateReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the association deployment failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the association between an application and an application resource.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#ApplicationResourceAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#ApplicationResourceAssociation"
             }
         },
         "com.amazonaws.workspaces#AssociateConnectionAlias": {
@@ -305,6 +398,200 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#AssociateWorkspaceApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#AssociateWorkspaceApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#AssociateWorkspaceApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ApplicationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ComputeNotCompatibleException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#IncompatibleApplicationsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperatingSystemNotCompatibleException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the specified application to the specified WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#AssociateWorkspaceApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#AssociateWorkspaceApplicationResult": {
+            "type": "structure",
+            "members": {
+                "Association": {
+                    "target": "com.amazonaws.workspaces#WorkspaceResourceAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the association between the specified WorkSpace and the specified application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#AssociationErrorCode": {
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_DISKSPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationError.InsufficientDiskSpace"
+                    }
+                },
+                "INSUFFICIENT_MEMORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationError.InsufficientMemory"
+                    }
+                },
+                "UNSUPPORTED_OPERATING_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationError.UnsupportedOperatingSystem"
+                    }
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeploymentError.InternalServerError"
+                    }
+                },
+                "WORKSPACE_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeploymentError.WorkspaceUnreachable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#AssociationState": {
+            "type": "enum",
+            "members": {
+                "PENDING_INSTALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_INSTALL"
+                    }
+                },
+                "PENDING_INSTALL_DEPLOYMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_INSTALL_DEPLOYMENT"
+                    }
+                },
+                "PENDING_UNINSTALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_UNINSTALL"
+                    }
+                },
+                "PENDING_UNINSTALL_DEPLOYMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_UNINSTALL_DEPLOYMENT"
+                    }
+                },
+                "INSTALLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTALLING"
+                    }
+                },
+                "UNINSTALLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNINSTALLING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#AssociationStateReason": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.workspaces#AssociationErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code of the association deployment failure.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.workspaces#String2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message of the association deployment failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the reason that the association deployment failed, including the error code and error message.</p>"
+            }
+        },
         "com.amazonaws.workspaces#AssociationStatus": {
             "type": "enum",
             "members": {
@@ -407,6 +694,23 @@
         "com.amazonaws.workspaces#BooleanObject": {
             "type": "boolean"
         },
+        "com.amazonaws.workspaces#BundleAssociatedResourceType": {
+            "type": "enum",
+            "members": {
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#BundleAssociatedResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#BundleAssociatedResourceType"
+            }
+        },
         "com.amazonaws.workspaces#BundleId": {
             "type": "string",
             "traits": {
@@ -433,6 +737,62 @@
         },
         "com.amazonaws.workspaces#BundleOwner": {
             "type": "string"
+        },
+        "com.amazonaws.workspaces#BundleResourceAssociation": {
+            "type": "structure",
+            "members": {
+                "AssociatedResourceId": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the associated resource.</p>"
+                    }
+                },
+                "AssociatedResourceType": {
+                    "target": "com.amazonaws.workspaces#BundleAssociatedResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the associated resources.</p>"
+                    }
+                },
+                "BundleId": {
+                    "target": "com.amazonaws.workspaces#BundleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bundle.</p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association is created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association status was last updated.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#AssociationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bundle resource association.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.workspaces#AssociationStateReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the association deployment failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the association between an application and a bundle resource.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#BundleResourceAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#BundleResourceAssociation"
+            }
         },
         "com.amazonaws.workspaces#BundleType": {
             "type": "enum",
@@ -694,6 +1054,20 @@
                         "smithy.api#enumValue": "GRAPHICSPRO_G4DN"
                     }
                 }
+            }
+        },
+        "com.amazonaws.workspaces#ComputeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#Compute"
+            }
+        },
+        "com.amazonaws.workspaces#ComputeNotCompatibleException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The compute type of the WorkSpace is not compatible with the application.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.workspaces#ComputeType": {
@@ -2335,6 +2709,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#DeployWorkspaceApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DeployWorkspaceApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DeployWorkspaceApplicationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#IncompatibleApplicationsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deploys associated applications to the specified WorkSpace</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DeployWorkspaceApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Force": {
+                    "target": "com.amazonaws.workspaces#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled, \n         it allows previously failed deployments to be retried.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DeployWorkspaceApplicationsResult": {
+            "type": "structure",
+            "members": {
+                "Deployment": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationDeployment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of deployed associations and information about them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#DeregisterWorkspaceDirectory": {
             "type": "operation",
             "input": {
@@ -2474,6 +2915,254 @@
                     "target": "com.amazonaws.workspaces#DedicatedTenancyManagementCidrRange",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address range, specified as an IPv4 CIDR block, used for the management network\n         interface.</p>\n         <p>The management network interface is connected to a secure Amazon WorkSpaces management\n         network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces\n         clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeApplicationAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeApplicationAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeApplicationAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the associations between the application and the specified associated resources.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DescribeApplicationAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.workspaces#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of associations to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the specified application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceTypes": {
+                    "target": "com.amazonaws.workspaces#ApplicationAssociatedResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the associated resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeApplicationAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.workspaces#ApplicationResourceAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of associations and information about them.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeApplicationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DescribeApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationIds": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of one or more applications.</p>"
+                    }
+                },
+                "ComputeTypeNames": {
+                    "target": "com.amazonaws.workspaces#ComputeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute types supported by the applications.</p>"
+                    }
+                },
+                "LicenseType": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationLicenseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The license availability for the applications.</p>"
+                    }
+                },
+                "OperatingSystemNames": {
+                    "target": "com.amazonaws.workspaces#OperatingSystemNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating systems supported by the applications.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the applications.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.workspaces#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of applications to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeApplicationsResult": {
+            "type": "structure",
+            "members": {
+                "Applications": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of information about the specified applications.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeBundleAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeBundleAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeBundleAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the associations between the applications and the specified bundle.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeBundleAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "BundleId": {
+                    "target": "com.amazonaws.workspaces#BundleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceTypes": {
+                    "target": "com.amazonaws.workspaces#BundleAssociatedResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types of the associated resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeBundleAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.workspaces#BundleResourceAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of information about the specified associations.</p>"
                     }
                 }
             },
@@ -2839,6 +3528,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#DescribeImageAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeImageAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeImageAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the associations between the applications and the specified image.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeImageAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceTypes": {
+                    "target": "com.amazonaws.workspaces#ImageAssociatedResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types of the associated resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeImageAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.workspaces#ImageResourceAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of information about the specified associations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#DescribeIpGroups": {
             "type": "operation",
             "input": {
@@ -2944,6 +3695,68 @@
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeWorkspaceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeWorkspaceAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the associations betweens applications and the specified WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceTypes": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceAssociatedResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types of the associated resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.workspaces#WorkspaceResourceAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of information about the specified associations.</p>"
                     }
                 }
             },
@@ -3577,6 +4390,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#DisassociateWorkspaceApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DisassociateWorkspaceApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DisassociateWorkspaceApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the specified application from a WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DisassociateWorkspaceApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DisassociateWorkspaceApplicationResult": {
+            "type": "structure",
+            "members": {
+                "Association": {
+                    "target": "com.amazonaws.workspaces#WorkspaceResourceAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the targeted association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#DnsIpAddresses": {
             "type": "list",
             "member": {
@@ -3606,7 +4484,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides in-depth details about the error. These details include the \n         possible causes of the errors and troubleshooting information.</p>"
+                "smithy.api#documentation": "<p>Describes in-depth details about the error. These details include the \n         possible causes of the error and troubleshooting information.</p>"
             }
         },
         "com.amazonaws.workspaces#ErrorDetailsList": {
@@ -3744,6 +4622,23 @@
                 "smithy.api#documentation": "<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>),\n         rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>"
             }
         },
+        "com.amazonaws.workspaces#ImageAssociatedResourceType": {
+            "type": "enum",
+            "members": {
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ImageAssociatedResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#ImageAssociatedResourceType"
+            }
+        },
         "com.amazonaws.workspaces#ImagePermission": {
             "type": "structure",
             "members": {
@@ -3762,6 +4657,62 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#ImagePermission"
+            }
+        },
+        "com.amazonaws.workspaces#ImageResourceAssociation": {
+            "type": "structure",
+            "members": {
+                "AssociatedResourceId": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the associated resource.</p>"
+                    }
+                },
+                "AssociatedResourceType": {
+                    "target": "com.amazonaws.workspaces#ImageAssociatedResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the associated resources.</p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association is created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association status was last updated.</p>"
+                    }
+                },
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the image.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#AssociationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the image resource association.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.workspaces#AssociationStateReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the association deployment failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the association between an application and an image resource.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#ImageResourceAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#ImageResourceAssociation"
             }
         },
         "com.amazonaws.workspaces#ImageType": {
@@ -3994,6 +4945,14 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#IncompatibleApplicationsException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The specified application is not compatible with the resource.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.workspaces#InvalidParameterValuesException": {
@@ -4991,6 +5950,91 @@
                 "smithy.api#documentation": "<p>The operating system that the image is running.</p>"
             }
         },
+        "com.amazonaws.workspaces#OperatingSystemName": {
+            "type": "enum",
+            "members": {
+                "AMAZON_LINUX_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_LINUX_2"
+                    }
+                },
+                "UBUNTU_18_04": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UBUNTU_18_04"
+                    }
+                },
+                "UBUNTU_20_04": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UBUNTU_20_04"
+                    }
+                },
+                "UBUNTU_22_04": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UBUNTU_22_04"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "WINDOWS_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_10"
+                    }
+                },
+                "WINDOWS_11": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_11"
+                    }
+                },
+                "WINDOWS_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_7"
+                    }
+                },
+                "WINDOWS_SERVER_2016": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2016"
+                    }
+                },
+                "WINDOWS_SERVER_2019": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2019"
+                    }
+                },
+                "WINDOWS_SERVER_2022": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2022"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#OperatingSystemNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#OperatingSystemName"
+            }
+        },
+        "com.amazonaws.workspaces#OperatingSystemNotCompatibleException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The operating system of the WorkSpace is not compatible with the application.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.workspaces#OperatingSystemType": {
             "type": "enum",
             "members": {
@@ -5468,6 +6512,24 @@
                     "min": 1,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.workspaces#ResourceInUseException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspaces#ExceptionMessage"
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that is in use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource is currently in use.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.workspaces#ResourceLimitExceededException": {
@@ -5989,6 +7051,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#String2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.workspaces#SubnetId": {
@@ -6558,6 +7629,175 @@
         },
         "com.amazonaws.workspaces#VolumeEncryptionKey": {
             "type": "string"
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplication": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application.</p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the application is created.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workspaces#String2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the WorkSpace application.</p>"
+                    }
+                },
+                "LicenseType": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationLicenseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The license availability for the applications.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the WorkSpace application.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the WorkSpace application.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceApplicationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of WorkSpace application.</p>"
+                    }
+                },
+                "SupportedComputeTypeNames": {
+                    "target": "com.amazonaws.workspaces#ComputeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported compute types of the WorkSpace application.</p>"
+                    }
+                },
+                "SupportedOperatingSystemNames": {
+                    "target": "com.amazonaws.workspaces#OperatingSystemNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported operating systems of the WorkSpace application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the WorkSpace application.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationDeployment": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.workspaces#WorkspaceResourceAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associations between the applications and the associated resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the WorkSpace application deployment.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^wsa-[0-9a-z]{8,63}$"
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#WorkSpaceApplicationId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationLicenseType": {
+            "type": "enum",
+            "members": {
+                "LICENSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LICENSED"
+                    }
+                },
+                "UNLICENSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNLICENSED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#WorkSpaceApplication"
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}|AMAZON$"
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceApplicationState": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "UNINSTALL_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNINSTALL_ONLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceAssociatedResourceType": {
+            "type": "enum",
+            "members": {
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#WorkSpaceAssociatedResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#WorkSpaceAssociatedResourceType"
+            }
         },
         "com.amazonaws.workspaces#Workspace": {
             "type": "structure",
@@ -7185,7 +8425,7 @@
                 "ErrorDetails": {
                     "target": "com.amazonaws.workspaces#ErrorDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the error returned for the image.</p>"
+                        "smithy.api#documentation": "<p>Additional details of the error returned for the image, including the \n         possible causes of the errors and troubleshooting information.</p>"
                     }
                 }
             },
@@ -7532,6 +8772,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html\">\n            Protocols for Amazon WorkSpaces</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Only available for WorkSpaces created with PCoIP bundles.</p>\n               </li>\n               <li>\n                  <p>The <code>Protocols</code> property is case sensitive. Ensure you use <code>PCOIP</code> or <code>WSP</code>.</p>\n               </li>\n               <li>\n                  <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles \n               (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).</p>\n               </li>\n            </ul>\n         </note>"
                     }
+                },
+                "OperatingSystemName": {
+                    "target": "com.amazonaws.workspaces#OperatingSystemName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operating system.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7607,6 +8853,62 @@
                     "min": 1,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.workspaces#WorkspaceResourceAssociation": {
+            "type": "structure",
+            "members": {
+                "AssociatedResourceId": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the associated resource.</p>"
+                    }
+                },
+                "AssociatedResourceType": {
+                    "target": "com.amazonaws.workspaces#WorkSpaceAssociatedResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types of the associated resource.</p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association is created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the association status was last updated.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#AssociationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the WorkSpace resource association.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.workspaces#AssociationStateReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the association deployment failed.</p>"
+                    }
+                },
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the association between an application and a WorkSpace resource.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#WorkspaceResourceAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#WorkspaceResourceAssociation"
             }
         },
         "com.amazonaws.workspaces#WorkspaceState": {
@@ -7777,6 +9079,9 @@
                     "target": "com.amazonaws.workspaces#AssociateIpGroups"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#AssociateWorkspaceApplication"
+                },
+                {
                     "target": "com.amazonaws.workspaces#AuthorizeIpRules"
                 },
                 {
@@ -7831,6 +9136,9 @@
                     "target": "com.amazonaws.workspaces#DeleteWorkspaceImage"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#DeployWorkspaceApplications"
+                },
+                {
                     "target": "com.amazonaws.workspaces#DeregisterWorkspaceDirectory"
                 },
                 {
@@ -7838,6 +9146,15 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#DescribeAccountModifications"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DescribeApplicationAssociations"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DescribeApplications"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DescribeBundleAssociations"
                 },
                 {
                     "target": "com.amazonaws.workspaces#DescribeClientBranding"
@@ -7855,10 +9172,16 @@
                     "target": "com.amazonaws.workspaces#DescribeConnectionAliasPermissions"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#DescribeImageAssociations"
+                },
+                {
                     "target": "com.amazonaws.workspaces#DescribeIpGroups"
                 },
                 {
                     "target": "com.amazonaws.workspaces#DescribeTags"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DescribeWorkspaceAssociations"
                 },
                 {
                     "target": "com.amazonaws.workspaces#DescribeWorkspaceBundles"
@@ -7886,6 +9209,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#DisassociateIpGroups"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DisassociateWorkspaceApplication"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ImportClientBranding"

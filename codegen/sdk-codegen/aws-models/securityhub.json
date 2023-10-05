@@ -4877,6 +4877,297 @@
                 "smithy.api#documentation": "<p>Contains the cross-origin resource sharing (CORS) configuration for the API. CORS is\n         only supported for HTTP APIs.</p>"
             }
         },
+        "com.amazonaws.securityhub#AwsDmsEndpointDetails": {
+            "type": "structure",
+            "members": {
+                "CertificateArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) for the SSL certificate that encrypts connections between the DMS endpoint and the \n            replication instance.\n        </p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the endpoint database.</p>"
+                    }
+                },
+                "EndpointArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the endpoint.\n        </p>"
+                    }
+                },
+                "EndpointIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The database endpoint identifier.\n        </p>"
+                    }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of endpoint. Valid values are source and target.\n        </p>"
+                    }
+                },
+                "EngineName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of engine for the endpoint, depending on the <code>EndpointType</code> value.\n        </p>"
+                    }
+                },
+                "ExternalId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A value that can be used for cross-account validation.\n        </p>"
+                    }
+                },
+                "ExtraConnectionAttributes": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Additional attributes associated with the connection.\n        </p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An DMS key identifier that is used to encrypt the connection parameters for the endpoint.\n            If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default \n            encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your \n            Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The port used to access the endpoint.\n        </p>"
+                    }
+                },
+                "ServerName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the server where the endpoint database resides.</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The SSL mode used to connect to the endpoint. The default is none.</p>"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The user name to be used to log in to the endpoint database.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about an Database Migration Service (DMS) endpoint. An endpoint provides connection, data \n            store type, and location information about your data store.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsDmsReplicationInstanceDetails": {
+            "type": "structure",
+            "members": {
+                "AllocatedStorage": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The amount of storage (in gigabytes) that is allocated for the replication instance.\n        </p>"
+                    }
+                },
+                "AutoMinorVersionUpgrade": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n        Indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance \n        window.\n        </p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zone that the replication instance is created in. The default value is a random, system-chosen \n            Availability Zone in the endpoint's Amazon Web Services Region, such as <code>us-east-1d</code>.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The engine version number of the replication instance. If an engine version number is not specified when a \n            replication instance is created, the default is the latest engine version available.\n        </p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An KMS key identifier that is used to encrypt the data on the replication instance. If you don't \n            specify a value for the <code>KmsKeyId</code> parameter, DMS uses your default encryption key. \n            KMS creates the default encryption key for your Amazon Web Services account. Your \n            Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "MultiAZ": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Specifies whether the replication instance is deployed across multiple Availability Zones (AZs). You can't set the \n            <code>AvailabilityZone</code> parameter if the <code>MultiAZ</code> parameter is set to <code>true</code>.</p>"
+                    }
+                },
+                "PreferredMaintenanceWindow": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maintenance window times for the replication instance. Upgrades to the replication instance are performed during \n            this time.</p>"
+                    }
+                },
+                "PubliclyAccessible": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance \n            with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default \n            value is <code>true</code>.</p>"
+                    }
+                },
+                "ReplicationInstanceClass": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The compute and memory capacity of the replication instance as defined for the specified replication instance class. </p>"
+                    }
+                },
+                "ReplicationInstanceIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The replication instance identifier.</p>"
+                    }
+                },
+                "ReplicationSubnetGroup": {
+                    "target": "com.amazonaws.securityhub#AwsDmsReplicationInstanceReplicationSubnetGroupDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The subnet group for the replication instance.</p>"
+                    }
+                },
+                "VpcSecurityGroups": {
+                    "target": "com.amazonaws.securityhub#AwsDmsReplicationInstanceVpcSecurityGroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The virtual private cloud (VPC) security group for the replication instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about an Database Migration Service (DMS) replication instance. DMS uses a replication instance to connect to \n            your source data store, read the source data, and format the data for consumption by the target data store.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsDmsReplicationInstanceReplicationSubnetGroupDetails": {
+            "type": "structure",
+            "members": {
+                "ReplicationSubnetGroupIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the replication subnet group.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about the replication subnet group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsDmsReplicationInstanceVpcSecurityGroupsDetails": {
+            "type": "structure",
+            "members": {
+                "VpcSecurityGroupId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the VPC security group that’s associated with the replication instance.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about the virtual private cloud (VPC) security group that’s associated with the replication instance.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsDmsReplicationInstanceVpcSecurityGroupsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsDmsReplicationInstanceVpcSecurityGroupsDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsDmsReplicationTaskDetails": {
+            "type": "structure",
+            "members": {
+                "CdcStartPosition": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates when you want a change data capture (CDC) operation to start. <code>CCdcStartPosition</code> or \n            <code>CCdcStartTime</code> specifies when you want a CDC operation to start. Only a value for one of these fields \n            is included.</p>"
+                    }
+                },
+                "CdcStartTime": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates the start time for a CDC operation. <code>CdcStartPosition</code> or <code>CCdcStartTime</code> specifies \n            when you want a CDC operation to start. Only a value for one of these fields is included.</p>"
+                    }
+                },
+                "CdcStopPosition": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates when you want a CDC operation to stop. The value can be either server time or commit time.</p>"
+                    }
+                },
+                "MigrationType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The migration type.\n        </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the replication task.</p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A display name for the resource identifier at the end of the <code>EndpointArn</code> response parameter. \n            If you don't specify a <code>ResourceIdentifier</code> value, DMS generates a default identifier value for \n            the end of <code>EndpointArn</code>.</p>"
+                    }
+                },
+                "ReplicationInstanceArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of a replication instance.\n        </p>"
+                    }
+                },
+                "ReplicationTaskIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The user-defined replication task identifier or name.</p>"
+                    }
+                },
+                "ReplicationTaskSettings": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The settings for the replication task.</p>"
+                    }
+                },
+                "SourceEndpointArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the source endpoint.</p>"
+                    }
+                },
+                "TableMappings": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The table mappings for the replication task, in JSON format.</p>"
+                    }
+                },
+                "TargetEndpointArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the target endpoint.</p>"
+                    }
+                },
+                "TaskData": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Supplemental information that the task requires to migrate the data for certain source and target endpoints.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about an Database Migration Service (DMS) replication task. A replication task moves a set of data from the \n            source endpoint to the target endpoint.</p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsDynamoDbTableAttributeDefinition": {
             "type": "structure",
             "members": {
@@ -10015,6 +10306,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The data volume definitions for the task.</p>"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status of the task definition.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -11797,6 +12094,202 @@
                 "smithy.api#documentation": "<p>\n            A schema defines the structure of events that are sent to Amazon EventBridge. Schema registries are containers for \n            schemas. They collect and organize schemas so that your schemas are in logical groups. \n        </p>"
             }
         },
+        "com.amazonaws.securityhub#AwsEventsEndpointDetails": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the endpoint.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A description of the endpoint.\n        </p>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The URL subdomain of the endpoint. For example, if <code>EndpointUrl</code> is \n            <code>https://abcde.veo.endpoints.event.amazonaws.com</code>, then the <code>EndpointId</code> is <code>abcde.veo</code>.</p>"
+                    }
+                },
+                "EndpointUrl": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The URL of the endpoint.</p>"
+                    }
+                },
+                "EventBuses": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointEventBusesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The event buses being used by the endpoint.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the endpoint.</p>"
+                    }
+                },
+                "ReplicationConfig": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointReplicationConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Whether event replication was enabled or disabled for this endpoint. The default state is <code>ENABLED</code>, which \n            means you must supply a <code>RoleArn</code>. If you don't have a <code>RoleArn</code> or you don't want event \n            replication enabled, set the state to <code>DISABLED</code>.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the role used by event replication for the endpoint.</p>"
+                    }
+                },
+                "RoutingConfig": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The routing configuration of the endpoint.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current state of the endpoint.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The reason the endpoint is in its current state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about an Amazon EventBridge global endpoint. The endpoint can improve your application’s \n            availability by making it Regional-fault tolerant.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointEventBusesDetails": {
+            "type": "structure",
+            "members": {
+                "EventBusArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the event bus that the endpoint is associated with.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about the Amazon EventBridge event buses that the endpoint is associated with.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointEventBusesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEventsEndpointEventBusesDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointReplicationConfigDetails": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The state of event replication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Indicates whether replication is enabled or disabled for the endpoint. If enabled, the endpoint can replicate all \n            events to a secondary Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigDetails": {
+            "type": "structure",
+            "members": {
+                "FailoverConfig": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigFailoverConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about the routing configuration of the endpoint.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigFailoverConfigDetails": {
+            "type": "structure",
+            "members": {
+                "Primary": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The main Region of the endpoint.</p>"
+                    }
+                },
+                "Secondary": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Region that events are routed to when failover is triggered or event replication is enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails": {
+            "type": "structure",
+            "members": {
+                "HealthCheck": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the health check used by the endpoint to determine whether failover is triggered.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about the primary Amazon Web Services Region of the endpoint.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails": {
+            "type": "structure",
+            "members": {
+                "Route": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Defines the secondary Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The Amazon Web Services Region that events are routed to when failover is triggered or event replication is enabled.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEventsEventbusDetails": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the account permitted to write events to the current account.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the event bus.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The policy that enables the external account to send events to your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about Amazon EventBridge event bus. An event bus is a router that receives events and delivers \n            them to zero or more destinations, or targets. This can be a custom event bus which you can use to receive events \n            from your custom applications and services, or it can be a partner event bus which can be matched to a partner event \n            source.</p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsGuardDutyDetectorDataSourcesCloudTrailDetails": {
             "type": "structure",
             "members": {
@@ -13156,6 +13649,226 @@
                 "target": "com.amazonaws.securityhub#AwsMountPoint"
             }
         },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationDetails": {
+            "type": "structure",
+            "members": {
+                "Sasl": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationSaslDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details for client authentication using SASL.</p>"
+                    }
+                },
+                "Unauthenticated": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details for allowing no client authentication.</p>"
+                    }
+                },
+                "Tls": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationTlsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details for client authentication using TLS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about different modes of client authentication.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationSaslDetails": {
+            "type": "structure",
+            "members": {
+                "Iam": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details for SASL client authentication using IAM. </p>"
+                    }
+                },
+                "Scram": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Details for SASL client authentication using SCRAM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details for client authentication using SASL.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Indicates whether SASL/IAM authentication is enabled or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Details for SASL/IAM client authentication.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Indicates whether SASL/SCRAM authentication is enabled or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Details for SASL/SCRAM client authentication.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationTlsDetails": {
+            "type": "structure",
+            "members": {
+                "CertificateAuthorityArnList": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            List of Amazon Web Services Private CA Amazon Resource Names (ARNs). Amazon Web Services Private CA enables creation of \nprivate certificate authority (CA) hierarchies, including root and subordinate CAs, without the investment and maintenance costs \nof operating an on-premises CA.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Indicates whether TLS authentication is enabled or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details for client authentication using TLS.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Indicates whether unauthenticated is allowed or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details for allowing no client authentication.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoDetails": {
+            "type": "structure",
+            "members": {
+                "EncryptionInfo": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Includes encryption-related information, such as the KMS key used for encrypting data at rest and \nwhether you want Amazon MSK to encrypt your data in transit.</p>"
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current version of the MSK cluster.</p>"
+                    }
+                },
+                "NumberOfBrokerNodes": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The number of broker nodes in the cluster.</p>"
+                    }
+                },
+                "ClusterName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the cluster.</p>"
+                    }
+                },
+                "ClientAuthentication": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoClientAuthenticationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides information for different modes of client authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provide details about an Amazon MSK cluster.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoDetails": {
+            "type": "structure",
+            "members": {
+                "EncryptionInTransit": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The settings for encrypting data in transit.</p>"
+                    }
+                },
+                "EncryptionAtRest": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The data-volume encryption details. You can't update encryption at rest settings for existing clusters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Includes encryption-related information, such as the KMS key used for encrypting data at rest and \nwhether you want MSK to encrypt your data in transit.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails": {
+            "type": "structure",
+            "members": {
+                "DataVolumeKMSKeyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the KMS key for encrypting data at rest. If you don't specify a \nKMS key, MSK creates one for you and uses it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The data-volume encryption details. You can't update encryption at rest settings for existing clusters.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails": {
+            "type": "structure",
+            "members": {
+                "InCluster": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            When set to <code>true</code>, it indicates that data communication among the broker nodes of the cluster is \n            encrypted. When set to <code>false</code>, the communication happens in plain text. The default value is \n            <code>true</code>.</p>"
+                    }
+                },
+                "ClientBroker": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates the encryption setting for data in transit between clients and brokers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The settings for encrypting data in transit.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsMskClusterDetails": {
+            "type": "structure",
+            "members": {
+                "ClusterInfo": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterClusterInfoDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides information about a cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster. \n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsNetworkFirewallFirewallDetails": {
             "type": "structure",
             "members": {
@@ -14038,6 +14751,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the mapping of IAM accounts to database accounts is enabled.</p>"
+                    }
+                },
+                "AutoMinorVersionUpgrade": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Indicates if minor version upgrades are automatically applied to the cluster.</p>"
                     }
                 }
             },
@@ -16216,6 +16936,124 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#AwsRedshiftClusterVpcSecurityGroup"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53HostedZoneConfigDetails": {
+            "type": "structure",
+            "members": {
+                "Comment": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Any comments that you include about the hosted zone.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that contains an optional comment about your Amazon Route 53 hosted zone.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53HostedZoneDetails": {
+            "type": "structure",
+            "members": {
+                "HostedZone": {
+                    "target": "com.amazonaws.securityhub#AwsRoute53HostedZoneObjectDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that contains information about the specified hosted zone.</p>"
+                    }
+                },
+                "Vpcs": {
+                    "target": "com.amazonaws.securityhub#AwsRoute53HostedZoneVpcsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that contains information about the Amazon Virtual Private Clouds (Amazon VPCs) that are associated with \nthe specified hosted zone.</p>"
+                    }
+                },
+                "NameServers": {
+                    "target": "com.amazonaws.securityhub#AwsRoute53HostedZoneNameServersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that contains a list of the authoritative name servers for a hosted zone or for a reusable delegation set.</p>"
+                    }
+                },
+                "QueryLoggingConfig": {
+                    "target": "com.amazonaws.securityhub#AwsRoute53QueryLoggingConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array that contains one <code>QueryLoggingConfig</code> element for each DNS query logging configuration that is \nassociated with the current Amazon Web Services account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about a specified Amazon Route 53 hosted zone, including the four name servers assigned to \nthe hosted zone. A hosted zone represents a collection of records that can be managed together, belonging to a single parent \ndomain name.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53HostedZoneNameServersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53HostedZoneObjectDetails": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID that Route 53 assigns to the hosted zone when you create it. </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the domain. For public hosted zones, this is the name that you have registered with your DNS registrar.</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.securityhub#AwsRoute53HostedZoneConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that includes the <code>Comment</code> element.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that contains information about an Amazon Route 53 hosted zone. </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53HostedZoneVpcDetails": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of an Amazon VPC.\n        </p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services Region that an Amazon VPC was created in.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            For private hosted zones, this is a complex type that contains information about an Amazon VPC.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53HostedZoneVpcsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsRoute53HostedZoneVpcDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRoute53QueryLoggingConfigDetails": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogsLogGroupArn": {
+                    "target": "com.amazonaws.securityhub#CloudWatchLogsLogGroupArnConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that Route 53 is publishing logs to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about a specified Amazon Route 53 configuration for DNS query logging.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsS3AccountPublicAccessBlockDetails": {
@@ -21028,6 +21866,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides details about the current status of the sensitive data detection.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#CloudWatchLogsLogGroupArnConfigDetails": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogsLogGroupArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the CloudWatch Logs log group that Route 53 is publishing logs to.</p>"
+                    }
+                },
+                "HostedZoneId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the hosted zone that CloudWatch Logs is logging queries for. </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID for a DNS query logging configuration.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) and other details of the Amazon CloudWatch Logs log group that Amazon Route 53 is \npublishing logs to.</p>"
             }
         },
         "com.amazonaws.securityhub#CodeVulnerabilitiesFilePath": {
@@ -28188,6 +29052,48 @@
                     "target": "com.amazonaws.securityhub#AwsAthenaWorkGroupDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Provides information about an Amazon Athena workgroup. A workgroup helps you separate users, teams, \n            applications, or workloads. It also helps you set limits on data processing and track costs.\n        </p>"
+                    }
+                },
+                "AwsEventsEventbus": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEventbusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about Amazon EventBridge event bus for an endpoint. An event bus is a router that receives events \nand delivers them to zero or more destinations, or targets.</p>"
+                    }
+                },
+                "AwsDmsEndpoint": {
+                    "target": "com.amazonaws.securityhub#AwsDmsEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Database Migration Service (DMS) endpoint. An endpoint provides connection, data \nstore type, and location information about your data store.</p>"
+                    }
+                },
+                "AwsEventsEndpoint": {
+                    "target": "com.amazonaws.securityhub#AwsEventsEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Amazon EventBridge global endpoint. The endpoint can improve your application’s \navailability by making it Regional-fault tolerant.</p>"
+                    }
+                },
+                "AwsDmsReplicationTask": {
+                    "target": "com.amazonaws.securityhub#AwsDmsReplicationTaskDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an DMS replication task. A replication task moves a set of data from the source \nendpoint to the target endpoint.</p>"
+                    }
+                },
+                "AwsDmsReplicationInstance": {
+                    "target": "com.amazonaws.securityhub#AwsDmsReplicationInstanceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an DMS replication instance. DMS uses a replication instance to connect to your \nsource data store, read the source data, and format the data for consumption by the target data store.</p>"
+                    }
+                },
+                "AwsRoute53HostedZone": {
+                    "target": "com.amazonaws.securityhub#AwsRoute53HostedZoneDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Amazon Route 53 hosted zone, including the four name servers assigned to the hosted \nzone. A hosted zone represents a collection of records that can be managed together, belonging to a single parent domain name.</p>"
+                    }
+                },
+                "AwsMskCluster": {
+                    "target": "com.amazonaws.securityhub#AwsMskClusterDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster.</p>"
                     }
                 }
             },
