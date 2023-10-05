@@ -51,8 +51,8 @@ import (
 //   - CREATE : Creates a resource record set that has the specified values.
 //   - DELETE : Deletes an existing resource record set that has the specified
 //     values.
-//   - UPSERT : If a resource set exists Route 53 updates it with the values in the
-//     request.
+//   - UPSERT : If a resource set doesn't exist, Route 53 creates it. If a resource
+//     set exists Route 53 updates it with the values in the request.
 //
 // Syntaxes for Creating, Updating, and Deleting Resource Record Sets The syntax
 // for a request depends on the type of resource record set that you want to

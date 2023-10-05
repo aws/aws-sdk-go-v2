@@ -38,6 +38,83 @@ func (Application) Values() []Application {
 	}
 }
 
+type ApplicationAssociatedResourceType string
+
+// Enum values for ApplicationAssociatedResourceType
+const (
+	ApplicationAssociatedResourceTypeWorkspace ApplicationAssociatedResourceType = "WORKSPACE"
+	ApplicationAssociatedResourceTypeBundle    ApplicationAssociatedResourceType = "BUNDLE"
+	ApplicationAssociatedResourceTypeImage     ApplicationAssociatedResourceType = "IMAGE"
+)
+
+// Values returns all known values for ApplicationAssociatedResourceType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ApplicationAssociatedResourceType) Values() []ApplicationAssociatedResourceType {
+	return []ApplicationAssociatedResourceType{
+		"WORKSPACE",
+		"BUNDLE",
+		"IMAGE",
+	}
+}
+
+type AssociationErrorCode string
+
+// Enum values for AssociationErrorCode
+const (
+	AssociationErrorCodeInsufficientDiskspace      AssociationErrorCode = "ValidationError.InsufficientDiskSpace"
+	AssociationErrorCodeInsufficientMemory         AssociationErrorCode = "ValidationError.InsufficientMemory"
+	AssociationErrorCodeUnsupportedOperatingSystem AssociationErrorCode = "ValidationError.UnsupportedOperatingSystem"
+	AssociationErrorCodeInternalServerError        AssociationErrorCode = "DeploymentError.InternalServerError"
+	AssociationErrorCodeWorkspaceUnreachable       AssociationErrorCode = "DeploymentError.WorkspaceUnreachable"
+)
+
+// Values returns all known values for AssociationErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationErrorCode) Values() []AssociationErrorCode {
+	return []AssociationErrorCode{
+		"ValidationError.InsufficientDiskSpace",
+		"ValidationError.InsufficientMemory",
+		"ValidationError.UnsupportedOperatingSystem",
+		"DeploymentError.InternalServerError",
+		"DeploymentError.WorkspaceUnreachable",
+	}
+}
+
+type AssociationState string
+
+// Enum values for AssociationState
+const (
+	AssociationStatePendingInstall             AssociationState = "PENDING_INSTALL"
+	AssociationStatePendingInstallDeployment   AssociationState = "PENDING_INSTALL_DEPLOYMENT"
+	AssociationStatePendingUninstall           AssociationState = "PENDING_UNINSTALL"
+	AssociationStatePendingUninstallDeployment AssociationState = "PENDING_UNINSTALL_DEPLOYMENT"
+	AssociationStateInstalling                 AssociationState = "INSTALLING"
+	AssociationStateUninstalling               AssociationState = "UNINSTALLING"
+	AssociationStateError                      AssociationState = "ERROR"
+	AssociationStateCompleted                  AssociationState = "COMPLETED"
+	AssociationStateRemoved                    AssociationState = "REMOVED"
+)
+
+// Values returns all known values for AssociationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationState) Values() []AssociationState {
+	return []AssociationState{
+		"PENDING_INSTALL",
+		"PENDING_INSTALL_DEPLOYMENT",
+		"PENDING_UNINSTALL",
+		"PENDING_UNINSTALL_DEPLOYMENT",
+		"INSTALLING",
+		"UNINSTALLING",
+		"ERROR",
+		"COMPLETED",
+		"REMOVED",
+	}
+}
+
 type AssociationStatus string
 
 // Enum values for AssociationStatus
@@ -59,6 +136,23 @@ func (AssociationStatus) Values() []AssociationStatus {
 		"ASSOCIATED_WITH_SHARED_ACCOUNT",
 		"PENDING_ASSOCIATION",
 		"PENDING_DISASSOCIATION",
+	}
+}
+
+type BundleAssociatedResourceType string
+
+// Enum values for BundleAssociatedResourceType
+const (
+	BundleAssociatedResourceTypeApplication BundleAssociatedResourceType = "APPLICATION"
+)
+
+// Values returns all known values for BundleAssociatedResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BundleAssociatedResourceType) Values() []BundleAssociatedResourceType {
+	return []BundleAssociatedResourceType{
+		"APPLICATION",
 	}
 }
 
@@ -288,6 +382,22 @@ func (DeletableSamlProperty) Values() []DeletableSamlProperty {
 	}
 }
 
+type ImageAssociatedResourceType string
+
+// Enum values for ImageAssociatedResourceType
+const (
+	ImageAssociatedResourceTypeApplication ImageAssociatedResourceType = "APPLICATION"
+)
+
+// Values returns all known values for ImageAssociatedResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageAssociatedResourceType) Values() []ImageAssociatedResourceType {
+	return []ImageAssociatedResourceType{
+		"APPLICATION",
+	}
+}
+
 type ImageType string
 
 // Enum values for ImageType
@@ -359,6 +469,42 @@ func (ModificationStateEnum) Values() []ModificationStateEnum {
 	return []ModificationStateEnum{
 		"UPDATE_INITIATED",
 		"UPDATE_IN_PROGRESS",
+	}
+}
+
+type OperatingSystemName string
+
+// Enum values for OperatingSystemName
+const (
+	OperatingSystemNameAmazonLinux2      OperatingSystemName = "AMAZON_LINUX_2"
+	OperatingSystemNameUbuntu1804        OperatingSystemName = "UBUNTU_18_04"
+	OperatingSystemNameUbuntu2004        OperatingSystemName = "UBUNTU_20_04"
+	OperatingSystemNameUbuntu2204        OperatingSystemName = "UBUNTU_22_04"
+	OperatingSystemNameUnknown           OperatingSystemName = "UNKNOWN"
+	OperatingSystemNameWindows10         OperatingSystemName = "WINDOWS_10"
+	OperatingSystemNameWindows11         OperatingSystemName = "WINDOWS_11"
+	OperatingSystemNameWindows7          OperatingSystemName = "WINDOWS_7"
+	OperatingSystemNameWindowsServer2016 OperatingSystemName = "WINDOWS_SERVER_2016"
+	OperatingSystemNameWindowsServer2019 OperatingSystemName = "WINDOWS_SERVER_2019"
+	OperatingSystemNameWindowsServer2022 OperatingSystemName = "WINDOWS_SERVER_2022"
+)
+
+// Values returns all known values for OperatingSystemName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperatingSystemName) Values() []OperatingSystemName {
+	return []OperatingSystemName{
+		"AMAZON_LINUX_2",
+		"UBUNTU_18_04",
+		"UBUNTU_20_04",
+		"UBUNTU_22_04",
+		"UNKNOWN",
+		"WINDOWS_10",
+		"WINDOWS_11",
+		"WINDOWS_7",
+		"WINDOWS_SERVER_2016",
+		"WINDOWS_SERVER_2019",
+		"WINDOWS_SERVER_2022",
 	}
 }
 
@@ -508,6 +654,64 @@ func (Tenancy) Values() []Tenancy {
 	return []Tenancy{
 		"DEDICATED",
 		"SHARED",
+	}
+}
+
+type WorkSpaceApplicationLicenseType string
+
+// Enum values for WorkSpaceApplicationLicenseType
+const (
+	WorkSpaceApplicationLicenseTypeLicensed   WorkSpaceApplicationLicenseType = "LICENSED"
+	WorkSpaceApplicationLicenseTypeUnlicensed WorkSpaceApplicationLicenseType = "UNLICENSED"
+)
+
+// Values returns all known values for WorkSpaceApplicationLicenseType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkSpaceApplicationLicenseType) Values() []WorkSpaceApplicationLicenseType {
+	return []WorkSpaceApplicationLicenseType{
+		"LICENSED",
+		"UNLICENSED",
+	}
+}
+
+type WorkSpaceApplicationState string
+
+// Enum values for WorkSpaceApplicationState
+const (
+	WorkSpaceApplicationStatePending       WorkSpaceApplicationState = "PENDING"
+	WorkSpaceApplicationStateError         WorkSpaceApplicationState = "ERROR"
+	WorkSpaceApplicationStateAvailable     WorkSpaceApplicationState = "AVAILABLE"
+	WorkSpaceApplicationStateUninstallOnly WorkSpaceApplicationState = "UNINSTALL_ONLY"
+)
+
+// Values returns all known values for WorkSpaceApplicationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkSpaceApplicationState) Values() []WorkSpaceApplicationState {
+	return []WorkSpaceApplicationState{
+		"PENDING",
+		"ERROR",
+		"AVAILABLE",
+		"UNINSTALL_ONLY",
+	}
+}
+
+type WorkSpaceAssociatedResourceType string
+
+// Enum values for WorkSpaceAssociatedResourceType
+const (
+	WorkSpaceAssociatedResourceTypeApplication WorkSpaceAssociatedResourceType = "APPLICATION"
+)
+
+// Values returns all known values for WorkSpaceAssociatedResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkSpaceAssociatedResourceType) Values() []WorkSpaceAssociatedResourceType {
+	return []WorkSpaceAssociatedResourceType{
+		"APPLICATION",
 	}
 }
 

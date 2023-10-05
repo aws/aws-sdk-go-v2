@@ -73,6 +73,9 @@ type CreateHealthCheckInput struct {
 	//   - If you send a CreateHealthCheck request with a unique CallerReference but
 	//   settings identical to an existing health check, Route 53 creates the health
 	//   check.
+	// Route 53 does not store the CallerReference for a deleted health check
+	// indefinitely. The CallerReference for a deleted health check will be deleted
+	// after a number of days.
 	//
 	// This member is required.
 	CallerReference *string

@@ -3053,6 +3053,194 @@ type AwsCorsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about an Database Migration Service (DMS) endpoint. An
+// endpoint provides connection, data store type, and location information about
+// your data store.
+type AwsDmsEndpointDetails struct {
+
+	// The Amazon Resource Name (ARN) for the SSL certificate that encrypts
+	// connections between the DMS endpoint and the replication instance.
+	CertificateArn *string
+
+	// The name of the endpoint database.
+	DatabaseName *string
+
+	// The Amazon Resource Name (ARN) of the endpoint.
+	EndpointArn *string
+
+	// The database endpoint identifier.
+	EndpointIdentifier *string
+
+	// The type of endpoint. Valid values are source and target.
+	EndpointType *string
+
+	// The type of engine for the endpoint, depending on the EndpointType value.
+	EngineName *string
+
+	// A value that can be used for cross-account validation.
+	ExternalId *string
+
+	// Additional attributes associated with the connection.
+	ExtraConnectionAttributes *string
+
+	// An DMS key identifier that is used to encrypt the connection parameters for the
+	// endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS
+	// uses your default encryption key. KMS creates the default encryption key for
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Region.
+	KmsKeyId *string
+
+	// The port used to access the endpoint.
+	Port int32
+
+	// The name of the server where the endpoint database resides.
+	ServerName *string
+
+	// The SSL mode used to connect to the endpoint. The default is none.
+	SslMode *string
+
+	// The user name to be used to log in to the endpoint database.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Database Migration Service (DMS) replication
+// instance. DMS uses a replication instance to connect to your source data store,
+// read the source data, and format the data for consumption by the target data
+// store.
+type AwsDmsReplicationInstanceDetails struct {
+
+	// The amount of storage (in gigabytes) that is allocated for the replication
+	// instance.
+	AllocatedStorage int32
+
+	// Indicates whether minor engine upgrades are applied automatically to the
+	// replication instance during the maintenance window.
+	AutoMinorVersionUpgrade bool
+
+	// The Availability Zone that the replication instance is created in. The default
+	// value is a random, system-chosen Availability Zone in the endpoint's Amazon Web
+	// Services Region, such as us-east-1d .
+	AvailabilityZone *string
+
+	// The engine version number of the replication instance. If an engine version
+	// number is not specified when a replication instance is created, the default is
+	// the latest engine version available.
+	EngineVersion *string
+
+	// An KMS key identifier that is used to encrypt the data on the replication
+	// instance. If you don't specify a value for the KmsKeyId parameter, DMS uses
+	// your default encryption key. KMS creates the default encryption key for your
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
+	KmsKeyId *string
+
+	// Specifies whether the replication instance is deployed across multiple
+	// Availability Zones (AZs). You can't set the AvailabilityZone parameter if the
+	// MultiAZ parameter is set to true .
+	MultiAZ bool
+
+	// The maintenance window times for the replication instance. Upgrades to the
+	// replication instance are performed during this time.
+	PreferredMaintenanceWindow *string
+
+	// Specifies the accessibility options for the replication instance. A value of
+	// true represents an instance with a public IP address. A value of false
+	// represents an instance with a private IP address. The default value is true .
+	PubliclyAccessible bool
+
+	// The compute and memory capacity of the replication instance as defined for the
+	// specified replication instance class.
+	ReplicationInstanceClass *string
+
+	// The replication instance identifier.
+	ReplicationInstanceIdentifier *string
+
+	// The subnet group for the replication instance.
+	ReplicationSubnetGroup *AwsDmsReplicationInstanceReplicationSubnetGroupDetails
+
+	// The virtual private cloud (VPC) security group for the replication instance.
+	VpcSecurityGroups []AwsDmsReplicationInstanceVpcSecurityGroupsDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the replication subnet group.
+type AwsDmsReplicationInstanceReplicationSubnetGroupDetails struct {
+
+	// The identifier of the replication subnet group.
+	ReplicationSubnetGroupIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the virtual private cloud (VPC) security group that’s
+// associated with the replication instance.
+type AwsDmsReplicationInstanceVpcSecurityGroupsDetails struct {
+
+	// The identifier of the VPC security group that’s associated with the replication
+	// instance.
+	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Database Migration Service (DMS) replication task. A
+// replication task moves a set of data from the source endpoint to the target
+// endpoint.
+type AwsDmsReplicationTaskDetails struct {
+
+	// Indicates when you want a change data capture (CDC) operation to start.
+	// CCdcStartPosition or CCdcStartTime specifies when you want a CDC operation to
+	// start. Only a value for one of these fields is included.
+	CdcStartPosition *string
+
+	// Indicates the start time for a CDC operation. CdcStartPosition or CCdcStartTime
+	// specifies when you want a CDC operation to start. Only a value for one of these
+	// fields is included.
+	CdcStartTime *string
+
+	// Indicates when you want a CDC operation to stop. The value can be either server
+	// time or commit time.
+	CdcStopPosition *string
+
+	// The identifier of the replication task.
+	Id *string
+
+	// The migration type.
+	MigrationType *string
+
+	// The Amazon Resource Name (ARN) of a replication instance.
+	ReplicationInstanceArn *string
+
+	// The user-defined replication task identifier or name.
+	ReplicationTaskIdentifier *string
+
+	// The settings for the replication task.
+	ReplicationTaskSettings *string
+
+	// A display name for the resource identifier at the end of the EndpointArn
+	// response parameter. If you don't specify a ResourceIdentifier value, DMS
+	// generates a default identifier value for the end of EndpointArn .
+	ResourceIdentifier *string
+
+	// The ARN of the source endpoint.
+	SourceEndpointArn *string
+
+	// The table mappings for the replication task, in JSON format.
+	TableMappings *string
+
+	// The ARN of the target endpoint.
+	TargetEndpointArn *string
+
+	// Supplemental information that the task requires to migrate the data for certain
+	// source and target endpoints.
+	TaskData *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains a definition of an attribute for the table.
 type AwsDynamoDbTableAttributeDefinition struct {
 
@@ -6144,6 +6332,9 @@ type AwsEcsTaskDefinitionDetails struct {
 	// The task launch types that the task definition was validated against.
 	RequiresCompatibilities []string
 
+	// The status of the task definition.
+	Status *string
+
 	// The short name or ARN of the IAM role that grants containers in the task
 	// permission to call Amazon Web Services API operations on your behalf.
 	TaskRoleArn *string
@@ -7232,6 +7423,137 @@ type AwsEventSchemasRegistryDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about an Amazon EventBridge global endpoint. The endpoint can
+// improve your application’s availability by making it Regional-fault tolerant.
+type AwsEventsEndpointDetails struct {
+
+	// The Amazon Resource Name (ARN) of the endpoint.
+	Arn *string
+
+	// A description of the endpoint.
+	Description *string
+
+	// The URL subdomain of the endpoint. For example, if EndpointUrl is
+	// https://abcde.veo.endpoints.event.amazonaws.com , then the EndpointId is
+	// abcde.veo .
+	EndpointId *string
+
+	// The URL of the endpoint.
+	EndpointUrl *string
+
+	// The event buses being used by the endpoint.
+	EventBuses []AwsEventsEndpointEventBusesDetails
+
+	// The name of the endpoint.
+	Name *string
+
+	// Whether event replication was enabled or disabled for this endpoint. The
+	// default state is ENABLED , which means you must supply a RoleArn . If you don't
+	// have a RoleArn or you don't want event replication enabled, set the state to
+	// DISABLED .
+	ReplicationConfig *AwsEventsEndpointReplicationConfigDetails
+
+	// The ARN of the role used by event replication for the endpoint.
+	RoleArn *string
+
+	// The routing configuration of the endpoint.
+	RoutingConfig *AwsEventsEndpointRoutingConfigDetails
+
+	// The current state of the endpoint.
+	State *string
+
+	// The reason the endpoint is in its current state.
+	StateReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the Amazon EventBridge event buses that the endpoint is
+// associated with.
+type AwsEventsEndpointEventBusesDetails struct {
+
+	// The Amazon Resource Name (ARN) of the event bus that the endpoint is associated
+	// with.
+	EventBusArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates whether replication is enabled or disabled for the endpoint. If
+// enabled, the endpoint can replicate all events to a secondary Amazon Web
+// Services Region.
+type AwsEventsEndpointReplicationConfigDetails struct {
+
+	// The state of event replication.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the routing configuration of the endpoint.
+type AwsEventsEndpointRoutingConfigDetails struct {
+
+	// The failover configuration for an endpoint. This includes what triggers
+	// failover and what happens when it's triggered.
+	FailoverConfig *AwsEventsEndpointRoutingConfigFailoverConfigDetails
+
+	noSmithyDocumentSerde
+}
+
+// The failover configuration for an endpoint. This includes what triggers
+// failover and what happens when it's triggered.
+type AwsEventsEndpointRoutingConfigFailoverConfigDetails struct {
+
+	// The main Region of the endpoint.
+	Primary *AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails
+
+	// The Region that events are routed to when failover is triggered or event
+	// replication is enabled.
+	Secondary *AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the primary Amazon Web Services Region of the endpoint.
+type AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails struct {
+
+	// The Amazon Resource Name (ARN) of the health check used by the endpoint to
+	// determine whether failover is triggered.
+	HealthCheck *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Web Services Region that events are routed to when failover is
+// triggered or event replication is enabled.
+type AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails struct {
+
+	// Defines the secondary Region.
+	Route *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about Amazon EventBridge event bus. An event bus is a router
+// that receives events and delivers them to zero or more destinations, or targets.
+// This can be a custom event bus which you can use to receive events from your
+// custom applications and services, or it can be a partner event bus which can be
+// matched to a partner event source.
+type AwsEventsEventbusDetails struct {
+
+	// The Amazon Resource Name (ARN) of the account permitted to write events to the
+	// current account.
+	Arn *string
+
+	// The name of the event bus.
+	Name *string
+
+	// The policy that enables the external account to send events to your account.
+	Policy *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information on the status of CloudTrail as a data
 // source for the detector.
 type AwsGuardDutyDetectorDataSourcesCloudTrailDetails struct {
@@ -8038,6 +8360,149 @@ type AwsMountPoint struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about different modes of client authentication.
+type AwsMskClusterClusterInfoClientAuthenticationDetails struct {
+
+	// Provides details for client authentication using SASL.
+	Sasl *AwsMskClusterClusterInfoClientAuthenticationSaslDetails
+
+	// Provides details for client authentication using TLS.
+	Tls *AwsMskClusterClusterInfoClientAuthenticationTlsDetails
+
+	// Provides details for allowing no client authentication.
+	Unauthenticated *AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details for client authentication using SASL.
+type AwsMskClusterClusterInfoClientAuthenticationSaslDetails struct {
+
+	// Provides details for SASL client authentication using IAM.
+	Iam *AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails
+
+	// Details for SASL client authentication using SCRAM.
+	Scram *AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/IAM client authentication.
+type AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails struct {
+
+	// Indicates whether SASL/IAM authentication is enabled or not.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/SCRAM client authentication.
+type AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails struct {
+
+	// Indicates whether SASL/SCRAM authentication is enabled or not.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides details for client authentication using TLS.
+type AwsMskClusterClusterInfoClientAuthenticationTlsDetails struct {
+
+	// List of Amazon Web Services Private CA Amazon Resource Names (ARNs). Amazon Web
+	// Services Private CA enables creation of private certificate authority (CA)
+	// hierarchies, including root and subordinate CAs, without the investment and
+	// maintenance costs of operating an on-premises CA.
+	CertificateAuthorityArnList []string
+
+	// Indicates whether TLS authentication is enabled or not.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides details for allowing no client authentication.
+type AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails struct {
+
+	// Indicates whether unauthenticated is allowed or not.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Provide details about an Amazon MSK cluster.
+type AwsMskClusterClusterInfoDetails struct {
+
+	// Provides information for different modes of client authentication.
+	ClientAuthentication *AwsMskClusterClusterInfoClientAuthenticationDetails
+
+	// The name of the cluster.
+	ClusterName *string
+
+	// The current version of the MSK cluster.
+	CurrentVersion *string
+
+	// Includes encryption-related information, such as the KMS key used for
+	// encrypting data at rest and whether you want Amazon MSK to encrypt your data in
+	// transit.
+	EncryptionInfo *AwsMskClusterClusterInfoEncryptionInfoDetails
+
+	// The number of broker nodes in the cluster.
+	NumberOfBrokerNodes int32
+
+	noSmithyDocumentSerde
+}
+
+// Includes encryption-related information, such as the KMS key used for
+// encrypting data at rest and whether you want MSK to encrypt your data in
+// transit.
+type AwsMskClusterClusterInfoEncryptionInfoDetails struct {
+
+	// The data-volume encryption details. You can't update encryption at rest
+	// settings for existing clusters.
+	EncryptionAtRest *AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails
+
+	// The settings for encrypting data in transit.
+	EncryptionInTransit *AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails
+
+	noSmithyDocumentSerde
+}
+
+// The data-volume encryption details. You can't update encryption at rest
+// settings for existing clusters.
+type AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails struct {
+
+	// The Amazon Resource Name (ARN) of the KMS key for encrypting data at rest. If
+	// you don't specify a KMS key, MSK creates one for you and uses it.
+	DataVolumeKMSKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings for encrypting data in transit.
+type AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails struct {
+
+	// Indicates the encryption setting for data in transit between clients and
+	// brokers.
+	ClientBroker *string
+
+	// When set to true , it indicates that data communication among the broker nodes
+	// of the cluster is encrypted. When set to false , the communication happens in
+	// plain text. The default value is true .
+	InCluster bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
+// MSK) cluster.
+type AwsMskClusterDetails struct {
+
+	// Provides information about a cluster.
+	ClusterInfo *AwsMskClusterClusterInfoDetails
+
+	noSmithyDocumentSerde
+}
+
 // Details about an Network Firewall firewall.
 type AwsNetworkFirewallFirewallDetails struct {
 
@@ -8432,6 +8897,9 @@ type AwsRdsDbClusterDetails struct {
 
 	// A list of the IAM roles that are associated with the DB cluster.
 	AssociatedRoles []AwsRdsDbClusterAssociatedRole
+
+	// Indicates if minor version upgrades are automatically applied to the cluster.
+	AutoMinorVersionUpgrade bool
 
 	// A list of Availability Zones (AZs) where instances in the DB cluster can be
 	// created.
@@ -9822,6 +10290,81 @@ type AwsRedshiftClusterVpcSecurityGroup struct {
 
 	// The identifier of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains an optional comment about your Amazon Route 53 hosted
+// zone.
+type AwsRoute53HostedZoneConfigDetails struct {
+
+	// Any comments that you include about the hosted zone.
+	Comment *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a specified Amazon Route 53 hosted zone, including the
+// four name servers assigned to the hosted zone. A hosted zone represents a
+// collection of records that can be managed together, belonging to a single parent
+// domain name.
+type AwsRoute53HostedZoneDetails struct {
+
+	// An object that contains information about the specified hosted zone.
+	HostedZone *AwsRoute53HostedZoneObjectDetails
+
+	// An object that contains a list of the authoritative name servers for a hosted
+	// zone or for a reusable delegation set.
+	NameServers []string
+
+	// An array that contains one QueryLoggingConfig element for each DNS query
+	// logging configuration that is associated with the current Amazon Web Services
+	// account.
+	QueryLoggingConfig *AwsRoute53QueryLoggingConfigDetails
+
+	// An object that contains information about the Amazon Virtual Private Clouds
+	// (Amazon VPCs) that are associated with the specified hosted zone.
+	Vpcs []AwsRoute53HostedZoneVpcDetails
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information about an Amazon Route 53 hosted zone.
+type AwsRoute53HostedZoneObjectDetails struct {
+
+	// An object that includes the Comment element.
+	Config *AwsRoute53HostedZoneConfigDetails
+
+	// The ID that Route 53 assigns to the hosted zone when you create it.
+	Id *string
+
+	// The name of the domain. For public hosted zones, this is the name that you have
+	// registered with your DNS registrar.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// For private hosted zones, this is a complex type that contains information
+// about an Amazon VPC.
+type AwsRoute53HostedZoneVpcDetails struct {
+
+	// The identifier of an Amazon VPC.
+	Id *string
+
+	// The Amazon Web Services Region that an Amazon VPC was created in.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a specified Amazon Route 53 configuration for DNS query
+// logging.
+type AwsRoute53QueryLoggingConfigDetails struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that
+	// Route 53 is publishing logs to.
+	CloudWatchLogsLogGroupArn *CloudWatchLogsLogGroupArnConfigDetails
 
 	noSmithyDocumentSerde
 }
@@ -12259,6 +12802,22 @@ type ClassificationStatus struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Resource Name (ARN) and other details of the Amazon CloudWatch Logs
+// log group that Amazon Route 53 is publishing logs to.
+type CloudWatchLogsLogGroupArnConfigDetails struct {
+
+	// The ARN of the CloudWatch Logs log group that Route 53 is publishing logs to.
+	CloudWatchLogsLogGroupArn *string
+
+	// The ID of the hosted zone that CloudWatch Logs is logging queries for.
+	HostedZoneId *string
+
+	// The ID for a DNS query logging configuration.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about where a code vulnerability is located in your Lambda
 // function.
 type CodeVulnerabilitiesFilePath struct {
@@ -13628,6 +14187,20 @@ type ResourceDetails struct {
 	// Details for an CodeBuild project.
 	AwsCodeBuildProject *AwsCodeBuildProjectDetails
 
+	// Provides details about an Database Migration Service (DMS) endpoint. An
+	// endpoint provides connection, data store type, and location information about
+	// your data store.
+	AwsDmsEndpoint *AwsDmsEndpointDetails
+
+	// Provides details about an DMS replication instance. DMS uses a replication
+	// instance to connect to your source data store, read the source data, and format
+	// the data for consumption by the target data store.
+	AwsDmsReplicationInstance *AwsDmsReplicationInstanceDetails
+
+	// Provides details about an DMS replication task. A replication task moves a set
+	// of data from the source endpoint to the target endpoint.
+	AwsDmsReplicationTask *AwsDmsReplicationTaskDetails
+
 	// Details about a DynamoDB table.
 	AwsDynamoDbTable *AwsDynamoDbTableDetails
 
@@ -13727,6 +14300,15 @@ type ResourceDetails struct {
 	// so that your schemas are in logical groups.
 	AwsEventSchemasRegistry *AwsEventSchemasRegistryDetails
 
+	// Provides details about an Amazon EventBridge global endpoint. The endpoint can
+	// improve your application’s availability by making it Regional-fault tolerant.
+	AwsEventsEndpoint *AwsEventsEndpointDetails
+
+	// Provides details about Amazon EventBridge event bus for an endpoint. An event
+	// bus is a router that receives events and delivers them to zero or more
+	// destinations, or targets.
+	AwsEventsEventbus *AwsEventsEventbusDetails
+
 	// Provides details about an Amazon GuardDuty detector. A detector is an object
 	// that represents the GuardDuty service. A detector is required for GuardDuty to
 	// become operational.
@@ -13758,6 +14340,10 @@ type ResourceDetails struct {
 
 	// Details for a Lambda layer version.
 	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
+
+	// Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
+	// MSK) cluster.
+	AwsMskCluster *AwsMskClusterDetails
 
 	// Details about an Network Firewall firewall.
 	AwsNetworkFirewallFirewall *AwsNetworkFirewallFirewallDetails
@@ -13791,6 +14377,11 @@ type ResourceDetails struct {
 
 	// Contains details about an Amazon Redshift cluster.
 	AwsRedshiftCluster *AwsRedshiftClusterDetails
+
+	// Provides details about an Amazon Route 53 hosted zone, including the four name
+	// servers assigned to the hosted zone. A hosted zone represents a collection of
+	// records that can be managed together, belonging to a single parent domain name.
+	AwsRoute53HostedZone *AwsRoute53HostedZoneDetails
 
 	// Details about the Amazon S3 Public Access Block configuration for an account.
 	AwsS3AccountPublicAccessBlock *AwsS3AccountPublicAccessBlockDetails

@@ -23,9 +23,9 @@ import (
 // replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
 // information, see Working with read replicas (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
 // and Migrating from a Multi-AZ DB cluster to a DB instance using a read replica (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica)
-// in the Amazon RDS User Guide. Amazon Aurora doesn't support this operation. Call
-// the CreateDBInstance operation to create a DB instance for an Aurora DB
-// cluster. All read replica DB instances are created with backups disabled. All
+// in the Amazon RDS User Guide. Amazon Aurora doesn't support this operation. To
+// create a DB instance for an Aurora DB cluster, use the CreateDBInstance
+// operation. All read replica DB instances are created with backups disabled. All
 // other attributes (including DB security groups and DB parameter groups) are
 // inherited from the source DB instance or cluster, except as specified. Your
 // source DB instance or cluster must have backup retention enabled.
@@ -59,9 +59,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// succeed. You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
-	// A value that indicates whether minor engine upgrades are applied automatically
-	// to the read replica during the maintenance window. This setting doesn't apply to
-	// RDS Custom. Default: Inherits from the source DB instance
+	// Specifies whether to automatically apply minor engine upgrades to the read
+	// replica during the maintenance window. This setting doesn't apply to RDS Custom
+	// DB instances. Default: Inherits the value from the source DB instance.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the read replica will be created. Default: A
@@ -69,8 +69,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Region. Example: us-east-1d
 	AvailabilityZone *string
 
-	// A value that indicates whether to copy all tags from the read replica to
-	// snapshots of the read replica. By default, tags are not copied.
+	// Specifies whether to copy all tags from the read replica to snapshots of the
+	// read replica. By default, tags aren't copied.
 	CopyTagsToSnapshot *bool
 
 	// The instance profile associated with the underlying Amazon EC2 instance of an
@@ -83,35 +83,39 @@ type CreateDBInstanceReadReplicaInput struct {
 	//   the prefix AWSRDSCustom .
 	// For the list of permissions required for the IAM role, see  Configure IAM and
 	// your VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
-	// in the Amazon RDS User Guide. This setting is required for RDS Custom.
+	// in the Amazon RDS User Guide. This setting is required for RDS Custom DB
+	// instances.
 	CustomIamInstanceProfile *string
 
 	// The compute and memory capacity of the read replica, for example db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
 	// for all database engines. For the full list of DB instance classes, and
 	// availability for your engine, see DB Instance Class (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon RDS User Guide. Default: Inherits from the source DB instance.
+	// in the Amazon RDS User Guide. Default: Inherits the value from the source DB
+	// instance.
 	DBInstanceClass *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you
-	// do not specify a value for DBParameterGroupName , then Amazon RDS uses the
-	// DBParameterGroup of source DB instance for a same Region read replica, or the
-	// default DBParameterGroup for the specified DB engine for a cross-Region read
-	// replica. Specifying a parameter group for this operation is only supported for
-	// MySQL and Oracle DB instances. It isn't supported for RDS Custom. Constraints:
+	// don't specify a value for DBParameterGroupName , then Amazon RDS uses the
+	// DBParameterGroup of the source DB instance for a same Region read replica, or
+	// the default DBParameterGroup for the specified DB engine for a cross-Region
+	// read replica. Specifying a parameter group for this operation is only supported
+	// for MySQL DB instances for cross-Region read replicas and for Oracle DB
+	// instances. It isn't supported for MySQL DB instances for same Region read
+	// replicas or for RDS Custom. Constraints:
 	//   - Must be 1 to 255 letters, numbers, or hyphens.
-	//   - First character must be a letter
-	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	DBParameterGroupName *string
 
-	// Specifies a DB subnet group for the DB instance. The new DB instance is created
-	// in the VPC associated with the DB subnet group. If no DB subnet group is
-	// specified, then the new DB instance isn't created in a VPC. Constraints:
-	//   - If supplied, must match the name of an existing DBSubnetGroup.
+	// A DB subnet group for the DB instance. The new DB instance is created in the
+	// VPC associated with the DB subnet group. If no DB subnet group is specified,
+	// then the new DB instance isn't created in a VPC. Constraints:
+	//   - If supplied, must match the name of an existing DB subnet group.
 	//   - The specified DB subnet group must be in the same Amazon Web Services
 	//   Region in which the operation is running.
 	//   - All read replicas in one Amazon Web Services Region that are created from
-	//   the same source DB instance must either:>
+	//   the same source DB instance must either:
 	//   - Specify DB subnet groups from the same VPC. All these read replicas are
 	//   created in the same VPC.
 	//   - Not specify a DB subnet group. All these read replicas are created outside
@@ -119,8 +123,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB instance has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
+	// Specifies whether to enable deletion protection for the DB instance. The
+	// database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection isn't enabled. For more information, see Deleting a DB
 	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
@@ -129,7 +133,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The Active Directory directory ID to create the DB instance in. Currently, only
 	// MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created
 	// in an Active Directory Domain. For more information, see Kerberos Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom DB
+	// instances.
 	Domain *string
 
 	// The ARN for the Secrets Manager secret with the credentials for the user
@@ -151,8 +156,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: mymanagedADtest.mymanagedAD.mydomain
 	DomainFqdn *string
 
-	// The name of the IAM role to be used when making API calls to the Directory
-	// Service. This setting doesn't apply to RDS Custom.
+	// The name of the IAM role to use when making API calls to the Directory Service.
+	// This setting doesn't apply to RDS Custom DB instances.
 	DomainIAMRoleName *string
 
 	// The Active Directory organizational unit for your DB instance to join.
@@ -165,14 +170,15 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The list of logs that the new DB instance is to export to CloudWatch Logs. The
 	// values in the list depend on the DB engine being used. For more information, see
 	// Publishing Database Logs to Amazon CloudWatch Logs  (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom DB
+	// instances.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
-	// an RDS on Outposts read replica. A CoIP provides local or external connectivity
-	// to resources in your Outpost subnets through your on-premises network. For some
-	// use cases, a CoIP can provide lower latency for connections to the read replica
-	// from outside of its virtual private cloud (VPC) on your local network. For more
+	// Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on
+	// Outposts read replica. A CoIP provides local or external connectivity to
+	// resources in your Outpost subnets through your on-premises network. For some use
+	// cases, a CoIP can provide lower latency for connections to the read replica from
+	// outside of its virtual private cloud (VPC) on your local network. For more
 	// information about RDS on Outposts, see Working with Amazon RDS on Amazon Web
 	// Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
 	// in the Amazon RDS User Guide. For more information about CoIPs, see
@@ -180,20 +186,22 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in the Amazon Web Services Outposts User Guide.
 	EnableCustomerOwnedIp *bool
 
-	// A value that indicates whether to enable mapping of Amazon Web Services
-	// Identity and Access Management (IAM) accounts to database accounts. By default,
-	// mapping isn't enabled. For more information about IAM database authentication,
-	// see IAM Database Authentication for MySQL and PostgreSQL (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
+	// Specifies whether to enable mapping of Amazon Web Services Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping isn't
+	// enabled. For more information about IAM database authentication, see IAM
+	// Database Authentication for MySQL and PostgreSQL (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom DB
+	// instances.
 	EnableIAMDatabaseAuthentication *bool
 
-	// A value that indicates whether to enable Performance Insights for the read
-	// replica. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
+	// Specifies whether to enable Performance Insights for the read replica. For more
+	// information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom DB
+	// instances.
 	EnablePerformanceInsights *bool
 
-	// The amount of Provisioned IOPS (input/output operations per second) to be
-	// initially allocated for the DB instance.
+	// The amount of Provisioned IOPS (input/output operations per second) to
+	// initially allocate for the DB instance.
 	Iops *int32
 
 	// The Amazon Web Services KMS key identifier for an encrypted read replica. The
@@ -220,10 +228,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
-	// collected for the read replica. To disable collecting Enhanced Monitoring
-	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, then
-	// you must also set MonitoringInterval to a value other than 0. This setting
-	// doesn't apply to RDS Custom. Valid Values: 0, 1, 5, 10, 15, 30, 60
+	// collected for the read replica. To disable collection of Enhanced Monitoring
+	// metrics, specify 0 . The default is 0 . If MonitoringRoleArn is specified, then
+	// you must set MonitoringInterval to a value other than 0 . This setting doesn't
+	// apply to RDS Custom DB instances. Valid Values: 0, 1, 5, 10, 15, 30, 60
+	// Default: 0
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics
@@ -232,18 +241,18 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Amazon RDS Enhanced Monitoring (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole)
 	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other
 	// than 0, then you must supply a MonitoringRoleArn value. This setting doesn't
-	// apply to RDS Custom.
+	// apply to RDS Custom DB instances.
 	MonitoringRoleArn *string
 
-	// A value that indicates whether the read replica is in a Multi-AZ deployment.
-	// You can create a read replica as a Multi-AZ DB instance. RDS creates a standby
-	// of your replica in another Availability Zone for failover support for the
-	// replica. Creating your read replica as a Multi-AZ DB instance is independent of
-	// whether the source is a Multi-AZ DB instance or a Multi-AZ DB cluster. This
-	// setting doesn't apply to RDS Custom.
+	// Specifies whether the read replica is in a Multi-AZ deployment. You can create
+	// a read replica as a Multi-AZ DB instance. RDS creates a standby of your replica
+	// in another Availability Zone for failover support for the replica. Creating your
+	// read replica as a Multi-AZ DB instance is independent of whether the source is a
+	// Multi-AZ DB instance or a Multi-AZ DB cluster. This setting doesn't apply to RDS
+	// Custom DB instances.
 	MultiAZ *bool
 
-	// The network type of the DB instance. Valid values:
+	// The network type of the DB instance. Valid Values:
 	//   - IPV4
 	//   - DUAL
 	// The network type is determined by the DBSubnetGroup specified for read replica.
@@ -253,10 +262,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in the Amazon RDS User Guide.
 	NetworkType *string
 
-	// The option group the DB instance is associated with. If omitted, the option
-	// group associated with the source instance or cluster is used. For SQL Server,
-	// you must use the option group associated with the source. This setting doesn't
-	// apply to RDS Custom.
+	// The option group to associate the DB instance with. If not specified, RDS uses
+	// the option group associated with the source DB instance or cluster. For SQL
+	// Server, you must use the option group associated with the source. This setting
+	// doesn't apply to RDS Custom DB instances.
 	OptionGroupName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
@@ -265,25 +274,21 @@ type CreateDBInstanceReadReplicaInput struct {
 	// PerformanceInsightsKMSKeyId , then Amazon RDS uses your default KMS key. There
 	// is a default KMS key for your Amazon Web Services account. Your Amazon Web
 	// Services account has a different default KMS key for each Amazon Web Services
-	// Region. This setting doesn't apply to RDS Custom.
+	// Region. This setting doesn't apply to RDS Custom DB instances.
 	PerformanceInsightsKMSKeyId *string
 
-	// The number of days to retain Performance Insights data. The default is 7 days.
-	// The following values are valid:
+	// The number of days to retain Performance Insights data. This setting doesn't
+	// apply to RDS Custom DB instances. Valid Values:
 	//   - 7
-	//   - month * 31, where month is a number of months from 1-23
+	//   - month * 31, where month is a number of months from 1-23. Examples: 93 (3
+	//   months * 31), 341 (11 months * 31), 589 (19 months * 31)
 	//   - 731
-	// For example, the following values are valid:
-	//   - 93 (3 months * 31)
-	//   - 341 (11 months * 31)
-	//   - 589 (19 months * 31)
-	//   - 731
-	// If you specify a retention period such as 94, which isn't a valid value, RDS
-	// issues an error. This setting doesn't apply to RDS Custom.
+	// Default: 7 days If you specify a retention period that isn't valid, such as 94 ,
+	// Amazon RDS returns an error.
 	PerformanceInsightsRetentionPeriod *int32
 
-	// The port number that the DB instance uses for connections. Default: Inherits
-	// from the source DB instance Valid Values: 1150-65535
+	// The port number that the DB instance uses for connections. Valid Values:
+	// 1150-65535 Default: Inherits the value from the source DB instance.
 	Port *int32
 
 	// When you are creating a read replica from one Amazon Web Services GovCloud (US)
@@ -334,22 +339,22 @@ type CreateDBInstanceReadReplicaInput struct {
 	// request for the operation that can run in the source Amazon Web Services Region.
 	// SourceRegion isn't supported for SQL Server, because Amazon RDS for SQL Server
 	// doesn't support cross-Region read replicas. This setting doesn't apply to RDS
-	// Custom.
+	// Custom DB instances.
 	PreSignedUrl *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
-	// class of the DB instance. This setting doesn't apply to RDS Custom.
+	// class of the DB instance. This setting doesn't apply to RDS Custom DB instances.
 	ProcessorFeatures []types.ProcessorFeature
 
-	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
-	// resolves to the private IP address from within the DB cluster's virtual private
-	// cloud (VPC). It resolves to the public IP address from outside of the DB
-	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
-	// group it uses. That public access isn't permitted if the security group assigned
-	// to the DB cluster doesn't permit it. When the DB instance isn't publicly
-	// accessible, it is an internal DB instance with a DNS name that resolves to a
-	// private IP address. For more information, see CreateDBInstance .
+	// Specifies whether the DB instance is publicly accessible. When the DB cluster
+	// is publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// private IP address from within the DB cluster's virtual private cloud (VPC). It
+	// resolves to the public IP address from outside of the DB cluster's VPC. Access
+	// to the DB cluster is ultimately controlled by the security group it uses. That
+	// public access isn't permitted if the security group assigned to the DB cluster
+	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
+	// internal DB instance with a DNS name that resolves to a private IP address. For
+	// more information, see CreateDBInstance .
 	PubliclyAccessible *bool
 
 	// The open mode of the replica database: mounted or read-only. This parameter is
@@ -406,26 +411,25 @@ type CreateDBInstanceReadReplicaInput struct {
 	SourceRegion *string
 
 	// Specifies the storage throughput value for the read replica. This setting
-	// doesn't apply to RDS Custom or Amazon Aurora.
+	// doesn't apply to RDS Custom or Amazon Aurora DB instances.
 	StorageThroughput *int32
 
-	// Specifies the storage type to be associated with the read replica. Valid
-	// values: gp2 | gp3 | io1 | standard If you specify io1 or gp3 , you must also
-	// include a value for the Iops parameter. Default: io1 if the Iops parameter is
-	// specified, otherwise gp2
+	// The storage type to associate with the read replica. If you specify io1 or gp3 ,
+	// you must also include a value for the Iops parameter. Valid Values: gp2 | gp3 |
+	// io1 | standard Default: io1 if the Iops parameter is specified. Otherwise, gp2 .
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
-	// A value that indicates whether the DB instance class of the DB instance uses
-	// its default processor features. This setting doesn't apply to RDS Custom.
+	// Specifies whether the DB instance class of the DB instance uses its default
+	// processor features. This setting doesn't apply to RDS Custom DB instances.
 	UseDefaultProcessorFeatures *bool
 
 	// A list of Amazon EC2 VPC security groups to associate with the read replica.
-	// This setting doesn't apply to RDS Custom. Default: The default EC2 VPC security
-	// group for the DB subnet group's VPC.
+	// This setting doesn't apply to RDS Custom DB instances. Default: The default EC2
+	// VPC security group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []string
 
 	// Used by the SDK's PresignURL autofill customization to specify the region the

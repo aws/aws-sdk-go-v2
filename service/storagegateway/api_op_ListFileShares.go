@@ -17,8 +17,8 @@ import (
 )
 
 // Gets a list of the file shares for a specific S3 File Gateway, or the list of
-// file shares that belong to the calling user account. This operation is only
-// supported for S3 File Gateways.
+// file shares that belong to the calling Amazon Web Services account. This
+// operation is only supported for S3 File Gateways.
 func (c *Client) ListFileShares(ctx context.Context, params *ListFileSharesInput, optFns ...func(*Options)) (*ListFileSharesOutput, error) {
 	if params == nil {
 		params = &ListFileSharesInput{}

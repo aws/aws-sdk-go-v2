@@ -49,9 +49,9 @@ func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBCluste
 
 type FailoverDBClusterInput struct {
 
-	// A DB cluster identifier to force a failover for. This parameter isn't
+	// The identifier of the DB cluster to force a failover for. This parameter isn't
 	// case-sensitive. Constraints:
-	//   - Must match the identifier of an existing DBCluster.
+	//   - Must match the identifier of an existing DB cluster.
 	//
 	// This member is required.
 	DBClusterIdentifier *string

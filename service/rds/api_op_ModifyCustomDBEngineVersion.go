@@ -172,30 +172,29 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// the CreateDBInstance action.
 	SupportedTimezones []types.Timezone
 
-	// A value that indicates whether the engine version supports Babelfish for Aurora
-	// PostgreSQL.
+	// Indicates whether the engine version supports Babelfish for Aurora PostgreSQL.
 	SupportsBabelfish bool
 
-	// A value that indicates whether the engine version supports rotating the server
-	// certificate without rebooting the DB instance.
+	// Indicates whether the engine version supports rotating the server certificate
+	// without rebooting the DB instance.
 	SupportsCertificateRotationWithoutRestart *bool
 
-	// A value that indicates whether you can use Aurora global databases with a
-	// specific DB engine version.
+	// Indicates whether you can use Aurora global databases with a specific DB engine
+	// version.
 	SupportsGlobalDatabases bool
 
-	// A value that indicates whether the DB engine version supports forwarding write
-	// operations from reader DB instances to the writer DB instance in the DB cluster.
-	// By default, write operations aren't allowed on reader DB instances. Valid for:
+	// Indicates whether the DB engine version supports forwarding write operations
+	// from reader DB instances to the writer DB instance in the DB cluster. By
+	// default, write operations aren't allowed on reader DB instances. Valid for:
 	// Aurora DB clusters only
 	SupportsLocalWriteForwarding *bool
 
-	// A value that indicates whether the engine version supports exporting the log
-	// types specified by ExportableLogTypes to CloudWatch Logs.
+	// Indicates whether the engine version supports exporting the log types specified
+	// by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs bool
 
-	// A value that indicates whether you can use Aurora parallel query with a
-	// specific DB engine version.
+	// Indicates whether you can use Aurora parallel query with a specific DB engine
+	// version.
 	SupportsParallelQuery bool
 
 	// Indicates whether the database engine version supports read replicas.

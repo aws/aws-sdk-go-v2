@@ -93,9 +93,9 @@ type RestoreDBInstanceFromS3Input struct {
 	// succeed. You can also allocate additional storage for future growth.
 	AllocatedStorage *int32
 
-	// A value that indicates whether minor engine upgrades are applied automatically
-	// to the DB instance during the maintenance window. By default, minor engine
-	// upgrades are not applied automatically.
+	// Specifies whether to automatically apply minor engine upgrades to the DB
+	// instance during the maintenance window. By default, minor engine upgrades are
+	// not applied automatically.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone that the DB instance is created in. For information about
@@ -113,8 +113,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// CreateDBInstance .
 	BackupRetentionPeriod *int32
 
-	// A value that indicates whether to copy all tags from the DB instance to
-	// snapshots of the DB instance. By default, tags are not copied.
+	// Specifies whether to copy all tags from the DB instance to snapshots of the DB
+	// instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
 
 	// The name of the database to create when the DB instance is created. Follow the
@@ -134,8 +134,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB instance has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
+	// Specifies whether to enable deletion protection for the DB instance. The
+	// database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection isn't enabled. For more information, see Deleting a DB
 	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
@@ -147,15 +147,15 @@ type RestoreDBInstanceFromS3Input struct {
 	// in the Amazon RDS User Guide.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of Amazon Web Services
-	// Identity and Access Management (IAM) accounts to database accounts. By default,
-	// mapping isn't enabled. For more information about IAM database authentication,
-	// see IAM Database Authentication for MySQL and PostgreSQL (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// Specifies whether to enable mapping of Amazon Web Services Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping isn't
+	// enabled. For more information about IAM database authentication, see IAM
+	// Database Authentication for MySQL and PostgreSQL (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
-	// A value that indicates whether to enable Performance Insights for the DB
-	// instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// Specifies whether to enable Performance Insights for the DB instance. For more
+	// information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon RDS User Guide.
 	EnablePerformanceInsights *bool
 
@@ -183,9 +183,9 @@ type RestoreDBInstanceFromS3Input struct {
 	// The license model for this DB instance. Use general-public-license .
 	LicenseModel *string
 
-	// A value that indicates whether to manage the master user password with Amazon
-	// Web Services Secrets Manager. For more information, see Password management
-	// with Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// Specifies whether to manage the master user password with Amazon Web Services
+	// Secrets Manager. For more information, see Password management with Amazon Web
+	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide. Constraints:
 	//   - Can't manage the master user password with Amazon Web Services Secrets
 	//   Manager if MasterUserPassword is specified.
@@ -243,12 +243,11 @@ type RestoreDBInstanceFromS3Input struct {
 	// than 0, then you must supply a MonitoringRoleArn value.
 	MonitoringRoleArn *string
 
-	// A value that indicates whether the DB instance is a Multi-AZ deployment. If the
-	// DB instance is a Multi-AZ deployment, you can't set the AvailabilityZone
-	// parameter.
+	// Specifies whether the DB instance is a Multi-AZ deployment. If the DB instance
+	// is a Multi-AZ deployment, you can't set the AvailabilityZone parameter.
 	MultiAZ *bool
 
-	// The network type of the DB instance. Valid values:
+	// The network type of the DB instance. Valid Values:
 	//   - IPV4
 	//   - DUAL
 	// The network type is determined by the DBSubnetGroup specified for the DB
@@ -313,28 +312,28 @@ type RestoreDBInstanceFromS3Input struct {
 	// class of the DB instance.
 	ProcessorFeatures []types.ProcessorFeature
 
-	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB instance is publicly accessible, its Domain Name System (DNS) endpoint
-	// resolves to the private IP address from within the DB instance's virtual private
-	// cloud (VPC). It resolves to the public IP address from outside of the DB
-	// instance's VPC. Access to the DB instance is ultimately controlled by the
-	// security group it uses. That public access is not permitted if the security
-	// group assigned to the DB instance doesn't permit it. When the DB instance isn't
-	// publicly accessible, it is an internal DB instance with a DNS name that resolves
-	// to a private IP address. For more information, see CreateDBInstance .
+	// Specifies whether the DB instance is publicly accessible. When the DB instance
+	// is publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// private IP address from within the DB instance's virtual private cloud (VPC). It
+	// resolves to the public IP address from outside of the DB instance's VPC. Access
+	// to the DB instance is ultimately controlled by the security group it uses. That
+	// public access is not permitted if the security group assigned to the DB instance
+	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
+	// internal DB instance with a DNS name that resolves to a private IP address. For
+	// more information, see CreateDBInstance .
 	PubliclyAccessible *bool
 
 	// The prefix of your Amazon S3 bucket.
 	S3Prefix *string
 
-	// A value that indicates whether the new DB instance is encrypted or not.
+	// Specifies whether the new DB instance is encrypted or not.
 	StorageEncrypted *bool
 
 	// Specifies the storage throughput value for the DB instance. This setting
 	// doesn't apply to RDS Custom or Amazon Aurora.
 	StorageThroughput *int32
 
-	// Specifies the storage type to be associated with the DB instance. Valid values:
+	// Specifies the storage type to be associated with the DB instance. Valid Values:
 	// gp2 | gp3 | io1 | standard If you specify io1 or gp3 , you must also include a
 	// value for the Iops parameter. Default: io1 if the Iops parameter is specified;
 	// otherwise gp2
@@ -345,8 +344,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
-	// A value that indicates whether the DB instance class of the DB instance uses
-	// its default processor features.
+	// Specifies whether the DB instance class of the DB instance uses its default
+	// processor features.
 	UseDefaultProcessorFeatures *bool
 
 	// A list of VPC security groups to associate with this DB instance.

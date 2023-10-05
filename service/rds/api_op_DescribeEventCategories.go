@@ -42,7 +42,7 @@ type DescribeEventCategoriesInput struct {
 	Filters []types.Filter
 
 	// The type of source that is generating the events. For RDS Proxy events, specify
-	// db-proxy . Valid values: db-instance | db-cluster | db-parameter-group |
+	// db-proxy . Valid Values: db-instance | db-cluster | db-parameter-group |
 	// db-security-group | db-snapshot | db-cluster-snapshot | db-proxy
 	SourceType *string
 

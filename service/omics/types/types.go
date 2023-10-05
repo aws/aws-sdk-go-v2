@@ -296,6 +296,21 @@ type CompleteReadSetUploadPartListItem struct {
 	noSmithyDocumentSerde
 }
 
+// The entity tag (ETag) is a hash of the object representing its semantic content.
+type ETag struct {
+
+	// The algorithm used to calculate the read set’s ETag(s).
+	Algorithm ETagAlgorithm
+
+	// The ETag hash calculated on Source1 of the read set.
+	Source1 *string
+
+	// The ETag hash calculated on Source2 of the read set.
+	Source2 *string
+
+	noSmithyDocumentSerde
+}
+
 // A read set.
 type ExportReadSet struct {
 
@@ -852,6 +867,9 @@ type ReadSetListItem struct {
 
 	// The read set's description.
 	Description *string
+
+	// The entity tag (ETag) is a hash of the object representing its semantic content.
+	Etag *ETag
 
 	// The read set's name.
 	Name *string

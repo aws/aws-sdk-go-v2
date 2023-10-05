@@ -16,10 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata about a gateway such as its name, network interfaces,
-// configured time zone, and the state (whether the gateway is running or not). To
-// specify which gateway to describe, use the Amazon Resource Name (ARN) of the
-// gateway in your request.
+// Returns metadata about a gateway such as its name, network interfaces, time
+// zone, status, and software version. To specify which gateway to describe, use
+// the Amazon Resource Name (ARN) of the gateway in your request.
 func (c *Client) DescribeGatewayInformation(ctx context.Context, params *DescribeGatewayInformationInput, optFns ...func(*Options)) (*DescribeGatewayInformationOutput, error) {
 	if params == nil {
 		params = &DescribeGatewayInformationInput{}
@@ -119,6 +118,9 @@ type DescribeGatewayInformationOutput struct {
 	// Date after which this gateway will not receive software updates for new
 	// features.
 	SoftwareUpdatesEndDate *string
+
+	// The version number of the software running on the gateway appliance.
+	SoftwareVersion *string
 
 	// A list of the metadata cache sizes that the gateway can support based on its
 	// current hardware specifications.

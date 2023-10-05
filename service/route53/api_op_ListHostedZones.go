@@ -45,6 +45,9 @@ type ListHostedZonesInput struct {
 	// reusable delegation set.
 	DelegationSetId *string
 
+	// (Optional) Specifies if the hosted zone is private.
+	HostedZoneType types.HostedZoneType
+
 	// If the value of IsTruncated in the previous response was true , you have more
 	// hosted zones. To get more hosted zones, submit another ListHostedZones request.
 	// For the value of marker , specify the value of NextMarker from the previous

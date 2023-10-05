@@ -24,8 +24,8 @@ import (
 // notification through an Amazon CloudWatch Event. You can configure CloudWatch
 // Events to send the notification through event targets such as Amazon SNS or
 // Lambda function. This operation is only supported for S3 File Gateways. For more
-// information, see Getting file upload notification (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification)
-// in the Storage Gateway User Guide.
+// information, see Getting file upload notification (https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification)
+// in the Amazon S3 File Gateway User Guide.
 func (c *Client) NotifyWhenUploaded(ctx context.Context, params *NotifyWhenUploadedInput, optFns ...func(*Options)) (*NotifyWhenUploadedOutput, error) {
 	if params == nil {
 		params = &NotifyWhenUploadedInput{}

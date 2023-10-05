@@ -4149,6 +4149,10 @@ func awsRestxml_serializeOpHttpBindingsListHostedZonesInput(v *ListHostedZonesIn
 		encoder.SetQuery("delegationsetid").String(*v.DelegationSetId)
 	}
 
+	if len(v.HostedZoneType) > 0 {
+		encoder.SetQuery("hostedzonetype").String(string(v.HostedZoneType))
+	}
+
 	if v.Marker != nil {
 		encoder.SetQuery("marker").String(*v.Marker)
 	}

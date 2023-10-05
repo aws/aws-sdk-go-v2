@@ -112,7 +112,9 @@ type BandwidthRateLimitInterval struct {
 
 	// The average upload rate limit component of the bandwidth rate limit interval,
 	// in bits per second. This field does not appear in the response if the upload
-	// rate limit is not set.
+	// rate limit is not set. For Tape Gateway and Volume Gateway, the minimum value is
+	// 51200 . For S3 File Gateway and FSx File Gateway, the minimum value is 104857600
+	// .
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	noSmithyDocumentSerde

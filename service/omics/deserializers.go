@@ -5973,6 +5973,11 @@ func awsRestjson1_deserializeOpDocumentGetReadSetMetadataOutput(v **GetReadSetMe
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "etag":
+			if err := awsRestjson1_deserializeDocumentETag(&sv.Etag, value); err != nil {
+				return err
+			}
+
 		case "files":
 			if err := awsRestjson1_deserializeDocumentReadSetFiles(&sv.Files, value); err != nil {
 				return err
@@ -16585,6 +16590,64 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentETag(v **types.ETag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ETag
+	if *v == nil {
+		sv = &types.ETag{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "algorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ETagAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.Algorithm = types.ETagAlgorithm(jtv)
+			}
+
+		case "source1":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Source1 = ptr.String(jtv)
+			}
+
+		case "source2":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Source2 = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentExportReadSetDetail(v **types.ExportReadSetDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18113,6 +18176,11 @@ func awsRestjson1_deserializeDocumentReadSetListItem(v **types.ReadSetListItem, 
 					return fmt.Errorf("expected ReadSetDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "etag":
+			if err := awsRestjson1_deserializeDocumentETag(&sv.Etag, value); err != nil {
+				return err
 			}
 
 		case "fileType":

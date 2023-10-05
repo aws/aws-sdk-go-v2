@@ -266,6 +266,22 @@ func (HostedZoneLimitType) Values() []HostedZoneLimitType {
 	}
 }
 
+type HostedZoneType string
+
+// Enum values for HostedZoneType
+const (
+	HostedZoneTypePrivateHostedZone HostedZoneType = "PrivateHostedZone"
+)
+
+// Values returns all known values for HostedZoneType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HostedZoneType) Values() []HostedZoneType {
+	return []HostedZoneType{
+		"PrivateHostedZone",
+	}
+}
+
 type InsufficientDataHealthStatus string
 
 // Enum values for InsufficientDataHealthStatus

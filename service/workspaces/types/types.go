@@ -34,6 +34,73 @@ type AccountModification struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the association between an application and an application resource.
+type ApplicationResourceAssociation struct {
+
+	// The identifier of the application.
+	ApplicationId *string
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string
+
+	// The resource type of the associated resource.
+	AssociatedResourceType ApplicationAssociatedResourceType
+
+	// The time the association was created.
+	Created *time.Time
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time
+
+	// The status of the application resource association.
+	State AssociationState
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the reason that the association deployment failed, including the
+// error code and error message.
+type AssociationStateReason struct {
+
+	// The error code of the association deployment failure.
+	ErrorCode AssociationErrorCode
+
+	// The error message of the association deployment failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the association between an application and a bundle resource.
+type BundleResourceAssociation struct {
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string
+
+	// The resource type of the associated resources.
+	AssociatedResourceType BundleAssociatedResourceType
+
+	// The identifier of the bundle.
+	BundleId *string
+
+	// The time the association is created.
+	Created *time.Time
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time
+
+	// The status of the bundle resource association.
+	State AssociationState
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason
+
+	noSmithyDocumentSerde
+}
+
 // Describes the properties of the certificate-based authentication you want to
 // use with your WorkSpaces.
 type CertificateBasedAuthProperties struct {
@@ -292,8 +359,8 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Provides in-depth details about the error. These details include the possible
-// causes of the errors and troubleshooting information.
+// Describes in-depth details about the error. These details include the possible
+// causes of the error and troubleshooting information.
 type ErrorDetails struct {
 
 	// Indicates the error code returned.
@@ -365,6 +432,33 @@ type ImagePermission struct {
 	// The identifier of the Amazon Web Services account that an image has been shared
 	// with.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the association between an application and an image resource.
+type ImageResourceAssociation struct {
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string
+
+	// The resource type of the associated resources.
+	AssociatedResourceType ImageAssociatedResourceType
+
+	// The time the association is created.
+	Created *time.Time
+
+	// The identifier of the image.
+	ImageId *string
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time
+
+	// The status of the image resource association.
+	State AssociationState
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason
 
 	noSmithyDocumentSerde
 }
@@ -835,6 +929,48 @@ type WorkspaceAccessProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the WorkSpace application.
+type WorkSpaceApplication struct {
+
+	// The identifier of the application.
+	ApplicationId *string
+
+	// The time the application is created.
+	Created *time.Time
+
+	// The description of the WorkSpace application.
+	Description *string
+
+	// The license availability for the applications.
+	LicenseType WorkSpaceApplicationLicenseType
+
+	// The name of the WorkSpace application.
+	Name *string
+
+	// The owner of the WorkSpace application.
+	Owner *string
+
+	// The status of WorkSpace application.
+	State WorkSpaceApplicationState
+
+	// The supported compute types of the WorkSpace application.
+	SupportedComputeTypeNames []Compute
+
+	// The supported operating systems of the WorkSpace application.
+	SupportedOperatingSystemNames []OperatingSystemName
+
+	noSmithyDocumentSerde
+}
+
+// Describes the WorkSpace application deployment.
+type WorkSpaceApplicationDeployment struct {
+
+	// The associations between the applications and the associated resources.
+	Associations []WorkspaceResourceAssociation
+
+	noSmithyDocumentSerde
+}
+
 // Describes a WorkSpace bundle.
 type WorkspaceBundle struct {
 
@@ -1034,7 +1170,8 @@ type WorkspaceImage struct {
 	// The error code that is returned for the image.
 	ErrorCode *string
 
-	// The details of the error returned for the image.
+	// Additional details of the error returned for the image, including the possible
+	// causes of the errors and troubleshooting information.
 	ErrorDetails []ErrorDetails
 
 	// The text of the error message that is returned for the image.
@@ -1073,6 +1210,9 @@ type WorkspaceProperties struct {
 	// The compute type. For more information, see Amazon WorkSpaces Bundles (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles)
 	// .
 	ComputeTypeName Compute
+
+	// The name of the operating system.
+	OperatingSystemName OperatingSystemName
 
 	// The protocol. For more information, see  Protocols for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html)
 	// .
@@ -1141,6 +1281,33 @@ type WorkspaceRequest struct {
 
 	// The WorkSpace properties.
 	WorkspaceProperties *WorkspaceProperties
+
+	noSmithyDocumentSerde
+}
+
+// Describes the association between an application and a WorkSpace resource.
+type WorkspaceResourceAssociation struct {
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string
+
+	// The resource types of the associated resource.
+	AssociatedResourceType WorkSpaceAssociatedResourceType
+
+	// The time the association is created.
+	Created *time.Time
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time
+
+	// The status of the WorkSpace resource association.
+	State AssociationState
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason
+
+	// The identifier of the WorkSpace.
+	WorkspaceId *string
 
 	noSmithyDocumentSerde
 }

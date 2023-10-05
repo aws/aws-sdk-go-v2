@@ -86,6 +86,10 @@ type GetReadSetMetadataOutput struct {
 	// The read set's description.
 	Description *string
 
+	// The entity tag (ETag) is a hash of the object meant to represent its semantic
+	// content.
+	Etag *types.ETag
+
 	// The read set's files.
 	Files *types.ReadSetFiles
 

@@ -453,7 +453,9 @@ type CreateDBInstanceInput struct {
 	// DB instances. The password for the master user is managed by the DB cluster.
 	// Constraints:
 	//   - Can't be specified if ManageMasterUserPassword is turned on.
-	//   - Can include any printable ASCII character except "/", """, or "@".
+	//   - Can include any printable ASCII character except "/", """, or "@". For RDS
+	//   for Oracle, can't include the "&" (ampersand) or the "'" (single quotes)
+	//   character.
 	// Length Constraints:
 	//   - RDS for MariaDB - Must contain from 8 to 41 characters.
 	//   - RDS for Microsoft SQL Server - Must contain from 8 to 128 characters.

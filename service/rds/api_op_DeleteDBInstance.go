@@ -16,25 +16,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeleteDBInstance action deletes a previously provisioned DB instance. When
-// you delete a DB instance, all automated backups for that instance are deleted
-// and can't be recovered. Manual DB snapshots of the DB instance to be deleted by
-// DeleteDBInstance are not deleted. If you request a final DB snapshot the status
-// of the Amazon RDS DB instance is deleting until the DB snapshot is created. The
-// API action DescribeDBInstance is used to monitor the status of this operation.
-// The action can't be canceled or reverted once submitted. When a DB instance is
-// in a failure state and has a status of failed , incompatible-restore , or
-// incompatible-network , you can only delete it when you skip creation of the
-// final snapshot with the SkipFinalSnapshot parameter. If the specified DB
-// instance is part of an Amazon Aurora DB cluster, you can't delete the DB
-// instance if both of the following conditions are true:
+// Deletes a previously provisioned DB instance. When you delete a DB instance,
+// all automated backups for that instance are deleted and can't be recovered.
+// However, manual DB snapshots of the DB instance aren't deleted. If you request a
+// final DB snapshot, the status of the Amazon RDS DB instance is deleting until
+// the DB snapshot is created. This operation can't be canceled or reverted after
+// it begins. To monitor the status of this operation, use DescribeDBInstance .
+// When a DB instance is in a failure state and has a status of failed ,
+// incompatible-restore , or incompatible-network , you can only delete it when you
+// skip creation of the final snapshot with the SkipFinalSnapshot parameter. If
+// the specified DB instance is part of an Amazon Aurora DB cluster, you can't
+// delete the DB instance if both of the following conditions are true:
 //   - The DB cluster is a read replica of another Amazon Aurora DB cluster.
 //   - The DB instance is the only instance in the DB cluster.
 //
-// To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster
-// API action to promote the DB cluster so it's no longer a read replica. After the
-// promotion completes, then call the DeleteDBInstance API action to delete the
-// final instance in the DB cluster.
+// To delete a DB instance in this case, first use the PromoteReadReplicaDBCluster
+// operation to promote the DB cluster so that it's no longer a read replica. After
+// the promotion completes, use the DeleteDBInstance operation to delete the final
+// instance in the DB cluster. For RDS Custom DB instances, deleting the DB
+// instance permanently deletes the EC2 instance and the associated EBS volumes.
+// Make sure that you don't terminate or delete these resources before you delete
+// the DB instance. Otherwise, deleting the DB instance and creation of the final
+// snapshot might fail.
 func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceInput, optFns ...func(*Options)) (*DeleteDBInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteDBInstanceInput{}
@@ -59,9 +62,9 @@ type DeleteDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// A value that indicates whether to remove automated backups immediately after
-	// the DB instance is deleted. This parameter isn't case-sensitive. The default is
-	// to remove automated backups immediately after the DB instance is deleted.
+	// Specifies whether to remove automated backups immediately after the DB instance
+	// is deleted. This parameter isn't case-sensitive. The default is to remove
+	// automated backups immediately after the DB instance is deleted.
 	DeleteAutomatedBackups *bool
 
 	// The DBSnapshotIdentifier of the new DBSnapshot created when the
@@ -74,11 +77,11 @@ type DeleteDBInstanceInput struct {
 	//   - Can't be specified when deleting a read replica.
 	FinalDBSnapshotIdentifier *string
 
-	// A value that indicates whether to skip the creation of a final DB snapshot
-	// before deleting the instance. If you enable this parameter, RDS doesn't create a
-	// DB snapshot. If you don't enable this parameter, RDS creates a DB snapshot
-	// before the DB instance is deleted. By default, skip isn't enabled, and the DB
-	// snapshot is created. If you don't enable this parameter, you must specify the
+	// Specifies whether to skip the creation of a final DB snapshot before deleting
+	// the instance. If you enable this parameter, RDS doesn't create a DB snapshot. If
+	// you don't enable this parameter, RDS creates a DB snapshot before the DB
+	// instance is deleted. By default, skip isn't enabled, and the DB snapshot is
+	// created. If you don't enable this parameter, you must specify the
 	// FinalDBSnapshotIdentifier parameter. When a DB instance is in a failure state
 	// and has a status of failed , incompatible-restore , or incompatible-network ,
 	// RDS can delete the instance only if you enable this parameter. If you delete a

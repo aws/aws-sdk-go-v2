@@ -84,7 +84,7 @@ type RestoreDBClusterFromS3Input struct {
 	S3IngestionRoleArn *string
 
 	// The identifier for the database engine that was backed up to create the files
-	// stored in the Amazon S3 bucket. Valid values: mysql
+	// stored in the Amazon S3 bucket. Valid Values: mysql
 	//
 	// This member is required.
 	SourceEngine *string
@@ -115,8 +115,8 @@ type RestoreDBClusterFromS3Input struct {
 	// the specified CharacterSet.
 	CharacterSetName *string
 
-	// A value that indicates whether to copy all tags from the restored DB cluster to
-	// snapshots of the restored DB cluster. The default is not to copy them.
+	// Specifies whether to copy all tags from the restored DB cluster to snapshots of
+	// the restored DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool
 
 	// The name of the DB cluster parameter group to associate with the restored DB
@@ -133,8 +133,8 @@ type RestoreDBClusterFromS3Input struct {
 	// The database name for the restored DB cluster.
 	DatabaseName *string
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
+	// Specifies whether to enable deletion protection for the DB cluster. The
+	// database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection isn't enabled.
 	DeletionProtection *bool
 
@@ -157,9 +157,9 @@ type RestoreDBClusterFromS3Input struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of Amazon Web Services
-	// Identity and Access Management (IAM) accounts to database accounts. By default,
-	// mapping isn't enabled. For more information, see IAM Database Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
+	// Specifies whether to enable mapping of Amazon Web Services Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping isn't
+	// enabled. For more information, see IAM Database Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
@@ -180,9 +180,9 @@ type RestoreDBClusterFromS3Input struct {
 	// KMS key for each Amazon Web Services Region.
 	KmsKeyId *string
 
-	// A value that indicates whether to manage the master user password with Amazon
-	// Web Services Secrets Manager. For more information, see Password management
-	// with Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// Specifies whether to manage the master user password with Amazon Web Services
+	// Secrets Manager. For more information, see Password management with Amazon Web
+	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide and Password management with Amazon Web Services
 	// Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
 	// in the Amazon Aurora User Guide. Constraints:
@@ -211,7 +211,7 @@ type RestoreDBClusterFromS3Input struct {
 	// Region.
 	MasterUserSecretKmsKeyId *string
 
-	// The network type of the DB cluster. Valid values:
+	// The network type of the DB cluster. Valid Values:
 	//   - IPV4
 	//   - DUAL
 	// The network type is determined by the DBSubnetGroup specified for the DB
@@ -262,10 +262,10 @@ type RestoreDBClusterFromS3Input struct {
 	// in the Amazon Aurora User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 
-	// A value that indicates whether the restored DB cluster is encrypted.
+	// Specifies whether the restored DB cluster is encrypted.
 	StorageEncrypted *bool
 
-	// Specifies the storage type to be associated with the DB cluster. Valid values:
+	// Specifies the storage type to be associated with the DB cluster. Valid Values:
 	// aurora , aurora-iopt1 Default: aurora Valid for: Aurora DB clusters only
 	StorageType *string
 

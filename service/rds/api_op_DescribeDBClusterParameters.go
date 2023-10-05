@@ -59,8 +59,10 @@ type DescribeDBClusterParametersInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// A value that indicates to return only parameters for a specific source.
-	// Parameter sources can be engine , service , or customer .
+	// A specific source to return parameters for. Valid Values:
+	//   - customer
+	//   - engine
+	//   - service
 	Source *string
 
 	noSmithyDocumentSerde

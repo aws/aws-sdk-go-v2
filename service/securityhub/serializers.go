@@ -9296,6 +9296,258 @@ func awsRestjson1_serializeDocumentAwsCorsConfiguration(v *types.AwsCorsConfigur
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsDmsEndpointDetails(v *types.AwsDmsEndpointDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.EndpointArn != nil {
+		ok := object.Key("EndpointArn")
+		ok.String(*v.EndpointArn)
+	}
+
+	if v.EndpointIdentifier != nil {
+		ok := object.Key("EndpointIdentifier")
+		ok.String(*v.EndpointIdentifier)
+	}
+
+	if v.EndpointType != nil {
+		ok := object.Key("EndpointType")
+		ok.String(*v.EndpointType)
+	}
+
+	if v.EngineName != nil {
+		ok := object.Key("EngineName")
+		ok.String(*v.EngineName)
+	}
+
+	if v.ExternalId != nil {
+		ok := object.Key("ExternalId")
+		ok.String(*v.ExternalId)
+	}
+
+	if v.ExtraConnectionAttributes != nil {
+		ok := object.Key("ExtraConnectionAttributes")
+		ok.String(*v.ExtraConnectionAttributes)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.Port != 0 {
+		ok := object.Key("Port")
+		ok.Integer(v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if v.SslMode != nil {
+		ok := object.Key("SslMode")
+		ok.String(*v.SslMode)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("Username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsDmsReplicationInstanceDetails(v *types.AwsDmsReplicationInstanceDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllocatedStorage != 0 {
+		ok := object.Key("AllocatedStorage")
+		ok.Integer(v.AllocatedStorage)
+	}
+
+	if v.AutoMinorVersionUpgrade {
+		ok := object.Key("AutoMinorVersionUpgrade")
+		ok.Boolean(v.AutoMinorVersionUpgrade)
+	}
+
+	if v.AvailabilityZone != nil {
+		ok := object.Key("AvailabilityZone")
+		ok.String(*v.AvailabilityZone)
+	}
+
+	if v.EngineVersion != nil {
+		ok := object.Key("EngineVersion")
+		ok.String(*v.EngineVersion)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.MultiAZ {
+		ok := object.Key("MultiAZ")
+		ok.Boolean(v.MultiAZ)
+	}
+
+	if v.PreferredMaintenanceWindow != nil {
+		ok := object.Key("PreferredMaintenanceWindow")
+		ok.String(*v.PreferredMaintenanceWindow)
+	}
+
+	if v.PubliclyAccessible {
+		ok := object.Key("PubliclyAccessible")
+		ok.Boolean(v.PubliclyAccessible)
+	}
+
+	if v.ReplicationInstanceClass != nil {
+		ok := object.Key("ReplicationInstanceClass")
+		ok.String(*v.ReplicationInstanceClass)
+	}
+
+	if v.ReplicationInstanceIdentifier != nil {
+		ok := object.Key("ReplicationInstanceIdentifier")
+		ok.String(*v.ReplicationInstanceIdentifier)
+	}
+
+	if v.ReplicationSubnetGroup != nil {
+		ok := object.Key("ReplicationSubnetGroup")
+		if err := awsRestjson1_serializeDocumentAwsDmsReplicationInstanceReplicationSubnetGroupDetails(v.ReplicationSubnetGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcSecurityGroups != nil {
+		ok := object.Key("VpcSecurityGroups")
+		if err := awsRestjson1_serializeDocumentAwsDmsReplicationInstanceVpcSecurityGroupsList(v.VpcSecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsDmsReplicationInstanceReplicationSubnetGroupDetails(v *types.AwsDmsReplicationInstanceReplicationSubnetGroupDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReplicationSubnetGroupIdentifier != nil {
+		ok := object.Key("ReplicationSubnetGroupIdentifier")
+		ok.String(*v.ReplicationSubnetGroupIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsDmsReplicationInstanceVpcSecurityGroupsDetails(v *types.AwsDmsReplicationInstanceVpcSecurityGroupsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VpcSecurityGroupId != nil {
+		ok := object.Key("VpcSecurityGroupId")
+		ok.String(*v.VpcSecurityGroupId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsDmsReplicationInstanceVpcSecurityGroupsList(v []types.AwsDmsReplicationInstanceVpcSecurityGroupsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsDmsReplicationInstanceVpcSecurityGroupsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsDmsReplicationTaskDetails(v *types.AwsDmsReplicationTaskDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CdcStartPosition != nil {
+		ok := object.Key("CdcStartPosition")
+		ok.String(*v.CdcStartPosition)
+	}
+
+	if v.CdcStartTime != nil {
+		ok := object.Key("CdcStartTime")
+		ok.String(*v.CdcStartTime)
+	}
+
+	if v.CdcStopPosition != nil {
+		ok := object.Key("CdcStopPosition")
+		ok.String(*v.CdcStopPosition)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.MigrationType != nil {
+		ok := object.Key("MigrationType")
+		ok.String(*v.MigrationType)
+	}
+
+	if v.ReplicationInstanceArn != nil {
+		ok := object.Key("ReplicationInstanceArn")
+		ok.String(*v.ReplicationInstanceArn)
+	}
+
+	if v.ReplicationTaskIdentifier != nil {
+		ok := object.Key("ReplicationTaskIdentifier")
+		ok.String(*v.ReplicationTaskIdentifier)
+	}
+
+	if v.ReplicationTaskSettings != nil {
+		ok := object.Key("ReplicationTaskSettings")
+		ok.String(*v.ReplicationTaskSettings)
+	}
+
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("ResourceIdentifier")
+		ok.String(*v.ResourceIdentifier)
+	}
+
+	if v.SourceEndpointArn != nil {
+		ok := object.Key("SourceEndpointArn")
+		ok.String(*v.SourceEndpointArn)
+	}
+
+	if v.TableMappings != nil {
+		ok := object.Key("TableMappings")
+		ok.String(*v.TableMappings)
+	}
+
+	if v.TargetEndpointArn != nil {
+		ok := object.Key("TargetEndpointArn")
+		ok.String(*v.TargetEndpointArn)
+	}
+
+	if v.TaskData != nil {
+		ok := object.Key("TaskData")
+		ok.String(*v.TaskData)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsDynamoDbTableAttributeDefinition(v *types.AwsDynamoDbTableAttributeDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14329,6 +14581,11 @@ func awsRestjson1_serializeDocumentAwsEcsTaskDefinitionDetails(v *types.AwsEcsTa
 		}
 	}
 
+	if v.Status != nil {
+		ok := object.Key("Status")
+		ok.String(*v.Status)
+	}
+
 	if v.TaskRoleArn != nil {
 		ok := object.Key("TaskRoleArn")
 		ok.String(*v.TaskRoleArn)
@@ -16066,6 +16323,192 @@ func awsRestjson1_serializeDocumentAwsEventSchemasRegistryDetails(v *types.AwsEv
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsEventsEndpointDetails(v *types.AwsEventsEndpointDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.EndpointId != nil {
+		ok := object.Key("EndpointId")
+		ok.String(*v.EndpointId)
+	}
+
+	if v.EndpointUrl != nil {
+		ok := object.Key("EndpointUrl")
+		ok.String(*v.EndpointUrl)
+	}
+
+	if v.EventBuses != nil {
+		ok := object.Key("EventBuses")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointEventBusesList(v.EventBuses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ReplicationConfig != nil {
+		ok := object.Key("ReplicationConfig")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointReplicationConfigDetails(v.ReplicationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.RoutingConfig != nil {
+		ok := object.Key("RoutingConfig")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigDetails(v.RoutingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
+	}
+
+	if v.StateReason != nil {
+		ok := object.Key("StateReason")
+		ok.String(*v.StateReason)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointEventBusesDetails(v *types.AwsEventsEndpointEventBusesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventBusArn != nil {
+		ok := object.Key("EventBusArn")
+		ok.String(*v.EventBusArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointEventBusesList(v []types.AwsEventsEndpointEventBusesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointEventBusesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointReplicationConfigDetails(v *types.AwsEventsEndpointReplicationConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigDetails(v *types.AwsEventsEndpointRoutingConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailoverConfig != nil {
+		ok := object.Key("FailoverConfig")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigFailoverConfigDetails(v.FailoverConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigFailoverConfigDetails(v *types.AwsEventsEndpointRoutingConfigFailoverConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Primary != nil {
+		ok := object.Key("Primary")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails(v.Primary, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Secondary != nil {
+		ok := object.Key("Secondary")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails(v.Secondary, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails(v *types.AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HealthCheck != nil {
+		ok := object.Key("HealthCheck")
+		ok.String(*v.HealthCheck)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails(v *types.AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Route != nil {
+		ok := object.Key("Route")
+		ok.String(*v.Route)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEventsEventbusDetails(v *types.AwsEventsEventbusDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Policy != nil {
+		ok := object.Key("Policy")
+		ok.String(*v.Policy)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsGuardDutyDetectorDataSourcesCloudTrailDetails(v *types.AwsGuardDutyDetectorDataSourcesCloudTrailDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17344,6 +17787,210 @@ func awsRestjson1_serializeDocumentAwsMountPointList(v []types.AwsMountPoint, va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationDetails(v *types.AwsMskClusterClusterInfoClientAuthenticationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Sasl != nil {
+		ok := object.Key("Sasl")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationSaslDetails(v.Sasl, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tls != nil {
+		ok := object.Key("Tls")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationTlsDetails(v.Tls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Unauthenticated != nil {
+		ok := object.Key("Unauthenticated")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails(v.Unauthenticated, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationSaslDetails(v *types.AwsMskClusterClusterInfoClientAuthenticationSaslDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Iam != nil {
+		ok := object.Key("Iam")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationSaslIamDetails(v.Iam, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Scram != nil {
+		ok := object.Key("Scram")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationSaslScramDetails(v.Scram, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationSaslIamDetails(v *types.AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationSaslScramDetails(v *types.AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationTlsDetails(v *types.AwsMskClusterClusterInfoClientAuthenticationTlsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityArnList != nil {
+		ok := object.Key("CertificateAuthorityArnList")
+		if err := awsRestjson1_serializeDocumentStringList(v.CertificateAuthorityArnList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails(v *types.AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoDetails(v *types.AwsMskClusterClusterInfoDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientAuthentication != nil {
+		ok := object.Key("ClientAuthentication")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoClientAuthenticationDetails(v.ClientAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterName != nil {
+		ok := object.Key("ClusterName")
+		ok.String(*v.ClusterName)
+	}
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("CurrentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	if v.EncryptionInfo != nil {
+		ok := object.Key("EncryptionInfo")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoEncryptionInfoDetails(v.EncryptionInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberOfBrokerNodes != 0 {
+		ok := object.Key("NumberOfBrokerNodes")
+		ok.Integer(v.NumberOfBrokerNodes)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoEncryptionInfoDetails(v *types.AwsMskClusterClusterInfoEncryptionInfoDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionAtRest != nil {
+		ok := object.Key("EncryptionAtRest")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails(v.EncryptionAtRest, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EncryptionInTransit != nil {
+		ok := object.Key("EncryptionInTransit")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails(v.EncryptionInTransit, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails(v *types.AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataVolumeKMSKeyId != nil {
+		ok := object.Key("DataVolumeKMSKeyId")
+		ok.String(*v.DataVolumeKMSKeyId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails(v *types.AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientBroker != nil {
+		ok := object.Key("ClientBroker")
+		ok.String(*v.ClientBroker)
+	}
+
+	if v.InCluster {
+		ok := object.Key("InCluster")
+		ok.Boolean(v.InCluster)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsMskClusterDetails(v *types.AwsMskClusterDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterInfo != nil {
+		ok := object.Key("ClusterInfo")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterClusterInfoDetails(v.ClusterInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallDetails(v *types.AwsNetworkFirewallFirewallDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17946,6 +18593,11 @@ func awsRestjson1_serializeDocumentAwsRdsDbClusterDetails(v *types.AwsRdsDbClust
 		if err := awsRestjson1_serializeDocumentAwsRdsDbClusterAssociatedRoles(v.AssociatedRoles, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AutoMinorVersionUpgrade {
+		ok := object.Key("AutoMinorVersionUpgrade")
+		ok.Boolean(v.AutoMinorVersionUpgrade)
 	}
 
 	if v.AvailabilityZones != nil {
@@ -20175,6 +20827,132 @@ func awsRestjson1_serializeDocumentAwsRedshiftClusterVpcSecurityGroups(v []types
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53HostedZoneConfigDetails(v *types.AwsRoute53HostedZoneConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Comment != nil {
+		ok := object.Key("Comment")
+		ok.String(*v.Comment)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53HostedZoneDetails(v *types.AwsRoute53HostedZoneDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HostedZone != nil {
+		ok := object.Key("HostedZone")
+		if err := awsRestjson1_serializeDocumentAwsRoute53HostedZoneObjectDetails(v.HostedZone, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NameServers != nil {
+		ok := object.Key("NameServers")
+		if err := awsRestjson1_serializeDocumentAwsRoute53HostedZoneNameServersList(v.NameServers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryLoggingConfig != nil {
+		ok := object.Key("QueryLoggingConfig")
+		if err := awsRestjson1_serializeDocumentAwsRoute53QueryLoggingConfigDetails(v.QueryLoggingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Vpcs != nil {
+		ok := object.Key("Vpcs")
+		if err := awsRestjson1_serializeDocumentAwsRoute53HostedZoneVpcsList(v.Vpcs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53HostedZoneNameServersList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53HostedZoneObjectDetails(v *types.AwsRoute53HostedZoneObjectDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Config != nil {
+		ok := object.Key("Config")
+		if err := awsRestjson1_serializeDocumentAwsRoute53HostedZoneConfigDetails(v.Config, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53HostedZoneVpcDetails(v *types.AwsRoute53HostedZoneVpcDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53HostedZoneVpcsList(v []types.AwsRoute53HostedZoneVpcDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsRoute53HostedZoneVpcDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRoute53QueryLoggingConfigDetails(v *types.AwsRoute53QueryLoggingConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchLogsLogGroupArn != nil {
+		ok := object.Key("CloudWatchLogsLogGroupArn")
+		if err := awsRestjson1_serializeDocumentCloudWatchLogsLogGroupArnConfigDetails(v.CloudWatchLogsLogGroupArn, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23794,6 +24572,28 @@ func awsRestjson1_serializeDocumentClassificationStatus(v *types.ClassificationS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCloudWatchLogsLogGroupArnConfigDetails(v *types.CloudWatchLogsLogGroupArnConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchLogsLogGroupArn != nil {
+		ok := object.Key("CloudWatchLogsLogGroupArn")
+		ok.String(*v.CloudWatchLogsLogGroupArn)
+	}
+
+	if v.HostedZoneId != nil {
+		ok := object.Key("HostedZoneId")
+		ok.String(*v.HostedZoneId)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCodeVulnerabilitiesFilePath(v *types.CodeVulnerabilitiesFilePath, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25629,6 +26429,27 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 		}
 	}
 
+	if v.AwsDmsEndpoint != nil {
+		ok := object.Key("AwsDmsEndpoint")
+		if err := awsRestjson1_serializeDocumentAwsDmsEndpointDetails(v.AwsDmsEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsDmsReplicationInstance != nil {
+		ok := object.Key("AwsDmsReplicationInstance")
+		if err := awsRestjson1_serializeDocumentAwsDmsReplicationInstanceDetails(v.AwsDmsReplicationInstance, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsDmsReplicationTask != nil {
+		ok := object.Key("AwsDmsReplicationTask")
+		if err := awsRestjson1_serializeDocumentAwsDmsReplicationTaskDetails(v.AwsDmsReplicationTask, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsDynamoDbTable != nil {
 		ok := object.Key("AwsDynamoDbTable")
 		if err := awsRestjson1_serializeDocumentAwsDynamoDbTableDetails(v.AwsDynamoDbTable, ok); err != nil {
@@ -25832,6 +26653,20 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 		}
 	}
 
+	if v.AwsEventsEndpoint != nil {
+		ok := object.Key("AwsEventsEndpoint")
+		if err := awsRestjson1_serializeDocumentAwsEventsEndpointDetails(v.AwsEventsEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsEventsEventbus != nil {
+		ok := object.Key("AwsEventsEventbus")
+		if err := awsRestjson1_serializeDocumentAwsEventsEventbusDetails(v.AwsEventsEventbus, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsGuardDutyDetector != nil {
 		ok := object.Key("AwsGuardDutyDetector")
 		if err := awsRestjson1_serializeDocumentAwsGuardDutyDetectorDetails(v.AwsGuardDutyDetector, ok); err != nil {
@@ -25898,6 +26733,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 	if v.AwsLambdaLayerVersion != nil {
 		ok := object.Key("AwsLambdaLayerVersion")
 		if err := awsRestjson1_serializeDocumentAwsLambdaLayerVersionDetails(v.AwsLambdaLayerVersion, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsMskCluster != nil {
+		ok := object.Key("AwsMskCluster")
+		if err := awsRestjson1_serializeDocumentAwsMskClusterDetails(v.AwsMskCluster, ok); err != nil {
 			return err
 		}
 	}
@@ -25975,6 +26817,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 	if v.AwsRedshiftCluster != nil {
 		ok := object.Key("AwsRedshiftCluster")
 		if err := awsRestjson1_serializeDocumentAwsRedshiftClusterDetails(v.AwsRedshiftCluster, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsRoute53HostedZone != nil {
+		ok := object.Key("AwsRoute53HostedZone")
+		if err := awsRestjson1_serializeDocumentAwsRoute53HostedZoneDetails(v.AwsRoute53HostedZone, ok); err != nil {
 			return err
 		}
 	}

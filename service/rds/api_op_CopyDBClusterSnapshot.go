@@ -87,8 +87,8 @@ type CopyDBClusterSnapshotInput struct {
 	// This member is required.
 	TargetDBClusterSnapshotIdentifier *string
 
-	// A value that indicates whether to copy all tags from the source DB cluster
-	// snapshot to the target DB cluster snapshot. By default, tags are not copied.
+	// Specifies whether to copy all tags from the source DB cluster snapshot to the
+	// target DB cluster snapshot. By default, tags are not copied.
 	CopyTags *bool
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster

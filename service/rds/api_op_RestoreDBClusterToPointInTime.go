@@ -65,9 +65,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Valid for: Aurora MySQL DB clusters only
 	BacktrackWindow *int64
 
-	// A value that indicates whether to copy all tags from the restored DB cluster to
-	// snapshots of the restored DB cluster. The default is not to copy them. Valid
-	// for: Aurora DB clusters and Multi-AZ DB clusters
+	// Specifies whether to copy all tags from the restored DB cluster to snapshots of
+	// the restored DB cluster. The default is not to copy them. Valid for: Aurora DB
+	// clusters and Multi-AZ DB clusters
 	CopyTagsToSnapshot *bool
 
 	// The compute and memory capacity of the each DB instance in the Multi-AZ DB
@@ -93,21 +93,21 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// mydbsubnetgroup Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
+	// Specifies whether to enable deletion protection for the DB cluster. The
+	// database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection isn't enabled. Valid for: Aurora DB clusters and Multi-AZ DB
 	// clusters
 	DeletionProtection *bool
 
-	// Specify the Active Directory directory ID to restore the DB cluster in. The
-	// domain must be created prior to this operation. For Amazon Aurora DB clusters,
-	// Amazon RDS can use Kerberos Authentication to authenticate users that connect to
-	// the DB cluster. For more information, see Kerberos Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
+	// The Active Directory directory ID to restore the DB cluster in. The domain must
+	// be created prior to this operation. For Amazon Aurora DB clusters, Amazon RDS
+	// can use Kerberos Authentication to authenticate users that connect to the DB
+	// cluster. For more information, see Kerberos Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	Domain *string
 
-	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service. Valid for: Aurora DB clusters only
+	// The name of the IAM role to be used when making API calls to the Directory
+	// Service. Valid for: Aurora DB clusters only
 	DomainIAMRoleName *string
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch Logs.
@@ -123,9 +123,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// clusters
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of Amazon Web Services
-	// Identity and Access Management (IAM) accounts to database accounts. By default,
-	// mapping isn't enabled. For more information, see IAM Database Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
+	// Specifies whether to enable mapping of Amazon Web Services Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping isn't
+	// enabled. For more information, see IAM Database Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
@@ -162,7 +162,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// clusters
 	KmsKeyId *string
 
-	// The network type of the DB cluster. Valid values:
+	// The network type of the DB cluster. Valid Values:
 	//   - IPV4
 	//   - DUAL
 	// The network type is determined by the DBSubnetGroup specified for the DB
@@ -181,17 +181,17 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Aurora DB clusters and Multi-AZ DB clusters
 	Port *int32
 
-	// A value that indicates whether the DB cluster is publicly accessible. When the
-	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
-	// resolves to the private IP address from within the DB cluster's virtual private
-	// cloud (VPC). It resolves to the public IP address from outside of the DB
-	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
-	// group it uses. That public access is not permitted if the security group
-	// assigned to the DB cluster doesn't permit it. When the DB cluster isn't publicly
-	// accessible, it is an internal DB cluster with a DNS name that resolves to a
-	// private IP address. Default: The default behavior varies depending on whether
-	// DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and
-	// PubliclyAccessible isn't specified, the following applies:
+	// Specifies whether the DB cluster is publicly accessible. When the DB cluster is
+	// publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// private IP address from within the DB cluster's virtual private cloud (VPC). It
+	// resolves to the public IP address from outside of the DB cluster's VPC. Access
+	// to the DB cluster is ultimately controlled by the security group it uses. That
+	// public access is not permitted if the security group assigned to the DB cluster
+	// doesn't permit it. When the DB cluster isn't publicly accessible, it is an
+	// internal DB cluster with a DNS name that resolves to a private IP address.
+	// Default: The default behavior varies depending on whether DBSubnetGroupName is
+	// specified. If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't
+	// specified, the following applies:
 	//   - If the default VPC in the target Region doesn’t have an internet gateway
 	//   attached to it, the DB cluster is private.
 	//   - If the default VPC in the target Region has an internet gateway attached to
@@ -245,7 +245,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// Specifies the storage type to be associated with the DB cluster. When specified
 	// for a Multi-AZ DB cluster, a value for the Iops parameter is required. Valid
-	// values: aurora , aurora-iopt1 (Aurora DB clusters); io1 (Multi-AZ DB clusters)
+	// Values: aurora , aurora-iopt1 (Aurora DB clusters); io1 (Multi-AZ DB clusters)
 	// Default: aurora (Aurora DB clusters); io1 (Multi-AZ DB clusters) Valid for:
 	// Aurora DB clusters and Multi-AZ DB clusters
 	StorageType *string
@@ -254,10 +254,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
-	// A value that indicates whether to restore the DB cluster to the latest
-	// restorable backup time. By default, the DB cluster isn't restored to the latest
-	// restorable backup time. Constraints: Can't be specified if RestoreToTime
-	// parameter is provided. Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	// Specifies whether to restore the DB cluster to the latest restorable backup
+	// time. By default, the DB cluster isn't restored to the latest restorable backup
+	// time. Constraints: Can't be specified if RestoreToTime parameter is provided.
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	UseLatestRestorableTime bool
 
 	// A list of VPC security groups that the new DB cluster belongs to. Valid for:

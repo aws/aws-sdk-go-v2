@@ -1,0 +1,8 @@
+{
+    "id": "c3c5b10d-f400-4655-bff0-2266b8e8142e",
+    "type": "feature",
+    "description": "Add Etag Support for Omics Storage in ListReadSets and GetReadSetMetadata API",
+    "modules": [
+        "service/omics"
+    ]
+}

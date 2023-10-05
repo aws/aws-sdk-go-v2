@@ -59,9 +59,9 @@ type ResetDBParameterGroupInput struct {
 	// Valid Values (for Apply method): pending-reboot
 	Parameters []types.Parameter
 
-	// A value that indicates whether to reset all parameters in the DB parameter
-	// group to default values. By default, all parameters in the DB parameter group
-	// are reset to default values.
+	// Specifies whether to reset all parameters in the DB parameter group to default
+	// values. By default, all parameters in the DB parameter group are reset to
+	// default values.
 	ResetAllParameters bool
 
 	noSmithyDocumentSerde

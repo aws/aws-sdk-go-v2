@@ -68,13 +68,13 @@ type CreateDBProxyInput struct {
 	// This member is required.
 	VpcSubnetIds []string
 
-	// Whether the proxy includes detailed information about SQL statements in its
-	// logs. This information helps you to debug issues involving SQL behavior or the
-	// performance and scalability of the proxy connections. The debug information
-	// includes the text of SQL statements that you submit through the proxy. Thus,
-	// only enable this setting when needed for debugging, and only when you have
-	// security measures in place to safeguard any sensitive information that appears
-	// in the logs.
+	// Specifies whether the proxy includes detailed information about SQL statements
+	// in its logs. This information helps you to debug issues involving SQL behavior
+	// or the performance and scalability of the proxy connections. The debug
+	// information includes the text of SQL statements that you submit through the
+	// proxy. Thus, only enable this setting when needed for debugging, and only when
+	// you have security measures in place to safeguard any sensitive information that
+	// appears in the logs.
 	DebugLogging bool
 
 	// The number of seconds that a connection to the proxy can be inactive before the
@@ -82,9 +82,9 @@ type CreateDBProxyInput struct {
 	// timeout limit for the associated database.
 	IdleClientTimeout *int32
 
-	// A Boolean parameter that specifies whether Transport Layer Security (TLS)
-	// encryption is required for connections to the proxy. By enabling this setting,
-	// you can enforce encrypted TLS connections to the proxy.
+	// Specifies whether Transport Layer Security (TLS) encryption is required for
+	// connections to the proxy. By enabling this setting, you can enforce encrypted
+	// TLS connections to the proxy.
 	RequireTLS bool
 
 	// An optional set of key-value pairs to associate arbitrary data of your choosing

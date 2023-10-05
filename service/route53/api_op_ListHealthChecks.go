@@ -46,9 +46,9 @@ type ListHealthChecksInput struct {
 	Marker *string
 
 	// The maximum number of health checks that you want ListHealthChecks to return in
-	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
-	// If you set MaxItems to a value greater than 100, Route 53 returns only the
-	// first 100 health checks.
+	// response to the current request. Amazon Route 53 returns a maximum of 1000
+	// items. If you set MaxItems to a value greater than 1000, Route 53 returns only
+	// the first 1000 health checks.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -177,9 +177,9 @@ var _ ListHealthChecksAPIClient = (*Client)(nil)
 // ListHealthChecksPaginatorOptions is the paginator options for ListHealthChecks
 type ListHealthChecksPaginatorOptions struct {
 	// The maximum number of health checks that you want ListHealthChecks to return in
-	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
-	// If you set MaxItems to a value greater than 100, Route 53 returns only the
-	// first 100 health checks.
+	// response to the current request. Amazon Route 53 returns a maximum of 1000
+	// items. If you set MaxItems to a value greater than 1000, Route 53 returns only
+	// the first 1000 health checks.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

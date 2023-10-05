@@ -76,7 +76,7 @@ type DownloadDBLogFilePortionInput struct {
 // This data type is used as a response element to DownloadDBLogFilePortion .
 type DownloadDBLogFilePortionOutput struct {
 
-	// Boolean value that if true, indicates there is more data to be downloaded.
+	// A Boolean value that, if true, indicates there is more data to be downloaded.
 	AdditionalDataPending bool
 
 	// Entries from the specified log file.

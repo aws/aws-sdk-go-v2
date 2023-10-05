@@ -90,6 +90,26 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type ETagAlgorithm string
+
+// Enum values for ETagAlgorithm
+const (
+	ETagAlgorithmFastqMd5up ETagAlgorithm = "FASTQ_MD5up"
+	ETagAlgorithmBamMd5up   ETagAlgorithm = "BAM_MD5up"
+	ETagAlgorithmCramMd5up  ETagAlgorithm = "CRAM_MD5up"
+)
+
+// Values returns all known values for ETagAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ETagAlgorithm) Values() []ETagAlgorithm {
+	return []ETagAlgorithm{
+		"FASTQ_MD5up",
+		"BAM_MD5up",
+		"CRAM_MD5up",
+	}
+}
+
 type FileType string
 
 // Enum values for FileType

@@ -314,8 +314,8 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// device. This setting doesn't apply to RDS Custom.
 	TdeCredentialPassword *string
 
-	// A value that indicates whether the DB instance class of the DB instance uses
-	// its default processor features. This setting doesn't apply to RDS Custom.
+	// Specifies whether the DB instance class of the DB instance uses its default
+	// processor features. This setting doesn't apply to RDS Custom.
 	UseDefaultProcessorFeatures *bool
 
 	// Specifies whether the DB instance is restored from the latest backup time. By

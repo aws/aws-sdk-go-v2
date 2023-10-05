@@ -1,0 +1,8 @@
+{
+    "id": "fe6cf686-67d5-4e53-b8c3-c7473f475920",
+    "type": "feature",
+    "description": "Add hostedzonetype filter to ListHostedZones API.",
+    "modules": [
+        "service/route53"
+    ]
+}

@@ -88,9 +88,9 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// Default: 100 Constraints: Minimum 20, maximum 10000.
 	MaxRecords *int32
 
-	// A value that indicates whether to show only VPC or non-VPC offerings. RDS
-	// Custom supports only VPC offerings. RDS Custom supports only VPC offerings. If
-	// you describe non-VPC offerings for RDS Custom, the output shows VPC offerings.
+	// Specifies whether to show only VPC or non-VPC offerings. RDS Custom supports
+	// only VPC offerings. RDS Custom supports only VPC offerings. If you describe
+	// non-VPC offerings for RDS Custom, the output shows VPC offerings.
 	Vpc *bool
 
 	noSmithyDocumentSerde

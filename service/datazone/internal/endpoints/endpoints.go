@@ -150,6 +150,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.ap-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-northeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.ap-northeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.ap-northeast-2.api.aws",
@@ -170,6 +175,16 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.ap-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.ap-southeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-2",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.ap-southeast-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.ap-southeast-3.api.aws",
@@ -180,9 +195,30 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.ap-southeast-4.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ca-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "datazone-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.eu-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-2",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.eu-central-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.eu-north-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
@@ -193,6 +229,11 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-south-2",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.eu-south-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.eu-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
@@ -220,9 +261,47 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.me-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "sa-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.sa-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "datazone-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "datazone-fips.us-east-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "datazone-fips.us-west-2.amazonaws.com",
 			},
 		},
 	},

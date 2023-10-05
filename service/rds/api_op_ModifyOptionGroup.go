@@ -42,8 +42,8 @@ type ModifyOptionGroupInput struct {
 	// This member is required.
 	OptionGroupName *string
 
-	// A value that indicates whether to apply the change immediately or during the
-	// next maintenance window for each instance associated with the option group.
+	// Specifies whether to apply the change immediately or during the next
+	// maintenance window for each instance associated with the option group.
 	ApplyImmediately bool
 
 	// Options in this list are added to the option group or, if already present, the

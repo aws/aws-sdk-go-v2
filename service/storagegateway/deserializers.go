@@ -16706,6 +16706,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeGatewayInformationOutput(v **Desc
 				sv.SoftwareUpdatesEndDate = ptr.String(jtv)
 			}
 
+		case "SoftwareVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SoftwareVersion to be of type string, got %T instead", value)
+				}
+				sv.SoftwareVersion = ptr.String(jtv)
+			}
+
 		case "SupportedGatewayCapacities":
 			if err := awsAwsjson11_deserializeDocumentSupportedGatewayCapacities(&sv.SupportedGatewayCapacities, value); err != nil {
 				return err

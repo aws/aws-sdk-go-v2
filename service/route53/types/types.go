@@ -568,7 +568,8 @@ type GeoLocation struct {
 
 	// For geolocation resource record sets, the two-letter code for a country. Amazon
 	// Route 53 uses the two-letter country codes that are specified in ISO standard
-	// 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) .
+	// 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) . Route 53
+	// also supports the contry code UA forr Ukraine.
 	CountryCode *string
 
 	// For geolocation resource record sets, the two-letter code for a state of the

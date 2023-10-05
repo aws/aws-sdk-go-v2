@@ -58,9 +58,8 @@ type ModifyCertificatesInput struct {
 	// DescribeCertificates API operation.
 	CertificateIdentifier *string
 
-	// A value that indicates whether to remove the override for the default
-	// certificate. If the override is removed, the default certificate is the system
-	// default.
+	// Specifies whether to remove the override for the default certificate. If the
+	// override is removed, the default certificate is the system default.
 	RemoveCustomerOverride *bool
 
 	noSmithyDocumentSerde

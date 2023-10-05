@@ -1,0 +1,8 @@
+{
+    "id": "98705f8a-5784-4292-9689-4bab770002f3",
+    "type": "feature",
+    "description": "Add SoftwareVersion to response of DescribeGatewayInformation.",
+    "modules": [
+        "service/storagegateway"
+    ]
+}
