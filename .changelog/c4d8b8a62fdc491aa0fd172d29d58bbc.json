@@ -1,8 +1,0 @@
-{
-    "id": "c4d8b8a6-2fdc-491a-a0fd-172d29d58bbc",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for corrections and minor improvements.",
-    "modules": [
-        "service/rds"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "e426087b-9875-4cc2-9d88-a98d8efbcfa0",
-    "type": "feature",
-    "description": "Added new resource detail objects to ASFF, including resources for AwsEventsEventbus, AwsEventsEndpoint, AwsDmsEndpoint, AwsDmsReplicationTask, AwsDmsReplicationInstance, AwsRoute53HostedZone, and AwsMskCluster",
-    "modules": [
-        "service/securityhub"
-    ]
-}

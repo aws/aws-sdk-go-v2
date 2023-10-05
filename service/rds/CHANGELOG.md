@@ -1,3 +1,7 @@
+# v1.55.1 (2023-10-05)
+
+* **Documentation**: Updates Amazon RDS documentation for corrections and minor improvements.
+
 # v1.55.0 (2023-10-02)
 
 * **Feature**: Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response.

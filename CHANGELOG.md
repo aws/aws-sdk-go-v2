@@ -1,3 +1,19 @@
+# Release (2023-10-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.10.0](service/omics/CHANGELOG.md#v1100-2023-10-05)
+  * **Feature**: Add Etag Support for Omics Storage in ListReadSets and GetReadSetMetadata API
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.55.1](service/rds/CHANGELOG.md#v1551-2023-10-05)
+  * **Documentation**: Updates Amazon RDS documentation for corrections and minor improvements.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.30.0](service/route53/CHANGELOG.md#v1300-2023-10-05)
+  * **Feature**: Add hostedzonetype filter to ListHostedZones API.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.37.0](service/securityhub/CHANGELOG.md#v1370-2023-10-05)
+  * **Feature**: Added new resource detail objects to ASFF, including resources for AwsEventsEventbus, AwsEventsEndpoint, AwsDmsEndpoint, AwsDmsReplicationTask, AwsDmsReplicationInstance, AwsRoute53HostedZone, and AwsMskCluster
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.21.0](service/storagegateway/CHANGELOG.md#v1210-2023-10-05)
+  * **Feature**: Add SoftwareVersion to response of DescribeGatewayInformation.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.31.0](service/workspaces/CHANGELOG.md#v1310-2023-10-05)
+  * **Feature**: This release introduces Manage applications. This feature allows users to manage their WorkSpaces applications by associating or disassociating their WorkSpaces with applications. The DescribeWorkspaces API will now additionally return OperatingSystemName in its responses.
+
 # Release (2023-10-04)
 
 ## Module Highlights

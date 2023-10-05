@@ -1,3 +1,7 @@
+# v1.37.0 (2023-10-05)
+
+* **Feature**: Added new resource detail objects to ASFF, including resources for AwsEventsEventbus, AwsEventsEndpoint, AwsDmsEndpoint, AwsDmsReplicationTask, AwsDmsReplicationInstance, AwsRoute53HostedZone, and AwsMskCluster
+
 # v1.36.2 (2023-09-07)
 
 * **Documentation**: Documentation updates for AWS Security Hub

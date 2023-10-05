@@ -1,3 +1,7 @@
+# v1.31.0 (2023-10-05)
+
+* **Feature**: This release introduces Manage applications. This feature allows users to manage their WorkSpaces applications by associating or disassociating their WorkSpaces with applications. The DescribeWorkspaces API will now additionally return OperatingSystemName in its responses.
+
 # v1.30.0 (2023-09-08)
 
 * **Feature**: A new field "ErrorDetails" will be added to the output of "DescribeWorkspaceImages" API call. This field provides in-depth details about the error occurred during image import process. These details include the possible causes of the errors and troubleshooting information.

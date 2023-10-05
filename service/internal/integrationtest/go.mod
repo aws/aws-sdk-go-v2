@@ -60,10 +60,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.55.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.55.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.30.6
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.29.5
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.40.0
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.39.1
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.30.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.31.0
 	github.com/aws/smithy-go v1.14.2
 	github.com/google/go-cmp v0.5.8
 )

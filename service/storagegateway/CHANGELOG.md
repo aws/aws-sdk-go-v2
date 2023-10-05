@@ -1,3 +1,7 @@
+# v1.21.0 (2023-10-05)
+
+* **Feature**: Add SoftwareVersion to response of DescribeGatewayInformation.
+
 # v1.20.0 (2023-09-18)
 
 * **Announcement**: [BREAKFIX] Change in MaxResults datatype from value to pointer type in cognito-sync service.

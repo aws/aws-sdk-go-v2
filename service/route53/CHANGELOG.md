@@ -1,3 +1,7 @@
+# v1.30.0 (2023-10-05)
+
+* **Feature**: Add hostedzonetype filter to ListHostedZones API.
+
 # v1.29.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.10.0 (2023-10-05)
+
+* **Feature**: Add Etag Support for Omics Storage in ListReadSets and GetReadSetMetadata API
+
 # v1.9.1 (2023-09-27)
 
 * No change notes available for this release.
