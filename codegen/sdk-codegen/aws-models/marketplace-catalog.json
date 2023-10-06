@@ -834,7 +834,7 @@
                 "ChangeType": {
                     "target": "com.amazonaws.marketplacecatalog#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Change types are single string values that describe your intention for the change.\n            Each change type is unique for each <code>EntityType</code> provided in the change's\n            scope. For more information on change types available for single-AMI products, see\n                <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information on change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
+                        "smithy.api#documentation": "<p>Change types are single string values that describe your intention for the change.\n            Each change type is unique for each <code>EntityType</code> provided in the change's\n            scope. For more information on change types available for single-AMI products, see\n                <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -854,8 +854,13 @@
                 "Details": {
                     "target": "com.amazonaws.marketplacecatalog#Json",
                     "traits": {
-                        "smithy.api#documentation": "<p>This object contains details specific to the change type of the requested\n            change. For more\n            information on change types available for single-AMI products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information on change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>This object contains details specific to the change type of the requested change. For\n            more information about change types available for single-AMI products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>"
+                    }
+                },
+                "DetailsDocument": {
+                    "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alternative field that accepts a JSON value instead of a string for\n                <code>ChangeType</code> details. You can use either <code>Details</code> or\n                <code>DetailsDocument</code>, but not both.</p>"
                     }
                 },
                 "ChangeName": {
@@ -1013,6 +1018,12 @@
                         "smithy.api#documentation": "<p>This object contains details specific to the change type of the requested\n            change.</p>"
                     }
                 },
+                "DetailsDocument": {
+                    "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON value of the details specific to the change type of the requested change.</p>"
+                    }
+                },
                 "ErrorDetailList": {
                     "target": "com.amazonaws.marketplacecatalog#ErrorDetailList",
                     "traits": {
@@ -1086,7 +1097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a resource-based policy on an Entity that is identified by its resource\n            ARN.</p>",
+                "smithy.api#documentation": "<p>Deletes a resource-based policy on an entity that is identified by its resource\n            ARN.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/DeleteResourcePolicy",
@@ -1100,7 +1111,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.marketplacecatalog#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Entity resource that is associated with the\n            resource policy.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the entity resource that is associated with the\n            resource policy.</p>",
                         "smithy.api#httpQuery": "resourceArn",
                         "smithy.api#required": {}
                     }
@@ -1329,6 +1340,12 @@
                     "target": "com.amazonaws.marketplacecatalog#Json",
                     "traits": {
                         "smithy.api#documentation": "<p>This stringified JSON object includes the details of the entity.</p>"
+                    }
+                },
+                "DetailsDocument": {
+                    "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON value of the details specific to the entity.</p>"
                     }
                 }
             },
@@ -1568,7 +1585,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a resource-based policy of an Entity that is identified by its resource\n            ARN.</p>",
+                "smithy.api#documentation": "<p>Gets a resource-based policy of an entity that is identified by its resource\n            ARN.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/GetResourcePolicy",
@@ -1582,7 +1599,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.marketplacecatalog#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Entity resource that is associated with the\n            resource policy.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the entity resource that is associated with the\n            resource policy.</p>",
                         "smithy.api#httpQuery": "resourceArn",
                         "smithy.api#required": {}
                     }
@@ -1638,6 +1655,9 @@
                 },
                 "smithy.api#pattern": "^[\\s]*\\{[\\s\\S]*\\}[\\s]*$"
             }
+        },
+        "com.amazonaws.marketplacecatalog#JsonDocumentType": {
+            "type": "document"
         },
         "com.amazonaws.marketplacecatalog#ListChangeSets": {
             "type": "operation",
@@ -1835,7 +1855,10 @@
                     }
                 },
                 "OwnershipType": {
-                    "target": "com.amazonaws.marketplacecatalog#OwnershipType"
+                    "target": "com.amazonaws.marketplacecatalog#OwnershipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the returned set of entities based on their owner. The default is\n                <code>SELF</code>. To list entities shared with you\n            through AWS Resource Access Manager (AWS RAM), set to <code>SHARED</code>. Entities shared through the AWS Marketplace\n            Catalog API <code>PutResourcePolicy</code> operation can't be discovered through the\n                <code>SHARED</code> parameter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1984,7 +2007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a resource-based policy to an Entity. Examples of an entity include:\n                <code>AmiProduct</code> and <code>ContainerProduct</code>.</p>",
+                "smithy.api#documentation": "<p>Attaches a resource-based policy to an entity. Examples of an entity include:\n                <code>AmiProduct</code> and <code>ContainerProduct</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/PutResourcePolicy",
@@ -1998,7 +2021,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.marketplacecatalog#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Entity resource you want to associate with a\n            resource policy. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the entity resource you want to associate with a\n            resource policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2127,7 +2150,7 @@
                 "SortBy": {
                     "target": "com.amazonaws.marketplacecatalog#SortBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, supported attributes include\n                <code>LastModifiedDate</code> (default), <code>Visibility</code>,\n                <code>EntityId</code>, and <code>Name</code>.</p>\n         <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code>\n            and <code>EndTime</code>.</p>"
+                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, supported attributes include\n                <code>LastModifiedDate</code> (default) and <code>EntityId</code>. In addition to\n                <code>LastModifiedDate</code> and <code>EntityId</code>, each\n                <code>EntityType</code> might support additional fields.</p>\n         <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code>\n            and <code>EndTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
@@ -2200,7 +2223,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n         <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n         <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>. For information on change types for single-AMI\n            products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Als, for more information on change types\n            available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n         <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n         <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>. For information about change types for\n            single-AMI products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartChangeSet",

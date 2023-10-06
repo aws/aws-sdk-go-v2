@@ -5779,7 +5779,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 4096
                 },
                 "smithy.api#pattern": "^[\\x09-\\x0D\\x20-\\x7E]*$"
             }
@@ -5789,7 +5789,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 4096
                 },
                 "smithy.api#pattern": "^[\\x09-\\x0D\\x20-\\x7E]*$"
             }
@@ -6385,7 +6385,7 @@
                 "TrustedHostKeys": {
                     "target": "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and an optional <code><comment></code>, with spaces\n      between each element. Specify only the  <code><key type></code> and <code><body\n        base64></code>: do not enter the <code><comment></code> portion of the key.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n          <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting.\n      You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and an optional <code><comment></code>, with spaces\n      between each element. Specify only the  <code><key type></code> and <code><body\n        base64></code>: do not enter the <code><comment></code> portion of the key.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the <code><key type></code> string is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the <code><key type></code> string is either\n            <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or\n            <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

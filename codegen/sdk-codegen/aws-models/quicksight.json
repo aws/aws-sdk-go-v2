@@ -6050,6 +6050,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of an analysis.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n            order for the request to be valid.</p>"
                     }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6226,6 +6232,12 @@
                     "target": "com.amazonaws.quicksight#DashboardVersionDefinition",
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of a dashboard.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n            order for the request to be valid.</p>"
+                    }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to relax the validation needed to create a dashboard with definition objects. This option skips the validation step for specific errors.</p>"
                     }
                 }
             },
@@ -7810,6 +7822,12 @@
                     "target": "com.amazonaws.quicksight#TemplateVersionDefinition",
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of a template.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>\n         <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in \n\t\t\torder for the request to be valid.</p>"
+                    }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TThe option to relax the validation needed to create a template with definition objects. This skips the validation step for specific errors.</p>"
                     }
                 }
             },
@@ -11331,6 +11349,36 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DatabaseGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DatabaseGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DatabaseGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DatabaseUser": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
                 }
             }
         },
@@ -20539,6 +20587,12 @@
                     "target": "com.amazonaws.quicksight#CategoryFilterSelectAllOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Select all of the values. Null is not the assigned value of select all.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FILTER_ALL_VALUES</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NullOption": {
+                    "target": "com.amazonaws.quicksight#FilterNullOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This option determines how null values should be treated when filtering data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VALUES</code>: Include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -30288,6 +30342,12 @@
                         "smithy.api#enumValue": "DATASET"
                     }
                 },
+                "DATASOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASOURCE"
+                    }
+                },
                 "TOPIC": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -35792,6 +35852,41 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#RedshiftIAMParameters": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.quicksight#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseUser": {
+                    "target": "com.amazonaws.quicksight#DatabaseUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseGroups": {
+                    "target": "com.amazonaws.quicksight#DatabaseGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>"
+                    }
+                },
+                "AutoCreateDatabaseUser": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#RedshiftParameters": {
             "type": "structure",
             "members": {
@@ -35820,10 +35915,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>"
                     }
+                },
+                "IAMParameters": {
+                    "target": "com.amazonaws.quicksight#RedshiftIAMParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that uses IAM authentication to grant Amazon QuickSight access to your cluster. This parameter can be used instead of <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html\">DataSourceCredentials</a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>"
+                "smithy.api#documentation": "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>"
             }
         },
         "com.amazonaws.quicksight#ReferenceLine": {
@@ -36623,7 +36724,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 256
                 }
             }
         },
@@ -36632,7 +36733,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 256
                 }
             }
         },
@@ -42168,6 +42269,12 @@
                     "traits": {
                         "smithy.api#enumValue": "END"
                     }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
                 }
             }
         },
@@ -46101,6 +46208,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of an analysis.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
                     }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to relax the validation needed to update an analysis with definition objects. This skips the validation step for specific errors.</p>"
+                    }
                 }
             },
             "traits": {
@@ -46484,6 +46597,12 @@
                     "target": "com.amazonaws.quicksight#DashboardVersionDefinition",
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of a dashboard.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
+                    }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to relax the validation needed to update a dashboard with definition objects. This skips the validation step for specific errors.</p>"
                     }
                 }
             },
@@ -48138,6 +48257,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of a template.</p>\n         <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>"
                     }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to relax the validation needed to update a template with definition objects. This skips the validation step for specific errors.</p>"
+                    }
                 }
             },
             "traits": {
@@ -49628,6 +49753,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#VPCConnectionSummary"
+            }
+        },
+        "com.amazonaws.quicksight#ValidationStrategy": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.quicksight#ValidationStrategyMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of validation for the asset to be creaed or updated. When you set this value to <code>STRICT</code>, strict validation for every error is enforced. When you set this value to <code>LENIENT</code>, validation is skipped for specific UI errors.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The option to relax the validation that is required to create and update analyses, dashboards, and templates with definition objects. When you set this value to <code>LENIENT</code>, validation is skipped for specific errors.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ValidationStrategyMode": {
+            "type": "enum",
+            "members": {
+                "STRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRICT"
+                    }
+                },
+                "LENIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LENIENT"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#ValueWhenUnsetOption": {
