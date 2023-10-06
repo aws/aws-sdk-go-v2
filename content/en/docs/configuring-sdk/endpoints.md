@@ -126,9 +126,13 @@ func (*resolverV2) ResolveEndpoint(ctx context.Context, params s3.EndpointParame
         smithyendpoints.Endpoint, error,
     ) {
     if /* input params or caller context indicate we must route somewhere */ {
-        return smithyEndpoints.Endpoint{
-            URI: url.Parse("https://custom.service.endpoint/"),
+        u, err := url.Parse("https://custom.service.endpoint/")
+        if err != nil {
+            return smithyendpoints.Endpoint{}, err
         }
+        return smithyendpoints.Endpoint{
+            URI: *u,
+        }, nil
     }
 
     // delegate back to the default v2 resolver otherwise
@@ -382,9 +386,13 @@ func (*staticResolver) ResolveEndpoint(ctx context.Context, params svc.EndpointP
         smithyendpoints.Endpoint, error,
     ) {
     // This value will be used as-is when making the request.
-    return smithyEndpoints.Endpoint{
-        URI: url.Parse("https://custom.endpoint.api/"),
+    u, err := url.Parse("https://custom.endpoint.api/")
+    if err != nil {
+        return smithyendpoints.Endpoint{}, err
     }
+    return smithyendpoints.Endpoint{
+        URI: *u,
+    }, nil
 }
 
 client := svc.NewFromConfig(cfg, func (o *svc.Options) {
