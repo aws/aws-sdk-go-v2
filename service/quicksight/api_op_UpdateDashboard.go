@@ -94,6 +94,10 @@ type UpdateDashboardInput struct {
 	// Amazon Web Services account where you create the dashboard.
 	ThemeArn *string
 
+	// The option to relax the validation needed to update a dashboard with definition
+	// objects. This skips the validation step for specific errors.
+	ValidationStrategy *types.ValidationStrategy
+
 	// A description for the first version of the dashboard being created.
 	VersionDescription *string
 

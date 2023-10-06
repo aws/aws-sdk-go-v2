@@ -27,9 +27,9 @@ import (
 // later in this topic because it contains two changes to run the same change type
 // ( AddRevisions ) against the same entity ( entity-id@1 ). For more information
 // about working with change sets, see Working with change sets (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)
-// . For information on change types for single-AMI products, see Working with
+// . For information about change types for single-AMI products, see Working with
 // single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
-// . Als, for more information on change types available for container-based
+// . Also, for more information about change types available for container-based
 // products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
 // .
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {

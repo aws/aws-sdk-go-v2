@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,6 +51,9 @@ type DescribeEntityOutput struct {
 
 	// This stringified JSON object includes the details of the entity.
 	Details *string
+
+	// The JSON value of the details specific to the entity.
+	DetailsDocument document.Interface
 
 	// The ARN associated to the unique identifier for the entity referenced in this
 	// request.

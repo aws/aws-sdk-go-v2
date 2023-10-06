@@ -510,6 +510,26 @@ func (m *validateOpRestoreVolumeFromSnapshot) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMisconfiguredStateRecovery struct {
+}
+
+func (*validateOpStartMisconfiguredStateRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMisconfiguredStateRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMisconfiguredStateRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMisconfiguredStateRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -768,6 +788,10 @@ func addOpReleaseFileSystemNfsV3LocksValidationMiddleware(stack *middleware.Stac
 
 func addOpRestoreVolumeFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreVolumeFromSnapshot{}, middleware.After)
+}
+
+func addOpStartMisconfiguredStateRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMisconfiguredStateRecovery{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2116,6 +2140,21 @@ func validateOpRestoreVolumeFromSnapshotInput(v *RestoreVolumeFromSnapshotInput)
 	}
 	if v.SnapshotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMisconfiguredStateRecoveryInput(v *StartMisconfiguredStateRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMisconfiguredStateRecoveryInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

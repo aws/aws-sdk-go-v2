@@ -5173,6 +5173,12 @@ type FilterListConfiguration struct {
 	// The list of category values for the filter.
 	CategoryValues []string
 
+	// This option determines how null values should be treated when filtering data.
+	//   - ALL_VALUES : Include null values in filtered results.
+	//   - NULLS_ONLY : Only include null values in filtered results.
+	//   - NON_NULLS_ONLY : Exclude null values from filtered results.
+	NullOption FilterNullOption
+
 	// Select all of the values. Null is not the assigned value of select all.
 	//   - FILTER_ALL_VALUES
 	SelectAllOptions CategoryFilterSelectAllOptions
@@ -9519,6 +9525,45 @@ type RdsParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that grants Amazon QuickSight access to your cluster and make a
+// call to the redshift:GetClusterCredentials API. For more information on the
+// redshift:GetClusterCredentials API, see GetClusterCredentials (https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html)
+// .
+type RedshiftIAMParameters struct {
+
+	// The user whose permissions and group memberships will be used by Amazon
+	// QuickSight to access the cluster. If this user already exists in your database,
+	// Amazon QuickSight is granted the same permissions that the user has. If the user
+	// doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new
+	// user with PUBLIC permissions.
+	//
+	// This member is required.
+	DatabaseUser *string
+
+	// Use the RoleArn structure to allow Amazon QuickSight to call
+	// redshift:GetClusterCredentials on your cluster. The calling principal must have
+	// iam:PassRole access to pass the role to Amazon QuickSight. The role's trust
+	// policy must allow the Amazon QuickSight service principal to assume the role.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Automatically creates a database user. If your database doesn't have a
+	// DatabaseUser , set this parameter to True . If there is no DatabaseUser , Amazon
+	// QuickSight can't connect to your cluster. The RoleArn that you use for this
+	// operation must grant access to redshift:CreateClusterUser to successfully
+	// create the user.
+	AutoCreateDatabaseUser bool
+
+	// A list of groups whose permissions will be granted to Amazon QuickSight to
+	// access the cluster. These permissions are combined with the permissions granted
+	// to Amazon QuickSight by the DatabaseUser . If you choose to include this
+	// parameter, the RoleArn must grant access to redshift:JoinGroup .
+	DatabaseGroups []string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for Amazon Redshift. The ClusterId field can be blank if Host
 // and Port are both set. The Host and Port fields can be blank if the ClusterId
 // field is set.
@@ -9534,6 +9579,12 @@ type RedshiftParameters struct {
 
 	// Host. This field can be blank if ClusterId is provided.
 	Host *string
+
+	// An optional parameter that uses IAM authentication to grant Amazon QuickSight
+	// access to your cluster. This parameter can be used instead of
+	// DataSourceCredentials (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html)
+	// .
+	IAMParameters *RedshiftIAMParameters
 
 	// Port. This field can be blank if the ClusterId is provided.
 	Port int32
@@ -13571,6 +13622,21 @@ type User struct {
 	// N/A when the value for IdentityType is IAM and the corresponding IAM user is
 	// deleted.
 	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// The option to relax the validation that is required to create and update
+// analyses, dashboards, and templates with definition objects. When you set this
+// value to LENIENT , validation is skipped for specific errors.
+type ValidationStrategy struct {
+
+	// The mode of validation for the asset to be creaed or updated. When you set this
+	// value to STRICT , strict validation for every error is enforced. When you set
+	// this value to LENIENT , validation is skipped for specific UI errors.
+	//
+	// This member is required.
+	Mode ValidationStrategyMode
 
 	noSmithyDocumentSerde
 }

@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a resource-based policy on an Entity that is identified by its resource
+// Deletes a resource-based policy on an entity that is identified by its resource
 // ARN.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
@@ -34,7 +34,7 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 
 type DeleteResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the Entity resource that is associated with
+	// The Amazon Resource Name (ARN) of the entity resource that is associated with
 	// the resource policy.
 	//
 	// This member is required.

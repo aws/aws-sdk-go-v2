@@ -1,0 +1,8 @@
+{
+    "id": "6ac052d2-a7a8-404b-aae7-b3e122ca81a4",
+    "type": "feature",
+    "description": "NullOption in FilterListConfiguration; Dataset schema/table max length increased; Support total placement for pivot table visual; Lenient mode relaxes the validation to create resources with definition; Data sources can be added to folders; Redshift data sources support IAM Role-based authentication",
+    "modules": [
+        "service/quicksight"
+    ]
+}

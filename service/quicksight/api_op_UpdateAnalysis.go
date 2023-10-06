@@ -70,6 +70,10 @@ type UpdateAnalysisInput struct {
 	// that you have access to it.
 	ThemeArn *string
 
+	// The option to relax the validation needed to update an analysis with definition
+	// objects. This skips the validation step for specific errors.
+	ValidationStrategy *types.ValidationStrategy
+
 	noSmithyDocumentSerde
 }
 

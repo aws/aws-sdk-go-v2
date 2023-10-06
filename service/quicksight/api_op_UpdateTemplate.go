@@ -65,6 +65,10 @@ type UpdateTemplateInput struct {
 	// each dataset must match its placeholder.
 	SourceEntity *types.TemplateSourceEntity
 
+	// The option to relax the validation needed to update a template with definition
+	// objects. This skips the validation step for specific errors.
+	ValidationStrategy *types.ValidationStrategy
+
 	// A description of the current template version that is being updated. Every time
 	// you call UpdateTemplate , you create a new version of the template. Each version
 	// of the template maintains a description of the version in the VersionDescription

@@ -12707,6 +12707,24 @@ func validateRdsParameters(v *types.RdsParameters) error {
 	}
 }
 
+func validateRedshiftIAMParameters(v *types.RedshiftIAMParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftIAMParameters"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DatabaseUser == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseUser"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftParameters(v *types.RedshiftParameters) error {
 	if v == nil {
 		return nil
@@ -12714,6 +12732,11 @@ func validateRedshiftParameters(v *types.RedshiftParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftParameters"}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.IAMParameters != nil {
+		if err := validateRedshiftIAMParameters(v.IAMParameters); err != nil {
+			invalidParams.AddNested("IAMParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15955,6 +15978,21 @@ func validateUpdateResourcePermissionList(v []types.ResourcePermission) error {
 	}
 }
 
+func validateValidationStrategy(v *types.ValidationStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidationStrategy"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVisual(v *types.Visual) error {
 	if v == nil {
 		return nil
@@ -16643,6 +16681,11 @@ func validateOpCreateAnalysisInput(v *CreateAnalysisInput) error {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ValidationStrategy != nil {
+		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
+			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16687,6 +16730,11 @@ func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
 	if v.Definition != nil {
 		if err := validateDashboardVersionDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationStrategy != nil {
+		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
+			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -17057,6 +17105,11 @@ func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
 	if v.Definition != nil {
 		if err := validateTemplateVersionDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationStrategy != nil {
+		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
+			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -19394,6 +19447,11 @@ func validateOpUpdateAnalysisInput(v *UpdateAnalysisInput) error {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ValidationStrategy != nil {
+		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
+			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19456,6 +19514,11 @@ func validateOpUpdateDashboardInput(v *UpdateDashboardInput) error {
 	if v.Definition != nil {
 		if err := validateDashboardVersionDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationStrategy != nil {
+		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
+			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -19861,6 +19924,11 @@ func validateOpUpdateTemplateInput(v *UpdateTemplateInput) error {
 	if v.Definition != nil {
 		if err := validateTemplateVersionDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationStrategy != nil {
+		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
+			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

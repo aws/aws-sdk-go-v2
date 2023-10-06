@@ -1,0 +1,8 @@
+{
+    "id": "bf82c70d-adfc-40ca-852b-e472111bb495",
+    "type": "feature",
+    "description": "This release adds support for Document type as an alternative for stringified JSON for StartChangeSet, DescribeChangeSet and DescribeEntity APIs",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

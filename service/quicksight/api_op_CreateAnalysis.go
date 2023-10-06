@@ -82,6 +82,10 @@ type CreateAnalysisInput struct {
 	// theme in the Amazon QuickSight console, make sure that you have access to it.
 	ThemeArn *string
 
+	// The option to relax the validation needed to create an analysis with definition
+	// objects. This skips the validation step for specific errors.
+	ValidationStrategy *types.ValidationStrategy
+
 	noSmithyDocumentSerde
 }
 

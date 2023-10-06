@@ -318,9 +318,6 @@ func validateChange(v *types.Change) error {
 			invalidParams.AddNested("EntityTags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Details == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Details"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -13,22 +14,12 @@ type Change struct {
 	// change. Each change type is unique for each EntityType provided in the change's
 	// scope. For more information on change types available for single-AMI products,
 	// see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
-	// . Also, for more information on change types available for container-based
+	// . Also, for more information about change types available for container-based
 	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
 	// .
 	//
 	// This member is required.
 	ChangeType *string
-
-	// This object contains details specific to the change type of the requested
-	// change. For more information on change types available for single-AMI products,
-	// see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
-	// . Also, for more information on change types available for container-based
-	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
-	// .
-	//
-	// This member is required.
-	Details *string
 
 	// The entity to be changed.
 	//
@@ -37,6 +28,18 @@ type Change struct {
 
 	// Optional name for the change.
 	ChangeName *string
+
+	// This object contains details specific to the change type of the requested
+	// change. For more information about change types available for single-AMI
+	// products, see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
+	// . Also, for more information about change types available for container-based
+	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
+	// .
+	Details *string
+
+	// Alternative field that accepts a JSON value instead of a string for ChangeType
+	// details. You can use either Details or DetailsDocument , but not both.
+	DetailsDocument document.Interface
 
 	// The tags associated with the change.
 	EntityTags []Tag
@@ -96,6 +99,10 @@ type ChangeSummary struct {
 	// This object contains details specific to the change type of the requested
 	// change.
 	Details *string
+
+	// The JSON value of the details specific to the change type of the requested
+	// change.
+	DetailsDocument document.Interface
 
 	// The entity to be changed.
 	Entity *Entity
@@ -194,9 +201,10 @@ type Filter struct {
 // An object that contains two attributes, SortBy and SortOrder .
 type Sort struct {
 
-	// For ListEntities , supported attributes include LastModifiedDate (default),
-	// Visibility , EntityId , and Name . For ListChangeSets , supported attributes
-	// include StartTime and EndTime .
+	// For ListEntities , supported attributes include LastModifiedDate (default) and
+	// EntityId . In addition to LastModifiedDate and EntityId , each EntityType might
+	// support additional fields. For ListChangeSets , supported attributes include
+	// StartTime and EndTime .
 	SortBy *string
 
 	// The sorting order. Can be ASCENDING or DESCENDING . The default value is

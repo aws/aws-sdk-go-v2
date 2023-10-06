@@ -494,6 +494,13 @@ func awsRestjson1_serializeOpDocumentCreateAnalysisInput(v *CreateAnalysisInput,
 		ok.String(*v.ThemeArn)
 	}
 
+	if v.ValidationStrategy != nil {
+		ok := object.Key("ValidationStrategy")
+		if err := awsRestjson1_serializeDocumentValidationStrategy(v.ValidationStrategy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -636,6 +643,13 @@ func awsRestjson1_serializeOpDocumentCreateDashboardInput(v *CreateDashboardInpu
 	if v.ThemeArn != nil {
 		ok := object.Key("ThemeArn")
 		ok.String(*v.ThemeArn)
+	}
+
+	if v.ValidationStrategy != nil {
+		ok := object.Key("ValidationStrategy")
+		if err := awsRestjson1_serializeDocumentValidationStrategy(v.ValidationStrategy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VersionDescription != nil {
@@ -1910,6 +1924,13 @@ func awsRestjson1_serializeOpDocumentCreateTemplateInput(v *CreateTemplateInput,
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationStrategy != nil {
+		ok := object.Key("ValidationStrategy")
+		if err := awsRestjson1_serializeDocumentValidationStrategy(v.ValidationStrategy, ok); err != nil {
 			return err
 		}
 	}
@@ -11937,6 +11958,13 @@ func awsRestjson1_serializeOpDocumentUpdateAnalysisInput(v *UpdateAnalysisInput,
 		ok.String(*v.ThemeArn)
 	}
 
+	if v.ValidationStrategy != nil {
+		ok := object.Key("ValidationStrategy")
+		if err := awsRestjson1_serializeDocumentValidationStrategy(v.ValidationStrategy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -12171,6 +12199,13 @@ func awsRestjson1_serializeOpDocumentUpdateDashboardInput(v *UpdateDashboardInpu
 	if v.ThemeArn != nil {
 		ok := object.Key("ThemeArn")
 		ok.String(*v.ThemeArn)
+	}
+
+	if v.ValidationStrategy != nil {
+		ok := object.Key("ValidationStrategy")
+		if err := awsRestjson1_serializeDocumentValidationStrategy(v.ValidationStrategy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VersionDescription != nil {
@@ -13699,6 +13734,13 @@ func awsRestjson1_serializeOpDocumentUpdateTemplateInput(v *UpdateTemplateInput,
 	if v.SourceEntity != nil {
 		ok := object.Key("SourceEntity")
 		if err := awsRestjson1_serializeDocumentTemplateSourceEntity(v.SourceEntity, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationStrategy != nil {
+		ok := object.Key("ValidationStrategy")
+		if err := awsRestjson1_serializeDocumentValidationStrategy(v.ValidationStrategy, ok); err != nil {
 			return err
 		}
 	}
@@ -19301,6 +19343,17 @@ func awsRestjson1_serializeDocumentDataBarsOptions(v *types.DataBarsOptions, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDatabaseGroupList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDatabricksParameters(v *types.DatabricksParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22010,6 +22063,11 @@ func awsRestjson1_serializeDocumentFilterListConfiguration(v *types.FilterListCo
 	if len(v.MatchOperator) > 0 {
 		ok := object.Key("MatchOperator")
 		ok.String(string(v.MatchOperator))
+	}
+
+	if len(v.NullOption) > 0 {
+		ok := object.Key("NullOption")
+		ok.String(string(v.NullOption))
 	}
 
 	if len(v.SelectAllOptions) > 0 {
@@ -28890,6 +28948,35 @@ func awsRestjson1_serializeDocumentRdsParameters(v *types.RdsParameters, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRedshiftIAMParameters(v *types.RedshiftIAMParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoCreateDatabaseUser {
+		ok := object.Key("AutoCreateDatabaseUser")
+		ok.Boolean(v.AutoCreateDatabaseUser)
+	}
+
+	if v.DatabaseGroups != nil {
+		ok := object.Key("DatabaseGroups")
+		if err := awsRestjson1_serializeDocumentDatabaseGroupList(v.DatabaseGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DatabaseUser != nil {
+		ok := object.Key("DatabaseUser")
+		ok.String(*v.DatabaseUser)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRedshiftParameters(v *types.RedshiftParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28907,6 +28994,13 @@ func awsRestjson1_serializeDocumentRedshiftParameters(v *types.RedshiftParameter
 	if v.Host != nil {
 		ok := object.Key("Host")
 		ok.String(*v.Host)
+	}
+
+	if v.IAMParameters != nil {
+		ok := object.Key("IAMParameters")
+		if err := awsRestjson1_serializeDocumentRedshiftIAMParameters(v.IAMParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Port != 0 {
@@ -34365,6 +34459,18 @@ func awsRestjson1_serializeDocumentUploadSettings(v *types.UploadSettings, value
 	if len(v.TextQualifier) > 0 {
 		ok := object.Key("TextQualifier")
 		ok.String(string(v.TextQualifier))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValidationStrategy(v *types.ValidationStrategy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil

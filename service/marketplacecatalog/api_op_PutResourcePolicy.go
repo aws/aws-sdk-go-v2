@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a resource-based policy to an Entity. Examples of an entity include:
+// Attaches a resource-based policy to an entity. Examples of an entity include:
 // AmiProduct and ContainerProduct .
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the Entity resource you want to associate
+	// The Amazon Resource Name (ARN) of the entity resource you want to associate
 	// with a resource policy.
 	//
 	// This member is required.

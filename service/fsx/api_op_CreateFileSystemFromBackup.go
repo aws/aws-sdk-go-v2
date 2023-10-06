@@ -106,7 +106,7 @@ type CreateFileSystemFromBackupInput struct {
 	// created with .
 	//   - AutoImportPolicy
 	//   - ExportPath
-	//   - ImportedChunkSize
+	//   - ImportedFileChunkSize
 	//   - ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 

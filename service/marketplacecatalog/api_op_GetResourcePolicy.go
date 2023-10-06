@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a resource-based policy of an Entity that is identified by its resource
+// Gets a resource-based policy of an entity that is identified by its resource
 // ARN.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
@@ -34,7 +34,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the Entity resource that is associated with
+	// The Amazon Resource Name (ARN) of the entity resource that is associated with
 	// the resource policy.
 	//
 	// This member is required.

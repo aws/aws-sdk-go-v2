@@ -1,0 +1,8 @@
+{
+    "id": "92c5587a-caf3-4fe6-a4a9-6bdc2fde6b90",
+    "type": "feature",
+    "description": "This release updates the max character limit of PreAuthenticationLoginBanner and PostAuthenticationLoginBanner to 4096 characters",
+    "modules": [
+        "service/transfer"
+    ]
+}

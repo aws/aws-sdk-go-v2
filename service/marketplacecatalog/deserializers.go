@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -674,6 +676,11 @@ func awsRestjson1_deserializeOpDocumentDescribeEntityOutput(v **DescribeEntityOu
 					return fmt.Errorf("expected Json to be of type string, got %T instead", value)
 				}
 				sv.Details = ptr.String(jtv)
+			}
+
+		case "DetailsDocument":
+			if err := awsRestjson1_deserializeDocumentJsonDocumentType(&sv.DetailsDocument, value); err != nil {
+				return err
 			}
 
 		case "EntityArn":
@@ -2392,6 +2399,11 @@ func awsRestjson1_deserializeDocumentChangeSummary(v **types.ChangeSummary, valu
 				sv.Details = ptr.String(jtv)
 			}
 
+		case "DetailsDocument":
+			if err := awsRestjson1_deserializeDocumentJsonDocumentType(&sv.DetailsDocument, value); err != nil {
+				return err
+			}
+
 		case "Entity":
 			if err := awsRestjson1_deserializeDocumentEntity(&sv.Entity, value); err != nil {
 				return err
@@ -2699,6 +2711,14 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJsonDocumentType(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }
 

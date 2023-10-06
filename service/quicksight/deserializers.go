@@ -43805,6 +43805,42 @@ func awsRestjson1_deserializeDocumentDataBarsOptions(v **types.DataBarsOptions, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDatabaseGroupList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DatabaseGroup to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDatabricksParameters(v **types.DatabricksParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -50264,6 +50300,15 @@ func awsRestjson1_deserializeDocumentFilterListConfiguration(v **types.FilterLis
 					return fmt.Errorf("expected CategoryFilterMatchOperator to be of type string, got %T instead", value)
 				}
 				sv.MatchOperator = types.CategoryFilterMatchOperator(jtv)
+			}
+
+		case "NullOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FilterNullOption to be of type string, got %T instead", value)
+				}
+				sv.NullOption = types.FilterNullOption(jtv)
 			}
 
 		case "SelectAllOptions":
@@ -65716,6 +65761,69 @@ func awsRestjson1_deserializeDocumentRdsParameters(v **types.RdsParameters, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRedshiftIAMParameters(v **types.RedshiftIAMParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedshiftIAMParameters
+	if *v == nil {
+		sv = &types.RedshiftIAMParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoCreateDatabaseUser":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoCreateDatabaseUser = jtv
+			}
+
+		case "DatabaseGroups":
+			if err := awsRestjson1_deserializeDocumentDatabaseGroupList(&sv.DatabaseGroups, value); err != nil {
+				return err
+			}
+
+		case "DatabaseUser":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseUser to be of type string, got %T instead", value)
+				}
+				sv.DatabaseUser = ptr.String(jtv)
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRedshiftParameters(v **types.RedshiftParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -65763,6 +65871,11 @@ func awsRestjson1_deserializeDocumentRedshiftParameters(v **types.RedshiftParame
 					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
 				}
 				sv.Host = ptr.String(jtv)
+			}
+
+		case "IAMParameters":
+			if err := awsRestjson1_deserializeDocumentRedshiftIAMParameters(&sv.IAMParameters, value); err != nil {
+				return err
 			}
 
 		case "Port":

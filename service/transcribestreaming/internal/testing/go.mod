@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.13
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.80
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.11.0
-	github.com/aws/smithy-go v1.14.2
+	github.com/aws/smithy-go v1.15.0
 	github.com/google/go-cmp v0.5.8
 )
 

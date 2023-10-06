@@ -2379,10 +2379,11 @@ type MemberType string
 
 // Enum values for MemberType
 const (
-	MemberTypeDashboard MemberType = "DASHBOARD"
-	MemberTypeAnalysis  MemberType = "ANALYSIS"
-	MemberTypeDataset   MemberType = "DATASET"
-	MemberTypeTopic     MemberType = "TOPIC"
+	MemberTypeDashboard  MemberType = "DASHBOARD"
+	MemberTypeAnalysis   MemberType = "ANALYSIS"
+	MemberTypeDataset    MemberType = "DATASET"
+	MemberTypeDatasource MemberType = "DATASOURCE"
+	MemberTypeTopic      MemberType = "TOPIC"
 )
 
 // Values returns all known values for MemberType. Note that this can be expanded
@@ -2393,6 +2394,7 @@ func (MemberType) Values() []MemberType {
 		"DASHBOARD",
 		"ANALYSIS",
 		"DATASET",
+		"DATASOURCE",
 		"TOPIC",
 	}
 }
@@ -3698,6 +3700,7 @@ type TableTotalsPlacement string
 const (
 	TableTotalsPlacementStart TableTotalsPlacement = "START"
 	TableTotalsPlacementEnd   TableTotalsPlacement = "END"
+	TableTotalsPlacementAuto  TableTotalsPlacement = "AUTO"
 )
 
 // Values returns all known values for TableTotalsPlacement. Note that this can be
@@ -3707,6 +3710,7 @@ func (TableTotalsPlacement) Values() []TableTotalsPlacement {
 	return []TableTotalsPlacement{
 		"START",
 		"END",
+		"AUTO",
 	}
 }
 
@@ -4102,6 +4106,24 @@ func (UserRole) Values() []UserRole {
 		"READER",
 		"RESTRICTED_AUTHOR",
 		"RESTRICTED_READER",
+	}
+}
+
+type ValidationStrategyMode string
+
+// Enum values for ValidationStrategyMode
+const (
+	ValidationStrategyModeStrict  ValidationStrategyMode = "STRICT"
+	ValidationStrategyModeLenient ValidationStrategyMode = "LENIENT"
+)
+
+// Values returns all known values for ValidationStrategyMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationStrategyMode) Values() []ValidationStrategyMode {
+	return []ValidationStrategyMode{
+		"STRICT",
+		"LENIENT",
 	}
 }
 

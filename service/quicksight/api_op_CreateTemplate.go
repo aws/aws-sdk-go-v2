@@ -83,6 +83,10 @@ type CreateTemplateInput struct {
 	// the resource.
 	Tags []types.Tag
 
+	// TThe option to relax the validation needed to create a template with definition
+	// objects. This skips the validation step for specific errors.
+	ValidationStrategy *types.ValidationStrategy
+
 	// A description of the current template version being created. This API operation
 	// creates the first version of the template. Every time UpdateTemplate is called,
 	// a new version is created. Each version of the template maintains a description

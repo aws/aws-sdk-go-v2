@@ -39,6 +39,7 @@ const (
 	AdministrativeActionTypeThroughputOptimization        AdministrativeActionType = "THROUGHPUT_OPTIMIZATION"
 	AdministrativeActionTypeIopsOptimization              AdministrativeActionType = "IOPS_OPTIMIZATION"
 	AdministrativeActionTypeStorageTypeOptimization       AdministrativeActionType = "STORAGE_TYPE_OPTIMIZATION"
+	AdministrativeActionTypeMisconfiguredStateRecovery    AdministrativeActionType = "MISCONFIGURED_STATE_RECOVERY"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this
@@ -57,6 +58,7 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 		"THROUGHPUT_OPTIMIZATION",
 		"IOPS_OPTIMIZATION",
 		"STORAGE_TYPE_OPTIMIZATION",
+		"MISCONFIGURED_STATE_RECOVERY",
 	}
 }
 

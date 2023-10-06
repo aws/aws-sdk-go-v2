@@ -55,6 +55,10 @@ type ListEntitiesInput struct {
 	// The value of the next token, if it exists. Null if there are no more results.
 	NextToken *string
 
+	// Filters the returned set of entities based on their owner. The default is SELF .
+	// To list entities shared with you through AWS Resource Access Manager (AWS RAM),
+	// set to SHARED . Entities shared through the AWS Marketplace Catalog API
+	// PutResourcePolicy operation can't be discovered through the SHARED parameter.
 	OwnershipType types.OwnershipType
 
 	// An object that contains two attributes, SortBy and SortOrder .

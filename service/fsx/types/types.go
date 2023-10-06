@@ -404,7 +404,7 @@ type CreateFileCacheLustreConfiguration struct {
 // created with .
 //   - AutoImportPolicy
 //   - ExportPath
-//   - ImportedChunkSize
+//   - ImportedFileChunkSize
 //   - ImportPath
 type CreateFileSystemLustreConfiguration struct {
 

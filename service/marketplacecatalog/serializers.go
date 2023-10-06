@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -971,6 +973,13 @@ func awsRestjson1_serializeDocumentChange(v *types.Change, value smithyjson.Valu
 		ok.String(*v.Details)
 	}
 
+	if v.DetailsDocument != nil {
+		ok := object.Key("DetailsDocument")
+		if err := awsRestjson1_serializeDocumentJsonDocumentType(v.DetailsDocument, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Entity != nil {
 		ok := object.Key("Entity")
 		if err := awsRestjson1_serializeDocumentEntity(v.Entity, ok); err != nil {
@@ -1034,6 +1043,21 @@ func awsRestjson1_serializeDocumentFilterList(v []types.Filter, value smithyjson
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonDocumentType(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 
