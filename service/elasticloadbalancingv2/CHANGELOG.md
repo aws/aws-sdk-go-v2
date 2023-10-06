@@ -1,3 +1,7 @@
+# v1.21.5 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.4 (2023-09-06)
 
 * **Documentation**: This release enables default UDP connection termination and disabling unhealthy target connection termination for Network Load Balancers.

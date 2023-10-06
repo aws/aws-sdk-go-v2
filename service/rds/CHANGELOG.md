@@ -1,3 +1,7 @@
+# v1.55.2 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.1 (2023-10-05)
 
 * **Documentation**: Updates Amazon RDS documentation for corrections and minor improvements.

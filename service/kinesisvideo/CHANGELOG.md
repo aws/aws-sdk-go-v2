@@ -1,3 +1,7 @@
+# v1.18.5 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.4 (2023-09-20)
 
 * **Documentation**: Updated DescribeMediaStorageConfiguration, StartEdgeConfigurationUpdate, ImageGenerationConfiguration$SamplingInterval, and UpdateMediaStorageConfiguration to match AWS Docs.

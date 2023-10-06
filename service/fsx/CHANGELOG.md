@@ -1,3 +1,8 @@
+# v1.33.0 (2023-10-06)
+
+* **Feature**: After performing steps to repair the Active Directory configuration of a file system, use this action to initiate the process of attempting to recover to the file system.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.6 (2023-09-08)
 
 * **Documentation**: Amazon FSx documentation fixes

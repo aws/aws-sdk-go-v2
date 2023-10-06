@@ -1,3 +1,20 @@
+# Release (2023-10-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.124.0](service/ec2/CHANGELOG.md#v11240-2023-10-06)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.33.0](service/fsx/CHANGELOG.md#v1330-2023-10-06)
+  * **Feature**: After performing steps to repair the Active Directory configuration of a file system, use this action to initiate the process of attempting to recover to the file system.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.18.0](service/marketplacecatalog/CHANGELOG.md#v1180-2023-10-06)
+  * **Feature**: This release adds support for Document type as an alternative for stringified JSON for StartChangeSet, DescribeChangeSet and DescribeEntity APIs
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.45.0](service/quicksight/CHANGELOG.md#v1450-2023-10-06)
+  * **Feature**: NullOption in FilterListConfiguration; Dataset schema/table max length increased; Support total placement for pivot table visual; Lenient mode relaxes the validation to create resources with definition; Data sources can be added to folders; Redshift data sources support IAM Role-based authentication
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.34.0](service/transfer/CHANGELOG.md#v1340-2023-10-06)
+  * **Feature**: This release updates the max character limit of PreAuthenticationLoginBanner and PostAuthenticationLoginBanner to 4096 characters
+
 # Release (2023-10-05)
 
 ## Module Highlights

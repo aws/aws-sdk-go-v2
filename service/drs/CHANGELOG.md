@@ -1,3 +1,7 @@
+# v1.16.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-09-13)
 
 * **Feature**: Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions.

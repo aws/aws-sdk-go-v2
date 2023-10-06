@@ -1,3 +1,7 @@
+# v1.43.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2023-10-03)
 
 * **Feature**: This release adds the ability to replace video frames without modifying the audio essence.

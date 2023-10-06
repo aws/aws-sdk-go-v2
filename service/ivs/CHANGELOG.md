@@ -1,3 +1,7 @@
+# v1.26.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-08-31)
 
 * **Feature**: Updated "type" description for CreateChannel, UpdateChannel, Channel, and ChannelSummary.

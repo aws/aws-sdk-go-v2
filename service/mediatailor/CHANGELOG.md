@@ -1,3 +1,7 @@
+# v1.28.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-10-04)
 
 * **Feature**: Updates DescribeVodSource to include a list of ad break opportunities in the response

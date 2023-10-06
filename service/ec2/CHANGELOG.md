@@ -1,3 +1,8 @@
+# v1.124.0 (2023-10-06)
+
+* **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.123.0 (2023-10-02)
 
 * **Feature**: Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances.

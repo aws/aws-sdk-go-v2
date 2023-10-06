@@ -1,3 +1,7 @@
+# v1.110.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.110.0 (2023-10-04)
 
 * **Feature**: Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.

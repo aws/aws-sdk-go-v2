@@ -1,3 +1,7 @@
+# v1.17.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-09-28)
 
 * **Feature**: Update DescribeBudgets and DescribeBudgetNotificationsForAccount MaxResults limit to 1000.

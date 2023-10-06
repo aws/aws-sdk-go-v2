@@ -1,3 +1,7 @@
+# v1.29.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2023-08-25)
 
 * **Feature**: Add ThrottlingException with error code 429 to handle CloudTrail Delegated Admin request rate exceeded on organization resources.

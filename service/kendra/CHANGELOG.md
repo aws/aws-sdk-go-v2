@@ -1,3 +1,7 @@
+# v1.43.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2023-09-12)
 
 * **Feature**: Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API.

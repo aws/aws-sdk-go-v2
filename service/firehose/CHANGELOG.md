@@ -1,3 +1,7 @@
+# v1.19.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-09-27)
 
 * **Feature**: Features : Adding support for new data ingestion source to Kinesis Firehose - AWS Managed Services Kafka.

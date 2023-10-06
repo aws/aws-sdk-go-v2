@@ -1,3 +1,7 @@
+# v1.29.8 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.7 (2023-09-18)
 
 * **Documentation**: This release changes the default managedDataIdentifierSelector setting for new classification jobs to RECOMMENDED. By default, new classification jobs now use the recommended set of managed data identifiers.

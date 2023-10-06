@@ -1,3 +1,7 @@
+# v1.27.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2023-09-27)
 
 * **Feature**: The UserPoolType Status field is no longer used.

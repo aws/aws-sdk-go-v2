@@ -1,3 +1,7 @@
+# v1.18.2 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.1 (2023-09-26)
 
 * **Documentation**: CodeDeploy now supports In-place and Blue/Green EC2 deployments with multiple Classic Load Balancers and multiple Target Groups.

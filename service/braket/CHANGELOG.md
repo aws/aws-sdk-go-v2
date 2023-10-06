@@ -1,3 +1,7 @@
+# v1.20.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-09-22)
 
 * **Feature**: This release adds support to view the device queue depth (the number of queued quantum tasks and hybrid jobs on a device) and queue position for a quantum task and hybrid job.

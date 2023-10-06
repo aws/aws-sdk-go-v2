@@ -1,3 +1,7 @@
+# v1.22.7 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.6 (2023-09-26)
 
 * **Documentation**: Update documentation for RemoveAttributes to more accurately reflect its behavior when attributes are deleted.

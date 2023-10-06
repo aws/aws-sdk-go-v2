@@ -1,3 +1,7 @@
+# v1.9.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2023-09-05)
 
 * **Feature**: This release adds support for line item filtering in for the custom line item resource.

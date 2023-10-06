@@ -1,3 +1,7 @@
+# v1.21.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-10-04)
 
 * **Feature**: AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.

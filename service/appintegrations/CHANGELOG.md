@@ -1,3 +1,7 @@
+# v1.18.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-09-26)
 
 * **Feature**: The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace.

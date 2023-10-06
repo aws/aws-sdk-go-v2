@@ -1,3 +1,8 @@
+# v1.34.0 (2023-10-06)
+
+* **Feature**: This release updates the max character limit of PreAuthenticationLoginBanner and PostAuthenticationLoginBanner to 4096 characters
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.9 (2023-10-02)
 
 * **Documentation**: Documentation updates for AWS Transfer Family

@@ -1,3 +1,7 @@
+# v1.25.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2023-08-28)
 
 * **Feature**: Add support for customizing time zone for backup window in backup plan rules.

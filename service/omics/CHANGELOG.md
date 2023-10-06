@@ -1,3 +1,7 @@
+# v1.10.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2023-10-05)
 
 * **Feature**: Add Etag Support for Omics Storage in ListReadSets and GetReadSetMetadata API

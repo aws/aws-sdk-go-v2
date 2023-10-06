@@ -1,3 +1,7 @@
+# v1.24.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-09-20)
 
 * **Feature**: Adds a new DiscoverInstancesRevision API and also adds InstanceRevision field to the DiscoverInstances API response.

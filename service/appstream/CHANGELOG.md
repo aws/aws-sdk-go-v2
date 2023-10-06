@@ -1,3 +1,7 @@
+# v1.24.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-09-15)
 
 * **Feature**: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block

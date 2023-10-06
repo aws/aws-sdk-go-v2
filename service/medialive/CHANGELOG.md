@@ -1,3 +1,7 @@
+# v1.37.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2023-09-11)
 
 * **Feature**: AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.

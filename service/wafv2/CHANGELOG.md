@@ -1,3 +1,7 @@
+# v1.39.2 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.1 (2023-09-28)
 
 * **Documentation**: Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.

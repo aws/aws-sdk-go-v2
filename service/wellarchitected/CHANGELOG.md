@@ -1,3 +1,7 @@
+# v1.23.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-10-03)
 
 * **Feature**: AWS Well-Architected now supports Review Templates that allows you to create templates with pre-filled answers for Well-Architected and Custom Lens best practices.

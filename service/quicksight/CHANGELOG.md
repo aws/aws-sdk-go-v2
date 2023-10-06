@@ -1,3 +1,8 @@
+# v1.45.0 (2023-10-06)
+
+* **Feature**: NullOption in FilterListConfiguration; Dataset schema/table max length increased; Support total placement for pivot table visual; Lenient mode relaxes the validation to create resources with definition; Data sources can be added to folders; Redshift data sources support IAM Role-based authentication
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2023-09-25)
 
 * **Feature**: Added ability to tag users upon creation.

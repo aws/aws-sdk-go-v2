@@ -1,3 +1,7 @@
+# v1.18.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-09-13)
 
 * **Feature**: Add StartTime field in GetTraceSummaries API response for each TraceSummary.

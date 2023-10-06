@@ -1,3 +1,7 @@
+# v1.20.7 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.6 (2023-08-28)
 
 * **Documentation**: Documentation updates for permissions and links.

@@ -1,3 +1,7 @@
+# v1.17.4 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.3 (2023-08-21)
 
 * **Documentation**: Fixed typos in description fields

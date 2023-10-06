@@ -1,3 +1,7 @@
+# v1.16.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-08-28)
 
 * **Feature**: Service Quotas now supports viewing the applied quota value and requesting a quota increase for a specific resource in an AWS account.

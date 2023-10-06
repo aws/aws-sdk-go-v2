@@ -1,3 +1,7 @@
+# v1.21.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-09-26)
 
 * **Feature**: This release allows an App Runner customer to specify a custom source directory to run the build & start command. This change allows App Runner to support monorepo based repositories

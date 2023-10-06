@@ -1,3 +1,7 @@
+# v1.17.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-08-31)
 
 * **Feature**: Amazon Connect Participant Service adds the ability to get a view resource using a view token, which is provided in a participant message, with the release of the DescribeView API.

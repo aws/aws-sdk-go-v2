@@ -1,3 +1,7 @@
+# v1.13.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2023-09-25)
 
 * **Feature**: Support for generating code that is compatible with future versions of amplify project dependencies.

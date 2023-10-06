@@ -1,3 +1,7 @@
+# v1.4.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2023-08-30)
 
 * **Feature**: This release decouples member abilities in a collaboration. With this change, the member who can run queries no longer needs to be the same as the member who can receive results.

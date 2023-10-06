@@ -1,3 +1,7 @@
+# v1.2.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2023-09-05)
 
 * **Feature**: This release adds Lambda event structure version config support for LAMBDA target groups. It also adds newline support for auth policies.

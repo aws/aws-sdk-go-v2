@@ -1,3 +1,7 @@
+# v1.21.1 (2023-10-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-10-05)
 
 * **Feature**: Add SoftwareVersion to response of DescribeGatewayInformation.
