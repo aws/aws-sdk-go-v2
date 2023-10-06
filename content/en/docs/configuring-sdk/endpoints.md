@@ -132,11 +132,11 @@ func (*resolverV2) ResolveEndpoint(ctx context.Context, params s3.EndpointParame
         }
         return smithyEndpoints.Endpoint{
             URI: *u,
-        }
+        }, nil
     }
 
     // delegate back to the default v2 resolver otherwise
-    return s3.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params)
+    return s3.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params), nil
 }
 
 func main() {
