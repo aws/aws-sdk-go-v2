@@ -130,7 +130,7 @@ func (*resolverV2) ResolveEndpoint(ctx context.Context, params s3.EndpointParame
         if err != nil {
             return smithyendpoints.Endpoint{}, err
         }
-        return smithyEndpoints.Endpoint{
+        return smithyendpoints.Endpoint{
             URI: *u,
         }, nil
     }
