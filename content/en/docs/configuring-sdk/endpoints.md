@@ -136,7 +136,7 @@ func (*resolverV2) ResolveEndpoint(ctx context.Context, params s3.EndpointParame
     }
 
     // delegate back to the default v2 resolver otherwise
-    return s3.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params), nil
+    return s3.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params)
 }
 
 func main() {
