@@ -96,9 +96,6 @@ func (c *Client) addOperationListSpacesMiddlewares(stack *middleware.Stack, opti
 	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
 		return err
 	}
-	if err = addBearerAuthSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSpaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -115,6 +112,25 @@ func (c *Client) addOperationListSpacesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "ListSpaces",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
 		return err
 	}
 	return nil

@@ -116,9 +116,6 @@ func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.St
 	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
 		return err
 	}
-	if err = addBearerAuthSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListDevEnvironmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,6 +135,25 @@ func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "ListDevEnvironments",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
 		return err
 	}
 	return nil
