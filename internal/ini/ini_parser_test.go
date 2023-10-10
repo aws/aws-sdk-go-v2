@@ -60,7 +60,7 @@ func TestParser(t *testing.T) {
 	sepInValueExpr := newEqualExpr(newExpression(sepInValueID), equalOp)
 	sepInValueExpr.AppendChild(newExpression(sepInValueLit))
 
-	nestedEQExpr := newEqualExpr(newExpression(s3ServiceId), equalOp)
+	nestedEQExpr := newEqualExpr(newExpression(s3ServiceID), equalOp)
 	nestedEQExpr.AppendChild(newExpression(nestedParamsLit))
 
 	cases := []struct {
