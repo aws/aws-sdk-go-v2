@@ -7,14 +7,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-// defaultLoaders are a slice of functions that will read external configuration
-// sources for configuration values. These values are read by the AWSConfigResolvers
-// using interfaces to extract specific information from the external configuration.
-var defaultLoaders = []loader{
-	loadEnvConfig,
-	loadSharedConfigIgnoreNotExist,
-}
-
 // defaultAWSConfigResolvers are a slice of functions that will resolve external
 // configuration values into AWS configuration values.
 //
