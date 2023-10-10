@@ -17,7 +17,7 @@ func TestParser(t *testing.T) {
 	regionLit, _, _ := newLitToken([]rune(`"us-west-2"`))
 	regionNoQuotesLit, _, _ := newLitToken([]rune("us-west-2"))
 
-	s3ServiceId, _, _ := newLitToken([]rune("s3"))
+	s3ServiceID, _, _ := newLitToken([]rune("s3"))
 	nestedParamsLit, _, _ := newLitToken([]rune("\n\tfoo=bar\n\tbar=baz\n"))
 
 	credentialID, _, _ := newLitToken([]rune("credential_source"))
