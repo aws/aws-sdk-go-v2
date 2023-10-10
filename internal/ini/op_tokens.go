@@ -24,7 +24,6 @@ func isOp(b []rune) bool {
 	}
 }
 
-
 func newOpToken(b []rune) (Token, int, error) {
 	tok := Token{}
 
