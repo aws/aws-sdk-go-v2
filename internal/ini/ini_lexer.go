@@ -104,7 +104,7 @@ func countTokens(runes []rune) int {
 	for len(runes) > 0 {
 		switch {
 		case isSubProperty(runes):
-			_, n, err = newLitToken(runes)	
+			_, n, err = newLitToken(runes)
 		case isWhitespace(runes[0]):
 			_, n, err = newWSToken(runes)
 		case isComma(runes[0]):

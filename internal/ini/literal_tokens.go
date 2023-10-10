@@ -114,16 +114,14 @@ func newLitToken(b []rune) (Token, int, error) {
 		if err != nil {
 			return token, n, err
 		}
-
 		token = newToken(TokenLit, b[:n], QuotedStringType)
 	} else if isSubProperty(b) {
-		// _, start, _ := newNewlineToken(b)
-		// removeWhitespace := start + 1
-		end, err := getSubProperty(b, 0)
+		offset := 0 // include leading newline and whitespace
+		end, err := getSubProperty(b, offset)
 		if err != nil {
 			return token, n, err
 		}
-		token = newToken(TokenLit, b[0:end], StringType)
+		token = newToken(TokenLit, b[offset:end], StringType)
 		n = end
 	} else {
 		n, err = getValue(b)
@@ -134,14 +132,24 @@ func newLitToken(b []rune) (Token, int, error) {
 }
 
 
+
+
 func isSubProperty(runes []rune) bool {
+	// needs at least
+	// (1) newline (2) whitespace (3) literal
 	if len(runes) < 3 {
 		return false
 	}
-	split := strings.Split(string(runes), "=")
+
+	// must have an equal expression
+	split := strings.FieldsFunc(string(runes), func(r rune)(bool){
+		return isOp([]rune{r})
+	})
 	if len(split) < 2 {
 		return false
 	}
+
+	// must start with a new line
 	if !isNewline(runes) {
 		return false
 	}
@@ -149,9 +157,15 @@ func isSubProperty(runes []rune) bool {
 	if err != nil {
 		return false
 	}
+
+	// whitespace must follow newline
 	return isWhitespace(runes[n])
 }
 
+// getSubProperty pulls all subproperties and terminates when
+// it hits a newline that is not the start of another subproperty.
+// offset allows for removal of leading newline and whitespace
+// characters
 func getSubProperty(runes []rune, offset int) (int, error) {
 	for idx, val := range runes[offset:] {
 		if val == '\n' && !isSubProperty(runes[offset+idx:]) {
