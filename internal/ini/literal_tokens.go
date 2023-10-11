@@ -130,7 +130,7 @@ func newLitToken(b []rune) (Token, int, error) {
 		}
 		token = newToken(TokenLit, b[:n], QuotedStringType)
 	} else if isSubProperty(b) {
-		offset := 0 // include leading newline and whitespace
+		offset := 0
 		end, err := getSubProperty(b, offset)
 		if err != nil {
 			return token, n, err
