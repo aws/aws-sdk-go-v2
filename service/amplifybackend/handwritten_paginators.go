@@ -25,6 +25,7 @@ type ListBackendJobsPaginator struct {
 	isTruncated bool
 }
 
+// ListBackendJobsAPIClient is a client that implements the ListBackendJobs operation.
 type ListBackendJobsAPIClient interface {
 	ListBackendJobs(context.Context, *ListBackendJobsInput, ...func(*Options)) (*ListBackendJobsOutput, error)
 }

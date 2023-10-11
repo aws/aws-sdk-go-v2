@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
+// BatchGetItemPaginatorOptions is the paginator options for BatchGetItem
 type BatchGetItemPaginatorOptions struct {
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
@@ -23,6 +24,7 @@ type BatchGetItemPaginator struct {
 	isTruncated  bool
 }
 
+// BatchGetItemAPIClient is a client that implements the BatchGetItem operation.
 type BatchGetItemAPIClient interface {
 	BatchGetItem(context.Context, *BatchGetItemInput, ...func(*Options)) (*BatchGetItemOutput, error)
 }
