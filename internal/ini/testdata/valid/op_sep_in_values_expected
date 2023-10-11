@@ -19,7 +19,7 @@
     "key": "value5"
   },
   "case6": {
-    "s3": "[nested6]\n    key = valuen6",
+    "s3": "map[key:valuen6]",
     "key": "=value6"
   },
   "case7": {

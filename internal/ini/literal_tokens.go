@@ -60,7 +60,6 @@ const (
 	NoneType = ValueType(iota)
 	StringType
 	QuotedStringType
-	// FUTURE(2226) MapType
 )
 
 // Value is a union container
@@ -69,7 +68,7 @@ type Value struct {
 	raw  []rune
 
 	str string
-	// FUTURE(2226) mp map[string]string
+	mp map[string]string
 }
 
 func newValue(t ValueType, base int, raw []rune) (Value, error) {
@@ -81,6 +80,21 @@ func newValue(t ValueType, base int, raw []rune) (Value, error) {
 	switch t {
 	case StringType:
 		v.str = string(raw)
+		if isSubProperty(raw) {
+			newlineParts := strings.Split(string(raw), "\n")
+			for _, part := range newlineParts {
+				operandParts := strings.Split(part, "=")
+				if len(operandParts) < 2 {
+					continue
+				}
+				key := strings.TrimSpace(operandParts[0])
+				val := strings.TrimSpace(operandParts[1])
+				if v.mp == nil {
+					v.mp = make(map[string]string)
+				}
+				v.mp[key] = val
+			}
+		}
 	case QuotedStringType:
 		v.str = string(raw[1 : len(raw)-1])
 	}
@@ -130,9 +144,6 @@ func newLitToken(b []rune) (Token, int, error) {
 
 	return token, n, err
 }
-
-
-
 
 func isSubProperty(runes []rune) bool {
 	// needs at least
@@ -218,6 +229,7 @@ func isTrimmable(r rune) bool {
 // StringValue returns the string value
 func (v Value) StringValue() string {
 	switch v.Type {
+
 	case StringType:
 		return strings.TrimFunc(string(v.raw), isTrimmable)
 	case QuotedStringType:

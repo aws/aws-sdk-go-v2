@@ -1,5 +1,6 @@
 {
 	"foo": {
+		"aws_access_key_id": "map[aws_secret_access_key:valid]",
 		"aws_session_token": "valid"
 	},
 	"bar": {
