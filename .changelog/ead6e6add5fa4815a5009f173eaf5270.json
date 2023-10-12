@@ -1,8 +1,0 @@
-{
-    "id": "ead6e6ad-d5fa-4815-a500-9f173eaf5270",
-    "type": "feature",
-    "description": "Added new EnabledControl resource details to ListEnabledControls API and added new GetEnabledControl API.",
-    "modules": [
-        "service/controltower"
-    ]
-}

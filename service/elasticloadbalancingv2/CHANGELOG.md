@@ -1,3 +1,8 @@
+# v1.21.6 (2023-10-12)
+
+* **Documentation**: This release enables routing policies with Availability Zone affinity for Network Load Balancers.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.5 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

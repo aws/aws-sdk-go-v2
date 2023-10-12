@@ -1,3 +1,7 @@
+# v1.34.1 (2023-10-12)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-10-06)
 
 * **Feature**: This release updates the max character limit of PreAuthenticationLoginBanner and PostAuthenticationLoginBanner to 4096 characters

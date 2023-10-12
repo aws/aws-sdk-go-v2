@@ -1,3 +1,8 @@
+# v1.40.0 (2023-10-12)
+
+* **Feature**: Adds support for Lambda functions to access Dual-Stack subnets over IPv6, via an opt-in flag in CreateFunction and UpdateFunctionConfiguration APIs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.6 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

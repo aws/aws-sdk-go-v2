@@ -1,3 +1,8 @@
+# v1.25.0 (2023-10-12)
+
+* **Feature**: This release adds 9 new APIs for adapter and adapter version management, 3 new APIs for tagging, and updates AnalyzeDocument and StartDocumentAnalysis API parameters for using adapters.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.1 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

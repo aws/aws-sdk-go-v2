@@ -1,8 +1,0 @@
-{
-    "id": "9b06a5f2-ff21-4634-950d-b8a6f0959e95",
-    "type": "documentation",
-    "description": "Documentation updates for Price List",
-    "modules": [
-        "service/pricing"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.37.0 (2023-10-12)
+
+* **Feature**: Add enums for resource types supported by Config
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.4 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

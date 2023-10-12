@@ -1,3 +1,8 @@
+# v1.31.2 (2023-10-12)
+
+* **Documentation**: Updated the CreateWorkspaces action documentation to clarify that the PCoIP protocol is only available for Windows bundles.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.1 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

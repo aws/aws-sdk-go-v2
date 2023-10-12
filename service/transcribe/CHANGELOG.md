@@ -1,3 +1,8 @@
+# v1.29.0 (2023-10-12)
+
+* **Feature**: This release is to enable m4a format to customers
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.6 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.111.0 (2023-10-12)
+
+* **Feature**: Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.110.1 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

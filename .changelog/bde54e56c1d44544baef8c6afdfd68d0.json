@@ -1,8 +1,0 @@
-{
-    "id": "bde54e56-c1d4-4544-baef-8c6afdfd68d0",
-    "type": "bugfix",
-    "description": "Fail to load config if an explicitly provided profile doesn't exist.",
-    "modules": [
-        "config"
-    ]
-}

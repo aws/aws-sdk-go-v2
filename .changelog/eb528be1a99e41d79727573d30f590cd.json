@@ -1,8 +1,0 @@
-{
-    "id": "eb528be1-a99e-41d7-9727-573d30f590cd",
-    "type": "feature",
-    "description": "Update the NotificationMetadata field to only allow visible ascii characters. Add paginators to DescribeInstanceRefreshes, DescribeLoadBalancers, and DescribeLoadBalancerTargetGroups",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

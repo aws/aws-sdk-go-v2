@@ -1,3 +1,8 @@
+# v1.4.0 (2023-10-12)
+
+* **Feature**: Added new EnabledControl resource details to ListEnabledControls API and added new GetEnabledControl API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.1 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

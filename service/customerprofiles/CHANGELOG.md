@@ -1,3 +1,8 @@
+# v1.29.0 (2023-10-12)
+
+* **Feature**: Adds sensitive trait to various shapes in Customer Profiles Calculated Attribute API model.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.1 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "e694a537-8b4e-423c-b7be-a234b0f0e459",
-    "type": "feature",
-    "description": "This release marks Password field as sensitive",
-    "modules": [
-        "service/machinelearning"
-    ]
-}

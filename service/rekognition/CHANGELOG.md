@@ -1,3 +1,8 @@
+# v1.31.0 (2023-10-12)
+
+* **Feature**: Amazon Rekognition introduces support for Custom Moderation. This allows the enhancement of accuracy for detect moderation labels operations by creating custom adapters tuned on customer data.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.7 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

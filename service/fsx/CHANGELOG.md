@@ -1,3 +1,7 @@
+# v1.33.1 (2023-10-12)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-10-06)
 
 * **Feature**: After performing steps to repair the Active Directory configuration of a file system, use this action to initiate the process of attempting to recover to the file system.

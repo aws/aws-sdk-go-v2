@@ -1,8 +1,0 @@
-{
-    "id": "62b8ff64-4306-4351-ae6f-9788e89549f0",
-    "type": "feature",
-    "description": "Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

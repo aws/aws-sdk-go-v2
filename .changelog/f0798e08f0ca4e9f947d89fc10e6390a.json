@@ -1,8 +1,0 @@
-{
-    "id": "f0798e08-f0ca-4e9f-947d-89fc10e6390a",
-    "type": "feature",
-    "description": "This release adds support for adding a dedicated log volume to open-source RDS instances.",
-    "modules": [
-        "service/rds"
-    ]
-}

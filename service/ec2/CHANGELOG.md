@@ -1,3 +1,8 @@
+# v1.125.0 (2023-10-12)
+
+* **Feature**: This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.124.0 (2023-10-06)
 
 * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).

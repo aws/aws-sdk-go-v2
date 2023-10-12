@@ -1,3 +1,8 @@
+# v1.31.0 (2023-10-12)
+
+* **Feature**: Update the NotificationMetadata field to only allow visible ascii characters. Add paginators to DescribeInstanceRefreshes, DescribeLoadBalancers, and DescribeLoadBalancerTargetGroups
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.7 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

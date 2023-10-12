@@ -1,3 +1,7 @@
+# v1.18.1 (2023-10-12)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-10-06)
 
 * **Feature**: This release adds support for Document type as an alternative for stringified JSON for StartChangeSet, DescribeChangeSet and DescribeEntity APIs

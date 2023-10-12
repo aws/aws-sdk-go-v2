@@ -1,3 +1,8 @@
+# v1.63.0 (2023-10-12)
+
+* **Feature**: Extending version control support to GitLab and Bitbucket from AWSGlue
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.1 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

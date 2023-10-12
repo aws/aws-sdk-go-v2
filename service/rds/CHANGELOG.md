@@ -1,3 +1,8 @@
+# v1.56.0 (2023-10-12)
+
+* **Feature**: This release adds support for adding a dedicated log volume to open-source RDS instances.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.2 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

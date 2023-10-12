@@ -1,3 +1,8 @@
+# v1.5.0 (2023-10-12)
+
+* **Feature**: Update GetParticipant to return additional metadata.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.5 (2023-10-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

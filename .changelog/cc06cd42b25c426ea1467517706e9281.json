@@ -1,8 +1,0 @@
-{
-    "id": "cc06cd42-b25c-426e-a146-7517706e9281",
-    "type": "feature",
-    "description": "Adds sensitive trait to various shapes in Customer Profiles Calculated Attribute API model.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

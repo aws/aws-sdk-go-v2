@@ -1,8 +1,0 @@
-{
-    "id": "33962bb8-3c42-42ae-ac65-70dd033ecc63",
-    "type": "feature",
-    "description": "Amazon Rekognition introduces support for Custom Moderation. This allows the enhancement of accuracy for detect moderation labels operations by creating custom adapters tuned on customer data.",
-    "modules": [
-        "service/rekognition"
-    ]
-}
