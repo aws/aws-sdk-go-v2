@@ -438,6 +438,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.autoscaling#AnyPrintableAsciiStringMaxLen4000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007e]+$"
+            }
+        },
         "com.amazonaws.autoscaling#AsciiStringMaxLen255": {
             "type": "string",
             "traits": {
@@ -3975,7 +3985,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the instance refreshes for the specified Auto Scaling group.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n         <p>To help you determine the status of an instance refresh, Amazon EC2 Auto Scaling returns information\n            about the instance refreshes you previously initiated, including their status, start\n            time, end time, the percentage of the instance refresh that is complete, and the number\n            of instances remaining to update before the instance refresh is complete. If a rollback\n            is initiated while an instance refresh is in progress, Amazon EC2 Auto Scaling also returns information\n            about the rollback of the instance refresh.</p>"
+                "smithy.api#documentation": "<p>Gets information about the instance refreshes for the specified Auto Scaling group.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n         <p>To help you determine the status of an instance refresh, Amazon EC2 Auto Scaling returns information\n            about the instance refreshes you previously initiated, including their status, start\n            time, end time, the percentage of the instance refresh that is complete, and the number\n            of instances remaining to update before the instance refresh is complete. If a rollback\n            is initiated while an instance refresh is in progress, Amazon EC2 Auto Scaling also returns information\n            about the rollback of the instance refresh.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.autoscaling#DescribeInstanceRefreshesAnswer": {
@@ -4225,7 +4240,12 @@
                             ]
                         }
                     }
-                ]
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.autoscaling#DescribeLoadBalancerTargetGroupsRequest": {
@@ -4309,7 +4329,12 @@
                             ]
                         }
                     }
-                ]
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.autoscaling#DescribeLoadBalancersRequest": {
@@ -6991,7 +7016,7 @@
                     }
                 },
                 "NotificationMetadata": {
-                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen1023",
+                    "target": "com.amazonaws.autoscaling#AnyPrintableAsciiStringMaxLen4000",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information that is included any time Amazon EC2 Auto Scaling sends a message to the\n            notification target.</p>"
                     }
@@ -7049,7 +7074,7 @@
                     }
                 },
                 "NotificationMetadata": {
-                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen1023",
+                    "target": "com.amazonaws.autoscaling#AnyPrintableAsciiStringMaxLen4000",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information that you want to include any time Amazon EC2 Auto Scaling sends a message to\n            the notification target.</p>"
                     }
@@ -8440,7 +8465,7 @@
                     }
                 },
                 "NotificationMetadata": {
-                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen1023",
+                    "target": "com.amazonaws.autoscaling#AnyPrintableAsciiStringMaxLen4000",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information that you want to include any time Amazon EC2 Auto Scaling sends a message to\n            the notification target.</p>"
                     }

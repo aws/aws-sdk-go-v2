@@ -4287,7 +4287,7 @@
                 "TimeSeriesForecastingSettings": {
                     "target": "com.amazonaws.sagemaker#TimeSeriesForecastingSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time series forecast settings for the Canvas application.</p>"
+                        "smithy.api#documentation": "<p>Time series forecast settings for the SageMaker Canvas application.</p>"
                     }
                 },
                 "ModelRegisterSettings": {
@@ -4306,6 +4306,18 @@
                     "target": "com.amazonaws.sagemaker#IdentityProviderOAuthSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for connecting to an external data source with OAuth.</p>"
+                    }
+                },
+                "KendraSettings": {
+                    "target": "com.amazonaws.sagemaker#KendraSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for document querying.</p>"
+                    }
+                },
+                "DirectDeploySettings": {
+                    "target": "com.amazonaws.sagemaker#DirectDeploySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model deployment settings for the SageMaker Canvas application.</p>"
                     }
                 }
             },
@@ -8095,7 +8107,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new <code>FeatureGroup</code>. A <code>FeatureGroup</code> is a group of\n            <code>Features</code> defined in the <code>FeatureStore</code> to describe a\n            <code>Record</code>. </p>\n         <p>The <code>FeatureGroup</code> defines the schema and features contained in the\n         FeatureGroup. A <code>FeatureGroup</code> definition is composed of a list of\n            <code>Features</code>, a <code>RecordIdentifierFeatureName</code>, an\n            <code>EventTimeFeatureName</code> and configurations for its <code>OnlineStore</code>\n         and <code>OfflineStore</code>. Check <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Web Services service\n            quotas</a> to see the <code>FeatureGroup</code>s quota for your Amazon Web Services\n         account.</p>\n         <important>\n            <p>You must include at least one of <code>OnlineStoreConfig</code> and\n               <code>OfflineStoreConfig</code> to create a <code>FeatureGroup</code>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Create a new <code>FeatureGroup</code>. A <code>FeatureGroup</code> is a group of\n            <code>Features</code> defined in the <code>FeatureStore</code> to describe a\n            <code>Record</code>. </p>\n         <p>The <code>FeatureGroup</code> defines the schema and features contained in the\n            <code>FeatureGroup</code>. A <code>FeatureGroup</code> definition is composed of a list\n         of <code>Features</code>, a <code>RecordIdentifierFeatureName</code>, an\n            <code>EventTimeFeatureName</code> and configurations for its <code>OnlineStore</code>\n         and <code>OfflineStore</code>. Check <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Web Services service\n            quotas</a> to see the <code>FeatureGroup</code>s quota for your Amazon Web Services\n         account.</p>\n         <p>Note that it can take approximately 10-15 minutes to provision an\n            <code>OnlineStore</code>\n            <code>FeatureGroup</code> with the <code>InMemory</code>\n            <code>StorageType</code>.</p>\n         <important>\n            <p>You must include at least one of <code>OnlineStoreConfig</code> and\n               <code>OfflineStoreConfig</code> to create a <code>FeatureGroup</code>.</p>\n         </important>"
             }
         },
         "com.amazonaws.sagemaker#CreateFeatureGroupRequest": {
@@ -12603,7 +12615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete the <code>FeatureGroup</code> and any data that was written to the\n            <code>OnlineStore</code> of the <code>FeatureGroup</code>. Data cannot be accessed from\n         the <code>OnlineStore</code> immediately after <code>DeleteFeatureGroup</code> is called. </p>\n         <p>Data written into the <code>OfflineStore</code> will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your\n            <code>OfflineStore</code> are not deleted. </p>"
+                "smithy.api#documentation": "<p>Delete the <code>FeatureGroup</code> and any data that was written to the\n            <code>OnlineStore</code> of the <code>FeatureGroup</code>. Data cannot be accessed from\n         the <code>OnlineStore</code> immediately after <code>DeleteFeatureGroup</code> is called. </p>\n         <p>Data written into the <code>OfflineStore</code> will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your\n            <code>OfflineStore</code> are not deleted. </p>\n         <p>Note that it can take approximately 10-15 minutes to delete an <code>OnlineStore</code>\n            <code>FeatureGroup</code> with the <code>InMemory</code>\n            <code>StorageType</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteFeatureGroupRequest": {
@@ -21681,6 +21693,20 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#DirectDeploySettings": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether model deployment permissions are enabled or disabled in the Canvas application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The model deployment settings for the SageMaker Canvas application.</p>\n         <note>\n            <p>In order to enable model deployment for Canvas, the SageMaker Domain's or user profile's Amazon Web Services IAM\n      execution role must have the <code>AmazonSageMakerCanvasDirectDeployAccess</code> policy attached. You can also\n    turn on model deployment permissions through the SageMaker Domain's or user profile's settings in the SageMaker console.</p>\n         </note>"
+            }
+        },
         "com.amazonaws.sagemaker#DirectInternetAccess": {
             "type": "enum",
             "members": {
@@ -27496,7 +27522,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon SageMaker Canvas app setting where you configure OAuth for connecting to an external\n      data source, such as Snowflake.</p>"
+                "smithy.api#documentation": "<p>The Amazon SageMaker Canvas application setting where you configure OAuth for connecting to an external\n      data source, such as Snowflake.</p>"
             }
         },
         "com.amazonaws.sagemaker#IdentityProviderOAuthSettings": {
@@ -29533,6 +29559,20 @@
                     "min": 0,
                     "max": 3600
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#KendraSettings": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether the document querying feature is enabled\n      or disabled in the Canvas application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon SageMaker Canvas application setting where you configure\n      document querying.</p>"
             }
         },
         "com.amazonaws.sagemaker#KernelDisplayName": {
@@ -51690,7 +51730,7 @@
                 "SourcePipelineExecutionArn": {
                     "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>\n         <p>This field is required if the steps you specify for\n          <code>SelectedSteps</code> depend on output collaterals from any non-specified pipeline\n          steps. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html\">Selective\n          Execution for Pipeline Steps</a>.</p>"
                     }
                 },
                 "SelectedSteps": {
@@ -54880,7 +54920,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10
+                    "max": 100
                 }
             }
         },
@@ -54915,7 +54955,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 48
+                    "max": 100
                 }
             }
         },

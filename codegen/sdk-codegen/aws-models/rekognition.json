@@ -1217,7 +1217,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and\n         destination projects can be in different AWS accounts but must be in the same AWS Region.\n         You can't copy a model to another AWS service.\n        \n      </p>\n         <p>To copy a model version to a different AWS account, you need to create a resource-based policy known as a\n         <i>project policy</i>. You attach the project policy to the\n         source project by calling <a>PutProjectPolicy</a>. The project policy\n      gives permission to copy the model version from a trusting AWS account to a trusted account.</p>\n         <p>For more information creating and attaching a project policy, see Attaching a project policy (SDK)\n         in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         <p>If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.</p>\n         <note>\n            <p>To copy a model, the destination project, source project, and source model version must already exist.</p>\n         </note>\n         <p>Copying a model version takes a while to complete. To get the current status, call <a>DescribeProjectVersions</a> and check the value of <code>Status</code> in the\n            <a>ProjectVersionDescription</a> object. The copy operation has finished when\n         the value of <code>Status</code> is <code>COPYING_COMPLETED</code>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CopyProjectVersion</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and\n         destination projects can be in different AWS accounts but must be in the same AWS Region.\n         You can't copy a model to another AWS service.\n        \n      </p>\n         <p>To copy a model version to a different AWS account, you need to create a resource-based policy known as a\n         <i>project policy</i>. You attach the project policy to the\n         source project by calling <a>PutProjectPolicy</a>. The project policy\n      gives permission to copy the model version from a trusting AWS account to a trusted account.</p>\n         <p>For more information creating and attaching a project policy, see Attaching a project policy (SDK)\n         in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         <p>If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.</p>\n         <note>\n            <p>Copying project versions is supported only for Custom Labels models. </p>\n            <p>To copy a model, the destination project, source project, and source model version\n            must already exist.</p>\n         </note>\n         <p>Copying a model version takes a while to complete. To get the current status, call <a>DescribeProjectVersions</a> and check the value of <code>Status</code> in the\n            <a>ProjectVersionDescription</a> object. The copy operation has finished when\n         the value of <code>Status</code> is <code>COPYING_COMPLETED</code>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CopyProjectVersion</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "CopyProjectVersion",
@@ -1466,7 +1466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using\n   an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset.</p>\n         <p>To create a training dataset for a project, specify <code>TRAIN</code> for the value of \n      <code>DatasetType</code>. To create the test dataset for a project,\n      specify <code>TEST</code> for the value of <code>DatasetType</code>.\n    </p>\n         <p>The response from <code>CreateDataset</code> is the Amazon Resource Name (ARN) for the dataset.\n   Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the \n   current status. The dataset created successfully if the value of <code>Status</code> is\n   <code>CREATE_COMPLETE</code>. </p>\n         <p>To check if any non-terminal errors occurred, call <a>ListDatasetEntries</a>\nand check for the presence of <code>errors</code> lists in the JSON Lines.</p>\n         <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>). \n      Currently, you can't access the terminal error information.\n      \n   </p>\n         <p>For more information, see Creating dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateDataset</code> action.\n   If you want to copy an existing dataset, you also require permission to perform the <code>rekognition:ListDatasetEntries</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using\n   an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset.</p>\n         <p>To create a training dataset for a project, specify <code>TRAIN</code> for the value of \n      <code>DatasetType</code>. To create the test dataset for a project,\n      specify <code>TEST</code> for the value of <code>DatasetType</code>.\n    </p>\n         <p>The response from <code>CreateDataset</code> is the Amazon Resource Name (ARN) for the dataset.\n   Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the \n   current status. The dataset created successfully if the value of <code>Status</code> is\n   <code>CREATE_COMPLETE</code>. </p>\n         <p>To check if any non-terminal errors occurred, call <a>ListDatasetEntries</a>\nand check for the presence of <code>errors</code> lists in the JSON Lines.</p>\n         <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>). \n      Currently, you can't access the terminal error information.\n      \n   </p>\n         <p>For more information, see Creating dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateDataset</code> action.\n   If you want to copy an existing dataset, you also require permission to perform the <code>rekognition:ListDatasetEntries</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create an Amazon Rekognition Custom Labels dataset",
@@ -1655,7 +1655,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Rekognition Custom Labels project. A project is a group of resources (datasets, model versions) \n         that you use to create and manage Amazon Rekognition Custom Labels models.  </p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateProject</code> action.</p>",
+                "smithy.api#documentation": "<p>Creates a new Amazon Rekognition project. A project is a group of resources (datasets, model\n         versions) that you use to create and manage a Amazon Rekognition Custom Labels Model or custom adapter. You can\n         specify a feature to create the project with, if no feature is specified then Custom Labels\n         is used by default. For adapters, you can also choose whether or not to have the project\n         auto update by using the AutoUpdate argument. This operation requires permissions to\n         perform the <code>rekognition:CreateProject</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create an Amazon Rekognition Custom Labels project",
@@ -1678,6 +1678,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the project to create.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Feature": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies feature that is being customized. If no value is provided CUSTOM_LABELS is used as a default.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.rekognition#ProjectAutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether automatic retraining should be attempted for the versions of the\n         project. Automatic retraining is done as a best effort. Required argument for Content\n         Moderation. Applicable only to adapters.</p>"
                     }
                 }
             },
@@ -1737,7 +1749,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new version of a model and begins training. \n         Models are managed as part of an Amazon Rekognition Custom Labels project. \n         The response from <code>CreateProjectVersion</code>\n         is an Amazon Resource Name (ARN) for the version of the model. </p>\n         <p>Training uses the training and test datasets associated with the project. \n         For more information, see Creating training and test dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         <note>\n            <p>You can train a model in a project that doesn't have associated datasets by specifying manifest files in the\n         <code>TrainingData</code> and <code>TestingData</code> fields.\n         </p>\n            <p>If you open the console after training a model with manifest files, Amazon Rekognition Custom Labels creates\n            the datasets for you using the most recent manifest files. You can no longer train\n            a model version for the project by specifying manifest files. </p>\n            <p>Instead of training with a project without associated datasets,\n            we recommend that you use the manifest\n            files to create training and test datasets for the project.</p>\n         </note>\n         <p>Training takes a while to complete. You can get the current status by calling\n         <a>DescribeProjectVersions</a>. Training completed successfully if\n         the value of the <code>Status</code> field is <code>TRAINING_COMPLETED</code>.</p>\n         <p>If training \n         fails, see Debugging a failed model training in the <i>Amazon Rekognition Custom Labels</i> developer guide. </p>\n         <p>Once training has successfully completed, call <a>DescribeProjectVersions</a> to\n         get the training results and evaluate the model.  For more information, see Improving a trained Amazon Rekognition Custom Labels model\n         in the <i>Amazon Rekognition Custom Labels</i> developers guide.\n      </p>\n         <p>After evaluating the model, you start the model\n       by calling <a>StartProjectVersion</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateProjectVersion</code> action.</p>",
+                "smithy.api#documentation": "<p>Creates a new version of Amazon Rekognition project (like a Custom Labels model or a custom adapter)\n         and begins training. Models and adapters are managed as part of a Rekognition project. The\n         response from <code>CreateProjectVersion</code> is an Amazon Resource Name (ARN) for the\n         project version. </p>\n         <p>The FeatureConfig operation argument allows you to configure specific model or adapter\n         settings. You can provide a description to the project version by using the\n         VersionDescription argment. Training can take a while to complete. You can get the current\n         status by calling <a>DescribeProjectVersions</a>. Training completed\n         successfully if the value of the <code>Status</code> field is\n            <code>TRAINING_COMPLETED</code>. Once training has successfully completed, call <a>DescribeProjectVersions</a> to get the training results and evaluate the\n         model.</p>\n         <p>This operation requires permissions to perform the\n            <code>rekognition:CreateProjectVersion</code> action.</p>\n         <note>\n            <p>\n               <i>The following applies only to projects with Amazon Rekognition Custom Labels as the chosen\n               feature:</i>\n            </p>\n            <p>You can train a model in a project that doesn't have associated datasets by specifying manifest files in the\n         <code>TrainingData</code> and <code>TestingData</code> fields.\n         </p>\n            <p>If you open the console after training a model with manifest files, Amazon Rekognition Custom Labels creates\n            the datasets for you using the most recent manifest files. You can no longer train\n            a model version for the project by specifying manifest files. </p>\n            <p>Instead of training with a project without associated datasets,\n            we recommend that you use the manifest\n            files to create training and test datasets for the project.</p>\n         </note>\n         <p></p>",
                 "smithy.api#examples": [
                     {
                         "title": "To train an Amazon Rekognition Custom Labels model",
@@ -1763,46 +1775,58 @@
                 "ProjectArn": {
                     "target": "com.amazonaws.rekognition#ProjectArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Rekognition Custom Labels project that \n         manages the model that you want to train.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Rekognition project that will manage the project version you want to\n         train.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "VersionName": {
                     "target": "com.amazonaws.rekognition#VersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the version of the model. This value must be unique.</p>",
+                        "smithy.api#documentation": "<p>A name for the version of the project version. This value must be unique.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OutputConfig": {
                     "target": "com.amazonaws.rekognition#OutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket location to store the results of training.\n      The S3 bucket can be in any AWS account as long as the caller has\n      <code>s3:PutObject</code> permissions on the S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket location to store the results of training. The bucket can be any S3\n         bucket in your AWS account. You need <code>s3:PutObject</code> permission on the bucket.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TrainingData": {
                     "target": "com.amazonaws.rekognition#TrainingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an external manifest that the services uses to train the model.\n         If you specify <code>TrainingData</code> you must also specify <code>TestingData</code>.\n         The project must not have any associated datasets.\n      </p>"
+                        "smithy.api#documentation": "<p>Specifies an external manifest that the services uses to train the project version.\n         If you specify <code>TrainingData</code> you must also specify <code>TestingData</code>.\n         The project must not have any associated datasets. </p>"
                     }
                 },
                 "TestingData": {
                     "target": "com.amazonaws.rekognition#TestingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an external manifest that the service uses to test the model.\n         If you specify <code>TestingData</code> you must also specify <code>TrainingData</code>.\n         The project must not have any associated datasets.</p>"
+                        "smithy.api#documentation": "<p>Specifies an external manifest that the service uses to test the project version. If\n         you specify <code>TestingData</code> you must also specify <code>TrainingData</code>. The\n         project must not have any associated datasets.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.rekognition#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p> A set of tags (key-value pairs) that you want to attach to the model. </p>"
+                        "smithy.api#documentation": "<p> A set of tags (key-value pairs) that you want to attach to the project version. </p>"
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.rekognition#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service key (AWS KMS key).\n         You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,\n         an alias for your KMS key, or an alias ARN.\n         The key is used to encrypt training and test images copied into the service for model training.\n         Your source images are unaffected. The key is also used to encrypt training results\n         and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you choose to use your own KMS key, you need the following permissions on the KMS key.</p>\n         <ul>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service key (AWS KMS key). You can supply\n         the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for\n         your KMS key, or an alias ARN. The key is used to encrypt training images, test images, and manifest files copied\n         into the service for the project version. Your source images are unaffected. The\n         key is also used to encrypt training results and manifest files written to the output Amazon S3\n         bucket (<code>OutputConfig</code>).</p>\n         <p>If you choose to use your own KMS key, you need the following permissions on the KMS key.</p>\n         <ul>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
+                    }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.rekognition#VersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description applied to the project version being created.</p>"
+                    }
+                },
+                "FeatureConfig": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeatureConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Feature-specific configuration of the training job. If the job configuration does not match the feature type associated with the project, an InvalidParameterException is returned.</p>"
                     }
                 }
             },
@@ -1816,7 +1840,7 @@
                 "ProjectVersionArn": {
                     "target": "com.amazonaws.rekognition#ProjectVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model version that was created. Use <code>DescribeProjectVersion</code>\n         to get the current status of the training operation.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the model or the project version that was created. Use\n            <code>DescribeProjectVersion</code> to get the current status of the training\n         operation.</p>"
                     }
                 }
             },
@@ -2063,6 +2087,63 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rekognition#CustomLabel"
+            }
+        },
+        "com.amazonaws.rekognition#CustomizationFeature": {
+            "type": "enum",
+            "members": {
+                "CONTENT_MODERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_MODERATION"
+                    }
+                },
+                "CUSTOM_LABELS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_LABELS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#CustomizationFeatureConfig": {
+            "type": "structure",
+            "members": {
+                "ContentModeration": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeatureContentModerationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for Custom Moderation training.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Feature specific configuration for the training job. Configuration provided for the job must match \n         the feature type parameter associated with project. If configuration \n         and feature type do not match an InvalidParameterException is returned.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#CustomizationFeatureContentModerationConfig": {
+            "type": "structure",
+            "members": {
+                "ConfidenceThreshold": {
+                    "target": "com.amazonaws.rekognition#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level you plan to use to identify if unsafe content is present during inference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration options for Content Moderation training.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#CustomizationFeatures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#CustomizationFeature"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.rekognition#DatasetArn": {
@@ -2524,7 +2605,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing Amazon Rekognition Custom Labels dataset.\n   Deleting a dataset might take while. Use <a>DescribeDataset</a> to check the \n   current status. The dataset is still deleting if the value of <code>Status</code> is\n   <code>DELETE_IN_PROGRESS</code>. If you try to access the dataset after it is deleted, you get\n   a <code>ResourceNotFoundException</code> exception.\n\n</p>\n         <p>You can't delete a dataset while it is creating (<code>Status</code> =  <code>CREATE_IN_PROGRESS</code>)\n      or if the dataset is updating (<code>Status</code> =  <code>UPDATE_IN_PROGRESS</code>).</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DeleteDataset</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Deletes an existing Amazon Rekognition Custom Labels dataset.\n   Deleting a dataset might take while. Use <a>DescribeDataset</a> to check the \n   current status. The dataset is still deleting if the value of <code>Status</code> is\n   <code>DELETE_IN_PROGRESS</code>. If you try to access the dataset after it is deleted, you get\n   a <code>ResourceNotFoundException</code> exception.\n\n</p>\n         <p>You can't delete a dataset while it is creating (<code>Status</code> =  <code>CREATE_IN_PROGRESS</code>)\n      or if the dataset is updating (<code>Status</code> =  <code>UPDATE_IN_PROGRESS</code>).</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DeleteDataset</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an Amazon Rekognition Custom Labels dataset",
@@ -2682,7 +2763,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Rekognition Custom Labels project.  To delete a project you must first delete all models associated \n         with the project. To delete a model, see <a>DeleteProjectVersion</a>.</p>\n         <p>\n            <code>DeleteProject</code> is an asynchronous operation. To check if the project is\n         deleted, call <a>DescribeProjects</a>. The project is deleted when the project\n         no longer appears in the response. Be aware that deleting a given project will also delete\n         any <code>ProjectPolicies</code> associated with that project.</p>\n         <p>This operation requires permissions to perform the\n            <code>rekognition:DeleteProject</code> action. </p>",
+                "smithy.api#documentation": "<p>Deletes a Amazon Rekognition project. To delete a project you must first delete all models or\n         adapters associated with the project. To delete a model or adapter, see <a>DeleteProjectVersion</a>.</p>\n         <p>\n            <code>DeleteProject</code> is an asynchronous operation. To check if the project is\n         deleted, call <a>DescribeProjects</a>. The project is deleted when the project\n         no longer appears in the response. Be aware that deleting a given project will also delete\n         any <code>ProjectPolicies</code> associated with that project.</p>\n         <p>This operation requires permissions to perform the\n            <code>rekognition:DeleteProject</code> action. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an Amazon Rekognition Custom Labels project",
@@ -2729,7 +2810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing project policy.</p>\n         <p>To get a list of project policies attached to a project, call <a>ListProjectPolicies</a>. To attach a project policy to a project, call <a>PutProjectPolicy</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DeleteProjectPolicy</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Deletes an existing project policy.</p>\n         <p>To get a list of project policies attached to a project, call <a>ListProjectPolicies</a>. To attach a project policy to a project, call <a>PutProjectPolicy</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DeleteProjectPolicy</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "DeleteProjectPolicy",
@@ -2840,7 +2921,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Rekognition Custom Labels model.  </p>\n         <p>You can't delete a model if it is running or if it is training. \n          To check the status of a model, use the <code>Status</code> field returned\n         from <a>DescribeProjectVersions</a>.\n         To stop a running model call <a>StopProjectVersion</a>. If the model\n      is training, wait until it finishes.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DeleteProjectVersion</code> action. </p>",
+                "smithy.api#documentation": "<p>Deletes a Rekognition project model or project version, like a Amazon Rekognition Custom Labels model or a custom\n         adapter.</p>\n         <p>You can't delete a project version if it is running or if it is training. To check\n         the status of a project version, use the Status field returned from <a>DescribeProjectVersions</a>. To stop a project version call <a>StopProjectVersion</a>. If the project version is training, wait until it\n         finishes.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DeleteProjectVersion</code> action. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an Amazon Rekognition Custom Labels model",
@@ -2861,7 +2942,7 @@
                 "ProjectVersionArn": {
                     "target": "com.amazonaws.rekognition#ProjectVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project version that you want to\n         delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3140,7 +3221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDescribes an Amazon Rekognition Custom Labels dataset. You can get information such as the current status of a dataset and\nstatistics about the images and labels in a dataset.  \n</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeDataset</code> action.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>\nDescribes an Amazon Rekognition Custom Labels dataset. You can get information such as the current status of a dataset and\nstatistics about the images and labels in a dataset.  \n</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeDataset</code> action.</p>"
             }
         },
         "com.amazonaws.rekognition#DescribeDatasetRequest": {
@@ -3204,7 +3285,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists and describes the versions of a model in an Amazon Rekognition Custom Labels project. You \n         can specify up to 10 model versions in <code>ProjectVersionArns</code>. If\n         you don't specify a value, descriptions for all model versions in the project are returned.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjectVersions</code>\n            action.</p>",
+                "smithy.api#documentation": "<p>Lists and describes the versions of an Amazon Rekognition project. You can specify up to 10 model or\n         adapter versions in <code>ProjectVersionArns</code>. If you don't specify a value,\n         descriptions for all model/adapter versions in the project are returned.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjectVersions</code>\n            action.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3273,20 +3354,20 @@
                 "ProjectArn": {
                     "target": "com.amazonaws.rekognition#ProjectArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that contains the models you want to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that contains the model/adapter you want\n         to describe.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "VersionNames": {
                     "target": "com.amazonaws.rekognition#VersionNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of model version names that you want to describe. You can add up to 10 model version names\n         to the list. If you don't specify a value, all model descriptions are returned.  A version name is part of a\n         model (ProjectVersion) ARN. For example, <code>my-model.2020-01-21T09.10.15</code> is the version name in the following ARN.\n               <code>arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/<i>my-model.2020-01-21T09.10.15</i>/1234567890123</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of model or project version names that you want to describe. You can add\n         up to 10 model or project version names to the list. If you don't specify a value, all\n         project version descriptions are returned. A version name is part of a project version ARN. For example, <code>my-model.2020-01-21T09.10.15</code> is\n         the version name in the following ARN.\n               <code>arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/<i>my-model.2020-01-21T09.10.15</i>/1234567890123</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n           results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. \n           You can use this pagination token to retrieve the next set of results. </p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n           results to retrieve), Amazon Rekognition returns a pagination token in the response. \n           You can use this pagination token to retrieve the next set of results. </p>"
                     }
                 },
                 "MaxResults": {
@@ -3306,13 +3387,13 @@
                 "ProjectVersionDescriptions": {
                     "target": "com.amazonaws.rekognition#ProjectVersionDescriptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of model descriptions. The list is sorted by the creation date and time of\n         the model versions, latest to earliest.</p>"
+                        "smithy.api#documentation": "<p>A list of project version descriptions. The list is sorted by the creation date and\n         time of the project versions, latest to earliest.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. \n         You can use this pagination token to retrieve the next set of results. </p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n         results to retrieve), Amazon Rekognition returns a pagination token in the response. \n         You can use this pagination token to retrieve the next set of results. </p>"
                     }
                 }
             },
@@ -3349,7 +3430,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about your Amazon Rekognition Custom Labels projects. </p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjects</code> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about your Rekognition projects.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjects</code> action.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3364,7 +3445,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination \n         token to retrieve the next set of results. </p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n         results to retrieve), Rekognition returns a pagination token in the response. You can use this pagination \n         token to retrieve the next set of results. </p>"
                     }
                 },
                 "MaxResults": {
@@ -3376,7 +3457,13 @@
                 "ProjectNames": {
                     "target": "com.amazonaws.rekognition#ProjectNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the projects that you want Amazon Rekognition Custom Labels to describe. If you don't specify a value, \n      the response includes descriptions for all the projects in your AWS account.</p>"
+                        "smithy.api#documentation": "<p>A list of the projects that you want Rekognition to describe. If you don't specify a value, \n      the response includes descriptions for all the projects in your AWS account.</p>"
+                    }
+                },
+                "Features": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeatures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of customization to filter projects by. If no value is specified, \n         CUSTOM_LABELS is used as a default.</p>"
                     }
                 }
             },
@@ -3396,7 +3483,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. \n         You can use this pagination token to retrieve the next set of results. </p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n         results to retrieve), Amazon Rekognition returns a pagination token in the response. \n         You can use this pagination token to retrieve the next set of results. </p>"
                     }
                 }
             },
@@ -3584,7 +3671,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p>\n         <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input\n      parameter. </p>\n         <p>You pass the input image as base64-encoded image bytes or as a reference to an image in\n         an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing\n         image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p> For each object that the model version detects on an image, the API returns a \n         (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>).\n         Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level\n         of confidence that the image contains the object (<code>Confidence</code>), and \n         object location information, if it exists,  for the label on the image (<code>Geometry</code>). </p>\n         <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>.\n         <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that's higher than\n         the specified value.\n\n         The value of <code>MinConfidence</code> maps to the assumed threshold values\n         created during training. For more information, see <i>Assumed threshold</i>\n         in the Amazon Rekognition Custom Labels Developer Guide. \n         Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of\n         <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence\n         responses from <code>DetectCustomLabels</code> are also returned as a percentage. \n         You can use <code>MinConfidence</code> to change the precision and recall or your model. \n         For more information, see \n         <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>\n      returns labels based on the assumed threshold of each label.</p>\n         <p>This is a stateless API operation. That is, the operation does not persist any\n         data.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DetectCustomLabels</code> action. </p>\n         <p>For more information, see \n      <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p>\n         <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input\n      parameter. </p>\n         <p>You pass the input image as base64-encoded image bytes or as a reference to an image in\n         an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing\n         image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p> For each object that the model version detects on an image, the API returns a \n         (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>).\n         Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level\n         of confidence that the image contains the object (<code>Confidence</code>), and \n         object location information, if it exists,  for the label on the image (<code>Geometry</code>). </p>\n         <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>.\n         <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that's higher than\n         the specified value.\n\n         The value of <code>MinConfidence</code> maps to the assumed threshold values\n         created during training. For more information, see <i>Assumed threshold</i>\n         in the Amazon Rekognition Custom Labels Developer Guide. \n         Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of\n         <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence\n         responses from <code>DetectCustomLabels</code> are also returned as a percentage. \n         You can use <code>MinConfidence</code> to change the precision and recall or your model. \n         For more information, see \n         <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>\n      returns labels based on the assumed threshold of each label.</p>\n         <p>This is a stateless API operation. That is, the operation does not persist any\n         data.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DetectCustomLabels</code> action. </p>\n         <p>For more information, see \n      <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To detect custom labels in an image with an Amazon Rekognition Custom Labels model",
@@ -3622,7 +3709,7 @@
                 "ProjectVersionArn": {
                     "target": "com.amazonaws.rekognition#ProjectVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model version that you want to use.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the model version that you want to use. Only models associated with Custom\n         Labels projects accepted by the operation. If a provided ARN refers to a model version\n         associated with a project for a different feature type, then an InvalidParameterException\n         is returned.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4149,11 +4236,17 @@
                     "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
                 },
                 {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotReadyException"
+                },
+                {
                     "target": "com.amazonaws.rekognition#ThrottlingException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects unsafe content in a specified JPEG or PNG format image. Use\n        <code>DetectModerationLabels</code> to moderate images depending on your requirements. For\n      example, you might want to filter images that contain nudity, but not images containing\n      suggestive content.</p>\n         <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to\n      determine which types of content are appropriate.</p>\n         <p>For information about moderation labels, see Detecting Unsafe Content in the\n      Amazon Rekognition Developer Guide.</p>\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>"
+                "smithy.api#documentation": "<p>Detects unsafe content in a specified JPEG or PNG format image. Use\n        <code>DetectModerationLabels</code> to moderate images depending on your requirements. For\n      example, you might want to filter images that contain nudity, but not images containing\n      suggestive content.</p>\n         <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to\n      determine which types of content are appropriate.</p>\n         <p>For information about moderation labels, see Detecting Unsafe Content in the\n      Amazon Rekognition Developer Guide.</p>\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p>You can specify an adapter to use when retrieving label predictions by providing a\n        <code>ProjectVersionArn</code> to the <code>ProjectVersion</code> argument.</p>"
             }
         },
         "com.amazonaws.rekognition#DetectModerationLabelsRequest": {
@@ -4177,6 +4270,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sets up the configuration for human evaluation, including the FlowDefinition the image\n      will be sent to.</p>"
                     }
+                },
+                "ProjectVersion": {
+                    "target": "com.amazonaws.rekognition#ProjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier for the custom adapter. Expects the ProjectVersionArn as a value. \n         Use the CreateProject or CreateProjectVersion APIs to create a custom adapter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4195,13 +4294,19 @@
                 "ModerationModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Version number of the moderation detection model that was used to detect unsafe\n      content.</p>"
+                        "smithy.api#documentation": "<p>Version number of the base moderation detection model that was used to detect unsafe\n      content.</p>"
                     }
                 },
                 "HumanLoopActivationOutput": {
                     "target": "com.amazonaws.rekognition#HumanLoopActivationOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>Shows the results of the human in the loop evaluation.</p>"
+                    }
+                },
+                "ProjectVersion": {
+                    "target": "com.amazonaws.rekognition#ProjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the custom adapter that was used during inference. If\n         during inference the adapter was EXPIRED, then the parameter will not be returned,\n         indicating that a base moderation detection project version was used.</p>"
                     }
                 }
             },
@@ -4621,7 +4726,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Distributes the entries (images) in a training dataset across the training dataset and the test dataset for a project.\n         <code>DistributeDatasetEntries</code> moves 20% of the training dataset images to the test dataset.\n         An entry is a JSON Line that describes an image.\n      </p>\n         <p>You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset. \n         The training dataset must contain the images that you want to split. The test dataset \n      must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call <a>CreateDataset</a>.</p>\n         <p>Distributing a dataset takes a while to complete. To check the status call <code>DescribeDataset</code>. The operation\n         is complete when the <code>Status</code> field for the training dataset and the test dataset is <code>UPDATE_COMPLETE</code>. \n         If the dataset split fails, the value of <code>Status</code> is <code>UPDATE_FAILED</code>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DistributeDatasetEntries</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Distributes the entries (images) in a training dataset across the training dataset and the test dataset for a project.\n         <code>DistributeDatasetEntries</code> moves 20% of the training dataset images to the test dataset.\n         An entry is a JSON Line that describes an image.\n      </p>\n         <p>You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset. \n         The training dataset must contain the images that you want to split. The test dataset \n      must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call <a>CreateDataset</a>.</p>\n         <p>Distributing a dataset takes a while to complete. To check the status call <code>DescribeDataset</code>. The operation\n         is complete when the <code>Status</code> field for the training dataset and the test dataset is <code>UPDATE_COMPLETE</code>. \n         If the dataset split fails, the value of <code>Status</code> is <code>UPDATE_FAILED</code>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DistributeDatasetEntries</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To distribute an Amazon Rekognition Custom Labels dataset",
@@ -7954,7 +8059,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon Rekognition service limit was exceeded. For example, if you start too many Amazon Rekognition Video jobs concurrently, calls to start operations \n            (<code>StartLabelDetection</code>, for example) will raise a <code>LimitExceededException</code> exception (HTTP status code: 400) until\n            the number of concurrently running jobs is below the Amazon Rekognition service limit.  </p>",
+                "smithy.api#documentation": "<p>An Amazon Rekognition service limit was exceeded. For example, if you start too many jobs\n            concurrently, subsequent calls to start operations (ex:\n            <code>StartLabelDetection</code>) will raise a <code>LimitExceededException</code>\n            exception (HTTP status code: 400) until the number of concurrently running jobs is below\n            the Amazon Rekognition service limit. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8094,7 +8199,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nLists the entries (images) within a dataset. An entry is a\nJSON Line that contains the information for a single image, including\nthe image location, assigned labels, and object location bounding boxes. For \nmore information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html\">Creating a manifest file</a>.</p>\n         <p>JSON Lines in the response include information about non-terminal\n   errors found in the dataset. \n   Non terminal errors are reported in <code>errors</code> lists within each JSON Line. The\n   same information is reported in the training and testing validation result manifests that\n   Amazon Rekognition Custom Labels creates during model training.\n </p>\n         <p>You can filter the response in variety of ways, such as choosing which labels to return and returning JSON Lines created after a specific date.\n</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListDatasetEntries</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>\nLists the entries (images) within a dataset. An entry is a\nJSON Line that contains the information for a single image, including\nthe image location, assigned labels, and object location bounding boxes. For \nmore information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html\">Creating a manifest file</a>.</p>\n         <p>JSON Lines in the response include information about non-terminal\n   errors found in the dataset. \n   Non terminal errors are reported in <code>errors</code> lists within each JSON Line. The\n   same information is reported in the training and testing validation result manifests that\n   Amazon Rekognition Custom Labels creates during model training.\n </p>\n         <p>You can filter the response in variety of ways, such as choosing which labels to return and returning JSON Lines created after a specific date.\n</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListDatasetEntries</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list the entries in an Amazon Rekognition Custom Labels dataset",
@@ -8244,7 +8349,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see \n   <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html\">Labeling images</a>.\n</p>\n         <p>\n      Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see Labeling images\n      in the <i>Amazon Rekognition Custom Labels Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see \n   <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html\">Labeling images</a>.\n</p>\n         <p>\n      Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see Labeling images\n      in the <i>Amazon Rekognition Custom Labels Developer Guide</i>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list the entries in an Amazon Rekognition Custom Labels dataset",
@@ -8532,7 +8637,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of the project policies attached to a project.</p>\n         <p>To attach a project policy to a project, call <a>PutProjectPolicy</a>. To remove a project policy from a project, call <a>DeleteProjectPolicy</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListProjectPolicies</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Gets a list of the project policies attached to a project.</p>\n         <p>To attach a project policy to a project, call <a>PutProjectPolicy</a>. To remove a project policy from a project, call <a>DeleteProjectPolicy</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListProjectPolicies</code> action.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9397,6 +9502,23 @@
                 "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$"
             }
         },
+        "com.amazonaws.rekognition#ProjectAutoUpdate": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#ProjectDescription": {
             "type": "structure",
             "members": {
@@ -9422,6 +9544,18 @@
                     "target": "com.amazonaws.rekognition#DatasetMetadataList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         Information about the training and test datasets in the project.\n      </p>"
+                    }
+                },
+                "Feature": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the project that is being customized.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.rekognition#ProjectAutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether automatic retraining will be attempted for the versions of the project. Applies only to adapters. </p>"
                     }
                 }
             },
@@ -9576,7 +9710,7 @@
                 "ProjectVersionArn": {
                     "target": "com.amazonaws.rekognition#ProjectVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project version. </p>"
                     }
                 },
                 "CreationTimestamp": {
@@ -9588,7 +9722,7 @@
                 "MinInferenceUnits": {
                     "target": "com.amazonaws.rekognition#InferenceUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of inference units used by the model. For more information,\n      see <a>StartProjectVersion</a>.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of inference units used by the model. Applies only to Custom Labels\n         projects. For more information, see <a>StartProjectVersion</a>.</p>"
                     }
                 },
                 "Status": {
@@ -9654,7 +9788,7 @@
                 "MaxInferenceUnits": {
                     "target": "com.amazonaws.rekognition#InferenceUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of inference units Amazon Rekognition Custom Labels uses to auto-scale the model.\n         For more information, see <a>StartProjectVersion</a>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of inference units Amazon Rekognition uses to auto-scale the model. Applies\n         only to Custom Labels projects. For more information, see <a>StartProjectVersion</a>.</p>"
                     }
                 },
                 "SourceProjectVersionArn": {
@@ -9662,16 +9796,50 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the model version was copied from a different project, <code>SourceProjectVersionArn</code> contains the ARN of the source model version. </p>"
                     }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.rekognition#VersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-provided description of the project version.</p>"
+                    }
+                },
+                "Feature": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature that was customized.</p>"
+                    }
+                },
+                "BaseModelVersion": {
+                    "target": "com.amazonaws.rekognition#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base detection model version used to create the project version.</p>"
+                    }
+                },
+                "FeatureConfig": {
+                    "target": "com.amazonaws.rekognition#CustomizationFeatureConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Feature specific configuration that was applied during training.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A description of a version of an Amazon Rekognition Custom Labels model.</p>"
+                "smithy.api#documentation": "<p>A description of a version of a Amazon Rekognition project version.</p>"
             }
         },
         "com.amazonaws.rekognition#ProjectVersionDescriptions": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rekognition#ProjectVersionDescription"
+            }
+        },
+        "com.amazonaws.rekognition#ProjectVersionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/version\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$"
             }
         },
         "com.amazonaws.rekognition#ProjectVersionStatus": {
@@ -9747,6 +9915,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "COPYING_FAILED"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
                     }
                 }
             }
@@ -9981,7 +10161,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A\n         project policy specifies that a trusted AWS account can copy a model version from a\n         trusting AWS account to a project in the trusted AWS account. To copy a model version you use\n       the <a>CopyProjectVersion</a> operation.</p>\n         <p>For more information about the format of a project policy document, see Attaching a project policy (SDK)\n         in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         <p>The response from <code>PutProjectPolicy</code> is a revision ID for the project policy.\n         You can attach multiple project policies to a project. You can also update an existing\n         project policy by specifying the policy revision ID of the existing policy.</p>\n         <p>To remove a project policy from a project, call <a>DeleteProjectPolicy</a>.\n         To get a list of project policies attached to a project, call <a>ListProjectPolicies</a>. </p>\n         <p>You copy a model version by calling <a>CopyProjectVersion</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:PutProjectPolicy</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A\n         project policy specifies that a trusted AWS account can copy a model version from a\n         trusting AWS account to a project in the trusted AWS account. To copy a model version\n         you use the <a>CopyProjectVersion</a> operation. Only applies to Custom Labels\n         projects.</p>\n         <p>For more information about the format of a project policy document, see Attaching a project policy (SDK)\n         in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         <p>The response from <code>PutProjectPolicy</code> is a revision ID for the project policy.\n         You can attach multiple project policies to a project. You can also update an existing\n         project policy by specifying the policy revision ID of the existing policy.</p>\n         <p>To remove a project policy from a project, call <a>DeleteProjectPolicy</a>.\n         To get a list of project policies attached to a project, call <a>ListProjectPolicies</a>. </p>\n         <p>You copy a model version by calling <a>CopyProjectVersion</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:PutProjectPolicy</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "PutProjectPolicy",
@@ -13054,7 +13234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the running of the version of a model. Starting a model takes a while\n      to complete. To check the current state of the model, use <a>DescribeProjectVersions</a>.</p>\n         <p>Once the model is running, you can detect custom labels in new images by calling \n         <a>DetectCustomLabels</a>.</p>\n         <note>\n            <p>You are charged for the amount of time that the model is running. To stop a running\n      model, call <a>StopProjectVersion</a>.</p>\n         </note>\n         <p>For more information, see <i>Running a trained Amazon Rekognition Custom Labels model</i> in the Amazon Rekognition Custom Labels Guide.</p>\n         <p>This operation requires permissions to perform the \n         <code>rekognition:StartProjectVersion</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Starts the running of the version of a model. Starting a model takes a while to\n         complete. To check the current state of the model, use <a>DescribeProjectVersions</a>. </p>\n         <p>Once the model is running, you can detect custom labels in new images by calling \n         <a>DetectCustomLabels</a>.</p>\n         <note>\n            <p>You are charged for the amount of time that the model is running. To stop a running\n      model, call <a>StopProjectVersion</a>.</p>\n         </note>\n         <p>This operation requires permissions to perform the \n         <code>rekognition:StartProjectVersion</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To start an Amazon Rekognition Custom Labels model",
@@ -13084,7 +13264,7 @@
                 "MinInferenceUnits": {
                     "target": "com.amazonaws.rekognition#InferenceUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of inference units to use. A single\n      inference unit represents 1 hour of processing. </p>\n         <p>For information about the number \n            of transactions per second (TPS) that an inference unit can support, see \n            <i>Running a trained Amazon Rekognition Custom Labels model</i> in the \n            Amazon Rekognition Custom Labels Guide.\n         </p>\n         <p>Use a higher number to increase the TPS throughput of your model. You are charged for the number\n      of inference units that you use.\n    </p>",
+                        "smithy.api#documentation": "<p>The minimum number of inference units to use. A single\n      inference unit represents 1 hour of processing. </p>\n         <p>Use a higher number to increase the TPS throughput of your model. You are charged for the number\n      of inference units that you use.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13493,7 +13673,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a running model. The operation might take a while to complete. To\n         check the current status, call <a>DescribeProjectVersions</a>. </p>\n         <p>This operation requires permissions to perform the <code>rekognition:StopProjectVersion</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Stops a running model. The operation might take a while to complete. To check the\n         current status, call <a>DescribeProjectVersions</a>. Only applies to Custom\n         Labels projects.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:StopProjectVersion</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To stop an Amazon Rekognition Custom Labels model.",
@@ -13514,7 +13694,7 @@
                 "ProjectVersionArn": {
                     "target": "com.amazonaws.rekognition#ProjectVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version that you want to delete.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:StopProjectVersion</code> action.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version that you want to stop.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:StopProjectVersion</code> action.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14060,12 +14240,12 @@
                     "target": "com.amazonaws.rekognition#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If specified, Amazon Rekognition Custom Labels temporarily splits the training dataset (80%) to create a test dataset (20%) for the training job.\n      After training completes, the test dataset is not stored and the training dataset reverts to its previous size.</p>"
+                        "smithy.api#documentation": "<p>If specified, Rekognition splits training dataset to create a test dataset for\n         the training job.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set,  Amazon Rekognition Custom Labels uses the\n         training dataset to create a test dataset with a temporary split of the training dataset. </p>"
+                "smithy.api#documentation": "<p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set, Amazon Rekognition uses the\n         training dataset to create a test dataset with a temporary split of the training dataset. </p>"
             }
         },
         "com.amazonaws.rekognition#TestingDataResult": {
@@ -14091,7 +14271,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.</p>"
+                "smithy.api#documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation\n         datasets that are used and created during testing.</p>"
             }
         },
         "com.amazonaws.rekognition#TextDetection": {
@@ -14224,7 +14404,7 @@
                 "Assets": {
                     "target": "com.amazonaws.rekognition#Assets",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Sagemaker GroundTruth manifest file that contains the training images (assets).</p>"
+                        "smithy.api#documentation": "<p>A manifest file that contains references to the training images and ground-truth\n         annotations.</p>"
                     }
                 }
             },
@@ -14238,24 +14418,24 @@
                 "Input": {
                     "target": "com.amazonaws.rekognition#TrainingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The training assets that you supplied for training.</p>"
+                        "smithy.api#documentation": "<p>The training data that you supplied.</p>"
                     }
                 },
                 "Output": {
                     "target": "com.amazonaws.rekognition#TrainingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The images (assets) that were actually trained by Amazon Rekognition Custom Labels. </p>"
+                        "smithy.api#documentation": "<p>Reference to images (assets) that were actually used during training with trained model\n         predictions.</p>"
                     }
                 },
                 "Validation": {
                     "target": "com.amazonaws.rekognition#ValidationData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the data validation manifest. The data validation manifest is created for the training dataset during model training.</p>"
+                        "smithy.api#documentation": "<p>A manifest that you supplied for training, with validation results for each\n         line.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.</p>"
+                "smithy.api#documentation": "<p>The data \n         validation manifest created for the training dataset during model training.</p>"
             }
         },
         "com.amazonaws.rekognition#UInteger": {
@@ -14673,7 +14853,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates one or more entries (images) in a dataset. An entry is a JSON Line which contains the\n      information for a single image,  including\n      the image location, assigned labels, and object location bounding boxes.  For more information, \n      see Image-Level labels in manifest files and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n     </p>\n         <p>If the <code>source-ref</code> field in the JSON line references an existing image, the existing image in the dataset\n      is updated. \n      If <code>source-ref</code> field doesn't reference an existing image, the image is added as a new image to the dataset. </p>\n         <p>You specify the changes that you want to make in the <code>Changes</code> input parameter. \n    There isn't a limit to the number JSON Lines that you can change, but the size of <code>Changes</code> must be less\nthan 5MB.</p>\n         <p>\n            <code>UpdateDatasetEntries</code> returns immediatly, but the dataset update might take a while to complete.\n      Use <a>DescribeDataset</a> to check the \n      current status. The dataset updated successfully if the value of <code>Status</code> is\n      <code>UPDATE_COMPLETE</code>. </p>\n         <p>To check if any non-terminal errors occured, call <a>ListDatasetEntries</a>\n      and check for the presence of <code>errors</code> lists in the JSON Lines.</p>\n         <p>Dataset update fails if a terminal error occurs (<code>Status</code> = <code>UPDATE_FAILED</code>). \n      Currently, you can't access the terminal error information from the Amazon Rekognition Custom Labels SDK.\n   </p>\n         <p>This operation requires permissions to perform the <code>rekognition:UpdateDatasetEntries</code> action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This operation applies only to Amazon Rekognition Custom Labels.</p>\n         </note>\n         <p>Adds or updates one or more entries (images) in a dataset. An entry is a JSON Line which contains the\n      information for a single image,  including\n      the image location, assigned labels, and object location bounding boxes.  For more information, \n      see Image-Level labels in manifest files and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n     </p>\n         <p>If the <code>source-ref</code> field in the JSON line references an existing image, the existing image in the dataset\n      is updated. \n      If <code>source-ref</code> field doesn't reference an existing image, the image is added as a new image to the dataset. </p>\n         <p>You specify the changes that you want to make in the <code>Changes</code> input parameter. \n    There isn't a limit to the number JSON Lines that you can change, but the size of <code>Changes</code> must be less\nthan 5MB.</p>\n         <p>\n            <code>UpdateDatasetEntries</code> returns immediatly, but the dataset update might take a while to complete.\n      Use <a>DescribeDataset</a> to check the \n      current status. The dataset updated successfully if the value of <code>Status</code> is\n      <code>UPDATE_COMPLETE</code>. </p>\n         <p>To check if any non-terminal errors occured, call <a>ListDatasetEntries</a>\n      and check for the presence of <code>errors</code> lists in the JSON Lines.</p>\n         <p>Dataset update fails if a terminal error occurs (<code>Status</code> = <code>UPDATE_FAILED</code>). \n      Currently, you can't access the terminal error information from the Amazon Rekognition Custom Labels SDK.\n   </p>\n         <p>This operation requires permissions to perform the <code>rekognition:UpdateDatasetEntries</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To-add dataset entries to an Amazon Rekognition Custom Labels dataset",
@@ -14941,6 +15121,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p>\n         <p>The validation data includes error information for individual JSON Lines in the dataset.\n         For more information, see <i>Debugging a Failed Model Training</i> in the\n         Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>)\n         and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p>\n         <p>The assets array contains a single <a>Asset</a> object. \n         The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of\n         the validation data. \n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#VersionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_. ()':,;?]+$"
             }
         },
         "com.amazonaws.rekognition#VersionName": {

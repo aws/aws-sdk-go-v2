@@ -5015,6 +5015,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Oracle system identifier (SID), which is the name of the Oracle database instance that \n            manages your database files. In this context, the term \"Oracle database instance\" refers exclusively \n            to the system global area (SGA) and Oracle background processes. If you don't specify a SID, \n            the value defaults to <code>RDSCDB</code>. The Oracle SID is also the name of your CDB.</p>"
                     }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5372,6 +5378,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the Multi-AZ DB cluster that will act as the source for the read\n            replica. Each DB cluster can have up to 15 read replicas.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier of an existing Multi-AZ DB cluster.</p>\n            </li>\n            <li>\n               <p>Can't be specified if the <code>SourceDBInstanceIdentifier</code> parameter is\n                    also specified.</p>\n            </li>\n            <li>\n               <p>The specified DB cluster must have automatic backups enabled, that is, its\n                    backup retention period must be greater than 0.</p>\n            </li>\n            <li>\n               <p>The source DB cluster must be in the same Amazon Web Services Region as the read replica.\n                    Cross-Region replication isn't supported.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
                     }
                 }
             },
@@ -8762,6 +8774,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The progress of the storage optimization operation as a percentage.</p>"
                     }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8964,6 +8983,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>"
+                    }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
                     }
                 }
             },
@@ -10411,6 +10436,13 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Oracle system identifier (SID), which is the name of the Oracle database instance that \n            manages your database files. The Oracle SID is also the name of your CDB.</p>"
+                    }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
                     }
                 }
             },
@@ -19976,6 +20008,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The target Oracle DB engine when you convert a non-CDB to a CDB. This intermediate step is necessary to upgrade an Oracle Database 19c non-CDB\n           to an Oracle Database 21c CDB.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Make sure that you specify <code>oracle-ee-cdb</code> or <code>oracle-se2-cdb</code>.</p>\n            </li>\n            <li>\n               <p>Make sure that your DB engine runs Oracle Database 19c with an April 2021 or later RU.</p>\n            </li>\n         </ul>\n         <p>Note the following limitations:</p>\n         <ul>\n            <li>\n               <p>You can't convert a CDB to a non-CDB.</p>\n            </li>\n            <li>\n               <p>You can't convert a replica database.</p>\n            </li>\n            <li>\n               <p>You can't convert a non-CDB to a CDB and upgrade the engine version in the\n                   same command.</p>\n            </li>\n            <li>\n               <p>You can't convert the existing custom parameter or option group when it has\n                   options or parameters that are permanent or persistent. In this situation, the\n                   DB instance reverts to the default option and parameter group. To avoid\n                   reverting to the default, specify a new parameter group with\n                       <code>--db-parameter-group-name</code> and a new option group with\n                       <code>--option-group-name</code>.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21794,6 +21832,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum storage throughput to provisioned IOPS ratio for a DB instance.</p>"
                     }
+                },
+                "SupportsDedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether a DB instance supports using a dedicated log volume (DLV).</p>"
+                    }
                 }
             },
             "traits": {
@@ -22149,6 +22194,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The database engine of the DB instance.</p>"
+                    }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.></p>"
                     }
                 }
             },
@@ -24930,6 +24981,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage (in gibibytes) to allocate initially for the DB instance. Follow the allocation rules specified in\n            CreateDBInstance.</p>\n         <note>\n            <p>Be sure to allocate enough storage for your new DB instance so that the restore operation can succeed. You can also\n                allocate additional storage for future growth.</p>\n         </note>"
                     }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25312,6 +25369,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>"
                     }
                 }
             },
@@ -25761,6 +25824,12 @@
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage (in gibibytes) to allocate initially for the DB instance.\n            Follow the allocation rules specified in <code>CreateDBInstance</code>.</p>\n         <note>\n            <p>Be sure to allocate enough storage for your new DB instance so that the restore operation can succeed.\n                You can also allocate additional storage for future growth.</p>\n         </note>"
+                    }
+                },
+                "DedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>"
                     }
                 }
             },
@@ -27946,6 +28015,13 @@
                     "target": "com.amazonaws.rds#AvailableProcessorFeatureList",
                     "traits": {
                         "smithy.api#documentation": "<p>Valid processor features for your DB instance.</p>"
+                    }
+                },
+                "SupportsDedicatedLogVolume": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether a DB instance supports using a dedicated log volume (DLV).</p>"
                     }
                 }
             },

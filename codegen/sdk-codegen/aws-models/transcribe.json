@@ -3405,6 +3405,12 @@
                     "traits": {
                         "smithy.api#enumValue": "webm"
                     }
+                },
+                "M4A": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m4a"
+                    }
                 }
             }
         },

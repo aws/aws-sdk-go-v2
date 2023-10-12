@@ -4313,7 +4313,8 @@
                 "smithy.api#length": {
                     "min": 8,
                     "max": 128
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.machinelearning#RDSDatabaseUsername": {
@@ -4594,7 +4595,8 @@
                 "smithy.api#length": {
                     "min": 8,
                     "max": 64
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.machinelearning#RedshiftDatabaseUsername": {

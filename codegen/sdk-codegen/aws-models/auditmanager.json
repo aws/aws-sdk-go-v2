@@ -61,6 +61,10 @@
                 "target": "com.amazonaws.auditmanager#AWSAccount"
             },
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
                 "smithy.api#sensitive": {}
             }
         },

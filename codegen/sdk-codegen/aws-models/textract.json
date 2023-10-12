@@ -44,6 +44,305 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.textract#Adapter": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the adapter resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Pages": {
+                    "target": "com.amazonaws.textract#AdapterPages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pages is a parameter that the user inputs to specify which pages to apply an adapter to. The following is a \n         list of rules for using this parameter.</p>\n         <ul>\n            <li>\n               <p>If a page is not specified, it is set to <code>[\"1\"]</code> by default.</p>\n            </li>\n            <li>\n               <p>The following characters are allowed in the parameter's string: \n               <code>0 1 2 3 4 5 6 7 8 9 - *</code>. No whitespace is allowed.</p>\n            </li>\n            <li>\n               <p>When using * to indicate all pages, it must be the only element in the list.</p>\n            </li>\n            <li>\n               <p>You can use page intervals, such as <code>[\"1-3\", \"1-1\", \"4-*\"]</code>. Where <code>*</code> indicates last page of \n               document.</p>\n            </li>\n            <li>\n               <p>Specified pages must be greater than 0 and less than or equal to the number of pages in the document.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.textract#AdapterVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that identifies the version of the adapter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An adapter selected for use when analyzing documents. Contains an adapter ID and a version number. \n         Contains information on pages selected for analysis when analyzing documents asychronously.</p>"
+            }
+        },
+        "com.amazonaws.textract#AdapterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><]+$"
+            }
+        },
+        "com.amazonaws.textract#AdapterId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 1011
+                }
+            }
+        },
+        "com.amazonaws.textract#AdapterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#AdapterOverview"
+            }
+        },
+        "com.amazonaws.textract#AdapterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.textract#AdapterOverview": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the adapter resource.</p>"
+                    }
+                },
+                "AdapterName": {
+                    "target": "com.amazonaws.textract#AdapterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string naming the adapter resource.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the adapter was created.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.textract#FeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature types that the adapter is operating on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on the adapter, including the adapter ID, Name, Creation time, and feature types.</p>"
+            }
+        },
+        "com.amazonaws.textract#AdapterPage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                },
+                "smithy.api#pattern": "^[0-9\\*\\-]+$"
+            }
+        },
+        "com.amazonaws.textract#AdapterPages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#AdapterPage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.textract#AdapterVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionDatasetConfig": {
+            "type": "structure",
+            "members": {
+                "ManifestS3Object": {
+                    "target": "com.amazonaws.textract#S3Object"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dataset configuration options for a given version of an adapter. \n         Can include an Amazon S3 bucket if specified.</p>"
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionEvaluationMetric": {
+            "type": "structure",
+            "members": {
+                "Baseline": {
+                    "target": "com.amazonaws.textract#EvaluationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The F1 score, precision, and recall metrics for the baseline model.</p>"
+                    }
+                },
+                "AdapterVersion": {
+                    "target": "com.amazonaws.textract#EvaluationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The F1 score, precision, and recall metrics for the baseline model.</p>"
+                    }
+                },
+                "FeatureType": {
+                    "target": "com.amazonaws.textract#FeatureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the feature type being analyzed by a given adapter version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on the metrics used to evalute the peformance of a given adapter version. Includes data for \n         baseline model performance and individual adapter version perfromance.</p>"
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionEvaluationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#AdapterVersionEvaluationMetric"
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#AdapterVersionOverview"
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionOverview": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the adapter associated with a given adapter version.</p>"
+                    }
+                },
+                "AdapterVersion": {
+                    "target": "com.amazonaws.textract#AdapterVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identified for a given adapter version.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a given adapter version was created.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.textract#FeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature types that the adapter version is operating on.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.textract#AdapterVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information on the status of a given adapter version.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.textract#AdapterVersionStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message explaining the status of a given adapter vesion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary info for an adapter version. Contains information on the AdapterId, AdapterVersion, CreationTime, FeatureTypes, and Status.</p>"
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "AT_RISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AT_RISK"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                },
+                "CREATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_ERROR"
+                    }
+                },
+                "CREATION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_IN_PROGRESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#AdapterVersionStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><]+$"
+            }
+        },
+        "com.amazonaws.textract#Adapters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#Adapter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.textract#AdaptersConfig": {
+            "type": "structure",
+            "members": {
+                "Adapters": {
+                    "target": "com.amazonaws.textract#Adapters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of adapters to be used when analyzing the specified document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about adapters used when analyzing a document, \n         with each adapter specified using an AdapterId and version</p>"
+            }
+        },
+        "com.amazonaws.textract#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
         "com.amazonaws.textract#AnalyzeDocument": {
             "type": "operation",
             "input": {
@@ -101,7 +400,7 @@
                 "FeatureTypes": {
                     "target": "com.amazonaws.textract#FeatureTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected form\n         data. Add SIGNATURES to return the locations of detected signatures. Add LAYOUT to the list\n         to return information about the layout of the document. To perform both forms\n         and table analysis, add TABLES and FORMS to <code>FeatureTypes</code>. To detect signatures\n         within the document and within form data and table data, add SIGNATURES to either TABLES or\n         FORMS. All lines and words detected in the document are included in the response (including\n         text that isn't related to the value of <code>FeatureTypes</code>). </p>",
+                        "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected form\n         data. Add SIGNATURES to return the locations of detected signatures. Add LAYOUT to the list\n         to return information about the layout of the document.  All lines and words detected in the document are included in the response (including\n         text that isn't related to the value of <code>FeatureTypes</code>). </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -115,6 +414,12 @@
                     "target": "com.amazonaws.textract#QueriesConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains Queries and the alias for those Queries, as determined by the input. </p>"
+                    }
+                },
+                "AdaptersConfig": {
+                    "target": "com.amazonaws.textract#AdaptersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the adapter to be used when analyzing a document.</p>"
                     }
                 }
             },
@@ -332,6 +637,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#AutoUpdate": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.textract#BadDocumentException": {
             "type": "structure",
             "members": {
@@ -353,7 +675,7 @@
                 "BlockType": {
                     "target": "com.amazonaws.textract#BlockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_TITLE</i> - The title of a table. A title is typically a\n               line of text above or below a table, or embedded as the first row of a table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_FOOTER</i> - The footer associated with a table. A footer\n               is typically a line or lines of text below a table or embedded as the last row of a\n               table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>MERGED_CELL</i>  - A cell in a table whose content spans more than\n               one row or column. The <code>Relationships</code> array for this cell contain data\n               from individual cells.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SIGNATURE</i> - The location and confidence score of a signature detected on a\n               document page. Can be returned as part of a Key-Value pair or a detected cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_TITLE</i> - The title of a table. A title is typically a\n               line of text above or below a table, or embedded as the first row of a table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE_FOOTER</i> - The footer associated with a table. A footer\n               is typically a line or lines of text below a table or embedded as the last row of a\n               table. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>MERGED_CELL</i>  - A cell in a table whose content spans more than\n               one row or column. The <code>Relationships</code> array for this cell contain data\n               from individual cells.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SIGNATURE</i> - The location and confidence score of a signature detected on a\n               document page. Can be returned as part of a Key-Value pair or a detected cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>\n         <p>The following BlockTypes are only returned for Amazon Textract Layout.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LAYOUT_TITLE</code> - The main title of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_HEADER</code> - Text located in the top margin of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_FOOTER</code> - Text located in the bottom margin of the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_SECTION_HEADER</code> - The titles of sections within a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_PAGE_NUMBER</code> - The page number of the documents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_LIST</code> - Any information grouped together in list form. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_FIGURE</code> - Indicates the location of an image in a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_TABLE</code> - Indicates the location of a table in the document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_KEY_VALUE</code> - Indicates the location of form key-values in a document.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAYOUT_TEXT</code> - Text that is present typically as a part of paragraphs in documents.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Confidence": {
@@ -646,6 +968,21 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
+        "com.amazonaws.textract#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.textract#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.textract#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.textract#ContentClassifier": {
             "type": "enum",
             "members": {
@@ -673,6 +1010,365 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.textract#CreateAdapter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#CreateAdapterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#CreateAdapterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an adapter, which can be fine-tuned for enhanced performance on user provided\n         documents. Takes an AdapterName and FeatureType. Currently the only supported feature type\n         is <code>QUERIES</code>. You can also provide a Description, Tags, and a\n         ClientRequestToken. You can choose whether or not the adapter should be AutoUpdated with\n         the AutoUpdate argument. By default, AutoUpdate is set to DISABLED.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#CreateAdapterRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterName": {
+                    "target": "com.amazonaws.textract#AdapterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name to be assigned to the adapter being created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.textract#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Idempotent token is used to recognize the request. If the same token is used with multiple \n         CreateAdapter requests, the same session is returned. \n         This token is employed to avoid unintentionally creating the same session multiple times.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.textract#AdapterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description to be assigned to the adapter being created.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.textract#FeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of feature that the adapter is being trained on. Currrenly, supported feature\n         types are: <code>QUERIES</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.textract#AutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether or not the adapter should automatically update.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to the adapter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#CreateAdapterResponse": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the unique ID for the adapter that has been created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#CreateAdapterVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#CreateAdapterVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#CreateAdapterVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidKMSKeyException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates  a new version of an adapter. Operates on a provided AdapterId and a specified \n         dataset provided via the DatasetConfig argument. Requires that you \n         specify an Amazon S3 bucket with the OutputConfig argument. You can provide an optional KMSKeyId, \n         an optional ClientRequestToken, and optional tags.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#CreateAdapterVersionRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that will receive a new version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.textract#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Idempotent token is used to recognize the request. If the same token is used with multiple \n         CreateAdapterVersion requests, the same session is returned. \n         This token is employed to avoid unintentionally creating the same session multiple times.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DatasetConfig": {
+                    "target": "com.amazonaws.textract#AdapterVersionDatasetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a dataset used to train a new adapter version. Takes a ManifestS3Object as the\n         value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KMSKeyId": {
+                    "target": "com.amazonaws.textract#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service key (AWS KMS key). Used to encrypt your documents.</p>"
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.textract#OutputConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) that you want to attach to the adapter version. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#CreateAdapterVersionResponse": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the unique ID for the adapter that has received a new version.</p>"
+                    }
+                },
+                "AdapterVersion": {
+                    "target": "com.amazonaws.textract#AdapterVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string describing the new version of the adapter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#DateTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.textract#DeleteAdapter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#DeleteAdapterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#DeleteAdapterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Textract adapter. Takes an AdapterId and deletes the adapter specified by the ID.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteAdapterRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteAdapterResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteAdapterVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#DeleteAdapterVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#DeleteAdapterVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Textract adapter version. Requires that you specify both an AdapterId and a \n         AdapterVersion. Deletes the adapter version specified by the AdapterId and the AdapterVersion.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteAdapterVersionRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter version that will be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdapterVersion": {
+                    "target": "com.amazonaws.textract#AdapterVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the adapter version to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteAdapterVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.textract#DetectDocumentText": {
@@ -958,6 +1654,35 @@
         "com.amazonaws.textract#ErrorCode": {
             "type": "string"
         },
+        "com.amazonaws.textract#EvaluationMetric": {
+            "type": "structure",
+            "members": {
+                "F1Score": {
+                    "target": "com.amazonaws.textract#Float",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The F1 score for an adapter version.</p>"
+                    }
+                },
+                "Precision": {
+                    "target": "com.amazonaws.textract#Float",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The Precision score for an adapter version.</p>"
+                    }
+                },
+                "Recall": {
+                    "target": "com.amazonaws.textract#Float",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The Recall score for an adapter version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The evaluation metrics (F1 score, Precision, and Recall) for an adapter version.</p>"
+            }
+        },
         "com.amazonaws.textract#ExpenseCurrency": {
             "type": "structure",
             "members": {
@@ -1235,6 +1960,234 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about where the following items are located on a document page: detected\n         page, text, key-value pairs, tables, table cells, and selection elements.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetAdapter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetAdapterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetAdapterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets configuration information for an adapter specified by an AdapterId, returning information on AdapterName, Description,\n         CreationTime, AutoUpdate status, and FeatureTypes.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetAdapterRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#GetAdapterResponse": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string identifying the adapter that information has been retrieved for.</p>"
+                    }
+                },
+                "AdapterName": {
+                    "target": "com.amazonaws.textract#AdapterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the requested adapter.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the requested adapter was created at.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.textract#AdapterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the requested adapter.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.textract#FeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the targeted feature types for the requested adapter.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.textract#AutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Binary value indicating if the adapter is being automatically updated or not.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) associated with the adapter that has been retrieved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#GetAdapterVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetAdapterVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetAdapterVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets configuration information for the specified adapter version, including: \n         AdapterId, AdapterVersion, FeatureTypes, Status, StatusMessage, DatasetConfig, \n         KMSKeyId, OutputConfig, Tags and EvaluationMetrics.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetAdapterVersionRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying a unique ID for the adapter version you want to retrieve information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdapterVersion": {
+                    "target": "com.amazonaws.textract#AdapterVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying the adapter version you want to retrieve information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#GetAdapterVersionResponse": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter version being retrieved.</p>"
+                    }
+                },
+                "AdapterVersion": {
+                    "target": "com.amazonaws.textract#AdapterVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the adapter version that has been retrieved.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the adapter version was created.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.textract#FeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the targeted feature types for the requested adapter version.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.textract#AdapterVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the adapter version that has been requested.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.textract#AdapterVersionStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the status of the requested adapter version.</p>"
+                    }
+                },
+                "DatasetConfig": {
+                    "target": "com.amazonaws.textract#AdapterVersionDatasetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a dataset used to train a new adapter version. Takes a ManifestS3Objec as the\n         value.</p>"
+                    }
+                },
+                "KMSKeyId": {
+                    "target": "com.amazonaws.textract#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service key (AWS KMS key). Used to encrypt your documents.</p>"
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.textract#OutputConfig"
+                },
+                "EvaluationMetrics": {
+                    "target": "com.amazonaws.textract#AdapterVersionEvaluationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation metrics (F1 score, Precision, and Recall) for the requested version, \n         grouped by baseline metrics and adapter version.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) that are associated with the adapter version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.textract#GetDocumentAnalysis": {
@@ -2336,6 +3289,259 @@
                 "target": "com.amazonaws.textract#LineItemFields"
             }
         },
+        "com.amazonaws.textract#ListAdapterVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#ListAdapterVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#ListAdapterVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all version of an adapter that meet the specified filtration criteria.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AdapterVersions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.textract#ListAdapterVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter to match for when listing adapter versions.</p>"
+                    }
+                },
+                "AfterCreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the lower bound for the ListAdapterVersions operation. \n         Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.</p>"
+                    }
+                },
+                "BeforeCreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the upper bound for the ListAdapterVersions operation. \n         Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.textract#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return when listing adapter versions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return when listing adapter versions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#ListAdapterVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "AdapterVersions": {
+                    "target": "com.amazonaws.textract#AdapterVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adapter versions that match the filtering criteria specified when calling ListAdapters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return when listing adapter versions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#ListAdapters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#ListAdaptersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#ListAdaptersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all adapters that match the specified filtration criteria.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Adapters",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.textract#ListAdaptersRequest": {
+            "type": "structure",
+            "members": {
+                "AfterCreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the lower bound for the ListAdapters operation. \n         Ensures ListAdapters returns only adapters created after the specified creation time.</p>"
+                    }
+                },
+                "BeforeCreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the upper bound for the ListAdapters operation. \n         Ensures ListAdapters returns only adapters created before the specified creation time.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.textract#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return when listing adapters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return when listing adapters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#ListAdaptersResponse": {
+            "type": "structure",
+            "members": {
+                "Adapters": {
+                    "target": "com.amazonaws.textract#AdapterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of adapters that matches the filtering criteria specified when calling ListAdapters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return when listing adapters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all tags for an Amazon Textract resource.</p>"
+            }
+        },
+        "com.amazonaws.textract#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.textract#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the resource to list tags for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) that are part of the requested resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.textract#MaxResults": {
             "type": "integer",
             "traits": {
@@ -2452,7 +3658,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 1024
                 },
                 "smithy.api#pattern": "\\S"
             }
@@ -2704,6 +3910,21 @@
                 }
             }
         },
+        "com.amazonaws.textract#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.textract#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.textract#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Returned when an operation tried to access a nonexistent resource. </p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.textract#RoleArn": {
             "type": "string",
             "traits": {
@@ -2795,6 +4016,21 @@
                         "smithy.api#enumValue": "NOT_SELECTED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.textract#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.textract#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.textract#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned when a request cannot be completed as it would exceed a maximum service quota.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.textract#SignatureDetection": {
@@ -2945,6 +4181,12 @@
                 },
                 "QueriesConfig": {
                     "target": "com.amazonaws.textract#QueriesConfig"
+                },
+                "AdaptersConfig": {
+                    "target": "com.amazonaws.textract#AdaptersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the adapter to be used when analyzing a document.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3307,6 +4549,120 @@
                 "smithy.api#mediaType": "application/json"
             }
         },
+        "com.amazonaws.textract#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+            }
+        },
+        "com.amazonaws.textract#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.textract#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.textract#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.textract#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.textract#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>"
+            }
+        },
+        "com.amazonaws.textract#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.textract#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the resource to be tagged.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) that you want to assign to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.textract#TextType": {
             "type": "enum",
             "members": {
@@ -3338,7 +4694,25 @@
                     "target": "com.amazonaws.textract#AnalyzeID"
                 },
                 {
+                    "target": "com.amazonaws.textract#CreateAdapter"
+                },
+                {
+                    "target": "com.amazonaws.textract#CreateAdapterVersion"
+                },
+                {
+                    "target": "com.amazonaws.textract#DeleteAdapter"
+                },
+                {
+                    "target": "com.amazonaws.textract#DeleteAdapterVersion"
+                },
+                {
                     "target": "com.amazonaws.textract#DetectDocumentText"
+                },
+                {
+                    "target": "com.amazonaws.textract#GetAdapter"
+                },
+                {
+                    "target": "com.amazonaws.textract#GetAdapterVersion"
                 },
                 {
                     "target": "com.amazonaws.textract#GetDocumentAnalysis"
@@ -3356,6 +4730,15 @@
                     "target": "com.amazonaws.textract#GetLendingAnalysisSummary"
                 },
                 {
+                    "target": "com.amazonaws.textract#ListAdapters"
+                },
+                {
+                    "target": "com.amazonaws.textract#ListAdapterVersions"
+                },
+                {
+                    "target": "com.amazonaws.textract#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.textract#StartDocumentAnalysis"
                 },
                 {
@@ -3366,6 +4749,15 @@
                 },
                 {
                     "target": "com.amazonaws.textract#StartLendingAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.textract#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.textract#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.textract#UpdateAdapter"
                 }
             ],
             "traits": {
@@ -4307,6 +5699,200 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for operations can be in\n         PNG, JPEG, PDF, or TIFF format.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.textract#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes any tags with the specified keys from the specified resource.</p>"
+            }
+        },
+        "com.amazonaws.textract#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.textract#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the resource to be untagged.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.textract#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the tags to be removed from the resource specified by the ResourceARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateAdapter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#UpdateAdapterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#UpdateAdapterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the configuration for an adapter. FeatureTypes configurations cannot be updated.\n         At least one new parameter must be specified as an argument.</p>"
+            }
+        },
+        "com.amazonaws.textract#UpdateAdapterRequest": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that will be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.textract#AdapterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new description to be applied to the adapter.</p>"
+                    }
+                },
+                "AdapterName": {
+                    "target": "com.amazonaws.textract#AdapterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name to be applied to the adapter.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.textract#AutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new auto-update status to be applied to the adapter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateAdapterResponse": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.textract#AdapterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that has been updated.</p>"
+                    }
+                },
+                "AdapterName": {
+                    "target": "com.amazonaws.textract#AdapterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the name of the adapter that has been updated.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object specifying the creation time of the the adapter that has been updated.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.textract#AdapterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the description of the adapter that has been updated.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.textract#FeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the targeted feature types for the updated adapter.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.textract#AutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto-update status of the adapter that has been updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.textract#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.textract#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>  Indicates that a request was not valid. Check request for proper formatting. </p>",
                 "smithy.api#error": "client"
             }
         },

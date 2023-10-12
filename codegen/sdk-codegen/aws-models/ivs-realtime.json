@@ -1846,6 +1846,42 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the participant ever published to the stage session.</p>"
                     }
+                },
+                "ispName": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantClientAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant’s Internet Service Provider.</p>"
+                    }
+                },
+                "osName": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantClientAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant’s operating system.</p>"
+                    }
+                },
+                "osVersion": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantClientAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant’s operating system version.</p>"
+                    }
+                },
+                "browserName": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantClientAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant’s browser.</p>"
+                    }
+                },
+                "browserVersion": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantClientAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant’s browser version.</p>"
+                    }
+                },
+                "sdkVersion": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantClientAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant’s SDK version.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1859,6 +1895,16 @@
             },
             "value": {
                 "target": "com.amazonaws.ivsrealtime#String"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantClientAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_.,:;\\s]*$"
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantId": {

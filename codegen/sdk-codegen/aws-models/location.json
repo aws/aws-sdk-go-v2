@@ -179,7 +179,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an association between a geofence collection and a tracker resource. This\n            allows the tracker resource to communicate location data to the linked geofence\n            collection. </p>\n         <p>You can associate up to five geofence collections to each tracker resource.</p>\n         <note>\n            <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers/{TrackerName}/consumers",
@@ -1533,7 +1533,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a geofence collection, which manages and stores geofences.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "geofencing."
+                    "hostPrefix": "cp.geofencing."
                 },
                 "smithy.api#http": {
                     "uri": "/geofencing/v0/collections",
@@ -1649,7 +1649,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an API key resource in your Amazon Web Services account, which lets you grant\n            actions for Amazon Location resources to the API key bearer.</p>\n         <note>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "uri": "/metadata/v0/keys",
@@ -1765,7 +1765,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a map resource in your Amazon Web Services account, which provides map tiles of different\n            styles sourced from global location data providers.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services\n                    service terms</a> for more details.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "maps."
+                    "hostPrefix": "cp.maps."
                 },
                 "smithy.api#http": {
                     "uri": "/maps/v0/maps",
@@ -1872,7 +1872,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a place index resource in your Amazon Web Services account. Use a place index resource to\n            geocode addresses and other text queries by using the\n                <code>SearchPlaceIndexForText</code> operation, and reverse geocode coordinates by\n            using the <code>SearchPlaceIndexForPosition</code> operation, and enable autosuggestions\n            by using the <code>SearchPlaceIndexForSuggestions</code> operation.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services\n                    service terms</a> for more details.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "places."
+                    "hostPrefix": "cp.places."
                 },
                 "smithy.api#http": {
                     "uri": "/places/v0/indexes",
@@ -1985,7 +1985,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a route calculator resource in your Amazon Web Services account.</p>\n         <p>You can send requests to a route calculator resource to estimate travel time,\n            distance, and get directions. A route calculator sources traffic and road network data\n            from your chosen data provider.</p>\n         <note>\n            <p>If your application is tracking or routing assets you use in your business, such \n                as delivery vehicles or employees, you must not use Esri as your geolocation \n                provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services\n                    service terms</a> for more details.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "routes."
+                    "hostPrefix": "cp.routes."
                 },
                 "smithy.api#http": {
                     "uri": "/routes/v0/calculators",
@@ -2092,7 +2092,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and\n            historical location of devices.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers",
@@ -2237,7 +2237,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a geofence collection from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the geofence collection is the\n                target of a tracker resource, the devices will no longer be monitored.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "geofencing."
+                    "hostPrefix": "cp.geofencing."
                 },
                 "smithy.api#http": {
                     "uri": "/geofencing/v0/collections/{CollectionName}",
@@ -2291,7 +2291,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified API key. The API key must have been deactivated more than\n            90 days previously.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "uri": "/metadata/v0/keys/{KeyName}",
@@ -2345,7 +2345,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a map resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the map is being used in an application,\n                the map may not render.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "maps."
+                    "hostPrefix": "cp.maps."
                 },
                 "smithy.api#http": {
                     "uri": "/maps/v0/maps/{MapName}",
@@ -2400,7 +2400,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a place index resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "places."
+                    "hostPrefix": "cp.places."
                 },
                 "smithy.api#http": {
                     "uri": "/places/v0/indexes/{IndexName}",
@@ -2455,7 +2455,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a route calculator resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "routes."
+                    "hostPrefix": "cp.routes."
                 },
                 "smithy.api#http": {
                     "uri": "/routes/v0/calculators/{CalculatorName}",
@@ -2510,7 +2510,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a tracker resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the tracker resource is in use, you may\n                encounter an error. Make sure that the target resource isn't a dependency for your\n                applications.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers/{TrackerName}",
@@ -2564,7 +2564,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the geofence collection details.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "geofencing."
+                    "hostPrefix": "cp.geofencing."
                 },
                 "smithy.api#http": {
                     "uri": "/geofencing/v0/collections/{CollectionName}",
@@ -2695,7 +2695,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the API key resource details.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "uri": "/metadata/v0/keys/{KeyName}",
@@ -2810,7 +2810,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the map resource details.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "maps."
+                    "hostPrefix": "cp.maps."
                 },
                 "smithy.api#http": {
                     "uri": "/maps/v0/maps/{MapName}",
@@ -2930,7 +2930,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the place index resource details.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "places."
+                    "hostPrefix": "cp.places."
                 },
                 "smithy.api#http": {
                     "uri": "/places/v0/indexes/{IndexName}",
@@ -3050,7 +3050,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the route calculator resource details.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "routes."
+                    "hostPrefix": "cp.routes."
                 },
                 "smithy.api#http": {
                     "uri": "/routes/v0/calculators/{CalculatorName}",
@@ -3163,7 +3163,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the tracker resource details.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers/{TrackerName}",
@@ -3422,7 +3422,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes the association between a tracker resource and a geofence collection.</p>\n         <note>\n            <p>Once you unlink a tracker resource from a geofence collection, the tracker\n                positions will no longer be automatically evaluated against geofences.</p>\n         </note>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}",
@@ -4727,7 +4727,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists geofence collections in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "geofencing."
+                    "hostPrefix": "cp.geofencing."
                 },
                 "smithy.api#http": {
                     "uri": "/geofencing/v0/list-collections",
@@ -5013,7 +5013,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists API key resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "uri": "/metadata/v0/list-keys",
@@ -5152,7 +5152,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists map resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "maps."
+                    "hostPrefix": "cp.maps."
                 },
                 "smithy.api#http": {
                     "uri": "/maps/v0/list-maps",
@@ -5290,7 +5290,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists place index resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "places."
+                    "hostPrefix": "cp.places."
                 },
                 "smithy.api#http": {
                     "uri": "/places/v0/list-indexes",
@@ -5428,7 +5428,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists route calculator resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "routes."
+                    "hostPrefix": "cp.routes."
                 },
                 "smithy.api#http": {
                     "uri": "/routes/v0/list-calculators",
@@ -5569,7 +5569,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of tags that are applied to the specified Amazon Location resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "method": "GET",
@@ -5630,7 +5630,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists geofence collections currently associated to the given tracker resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers/{TrackerName}/list-consumers",
@@ -5717,7 +5717,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists tracker resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/list-trackers",
@@ -7973,7 +7973,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service\n            resource.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to\n            scope user permissions, by granting a user permission to access or change only resources\n            with certain tag values.</p>\n         <p>You can use the <code>TagResource</code> operation with an Amazon Location Service\n            resource that already has tags. If you specify a new tag key for the resource, this tag\n            is appended to the tags already associated with the resource. If you specify a tag key\n            that's already associated with the resource, the new tag value that you specify replaces\n            the previous value for that tag. </p>\n         <p>You can associate up to 50 tags with a resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "method": "POST",
@@ -8258,7 +8258,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes one or more tags from the specified Amazon Location resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -8320,7 +8320,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified properties of a given geofence collection.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "geofencing."
+                    "hostPrefix": "cp.geofencing."
                 },
                 "smithy.api#http": {
                     "uri": "/geofencing/v0/collections/{CollectionName}",
@@ -8422,7 +8422,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified properties of a given API key resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "metadata."
+                    "hostPrefix": "cp.metadata."
                 },
                 "smithy.api#http": {
                     "uri": "/metadata/v0/keys/{KeyName}",
@@ -8528,7 +8528,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified properties of a given map resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "maps."
+                    "hostPrefix": "cp.maps."
                 },
                 "smithy.api#http": {
                     "uri": "/maps/v0/maps/{MapName}",
@@ -8626,7 +8626,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified properties of a given place index resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "places."
+                    "hostPrefix": "cp.places."
                 },
                 "smithy.api#http": {
                     "uri": "/places/v0/indexes/{IndexName}",
@@ -8724,7 +8724,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified properties for a given route calculator resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "routes."
+                    "hostPrefix": "cp.routes."
                 },
                 "smithy.api#http": {
                     "uri": "/routes/v0/calculators/{CalculatorName}",
@@ -8816,7 +8816,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified properties of a given tracker resource.</p>",
                 "smithy.api#endpoint": {
-                    "hostPrefix": "tracking."
+                    "hostPrefix": "cp.tracking."
                 },
                 "smithy.api#http": {
                     "uri": "/tracking/v0/trackers/{TrackerName}",

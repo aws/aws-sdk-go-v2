@@ -29324,6 +29324,18 @@
                         "smithy.api#enumValue": "GITHUB"
                     }
                 },
+                "GITLAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB"
+                    }
+                },
+                "BITBUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITBUCKET"
+                    }
+                },
                 "AWS_CODE_COMMIT": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -33614,13 +33626,13 @@
                 "Provider": {
                     "target": "com.amazonaws.glue#SourceControlProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provider for the remote repository.</p>"
+                        "smithy.api#documentation": "<p>\n      The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.\n    </p>"
                     }
                 },
                 "RepositoryName": {
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts.</p>"
+                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts. \n      For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.\n      Use the format <code><WorkspaceName>/<RepositoryName></code>. \n    </p>"
                     }
                 },
                 "RepositoryOwner": {
@@ -34137,13 +34149,13 @@
                 "Provider": {
                     "target": "com.amazonaws.glue#SourceControlProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provider for the remote repository.</p>"
+                        "smithy.api#documentation": "<p>\n      The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.\n    </p>"
                     }
                 },
                 "RepositoryName": {
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts.</p>"
+                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts. \n      For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.\n      Use the format <code><WorkspaceName>/<RepositoryName></code>. \n    </p>"
                     }
                 },
                 "RepositoryOwner": {

@@ -8546,6 +8546,9 @@
                 }
             }
         },
+        "com.amazonaws.lambda#NullableBoolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.lambda#OnFailure": {
             "type": "structure",
             "members": {
@@ -11735,6 +11738,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of VPC security group IDs.</p>"
                     }
+                },
+                "Ipv6AllowedForDualStack": {
+                    "target": "com.amazonaws.lambda#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11760,6 +11769,12 @@
                     "target": "com.amazonaws.lambda#VpcId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the VPC.</p>"
+                    }
+                },
+                "Ipv6AllowedForDualStack": {
+                    "target": "com.amazonaws.lambda#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.</p>"
                     }
                 }
             },

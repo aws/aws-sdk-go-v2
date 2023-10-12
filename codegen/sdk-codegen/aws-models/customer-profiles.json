@@ -600,6 +600,9 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionItem"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#CalculatedAttributesForProfileList": {
@@ -796,7 +799,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
                     }
@@ -848,7 +851,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
                     }
@@ -3788,7 +3791,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
                     }
@@ -5498,7 +5501,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The threshold for the calculated attribute.</p>"
                     }
@@ -9776,7 +9779,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
                     }
@@ -9808,7 +9811,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
                     }

@@ -2089,7 +2089,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates one or more WorkSpaces.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>\n         <note>\n            <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces\n            Core. Contact your account team to be allow-listed to use this value. For more\n            information, see <a href=\"http://aws.amazon.com/workspaces/core/\">Amazon WorkSpaces\n               Core</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates one or more WorkSpaces.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces\n               Core. Contact your account team to be allow-listed to use this value. For more\n               information, see <a href=\"http://aws.amazon.com/workspaces/core/\">Amazon WorkSpaces\n                  Core</a>.</p>\n               </li>\n               <li>\n                  <p>PCoIP is only available for Windows bundles.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#CreateWorkspacesRequest": {
