@@ -3,14 +3,23 @@
 // More information about signed URLs and their structure can be found at:
 // http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-canned-policy.html
 //
-// To sign a URL create a URLSigner with your private key and credential pair key ID.
-// Once you have a URLSigner instance you can call Sign or SignWithPolicy to
-// sign the URLs.
+// To sign a URL create a [URLSigner] with your private key and credential pair
+// key ID. Once you have a URLSigner instance you can call [URLSigner.Sign] or
+// [URLSigner.SignWithPolicy] to sign the URLs.
 //
 // Example:
 //
-//	// Sign URL to be valid for 1 hour from now.
+//	// Load our key from a PEM block.
+//	privKey, err := sign.LoadPEMPrivKey(block)
+//	if err != nil {
+//	    log.Fatalf("Failed to load private key, err: %s\n", err.Error())
+//	}
+//
+//	// Create our signer. Keys loaded via the LoadPEMPrivKey* family of APIs
+//	// implement crypto.Signer and can be passed to this directly.
 //	signer := sign.NewURLSigner(keyID, privKey)
+//
+//	// Sign URL to be valid for 1 hour from now.
 //	signedURL, err := signer.Sign(rawURL, time.Now().Add(1*time.Hour))
 //	if err != nil {
 //	    log.Fatalf("Failed to sign url, err: %s\n", err.Error())
