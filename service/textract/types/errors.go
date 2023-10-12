@@ -65,6 +65,34 @@ func (e *BadDocumentException) ErrorCode() string {
 }
 func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Updating or deleting a resource can cause an inconsistent state.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The document can't be processed because it's too large. The maximum document
 // size for synchronous operations 10 MB. The maximum document size for
 // asynchronous operations is 500 MB for PDF files.
@@ -368,6 +396,63 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
+// Returned when an operation tried to access a nonexistent resource.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Returned when a request cannot be completed as it would exceed a maximum
+// service quota.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Amazon Textract is temporarily unable to process the request. Try your call
 // again.
 type ThrottlingException struct {
@@ -425,3 +510,31 @@ func (e *UnsupportedDocumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Indicates that a request was not valid. Check request for proper formatting.
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -17,7 +17,10 @@ import (
 	"time"
 )
 
-// Returns a list of ConfigurationItems for the specified resource. The list
+// For accurate reporting on the compliance status, you must record the
+// AWS::Config::ResourceCompliance resource type. For more information, see
+// Selecting Which Resources Config Records (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html)
+// . Returns a list of ConfigurationItems for the specified resource. The list
 // contains details about each state of the resource during the specified time
 // interval. If you specified a retention period to retain your ConfigurationItems
 // between a minimum of 30 days and a maximum of 7 years (2557 days), Config
@@ -61,13 +64,13 @@ type GetResourceConfigHistoryInput struct {
 	// are listed in reverse chronological order.
 	ChronologicalOrder types.ChronologicalOrder
 
-	// The time stamp that indicates an earlier time. If not specified, the action
-	// returns paginated results that contain configuration items that start when the
-	// first configuration item was recorded.
+	// The chronologically earliest time in the time range for which the history
+	// requested. If not specified, the action returns paginated results that contain
+	// configuration items that start when the first configuration item was recorded.
 	EarlierTime *time.Time
 
-	// The time stamp that indicates a later time. If not specified, current time is
-	// taken.
+	// The chronologically latest time in the time range for which the history
+	// requested. If not specified, current time is taken.
 	LaterTime *time.Time
 
 	// The maximum number of configuration items returned on each page. The default is

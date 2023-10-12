@@ -69,6 +69,26 @@ func (m *validateOpGetControlOperation) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEnabledControl struct {
+}
+
+func (*validateOpGetEnabledControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEnabledControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEnabledControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEnabledControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnabledControls struct {
 }
 
@@ -99,6 +119,10 @@ func addOpEnableControlValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetControlOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetControlOperation{}, middleware.After)
+}
+
+func addOpGetEnabledControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEnabledControl{}, middleware.After)
 }
 
 func addOpListEnabledControlsValidationMiddleware(stack *middleware.Stack) error {
@@ -148,6 +172,21 @@ func validateOpGetControlOperationInput(v *GetControlOperationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetControlOperationInput"}
 	if v.OperationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEnabledControlInput(v *GetEnabledControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEnabledControlInput"}
+	if v.EnabledControlIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledControlIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

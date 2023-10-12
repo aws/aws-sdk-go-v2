@@ -1,0 +1,8 @@
+{
+    "id": "2f2403fb-26b7-45ef-aeed-6b5d11fd8b19",
+    "type": "feature",
+    "description": "Add enums for resource types supported by Config",
+    "modules": [
+        "service/configservice"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "020510a9-828a-4c4d-8e96-d917714e2c13",
+    "type": "feature",
+    "description": "Add MacOs ec2 platform support",
+    "modules": [
+        "service/inspector2"
+    ]
+}

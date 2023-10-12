@@ -37,13 +37,17 @@ type ListUsageTotalsInput struct {
 	// The Amazon Web Services account IDs to retrieve usage totals for.
 	AccountIds []string
 
-	// The maximum number of results to return in the response.
+	// The maximum number of results the response can return. If your request would
+	// return more than the maximum the response will return a nextToken value, use
+	// this value when you call the action again to get the remaining results.
 	MaxResults *int32
 
 	// A token to use for paginating results that are returned in the response. Set
-	// the value of this parameter to null for the first request to a list action. For
-	// subsequent calls, use the NextToken value returned from the previous request to
-	// continue listing results after the first page.
+	// the value of this parameter to null for the first request to a list action. If
+	// your response returns more than the maxResults maximum value it will also
+	// return a nextToken value. For subsequent calls, use the nextToken value
+	// returned from the previous request to continue listing results after the first
+	// page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -146,7 +150,9 @@ var _ ListUsageTotalsAPIClient = (*Client)(nil)
 
 // ListUsageTotalsPaginatorOptions is the paginator options for ListUsageTotals
 type ListUsageTotalsPaginatorOptions struct {
-	// The maximum number of results to return in the response.
+	// The maximum number of results the response can return. If your request would
+	// return more than the maximum the response will return a nextToken value, use
+	// this value when you call the action again to get the remaining results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

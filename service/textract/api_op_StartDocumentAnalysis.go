@@ -62,6 +62,9 @@ type StartDocumentAnalysisInput struct {
 	// This member is required.
 	FeatureTypes []types.FeatureType
 
+	// Specifies the adapter to be used when analyzing a document.
+	AdaptersConfig *types.AdaptersConfig
+
 	// The idempotent token that you use to identify the start request. If you use the
 	// same token with multiple StartDocumentAnalysis requests, the same JobId is
 	// returned. Use ClientRequestToken to prevent the same job from being

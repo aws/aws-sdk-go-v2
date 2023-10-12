@@ -372,7 +372,7 @@ func awsRestjson1_deserializeOpDocumentCreateCalculatedAttributeDefinitionOutput
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveText to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -2818,7 +2818,7 @@ func awsRestjson1_deserializeOpDocumentGetCalculatedAttributeDefinitionOutput(v 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveText to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -8896,7 +8896,7 @@ func awsRestjson1_deserializeOpDocumentUpdateCalculatedAttributeDefinitionOutput
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveText to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -11582,7 +11582,7 @@ func awsRestjson1_deserializeDocumentListCalculatedAttributeDefinitionItem(v **t
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveText to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}

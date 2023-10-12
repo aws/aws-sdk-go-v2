@@ -1,0 +1,8 @@
+{
+    "id": "741e609d-1263-4fe2-af54-9ba2eb80147a",
+    "type": "feature",
+    "description": "Adds support for Lambda functions to access Dual-Stack subnets over IPv6, via an opt-in flag in CreateFunction and UpdateFunctionConfiguration APIs",
+    "modules": [
+        "service/lambda"
+    ]
+}

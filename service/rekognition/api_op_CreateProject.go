@@ -10,15 +10,19 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Rekognition Custom Labels project. A project is a group of
-// resources (datasets, model versions) that you use to create and manage Amazon
-// Rekognition Custom Labels models. This operation requires permissions to perform
-// the rekognition:CreateProject action.
+// Creates a new Amazon Rekognition project. A project is a group of resources
+// (datasets, model versions) that you use to create and manage a Amazon
+// Rekognition Custom Labels Model or custom adapter. You can specify a feature to
+// create the project with, if no feature is specified then Custom Labels is used
+// by default. For adapters, you can also choose whether or not to have the project
+// auto update by using the AutoUpdate argument. This operation requires
+// permissions to perform the rekognition:CreateProject action.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -40,6 +44,15 @@ type CreateProjectInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	// Specifies whether automatic retraining should be attempted for the versions of
+	// the project. Automatic retraining is done as a best effort. Required argument
+	// for Content Moderation. Applicable only to adapters.
+	AutoUpdate types.ProjectAutoUpdate
+
+	// Specifies feature that is being customized. If no value is provided
+	// CUSTOM_LABELS is used as a default.
+	Feature types.CustomizationFeature
 
 	noSmithyDocumentSerde
 }

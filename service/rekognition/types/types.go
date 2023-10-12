@@ -411,6 +411,28 @@ type CreateFaceLivenessSessionRequestSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Feature specific configuration for the training job. Configuration provided for
+// the job must match the feature type parameter associated with project. If
+// configuration and feature type do not match an InvalidParameterException is
+// returned.
+type CustomizationFeatureConfig struct {
+
+	// Configuration options for Custom Moderation training.
+	ContentModeration *CustomizationFeatureContentModerationConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration options for Content Moderation training.
+type CustomizationFeatureContentModerationConfig struct {
+
+	// The confidence level you plan to use to identify if unsafe content is present
+	// during inference.
+	ConfidenceThreshold *float32
+
+	noSmithyDocumentSerde
+}
+
 // A custom label detected in an image by a call to DetectCustomLabels .
 type CustomLabel struct {
 
@@ -1636,11 +1658,18 @@ type Pose struct {
 // information, see DescribeProjects .
 type ProjectDescription struct {
 
+	// Indicates whether automatic retraining will be attempted for the versions of
+	// the project. Applies only to adapters.
+	AutoUpdate ProjectAutoUpdate
+
 	// The Unix timestamp for the date and time that the project was created.
 	CreationTimestamp *time.Time
 
 	// Information about the training and test datasets in the project.
 	Datasets []DatasetMetadata
+
+	// Specifies the project that is being customized.
+	Feature CustomizationFeature
 
 	// The Amazon Resource Name (ARN) of the project.
 	ProjectArn *string
@@ -1676,8 +1705,11 @@ type ProjectPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// A description of a version of an Amazon Rekognition Custom Labels model.
+// A description of a version of a Amazon Rekognition project version.
 type ProjectVersionDescription struct {
+
+	// The base detection model version used to create the project version.
+	BaseModelVersion *string
 
 	// The duration, in seconds, that you were billed for a successful training of the
 	// model version. This value is only returned if the model version has been
@@ -1691,6 +1723,12 @@ type ProjectVersionDescription struct {
 	// successful.
 	EvaluationResult *EvaluationResult
 
+	// The feature that was customized.
+	Feature CustomizationFeature
+
+	// Feature specific configuration that was applied during training.
+	FeatureConfig *CustomizationFeatureConfig
+
 	// The identifer for the AWS Key Management Service key (AWS KMS key) that was
 	// used to encrypt the model during training.
 	KmsKeyId *string
@@ -1699,18 +1737,19 @@ type ProjectVersionDescription struct {
 	// data validation results for the training and test datasets.
 	ManifestSummary *GroundTruthManifest
 
-	// The maximum number of inference units Amazon Rekognition Custom Labels uses to
-	// auto-scale the model. For more information, see StartProjectVersion .
+	// The maximum number of inference units Amazon Rekognition uses to auto-scale the
+	// model. Applies only to Custom Labels projects. For more information, see
+	// StartProjectVersion .
 	MaxInferenceUnits *int32
 
-	// The minimum number of inference units used by the model. For more information,
-	// see StartProjectVersion .
+	// The minimum number of inference units used by the model. Applies only to Custom
+	// Labels projects. For more information, see StartProjectVersion .
 	MinInferenceUnits *int32
 
 	// The location where training results are saved.
 	OutputConfig *OutputConfig
 
-	// The Amazon Resource Name (ARN) of the model version.
+	// The Amazon Resource Name (ARN) of the project version.
 	ProjectVersionArn *string
 
 	// If the model version was copied from a different project,
@@ -1731,6 +1770,9 @@ type ProjectVersionDescription struct {
 
 	// The Unix date and time that training of the model ended.
 	TrainingEndTimestamp *time.Time
+
+	// A user-provided description of the project version.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -2279,17 +2321,15 @@ type TechnicalCueSegment struct {
 }
 
 // The dataset used for testing. Optionally, if AutoCreate is set, Amazon
-// Rekognition Custom Labels uses the training dataset to create a test dataset
-// with a temporary split of the training dataset.
+// Rekognition uses the training dataset to create a test dataset with a temporary
+// split of the training dataset.
 type TestingData struct {
 
 	// The assets used for testing.
 	Assets []Asset
 
-	// If specified, Amazon Rekognition Custom Labels temporarily splits the training
-	// dataset (80%) to create a test dataset (20%) for the training job. After
-	// training completes, the test dataset is not stored and the training dataset
-	// reverts to its previous size.
+	// If specified, Rekognition splits training dataset to create a test dataset for
+	// the training job.
 	AutoCreate bool
 
 	noSmithyDocumentSerde
@@ -2367,26 +2407,26 @@ type TextDetectionResult struct {
 // The dataset used for training.
 type TrainingData struct {
 
-	// A Sagemaker GroundTruth manifest file that contains the training images
-	// (assets).
+	// A manifest file that contains references to the training images and
+	// ground-truth annotations.
 	Assets []Asset
 
 	noSmithyDocumentSerde
 }
 
-// Sagemaker Groundtruth format manifest files for the input, output and
-// validation datasets that are used and created during testing.
+// The data validation manifest created for the training dataset during model
+// training.
 type TrainingDataResult struct {
 
-	// The training assets that you supplied for training.
+	// The training data that you supplied.
 	Input *TrainingData
 
-	// The images (assets) that were actually trained by Amazon Rekognition Custom
-	// Labels.
+	// Reference to images (assets) that were actually used during training with
+	// trained model predictions.
 	Output *TrainingData
 
-	// The location of the data validation manifest. The data validation manifest is
-	// created for the training dataset during model training.
+	// A manifest that you supplied for training, with validation results for each
+	// line.
 	Validation *ValidationData
 
 	noSmithyDocumentSerde

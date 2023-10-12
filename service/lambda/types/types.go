@@ -1134,6 +1134,10 @@ type TracingConfigResponse struct {
 // .
 type VpcConfig struct {
 
+	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack
+	// subnets.
+	Ipv6AllowedForDualStack *bool
+
 	// A list of VPC security group IDs.
 	SecurityGroupIds []string
 
@@ -1145,6 +1149,10 @@ type VpcConfig struct {
 
 // The VPC security groups and subnets that are attached to a Lambda function.
 type VpcConfigResponse struct {
+
+	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack
+	// subnets.
+	Ipv6AllowedForDualStack *bool
 
 	// A list of VPC security group IDs.
 	SecurityGroupIds []string

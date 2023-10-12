@@ -10753,6 +10753,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.DBSystemId)
 	}
 
+	if v.DedicatedLogVolume != nil {
+		objectKey := object.Key("DedicatedLogVolume")
+		objectKey.Boolean(*v.DedicatedLogVolume)
+	}
+
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
@@ -11028,6 +11033,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.DBSubnetGroupName != nil {
 		objectKey := object.Key("DBSubnetGroupName")
 		objectKey.String(*v.DBSubnetGroupName)
+	}
+
+	if v.DedicatedLogVolume != nil {
+		objectKey := object.Key("DedicatedLogVolume")
+		objectKey.Boolean(*v.DedicatedLogVolume)
 	}
 
 	if v.DeletionProtection != nil {
@@ -13791,6 +13801,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.String(*v.DBSubnetGroupName)
 	}
 
+	if v.DedicatedLogVolume != nil {
+		objectKey := object.Key("DedicatedLogVolume")
+		objectKey.Boolean(*v.DedicatedLogVolume)
+	}
+
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
@@ -15152,6 +15167,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.String(*v.DBSubnetGroupName)
 	}
 
+	if v.DedicatedLogVolume != nil {
+		objectKey := object.Key("DedicatedLogVolume")
+		objectKey.Boolean(*v.DedicatedLogVolume)
+	}
+
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
@@ -15354,6 +15374,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 	if v.DBSubnetGroupName != nil {
 		objectKey := object.Key("DBSubnetGroupName")
 		objectKey.String(*v.DBSubnetGroupName)
+	}
+
+	if v.DedicatedLogVolume != nil {
+		objectKey := object.Key("DedicatedLogVolume")
+		objectKey.Boolean(*v.DedicatedLogVolume)
 	}
 
 	if v.DeletionProtection != nil {
@@ -15604,6 +15629,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.DBSubnetGroupName != nil {
 		objectKey := object.Key("DBSubnetGroupName")
 		objectKey.String(*v.DBSubnetGroupName)
+	}
+
+	if v.DedicatedLogVolume != nil {
+		objectKey := object.Key("DedicatedLogVolume")
+		objectKey.Boolean(*v.DedicatedLogVolume)
 	}
 
 	if v.DeletionProtection != nil {

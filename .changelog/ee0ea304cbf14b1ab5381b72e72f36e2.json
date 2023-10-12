@@ -1,0 +1,8 @@
+{
+    "id": "ee0ea304-cbf1-4b1a-b538-1b72e72f36e2",
+    "type": "feature",
+    "description": "Extending version control support to GitLab and Bitbucket from AWSGlue",
+    "modules": [
+        "service/glue"
+    ]
+}

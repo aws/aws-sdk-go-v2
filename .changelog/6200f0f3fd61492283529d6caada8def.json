@@ -1,0 +1,8 @@
+{
+    "id": "6200f0f3-fd61-4922-8352-9d6caada8def",
+    "type": "documentation",
+    "description": "This release enables routing policies with Availability Zone affinity for Network Load Balancers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

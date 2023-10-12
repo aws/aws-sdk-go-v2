@@ -139,6 +139,24 @@ func (ContentModerationSortBy) Values() []ContentModerationSortBy {
 	}
 }
 
+type CustomizationFeature string
+
+// Enum values for CustomizationFeature
+const (
+	CustomizationFeatureContentModeration CustomizationFeature = "CONTENT_MODERATION"
+	CustomizationFeatureCustomLabels      CustomizationFeature = "CUSTOM_LABELS"
+)
+
+// Values returns all known values for CustomizationFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomizationFeature) Values() []CustomizationFeature {
+	return []CustomizationFeature{
+		"CONTENT_MODERATION",
+		"CUSTOM_LABELS",
+	}
+}
+
 type DatasetStatus string
 
 // Enum values for DatasetStatus
@@ -521,6 +539,24 @@ func (PersonTrackingSortBy) Values() []PersonTrackingSortBy {
 	}
 }
 
+type ProjectAutoUpdate string
+
+// Enum values for ProjectAutoUpdate
+const (
+	ProjectAutoUpdateEnabled  ProjectAutoUpdate = "ENABLED"
+	ProjectAutoUpdateDisabled ProjectAutoUpdate = "DISABLED"
+)
+
+// Values returns all known values for ProjectAutoUpdate. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectAutoUpdate) Values() []ProjectAutoUpdate {
+	return []ProjectAutoUpdate{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ProjectStatus string
 
 // Enum values for ProjectStatus
@@ -557,6 +593,8 @@ const (
 	ProjectVersionStatusCopyingInProgress  ProjectVersionStatus = "COPYING_IN_PROGRESS"
 	ProjectVersionStatusCopyingCompleted   ProjectVersionStatus = "COPYING_COMPLETED"
 	ProjectVersionStatusCopyingFailed      ProjectVersionStatus = "COPYING_FAILED"
+	ProjectVersionStatusDeprecated         ProjectVersionStatus = "DEPRECATED"
+	ProjectVersionStatusExpired            ProjectVersionStatus = "EXPIRED"
 )
 
 // Values returns all known values for ProjectVersionStatus. Note that this can be
@@ -576,6 +614,8 @@ func (ProjectVersionStatus) Values() []ProjectVersionStatus {
 		"COPYING_IN_PROGRESS",
 		"COPYING_COMPLETED",
 		"COPYING_FAILED",
+		"DEPRECATED",
+		"EXPIRED",
 	}
 }
 

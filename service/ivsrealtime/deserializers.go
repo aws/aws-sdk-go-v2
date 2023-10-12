@@ -2627,6 +2627,24 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 				return err
 			}
 
+		case "browserName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantClientAttribute to be of type string, got %T instead", value)
+				}
+				sv.BrowserName = ptr.String(jtv)
+			}
+
+		case "browserVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantClientAttribute to be of type string, got %T instead", value)
+				}
+				sv.BrowserVersion = ptr.String(jtv)
+			}
+
 		case "firstJoinTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2638,6 +2656,33 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 					return err
 				}
 				sv.FirstJoinTime = ptr.Time(t)
+			}
+
+		case "ispName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantClientAttribute to be of type string, got %T instead", value)
+				}
+				sv.IspName = ptr.String(jtv)
+			}
+
+		case "osName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantClientAttribute to be of type string, got %T instead", value)
+				}
+				sv.OsName = ptr.String(jtv)
+			}
+
+		case "osVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantClientAttribute to be of type string, got %T instead", value)
+				}
+				sv.OsVersion = ptr.String(jtv)
 			}
 
 		case "participantId":
@@ -2656,6 +2701,15 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 					return fmt.Errorf("expected Published to be of type *bool, got %T instead", value)
 				}
 				sv.Published = jtv
+			}
+
+		case "sdkVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantClientAttribute to be of type string, got %T instead", value)
+				}
+				sv.SdkVersion = ptr.String(jtv)
 			}
 
 		case "state":

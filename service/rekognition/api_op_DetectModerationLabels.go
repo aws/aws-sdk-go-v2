@@ -25,7 +25,9 @@ import (
 // Rekognition Developer Guide. You pass the input image either as base64-encoded
 // image bytes or as a reference to an image in an Amazon S3 bucket. If you use the
 // AWS CLI to call Amazon Rekognition operations, passing image bytes is not
-// supported. The image must be either a PNG or JPEG formatted file.
+// supported. The image must be either a PNG or JPEG formatted file. You can
+// specify an adapter to use when retrieving label predictions by providing a
+// ProjectVersionArn to the ProjectVersion argument.
 func (c *Client) DetectModerationLabels(ctx context.Context, params *DetectModerationLabelsInput, optFns ...func(*Options)) (*DetectModerationLabelsOutput, error) {
 	if params == nil {
 		params = &DetectModerationLabelsInput{}
@@ -62,6 +64,10 @@ type DetectModerationLabelsInput struct {
 	// labels with confidence values greater than or equal to 50 percent.
 	MinConfidence *float32
 
+	// Identifier for the custom adapter. Expects the ProjectVersionArn as a value.
+	// Use the CreateProject or CreateProjectVersion APIs to create a custom adapter.
+	ProjectVersion *string
+
 	noSmithyDocumentSerde
 }
 
@@ -74,9 +80,14 @@ type DetectModerationLabelsOutput struct {
 	// start of the video, they were detected.
 	ModerationLabels []types.ModerationLabel
 
-	// Version number of the moderation detection model that was used to detect unsafe
-	// content.
+	// Version number of the base moderation detection model that was used to detect
+	// unsafe content.
 	ModerationModelVersion *string
+
+	// Identifier of the custom adapter that was used during inference. If during
+	// inference the adapter was EXPIRED, then the parameter will not be returned,
+	// indicating that a base moderation detection project version was used.
+	ProjectVersion *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -321,10 +321,20 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "us-gov-east-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "simspaceweaver.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "simspaceweaver.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

@@ -6461,6 +6461,11 @@ func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 	object := value.Object()
 	defer object.Close()
 
+	if v.Ipv6AllowedForDualStack != nil {
+		ok := object.Key("Ipv6AllowedForDualStack")
+		ok.Boolean(*v.Ipv6AllowedForDualStack)
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
 		if err := awsRestjson1_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {

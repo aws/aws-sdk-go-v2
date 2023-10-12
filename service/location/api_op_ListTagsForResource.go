@@ -153,7 +153,7 @@ func (m *endpointPrefix_opListTagsForResourceMiddleware) HandleSerialize(ctx con
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "metadata." + req.URL.Host
+	req.URL.Host = "cp.metadata." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

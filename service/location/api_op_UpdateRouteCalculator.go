@@ -176,7 +176,7 @@ func (m *endpointPrefix_opUpdateRouteCalculatorMiddleware) HandleSerialize(ctx c
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "routes." + req.URL.Host
+	req.URL.Host = "cp.routes." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

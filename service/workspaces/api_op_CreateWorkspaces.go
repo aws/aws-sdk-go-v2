@@ -17,10 +17,12 @@ import (
 )
 
 // Creates one or more WorkSpaces. This operation is asynchronous and returns
-// before the WorkSpaces are created. The MANUAL running mode value is only
-// supported by Amazon WorkSpaces Core. Contact your account team to be
-// allow-listed to use this value. For more information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/)
-// .
+// before the WorkSpaces are created.
+//   - The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
+//     Contact your account team to be allow-listed to use this value. For more
+//     information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/)
+//     .
+//   - PCoIP is only available for Windows bundles.
 func (c *Client) CreateWorkspaces(ctx context.Context, params *CreateWorkspacesInput, optFns ...func(*Options)) (*CreateWorkspacesOutput, error) {
 	if params == nil {
 		params = &CreateWorkspacesInput{}

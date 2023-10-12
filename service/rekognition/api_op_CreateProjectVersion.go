@@ -16,29 +16,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version of a model and begins training. Models are managed as
-// part of an Amazon Rekognition Custom Labels project. The response from
-// CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the
-// model. Training uses the training and test datasets associated with the project.
-// For more information, see Creating training and test dataset in the Amazon
-// Rekognition Custom Labels Developer Guide. You can train a model in a project
-// that doesn't have associated datasets by specifying manifest files in the
-// TrainingData and TestingData fields. If you open the console after training a
-// model with manifest files, Amazon Rekognition Custom Labels creates the datasets
-// for you using the most recent manifest files. You can no longer train a model
-// version for the project by specifying manifest files. Instead of training with a
-// project without associated datasets, we recommend that you use the manifest
-// files to create training and test datasets for the project. Training takes a
-// while to complete. You can get the current status by calling
-// DescribeProjectVersions . Training completed successfully if the value of the
-// Status field is TRAINING_COMPLETED . If training fails, see Debugging a failed
-// model training in the Amazon Rekognition Custom Labels developer guide. Once
-// training has successfully completed, call DescribeProjectVersions to get the
-// training results and evaluate the model. For more information, see Improving a
-// trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom
-// Labels developers guide. After evaluating the model, you start the model by
-// calling StartProjectVersion . This operation requires permissions to perform the
-// rekognition:CreateProjectVersion action.
+// Creates a new version of Amazon Rekognition project (like a Custom Labels model
+// or a custom adapter) and begins training. Models and adapters are managed as
+// part of a Rekognition project. The response from CreateProjectVersion is an
+// Amazon Resource Name (ARN) for the project version. The FeatureConfig operation
+// argument allows you to configure specific model or adapter settings. You can
+// provide a description to the project version by using the VersionDescription
+// argment. Training can take a while to complete. You can get the current status
+// by calling DescribeProjectVersions . Training completed successfully if the
+// value of the Status field is TRAINING_COMPLETED . Once training has successfully
+// completed, call DescribeProjectVersions to get the training results and
+// evaluate the model. This operation requires permissions to perform the
+// rekognition:CreateProjectVersion action. The following applies only to projects
+// with Amazon Rekognition Custom Labels as the chosen feature: You can train a
+// model in a project that doesn't have associated datasets by specifying manifest
+// files in the TrainingData and TestingData fields. If you open the console after
+// training a model with manifest files, Amazon Rekognition Custom Labels creates
+// the datasets for you using the most recent manifest files. You can no longer
+// train a model version for the project by specifying manifest files. Instead of
+// training with a project without associated datasets, we recommend that you use
+// the manifest files to create training and test datasets for the project.
 func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProjectVersionInput, optFns ...func(*Options)) (*CreateProjectVersionOutput, error) {
 	if params == nil {
 		params = &CreateProjectVersionInput{}
@@ -56,31 +53,37 @@ func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProject
 
 type CreateProjectVersionInput struct {
 
-	// The Amazon S3 bucket location to store the results of training. The S3 bucket
-	// can be in any AWS account as long as the caller has s3:PutObject permissions on
-	// the S3 bucket.
+	// The Amazon S3 bucket location to store the results of training. The bucket can
+	// be any S3 bucket in your AWS account. You need s3:PutObject permission on the
+	// bucket.
 	//
 	// This member is required.
 	OutputConfig *types.OutputConfig
 
-	// The ARN of the Amazon Rekognition Custom Labels project that manages the model
-	// that you want to train.
+	// The ARN of the Amazon Rekognition project that will manage the project version
+	// you want to train.
 	//
 	// This member is required.
 	ProjectArn *string
 
-	// A name for the version of the model. This value must be unique.
+	// A name for the version of the project version. This value must be unique.
 	//
 	// This member is required.
 	VersionName *string
 
+	// Feature-specific configuration of the training job. If the job configuration
+	// does not match the feature type associated with the project, an
+	// InvalidParameterException is returned.
+	FeatureConfig *types.CustomizationFeatureConfig
+
 	// The identifier for your AWS Key Management Service key (AWS KMS key). You can
 	// supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,
 	// an alias for your KMS key, or an alias ARN. The key is used to encrypt training
-	// and test images copied into the service for model training. Your source images
-	// are unaffected. The key is also used to encrypt training results and manifest
-	// files written to the output Amazon S3 bucket ( OutputConfig ). If you choose to
-	// use your own KMS key, you need the following permissions on the KMS key.
+	// images, test images, and manifest files copied into the service for the project
+	// version. Your source images are unaffected. The key is also used to encrypt
+	// training results and manifest files written to the output Amazon S3 bucket (
+	// OutputConfig ). If you choose to use your own KMS key, you need the following
+	// permissions on the KMS key.
 	//   - kms:CreateGrant
 	//   - kms:DescribeKey
 	//   - kms:GenerateDataKey
@@ -89,26 +92,29 @@ type CreateProjectVersionInput struct {
 	// encrypted using a key that AWS owns and manages.
 	KmsKeyId *string
 
-	// A set of tags (key-value pairs) that you want to attach to the model.
+	// A set of tags (key-value pairs) that you want to attach to the project version.
 	Tags map[string]string
 
-	// Specifies an external manifest that the service uses to test the model. If you
-	// specify TestingData you must also specify TrainingData . The project must not
-	// have any associated datasets.
+	// Specifies an external manifest that the service uses to test the project
+	// version. If you specify TestingData you must also specify TrainingData . The
+	// project must not have any associated datasets.
 	TestingData *types.TestingData
 
-	// Specifies an external manifest that the services uses to train the model. If
-	// you specify TrainingData you must also specify TestingData . The project must
-	// not have any associated datasets.
+	// Specifies an external manifest that the services uses to train the project
+	// version. If you specify TrainingData you must also specify TestingData . The
+	// project must not have any associated datasets.
 	TrainingData *types.TrainingData
+
+	// A description applied to the project version being created.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }
 
 type CreateProjectVersionOutput struct {
 
-	// The ARN of the model version that was created. Use DescribeProjectVersion to
-	// get the current status of the training operation.
+	// The ARN of the model or the project version that was created. Use
+	// DescribeProjectVersion to get the current status of the training operation.
 	ProjectVersionArn *string
 
 	// Metadata pertaining to the operation's result.

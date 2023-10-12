@@ -156,6 +156,99 @@ func (c *Client) addOperationDescribeInstanceRefreshesMiddlewares(stack *middlew
 	return nil
 }
 
+// DescribeInstanceRefreshesAPIClient is a client that implements the
+// DescribeInstanceRefreshes operation.
+type DescribeInstanceRefreshesAPIClient interface {
+	DescribeInstanceRefreshes(context.Context, *DescribeInstanceRefreshesInput, ...func(*Options)) (*DescribeInstanceRefreshesOutput, error)
+}
+
+var _ DescribeInstanceRefreshesAPIClient = (*Client)(nil)
+
+// DescribeInstanceRefreshesPaginatorOptions is the paginator options for
+// DescribeInstanceRefreshes
+type DescribeInstanceRefreshesPaginatorOptions struct {
+	// The maximum number of items to return with this call. The default value is 50
+	// and the maximum value is 100 .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeInstanceRefreshesPaginator is a paginator for DescribeInstanceRefreshes
+type DescribeInstanceRefreshesPaginator struct {
+	options   DescribeInstanceRefreshesPaginatorOptions
+	client    DescribeInstanceRefreshesAPIClient
+	params    *DescribeInstanceRefreshesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeInstanceRefreshesPaginator returns a new
+// DescribeInstanceRefreshesPaginator
+func NewDescribeInstanceRefreshesPaginator(client DescribeInstanceRefreshesAPIClient, params *DescribeInstanceRefreshesInput, optFns ...func(*DescribeInstanceRefreshesPaginatorOptions)) *DescribeInstanceRefreshesPaginator {
+	if params == nil {
+		params = &DescribeInstanceRefreshesInput{}
+	}
+
+	options := DescribeInstanceRefreshesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeInstanceRefreshesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeInstanceRefreshesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeInstanceRefreshes page.
+func (p *DescribeInstanceRefreshesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInstanceRefreshesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeInstanceRefreshes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeInstanceRefreshes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

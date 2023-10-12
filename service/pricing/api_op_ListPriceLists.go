@@ -60,9 +60,9 @@ type ListPriceListsInput struct {
 	// want to retrieve. For example, to get the list of applicable Amazon EC2 price
 	// lists, use AmazonEC2 . For a full list of service codes containing On-Demand and
 	// Reserved Instance (RI) pricing, use the DescribeServices (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion)
-	// API. To retrieve the Compute Savings Plan price lists, use ComputeSavingsPlans .
-	// To retrieve Machine Learning Savings Plans price lists, use
-	// MachineLearningSavingsPlans .
+	// API. To retrieve the Reserved Instance and Compute Savings Plan price lists, use
+	// ComputeSavingsPlans . To retrieve Machine Learning Savings Plans price lists,
+	// use MachineLearningSavingsPlans .
 	//
 	// This member is required.
 	ServiceCode *string

@@ -5006,7 +5006,7 @@ type Image struct {
 	// Specifies whether enhanced networking with ENA is enabled.
 	EnaSupport *bool
 
-	// The hypervisor type of the image.
+	// The hypervisor type of the image. Only xen is supported. ovm is not supported.
 	Hypervisor HypervisorType
 
 	// The ID of the AMI.
@@ -5066,6 +5066,11 @@ type Image struct {
 	// The type of root device used by the AMI. The AMI can use an Amazon EBS volume
 	// or an instance store volume.
 	RootDeviceType DeviceType
+
+	// The ID of the instance that the AMI was created from if the AMI was created
+	// using CreateImage (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html)
+	// . This field only appears if the AMI was created using CreateImage.
+	SourceInstanceId *string
 
 	// Specifies whether enhanced networking with the Intel 82599 Virtual Function
 	// interface is enabled.

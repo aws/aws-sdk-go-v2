@@ -191,6 +191,7 @@ const (
 	MediaFormatOgg  MediaFormat = "ogg"
 	MediaFormatAmr  MediaFormat = "amr"
 	MediaFormatWebm MediaFormat = "webm"
+	MediaFormatM4a  MediaFormat = "m4a"
 )
 
 // Values returns all known values for MediaFormat. Note that this can be expanded
@@ -205,6 +206,7 @@ func (MediaFormat) Values() []MediaFormat {
 		"ogg",
 		"amr",
 		"webm",
+		"m4a",
 	}
 }
 

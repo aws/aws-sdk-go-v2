@@ -518,6 +518,12 @@ type LoadBalancerAttribute struct {
 	//   balancer to route requests to targets if it is unable to forward the request to
 	//   Amazon Web Services WAF. The possible values are true and false . The default
 	//   is false .
+	// The following attributes are supported by only Network Load Balancers:
+	//   - dns_record.client_routing_policy - Indicates how traffic is distributed
+	//   among the load balancer Availability Zones. The possible values are
+	//   availability_zone_affinity with 100 percent zonal affinity,
+	//   partial_availability_zone_affinity with 85 percent zonal affinity, and
+	//   any_availability_zone with 0 percent zonal affinity.
 	Key *string
 
 	// The value of the attribute.

@@ -147,7 +147,7 @@ func (m *endpointPrefix_opDeleteGeofenceCollectionMiddleware) HandleSerialize(ct
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "geofencing." + req.URL.Host
+	req.URL.Host = "cp.geofencing." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

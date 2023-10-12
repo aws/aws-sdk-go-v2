@@ -16,8 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detects custom labels in a supplied image by using an Amazon Rekognition Custom
-// Labels model. You specify which version of a model version to use by using the
+// This operation applies only to Amazon Rekognition Custom Labels. Detects custom
+// labels in a supplied image by using an Amazon Rekognition Custom Labels model.
+// You specify which version of a model version to use by using the
 // ProjectVersionArn input parameter. You pass the input image as base64-encoded
 // image bytes or as a reference to an image in an Amazon S3 bucket. If you use the
 // AWS CLI to call Amazon Rekognition operations, passing image bytes is not
@@ -81,7 +82,10 @@ type DetectCustomLabelsInput struct {
 	// This member is required.
 	Image *types.Image
 
-	// The ARN of the model version that you want to use.
+	// The ARN of the model version that you want to use. Only models associated with
+	// Custom Labels projects accepted by the operation. If a provided ARN refers to a
+	// model version associated with a project for a different feature type, then an
+	// InvalidParameterException is returned.
 	//
 	// This member is required.
 	ProjectVersionArn *string

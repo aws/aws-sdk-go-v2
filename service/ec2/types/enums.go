@@ -819,6 +819,7 @@ const (
 	CapacityReservationInstancePlatformRhelWithHa                       CapacityReservationInstancePlatform = "RHEL with HA"
 	CapacityReservationInstancePlatformRhelWithHaAndSqlServerStandard   CapacityReservationInstancePlatform = "RHEL with HA and SQL Server Standard"
 	CapacityReservationInstancePlatformRhelWithHaAndSqlServerEnterprise CapacityReservationInstancePlatform = "RHEL with HA and SQL Server Enterprise"
+	CapacityReservationInstancePlatformUbuntuProLinux                   CapacityReservationInstancePlatform = "Ubuntu Pro"
 )
 
 // Values returns all known values for CapacityReservationInstancePlatform. Note
@@ -844,6 +845,7 @@ func (CapacityReservationInstancePlatform) Values() []CapacityReservationInstanc
 		"RHEL with HA",
 		"RHEL with HA and SQL Server Standard",
 		"RHEL with HA and SQL Server Enterprise",
+		"Ubuntu Pro",
 	}
 }
 
@@ -2430,6 +2432,7 @@ const (
 	ImageStateTransient    ImageState = "transient"
 	ImageStateFailed       ImageState = "failed"
 	ImageStateError        ImageState = "error"
+	ImageStateDisabled     ImageState = "disabled"
 )
 
 // Values returns all known values for ImageState. Note that this can be expanded
@@ -2444,6 +2447,7 @@ func (ImageState) Values() []ImageState {
 		"transient",
 		"failed",
 		"error",
+		"disabled",
 	}
 }
 

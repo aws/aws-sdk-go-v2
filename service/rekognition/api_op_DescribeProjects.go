@@ -16,9 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about your Amazon Rekognition Custom Labels projects. This
-// operation requires permissions to perform the rekognition:DescribeProjects
-// action.
+// Gets information about your Rekognition projects. This operation requires
+// permissions to perform the rekognition:DescribeProjects action.
 func (c *Client) DescribeProjects(ctx context.Context, params *DescribeProjectsInput, optFns ...func(*Options)) (*DescribeProjectsOutput, error) {
 	if params == nil {
 		params = &DescribeProjectsInput{}
@@ -36,19 +35,23 @@ func (c *Client) DescribeProjects(ctx context.Context, params *DescribeProjectsI
 
 type DescribeProjectsInput struct {
 
+	// Specifies the type of customization to filter projects by. If no value is
+	// specified, CUSTOM_LABELS is used as a default.
+	Features []types.CustomizationFeature
+
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more results to
-	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of results.
+	// retrieve), Rekognition returns a pagination token in the response. You can use
+	// this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// A list of the projects that you want Amazon Rekognition Custom Labels to
-	// describe. If you don't specify a value, the response includes descriptions for
-	// all the projects in your AWS account.
+	// A list of the projects that you want Rekognition to describe. If you don't
+	// specify a value, the response includes descriptions for all the projects in your
+	// AWS account.
 	ProjectNames []string
 
 	noSmithyDocumentSerde
@@ -57,8 +60,8 @@ type DescribeProjectsInput struct {
 type DescribeProjectsOutput struct {
 
 	// If the previous response was incomplete (because there is more results to
-	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of results.
+	// retrieve), Amazon Rekognition returns a pagination token in the response. You
+	// can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
 	// A list of project descriptions. The list is sorted by the date and time the

@@ -15,10 +15,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the entries (images) within a dataset. An entry is a JSON Line that
-// contains the information for a single image, including the image location,
-// assigned labels, and object location bounding boxes. For more information, see
-// Creating a manifest file (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html)
+// This operation applies only to Amazon Rekognition Custom Labels. Lists the
+// entries (images) within a dataset. An entry is a JSON Line that contains the
+// information for a single image, including the image location, assigned labels,
+// and object location bounding boxes. For more information, see Creating a
+// manifest file (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html)
 // . JSON Lines in the response include information about non-terminal errors found
 // in the dataset. Non terminal errors are reported in errors lists within each
 // JSON Line. The same information is reported in the training and testing

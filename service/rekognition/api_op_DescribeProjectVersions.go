@@ -20,10 +20,10 @@ import (
 	"time"
 )
 
-// Lists and describes the versions of a model in an Amazon Rekognition Custom
-// Labels project. You can specify up to 10 model versions in ProjectVersionArns .
-// If you don't specify a value, descriptions for all model versions in the project
-// are returned. This operation requires permissions to perform the
+// Lists and describes the versions of an Amazon Rekognition project. You can
+// specify up to 10 model or adapter versions in ProjectVersionArns . If you don't
+// specify a value, descriptions for all model/adapter versions in the project are
+// returned. This operation requires permissions to perform the
 // rekognition:DescribeProjectVersions action.
 func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribeProjectVersionsInput, optFns ...func(*Options)) (*DescribeProjectVersionsOutput, error) {
 	if params == nil {
@@ -42,8 +42,8 @@ func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribePr
 
 type DescribeProjectVersionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the project that contains the models you want
-	// to describe.
+	// The Amazon Resource Name (ARN) of the project that contains the model/adapter
+	// you want to describe.
 	//
 	// This member is required.
 	ProjectArn *string
@@ -54,15 +54,15 @@ type DescribeProjectVersionsInput struct {
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more results to
-	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of results.
+	// retrieve), Amazon Rekognition returns a pagination token in the response. You
+	// can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// A list of model version names that you want to describe. You can add up to 10
-	// model version names to the list. If you don't specify a value, all model
-	// descriptions are returned. A version name is part of a model (ProjectVersion)
-	// ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the
-	// following ARN.
+	// A list of model or project version names that you want to describe. You can add
+	// up to 10 model or project version names to the list. If you don't specify a
+	// value, all project version descriptions are returned. A version name is part of
+	// a project version ARN. For example, my-model.2020-01-21T09.10.15 is the version
+	// name in the following ARN.
 	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123
 	// .
 	VersionNames []string
@@ -73,12 +73,12 @@ type DescribeProjectVersionsInput struct {
 type DescribeProjectVersionsOutput struct {
 
 	// If the previous response was incomplete (because there is more results to
-	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of results.
+	// retrieve), Amazon Rekognition returns a pagination token in the response. You
+	// can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// A list of model descriptions. The list is sorted by the creation date and time
-	// of the model versions, latest to earliest.
+	// A list of project version descriptions. The list is sorted by the creation date
+	// and time of the project versions, latest to earliest.
 	ProjectVersionDescriptions []types.ProjectVersionDescription
 
 	// Metadata pertaining to the operation's result.

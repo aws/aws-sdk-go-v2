@@ -67,7 +67,10 @@ type PutConformancePackInput struct {
 	// The location of the file containing the template body ( s3://bucketname/prefix
 	// ). The uri must point to a conformance pack template (max size: 300 KB) that is
 	// located in an Amazon S3 bucket in the same Region as the conformance pack. You
-	// must have access to read Amazon S3 bucket.
+	// must have access to read Amazon S3 bucket. In addition, in order to ensure a
+	// successful deployment, the template object must not be in an archived storage
+	// class (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
+	// if this parameter is passed.
 	TemplateS3Uri *string
 
 	// An object of type TemplateSSMDocumentDetails , which contains the name or the

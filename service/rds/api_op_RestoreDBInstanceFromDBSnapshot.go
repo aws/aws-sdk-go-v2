@@ -156,6 +156,9 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
+	// Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
+	DedicatedLogVolume *bool
+
 	// Specifies whether to enable deletion protection for the DB instance. The
 	// database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection isn't enabled. For more information, see Deleting a DB

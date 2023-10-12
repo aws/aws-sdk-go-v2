@@ -16,8 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
-// describe images. For more information, see Labeling images (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html)
+// This operation applies only to Amazon Rekognition Custom Labels. Lists the
+// labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe
+// images. For more information, see Labeling images (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html)
 // . Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
 // describe images. For more information, see Labeling images in the Amazon
 // Rekognition Custom Labels Developer Guide.

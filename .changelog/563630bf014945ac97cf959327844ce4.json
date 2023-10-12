@@ -1,0 +1,8 @@
+{
+    "id": "563630bf-0149-45ac-97cf-959327844ce4",
+    "type": "feature",
+    "description": "This release adds endpoint updates for all AWS Location resource operations.",
+    "modules": [
+        "service/location"
+    ]
+}

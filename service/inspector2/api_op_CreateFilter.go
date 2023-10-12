@@ -16,7 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a filter resource using specified filter criteria.
+// Creates a filter resource using specified filter criteria. When the filter
+// action is set to SUPPRESS this action creates a suppression rule.
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}

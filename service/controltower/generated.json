@@ -12,6 +12,7 @@
         "api_op_DisableControl.go",
         "api_op_EnableControl.go",
         "api_op_GetControlOperation.go",
+        "api_op_GetEnabledControl.go",
         "api_op_ListEnabledControls.go",
         "deserializers.go",
         "doc.go",

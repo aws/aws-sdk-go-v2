@@ -4240,6 +4240,56 @@ func awsAwsjson11_serializeDocumentCreateFaceLivenessSessionRequestSettings(v *t
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomizationFeatureConfig(v *types.CustomizationFeatureConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContentModeration != nil {
+		ok := object.Key("ContentModeration")
+		if err := awsAwsjson11_serializeDocumentCustomizationFeatureContentModerationConfig(v.ContentModeration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomizationFeatureContentModerationConfig(v *types.CustomizationFeatureContentModerationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfidenceThreshold != nil {
+		ok := object.Key("ConfidenceThreshold")
+		switch {
+		case math.IsNaN(float64(*v.ConfidenceThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.ConfidenceThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.ConfidenceThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.ConfidenceThreshold)
+
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomizationFeatures(v []types.CustomizationFeature, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDatasetChanges(v *types.DatasetChanges, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5431,6 +5481,16 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AutoUpdate) > 0 {
+		ok := object.Key("AutoUpdate")
+		ok.String(string(v.AutoUpdate))
+	}
+
+	if len(v.Feature) > 0 {
+		ok := object.Key("Feature")
+		ok.String(string(v.Feature))
+	}
+
 	if v.ProjectName != nil {
 		ok := object.Key("ProjectName")
 		ok.String(*v.ProjectName)
@@ -5442,6 +5502,13 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 func awsAwsjson11_serializeOpDocumentCreateProjectVersionInput(v *CreateProjectVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FeatureConfig != nil {
+		ok := object.Key("FeatureConfig")
+		if err := awsAwsjson11_serializeDocumentCustomizationFeatureConfig(v.FeatureConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
@@ -5479,6 +5546,11 @@ func awsAwsjson11_serializeOpDocumentCreateProjectVersionInput(v *CreateProjectV
 		if err := awsAwsjson11_serializeDocumentTrainingData(v.TrainingData, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VersionDescription != nil {
+		ok := object.Key("VersionDescription")
+		ok.String(*v.VersionDescription)
 	}
 
 	if v.VersionName != nil {
@@ -5733,6 +5805,13 @@ func awsAwsjson11_serializeOpDocumentDescribeProjectsInput(v *DescribeProjectsIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.Features != nil {
+		ok := object.Key("Features")
+		if err := awsAwsjson11_serializeDocumentCustomizationFeatures(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -5942,6 +6021,11 @@ func awsAwsjson11_serializeOpDocumentDetectModerationLabelsInput(v *DetectModera
 			ok.Float(*v.MinConfidence)
 
 		}
+	}
+
+	if v.ProjectVersion != nil {
+		ok := object.Key("ProjectVersion")
+		ok.String(*v.ProjectVersion)
 	}
 
 	return nil

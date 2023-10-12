@@ -18,13 +18,14 @@ import (
 
 // Create a new FeatureGroup . A FeatureGroup is a group of Features defined in
 // the FeatureStore to describe a Record . The FeatureGroup defines the schema and
-// features contained in the FeatureGroup. A FeatureGroup definition is composed
+// features contained in the FeatureGroup . A FeatureGroup definition is composed
 // of a list of Features , a RecordIdentifierFeatureName , an EventTimeFeatureName
 // and configurations for its OnlineStore and OfflineStore . Check Amazon Web
 // Services service quotas (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
-// to see the FeatureGroup s quota for your Amazon Web Services account. You must
-// include at least one of OnlineStoreConfig and OfflineStoreConfig to create a
-// FeatureGroup .
+// to see the FeatureGroup s quota for your Amazon Web Services account. Note that
+// it can take approximately 10-15 minutes to provision an OnlineStore FeatureGroup
+// with the InMemory StorageType . You must include at least one of
+// OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup .
 func (c *Client) CreateFeatureGroup(ctx context.Context, params *CreateFeatureGroupInput, optFns ...func(*Options)) (*CreateFeatureGroupOutput, error) {
 	if params == nil {
 		params = &CreateFeatureGroupInput{}

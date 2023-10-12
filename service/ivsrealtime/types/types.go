@@ -49,15 +49,33 @@ type Participant struct {
 	// not be used for personally identifying, confidential, or sensitive information.
 	Attributes map[string]string
 
+	// The participant’s browser.
+	BrowserName *string
+
+	// The participant’s browser version.
+	BrowserVersion *string
+
 	// ISO 8601 timestamp (returned as a string) when the participant first joined the
 	// stage session.
 	FirstJoinTime *time.Time
+
+	// The participant’s Internet Service Provider.
+	IspName *string
+
+	// The participant’s operating system.
+	OsName *string
+
+	// The participant’s operating system version.
+	OsVersion *string
 
 	// Unique identifier for this participant, assigned by IVS.
 	ParticipantId *string
 
 	// Whether the participant ever published to the stage session.
 	Published bool
+
+	// The participant’s SDK version.
+	SdkVersion *string
 
 	// Whether the participant is connected to or disconnected from the stage.
 	State ParticipantState

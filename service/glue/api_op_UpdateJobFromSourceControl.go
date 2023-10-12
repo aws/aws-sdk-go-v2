@@ -56,10 +56,13 @@ type UpdateJobFromSourceControlInput struct {
 	// The name of the Glue job to be synchronized to or from the remote repository.
 	JobName *string
 
-	// The provider for the remote repository.
+	// The provider for the remote repository. Possible values: GITHUB,
+	// AWS_CODE_COMMIT, GITLAB, BITBUCKET.
 	Provider types.SourceControlProvider
 
-	// The name of the remote repository that contains the job artifacts.
+	// The name of the remote repository that contains the job artifacts. For
+	// BitBucket providers, RepositoryName should include WorkspaceName . Use the
+	// format / .
 	RepositoryName *string
 
 	// The owner of the remote repository that contains the job artifacts.

@@ -1458,6 +1458,9 @@ type DBInstance struct {
 	// whenever the Amazon Web Services KMS key for the DB instance is accessed.
 	DbiResourceId *string
 
+	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+	DedicatedLogVolume bool
+
 	// Indicates whether the DB instance has deletion protection enabled. The database
 	// can't be deleted when deletion protection is enabled. For more information, see
 	// Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
@@ -1718,6 +1721,9 @@ type DBInstanceAutomatedBackup struct {
 	// The resource ID for the source DB instance, which can't be changed and which is
 	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
+
+	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+	DedicatedLogVolume *bool
 
 	// Indicates whether the automated backup is encrypted.
 	Encrypted bool
@@ -2167,6 +2173,9 @@ type DBSnapshot struct {
 	// The identifier for the source DB instance, which can't be changed and which is
 	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
+
+	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+	DedicatedLogVolume bool
 
 	// Indicates whether the DB snapshot is encrypted.
 	Encrypted bool
@@ -3169,6 +3178,9 @@ type OrderableDBInstanceOption struct {
 	// in the Amazon RDS User Guide.
 	SupportsClusters bool
 
+	// Indicates whether a DB instance supports using a dedicated log volume (DLV).
+	SupportsDedicatedLogVolume bool
+
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from
 	// 1 to 60 seconds.
 	SupportsEnhancedMonitoring bool
@@ -3340,6 +3352,9 @@ type PendingModifiedValues struct {
 
 	// The DB subnet group for the DB instance.
 	DBSubnetGroupName *string
+
+	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.>
+	DedicatedLogVolume *bool
 
 	// The database engine of the DB instance.
 	Engine *string
@@ -3938,6 +3953,9 @@ type ValidDBInstanceModificationsMessage struct {
 
 	// Valid storage options for your DB instance.
 	Storage []ValidStorageOptions
+
+	// Indicates whether a DB instance supports using a dedicated log volume (DLV).
+	SupportsDedicatedLogVolume bool
 
 	// Valid processor features for your DB instance.
 	ValidProcessorFeatures []AvailableProcessorFeature

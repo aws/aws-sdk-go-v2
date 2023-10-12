@@ -2044,13 +2044,19 @@ type CandidateProperties struct {
 // The SageMaker Canvas application settings.
 type CanvasAppSettings struct {
 
+	// The model deployment settings for the SageMaker Canvas application.
+	DirectDeploySettings *DirectDeploySettings
+
 	// The settings for connecting to an external data source with OAuth.
 	IdentityProviderOAuthSettings []IdentityProviderOAuthSetting
+
+	// The settings for document querying.
+	KendraSettings *KendraSettings
 
 	// The model registry settings for the SageMaker Canvas application.
 	ModelRegisterSettings *ModelRegisterSettings
 
-	// Time series forecast settings for the Canvas application.
+	// Time series forecast settings for the SageMaker Canvas application.
 	TimeSeriesForecastingSettings *TimeSeriesForecastingSettings
 
 	// The workspace settings for the SageMaker Canvas application.
@@ -3563,6 +3569,21 @@ type DeviceSummary struct {
 
 	// The timestamp of the last registration or de-reregistration.
 	RegistrationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The model deployment settings for the SageMaker Canvas application. In order to
+// enable model deployment for Canvas, the SageMaker Domain's or user profile's
+// Amazon Web Services IAM execution role must have the
+// AmazonSageMakerCanvasDirectDeployAccess policy attached. You can also turn on
+// model deployment permissions through the SageMaker Domain's or user profile's
+// settings in the SageMaker console.
+type DirectDeploySettings struct {
+
+	// Describes whether model deployment permissions are enabled or disabled in the
+	// Canvas application.
+	Status FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -6598,7 +6619,7 @@ type IamIdentity struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon SageMaker Canvas app setting where you configure OAuth for
+// The Amazon SageMaker Canvas application setting where you configure OAuth for
 // connecting to an external data source, such as Snowflake.
 type IdentityProviderOAuthSetting struct {
 
@@ -7231,6 +7252,17 @@ type JupyterServerAppSettings struct {
 	// is also required. To remove a Lifecycle Config, you must set LifecycleConfigArns
 	// to an empty list.
 	LifecycleConfigArns []string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon SageMaker Canvas application setting where you configure document
+// querying.
+type KendraSettings struct {
+
+	// Describes whether the document querying feature is enabled or disabled in the
+	// Canvas application.
+	Status FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -12910,7 +12942,11 @@ type SelectiveExecutionConfig struct {
 
 	// The ARN from a reference execution of the current pipeline. Used to copy input
 	// collaterals needed for the selected steps to run. The execution status of the
-	// pipeline can be either Failed or Success .
+	// pipeline can be either Failed or Success . This field is required if the steps
+	// you specify for SelectedSteps depend on output collaterals from any
+	// non-specified pipeline steps. For more information, see Selective Execution for
+	// Pipeline Steps (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html)
+	// .
 	SourcePipelineExecutionArn *string
 
 	noSmithyDocumentSerde

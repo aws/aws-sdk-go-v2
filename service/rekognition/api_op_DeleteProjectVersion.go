@@ -16,12 +16,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Rekognition Custom Labels model. You can't delete a model if
-// it is running or if it is training. To check the status of a model, use the
-// Status field returned from DescribeProjectVersions . To stop a running model
-// call StopProjectVersion . If the model is training, wait until it finishes. This
-// operation requires permissions to perform the rekognition:DeleteProjectVersion
-// action.
+// Deletes a Rekognition project model or project version, like a Amazon
+// Rekognition Custom Labels model or a custom adapter. You can't delete a project
+// version if it is running or if it is training. To check the status of a project
+// version, use the Status field returned from DescribeProjectVersions . To stop a
+// project version call StopProjectVersion . If the project version is training,
+// wait until it finishes. This operation requires permissions to perform the
+// rekognition:DeleteProjectVersion action.
 func (c *Client) DeleteProjectVersion(ctx context.Context, params *DeleteProjectVersionInput, optFns ...func(*Options)) (*DeleteProjectVersionOutput, error) {
 	if params == nil {
 		params = &DeleteProjectVersionInput{}
@@ -39,7 +40,7 @@ func (c *Client) DeleteProjectVersion(ctx context.Context, params *DeleteProject
 
 type DeleteProjectVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the model version that you want to delete.
+	// The Amazon Resource Name (ARN) of the project version that you want to delete.
 	//
 	// This member is required.
 	ProjectVersionArn *string

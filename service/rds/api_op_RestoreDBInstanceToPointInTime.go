@@ -122,6 +122,9 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
+	// Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
+	DedicatedLogVolume *bool
+
 	// Specifies whether the DB instance has deletion protection enabled. The database
 	// can't be deleted when deletion protection is enabled. By default, deletion
 	// protection isn't enabled. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)

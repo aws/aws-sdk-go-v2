@@ -29310,6 +29310,22 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				sv.DBSystemId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DedicatedLogVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.DedicatedLogVolume = xtv
+			}
+
 		case strings.EqualFold("DeletionProtection", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -30111,6 +30127,22 @@ func awsAwsquery_deserializeDocumentDBInstanceAutomatedBackup(v **types.DBInstan
 			{
 				xtv := string(val)
 				sv.DbiResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DedicatedLogVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.DedicatedLogVolume = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Encrypted", t.Name.Local):
@@ -33600,6 +33632,22 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 			{
 				xtv := string(val)
 				sv.DBSystemId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DedicatedLogVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.DedicatedLogVolume = xtv
 			}
 
 		case strings.EqualFold("Encrypted", t.Name.Local):
@@ -41942,6 +41990,22 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				sv.SupportsClusters = xtv
 			}
 
+		case strings.EqualFold("SupportsDedicatedLogVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsDedicatedLogVolume = xtv
+			}
+
 		case strings.EqualFold("SupportsEnhancedMonitoring", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -42905,6 +42969,22 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 			{
 				xtv := string(val)
 				sv.DBSubnetGroupName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DedicatedLogVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.DedicatedLogVolume = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Engine", t.Name.Local):
@@ -47328,6 +47408,22 @@ func awsAwsquery_deserializeDocumentValidDBInstanceModificationsMessage(v **type
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentValidStorageOptionsList(&sv.Storage, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SupportsDedicatedLogVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsDedicatedLogVolume = xtv
 			}
 
 		case strings.EqualFold("ValidProcessorFeatures", t.Name.Local):

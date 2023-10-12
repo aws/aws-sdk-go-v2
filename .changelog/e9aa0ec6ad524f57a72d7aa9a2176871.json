@@ -1,0 +1,8 @@
+{
+    "id": "e9aa0ec6-ad52-4f57-a72d-7aa9a2176871",
+    "type": "feature",
+    "description": "This release adds 9 new APIs for adapter and adapter version management, 3 new APIs for tagging, and updates AnalyzeDocument and StartDocumentAnalysis API parameters for using adapters.",
+    "modules": [
+        "service/textract"
+    ]
+}

@@ -123,6 +123,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
+	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+	DedicatedLogVolume *bool
+
 	// Specifies whether to enable deletion protection for the DB instance. The
 	// database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection isn't enabled. For more information, see Deleting a DB

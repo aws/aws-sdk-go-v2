@@ -17847,9 +17847,23 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 	object := value.Object()
 	defer object.Close()
 
+	if v.DirectDeploySettings != nil {
+		ok := object.Key("DirectDeploySettings")
+		if err := awsAwsjson11_serializeDocumentDirectDeploySettings(v.DirectDeploySettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdentityProviderOAuthSettings != nil {
 		ok := object.Key("IdentityProviderOAuthSettings")
 		if err := awsAwsjson11_serializeDocumentIdentityProviderOAuthSettings(v.IdentityProviderOAuthSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KendraSettings != nil {
+		ok := object.Key("KendraSettings")
+		if err := awsAwsjson11_serializeDocumentKendraSettings(v.KendraSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -19324,6 +19338,18 @@ func awsAwsjson11_serializeDocumentDeviceSelectionConfig(v *types.DeviceSelectio
 	if v.Percentage != 0 {
 		ok := object.Key("Percentage")
 		ok.Integer(v.Percentage)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDirectDeploySettings(v *types.DirectDeploySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil
@@ -21203,6 +21229,18 @@ func awsAwsjson11_serializeDocumentJupyterServerAppSettings(v *types.JupyterServ
 		if err := awsAwsjson11_serializeDocumentLifecycleConfigArns(v.LifecycleConfigArns, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentKendraSettings(v *types.KendraSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

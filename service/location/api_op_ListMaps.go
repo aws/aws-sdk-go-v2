@@ -157,7 +157,7 @@ func (m *endpointPrefix_opListMapsMiddleware) HandleSerialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "maps." + req.URL.Host
+	req.URL.Host = "cp.maps." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

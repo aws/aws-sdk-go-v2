@@ -1,0 +1,8 @@
+{
+    "id": "f7451f66-8c6a-4ef1-8eb4-5dd71dc324ee",
+    "type": "feature",
+    "description": "This release is to enable m4a format to customers",
+    "modules": [
+        "service/transcribe"
+    ]
+}

@@ -1690,6 +1690,8 @@ type SourceControlProvider string
 // Enum values for SourceControlProvider
 const (
 	SourceControlProviderGithub        SourceControlProvider = "GITHUB"
+	SourceControlProviderGitlab        SourceControlProvider = "GITLAB"
+	SourceControlProviderBitbucket     SourceControlProvider = "BITBUCKET"
 	SourceControlProviderAwsCodeCommit SourceControlProvider = "AWS_CODE_COMMIT"
 )
 
@@ -1699,6 +1701,8 @@ const (
 func (SourceControlProvider) Values() []SourceControlProvider {
 	return []SourceControlProvider{
 		"GITHUB",
+		"GITLAB",
+		"BITBUCKET",
 		"AWS_CODE_COMMIT",
 	}
 }

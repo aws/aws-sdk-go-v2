@@ -4,7 +4,125 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
+
+// An adapter selected for use when analyzing documents. Contains an adapter ID
+// and a version number. Contains information on pages selected for analysis when
+// analyzing documents asychronously.
+type Adapter struct {
+
+	// A unique identifier for the adapter resource.
+	//
+	// This member is required.
+	AdapterId *string
+
+	// A string that identifies the version of the adapter.
+	//
+	// This member is required.
+	Version *string
+
+	// Pages is a parameter that the user inputs to specify which pages to apply an
+	// adapter to. The following is a list of rules for using this parameter.
+	//   - If a page is not specified, it is set to ["1"] by default.
+	//   - The following characters are allowed in the parameter's string: 0 1 2 3 4 5
+	//   6 7 8 9 - * . No whitespace is allowed.
+	//   - When using * to indicate all pages, it must be the only element in the
+	//   list.
+	//   - You can use page intervals, such as ["1-3", "1-1", "4-*"] . Where *
+	//   indicates last page of document.
+	//   - Specified pages must be greater than 0 and less than or equal to the number
+	//   of pages in the document.
+	Pages []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on the adapter, including the adapter ID, Name, Creation
+// time, and feature types.
+type AdapterOverview struct {
+
+	// A unique identifier for the adapter resource.
+	AdapterId *string
+
+	// A string naming the adapter resource.
+	AdapterName *string
+
+	// The date and time that the adapter was created.
+	CreationTime *time.Time
+
+	// The feature types that the adapter is operating on.
+	FeatureTypes []FeatureType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about adapters used when analyzing a document, with each
+// adapter specified using an AdapterId and version
+type AdaptersConfig struct {
+
+	// A list of adapters to be used when analyzing the specified document.
+	//
+	// This member is required.
+	Adapters []Adapter
+
+	noSmithyDocumentSerde
+}
+
+// The dataset configuration options for a given version of an adapter. Can
+// include an Amazon S3 bucket if specified.
+type AdapterVersionDatasetConfig struct {
+
+	// The S3 bucket name and file name that identifies the document. The AWS Region
+	// for the S3 bucket that contains the document must match the Region that you use
+	// for Amazon Textract operations. For Amazon Textract to process a file in an S3
+	// bucket, the user must have permission to access the S3 bucket and file.
+	ManifestS3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on the metrics used to evalute the peformance of a given
+// adapter version. Includes data for baseline model performance and individual
+// adapter version perfromance.
+type AdapterVersionEvaluationMetric struct {
+
+	// The F1 score, precision, and recall metrics for the baseline model.
+	AdapterVersion *EvaluationMetric
+
+	// The F1 score, precision, and recall metrics for the baseline model.
+	Baseline *EvaluationMetric
+
+	// Indicates the feature type being analyzed by a given adapter version.
+	FeatureType FeatureType
+
+	noSmithyDocumentSerde
+}
+
+// Summary info for an adapter version. Contains information on the AdapterId,
+// AdapterVersion, CreationTime, FeatureTypes, and Status.
+type AdapterVersionOverview struct {
+
+	// A unique identifier for the adapter associated with a given adapter version.
+	AdapterId *string
+
+	// An identified for a given adapter version.
+	AdapterVersion *string
+
+	// The date and time that a given adapter version was created.
+	CreationTime *time.Time
+
+	// The feature types that the adapter version is operating on.
+	FeatureTypes []FeatureType
+
+	// Contains information on the status of a given adapter version.
+	Status AdapterVersionStatus
+
+	// A message explaining the status of a given adapter vesion.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
 
 // Used to contain the information detected by an AnalyzeID operation.
 type AnalyzeIDDetections struct {
@@ -78,6 +196,18 @@ type Block struct {
 	//   - QUERY_RESULT - A response to a question asked during the call of analyze
 	//   document. Comes with an alias and ID for ease of locating in a response. Also
 	//   contains location and confidence score.
+	// The following BlockTypes are only returned for Amazon Textract Layout.
+	//   - LAYOUT_TITLE - The main title of the document.
+	//   - LAYOUT_HEADER - Text located in the top margin of the document.
+	//   - LAYOUT_FOOTER - Text located in the bottom margin of the document.
+	//   - LAYOUT_SECTION_HEADER - The titles of sections within a document.
+	//   - LAYOUT_PAGE_NUMBER - The page number of the documents.
+	//   - LAYOUT_LIST - Any information grouped together in list form.
+	//   - LAYOUT_FIGURE - Indicates the location of an image in a document.
+	//   - LAYOUT_TABLE - Indicates the location of a table in the document.
+	//   - LAYOUT_KEY_VALUE - Indicates the location of form key-values in a document.
+	//   - LAYOUT_TEXT - Text that is present typically as a part of paragraphs in
+	//   documents.
 	BlockType BlockType
 
 	// The column in which a table cell appears. The first column position is 1.
@@ -266,6 +396,21 @@ type DocumentMetadata struct {
 
 	// The number of pages that are detected in the document.
 	Pages *int32
+
+	noSmithyDocumentSerde
+}
+
+// The evaluation metrics (F1 score, Precision, and Recall) for an adapter version.
+type EvaluationMetric struct {
+
+	// The F1 score for an adapter version.
+	F1Score float32
+
+	// The Precision score for an adapter version.
+	Precision float32
+
+	// The Recall score for an adapter version.
+	Recall float32
 
 	noSmithyDocumentSerde
 }

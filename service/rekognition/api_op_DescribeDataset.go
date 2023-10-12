@@ -16,9 +16,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an Amazon Rekognition Custom Labels dataset. You can get information
-// such as the current status of a dataset and statistics about the images and
-// labels in a dataset. This operation requires permissions to perform the
+// This operation applies only to Amazon Rekognition Custom Labels. Describes an
+// Amazon Rekognition Custom Labels dataset. You can get information such as the
+// current status of a dataset and statistics about the images and labels in a
+// dataset. This operation requires permissions to perform the
 // rekognition:DescribeDataset action.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {

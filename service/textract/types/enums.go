@@ -2,6 +2,48 @@
 
 package types
 
+type AdapterVersionStatus string
+
+// Enum values for AdapterVersionStatus
+const (
+	AdapterVersionStatusActive             AdapterVersionStatus = "ACTIVE"
+	AdapterVersionStatusAtRisk             AdapterVersionStatus = "AT_RISK"
+	AdapterVersionStatusDeprecated         AdapterVersionStatus = "DEPRECATED"
+	AdapterVersionStatusCreationError      AdapterVersionStatus = "CREATION_ERROR"
+	AdapterVersionStatusCreationInProgress AdapterVersionStatus = "CREATION_IN_PROGRESS"
+)
+
+// Values returns all known values for AdapterVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdapterVersionStatus) Values() []AdapterVersionStatus {
+	return []AdapterVersionStatus{
+		"ACTIVE",
+		"AT_RISK",
+		"DEPRECATED",
+		"CREATION_ERROR",
+		"CREATION_IN_PROGRESS",
+	}
+}
+
+type AutoUpdate string
+
+// Enum values for AutoUpdate
+const (
+	AutoUpdateEnabled  AutoUpdate = "ENABLED"
+	AutoUpdateDisabled AutoUpdate = "DISABLED"
+)
+
+// Values returns all known values for AutoUpdate. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AutoUpdate) Values() []AutoUpdate {
+	return []AutoUpdate{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type BlockType string
 
 // Enum values for BlockType

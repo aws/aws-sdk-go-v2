@@ -170,6 +170,100 @@ func (c *Client) addOperationDescribeLoadBalancerTargetGroupsMiddlewares(stack *
 	return nil
 }
 
+// DescribeLoadBalancerTargetGroupsAPIClient is a client that implements the
+// DescribeLoadBalancerTargetGroups operation.
+type DescribeLoadBalancerTargetGroupsAPIClient interface {
+	DescribeLoadBalancerTargetGroups(context.Context, *DescribeLoadBalancerTargetGroupsInput, ...func(*Options)) (*DescribeLoadBalancerTargetGroupsOutput, error)
+}
+
+var _ DescribeLoadBalancerTargetGroupsAPIClient = (*Client)(nil)
+
+// DescribeLoadBalancerTargetGroupsPaginatorOptions is the paginator options for
+// DescribeLoadBalancerTargetGroups
+type DescribeLoadBalancerTargetGroupsPaginatorOptions struct {
+	// The maximum number of items to return with this call. The default value is 100
+	// and the maximum value is 100 .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLoadBalancerTargetGroupsPaginator is a paginator for
+// DescribeLoadBalancerTargetGroups
+type DescribeLoadBalancerTargetGroupsPaginator struct {
+	options   DescribeLoadBalancerTargetGroupsPaginatorOptions
+	client    DescribeLoadBalancerTargetGroupsAPIClient
+	params    *DescribeLoadBalancerTargetGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLoadBalancerTargetGroupsPaginator returns a new
+// DescribeLoadBalancerTargetGroupsPaginator
+func NewDescribeLoadBalancerTargetGroupsPaginator(client DescribeLoadBalancerTargetGroupsAPIClient, params *DescribeLoadBalancerTargetGroupsInput, optFns ...func(*DescribeLoadBalancerTargetGroupsPaginatorOptions)) *DescribeLoadBalancerTargetGroupsPaginator {
+	if params == nil {
+		params = &DescribeLoadBalancerTargetGroupsInput{}
+	}
+
+	options := DescribeLoadBalancerTargetGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeLoadBalancerTargetGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLoadBalancerTargetGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeLoadBalancerTargetGroups page.
+func (p *DescribeLoadBalancerTargetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLoadBalancerTargetGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeLoadBalancerTargetGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeLoadBalancerTargetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

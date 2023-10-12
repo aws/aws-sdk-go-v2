@@ -321,6 +321,7 @@ const (
 	Ec2PlatformWindows Ec2Platform = "WINDOWS"
 	Ec2PlatformLinux   Ec2Platform = "LINUX"
 	Ec2PlatformUnknown Ec2Platform = "UNKNOWN"
+	Ec2PlatformMacos   Ec2Platform = "MACOS"
 )
 
 // Values returns all known values for Ec2Platform. Note that this can be expanded
@@ -331,6 +332,7 @@ func (Ec2Platform) Values() []Ec2Platform {
 		"WINDOWS",
 		"LINUX",
 		"UNKNOWN",
+		"MACOS",
 	}
 }
 

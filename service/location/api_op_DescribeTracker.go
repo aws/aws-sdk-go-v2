@@ -214,7 +214,7 @@ func (m *endpointPrefix_opDescribeTrackerMiddleware) HandleSerialize(ctx context
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "tracking." + req.URL.Host
+	req.URL.Host = "cp.tracking." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

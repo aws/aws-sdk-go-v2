@@ -39,3 +39,45 @@ func (ControlOperationType) Values() []ControlOperationType {
 		"DISABLE_CONTROL",
 	}
 }
+
+type DriftStatus string
+
+// Enum values for DriftStatus
+const (
+	DriftStatusDrifted     DriftStatus = "DRIFTED"
+	DriftStatusInSync      DriftStatus = "IN_SYNC"
+	DriftStatusNotChecking DriftStatus = "NOT_CHECKING"
+	DriftStatusUnknown     DriftStatus = "UNKNOWN"
+)
+
+// Values returns all known values for DriftStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DriftStatus) Values() []DriftStatus {
+	return []DriftStatus{
+		"DRIFTED",
+		"IN_SYNC",
+		"NOT_CHECKING",
+		"UNKNOWN",
+	}
+}
+
+type EnablementStatus string
+
+// Enum values for EnablementStatus
+const (
+	EnablementStatusSucceeded   EnablementStatus = "SUCCEEDED"
+	EnablementStatusFailed      EnablementStatus = "FAILED"
+	EnablementStatusUnderChange EnablementStatus = "UNDER_CHANGE"
+)
+
+// Values returns all known values for EnablementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnablementStatus) Values() []EnablementStatus {
+	return []EnablementStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"UNDER_CHANGE",
+	}
+}

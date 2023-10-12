@@ -225,7 +225,7 @@ func (m *endpointPrefix_opCreatePlaceIndexMiddleware) HandleSerialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "places." + req.URL.Host
+	req.URL.Host = "cp.places." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

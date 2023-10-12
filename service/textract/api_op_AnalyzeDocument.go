@@ -76,14 +76,14 @@ type AnalyzeDocumentInput struct {
 	// information about the tables that are detected in the input document. Add FORMS
 	// to return detected form data. Add SIGNATURES to return the locations of detected
 	// signatures. Add LAYOUT to the list to return information about the layout of the
-	// document. To perform both forms and table analysis, add TABLES and FORMS to
-	// FeatureTypes . To detect signatures within the document and within form data and
-	// table data, add SIGNATURES to either TABLES or FORMS. All lines and words
-	// detected in the document are included in the response (including text that isn't
-	// related to the value of FeatureTypes ).
+	// document. All lines and words detected in the document are included in the
+	// response (including text that isn't related to the value of FeatureTypes ).
 	//
 	// This member is required.
 	FeatureTypes []types.FeatureType
+
+	// Specifies the adapter to be used when analyzing a document.
+	AdaptersConfig *types.AdaptersConfig
 
 	// Sets the configuration for the human in the loop workflow for analyzing
 	// documents.

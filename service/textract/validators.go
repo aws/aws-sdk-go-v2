@@ -70,6 +70,86 @@ func (m *validateOpAnalyzeID) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAdapter struct {
+}
+
+func (*validateOpCreateAdapter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAdapter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAdapterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAdapterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAdapterVersion struct {
+}
+
+func (*validateOpCreateAdapterVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAdapterVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAdapterVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAdapterVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAdapter struct {
+}
+
+func (*validateOpDeleteAdapter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAdapter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAdapterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAdapterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAdapterVersion struct {
+}
+
+func (*validateOpDeleteAdapterVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAdapterVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAdapterVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAdapterVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDetectDocumentText struct {
 }
 
@@ -85,6 +165,46 @@ func (m *validateOpDetectDocumentText) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDetectDocumentTextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAdapter struct {
+}
+
+func (*validateOpGetAdapter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAdapter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAdapterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAdapterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAdapterVersion struct {
+}
+
+func (*validateOpGetAdapterVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAdapterVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAdapterVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAdapterVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +310,26 @@ func (m *validateOpGetLendingAnalysisSummary) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDocumentAnalysis struct {
 }
 
@@ -270,6 +410,66 @@ func (m *validateOpStartLendingAnalysis) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAdapter struct {
+}
+
+func (*validateOpUpdateAdapter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAdapter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAdapterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAdapterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAnalyzeDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAnalyzeDocument{}, middleware.After)
 }
@@ -282,8 +482,32 @@ func addOpAnalyzeIDValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAnalyzeID{}, middleware.After)
 }
 
+func addOpCreateAdapterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAdapter{}, middleware.After)
+}
+
+func addOpCreateAdapterVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAdapterVersion{}, middleware.After)
+}
+
+func addOpDeleteAdapterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAdapter{}, middleware.After)
+}
+
+func addOpDeleteAdapterVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAdapterVersion{}, middleware.After)
+}
+
 func addOpDetectDocumentTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetectDocumentText{}, middleware.After)
+}
+
+func addOpGetAdapterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAdapter{}, middleware.After)
+}
+
+func addOpGetAdapterVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAdapterVersion{}, middleware.After)
 }
 
 func addOpGetDocumentAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -306,6 +530,10 @@ func addOpGetLendingAnalysisSummaryValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetLendingAnalysisSummary{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpStartDocumentAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDocumentAnalysis{}, middleware.After)
 }
@@ -320,6 +548,72 @@ func addOpStartExpenseAnalysisValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpStartLendingAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartLendingAnalysis{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAdapterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAdapter{}, middleware.After)
+}
+
+func validateAdapter(v *types.Adapter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Adapter"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdapters(v []types.Adapter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Adapters"}
+	for i := range v {
+		if err := validateAdapter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdaptersConfig(v *types.AdaptersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdaptersConfig"}
+	if v.Adapters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Adapters"))
+	} else if v.Adapters != nil {
+		if err := validateAdapters(v.Adapters); err != nil {
+			invalidParams.AddNested("Adapters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateHumanLoopConfig(v *types.HumanLoopConfig) error {
@@ -445,6 +739,11 @@ func validateOpAnalyzeDocumentInput(v *AnalyzeDocumentInput) error {
 			invalidParams.AddNested("QueriesConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AdaptersConfig != nil {
+		if err := validateAdaptersConfig(v.AdaptersConfig); err != nil {
+			invalidParams.AddNested("AdaptersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -482,6 +781,82 @@ func validateOpAnalyzeIDInput(v *AnalyzeIDInput) error {
 	}
 }
 
+func validateOpCreateAdapterInput(v *CreateAdapterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAdapterInput"}
+	if v.AdapterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterName"))
+	}
+	if v.FeatureTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAdapterVersionInput(v *CreateAdapterVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAdapterVersionInput"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.DatasetConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetConfig"))
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAdapterInput(v *DeleteAdapterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAdapterInput"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAdapterVersionInput(v *DeleteAdapterVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAdapterVersionInput"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.AdapterVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDetectDocumentTextInput(v *DetectDocumentTextInput) error {
 	if v == nil {
 		return nil
@@ -489,6 +864,39 @@ func validateOpDetectDocumentTextInput(v *DetectDocumentTextInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DetectDocumentTextInput"}
 	if v.Document == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Document"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAdapterInput(v *GetAdapterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAdapterInput"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAdapterVersionInput(v *GetAdapterVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAdapterVersionInput"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.AdapterVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -572,6 +980,21 @@ func validateOpGetLendingAnalysisSummaryInput(v *GetLendingAnalysisSummaryInput)
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -596,6 +1019,11 @@ func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 	if v.QueriesConfig != nil {
 		if err := validateQueriesConfig(v.QueriesConfig); err != nil {
 			invalidParams.AddNested("QueriesConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdaptersConfig != nil {
+		if err := validateAdaptersConfig(v.AdaptersConfig); err != nil {
+			invalidParams.AddNested("AdaptersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -672,6 +1100,57 @@ func validateOpStartLendingAnalysisInput(v *StartLendingAnalysisInput) error {
 		if err := validateOutputConfig(v.OutputConfig); err != nil {
 			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAdapterInput(v *UpdateAdapterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAdapterInput"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

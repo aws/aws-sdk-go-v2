@@ -3533,6 +3533,12 @@ func awsAwsjson11_deserializeOpErrorDetectModerationLabels(response *smithyhttp.
 	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
@@ -12000,6 +12006,107 @@ func awsAwsjson11_deserializeDocumentCoversBodyPart(v **types.CoversBodyPart, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomizationFeatureConfig(v **types.CustomizationFeatureConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomizationFeatureConfig
+	if *v == nil {
+		sv = &types.CustomizationFeatureConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContentModeration":
+			if err := awsAwsjson11_deserializeDocumentCustomizationFeatureContentModerationConfig(&sv.ContentModeration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomizationFeatureContentModerationConfig(v **types.CustomizationFeatureContentModerationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomizationFeatureContentModerationConfig
+	if *v == nil {
+		sv = &types.CustomizationFeatureContentModerationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConfidenceThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ConfidenceThreshold = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ConfidenceThreshold = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Percent to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCustomLabel(v **types.CustomLabel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17303,6 +17410,15 @@ func awsAwsjson11_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 
 	for key, value := range shape {
 		switch key {
+		case "AutoUpdate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectAutoUpdate to be of type string, got %T instead", value)
+				}
+				sv.AutoUpdate = types.ProjectAutoUpdate(jtv)
+			}
+
 		case "CreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17322,6 +17438,15 @@ func awsAwsjson11_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 		case "Datasets":
 			if err := awsAwsjson11_deserializeDocumentDatasetMetadataList(&sv.Datasets, value); err != nil {
 				return err
+			}
+
+		case "Feature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizationFeature to be of type string, got %T instead", value)
+				}
+				sv.Feature = types.CustomizationFeature(jtv)
 			}
 
 		case "ProjectArn":
@@ -17540,6 +17665,15 @@ func awsAwsjson11_deserializeDocumentProjectVersionDescription(v **types.Project
 
 	for key, value := range shape {
 		switch key {
+		case "BaseModelVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BaseModelVersion = ptr.String(jtv)
+			}
+
 		case "BillableTrainingTimeInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17571,6 +17705,20 @@ func awsAwsjson11_deserializeDocumentProjectVersionDescription(v **types.Project
 
 		case "EvaluationResult":
 			if err := awsAwsjson11_deserializeDocumentEvaluationResult(&sv.EvaluationResult, value); err != nil {
+				return err
+			}
+
+		case "Feature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizationFeature to be of type string, got %T instead", value)
+				}
+				sv.Feature = types.CustomizationFeature(jtv)
+			}
+
+		case "FeatureConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomizationFeatureConfig(&sv.FeatureConfig, value); err != nil {
 				return err
 			}
 
@@ -17679,6 +17827,15 @@ func awsAwsjson11_deserializeDocumentProjectVersionDescription(v **types.Project
 					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "VersionDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionDescription to be of type string, got %T instead", value)
+				}
+				sv.VersionDescription = ptr.String(jtv)
 			}
 
 		default:
@@ -22527,6 +22684,15 @@ func awsAwsjson11_deserializeOpDocumentDetectModerationLabelsOutput(v **DetectMo
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ModerationModelVersion = ptr.String(jtv)
+			}
+
+		case "ProjectVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectVersionId to be of type string, got %T instead", value)
+				}
+				sv.ProjectVersion = ptr.String(jtv)
 			}
 
 		default:
