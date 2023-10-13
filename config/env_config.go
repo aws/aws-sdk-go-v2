@@ -69,6 +69,7 @@ const (
 
 	awsRetryMaxAttempts = "AWS_MAX_ATTEMPTS"
 	awsRetryMode        = "AWS_RETRY_MODE"
+	awsSdkAppID         = "AWS_SDK_UA_APP_ID"
 )
 
 var (
@@ -248,6 +249,9 @@ type EnvConfig struct {
 	//
 	// aws_retry_mode=standard
 	RetryMode aws.RetryMode
+
+	// aws sdk app ID that can be added to user agent header string
+	AppID string
 }
 
 // loadEnvConfig reads configuration values from the OS's environment variables.
@@ -287,6 +291,8 @@ func NewEnvConfig() (EnvConfig, error) {
 
 	cfg.RoleARN = os.Getenv(awsRoleARNEnvVar)
 	cfg.RoleSessionName = os.Getenv(awsRoleSessionNameEnvVar)
+
+	cfg.AppID = os.Getenv(awsSdkAppID)
 
 	if err := setEndpointDiscoveryTypeFromEnvVal(&cfg.EnableEndpointDiscovery, []string{awsEnableEndpointDiscoveryEnvVar}); err != nil {
 		return cfg, err
@@ -336,8 +342,7 @@ func (c EnvConfig) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool,
 }
 
 func (c EnvConfig) getAppID(context.Context) (string, bool, error) {
-	appID := os.Getenv(`AWS_SDK_UA_APP_ID`)
-	return appID, len(appID) > 0, nil
+	return c.AppID, len(c.AppID) > 0, nil
 }
 
 // GetRetryMaxAttempts returns the value of AWS_MAX_ATTEMPTS if was specified,
