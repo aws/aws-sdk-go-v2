@@ -1,0 +1,8 @@
+{
+    "id": "4f0e4753-f953-4938-a417-48143638981c",
+    "type": "feature",
+    "description": "Modify logic of retrieving user agent appID from env config",
+    "modules": [
+        "config"
+    ]
+}
