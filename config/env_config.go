@@ -335,6 +335,11 @@ func (c EnvConfig) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool,
 	return c.DefaultsMode, true, nil
 }
 
+func (c EnvConfig) getAppID(context.Context) (string, bool, error) {
+	appID := os.Getenv(`AWS_SDK_UA_APP_ID`)
+	return appID, len(appID) > 0, nil
+}
+
 // GetRetryMaxAttempts returns the value of AWS_MAX_ATTEMPTS if was specified,
 // and not 0.
 func (c EnvConfig) GetRetryMaxAttempts(ctx context.Context) (int, bool, error) {
