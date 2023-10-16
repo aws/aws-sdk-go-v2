@@ -5798,6 +5798,24 @@ func awsAwsjson11_deserializeDocumentNamespace(v **types.Namespace, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "adminPasswordSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AdminPasswordSecretArn = ptr.String(jtv)
+			}
+
+		case "adminPasswordSecretKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.AdminPasswordSecretKmsKeyId = ptr.String(jtv)
+			}
+
 		case "adminUsername":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6423,6 +6441,24 @@ func awsAwsjson11_deserializeDocumentSnapshot(v **types.Snapshot, value interfac
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "adminPasswordSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AdminPasswordSecretArn = ptr.String(jtv)
+			}
+
+		case "adminPasswordSecretKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.AdminPasswordSecretKmsKeyId = ptr.String(jtv)
 			}
 
 		case "adminUsername":

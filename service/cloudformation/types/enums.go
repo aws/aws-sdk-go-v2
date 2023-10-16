@@ -720,12 +720,13 @@ type ResourceAttribute string
 
 // Enum values for ResourceAttribute
 const (
-	ResourceAttributeProperties     ResourceAttribute = "Properties"
-	ResourceAttributeMetadata       ResourceAttribute = "Metadata"
-	ResourceAttributeCreationPolicy ResourceAttribute = "CreationPolicy"
-	ResourceAttributeUpdatePolicy   ResourceAttribute = "UpdatePolicy"
-	ResourceAttributeDeletionPolicy ResourceAttribute = "DeletionPolicy"
-	ResourceAttributeTags           ResourceAttribute = "Tags"
+	ResourceAttributeProperties          ResourceAttribute = "Properties"
+	ResourceAttributeMetadata            ResourceAttribute = "Metadata"
+	ResourceAttributeCreationPolicy      ResourceAttribute = "CreationPolicy"
+	ResourceAttributeUpdatePolicy        ResourceAttribute = "UpdatePolicy"
+	ResourceAttributeDeletionPolicy      ResourceAttribute = "DeletionPolicy"
+	ResourceAttributeUpdateReplacePolicy ResourceAttribute = "UpdateReplacePolicy"
+	ResourceAttributeTags                ResourceAttribute = "Tags"
 )
 
 // Values returns all known values for ResourceAttribute. Note that this can be
@@ -738,6 +739,7 @@ func (ResourceAttribute) Values() []ResourceAttribute {
 		"CreationPolicy",
 		"UpdatePolicy",
 		"DeletionPolicy",
+		"UpdateReplacePolicy",
 		"Tags",
 	}
 }

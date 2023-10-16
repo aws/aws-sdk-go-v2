@@ -1,0 +1,8 @@
+{
+    "id": "bd9535cf-5ab8-4fd4-b7e4-90796d520ee7",
+    "type": "feature",
+    "description": "This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

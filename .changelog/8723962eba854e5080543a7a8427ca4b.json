@@ -1,0 +1,8 @@
+{
+    "id": "8723962e-ba85-4e50-8054-3a7a8427ca4b",
+    "type": "feature",
+    "description": "This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet.",
+    "modules": [
+        "service/managedblockchainquery"
+    ]
+}

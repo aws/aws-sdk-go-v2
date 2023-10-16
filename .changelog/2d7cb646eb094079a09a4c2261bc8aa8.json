@@ -1,0 +1,8 @@
+{
+    "id": "2d7cb646-eb09-4079-a09a-4c2261bc8aa8",
+    "type": "feature",
+    "description": "This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time.",
+    "modules": [
+        "service/xray"
+    ]
+}

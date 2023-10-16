@@ -17,7 +17,7 @@ import (
 )
 
 // Modifies the cluster configuration of the specified Amazon OpenSearch Service
-// domain.sl
+// domain.
 func (c *Client) UpdateDomainConfig(ctx context.Context, params *UpdateDomainConfigInput, optFns ...func(*Options)) (*UpdateDomainConfigOutput, error) {
 	if params == nil {
 		params = &UpdateDomainConfigInput{}

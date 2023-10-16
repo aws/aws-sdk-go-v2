@@ -79,6 +79,10 @@ type GetEmailIdentityOutput struct {
 	// with the email identity.
 	Tags []types.Tag
 
+	// An object that contains additional information about the verification status
+	// for the identity.
+	VerificationInfo *types.VerificationInfo
+
 	// The verification status of the identity. The status can be one of the
 	// following:
 	//   - PENDING – The verification process was initiated, but Amazon SES hasn't yet

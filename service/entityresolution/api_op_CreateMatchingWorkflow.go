@@ -60,8 +60,8 @@ type CreateMatchingWorkflowInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The name of the workflow. There cannot be multiple DataIntegrationWorkflows
-	// with the same name.
+	// The name of the workflow. There can't be multiple MatchingWorkflows with the
+	// same name.
 	//
 	// This member is required.
 	WorkflowName *string

@@ -47,6 +47,8 @@ const (
 	QueryNetworkEthereumMainnet QueryNetwork = "ETHEREUM_MAINNET"
 	// Bitcoin main network
 	QueryNetworkBitcoinMainnet QueryNetwork = "BITCOIN_MAINNET"
+	// Bitcoin test network
+	QueryNetworkBitcoinTestnet QueryNetwork = "BITCOIN_TESTNET"
 )
 
 // Values returns all known values for QueryNetwork. Note that this can be
@@ -56,6 +58,27 @@ func (QueryNetwork) Values() []QueryNetwork {
 	return []QueryNetwork{
 		"ETHEREUM_MAINNET",
 		"BITCOIN_MAINNET",
+		"BITCOIN_TESTNET",
+	}
+}
+
+type QueryTokenStandard string
+
+// Enum values for QueryTokenStandard
+const (
+	QueryTokenStandardErc20   QueryTokenStandard = "ERC20"
+	QueryTokenStandardErc721  QueryTokenStandard = "ERC721"
+	QueryTokenStandardErc1155 QueryTokenStandard = "ERC1155"
+)
+
+// Values returns all known values for QueryTokenStandard. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryTokenStandard) Values() []QueryTokenStandard {
+	return []QueryTokenStandard{
+		"ERC20",
+		"ERC721",
+		"ERC1155",
 	}
 }
 

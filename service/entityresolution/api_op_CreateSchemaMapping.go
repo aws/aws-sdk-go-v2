@@ -44,7 +44,7 @@ type CreateSchemaMappingInput struct {
 	// This member is required.
 	MappedInputFields []types.SchemaInputAttribute
 
-	// The name of the schema. There cannot be multiple SchemaMappings with the same
+	// The name of the schema. There can't be multiple SchemaMappings with the same
 	// name.
 	//
 	// This member is required.

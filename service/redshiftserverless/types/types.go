@@ -81,6 +81,14 @@ type EndpointAccess struct {
 // A collection of database objects and users.
 type Namespace struct {
 
+	// The Amazon Resource Name (ARN) for the namespace's admin user credentials
+	// secret.
+	AdminPasswordSecretArn *string
+
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// namespace's admin credentials secret.
+	AdminPasswordSecretKmsKeyId *string
+
 	// The username of the administrator for the first database created in the
 	// namespace.
 	AdminUsername *string
@@ -195,6 +203,14 @@ type Snapshot struct {
 
 	// The size of the incremental backup in megabytes.
 	ActualIncrementalBackupSizeInMegaBytes *float64
+
+	// The Amazon Resource Name (ARN) for the namespace's admin user credentials
+	// secret.
+	AdminPasswordSecretArn *string
+
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// namespace's admin credentials secret.
+	AdminPasswordSecretKmsKeyId *string
 
 	// The username of the database within a snapshot.
 	AdminUsername *string

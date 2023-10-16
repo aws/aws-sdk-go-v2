@@ -218,7 +218,7 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -447,7 +447,7 @@ func awsRestjson1_deserializeOpDocumentCreateChannelGroupOutput(v **CreateChanne
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -1434,7 +1434,7 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -1657,7 +1657,7 @@ func awsRestjson1_deserializeOpDocumentGetChannelGroupOutput(v **GetChannelGroup
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -1868,7 +1868,7 @@ func awsRestjson1_deserializeOpDocumentGetChannelPolicyOutput(v **GetChannelPoli
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PolicyText to be of type string, got %T instead", value)
 				}
 				sv.Policy = ptr.String(jtv)
 			}
@@ -2304,7 +2304,7 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointPolicyOutput(v **GetOrig
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.ChannelGroupName = ptr.String(jtv)
 			}
@@ -2313,7 +2313,7 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointPolicyOutput(v **GetOrig
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
@@ -2322,7 +2322,7 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointPolicyOutput(v **GetOrig
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.OriginEndpointName = ptr.String(jtv)
 			}
@@ -2331,7 +2331,7 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointPolicyOutput(v **GetOrig
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PolicyText to be of type string, got %T instead", value)
 				}
 				sv.Policy = ptr.String(jtv)
 			}
@@ -3559,7 +3559,7 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -3785,7 +3785,7 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelGroupOutput(v **UpdateChanne
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -4460,7 +4460,7 @@ func awsRestjson1_deserializeDocumentChannelGroupListConfiguration(v **types.Cha
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -4627,7 +4627,7 @@ func awsRestjson1_deserializeDocumentChannelListConfiguration(v **types.ChannelL
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}

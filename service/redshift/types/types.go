@@ -284,6 +284,13 @@ type Cluster struct {
 	// 1 and 3,653.
 	ManualSnapshotRetentionPeriod int32
 
+	// The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.
+	MasterPasswordSecretArn *string
+
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// cluster's admin credentials secret.
+	MasterPasswordSecretKmsKeyId *string
+
 	// The admin user name for the cluster. This name is used to connect to the
 	// database that is specified in the DBName parameter.
 	MasterUsername *string
@@ -1654,6 +1661,13 @@ type Snapshot struct {
 	// manual snapshot is retained indefinitely. The value must be either -1 or an
 	// integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
+
+	// The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.
+	MasterPasswordSecretArn *string
+
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// cluster's admin credentials secret.
+	MasterPasswordSecretKmsKeyId *string
 
 	// The admin user name for the cluster.
 	MasterUsername *string

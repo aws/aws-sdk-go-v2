@@ -1,0 +1,8 @@
+{
+    "id": "dcd01bd6-d35c-4193-a6f2-ca9f642a5cfa",
+    "type": "feature",
+    "description": "This release allows customers to manage MediaPackage v2 resource using CloudFormation.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

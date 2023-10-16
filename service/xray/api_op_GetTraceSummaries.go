@@ -69,8 +69,8 @@ type GetTraceSummariesInput struct {
 	// parameters are Name and Value.
 	SamplingStrategy *types.SamplingStrategy
 
-	// A parameter to indicate whether to query trace summaries by TraceId or Event
-	// time.
+	// A parameter to indicate whether to query trace summaries by TraceId, Event
+	// (trace update time), or Service (segment end time).
 	TimeRangeType types.TimeRangeType
 
 	noSmithyDocumentSerde

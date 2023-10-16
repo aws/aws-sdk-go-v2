@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the token balance for a batch of tokens by using the GetTokenBalance
+// Gets the token balance for a batch of tokens by using the BatchGetTokenBalance
 // action for every token in the request. Only the native tokens BTC,ETH, and the
 // ERC-20, ERC-721, and ERC 1155 token standards are supported.
 func (c *Client) BatchGetTokenBalance(ctx context.Context, params *BatchGetTokenBalanceInput, optFns ...func(*Options)) (*BatchGetTokenBalanceOutput, error) {
@@ -36,7 +36,8 @@ func (c *Client) BatchGetTokenBalance(ctx context.Context, params *BatchGetToken
 
 type BatchGetTokenBalanceInput struct {
 
-	// An array of GetTokenBalanceInput objects whose balance is being requested.
+	// An array of BatchGetTokenBalanceInputItem objects whose balance is being
+	// requested.
 	GetTokenBalanceInputs []types.BatchGetTokenBalanceInputItem
 
 	noSmithyDocumentSerde

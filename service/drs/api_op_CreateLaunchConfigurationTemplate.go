@@ -46,6 +46,11 @@ type CreateLaunchConfigurationTemplateInput struct {
 	// Launch disposition.
 	LaunchDisposition types.LaunchDisposition
 
+	// DRS will set the 'launch into instance ID' of any source server when performing
+	// a drill, recovery or failback to the previous region or availability zone, using
+	// the instance ID of the source instance.
+	LaunchIntoSourceInstance *bool
+
 	// Licensing.
 	Licensing *types.Licensing
 

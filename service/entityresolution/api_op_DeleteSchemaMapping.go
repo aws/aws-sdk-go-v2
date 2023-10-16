@@ -17,8 +17,8 @@ import (
 
 // Deletes the SchemaMapping with a given name. This operation will succeed even
 // if a schema with the given name does not exist. This operation will fail if
-// there is a DataIntegrationWorkflow object that references the SchemaMapping in
-// the workflow's InputSourceConfig .
+// there is a MatchingWorkflow object that references the SchemaMapping in the
+// workflow's InputSourceConfig .
 func (c *Client) DeleteSchemaMapping(ctx context.Context, params *DeleteSchemaMappingInput, optFns ...func(*Options)) (*DeleteSchemaMappingOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaMappingInput{}

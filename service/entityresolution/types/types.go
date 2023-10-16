@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -12,6 +13,98 @@ type ErrorDetails struct {
 
 	// The error message from the job, if there is one.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// An object containing InputRecords , TotalRecordsProcessed , MatchIDs , and
+// RecordsNotProcessed .
+type IdMappingJobMetrics struct {
+
+	// The total number of input records.
+	InputRecords *int32
+
+	// The total number of records that did not get processed.
+	RecordsNotProcessed *int32
+
+	// The total number of records processed.
+	TotalRecordsProcessed *int32
+
+	noSmithyDocumentSerde
+}
+
+// An object which defines the ID mapping techniques and provider configurations.
+type IdMappingTechniques struct {
+
+	// The type of ID mapping.
+	//
+	// This member is required.
+	IdMappingType IdMappingType
+
+	// An object which defines any additional configurations required by the provider
+	// service.
+	//
+	// This member is required.
+	ProviderProperties *ProviderProperties
+
+	noSmithyDocumentSerde
+}
+
+// An object containing InputSourceARN and SchemaName .
+type IdMappingWorkflowInputSource struct {
+
+	// An Gluetable ARN for the input source table.
+	//
+	// This member is required.
+	InputSourceARN *string
+
+	// The name of the schema to be retrieved.
+	//
+	// This member is required.
+	SchemaName *string
+
+	noSmithyDocumentSerde
+}
+
+// The output source for the ID mapping workflow.
+type IdMappingWorkflowOutputSource struct {
+
+	// The S3 path to which Entity Resolution will write the output table.
+	//
+	// This member is required.
+	OutputS3Path *string
+
+	// Customer KMS ARN for encryption at rest. If not provided, system will use an
+	// Entity Resolution managed KMS key.
+	KMSArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of IdMappingWorkflowSummary objects, each of which contain the fields
+// WorkflowName , WorkflowArn , CreatedAt , and UpdatedAt .
+type IdMappingWorkflowSummary struct {
+
+	// The timestamp of when the workflow was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The timestamp of when the workflow was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The ARN (Amazon Resource Name) that Entity Resolution generated for the
+	// IdMappingWorkflow .
+	//
+	// This member is required.
+	WorkflowArn *string
+
+	// The name of the workflow.
+	//
+	// This member is required.
+	WorkflowName *string
 
 	noSmithyDocumentSerde
 }
@@ -44,6 +137,19 @@ type InputSource struct {
 	// table is in a format of 1234567890, Entity Resolution will normalize this field
 	// in the output to (123)-456-7890.
 	ApplyNormalization *bool
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 location that temporarily stores your data while it processes.
+// Your information won't be saved permanently.
+type IntermediateSourceConfiguration struct {
+
+	// The Amazon S3 location (bucket and prefix). For example:
+	// s3://provider_bucket/DOC-EXAMPLE-BUCKET
+	//
+	// This member is required.
+	IntermediateS3Path *string
 
 	noSmithyDocumentSerde
 }
@@ -99,6 +205,12 @@ type MatchingWorkflowSummary struct {
 	//
 	// This member is required.
 	CreatedAt *time.Time
+
+	// The method that has been specified for data matching, either using matching
+	// provided by Entity Resolution or through a provider service.
+	//
+	// This member is required.
+	ResolutionType ResolutionType
 
 	// The timestamp of when the workflow was last updated.
 	//
@@ -166,6 +278,117 @@ type OutputSource struct {
 	noSmithyDocumentSerde
 }
 
+// The required configuration fields to use with the provider service.
+//
+// The following types satisfy this interface:
+//
+//	ProviderEndpointConfigurationMemberMarketplaceConfiguration
+type ProviderEndpointConfiguration interface {
+	isProviderEndpointConfiguration()
+}
+
+// The identifiers of the provider service, from Data Exchange.
+type ProviderEndpointConfigurationMemberMarketplaceConfiguration struct {
+	Value ProviderMarketplaceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderEndpointConfigurationMemberMarketplaceConfiguration) isProviderEndpointConfiguration() {
+}
+
+// The required configuration fields to give intermediate access to a provider
+// service.
+type ProviderIntermediateDataAccessConfiguration struct {
+
+	// The Amazon Web Services account that provider can use to read or write data
+	// into the customer's intermediate S3 bucket.
+	AwsAccountIds []string
+
+	// The S3 bucket actions that the provider requires permission for.
+	RequiredBucketActions []string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers of the provider service, from Data Exchange.
+type ProviderMarketplaceConfiguration struct {
+
+	// The asset ID on Data Exchange.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The dataset ID on Data Exchange.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The listing ID on Data Exchange.
+	//
+	// This member is required.
+	ListingId *string
+
+	// The revision ID on Data Exchange.
+	//
+	// This member is required.
+	RevisionId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the providerServiceARN , intermediateSourceConfiguration ,
+// and providerConfiguration .
+type ProviderProperties struct {
+
+	// The ARN of the provider service.
+	//
+	// This member is required.
+	ProviderServiceArn *string
+
+	// The Amazon S3 location that temporarily stores your data while it processes.
+	// Your information won't be saved permanently.
+	IntermediateSourceConfiguration *IntermediateSourceConfiguration
+
+	// The required configuration fields to use with the provider service.
+	ProviderConfiguration document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// A list of ProviderService objects, each of which contain the fields providerName
+// , providerServiceArn , providerServiceName , and providerServiceType .
+type ProviderServiceSummary struct {
+
+	// The name of the provider. This name is typically the company name.
+	//
+	// This member is required.
+	ProviderName *string
+
+	// The ARN (Amazon Resource Name) that Entity Resolution generated for the
+	// providerService .
+	//
+	// This member is required.
+	ProviderServiceArn *string
+
+	// The display name of the provider service.
+	//
+	// This member is required.
+	ProviderServiceDisplayName *string
+
+	// The name of the product that the provider service provides.
+	//
+	// This member is required.
+	ProviderServiceName *string
+
+	// The type of provider service.
+	//
+	// This member is required.
+	ProviderServiceType ServiceType
+
+	noSmithyDocumentSerde
+}
+
 // An object which defines the resolutionType and the ruleBasedProperties .
 type ResolutionTechniques struct {
 
@@ -174,6 +397,9 @@ type ResolutionTechniques struct {
 	//
 	// This member is required.
 	ResolutionType ResolutionType
+
+	// The properties of the provider service.
+	ProviderProperties *ProviderProperties
 
 	// An object which defines the list of matching rules to run and has a field Rules
 	// , which is a list of rule objects.
@@ -225,7 +451,7 @@ type RuleBasedProperties struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing FieldField , Type , GroupName , and MatchKey .
+// An object containing FieldName , Type , GroupName , and MatchKey .
 type SchemaInputAttribute struct {
 
 	// A string containing the field name.
@@ -246,12 +472,15 @@ type SchemaInputAttribute struct {
 
 	// A key that allows grouping of multiple input attributes into a unified matching
 	// group. For example, let's consider a scenario where the source table contains
-	// various addresses, such as business_address and shipping_address. By assigning
+	// various addresses, such as business_address and shipping_address . By assigning
 	// the MatchKey Address to both attributes, Entity Resolution will match records
 	// across these fields to create a consolidated matching group. If no MatchKey is
 	// specified for a column, it won't be utilized for matching purposes but will
 	// still be included in the output table.
 	MatchKey *string
+
+	// The subtype of the attribute, selected from a list of values.
+	SubType *string
 
 	noSmithyDocumentSerde
 }
@@ -263,6 +492,11 @@ type SchemaMappingSummary struct {
 	//
 	// This member is required.
 	CreatedAt *time.Time
+
+	// Specifies whether the schema mapping has been applied to a workflow.
+	//
+	// This member is required.
+	HasWorkflows *bool
 
 	// The ARN (Amazon Resource Name) that Entity Resolution generated for the
 	// SchemaMapping .
@@ -284,3 +518,14 @@ type SchemaMappingSummary struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isProviderEndpointConfiguration() {}

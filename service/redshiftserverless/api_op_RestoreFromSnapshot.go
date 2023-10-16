@@ -44,6 +44,16 @@ type RestoreFromSnapshotInput struct {
 	// This member is required.
 	WorkgroupName *string
 
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// namespace's admin credentials secret.
+	AdminPasswordSecretKmsKeyId *string
+
+	// If true , Amazon Redshift uses Secrets Manager to manage the restored snapshot's
+	// admin credentials. If MmanageAdminPassword is false or not set, Amazon Redshift
+	// uses the admin credentials that the namespace or cluster had at the time the
+	// snapshot was taken.
+	ManageAdminPassword *bool
+
 	// The Amazon Web Services account that owns the snapshot.
 	OwnerAccount *string
 

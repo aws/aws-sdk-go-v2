@@ -8728,9 +8728,19 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.String(*v.MaintenanceTrackName)
 	}
 
+	if v.ManageMasterPassword != nil {
+		objectKey := object.Key("ManageMasterPassword")
+		objectKey.Boolean(*v.ManageMasterPassword)
+	}
+
 	if v.ManualSnapshotRetentionPeriod != nil {
 		objectKey := object.Key("ManualSnapshotRetentionPeriod")
 		objectKey.Integer(*v.ManualSnapshotRetentionPeriod)
+	}
+
+	if v.MasterPasswordSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterPasswordSecretKmsKeyId")
+		objectKey.String(*v.MasterPasswordSecretKmsKeyId)
 	}
 
 	if v.MasterUsername != nil {
@@ -11065,9 +11075,19 @@ func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, va
 		objectKey.String(*v.MaintenanceTrackName)
 	}
 
+	if v.ManageMasterPassword != nil {
+		objectKey := object.Key("ManageMasterPassword")
+		objectKey.Boolean(*v.ManageMasterPassword)
+	}
+
 	if v.ManualSnapshotRetentionPeriod != nil {
 		objectKey := object.Key("ManualSnapshotRetentionPeriod")
 		objectKey.Integer(*v.ManualSnapshotRetentionPeriod)
+	}
+
+	if v.MasterPasswordSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterPasswordSecretKmsKeyId")
+		objectKey.String(*v.MasterPasswordSecretKmsKeyId)
 	}
 
 	if v.MasterUserPassword != nil {
@@ -11660,9 +11680,19 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		objectKey.String(*v.MaintenanceTrackName)
 	}
 
+	if v.ManageMasterPassword != nil {
+		objectKey := object.Key("ManageMasterPassword")
+		objectKey.Boolean(*v.ManageMasterPassword)
+	}
+
 	if v.ManualSnapshotRetentionPeriod != nil {
 		objectKey := object.Key("ManualSnapshotRetentionPeriod")
 		objectKey.Integer(*v.ManualSnapshotRetentionPeriod)
+	}
+
+	if v.MasterPasswordSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterPasswordSecretKmsKeyId")
+		objectKey.String(*v.MasterPasswordSecretKmsKeyId)
 	}
 
 	if v.NodeType != nil {

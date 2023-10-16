@@ -1,0 +1,8 @@
+{
+    "id": "ccb757fb-87c7-4684-8362-f8d31e5e2526",
+    "type": "feature",
+    "description": "Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

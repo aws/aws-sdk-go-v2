@@ -14017,6 +14017,11 @@ func awsRestjson1_deserializeDocumentPackageDetails(v **types.PackageDetails, va
 				sv.AvailablePackageVersion = ptr.String(jtv)
 			}
 
+		case "AvailablePluginProperties":
+			if err := awsRestjson1_deserializeDocumentPluginProperties(&sv.AvailablePluginProperties, value); err != nil {
+				return err
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14031,6 +14036,15 @@ func awsRestjson1_deserializeDocumentPackageDetails(v **types.PackageDetails, va
 					return fmt.Errorf("expected CreatedAt to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "EngineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EngineVersion to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = ptr.String(jtv)
 			}
 
 		case "ErrorDetails":
@@ -14198,6 +14212,11 @@ func awsRestjson1_deserializeDocumentPackageVersionHistory(v **types.PackageVers
 				sv.PackageVersion = ptr.String(jtv)
 			}
 
+		case "PluginProperties":
+			if err := awsRestjson1_deserializeDocumentPluginProperties(&sv.PluginProperties, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14238,6 +14257,86 @@ func awsRestjson1_deserializeDocumentPackageVersionHistoryList(v *[]types.Packag
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginProperties(v **types.PluginProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginProperties
+	if *v == nil {
+		sv = &types.PluginProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClassName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PluginClassName to be of type string, got %T instead", value)
+				}
+				sv.ClassName = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PluginDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PluginName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "UncompressedSizeInBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UncompressedPluginSizeInBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UncompressedSizeInBytes = ptr.Int64(i64)
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PluginVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

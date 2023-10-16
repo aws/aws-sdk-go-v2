@@ -30,6 +30,26 @@ func (m *validateOpBatchGetTokenBalance) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAssetContract struct {
+}
+
+func (*validateOpGetAssetContract) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssetContract) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetContractInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetContractInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTokenBalance struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpGetTransaction) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTransactionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetContracts struct {
+}
+
+func (*validateOpListAssetContracts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetContracts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetContractsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetContractsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -134,12 +174,20 @@ func addOpBatchGetTokenBalanceValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpBatchGetTokenBalance{}, middleware.After)
 }
 
+func addOpGetAssetContractValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssetContract{}, middleware.After)
+}
+
 func addOpGetTokenBalanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTokenBalance{}, middleware.After)
 }
 
 func addOpGetTransactionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTransaction{}, middleware.After)
+}
+
+func addOpListAssetContractsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetContracts{}, middleware.After)
 }
 
 func addOpListTokenBalancesValidationMiddleware(stack *middleware.Stack) error {
@@ -172,6 +220,45 @@ func validateBatchGetTokenBalanceInputItem(v *types.BatchGetTokenBalanceInputIte
 		if err := validateOwnerIdentifier(v.OwnerIdentifier); err != nil {
 			invalidParams.AddNested("OwnerIdentifier", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContractFilter(v *types.ContractFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContractFilter"}
+	if len(v.Network) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Network"))
+	}
+	if len(v.TokenStandard) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenStandard"))
+	}
+	if v.DeployerAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeployerAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContractIdentifier(v *types.ContractIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContractIdentifier"}
+	if len(v.Network) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Network"))
+	}
+	if v.ContractAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractAddress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -274,6 +361,25 @@ func validateOpBatchGetTokenBalanceInput(v *BatchGetTokenBalanceInput) error {
 	}
 }
 
+func validateOpGetAssetContractInput(v *GetAssetContractInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetContractInput"}
+	if v.ContractIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractIdentifier"))
+	} else if v.ContractIdentifier != nil {
+		if err := validateContractIdentifier(v.ContractIdentifier); err != nil {
+			invalidParams.AddNested("ContractIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTokenBalanceInput(v *GetTokenBalanceInput) error {
 	if v == nil {
 		return nil
@@ -310,6 +416,25 @@ func validateOpGetTransactionInput(v *GetTransactionInput) error {
 	}
 	if len(v.Network) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Network"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetContractsInput(v *ListAssetContractsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetContractsInput"}
+	if v.ContractFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractFilter"))
+	} else if v.ContractFilter != nil {
+		if err := validateContractFilter(v.ContractFilter); err != nil {
+			invalidParams.AddNested("ContractFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

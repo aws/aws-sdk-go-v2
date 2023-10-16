@@ -96,6 +96,7 @@ type TimeRangeType string
 const (
 	TimeRangeTypeTraceId TimeRangeType = "TraceId"
 	TimeRangeTypeEvent   TimeRangeType = "Event"
+	TimeRangeTypeService TimeRangeType = "Service"
 )
 
 // Values returns all known values for TimeRangeType. Note that this can be
@@ -105,5 +106,6 @@ func (TimeRangeType) Values() []TimeRangeType {
 	return []TimeRangeType{
 		"TraceId",
 		"Event",
+		"Service",
 	}
 }

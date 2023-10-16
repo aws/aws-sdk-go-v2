@@ -771,7 +771,10 @@ type EmailContent struct {
 	//   - Each part of a multipart MIME message must be formatted properly.
 	//   - If you include attachments, they must be in a file format that the Amazon
 	//   SES API v2 supports.
-	//   - The entire message must be Base64 encoded.
+	//   - The raw data of the message needs to base64-encoded if you are accessing
+	//   Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES
+	//   using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for
+	//   you.
 	//   - If any of the MIME parts in your message contain content that is outside of
 	//   the 7-bit ASCII character range, you should encode that content to ensure that
 	//   recipients' email clients render the message properly.
@@ -1592,7 +1595,10 @@ type RawMessage struct {
 	//   - All of the required header fields must be present in the message.
 	//   - Each part of a multipart MIME message must be formatted properly.
 	//   - Attachments must be in a file format that the Amazon SES supports.
-	//   - The entire message must be Base64 encoded.
+	//   - The raw data of the message needs to base64-encoded if you are accessing
+	//   Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES
+	//   using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for
+	//   you.
 	//   - If any of the MIME parts in your message contain content that is outside of
 	//   the 7-bit ASCII character range, you should encode that content to ensure that
 	//   recipients' email clients render the message properly.
@@ -1736,6 +1742,22 @@ type SnsDestination struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information about the start of authority (SOA) record
+// associated with the identity.
+type SOARecord struct {
+
+	// Administrative contact email from the SOA record.
+	AdminEmail *string
+
+	// Primary name server specified in the SOA record.
+	PrimaryNameServer *string
+
+	// Serial number from the SOA record.
+	SerialNumber int64
 
 	noSmithyDocumentSerde
 }
@@ -2020,6 +2042,40 @@ type VdmOptions struct {
 	// Specifies additional settings for your VDM configuration as applicable to the
 	// Guardian.
 	GuardianOptions *GuardianOptions
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains additional information about the verification status
+// for the identity.
+type VerificationInfo struct {
+
+	// Provides the reason for the failure describing why Amazon SES was not able to
+	// successfully verify the identity. Below are the possible values:
+	//   - INVALID_VALUE – Amazon SES was able to find the record, but the value
+	//   contained within the record was invalid. Ensure you have published the correct
+	//   values for the record.
+	//   - TYPE_NOT_FOUND – The queried hostname exists but does not have the requested
+	//   type of DNS record. Ensure that you have published the correct type of DNS
+	//   record.
+	//   - HOST_NOT_FOUND – The queried hostname does not exist or was not reachable at
+	//   the time of the request. Ensure that you have published the required DNS
+	//   record(s).
+	//   - SERVICE_ERROR – A temporary issue is preventing Amazon SES from determining
+	//   the verification status of the domain.
+	//   - DNS_SERVER_ERROR – The DNS server encountered an issue and was unable to
+	//   complete the request.
+	ErrorType VerificationError
+
+	// The last time a verification attempt was made for this identity.
+	LastCheckedTimestamp *time.Time
+
+	// The last time a successful verification was made for this identity.
+	LastSuccessTimestamp *time.Time
+
+	// An object that contains information about the start of authority (SOA) record
+	// associated with the identity.
+	SOARecord *SOARecord
 
 	noSmithyDocumentSerde
 }

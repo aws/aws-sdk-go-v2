@@ -50,6 +50,9 @@ type UpdateLaunchConfigurationInput struct {
 	// The state of the Recovery Instance in EC2 after the recovery operation.
 	LaunchDisposition types.LaunchDisposition
 
+	// Launch into existing instance properties.
+	LaunchIntoInstanceProperties *types.LaunchIntoInstanceProperties
+
 	// The licensing configuration to be used for this launch configuration.
 	Licensing *types.Licensing
 
@@ -81,6 +84,9 @@ type UpdateLaunchConfigurationOutput struct {
 
 	// The state of the Recovery Instance in EC2 after the recovery operation.
 	LaunchDisposition types.LaunchDisposition
+
+	// Launch into existing instance properties.
+	LaunchIntoInstanceProperties *types.LaunchIntoInstanceProperties
 
 	// The licensing configuration to be used for this launch configuration.
 	Licensing *types.Licensing

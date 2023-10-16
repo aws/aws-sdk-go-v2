@@ -50,6 +50,11 @@ type GetSchemaMappingOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
+	// Specifies whether the schema mapping has been applied to a workflow.
+	//
+	// This member is required.
+	HasWorkflows *bool
+
 	// A list of MappedInputFields . Each MappedInputField corresponds to a column the
 	// source data table, and contains column name plus additional information Venice
 	// uses for matching.

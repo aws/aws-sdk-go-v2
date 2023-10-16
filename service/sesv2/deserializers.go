@@ -5277,6 +5277,11 @@ func awsRestjson1_deserializeOpDocumentGetEmailIdentityOutput(v **GetEmailIdenti
 				return err
 			}
 
+		case "VerificationInfo":
+			if err := awsRestjson1_deserializeDocumentVerificationInfo(&sv.VerificationInfo, value); err != nil {
+				return err
+			}
+
 		case "VerificationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18364,6 +18369,68 @@ func awsRestjson1_deserializeDocumentSnsDestination(v **types.SnsDestination, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSOARecord(v **types.SOARecord, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SOARecord
+	if *v == nil {
+		sv = &types.SOARecord{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdminEmail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdminEmail to be of type string, got %T instead", value)
+				}
+				sv.AdminEmail = ptr.String(jtv)
+			}
+
+		case "PrimaryNameServer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrimaryNameServer to be of type string, got %T instead", value)
+				}
+				sv.PrimaryNameServer = ptr.String(jtv)
+			}
+
+		case "SerialNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SerialNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SerialNumber = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSuppressedDestination(v **types.SuppressedDestination, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19199,6 +19266,83 @@ func awsRestjson1_deserializeDocumentVdmOptions(v **types.VdmOptions, value inte
 
 		case "GuardianOptions":
 			if err := awsRestjson1_deserializeDocumentGuardianOptions(&sv.GuardianOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVerificationInfo(v **types.VerificationInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VerificationInfo
+	if *v == nil {
+		sv = &types.VerificationInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VerificationError to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = types.VerificationError(jtv)
+			}
+
+		case "LastCheckedTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastCheckedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "LastSuccessTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastSuccessTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "SOARecord":
+			if err := awsRestjson1_deserializeDocumentSOARecord(&sv.SOARecord, value); err != nil {
 				return err
 			}
 

@@ -20,6 +20,22 @@ func (AttributeMatchingModel) Values() []AttributeMatchingModel {
 	}
 }
 
+type IdMappingType string
+
+// Enum values for IdMappingType
+const (
+	IdMappingTypeProvider IdMappingType = "PROVIDER"
+)
+
+// Values returns all known values for IdMappingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdMappingType) Values() []IdMappingType {
+	return []IdMappingType{
+		"PROVIDER",
+	}
+}
+
 type IncrementalRunType string
 
 // Enum values for IncrementalRunType
@@ -64,6 +80,7 @@ type ResolutionType string
 const (
 	ResolutionTypeRuleMatching ResolutionType = "RULE_MATCHING"
 	ResolutionTypeMlMatching   ResolutionType = "ML_MATCHING"
+	ResolutionTypeProvider     ResolutionType = "PROVIDER"
 )
 
 // Values returns all known values for ResolutionType. Note that this can be
@@ -73,6 +90,7 @@ func (ResolutionType) Values() []ResolutionType {
 	return []ResolutionType{
 		"RULE_MATCHING",
 		"ML_MATCHING",
+		"PROVIDER",
 	}
 }
 
@@ -99,6 +117,7 @@ const (
 	SchemaAttributeTypeUniqueId          SchemaAttributeType = "UNIQUE_ID"
 	SchemaAttributeTypeDate              SchemaAttributeType = "DATE"
 	SchemaAttributeTypeString            SchemaAttributeType = "STRING"
+	SchemaAttributeTypeProviderId        SchemaAttributeType = "PROVIDER_ID"
 )
 
 // Values returns all known values for SchemaAttributeType. Note that this can be
@@ -125,5 +144,24 @@ func (SchemaAttributeType) Values() []SchemaAttributeType {
 		"UNIQUE_ID",
 		"DATE",
 		"STRING",
+		"PROVIDER_ID",
+	}
+}
+
+type ServiceType string
+
+// Enum values for ServiceType
+const (
+	ServiceTypeAssignment ServiceType = "ASSIGNMENT"
+	ServiceTypeIdMapping  ServiceType = "ID_MAPPING"
+)
+
+// Values returns all known values for ServiceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceType) Values() []ServiceType {
+	return []ServiceType{
+		"ASSIGNMENT",
+		"ID_MAPPING",
 	}
 }

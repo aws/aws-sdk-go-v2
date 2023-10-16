@@ -59,6 +59,11 @@ type PutLaunchActionInput struct {
 	// This member is required.
 	Category types.LaunchActionCategory
 
+	// Launch action description.
+	//
+	// This member is required.
+	Description *string
+
 	// Launch action name.
 	//
 	// This member is required.
@@ -78,9 +83,6 @@ type PutLaunchActionInput struct {
 	//
 	// This member is required.
 	ResourceId *string
-
-	// Launch action description.
-	Description *string
 
 	// Launch action parameters.
 	Parameters map[string]types.LaunchActionParameter

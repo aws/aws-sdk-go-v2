@@ -2405,6 +2405,11 @@ func awsAwsjson11_serializeOpDocumentCreateNamespaceInput(v *CreateNamespaceInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdminPasswordSecretKmsKeyId != nil {
+		ok := object.Key("adminPasswordSecretKmsKeyId")
+		ok.String(*v.AdminPasswordSecretKmsKeyId)
+	}
+
 	if v.AdminUsername != nil {
 		ok := object.Key("adminUsername")
 		ok.String(*v.AdminUsername)
@@ -2442,6 +2447,11 @@ func awsAwsjson11_serializeOpDocumentCreateNamespaceInput(v *CreateNamespaceInpu
 		if err := awsAwsjson11_serializeDocumentLogExportList(v.LogExports, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ManageAdminPassword != nil {
+		ok := object.Key("manageAdminPassword")
+		ok.Boolean(*v.ManageAdminPassword)
 	}
 
 	if v.NamespaceName != nil {
@@ -3044,6 +3054,16 @@ func awsAwsjson11_serializeOpDocumentRestoreFromSnapshotInput(v *RestoreFromSnap
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdminPasswordSecretKmsKeyId != nil {
+		ok := object.Key("adminPasswordSecretKmsKeyId")
+		ok.String(*v.AdminPasswordSecretKmsKeyId)
+	}
+
+	if v.ManageAdminPassword != nil {
+		ok := object.Key("manageAdminPassword")
+		ok.Boolean(*v.ManageAdminPassword)
+	}
+
 	if v.NamespaceName != nil {
 		ok := object.Key("namespaceName")
 		ok.String(*v.NamespaceName)
@@ -3190,6 +3210,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNamespaceInput(v *UpdateNamespaceInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdminPasswordSecretKmsKeyId != nil {
+		ok := object.Key("adminPasswordSecretKmsKeyId")
+		ok.String(*v.AdminPasswordSecretKmsKeyId)
+	}
+
 	if v.AdminUsername != nil {
 		ok := object.Key("adminUsername")
 		ok.String(*v.AdminUsername)
@@ -3222,6 +3247,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNamespaceInput(v *UpdateNamespaceInpu
 		if err := awsAwsjson11_serializeDocumentLogExportList(v.LogExports, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ManageAdminPassword != nil {
+		ok := object.Key("manageAdminPassword")
+		ok.Boolean(*v.ManageAdminPassword)
 	}
 
 	if v.NamespaceName != nil {

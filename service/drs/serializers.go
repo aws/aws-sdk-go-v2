@@ -263,6 +263,11 @@ func awsRestjson1_serializeOpDocumentCreateLaunchConfigurationTemplateInput(v *C
 		ok.String(string(v.LaunchDisposition))
 	}
 
+	if v.LaunchIntoSourceInstance != nil {
+		ok := object.Key("launchIntoSourceInstance")
+		ok.Boolean(*v.LaunchIntoSourceInstance)
+	}
+
 	if v.Licensing != nil {
 		ok := object.Key("licensing")
 		if err := awsRestjson1_serializeDocumentLicensing(v.Licensing, ok); err != nil {
@@ -3901,6 +3906,13 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationInput(v *UpdateLau
 		ok.String(string(v.LaunchDisposition))
 	}
 
+	if v.LaunchIntoInstanceProperties != nil {
+		ok := object.Key("launchIntoInstanceProperties")
+		if err := awsRestjson1_serializeDocumentLaunchIntoInstanceProperties(v.LaunchIntoInstanceProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Licensing != nil {
 		ok := object.Key("licensing")
 		if err := awsRestjson1_serializeDocumentLicensing(v.Licensing, ok); err != nil {
@@ -4021,6 +4033,11 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationTemplateInput(v *U
 	if len(v.LaunchDisposition) > 0 {
 		ok := object.Key("launchDisposition")
 		ok.String(string(v.LaunchDisposition))
+	}
+
+	if v.LaunchIntoSourceInstance != nil {
+		ok := object.Key("launchIntoSourceInstance")
+		ok.Boolean(*v.LaunchIntoSourceInstance)
 	}
 
 	if v.Licensing != nil {
@@ -4582,6 +4599,18 @@ func awsRestjson1_serializeDocumentLaunchConfigurationTemplateIDs(v []string, va
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchIntoInstanceProperties(v *types.LaunchIntoInstanceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchIntoEC2InstanceID != nil {
+		ok := object.Key("launchIntoEC2InstanceID")
+		ok.String(*v.LaunchIntoEC2InstanceID)
+	}
+
 	return nil
 }
 

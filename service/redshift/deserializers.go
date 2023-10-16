@@ -21647,6 +21647,32 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				sv.ManualSnapshotRetentionPeriod = int32(i64)
 			}
 
+		case strings.EqualFold("MasterPasswordSecretArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MasterPasswordSecretArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MasterPasswordSecretKmsKeyId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MasterPasswordSecretKmsKeyId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("MasterUsername", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -34618,6 +34644,32 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 					return err
 				}
 				sv.ManualSnapshotRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MasterPasswordSecretArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MasterPasswordSecretArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MasterPasswordSecretKmsKeyId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MasterPasswordSecretKmsKeyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MasterUsername", t.Name.Local):

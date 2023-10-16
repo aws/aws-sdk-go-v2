@@ -38,7 +38,7 @@ type ListMatchingWorkflowsInput struct {
 	// The maximum number of objects returned per page.
 	MaxResults *int32
 
-	// The pagination token from the previous ListSchemaMappings API call.
+	// The pagination token from the previous API call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListMatchingWorkflowsInput struct {
 
 type ListMatchingWorkflowsOutput struct {
 
-	// The pagination token from the previous ListSchemaMappings API call.
+	// The pagination token from the previous API call.
 	NextToken *string
 
 	// A list of MatchingWorkflowSummary objects, each of which contain the fields

@@ -1495,6 +1495,9 @@ func validateOpPutLaunchActionInput(v *PutLaunchActionInput) error {
 	if len(v.Category) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Category"))
 	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

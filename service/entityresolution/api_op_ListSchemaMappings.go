@@ -38,7 +38,7 @@ type ListSchemaMappingsInput struct {
 	// The maximum number of objects returned per page.
 	MaxResults *int32
 
-	// The pagination token from the previous ListSchemaMappings API call.
+	// The pagination token from the previous API call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListSchemaMappingsInput struct {
 
 type ListSchemaMappingsOutput struct {
 
-	// The pagination token from the previous ListDomains API call.
+	// The pagination token from the previous API call.
 	NextToken *string
 
 	// A list of SchemaMappingSummary objects, each of which contain the fields

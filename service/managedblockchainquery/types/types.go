@@ -7,6 +7,28 @@ import (
 	"time"
 )
 
+// This container contains information about an contract.
+type AssetContract struct {
+
+	// The container for the contract identifier containing its blockchain network and
+	// address.
+	//
+	// This member is required.
+	ContractIdentifier *ContractIdentifier
+
+	// The address of the contract deployer.
+	//
+	// This member is required.
+	DeployerAddress *string
+
+	// The token standard of the contract.
+	//
+	// This member is required.
+	TokenStandard QueryTokenStandard
+
+	noSmithyDocumentSerde
+}
+
 // Error generated from a failed BatchGetTokenBalance request.
 type BatchGetTokenBalanceErrorItem struct {
 
@@ -97,6 +119,58 @@ type BlockchainInstant struct {
 	noSmithyDocumentSerde
 }
 
+// The contract or wallet address by which to filter the request.
+type ContractFilter struct {
+
+	// The network address of the deployer.
+	//
+	// This member is required.
+	DeployerAddress *string
+
+	// The blockchain network of the contract.
+	//
+	// This member is required.
+	Network QueryNetwork
+
+	// The container for the token standard.
+	//
+	// This member is required.
+	TokenStandard QueryTokenStandard
+
+	noSmithyDocumentSerde
+}
+
+// Container for the blockchain address and network information about a contract.
+type ContractIdentifier struct {
+
+	// Container for the blockchain address about a contract.
+	//
+	// This member is required.
+	ContractAddress *string
+
+	// The blockchain network of the contract.
+	//
+	// This member is required.
+	Network QueryNetwork
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the contract.
+type ContractMetadata struct {
+
+	// The decimals used by the token contract.
+	Decimals *int32
+
+	// The name of the token contract.
+	Name *string
+
+	// The symbol of the token contract.
+	Symbol *string
+
+	noSmithyDocumentSerde
+}
+
 // The container for determining how the list transaction result will be sorted.
 type ListTransactionsSort struct {
 
@@ -148,7 +222,7 @@ type TokenBalance struct {
 	// This member is required.
 	Balance *string
 
-	// The timestamp of the last transaction at which the balance for the token in the
+	// The Timestamp of the last transaction at which the balance for the token in the
 	// wallet was updated.
 	LastUpdatedTime *BlockchainInstant
 
@@ -195,7 +269,10 @@ type TokenIdentifier struct {
 	// This is the token's contract address.
 	ContractAddress *string
 
-	// The unique identifier of the token.
+	// The unique identifier of the token. You must specify this container with btc
+	// for the native BTC token, and eth for the native ETH token. For all other token
+	// types you must specify the tokenId in the 64 character hexadecimal tokenid
+	// format.
 	TokenId *string
 
 	noSmithyDocumentSerde
@@ -209,7 +286,7 @@ type TokenIdentifier struct {
 //     must be credited. This state-changing action occurs within a transaction.
 type Transaction struct {
 
-	// The blockchain network where the transaction occured.
+	// The blockchain network where the transaction occurred.
 	//
 	// This member is required.
 	Network QueryNetwork

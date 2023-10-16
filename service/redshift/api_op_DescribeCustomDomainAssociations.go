@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Contains information for custom domain associations for a cluster.
+// Contains information about custom domain associations for a cluster.
 func (c *Client) DescribeCustomDomainAssociations(ctx context.Context, params *DescribeCustomDomainAssociationsInput, optFns ...func(*Options)) (*DescribeCustomDomainAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeCustomDomainAssociationsInput{}

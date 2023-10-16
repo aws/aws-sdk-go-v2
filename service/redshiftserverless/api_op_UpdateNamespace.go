@@ -43,8 +43,14 @@ type UpdateNamespaceInput struct {
 	// This member is required.
 	NamespaceName *string
 
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// namespace's admin credentials secret. You can only use this parameter if
+	// manageAdminPassword is true.
+	AdminPasswordSecretKmsKeyId *string
+
 	// The password of the administrator for the first database created in the
-	// namespace. This parameter must be updated together with adminUsername .
+	// namespace. This parameter must be updated together with adminUsername . You
+	// can't use adminUserPassword if manageAdminPassword is true.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the
@@ -66,6 +72,12 @@ type UpdateNamespaceInput struct {
 	// The types of logs the namespace can export. The export types are userlog ,
 	// connectionlog , and useractivitylog .
 	LogExports []types.LogExport
+
+	// If true , Amazon Redshift uses Secrets Manager to manage the namespace's admin
+	// credentials. You can't use adminUserPassword if manageAdminPassword is true. If
+	// manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword
+	// for the admin user account's password.
+	ManageAdminPassword *bool
 
 	noSmithyDocumentSerde
 }

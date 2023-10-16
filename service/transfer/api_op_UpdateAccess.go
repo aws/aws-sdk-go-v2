@@ -57,7 +57,7 @@ type UpdateAccessInput struct {
 
 	// The landing directory (folder) for a user when they log in to the server using
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
-	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and

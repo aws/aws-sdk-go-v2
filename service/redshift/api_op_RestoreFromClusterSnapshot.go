@@ -156,11 +156,21 @@ type RestoreFromClusterSnapshotInput struct {
 	// tracks.
 	MaintenanceTrackName *string
 
+	// If true , Amazon Redshift uses Secrets Manager to manage the restored cluster's
+	// admin credentials. If ManageMasterPassword is false or not set, Amazon Redshift
+	// uses the admin credentials the cluster had at the time the snapshot was taken.
+	ManageMasterPassword *bool
+
 	// The default number of days to retain a manual snapshot. If the value is -1, the
 	// snapshot is retained indefinitely. This setting doesn't change the retention
 	// period of existing snapshots. The value must be either -1 or an integer between
 	// 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
+
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// cluster's admin credentials secret. You can only use this parameter if
+	// ManageMasterPassword is true.
+	MasterPasswordSecretKmsKeyId *string
 
 	// The node type that the restored cluster will be provisioned with. Default: The
 	// node type of the cluster from which the snapshot was taken. You can modify this

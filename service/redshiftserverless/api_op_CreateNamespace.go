@@ -39,8 +39,13 @@ type CreateNamespaceInput struct {
 	// This member is required.
 	NamespaceName *string
 
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// namespace's admin credentials secret. You can only use this parameter if
+	// manageAdminPassword is true.
+	AdminPasswordSecretKmsKeyId *string
+
 	// The password of the administrator for the first database created in the
-	// namespace.
+	// namespace. You can't use adminUserPassword if manageAdminPassword is true.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the
@@ -64,6 +69,12 @@ type CreateNamespaceInput struct {
 	// The types of logs the namespace can export. Available export types are userlog ,
 	// connectionlog , and useractivitylog .
 	LogExports []types.LogExport
+
+	// If true , Amazon Redshift uses Secrets Manager to manage the namespace's admin
+	// credentials. You can't use adminUserPassword if manageAdminPassword is true. If
+	// manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword
+	// for the admin user account's password.
+	ManageAdminPassword *bool
 
 	// A list of tag instances.
 	Tags []types.Tag

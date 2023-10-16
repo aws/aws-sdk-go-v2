@@ -183,6 +183,8 @@ const (
 	DescribePackagesFilterNamePackageID     DescribePackagesFilterName = "PackageID"
 	DescribePackagesFilterNamePackageName   DescribePackagesFilterName = "PackageName"
 	DescribePackagesFilterNamePackageStatus DescribePackagesFilterName = "PackageStatus"
+	DescribePackagesFilterNamePackageType   DescribePackagesFilterName = "PackageType"
+	DescribePackagesFilterNameEngineVersion DescribePackagesFilterName = "EngineVersion"
 )
 
 // Values returns all known values for DescribePackagesFilterName. Note that this
@@ -193,6 +195,8 @@ func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
 		"PackageID",
 		"PackageName",
 		"PackageStatus",
+		"PackageType",
+		"EngineVersion",
 	}
 }
 
@@ -746,6 +750,7 @@ type PackageType string
 // Enum values for PackageType
 const (
 	PackageTypeTxtDictionary PackageType = "TXT-DICTIONARY"
+	PackageTypeZipPlugin     PackageType = "ZIP-PLUGIN"
 )
 
 // Values returns all known values for PackageType. Note that this can be expanded
@@ -754,6 +759,7 @@ const (
 func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"TXT-DICTIONARY",
+		"ZIP-PLUGIN",
 	}
 }
 

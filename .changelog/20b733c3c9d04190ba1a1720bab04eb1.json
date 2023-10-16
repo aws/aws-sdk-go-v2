@@ -1,0 +1,8 @@
+{
+    "id": "20b733c3-c9d0-4190-ba1a-1720bab04eb1",
+    "type": "documentation",
+    "description": "Documentation updates for AWS Transfer Family",
+    "modules": [
+        "service/transfer"
+    ]
+}

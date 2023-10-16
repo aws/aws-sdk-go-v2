@@ -770,6 +770,30 @@ func (TlsPolicy) Values() []TlsPolicy {
 	}
 }
 
+type VerificationError string
+
+// Enum values for VerificationError
+const (
+	VerificationErrorServiceError   VerificationError = "SERVICE_ERROR"
+	VerificationErrorDnsServerError VerificationError = "DNS_SERVER_ERROR"
+	VerificationErrorHostNotFound   VerificationError = "HOST_NOT_FOUND"
+	VerificationErrorTypeNotFound   VerificationError = "TYPE_NOT_FOUND"
+	VerificationErrorInvalidValue   VerificationError = "INVALID_VALUE"
+)
+
+// Values returns all known values for VerificationError. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationError) Values() []VerificationError {
+	return []VerificationError{
+		"SERVICE_ERROR",
+		"DNS_SERVER_ERROR",
+		"HOST_NOT_FOUND",
+		"TYPE_NOT_FOUND",
+		"INVALID_VALUE",
+	}
+}
+
 type VerificationStatus string
 
 // Enum values for VerificationStatus

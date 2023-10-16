@@ -213,7 +213,7 @@ type DescribedAccess struct {
 
 	// The landing directory (folder) for a user when they log in to the server using
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
-	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -744,7 +744,7 @@ type DescribedUser struct {
 
 	// The landing directory (folder) for a user when they log in to the server using
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
-	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -1061,7 +1061,7 @@ type ListedAccess struct {
 
 	// The landing directory (folder) for a user when they log in to the server using
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
-	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
 	HomeDirectory *string
 
 	// The type of landing directory (folder) that you want your users' home directory
@@ -1313,7 +1313,7 @@ type ListedUser struct {
 
 	// The landing directory (folder) for a user when they log in to the server using
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
-	// HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL .
+	// HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
 	HomeDirectory *string
 
 	// The type of landing directory (folder) that you want your users' home directory

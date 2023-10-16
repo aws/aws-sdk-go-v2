@@ -48,7 +48,7 @@ type ListEmailTemplatesInput struct {
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
-	// more than 10.
+	// more than 100.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -159,7 +159,7 @@ type ListEmailTemplatesPaginatorOptions struct {
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results. The value you specify has to be at least 1, and can be no
-	// more than 10.
+	// more than 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

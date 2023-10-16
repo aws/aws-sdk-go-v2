@@ -575,10 +575,13 @@ type ConnectionProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Cross cluster search specific connection properties.
+// Cross-cluster search specific connection properties.
 type CrossClusterSearchConnectionProperties struct {
 
-	// Status of SkipUnavailable param for outbound connection.
+	// The status of the SkipUnavailable setting for the outbound connection. This
+	// feature allows you to specify some clusters as optional and ensure that your
+	// cross-cluster queries return partial results despite failures on one or more
+	// remote clusters.
 	SkipUnavailable SkipUnavailableStatus
 
 	noSmithyDocumentSerde
@@ -1397,8 +1400,16 @@ type PackageDetails struct {
 	// The package version.
 	AvailablePackageVersion *string
 
+	// If the package is a ZIP-PLUGIN package, additional information about plugin
+	// properties.
+	AvailablePluginProperties *PluginProperties
+
 	// The timestamp when the package was created.
 	CreatedAt *time.Time
+
+	// Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
+	// OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
+	EngineVersion *string
 
 	// Additional information if the package is in an error state. Null otherwise.
 	ErrorDetails *ErrorDetails
@@ -1448,6 +1459,31 @@ type PackageVersionHistory struct {
 
 	// The package version.
 	PackageVersion *string
+
+	// Additional information about plugin properties if the package is a ZIP-PLUGIN
+	// package.
+	PluginProperties *PluginProperties
+
+	noSmithyDocumentSerde
+}
+
+// Basic information about the plugin.
+type PluginProperties struct {
+
+	// The name of the class to load.
+	ClassName *string
+
+	// The description of the plugin.
+	Description *string
+
+	// The name of the plugin.
+	Name *string
+
+	// The uncompressed size of the plugin.
+	UncompressedSizeInBytes *int64
+
+	// The version of the plugin.
+	Version *string
 
 	noSmithyDocumentSerde
 }

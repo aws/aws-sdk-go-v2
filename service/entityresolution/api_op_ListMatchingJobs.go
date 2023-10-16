@@ -42,7 +42,7 @@ type ListMatchingJobsInput struct {
 	// The maximum number of objects returned per page.
 	MaxResults *int32
 
-	// The pagination token from the previous ListSchemaMappings API call.
+	// The pagination token from the previous API call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,7 +54,7 @@ type ListMatchingJobsOutput struct {
 	// and end time of a job.
 	Jobs []types.JobSummary
 
-	// The pagination token from the previous ListSchemaMappings API call.
+	// The pagination token from the previous API call.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

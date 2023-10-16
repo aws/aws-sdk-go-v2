@@ -52,18 +52,6 @@ type CreateClusterInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The password associated with the admin user account for the cluster that is
-	// being created. Constraints:
-	//   - Must be between 8 and 64 characters in length.
-	//   - Must contain at least one uppercase letter.
-	//   - Must contain at least one lowercase letter.
-	//   - Must contain one number.
-	//   - Can be any printable ASCII character (ASCII code 33-126) except ' (single
-	//   quote), " (double quote), \ , / , or @ .
-	//
-	// This member is required.
-	MasterUserPassword *string
-
 	// The user name associated with the admin user account for the cluster that is
 	// being created. Constraints:
 	//   - Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be
@@ -215,11 +203,33 @@ type CreateClusterInput struct {
 	// current track.
 	MaintenanceTrackName *string
 
+	// If true , Amazon Redshift uses Secrets Manager to manage this cluster's admin
+	// credentials. You can't use MasterUserPassword if ManageMasterPassword is true.
+	// If ManageMasterPassword is false or not set, Amazon Redshift uses
+	// MasterUserPassword for the admin user account's password.
+	ManageMasterPassword *bool
+
 	// The default number of days to retain a manual snapshot. If the value is -1, the
 	// snapshot is retained indefinitely. This setting doesn't change the retention
 	// period of existing snapshots. The value must be either -1 or an integer between
 	// 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
+
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// cluster's admin credentials secret. You can only use this parameter if
+	// ManageMasterPassword is true.
+	MasterPasswordSecretKmsKeyId *string
+
+	// The password associated with the admin user account for the cluster that is
+	// being created. You can't use MasterUserPassword if ManageMasterPassword is true
+	// . Constraints:
+	//   - Must be between 8 and 64 characters in length.
+	//   - Must contain at least one uppercase letter.
+	//   - Must contain at least one lowercase letter.
+	//   - Must contain one number.
+	//   - Can be any printable ASCII character (ASCII code 33-126) except ' (single
+	//   quote), " (double quote), \ , / , or @ .
+	MasterUserPassword *string
 
 	// The number of compute nodes in the cluster. This parameter is required when the
 	// ClusterType parameter is specified as multi-node . For information about

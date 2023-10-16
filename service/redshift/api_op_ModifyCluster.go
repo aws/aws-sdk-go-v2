@@ -143,6 +143,12 @@ type ModifyClusterInput struct {
 	// track name is applied.
 	MaintenanceTrackName *string
 
+	// If true , Amazon Redshift uses Secrets Manager to manage this cluster's admin
+	// credentials. You can't use MasterUserPassword if ManageMasterPassword is true.
+	// If ManageMasterPassword is false or not set, Amazon Redshift uses
+	// MasterUserPassword for the admin user account's password.
+	ManageMasterPassword *bool
+
 	// The default for number of days that a newly created manual snapshot is
 	// retained. If the value is -1, the manual snapshot is retained indefinitely. This
 	// value doesn't retroactively change the retention periods of existing manual
@@ -150,13 +156,19 @@ type ModifyClusterInput struct {
 	// default value is -1.
 	ManualSnapshotRetentionPeriod *int32
 
+	// The ID of the Key Management Service (KMS) key used to encrypt and store the
+	// cluster's admin credentials secret. You can only use this parameter if
+	// ManageMasterPassword is true.
+	MasterPasswordSecretKmsKeyId *string
+
 	// The new password for the cluster admin user. This change is asynchronously
 	// applied as soon as possible. Between the time of the request and the completion
 	// of the request, the MasterUserPassword element exists in the
-	// PendingModifiedValues element of the operation response. Operations never return
-	// the password, so this operation provides a way to regain access to the admin
-	// user account for a cluster if the password is lost. Default: Uses existing
-	// setting. Constraints:
+	// PendingModifiedValues element of the operation response. You can't use
+	// MasterUserPassword if ManageMasterPassword is true . Operations never return the
+	// password, so this operation provides a way to regain access to the admin user
+	// account for a cluster if the password is lost. Default: Uses existing setting.
+	// Constraints:
 	//   - Must be between 8 and 64 characters in length.
 	//   - Must contain at least one uppercase letter.
 	//   - Must contain at least one lowercase letter.

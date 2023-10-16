@@ -448,6 +448,11 @@ type LaunchConfigurationTemplate struct {
 	// Launch disposition.
 	LaunchDisposition LaunchDisposition
 
+	// DRS will set the 'launch into instance ID' of any source server when performing
+	// a drill, recovery or failback to the previous region or availability zone, using
+	// the instance ID of the source instance.
+	LaunchIntoSourceInstance *bool
+
 	// Licensing.
 	Licensing *Licensing
 
@@ -459,6 +464,16 @@ type LaunchConfigurationTemplate struct {
 
 	// Target instance type right-sizing method.
 	TargetInstanceTypeRightSizingMethod TargetInstanceTypeRightSizingMethod
+
+	noSmithyDocumentSerde
+}
+
+// Launch into existing instance.
+type LaunchIntoInstanceProperties struct {
+
+	// Optionally holds EC2 instance ID of an instance to launch into, instead of
+	// launching a new instance during drill, recovery or failback.
+	LaunchIntoEC2InstanceID *string
 
 	noSmithyDocumentSerde
 }
