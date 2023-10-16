@@ -433,7 +433,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -973,7 +973,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -2465,7 +2465,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -3061,7 +3061,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryMappings": {
@@ -5074,7 +5074,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -5459,7 +5459,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -8404,7 +8404,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -9075,7 +9075,7 @@
                 "HomeDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>LOGICAL</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The landing directory (folder) for a user when they log in to the server using the client.</p>\n         <p>A <code>HomeDirectory</code> example is <code>/bucket_name/home/mydirectory</code>.</p>\n         <note>\n            <p>The <code>HomeDirectory</code> parameter is only used if <code>HomeDirectoryType</code> is set to <code>PATH</code>.</p>\n         </note>"
                     }
                 },
                 "HomeDirectoryType": {

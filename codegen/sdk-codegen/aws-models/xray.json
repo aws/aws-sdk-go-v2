@@ -3287,7 +3287,7 @@
                 "TimeRangeType": {
                     "target": "com.amazonaws.xray#TimeRangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId or Event time.</p>"
+                        "smithy.api#documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId, Event (trace update time), or Service (segment end time).</p>"
                     }
                 },
                 "Sampling": {
@@ -5557,6 +5557,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Event"
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Service"
                     }
                 }
             }

@@ -8651,6 +8651,12 @@
                         "smithy.api#enumValue": "DeletionPolicy"
                     }
                 },
+                "UpdateReplacePolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateReplacePolicy"
+                    }
+                },
                 "Tags": {
                     "target": "smithy.api#Unit",
                     "traits": {

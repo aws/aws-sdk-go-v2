@@ -18,6 +18,47 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.managedblockchainquery#AssetContract": {
+            "type": "structure",
+            "members": {
+                "contractIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#ContractIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the contract identifier containing its blockchain network \n             and address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tokenStandard": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTokenStandard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token standard of the contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deployerAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the contract deployer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This container contains information about an contract.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#AssetContractList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#AssetContract"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
         "com.amazonaws.managedblockchainquery#BatchGetTokenBalance": {
             "type": "operation",
             "input": {
@@ -48,7 +89,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to batch calls for GetTokenBalance API",
-                "smithy.api#documentation": "<p>Gets the token balance for a batch of tokens by using the <code>GetTokenBalance</code> \n         action for every token in the request.</p>\n         <note>\n            <p>Only the native tokens BTC,ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets the token balance for a batch of tokens by using the <code>BatchGetTokenBalance</code> \n         action for every token in the request.</p>\n         <note>\n            <p>Only the native tokens BTC,ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/batch-get-token-balance",
                     "method": "POST"
@@ -112,7 +153,7 @@
                 "getTokenBalanceInputs": {
                     "target": "com.amazonaws.managedblockchainquery#GetTokenBalanceInputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>GetTokenBalanceInput</code> objects whose balance is being requested.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>BatchGetTokenBalanceInputItem</code> objects whose balance is being requested.</p>"
                     }
                 }
             },
@@ -233,6 +274,83 @@
                 "smithy.api#pattern": "^[-A-Za-z0-9]{13,74}$"
             }
         },
+        "com.amazonaws.managedblockchainquery#ContractFilter": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network of the contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tokenStandard": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTokenStandard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the token standard.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deployerAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network address of the deployer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contract or wallet address by which to filter the request.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ContractIdentifier": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network of the contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contractAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the blockchain address about a contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the blockchain address and network information about a contract.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ContractMetadata": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the token contract.</p>"
+                    }
+                },
+                "symbol": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The symbol of the token contract.</p>"
+                    }
+                },
+                "decimals": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decimals used by the token contract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata of the contract.</p>"
+            }
+        },
         "com.amazonaws.managedblockchainquery#ErrorType": {
             "type": "string",
             "traits": {
@@ -256,6 +374,91 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetAssetContract": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#GetAssetContractInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#GetAssetContractOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to fetch information about a contract on the blockchain",
+                "smithy.api#documentation": "<p>Gets the information about a specific contract deployed on the blockchain.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>The Bitcoin blockchain networks do not support this \n             operation.</p>\n               </li>\n               <li>\n                  <p>Metadata is currently only available for some <code>ERC-20</code> contracts. \n                Metadata will be available for additional contracts in the future.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/get-asset-contract",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetAssetContractInput": {
+            "type": "structure",
+            "members": {
+                "contractIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#ContractIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the blockchain address and network information about the contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetAssetContractOutput": {
+            "type": "structure",
+            "members": {
+                "contractIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#ContractIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the blockchain address and network information about the contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tokenStandard": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTokenStandard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token standard of the contract requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deployerAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the deployer of contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.managedblockchainquery#ContractMetadata"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.managedblockchainquery#GetTokenBalance": {
@@ -466,6 +669,99 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.managedblockchainquery#ListAssetContracts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#ListAssetContractsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#ListAssetContractsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to fetch multiple contracts on the blockchain",
+                "smithy.api#documentation": "<p>Lists all the contracts for a given contract type deployed by an address \n         (either a contract address or a wallet address).</p>\n         <p>The Bitcoin blockchain networks do not support this \n            operation.</p>",
+                "smithy.api#http": {
+                    "uri": "/list-asset-contracts",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "contracts",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListAssetContractsInput": {
+            "type": "structure",
+            "members": {
+                "contractFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#ContractFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the filter parameter for the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of contracts to list.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 250
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListAssetContractsOutput": {
+            "type": "structure",
+            "members": {
+                "contracts": {
+                    "target": "com.amazonaws.managedblockchainquery#AssetContractList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of contract objects that contain the properties for each contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.managedblockchainquery#ListTokenBalances": {
             "type": "operation",
             "input": {
@@ -493,7 +789,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to retrieve multiple balances on the blockchain",
-                "smithy.api#documentation": "<p>This action returns the following for a given a blockchain network:</p>\n         <ul>\n            <li>\n               <p>Lists all token balances owned by an address (either a contact \n          address or a wallet address).</p>\n            </li>\n            <li>\n               <p>Lists all token balances for all tokens created by a contract.</p>\n            </li>\n            <li>\n               <p>Lists all token balances for a given token.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must always specify the network property of \n                              the <code>tokenFilter</code> when using this operation.</p>\n         </note>",
+                "smithy.api#documentation": "<p>This action returns the following for a given blockchain network:</p>\n         <ul>\n            <li>\n               <p>Lists all token balances owned by an address (either a contract \n          address or a wallet address).</p>\n            </li>\n            <li>\n               <p>Lists all token balances for all tokens created by a contract.</p>\n            </li>\n            <li>\n               <p>Lists all token balances for a given token.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must always specify the network property of \n                              the <code>tokenFilter</code> when using this operation.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/list-token-balances",
                     "method": "POST"
@@ -519,7 +815,7 @@
                 "tokenFilter": {
                     "target": "com.amazonaws.managedblockchainquery#TokenFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>The contract address or a token identifier on the \n        blockchain network by which to filter the request. You must specify the contractAddress \n        property of this container when listing tokens minted by a contract.</p>\n         <note>\n            <p>You must always specify the network property of this \n                           container when using this operation.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The contract address or a token identifier on the \n        blockchain network by which to filter the request. You must specify the <code>contractAddress</code> \n        property of this container when listing tokens minted by a contract.</p>\n         <note>\n            <p>You must always specify the network property of this \n                           container when using this operation.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -861,6 +1157,11 @@
                         "value": "BITCOIN_MAINNET",
                         "name": "BITCOIN_MAINNET",
                         "documentation": "Bitcoin main network"
+                    },
+                    {
+                        "value": "BITCOIN_TESTNET",
+                        "name": "BITCOIN_TESTNET",
+                        "documentation": "Bitcoin test network"
                     }
                 ]
             }
@@ -869,6 +1170,25 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9]{1,66}$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryTokenStandard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ERC20",
+                        "name": "ERC20"
+                    },
+                    {
+                        "value": "ERC721",
+                        "name": "ERC721"
+                    },
+                    {
+                        "value": "ERC1155",
+                        "name": "ERC1155"
+                    }
+                ]
             }
         },
         "com.amazonaws.managedblockchainquery#QueryTransactionEventType": {
@@ -1118,10 +1438,16 @@
                     "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalance"
                 },
                 {
+                    "target": "com.amazonaws.managedblockchainquery#GetAssetContract"
+                },
+                {
                     "target": "com.amazonaws.managedblockchainquery#GetTokenBalance"
                 },
                 {
                     "target": "com.amazonaws.managedblockchainquery#GetTransaction"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ListAssetContracts"
                 },
                 {
                     "target": "com.amazonaws.managedblockchainquery#ListTokenBalances"
@@ -1866,7 +2192,7 @@
                 "lastUpdatedTime": {
                     "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.</p>"
+                        "smithy.api#documentation": "<p>The <code>Timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.</p>"
                     }
                 }
             },
@@ -1932,7 +2258,7 @@
                 "tokenId": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the token.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the token.</p>\n         <note>\n            <p>You must specify this container with <code>btc</code> for the native BTC token, and \n         <code>eth</code> for the native ETH token. For all other token types you must \n         specify the <code>tokenId</code> in the 64 character hexadecimal <code>tokenid</code> format.</p>\n         </note>"
                     }
                 }
             },
@@ -1946,7 +2272,7 @@
                 "network": {
                     "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blockchain network where the transaction occured.</p>",
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
                         "smithy.api#required": {}
                     }
                 },

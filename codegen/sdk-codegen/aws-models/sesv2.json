@@ -110,6 +110,9 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.sesv2#AdminEmail": {
+            "type": "string"
+        },
         "com.amazonaws.sesv2#AlreadyExistsException": {
             "type": "structure",
             "members": {
@@ -2930,7 +2933,7 @@
                 "NextSigningKeyLength": {
                     "target": "com.amazonaws.sesv2#DkimSigningKeyLength",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.</p>"
+                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be\n            changed at most once per day.</p>"
                     }
                 },
                 "CurrentSigningKeyLength": {
@@ -2956,7 +2959,7 @@
                 "DomainSigningSelector": {
                     "target": "com.amazonaws.sesv2#Selector",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a\n            domain.</p>"
+                        "smithy.api#documentation": "<p>[Bring Your Own DKIM] A string that's used to identify a public key in the DNS\n            configuration for a domain.</p>"
                     }
                 },
                 "DomainSigningPrivateKey": {
@@ -2968,12 +2971,12 @@
                 "NextSigningKeyLength": {
                     "target": "com.amazonaws.sesv2#DkimSigningKeyLength",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.</p>"
+                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be\n            changed at most once per day.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains configuration for Bring Your Own DKIM (BYODKIM), or, for Easy DKIM</p>"
+                "smithy.api#documentation": "<p>An object that contains configuration for Bring Your Own DKIM (BYODKIM), or, for Easy\n            DKIM</p>"
             }
         },
         "com.amazonaws.sesv2#DkimSigningAttributesOrigin": {
@@ -3273,7 +3276,7 @@
                 "Raw": {
                     "target": "com.amazonaws.sesv2#RawMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The raw email message. The message has to meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>The message has to contain a header and a body, separated by one blank\n                    line.</p>\n            </li>\n            <li>\n               <p>All of the required header fields must be present in the message.</p>\n            </li>\n            <li>\n               <p>Each part of a multipart MIME message must be formatted properly.</p>\n            </li>\n            <li>\n               <p>If you include attachments, they must be in a file format that the Amazon SES API v2\n                    supports.\n                    </p>\n            </li>\n            <li>\n               <p>The entire message must be Base64 encoded.</p>\n            </li>\n            <li>\n               <p>If any of the MIME parts in your message contain content that is outside of\n                    the 7-bit ASCII character range, you should encode that content to ensure that\n                    recipients' email clients render the message properly.</p>\n            </li>\n            <li>\n               <p>The length of any single line of text in the message can't exceed 1,000\n                    characters. This restriction is defined in <a href=\"https://tools.ietf.org/html/rfc5321\">RFC 5321</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The raw email message. The message has to meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>The message has to contain a header and a body, separated by one blank\n                    line.</p>\n            </li>\n            <li>\n               <p>All of the required header fields must be present in the message.</p>\n            </li>\n            <li>\n               <p>Each part of a multipart MIME message must be formatted properly.</p>\n            </li>\n            <li>\n               <p>If you include attachments, they must be in a file format that the Amazon SES API v2\n                    supports.\n                    </p>\n            </li>\n            <li>\n               <p>The raw data of the message needs to base64-encoded if you are accessing\n                    Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services\n                    SDK, the SDK takes care of the base 64-encoding for you.</p>\n            </li>\n            <li>\n               <p>If any of the MIME parts in your message contain content that is outside of\n                    the 7-bit ASCII character range, you should encode that content to ensure that\n                    recipients' email clients render the message properly.</p>\n            </li>\n            <li>\n               <p>The length of any single line of text in the message can't exceed 1,000\n                    characters. This restriction is defined in <a href=\"https://tools.ietf.org/html/rfc5321\">RFC 5321</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Template": {
@@ -5190,6 +5193,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The verification status of the identity. The status can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – The verification process was initiated, but Amazon SES\n                    hasn't yet been able to verify the identity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – The verification process completed\n                    successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The verification process failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES\n                    from determining the verification status of the identity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code> – The verification process hasn't been\n                    initiated for the identity.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "VerificationInfo": {
+                    "target": "com.amazonaws.sesv2#VerificationInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains additional information about the verification status for the\n            identity.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5687,7 +5696,7 @@
                 "VerificationStatus": {
                     "target": "com.amazonaws.sesv2#VerificationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The verification status of the identity. The status can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – The verification process was initiated, but Amazon SES\n                    hasn't yet been able to verify the identity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – The verification process completed\n                    successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The verification process failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES\n                    from determining the verification status of the identity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code> – The verification process hasn't been\n                    initiated for the identity.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The verification status of the identity. The status can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – The verification process was initiated, but Amazon SES\n                    hasn't yet been able to verify the identity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – The verification process completed\n                    successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The verification process failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES\n                    from determining the verification status of the identity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code> – The verification process hasn't been\n                    initiated for the identity.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6799,7 +6808,7 @@
                 "PageSize": {
                     "target": "com.amazonaws.sesv2#MaxItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListEmailTemplates</code>. If the number of\n            results is larger than the number you specified in this parameter, then the response\n            includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>\n         <p>The value you specify has to be at least 1, and can be no more than 10.</p>",
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListEmailTemplates</code>. If the number of\n            results is larger than the number you specified in this parameter, then the response\n            includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>\n         <p>The value you specify has to be at least 1, and can be no more than 100.</p>",
                         "smithy.api#httpQuery": "PageSize"
                     }
                 }
@@ -8009,6 +8018,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>The name of a dedicated IP pool.</p>"
             }
+        },
+        "com.amazonaws.sesv2#PrimaryNameServer": {
+            "type": "string"
         },
         "com.amazonaws.sesv2#PrivateKey": {
             "type": "string",
@@ -9338,7 +9350,7 @@
                 "Data": {
                     "target": "com.amazonaws.sesv2#RawMessageData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The raw email message. The message has to meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>The message has to contain a header and a body, separated by one blank\n                    line.</p>\n            </li>\n            <li>\n               <p>All of the required header fields must be present in the message.</p>\n            </li>\n            <li>\n               <p>Each part of a multipart MIME message must be formatted properly.</p>\n            </li>\n            <li>\n               <p>Attachments must be in a file format that the Amazon SES supports.</p>\n            </li>\n            <li>\n               <p>The entire message must be Base64 encoded.</p>\n            </li>\n            <li>\n               <p>If any of the MIME parts in your message contain content that is outside of\n                    the 7-bit ASCII character range, you should encode that content to ensure that\n                    recipients' email clients render the message properly.</p>\n            </li>\n            <li>\n               <p>The length of any single line of text in the message can't exceed 1,000\n                    characters. This restriction is defined in <a href=\"https://tools.ietf.org/html/rfc5321\">RFC 5321</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The raw email message. The message has to meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>The message has to contain a header and a body, separated by one blank\n                    line.</p>\n            </li>\n            <li>\n               <p>All of the required header fields must be present in the message.</p>\n            </li>\n            <li>\n               <p>Each part of a multipart MIME message must be formatted properly.</p>\n            </li>\n            <li>\n               <p>Attachments must be in a file format that the Amazon SES supports.</p>\n            </li>\n            <li>\n               <p>The raw data of the message needs to base64-encoded if you are accessing\n                    Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services\n                    SDK, the SDK takes care of the base 64-encoding for you.</p>\n            </li>\n            <li>\n               <p>If any of the MIME parts in your message contain content that is outside of\n                    the 7-bit ASCII character range, you should encode that content to ensure that\n                    recipients' email clients render the message properly.</p>\n            </li>\n            <li>\n               <p>The length of any single line of text in the message can't exceed 1,000\n                    characters. This restriction is defined in <a href=\"https://tools.ietf.org/html/rfc5321\">RFC 5321</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9602,6 +9614,33 @@
             "traits": {
                 "smithy.api#documentation": "<p>An Amazon S3 URL in the format s3://<i><bucket_name></i>/<i><object></i> or\n            a pre-signed URL.</p>",
                 "smithy.api#pattern": "^s3:\\/\\/([^\\/]+)\\/(.*?([^\\/]+)\\/?)$"
+            }
+        },
+        "com.amazonaws.sesv2#SOARecord": {
+            "type": "structure",
+            "members": {
+                "PrimaryNameServer": {
+                    "target": "com.amazonaws.sesv2#PrimaryNameServer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Primary name server specified in the SOA record.</p>"
+                    }
+                },
+                "AdminEmail": {
+                    "target": "com.amazonaws.sesv2#AdminEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Administrative contact email from the SOA record.</p>"
+                    }
+                },
+                "SerialNumber": {
+                    "target": "com.amazonaws.sesv2#SerialNumber",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Serial number from the SOA record.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about the start of authority (SOA) record\n            associated with the identity.</p>"
             }
         },
         "com.amazonaws.sesv2#ScalingMode": {
@@ -10036,6 +10075,12 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.sesv2#SerialNumber": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.sesv2#SimpleEmailService_v2": {
             "type": "service",
             "version": "2019-09-27",
@@ -10373,7 +10418,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -10416,7 +10460,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -10429,7 +10474,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -10443,7 +10487,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -10466,7 +10509,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -10501,7 +10543,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -10512,14 +10553,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -10533,14 +10576,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -10549,11 +10590,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -10564,14 +10605,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -10585,7 +10628,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -10605,7 +10647,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -10616,14 +10657,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -10634,9 +10677,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -12377,6 +12422,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that defines the VDM settings that apply to emails that you send using the\n            configuration set.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#VerificationError": {
+            "type": "enum",
+            "members": {
+                "SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_ERROR"
+                    }
+                },
+                "DNS_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_SERVER_ERROR"
+                    }
+                },
+                "HOST_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOST_NOT_FOUND"
+                    }
+                },
+                "TYPE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPE_NOT_FOUND"
+                    }
+                },
+                "INVALID_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_VALUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#VerificationInfo": {
+            "type": "structure",
+            "members": {
+                "LastCheckedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time a verification attempt was made for this identity.</p>"
+                    }
+                },
+                "LastSuccessTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time a successful verification was made for this identity.</p>"
+                    }
+                },
+                "ErrorType": {
+                    "target": "com.amazonaws.sesv2#VerificationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SOARecord": {
+                    "target": "com.amazonaws.sesv2#SOARecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the start of authority (SOA) record\n            associated with the identity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains additional information about the verification status for the\n            identity.</p>"
             }
         },
         "com.amazonaws.sesv2#VerificationStatus": {

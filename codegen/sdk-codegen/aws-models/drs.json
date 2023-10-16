@@ -478,6 +478,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether we want to activate post-launch actions.</p>"
                     }
+                },
+                "launchIntoSourceInstance": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
+                    }
                 }
             }
         },
@@ -4864,6 +4870,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether we want to activate post-launch actions for the Source Server.</p>"
                     }
+                },
+                "launchIntoInstanceProperties": {
+                    "target": "com.amazonaws.drs#LaunchIntoInstanceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch into existing instance properties.</p>"
+                    }
                 }
             }
         },
@@ -4928,6 +4940,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Post-launch actions activated.</p>"
+                    }
+                },
+                "launchIntoSourceInstance": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
                     }
                 }
             },
@@ -5007,6 +5025,20 @@
                         "value": "STARTED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.drs#LaunchIntoInstanceProperties": {
+            "type": "structure",
+            "members": {
+                "launchIntoEC2InstanceID": {
+                    "target": "com.amazonaws.drs#EC2InstanceID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally holds EC2 instance ID of an instance to launch into, instead of launching a new instance during drill, recovery or failback.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Launch into existing instance.</p>"
             }
         },
         "com.amazonaws.drs#LaunchStatus": {
@@ -5810,7 +5842,10 @@
                     "target": "com.amazonaws.drs#LaunchActionParameters"
                 },
                 "description": {
-                    "target": "com.amazonaws.drs#LaunchActionDescription"
+                    "target": "com.amazonaws.drs#LaunchActionDescription",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
@@ -7815,7 +7850,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^([A-Za-z0-9-])+$"
+                "smithy.api#pattern": "^([A-Za-z0-9-/:])+$"
             }
         },
         "com.amazonaws.drs#StagingArea": {
@@ -8972,6 +9007,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether we want to enable post-launch actions for the Source Server.</p>"
                     }
+                },
+                "launchIntoInstanceProperties": {
+                    "target": "com.amazonaws.drs#LaunchIntoInstanceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch into existing instance properties.</p>"
+                    }
                 }
             }
         },
@@ -9062,6 +9103,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether we want to activate post-launch actions.</p>"
+                    }
+                },
+                "launchIntoSourceInstance": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
                     }
                 }
             }

@@ -3223,12 +3223,12 @@
                 "SkipUnavailable": {
                     "target": "com.amazonaws.opensearch#SkipUnavailableStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of SkipUnavailable param for outbound connection.</p>"
+                        "smithy.api#documentation": "<p>The status of the <code>SkipUnavailable</code> setting for the outbound connection. This\n   feature allows you to specify some clusters as optional and ensure that your cross-cluster\n   queries return partial results despite failures on one or more remote clusters.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Cross cluster search specific connection properties.</p>"
+                "smithy.api#documentation": "<p>Cross-cluster search specific connection properties.</p>"
             }
         },
         "com.amazonaws.opensearch#DeleteDomain": {
@@ -4128,7 +4128,7 @@
                 "DomainNames": {
                     "target": "com.amazonaws.opensearch#DomainNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of OpenSearch Service domain names that you want information about. If you don't\n   specify any domains, OpenSearch Service returns information about all domains owned by the\n   account.</p>",
+                        "smithy.api#documentation": "<p>Array of OpenSearch Service domain names that you want information about. You must specify\n   at least one domain name.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4574,13 +4574,25 @@
                     "traits": {
                         "smithy.api#enumValue": "PackageStatus"
                     }
+                },
+                "PackageType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageType"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EngineVersion"
+                    }
                 }
             }
         },
         "com.amazonaws.opensearch#DescribePackagesFilterValue": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?-]*$"
+                "smithy.api#pattern": "^[0-9a-zA-Z\\*\\.\\_\\\\\\/\\?-]+$"
             }
         },
         "com.amazonaws.opensearch#DescribePackagesFilterValues": {
@@ -5896,6 +5908,12 @@
                         "smithy.api#enumValue": "Elasticsearch"
                     }
                 }
+            }
+        },
+        "com.amazonaws.opensearch#EngineVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^Elasticsearch_[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$"
             }
         },
         "com.amazonaws.opensearch#EnvironmentInfo": {
@@ -8764,6 +8782,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information if the package is in an error state. Null otherwise.</p>"
                     }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.opensearch#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y.\n   Defaults to the latest version of OpenSearch.</p>"
+                    }
+                },
+                "AvailablePluginProperties": {
+                    "target": "com.amazonaws.opensearch#PluginProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the package is a <code>ZIP-PLUGIN</code> package, additional information about plugin properties.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8777,14 +8807,17 @@
             }
         },
         "com.amazonaws.opensearch#PackageID": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([FG][0-9]+)$"
+            }
         },
         "com.amazonaws.opensearch#PackageName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 3,
-                    "max": 28
+                    "max": 256
                 },
                 "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
             }
@@ -8870,6 +8903,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TXT-DICTIONARY"
                     }
+                },
+                "ZIP_PLUGIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZIP-PLUGIN"
+                    }
                 }
             }
         },
@@ -8896,6 +8935,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the package was created.</p>"
                     }
+                },
+                "PluginProperties": {
+                    "target": "com.amazonaws.opensearch#PluginProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about plugin properties if the package is a <code>ZIP-PLUGIN</code> package.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8917,6 +8962,80 @@
                 },
                 "smithy.api#pattern": ".*",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.opensearch#PluginClassName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.opensearch#PluginDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.opensearch#PluginName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.opensearch#PluginProperties": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.opensearch#PluginName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the plugin.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#PluginDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the plugin.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.opensearch#PluginVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the plugin.</p>"
+                    }
+                },
+                "ClassName": {
+                    "target": "com.amazonaws.opensearch#PluginClassName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the class to load.</p>"
+                    }
+                },
+                "UncompressedSizeInBytes": {
+                    "target": "com.amazonaws.opensearch#UncompressedPluginSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uncompressed size of the plugin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Basic information about the plugin.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#PluginVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.opensearch#PolicyDocument": {
@@ -9931,7 +10050,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Status of SkipUnavailable param for outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The SkipUnavailable param is enabled\n    for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The SkipUnavailable param is disabled\n     for the connection.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The status of <code>SkipUnavailable</code> setting for the outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The <code>SkipUnavailable</code> setting is enabled\n    for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The <code>SkipUnavailable</code> setting is disabled\n     for the connection.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opensearch#SlotList": {
@@ -10310,6 +10429,9 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#UncompressedPluginSizeInBytes": {
+            "type": "long"
+        },
         "com.amazonaws.opensearch#UpdateDomainConfig": {
             "type": "operation",
             "input": {
@@ -10339,7 +10461,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service\n   domain.sl</p>",
+                "smithy.api#documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service\n   domain.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/config",

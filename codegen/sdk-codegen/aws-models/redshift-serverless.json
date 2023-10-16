@@ -282,7 +282,7 @@
                 "adminUserPassword": {
                     "target": "com.amazonaws.redshiftserverless#DbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace.</p>"
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace.</p>\n         <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
                     }
                 },
                 "dbName": {
@@ -319,6 +319,18 @@
                     "target": "com.amazonaws.redshiftserverless#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tag instances.</p>"
+                    }
+                },
+                "manageAdminPassword": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. \n         You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. \n         If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses \n         <code>adminUserPassword</code> for the admin user account's password.\n      </p>"
+                    }
+                },
+                "adminPasswordSecretKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. \n         You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
                     }
                 }
             },
@@ -2473,6 +2485,18 @@
                         "smithy.api#documentation": "<p>The date of when the namespace was created.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "adminPasswordSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the namespace's admin user credentials secret.</p>"
+                    }
+                },
+                "adminPasswordSecretKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3734,6 +3758,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account that owns the snapshot.</p>"
                     }
+                },
+                "manageAdminPassword": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored \n         snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, \n         Amazon Redshift uses the admin credentials that the namespace or cluster \n         had at the time the snapshot was taken.</p>"
+                    }
+                },
+                "adminPasswordSecretKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4025,6 +4061,18 @@
                     "target": "com.amazonaws.redshiftserverless#AccountIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>All of the Amazon Web Services accounts that have access to restore a snapshot to a provisioned cluster.</p>"
+                    }
+                },
+                "adminPasswordSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the namespace's admin user credentials secret.</p>"
+                    }
+                },
+                "adminPasswordSecretKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>"
                     }
                 }
             },
@@ -4530,7 +4578,7 @@
                 "adminUserPassword": {
                     "target": "com.amazonaws.redshiftserverless#DbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace. This parameter must be updated together\n      with <code>adminUsername</code>.</p>"
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace. This parameter must be updated together\n      with <code>adminUsername</code>.</p>\n         <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
                     }
                 },
                 "adminUsername": {
@@ -4561,6 +4609,18 @@
                     "target": "com.amazonaws.redshiftserverless#LogExportList",
                     "traits": {
                         "smithy.api#documentation": "<p>The types of logs the namespace can export. The export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>"
+                    }
+                },
+                "manageAdminPassword": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. \n         You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. \n         If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses \n         <code>adminUserPassword</code> for the admin user account's password.\n      </p>"
+                    }
+                },
+                "adminPasswordSecretKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. \n         You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
                     }
                 }
             },
