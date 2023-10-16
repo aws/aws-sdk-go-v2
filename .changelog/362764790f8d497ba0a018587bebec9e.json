@@ -1,8 +1,0 @@
-{
-    "id": "36276479-0f8d-497b-a0a0-18587bebec9e",
-    "type": "feature",
-    "description": "Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.",
-    "modules": [
-        "service/drs"
-    ]
-}

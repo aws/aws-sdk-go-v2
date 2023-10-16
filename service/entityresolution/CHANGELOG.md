@@ -1,3 +1,7 @@
+# v1.3.0 (2023-10-16)
+
+* **Feature**: This launch expands our matching techniques to include provider-based matching to help customer match, link, and enhance records with minimal data movement. With data service providers, we have removed the need for customers to build bespoke integrations,.
+
 # v1.2.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

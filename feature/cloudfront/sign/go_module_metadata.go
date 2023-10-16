@@ -3,4 +3,4 @@
 package sign
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.3.51"
+const goModuleVersion = "1.4.0"

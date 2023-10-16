@@ -1,3 +1,36 @@
+# Release (2023-10-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.19.0](config/CHANGELOG.md#v1190-2023-10-16)
+  * **Feature**: Modify logic of retrieving user agent appID from env config
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.4.0](feature/cloudfront/sign/CHANGELOG.md#v140-2023-10-16)
+  * **Feature**: Add support for loading PKCS8-formatted private keys.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.35.0](service/cloudformation/CHANGELOG.md#v1350-2023-10-16)
+  * **Feature**: SDK and documentation updates for UpdateReplacePolicy
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.17.0](service/drs/CHANGELOG.md#v1170-2023-10-16)
+  * **Feature**: Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.3.0](service/entityresolution/CHANGELOG.md#v130-2023-10-16)
+  * **Feature**: This launch expands our matching techniques to include provider-based matching to help customer match, link, and enhance records with minimal data movement. With data service providers, we have removed the need for customers to build bespoke integrations,.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.2.0](service/managedblockchainquery/CHANGELOG.md#v120-2023-10-16)
+  * **Feature**: This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.3.0](service/mediapackagev2/CHANGELOG.md#v130-2023-10-16)
+  * **Feature**: This release allows customers to manage MediaPackage v2 resource using CloudFormation.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.20.0](service/opensearch/CHANGELOG.md#v1200-2023-10-16)
+  * **Feature**: This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.30.0](service/redshift/CHANGELOG.md#v1300-2023-10-16)
+  * **Feature**: Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.7.0](service/redshiftserverless/CHANGELOG.md#v170-2023-10-16)
+  * **Feature**: Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.21.0](service/sesv2/CHANGELOG.md#v1210-2023-10-16)
+  * **Feature**: This release provides enhanced visibility into your SES identity verification status. This will offer you more actionable insights, enabling you to promptly address any verification-related issues.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.34.2](service/transfer/CHANGELOG.md#v1342-2023-10-16)
+  * **Documentation**: Documentation updates for AWS Transfer Family
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.19.0](service/xray/CHANGELOG.md#v1190-2023-10-16)
+  * **Feature**: This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time.
+
 # Release (2023-10-12)
 
 ## General Highlights

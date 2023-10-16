@@ -1,8 +1,0 @@
-{
-    "id": "71a17e4b-0d33-4a06-a7b2-398a0dc1ec87",
-    "type": "feature",
-    "description": "Add support for loading PKCS8-formatted private keys.",
-    "modules": [
-        "feature/cloudfront/sign"
-    ]
-}

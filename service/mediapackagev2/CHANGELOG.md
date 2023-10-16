@@ -1,3 +1,7 @@
+# v1.3.0 (2023-10-16)
+
+* **Feature**: This release allows customers to manage MediaPackage v2 resource using CloudFormation.
+
 # v1.2.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

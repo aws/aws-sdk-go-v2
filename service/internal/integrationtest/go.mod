@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.21.2
-	github.com/aws/aws-sdk-go-v2/config v1.18.45
+	github.com/aws/aws-sdk-go-v2/config v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.7
@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.31.8
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.26.7
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.34.8
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.16.2
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.56.0
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.7
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.17.5

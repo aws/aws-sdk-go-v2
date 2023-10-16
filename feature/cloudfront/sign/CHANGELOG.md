@@ -1,3 +1,7 @@
+# v1.4.0 (2023-10-16)
+
+* **Feature**: Add support for loading PKCS8-formatted private keys.
+
 # v1.3.51 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

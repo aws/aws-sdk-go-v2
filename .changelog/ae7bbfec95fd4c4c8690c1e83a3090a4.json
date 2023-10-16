@@ -1,8 +1,0 @@
-{
-    "id": "ae7bbfec-95fd-4c4c-8690-c1e83a3090a4",
-    "type": "feature",
-    "description": "SDK and documentation updates for UpdateReplacePolicy",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

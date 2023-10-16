@@ -1,3 +1,7 @@
+# v1.20.0 (2023-10-16)
+
+* **Feature**: This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.
+
 # v1.19.8 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

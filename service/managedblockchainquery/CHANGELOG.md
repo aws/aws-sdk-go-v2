@@ -1,3 +1,7 @@
+# v1.2.0 (2023-10-16)
+
+* **Feature**: This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet.
+
 # v1.1.8 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

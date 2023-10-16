@@ -1,3 +1,7 @@
+# v1.19.0 (2023-10-16)
+
+* **Feature**: This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time.
+
 # v1.18.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

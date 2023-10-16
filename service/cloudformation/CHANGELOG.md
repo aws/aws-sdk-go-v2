@@ -1,3 +1,7 @@
+# v1.35.0 (2023-10-16)
+
+* **Feature**: SDK and documentation updates for UpdateReplacePolicy
+
 # v1.34.8 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

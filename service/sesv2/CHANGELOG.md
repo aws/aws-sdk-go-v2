@@ -1,3 +1,7 @@
+# v1.21.0 (2023-10-16)
+
+* **Feature**: This release provides enhanced visibility into your SES identity verification status. This will offer you more actionable insights, enabling you to promptly address any verification-related issues.
+
 # v1.20.3 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

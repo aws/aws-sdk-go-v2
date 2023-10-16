@@ -1,3 +1,7 @@
+# v1.34.2 (2023-10-16)
+
+* **Documentation**: Documentation updates for AWS Transfer Family
+
 # v1.34.1 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.17.0 (2023-10-16)
+
+* **Feature**: Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.
+
 # v1.16.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

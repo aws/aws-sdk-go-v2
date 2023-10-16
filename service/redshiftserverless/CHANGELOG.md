@@ -1,3 +1,7 @@
+# v1.7.0 (2023-10-16)
+
+* **Feature**: Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
+
 # v1.6.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions
