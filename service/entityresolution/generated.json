@@ -36,6 +36,7 @@
         "api_op_UpdateIdMappingWorkflow.go",
         "api_op_UpdateMatchingWorkflow.go",
         "api_op_UpdateSchemaMapping.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "document/doc.go",

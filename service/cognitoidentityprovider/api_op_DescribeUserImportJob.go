@@ -43,10 +43,6 @@ type DescribeUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeUserImportJobInput) operationName() string {
-	return "DescribeUserImportJob"
-}
-
 // Represents the response from the server to the request to describe the user
 // import job.
 type DescribeUserImportJobOutput struct {

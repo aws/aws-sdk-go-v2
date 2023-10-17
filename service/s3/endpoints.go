@@ -4287,7 +4287,7 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
 	}
 
-	params := bindEndpointParams(in.Parameters.(endpointParamsBinder), m.options)
+	params := bindEndpointParams(in.Parameters, m.options)
 	resolvedEndpoint, err := m.options.EndpointResolverV2.ResolveEndpoint(ctx, *params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)

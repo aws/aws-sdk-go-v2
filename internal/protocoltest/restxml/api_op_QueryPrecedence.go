@@ -32,10 +32,6 @@ type QueryPrecedenceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*QueryPrecedenceInput) operationName() string {
-	return "QueryPrecedence"
-}
-
 type QueryPrecedenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

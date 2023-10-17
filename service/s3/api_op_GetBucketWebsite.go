@@ -52,10 +52,6 @@ type GetBucketWebsiteInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketWebsiteInput) operationName() string {
-	return "GetBucketWebsite"
-}
-
 func (in *GetBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

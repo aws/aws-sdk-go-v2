@@ -79,10 +79,6 @@ type ListAccessPointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListAccessPointsInput) operationName() string {
-	return "ListAccessPoints"
-}
-
 func (in *ListAccessPointsInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

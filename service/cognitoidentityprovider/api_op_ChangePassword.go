@@ -53,10 +53,6 @@ type ChangePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ChangePasswordInput) operationName() string {
-	return "ChangePassword"
-}
-
 // The response from the server to the change password request.
 type ChangePasswordOutput struct {
 	// Metadata pertaining to the operation's result.

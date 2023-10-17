@@ -30,10 +30,6 @@ type XmlEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlEnumsInput) operationName() string {
-	return "XmlEnums"
-}
-
 type XmlEnumsOutput struct {
 	FooEnum1 types.FooEnum
 

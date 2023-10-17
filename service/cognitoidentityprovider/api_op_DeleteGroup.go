@@ -41,10 +41,6 @@ type DeleteGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteGroupInput) operationName() string {
-	return "DeleteGroup"
-}
-
 type DeleteGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

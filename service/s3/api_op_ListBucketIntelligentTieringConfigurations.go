@@ -60,10 +60,6 @@ type ListBucketIntelligentTieringConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListBucketIntelligentTieringConfigurationsInput) operationName() string {
-	return "ListBucketIntelligentTieringConfigurations"
-}
-
 func (in *ListBucketIntelligentTieringConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

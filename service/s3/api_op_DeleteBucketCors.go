@@ -48,10 +48,6 @@ type DeleteBucketCorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketCorsInput) operationName() string {
-	return "DeleteBucketCors"
-}
-
 func (in *DeleteBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

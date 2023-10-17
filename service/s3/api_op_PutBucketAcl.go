@@ -166,10 +166,6 @@ type PutBucketAclInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketAclInput) operationName() string {
-	return "PutBucketAcl"
-}
-
 func (in *PutBucketAclInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

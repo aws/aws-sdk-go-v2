@@ -237,10 +237,6 @@ type UploadPartCopyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UploadPartCopyInput) operationName() string {
-	return "UploadPartCopy"
-}
-
 func (in *UploadPartCopyInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

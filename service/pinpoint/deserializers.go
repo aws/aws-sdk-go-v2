@@ -20471,7 +20471,7 @@ func awsRestjson1_deserializeDocumentActivityResponse(v **types.ActivityResponse
 				if err != nil {
 					return err
 				}
-				sv.SuccessfulEndpointCount = int32(i64)
+				sv.SuccessfulEndpointCount = ptr.Int32(int32(i64))
 			}
 
 		case "TimezonesCompletedCount":
@@ -20484,7 +20484,7 @@ func awsRestjson1_deserializeDocumentActivityResponse(v **types.ActivityResponse
 				if err != nil {
 					return err
 				}
-				sv.TimezonesCompletedCount = int32(i64)
+				sv.TimezonesCompletedCount = ptr.Int32(int32(i64))
 			}
 
 		case "TimezonesTotalCount":
@@ -20497,7 +20497,7 @@ func awsRestjson1_deserializeDocumentActivityResponse(v **types.ActivityResponse
 				if err != nil {
 					return err
 				}
-				sv.TimezonesTotalCount = int32(i64)
+				sv.TimezonesTotalCount = ptr.Int32(int32(i64))
 			}
 
 		case "TotalEndpointCount":
@@ -20510,7 +20510,7 @@ func awsRestjson1_deserializeDocumentActivityResponse(v **types.ActivityResponse
 				if err != nil {
 					return err
 				}
-				sv.TotalEndpointCount = int32(i64)
+				sv.TotalEndpointCount = ptr.Int32(int32(i64))
 			}
 
 		case "TreatmentId":
@@ -20577,7 +20577,7 @@ func awsRestjson1_deserializeDocumentADMChannelResponse(v **types.ADMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -20586,7 +20586,7 @@ func awsRestjson1_deserializeDocumentADMChannelResponse(v **types.ADMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -20604,7 +20604,7 @@ func awsRestjson1_deserializeDocumentADMChannelResponse(v **types.ADMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -20644,7 +20644,7 @@ func awsRestjson1_deserializeDocumentADMChannelResponse(v **types.ADMChannelResp
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -20823,7 +20823,7 @@ func awsRestjson1_deserializeDocumentAPNSChannelResponse(v **types.APNSChannelRe
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -20832,7 +20832,7 @@ func awsRestjson1_deserializeDocumentAPNSChannelResponse(v **types.APNSChannelRe
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "HasTokenKey":
@@ -20841,7 +20841,7 @@ func awsRestjson1_deserializeDocumentAPNSChannelResponse(v **types.APNSChannelRe
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasTokenKey = jtv
+				sv.HasTokenKey = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -20859,7 +20859,7 @@ func awsRestjson1_deserializeDocumentAPNSChannelResponse(v **types.APNSChannelRe
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -20899,7 +20899,7 @@ func awsRestjson1_deserializeDocumentAPNSChannelResponse(v **types.APNSChannelRe
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21060,7 +21060,7 @@ func awsRestjson1_deserializeDocumentAPNSSandboxChannelResponse(v **types.APNSSa
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -21069,7 +21069,7 @@ func awsRestjson1_deserializeDocumentAPNSSandboxChannelResponse(v **types.APNSSa
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "HasTokenKey":
@@ -21078,7 +21078,7 @@ func awsRestjson1_deserializeDocumentAPNSSandboxChannelResponse(v **types.APNSSa
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasTokenKey = jtv
+				sv.HasTokenKey = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -21096,7 +21096,7 @@ func awsRestjson1_deserializeDocumentAPNSSandboxChannelResponse(v **types.APNSSa
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -21136,7 +21136,7 @@ func awsRestjson1_deserializeDocumentAPNSSandboxChannelResponse(v **types.APNSSa
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21203,7 +21203,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipChannelResponse(v **types.APNSVoipC
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -21212,7 +21212,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipChannelResponse(v **types.APNSVoipC
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "HasTokenKey":
@@ -21221,7 +21221,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipChannelResponse(v **types.APNSVoipC
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasTokenKey = jtv
+				sv.HasTokenKey = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -21239,7 +21239,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipChannelResponse(v **types.APNSVoipC
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -21279,7 +21279,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipChannelResponse(v **types.APNSVoipC
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21346,7 +21346,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipSandboxChannelResponse(v **types.AP
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -21355,7 +21355,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipSandboxChannelResponse(v **types.AP
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "HasTokenKey":
@@ -21364,7 +21364,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipSandboxChannelResponse(v **types.AP
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasTokenKey = jtv
+				sv.HasTokenKey = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -21382,7 +21382,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipSandboxChannelResponse(v **types.AP
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -21422,7 +21422,7 @@ func awsRestjson1_deserializeDocumentAPNSVoipSandboxChannelResponse(v **types.AP
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21627,7 +21627,7 @@ func awsRestjson1_deserializeDocumentApplicationSettingsJourneyLimits(v **types.
 				if err != nil {
 					return err
 				}
-				sv.DailyCap = int32(i64)
+				sv.DailyCap = ptr.Int32(int32(i64))
 			}
 
 		case "TimeframeCap":
@@ -21645,7 +21645,7 @@ func awsRestjson1_deserializeDocumentApplicationSettingsJourneyLimits(v **types.
 				if err != nil {
 					return err
 				}
-				sv.TotalCap = int32(i64)
+				sv.TotalCap = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21974,7 +21974,7 @@ func awsRestjson1_deserializeDocumentBaiduChannelResponse(v **types.BaiduChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -21983,7 +21983,7 @@ func awsRestjson1_deserializeDocumentBaiduChannelResponse(v **types.BaiduChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -22001,7 +22001,7 @@ func awsRestjson1_deserializeDocumentBaiduChannelResponse(v **types.BaiduChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -22041,7 +22041,7 @@ func awsRestjson1_deserializeDocumentBaiduChannelResponse(v **types.BaiduChannel
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22488,7 +22488,7 @@ func awsRestjson1_deserializeDocumentCampaignLimits(v **types.CampaignLimits, va
 				if err != nil {
 					return err
 				}
-				sv.Daily = int32(i64)
+				sv.Daily = ptr.Int32(int32(i64))
 			}
 
 		case "MaximumDuration":
@@ -22501,7 +22501,7 @@ func awsRestjson1_deserializeDocumentCampaignLimits(v **types.CampaignLimits, va
 				if err != nil {
 					return err
 				}
-				sv.MaximumDuration = int32(i64)
+				sv.MaximumDuration = ptr.Int32(int32(i64))
 			}
 
 		case "MessagesPerSecond":
@@ -22514,7 +22514,7 @@ func awsRestjson1_deserializeDocumentCampaignLimits(v **types.CampaignLimits, va
 				if err != nil {
 					return err
 				}
-				sv.MessagesPerSecond = int32(i64)
+				sv.MessagesPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "Session":
@@ -22527,7 +22527,7 @@ func awsRestjson1_deserializeDocumentCampaignLimits(v **types.CampaignLimits, va
 				if err != nil {
 					return err
 				}
-				sv.Session = int32(i64)
+				sv.Session = ptr.Int32(int32(i64))
 			}
 
 		case "Total":
@@ -22540,7 +22540,7 @@ func awsRestjson1_deserializeDocumentCampaignLimits(v **types.CampaignLimits, va
 				if err != nil {
 					return err
 				}
-				sv.Total = int32(i64)
+				sv.Total = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22635,7 +22635,7 @@ func awsRestjson1_deserializeDocumentCampaignResponse(v **types.CampaignResponse
 				if err != nil {
 					return err
 				}
-				sv.HoldoutPercent = int32(i64)
+				sv.HoldoutPercent = ptr.Int32(int32(i64))
 			}
 
 		case "Hook":
@@ -22658,7 +22658,7 @@ func awsRestjson1_deserializeDocumentCampaignResponse(v **types.CampaignResponse
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsPaused = jtv
+				sv.IsPaused = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedDate":
@@ -22699,7 +22699,7 @@ func awsRestjson1_deserializeDocumentCampaignResponse(v **types.CampaignResponse
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "Schedule":
@@ -22726,7 +22726,7 @@ func awsRestjson1_deserializeDocumentCampaignResponse(v **types.CampaignResponse
 				if err != nil {
 					return err
 				}
-				sv.SegmentVersion = int32(i64)
+				sv.SegmentVersion = ptr.Int32(int32(i64))
 			}
 
 		case "State":
@@ -22772,7 +22772,7 @@ func awsRestjson1_deserializeDocumentCampaignResponse(v **types.CampaignResponse
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -23000,7 +23000,7 @@ func awsRestjson1_deserializeDocumentChannelResponse(v **types.ChannelResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -23009,7 +23009,7 @@ func awsRestjson1_deserializeDocumentChannelResponse(v **types.ChannelResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -23027,7 +23027,7 @@ func awsRestjson1_deserializeDocumentChannelResponse(v **types.ChannelResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -23058,7 +23058,7 @@ func awsRestjson1_deserializeDocumentChannelResponse(v **types.ChannelResponse, 
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -23634,7 +23634,7 @@ func awsRestjson1_deserializeDocumentDefaultButtonConfiguration(v **types.Defaul
 				if err != nil {
 					return err
 				}
-				sv.BorderRadius = int32(i64)
+				sv.BorderRadius = ptr.Int32(int32(i64))
 			}
 
 		case "ButtonAction":
@@ -23813,7 +23813,7 @@ func awsRestjson1_deserializeDocumentEmailChannelResponse(v **types.EmailChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "FromAddress":
@@ -23831,7 +23831,7 @@ func awsRestjson1_deserializeDocumentEmailChannelResponse(v **types.EmailChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -23858,7 +23858,7 @@ func awsRestjson1_deserializeDocumentEmailChannelResponse(v **types.EmailChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -23889,7 +23889,7 @@ func awsRestjson1_deserializeDocumentEmailChannelResponse(v **types.EmailChannel
 				if err != nil {
 					return err
 				}
-				sv.MessagesPerSecond = int32(i64)
+				sv.MessagesPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "Platform":
@@ -23920,7 +23920,7 @@ func awsRestjson1_deserializeDocumentEmailChannelResponse(v **types.EmailChannel
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -24283,7 +24283,7 @@ func awsRestjson1_deserializeDocumentEndpointItemResponse(v **types.EndpointItem
 				if err != nil {
 					return err
 				}
-				sv.StatusCode = int32(i64)
+				sv.StatusCode = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -24343,7 +24343,7 @@ func awsRestjson1_deserializeDocumentEndpointLocation(v **types.EndpointLocation
 					if err != nil {
 						return err
 					}
-					sv.Latitude = f64
+					sv.Latitude = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -24361,7 +24361,7 @@ func awsRestjson1_deserializeDocumentEndpointLocation(v **types.EndpointLocation
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Latitude = f64
+					sv.Latitude = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -24377,7 +24377,7 @@ func awsRestjson1_deserializeDocumentEndpointLocation(v **types.EndpointLocation
 					if err != nil {
 						return err
 					}
-					sv.Longitude = f64
+					sv.Longitude = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -24395,7 +24395,7 @@ func awsRestjson1_deserializeDocumentEndpointLocation(v **types.EndpointLocation
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Longitude = f64
+					sv.Longitude = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -24489,7 +24489,7 @@ func awsRestjson1_deserializeDocumentEndpointMessageResult(v **types.EndpointMes
 				if err != nil {
 					return err
 				}
-				sv.StatusCode = int32(i64)
+				sv.StatusCode = ptr.Int32(int32(i64))
 			}
 
 		case "StatusMessage":
@@ -24923,7 +24923,7 @@ func awsRestjson1_deserializeDocumentEventItemResponse(v **types.EventItemRespon
 				if err != nil {
 					return err
 				}
-				sv.StatusCode = int32(i64)
+				sv.StatusCode = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25160,7 +25160,7 @@ func awsRestjson1_deserializeDocumentExportJobResource(v **types.ExportJobResour
 				if err != nil {
 					return err
 				}
-				sv.SegmentVersion = int32(i64)
+				sv.SegmentVersion = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25213,7 +25213,7 @@ func awsRestjson1_deserializeDocumentExportJobResponse(v **types.ExportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.CompletedPieces = int32(i64)
+				sv.CompletedPieces = ptr.Int32(int32(i64))
 			}
 
 		case "CompletionDate":
@@ -25249,7 +25249,7 @@ func awsRestjson1_deserializeDocumentExportJobResponse(v **types.ExportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.FailedPieces = int32(i64)
+				sv.FailedPieces = ptr.Int32(int32(i64))
 			}
 
 		case "Failures":
@@ -25285,7 +25285,7 @@ func awsRestjson1_deserializeDocumentExportJobResponse(v **types.ExportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.TotalFailures = int32(i64)
+				sv.TotalFailures = ptr.Int32(int32(i64))
 			}
 
 		case "TotalPieces":
@@ -25298,7 +25298,7 @@ func awsRestjson1_deserializeDocumentExportJobResponse(v **types.ExportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.TotalPieces = int32(i64)
+				sv.TotalPieces = ptr.Int32(int32(i64))
 			}
 
 		case "TotalProcessed":
@@ -25311,7 +25311,7 @@ func awsRestjson1_deserializeDocumentExportJobResponse(v **types.ExportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.TotalProcessed = int32(i64)
+				sv.TotalProcessed = ptr.Int32(int32(i64))
 			}
 
 		case "Type":
@@ -25490,7 +25490,7 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -25499,7 +25499,7 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "HasFcmServiceCredentials":
@@ -25508,7 +25508,7 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasFcmServiceCredentials = jtv
+				sv.HasFcmServiceCredentials = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -25526,7 +25526,7 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -25566,7 +25566,7 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25608,7 +25608,7 @@ func awsRestjson1_deserializeDocumentGPSCoordinates(v **types.GPSCoordinates, va
 					if err != nil {
 						return err
 					}
-					sv.Latitude = f64
+					sv.Latitude = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -25626,7 +25626,7 @@ func awsRestjson1_deserializeDocumentGPSCoordinates(v **types.GPSCoordinates, va
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Latitude = f64
+					sv.Latitude = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -25642,7 +25642,7 @@ func awsRestjson1_deserializeDocumentGPSCoordinates(v **types.GPSCoordinates, va
 					if err != nil {
 						return err
 					}
-					sv.Longitude = f64
+					sv.Longitude = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -25660,7 +25660,7 @@ func awsRestjson1_deserializeDocumentGPSCoordinates(v **types.GPSCoordinates, va
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Longitude = f64
+					sv.Longitude = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -25712,7 +25712,7 @@ func awsRestjson1_deserializeDocumentGPSPointDimension(v **types.GPSPointDimensi
 					if err != nil {
 						return err
 					}
-					sv.RangeInKilometers = f64
+					sv.RangeInKilometers = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -25730,7 +25730,7 @@ func awsRestjson1_deserializeDocumentGPSPointDimension(v **types.GPSPointDimensi
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.RangeInKilometers = f64
+					sv.RangeInKilometers = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -25788,7 +25788,7 @@ func awsRestjson1_deserializeDocumentHoldoutActivity(v **types.HoldoutActivity, 
 				if err != nil {
 					return err
 				}
-				sv.Percentage = int32(i64)
+				sv.Percentage = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25828,7 +25828,7 @@ func awsRestjson1_deserializeDocumentImportJobResource(v **types.ImportJobResour
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DefineSegment = jtv
+				sv.DefineSegment = ptr.Bool(jtv)
 			}
 
 		case "ExternalId":
@@ -25855,7 +25855,7 @@ func awsRestjson1_deserializeDocumentImportJobResource(v **types.ImportJobResour
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RegisterEndpoints = jtv
+				sv.RegisterEndpoints = ptr.Bool(jtv)
 			}
 
 		case "RoleArn":
@@ -25944,7 +25944,7 @@ func awsRestjson1_deserializeDocumentImportJobResponse(v **types.ImportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.CompletedPieces = int32(i64)
+				sv.CompletedPieces = ptr.Int32(int32(i64))
 			}
 
 		case "CompletionDate":
@@ -25980,7 +25980,7 @@ func awsRestjson1_deserializeDocumentImportJobResponse(v **types.ImportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.FailedPieces = int32(i64)
+				sv.FailedPieces = ptr.Int32(int32(i64))
 			}
 
 		case "Failures":
@@ -26016,7 +26016,7 @@ func awsRestjson1_deserializeDocumentImportJobResponse(v **types.ImportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.TotalFailures = int32(i64)
+				sv.TotalFailures = ptr.Int32(int32(i64))
 			}
 
 		case "TotalPieces":
@@ -26029,7 +26029,7 @@ func awsRestjson1_deserializeDocumentImportJobResponse(v **types.ImportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.TotalPieces = int32(i64)
+				sv.TotalPieces = ptr.Int32(int32(i64))
 			}
 
 		case "TotalProcessed":
@@ -26042,7 +26042,7 @@ func awsRestjson1_deserializeDocumentImportJobResponse(v **types.ImportJobRespon
 				if err != nil {
 					return err
 				}
-				sv.TotalProcessed = int32(i64)
+				sv.TotalProcessed = ptr.Int32(int32(i64))
 			}
 
 		case "Type":
@@ -26358,7 +26358,7 @@ func awsRestjson1_deserializeDocumentInAppMessageCampaign(v **types.InAppMessage
 				if err != nil {
 					return err
 				}
-				sv.DailyCap = int32(i64)
+				sv.DailyCap = ptr.Int32(int32(i64))
 			}
 
 		case "InAppMessage":
@@ -26376,7 +26376,7 @@ func awsRestjson1_deserializeDocumentInAppMessageCampaign(v **types.InAppMessage
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "Schedule":
@@ -26394,7 +26394,7 @@ func awsRestjson1_deserializeDocumentInAppMessageCampaign(v **types.InAppMessage
 				if err != nil {
 					return err
 				}
-				sv.SessionCap = int32(i64)
+				sv.SessionCap = ptr.Int32(int32(i64))
 			}
 
 		case "TotalCap":
@@ -26407,7 +26407,7 @@ func awsRestjson1_deserializeDocumentInAppMessageCampaign(v **types.InAppMessage
 				if err != nil {
 					return err
 				}
-				sv.TotalCap = int32(i64)
+				sv.TotalCap = ptr.Int32(int32(i64))
 			}
 
 		case "TreatmentId":
@@ -27202,7 +27202,7 @@ func awsRestjson1_deserializeDocumentJourneyLimits(v **types.JourneyLimits, valu
 				if err != nil {
 					return err
 				}
-				sv.DailyCap = int32(i64)
+				sv.DailyCap = ptr.Int32(int32(i64))
 			}
 
 		case "EndpointReentryCap":
@@ -27215,7 +27215,7 @@ func awsRestjson1_deserializeDocumentJourneyLimits(v **types.JourneyLimits, valu
 				if err != nil {
 					return err
 				}
-				sv.EndpointReentryCap = int32(i64)
+				sv.EndpointReentryCap = ptr.Int32(int32(i64))
 			}
 
 		case "EndpointReentryInterval":
@@ -27237,7 +27237,7 @@ func awsRestjson1_deserializeDocumentJourneyLimits(v **types.JourneyLimits, valu
 				if err != nil {
 					return err
 				}
-				sv.MessagesPerSecond = int32(i64)
+				sv.MessagesPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "TimeframeCap":
@@ -27255,7 +27255,7 @@ func awsRestjson1_deserializeDocumentJourneyLimits(v **types.JourneyLimits, valu
 				if err != nil {
 					return err
 				}
-				sv.TotalCap = int32(i64)
+				sv.TotalCap = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -27391,7 +27391,7 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.LocalTime = jtv
+				sv.LocalTime = ptr.Bool(jtv)
 			}
 
 		case "Name":
@@ -27428,7 +27428,7 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RefreshOnSegmentUpdate = jtv
+				sv.RefreshOnSegmentUpdate = ptr.Bool(jtv)
 			}
 
 		case "Schedule":
@@ -27442,7 +27442,7 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SendingSchedule = jtv
+				sv.SendingSchedule = ptr.Bool(jtv)
 			}
 
 		case "StartActivity":
@@ -27484,7 +27484,7 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.WaitForQuietTime = jtv
+				sv.WaitForQuietTime = ptr.Bool(jtv)
 			}
 
 		default:
@@ -27989,7 +27989,7 @@ func awsRestjson1_deserializeDocumentJourneyTimeframeCap(v **types.JourneyTimefr
 				if err != nil {
 					return err
 				}
-				sv.Cap = int32(i64)
+				sv.Cap = ptr.Int32(int32(i64))
 			}
 
 		case "Days":
@@ -28002,7 +28002,7 @@ func awsRestjson1_deserializeDocumentJourneyTimeframeCap(v **types.JourneyTimefr
 				if err != nil {
 					return err
 				}
-				sv.Days = int32(i64)
+				sv.Days = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -29636,7 +29636,7 @@ func awsRestjson1_deserializeDocumentMessage(v **types.Message, value interface{
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SilentPush = jtv
+				sv.SilentPush = ptr.Bool(jtv)
 			}
 
 		case "TimeToLive":
@@ -29649,7 +29649,7 @@ func awsRestjson1_deserializeDocumentMessage(v **types.Message, value interface{
 				if err != nil {
 					return err
 				}
-				sv.TimeToLive = int32(i64)
+				sv.TimeToLive = ptr.Int32(int32(i64))
 			}
 
 		case "Title":
@@ -29913,7 +29913,7 @@ func awsRestjson1_deserializeDocumentMessageResult(v **types.MessageResult, valu
 				if err != nil {
 					return err
 				}
-				sv.StatusCode = int32(i64)
+				sv.StatusCode = ptr.Int32(int32(i64))
 			}
 
 		case "StatusMessage":
@@ -30031,7 +30031,7 @@ func awsRestjson1_deserializeDocumentMetricDimension(v **types.MetricDimension, 
 					if err != nil {
 						return err
 					}
-					sv.Value = f64
+					sv.Value = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -30049,7 +30049,7 @@ func awsRestjson1_deserializeDocumentMetricDimension(v **types.MetricDimension, 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Value = f64
+					sv.Value = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -30341,7 +30341,7 @@ func awsRestjson1_deserializeDocumentNumberValidateResponse(v **types.NumberVali
 				if err != nil {
 					return err
 				}
-				sv.PhoneTypeCode = int32(i64)
+				sv.PhoneTypeCode = ptr.Int32(int32(i64))
 			}
 
 		case "Timezone":
@@ -30905,7 +30905,7 @@ func awsRestjson1_deserializeDocumentRandomSplitEntry(v **types.RandomSplitEntry
 				if err != nil {
 					return err
 				}
-				sv.Percentage = int32(i64)
+				sv.Percentage = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -31084,7 +31084,7 @@ func awsRestjson1_deserializeDocumentRecommenderConfigurationResponse(v **types.
 				if err != nil {
 					return err
 				}
-				sv.RecommendationsPerMessage = int32(i64)
+				sv.RecommendationsPerMessage = ptr.Int32(int32(i64))
 			}
 
 		case "RecommendationTransformerUri":
@@ -31255,7 +31255,7 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsLocalTime = jtv
+				sv.IsLocalTime = ptr.Bool(jtv)
 			}
 
 		case "QuietTime":
@@ -31665,7 +31665,7 @@ func awsRestjson1_deserializeDocumentSegmentImportResource(v **types.SegmentImpo
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -31759,7 +31759,7 @@ func awsRestjson1_deserializeDocumentSegmentReference(v **types.SegmentReference
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -31886,7 +31886,7 @@ func awsRestjson1_deserializeDocumentSegmentResponse(v **types.SegmentResponse, 
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -32134,7 +32134,7 @@ func awsRestjson1_deserializeDocumentSMSChannelResponse(v **types.SMSChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -32143,7 +32143,7 @@ func awsRestjson1_deserializeDocumentSMSChannelResponse(v **types.SMSChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -32161,7 +32161,7 @@ func awsRestjson1_deserializeDocumentSMSChannelResponse(v **types.SMSChannelResp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -32201,7 +32201,7 @@ func awsRestjson1_deserializeDocumentSMSChannelResponse(v **types.SMSChannelResp
 				if err != nil {
 					return err
 				}
-				sv.PromotionalMessagesPerSecond = int32(i64)
+				sv.PromotionalMessagesPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "SenderId":
@@ -32232,7 +32232,7 @@ func awsRestjson1_deserializeDocumentSMSChannelResponse(v **types.SMSChannelResp
 				if err != nil {
 					return err
 				}
-				sv.TransactionalMessagesPerSecond = int32(i64)
+				sv.TransactionalMessagesPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "Version":
@@ -32245,7 +32245,7 @@ func awsRestjson1_deserializeDocumentSMSChannelResponse(v **types.SMSChannelResp
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -33110,7 +33110,7 @@ func awsRestjson1_deserializeDocumentTreatmentResource(v **types.TreatmentResour
 				if err != nil {
 					return err
 				}
-				sv.SizePercent = int32(i64)
+				sv.SizePercent = ptr.Int32(int32(i64))
 			}
 
 		case "State":
@@ -33178,7 +33178,7 @@ func awsRestjson1_deserializeDocumentVerificationResponse(v **types.Verification
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Valid = jtv
+				sv.Valid = ptr.Bool(jtv)
 			}
 
 		default:
@@ -33236,7 +33236,7 @@ func awsRestjson1_deserializeDocumentVoiceChannelResponse(v **types.VoiceChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "HasCredential":
@@ -33245,7 +33245,7 @@ func awsRestjson1_deserializeDocumentVoiceChannelResponse(v **types.VoiceChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HasCredential = jtv
+				sv.HasCredential = ptr.Bool(jtv)
 			}
 
 		case "Id":
@@ -33263,7 +33263,7 @@ func awsRestjson1_deserializeDocumentVoiceChannelResponse(v **types.VoiceChannel
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsArchived = jtv
+				sv.IsArchived = ptr.Bool(jtv)
 			}
 
 		case "LastModifiedBy":
@@ -33303,7 +33303,7 @@ func awsRestjson1_deserializeDocumentVoiceChannelResponse(v **types.VoiceChannel
 				if err != nil {
 					return err
 				}
-				sv.Version = int32(i64)
+				sv.Version = ptr.Int32(int32(i64))
 			}
 
 		default:

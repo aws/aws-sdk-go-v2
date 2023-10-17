@@ -81,10 +81,6 @@ type PutBucketAccelerateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketAccelerateConfigurationInput) operationName() string {
-	return "PutBucketAccelerateConfiguration"
-}
-
 func (in *PutBucketAccelerateConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

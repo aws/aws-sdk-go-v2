@@ -28,10 +28,6 @@ type MalformedAcceptWithPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedAcceptWithPayloadInput) operationName() string {
-	return "MalformedAcceptWithPayload"
-}
-
 type MalformedAcceptWithPayloadOutput struct {
 
 	// This value conforms to the media type: image/jpeg

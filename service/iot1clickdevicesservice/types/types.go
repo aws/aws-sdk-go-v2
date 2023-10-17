@@ -37,11 +37,11 @@ type DeviceDescription struct {
 	DeviceId *string
 
 	// A Boolean value indicating whether or not the device is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// A value between 0 and 1 inclusive, representing the fraction of life remaining
 	// for the device.
-	RemainingLife float64
+	RemainingLife *float64
 
 	// The tags currently associated with the AWS IoT 1-Click device.
 	Tags map[string]string

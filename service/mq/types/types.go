@@ -187,7 +187,7 @@ type ConfigurationId struct {
 	Id *string
 
 	// The revision number of the configuration.
-	Revision int32
+	Revision *int32
 
 	noSmithyDocumentSerde
 }
@@ -203,7 +203,7 @@ type ConfigurationRevision struct {
 	// Required. The revision number of the configuration.
 	//
 	// This member is required.
-	Revision int32
+	Revision *int32
 
 	// The description of the configuration revision.
 	Description *string
@@ -266,7 +266,7 @@ type EncryptionOptions struct {
 	// true by default, if no value is provided, for example, for RabbitMQ brokers.
 	//
 	// This member is required.
-	UseAwsOwnedKey bool
+	UseAwsOwnedKey *bool
 
 	// The customer master key (CMK) to use for the A KMS (KMS). This key is used to
 	// encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to
@@ -353,14 +353,14 @@ type LdapServerMetadataInput struct {
 
 	// The directory search scope for the role. If set to true, scope is to search the
 	// entire subtree.
-	RoleSearchSubtree bool
+	RoleSearchSubtree *bool
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire subtree.
-	UserSearchSubtree bool
+	UserSearchSubtree *bool
 
 	noSmithyDocumentSerde
 }
@@ -426,14 +426,14 @@ type LdapServerMetadataOutput struct {
 
 	// The directory search scope for the role. If set to true, scope is to search the
 	// entire subtree.
-	RoleSearchSubtree bool
+	RoleSearchSubtree *bool
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire subtree.
-	UserSearchSubtree bool
+	UserSearchSubtree *bool
 
 	noSmithyDocumentSerde
 }
@@ -443,10 +443,10 @@ type Logs struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
-	Audit bool
+	Audit *bool
 
 	// Enables general logging.
-	General bool
+	General *bool
 
 	noSmithyDocumentSerde
 }
@@ -458,7 +458,7 @@ type LogsSummary struct {
 	// Enables general logging.
 	//
 	// This member is required.
-	General bool
+	General *bool
 
 	// The location of the CloudWatch Logs log group where general logs are sent.
 	//
@@ -467,7 +467,7 @@ type LogsSummary struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
-	Audit bool
+	Audit *bool
 
 	// The location of the CloudWatch Logs log group where audit logs are sent.
 	AuditLogGroup *string
@@ -484,10 +484,10 @@ type PendingLogs struct {
 
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
-	Audit bool
+	Audit *bool
 
 	// Enables general logging.
-	General bool
+	General *bool
 
 	noSmithyDocumentSerde
 }
@@ -542,7 +542,7 @@ type User struct {
 
 	// Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not
 	// apply to RabbitMQ brokers.
-	ConsoleAccess bool
+	ConsoleAccess *bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
@@ -551,7 +551,7 @@ type User struct {
 	Groups []string
 
 	// Defines if this user is intended for CRDR replication purposes.
-	ReplicationUser bool
+	ReplicationUser *bool
 
 	noSmithyDocumentSerde
 }
@@ -566,7 +566,7 @@ type UserPendingChanges struct {
 	PendingChange ChangeType
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess bool
+	ConsoleAccess *bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and

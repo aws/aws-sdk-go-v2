@@ -61,10 +61,6 @@ type GetBucketIntelligentTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketIntelligentTieringConfigurationInput) operationName() string {
-	return "GetBucketIntelligentTieringConfiguration"
-}
-
 func (in *GetBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

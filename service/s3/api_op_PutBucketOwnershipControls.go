@@ -61,10 +61,6 @@ type PutBucketOwnershipControlsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketOwnershipControlsInput) operationName() string {
-	return "PutBucketOwnershipControls"
-}
-
 func (in *PutBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

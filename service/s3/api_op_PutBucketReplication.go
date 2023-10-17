@@ -110,10 +110,6 @@ type PutBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketReplicationInput) operationName() string {
-	return "PutBucketReplication"
-}
-
 func (in *PutBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

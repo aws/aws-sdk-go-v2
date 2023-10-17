@@ -1102,7 +1102,7 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoMinorVersionUpgrade = jtv
+				sv.AutoMinorVersionUpgrade = ptr.Bool(jtv)
 			}
 
 		case "brokerArn":
@@ -1291,7 +1291,7 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.PubliclyAccessible = jtv
+				sv.PubliclyAccessible = ptr.Bool(jtv)
 			}
 
 		case "securityGroups":
@@ -1486,7 +1486,7 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerEngineTypesOutput(v **Descr
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "nextToken":
@@ -1661,7 +1661,7 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerInstanceOptionsOutput(v **D
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "nextToken":
@@ -2267,7 +2267,7 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ConsoleAccess = jtv
+				sv.ConsoleAccess = ptr.Bool(jtv)
 			}
 
 		case "groups":
@@ -2286,7 +2286,7 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ReplicationUser = jtv
+				sv.ReplicationUser = ptr.Bool(jtv)
 			}
 
 		case "username":
@@ -2630,7 +2630,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationRevisionsOutput(v **List
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "nextToken":
@@ -2810,7 +2810,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationsOutput(v **ListConfigur
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "nextToken":
@@ -3148,7 +3148,7 @@ func awsRestjson1_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "nextToken":
@@ -3586,7 +3586,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBrokerOutput(v **UpdateBrokerOutput
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoMinorVersionUpgrade = jtv
+				sv.AutoMinorVersionUpgrade = ptr.Bool(jtv)
 			}
 
 		case "brokerId":
@@ -5284,7 +5284,7 @@ func awsRestjson1_deserializeDocumentConfigurationId(v **types.ConfigurationId, 
 				if err != nil {
 					return err
 				}
-				sv.Revision = int32(i64)
+				sv.Revision = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -5350,7 +5350,7 @@ func awsRestjson1_deserializeDocumentConfigurationRevision(v **types.Configurati
 				if err != nil {
 					return err
 				}
-				sv.Revision = int32(i64)
+				sv.Revision = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -5588,7 +5588,7 @@ func awsRestjson1_deserializeDocumentEncryptionOptions(v **types.EncryptionOptio
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UseAwsOwnedKey = jtv
+				sv.UseAwsOwnedKey = ptr.Bool(jtv)
 			}
 
 		default:
@@ -5798,7 +5798,7 @@ func awsRestjson1_deserializeDocumentLdapServerMetadataOutput(v **types.LdapServ
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RoleSearchSubtree = jtv
+				sv.RoleSearchSubtree = ptr.Bool(jtv)
 			}
 
 		case "serviceAccountUsername":
@@ -5843,7 +5843,7 @@ func awsRestjson1_deserializeDocumentLdapServerMetadataOutput(v **types.LdapServ
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UserSearchSubtree = jtv
+				sv.UserSearchSubtree = ptr.Bool(jtv)
 			}
 
 		default:
@@ -5883,7 +5883,7 @@ func awsRestjson1_deserializeDocumentLogs(v **types.Logs, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Audit = jtv
+				sv.Audit = ptr.Bool(jtv)
 			}
 
 		case "general":
@@ -5892,7 +5892,7 @@ func awsRestjson1_deserializeDocumentLogs(v **types.Logs, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.General = jtv
+				sv.General = ptr.Bool(jtv)
 			}
 
 		default:
@@ -5932,7 +5932,7 @@ func awsRestjson1_deserializeDocumentLogsSummary(v **types.LogsSummary, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Audit = jtv
+				sv.Audit = ptr.Bool(jtv)
 			}
 
 		case "auditLogGroup":
@@ -5950,7 +5950,7 @@ func awsRestjson1_deserializeDocumentLogsSummary(v **types.LogsSummary, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.General = jtv
+				sv.General = ptr.Bool(jtv)
 			}
 
 		case "generalLogGroup":
@@ -6053,7 +6053,7 @@ func awsRestjson1_deserializeDocumentPendingLogs(v **types.PendingLogs, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Audit = jtv
+				sv.Audit = ptr.Bool(jtv)
 			}
 
 		case "general":
@@ -6062,7 +6062,7 @@ func awsRestjson1_deserializeDocumentPendingLogs(v **types.PendingLogs, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.General = jtv
+				sv.General = ptr.Bool(jtv)
 			}
 
 		default:
@@ -6209,7 +6209,7 @@ func awsRestjson1_deserializeDocumentUserPendingChanges(v **types.UserPendingCha
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ConsoleAccess = jtv
+				sv.ConsoleAccess = ptr.Bool(jtv)
 			}
 
 		case "groups":

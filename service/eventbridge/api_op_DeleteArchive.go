@@ -36,10 +36,6 @@ type DeleteArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteArchiveInput) operationName() string {
-	return "DeleteArchive"
-}
-
 type DeleteArchiveOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

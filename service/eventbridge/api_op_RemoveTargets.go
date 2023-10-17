@@ -61,10 +61,6 @@ type RemoveTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*RemoveTargetsInput) operationName() string {
-	return "RemoveTargets"
-}
-
 type RemoveTargetsOutput struct {
 
 	// The failed target entries.

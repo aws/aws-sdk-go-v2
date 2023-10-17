@@ -124,10 +124,6 @@ type ListPartsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListPartsInput) operationName() string {
-	return "ListParts"
-}
-
 func (in *ListPartsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

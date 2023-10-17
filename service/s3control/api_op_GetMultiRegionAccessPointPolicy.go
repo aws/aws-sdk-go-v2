@@ -59,10 +59,6 @@ type GetMultiRegionAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetMultiRegionAccessPointPolicyInput) operationName() string {
-	return "GetMultiRegionAccessPointPolicy"
-}
-
 func (in *GetMultiRegionAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

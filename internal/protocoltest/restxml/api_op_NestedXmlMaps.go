@@ -33,10 +33,6 @@ type NestedXmlMapsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*NestedXmlMapsInput) operationName() string {
-	return "NestedXmlMaps"
-}
-
 type NestedXmlMapsOutput struct {
 	FlatNestedMap map[string]map[string]types.FooEnum
 

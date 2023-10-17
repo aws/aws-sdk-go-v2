@@ -43,10 +43,6 @@ type StopUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*StopUserImportJobInput) operationName() string {
-	return "StopUserImportJob"
-}
-
 // Represents the response from the server to the request to stop the user import
 // job.
 type StopUserImportJobOutput struct {

@@ -38,10 +38,6 @@ type DeleteAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteAccessTokenInput) operationName() string {
-	return "DeleteAccessToken"
-}
-
 type DeleteAccessTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

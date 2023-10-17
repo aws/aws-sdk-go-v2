@@ -32,10 +32,6 @@ type QueryIdempotencyTokenAutoFillInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*QueryIdempotencyTokenAutoFillInput) operationName() string {
-	return "QueryIdempotencyTokenAutoFill"
-}
-
 type QueryIdempotencyTokenAutoFillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

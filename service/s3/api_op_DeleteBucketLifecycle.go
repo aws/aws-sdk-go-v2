@@ -54,10 +54,6 @@ type DeleteBucketLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketLifecycleInput) operationName() string {
-	return "DeleteBucketLifecycle"
-}
-
 func (in *DeleteBucketLifecycleInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

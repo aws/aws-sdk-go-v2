@@ -64,10 +64,6 @@ type DeleteAccessPointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteAccessPointPolicyInput) operationName() string {
-	return "DeleteAccessPointPolicy"
-}
-
 func (in *DeleteAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.AccessPointName = in.Name

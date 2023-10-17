@@ -33,10 +33,6 @@ type OmitsNullSerializesEmptyStringInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*OmitsNullSerializesEmptyStringInput) operationName() string {
-	return "OmitsNullSerializesEmptyString"
-}
-
 type OmitsNullSerializesEmptyStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

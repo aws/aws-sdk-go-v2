@@ -65,10 +65,6 @@ type ListEventLogsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListEventLogsInput) operationName() string {
-	return "ListEventLogs"
-}
-
 type ListEventLogsOutput struct {
 
 	// Information about each event retrieved in the list.

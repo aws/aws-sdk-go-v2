@@ -48,10 +48,6 @@ type DeleteBucketOwnershipControlsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketOwnershipControlsInput) operationName() string {
-	return "DeleteBucketOwnershipControls"
-}
-
 func (in *DeleteBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

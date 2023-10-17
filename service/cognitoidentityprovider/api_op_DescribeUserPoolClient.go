@@ -49,10 +49,6 @@ type DescribeUserPoolClientInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeUserPoolClientInput) operationName() string {
-	return "DescribeUserPoolClient"
-}
-
 // Represents the response from the server from a request to describe the user
 // pool client.
 type DescribeUserPoolClientOutput struct {

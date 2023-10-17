@@ -30,10 +30,6 @@ type MalformedBlobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedBlobInput) operationName() string {
-	return "MalformedBlob"
-}
-
 type MalformedBlobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

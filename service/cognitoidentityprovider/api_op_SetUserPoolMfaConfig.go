@@ -67,10 +67,6 @@ type SetUserPoolMfaConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SetUserPoolMfaConfigInput) operationName() string {
-	return "SetUserPoolMfaConfig"
-}
-
 type SetUserPoolMfaConfigOutput struct {
 
 	// The MFA configuration. Valid values include:

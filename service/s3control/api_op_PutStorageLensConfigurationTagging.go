@@ -59,10 +59,6 @@ type PutStorageLensConfigurationTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutStorageLensConfigurationTaggingInput) operationName() string {
-	return "PutStorageLensConfigurationTagging"
-}
-
 func (in *PutStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

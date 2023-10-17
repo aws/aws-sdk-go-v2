@@ -53,10 +53,6 @@ type DescribeJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeJobInput) operationName() string {
-	return "DescribeJob"
-}
-
 func (in *DescribeJobInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

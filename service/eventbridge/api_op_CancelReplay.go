@@ -37,10 +37,6 @@ type CancelReplayInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CancelReplayInput) operationName() string {
-	return "CancelReplay"
-}
-
 type CancelReplayOutput struct {
 
 	// The ARN of the replay to cancel.

@@ -32,10 +32,6 @@ type DocumentTypeAsPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DocumentTypeAsPayloadInput) operationName() string {
-	return "DocumentTypeAsPayload"
-}
-
 type DocumentTypeAsPayloadOutput struct {
 	DocumentValue document.Interface
 

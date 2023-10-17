@@ -32,10 +32,6 @@ type QueryParamsAsStringListMapInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*QueryParamsAsStringListMapInput) operationName() string {
-	return "QueryParamsAsStringListMap"
-}
-
 type QueryParamsAsStringListMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

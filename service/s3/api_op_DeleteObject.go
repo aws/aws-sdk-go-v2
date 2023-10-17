@@ -103,10 +103,6 @@ type DeleteObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteObjectInput) operationName() string {
-	return "DeleteObject"
-}
-
 func (in *DeleteObjectInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

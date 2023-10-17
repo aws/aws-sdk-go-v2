@@ -150,10 +150,6 @@ type AdminInitiateAuthInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminInitiateAuthInput) operationName() string {
-	return "AdminInitiateAuth"
-}
-
 // Initiates the authentication response, as an administrator.
 type AdminInitiateAuthOutput struct {
 

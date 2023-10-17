@@ -235,10 +235,6 @@ type RestoreObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*RestoreObjectInput) operationName() string {
-	return "RestoreObject"
-}
-
 func (in *RestoreObjectInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

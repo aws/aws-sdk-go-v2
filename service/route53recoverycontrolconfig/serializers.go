@@ -952,8 +952,8 @@ func awsRestjson1_serializeOpHttpBindingsListAssociatedRoute53HealthChecksInput(
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1025,8 +1025,8 @@ func awsRestjson1_serializeOpHttpBindingsListClustersInput(v *ListClustersInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1093,8 +1093,8 @@ func awsRestjson1_serializeOpHttpBindingsListControlPanelsInput(v *ListControlPa
 		encoder.SetQuery("ClusterArn").String(*v.ClusterArn)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1166,8 +1166,8 @@ func awsRestjson1_serializeOpHttpBindingsListRoutingControlsInput(v *ListRouting
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1239,8 +1239,8 @@ func awsRestjson1_serializeOpHttpBindingsListSafetyRulesInput(v *ListSafetyRules
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1756,9 +1756,9 @@ func awsRestjson1_serializeDocumentAssertionRuleUpdate(v *types.AssertionRuleUpd
 		ok.String(*v.SafetyRuleArn)
 	}
 
-	{
+	if v.WaitPeriodMs != nil {
 		ok := object.Key("WaitPeriodMs")
-		ok.Integer(v.WaitPeriodMs)
+		ok.Integer(*v.WaitPeriodMs)
 	}
 
 	return nil
@@ -1778,9 +1778,9 @@ func awsRestjson1_serializeDocumentGatingRuleUpdate(v *types.GatingRuleUpdate, v
 		ok.String(*v.SafetyRuleArn)
 	}
 
-	{
+	if v.WaitPeriodMs != nil {
 		ok := object.Key("WaitPeriodMs")
-		ok.Integer(v.WaitPeriodMs)
+		ok.Integer(*v.WaitPeriodMs)
 	}
 
 	return nil
@@ -1814,9 +1814,9 @@ func awsRestjson1_serializeDocumentNewAssertionRule(v *types.NewAssertionRule, v
 		}
 	}
 
-	{
+	if v.WaitPeriodMs != nil {
 		ok := object.Key("WaitPeriodMs")
-		ok.Integer(v.WaitPeriodMs)
+		ok.Integer(*v.WaitPeriodMs)
 	}
 
 	return nil
@@ -1857,9 +1857,9 @@ func awsRestjson1_serializeDocumentNewGatingRule(v *types.NewGatingRule, value s
 		}
 	}
 
-	{
+	if v.WaitPeriodMs != nil {
 		ok := object.Key("WaitPeriodMs")
-		ok.Integer(v.WaitPeriodMs)
+		ok.Integer(*v.WaitPeriodMs)
 	}
 
 	return nil
@@ -1869,14 +1869,14 @@ func awsRestjson1_serializeDocumentRuleConfig(v *types.RuleConfig, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Inverted != nil {
 		ok := object.Key("Inverted")
-		ok.Boolean(v.Inverted)
+		ok.Boolean(*v.Inverted)
 	}
 
-	{
+	if v.Threshold != nil {
 		ok := object.Key("Threshold")
-		ok.Integer(v.Threshold)
+		ok.Integer(*v.Threshold)
 	}
 
 	if len(v.Type) > 0 {

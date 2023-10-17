@@ -28,10 +28,6 @@ type SimpleScalarXmlPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SimpleScalarXmlPropertiesInput) operationName() string {
-	return "SimpleScalarXmlProperties"
-}
-
 type SimpleScalarXmlPropertiesOutput struct {
 	ByteValue *int8
 

@@ -56,10 +56,6 @@ type AdminListUserAuthEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminListUserAuthEventsInput) operationName() string {
-	return "AdminListUserAuthEvents"
-}
-
 type AdminListUserAuthEventsOutput struct {
 
 	// The response object. It includes the EventID , EventType , CreationDate ,

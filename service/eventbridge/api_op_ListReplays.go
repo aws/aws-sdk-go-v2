@@ -49,10 +49,6 @@ type ListReplaysInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListReplaysInput) operationName() string {
-	return "ListReplays"
-}
-
 type ListReplaysOutput struct {
 
 	// The token returned by a previous call to retrieve the next set of results.

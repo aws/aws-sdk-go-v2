@@ -21,7 +21,7 @@ type BrokerEBSVolumeInfo struct {
 	ProvisionedThroughput *ProvisionedThroughput
 
 	// Size of the EBS volume to update.
-	VolumeSizeGB int32
+	VolumeSizeGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -87,7 +87,7 @@ type BrokerNodeInfo struct {
 	AttachedENIId *string
 
 	// The ID of the broker.
-	BrokerId float64
+	BrokerId *float64
 
 	// The client subnet to which this broker node belongs.
 	ClientSubnet *string
@@ -114,7 +114,7 @@ type BrokerSoftwareInfo struct {
 
 	// The revision of the configuration to use. This field isn't visible in this
 	// preview release.
-	ConfigurationRevision int64
+	ConfigurationRevision *int64
 
 	// The version of Apache Kafka.
 	KafkaVersion *string
@@ -163,7 +163,7 @@ type ClientVpcConnection struct {
 type CloudWatchLogs struct {
 
 	// This member is required.
-	Enabled bool
+	Enabled *bool
 
 	LogGroup *string
 
@@ -251,7 +251,7 @@ type ClusterInfo struct {
 	LoggingInfo *LoggingInfo
 
 	// The number of broker nodes in the cluster.
-	NumberOfBrokerNodes int32
+	NumberOfBrokerNodes *int32
 
 	// Settings for open monitoring using Prometheus.
 	OpenMonitoring *OpenMonitoring
@@ -501,7 +501,7 @@ type ConfigurationInfo struct {
 	// The revision of the configuration to use.
 	//
 	// This member is required.
-	Revision int64
+	Revision *int64
 
 	noSmithyDocumentSerde
 }
@@ -517,7 +517,7 @@ type ConfigurationRevision struct {
 	// The revision number.
 	//
 	// This member is required.
-	Revision int64
+	Revision *int64
 
 	// The description of the configuration revision.
 	Description *string
@@ -545,7 +545,7 @@ type EBSStorageInfo struct {
 	ProvisionedThroughput *ProvisionedThroughput
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
-	VolumeSize int32
+	VolumeSize *int32
 
 	noSmithyDocumentSerde
 }
@@ -590,7 +590,7 @@ type EncryptionInTransit struct {
 	// When set to true, it indicates that data communication among the broker nodes
 	// of the cluster is encrypted. When set to false, the communication happens in
 	// plaintext. The default value is true.
-	InCluster bool
+	InCluster *bool
 
 	noSmithyDocumentSerde
 }
@@ -610,7 +610,7 @@ type ErrorInfo struct {
 type Firehose struct {
 
 	// This member is required.
-	Enabled bool
+	Enabled *bool
 
 	DeliveryStream *string
 
@@ -621,7 +621,7 @@ type Firehose struct {
 type Iam struct {
 
 	// Indicates whether IAM access control is enabled.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -632,7 +632,7 @@ type JmxExporter struct {
 	// Indicates whether you want to turn on or turn off the JMX Exporter.
 	//
 	// This member is required.
-	EnabledInBroker bool
+	EnabledInBroker *bool
 
 	noSmithyDocumentSerde
 }
@@ -643,7 +643,7 @@ type JmxExporterInfo struct {
 	// Indicates whether you want to turn on or turn off the JMX Exporter.
 	//
 	// This member is required.
-	EnabledInBroker bool
+	EnabledInBroker *bool
 
 	noSmithyDocumentSerde
 }
@@ -697,7 +697,7 @@ type MutableClusterInfo struct {
 	LoggingInfo *LoggingInfo
 
 	// The number of broker nodes in the cluster.
-	NumberOfBrokerNodes int32
+	NumberOfBrokerNodes *int32
 
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoring
@@ -714,7 +714,7 @@ type NodeExporter struct {
 	// Indicates whether you want to turn on or turn off the Node Exporter.
 	//
 	// This member is required.
-	EnabledInBroker bool
+	EnabledInBroker *bool
 
 	noSmithyDocumentSerde
 }
@@ -725,7 +725,7 @@ type NodeExporterInfo struct {
 	// Indicates whether you want to turn on or turn off the Node Exporter.
 	//
 	// This member is required.
-	EnabledInBroker bool
+	EnabledInBroker *bool
 
 	noSmithyDocumentSerde
 }
@@ -811,7 +811,7 @@ type Provisioned struct {
 	// The number of broker nodes in the cluster.
 	//
 	// This member is required.
-	NumberOfBrokerNodes int32
+	NumberOfBrokerNodes *int32
 
 	// Includes all client authentication information.
 	ClientAuthentication *ClientAuthentication
@@ -861,7 +861,7 @@ type ProvisionedRequest struct {
 	// The number of broker nodes in the cluster.
 	//
 	// This member is required.
-	NumberOfBrokerNodes int32
+	NumberOfBrokerNodes *int32
 
 	// Includes all client authentication information.
 	ClientAuthentication *ClientAuthentication
@@ -894,11 +894,11 @@ type ProvisionedRequest struct {
 type ProvisionedThroughput struct {
 
 	// Provisioned throughput is enabled or not.
-	Enabled bool
+	Enabled *bool
 
 	// Throughput value of the EBS volumes for the data drive on each kafka broker
 	// node in MiB per second.
-	VolumeThroughput int32
+	VolumeThroughput *int32
 
 	noSmithyDocumentSerde
 }
@@ -916,7 +916,7 @@ type PublicAccess struct {
 type S3 struct {
 
 	// This member is required.
-	Enabled bool
+	Enabled *bool
 
 	Bucket *string
 
@@ -941,7 +941,7 @@ type Sasl struct {
 type Scram struct {
 
 	// SASL/SCRAM authentication is enabled or not.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1016,7 +1016,7 @@ type Tls struct {
 	CertificateAuthorityArnList []string
 
 	// Specifies whether you want to turn on or turn off TLS authentication.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1025,7 +1025,7 @@ type Unauthenticated struct {
 
 	// Specifies whether you want to turn on or turn off unauthenticated traffic to
 	// your cluster.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1160,7 +1160,7 @@ type VpcConnectivityClientAuthentication struct {
 type VpcConnectivityIam struct {
 
 	// SASL/IAM authentication is on or off for VPC connectivity.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1181,7 +1181,7 @@ type VpcConnectivitySasl struct {
 type VpcConnectivityScram struct {
 
 	// SASL/SCRAM authentication is on or off for VPC connectivity.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1190,7 +1190,7 @@ type VpcConnectivityScram struct {
 type VpcConnectivityTls struct {
 
 	// TLS authentication is on or off for VPC connectivity.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1208,7 +1208,7 @@ type ZookeeperNodeInfo struct {
 	Endpoints []string
 
 	// The role-specific ID for Zookeeper.
-	ZookeeperId float64
+	ZookeeperId *float64
 
 	// The version of Zookeeper.
 	ZookeeperVersion *string

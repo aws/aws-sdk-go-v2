@@ -87,11 +87,11 @@ type CmafPackage struct {
 	// Video Parameter Set (VPS) metadata in every video segment instead of in the init
 	// fragment. This lets you use different SPS/PPS/VPS settings for your assets
 	// during content playback.
-	IncludeEncoderConfigurationInSegments bool
+	IncludeEncoderConfigurationInSegments *bool
 
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
-	SegmentDurationSeconds int32
+	SegmentDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -122,7 +122,7 @@ type DashManifest struct {
 
 	// Minimum duration (in seconds) that a player will buffer media before starting
 	// the presentation.
-	MinBufferTimeSeconds int32
+	MinBufferTimeSeconds *int32
 
 	// The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to
 	// "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
@@ -155,10 +155,10 @@ type DashPackage struct {
 	// Video Parameter Set (VPS) metadata in every video segment instead of in the init
 	// fragment. This lets you use different SPS/PPS/VPS settings for your assets
 	// during content playback.
-	IncludeEncoderConfigurationInSegments bool
+	IncludeEncoderConfigurationInSegments *bool
 
 	// When enabled, an I-Frame only stream will be included in the output.
-	IncludeIframeOnlyStream bool
+	IncludeIframeOnlyStream *bool
 
 	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
 	// over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into
@@ -169,7 +169,7 @@ type DashPackage struct {
 
 	// Duration (in seconds) of each segment. Actual segments will be rounded to the
 	// nearest multiple of the source segment duration.
-	SegmentDurationSeconds int32
+	SegmentDurationSeconds *int32
 
 	// Determines the type of SegmentTemplate included in the Media Presentation
 	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
@@ -264,7 +264,7 @@ type HlsManifest struct {
 	AdMarkers AdMarkers
 
 	// When enabled, an I-Frame only stream will be included in the output.
-	IncludeIframeOnlyStream bool
+	IncludeIframeOnlyStream *bool
 
 	// An optional string to include in the name of the manifest.
 	ManifestName *string
@@ -277,10 +277,10 @@ type HlsManifest struct {
 	// generated. Note that irrespective of this parameter, if any ID3 Timed Metadata
 	// is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS
 	// output.
-	ProgramDateTimeIntervalSeconds int32
+	ProgramDateTimeIntervalSeconds *int32
 
 	// When enabled, the EXT-X-KEY tag will be repeated in output manifests.
-	RepeatExtXKey bool
+	RepeatExtXKey *bool
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
@@ -301,14 +301,14 @@ type HlsPackage struct {
 
 	// When enabled, MediaPackage passes through digital video broadcasting (DVB)
 	// subtitles into the output.
-	IncludeDvbSubtitles bool
+	IncludeDvbSubtitles *bool
 
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
-	SegmentDurationSeconds int32
+	SegmentDurationSeconds *int32
 
 	// When enabled, audio streams will be placed in rendition groups in the output.
-	UseAudioRenditionGroup bool
+	UseAudioRenditionGroup *bool
 
 	noSmithyDocumentSerde
 }
@@ -349,7 +349,7 @@ type MssPackage struct {
 	Encryption *MssEncryption
 
 	// The duration (in seconds) of each segment.
-	SegmentDurationSeconds int32
+	SegmentDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -391,7 +391,7 @@ type PackagingConfiguration struct {
 type PackagingGroup struct {
 
 	// The approximate asset count of the PackagingGroup.
-	ApproximateAssetCount int32
+	ApproximateAssetCount *int32
 
 	// The ARN of the PackagingGroup.
 	Arn *string
@@ -455,10 +455,10 @@ type SpekeKeyProvider struct {
 type StreamSelection struct {
 
 	// The maximum video bitrate (bps) to include in output.
-	MaxVideoBitsPerSecond int32
+	MaxVideoBitsPerSecond *int32
 
 	// The minimum video bitrate (bps) to include in output.
-	MinVideoBitsPerSecond int32
+	MinVideoBitsPerSecond *int32
 
 	// A directive that determines the order of streams in the output.
 	StreamOrder StreamOrder

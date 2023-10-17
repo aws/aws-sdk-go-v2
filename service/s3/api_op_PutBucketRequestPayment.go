@@ -72,10 +72,6 @@ type PutBucketRequestPaymentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketRequestPaymentInput) operationName() string {
-	return "PutBucketRequestPayment"
-}
-
 func (in *PutBucketRequestPaymentInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

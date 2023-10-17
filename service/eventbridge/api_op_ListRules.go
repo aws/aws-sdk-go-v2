@@ -49,10 +49,6 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListRulesInput) operationName() string {
-	return "ListRules"
-}
-
 type ListRulesOutput struct {
 
 	// Indicates whether there are additional results to retrieve. If there are no

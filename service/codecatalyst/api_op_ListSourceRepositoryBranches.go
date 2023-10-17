@@ -56,10 +56,6 @@ type ListSourceRepositoryBranchesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListSourceRepositoryBranchesInput) operationName() string {
-	return "ListSourceRepositoryBranches"
-}
-
 type ListSourceRepositoryBranchesOutput struct {
 
 	// Information about the source branches.

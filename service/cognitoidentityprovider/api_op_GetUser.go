@@ -43,10 +43,6 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetUserInput) operationName() string {
-	return "GetUser"
-}
-
 // Represents the response from the server from the request to get information
 // about the user.
 type GetUserOutput struct {

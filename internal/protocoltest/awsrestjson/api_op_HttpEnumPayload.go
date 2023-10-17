@@ -31,10 +31,6 @@ type HttpEnumPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpEnumPayloadInput) operationName() string {
-	return "HttpEnumPayload"
-}
-
 type HttpEnumPayloadOutput struct {
 	Payload types.StringEnum
 

@@ -72,10 +72,6 @@ type DeleteObjectTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteObjectTaggingInput) operationName() string {
-	return "DeleteObjectTagging"
-}
-
 func (in *DeleteObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

@@ -50,10 +50,6 @@ type GetAccessPointPolicyStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetAccessPointPolicyStatusInput) operationName() string {
-	return "GetAccessPointPolicyStatus"
-}
-
 func (in *GetAccessPointPolicyStatusInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.AccessPointName = in.Name

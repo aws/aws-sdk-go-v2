@@ -54,10 +54,6 @@ type AdminListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminListDevicesInput) operationName() string {
-	return "AdminListDevices"
-}
-
 // Lists the device's response, as an administrator.
 type AdminListDevicesOutput struct {
 

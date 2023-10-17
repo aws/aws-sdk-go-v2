@@ -207,10 +207,6 @@ type PutObjectAclInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutObjectAclInput) operationName() string {
-	return "PutObjectAcl"
-}
-
 func (in *PutObjectAclInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

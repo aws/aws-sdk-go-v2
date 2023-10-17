@@ -38,10 +38,6 @@ type MalformedIntegerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedIntegerInput) operationName() string {
-	return "MalformedInteger"
-}
-
 type MalformedIntegerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

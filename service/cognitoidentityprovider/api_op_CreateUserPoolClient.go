@@ -233,10 +233,6 @@ type CreateUserPoolClientInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateUserPoolClientInput) operationName() string {
-	return "CreateUserPoolClient"
-}
-
 // Represents the response from the server to create a user pool client.
 type CreateUserPoolClientOutput struct {
 

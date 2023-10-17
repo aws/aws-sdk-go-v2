@@ -36,10 +36,6 @@ type ListBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListBucketsInput) operationName() string {
-	return "ListBuckets"
-}
-
 type ListBucketsOutput struct {
 
 	// The list of buckets owned by the requester.

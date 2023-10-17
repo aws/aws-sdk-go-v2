@@ -47,10 +47,6 @@ type DeleteSourceRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteSourceRepositoryInput) operationName() string {
-	return "DeleteSourceRepository"
-}
-
 type DeleteSourceRepositoryOutput struct {
 
 	// The name of the repository.

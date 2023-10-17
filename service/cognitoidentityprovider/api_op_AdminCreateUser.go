@@ -165,10 +165,6 @@ type AdminCreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminCreateUserInput) operationName() string {
-	return "AdminCreateUser"
-}
-
 // Represents the response from the server to the request to create the user.
 type AdminCreateUserOutput struct {
 

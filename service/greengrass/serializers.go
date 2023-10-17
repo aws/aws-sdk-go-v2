@@ -5855,9 +5855,9 @@ func awsRestjson1_serializeOpDocumentResetDeploymentsInput(v *ResetDeploymentsIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Force {
+	if v.Force != nil {
 		ok := object.Key("Force")
-		ok.Boolean(v.Force)
+		ok.Boolean(*v.Force)
 	}
 
 	return nil
@@ -7315,9 +7315,9 @@ func awsRestjson1_serializeDocumentConnectivityInfo(v *types.ConnectivityInfo, v
 		ok.String(*v.Metadata)
 	}
 
-	if v.PortNumber != 0 {
+	if v.PortNumber != nil {
 		ok := object.Key("PortNumber")
-		ok.Integer(v.PortNumber)
+		ok.Integer(*v.PortNumber)
 	}
 
 	return nil
@@ -7375,9 +7375,9 @@ func awsRestjson1_serializeDocumentCore(v *types.Core, value smithyjson.Value) e
 		ok.String(*v.Id)
 	}
 
-	if v.SyncShadow {
+	if v.SyncShadow != nil {
 		ok := object.Key("SyncShadow")
-		ok.Boolean(v.SyncShadow)
+		ok.Boolean(*v.SyncShadow)
 	}
 
 	if v.ThingArn != nil {
@@ -7416,9 +7416,9 @@ func awsRestjson1_serializeDocumentDevice(v *types.Device, value smithyjson.Valu
 		ok.String(*v.Id)
 	}
 
-	if v.SyncShadow {
+	if v.SyncShadow != nil {
 		ok := object.Key("SyncShadow")
-		ok.Boolean(v.SyncShadow)
+		ok.Boolean(*v.SyncShadow)
 	}
 
 	if v.ThingArn != nil {
@@ -7498,19 +7498,19 @@ func awsRestjson1_serializeDocumentFunctionConfiguration(v *types.FunctionConfig
 		ok.String(*v.FunctionRuntimeOverride)
 	}
 
-	if v.MemorySize != 0 {
+	if v.MemorySize != nil {
 		ok := object.Key("MemorySize")
-		ok.Integer(v.MemorySize)
+		ok.Integer(*v.MemorySize)
 	}
 
-	if v.Pinned {
+	if v.Pinned != nil {
 		ok := object.Key("Pinned")
-		ok.Boolean(v.Pinned)
+		ok.Boolean(*v.Pinned)
 	}
 
-	if v.Timeout != 0 {
+	if v.Timeout != nil {
 		ok := object.Key("Timeout")
-		ok.Integer(v.Timeout)
+		ok.Integer(*v.Timeout)
 	}
 
 	return nil
@@ -7520,9 +7520,9 @@ func awsRestjson1_serializeDocumentFunctionConfigurationEnvironment(v *types.Fun
 	object := value.Object()
 	defer object.Close()
 
-	if v.AccessSysfs {
+	if v.AccessSysfs != nil {
 		ok := object.Key("AccessSysfs")
-		ok.Boolean(v.AccessSysfs)
+		ok.Boolean(*v.AccessSysfs)
 	}
 
 	if v.Execution != nil {
@@ -7626,14 +7626,14 @@ func awsRestjson1_serializeDocumentFunctionRunAsConfig(v *types.FunctionRunAsCon
 	object := value.Object()
 	defer object.Close()
 
-	if v.Gid != 0 {
+	if v.Gid != nil {
 		ok := object.Key("Gid")
-		ok.Integer(v.Gid)
+		ok.Integer(*v.Gid)
 	}
 
-	if v.Uid != 0 {
+	if v.Uid != nil {
 		ok := object.Key("Uid")
-		ok.Integer(v.Uid)
+		ok.Integer(*v.Uid)
 	}
 
 	return nil
@@ -7643,9 +7643,9 @@ func awsRestjson1_serializeDocumentGroupOwnerSetting(v *types.GroupOwnerSetting,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoAddGroupOwner {
+	if v.AutoAddGroupOwner != nil {
 		ok := object.Key("AutoAddGroupOwner")
-		ok.Boolean(v.AutoAddGroupOwner)
+		ok.Boolean(*v.AutoAddGroupOwner)
 	}
 
 	if v.GroupOwner != nil {
@@ -7760,9 +7760,9 @@ func awsRestjson1_serializeDocumentLogger(v *types.Logger, value smithyjson.Valu
 		ok.String(string(v.Level))
 	}
 
-	if v.Space != 0 {
+	if v.Space != nil {
 		ok := object.Key("Space")
-		ok.Integer(v.Space)
+		ok.Integer(*v.Space)
 	}
 
 	if len(v.Type) > 0 {

@@ -2,6 +2,12 @@
 
 package docdbelastic
 
+import (
+	"context"
+	smithyauth "github.com/aws/smithy-go/auth"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
 func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {
 	params.Region = options.Region
 }
@@ -16,16 +22,40 @@ type AuthResolverParameters struct {
 	Region string
 }
 
-type operationNamer interface {
-	operationName() string
-}
-
 func bindAuthResolverParams(input interface{}, options Options) *AuthResolverParameters {
 	params := &AuthResolverParameters{
-		Operation: input.(operationNamer).operationName(),
+		Operation: "",
 	}
 
 	bindAuthParamsRegion(params, input, options)
 
 	return params
+}
+
+// AuthSchemeResolver returns a set of possible authentication options for an
+// operation.
+type AuthSchemeResolver interface {
+	ResolveAuthSchemes(context.Context, *AuthResolverParameters) ([]*smithyauth.Option, error)
+}
+
+type defaultAuthSchemeResolver struct{}
+
+var _ AuthSchemeResolver = (*defaultAuthSchemeResolver)(nil)
+
+func (*defaultAuthSchemeResolver) ResolveAuthSchemes(ctx context.Context, params *AuthResolverParameters) ([]*smithyauth.Option, error) {
+	if overrides, ok := operationAuthOptions[params.Operation]; ok {
+		return overrides(params), nil
+	}
+	return serviceAuthOptions(params), nil
+}
+
+var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyauth.Option{}
+
+func serviceAuthOptions(params *AuthResolverParameters) []*smithyauth.Option {
+	return []*smithyauth.Option{
+		smithyhttp.NewSigV4Option(func(props *smithyhttp.SigV4Properties) {
+			props.SigningName = "docdb-elastic"
+			props.SigningRegion = params.Region
+		}),
+	}
 }

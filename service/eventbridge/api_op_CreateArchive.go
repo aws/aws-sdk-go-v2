@@ -57,10 +57,6 @@ type CreateArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateArchiveInput) operationName() string {
-	return "CreateArchive"
-}
-
 type CreateArchiveOutput struct {
 
 	// The ARN of the archive that was created.

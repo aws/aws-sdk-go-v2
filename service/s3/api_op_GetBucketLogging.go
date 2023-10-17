@@ -47,10 +47,6 @@ type GetBucketLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketLoggingInput) operationName() string {
-	return "GetBucketLogging"
-}
-
 func (in *GetBucketLoggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

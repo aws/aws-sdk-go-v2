@@ -35,10 +35,6 @@ type HttpRequestWithFloatLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpRequestWithFloatLabelsInput) operationName() string {
-	return "HttpRequestWithFloatLabels"
-}
-
 type HttpRequestWithFloatLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

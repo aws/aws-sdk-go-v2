@@ -57,10 +57,6 @@ type JsonListsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*JsonListsInput) operationName() string {
-	return "JsonLists"
-}
-
 type JsonListsOutput struct {
 	BooleanList []bool
 

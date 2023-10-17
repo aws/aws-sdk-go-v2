@@ -30,10 +30,6 @@ type EndpointOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*EndpointOperationInput) operationName() string {
-	return "EndpointOperation"
-}
-
 type EndpointOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

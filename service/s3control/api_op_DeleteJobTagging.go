@@ -53,10 +53,6 @@ type DeleteJobTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteJobTaggingInput) operationName() string {
-	return "DeleteJobTagging"
-}
-
 func (in *DeleteJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

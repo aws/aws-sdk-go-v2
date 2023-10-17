@@ -64,10 +64,6 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListJobsInput) operationName() string {
-	return "ListJobs"
-}
-
 func (in *ListJobsInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

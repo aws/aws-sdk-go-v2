@@ -58,10 +58,6 @@ type AdminSetUserMFAPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminSetUserMFAPreferenceInput) operationName() string {
-	return "AdminSetUserMFAPreference"
-}
-
 type AdminSetUserMFAPreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

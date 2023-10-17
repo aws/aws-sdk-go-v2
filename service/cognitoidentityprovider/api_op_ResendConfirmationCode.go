@@ -98,10 +98,6 @@ type ResendConfirmationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ResendConfirmationCodeInput) operationName() string {
-	return "ResendConfirmationCode"
-}
-
 // The response from the server when Amazon Cognito makes the request to resend a
 // confirmation code.
 type ResendConfirmationCodeOutput struct {

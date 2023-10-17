@@ -38,10 +38,6 @@ type DescribeArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeArchiveInput) operationName() string {
-	return "DescribeArchive"
-}
-
 type DescribeArchiveOutput struct {
 
 	// The ARN of the archive.

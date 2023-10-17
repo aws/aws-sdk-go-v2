@@ -61,10 +61,6 @@ type HttpRequestWithLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpRequestWithLabelsInput) operationName() string {
-	return "HttpRequestWithLabels"
-}
-
 type HttpRequestWithLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

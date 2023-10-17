@@ -38,10 +38,6 @@ type DescribeConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeConnectionInput) operationName() string {
-	return "DescribeConnection"
-}
-
 type DescribeConnectionOutput struct {
 
 	// The parameters to use for authorization for the connection.

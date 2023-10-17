@@ -30,10 +30,6 @@ type MalformedContentTypeWithGenericStringInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedContentTypeWithGenericStringInput) operationName() string {
-	return "MalformedContentTypeWithGenericString"
-}
-
 type MalformedContentTypeWithGenericStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

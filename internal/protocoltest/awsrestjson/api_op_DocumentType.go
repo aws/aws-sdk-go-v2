@@ -34,10 +34,6 @@ type DocumentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DocumentTypeInput) operationName() string {
-	return "DocumentType"
-}
-
 type DocumentTypeOutput struct {
 	DocumentValue document.Interface
 

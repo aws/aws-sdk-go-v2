@@ -63,10 +63,6 @@ type UpdateJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateJobStatusInput) operationName() string {
-	return "UpdateJobStatus"
-}
-
 func (in *UpdateJobStatusInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

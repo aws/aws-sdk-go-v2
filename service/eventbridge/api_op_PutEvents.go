@@ -46,10 +46,6 @@ type PutEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutEventsInput) operationName() string {
-	return "PutEvents"
-}
-
 func (in *PutEventsInput) bindEndpointParams(p *EndpointParameters) {
 	p.EndpointId = in.EndpointId
 

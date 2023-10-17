@@ -69,10 +69,6 @@ type ListBucketMetricsConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListBucketMetricsConfigurationsInput) operationName() string {
-	return "ListBucketMetricsConfigurations"
-}
-
 func (in *ListBucketMetricsConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

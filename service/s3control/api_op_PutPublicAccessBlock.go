@@ -55,10 +55,6 @@ type PutPublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutPublicAccessBlockInput) operationName() string {
-	return "PutPublicAccessBlock"
-}
-
 func (in *PutPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

@@ -2158,9 +2158,9 @@ func awsRestjson1_serializeOpDocumentListBackendJobsInput(v *ListBackendJobsInpu
 		ok.String(*v.JobId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2336,9 +2336,9 @@ func awsRestjson1_serializeOpDocumentRemoveAllBackendsInput(v *RemoveAllBackends
 	object := value.Object()
 	defer object.Close()
 
-	if v.CleanAmplifyApp {
+	if v.CleanAmplifyApp != nil {
 		ok := object.Key("cleanAmplifyApp")
-		ok.Boolean(v.CleanAmplifyApp)
+		ok.Boolean(*v.CleanAmplifyApp)
 	}
 
 	return nil
@@ -2936,20 +2936,20 @@ func awsRestjson1_serializeDocumentBackendAPIAppSyncAuthSettings(v *types.Backen
 		ok.String(*v.Description)
 	}
 
-	if v.ExpirationTime != 0 {
+	if v.ExpirationTime != nil {
 		ok := object.Key("expirationTime")
 		switch {
-		case math.IsNaN(v.ExpirationTime):
+		case math.IsNaN(*v.ExpirationTime):
 			ok.String("NaN")
 
-		case math.IsInf(v.ExpirationTime, 1):
+		case math.IsInf(*v.ExpirationTime, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.ExpirationTime, -1):
+		case math.IsInf(*v.ExpirationTime, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.ExpirationTime)
+			ok.Double(*v.ExpirationTime)
 
 		}
 	}
@@ -3156,9 +3156,9 @@ func awsRestjson1_serializeDocumentCreateBackendAuthIdentityPoolConfig(v *types.
 		ok.String(*v.IdentityPoolName)
 	}
 
-	{
+	if v.UnauthenticatedLogin != nil {
 		ok := object.Key("unauthenticatedLogin")
-		ok.Boolean(v.UnauthenticatedLogin)
+		ok.Boolean(*v.UnauthenticatedLogin)
 	}
 
 	return nil
@@ -3239,20 +3239,20 @@ func awsRestjson1_serializeDocumentCreateBackendAuthPasswordPolicyConfig(v *type
 		}
 	}
 
-	{
+	if v.MinimumLength != nil {
 		ok := object.Key("minimumLength")
 		switch {
-		case math.IsNaN(v.MinimumLength):
+		case math.IsNaN(*v.MinimumLength):
 			ok.String("NaN")
 
-		case math.IsInf(v.MinimumLength, 1):
+		case math.IsInf(*v.MinimumLength, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.MinimumLength, -1):
+		case math.IsInf(*v.MinimumLength, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.MinimumLength)
+			ok.Double(*v.MinimumLength)
 
 		}
 	}
@@ -3637,9 +3637,9 @@ func awsRestjson1_serializeDocumentUpdateBackendAuthIdentityPoolConfig(v *types.
 	object := value.Object()
 	defer object.Close()
 
-	if v.UnauthenticatedLogin {
+	if v.UnauthenticatedLogin != nil {
 		ok := object.Key("unauthenticatedLogin")
-		ok.Boolean(v.UnauthenticatedLogin)
+		ok.Boolean(*v.UnauthenticatedLogin)
 	}
 
 	return nil
@@ -3720,20 +3720,20 @@ func awsRestjson1_serializeDocumentUpdateBackendAuthPasswordPolicyConfig(v *type
 		}
 	}
 
-	if v.MinimumLength != 0 {
+	if v.MinimumLength != nil {
 		ok := object.Key("minimumLength")
 		switch {
-		case math.IsNaN(v.MinimumLength):
+		case math.IsNaN(*v.MinimumLength):
 			ok.String("NaN")
 
-		case math.IsInf(v.MinimumLength, 1):
+		case math.IsInf(*v.MinimumLength, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.MinimumLength, -1):
+		case math.IsInf(*v.MinimumLength, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.MinimumLength)
+			ok.Double(*v.MinimumLength)
 
 		}
 	}

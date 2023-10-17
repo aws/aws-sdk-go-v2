@@ -59,10 +59,6 @@ type GetPublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetPublicAccessBlockInput) operationName() string {
-	return "GetPublicAccessBlock"
-}
-
 func (in *GetPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

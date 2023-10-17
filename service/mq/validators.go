@@ -503,6 +503,9 @@ func validateEncryptionOptions(v *types.EncryptionOptions) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionOptions"}
+	if v.UseAwsOwnedKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UseAwsOwnedKey"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -584,6 +587,9 @@ func validateOpCreateBrokerInput(v *CreateBrokerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBrokerInput"}
+	if v.AutoMinorVersionUpgrade == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoMinorVersionUpgrade"))
+	}
 	if v.BrokerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerName"))
 	}
@@ -618,6 +624,9 @@ func validateOpCreateBrokerInput(v *CreateBrokerInput) error {
 		if err := validateWeeklyStartTime(v.MaintenanceWindowStartTime); err != nil {
 			invalidParams.AddNested("MaintenanceWindowStartTime", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.PubliclyAccessible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PubliclyAccessible"))
 	}
 	if v.Users == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Users"))

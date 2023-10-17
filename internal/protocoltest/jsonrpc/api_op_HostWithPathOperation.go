@@ -29,10 +29,6 @@ type HostWithPathOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HostWithPathOperationInput) operationName() string {
-	return "HostWithPathOperation"
-}
-
 type HostWithPathOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

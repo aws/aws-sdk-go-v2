@@ -74,10 +74,6 @@ type SubmitMultiRegionAccessPointRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SubmitMultiRegionAccessPointRoutesInput) operationName() string {
-	return "SubmitMultiRegionAccessPointRoutes"
-}
-
 func (in *SubmitMultiRegionAccessPointRoutesInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

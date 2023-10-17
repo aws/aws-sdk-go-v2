@@ -33,10 +33,6 @@ type MalformedTimestampQueryDefaultInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedTimestampQueryDefaultInput) operationName() string {
-	return "MalformedTimestampQueryDefault"
-}
-
 type MalformedTimestampQueryDefaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

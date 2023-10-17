@@ -12,7 +12,7 @@ type AacSettings struct {
 
 	// Average bitrate in bits/second. Valid values depend on rate control mode and
 	// profile.
-	Bitrate float64
+	Bitrate *float64
 
 	// Mono, Stereo, or 5.1 channel layout. Valid values depend on rate control mode
 	// and profile. The adReceiverMix setting receives a stereo description plus
@@ -39,7 +39,7 @@ type AacSettings struct {
 	RawFormat AacRawFormat
 
 	// Sample rate in Hz. Valid values depend on rate control mode and profile.
-	SampleRate float64
+	SampleRate *float64
 
 	// Use MPEG-2 AAC audio instead of MPEG-4 AAC audio for raw or MPEG-2 Transport
 	// Stream containers.
@@ -59,7 +59,7 @@ type Ac3Settings struct {
 	AttenuationControl Ac3AttenuationControl
 
 	// Average bitrate in bits/second. Valid bitrates depend on the coding mode.
-	Bitrate float64
+	Bitrate *float64
 
 	// Specifies the bitstream mode (bsmod) for the emitted AC-3 stream. See ATSC
 	// A/52-2012 for background on these values.
@@ -70,7 +70,7 @@ type Ac3Settings struct {
 
 	// Sets the dialnorm for the output. If excluded and input audio is Dolby Digital,
 	// dialnorm will be passed through.
-	Dialnorm int32
+	Dialnorm *int32
 
 	// If set to filmStandard, adds dynamic range compression signaling to the output
 	// bitstream as defined in the Dolby Digital specification.
@@ -107,7 +107,7 @@ type AncillarySourceSettings struct {
 	// format, complete this field. If you plan to choose Embedded as the captions
 	// destination in the output (to pass through all the channels in the ancillary
 	// captions), leave this field blank because MediaLive ignores the field.
-	SourceAncillaryChannelNumber int32
+	SourceAncillaryChannelNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -146,7 +146,7 @@ type ArchiveGroupSettings struct {
 
 	// Number of seconds to write to archive file before closing and starting a new
 	// one.
-	RolloverInterval int32
+	RolloverInterval *int32
 
 	noSmithyDocumentSerde
 }
@@ -201,7 +201,7 @@ type AudioChannelMapping struct {
 	// The index of the output channel being produced.
 	//
 	// This member is required.
-	OutputChannel int32
+	OutputChannel *int32
 
 	noSmithyDocumentSerde
 }
@@ -359,7 +359,7 @@ type AudioNormalizationSettings struct {
 	// value will be used according to the chosen algorithm. The CALM Act (1770-1)
 	// recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends
 	// a target of -23 LKFS.
-	TargetLkfs float64
+	TargetLkfs *float64
 
 	noSmithyDocumentSerde
 }
@@ -402,7 +402,7 @@ type AudioPidSelection struct {
 	// Selects a specific PID from within a source.
 	//
 	// This member is required.
-	Pid int32
+	Pid *int32
 
 	noSmithyDocumentSerde
 }
@@ -453,7 +453,7 @@ type AudioSilenceFailoverSettings struct {
 	// The amount of time (in milliseconds) that the active input must be silent
 	// before automatic input failover occurs. Silence is defined as audio loss or
 	// audio quieter than -50 dBFS.
-	AudioSilenceThresholdMsec int32
+	AudioSilenceThresholdMsec *int32
 
 	noSmithyDocumentSerde
 }
@@ -464,7 +464,7 @@ type AudioTrack struct {
 	// 1-based integer value that maps to a specific audio track
 	//
 	// This member is required.
-	Track int32
+	Track *int32
 
 	noSmithyDocumentSerde
 }
@@ -506,7 +506,7 @@ type AutomaticInputFailoverSettings struct {
 	// of time. Enter a time in milliseconds. This value is particularly important if
 	// the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED,
 	// because after this time, MediaLive will switch back to the primary input.
-	ErrorClearTimeMsec int32
+	ErrorClearTimeMsec *int32
 
 	// A list of failover conditions. If any of these conditions occur, MediaLive will
 	// perform a failover to the other input.
@@ -690,7 +690,7 @@ type BurnInDestinationSettings struct {
 	// Specifies the opacity of the background rectangle. 255 is opaque; 0 is
 	// transparent. Leaving this parameter out is equivalent to setting it to 0
 	// (transparent). All burn-in and DVB-Sub font settings must match.
-	BackgroundOpacity int32
+	BackgroundOpacity *int32
 
 	// External font file used for caption burn-in. File extension must be 'ttf' or
 	// 'tte'. Although the user can select output fonts for many different types of
@@ -707,11 +707,11 @@ type BurnInDestinationSettings struct {
 
 	// Specifies the opacity of the burned-in captions. 255 is opaque; 0 is
 	// transparent. All burn-in and DVB-Sub font settings must match.
-	FontOpacity int32
+	FontOpacity *int32
 
 	// Font resolution in DPI (dots per inch); default is 96 dpi. All burn-in and
 	// DVB-Sub font settings must match.
-	FontResolution int32
+	FontResolution *int32
 
 	// When set to 'auto' fontSize will scale depending on the size of the output.
 	// Giving a positive integer will specify the exact font size in points. All
@@ -728,7 +728,7 @@ type BurnInDestinationSettings struct {
 	// captions that are either 608/embedded or teletext. These source settings are
 	// already pre-defined by the caption stream. All burn-in and DVB-Sub font settings
 	// must match.
-	OutlineSize int32
+	OutlineSize *int32
 
 	// Specifies the color of the shadow cast by the captions. All burn-in and DVB-Sub
 	// font settings must match.
@@ -737,17 +737,17 @@ type BurnInDestinationSettings struct {
 	// Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving
 	// this parameter out is equivalent to setting it to 0 (transparent). All burn-in
 	// and DVB-Sub font settings must match.
-	ShadowOpacity int32
+	ShadowOpacity *int32
 
 	// Specifies the horizontal offset of the shadow relative to the captions in
 	// pixels. A value of -2 would result in a shadow offset 2 pixels to the left. All
 	// burn-in and DVB-Sub font settings must match.
-	ShadowXOffset int32
+	ShadowXOffset *int32
 
 	// Specifies the vertical offset of the shadow relative to the captions in pixels.
 	// A value of -2 would result in a shadow offset 2 pixels above the text. All
 	// burn-in and DVB-Sub font settings must match.
-	ShadowYOffset int32
+	ShadowYOffset *int32
 
 	// Controls whether a fixed grid size will be used to generate the output
 	// subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in
@@ -759,14 +759,14 @@ type BurnInDestinationSettings struct {
 	// pixels from the left of the output. If no explicit xPosition is provided, the
 	// horizontal caption position will be determined by the alignment parameter. All
 	// burn-in and DVB-Sub font settings must match.
-	XPosition int32
+	XPosition *int32
 
 	// Specifies the vertical position of the caption relative to the top of the
 	// output in pixels. A value of 10 would result in the captions starting 10 pixels
 	// from the top of the output. If no explicit yPosition is provided, the caption
 	// will be positioned towards the bottom of the output. All burn-in and DVB-Sub
 	// font settings must match.
-	YPosition int32
+	YPosition *int32
 
 	noSmithyDocumentSerde
 }
@@ -857,7 +857,7 @@ type CaptionLanguageMapping struct {
 	// channel mapping must have a unique channel number (maximum of 4)
 	//
 	// This member is required.
-	CaptionChannel int32
+	CaptionChannel *int32
 
 	// Three character ISO 639-2 language code (see
 	// http://www.loc.gov/standards/iso639-2)
@@ -883,7 +883,7 @@ type CaptionRectangle struct {
 	// tts:extent - Y in the TTML standard.
 	//
 	// This member is required.
-	Height float64
+	Height *float64
 
 	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML
 	// in an output. (Make sure to leave the default if you don't have either of these
@@ -900,7 +900,7 @@ type CaptionRectangle struct {
 	// tts:origin - X in the TTML standard.
 	//
 	// This member is required.
-	LeftOffset float64
+	LeftOffset *float64
 
 	// See the description in leftOffset. For topOffset, specify the position of the
 	// top edge of the rectangle, as a percentage of the underlying frame height, and
@@ -910,7 +910,7 @@ type CaptionRectangle struct {
 	// Y in the TTML standard.
 	//
 	// This member is required.
-	TopOffset float64
+	TopOffset *float64
 
 	// See the description in leftOffset. For width, specify the entire width of the
 	// rectangle as a percentage of the underlying frame width. For example, "80" means
@@ -919,7 +919,7 @@ type CaptionRectangle struct {
 	// - X in the TTML standard.
 	//
 	// This member is required.
-	Width float64
+	Width *float64
 
 	noSmithyDocumentSerde
 }
@@ -1026,7 +1026,7 @@ type Channel struct {
 	PipelineDetails []PipelineDetail
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount int32
+	PipelinesRunningCount *int32
 
 	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
 	RoleArn *string
@@ -1092,7 +1092,7 @@ type ChannelSummary struct {
 	Name *string
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount int32
+	PipelinesRunningCount *int32
 
 	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
 	RoleArn *string
@@ -1125,7 +1125,7 @@ type DvbNitSettings struct {
 	// The numeric value placed in the Network Information Table (NIT).
 	//
 	// This member is required.
-	NetworkId int32
+	NetworkId *int32
 
 	// The network name text placed in the networkNameDescriptor inside the Network
 	// Information Table. Maximum length is 256 characters.
@@ -1135,7 +1135,7 @@ type DvbNitSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	RepInterval int32
+	RepInterval *int32
 
 	noSmithyDocumentSerde
 }
@@ -1154,7 +1154,7 @@ type DvbSdtSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	RepInterval int32
+	RepInterval *int32
 
 	// The service name placed in the serviceDescriptor in the Service Description
 	// Table. Maximum length is 256 characters.
@@ -1189,7 +1189,7 @@ type DvbSubDestinationSettings struct {
 	// Specifies the opacity of the background rectangle. 255 is opaque; 0 is
 	// transparent. Leaving this parameter blank is equivalent to setting it to 0
 	// (transparent). All burn-in and DVB-Sub font settings must match.
-	BackgroundOpacity int32
+	BackgroundOpacity *int32
 
 	// External font file used for caption burn-in. File extension must be 'ttf' or
 	// 'tte'. Although the user can select output fonts for many different types of
@@ -1206,11 +1206,11 @@ type DvbSubDestinationSettings struct {
 
 	// Specifies the opacity of the burned-in captions. 255 is opaque; 0 is
 	// transparent. All burn-in and DVB-Sub font settings must match.
-	FontOpacity int32
+	FontOpacity *int32
 
 	// Font resolution in DPI (dots per inch); default is 96 dpi. All burn-in and
 	// DVB-Sub font settings must match.
-	FontResolution int32
+	FontResolution *int32
 
 	// When set to auto fontSize will scale depending on the size of the output.
 	// Giving a positive integer will specify the exact font size in points. All
@@ -1227,7 +1227,7 @@ type DvbSubDestinationSettings struct {
 	// captions that are either 608/embedded or teletext. These source settings are
 	// already pre-defined by the caption stream. All burn-in and DVB-Sub font settings
 	// must match.
-	OutlineSize int32
+	OutlineSize *int32
 
 	// Specifies the color of the shadow cast by the captions. All burn-in and DVB-Sub
 	// font settings must match.
@@ -1236,17 +1236,17 @@ type DvbSubDestinationSettings struct {
 	// Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving
 	// this parameter blank is equivalent to setting it to 0 (transparent). All burn-in
 	// and DVB-Sub font settings must match.
-	ShadowOpacity int32
+	ShadowOpacity *int32
 
 	// Specifies the horizontal offset of the shadow relative to the captions in
 	// pixels. A value of -2 would result in a shadow offset 2 pixels to the left. All
 	// burn-in and DVB-Sub font settings must match.
-	ShadowXOffset int32
+	ShadowXOffset *int32
 
 	// Specifies the vertical offset of the shadow relative to the captions in pixels.
 	// A value of -2 would result in a shadow offset 2 pixels above the text. All
 	// burn-in and DVB-Sub font settings must match.
-	ShadowYOffset int32
+	ShadowYOffset *int32
 
 	// Controls whether a fixed grid size will be used to generate the output
 	// subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in
@@ -1260,7 +1260,7 @@ type DvbSubDestinationSettings struct {
 	// option is not valid for source captions that are STL, 608/embedded or teletext.
 	// These source settings are already pre-defined by the caption stream. All burn-in
 	// and DVB-Sub font settings must match.
-	XPosition int32
+	XPosition *int32
 
 	// Specifies the vertical position of the caption relative to the top of the
 	// output in pixels. A value of 10 would result in the captions starting 10 pixels
@@ -1269,7 +1269,7 @@ type DvbSubDestinationSettings struct {
 	// for source captions that are STL, 608/embedded or teletext. These source
 	// settings are already pre-defined by the caption stream. All burn-in and DVB-Sub
 	// font settings must match.
-	YPosition int32
+	YPosition *int32
 
 	noSmithyDocumentSerde
 }
@@ -1285,7 +1285,7 @@ type DvbSubSourceSettings struct {
 	// When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source
 	// content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through,
 	// regardless of selectors.
-	Pid int32
+	Pid *int32
 
 	noSmithyDocumentSerde
 }
@@ -1295,7 +1295,7 @@ type DvbTdtSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	RepInterval int32
+	RepInterval *int32
 
 	noSmithyDocumentSerde
 }
@@ -1305,13 +1305,13 @@ type Eac3AtmosSettings struct {
 
 	// Average bitrate in bits/second. Valid bitrates depend on the coding mode. // *
 	// @affectsRightSizing true
-	Bitrate float64
+	Bitrate *float64
 
 	// Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
 	CodingMode Eac3AtmosCodingMode
 
 	// Sets the dialnorm for the output. Default 23.
-	Dialnorm int32
+	Dialnorm *int32
 
 	// Sets the Dolby dynamic range compression profile.
 	DrcLine Eac3AtmosDrcLine
@@ -1323,12 +1323,12 @@ type Eac3AtmosSettings struct {
 	// Height dimensional trim. Sets the maximum amount to attenuate the height
 	// channels when the downstream player isn??t configured to handle Dolby Digital
 	// Plus with Dolby Atmos and must remix the channels.
-	HeightTrim float64
+	HeightTrim *float64
 
 	// Surround dimensional trim. Sets the maximum amount to attenuate the surround
 	// channels when the downstream player isn't configured to handle Dolby Digital
 	// Plus with Dolby Atmos and must remix the channels.
-	SurroundTrim float64
+	SurroundTrim *float64
 
 	noSmithyDocumentSerde
 }
@@ -1341,7 +1341,7 @@ type Eac3Settings struct {
 	AttenuationControl Eac3AttenuationControl
 
 	// Average bitrate in bits/second. Valid bitrates depend on the coding mode.
-	Bitrate float64
+	Bitrate *float64
 
 	// Specifies the bitstream mode (bsmod) for the emitted E-AC-3 stream. See ATSC
 	// A/52-2012 (Annex E) for background on these values.
@@ -1355,7 +1355,7 @@ type Eac3Settings struct {
 
 	// Sets the dialnorm for the output. If blank and input audio is Dolby Digital
 	// Plus, dialnorm will be passed through.
-	Dialnorm int32
+	Dialnorm *int32
 
 	// Sets the Dolby dynamic range compression profile.
 	DrcLine Eac3DrcLine
@@ -1372,16 +1372,16 @@ type Eac3Settings struct {
 	LfeFilter Eac3LfeFilter
 
 	// Left only/Right only center mix level. Only used for 3/2 coding mode.
-	LoRoCenterMixLevel float64
+	LoRoCenterMixLevel *float64
 
 	// Left only/Right only surround mix level. Only used for 3/2 coding mode.
-	LoRoSurroundMixLevel float64
+	LoRoSurroundMixLevel *float64
 
 	// Left total/Right total center mix level. Only used for 3/2 coding mode.
-	LtRtCenterMixLevel float64
+	LtRtCenterMixLevel *float64
 
 	// Left total/Right total surround mix level. Only used for 3/2 coding mode.
-	LtRtSurroundMixLevel float64
+	LtRtSurroundMixLevel *float64
 
 	// When set to followInput, encoder metadata will be sourced from the DD, DD+, or
 	// DolbyE decoder that supplied this audio data. If audio was not supplied from one
@@ -1476,10 +1476,10 @@ type EmbeddedSourceSettings struct {
 
 	// Specifies the 608/708 channel number within the video track from which to
 	// extract captions. Unused for passthrough.
-	Source608ChannelNumber int32
+	Source608ChannelNumber *int32
 
 	// This field is unused and deprecated.
-	Source608TrackNumber int32
+	Source608TrackNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -1574,7 +1574,7 @@ type Esam struct {
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail
 	// PTS time. This only applies to embedded SCTE 104/35 messages and does not apply
 	// to OOB messages.
-	AdAvailOffset int32
+	AdAvailOffset *int32
 
 	// Documentation update needed
 	PasswordParam *string
@@ -1635,7 +1635,7 @@ type FecOutputSettings struct {
 	// Parameter D from SMPTE 2022-1. The height of the FEC protection matrix. The
 	// number of transport stream packets per column error correction packet. Must be
 	// between 4 and 20, inclusive.
-	ColumnDepth int32
+	ColumnDepth *int32
 
 	// Enables column only or column and row based FEC
 	IncludeFec FecOutputIncludeFec
@@ -1646,7 +1646,7 @@ type FecOutputSettings struct {
 	// stream packets per row error correction packet, and the value must be between 4
 	// and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this
 	// value must be 1 to 20, inclusive.
-	RowLength int32
+	RowLength *int32
 
 	noSmithyDocumentSerde
 }
@@ -1761,7 +1761,7 @@ type FrameCaptureSettings struct {
 	// The frequency at which to capture frames for inclusion in the output. May be
 	// specified in either seconds or milliseconds, as specified by
 	// captureIntervalUnits.
-	CaptureInterval int32
+	CaptureInterval *int32
 
 	// Unit for the frame capture interval.
 	CaptureIntervalUnits FrameCaptureIntervalUnit
@@ -1776,7 +1776,7 @@ type FrameCaptureSettings struct {
 type GlobalConfiguration struct {
 
 	// Value to set the initial audio gain for the Live Event.
-	InitialAudioGain int32
+	InitialAudioGain *int32
 
 	// Indicates the action to take when the current input completes (e.g.
 	// end-of-file). When switchAndLoopInputs is configured the encoder will restart at
@@ -1858,13 +1858,13 @@ type H264Settings struct {
 	// Average bitrate in bits/second. Required when the rate control mode is VBR or
 	// CBR. Not used for QVBR. In an MS Smooth output group, each output must have a
 	// unique value when its bitrate is rounded down to the nearest multiple of 1000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
-	BufFillPct int32
+	BufFillPct *int32
 
 	// Size of buffer (HRD buffer model) in bits.
-	BufSize int32
+	BufSize *int32
 
 	// Includes colorspace metadata in the output.
 	ColorMetadata H264ColorMetadata
@@ -1911,10 +1911,10 @@ type H264Settings struct {
 	FramerateControl H264FramerateControl
 
 	// Framerate denominator.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Documentation update needed
 	GopBReference H264GopBReference
@@ -1922,16 +1922,16 @@ type H264Settings struct {
 	// Frequency of closed GOPs. In streaming applications, it is recommended that
 	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
 	// quickly as possible. Setting this value to 0 will break output segmenting.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Number of B-frames between reference frames.
-	GopNumBFrames int32
+	GopNumBFrames *int32
 
 	// GOP size (keyframe interval) in units of either frames or seconds per
 	// gopSizeUnits. If gopSizeUnits is frames, gopSize must be an integer and must be
 	// greater than or equal to 1. If gopSizeUnits is seconds, gopSize must be greater
 	// than 0, but need not be an integer.
-	GopSize float64
+	GopSize *float64
 
 	// Indicates if the gopSize is specified in frames or seconds. If seconds the
 	// system will convert the gopSize into a frame count at run time.
@@ -1946,7 +1946,7 @@ type H264Settings struct {
 
 	// For QVBR: See the tooltip for Quality level For VBR: Set the maximum bitrate in
 	// order to accommodate expected spikes in the complexity of the video.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
 	// multiplex rate control is used. Enforces separation between repeated (cadence)
@@ -1955,11 +1955,11 @@ type H264Settings struct {
 	// and/or stretched to the scene change I-frame. GOP stretch requires enabling
 	// lookahead as well as setting I-interval. The normal cadence resumes for the next
 	// GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
-	MinIInterval int32
+	MinIInterval *int32
 
 	// Number of reference frames to use. The encoder may use more than requested if
 	// using B-frames and/or interlaced encoding.
-	NumRefFrames int32
+	NumRefFrames *int32
 
 	// This field indicates how the output pixel aspect ratio is specified. If
 	// "specified" is selected then the output video pixel aspect ratio is determined
@@ -1969,10 +1969,10 @@ type H264Settings struct {
 	ParControl H264ParControl
 
 	// Pixel Aspect Ratio denominator.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Pixel Aspect Ratio numerator.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// H.264 Profile.
 	Profile H264Profile
@@ -1997,7 +1997,7 @@ type H264Settings struct {
 	//   decide, leave the QVBR quality level field empty, and in Max bitrate enter the
 	//   maximum rate you want in the video. For more information, see the section called
 	//   "Video - rate control mode" in the MediaLive user guide
-	QvbrQualityLevel int32
+	QvbrQualityLevel *int32
 
 	// Rate control mode. QVBR: Quality will match the specified quality level except
 	// when it is constrained by the maximum bitrate. Recommended if you or your
@@ -2024,11 +2024,11 @@ type H264Settings struct {
 	// number of macroblock rows for interlaced pictures. This field is optional; when
 	// no value is specified the encoder will choose the number of slices based on
 	// encode resolution.
-	Slices int32
+	Slices *int32
 
 	// Softness. Selects quantizer matrix, larger values reduce high-frequency content
 	// in the encoded image. If not set to zero, must be greater than 15.
-	Softness int32
+	Softness *int32
 
 	// Spatial AQ makes adjustments within each frame based on spatial variation of
 	// content complexity. The value to enter in this field depends on the value in the
@@ -2109,12 +2109,12 @@ type H265Settings struct {
 	// Framerate denominator.
 	//
 	// This member is required.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
 	//
 	// This member is required.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
 	// quality.
@@ -2133,10 +2133,10 @@ type H265Settings struct {
 	// Average bitrate in bits/second. Required when the rate control mode is VBR or
 	// CBR. Not used for QVBR. In an MS Smooth output group, each output must have a
 	// unique value when its bitrate is rounded down to the nearest multiple of 1000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Size of buffer (HRD buffer model) in bits.
-	BufSize int32
+	BufSize *int32
 
 	// Includes colorspace metadata in the output.
 	ColorMetadata H265ColorMetadata
@@ -2158,13 +2158,13 @@ type H265Settings struct {
 	// Frequency of closed GOPs. In streaming applications, it is recommended that
 	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
 	// quickly as possible. Setting this value to 0 will break output segmenting.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// GOP size (keyframe interval) in units of either frames or seconds per
 	// gopSizeUnits. If gopSizeUnits is frames, gopSize must be an integer and must be
 	// greater than or equal to 1. If gopSizeUnits is seconds, gopSize must be greater
 	// than 0, but need not be an integer.
-	GopSize float64
+	GopSize *float64
 
 	// Indicates if the gopSize is specified in frames or seconds. If seconds the
 	// system will convert the gopSize into a frame count at run time.
@@ -2178,7 +2178,7 @@ type H265Settings struct {
 	LookAheadRateControl H265LookAheadRateControl
 
 	// For QVBR: See the tooltip for Quality level
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
 	// multiplex rate control is used. Enforces separation between repeated (cadence)
@@ -2187,13 +2187,13 @@ type H265Settings struct {
 	// and/or stretched to the scene change I-frame. GOP stretch requires enabling
 	// lookahead as well as setting I-interval. The normal cadence resumes for the next
 	// GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
-	MinIInterval int32
+	MinIInterval *int32
 
 	// Pixel Aspect Ratio denominator.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Pixel Aspect Ratio numerator.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// H.265 Profile.
 	Profile H265Profile
@@ -2205,7 +2205,7 @@ type H265Settings struct {
 	//   - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//   - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 	//   - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
-	QvbrQualityLevel int32
+	QvbrQualityLevel *int32
 
 	// Rate control mode. QVBR: Quality will match the specified quality level except
 	// when it is constrained by the maximum bitrate. Recommended if you or your
@@ -2228,7 +2228,7 @@ type H265Settings struct {
 	// number of macroblock rows for interlaced pictures. This field is optional; when
 	// no value is specified the encoder will choose the number of slices based on
 	// encode resolution.
-	Slices int32
+	Slices *int32
 
 	// H.265 Tier.
 	Tier H265Tier
@@ -2251,12 +2251,12 @@ type Hdr10Settings struct {
 	// Maximum Content Light Level An integer metadata value defining the maximum
 	// light level, in nits, of any single pixel within an encoded HDR video stream or
 	// file.
-	MaxCll int32
+	MaxCll *int32
 
 	// Maximum Frame Average Light Level An integer metadata value defining the
 	// maximum average light level, in nits, for any single frame within an encoded HDR
 	// video stream or file.
-	MaxFall int32
+	MaxFall *int32
 
 	noSmithyDocumentSerde
 }
@@ -2266,10 +2266,10 @@ type HlsAkamaiSettings struct {
 
 	// Number of seconds to wait before retrying connection to the CDN if the
 	// connection is lost.
-	ConnectionRetryInterval int32
+	ConnectionRetryInterval *int32
 
 	// Size in seconds of file cache for streaming outputs.
-	FilecacheDuration int32
+	FilecacheDuration *int32
 
 	// Specify whether or not to use chunked transfer encoding to Akamai. User should
 	// contact Akamai to enable this feature.
@@ -2278,11 +2278,11 @@ type HlsAkamaiSettings struct {
 	// Number of retry attempts that will be made before the Live Event is put into an
 	// error state. Applies only if the CDN destination URI begins with "s3" or
 	// "mediastore". For other URIs, the value is always 3.
-	NumRetries int32
+	NumRetries *int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
-	RestartDelay int32
+	RestartDelay *int32
 
 	// Salt for authenticated Akamai.
 	Salt *string
@@ -2298,19 +2298,19 @@ type HlsBasicPutSettings struct {
 
 	// Number of seconds to wait before retrying connection to the CDN if the
 	// connection is lost.
-	ConnectionRetryInterval int32
+	ConnectionRetryInterval *int32
 
 	// Size in seconds of file cache for streaming outputs.
-	FilecacheDuration int32
+	FilecacheDuration *int32
 
 	// Number of retry attempts that will be made before the Live Event is put into an
 	// error state. Applies only if the CDN destination URI begins with "s3" or
 	// "mediastore". For other URIs, the value is always 3.
-	NumRetries int32
+	NumRetries *int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
-	RestartDelay int32
+	RestartDelay *int32
 
 	noSmithyDocumentSerde
 }
@@ -2441,7 +2441,7 @@ type HlsGroupSettings struct {
 	// the media manifest file. After this maximum, older segments are removed from the
 	// media manifest. This number must be smaller than the number in the Keep Segments
 	// field.
-	IndexNSegments int32
+	IndexNSegments *int32
 
 	// Parameter that control output group behavior on input loss.
 	InputLossAction InputLossActionForHlsOut
@@ -2465,7 +2465,7 @@ type HlsGroupSettings struct {
 	// player is still reading a media manifest file that lists this segment, but that
 	// segment has been removed from the destination directory (as directed by
 	// indexNSegments). This situation would result in a 404 HTTP error on the player.
-	KeepSegments int32
+	KeepSegments *int32
 
 	// The value specifies how the key is represented in the resource identified by
 	// the URI. If parameter is absent, an implicit value of "identity" is used. A
@@ -2489,7 +2489,7 @@ type HlsGroupSettings struct {
 	// Minimum length of MPEG-2 Transport Stream segments in seconds. When set,
 	// minimum segment length is enforced by looking ahead and back within the
 	// specified range for a nearby avail and extending the segment size if needed.
-	MinSegmentLength int32
+	MinSegmentLength *int32
 
 	// If "vod", all segments are indexed and kept permanently in the destination and
 	// manifest. If "live", only the number segments specified in keepSegments and
@@ -2519,7 +2519,7 @@ type HlsGroupSettings struct {
 	ProgramDateTimeClock HlsProgramDateTimeClock
 
 	// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
-	ProgramDateTimePeriod int32
+	ProgramDateTimePeriod *int32
 
 	// ENABLED: The master manifest (.m3u8 file) for each pipeline includes
 	// information about both pipelines: first its own media files, then the media
@@ -2537,7 +2537,7 @@ type HlsGroupSettings struct {
 	// Length of MPEG-2 Transport Stream segments to create in seconds. Note that
 	// segments will end on the next keyframe after this duration, so actual segment
 	// length may be longer.
-	SegmentLength int32
+	SegmentLength *int32
 
 	// useInputSegmentation has been deprecated. The configured segment size is always
 	// used.
@@ -2546,7 +2546,7 @@ type HlsGroupSettings struct {
 	// Number of segments to write to a subdirectory before starting a new one.
 	// directoryStructure must be subdirectoryPerStream for this setting to have an
 	// effect.
-	SegmentsPerSubdirectory int32
+	SegmentsPerSubdirectory *int32
 
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
 	// variant manifest.
@@ -2556,10 +2556,10 @@ type HlsGroupSettings struct {
 	TimedMetadataId3Frame HlsTimedMetadataId3Frame
 
 	// Timed Metadata interval in seconds.
-	TimedMetadataId3Period int32
+	TimedMetadataId3Period *int32
 
 	// Provides an extra millisecond delta offset to fine tune the timestamps.
-	TimestampDeltaMilliseconds int32
+	TimestampDeltaMilliseconds *int32
 
 	// SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
 	// SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
@@ -2594,20 +2594,20 @@ type HlsInputSettings struct {
 	// this value will be chosen, otherwise the highest bandwidth stream in the m3u8
 	// will be chosen. The bitrate is specified in bits per second, as in an HLS
 	// manifest.
-	Bandwidth int32
+	Bandwidth *int32
 
 	// When specified, reading of the HLS input will begin this many buffer segments
 	// from the end (most recently written segment). When not specified, the HLS input
 	// will begin with the first segment specified in the m3u8.
-	BufferSegments int32
+	BufferSegments *int32
 
 	// The number of consecutive times that attempts to read a manifest or segment
 	// must fail before the input is considered unavailable.
-	Retries int32
+	Retries *int32
 
 	// The number of seconds between retries when an attempt to read a manifest or
 	// segment fails.
-	RetryInterval int32
+	RetryInterval *int32
 
 	// Identifies the source for the SCTE-35 messages that MediaLive will ingest.
 	// Messages can be ingested from the content segments (in the stream) or from tags
@@ -2623,10 +2623,10 @@ type HlsMediaStoreSettings struct {
 
 	// Number of seconds to wait before retrying connection to the CDN if the
 	// connection is lost.
-	ConnectionRetryInterval int32
+	ConnectionRetryInterval *int32
 
 	// Size in seconds of file cache for streaming outputs.
-	FilecacheDuration int32
+	FilecacheDuration *int32
 
 	// When set to temporal, output files are stored in non-persistent memory for
 	// faster reading and writing.
@@ -2635,11 +2635,11 @@ type HlsMediaStoreSettings struct {
 	// Number of retry attempts that will be made before the Live Event is put into an
 	// error state. Applies only if the CDN destination URI begins with "s3" or
 	// "mediastore". For other URIs, the value is always 3.
-	NumRetries int32
+	NumRetries *int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
-	RestartDelay int32
+	RestartDelay *int32
 
 	noSmithyDocumentSerde
 }
@@ -2711,10 +2711,10 @@ type HlsWebdavSettings struct {
 
 	// Number of seconds to wait before retrying connection to the CDN if the
 	// connection is lost.
-	ConnectionRetryInterval int32
+	ConnectionRetryInterval *int32
 
 	// Size in seconds of file cache for streaming outputs.
-	FilecacheDuration int32
+	FilecacheDuration *int32
 
 	// Specify whether or not to use chunked transfer encoding to WebDAV.
 	HttpTransferMode HlsWebdavHttpTransferMode
@@ -2722,11 +2722,11 @@ type HlsWebdavSettings struct {
 	// Number of retry attempts that will be made before the Live Event is put into an
 	// error state. Applies only if the CDN destination URI begins with "s3" or
 	// "mediastore". For other URIs, the value is always 3.
-	NumRetries int32
+	NumRetries *int32
 
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
-	RestartDelay int32
+	RestartDelay *int32
 
 	noSmithyDocumentSerde
 }
@@ -2832,12 +2832,12 @@ type InputChannelLevel struct {
 	// -60 (mute) and 6 dB.
 	//
 	// This member is required.
-	Gain int32
+	Gain *int32
 
 	// The index of the input channel used as a source.
 	//
 	// This member is required.
-	InputChannel int32
+	InputChannel *int32
 
 	noSmithyDocumentSerde
 }
@@ -2914,11 +2914,11 @@ type InputDeviceConfigurableSettings struct {
 	ConfiguredInput InputDeviceConfiguredInput
 
 	// The Link device's buffer size (latency) in milliseconds (ms).
-	LatencyMs int32
+	LatencyMs *int32
 
 	// The maximum bitrate in bits per second. Set a value here to throttle the
 	// bitrate of the source video.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// To attach this device to a MediaConnect flow, specify these parameters. To
 	// detach an existing flow, enter {} for the value of mediaconnectSettings. Only
@@ -2944,24 +2944,24 @@ type InputDeviceHdSettings struct {
 	DeviceState InputDeviceState
 
 	// The frame rate of the video source.
-	Framerate float64
+	Framerate *float64
 
 	// The height of the video source, in pixels.
-	Height int32
+	Height *int32
 
 	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
 	// this value.
-	LatencyMs int32
+	LatencyMs *int32
 
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// The scan type of the video source.
 	ScanType InputDeviceScanType
 
 	// The width of the video source, in pixels.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -3126,18 +3126,18 @@ type InputDeviceUhdSettings struct {
 	DeviceState InputDeviceState
 
 	// The frame rate of the video source.
-	Framerate float64
+	Framerate *float64
 
 	// The height of the video source, in pixels.
-	Height int32
+	Height *int32
 
 	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
 	// this value.
-	LatencyMs int32
+	LatencyMs *int32
 
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Information about the MediaConnect flow attached to the device. Returned only
 	// if the outputType is MEDIACONNECT_FLOW.
@@ -3147,7 +3147,7 @@ type InputDeviceUhdSettings struct {
 	ScanType InputDeviceScanType
 
 	// The width of the video source, in pixels.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -3175,7 +3175,7 @@ type InputLocation struct {
 type InputLossBehavior struct {
 
 	// Documentation update needed
-	BlackFrameMsec int32
+	BlackFrameMsec *int32
 
 	// When input loss image type is "color" this field specifies the color to use.
 	// Value: 6 hex characters representing the values of RGB.
@@ -3190,7 +3190,7 @@ type InputLossBehavior struct {
 	InputLossImageType InputLossImageType
 
 	// Documentation update needed
-	RepeatFrameMsec int32
+	RepeatFrameMsec *int32
 
 	noSmithyDocumentSerde
 }
@@ -3201,7 +3201,7 @@ type InputLossFailoverSettings struct {
 
 	// The amount of time (in milliseconds) that no input is detected. After that
 	// time, an input failover will occur.
-	InputLossThresholdMsec int32
+	InputLossThresholdMsec *int32
 
 	noSmithyDocumentSerde
 }
@@ -3269,7 +3269,7 @@ type InputSettings struct {
 	DenoiseFilter InputDenoiseFilter
 
 	// Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
-	FilterStrength int32
+	FilterStrength *int32
 
 	// Turns on the filter for this input. MPEG-2 inputs have the deblocking filter
 	// enabled by default.
@@ -3283,7 +3283,7 @@ type InputSettings struct {
 
 	// PID from which to read SCTE-35 messages. If left undefined, EML will select the
 	// first SCTE-35 PID found in the input.
-	Scte35Pid int32
+	Scte35Pid *int32
 
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source
 	// in this input. Applicable data types are captions, timecode, AFD, and SCTE-104
@@ -3448,7 +3448,7 @@ type M2tsSettings struct {
 	AudioBufferModel M2tsAudioBufferModel
 
 	// The number of audio frames to insert for each PES packet.
-	AudioFramesPerPes int32
+	AudioFramesPerPes *int32
 
 	// Packet Identifier (PID) of the elementary audio stream(s) in the transport
 	// stream. Multiple values are accepted, and can be entered in ranges and/or by
@@ -3462,7 +3462,7 @@ type M2tsSettings struct {
 
 	// The output bitrate of the transport stream in bits per second. Setting to 0
 	// lets the muxer automatically determine the appropriate bitrate.
-	Bitrate int32
+	Bitrate *int32
 
 	// Controls the timing accuracy for output network traffic. Leave as MULTIPLEX to
 	// ensure accurate network packet timing. Or set to NONE, which might result in
@@ -3515,7 +3515,7 @@ type M2tsSettings struct {
 	// lookahead value does not add latency to the system. The Live Event must be
 	// configured elsewhere to create sufficient latency to make the lookahead
 	// accurate.
-	EbpLookaheadMs int32
+	EbpLookaheadMs *int32
 
 	// Controls placement of EBP on Audio PIDs. If set to videoAndAudioPids, EBP
 	// markers will be placed on the video PID and all audio PIDs. If set to videoPid,
@@ -3539,7 +3539,7 @@ type M2tsSettings struct {
 	EtvSignalPid *string
 
 	// The length in seconds of each fragment. Only used with EBP markers.
-	FragmentTime float64
+	FragmentTime *float64
 
 	// If set to passthrough, passes any KLV data from the input source to this output.
 	Klv M2tsKlv
@@ -3558,11 +3558,11 @@ type M2tsSettings struct {
 	// Value in bits per second of extra null packets to insert into the transport
 	// stream. This can be used if a downstream encryption system requires periodic
 	// null packets.
-	NullPacketBitrate float64
+	NullPacketBitrate *float64
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream. Valid values are 0, 10..1000.
-	PatInterval int32
+	PatInterval *int32
 
 	// When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for
 	// every Packetized Elementary Stream (PES) header. This parameter is effective
@@ -3571,7 +3571,7 @@ type M2tsSettings struct {
 
 	// Maximum time in milliseconds between Program Clock Reference (PCRs) inserted
 	// into the transport stream.
-	PcrPeriod int32
+	PcrPeriod *int32
 
 	// Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport
 	// stream. When no value is given, the encoder will assign the same value as the
@@ -3581,7 +3581,7 @@ type M2tsSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream. Valid values are 0, 10..1000.
-	PmtInterval int32
+	PmtInterval *int32
 
 	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
 	// stream. Can be entered as a decimal or hexadecimal value. Valid values are 32
@@ -3589,7 +3589,7 @@ type M2tsSettings struct {
 	PmtPid *string
 
 	// The value of the program number field in the Program Map Table.
-	ProgramNum int32
+	ProgramNum *int32
 
 	// When vbr, does not insert null packets into transport stream to fill specified
 	// bitrate. The bitrate setting acts as the maximum bitrate when vbr is set.
@@ -3615,7 +3615,7 @@ type M2tsSettings struct {
 	// Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative
 	// pullup is not supported, which means that you can't make the preroll shorter. Be
 	// aware that latency in the output will increase by the pullup amount.
-	Scte35PrerollPullupMilliseconds float64
+	Scte35PrerollPullupMilliseconds *float64
 
 	// Inserts segmentation markers at each segmentationTime period. raiSegstart sets
 	// the Random Access Indicator bit in the adaptation field. raiAdapt sets the RAI
@@ -3640,7 +3640,7 @@ type M2tsSettings struct {
 	SegmentationStyle M2tsSegmentationStyle
 
 	// The length in seconds of each segment. Required unless markers is set to none.
-	SegmentationTime float64
+	SegmentationTime *float64
 
 	// When set to passthrough, timed metadata will be passed through from input to
 	// output.
@@ -3652,7 +3652,7 @@ type M2tsSettings struct {
 	TimedMetadataPid *string
 
 	// The value of the transport stream ID field in the Program Map Table.
-	TransportStreamId int32
+	TransportStreamId *int32
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
 	// Can be entered as a decimal or hexadecimal value. Valid values are 32 (or
@@ -3666,7 +3666,7 @@ type M2tsSettings struct {
 type M3u8Settings struct {
 
 	// The number of audio frames to insert for each PES packet.
-	AudioFramesPerPes int32
+	AudioFramesPerPes *int32
 
 	// Packet Identifier (PID) of the elementary audio stream(s) in the transport
 	// stream. Multiple values are accepted, and can be entered in ranges and/or by
@@ -3692,7 +3692,7 @@ type M3u8Settings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream. A value of "0" writes out the PMT once per segment file.
-	PatInterval int32
+	PatInterval *int32
 
 	// When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for
 	// every Packetized Elementary Stream (PES) header. This parameter is effective
@@ -3701,7 +3701,7 @@ type M3u8Settings struct {
 
 	// Maximum time in milliseconds between Program Clock References (PCRs) inserted
 	// into the transport stream.
-	PcrPeriod int32
+	PcrPeriod *int32
 
 	// Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport
 	// stream. When no value is given, the encoder will assign the same value as the
@@ -3710,14 +3710,14 @@ type M3u8Settings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream. A value of "0" writes out the PMT once per segment file.
-	PmtInterval int32
+	PmtInterval *int32
 
 	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
 	// stream. Can be entered as a decimal or hexadecimal value.
 	PmtPid *string
 
 	// The value of the program number field in the Program Map Table.
-	ProgramNum int32
+	ProgramNum *int32
 
 	// If set to passthrough, passes any SCTE-35 signals from the input source to this
 	// output.
@@ -3736,7 +3736,7 @@ type M3u8Settings struct {
 	TimedMetadataPid *string
 
 	// The value of the transport stream ID field in the Program Map Table.
-	TransportStreamId int32
+	TransportStreamId *int32
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
 	// Can be entered as a decimal or hexadecimal value.
@@ -3848,7 +3848,7 @@ type MotionGraphicsActivateScheduleActionSettings struct {
 	// Duration (in milliseconds) that motion graphics should render on to the video
 	// stream. Leaving out this property or setting to 0 will result in rendering
 	// continuing until a deactivate action is processed.
-	Duration int64
+	Duration *int64
 
 	// Key used to extract the password from EC2 Parameter store
 	PasswordParam *string
@@ -3895,14 +3895,14 @@ type MotionGraphicsSettings struct {
 type Mp2Settings struct {
 
 	// Average bitrate in bits/second.
-	Bitrate float64
+	Bitrate *float64
 
 	// The MPEG2 Audio coding mode. Valid values are codingMode10 (for mono) or
 	// codingMode20 (for stereo).
 	CodingMode Mp2CodingMode
 
 	// Sample rate in Hz.
-	SampleRate float64
+	SampleRate *float64
 
 	noSmithyDocumentSerde
 }
@@ -3924,13 +3924,13 @@ type Mpeg2Settings struct {
 	// FPS.
 	//
 	// This member is required.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// The framerate numerator. For example, 24000. The framerate is the numerator
 	// divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
 	//
 	// This member is required.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Choose Off to disable adaptive quantization. Or choose another value to enable
 	// the quantizer and set its strength. The strengths are: Auto, Off, Low, Medium,
@@ -3977,18 +3977,18 @@ type Mpeg2Settings struct {
 	FixedAfd FixedAfd
 
 	// MPEG2: default is open GOP.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Relates to the GOP structure. The number of B-frames between reference frames.
 	// If you do not know what a B-frame is, use the default.
-	GopNumBFrames int32
+	GopNumBFrames *int32
 
 	// Relates to the GOP structure. The GOP size (keyframe interval) in the units
 	// specified in gopSizeUnits. If you do not know what GOP is, use the default. If
 	// gopSizeUnits is frames, then the gopSize must be an integer and must be greater
 	// than or equal to 1. If gopSizeUnits is seconds, the gopSize must be greater than
 	// 0, but does not need to be an integer.
-	GopSize float64
+	GopSize *float64
 
 	// Relates to the GOP structure. Specifies whether the gopSize is specified in
 	// frames or seconds. If you do not plan to change the default gopSize, leave the
@@ -4044,7 +4044,7 @@ type MsSmoothGroupSettings struct {
 	// Number of seconds to wait before retrying connection to the IIS server if the
 	// connection is lost. Content will be cached during this time and the cache will
 	// be be delivered to the IIS server once the connection is re-established.
-	ConnectionRetryInterval int32
+	ConnectionRetryInterval *int32
 
 	// MS Smooth event ID to be sent to the IIS server. Should only be specified if
 	// eventIdMode is set to useConfigured.
@@ -4063,28 +4063,28 @@ type MsSmoothGroupSettings struct {
 	EventStopBehavior SmoothGroupEventStopBehavior
 
 	// Size in seconds of file cache for streaming outputs.
-	FilecacheDuration int32
+	FilecacheDuration *int32
 
 	// Length of mp4 fragments to generate (in seconds). Fragment length must be
 	// compatible with GOP size and framerate.
-	FragmentLength int32
+	FragmentLength *int32
 
 	// Parameter that control output group behavior on input loss.
 	InputLossAction InputLossActionForMsSmoothOut
 
 	// Number of retry attempts.
-	NumRetries int32
+	NumRetries *int32
 
 	// Number of seconds before initiating a restart due to output failure, due to
 	// exhausting the numRetries on one segment, or exceeding filecacheDuration.
-	RestartDelay int32
+	RestartDelay *int32
 
 	// useInputSegmentation has been deprecated. The configured segment size is always
 	// used.
 	SegmentationMode SmoothGroupSegmentationMode
 
 	// Number of milliseconds to delay the output from the second pipeline.
-	SendDelayMs int32
+	SendDelayMs *int32
 
 	// Identifies the type of data to place in the sparse track:
 	//   - SCTE35: Insert SCTE-35 messages from the source content. With each message,
@@ -4146,10 +4146,10 @@ type Multiplex struct {
 	Name *string
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount int32
+	PipelinesRunningCount *int32
 
 	// The number of programs in the multiplex.
-	ProgramCount int32
+	ProgramCount *int32
 
 	// The current state of the multiplex.
 	State MultiplexState
@@ -4245,37 +4245,37 @@ type MultiplexProgramPacketIdentifiersMap struct {
 	DvbSubPids []int32
 
 	// Placeholder documentation for __integer
-	DvbTeletextPid int32
+	DvbTeletextPid *int32
 
 	// Placeholder documentation for __integer
-	EtvPlatformPid int32
+	EtvPlatformPid *int32
 
 	// Placeholder documentation for __integer
-	EtvSignalPid int32
+	EtvSignalPid *int32
 
 	// Placeholder documentation for __listOf__integer
 	KlvDataPids []int32
 
 	// Placeholder documentation for __integer
-	PcrPid int32
+	PcrPid *int32
 
 	// Placeholder documentation for __integer
-	PmtPid int32
+	PmtPid *int32
 
 	// Placeholder documentation for __integer
-	PrivateMetadataPid int32
+	PrivateMetadataPid *int32
 
 	// Placeholder documentation for __listOf__integer
 	Scte27Pids []int32
 
 	// Placeholder documentation for __integer
-	Scte35Pid int32
+	Scte35Pid *int32
 
 	// Placeholder documentation for __integer
-	TimedMetadataPid int32
+	TimedMetadataPid *int32
 
 	// Placeholder documentation for __integer
-	VideoPid int32
+	VideoPid *int32
 
 	noSmithyDocumentSerde
 }
@@ -4315,7 +4315,7 @@ type MultiplexProgramSettings struct {
 	// Unique program number.
 	//
 	// This member is required.
-	ProgramNumber int32
+	ProgramNumber *int32
 
 	// Indicates which pipeline is preferred by the multiplex for program ingest.
 	PreferredChannelPipeline PreferredChannelPipeline
@@ -4347,18 +4347,18 @@ type MultiplexSettings struct {
 	// Transport stream bit rate.
 	//
 	// This member is required.
-	TransportStreamBitrate int32
+	TransportStreamBitrate *int32
 
 	// Transport stream ID.
 	//
 	// This member is required.
-	TransportStreamId int32
+	TransportStreamId *int32
 
 	// Maximum video buffer delay in milliseconds.
-	MaximumVideoBufferDelayMilliseconds int32
+	MaximumVideoBufferDelayMilliseconds *int32
 
 	// Transport stream reserved bit rate.
-	TransportStreamReservedBitrate int32
+	TransportStreamReservedBitrate *int32
 
 	noSmithyDocumentSerde
 }
@@ -4367,7 +4367,7 @@ type MultiplexSettings struct {
 type MultiplexSettingsSummary struct {
 
 	// Transport stream bit rate.
-	TransportStreamBitrate int32
+	TransportStreamBitrate *int32
 
 	noSmithyDocumentSerde
 }
@@ -4376,17 +4376,17 @@ type MultiplexSettingsSummary struct {
 type MultiplexStatmuxVideoSettings struct {
 
 	// Maximum statmux bitrate.
-	MaximumBitrate int32
+	MaximumBitrate *int32
 
 	// Minimum statmux bitrate.
-	MinimumBitrate int32
+	MinimumBitrate *int32
 
 	// The purpose of the priority is to use a combination of the\nmultiplex rate
 	// control algorithm and the QVBR capability of the\nencoder to prioritize the
 	// video quality of some channels in a\nmultiplex over others. Channels that have a
 	// higher priority will\nget higher video quality at the expense of the video
 	// quality of\nother channels in the multiplex with lower priority.
-	Priority int32
+	Priority *int32
 
 	noSmithyDocumentSerde
 }
@@ -4410,10 +4410,10 @@ type MultiplexSummary struct {
 	Name *string
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount int32
+	PipelinesRunningCount *int32
 
 	// The number of programs in the multiplex.
-	ProgramCount int32
+	ProgramCount *int32
 
 	// The current state of the multiplex.
 	State MultiplexState
@@ -4429,7 +4429,7 @@ type MultiplexVideoSettings struct {
 
 	// The constant bitrate configuration for the video encode. When this field is
 	// defined, StatmuxSettings must be undefined.
-	ConstantBitrate int32
+	ConstantBitrate *int32
 
 	// Statmux rate control settings. When this field is defined, ConstantBitrate must
 	// be undefined.
@@ -4501,7 +4501,7 @@ type NielsenNaesIiNw struct {
 	// Enter the Nielsen Source ID (SID) to include in the watermark
 	//
 	// This member is required.
-	Sid float64
+	Sid *float64
 
 	// Choose the timezone for the time stamps in the watermark. If not provided, the
 	// timestamps will be in Coordinated Universal Time (UTC)
@@ -4539,13 +4539,13 @@ type Offering struct {
 	CurrencyCode *string
 
 	// Lease duration, e.g. '12'
-	Duration int32
+	Duration *int32
 
 	// Units for duration, e.g. 'MONTHS'
 	DurationUnits OfferingDurationUnits
 
 	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
-	FixedPrice float64
+	FixedPrice *float64
 
 	// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard
 	// VQ in US West (Oregon)'
@@ -4564,7 +4564,7 @@ type Offering struct {
 	ResourceSpecification *ReservationResourceSpecification
 
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -4809,10 +4809,10 @@ type RemixSettings struct {
 	ChannelMappings []AudioChannelMapping
 
 	// Number of input channels to be used.
-	ChannelsIn int32
+	ChannelsIn *int32
 
 	// Number of output channels to be produced. Valid values: 1, 2, 4, 6, 8
-	ChannelsOut int32
+	ChannelsOut *int32
 
 	noSmithyDocumentSerde
 }
@@ -4824,7 +4824,7 @@ type RenewalSettings struct {
 	AutomaticRenewal ReservationAutomaticRenewal
 
 	// Count for the reservation renewal
-	RenewalCount int32
+	RenewalCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -4837,13 +4837,13 @@ type Reservation struct {
 	Arn *string
 
 	// Number of reserved resources
-	Count int32
+	Count *int32
 
 	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
 	CurrencyCode *string
 
 	// Lease duration, e.g. '12'
-	Duration int32
+	Duration *int32
 
 	// Units for duration, e.g. 'MONTHS'
 	DurationUnits OfferingDurationUnits
@@ -4852,7 +4852,7 @@ type Reservation struct {
 	End *string
 
 	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
-	FixedPrice float64
+	FixedPrice *float64
 
 	// User specified reservation name
 	Name *string
@@ -4890,7 +4890,7 @@ type Reservation struct {
 	Tags map[string]string
 
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -4951,7 +4951,7 @@ type RtmpGroupSettings struct {
 	CacheFullBehavior RtmpCacheFullBehavior
 
 	// Cache length, in seconds, is used to calculate buffer size.
-	CacheLength int32
+	CacheLength *int32
 
 	// Controls the types of data that passes to onCaptionInfo outputs. If set to
 	// 'all' then 608 and 708 carried DTVCC data will be passed. If set to
@@ -4975,7 +4975,7 @@ type RtmpGroupSettings struct {
 
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
-	RestartDelay int32
+	RestartDelay *int32
 
 	noSmithyDocumentSerde
 }
@@ -4997,10 +4997,10 @@ type RtmpOutputSettings struct {
 
 	// Number of seconds to wait before retrying a connection to the Flash Media
 	// server if the connection is lost.
-	ConnectionRetryInterval int32
+	ConnectionRetryInterval *int32
 
 	// Number of retry attempts.
-	NumRetries int32
+	NumRetries *int32
 
 	noSmithyDocumentSerde
 }
@@ -5106,7 +5106,7 @@ type Scte20SourceSettings struct {
 
 	// Specifies the 608/708 channel number within the video track from which to
 	// extract captions. Unused for passthrough.
-	Source608ChannelNumber int32
+	Source608ChannelNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -5133,7 +5133,7 @@ type Scte27SourceSettings struct {
 	//   PID that happens to be.
 	//   - Omit PID and omit Language: Valid only if source is DVB-Sub that is being
 	//   passed through; all languages will be passed through.
-	Pid int32
+	Pid *int32
 
 	noSmithyDocumentSerde
 }
@@ -5209,7 +5209,7 @@ type Scte35ReturnToNetworkScheduleActionSettings struct {
 	// The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
 	//
 	// This member is required.
-	SpliceEventId int64
+	SpliceEventId *int64
 
 	noSmithyDocumentSerde
 }
@@ -5225,26 +5225,26 @@ type Scte35SegmentationDescriptor struct {
 	// Corresponds to SCTE-35 segmentation_event_id.
 	//
 	// This member is required.
-	SegmentationEventId int64
+	SegmentationEventId *int64
 
 	// Holds the four SCTE-35 delivery restriction parameters.
 	DeliveryRestrictions *Scte35DeliveryRestrictions
 
 	// Corresponds to SCTE-35 segment_num. A value that is valid for the specified
 	// segmentation_type_id.
-	SegmentNum int32
+	SegmentNum *int32
 
 	// Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the
 	// time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds
 	// by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the
 	// time_signal will continue until you insert a cancellation message.
-	SegmentationDuration int64
+	SegmentationDuration *int64
 
 	// Corresponds to SCTE-35 segmentation_type_id. One of the segmentation_type_id
 	// values listed in the SCTE-35 specification. On the console, enter the ID in
 	// decimal (for example, "52"). In the CLI, API, or an SDK, enter the ID in hex
 	// (for example, "0x34") or decimal (for example, "52").
-	SegmentationTypeId int32
+	SegmentationTypeId *int32
 
 	// Corresponds to SCTE-35 segmentation_upid. Enter a string containing the
 	// hexadecimal representation of the characters that make up the SCTE-35
@@ -5258,19 +5258,19 @@ type Scte35SegmentationDescriptor struct {
 	// "0x0C" hex from the specification is "12" in decimal. In the CLI, API, or an
 	// SDK, enter one of the types listed in the SCTE-35 specification, in either hex
 	// (for example, "0x0C" ) or in decimal (for example, "12").
-	SegmentationUpidType int32
+	SegmentationUpidType *int32
 
 	// Corresponds to SCTE-35 segments_expected. A value that is valid for the
 	// specified segmentation_type_id.
-	SegmentsExpected int32
+	SegmentsExpected *int32
 
 	// Corresponds to SCTE-35 sub_segment_num. A value that is valid for the specified
 	// segmentation_type_id.
-	SubSegmentNum int32
+	SubSegmentNum *int32
 
 	// Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the
 	// specified segmentation_type_id.
-	SubSegmentsExpected int32
+	SubSegmentsExpected *int32
 
 	noSmithyDocumentSerde
 }
@@ -5282,7 +5282,7 @@ type Scte35SpliceInsert struct {
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail
 	// PTS time. This only applies to embedded SCTE 104/35 messages and does not apply
 	// to OOB messages.
-	AdAvailOffset int32
+	AdAvailOffset *int32
 
 	// When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0
 	// will no longer trigger blackouts or Ad Avail slates
@@ -5301,7 +5301,7 @@ type Scte35SpliceInsertScheduleActionSettings struct {
 	// The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
 	//
 	// This member is required.
-	SpliceEventId int64
+	SpliceEventId *int64
 
 	// Optional, the duration for the splice_insert, in 90 KHz ticks. To convert
 	// seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there
@@ -5309,7 +5309,7 @@ type Scte35SpliceInsertScheduleActionSettings struct {
 	// that time. If you do not enter a duration, the splice_insert will continue
 	// indefinitely and there is an expectation that you will enter a return_to_network
 	// to end the splice_insert at the appropriate time.
-	Duration int64
+	Duration *int64
 
 	noSmithyDocumentSerde
 }
@@ -5321,7 +5321,7 @@ type Scte35TimeSignalApos struct {
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail
 	// PTS time. This only applies to embedded SCTE 104/35 messages and does not apply
 	// to OOB messages.
-	AdAvailOffset int32
+	AdAvailOffset *int32
 
 	// When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0
 	// will no longer trigger blackouts or Ad Avail slates
@@ -5389,47 +5389,47 @@ type StaticImageActivateScheduleActionSettings struct {
 	// The duration in milliseconds for the image to remain on the video. If omitted
 	// or set to 0 the duration is unlimited and the image will remain until it is
 	// explicitly deactivated.
-	Duration int32
+	Duration *int32
 
 	// The time in milliseconds for the image to fade in. The fade-in starts at the
 	// start time of the overlay. Default is 0 (no fade-in).
-	FadeIn int32
+	FadeIn *int32
 
 	// Applies only if a duration is specified. The time in milliseconds for the image
 	// to fade out. The fade-out starts when the duration time is hit, so it
 	// effectively extends the duration. Default is 0 (no fade-out).
-	FadeOut int32
+	FadeOut *int32
 
 	// The height of the image when inserted into the video, in pixels. The overlay
 	// will be scaled up or down to the specified height. Leave blank to use the native
 	// height of the overlay.
-	Height int32
+	Height *int32
 
 	// Placement of the left edge of the overlay relative to the left edge of the
 	// video frame, in pixels. 0 (the default) is the left edge of the frame. If the
 	// placement causes the overlay to extend beyond the right edge of the underlying
 	// video, then the overlay is cropped on the right.
-	ImageX int32
+	ImageX *int32
 
 	// Placement of the top edge of the overlay relative to the top edge of the video
 	// frame, in pixels. 0 (the default) is the top edge of the frame. If the placement
 	// causes the overlay to extend beyond the bottom edge of the underlying video,
 	// then the overlay is cropped on the bottom.
-	ImageY int32
+	ImageY *int32
 
 	// The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the
 	// video, each layer with a different image. The layers are in Z order, which means
 	// that overlays with higher values of layer are inserted on top of overlays with
 	// lower values of layer. Default is 0.
-	Layer int32
+	Layer *int32
 
 	// Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.
-	Opacity int32
+	Opacity *int32
 
 	// The width of the image when inserted into the video, in pixels. The overlay
 	// will be scaled up or down to the specified width. Leave blank to use the native
 	// width of the overlay.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -5438,10 +5438,10 @@ type StaticImageActivateScheduleActionSettings struct {
 type StaticImageDeactivateScheduleActionSettings struct {
 
 	// The time in milliseconds for the image to fade out. Default is 0 (no fade-out).
-	FadeOut int32
+	FadeOut *int32
 
 	// The image overlay layer to deactivate, 0 to 7. Default is 0.
-	Layer int32
+	Layer *int32
 
 	noSmithyDocumentSerde
 }
@@ -5589,7 +5589,7 @@ type TimecodeConfig struct {
 	// timecode. Discrepancies below this threshold are permitted to avoid unnecessary
 	// discontinuities in the output timecode. No timecode sync when this is not
 	// specified.
-	SyncThreshold int32
+	SyncThreshold *int32
 
 	noSmithyDocumentSerde
 }
@@ -5647,7 +5647,7 @@ type UdpGroupSettings struct {
 	TimedMetadataId3Frame UdpTimedMetadataId3Frame
 
 	// Timed Metadata interval in seconds.
-	TimedMetadataId3Period int32
+	TimedMetadataId3Period *int32
 
 	noSmithyDocumentSerde
 }
@@ -5670,7 +5670,7 @@ type UdpOutputSettings struct {
 	// the transcoder but simultaneously assist the transcoder in maintaining a
 	// constant, low-jitter UDP/RTP output while accommodating clock recovery, input
 	// switching, input disruptions, picture reordering, etc.
-	BufferMsec int32
+	BufferMsec *int32
 
 	// Settings for enabling and adjusting Forward Error Correction on UDP outputs.
 	FecOutputSettings *FecOutputSettings
@@ -5702,11 +5702,11 @@ type VideoBlackFailoverSettings struct {
 	// of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth:
 	// (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is
 	// 0.0 to 1.0, with any number of decimal places.
-	BlackDetectThreshold float64
+	BlackDetectThreshold *float64
 
 	// The amount of time (in milliseconds) that the active input must be black before
 	// automatic input failover occurs.
-	VideoBlackThresholdMsec int32
+	VideoBlackThresholdMsec *int32
 
 	noSmithyDocumentSerde
 }
@@ -5746,7 +5746,7 @@ type VideoDescription struct {
 	// can leave this field and width blank in order to use the height and width
 	// (resolution) from the source. Note, however, that leaving blank is not
 	// recommended. For the Frame Capture codec, height and width are required.
-	Height int32
+	Height *int32
 
 	// Indicates how MediaLive will respond to the AFD values that might be in the
 	// input video. If you do not know what AFD signaling is, or if your downstream
@@ -5769,13 +5769,13 @@ type VideoDescription struct {
 	// Changes the strength of the anti-alias filter used for scaling. 0 is the
 	// softest setting, 100 is the sharpest. A setting of 50 is recommended for most
 	// content.
-	Sharpness int32
+	Sharpness *int32
 
 	// Output video width, in pixels. Must be an even number. For most codecs, you can
 	// leave this field and height blank in order to use the height and width
 	// (resolution) from the source. Note, however, that leaving blank is not
 	// recommended. For the Frame Capture codec, height and width are required.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -5821,7 +5821,7 @@ type VideoSelectorColorSpaceSettings struct {
 type VideoSelectorPid struct {
 
 	// Selects a specific PID from within a video source.
-	Pid int32
+	Pid *int32
 
 	noSmithyDocumentSerde
 }
@@ -5832,7 +5832,7 @@ type VideoSelectorProgramId struct {
 	// Selects a specific program from within a multi-program transport stream. If the
 	// program doesn't exist, the first program within the transport stream will be
 	// selected by default.
-	ProgramId int32
+	ProgramId *int32
 
 	noSmithyDocumentSerde
 }
@@ -5898,14 +5898,14 @@ type VpcOutputSettingsDescription struct {
 type WavSettings struct {
 
 	// Bits per sample.
-	BitDepth float64
+	BitDepth *float64
 
 	// The audio coding mode for the WAV audio. The mode determines the number of
 	// channels in the audio.
 	CodingMode WavCodingMode
 
 	// Sample rate in Hz.
-	SampleRate float64
+	SampleRate *float64
 
 	noSmithyDocumentSerde
 }

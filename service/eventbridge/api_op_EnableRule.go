@@ -42,10 +42,6 @@ type EnableRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*EnableRuleInput) operationName() string {
-	return "EnableRule"
-}
-
 type EnableRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

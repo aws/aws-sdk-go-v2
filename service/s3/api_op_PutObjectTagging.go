@@ -122,10 +122,6 @@ type PutObjectTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutObjectTaggingInput) operationName() string {
-	return "PutObjectTagging"
-}
-
 func (in *PutObjectTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

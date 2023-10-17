@@ -78,10 +78,6 @@ type PutBucketIntelligentTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketIntelligentTieringConfigurationInput) operationName() string {
-	return "PutBucketIntelligentTieringConfiguration"
-}
-
 func (in *PutBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

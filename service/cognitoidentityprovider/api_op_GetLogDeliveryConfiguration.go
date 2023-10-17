@@ -38,10 +38,6 @@ type GetLogDeliveryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetLogDeliveryConfigurationInput) operationName() string {
-	return "GetLogDeliveryConfiguration"
-}
-
 type GetLogDeliveryConfigurationOutput struct {
 
 	// The detailed activity logging configuration of the requested user pool.

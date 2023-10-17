@@ -84,10 +84,6 @@ type KitchenSinkOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*KitchenSinkOperationInput) operationName() string {
-	return "KitchenSinkOperation"
-}
-
 type KitchenSinkOperationOutput struct {
 	Blob []byte
 

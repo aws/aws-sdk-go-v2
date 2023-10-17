@@ -43,10 +43,6 @@ type DescribeRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeRuleInput) operationName() string {
-	return "DescribeRule"
-}
-
 type DescribeRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the rule.

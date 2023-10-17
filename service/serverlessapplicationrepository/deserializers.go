@@ -215,7 +215,7 @@ func awsRestjson1_deserializeOpDocumentCreateApplicationOutput(v **CreateApplica
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsVerifiedAuthor = jtv
+				sv.IsVerifiedAuthor = ptr.Bool(jtv)
 			}
 
 		case "labels":
@@ -461,7 +461,7 @@ func awsRestjson1_deserializeOpDocumentCreateApplicationVersionOutput(v **Create
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ResourcesSupported = jtv
+				sv.ResourcesSupported = ptr.Bool(jtv)
 			}
 
 		case "semanticVersion":
@@ -1213,7 +1213,7 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsVerifiedAuthor = jtv
+				sv.IsVerifiedAuthor = ptr.Bool(jtv)
 			}
 
 		case "labels":
@@ -2616,7 +2616,7 @@ func awsRestjson1_deserializeOpDocumentUpdateApplicationOutput(v **UpdateApplica
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsVerifiedAuthor = jtv
+				sv.IsVerifiedAuthor = ptr.Bool(jtv)
 			}
 
 		case "labels":
@@ -3662,7 +3662,7 @@ func awsRestjson1_deserializeDocumentParameterDefinition(v **types.ParameterDefi
 				if err != nil {
 					return err
 				}
-				sv.MaxLength = int32(i64)
+				sv.MaxLength = ptr.Int32(int32(i64))
 			}
 
 		case "maxValue":
@@ -3675,7 +3675,7 @@ func awsRestjson1_deserializeDocumentParameterDefinition(v **types.ParameterDefi
 				if err != nil {
 					return err
 				}
-				sv.MaxValue = int32(i64)
+				sv.MaxValue = ptr.Int32(int32(i64))
 			}
 
 		case "minLength":
@@ -3688,7 +3688,7 @@ func awsRestjson1_deserializeDocumentParameterDefinition(v **types.ParameterDefi
 				if err != nil {
 					return err
 				}
-				sv.MinLength = int32(i64)
+				sv.MinLength = ptr.Int32(int32(i64))
 			}
 
 		case "minValue":
@@ -3701,7 +3701,7 @@ func awsRestjson1_deserializeDocumentParameterDefinition(v **types.ParameterDefi
 				if err != nil {
 					return err
 				}
-				sv.MinValue = int32(i64)
+				sv.MinValue = ptr.Int32(int32(i64))
 			}
 
 		case "name":
@@ -3719,7 +3719,7 @@ func awsRestjson1_deserializeDocumentParameterDefinition(v **types.ParameterDefi
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.NoEcho = jtv
+				sv.NoEcho = ptr.Bool(jtv)
 			}
 
 		case "referencedByResources":
@@ -3850,7 +3850,7 @@ func awsRestjson1_deserializeDocumentVersion(v **types.Version, value interface{
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ResourcesSupported = jtv
+				sv.ResourcesSupported = ptr.Bool(jtv)
 			}
 
 		case "semanticVersion":

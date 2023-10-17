@@ -174,7 +174,7 @@ func awsRestjson1_deserializeOpDocumentCreateDiscovererOutput(v **CreateDiscover
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CrossAccount = jtv
+				sv.CrossAccount = ptr.Bool(jtv)
 			}
 
 		case "Description":
@@ -1527,7 +1527,7 @@ func awsRestjson1_deserializeOpDocumentDescribeDiscovererOutput(v **DescribeDisc
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CrossAccount = jtv
+				sv.CrossAccount = ptr.Bool(jtv)
 			}
 
 		case "Description":
@@ -4769,7 +4769,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDiscovererOutput(v **UpdateDiscover
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CrossAccount = jtv
+				sv.CrossAccount = ptr.Bool(jtv)
 			}
 
 		case "Description":
@@ -5940,7 +5940,7 @@ func awsRestjson1_deserializeDocumentDiscovererSummary(v **types.DiscovererSumma
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CrossAccount = jtv
+				sv.CrossAccount = ptr.Bool(jtv)
 			}
 
 		case "DiscovererArn":
@@ -6360,7 +6360,7 @@ func awsRestjson1_deserializeDocumentSchemaSummary(v **types.SchemaSummary, valu
 				if err != nil {
 					return err
 				}
-				sv.VersionCount = i64
+				sv.VersionCount = ptr.Int64(i64)
 			}
 
 		default:

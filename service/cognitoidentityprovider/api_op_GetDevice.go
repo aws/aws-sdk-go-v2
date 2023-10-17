@@ -46,10 +46,6 @@ type GetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetDeviceInput) operationName() string {
-	return "GetDevice"
-}
-
 // Gets the device response.
 type GetDeviceOutput struct {
 

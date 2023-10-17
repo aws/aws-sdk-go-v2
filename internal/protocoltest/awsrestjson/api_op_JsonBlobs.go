@@ -31,10 +31,6 @@ type JsonBlobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*JsonBlobsInput) operationName() string {
-	return "JsonBlobs"
-}
-
 type JsonBlobsOutput struct {
 	Data []byte
 

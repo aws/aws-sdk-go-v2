@@ -30,10 +30,6 @@ type XmlEmptyStringsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlEmptyStringsInput) operationName() string {
-	return "XmlEmptyStrings"
-}
-
 type XmlEmptyStringsOutput struct {
 	EmptyString *string
 

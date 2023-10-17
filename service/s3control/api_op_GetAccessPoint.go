@@ -68,10 +68,6 @@ type GetAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetAccessPointInput) operationName() string {
-	return "GetAccessPoint"
-}
-
 func (in *GetAccessPointInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.AccessPointName = in.Name

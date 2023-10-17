@@ -103,10 +103,6 @@ type ListObjectVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListObjectVersionsInput) operationName() string {
-	return "ListObjectVersions"
-}
-
 func (in *ListObjectVersionsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

@@ -45,10 +45,6 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateProjectInput) operationName() string {
-	return "CreateProject"
-}
-
 type CreateProjectOutput struct {
 
 	// The name of the project in the space.

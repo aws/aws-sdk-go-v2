@@ -77,10 +77,6 @@ type UpdateUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateUserPoolDomainInput) operationName() string {
-	return "UpdateUserPoolDomain"
-}
-
 // The UpdateUserPoolDomain response output.
 type UpdateUserPoolDomainOutput struct {
 

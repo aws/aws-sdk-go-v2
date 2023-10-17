@@ -41,10 +41,6 @@ type DeleteResourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteResourceServerInput) operationName() string {
-	return "DeleteResourceServer"
-}
-
 type DeleteResourceServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

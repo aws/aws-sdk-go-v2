@@ -9943,7 +9943,7 @@ func awsRestjson1_deserializeDocumentBridgeNetworkOutput(v **types.BridgeNetwork
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -9965,7 +9965,7 @@ func awsRestjson1_deserializeDocumentBridgeNetworkOutput(v **types.BridgeNetwork
 				if err != nil {
 					return err
 				}
-				sv.Ttl = int32(i64)
+				sv.Ttl = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -10036,7 +10036,7 @@ func awsRestjson1_deserializeDocumentBridgeNetworkSource(v **types.BridgeNetwork
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -10340,7 +10340,7 @@ func awsRestjson1_deserializeDocumentDestinationConfiguration(v **types.Destinat
 				if err != nil {
 					return err
 				}
-				sv.DestinationPort = int32(i64)
+				sv.DestinationPort = ptr.Int32(int32(i64))
 			}
 
 		case "interface":
@@ -10407,7 +10407,7 @@ func awsRestjson1_deserializeDocumentEgressGatewayBridge(v **types.EgressGateway
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -10449,7 +10449,7 @@ func awsRestjson1_deserializeDocumentEncodingParameters(v **types.EncodingParame
 					if err != nil {
 						return err
 					}
-					sv.CompressionFactor = f64
+					sv.CompressionFactor = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -10467,7 +10467,7 @@ func awsRestjson1_deserializeDocumentEncodingParameters(v **types.EncodingParame
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.CompressionFactor = f64
+					sv.CompressionFactor = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -10637,7 +10637,7 @@ func awsRestjson1_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				if err != nil {
 					return err
 				}
-				sv.DataTransferSubscriberFeePercent = int32(i64)
+				sv.DataTransferSubscriberFeePercent = ptr.Int32(int32(i64))
 			}
 
 		case "description":
@@ -10736,7 +10736,7 @@ func awsRestjson1_deserializeDocumentFailoverConfig(v **types.FailoverConfig, va
 				if err != nil {
 					return err
 				}
-				sv.RecoveryWindow = int32(i64)
+				sv.RecoveryWindow = ptr.Int32(int32(i64))
 			}
 
 		case "sourcePriority":
@@ -11230,7 +11230,7 @@ func awsRestjson1_deserializeDocumentGatewayInstance(v **types.GatewayInstance, 
 				if err != nil {
 					return err
 				}
-				sv.RunningBridgeCount = int32(i64)
+				sv.RunningBridgeCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -11372,7 +11372,7 @@ func awsRestjson1_deserializeDocumentIngressGatewayBridge(v **types.IngressGatew
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "maxOutputs":
@@ -11385,7 +11385,7 @@ func awsRestjson1_deserializeDocumentIngressGatewayBridge(v **types.IngressGatew
 				if err != nil {
 					return err
 				}
-				sv.MaxOutputs = int32(i64)
+				sv.MaxOutputs = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -11438,7 +11438,7 @@ func awsRestjson1_deserializeDocumentInputConfiguration(v **types.InputConfigura
 				if err != nil {
 					return err
 				}
-				sv.InputPort = int32(i64)
+				sv.InputPort = ptr.Int32(int32(i64))
 			}
 
 		case "interface":
@@ -11643,7 +11643,7 @@ func awsRestjson1_deserializeDocumentListedEntitlement(v **types.ListedEntitleme
 				if err != nil {
 					return err
 				}
-				sv.DataTransferSubscriberFeePercent = int32(i64)
+				sv.DataTransferSubscriberFeePercent = ptr.Int32(int32(i64))
 			}
 
 		case "entitlementArn":
@@ -11992,7 +11992,7 @@ func awsRestjson1_deserializeDocumentMediaStream(v **types.MediaStream, value in
 				if err != nil {
 					return err
 				}
-				sv.ClockRate = int32(i64)
+				sv.ClockRate = ptr.Int32(int32(i64))
 			}
 
 		case "description":
@@ -12014,7 +12014,7 @@ func awsRestjson1_deserializeDocumentMediaStream(v **types.MediaStream, value in
 				if err != nil {
 					return err
 				}
-				sv.Fmt = int32(i64)
+				sv.Fmt = ptr.Int32(int32(i64))
 			}
 
 		case "mediaStreamId":
@@ -12027,7 +12027,7 @@ func awsRestjson1_deserializeDocumentMediaStream(v **types.MediaStream, value in
 				if err != nil {
 					return err
 				}
-				sv.MediaStreamId = int32(i64)
+				sv.MediaStreamId = ptr.Int32(int32(i64))
 			}
 
 		case "mediaStreamName":
@@ -12399,7 +12399,7 @@ func awsRestjson1_deserializeDocumentOffering(v **types.Offering, value interfac
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -12507,7 +12507,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.DataTransferSubscriberFeePercent = int32(i64)
+				sv.DataTransferSubscriberFeePercent = ptr.Int32(int32(i64))
 			}
 
 		case "description":
@@ -12593,7 +12593,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "transport":
@@ -12656,7 +12656,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -12795,7 +12795,7 @@ func awsRestjson1_deserializeDocumentResourceSpecification(v **types.ResourceSpe
 				if err != nil {
 					return err
 				}
-				sv.ReservedBitrate = int32(i64)
+				sv.ReservedBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "resourceType":
@@ -12888,7 +12888,7 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.DataTransferSubscriberFeePercent = int32(i64)
+				sv.DataTransferSubscriberFeePercent = ptr.Int32(int32(i64))
 			}
 
 		case "decryption":
@@ -12938,7 +12938,7 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.IngestPort = int32(i64)
+				sv.IngestPort = ptr.Int32(int32(i64))
 			}
 
 		case "mediaStreamSourceConfigurations":
@@ -12965,7 +12965,7 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.SenderControlPort = int32(i64)
+				sv.SenderControlPort = ptr.Int32(int32(i64))
 			}
 
 		case "senderIpAddress":
@@ -13135,7 +13135,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "maxLatency":
@@ -13148,7 +13148,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.MaxLatency = int32(i64)
+				sv.MaxLatency = ptr.Int32(int32(i64))
 			}
 
 		case "maxSyncBuffer":
@@ -13161,7 +13161,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.MaxSyncBuffer = int32(i64)
+				sv.MaxSyncBuffer = ptr.Int32(int32(i64))
 			}
 
 		case "minLatency":
@@ -13174,7 +13174,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.MinLatency = int32(i64)
+				sv.MinLatency = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -13205,7 +13205,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.SenderControlPort = int32(i64)
+				sv.SenderControlPort = ptr.Int32(int32(i64))
 			}
 
 		case "senderIpAddress":
@@ -13227,7 +13227,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.SmoothingLatency = int32(i64)
+				sv.SmoothingLatency = ptr.Int32(int32(i64))
 			}
 
 		case "sourceListenerAddress":
@@ -13249,7 +13249,7 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				if err != nil {
 					return err
 				}
-				sv.SourceListenerPort = int32(i64)
+				sv.SourceListenerPort = ptr.Int32(int32(i64))
 			}
 
 		case "streamId":

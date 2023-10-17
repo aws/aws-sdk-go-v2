@@ -29,10 +29,6 @@ type FlattenedXmlMapWithXmlNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*FlattenedXmlMapWithXmlNamespaceInput) operationName() string {
-	return "FlattenedXmlMapWithXmlNamespace"
-}
-
 type FlattenedXmlMapWithXmlNamespaceOutput struct {
 	MyMap map[string]string
 

@@ -35,10 +35,6 @@ type NullOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*NullOperationInput) operationName() string {
-	return "NullOperation"
-}
-
 type NullOperationOutput struct {
 	SparseStringList []*string
 

@@ -96,10 +96,6 @@ type PutBucketLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketLoggingInput) operationName() string {
-	return "PutBucketLogging"
-}
-
 func (in *PutBucketLoggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

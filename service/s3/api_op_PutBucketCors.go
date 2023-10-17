@@ -95,10 +95,6 @@ type PutBucketCorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketCorsInput) operationName() string {
-	return "PutBucketCors"
-}
-
 func (in *PutBucketCorsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

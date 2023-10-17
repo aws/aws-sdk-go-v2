@@ -47,10 +47,6 @@ type UpdateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateConnectionInput) operationName() string {
-	return "UpdateConnection"
-}
-
 type UpdateConnectionOutput struct {
 
 	// The ARN of the connection that was updated.

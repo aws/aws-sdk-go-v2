@@ -53,10 +53,6 @@ type GetBucketPolicyStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketPolicyStatusInput) operationName() string {
-	return "GetBucketPolicyStatus"
-}
-
 func (in *GetBucketPolicyStatusInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

@@ -57,10 +57,6 @@ type CreateUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateUserPoolDomainInput) operationName() string {
-	return "CreateUserPoolDomain"
-}
-
 type CreateUserPoolDomainOutput struct {
 
 	// The Amazon CloudFront endpoint that you use as the target of the alias that you

@@ -2369,7 +2369,7 @@ func awsRestjson1_deserializeOpDocumentDeleteChannelOutput(v **DeleteChannelOutp
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "roleArn":
@@ -2820,7 +2820,7 @@ func awsRestjson1_deserializeOpDocumentDeleteMultiplexOutput(v **DeleteMultiplex
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "programCount":
@@ -2833,7 +2833,7 @@ func awsRestjson1_deserializeOpDocumentDeleteMultiplexOutput(v **DeleteMultiplex
 				if err != nil {
 					return err
 				}
-				sv.ProgramCount = int32(i64)
+				sv.ProgramCount = ptr.Int32(int32(i64))
 			}
 
 		case "state":
@@ -3228,7 +3228,7 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "currencyCode":
@@ -3250,7 +3250,7 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -3279,7 +3279,7 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 					if err != nil {
 						return err
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -3297,7 +3297,7 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -3400,7 +3400,7 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 					if err != nil {
 						return err
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -3418,7 +3418,7 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -4042,7 +4042,7 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "roleArn":
@@ -4760,7 +4760,7 @@ func awsRestjson1_deserializeOpHttpBindingsDescribeInputDeviceThumbnailOutput(v 
 		if err != nil {
 			return err
 		}
-		v.ContentLength = vv
+		v.ContentLength = ptr.Int64(vv)
 	}
 
 	if headerValues := response.Header.Values("Content-Type"); len(headerValues) != 0 {
@@ -5198,7 +5198,7 @@ func awsRestjson1_deserializeOpDocumentDescribeMultiplexOutput(v **DescribeMulti
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "programCount":
@@ -5211,7 +5211,7 @@ func awsRestjson1_deserializeOpDocumentDescribeMultiplexOutput(v **DescribeMulti
 				if err != nil {
 					return err
 				}
-				sv.ProgramCount = int32(i64)
+				sv.ProgramCount = ptr.Int32(int32(i64))
 			}
 
 		case "state":
@@ -5609,7 +5609,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOfferingOutput(v **DescribeOfferi
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -5629,7 +5629,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOfferingOutput(v **DescribeOfferi
 					if err != nil {
 						return err
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -5647,7 +5647,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOfferingOutput(v **DescribeOfferi
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -5704,7 +5704,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOfferingOutput(v **DescribeOfferi
 					if err != nil {
 						return err
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -5722,7 +5722,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOfferingOutput(v **DescribeOfferi
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -5909,7 +5909,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "currencyCode":
@@ -5931,7 +5931,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -5960,7 +5960,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 					if err != nil {
 						return err
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -5978,7 +5978,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -6081,7 +6081,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 					if err != nil {
 						return err
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -6099,7 +6099,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -8787,7 +8787,7 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "roleArn":
@@ -9241,7 +9241,7 @@ func awsRestjson1_deserializeOpDocumentStartMultiplexOutput(v **StartMultiplexOu
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "programCount":
@@ -9254,7 +9254,7 @@ func awsRestjson1_deserializeOpDocumentStartMultiplexOutput(v **StartMultiplexOu
 				if err != nil {
 					return err
 				}
-				sv.ProgramCount = int32(i64)
+				sv.ProgramCount = ptr.Int32(int32(i64))
 			}
 
 		case "state":
@@ -9529,7 +9529,7 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "roleArn":
@@ -9879,7 +9879,7 @@ func awsRestjson1_deserializeOpDocumentStopMultiplexOutput(v **StopMultiplexOutp
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "programCount":
@@ -9892,7 +9892,7 @@ func awsRestjson1_deserializeOpDocumentStopMultiplexOutput(v **StopMultiplexOutp
 				if err != nil {
 					return err
 				}
-				sv.ProgramCount = int32(i64)
+				sv.ProgramCount = ptr.Int32(int32(i64))
 			}
 
 		case "state":
@@ -13577,7 +13577,7 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 					if err != nil {
 						return err
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -13595,7 +13595,7 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -13656,7 +13656,7 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 					if err != nil {
 						return err
 					}
-					sv.SampleRate = f64
+					sv.SampleRate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -13674,7 +13674,7 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.SampleRate = f64
+					sv.SampleRate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -13748,7 +13748,7 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 					if err != nil {
 						return err
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -13766,7 +13766,7 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -13802,7 +13802,7 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Dialnorm = int32(i64)
+				sv.Dialnorm = ptr.Int32(int32(i64))
 			}
 
 		case "drcProfile":
@@ -13913,7 +13913,7 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 				if err != nil {
 					return err
 				}
-				sv.SourceAncillaryChannelNumber = int32(i64)
+				sv.SourceAncillaryChannelNumber = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14044,7 +14044,7 @@ func awsRestjson1_deserializeDocumentArchiveGroupSettings(v **types.ArchiveGroup
 				if err != nil {
 					return err
 				}
-				sv.RolloverInterval = int32(i64)
+				sv.RolloverInterval = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14249,7 +14249,7 @@ func awsRestjson1_deserializeDocumentAudioChannelMapping(v **types.AudioChannelM
 				if err != nil {
 					return err
 				}
-				sv.OutputChannel = int32(i64)
+				sv.OutputChannel = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14627,7 +14627,7 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 					if err != nil {
 						return err
 					}
-					sv.TargetLkfs = f64
+					sv.TargetLkfs = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -14645,7 +14645,7 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.TargetLkfs = f64
+					sv.TargetLkfs = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMinNegative59Max0 to be a JSON Number, got %T instead", value)
@@ -14757,7 +14757,7 @@ func awsRestjson1_deserializeDocumentAudioPidSelection(v **types.AudioPidSelecti
 				if err != nil {
 					return err
 				}
-				sv.Pid = int32(i64)
+				sv.Pid = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14906,7 +14906,7 @@ func awsRestjson1_deserializeDocumentAudioSilenceFailoverSettings(v **types.Audi
 				if err != nil {
 					return err
 				}
-				sv.AudioSilenceThresholdMsec = int32(i64)
+				sv.AudioSilenceThresholdMsec = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14950,7 +14950,7 @@ func awsRestjson1_deserializeDocumentAudioTrack(v **types.AudioTrack, value inte
 				if err != nil {
 					return err
 				}
-				sv.Track = int32(i64)
+				sv.Track = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -15071,7 +15071,7 @@ func awsRestjson1_deserializeDocumentAutomaticInputFailoverSettings(v **types.Au
 				if err != nil {
 					return err
 				}
-				sv.ErrorClearTimeMsec = int32(i64)
+				sv.ErrorClearTimeMsec = ptr.Int32(int32(i64))
 			}
 
 		case "failoverConditions":
@@ -15628,7 +15628,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.BackgroundOpacity = int32(i64)
+				sv.BackgroundOpacity = ptr.Int32(int32(i64))
 			}
 
 		case "font":
@@ -15655,7 +15655,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.FontOpacity = int32(i64)
+				sv.FontOpacity = ptr.Int32(int32(i64))
 			}
 
 		case "fontResolution":
@@ -15668,7 +15668,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.FontResolution = int32(i64)
+				sv.FontResolution = ptr.Int32(int32(i64))
 			}
 
 		case "fontSize":
@@ -15699,7 +15699,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.OutlineSize = int32(i64)
+				sv.OutlineSize = ptr.Int32(int32(i64))
 			}
 
 		case "shadowColor":
@@ -15721,7 +15721,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.ShadowOpacity = int32(i64)
+				sv.ShadowOpacity = ptr.Int32(int32(i64))
 			}
 
 		case "shadowXOffset":
@@ -15734,7 +15734,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.ShadowXOffset = int32(i64)
+				sv.ShadowXOffset = ptr.Int32(int32(i64))
 			}
 
 		case "shadowYOffset":
@@ -15747,7 +15747,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.ShadowYOffset = int32(i64)
+				sv.ShadowYOffset = ptr.Int32(int32(i64))
 			}
 
 		case "teletextGridControl":
@@ -15769,7 +15769,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.XPosition = int32(i64)
+				sv.XPosition = ptr.Int32(int32(i64))
 			}
 
 		case "yPosition":
@@ -15782,7 +15782,7 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				if err != nil {
 					return err
 				}
-				sv.YPosition = int32(i64)
+				sv.YPosition = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -16003,7 +16003,7 @@ func awsRestjson1_deserializeDocumentCaptionLanguageMapping(v **types.CaptionLan
 				if err != nil {
 					return err
 				}
-				sv.CaptionChannel = int32(i64)
+				sv.CaptionChannel = ptr.Int32(int32(i64))
 			}
 
 		case "languageCode":
@@ -16063,7 +16063,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 					if err != nil {
 						return err
 					}
-					sv.Height = f64
+					sv.Height = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -16081,7 +16081,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Height = f64
+					sv.Height = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max100 to be a JSON Number, got %T instead", value)
@@ -16097,7 +16097,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 					if err != nil {
 						return err
 					}
-					sv.LeftOffset = f64
+					sv.LeftOffset = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -16115,7 +16115,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.LeftOffset = f64
+					sv.LeftOffset = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max100 to be a JSON Number, got %T instead", value)
@@ -16131,7 +16131,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 					if err != nil {
 						return err
 					}
-					sv.TopOffset = f64
+					sv.TopOffset = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -16149,7 +16149,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.TopOffset = f64
+					sv.TopOffset = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max100 to be a JSON Number, got %T instead", value)
@@ -16165,7 +16165,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 					if err != nil {
 						return err
 					}
-					sv.Width = f64
+					sv.Width = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -16183,7 +16183,7 @@ func awsRestjson1_deserializeDocumentCaptionRectangle(v **types.CaptionRectangle
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Width = f64
+					sv.Width = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max100 to be a JSON Number, got %T instead", value)
@@ -16477,7 +16477,7 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "roleArn":
@@ -16664,7 +16664,7 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "roleArn":
@@ -16838,7 +16838,7 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				if err != nil {
 					return err
 				}
-				sv.NetworkId = int32(i64)
+				sv.NetworkId = ptr.Int32(int32(i64))
 			}
 
 		case "networkName":
@@ -16860,7 +16860,7 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				if err != nil {
 					return err
 				}
-				sv.RepInterval = int32(i64)
+				sv.RepInterval = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -16913,7 +16913,7 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				if err != nil {
 					return err
 				}
-				sv.RepInterval = int32(i64)
+				sv.RepInterval = ptr.Int32(int32(i64))
 			}
 
 		case "serviceName":
@@ -16993,7 +16993,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.BackgroundOpacity = int32(i64)
+				sv.BackgroundOpacity = ptr.Int32(int32(i64))
 			}
 
 		case "font":
@@ -17020,7 +17020,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.FontOpacity = int32(i64)
+				sv.FontOpacity = ptr.Int32(int32(i64))
 			}
 
 		case "fontResolution":
@@ -17033,7 +17033,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.FontResolution = int32(i64)
+				sv.FontResolution = ptr.Int32(int32(i64))
 			}
 
 		case "fontSize":
@@ -17064,7 +17064,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.OutlineSize = int32(i64)
+				sv.OutlineSize = ptr.Int32(int32(i64))
 			}
 
 		case "shadowColor":
@@ -17086,7 +17086,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.ShadowOpacity = int32(i64)
+				sv.ShadowOpacity = ptr.Int32(int32(i64))
 			}
 
 		case "shadowXOffset":
@@ -17099,7 +17099,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.ShadowXOffset = int32(i64)
+				sv.ShadowXOffset = ptr.Int32(int32(i64))
 			}
 
 		case "shadowYOffset":
@@ -17112,7 +17112,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.ShadowYOffset = int32(i64)
+				sv.ShadowYOffset = ptr.Int32(int32(i64))
 			}
 
 		case "teletextGridControl":
@@ -17134,7 +17134,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.XPosition = int32(i64)
+				sv.XPosition = ptr.Int32(int32(i64))
 			}
 
 		case "yPosition":
@@ -17147,7 +17147,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.YPosition = int32(i64)
+				sv.YPosition = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -17200,7 +17200,7 @@ func awsRestjson1_deserializeDocumentDvbSubSourceSettings(v **types.DvbSubSource
 				if err != nil {
 					return err
 				}
-				sv.Pid = int32(i64)
+				sv.Pid = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -17244,7 +17244,7 @@ func awsRestjson1_deserializeDocumentDvbTdtSettings(v **types.DvbTdtSettings, va
 				if err != nil {
 					return err
 				}
-				sv.RepInterval = int32(i64)
+				sv.RepInterval = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -17286,7 +17286,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 					if err != nil {
 						return err
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17304,7 +17304,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17331,7 +17331,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.Dialnorm = int32(i64)
+				sv.Dialnorm = ptr.Int32(int32(i64))
 			}
 
 		case "drcLine":
@@ -17360,7 +17360,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 					if err != nil {
 						return err
 					}
-					sv.HeightTrim = f64
+					sv.HeightTrim = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17378,7 +17378,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.HeightTrim = f64
+					sv.HeightTrim = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17394,7 +17394,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 					if err != nil {
 						return err
 					}
-					sv.SurroundTrim = f64
+					sv.SurroundTrim = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17412,7 +17412,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.SurroundTrim = f64
+					sv.SurroundTrim = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17468,7 +17468,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17486,7 +17486,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17531,7 +17531,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Dialnorm = int32(i64)
+				sv.Dialnorm = ptr.Int32(int32(i64))
 			}
 
 		case "drcLine":
@@ -17578,7 +17578,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.LoRoCenterMixLevel = f64
+					sv.LoRoCenterMixLevel = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17596,7 +17596,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.LoRoCenterMixLevel = f64
+					sv.LoRoCenterMixLevel = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17612,7 +17612,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.LoRoSurroundMixLevel = f64
+					sv.LoRoSurroundMixLevel = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17630,7 +17630,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.LoRoSurroundMixLevel = f64
+					sv.LoRoSurroundMixLevel = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17646,7 +17646,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.LtRtCenterMixLevel = f64
+					sv.LtRtCenterMixLevel = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17664,7 +17664,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.LtRtCenterMixLevel = f64
+					sv.LtRtCenterMixLevel = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17680,7 +17680,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.LtRtSurroundMixLevel = f64
+					sv.LtRtSurroundMixLevel = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -17698,7 +17698,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.LtRtSurroundMixLevel = f64
+					sv.LtRtSurroundMixLevel = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -17948,7 +17948,7 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				if err != nil {
 					return err
 				}
-				sv.Source608ChannelNumber = int32(i64)
+				sv.Source608ChannelNumber = ptr.Int32(int32(i64))
 			}
 
 		case "source608TrackNumber":
@@ -17961,7 +17961,7 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				if err != nil {
 					return err
 				}
-				sv.Source608TrackNumber = int32(i64)
+				sv.Source608TrackNumber = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -18159,7 +18159,7 @@ func awsRestjson1_deserializeDocumentEsam(v **types.Esam, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.AdAvailOffset = int32(i64)
+				sv.AdAvailOffset = ptr.Int32(int32(i64))
 			}
 
 		case "passwordParam":
@@ -18361,7 +18361,7 @@ func awsRestjson1_deserializeDocumentFecOutputSettings(v **types.FecOutputSettin
 				if err != nil {
 					return err
 				}
-				sv.ColumnDepth = int32(i64)
+				sv.ColumnDepth = ptr.Int32(int32(i64))
 			}
 
 		case "includeFec":
@@ -18383,7 +18383,7 @@ func awsRestjson1_deserializeDocumentFecOutputSettings(v **types.FecOutputSettin
 				if err != nil {
 					return err
 				}
-				sv.RowLength = int32(i64)
+				sv.RowLength = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -18802,7 +18802,7 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				if err != nil {
 					return err
 				}
-				sv.CaptureInterval = int32(i64)
+				sv.CaptureInterval = ptr.Int32(int32(i64))
 			}
 
 		case "captureIntervalUnits":
@@ -18900,7 +18900,7 @@ func awsRestjson1_deserializeDocumentGlobalConfiguration(v **types.GlobalConfigu
 				if err != nil {
 					return err
 				}
-				sv.InitialAudioGain = int32(i64)
+				sv.InitialAudioGain = ptr.Int32(int32(i64))
 			}
 
 		case "inputEndAction":
@@ -19090,7 +19090,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = int32(i64)
+				sv.Bitrate = ptr.Int32(int32(i64))
 			}
 
 		case "bufFillPct":
@@ -19103,7 +19103,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.BufFillPct = int32(i64)
+				sv.BufFillPct = ptr.Int32(int32(i64))
 			}
 
 		case "bufSize":
@@ -19116,7 +19116,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.BufSize = int32(i64)
+				sv.BufSize = ptr.Int32(int32(i64))
 			}
 
 		case "colorMetadata":
@@ -19193,7 +19193,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = int32(i64)
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
 
 		case "framerateNumerator":
@@ -19206,7 +19206,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = int32(i64)
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
 
 		case "gopBReference":
@@ -19228,7 +19228,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopClosedCadence = int32(i64)
+				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
 
 		case "gopNumBFrames":
@@ -19241,7 +19241,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopNumBFrames = int32(i64)
+				sv.GopNumBFrames = ptr.Int32(int32(i64))
 			}
 
 		case "gopSize":
@@ -19252,7 +19252,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.GopSize = f64
+					sv.GopSize = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -19270,7 +19270,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GopSize = f64
+					sv.GopSize = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -19315,7 +19315,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "minIInterval":
@@ -19328,7 +19328,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MinIInterval = int32(i64)
+				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
 
 		case "numRefFrames":
@@ -19341,7 +19341,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.NumRefFrames = int32(i64)
+				sv.NumRefFrames = ptr.Int32(int32(i64))
 			}
 
 		case "parControl":
@@ -19363,7 +19363,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = int32(i64)
+				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
 
 		case "parNumerator":
@@ -19376,7 +19376,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = int32(i64)
+				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
 
 		case "profile":
@@ -19407,7 +19407,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevel = int32(i64)
+				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
 			}
 
 		case "rateControlMode":
@@ -19447,7 +19447,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Slices = int32(i64)
+				sv.Slices = ptr.Int32(int32(i64))
 			}
 
 		case "softness":
@@ -19460,7 +19460,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Softness = int32(i64)
+				sv.Softness = ptr.Int32(int32(i64))
 			}
 
 		case "spatialAq":
@@ -19673,7 +19673,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = int32(i64)
+				sv.Bitrate = ptr.Int32(int32(i64))
 			}
 
 		case "bufSize":
@@ -19686,7 +19686,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.BufSize = int32(i64)
+				sv.BufSize = ptr.Int32(int32(i64))
 			}
 
 		case "colorMetadata":
@@ -19736,7 +19736,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = int32(i64)
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
 
 		case "framerateNumerator":
@@ -19749,7 +19749,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = int32(i64)
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
 
 		case "gopClosedCadence":
@@ -19762,7 +19762,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopClosedCadence = int32(i64)
+				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
 
 		case "gopSize":
@@ -19773,7 +19773,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					if err != nil {
 						return err
 					}
-					sv.GopSize = f64
+					sv.GopSize = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -19791,7 +19791,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GopSize = f64
+					sv.GopSize = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -19836,7 +19836,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "minIInterval":
@@ -19849,7 +19849,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MinIInterval = int32(i64)
+				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
 
 		case "parDenominator":
@@ -19862,7 +19862,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = int32(i64)
+				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
 
 		case "parNumerator":
@@ -19875,7 +19875,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = int32(i64)
+				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
 
 		case "profile":
@@ -19897,7 +19897,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevel = int32(i64)
+				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
 			}
 
 		case "rateControlMode":
@@ -19937,7 +19937,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Slices = int32(i64)
+				sv.Slices = ptr.Int32(int32(i64))
 			}
 
 		case "tier":
@@ -20004,7 +20004,7 @@ func awsRestjson1_deserializeDocumentHdr10Settings(v **types.Hdr10Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxCll = int32(i64)
+				sv.MaxCll = ptr.Int32(int32(i64))
 			}
 
 		case "maxFall":
@@ -20017,7 +20017,7 @@ func awsRestjson1_deserializeDocumentHdr10Settings(v **types.Hdr10Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxFall = int32(i64)
+				sv.MaxFall = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -20061,7 +20061,7 @@ func awsRestjson1_deserializeDocumentHlsAkamaiSettings(v **types.HlsAkamaiSettin
 				if err != nil {
 					return err
 				}
-				sv.ConnectionRetryInterval = int32(i64)
+				sv.ConnectionRetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "filecacheDuration":
@@ -20074,7 +20074,7 @@ func awsRestjson1_deserializeDocumentHlsAkamaiSettings(v **types.HlsAkamaiSettin
 				if err != nil {
 					return err
 				}
-				sv.FilecacheDuration = int32(i64)
+				sv.FilecacheDuration = ptr.Int32(int32(i64))
 			}
 
 		case "httpTransferMode":
@@ -20096,7 +20096,7 @@ func awsRestjson1_deserializeDocumentHlsAkamaiSettings(v **types.HlsAkamaiSettin
 				if err != nil {
 					return err
 				}
-				sv.NumRetries = int32(i64)
+				sv.NumRetries = ptr.Int32(int32(i64))
 			}
 
 		case "restartDelay":
@@ -20109,7 +20109,7 @@ func awsRestjson1_deserializeDocumentHlsAkamaiSettings(v **types.HlsAkamaiSettin
 				if err != nil {
 					return err
 				}
-				sv.RestartDelay = int32(i64)
+				sv.RestartDelay = ptr.Int32(int32(i64))
 			}
 
 		case "salt":
@@ -20171,7 +20171,7 @@ func awsRestjson1_deserializeDocumentHlsBasicPutSettings(v **types.HlsBasicPutSe
 				if err != nil {
 					return err
 				}
-				sv.ConnectionRetryInterval = int32(i64)
+				sv.ConnectionRetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "filecacheDuration":
@@ -20184,7 +20184,7 @@ func awsRestjson1_deserializeDocumentHlsBasicPutSettings(v **types.HlsBasicPutSe
 				if err != nil {
 					return err
 				}
-				sv.FilecacheDuration = int32(i64)
+				sv.FilecacheDuration = ptr.Int32(int32(i64))
 			}
 
 		case "numRetries":
@@ -20197,7 +20197,7 @@ func awsRestjson1_deserializeDocumentHlsBasicPutSettings(v **types.HlsBasicPutSe
 				if err != nil {
 					return err
 				}
-				sv.NumRetries = int32(i64)
+				sv.NumRetries = ptr.Int32(int32(i64))
 			}
 
 		case "restartDelay":
@@ -20210,7 +20210,7 @@ func awsRestjson1_deserializeDocumentHlsBasicPutSettings(v **types.HlsBasicPutSe
 				if err != nil {
 					return err
 				}
-				sv.RestartDelay = int32(i64)
+				sv.RestartDelay = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -20456,7 +20456,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.IndexNSegments = int32(i64)
+				sv.IndexNSegments = ptr.Int32(int32(i64))
 			}
 
 		case "inputLossAction":
@@ -20496,7 +20496,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.KeepSegments = int32(i64)
+				sv.KeepSegments = ptr.Int32(int32(i64))
 			}
 
 		case "keyFormat":
@@ -20550,7 +20550,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.MinSegmentLength = int32(i64)
+				sv.MinSegmentLength = ptr.Int32(int32(i64))
 			}
 
 		case "mode":
@@ -20599,7 +20599,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.ProgramDateTimePeriod = int32(i64)
+				sv.ProgramDateTimePeriod = ptr.Int32(int32(i64))
 			}
 
 		case "redundantManifest":
@@ -20630,7 +20630,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.SegmentLength = int32(i64)
+				sv.SegmentLength = ptr.Int32(int32(i64))
 			}
 
 		case "segmentsPerSubdirectory":
@@ -20643,7 +20643,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.SegmentsPerSubdirectory = int32(i64)
+				sv.SegmentsPerSubdirectory = ptr.Int32(int32(i64))
 			}
 
 		case "streamInfResolution":
@@ -20674,7 +20674,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.TimedMetadataId3Period = int32(i64)
+				sv.TimedMetadataId3Period = ptr.Int32(int32(i64))
 			}
 
 		case "timestampDeltaMilliseconds":
@@ -20687,7 +20687,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.TimestampDeltaMilliseconds = int32(i64)
+				sv.TimestampDeltaMilliseconds = ptr.Int32(int32(i64))
 			}
 
 		case "tsFileMode":
@@ -20789,7 +20789,7 @@ func awsRestjson1_deserializeDocumentHlsInputSettings(v **types.HlsInputSettings
 				if err != nil {
 					return err
 				}
-				sv.Bandwidth = int32(i64)
+				sv.Bandwidth = ptr.Int32(int32(i64))
 			}
 
 		case "bufferSegments":
@@ -20802,7 +20802,7 @@ func awsRestjson1_deserializeDocumentHlsInputSettings(v **types.HlsInputSettings
 				if err != nil {
 					return err
 				}
-				sv.BufferSegments = int32(i64)
+				sv.BufferSegments = ptr.Int32(int32(i64))
 			}
 
 		case "retries":
@@ -20815,7 +20815,7 @@ func awsRestjson1_deserializeDocumentHlsInputSettings(v **types.HlsInputSettings
 				if err != nil {
 					return err
 				}
-				sv.Retries = int32(i64)
+				sv.Retries = ptr.Int32(int32(i64))
 			}
 
 		case "retryInterval":
@@ -20828,7 +20828,7 @@ func awsRestjson1_deserializeDocumentHlsInputSettings(v **types.HlsInputSettings
 				if err != nil {
 					return err
 				}
-				sv.RetryInterval = int32(i64)
+				sv.RetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "scte35Source":
@@ -20881,7 +20881,7 @@ func awsRestjson1_deserializeDocumentHlsMediaStoreSettings(v **types.HlsMediaSto
 				if err != nil {
 					return err
 				}
-				sv.ConnectionRetryInterval = int32(i64)
+				sv.ConnectionRetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "filecacheDuration":
@@ -20894,7 +20894,7 @@ func awsRestjson1_deserializeDocumentHlsMediaStoreSettings(v **types.HlsMediaSto
 				if err != nil {
 					return err
 				}
-				sv.FilecacheDuration = int32(i64)
+				sv.FilecacheDuration = ptr.Int32(int32(i64))
 			}
 
 		case "mediaStoreStorageClass":
@@ -20916,7 +20916,7 @@ func awsRestjson1_deserializeDocumentHlsMediaStoreSettings(v **types.HlsMediaSto
 				if err != nil {
 					return err
 				}
-				sv.NumRetries = int32(i64)
+				sv.NumRetries = ptr.Int32(int32(i64))
 			}
 
 		case "restartDelay":
@@ -20929,7 +20929,7 @@ func awsRestjson1_deserializeDocumentHlsMediaStoreSettings(v **types.HlsMediaSto
 				if err != nil {
 					return err
 				}
-				sv.RestartDelay = int32(i64)
+				sv.RestartDelay = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21167,7 +21167,7 @@ func awsRestjson1_deserializeDocumentHlsWebdavSettings(v **types.HlsWebdavSettin
 				if err != nil {
 					return err
 				}
-				sv.ConnectionRetryInterval = int32(i64)
+				sv.ConnectionRetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "filecacheDuration":
@@ -21180,7 +21180,7 @@ func awsRestjson1_deserializeDocumentHlsWebdavSettings(v **types.HlsWebdavSettin
 				if err != nil {
 					return err
 				}
-				sv.FilecacheDuration = int32(i64)
+				sv.FilecacheDuration = ptr.Int32(int32(i64))
 			}
 
 		case "httpTransferMode":
@@ -21202,7 +21202,7 @@ func awsRestjson1_deserializeDocumentHlsWebdavSettings(v **types.HlsWebdavSettin
 				if err != nil {
 					return err
 				}
-				sv.NumRetries = int32(i64)
+				sv.NumRetries = ptr.Int32(int32(i64))
 			}
 
 		case "restartDelay":
@@ -21215,7 +21215,7 @@ func awsRestjson1_deserializeDocumentHlsWebdavSettings(v **types.HlsWebdavSettin
 				if err != nil {
 					return err
 				}
-				sv.RestartDelay = int32(i64)
+				sv.RestartDelay = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21523,7 +21523,7 @@ func awsRestjson1_deserializeDocumentInputChannelLevel(v **types.InputChannelLev
 				if err != nil {
 					return err
 				}
-				sv.Gain = int32(i64)
+				sv.Gain = ptr.Int32(int32(i64))
 			}
 
 		case "inputChannel":
@@ -21536,7 +21536,7 @@ func awsRestjson1_deserializeDocumentInputChannelLevel(v **types.InputChannelLev
 				if err != nil {
 					return err
 				}
-				sv.InputChannel = int32(i64)
+				sv.InputChannel = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -21767,7 +21767,7 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 					if err != nil {
 						return err
 					}
-					sv.Framerate = f64
+					sv.Framerate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -21785,7 +21785,7 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Framerate = f64
+					sv.Framerate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -21803,7 +21803,7 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 				if err != nil {
 					return err
 				}
-				sv.Height = int32(i64)
+				sv.Height = ptr.Int32(int32(i64))
 			}
 
 		case "latencyMs":
@@ -21816,7 +21816,7 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 				if err != nil {
 					return err
 				}
-				sv.LatencyMs = int32(i64)
+				sv.LatencyMs = ptr.Int32(int32(i64))
 			}
 
 		case "maxBitrate":
@@ -21829,7 +21829,7 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "scanType":
@@ -21851,7 +21851,7 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 				if err != nil {
 					return err
 				}
-				sv.Width = int32(i64)
+				sv.Width = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22263,7 +22263,7 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 					if err != nil {
 						return err
 					}
-					sv.Framerate = f64
+					sv.Framerate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -22281,7 +22281,7 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Framerate = f64
+					sv.Framerate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -22299,7 +22299,7 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 				if err != nil {
 					return err
 				}
-				sv.Height = int32(i64)
+				sv.Height = ptr.Int32(int32(i64))
 			}
 
 		case "latencyMs":
@@ -22312,7 +22312,7 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 				if err != nil {
 					return err
 				}
-				sv.LatencyMs = int32(i64)
+				sv.LatencyMs = ptr.Int32(int32(i64))
 			}
 
 		case "maxBitrate":
@@ -22325,7 +22325,7 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = int32(i64)
+				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "mediaconnectSettings":
@@ -22352,7 +22352,7 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 				if err != nil {
 					return err
 				}
-				sv.Width = int32(i64)
+				sv.Width = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22454,7 +22454,7 @@ func awsRestjson1_deserializeDocumentInputLossBehavior(v **types.InputLossBehavi
 				if err != nil {
 					return err
 				}
-				sv.BlackFrameMsec = int32(i64)
+				sv.BlackFrameMsec = ptr.Int32(int32(i64))
 			}
 
 		case "inputLossImageColor":
@@ -22490,7 +22490,7 @@ func awsRestjson1_deserializeDocumentInputLossBehavior(v **types.InputLossBehavi
 				if err != nil {
 					return err
 				}
-				sv.RepeatFrameMsec = int32(i64)
+				sv.RepeatFrameMsec = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22534,7 +22534,7 @@ func awsRestjson1_deserializeDocumentInputLossFailoverSettings(v **types.InputLo
 				if err != nil {
 					return err
 				}
-				sv.InputLossThresholdMsec = int32(i64)
+				sv.InputLossThresholdMsec = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22729,7 +22729,7 @@ func awsRestjson1_deserializeDocumentInputSettings(v **types.InputSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.FilterStrength = int32(i64)
+				sv.FilterStrength = ptr.Int32(int32(i64))
 			}
 
 		case "inputFilter":
@@ -22756,7 +22756,7 @@ func awsRestjson1_deserializeDocumentInputSettings(v **types.InputSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.Scte35Pid = int32(i64)
+				sv.Scte35Pid = ptr.Int32(int32(i64))
 			}
 
 		case "smpte2038DataPreference":
@@ -23150,7 +23150,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.AudioFramesPerPes = int32(i64)
+				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
 			}
 
 		case "audioPids":
@@ -23181,7 +23181,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = int32(i64)
+				sv.Bitrate = ptr.Int32(int32(i64))
 			}
 
 		case "bufferModel":
@@ -23263,7 +23263,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.EbpLookaheadMs = int32(i64)
+				sv.EbpLookaheadMs = ptr.Int32(int32(i64))
 			}
 
 		case "ebpPlacement":
@@ -23319,7 +23319,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 					if err != nil {
 						return err
 					}
-					sv.FragmentTime = f64
+					sv.FragmentTime = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -23337,7 +23337,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.FragmentTime = f64
+					sv.FragmentTime = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0 to be a JSON Number, got %T instead", value)
@@ -23380,7 +23380,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 					if err != nil {
 						return err
 					}
-					sv.NullPacketBitrate = f64
+					sv.NullPacketBitrate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -23398,7 +23398,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.NullPacketBitrate = f64
+					sv.NullPacketBitrate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0 to be a JSON Number, got %T instead", value)
@@ -23416,7 +23416,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PatInterval = int32(i64)
+				sv.PatInterval = ptr.Int32(int32(i64))
 			}
 
 		case "pcrControl":
@@ -23438,7 +23438,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PcrPeriod = int32(i64)
+				sv.PcrPeriod = ptr.Int32(int32(i64))
 			}
 
 		case "pcrPid":
@@ -23460,7 +23460,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PmtInterval = int32(i64)
+				sv.PmtInterval = ptr.Int32(int32(i64))
 			}
 
 		case "pmtPid":
@@ -23482,7 +23482,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.ProgramNum = int32(i64)
+				sv.ProgramNum = ptr.Int32(int32(i64))
 			}
 
 		case "rateMode":
@@ -23529,7 +23529,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 					if err != nil {
 						return err
 					}
-					sv.Scte35PrerollPullupMilliseconds = f64
+					sv.Scte35PrerollPullupMilliseconds = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -23547,7 +23547,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Scte35PrerollPullupMilliseconds = f64
+					sv.Scte35PrerollPullupMilliseconds = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max5000 to be a JSON Number, got %T instead", value)
@@ -23581,7 +23581,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 					if err != nil {
 						return err
 					}
-					sv.SegmentationTime = f64
+					sv.SegmentationTime = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -23599,7 +23599,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.SegmentationTime = f64
+					sv.SegmentationTime = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin1 to be a JSON Number, got %T instead", value)
@@ -23635,7 +23635,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamId = int32(i64)
+				sv.TransportStreamId = ptr.Int32(int32(i64))
 			}
 
 		case "videoPid":
@@ -23688,7 +23688,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.AudioFramesPerPes = int32(i64)
+				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
 			}
 
 		case "audioPids":
@@ -23746,7 +23746,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PatInterval = int32(i64)
+				sv.PatInterval = ptr.Int32(int32(i64))
 			}
 
 		case "pcrControl":
@@ -23768,7 +23768,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PcrPeriod = int32(i64)
+				sv.PcrPeriod = ptr.Int32(int32(i64))
 			}
 
 		case "pcrPid":
@@ -23790,7 +23790,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PmtInterval = int32(i64)
+				sv.PmtInterval = ptr.Int32(int32(i64))
 			}
 
 		case "pmtPid":
@@ -23812,7 +23812,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ProgramNum = int32(i64)
+				sv.ProgramNum = ptr.Int32(int32(i64))
 			}
 
 		case "scte35Behavior":
@@ -23861,7 +23861,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamId = int32(i64)
+				sv.TransportStreamId = ptr.Int32(int32(i64))
 			}
 
 		case "videoPid":
@@ -24128,7 +24128,7 @@ func awsRestjson1_deserializeDocumentMotionGraphicsActivateScheduleActionSetting
 				if err != nil {
 					return err
 				}
-				sv.Duration = i64
+				sv.Duration = ptr.Int64(i64)
 			}
 
 		case "passwordParam":
@@ -24309,7 +24309,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 					if err != nil {
 						return err
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -24327,7 +24327,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Bitrate = f64
+					sv.Bitrate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -24352,7 +24352,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 					if err != nil {
 						return err
 					}
-					sv.SampleRate = f64
+					sv.SampleRate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -24370,7 +24370,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.SampleRate = f64
+					sv.SampleRate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -24514,7 +24514,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = int32(i64)
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
 
 		case "framerateNumerator":
@@ -24527,7 +24527,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = int32(i64)
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
 
 		case "gopClosedCadence":
@@ -24540,7 +24540,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.GopClosedCadence = int32(i64)
+				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
 
 		case "gopNumBFrames":
@@ -24553,7 +24553,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.GopNumBFrames = int32(i64)
+				sv.GopNumBFrames = ptr.Int32(int32(i64))
 			}
 
 		case "gopSize":
@@ -24564,7 +24564,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 					if err != nil {
 						return err
 					}
-					sv.GopSize = f64
+					sv.GopSize = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -24582,7 +24582,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GopSize = f64
+					sv.GopSize = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -24699,7 +24699,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.ConnectionRetryInterval = int32(i64)
+				sv.ConnectionRetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "destination":
@@ -24744,7 +24744,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.FilecacheDuration = int32(i64)
+				sv.FilecacheDuration = ptr.Int32(int32(i64))
 			}
 
 		case "fragmentLength":
@@ -24757,7 +24757,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.FragmentLength = int32(i64)
+				sv.FragmentLength = ptr.Int32(int32(i64))
 			}
 
 		case "inputLossAction":
@@ -24779,7 +24779,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.NumRetries = int32(i64)
+				sv.NumRetries = ptr.Int32(int32(i64))
 			}
 
 		case "restartDelay":
@@ -24792,7 +24792,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.RestartDelay = int32(i64)
+				sv.RestartDelay = ptr.Int32(int32(i64))
 			}
 
 		case "segmentationMode":
@@ -24814,7 +24814,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.SendDelayMs = int32(i64)
+				sv.SendDelayMs = ptr.Int32(int32(i64))
 			}
 
 		case "sparseTrackType":
@@ -24985,7 +24985,7 @@ func awsRestjson1_deserializeDocumentMultiplex(v **types.Multiplex, value interf
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "programCount":
@@ -24998,7 +24998,7 @@ func awsRestjson1_deserializeDocumentMultiplex(v **types.Multiplex, value interf
 				if err != nil {
 					return err
 				}
-				sv.ProgramCount = int32(i64)
+				sv.ProgramCount = ptr.Int32(int32(i64))
 			}
 
 		case "state":
@@ -25322,7 +25322,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.DvbTeletextPid = int32(i64)
+				sv.DvbTeletextPid = ptr.Int32(int32(i64))
 			}
 
 		case "etvPlatformPid":
@@ -25335,7 +25335,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.EtvPlatformPid = int32(i64)
+				sv.EtvPlatformPid = ptr.Int32(int32(i64))
 			}
 
 		case "etvSignalPid":
@@ -25348,7 +25348,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.EtvSignalPid = int32(i64)
+				sv.EtvSignalPid = ptr.Int32(int32(i64))
 			}
 
 		case "klvDataPids":
@@ -25366,7 +25366,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.PcrPid = int32(i64)
+				sv.PcrPid = ptr.Int32(int32(i64))
 			}
 
 		case "pmtPid":
@@ -25379,7 +25379,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.PmtPid = int32(i64)
+				sv.PmtPid = ptr.Int32(int32(i64))
 			}
 
 		case "privateMetadataPid":
@@ -25392,7 +25392,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.PrivateMetadataPid = int32(i64)
+				sv.PrivateMetadataPid = ptr.Int32(int32(i64))
 			}
 
 		case "scte27Pids":
@@ -25410,7 +25410,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.Scte35Pid = int32(i64)
+				sv.Scte35Pid = ptr.Int32(int32(i64))
 			}
 
 		case "timedMetadataPid":
@@ -25423,7 +25423,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.TimedMetadataPid = int32(i64)
+				sv.TimedMetadataPid = ptr.Int32(int32(i64))
 			}
 
 		case "videoPid":
@@ -25436,7 +25436,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 				if err != nil {
 					return err
 				}
-				sv.VideoPid = int32(i64)
+				sv.VideoPid = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25587,7 +25587,7 @@ func awsRestjson1_deserializeDocumentMultiplexProgramSettings(v **types.Multiple
 				if err != nil {
 					return err
 				}
-				sv.ProgramNumber = int32(i64)
+				sv.ProgramNumber = ptr.Int32(int32(i64))
 			}
 
 		case "serviceDescriptor":
@@ -25690,7 +25690,7 @@ func awsRestjson1_deserializeDocumentMultiplexSettings(v **types.MultiplexSettin
 				if err != nil {
 					return err
 				}
-				sv.MaximumVideoBufferDelayMilliseconds = int32(i64)
+				sv.MaximumVideoBufferDelayMilliseconds = ptr.Int32(int32(i64))
 			}
 
 		case "transportStreamBitrate":
@@ -25703,7 +25703,7 @@ func awsRestjson1_deserializeDocumentMultiplexSettings(v **types.MultiplexSettin
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamBitrate = int32(i64)
+				sv.TransportStreamBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "transportStreamId":
@@ -25716,7 +25716,7 @@ func awsRestjson1_deserializeDocumentMultiplexSettings(v **types.MultiplexSettin
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamId = int32(i64)
+				sv.TransportStreamId = ptr.Int32(int32(i64))
 			}
 
 		case "transportStreamReservedBitrate":
@@ -25729,7 +25729,7 @@ func awsRestjson1_deserializeDocumentMultiplexSettings(v **types.MultiplexSettin
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamReservedBitrate = int32(i64)
+				sv.TransportStreamReservedBitrate = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25773,7 +25773,7 @@ func awsRestjson1_deserializeDocumentMultiplexSettingsSummary(v **types.Multiple
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamBitrate = int32(i64)
+				sv.TransportStreamBitrate = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25817,7 +25817,7 @@ func awsRestjson1_deserializeDocumentMultiplexStatmuxVideoSettings(v **types.Mul
 				if err != nil {
 					return err
 				}
-				sv.MaximumBitrate = int32(i64)
+				sv.MaximumBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "minimumBitrate":
@@ -25830,7 +25830,7 @@ func awsRestjson1_deserializeDocumentMultiplexStatmuxVideoSettings(v **types.Mul
 				if err != nil {
 					return err
 				}
-				sv.MinimumBitrate = int32(i64)
+				sv.MinimumBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "priority":
@@ -25843,7 +25843,7 @@ func awsRestjson1_deserializeDocumentMultiplexStatmuxVideoSettings(v **types.Mul
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -25924,7 +25924,7 @@ func awsRestjson1_deserializeDocumentMultiplexSummary(v **types.MultiplexSummary
 				if err != nil {
 					return err
 				}
-				sv.PipelinesRunningCount = int32(i64)
+				sv.PipelinesRunningCount = ptr.Int32(int32(i64))
 			}
 
 		case "programCount":
@@ -25937,7 +25937,7 @@ func awsRestjson1_deserializeDocumentMultiplexSummary(v **types.MultiplexSummary
 				if err != nil {
 					return err
 				}
-				sv.ProgramCount = int32(i64)
+				sv.ProgramCount = ptr.Int32(int32(i64))
 			}
 
 		case "state":
@@ -25995,7 +25995,7 @@ func awsRestjson1_deserializeDocumentMultiplexVideoSettings(v **types.MultiplexV
 				if err != nil {
 					return err
 				}
-				sv.ConstantBitrate = int32(i64)
+				sv.ConstantBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "statmuxSettings":
@@ -26203,7 +26203,7 @@ func awsRestjson1_deserializeDocumentNielsenNaesIiNw(v **types.NielsenNaesIiNw, 
 					if err != nil {
 						return err
 					}
-					sv.Sid = f64
+					sv.Sid = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -26221,7 +26221,7 @@ func awsRestjson1_deserializeDocumentNielsenNaesIiNw(v **types.NielsenNaesIiNw, 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Sid = f64
+					sv.Sid = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin1Max65535 to be a JSON Number, got %T instead", value)
@@ -26387,7 +26387,7 @@ func awsRestjson1_deserializeDocumentOffering(v **types.Offering, value interfac
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -26407,7 +26407,7 @@ func awsRestjson1_deserializeDocumentOffering(v **types.Offering, value interfac
 					if err != nil {
 						return err
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -26425,7 +26425,7 @@ func awsRestjson1_deserializeDocumentOffering(v **types.Offering, value interfac
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -26482,7 +26482,7 @@ func awsRestjson1_deserializeDocumentOffering(v **types.Offering, value interfac
 					if err != nil {
 						return err
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -26500,7 +26500,7 @@ func awsRestjson1_deserializeDocumentOffering(v **types.Offering, value interfac
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -27320,7 +27320,7 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.ChannelsIn = int32(i64)
+				sv.ChannelsIn = ptr.Int32(int32(i64))
 			}
 
 		case "channelsOut":
@@ -27333,7 +27333,7 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.ChannelsOut = int32(i64)
+				sv.ChannelsOut = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -27386,7 +27386,7 @@ func awsRestjson1_deserializeDocumentRenewalSettings(v **types.RenewalSettings, 
 				if err != nil {
 					return err
 				}
-				sv.RenewalCount = int32(i64)
+				sv.RenewalCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -27439,7 +27439,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "currencyCode":
@@ -27461,7 +27461,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "durationUnits":
@@ -27490,7 +27490,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 					if err != nil {
 						return err
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -27508,7 +27508,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.FixedPrice = f64
+					sv.FixedPrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -27611,7 +27611,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 					if err != nil {
 						return err
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -27629,7 +27629,7 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.UsagePrice = f64
+					sv.UsagePrice = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -27835,7 +27835,7 @@ func awsRestjson1_deserializeDocumentRtmpGroupSettings(v **types.RtmpGroupSettin
 				if err != nil {
 					return err
 				}
-				sv.CacheLength = int32(i64)
+				sv.CacheLength = ptr.Int32(int32(i64))
 			}
 
 		case "captionData":
@@ -27875,7 +27875,7 @@ func awsRestjson1_deserializeDocumentRtmpGroupSettings(v **types.RtmpGroupSettin
 				if err != nil {
 					return err
 				}
-				sv.RestartDelay = int32(i64)
+				sv.RestartDelay = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -27928,7 +27928,7 @@ func awsRestjson1_deserializeDocumentRtmpOutputSettings(v **types.RtmpOutputSett
 				if err != nil {
 					return err
 				}
-				sv.ConnectionRetryInterval = int32(i64)
+				sv.ConnectionRetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "destination":
@@ -27946,7 +27946,7 @@ func awsRestjson1_deserializeDocumentRtmpOutputSettings(v **types.RtmpOutputSett
 				if err != nil {
 					return err
 				}
-				sv.NumRetries = int32(i64)
+				sv.NumRetries = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -28222,7 +28222,7 @@ func awsRestjson1_deserializeDocumentScte20SourceSettings(v **types.Scte20Source
 				if err != nil {
 					return err
 				}
-				sv.Source608ChannelNumber = int32(i64)
+				sv.Source608ChannelNumber = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -28306,7 +28306,7 @@ func awsRestjson1_deserializeDocumentScte27SourceSettings(v **types.Scte27Source
 				if err != nil {
 					return err
 				}
-				sv.Pid = int32(i64)
+				sv.Pid = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -28538,7 +28538,7 @@ func awsRestjson1_deserializeDocumentScte35ReturnToNetworkScheduleActionSettings
 				if err != nil {
 					return err
 				}
-				sv.SpliceEventId = i64
+				sv.SpliceEventId = ptr.Int64(i64)
 			}
 
 		default:
@@ -28596,7 +28596,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SegmentationDuration = i64
+				sv.SegmentationDuration = ptr.Int64(i64)
 			}
 
 		case "segmentationEventId":
@@ -28609,7 +28609,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SegmentationEventId = i64
+				sv.SegmentationEventId = ptr.Int64(i64)
 			}
 
 		case "segmentationTypeId":
@@ -28622,7 +28622,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SegmentationTypeId = int32(i64)
+				sv.SegmentationTypeId = ptr.Int32(int32(i64))
 			}
 
 		case "segmentationUpid":
@@ -28644,7 +28644,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SegmentationUpidType = int32(i64)
+				sv.SegmentationUpidType = ptr.Int32(int32(i64))
 			}
 
 		case "segmentNum":
@@ -28657,7 +28657,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SegmentNum = int32(i64)
+				sv.SegmentNum = ptr.Int32(int32(i64))
 			}
 
 		case "segmentsExpected":
@@ -28670,7 +28670,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SegmentsExpected = int32(i64)
+				sv.SegmentsExpected = ptr.Int32(int32(i64))
 			}
 
 		case "subSegmentNum":
@@ -28683,7 +28683,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SubSegmentNum = int32(i64)
+				sv.SubSegmentNum = ptr.Int32(int32(i64))
 			}
 
 		case "subSegmentsExpected":
@@ -28696,7 +28696,7 @@ func awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(v **types.Scte
 				if err != nil {
 					return err
 				}
-				sv.SubSegmentsExpected = int32(i64)
+				sv.SubSegmentsExpected = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -28740,7 +28740,7 @@ func awsRestjson1_deserializeDocumentScte35SpliceInsert(v **types.Scte35SpliceIn
 				if err != nil {
 					return err
 				}
-				sv.AdAvailOffset = int32(i64)
+				sv.AdAvailOffset = ptr.Int32(int32(i64))
 			}
 
 		case "noRegionalBlackoutFlag":
@@ -28802,7 +28802,7 @@ func awsRestjson1_deserializeDocumentScte35SpliceInsertScheduleActionSettings(v 
 				if err != nil {
 					return err
 				}
-				sv.Duration = i64
+				sv.Duration = ptr.Int64(i64)
 			}
 
 		case "spliceEventId":
@@ -28815,7 +28815,7 @@ func awsRestjson1_deserializeDocumentScte35SpliceInsertScheduleActionSettings(v 
 				if err != nil {
 					return err
 				}
-				sv.SpliceEventId = i64
+				sv.SpliceEventId = ptr.Int64(i64)
 			}
 
 		default:
@@ -28859,7 +28859,7 @@ func awsRestjson1_deserializeDocumentScte35TimeSignalApos(v **types.Scte35TimeSi
 				if err != nil {
 					return err
 				}
-				sv.AdAvailOffset = int32(i64)
+				sv.AdAvailOffset = ptr.Int32(int32(i64))
 			}
 
 		case "noRegionalBlackoutFlag":
@@ -29073,7 +29073,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "fadeIn":
@@ -29086,7 +29086,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.FadeIn = int32(i64)
+				sv.FadeIn = ptr.Int32(int32(i64))
 			}
 
 		case "fadeOut":
@@ -29099,7 +29099,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.FadeOut = int32(i64)
+				sv.FadeOut = ptr.Int32(int32(i64))
 			}
 
 		case "height":
@@ -29112,7 +29112,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.Height = int32(i64)
+				sv.Height = ptr.Int32(int32(i64))
 			}
 
 		case "image":
@@ -29130,7 +29130,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.ImageX = int32(i64)
+				sv.ImageX = ptr.Int32(int32(i64))
 			}
 
 		case "imageY":
@@ -29143,7 +29143,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.ImageY = int32(i64)
+				sv.ImageY = ptr.Int32(int32(i64))
 			}
 
 		case "layer":
@@ -29156,7 +29156,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.Layer = int32(i64)
+				sv.Layer = ptr.Int32(int32(i64))
 			}
 
 		case "opacity":
@@ -29169,7 +29169,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.Opacity = int32(i64)
+				sv.Opacity = ptr.Int32(int32(i64))
 			}
 
 		case "width":
@@ -29182,7 +29182,7 @@ func awsRestjson1_deserializeDocumentStaticImageActivateScheduleActionSettings(v
 				if err != nil {
 					return err
 				}
-				sv.Width = int32(i64)
+				sv.Width = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -29226,7 +29226,7 @@ func awsRestjson1_deserializeDocumentStaticImageDeactivateScheduleActionSettings
 				if err != nil {
 					return err
 				}
-				sv.FadeOut = int32(i64)
+				sv.FadeOut = ptr.Int32(int32(i64))
 			}
 
 		case "layer":
@@ -29239,7 +29239,7 @@ func awsRestjson1_deserializeDocumentStaticImageDeactivateScheduleActionSettings
 				if err != nil {
 					return err
 				}
-				sv.Layer = int32(i64)
+				sv.Layer = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -29761,7 +29761,7 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				if err != nil {
 					return err
 				}
-				sv.SyncThreshold = int32(i64)
+				sv.SyncThreshold = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30006,7 +30006,7 @@ func awsRestjson1_deserializeDocumentUdpGroupSettings(v **types.UdpGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.TimedMetadataId3Period = int32(i64)
+				sv.TimedMetadataId3Period = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30050,7 +30050,7 @@ func awsRestjson1_deserializeDocumentUdpOutputSettings(v **types.UdpOutputSettin
 				if err != nil {
 					return err
 				}
-				sv.BufferMsec = int32(i64)
+				sv.BufferMsec = ptr.Int32(int32(i64))
 			}
 
 		case "containerSettings":
@@ -30201,7 +30201,7 @@ func awsRestjson1_deserializeDocumentVideoBlackFailoverSettings(v **types.VideoB
 					if err != nil {
 						return err
 					}
-					sv.BlackDetectThreshold = f64
+					sv.BlackDetectThreshold = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -30219,7 +30219,7 @@ func awsRestjson1_deserializeDocumentVideoBlackFailoverSettings(v **types.VideoB
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.BlackDetectThreshold = f64
+					sv.BlackDetectThreshold = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max1 to be a JSON Number, got %T instead", value)
@@ -30237,7 +30237,7 @@ func awsRestjson1_deserializeDocumentVideoBlackFailoverSettings(v **types.VideoB
 				if err != nil {
 					return err
 				}
-				sv.VideoBlackThresholdMsec = int32(i64)
+				sv.VideoBlackThresholdMsec = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30337,7 +30337,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.Height = int32(i64)
+				sv.Height = ptr.Int32(int32(i64))
 			}
 
 		case "name":
@@ -30377,7 +30377,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.Sharpness = int32(i64)
+				sv.Sharpness = ptr.Int32(int32(i64))
 			}
 
 		case "width":
@@ -30390,7 +30390,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.Width = int32(i64)
+				sv.Width = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30529,7 +30529,7 @@ func awsRestjson1_deserializeDocumentVideoSelectorPid(v **types.VideoSelectorPid
 				if err != nil {
 					return err
 				}
-				sv.Pid = int32(i64)
+				sv.Pid = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30573,7 +30573,7 @@ func awsRestjson1_deserializeDocumentVideoSelectorProgramId(v **types.VideoSelec
 				if err != nil {
 					return err
 				}
-				sv.ProgramId = int32(i64)
+				sv.ProgramId = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30707,7 +30707,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 					if err != nil {
 						return err
 					}
-					sv.BitDepth = f64
+					sv.BitDepth = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -30725,7 +30725,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.BitDepth = f64
+					sv.BitDepth = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -30750,7 +30750,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 					if err != nil {
 						return err
 					}
-					sv.SampleRate = f64
+					sv.SampleRate = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -30768,7 +30768,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.SampleRate = f64
+					sv.SampleRate = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)

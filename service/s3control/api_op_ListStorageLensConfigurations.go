@@ -51,10 +51,6 @@ type ListStorageLensConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListStorageLensConfigurationsInput) operationName() string {
-	return "ListStorageLensConfigurations"
-}
-
 func (in *ListStorageLensConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

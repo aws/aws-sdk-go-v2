@@ -92,10 +92,6 @@ type AbortMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AbortMultipartUploadInput) operationName() string {
-	return "AbortMultipartUpload"
-}
-
 func (in *AbortMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

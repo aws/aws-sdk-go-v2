@@ -397,10 +397,6 @@ type CopyObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CopyObjectInput) operationName() string {
-	return "CopyObject"
-}
-
 func (in *CopyObjectInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

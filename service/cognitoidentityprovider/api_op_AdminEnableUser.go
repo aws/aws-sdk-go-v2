@@ -48,10 +48,6 @@ type AdminEnableUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminEnableUserInput) operationName() string {
-	return "AdminEnableUser"
-}
-
 // Represents the response from the server for the request to enable a user as an
 // administrator.
 type AdminEnableUserOutput struct {

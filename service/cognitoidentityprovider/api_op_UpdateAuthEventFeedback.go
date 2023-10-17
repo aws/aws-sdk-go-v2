@@ -68,10 +68,6 @@ type UpdateAuthEventFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateAuthEventFeedbackInput) operationName() string {
-	return "UpdateAuthEventFeedback"
-}
-
 type UpdateAuthEventFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

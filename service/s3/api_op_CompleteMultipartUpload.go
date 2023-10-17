@@ -179,10 +179,6 @@ type CompleteMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CompleteMultipartUploadInput) operationName() string {
-	return "CompleteMultipartUpload"
-}
-
 func (in *CompleteMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

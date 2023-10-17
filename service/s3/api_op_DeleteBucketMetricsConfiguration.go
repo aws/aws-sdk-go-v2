@@ -62,10 +62,6 @@ type DeleteBucketMetricsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketMetricsConfigurationInput) operationName() string {
-	return "DeleteBucketMetricsConfiguration"
-}
-
 func (in *DeleteBucketMetricsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

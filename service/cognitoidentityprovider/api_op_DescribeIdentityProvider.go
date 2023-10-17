@@ -42,10 +42,6 @@ type DescribeIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeIdentityProviderInput) operationName() string {
-	return "DescribeIdentityProvider"
-}
-
 type DescribeIdentityProviderOutput struct {
 
 	// The identity provider details.

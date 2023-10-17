@@ -40,10 +40,6 @@ type QueryListsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*QueryListsInput) operationName() string {
-	return "QueryLists"
-}
-
 type QueryListsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

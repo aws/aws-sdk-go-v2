@@ -149,10 +149,6 @@ type AdminRespondToAuthChallengeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminRespondToAuthChallengeInput) operationName() string {
-	return "AdminRespondToAuthChallenge"
-}
-
 // Responds to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeOutput struct {
 

@@ -53,10 +53,6 @@ type GetAccessPointForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetAccessPointForObjectLambdaInput) operationName() string {
-	return "GetAccessPointForObjectLambda"
-}
-
 func (in *GetAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

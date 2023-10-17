@@ -36,10 +36,6 @@ type StreamingTraitsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*StreamingTraitsInput) operationName() string {
-	return "StreamingTraits"
-}
-
 type StreamingTraitsOutput struct {
 	Blob io.ReadCloser
 

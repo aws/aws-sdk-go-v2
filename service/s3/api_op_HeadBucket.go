@@ -88,10 +88,6 @@ type HeadBucketInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HeadBucketInput) operationName() string {
-	return "HeadBucket"
-}
-
 func (in *HeadBucketInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

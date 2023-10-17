@@ -51,10 +51,6 @@ type DeleteAccessPointForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteAccessPointForObjectLambdaInput) operationName() string {
-	return "DeleteAccessPointForObjectLambda"
-}
-
 func (in *DeleteAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

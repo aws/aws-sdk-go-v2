@@ -57,10 +57,6 @@ type CreateSourceRepositoryBranchInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateSourceRepositoryBranchInput) operationName() string {
-	return "CreateSourceRepositoryBranch"
-}
-
 type CreateSourceRepositoryBranchOutput struct {
 
 	// The commit ID of the tip of the newly created branch.
