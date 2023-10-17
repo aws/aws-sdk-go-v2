@@ -2,7 +2,7 @@
     "id": "6cb6bc26-277c-41be-84cb-8aa523a78989",
     "type": "feature",
     "collapse": true,
-    "description": "Add and Merge handwritten paginators presenting in v1 but not in v2",
+    "description": "Add handwritten paginators that were present in some services in the v1 SDK.",
     "modules": [
         "service/amplifybackend",
         "service/dynamodb",
