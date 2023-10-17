@@ -314,7 +314,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -357,7 +356,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -370,7 +370,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -384,7 +383,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -407,7 +405,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -442,7 +439,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -453,14 +449,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -474,14 +472,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -490,11 +486,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -505,14 +501,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -526,7 +524,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -546,7 +543,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -557,14 +553,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -575,9 +573,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1973,7 +1973,7 @@
                 "namespace": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify\n\t\t\ta Service Connect configuration. The namespace name can include up to 1024 characters.\n\t\t\tThe name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than\n\t\t\t(>), less than (<), or slash (/).</p>\n         <p>If you enter an existing namespace name or ARN, then that namespace will be used.\n\t\t\tAny namespace type is supported. The namespace must be in this account and this Amazon Web Services\n\t\t\tRegion.</p>\n         <p>If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a\n\t\t\tCloud Map namespace with the \"API calls\" method of instance discovery only. This instance\n\t\t\tdiscovery method is the \"HTTP\" namespace type in the Command Line Interface. Other types of instance\n\t\t\tdiscovery aren't used by Service Connect.</p>\n         <p>If you update the service with an empty string <code>\"\"</code> for the namespace name,\n\t\t\tthe cluster configuration for Service Connect is removed. Note that the namespace will\n\t\t\tremain in Cloud Map and must be deleted separately.</p>\n         <p>For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html\">Working\n\t\t\t\twith Services</a> in the <i>Cloud Map Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify\n\t\t\ta Service Connect configuration. The namespace name can include up to 1024 characters.\n\t\t\tThe name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than\n\t\t\t(>), less than (<), or slash (/).</p>\n         <p>If you enter an existing namespace name or ARN, then that namespace will be used.\n\t\t\tAny namespace type is supported. The namespace must be in this account and this Amazon Web Services\n\t\t\tRegion.</p>\n         <p>If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a\n\t\t\tCloud Map namespace with the \"API calls\" method of instance discovery only. This instance\n\t\t\tdiscovery method is the \"HTTP\" namespace type in the Command Line Interface. Other types of instance\n\t\t\tdiscovery aren't used by Service Connect.</p>\n         <p>If you update the cluster with an empty string <code>\"\"</code> for the namespace name,\n\t\t\tthe cluster configuration for Service Connect is removed. Note that the namespace will\n\t\t\tremain in Cloud Map and must be deleted separately.</p>\n         <p>For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html\">Working\n\t\t\t\twith Services</a> in the <i>Cloud Map Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3085,10 +3085,10 @@
                                 "loadBalancers": [],
                                 "pendingCount": 0,
                                 "runningCount": 0,
-                                "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service",
+                                "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service",
                                 "serviceName": "ecs-simple-service",
                                 "status": "ACTIVE",
-                                "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6"
+                                "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6"
                             }
                         }
                     }
@@ -4550,7 +4550,7 @@
                                     ],
                                     "ec2InstanceId": "i-807f3249",
                                     "agentConnected": true,
-                                    "containerInstanceArn": "arn:aws:ecs:us-east-1:012345678910:container-instance/f2756532-8f13-4d53-87c9-aed50dc94cd7",
+                                    "containerInstanceArn": "arn:aws:ecs:us-east-1:012345678910:container-instance/default/f2756532-8f13-4d53-87c9-aed50dc94cd7",
                                     "pendingTasksCount": 0,
                                     "remainingResources": [
                                         {
@@ -4703,10 +4703,10 @@
                                     "loadBalancers": [],
                                     "pendingCount": 0,
                                     "runningCount": 0,
-                                    "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service",
+                                    "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service",
                                     "serviceName": "ecs-simple-service",
                                     "status": "ACTIVE",
-                                    "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6"
+                                    "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6"
                                 }
                             ]
                         }
@@ -5080,7 +5080,7 @@
                             "failures": [],
                             "tasks": [
                                 {
-                                    "taskArn": "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
+                                    "taskArn": "arn:aws:ecs:<region>:<aws_account_id>:task/default/c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
                                     "overrides": {
                                         "containerOverrides": [
                                             {
@@ -5089,7 +5089,7 @@
                                         ]
                                     },
                                     "lastStatus": "RUNNING",
-                                    "containerInstanceArn": "arn:aws:ecs:<region>:<aws_account_id>:container-instance/18f9eda5-27d7-4c19-b133-45adc516e8fb",
+                                    "containerInstanceArn": "arn:aws:ecs:<region>:<aws_account_id>:container-instance/default/18f9eda5-27d7-4c19-b133-45adc516e8fb",
                                     "clusterArn": "arn:aws:ecs:<region>:<aws_account_id>:cluster/default",
                                     "desiredStatus": "RUNNING",
                                     "taskDefinitionArn": "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1",
@@ -5097,7 +5097,7 @@
                                     "containers": [
                                         {
                                             "containerArn": "arn:aws:ecs:<region>:<aws_account_id>:container/7c01765b-c588-45b3-8290-4ba38bd6c5a6",
-                                            "taskArn": "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
+                                            "taskArn": "arn:aws:ecs:<region>:<aws_account_id>:task/default/c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
                                             "lastStatus": "RUNNING",
                                             "name": "ecs-demo",
                                             "networkBindings": [
@@ -5531,7 +5531,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. You can\n\t\t\tspecify up to ten environment files. The file must have a <code>.env</code> file\n\t\t\textension. Each line in an environment file should contain an environment variable in\n\t\t\t\t<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information about the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n         <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they're processed from the top down. We recommend that you use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying environment\n\t\t\t\tvariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You must use the following platforms for the Fargate launch type:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.4.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. You can specify\n\t\t\tup to ten environment files. The file must have a <code>.env</code> file extension. Each\n\t\t\tline in an environment file should contain an environment variable in\n\t\t\t\t<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored.</p>\n         <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they're processed from the top down. We recommend that you use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying environment\n\t\t\t\tvariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You must use the following platforms for the Fargate launch type:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.4.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>\n         <p>Consider the following when using the Fargate launch type:</p>\n         <ul>\n            <li>\n               <p>The file is handled like a native Docker env-file.</p>\n            </li>\n            <li>\n               <p>There is no support for shell escape handling.</p>\n            </li>\n            <li>\n               <p>The container entry point interperts the <code>VARIABLE</code> values.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#EnvironmentFileType": {
@@ -5957,7 +5957,7 @@
                         "output": {
                             "protectedTasks": [
                                 {
-                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
                                     "protectionEnabled": true,
                                     "expirationDate": "2022-11-02T06:56:32.553Z"
                                 }
@@ -6051,7 +6051,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a container health check. Health check parameters that are\n\t\t\tspecified in a container definition override any Docker health checks that exist in the\n\t\t\tcontainer image (such as those specified in a parent image or from the image's\n\t\t\tDockerfile). This configuration maps to the <code>HEALTHCHECK</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n         <note>\n            <p>The Amazon ECS container agent only monitors and reports on the health checks specified\n\t\t\t\tin the task definition. Amazon ECS does not monitor Docker health checks that are\n\t\t\t\tembedded in a container image and not specified in the container definition. Health\n\t\t\t\tcheck parameters that are specified in a container definition override any Docker\n\t\t\t\thealth checks that exist in the container image.</p>\n         </note>\n         <p>You can view the health status of both individual containers and a task with the\n\t\t\tDescribeTasks API operation or when viewing the task details in the console.</p>\n         <p>The health check is designed to make sure that your containers survive\n\t\t\tagent restarts, upgrades, or temporary unavailability.</p>\n         <p>The following describes the possible <code>healthStatus</code> values for a\n\t\t\tcontainer:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-The container health check has passed\n\t\t\t\t\tsuccessfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-The container health check has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The container health check is being evaluated or\n\t\t\t\t\tthere's no container health check defined.</p>\n            </li>\n         </ul>\n         <p>The following describes the possible <code>healthStatus</code> values for a task. The\n\t\t\tcontainer health check status of\n\t\t\tnon-essential containers don't have an effect on the health status of a task.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-All essential containers within the task have\n\t\t\t\t\tpassed their health checks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-One or more essential containers have failed\n\t\t\t\t\ttheir health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The essential containers within the task are still\n\t\t\t\t\thaving their health checks evaluated, there are only nonessential containers\n\t\t\t\t\twith health checks defined, or there are no container health checks\n\t\t\t\t\tdefined.</p>\n            </li>\n         </ul>\n         <p>If a task is run manually, and not as part of a service, the task will continue its\n\t\t\tlifecycle regardless of its health status. For tasks that are part of a service, if the\n\t\t\ttask reports as unhealthy then the task will be stopped and the service scheduler will\n\t\t\treplace it.</p>\n         <p>The following are notes about container health check support:</p>\n         <ul>\n            <li>\n               <p>When the Amazon ECS agent cannot connect to the Amazon ECS service,  the\n\t\t\t\t\tservice reports the container as <code>UNHEALTHY</code>. </p>\n            </li>\n            <li>\n               <p>The health check statuses are the \"last heard from\" response from the Amazon ECS agent. There\n\t\t\t\t\tare no assumptions made about the status of the container health checks.</p>\n            </li>\n            <li>\n               <p>Container health checks require version 1.17.0 or greater of the Amazon ECS\n\t\t\t\t\tcontainer agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the\n\t\t\t\t\t\tAmazon ECS container agent</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks are supported for Fargate tasks if\n\t\t\t\t\tyou're using platform version <code>1.1.0</code> or greater. For more\n\t\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate\n\t\t\t\t\t\tplatform versions</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks aren't supported for tasks that are part of a service\n\t\t\t\t\tthat's configured to use a Classic Load Balancer.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object representing a container health check. Health check parameters that are\n\t\t\tspecified in a container definition override any Docker health checks that exist in the\n\t\t\tcontainer image (such as those specified in a parent image or from the image's\n\t\t\tDockerfile). This configuration maps to the <code>HEALTHCHECK</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n         <note>\n            <p>The Amazon ECS container agent only monitors and reports on the health checks specified\n\t\t\t\tin the task definition. Amazon ECS does not monitor Docker health checks that are\n\t\t\t\tembedded in a container image and not specified in the container definition. Health\n\t\t\t\tcheck parameters that are specified in a container definition override any Docker\n\t\t\t\thealth checks that exist in the container image.</p>\n         </note>\n         <p>You can view the health status of both individual containers and a task with the\n\t\t\tDescribeTasks API operation or when viewing the task details in the console.</p>\n         <p>The health check is designed to make sure that your containers survive agent restarts,\n\t\t\tupgrades, or temporary unavailability.</p>\n         <p>The following describes the possible <code>healthStatus</code> values for a\n\t\t\tcontainer:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-The container health check has passed\n\t\t\t\t\tsuccessfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-The container health check has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The container health check is being evaluated,\n\t\t\t\t\tthere's no container health check defined, or Amazon ECS doesn't have the health\n\t\t\t\t\tstatus of the container.</p>\n            </li>\n         </ul>\n         <p>The following describes the possible <code>healthStatus</code> values based on the\n\t\t\tcontainer health checker status of essential containers in the task with the following\n\t\t\tpriority order (high to low):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-One or more essential containers have failed\n\t\t\t\t\ttheir health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-Any essential container running within the task is\n\t\t\t\t\tin an <code>UNKNOWN</code> state and no other essential containers have an\n\t\t\t\t\t\t<code>UNHEALTHY</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-All essential containers within the task have\n\t\t\t\t\tpassed their health checks.</p>\n            </li>\n         </ul>\n         <p>Consider the following task health example with 2 containers.</p>\n         <ul>\n            <li>\n               <p>If Container1 is <code>UNHEALTHY</code> and Container2 is\n\t\t\t\t\t<code>UNKNOWN</code>, the task health is <code>UNHEALTHY</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>UNHEALTHY</code> and Container2 is\n\t\t\t\t\t<code>HEALTHY</code>, the task health is <code>UNHEALTHY</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>UNKNOWN</code>,\n\t\t\t\t\tthe task health is <code>UNKNOWN</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>HEALTHY</code>,\n\t\t\t\t\tthe task health is <code>HEALTHY</code>.</p>\n            </li>\n         </ul>\n         <p>Consider the following task health example with 3 containers.</p>\n         <ul>\n            <li>\n               <p>If Container1 is <code>UNHEALTHY</code> and Container2 is <code>UNKNOWN</code>, and Container3\n\t\t\t\t\tis <code>UNKNOWN</code>, the task health is <code>UNHEALTHY</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>UNHEALTHY</code> and Container2 is <code>UNKNOWN</code>, and Container3\n\t\t\t\t\tis <code>HEALTHY</code>, the task health is <code>UNHEALTHY</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>UNHEALTHY</code> and Container2 is <code>HEALTHY</code>, and Container3\n\t\t\t\t\tis <code>HEALTHY</code>, the task health is <code>UNHEALTHY</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>UNKNOWN</code>, and Container3\n\t\t\t\t\tis <code>HEALTHY</code>, the task health is <code>UNKNOWN</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>UNKNOWN</code>,\n\t\t\t\t\tand Container3 is <code>UNKNOWN</code>, the task health is\n\t\t\t\t\t<code>UNKNOWN</code>.</p>\n            </li>\n            <li>\n               <p>If Container1 is <code>HEALTHY</code> and Container2 is <code>HEALTHY</code>,\n\t\t\t\t\tand Container3 is <code>HEALTHY</code>, the task health is\n\t\t\t\t\t<code>HEALTHY</code>.</p>\n            </li>\n         </ul>\n         <p>If a task is run manually, and not as part of a service, the task will continue its\n\t\t\tlifecycle regardless of its health status. For tasks that are part of a service, if the\n\t\t\ttask reports as unhealthy then the task will be stopped and the service scheduler will\n\t\t\treplace it.</p>\n         <p>The following are notes about container health check support:</p>\n         <ul>\n            <li>\n               <p>When the Amazon ECS agent cannot connect to the Amazon ECS service, the service reports\n\t\t\t\t\tthe container as <code>UNHEALTHY</code>. </p>\n            </li>\n            <li>\n               <p>The health check statuses are the \"last heard from\" response from the Amazon ECS\n\t\t\t\t\tagent. There are no assumptions made about the status of the container health\n\t\t\t\t\tchecks.</p>\n            </li>\n            <li>\n               <p>Container health checks require version 1.17.0 or greater of the Amazon ECS\n\t\t\t\t\tcontainer agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the\n\t\t\t\t\t\tAmazon ECS container agent</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks are supported for Fargate tasks if\n\t\t\t\t\tyou're using platform version <code>1.1.0</code> or greater. For more\n\t\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate\n\t\t\t\t\t\tplatform versions</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks aren't supported for tasks that are part of a service\n\t\t\t\t\tthat's configured to use a Classic Load Balancer.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#HealthStatus": {
@@ -6745,8 +6745,8 @@
                         },
                         "output": {
                             "containerInstanceArns": [
-                                "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/f6bbb147-5370-4ace-8c73-c7181ded911f",
-                                "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb"
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/f6bbb147-5370-4ace-8c73-c7181ded911f",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/ffe3d344-77e2-476c-a4d0-bf560ad50acb"
                             ]
                         }
                     }
@@ -6847,7 +6847,7 @@
                         "documentation": "This example lists the services running in the default cluster for an account.",
                         "output": {
                             "serviceArns": [
-                                "arn:aws:ecs:us-east-1:012345678910:service/my-http-service"
+                                "arn:aws:ecs:us-east-1:012345678910:service/default/my-http-service"
                             ]
                         }
                     }
@@ -7303,8 +7303,8 @@
                         },
                         "output": {
                             "taskArns": [
-                                "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84",
-                                "arn:aws:ecs:us-east-1:012345678910:task/6b809ef6-c67e-4467-921f-ee261c15a0a1"
+                                "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84",
+                                "arn:aws:ecs:us-east-1:012345678910:task/default/6b809ef6-c67e-4467-921f-ee261c15a0a1"
                             ]
                         }
                     }
@@ -7807,7 +7807,7 @@
                 "containerPortRange": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number range on the container that's bound to the dynamically mapped host port\n\t\t\trange.</p>\n         <p>The following rules apply when you specify a <code>containerPortRange</code>:</p>\n         <ul>\n            <li>\n               <p>You must use either the <code>bridge</code> network mode or the <code>awsvpc</code>\n\t\t\t\t\tnetwork mode.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the EC2 and Fargate launch types.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the Linux and Windows operating systems.</p>\n            </li>\n            <li>\n               <p>The container instance must have at least version 1.67.0 of the container agent\n\t\t\t\t\tand at least version 1.67.0-1 of the <code>ecs-init</code> package </p>\n            </li>\n            <li>\n               <p>You can specify a maximum of 100 port ranges per container.</p>\n            </li>\n            <li>\n               <p>You do not specify a <code>hostPortRange</code>. The value of the <code>hostPortRange</code> is set\n\t\t\t\t\tas follows:</p>\n               <ul>\n                  <li>\n                     <p>For containers in a task with the <code>awsvpc</code> network mode,\n\t\t\t\t\t\t\tthe <code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping\n\t\t\t\t\t\t\tstrategy.</p>\n                  </li>\n                  <li>\n                     <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>containerPortRange</code> valid values are between 1 and\n\t\t\t\t\t65535.</p>\n            </li>\n            <li>\n               <p>A port can only be included in one port mapping per container.</p>\n            </li>\n            <li>\n               <p>You cannot specify overlapping port ranges.</p>\n            </li>\n            <li>\n               <p>The first port in the range must be less than last port in the range.</p>\n            </li>\n            <li>\n               <p>Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports.</p>\n               <p>For more information, see <a href=\"https://github.com/moby/moby/issues/11185\"> Issue #11185</a> on the Github website.</p>\n               <p>For information about how to  turn off the docker-proxy in the Docker daemon config file, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon\">Docker daemon</a> in the <i>Amazon ECS Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html\">\n               <code>DescribeTasks</code>\n            </a> to view the <code>hostPortRange</code> which\n\t\t\tare the host ports that are bound to the container ports.</p>"
+                        "smithy.api#documentation": "<p>The port number range on the container that's bound to the dynamically mapped host port\n\t\t\trange.</p>\n         <p>The following rules apply when you specify a <code>containerPortRange</code>:</p>\n         <ul>\n            <li>\n               <p>You must use either the <code>bridge</code> network mode or the <code>awsvpc</code>\n\t\t\t\t\tnetwork mode.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the EC2 and Fargate launch types.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the Linux and Windows operating systems.</p>\n            </li>\n            <li>\n               <p>The container instance must have at least version 1.67.0 of the container agent\n\t\t\t\t\tand at least version 1.67.0-1 of the <code>ecs-init</code> package </p>\n            </li>\n            <li>\n               <p>You can specify a maximum of 100 port ranges per container.</p>\n            </li>\n            <li>\n               <p>You do not specify a <code>hostPortRange</code>. The value of the <code>hostPortRange</code> is set\n\t\t\t\t\tas follows:</p>\n               <ul>\n                  <li>\n                     <p>For containers in a task with the <code>awsvpc</code> network mode,\n\t\t\t\t\t\t\tthe <code>hostPortRange</code> is set to the same value as the\n\t\t\t\t\t\t\t\t<code>containerPortRange</code>. This is a static mapping\n\t\t\t\t\t\t\tstrategy.</p>\n                  </li>\n                  <li>\n                     <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>containerPortRange</code> valid values are between 1 and\n\t\t\t\t\t65535.</p>\n            </li>\n            <li>\n               <p>A port can only be included in one port mapping per container.</p>\n            </li>\n            <li>\n               <p>You cannot specify overlapping port ranges.</p>\n            </li>\n            <li>\n               <p>The first port in the range must be less than last port in the range.</p>\n            </li>\n            <li>\n               <p>Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports.</p>\n               <p>For more information, see <a href=\"https://github.com/moby/moby/issues/11185\"> Issue #11185</a> on the Github website.</p>\n               <p>For information about how to  turn off the docker-proxy in the Docker daemon config file, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon\">Docker daemon</a> in the <i>Amazon ECS Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html\">\n               <code>DescribeTasks</code>\n            </a> to view the <code>hostPortRange</code> which\n\t\t\tare the host ports that are bound to the container ports.</p>"
                     }
                 },
                 "hostPortRange": {
@@ -8175,7 +8175,7 @@
                 "containerPortRange": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number range on the container that's bound to the dynamically mapped host port\n\t\t\trange. </p>\n         <p>The following rules apply when you specify a <code>containerPortRange</code>:</p>\n         <ul>\n            <li>\n               <p>You must use either the <code>bridge</code> network mode or the <code>awsvpc</code>\n\t\t\t\t\tnetwork mode.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the EC2 and Fargate launch types.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the Linux and Windows operating systems.</p>\n            </li>\n            <li>\n               <p>The container instance must have at least version 1.67.0 of the container agent\n\t\t\t\t\tand at least version 1.67.0-1 of the <code>ecs-init</code> package </p>\n            </li>\n            <li>\n               <p>You can specify a maximum of 100 port ranges per container.</p>\n            </li>\n            <li>\n               <p>You do not specify a <code>hostPortRange</code>. The value of the <code>hostPortRange</code> is set\n\t\t\t\t\tas follows:</p>\n               <ul>\n                  <li>\n                     <p>For containers in a task with the <code>awsvpc</code> network mode,\n\t\t\t\t\t\t\tthe <code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping\n\t\t\t\t\t\t\tstrategy.</p>\n                  </li>\n                  <li>\n                     <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>containerPortRange</code> valid values are between 1 and\n\t\t\t\t\t65535.</p>\n            </li>\n            <li>\n               <p>A port can only be included in one port mapping per container.</p>\n            </li>\n            <li>\n               <p>You cannot specify overlapping port ranges.</p>\n            </li>\n            <li>\n               <p>The first port in the range must be less than last port in the range.</p>\n            </li>\n            <li>\n               <p>Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports.</p>\n               <p>For more information, see <a href=\"https://github.com/moby/moby/issues/11185\"> Issue #11185</a> on the Github website.</p>\n               <p>For information about how to  turn off the docker-proxy in the Docker daemon config file, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon\">Docker daemon</a> in the <i>Amazon ECS Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html\">\n               <code>DescribeTasks</code>\n            </a> to view the <code>hostPortRange</code> which\n\t\t\tare the host ports that are bound to the container ports.</p>"
+                        "smithy.api#documentation": "<p>The port number range on the container that's bound to the dynamically mapped host port\n\t\t\trange. </p>\n         <p>The following rules apply when you specify a <code>containerPortRange</code>:</p>\n         <ul>\n            <li>\n               <p>You must use either the <code>bridge</code> network mode or the <code>awsvpc</code>\n\t\t\t\t\tnetwork mode.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the EC2 and Fargate launch types.</p>\n            </li>\n            <li>\n               <p>This parameter is available for both the Linux and Windows operating systems.</p>\n            </li>\n            <li>\n               <p>The container instance must have at least version 1.67.0 of the container agent\n\t\t\t\t\tand at least version 1.67.0-1 of the <code>ecs-init</code> package </p>\n            </li>\n            <li>\n               <p>You can specify a maximum of 100 port ranges per container.</p>\n            </li>\n            <li>\n               <p>You do not specify a <code>hostPortRange</code>. The value of the <code>hostPortRange</code> is set\n\t\t\t\t\tas follows:</p>\n               <ul>\n                  <li>\n                     <p>For containers in a task with the <code>awsvpc</code> network mode,\n\t\t\t\t\t\t\tthe <code>hostPortRange</code> is set to the same value as the\n\t\t\t\t\t\t\t\t<code>containerPortRange</code>. This is a static mapping\n\t\t\t\t\t\t\tstrategy.</p>\n                  </li>\n                  <li>\n                     <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>containerPortRange</code> valid values are between 1 and\n\t\t\t\t\t65535.</p>\n            </li>\n            <li>\n               <p>A port can only be included in one port mapping per container.</p>\n            </li>\n            <li>\n               <p>You cannot specify overlapping port ranges.</p>\n            </li>\n            <li>\n               <p>The first port in the range must be less than last port in the range.</p>\n            </li>\n            <li>\n               <p>Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports.</p>\n               <p>For more information, see <a href=\"https://github.com/moby/moby/issues/11185\"> Issue #11185</a> on the Github website.</p>\n               <p>For information about how to  turn off the docker-proxy in the Docker daemon config file, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon\">Docker daemon</a> in the <i>Amazon ECS Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html\">\n               <code>DescribeTasks</code>\n            </a> to view the <code>hostPortRange</code> which\n\t\t\tare the host ports that are bound to the container ports.</p>"
                     }
                 }
             },
@@ -9088,7 +9088,7 @@
                         "output": {
                             "tasks": [
                                 {
-                                    "taskArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0",
+                                    "taskArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task/default/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0",
                                     "overrides": {
                                         "containerOverrides": [
                                             {
@@ -9097,13 +9097,13 @@
                                         ]
                                     },
                                     "lastStatus": "PENDING",
-                                    "containerInstanceArn": "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb",
+                                    "containerInstanceArn": "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/ffe3d344-77e2-476c-a4d0-bf560ad50acb",
                                     "desiredStatus": "RUNNING",
                                     "taskDefinitionArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1",
                                     "containers": [
                                         {
-                                            "containerArn": "arn:aws:ecs:us-east-1:<aws_account_id>:container/58591c8e-be29-4ddf-95aa-ee459d4c59fd",
-                                            "taskArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0",
+                                            "containerArn": "arn:aws:ecs:us-east-1:<aws_account_id>:container/default/58591c8e-be29-4ddf-95aa-ee459d4c59fd",
+                                            "taskArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task/default/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0",
                                             "lastStatus": "PENDING",
                                             "name": "sleep"
                                         }
@@ -12371,7 +12371,7 @@
                         "output": {
                             "protectedTasks": [
                                 {
-                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
                                     "protectionEnabled": true,
                                     "expirationDate": "2022-11-02T06:56:32.553Z"
                                 }

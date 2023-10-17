@@ -97,6 +97,12 @@
                         "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin12Max12PatternD12",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the assertion rule owner.</p>"
+                    }
                 }
             },
             "traits": {
@@ -157,6 +163,12 @@
                     "target": "com.amazonaws.route53recoverycontrolconfig#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin12Max12PatternD12",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the cluster owner.</p>"
                     }
                 }
             },
@@ -238,6 +250,12 @@
                     "target": "com.amazonaws.route53recoverycontrolconfig#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin12Max12PatternD12",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the control panel owner.</p>"
                     }
                 }
             },
@@ -1324,6 +1342,12 @@
                         "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin12Max12PatternD12",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the gating rule owner.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1357,6 +1381,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Update to a gating rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get information about the resource policy for a cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/resourcePolicy/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53recoverycontrolconfig#InternalServerException": {
@@ -2029,6 +2108,9 @@
                     "target": "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRule"
                 },
                 {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#GetResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecks"
                 },
                 {
@@ -2118,7 +2200,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2161,7 +2242,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2174,7 +2256,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2188,7 +2269,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2211,7 +2291,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2246,7 +2325,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2257,14 +2335,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2278,14 +2358,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2294,11 +2372,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2309,14 +2387,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2330,7 +2410,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2350,7 +2429,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2361,14 +2439,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2406,9 +2486,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2780,6 +2862,12 @@
                     "target": "com.amazonaws.route53recoverycontrolconfig#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment status of a routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin12Max12PatternD12",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the routing control owner.</p>"
                     }
                 }
             },
@@ -3337,6 +3425,16 @@
                 "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin0Max256PatternS"
             }
         },
+        "com.amazonaws.route53recoverycontrolconfig#__policy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 10240
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]+$"
+            }
+        },
         "com.amazonaws.route53recoverycontrolconfig#__string": {
             "type": "string"
         },
@@ -3358,6 +3456,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__stringMin12Max12PatternD12": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
             }
         },
         "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max128PatternAZaZ09": {

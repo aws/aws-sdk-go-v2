@@ -3811,6 +3811,13 @@
                         "smithy.api#documentation": "<p>Indicates whether the targeted port is blocked.</p>",
                         "smithy.api#jsonName": "blocked"
                     }
+                },
+                "DomainWithSuffix": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second and top level domain involved in the \n      activity that prompted GuardDuty to generate this finding.</p>",
+                        "smithy.api#jsonName": "domainWithSuffix"
+                    }
                 }
             },
             "traits": {
@@ -6280,7 +6287,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -6323,7 +6329,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -6336,7 +6343,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -6350,7 +6356,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -6373,7 +6378,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6408,7 +6412,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6419,14 +6422,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -6440,14 +6445,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -6456,18 +6459,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -6476,7 +6478,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -6496,14 +6499,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -6517,7 +6522,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6537,7 +6541,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6548,14 +6551,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -6566,9 +6571,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -8427,7 +8434,7 @@
                 "FindingCriteria": {
                     "target": "com.amazonaws.guardduty#FindingCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p>\n         <ul>\n            <li>\n               <p>JSON field name</p>\n            </li>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to 'true', only archived findings are listed. When it's set\n          to 'false', only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p>\n         <ul>\n            <li>\n               <p>JSON field name</p>\n            </li>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domainWithSuffix</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to 'true', only archived findings are listed. When it's set\n          to 'false', only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "findingCriteria"
                     }
                 },

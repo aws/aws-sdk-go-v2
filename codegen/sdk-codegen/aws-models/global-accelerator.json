@@ -4020,6 +4020,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "EndpointGroups",
                     "pageSize": "MaxResults"
                 }
             }

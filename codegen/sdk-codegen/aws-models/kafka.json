@@ -29,6 +29,22 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.kafka#AmazonMskCluster": {
+            "type": "structure",
+            "members": {
+                "MskClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon MSK cluster.</p>",
+                        "smithy.api#jsonName": "mskClusterArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>"
+            }
+        },
         "com.amazonaws.kafka#BadRequestException": {
             "type": "structure",
             "members": {
@@ -1377,6 +1393,83 @@
                 "smithy.api#documentation": "<p>Information about the broker access configuration.</p>"
             }
         },
+        "com.amazonaws.kafka#ConsumerGroupReplication": {
+            "type": "structure",
+            "members": {
+                "ConsumerGroupsToExclude": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the consumer groups that should not be replicated.</p>",
+                        "smithy.api#jsonName": "consumerGroupsToExclude"
+                    }
+                },
+                "ConsumerGroupsToReplicate": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the consumer groups to copy.</p>",
+                        "smithy.api#jsonName": "consumerGroupsToReplicate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DetectAndCopyNewConsumerGroups": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables synchronization of consumer groups to target cluster.</p>",
+                        "smithy.api#jsonName": "detectAndCopyNewConsumerGroups"
+                    }
+                },
+                "SynchroniseConsumerGroupOffsets": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.</p>",
+                        "smithy.api#jsonName": "synchroniseConsumerGroupOffsets"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about consumer group replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ConsumerGroupReplicationUpdate": {
+            "type": "structure",
+            "members": {
+                "ConsumerGroupsToExclude": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the consumer groups that should not be replicated.</p>",
+                        "smithy.api#jsonName": "consumerGroupsToExclude",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConsumerGroupsToReplicate": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the consumer groups to copy.</p>",
+                        "smithy.api#jsonName": "consumerGroupsToReplicate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DetectAndCopyNewConsumerGroups": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables synchronization of consumer groups to target cluster.</p>",
+                        "smithy.api#jsonName": "detectAndCopyNewConsumerGroups",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SynchroniseConsumerGroupOffsets": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.</p>",
+                        "smithy.api#jsonName": "synchroniseConsumerGroupOffsets",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about consumer group replication.</p>"
+            }
+        },
         "com.amazonaws.kafka#CreateCluster": {
             "type": "operation",
             "input": {
@@ -1775,6 +1868,133 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#CreateReplicator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#CreateReplicatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#CreateReplicatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the replicator.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/replication/v1/replicators",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#CreateReplicatorRequest": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.kafka#__stringMax1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary description of the replicator.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "KafkaClusters": {
+                    "target": "com.amazonaws.kafka#__listOfKafkaCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Clusters to use in setting up sources / targets for replication.</p>",
+                        "smithy.api#jsonName": "kafkaClusters",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicationInfoList": {
+                    "target": "com.amazonaws.kafka#__listOfReplicationInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.</p>",
+                        "smithy.api#jsonName": "replicationInfoList",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicatorName": {
+                    "target": "com.amazonaws.kafka#__stringMin1Max128Pattern09AZaZ09AZaZ0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the replicator. Alpha-numeric characters with '-' are allowed.</p>",
+                        "smithy.api#jsonName": "replicatorName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceExecutionRoleArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)</p>",
+                        "smithy.api#jsonName": "serviceExecutionRoleArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of tags to attach to created Replicator.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a replicator using the specified configuration.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#CreateReplicatorResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorArn"
+                    }
+                },
+                "ReplicatorName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the replicator provided by the customer.</p>",
+                        "smithy.api#jsonName": "replicatorName"
+                    }
+                },
+                "ReplicatorState": {
+                    "target": "com.amazonaws.kafka#ReplicatorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#CreateVpcConnection": {
             "type": "operation",
             "input": {
@@ -2123,6 +2343,91 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
                         "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteReplicator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DeleteReplicatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DeleteReplicatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a replicator.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/replication/v1/replicators/{ReplicatorArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DeleteReplicatorRequest": {
+            "type": "structure",
+            "members": {
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the replicator.</p>",
+                        "smithy.api#httpQuery": "currentVersion"
+                    }
+                },
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteReplicatorResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorArn"
+                    }
+                },
+                "ReplicatorState": {
+                    "target": "com.amazonaws.kafka#ReplicatorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorState"
                     }
                 }
             },
@@ -2672,6 +2977,161 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. \n               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>",
                         "smithy.api#jsonName": "serverProperties"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeReplicator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DescribeReplicatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DescribeReplicatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a replicator.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/replication/v1/replicators/{ReplicatorArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DescribeReplicatorRequest": {
+            "type": "structure",
+            "members": {
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator to be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeReplicatorResponse": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the replicator was created.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version number of the replicator.</p>",
+                        "smithy.api#jsonName": "currentVersion"
+                    }
+                },
+                "IsReplicatorReference": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this resource is a replicator reference.</p>",
+                        "smithy.api#jsonName": "isReplicatorReference"
+                    }
+                },
+                "KafkaClusters": {
+                    "target": "com.amazonaws.kafka#__listOfKafkaClusterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Clusters used in setting up sources / targets for replication.</p>",
+                        "smithy.api#jsonName": "kafkaClusters"
+                    }
+                },
+                "ReplicationInfoList": {
+                    "target": "com.amazonaws.kafka#__listOfReplicationInfoDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.</p>",
+                        "smithy.api#jsonName": "replicationInfoList"
+                    }
+                },
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorArn"
+                    }
+                },
+                "ReplicatorDescription": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorDescription"
+                    }
+                },
+                "ReplicatorName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorName"
+                    }
+                },
+                "ReplicatorResourceArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator resource in the region where the replicator was created.</p>",
+                        "smithy.api#jsonName": "replicatorResourceArn"
+                    }
+                },
+                "ReplicatorState": {
+                    "target": "com.amazonaws.kafka#ReplicatorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorState"
+                    }
+                },
+                "ServiceExecutionRoleArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)</p>",
+                        "smithy.api#jsonName": "serviceExecutionRoleArn"
+                    }
+                },
+                "StateInfo": {
+                    "target": "com.amazonaws.kafka#ReplicationStateInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the state of the replicator.</p>",
+                        "smithy.api#jsonName": "stateInfo"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of tags attached to the Replicator.</p>",
+                        "smithy.api#jsonName": "tags"
                     }
                 }
             },
@@ -3339,6 +3799,9 @@
                     "target": "com.amazonaws.kafka#CreateConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.kafka#CreateReplicator"
+                },
+                {
                     "target": "com.amazonaws.kafka#CreateVpcConnection"
                 },
                 {
@@ -3349,6 +3812,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#DeleteConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.kafka#DeleteReplicator"
                 },
                 {
                     "target": "com.amazonaws.kafka#DeleteVpcConnection"
@@ -3370,6 +3836,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#DescribeConfigurationRevision"
+                },
+                {
+                    "target": "com.amazonaws.kafka#DescribeReplicator"
                 },
                 {
                     "target": "com.amazonaws.kafka#DescribeVpcConnection"
@@ -3409,6 +3878,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#ListNodes"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ListReplicators"
                 },
                 {
                     "target": "com.amazonaws.kafka#ListScramSecrets"
@@ -3457,6 +3929,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateMonitoring"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UpdateReplicationInfo"
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateSecurity"
@@ -3521,7 +3996,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3564,7 +4038,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3577,7 +4052,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3591,7 +4065,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3614,7 +4087,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3649,7 +4121,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3660,14 +4131,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3681,14 +4154,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3697,18 +4168,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -3717,7 +4187,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -3737,14 +4208,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3758,7 +4231,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3778,7 +4250,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3789,14 +4260,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -3807,9 +4280,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -4431,6 +4906,104 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.kafka#KafkaCluster": {
+            "type": "structure",
+            "members": {
+                "AmazonMskCluster": {
+                    "target": "com.amazonaws.kafka#AmazonMskCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>",
+                        "smithy.api#jsonName": "amazonMskCluster",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.kafka#KafkaClusterClientVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "vpcConfig",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about Kafka Cluster to be used as source / target for replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterClientVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups to attach to the ENIs for the broker nodes.</p>",
+                        "smithy.api#jsonName": "securityGroupIds"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnets in the client VPC to connect to.</p>",
+                        "smithy.api#jsonName": "subnetIds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterDescription": {
+            "type": "structure",
+            "members": {
+                "AmazonMskCluster": {
+                    "target": "com.amazonaws.kafka#AmazonMskCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>",
+                        "smithy.api#jsonName": "amazonMskCluster"
+                    }
+                },
+                "KafkaClusterAlias": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the Kafka cluster. Used to prefix names of replicated topics.</p>",
+                        "smithy.api#jsonName": "kafkaClusterAlias"
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.kafka#KafkaClusterClientVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "vpcConfig"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about Kafka Cluster used as source / target for replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterSummary": {
+            "type": "structure",
+            "members": {
+                "AmazonMskCluster": {
+                    "target": "com.amazonaws.kafka#AmazonMskCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>",
+                        "smithy.api#jsonName": "amazonMskCluster"
+                    }
+                },
+                "KafkaClusterAlias": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the Kafka cluster. Used to prefix names of replicated topics.</p>",
+                        "smithy.api#jsonName": "kafkaClusterAlias"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarized information about Kafka Cluster used as source / target for replication.</p>"
             }
         },
         "com.amazonaws.kafka#KafkaVersion": {
@@ -5269,6 +5842,103 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List containing a NodeInfo object.</p>",
                         "smithy.api#jsonName": "nodeInfoList"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#ListReplicators": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#ListReplicatorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#ListReplicatorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the replicators.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/replication/v1/replicators",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Replicators",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kafka#ListReplicatorsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response of ListReplicators is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListReplicators.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "ReplicatorNameFilter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns replicators starting with given name.</p>",
+                        "smithy.api#httpQuery": "replicatorNameFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#ListReplicatorsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response of ListReplicators is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListReplicators.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "Replicators": {
+                    "target": "com.amazonaws.kafka#__listOfReplicatorSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List containing information of each of the replicators in the account.</p>",
+                        "smithy.api#jsonName": "replicators"
                     }
                 }
             },
@@ -6257,6 +6927,250 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#ReplicationInfo": {
+            "type": "structure",
+            "members": {
+                "ConsumerGroupReplication": {
+                    "target": "com.amazonaws.kafka#ConsumerGroupReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration relating to consumer group replication.</p>",
+                        "smithy.api#jsonName": "consumerGroupReplication",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceKafkaClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source Kafka cluster.</p>",
+                        "smithy.api#jsonName": "sourceKafkaClusterArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetCompressionType": {
+                    "target": "com.amazonaws.kafka#TargetCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression type to use when producing records to target cluster.</p>",
+                        "smithy.api#jsonName": "targetCompressionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetKafkaClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the target Kafka cluster.</p>",
+                        "smithy.api#jsonName": "targetKafkaClusterArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicReplication": {
+                    "target": "com.amazonaws.kafka#TopicReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration relating to topic replication.</p>",
+                        "smithy.api#jsonName": "topicReplication",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration for replication between a source and target Kafka cluster.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicationInfoDescription": {
+            "type": "structure",
+            "members": {
+                "ConsumerGroupReplication": {
+                    "target": "com.amazonaws.kafka#ConsumerGroupReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration relating to consumer group replication.</p>",
+                        "smithy.api#jsonName": "consumerGroupReplication"
+                    }
+                },
+                "SourceKafkaClusterAlias": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the source Kafka cluster.</p>",
+                        "smithy.api#jsonName": "sourceKafkaClusterAlias"
+                    }
+                },
+                "TargetCompressionType": {
+                    "target": "com.amazonaws.kafka#TargetCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression type to use when producing records to target cluster.</p>",
+                        "smithy.api#jsonName": "targetCompressionType"
+                    }
+                },
+                "TargetKafkaClusterAlias": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the target Kafka cluster.</p>",
+                        "smithy.api#jsonName": "targetKafkaClusterAlias"
+                    }
+                },
+                "TopicReplication": {
+                    "target": "com.amazonaws.kafka#TopicReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration relating to topic replication.</p>",
+                        "smithy.api#jsonName": "topicReplication"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration for replication between a source and target Kafka cluster (sourceKafkaClusterAlias -> targetKafkaClusterAlias)</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicationInfoSummary": {
+            "type": "structure",
+            "members": {
+                "SourceKafkaClusterAlias": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the source Kafka cluster.</p>",
+                        "smithy.api#jsonName": "sourceKafkaClusterAlias"
+                    }
+                },
+                "TargetKafkaClusterAlias": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the target Kafka cluster.</p>",
+                        "smithy.api#jsonName": "targetKafkaClusterAlias"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarized information of replication between clusters.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicationStateInfo": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Code that describes the current state of the replicator.",
+                        "smithy.api#jsonName": "code"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Message that describes the state of the replicator.",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Details about the state of a replicator"
+            }
+        },
+        "com.amazonaws.kafka#ReplicatorState": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a replicator.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicatorSummary": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the replicator was created.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the replicator.</p>",
+                        "smithy.api#jsonName": "currentVersion"
+                    }
+                },
+                "IsReplicatorReference": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this resource is a replicator reference.</p>",
+                        "smithy.api#jsonName": "isReplicatorReference"
+                    }
+                },
+                "KafkaClustersSummary": {
+                    "target": "com.amazonaws.kafka#__listOfKafkaClusterSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Clusters used in setting up sources / targets for replication.</p>",
+                        "smithy.api#jsonName": "kafkaClustersSummary"
+                    }
+                },
+                "ReplicationInfoSummaryList": {
+                    "target": "com.amazonaws.kafka#__listOfReplicationInfoSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summarized information of replications between clusters.</p>",
+                        "smithy.api#jsonName": "replicationInfoSummaryList"
+                    }
+                },
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorArn"
+                    }
+                },
+                "ReplicatorName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorName"
+                    }
+                },
+                "ReplicatorResourceArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator resource in the region where the replicator was created.</p>",
+                        "smithy.api#jsonName": "replicatorResourceArn"
+                    }
+                },
+                "ReplicatorState": {
+                    "target": "com.amazonaws.kafka#ReplicatorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a replicator.</p>"
+            }
+        },
         "com.amazonaws.kafka#S3": {
             "type": "structure",
             "members": {
@@ -6522,6 +7436,44 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.kafka#TargetCompressionType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                },
+                "SNAPPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPPY"
+                    }
+                },
+                "LZ4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LZ4"
+                    }
+                },
+                "ZSTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZSTD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of compression to use producing records to the target cluster.</p>"
+            }
+        },
         "com.amazonaws.kafka#Tls": {
             "type": "structure",
             "members": {
@@ -6566,6 +7518,98 @@
                 "smithy.api#documentation": "<p>Returns information about an error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.kafka#TopicReplication": {
+            "type": "structure",
+            "members": {
+                "CopyAccessControlListsForTopics": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.</p>",
+                        "smithy.api#jsonName": "copyAccessControlListsForTopics"
+                    }
+                },
+                "CopyTopicConfigurations": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to periodically configure remote topics to match their corresponding upstream topics.</p>",
+                        "smithy.api#jsonName": "copyTopicConfigurations"
+                    }
+                },
+                "DetectAndCopyNewTopics": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to periodically check for new topics and partitions.</p>",
+                        "smithy.api#jsonName": "detectAndCopyNewTopics"
+                    }
+                },
+                "TopicsToExclude": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax249",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the topics that should not be replicated.</p>",
+                        "smithy.api#jsonName": "topicsToExclude"
+                    }
+                },
+                "TopicsToReplicate": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax249",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the topics to copy.</p>",
+                        "smithy.api#jsonName": "topicsToReplicate",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about topic replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#TopicReplicationUpdate": {
+            "type": "structure",
+            "members": {
+                "CopyAccessControlListsForTopics": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.</p>",
+                        "smithy.api#jsonName": "copyAccessControlListsForTopics",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CopyTopicConfigurations": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to periodically configure remote topics to match their corresponding upstream topics.</p>",
+                        "smithy.api#jsonName": "copyTopicConfigurations",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DetectAndCopyNewTopics": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to periodically check for new topics and partitions.</p>",
+                        "smithy.api#jsonName": "detectAndCopyNewTopics",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicsToExclude": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax249",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the topics that should not be replicated.</p>",
+                        "smithy.api#jsonName": "topicsToExclude",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicsToReplicate": {
+                    "target": "com.amazonaws.kafka#__listOf__stringMax249",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of regular expression patterns indicating the topics to copy.</p>",
+                        "smithy.api#jsonName": "topicsToReplicate",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for updating the topic replication of a replicator.</p>"
             }
         },
         "com.amazonaws.kafka#Unauthenticated": {
@@ -7430,6 +8474,123 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#UpdateReplicationInfo": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateReplicationInfoRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateReplicationInfoResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates replication info of a replicator.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/replication/v1/replicators/{ReplicatorArn}/replication-info",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateReplicationInfoRequest": {
+            "type": "structure",
+            "members": {
+                "ConsumerGroupReplication": {
+                    "target": "com.amazonaws.kafka#ConsumerGroupReplicationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated consumer group replication information.</p>",
+                        "smithy.api#jsonName": "consumerGroupReplication"
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current replicator version.</p>",
+                        "smithy.api#jsonName": "currentVersion",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceKafkaClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source Kafka cluster.</p>",
+                        "smithy.api#jsonName": "sourceKafkaClusterArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetKafkaClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the target Kafka cluster.</p>",
+                        "smithy.api#jsonName": "targetKafkaClusterArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicReplication": {
+                    "target": "com.amazonaws.kafka#TopicReplicationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated topic replication information.</p>",
+                        "smithy.api#jsonName": "topicReplication"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Update information relating to replication between a given source and target Kafka cluster.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateReplicationInfoResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicatorArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorArn"
+                    }
+                },
+                "ReplicatorState": {
+                    "target": "com.amazonaws.kafka#ReplicatorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the replicator.</p>",
+                        "smithy.api#jsonName": "replicatorState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#UpdateSecurity": {
             "type": "operation",
             "input": {
@@ -8120,6 +9281,24 @@
                 "target": "com.amazonaws.kafka#ConfigurationRevision"
             }
         },
+        "com.amazonaws.kafka#__listOfKafkaCluster": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#KafkaCluster"
+            }
+        },
+        "com.amazonaws.kafka#__listOfKafkaClusterDescription": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#KafkaClusterDescription"
+            }
+        },
+        "com.amazonaws.kafka#__listOfKafkaClusterSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#KafkaClusterSummary"
+            }
+        },
         "com.amazonaws.kafka#__listOfKafkaVersion": {
             "type": "list",
             "member": {
@@ -8130,6 +9309,30 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#NodeInfo"
+            }
+        },
+        "com.amazonaws.kafka#__listOfReplicationInfo": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ReplicationInfo"
+            }
+        },
+        "com.amazonaws.kafka#__listOfReplicationInfoDescription": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ReplicationInfoDescription"
+            }
+        },
+        "com.amazonaws.kafka#__listOfReplicationInfoSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ReplicationInfoSummary"
+            }
+        },
+        "com.amazonaws.kafka#__listOfReplicatorSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ReplicatorSummary"
             }
         },
         "com.amazonaws.kafka#__listOfUnprocessedScramSecret": {
@@ -8156,6 +9359,18 @@
                 "target": "com.amazonaws.kafka#__string"
             }
         },
+        "com.amazonaws.kafka#__listOf__stringMax249": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#__stringMax249"
+            }
+        },
+        "com.amazonaws.kafka#__listOf__stringMax256": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#__stringMax256"
+            }
+        },
         "com.amazonaws.kafka#__long": {
             "type": "long"
         },
@@ -8171,6 +9386,33 @@
         "com.amazonaws.kafka#__string": {
             "type": "string"
         },
+        "com.amazonaws.kafka#__stringMax1024": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.kafka#__stringMax249": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 249
+                }
+            }
+        },
+        "com.amazonaws.kafka#__stringMax256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.kafka#__stringMin1Max128": {
             "type": "string",
             "traits": {
@@ -8178,6 +9420,16 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.kafka#__stringMin1Max128Pattern09AZaZ09AZaZ0": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][0-9A-Za-z-]{0,}$"
             }
         },
         "com.amazonaws.kafka#__stringMin1Max64": {
