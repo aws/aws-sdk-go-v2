@@ -250,6 +250,26 @@ func (m *validateOpDescribeSafetyRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssociatedRoute53HealthChecks struct {
 }
 
@@ -476,6 +496,10 @@ func addOpDescribeRoutingControlValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeSafetyRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSafetyRule{}, middleware.After)
+}
+
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
 func addOpListAssociatedRoute53HealthChecksValidationMiddleware(stack *middleware.Stack) error {
@@ -809,6 +833,21 @@ func validateOpDescribeSafetyRuleInput(v *DescribeSafetyRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSafetyRuleInput"}
 	if v.SafetyRuleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SafetyRuleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

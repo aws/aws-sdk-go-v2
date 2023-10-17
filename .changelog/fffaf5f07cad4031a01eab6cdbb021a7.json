@@ -1,0 +1,8 @@
+{
+    "id": "fffaf5f0-7cad-4031-a01e-ab6cdbb021a7",
+    "type": "feature",
+    "description": "Adds Owner field to ListRoutingControls API.",
+    "modules": [
+        "service/route53recoverycluster"
+    ]
+}

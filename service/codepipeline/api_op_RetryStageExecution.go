@@ -16,10 +16,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resumes the pipeline execution by retrying the last failed actions in a stage.
-// You can retry a stage immediately if any of the actions in the stage fail. When
-// you retry, all actions that are still in progress continue working, and failed
-// actions are triggered again.
+// You can retry a stage that has failed without having to run a pipeline again
+// from the beginning. You do this by either retrying the failed actions in a stage
+// or by retrying all actions in the stage starting from the first action in the
+// stage. When you retry the failed actions in a stage, all actions that are still
+// in progress continue working, and failed actions are triggered again. When you
+// retry a failed stage from the first action in the stage, the stage cannot have
+// any actions in progress. Before a stage can be retried, it must either have all
+// actions failed or some actions failed and some succeeded.
 func (c *Client) RetryStageExecution(ctx context.Context, params *RetryStageExecutionInput, optFns ...func(*Options)) (*RetryStageExecutionOutput, error) {
 	if params == nil {
 		params = &RetryStageExecutionInput{}
@@ -50,8 +54,7 @@ type RetryStageExecutionInput struct {
 	// This member is required.
 	PipelineName *string
 
-	// The scope of the retry attempt. Currently, the only supported value is
-	// FAILED_ACTIONS.
+	// The scope of the retry attempt.
 	//
 	// This member is required.
 	RetryMode types.StageRetryMode

@@ -22,10 +22,10 @@ import (
 // panel ARN, this call lists the routing controls in the control panel. Otherwise,
 // it lists all the routing controls in the cluster. A routing control is a simple
 // on/off switch in Route 53 ARC that you can use to route traffic to cells. When a
-// routing control state is On, traffic flows to a cell. When the state is Off,
-// traffic does not flow. Before you can create a routing control, you must first
-// create a cluster, and then host the control in a control panel on the cluster.
-// For more information, see Create routing control structures (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html)
+// routing control state is set to ON, traffic flows to a cell. When the state is
+// set to OFF, traffic does not flow. Before you can create a routing control, you
+// must first create a cluster, and then host the control in a control panel on the
+// cluster. For more information, see Create routing control structures (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html)
 // in the Amazon Route 53 Application Recovery Controller Developer Guide. You
 // access one of the endpoints for the cluster to get or update the routing control
 // state to redirect traffic for your application. You must specify Regional

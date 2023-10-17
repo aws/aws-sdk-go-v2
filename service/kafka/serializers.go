@@ -526,6 +526,112 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationInput(v *CreateConfigura
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateReplicator struct {
+}
+
+func (*awsRestjson1_serializeOpCreateReplicator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateReplicator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateReplicatorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/replication/v1/replicators")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateReplicatorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateReplicatorInput(v *CreateReplicatorInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateReplicatorInput(v *CreateReplicatorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.KafkaClusters != nil {
+		ok := object.Key("kafkaClusters")
+		if err := awsRestjson1_serializeDocument__listOfKafkaCluster(v.KafkaClusters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicationInfoList != nil {
+		ok := object.Key("replicationInfoList")
+		if err := awsRestjson1_serializeDocument__listOfReplicationInfo(v.ReplicationInfoList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicatorName != nil {
+		ok := object.Key("replicatorName")
+		ok.String(*v.ReplicatorName)
+	}
+
+	if v.ServiceExecutionRoleArn != nil {
+		ok := object.Key("serviceExecutionRoleArn")
+		ok.String(*v.ServiceExecutionRoleArn)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateVpcConnection struct {
 }
 
@@ -824,6 +930,75 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationInput(v *DeleteConfi
 	}
 	if v.Arn != nil {
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteReplicator struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteReplicator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteReplicator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteReplicatorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/replication/v1/replicators/{ReplicatorArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteReplicatorInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteReplicatorInput(v *DeleteReplicatorInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CurrentVersion != nil {
+		encoder.SetQuery("currentVersion").String(*v.CurrentVersion)
+	}
+
+	if v.ReplicatorArn == nil || len(*v.ReplicatorArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ReplicatorArn must not be empty")}
+	}
+	if v.ReplicatorArn != nil {
+		if err := encoder.SetURI("ReplicatorArn").String(*v.ReplicatorArn); err != nil {
 			return err
 		}
 	}
@@ -1285,6 +1460,71 @@ func awsRestjson1_serializeOpHttpBindingsDescribeConfigurationRevisionInput(v *D
 
 	{
 		if err := encoder.SetURI("Revision").Long(v.Revision); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeReplicator struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeReplicator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeReplicator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeReplicatorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/replication/v1/replicators/{ReplicatorArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeReplicatorInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeReplicatorInput(v *DescribeReplicatorInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ReplicatorArn == nil || len(*v.ReplicatorArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ReplicatorArn must not be empty")}
+	}
+	if v.ReplicatorArn != nil {
+		if err := encoder.SetURI("ReplicatorArn").String(*v.ReplicatorArn); err != nil {
 			return err
 		}
 	}
@@ -2175,6 +2415,74 @@ func awsRestjson1_serializeOpHttpBindingsListNodesInput(v *ListNodesInput, encod
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListReplicators struct {
+}
+
+func (*awsRestjson1_serializeOpListReplicators) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListReplicators) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListReplicatorsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/replication/v1/replicators")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListReplicatorsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListReplicatorsInput(v *ListReplicatorsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ReplicatorNameFilter != nil {
+		encoder.SetQuery("replicatorNameFilter").String(*v.ReplicatorNameFilter)
 	}
 
 	return nil
@@ -3585,6 +3893,118 @@ func awsRestjson1_serializeOpDocumentUpdateMonitoringInput(v *UpdateMonitoringIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateReplicationInfo struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateReplicationInfo) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateReplicationInfo) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateReplicationInfoInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/replication/v1/replicators/{ReplicatorArn}/replication-info")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateReplicationInfoInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateReplicationInfoInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateReplicationInfoInput(v *UpdateReplicationInfoInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ReplicatorArn == nil || len(*v.ReplicatorArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ReplicatorArn must not be empty")}
+	}
+	if v.ReplicatorArn != nil {
+		if err := encoder.SetURI("ReplicatorArn").String(*v.ReplicatorArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateReplicationInfoInput(v *UpdateReplicationInfoInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerGroupReplication != nil {
+		ok := object.Key("consumerGroupReplication")
+		if err := awsRestjson1_serializeDocumentConsumerGroupReplicationUpdate(v.ConsumerGroupReplication, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("currentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	if v.SourceKafkaClusterArn != nil {
+		ok := object.Key("sourceKafkaClusterArn")
+		ok.String(*v.SourceKafkaClusterArn)
+	}
+
+	if v.TargetKafkaClusterArn != nil {
+		ok := object.Key("targetKafkaClusterArn")
+		ok.String(*v.TargetKafkaClusterArn)
+	}
+
+	if v.TopicReplication != nil {
+		ok := object.Key("topicReplication")
+		if err := awsRestjson1_serializeDocumentTopicReplicationUpdate(v.TopicReplication, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateSecurity struct {
 }
 
@@ -3803,6 +4223,28 @@ func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOf__stringMax249(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOf__stringMax256(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfBrokerEBSVolumeInfo(v []types.BrokerEBSVolumeInfo, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3810,6 +4252,32 @@ func awsRestjson1_serializeDocument__listOfBrokerEBSVolumeInfo(v []types.BrokerE
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentBrokerEBSVolumeInfo(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfKafkaCluster(v []types.KafkaCluster, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKafkaCluster(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfReplicationInfo(v []types.ReplicationInfo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentReplicationInfo(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3837,6 +4305,18 @@ func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value sm
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAmazonMskCluster(v *types.AmazonMskCluster, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MskClusterArn != nil {
+		ok := object.Key("mskClusterArn")
+		ok.String(*v.MskClusterArn)
+	}
+
 	return nil
 }
 
@@ -4027,6 +4507,68 @@ func awsRestjson1_serializeDocumentConnectivityInfo(v *types.ConnectivityInfo, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConsumerGroupReplication(v *types.ConsumerGroupReplication, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerGroupsToExclude != nil {
+		ok := object.Key("consumerGroupsToExclude")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax256(v.ConsumerGroupsToExclude, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConsumerGroupsToReplicate != nil {
+		ok := object.Key("consumerGroupsToReplicate")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax256(v.ConsumerGroupsToReplicate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DetectAndCopyNewConsumerGroups {
+		ok := object.Key("detectAndCopyNewConsumerGroups")
+		ok.Boolean(v.DetectAndCopyNewConsumerGroups)
+	}
+
+	if v.SynchroniseConsumerGroupOffsets {
+		ok := object.Key("synchroniseConsumerGroupOffsets")
+		ok.Boolean(v.SynchroniseConsumerGroupOffsets)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConsumerGroupReplicationUpdate(v *types.ConsumerGroupReplicationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerGroupsToExclude != nil {
+		ok := object.Key("consumerGroupsToExclude")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax256(v.ConsumerGroupsToExclude, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConsumerGroupsToReplicate != nil {
+		ok := object.Key("consumerGroupsToReplicate")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax256(v.ConsumerGroupsToReplicate, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("detectAndCopyNewConsumerGroups")
+		ok.Boolean(v.DetectAndCopyNewConsumerGroups)
+	}
+
+	{
+		ok := object.Key("synchroniseConsumerGroupOffsets")
+		ok.Boolean(v.SynchroniseConsumerGroupOffsets)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEBSStorageInfo(v *types.EBSStorageInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4132,6 +4674,48 @@ func awsRestjson1_serializeDocumentJmxExporterInfo(v *types.JmxExporterInfo, val
 	{
 		ok := object.Key("enabledInBroker")
 		ok.Boolean(v.EnabledInBroker)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaCluster(v *types.KafkaCluster, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AmazonMskCluster != nil {
+		ok := object.Key("amazonMskCluster")
+		if err := awsRestjson1_serializeDocumentAmazonMskCluster(v.AmazonMskCluster, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsRestjson1_serializeDocumentKafkaClusterClientVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaClusterClientVpcConfig(v *types.KafkaClusterClientVpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.SubnetIds, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4296,6 +4880,42 @@ func awsRestjson1_serializeDocumentPublicAccess(v *types.PublicAccess, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentReplicationInfo(v *types.ReplicationInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerGroupReplication != nil {
+		ok := object.Key("consumerGroupReplication")
+		if err := awsRestjson1_serializeDocumentConsumerGroupReplication(v.ConsumerGroupReplication, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceKafkaClusterArn != nil {
+		ok := object.Key("sourceKafkaClusterArn")
+		ok.String(*v.SourceKafkaClusterArn)
+	}
+
+	if len(v.TargetCompressionType) > 0 {
+		ok := object.Key("targetCompressionType")
+		ok.String(string(v.TargetCompressionType))
+	}
+
+	if v.TargetKafkaClusterArn != nil {
+		ok := object.Key("targetKafkaClusterArn")
+		ok.String(*v.TargetKafkaClusterArn)
+	}
+
+	if v.TopicReplication != nil {
+		ok := object.Key("topicReplication")
+		if err := awsRestjson1_serializeDocumentTopicReplication(v.TopicReplication, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3(v *types.S3, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4428,6 +5048,78 @@ func awsRestjson1_serializeDocumentTls(v *types.Tls, value smithyjson.Value) err
 	if v.Enabled {
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopicReplication(v *types.TopicReplication, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CopyAccessControlListsForTopics {
+		ok := object.Key("copyAccessControlListsForTopics")
+		ok.Boolean(v.CopyAccessControlListsForTopics)
+	}
+
+	if v.CopyTopicConfigurations {
+		ok := object.Key("copyTopicConfigurations")
+		ok.Boolean(v.CopyTopicConfigurations)
+	}
+
+	if v.DetectAndCopyNewTopics {
+		ok := object.Key("detectAndCopyNewTopics")
+		ok.Boolean(v.DetectAndCopyNewTopics)
+	}
+
+	if v.TopicsToExclude != nil {
+		ok := object.Key("topicsToExclude")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax249(v.TopicsToExclude, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TopicsToReplicate != nil {
+		ok := object.Key("topicsToReplicate")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax249(v.TopicsToReplicate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopicReplicationUpdate(v *types.TopicReplicationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("copyAccessControlListsForTopics")
+		ok.Boolean(v.CopyAccessControlListsForTopics)
+	}
+
+	{
+		ok := object.Key("copyTopicConfigurations")
+		ok.Boolean(v.CopyTopicConfigurations)
+	}
+
+	{
+		ok := object.Key("detectAndCopyNewTopics")
+		ok.Boolean(v.DetectAndCopyNewTopics)
+	}
+
+	if v.TopicsToExclude != nil {
+		ok := object.Key("topicsToExclude")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax249(v.TopicsToExclude, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TopicsToReplicate != nil {
+		ok := object.Key("topicsToReplicate")
+		if err := awsRestjson1_serializeDocument__listOf__stringMax249(v.TopicsToReplicate, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

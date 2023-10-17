@@ -110,6 +110,26 @@ func (m *validateOpCreateConfiguration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateReplicator struct {
+}
+
+func (*validateOpCreateReplicator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReplicator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReplicatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReplicatorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVpcConnection struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDeleteConfiguration) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteReplicator struct {
+}
+
+func (*validateOpDeleteReplicator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteReplicator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteReplicatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteReplicatorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +365,26 @@ func (m *validateOpDescribeConfigurationRevision) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeConfigurationRevisionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReplicator struct {
+}
+
+func (*validateOpDescribeReplicator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReplicator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReplicatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReplicatorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +850,26 @@ func (m *validateOpUpdateMonitoring) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateReplicationInfo struct {
+}
+
+func (*validateOpUpdateReplicationInfo) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateReplicationInfo) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateReplicationInfoInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateReplicationInfoInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSecurity struct {
 }
 
@@ -850,6 +930,10 @@ func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateConfiguration{}, middleware.After)
 }
 
+func addOpCreateReplicatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReplicator{}, middleware.After)
+}
+
 func addOpCreateVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpcConnection{}, middleware.After)
 }
@@ -864,6 +948,10 @@ func addOpDeleteClusterPolicyValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConfiguration{}, middleware.After)
+}
+
+func addOpDeleteReplicatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteReplicator{}, middleware.After)
 }
 
 func addOpDeleteVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -892,6 +980,10 @@ func addOpDescribeConfigurationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeConfigurationRevisionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConfigurationRevision{}, middleware.After)
+}
+
+func addOpDescribeReplicatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReplicator{}, middleware.After)
 }
 
 func addOpDescribeVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -986,6 +1078,10 @@ func addOpUpdateMonitoringValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitoring{}, middleware.After)
 }
 
+func addOpUpdateReplicationInfoValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateReplicationInfo{}, middleware.After)
+}
+
 func addOpUpdateSecurityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSecurity{}, middleware.After)
 }
@@ -1011,6 +1107,40 @@ func validate__listOfBrokerEBSVolumeInfo(v []types.BrokerEBSVolumeInfo) error {
 	}
 }
 
+func validate__listOfKafkaCluster(v []types.KafkaCluster) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfKafkaCluster"}
+	for i := range v {
+		if err := validateKafkaCluster(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfReplicationInfo(v []types.ReplicationInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfReplicationInfo"}
+	for i := range v {
+		if err := validateReplicationInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfVpcConfig(v []types.VpcConfig) error {
 	if v == nil {
 		return nil
@@ -1020,6 +1150,21 @@ func validate__listOfVpcConfig(v []types.VpcConfig) error {
 		if err := validateVpcConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAmazonMskCluster(v *types.AmazonMskCluster) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonMskCluster"}
+	if v.MskClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MskClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1115,6 +1260,39 @@ func validateConfigurationInfo(v *types.ConfigurationInfo) error {
 	}
 }
 
+func validateConsumerGroupReplication(v *types.ConsumerGroupReplication) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsumerGroupReplication"}
+	if v.ConsumerGroupsToReplicate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerGroupsToReplicate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConsumerGroupReplicationUpdate(v *types.ConsumerGroupReplicationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsumerGroupReplicationUpdate"}
+	if v.ConsumerGroupsToExclude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerGroupsToExclude"))
+	}
+	if v.ConsumerGroupsToReplicate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerGroupsToReplicate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryptionAtRest(v *types.EncryptionAtRest) error {
 	if v == nil {
 		return nil
@@ -1164,6 +1342,47 @@ func validateJmxExporterInfo(v *types.JmxExporterInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JmxExporterInfo"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaCluster(v *types.KafkaCluster) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaCluster"}
+	if v.AmazonMskCluster == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AmazonMskCluster"))
+	} else if v.AmazonMskCluster != nil {
+		if err := validateAmazonMskCluster(v.AmazonMskCluster); err != nil {
+			invalidParams.AddNested("AmazonMskCluster", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfig"))
+	} else if v.VpcConfig != nil {
+		if err := validateKafkaClusterClientVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaClusterClientVpcConfig(v *types.KafkaClusterClientVpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterClientVpcConfig"}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1285,6 +1504,41 @@ func validateProvisionedRequest(v *types.ProvisionedRequest) error {
 	}
 }
 
+func validateReplicationInfo(v *types.ReplicationInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationInfo"}
+	if v.ConsumerGroupReplication == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerGroupReplication"))
+	} else if v.ConsumerGroupReplication != nil {
+		if err := validateConsumerGroupReplication(v.ConsumerGroupReplication); err != nil {
+			invalidParams.AddNested("ConsumerGroupReplication", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceKafkaClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceKafkaClusterArn"))
+	}
+	if len(v.TargetCompressionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetCompressionType"))
+	}
+	if v.TargetKafkaClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetKafkaClusterArn"))
+	}
+	if v.TopicReplication == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicReplication"))
+	} else if v.TopicReplication != nil {
+		if err := validateTopicReplication(v.TopicReplication); err != nil {
+			invalidParams.AddNested("TopicReplication", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3(v *types.S3) error {
 	if v == nil {
 		return nil
@@ -1308,6 +1562,39 @@ func validateServerlessRequest(v *types.ServerlessRequest) error {
 		if err := validate__listOfVpcConfig(v.VpcConfigs); err != nil {
 			invalidParams.AddNested("VpcConfigs", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicReplication(v *types.TopicReplication) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicReplication"}
+	if v.TopicsToReplicate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicsToReplicate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicReplicationUpdate(v *types.TopicReplicationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicReplicationUpdate"}
+	if v.TopicsToExclude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicsToExclude"))
+	}
+	if v.TopicsToReplicate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicsToReplicate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1455,6 +1742,38 @@ func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
 	}
 }
 
+func validateOpCreateReplicatorInput(v *CreateReplicatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicatorInput"}
+	if v.KafkaClusters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KafkaClusters"))
+	} else if v.KafkaClusters != nil {
+		if err := validate__listOfKafkaCluster(v.KafkaClusters); err != nil {
+			invalidParams.AddNested("KafkaClusters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReplicationInfoList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInfoList"))
+	} else if v.ReplicationInfoList != nil {
+		if err := validate__listOfReplicationInfo(v.ReplicationInfoList); err != nil {
+			invalidParams.AddNested("ReplicationInfoList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReplicatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicatorName"))
+	}
+	if v.ServiceExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceExecutionRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVpcConnectionInput(v *CreateVpcConnectionInput) error {
 	if v == nil {
 		return nil
@@ -1519,6 +1838,21 @@ func validateOpDeleteConfigurationInput(v *DeleteConfigurationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteReplicatorInput(v *DeleteReplicatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteReplicatorInput"}
+	if v.ReplicatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicatorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1624,6 +1958,21 @@ func validateOpDescribeConfigurationRevisionInput(v *DescribeConfigurationRevisi
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeConfigurationRevisionInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReplicatorInput(v *DescribeReplicatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicatorInput"}
+	if v.ReplicatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicatorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2045,6 +2394,40 @@ func validateOpUpdateMonitoringInput(v *UpdateMonitoringInput) error {
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateReplicationInfoInput(v *UpdateReplicationInfoInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateReplicationInfoInput"}
+	if v.ConsumerGroupReplication != nil {
+		if err := validateConsumerGroupReplicationUpdate(v.ConsumerGroupReplication); err != nil {
+			invalidParams.AddNested("ConsumerGroupReplication", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.ReplicatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicatorArn"))
+	}
+	if v.SourceKafkaClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceKafkaClusterArn"))
+	}
+	if v.TargetKafkaClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetKafkaClusterArn"))
+	}
+	if v.TopicReplication != nil {
+		if err := validateTopicReplicationUpdate(v.TopicReplication); err != nil {
+			invalidParams.AddNested("TopicReplication", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

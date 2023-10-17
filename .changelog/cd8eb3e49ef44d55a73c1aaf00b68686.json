@@ -1,0 +1,8 @@
+{
+    "id": "cd8eb3e4-9ef4-4d55-a73c-1aaf00b68686",
+    "type": "feature",
+    "description": "AWS Managed Streaming for Kafka is launching MSK Replicator, a new feature that enables customers to reliably replicate data across Amazon MSK clusters in same or different AWS regions. You can now use SDK to create, list, describe, delete, update, and manage tags of MSK Replicators.",
+    "modules": [
+        "service/kafka"
+    ]
+}

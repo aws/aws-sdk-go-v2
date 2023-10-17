@@ -75,6 +75,7 @@ type ListFindingsInput struct {
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
 	//   - service.action.awsApiCallAction.serviceName
 	//   - service.action.dnsRequestAction.domain
+	//   - service.action.dnsRequestAction.domainWithSuffix
 	//   - service.action.networkConnectionAction.blocked
 	//   - service.action.networkConnectionAction.connectionDirection
 	//   - service.action.networkConnectionAction.localPortDetails.port

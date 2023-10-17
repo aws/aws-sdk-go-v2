@@ -1,0 +1,8 @@
+{
+    "id": "ee43898f-fbd1-4f6b-8b01-42a3b0784cba",
+    "type": "feature",
+    "description": "Adds permissions for GetResourcePolicy to support returning details about AWS Resource Access Manager resource policies for shared resources.",
+    "modules": [
+        "service/route53recoverycontrolconfig"
+    ]
+}

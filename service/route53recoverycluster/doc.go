@@ -10,14 +10,14 @@
 // controls are simple on/off switches hosted on a highly available cluster in
 // Route 53 ARC. A cluster provides a set of five redundant Regional endpoints
 // against which you can run API calls to get or update the state of routing
-// controls. To implement failover, you set one routing control On and another one
-// Off, to reroute traffic from one Availability Zone or Amazon Web Services Region
-// to another. Be aware that you must specify a Regional endpoint for a cluster
-// when you work with API cluster operations to get or update routing control
-// states in Route 53 ARC. In addition, you must specify the US West (Oregon)
-// Region for Route 53 ARC API calls. For example, use the parameter --region
-// us-west-2 with AWS CLI commands. For more information, see  Get and update
-// routing control states using the API (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.api.html)
+// controls. To implement failover, you set one routing control to ON and another
+// one to OFF, to reroute traffic from one Availability Zone or Amazon Web Services
+// Region to another. Be aware that you must specify a Regional endpoint for a
+// cluster when you work with API cluster operations to get or update routing
+// control states in Route 53 ARC. In addition, you must specify the US West
+// (Oregon) Region for Route 53 ARC API calls. For example, use the parameter
+// --region us-west-2 with AWS CLI commands. For more information, see  Get and
+// update routing control states using the API (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.api.html)
 // in the Amazon Route 53 Application Recovery Controller Developer Guide. This API
 // guide includes information about the API operations for how to get and update
 // routing control states in Route 53 ARC. To work with routing control in Route 53

@@ -1,0 +1,8 @@
+{
+    "id": "c8b2de27-bc8d-477e-922f-dd07a2243f5c",
+    "type": "feature",
+    "description": "Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

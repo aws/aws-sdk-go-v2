@@ -423,7 +423,7 @@ type ClusterServiceConnectDefaultsRequest struct {
 	// Cloud Map namespace with the "API calls" method of instance discovery only. This
 	// instance discovery method is the "HTTP" namespace type in the Command Line
 	// Interface. Other types of instance discovery aren't used by Service Connect. If
-	// you update the service with an empty string "" for the namespace name, the
+	// you update the cluster with an empty string "" for the namespace name, the
 	// cluster configuration for Service Connect is removed. Note that the namespace
 	// will remain in Cloud Map and must be deleted separately. For more information
 	// about Cloud Map, see Working with Services (https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html)
@@ -1707,18 +1707,21 @@ type EFSVolumeConfiguration struct {
 // You can specify up to ten environment files. The file must have a .env file
 // extension. Each line in an environment file should contain an environment
 // variable in VARIABLE=VALUE format. Lines beginning with # are treated as
-// comments and are ignored. For more information about the environment variable
-// file syntax, see Declare default environment variables in file (https://docs.docker.com/compose/env-file/)
-// . If there are environment variables specified using the environment parameter
-// in a container definition, they take precedence over the variables contained
-// within an environment file. If multiple environment files are specified that
-// contain the same variable, they're processed from the top down. We recommend
-// that you use unique variable names. For more information, see Specifying
-// environment variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
+// comments and are ignored. If there are environment variables specified using the
+// environment parameter in a container definition, they take precedence over the
+// variables contained within an environment file. If multiple environment files
+// are specified that contain the same variable, they're processed from the top
+// down. We recommend that you use unique variable names. For more information, see
+// Specifying environment variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
 // in the Amazon Elastic Container Service Developer Guide. You must use the
 // following platforms for the Fargate launch type:
 //   - Linux platform version 1.4.0 or later.
 //   - Windows platform version 1.0.0 or later.
+//
+// Consider the following when using the Fargate launch type:
+//   - The file is handled like a native Docker env-file.
+//   - There is no support for shell escape handling.
+//   - The container entry point interperts the VARIABLE values.
 type EnvironmentFile struct {
 
 	// The file type to use. The only supported value is s3 .
@@ -1913,18 +1916,42 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // values for a container:
 //   - HEALTHY -The container health check has passed successfully.
 //   - UNHEALTHY -The container health check has failed.
-//   - UNKNOWN -The container health check is being evaluated or there's no
-//     container health check defined.
+//   - UNKNOWN -The container health check is being evaluated, there's no container
+//     health check defined, or Amazon ECS doesn't have the health status of the
+//     container.
 //
-// The following describes the possible healthStatus values for a task. The
-// container health check status of non-essential containers don't have an effect
-// on the health status of a task.
+// The following describes the possible healthStatus values based on the container
+// health checker status of essential containers in the task with the following
+// priority order (high to low):
+//   - UNHEALTHY -One or more essential containers have failed their health check.
+//   - UNKNOWN -Any essential container running within the task is in an UNKNOWN
+//     state and no other essential containers have an UNHEALTHY state.
 //   - HEALTHY -All essential containers within the task have passed their health
 //     checks.
-//   - UNHEALTHY -One or more essential containers have failed their health check.
-//   - UNKNOWN -The essential containers within the task are still having their
-//     health checks evaluated, there are only nonessential containers with health
-//     checks defined, or there are no container health checks defined.
+//
+// Consider the following task health example with 2 containers.
+//   - If Container1 is UNHEALTHY and Container2 is UNKNOWN , the task health is
+//     UNHEALTHY .
+//   - If Container1 is UNHEALTHY and Container2 is HEALTHY , the task health is
+//     UNHEALTHY .
+//   - If Container1 is HEALTHY and Container2 is UNKNOWN , the task health is
+//     UNKNOWN .
+//   - If Container1 is HEALTHY and Container2 is HEALTHY , the task health is
+//     HEALTHY .
+//
+// Consider the following task health example with 3 containers.
+//   - If Container1 is UNHEALTHY and Container2 is UNKNOWN , and Container3 is
+//     UNKNOWN , the task health is UNHEALTHY .
+//   - If Container1 is UNHEALTHY and Container2 is UNKNOWN , and Container3 is
+//     HEALTHY , the task health is UNHEALTHY .
+//   - If Container1 is UNHEALTHY and Container2 is HEALTHY , and Container3 is
+//     HEALTHY , the task health is UNHEALTHY .
+//   - If Container1 is HEALTHY and Container2 is UNKNOWN , and Container3 is
+//     HEALTHY , the task health is UNKNOWN .
+//   - If Container1 is HEALTHY and Container2 is UNKNOWN , and Container3 is
+//     UNKNOWN , the task health is UNKNOWN .
+//   - If Container1 is HEALTHY and Container2 is HEALTHY , and Container3 is
+//     HEALTHY , the task health is HEALTHY .
 //
 // If a task is run manually, and not as part of a service, the task will continue
 // its lifecycle regardless of its health status. For tasks that are part of a
@@ -2440,8 +2467,9 @@ type NetworkBinding struct {
 	//   - You can specify a maximum of 100 port ranges per container.
 	//   - You do not specify a hostPortRange . The value of the hostPortRange is set
 	//   as follows:
-	//   - For containers in a task with the awsvpc network mode, the hostPort is set
-	//   to the same value as the containerPort . This is a static mapping strategy.
+	//   - For containers in a task with the awsvpc network mode, the hostPortRange is
+	//   set to the same value as the containerPortRange . This is a static mapping
+	//   strategy.
 	//   - For containers in a task with the bridge network mode, the Amazon ECS agent
 	//   finds open host ports from the default ephemeral range and passes it to docker
 	//   to bind them to the container ports.
@@ -2620,8 +2648,9 @@ type PortMapping struct {
 	//   - You can specify a maximum of 100 port ranges per container.
 	//   - You do not specify a hostPortRange . The value of the hostPortRange is set
 	//   as follows:
-	//   - For containers in a task with the awsvpc network mode, the hostPort is set
-	//   to the same value as the containerPort . This is a static mapping strategy.
+	//   - For containers in a task with the awsvpc network mode, the hostPortRange is
+	//   set to the same value as the containerPortRange . This is a static mapping
+	//   strategy.
 	//   - For containers in a task with the bridge network mode, the Amazon ECS agent
 	//   finds open host ports from the default ephemeral range and passes it to docker
 	//   to bind them to the container ports.

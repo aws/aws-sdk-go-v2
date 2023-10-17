@@ -22,6 +22,7 @@
         "api_op_DescribeControlPanel.go",
         "api_op_DescribeRoutingControl.go",
         "api_op_DescribeSafetyRule.go",
+        "api_op_GetResourcePolicy.go",
         "api_op_ListAssociatedRoute53HealthChecks.go",
         "api_op_ListClusters.go",
         "api_op_ListControlPanels.go",

@@ -716,6 +716,10 @@ type DnsRequestAction struct {
 	// The domain information for the DNS query.
 	Domain *string
 
+	// The second and top level domain involved in the activity that prompted
+	// GuardDuty to generate this finding.
+	DomainWithSuffix *string
+
 	// The network connection protocol observed in the activity that prompted
 	// GuardDuty to generate the finding.
 	Protocol *string

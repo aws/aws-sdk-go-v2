@@ -1100,6 +1100,15 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				sv.ControlPanelName = ptr.String(jtv)
 			}
 
+		case "Owner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Owner to be of type string, got %T instead", value)
+				}
+				sv.Owner = ptr.String(jtv)
+			}
+
 		case "RoutingControlArn":
 			if value != nil {
 				jtv, ok := value.(string)

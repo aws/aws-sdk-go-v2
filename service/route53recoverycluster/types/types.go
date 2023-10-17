@@ -7,16 +7,20 @@ import (
 )
 
 // A routing control, which is a simple on/off switch that you can use to route
-// traffic to cells. When a routing control state is On, traffic flows to a cell.
-// When the state is Off, traffic does not flow.
+// traffic to cells. When a routing control state is set to ON, traffic flows to a
+// cell. When the state is set to OFF, traffic does not flow.
 type RoutingControl struct {
 
 	// The Amazon Resource Name (ARN) of the control panel where the routing control
 	// is located.
 	ControlPanelArn *string
 
-	// The name of the control panel where the routing control is located.
+	// The name of the control panel where the routing control is located. Only ASCII
+	// characters are supported for control panel names.
 	ControlPanelName *string
+
+	// The Amazon Web Services account ID of the routing control owner.
+	Owner *string
 
 	// The Amazon Resource Name (ARN) of the routing control.
 	RoutingControlArn *string
@@ -24,8 +28,9 @@ type RoutingControl struct {
 	// The name of the routing control.
 	RoutingControlName *string
 
-	// The current state of the routing control. When a routing control state is On,
-	// traffic flows to a cell. When the state is Off, traffic does not flow.
+	// The current state of the routing control. When a routing control state is set
+	// to ON, traffic flows to a cell. When the state is set to OFF, traffic does not
+	// flow.
 	RoutingControlState RoutingControlState
 
 	noSmithyDocumentSerde

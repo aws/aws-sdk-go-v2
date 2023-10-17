@@ -7,6 +7,17 @@ import (
 	"time"
 )
 
+// Details of an Amazon MSK Cluster.
+type AmazonMskCluster struct {
+
+	// The Amazon Resource Name (ARN) of an Amazon MSK cluster.
+	//
+	// This member is required.
+	MskClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the EBS volume upgrade information. The broker identifier must be set
 // to the keyword ALL. This means the changes apply to all the brokers in the
 // cluster.
@@ -537,6 +548,56 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Details about consumer group replication.
+type ConsumerGroupReplication struct {
+
+	// List of regular expression patterns indicating the consumer groups to copy.
+	//
+	// This member is required.
+	ConsumerGroupsToReplicate []string
+
+	// List of regular expression patterns indicating the consumer groups that should
+	// not be replicated.
+	ConsumerGroupsToExclude []string
+
+	// Enables synchronization of consumer groups to target cluster.
+	DetectAndCopyNewConsumerGroups bool
+
+	// Enables synchronization of consumer group offsets to target cluster. The
+	// translated offsets will be written to topic __consumer_offsets.
+	SynchroniseConsumerGroupOffsets bool
+
+	noSmithyDocumentSerde
+}
+
+// Details about consumer group replication.
+type ConsumerGroupReplicationUpdate struct {
+
+	// List of regular expression patterns indicating the consumer groups that should
+	// not be replicated.
+	//
+	// This member is required.
+	ConsumerGroupsToExclude []string
+
+	// List of regular expression patterns indicating the consumer groups to copy.
+	//
+	// This member is required.
+	ConsumerGroupsToReplicate []string
+
+	// Enables synchronization of consumer groups to target cluster.
+	//
+	// This member is required.
+	DetectAndCopyNewConsumerGroups bool
+
+	// Enables synchronization of consumer group offsets to target cluster. The
+	// translated offsets will be written to topic __consumer_offsets.
+	//
+	// This member is required.
+	SynchroniseConsumerGroupOffsets bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the EBS storage volumes attached to Apache Kafka
 // broker nodes.
 type EBSStorageInfo struct {
@@ -644,6 +705,67 @@ type JmxExporterInfo struct {
 	//
 	// This member is required.
 	EnabledInBroker bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about Kafka Cluster to be used as source / target for replication.
+type KafkaCluster struct {
+
+	// Details of an Amazon MSK Cluster.
+	//
+	// This member is required.
+	AmazonMskCluster *AmazonMskCluster
+
+	// Details of an Amazon VPC which has network connectivity to the Apache Kafka
+	// cluster.
+	//
+	// This member is required.
+	VpcConfig *KafkaClusterClientVpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Details of an Amazon VPC which has network connectivity to the Apache Kafka
+// cluster.
+type KafkaClusterClientVpcConfig struct {
+
+	// The list of subnets in the client VPC to connect to.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The security groups to attach to the ENIs for the broker nodes.
+	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Information about Kafka Cluster used as source / target for replication.
+type KafkaClusterDescription struct {
+
+	// Details of an Amazon MSK Cluster.
+	AmazonMskCluster *AmazonMskCluster
+
+	// The alias of the Kafka cluster. Used to prefix names of replicated topics.
+	KafkaClusterAlias *string
+
+	// Details of an Amazon VPC which has network connectivity to the Apache Kafka
+	// cluster.
+	VpcConfig *KafkaClusterClientVpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Summarized information about Kafka Cluster used as source / target for
+// replication.
+type KafkaClusterSummary struct {
+
+	// Details of an Amazon MSK Cluster.
+	AmazonMskCluster *AmazonMskCluster
+
+	// The alias of the Kafka cluster. Used to prefix names of replicated topics.
+	KafkaClusterAlias *string
 
 	noSmithyDocumentSerde
 }
@@ -913,6 +1035,118 @@ type PublicAccess struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies configuration for replication between a source and target Kafka
+// cluster.
+type ReplicationInfo struct {
+
+	// Configuration relating to consumer group replication.
+	//
+	// This member is required.
+	ConsumerGroupReplication *ConsumerGroupReplication
+
+	// The ARN of the source Kafka cluster.
+	//
+	// This member is required.
+	SourceKafkaClusterArn *string
+
+	// The compression type to use when producing records to target cluster.
+	//
+	// This member is required.
+	TargetCompressionType TargetCompressionType
+
+	// The ARN of the target Kafka cluster.
+	//
+	// This member is required.
+	TargetKafkaClusterArn *string
+
+	// Configuration relating to topic replication.
+	//
+	// This member is required.
+	TopicReplication *TopicReplication
+
+	noSmithyDocumentSerde
+}
+
+// Specifies configuration for replication between a source and target Kafka
+// cluster (sourceKafkaClusterAlias -> targetKafkaClusterAlias)
+type ReplicationInfoDescription struct {
+
+	// Configuration relating to consumer group replication.
+	ConsumerGroupReplication *ConsumerGroupReplication
+
+	// The alias of the source Kafka cluster.
+	SourceKafkaClusterAlias *string
+
+	// The compression type to use when producing records to target cluster.
+	TargetCompressionType TargetCompressionType
+
+	// The alias of the target Kafka cluster.
+	TargetKafkaClusterAlias *string
+
+	// Configuration relating to topic replication.
+	TopicReplication *TopicReplication
+
+	noSmithyDocumentSerde
+}
+
+// Summarized information of replication between clusters.
+type ReplicationInfoSummary struct {
+
+	// The alias of the source Kafka cluster.
+	SourceKafkaClusterAlias *string
+
+	// The alias of the target Kafka cluster.
+	TargetKafkaClusterAlias *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the state of a replicator
+type ReplicationStateInfo struct {
+
+	// Code that describes the current state of the replicator.
+	Code *string
+
+	// Message that describes the state of the replicator.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a replicator.
+type ReplicatorSummary struct {
+
+	// The time the replicator was created.
+	CreationTime *time.Time
+
+	// The current version of the replicator.
+	CurrentVersion *string
+
+	// Whether this resource is a replicator reference.
+	IsReplicatorReference bool
+
+	// Kafka Clusters used in setting up sources / targets for replication.
+	KafkaClustersSummary []KafkaClusterSummary
+
+	// A list of summarized information of replications between clusters.
+	ReplicationInfoSummaryList []ReplicationInfoSummary
+
+	// The Amazon Resource Name (ARN) of the replicator.
+	ReplicatorArn *string
+
+	// The name of the replicator.
+	ReplicatorName *string
+
+	// The Amazon Resource Name (ARN) of the replicator resource in the region where
+	// the replicator was created.
+	ReplicatorResourceArn *string
+
+	// State of the replicator.
+	ReplicatorState ReplicatorState
+
+	noSmithyDocumentSerde
+}
+
 type S3 struct {
 
 	// This member is required.
@@ -1017,6 +1251,66 @@ type Tls struct {
 
 	// Specifies whether you want to turn on or turn off TLS authentication.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Details about topic replication.
+type TopicReplication struct {
+
+	// List of regular expression patterns indicating the topics to copy.
+	//
+	// This member is required.
+	TopicsToReplicate []string
+
+	// Whether to periodically configure remote topic ACLs to match their
+	// corresponding upstream topics.
+	CopyAccessControlListsForTopics bool
+
+	// Whether to periodically configure remote topics to match their corresponding
+	// upstream topics.
+	CopyTopicConfigurations bool
+
+	// Whether to periodically check for new topics and partitions.
+	DetectAndCopyNewTopics bool
+
+	// List of regular expression patterns indicating the topics that should not be
+	// replicated.
+	TopicsToExclude []string
+
+	noSmithyDocumentSerde
+}
+
+// Details for updating the topic replication of a replicator.
+type TopicReplicationUpdate struct {
+
+	// Whether to periodically configure remote topic ACLs to match their
+	// corresponding upstream topics.
+	//
+	// This member is required.
+	CopyAccessControlListsForTopics bool
+
+	// Whether to periodically configure remote topics to match their corresponding
+	// upstream topics.
+	//
+	// This member is required.
+	CopyTopicConfigurations bool
+
+	// Whether to periodically check for new topics and partitions.
+	//
+	// This member is required.
+	DetectAndCopyNewTopics bool
+
+	// List of regular expression patterns indicating the topics that should not be
+	// replicated.
+	//
+	// This member is required.
+	TopicsToExclude []string
+
+	// List of regular expression patterns indicating the topics to copy.
+	//
+	// This member is required.
+	TopicsToReplicate []string
 
 	noSmithyDocumentSerde
 }

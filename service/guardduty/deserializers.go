@@ -11807,6 +11807,15 @@ func awsRestjson1_deserializeDocumentDnsRequestAction(v **types.DnsRequestAction
 				sv.Domain = ptr.String(jtv)
 			}
 
+		case "domainWithSuffix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DomainWithSuffix = ptr.String(jtv)
+			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)

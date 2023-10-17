@@ -61,6 +61,9 @@ type AssertionRule struct {
 	// This member is required.
 	WaitPeriodMs int32
 
+	// The Amazon Web Services account ID of the assertion rule owner.
+	Owner *string
+
 	noSmithyDocumentSerde
 }
 
@@ -107,6 +110,9 @@ type Cluster struct {
 	// The name of the cluster.
 	Name *string
 
+	// The Amazon Web Services account ID of the cluster owner.
+	Owner *string
+
 	// Deployment status of a resource. Status can be one of the following: PENDING,
 	// DEPLOYED, PENDING_DELETION.
 	Status Status
@@ -150,6 +156,9 @@ type ControlPanel struct {
 	// The name of the control panel. You can use any non-white space character in the
 	// name.
 	Name *string
+
+	// The Amazon Web Services account ID of the control panel owner.
+	Owner *string
 
 	// The number of routing controls in the control panel.
 	RoutingControlCount int32
@@ -224,6 +233,9 @@ type GatingRule struct {
 	//
 	// This member is required.
 	WaitPeriodMs int32
+
+	// The Amazon Web Services account ID of the gating rule owner.
+	Owner *string
 
 	noSmithyDocumentSerde
 }
@@ -354,6 +366,9 @@ type RoutingControl struct {
 
 	// The name of the routing control.
 	Name *string
+
+	// The Amazon Web Services account ID of the routing control owner.
+	Owner *string
 
 	// The Amazon Resource Name (ARN) of the routing control.
 	RoutingControlArn *string

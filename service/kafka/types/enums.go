@@ -162,6 +162,30 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type ReplicatorState string
+
+// Enum values for ReplicatorState
+const (
+	ReplicatorStateRunning  ReplicatorState = "RUNNING"
+	ReplicatorStateCreating ReplicatorState = "CREATING"
+	ReplicatorStateUpdating ReplicatorState = "UPDATING"
+	ReplicatorStateDeleting ReplicatorState = "DELETING"
+	ReplicatorStateFailed   ReplicatorState = "FAILED"
+)
+
+// Values returns all known values for ReplicatorState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicatorState) Values() []ReplicatorState {
+	return []ReplicatorState{
+		"RUNNING",
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type StorageMode string
 
 // Enum values for StorageMode
@@ -177,6 +201,30 @@ func (StorageMode) Values() []StorageMode {
 	return []StorageMode{
 		"LOCAL",
 		"TIERED",
+	}
+}
+
+type TargetCompressionType string
+
+// Enum values for TargetCompressionType
+const (
+	TargetCompressionTypeNone   TargetCompressionType = "NONE"
+	TargetCompressionTypeGzip   TargetCompressionType = "GZIP"
+	TargetCompressionTypeSnappy TargetCompressionType = "SNAPPY"
+	TargetCompressionTypeLz4    TargetCompressionType = "LZ4"
+	TargetCompressionTypeZstd   TargetCompressionType = "ZSTD"
+)
+
+// Values returns all known values for TargetCompressionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetCompressionType) Values() []TargetCompressionType {
+	return []TargetCompressionType{
+		"NONE",
+		"GZIP",
+		"SNAPPY",
+		"LZ4",
+		"ZSTD",
 	}
 }
 

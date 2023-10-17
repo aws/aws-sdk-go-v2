@@ -304,6 +304,7 @@ type StageRetryMode string
 // Enum values for StageRetryMode
 const (
 	StageRetryModeFailedActions StageRetryMode = "FAILED_ACTIONS"
+	StageRetryModeAllActions    StageRetryMode = "ALL_ACTIONS"
 )
 
 // Values returns all known values for StageRetryMode. Note that this can be
@@ -312,6 +313,7 @@ const (
 func (StageRetryMode) Values() []StageRetryMode {
 	return []StageRetryMode{
 		"FAILED_ACTIONS",
+		"ALL_ACTIONS",
 	}
 }
 
