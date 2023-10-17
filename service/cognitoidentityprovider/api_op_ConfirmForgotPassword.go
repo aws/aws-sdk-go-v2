@@ -99,10 +99,6 @@ type ConfirmForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ConfirmForgotPasswordInput) operationName() string {
-	return "ConfirmForgotPassword"
-}
-
 // The response from the server that results from a user's request to retrieve a
 // forgotten password.
 type ConfirmForgotPasswordOutput struct {

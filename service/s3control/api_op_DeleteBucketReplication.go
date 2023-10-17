@@ -82,10 +82,6 @@ type DeleteBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketReplicationInput) operationName() string {
-	return "DeleteBucketReplication"
-}
-
 func (in *DeleteBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

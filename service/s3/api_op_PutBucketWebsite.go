@@ -108,10 +108,6 @@ type PutBucketWebsiteInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketWebsiteInput) operationName() string {
-	return "PutBucketWebsite"
-}
-
 func (in *PutBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

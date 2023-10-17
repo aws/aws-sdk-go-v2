@@ -42,10 +42,6 @@ type DescribeResourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeResourceServerInput) operationName() string {
-	return "DescribeResourceServer"
-}
-
 type DescribeResourceServerOutput struct {
 
 	// The resource server.

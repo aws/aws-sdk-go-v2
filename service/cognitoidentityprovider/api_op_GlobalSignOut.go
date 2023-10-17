@@ -49,10 +49,6 @@ type GlobalSignOutInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GlobalSignOutInput) operationName() string {
-	return "GlobalSignOut"
-}
-
 // The response to the request to sign out all devices.
 type GlobalSignOutOutput struct {
 	// Metadata pertaining to the operation's result.

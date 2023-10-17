@@ -71,10 +71,6 @@ type GetObjectRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetObjectRetentionInput) operationName() string {
-	return "GetObjectRetention"
-}
-
 func (in *GetObjectRetentionInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

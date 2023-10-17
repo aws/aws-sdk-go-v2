@@ -55,10 +55,6 @@ type AdminDeleteUserAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminDeleteUserAttributesInput) operationName() string {
-	return "AdminDeleteUserAttributes"
-}
-
 // Represents the response received from the server for a request to delete user
 // attributes.
 type AdminDeleteUserAttributesOutput struct {

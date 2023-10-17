@@ -38,10 +38,6 @@ type MalformedLongInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedLongInput) operationName() string {
-	return "MalformedLong"
-}
-
 type MalformedLongOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

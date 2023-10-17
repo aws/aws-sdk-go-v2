@@ -87,10 +87,6 @@ type CreateAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateAccessPointInput) operationName() string {
-	return "CreateAccessPoint"
-}
-
 func (in *CreateAccessPointInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

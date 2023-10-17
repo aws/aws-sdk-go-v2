@@ -36,10 +36,6 @@ type ListSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListSpacesInput) operationName() string {
-	return "ListSpaces"
-}
-
 type ListSpacesOutput struct {
 
 	// Information about the spaces.

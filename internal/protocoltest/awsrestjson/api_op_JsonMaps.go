@@ -50,10 +50,6 @@ type JsonMapsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*JsonMapsInput) operationName() string {
-	return "JsonMaps"
-}
-
 type JsonMapsOutput struct {
 	DenseBooleanMap map[string]bool
 

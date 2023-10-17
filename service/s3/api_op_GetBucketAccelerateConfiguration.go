@@ -70,10 +70,6 @@ type GetBucketAccelerateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketAccelerateConfigurationInput) operationName() string {
-	return "GetBucketAccelerateConfiguration"
-}
-
 func (in *GetBucketAccelerateConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

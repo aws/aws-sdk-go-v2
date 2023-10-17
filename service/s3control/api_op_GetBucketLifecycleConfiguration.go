@@ -82,10 +82,6 @@ type GetBucketLifecycleConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketLifecycleConfigurationInput) operationName() string {
-	return "GetBucketLifecycleConfiguration"
-}
-
 func (in *GetBucketLifecycleConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

@@ -56,10 +56,6 @@ type DeleteBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketEncryptionInput) operationName() string {
-	return "DeleteBucketEncryption"
-}
-
 func (in *DeleteBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

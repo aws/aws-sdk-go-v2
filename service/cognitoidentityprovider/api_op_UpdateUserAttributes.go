@@ -91,10 +91,6 @@ type UpdateUserAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateUserAttributesInput) operationName() string {
-	return "UpdateUserAttributes"
-}
-
 // Represents the response from the server for the request to update user
 // attributes.
 type UpdateUserAttributesOutput struct {

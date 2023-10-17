@@ -233,10 +233,6 @@ type GetObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetObjectInput) operationName() string {
-	return "GetObject"
-}
-
 func (in *GetObjectInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

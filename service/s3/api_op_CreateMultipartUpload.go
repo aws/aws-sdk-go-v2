@@ -345,10 +345,6 @@ type CreateMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateMultipartUploadInput) operationName() string {
-	return "CreateMultipartUpload"
-}
-
 func (in *CreateMultipartUploadInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

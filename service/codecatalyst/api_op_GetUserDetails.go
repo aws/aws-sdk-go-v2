@@ -37,10 +37,6 @@ type GetUserDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetUserDetailsInput) operationName() string {
-	return "GetUserDetails"
-}
-
 type GetUserDetailsOutput struct {
 
 	// The friendly name displayed for the user in Amazon CodeCatalyst.

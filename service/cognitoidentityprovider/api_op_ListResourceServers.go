@@ -49,10 +49,6 @@ type ListResourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListResourceServersInput) operationName() string {
-	return "ListResourceServers"
-}
-
 type ListResourceServersOutput struct {
 
 	// The resource servers.

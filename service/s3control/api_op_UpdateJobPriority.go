@@ -57,10 +57,6 @@ type UpdateJobPriorityInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateJobPriorityInput) operationName() string {
-	return "UpdateJobPriority"
-}
-
 func (in *UpdateJobPriorityInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

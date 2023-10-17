@@ -133,10 +133,6 @@ type RespondToAuthChallengeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*RespondToAuthChallengeInput) operationName() string {
-	return "RespondToAuthChallenge"
-}
-
 // The response to respond to the authentication challenge.
 type RespondToAuthChallengeOutput struct {
 

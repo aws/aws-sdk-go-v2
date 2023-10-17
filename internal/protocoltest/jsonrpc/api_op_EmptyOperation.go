@@ -29,10 +29,6 @@ type EmptyOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*EmptyOperationInput) operationName() string {
-	return "EmptyOperation"
-}
-
 type EmptyOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

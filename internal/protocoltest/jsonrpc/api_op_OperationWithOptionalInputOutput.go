@@ -31,10 +31,6 @@ type OperationWithOptionalInputOutputInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*OperationWithOptionalInputOutputInput) operationName() string {
-	return "OperationWithOptionalInputOutput"
-}
-
 type OperationWithOptionalInputOutputOutput struct {
 	Value *string
 

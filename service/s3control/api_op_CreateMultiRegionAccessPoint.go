@@ -69,10 +69,6 @@ type CreateMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateMultiRegionAccessPointInput) operationName() string {
-	return "CreateMultiRegionAccessPoint"
-}
-
 func (in *CreateMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

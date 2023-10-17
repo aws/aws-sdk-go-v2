@@ -31,10 +31,6 @@ type XmlTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlTimestampsInput) operationName() string {
-	return "XmlTimestamps"
-}
-
 type XmlTimestampsOutput struct {
 	DateTime *time.Time
 

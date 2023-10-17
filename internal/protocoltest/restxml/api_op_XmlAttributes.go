@@ -33,10 +33,6 @@ type XmlAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlAttributesInput) operationName() string {
-	return "XmlAttributes"
-}
-
 type XmlAttributesOutput struct {
 	Attr *string
 

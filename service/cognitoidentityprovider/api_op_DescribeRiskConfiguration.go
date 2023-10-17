@@ -40,10 +40,6 @@ type DescribeRiskConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeRiskConfigurationInput) operationName() string {
-	return "DescribeRiskConfiguration"
-}
-
 type DescribeRiskConfigurationOutput struct {
 
 	// The risk configuration.

@@ -46,10 +46,6 @@ type DescribeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeEndpointInput) operationName() string {
-	return "DescribeEndpoint"
-}
-
 type DescribeEndpointOutput struct {
 
 	// The ARN of the endpoint you asked for information about.

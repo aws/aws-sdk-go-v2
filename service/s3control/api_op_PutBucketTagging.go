@@ -105,10 +105,6 @@ type PutBucketTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketTaggingInput) operationName() string {
-	return "PutBucketTagging"
-}
-
 func (in *PutBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

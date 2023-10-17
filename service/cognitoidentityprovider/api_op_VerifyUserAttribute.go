@@ -56,10 +56,6 @@ type VerifyUserAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*VerifyUserAttributeInput) operationName() string {
-	return "VerifyUserAttribute"
-}
-
 // A container representing the response from the server from the request to
 // verify user attributes.
 type VerifyUserAttributeOutput struct {

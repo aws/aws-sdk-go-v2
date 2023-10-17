@@ -54,10 +54,6 @@ type ListDevEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListDevEnvironmentsInput) operationName() string {
-	return "ListDevEnvironments"
-}
-
 type ListDevEnvironmentsOutput struct {
 
 	// Information about the Dev Environments in a project.

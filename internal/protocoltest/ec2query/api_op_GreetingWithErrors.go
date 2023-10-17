@@ -32,10 +32,6 @@ type GreetingWithErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GreetingWithErrorsInput) operationName() string {
-	return "GreetingWithErrors"
-}
-
 type GreetingWithErrorsOutput struct {
 	Greeting *string
 

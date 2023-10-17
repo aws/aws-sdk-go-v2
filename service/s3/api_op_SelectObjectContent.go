@@ -168,10 +168,6 @@ type SelectObjectContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SelectObjectContentInput) operationName() string {
-	return "SelectObjectContent"
-}
-
 func (in *SelectObjectContentInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

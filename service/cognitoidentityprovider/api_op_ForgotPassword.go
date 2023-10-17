@@ -107,10 +107,6 @@ type ForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ForgotPasswordInput) operationName() string {
-	return "ForgotPassword"
-}
-
 // The response from Amazon Cognito to a request to reset a password.
 type ForgotPasswordOutput struct {
 

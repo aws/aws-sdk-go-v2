@@ -41,10 +41,6 @@ type DeleteProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteProjectInput) operationName() string {
-	return "DeleteProject"
-}
-
 type DeleteProjectOutput struct {
 
 	// The name of the project in the space.

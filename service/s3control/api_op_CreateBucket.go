@@ -97,10 +97,6 @@ type CreateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateBucketInput) operationName() string {
-	return "CreateBucket"
-}
-
 func (in *CreateBucketInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 	p.OutpostId = in.OutpostId

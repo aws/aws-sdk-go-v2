@@ -94,10 +94,6 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListUsersInput) operationName() string {
-	return "ListUsers"
-}
-
 // The response from the request to list users.
 type ListUsersOutput struct {
 

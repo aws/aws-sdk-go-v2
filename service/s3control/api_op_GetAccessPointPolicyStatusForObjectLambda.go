@@ -49,10 +49,6 @@ type GetAccessPointPolicyStatusForObjectLambdaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetAccessPointPolicyStatusForObjectLambdaInput) operationName() string {
-	return "GetAccessPointPolicyStatusForObjectLambda"
-}
-
 func (in *GetAccessPointPolicyStatusForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

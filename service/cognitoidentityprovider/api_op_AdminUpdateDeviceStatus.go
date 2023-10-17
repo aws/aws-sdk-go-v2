@@ -57,10 +57,6 @@ type AdminUpdateDeviceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminUpdateDeviceStatusInput) operationName() string {
-	return "AdminUpdateDeviceStatus"
-}
-
 // The status response to the request to update the device, as an administrator.
 type AdminUpdateDeviceStatusOutput struct {
 	// Metadata pertaining to the operation's result.

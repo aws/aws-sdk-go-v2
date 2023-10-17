@@ -36,10 +36,6 @@ type StreamingTraitsRequireLengthInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*StreamingTraitsRequireLengthInput) operationName() string {
-	return "StreamingTraitsRequireLength"
-}
-
 type StreamingTraitsRequireLengthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

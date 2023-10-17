@@ -43,10 +43,6 @@ type SetLogDeliveryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SetLogDeliveryConfigurationInput) operationName() string {
-	return "SetLogDeliveryConfiguration"
-}
-
 type SetLogDeliveryConfigurationOutput struct {
 
 	// The detailed activity logging configuration that you applied to the requested

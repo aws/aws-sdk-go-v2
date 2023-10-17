@@ -28,10 +28,6 @@ type MalformedAcceptWithBodyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedAcceptWithBodyInput) operationName() string {
-	return "MalformedAcceptWithBody"
-}
-
 type MalformedAcceptWithBodyOutput struct {
 	Hi *string
 

@@ -94,10 +94,6 @@ type PutBucketInventoryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketInventoryConfigurationInput) operationName() string {
-	return "PutBucketInventoryConfiguration"
-}
-
 func (in *PutBucketInventoryConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

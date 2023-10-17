@@ -31,10 +31,6 @@ type XmlNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlNamespacesInput) operationName() string {
-	return "XmlNamespaces"
-}
-
 type XmlNamespacesOutput struct {
 	Nested *types.XmlNamespaceNested
 

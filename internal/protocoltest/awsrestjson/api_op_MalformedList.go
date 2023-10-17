@@ -30,10 +30,6 @@ type MalformedListInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedListInput) operationName() string {
-	return "MalformedList"
-}
-
 type MalformedListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

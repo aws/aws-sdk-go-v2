@@ -32,10 +32,6 @@ type FlattenedXmlMapInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*FlattenedXmlMapInput) operationName() string {
-	return "FlattenedXmlMap"
-}
-
 type FlattenedXmlMapOutput struct {
 	MyMap map[string]types.FooEnum
 

@@ -51,10 +51,6 @@ type DeletePublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeletePublicAccessBlockInput) operationName() string {
-	return "DeletePublicAccessBlock"
-}
-
 func (in *DeletePublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

@@ -32,10 +32,6 @@ type MalformedRequestBodyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedRequestBodyInput) operationName() string {
-	return "MalformedRequestBody"
-}
-
 type MalformedRequestBodyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -32,10 +32,6 @@ type XmlAttributesOnPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlAttributesOnPayloadInput) operationName() string {
-	return "XmlAttributesOnPayload"
-}
-
 type XmlAttributesOnPayloadOutput struct {
 	Payload *types.XmlAttributesInputOutput
 

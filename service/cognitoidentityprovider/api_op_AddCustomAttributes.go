@@ -49,10 +49,6 @@ type AddCustomAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AddCustomAttributesInput) operationName() string {
-	return "AddCustomAttributes"
-}
-
 // Represents the response from the server for the request to add custom
 // attributes.
 type AddCustomAttributesOutput struct {

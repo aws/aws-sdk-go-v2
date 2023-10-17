@@ -58,10 +58,6 @@ type ListRegionalBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListRegionalBucketsInput) operationName() string {
-	return "ListRegionalBuckets"
-}
-
 func (in *ListRegionalBucketsInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.OutpostId = in.OutpostId

@@ -52,10 +52,6 @@ type AdminForgetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminForgetDeviceInput) operationName() string {
-	return "AdminForgetDevice"
-}
-
 type AdminForgetDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

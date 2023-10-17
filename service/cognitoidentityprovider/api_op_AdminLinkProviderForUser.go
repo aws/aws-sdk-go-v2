@@ -94,10 +94,6 @@ type AdminLinkProviderForUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminLinkProviderForUserInput) operationName() string {
-	return "AdminLinkProviderForUser"
-}
-
 type AdminLinkProviderForUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

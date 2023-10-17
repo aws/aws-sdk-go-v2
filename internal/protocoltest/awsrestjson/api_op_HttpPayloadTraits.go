@@ -34,10 +34,6 @@ type HttpPayloadTraitsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpPayloadTraitsInput) operationName() string {
-	return "HttpPayloadTraits"
-}
-
 type HttpPayloadTraitsOutput struct {
 	Blob []byte
 

@@ -84,10 +84,6 @@ type PutJobTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutJobTaggingInput) operationName() string {
-	return "PutJobTagging"
-}
-
 func (in *PutJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

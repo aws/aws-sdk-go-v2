@@ -40,10 +40,6 @@ type XmlListsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlListsInput) operationName() string {
-	return "XmlLists"
-}
-
 type XmlListsOutput struct {
 	BooleanList []bool
 

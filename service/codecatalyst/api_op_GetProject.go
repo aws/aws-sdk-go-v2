@@ -40,10 +40,6 @@ type GetProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetProjectInput) operationName() string {
-	return "GetProject"
-}
-
 type GetProjectOutput struct {
 
 	// The name of the project in the space.

@@ -47,10 +47,6 @@ type GetBucketRequestPaymentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketRequestPaymentInput) operationName() string {
-	return "GetBucketRequestPayment"
-}
-
 func (in *GetBucketRequestPaymentInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

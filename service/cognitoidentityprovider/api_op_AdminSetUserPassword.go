@@ -71,10 +71,6 @@ type AdminSetUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminSetUserPasswordInput) operationName() string {
-	return "AdminSetUserPassword"
-}
-
 type AdminSetUserPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

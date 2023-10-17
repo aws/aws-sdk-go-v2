@@ -52,10 +52,6 @@ type SetUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SetUserSettingsInput) operationName() string {
-	return "SetUserSettings"
-}
-
 // The response from the server for a set user settings request.
 type SetUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.

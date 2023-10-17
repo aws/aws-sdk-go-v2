@@ -53,10 +53,6 @@ type AdminGetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminGetDeviceInput) operationName() string {
-	return "AdminGetDevice"
-}
-
 // Gets the device response, as an administrator.
 type AdminGetDeviceOutput struct {
 

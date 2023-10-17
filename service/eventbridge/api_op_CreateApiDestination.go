@@ -62,10 +62,6 @@ type CreateApiDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateApiDestinationInput) operationName() string {
-	return "CreateApiDestination"
-}
-
 type CreateApiDestinationOutput struct {
 
 	// The ARN of the API destination that was created by the request.

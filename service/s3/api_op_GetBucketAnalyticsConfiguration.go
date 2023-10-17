@@ -61,10 +61,6 @@ type GetBucketAnalyticsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketAnalyticsConfigurationInput) operationName() string {
-	return "GetBucketAnalyticsConfiguration"
-}
-
 func (in *GetBucketAnalyticsConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

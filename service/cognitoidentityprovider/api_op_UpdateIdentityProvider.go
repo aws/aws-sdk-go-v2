@@ -56,10 +56,6 @@ type UpdateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateIdentityProviderInput) operationName() string {
-	return "UpdateIdentityProvider"
-}
-
 type UpdateIdentityProviderOutput struct {
 
 	// The identity provider details.

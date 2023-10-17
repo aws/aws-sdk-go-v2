@@ -33,10 +33,6 @@ type BodyWithXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*BodyWithXmlNameInput) operationName() string {
-	return "BodyWithXmlName"
-}
-
 type BodyWithXmlNameOutput struct {
 	Nested *types.PayloadWithXmlName
 

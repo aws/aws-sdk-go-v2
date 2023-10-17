@@ -38,10 +38,6 @@ type DescribeApiDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DescribeApiDestinationInput) operationName() string {
-	return "DescribeApiDestination"
-}
-
 type DescribeApiDestinationOutput struct {
 
 	// The ARN of the API destination retrieved.

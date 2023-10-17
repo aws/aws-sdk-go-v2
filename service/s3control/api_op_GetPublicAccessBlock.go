@@ -47,10 +47,6 @@ type GetPublicAccessBlockInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetPublicAccessBlockInput) operationName() string {
-	return "GetPublicAccessBlock"
-}
-
 func (in *GetPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

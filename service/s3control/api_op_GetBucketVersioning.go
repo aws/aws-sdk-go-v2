@@ -65,10 +65,6 @@ type GetBucketVersioningInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketVersioningInput) operationName() string {
-	return "GetBucketVersioning"
-}
-
 func (in *GetBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

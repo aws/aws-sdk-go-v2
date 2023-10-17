@@ -42,10 +42,6 @@ type GetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetGroupInput) operationName() string {
-	return "GetGroup"
-}
-
 type GetGroupOutput struct {
 
 	// The group object for the group.

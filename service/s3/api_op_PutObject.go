@@ -333,10 +333,6 @@ type PutObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutObjectInput) operationName() string {
-	return "PutObject"
-}
-
 func (in *PutObjectInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

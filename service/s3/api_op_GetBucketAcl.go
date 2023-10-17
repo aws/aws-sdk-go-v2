@@ -68,10 +68,6 @@ type GetBucketAclInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketAclInput) operationName() string {
-	return "GetBucketAcl"
-}
-
 func (in *GetBucketAclInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

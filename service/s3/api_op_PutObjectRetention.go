@@ -96,10 +96,6 @@ type PutObjectRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutObjectRetentionInput) operationName() string {
-	return "PutObjectRetention"
-}
-
 func (in *PutObjectRetentionInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

@@ -36,10 +36,6 @@ type HttpPayloadTraitsWithMediaTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpPayloadTraitsWithMediaTypeInput) operationName() string {
-	return "HttpPayloadTraitsWithMediaType"
-}
-
 type HttpPayloadTraitsWithMediaTypeOutput struct {
 
 	// This value conforms to the media type: text/plain

@@ -31,10 +31,6 @@ type XmlUnionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlUnionsInput) operationName() string {
-	return "XmlUnions"
-}
-
 type XmlUnionsOutput struct {
 	UnionValue types.XmlUnionShape
 

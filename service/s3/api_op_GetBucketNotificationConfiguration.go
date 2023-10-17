@@ -66,10 +66,6 @@ type GetBucketNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketNotificationConfigurationInput) operationName() string {
-	return "GetBucketNotificationConfiguration"
-}
-
 func (in *GetBucketNotificationConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

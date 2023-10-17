@@ -38,10 +38,6 @@ type MalformedShortInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedShortInput) operationName() string {
-	return "MalformedShort"
-}
-
 type MalformedShortOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

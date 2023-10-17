@@ -86,10 +86,6 @@ type GetBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketReplicationInput) operationName() string {
-	return "GetBucketReplication"
-}
-
 func (in *GetBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

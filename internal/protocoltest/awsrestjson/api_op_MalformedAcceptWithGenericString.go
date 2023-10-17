@@ -28,10 +28,6 @@ type MalformedAcceptWithGenericStringInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*MalformedAcceptWithGenericStringInput) operationName() string {
-	return "MalformedAcceptWithGenericString"
-}
-
 type MalformedAcceptWithGenericStringOutput struct {
 	Payload *string
 

@@ -52,10 +52,6 @@ type StopDevEnvironmentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*StopDevEnvironmentSessionInput) operationName() string {
-	return "StopDevEnvironmentSession"
-}
-
 type StopDevEnvironmentSessionOutput struct {
 
 	// The system-generated unique ID of the Dev Environment.

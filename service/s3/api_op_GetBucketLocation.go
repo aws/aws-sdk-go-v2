@@ -72,10 +72,6 @@ type GetBucketLocationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketLocationInput) operationName() string {
-	return "GetBucketLocation"
-}
-
 func (in *GetBucketLocationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

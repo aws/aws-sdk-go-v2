@@ -43,10 +43,6 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateProjectInput) operationName() string {
-	return "UpdateProject"
-}
-
 type UpdateProjectOutput struct {
 
 	// The description of the project.

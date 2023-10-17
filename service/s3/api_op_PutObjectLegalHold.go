@@ -89,10 +89,6 @@ type PutObjectLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutObjectLegalHoldInput) operationName() string {
-	return "PutObjectLegalHold"
-}
-
 func (in *PutObjectLegalHoldInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

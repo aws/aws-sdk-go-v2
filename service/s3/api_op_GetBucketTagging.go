@@ -52,10 +52,6 @@ type GetBucketTaggingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketTaggingInput) operationName() string {
-	return "GetBucketTagging"
-}
-
 func (in *GetBucketTaggingInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

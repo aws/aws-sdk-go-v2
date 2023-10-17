@@ -64,10 +64,6 @@ type GetObjectTorrentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetObjectTorrentInput) operationName() string {
-	return "GetObjectTorrent"
-}
-
 func (in *GetObjectTorrentInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

@@ -36,10 +36,6 @@ type DeleteApiDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteApiDestinationInput) operationName() string {
-	return "DeleteApiDestination"
-}
-
 type DeleteApiDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

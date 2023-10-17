@@ -73,10 +73,6 @@ type AllQueryStringTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AllQueryStringTypesInput) operationName() string {
-	return "AllQueryStringTypes"
-}
-
 type AllQueryStringTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

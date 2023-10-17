@@ -57,10 +57,6 @@ type GetBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketEncryptionInput) operationName() string {
-	return "GetBucketEncryption"
-}
-
 func (in *GetBucketEncryptionInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

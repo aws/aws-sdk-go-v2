@@ -34,6 +34,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateAdapter.go",
+        "auth.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

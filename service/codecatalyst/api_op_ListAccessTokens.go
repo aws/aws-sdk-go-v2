@@ -42,10 +42,6 @@ type ListAccessTokensInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListAccessTokensInput) operationName() string {
-	return "ListAccessTokens"
-}
-
 type ListAccessTokensOutput struct {
 
 	// A list of personal access tokens (PATs) associated with the calling user

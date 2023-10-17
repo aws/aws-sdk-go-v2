@@ -162,10 +162,6 @@ type GetObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetObjectAttributesInput) operationName() string {
-	return "GetObjectAttributes"
-}
-
 func (in *GetObjectAttributesInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

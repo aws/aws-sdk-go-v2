@@ -31,10 +31,6 @@ type XmlEmptyMapsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlEmptyMapsInput) operationName() string {
-	return "XmlEmptyMaps"
-}
-
 type XmlEmptyMapsOutput struct {
 	MyMap map[string]types.GreetingStruct
 

@@ -82,10 +82,6 @@ type PutObjectLockConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutObjectLockConfigurationInput) operationName() string {
-	return "PutObjectLockConfiguration"
-}
-
 func (in *PutObjectLockConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

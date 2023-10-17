@@ -60,10 +60,6 @@ type DeleteBucketIntelligentTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketIntelligentTieringConfigurationInput) operationName() string {
-	return "DeleteBucketIntelligentTieringConfiguration"
-}
-
 func (in *DeleteBucketIntelligentTieringConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

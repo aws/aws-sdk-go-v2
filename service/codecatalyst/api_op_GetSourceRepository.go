@@ -46,10 +46,6 @@ type GetSourceRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetSourceRepositoryInput) operationName() string {
-	return "GetSourceRepository"
-}
-
 type GetSourceRepositoryOutput struct {
 
 	// The time the source repository was created, in coordinated universal time (UTC)

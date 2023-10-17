@@ -44,10 +44,6 @@ type GetUICustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetUICustomizationInput) operationName() string {
-	return "GetUICustomization"
-}
-
 type GetUICustomizationOutput struct {
 
 	// The UI customization information.

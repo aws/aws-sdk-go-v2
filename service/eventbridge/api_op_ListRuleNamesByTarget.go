@@ -47,10 +47,6 @@ type ListRuleNamesByTargetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ListRuleNamesByTargetInput) operationName() string {
-	return "ListRuleNamesByTarget"
-}
-
 type ListRuleNamesByTargetOutput struct {
 
 	// Indicates whether there are additional results to retrieve. If there are no

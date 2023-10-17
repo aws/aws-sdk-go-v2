@@ -33,10 +33,6 @@ type HttpPrefixHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpPrefixHeadersInput) operationName() string {
-	return "HttpPrefixHeaders"
-}
-
 type HttpPrefixHeadersOutput struct {
 	Foo *string
 

@@ -100,10 +100,6 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateJobInput) operationName() string {
-	return "CreateJob"
-}
-
 func (in *CreateJobInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

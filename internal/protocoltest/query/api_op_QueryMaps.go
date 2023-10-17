@@ -46,10 +46,6 @@ type QueryMapsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*QueryMapsInput) operationName() string {
-	return "QueryMaps"
-}
-
 type QueryMapsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

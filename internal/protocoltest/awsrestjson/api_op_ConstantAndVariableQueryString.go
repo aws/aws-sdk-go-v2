@@ -35,10 +35,6 @@ type ConstantAndVariableQueryStringInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*ConstantAndVariableQueryStringInput) operationName() string {
-	return "ConstantAndVariableQueryString"
-}
-
 type ConstantAndVariableQueryStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

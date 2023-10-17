@@ -41,10 +41,6 @@ type DeleteIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteIdentityProviderInput) operationName() string {
-	return "DeleteIdentityProvider"
-}
-
 type DeleteIdentityProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -79,10 +79,6 @@ type DeleteBucketPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketPolicyInput) operationName() string {
-	return "DeleteBucketPolicy"
-}
-
 func (in *DeleteBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket

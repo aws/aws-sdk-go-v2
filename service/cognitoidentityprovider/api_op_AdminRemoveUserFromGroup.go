@@ -52,10 +52,6 @@ type AdminRemoveUserFromGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*AdminRemoveUserFromGroupInput) operationName() string {
-	return "AdminRemoveUserFromGroup"
-}
-
 type AdminRemoveUserFromGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

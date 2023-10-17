@@ -35,10 +35,6 @@ type HttpRequestWithGreedyLabelInPathInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*HttpRequestWithGreedyLabelInPathInput) operationName() string {
-	return "HttpRequestWithGreedyLabelInPath"
-}
-
 type HttpRequestWithGreedyLabelInPathOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

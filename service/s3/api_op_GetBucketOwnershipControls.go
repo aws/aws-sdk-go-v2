@@ -49,10 +49,6 @@ type GetBucketOwnershipControlsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetBucketOwnershipControlsInput) operationName() string {
-	return "GetBucketOwnershipControls"
-}
-
 func (in *GetBucketOwnershipControlsInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

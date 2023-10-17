@@ -52,10 +52,6 @@ type DeleteStorageLensConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteStorageLensConfigurationInput) operationName() string {
-	return "DeleteStorageLensConfiguration"
-}
-
 func (in *DeleteStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

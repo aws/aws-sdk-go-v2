@@ -55,10 +55,6 @@ type DeleteBucketWebsiteInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteBucketWebsiteInput) operationName() string {
-	return "DeleteBucketWebsite"
-}
-
 func (in *DeleteBucketWebsiteInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

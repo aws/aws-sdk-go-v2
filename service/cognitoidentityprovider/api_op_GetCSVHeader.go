@@ -39,10 +39,6 @@ type GetCSVHeaderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*GetCSVHeaderInput) operationName() string {
-	return "GetCSVHeader"
-}
-
 // Represents the response from the server to the request to get the header
 // information of the CSV file for the user import job.
 type GetCSVHeaderOutput struct {

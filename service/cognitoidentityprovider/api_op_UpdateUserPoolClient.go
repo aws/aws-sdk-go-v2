@@ -225,10 +225,6 @@ type UpdateUserPoolClientInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*UpdateUserPoolClientInput) operationName() string {
-	return "UpdateUserPoolClient"
-}
-
 // Represents the response from the server to the request to update the user pool
 // client.
 type UpdateUserPoolClientOutput struct {

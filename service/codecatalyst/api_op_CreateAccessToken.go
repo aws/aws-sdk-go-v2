@@ -48,10 +48,6 @@ type CreateAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*CreateAccessTokenInput) operationName() string {
-	return "CreateAccessToken"
-}
-
 type CreateAccessTokenOutput struct {
 
 	// The system-generated unique ID of the access token.

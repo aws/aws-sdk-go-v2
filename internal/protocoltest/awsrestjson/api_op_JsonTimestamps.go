@@ -45,10 +45,6 @@ type JsonTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*JsonTimestampsInput) operationName() string {
-	return "JsonTimestamps"
-}
-
 type JsonTimestampsOutput struct {
 	DateTime *time.Time
 

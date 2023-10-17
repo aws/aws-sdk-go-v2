@@ -32,10 +32,6 @@ type SimpleScalarPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*SimpleScalarPropertiesInput) operationName() string {
-	return "SimpleScalarProperties"
-}
-
 type SimpleScalarPropertiesOutput struct {
 	DoubleValue *float64
 

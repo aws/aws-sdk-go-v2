@@ -32,10 +32,6 @@ type NestedStructuresInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*NestedStructuresInput) operationName() string {
-	return "NestedStructures"
-}
-
 type NestedStructuresOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

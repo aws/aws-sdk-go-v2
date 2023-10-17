@@ -279,10 +279,6 @@ type WriteGetObjectResponseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*WriteGetObjectResponseInput) operationName() string {
-	return "WriteGetObjectResponse"
-}
-
 func (in *WriteGetObjectResponseInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseObjectLambdaEndpoint = ptr.Bool(true)

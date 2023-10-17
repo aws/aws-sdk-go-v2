@@ -67,10 +67,6 @@ type DeleteMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*DeleteMultiRegionAccessPointInput) operationName() string {
-	return "DeleteMultiRegionAccessPoint"
-}
-
 func (in *DeleteMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParameters) {
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)

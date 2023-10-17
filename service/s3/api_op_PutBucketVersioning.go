@@ -90,10 +90,6 @@ type PutBucketVersioningInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*PutBucketVersioningInput) operationName() string {
-	return "PutBucketVersioning"
-}
-
 func (in *PutBucketVersioningInput) bindEndpointParams(p *EndpointParameters) {
 	p.Bucket = in.Bucket
 

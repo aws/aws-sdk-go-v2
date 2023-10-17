@@ -28,10 +28,6 @@ type XmlEmptyBlobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (*XmlEmptyBlobsInput) operationName() string {
-	return "XmlEmptyBlobs"
-}
-
 type XmlEmptyBlobsOutput struct {
 	Data []byte
 
