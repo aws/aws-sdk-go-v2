@@ -1,3 +1,7 @@
+# v1.18.0 (2023-10-17)
+
+* **Feature**: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+
 # v1.17.7 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

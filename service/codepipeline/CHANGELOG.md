@@ -1,3 +1,7 @@
+# v1.17.0 (2023-10-17)
+
+* **Feature**: Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage
+
 # v1.16.7 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

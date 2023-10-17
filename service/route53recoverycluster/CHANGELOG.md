@@ -1,3 +1,7 @@
+# v1.14.0 (2023-10-17)
+
+* **Feature**: Adds Owner field to ListRoutingControls API.
+
 # v1.13.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

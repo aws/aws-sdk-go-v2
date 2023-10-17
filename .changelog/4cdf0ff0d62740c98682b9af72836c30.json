@@ -1,8 +1,0 @@
-{
-    "id": "4cdf0ff0-d627-40c9-8682-b9af72836c30",
-    "type": "feature",
-    "description": "This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.",
-    "modules": [
-        "service/applicationdiscoveryservice"
-    ]
-}

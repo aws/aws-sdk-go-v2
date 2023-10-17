@@ -1,8 +1,0 @@
-{
-    "id": "a07d4f53-3eb6-42dd-8853-d2c7d2209e8e",
-    "type": "feature",
-    "description": "Fixed error where ListCustomRoutingEndpointGroups did not have a paginator",
-    "modules": [
-        "service/globalaccelerator"
-    ]
-}

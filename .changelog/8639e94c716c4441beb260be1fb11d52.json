@@ -1,8 +1,0 @@
-{
-    "id": "8639e94c-716c-4441-beb2-60be1fb11d52",
-    "type": "feature",
-    "description": "Add domainWithSuffix finding field to dnsRequestAction",
-    "modules": [
-        "service/guardduty"
-    ]
-}

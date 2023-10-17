@@ -1,3 +1,7 @@
+# v1.29.0 (2023-10-17)
+
+* **Feature**: Add domainWithSuffix finding field to dnsRequestAction
+
 # v1.28.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

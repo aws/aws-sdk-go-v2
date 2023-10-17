@@ -1,3 +1,21 @@
+# Release (2023-10-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.18.0](service/applicationdiscoveryservice/CHANGELOG.md#v1180-2023-10-17)
+  * **Feature**: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.17.0](service/codepipeline/CHANGELOG.md#v1170-2023-10-17)
+  * **Feature**: Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.30.4](service/ecs/CHANGELOG.md#v1304-2023-10-17)
+  * **Documentation**: Documentation only updates to address Amazon ECS tickets.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.29.0](service/guardduty/CHANGELOG.md#v1290-2023-10-17)
+  * **Feature**: Add domainWithSuffix finding field to dnsRequestAction
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.23.0](service/kafka/CHANGELOG.md#v1230-2023-10-17)
+  * **Feature**: AWS Managed Streaming for Kafka is launching MSK Replicator, a new feature that enables customers to reliably replicate data across Amazon MSK clusters in same or different AWS regions. You can now use SDK to create, list, describe, delete, update, and manage tags of MSK Replicators.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.14.0](service/route53recoverycluster/CHANGELOG.md#v1140-2023-10-17)
+  * **Feature**: Adds Owner field to ListRoutingControls API.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.14.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1140-2023-10-17)
+  * **Feature**: Adds permissions for GetResourcePolicy to support returning details about AWS Resource Access Manager resource policies for shared resources.
+
 # Release (2023-10-16)
 
 ## General Highlights

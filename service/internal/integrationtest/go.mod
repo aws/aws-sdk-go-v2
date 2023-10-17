@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.7
-	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.17.7
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.31.8
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.31.0
@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.18.3
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.16.7
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.37.0
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.125.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.2
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.3
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.9
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.17.2
