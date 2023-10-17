@@ -46,6 +46,12 @@ func (r *timeoutReadCloser) Read(b []byte) (int, error) {
 
 	go func() {
 		n, err := r.reader.Read(b)
+		// The length returned("n") maybe large than the real length of bytes read when an error occurs.
+		// In this case, it will generate a slice overflow due to bufio read operation (golang/go#49795).
+		// To prevent crashes, in the event of an error, set "n" to 0.
+		if err != nil {
+			n = 0
+		}
 		timer.Stop()
 		c <- readResult{n: n, err: err}
 	}()
