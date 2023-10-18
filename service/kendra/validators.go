@@ -1902,6 +1902,26 @@ func validateClickFeedbackList(v []types.ClickFeedback) error {
 	}
 }
 
+func validateCollapseConfiguration(v *types.CollapseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CollapseConfiguration"}
+	if v.DocumentAttributeKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentAttributeKey"))
+	}
+	if v.SortingConfigurations != nil {
+		if err := validateSortingConfigurationList(v.SortingConfigurations); err != nil {
+			invalidParams.AddNested("SortingConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateColumnConfiguration(v *types.ColumnConfiguration) error {
 	if v == nil {
 		return nil
@@ -3565,6 +3585,23 @@ func validateSortingConfiguration(v *types.SortingConfiguration) error {
 	}
 }
 
+func validateSortingConfigurationList(v []types.SortingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortingConfigurationList"}
+	for i := range v {
+		if err := validateSortingConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSpellCorrectionConfiguration(v *types.SpellCorrectionConfiguration) error {
 	if v == nil {
 		return nil
@@ -4796,6 +4833,11 @@ func validateOpQueryInput(v *QueryInput) error {
 			invalidParams.AddNested("SortingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SortingConfigurations != nil {
+		if err := validateSortingConfigurationList(v.SortingConfigurations); err != nil {
+			invalidParams.AddNested("SortingConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.UserContext != nil {
 		if err := validateUserContext(v.UserContext); err != nil {
 			invalidParams.AddNested("UserContext", err.(smithy.InvalidParamsError))
@@ -4804,6 +4846,11 @@ func validateOpQueryInput(v *QueryInput) error {
 	if v.SpellCorrectionConfiguration != nil {
 		if err := validateSpellCorrectionConfiguration(v.SpellCorrectionConfiguration); err != nil {
 			invalidParams.AddNested("SpellCorrectionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CollapseConfiguration != nil {
+		if err := validateCollapseConfiguration(v.CollapseConfiguration); err != nil {
+			invalidParams.AddNested("CollapseConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

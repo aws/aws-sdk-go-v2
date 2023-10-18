@@ -1504,6 +1504,14 @@ type DBInstance struct {
 	// The Provisioned IOPS (I/O operations per second) value for the DB instance.
 	Iops *int32
 
+	// Indicates whether an upgrade is recommended for the storage file system
+	// configuration on the DB instance. To migrate to the preferred configuration, you
+	// can either create a blue/green deployment, or create a read replica from the DB
+	// instance. For more information, see Upgrading the storage file system for a DB
+	// instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem)
+	// .
+	IsStorageConfigUpgradeAvailable *bool
+
 	// If StorageEncrypted is enabled, the Amazon Web Services KMS key identifier for
 	// the encrypted DB instance. The Amazon Web Services KMS key identifier is the key
 	// ARN, key ID, alias ARN, or alias name for the KMS key.

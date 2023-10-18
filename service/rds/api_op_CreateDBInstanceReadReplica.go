@@ -426,6 +426,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
+	// Whether to upgrade the storage file system configuration on the read replica.
+	// This option migrates the read replica from the old storage file system layout to
+	// the preferred layout.
+	UpgradeStorageConfig *bool
+
 	// Specifies whether the DB instance class of the DB instance uses its default
 	// processor features. This setting doesn't apply to RDS Custom DB instances.
 	UseDefaultProcessorFeatures *bool

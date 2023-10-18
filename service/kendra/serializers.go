@@ -4110,6 +4110,42 @@ func awsAwsjson11_serializeDocumentClickFeedbackList(v []types.ClickFeedback, va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCollapseConfiguration(v *types.CollapseConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DocumentAttributeKey != nil {
+		ok := object.Key("DocumentAttributeKey")
+		ok.String(*v.DocumentAttributeKey)
+	}
+
+	if v.Expand {
+		ok := object.Key("Expand")
+		ok.Boolean(v.Expand)
+	}
+
+	if v.ExpandConfiguration != nil {
+		ok := object.Key("ExpandConfiguration")
+		if err := awsAwsjson11_serializeDocumentExpandConfiguration(v.ExpandConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MissingAttributeKeyStrategy) > 0 {
+		ok := object.Key("MissingAttributeKeyStrategy")
+		ok.String(string(v.MissingAttributeKeyStrategy))
+	}
+
+	if v.SortingConfigurations != nil {
+		ok := object.Key("SortingConfigurations")
+		if err := awsAwsjson11_serializeDocumentSortingConfigurationList(v.SortingConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentColumnConfiguration(v *types.ColumnConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5308,6 +5344,23 @@ func awsAwsjson11_serializeDocumentExcludeUserAccountsList(v []string, value smi
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExpandConfiguration(v *types.ExpandConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxExpandedResultsPerItem != nil {
+		ok := object.Key("MaxExpandedResultsPerItem")
+		ok.Integer(*v.MaxExpandedResultsPerItem)
+	}
+
+	if v.MaxResultItemsToExpand != nil {
+		ok := object.Key("MaxResultItemsToExpand")
+		ok.Integer(*v.MaxResultItemsToExpand)
+	}
+
 	return nil
 }
 
@@ -7289,6 +7342,19 @@ func awsAwsjson11_serializeDocumentSortingConfiguration(v *types.SortingConfigur
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSortingConfigurationList(v []types.SortingConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSortingConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSpellCorrectionConfiguration(v *types.SpellCorrectionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9053,6 +9119,13 @@ func awsAwsjson11_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.
 		}
 	}
 
+	if v.CollapseConfiguration != nil {
+		ok := object.Key("CollapseConfiguration")
+		if err := awsAwsjson11_serializeDocumentCollapseConfiguration(v.CollapseConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DocumentRelevanceOverrideConfigurations != nil {
 		ok := object.Key("DocumentRelevanceOverrideConfigurations")
 		if err := awsAwsjson11_serializeDocumentDocumentRelevanceOverrideConfigurationList(v.DocumentRelevanceOverrideConfigurations, ok); err != nil {
@@ -9102,6 +9175,13 @@ func awsAwsjson11_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.
 	if v.SortingConfiguration != nil {
 		ok := object.Key("SortingConfiguration")
 		if err := awsAwsjson11_serializeDocumentSortingConfiguration(v.SortingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SortingConfigurations != nil {
+		ok := object.Key("SortingConfigurations")
+		if err := awsAwsjson11_serializeDocumentSortingConfigurationList(v.SortingConfigurations, ok); err != nil {
 			return err
 		}
 	}

@@ -560,6 +560,56 @@ type ClickFeedback struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies how to group results by document attribute value, and how to display
+// them collapsed/expanded under a designated primary document for each group.
+type CollapseConfiguration struct {
+
+	// The document attribute used to group search results. You can use any attribute
+	// that has the Sortable flag set to true. You can also sort by any of the
+	// following built-in attributes:"_category","_created_at", "_last_updated_at",
+	// "_version", "_view_count".
+	//
+	// This member is required.
+	DocumentAttributeKey *string
+
+	// Specifies whether to expand the collapsed results.
+	Expand bool
+
+	// Provides configuration information to customize expansion options for a
+	// collapsed group.
+	ExpandConfiguration *ExpandConfiguration
+
+	// Specifies the behavior for documents without a value for the collapse
+	// attribute. Amazon Kendra offers three customization options:
+	//   - Choose to COLLAPSE all documents with null or missing values in one group.
+	//   This is the default configuration.
+	//   - Choose to IGNORE documents with null or missing values. Ignored documents
+	//   will not appear in query results.
+	//   - Choose to EXPAND each document with a null or missing value into a group of
+	//   its own.
+	MissingAttributeKeyStrategy MissingAttributeKeyStrategy
+
+	// A prioritized list of document attributes/fields that determine the primary
+	// document among those in a collapsed group.
+	SortingConfigurations []SortingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a collapsed group of search results.
+type CollapsedResultDetail struct {
+
+	// The value of the document attribute that results are collapsed on.
+	//
+	// This member is required.
+	DocumentAttribute *DocumentAttribute
+
+	// A list of results in the collapsed group.
+	ExpandedResults []ExpandedResultItem
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about how Amazon Kendra should use the columns of a
 // database in an index.
 type ColumnConfiguration struct {
@@ -1594,6 +1644,53 @@ type EntityPersonaConfiguration struct {
 	//
 	// This member is required.
 	Persona Persona
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration information needed to customize how collapsed
+// search result groups expand.
+type ExpandConfiguration struct {
+
+	// The number of expanded results to show per collapsed primary document. For
+	// instance, if you set this value to 3, then at most 3 results per collapsed group
+	// will be displayed.
+	MaxExpandedResultsPerItem *int32
+
+	// The number of collapsed search result groups to expand. If you set this value
+	// to 10, for example, only the first 10 out of 100 result groups will have expand
+	// functionality.
+	MaxResultItemsToExpand *int32
+
+	noSmithyDocumentSerde
+}
+
+// A single expanded result in a collapsed group of search results. An expanded
+// result item contains information about an expanded result document within a
+// collapsed group of search results. This includes the original location of the
+// document, a list of attributes assigned to the document, and relevant text from
+// the document that satisfies the query.
+type ExpandedResultItem struct {
+
+	// An array of document attributes assigned to a document in the search results.
+	// For example, the document author ("_author") or the source URI ("_source_uri")
+	// of the document.
+	DocumentAttributes []DocumentAttribute
+
+	// Provides text and information about where to highlight the text.
+	DocumentExcerpt *TextWithHighlights
+
+	// The idenitifier of the document.
+	DocumentId *string
+
+	// Provides text and information about where to highlight the text.
+	DocumentTitle *TextWithHighlights
+
+	// The URI of the original location of the document.
+	DocumentURI *string
+
+	// The identifier for the expanded result.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -2812,6 +2909,9 @@ type QueryResultItem struct {
 
 	// One or more additional fields/attributes associated with the query result.
 	AdditionalAttributes []AdditionalResultAttribute
+
+	// Provides details about a collapsed group of search results.
+	CollapsedResultDetail *CollapsedResultDetail
 
 	// An array of document fields/attributes assigned to a document in the search
 	// results. For example, the document author ( _author ) or the source URI (
@@ -4147,9 +4247,9 @@ type UserContext struct {
 }
 
 // Provides the configuration information to get users and groups from an IAM
-// Identity Center (successor to Single Sign-On) identity source. This is useful
-// for user context filtering, where search results are filtered based on the user
-// or their group access to documents. You can also use the PutPrincipalMapping (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html)
+// Identity Center identity source. This is useful for user context filtering,
+// where search results are filtered based on the user or their group access to
+// documents. You can also use the PutPrincipalMapping (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html)
 // API to map users to their groups so that you only need to provide the user ID
 // when you issue the query. To set up an IAM Identity Center identity source in
 // the console to use with Amazon Kendra, see Getting started with an IAM Identity
@@ -4164,9 +4264,8 @@ type UserContext struct {
 type UserGroupResolutionConfiguration struct {
 
 	// The identity store provider (mode) you want to use to get users and groups. IAM
-	// Identity Center (successor to Single Sign-On) is currently the only available
-	// mode. Your users and groups must exist in an IAM Identity Center identity source
-	// in order to use this mode.
+	// Identity Center is currently the only available mode. Your users and groups must
+	// exist in an IAM Identity Center identity source in order to use this mode.
 	//
 	// This member is required.
 	UserGroupResolutionMode UserGroupResolutionMode

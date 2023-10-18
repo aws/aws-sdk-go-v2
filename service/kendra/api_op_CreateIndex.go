@@ -91,8 +91,8 @@ type CreateIndexInput struct {
 	// displayable.
 	UserContextPolicy types.UserContextPolicy
 
-	// Gets users and groups from IAM Identity Center (successor to Single Sign-On)
-	// identity source. To configure this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
+	// Gets users and groups from IAM Identity Center identity source. To configure
+	// this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
 	// .
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 

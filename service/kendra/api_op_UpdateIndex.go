@@ -65,8 +65,7 @@ type UpdateIndexInput struct {
 	UserContextPolicy types.UserContextPolicy
 
 	// Enables fetching access levels of groups and users from an IAM Identity Center
-	// (successor to Single Sign-On) identity source. To configure this, see
-	// UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
+	// identity source. To configure this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
 	// .
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 

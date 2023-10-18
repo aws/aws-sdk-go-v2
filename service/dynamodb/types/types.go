@@ -1173,9 +1173,8 @@ type ExportDescription struct {
 	// Point in time from which table data was exported.
 	ExportTime *time.Time
 
-	// Choice of whether to execute as a full export or incremental export. Valid
-	// values are FULL_EXPORT or INCREMENTAL_EXPORT . If INCREMENTAL_EXPORT is
-	// provided, the IncrementalExportSpecification must also be used.
+	// The type of export that was performed. Valid values are FULL_EXPORT or
+	// INCREMENTAL_EXPORT .
 	ExportType ExportType
 
 	// Status code for the result of the failed export.
@@ -1232,9 +1231,8 @@ type ExportSummary struct {
 	// Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
 	ExportStatus ExportStatus
 
-	// Choice of whether to execute as a full export or incremental export. Valid
-	// values are FULL_EXPORT or INCREMENTAL_EXPORT . If INCREMENTAL_EXPORT is
-	// provided, the IncrementalExportSpecification must also be used.
+	// The type of export that was performed. Valid values are FULL_EXPORT or
+	// INCREMENTAL_EXPORT .
 	ExportType ExportType
 
 	noSmithyDocumentSerde
@@ -1635,8 +1633,8 @@ type IncrementalExportSpecification struct {
 	// is not provided, the latest time with data available will be used.
 	ExportToTime *time.Time
 
-	// Choice of whether to output the previous item image prior to the start time of
-	// the incremental export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES .
+	// The view type that was chosen for the export. Valid values are
+	// NEW_AND_OLD_IMAGES and NEW_IMAGES . The default value is NEW_AND_OLD_IMAGES .
 	ExportViewType ExportViewType
 
 	noSmithyDocumentSerde

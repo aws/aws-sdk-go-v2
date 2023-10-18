@@ -72,6 +72,9 @@ type CreateBlueGreenDeploymentInput struct {
 	// group that is different from the one associated with the source DB cluster.
 	TargetDBClusterParameterGroupName *string
 
+	// Specify the DB instance class for the databases in the green environment.
+	TargetDBInstanceClass *string
+
 	// The DB parameter group associated with the DB instance in the green
 	// environment. To test parameter changes, specify a DB parameter group that is
 	// different from the one associated with the source DB instance.
@@ -80,6 +83,13 @@ type CreateBlueGreenDeploymentInput struct {
 	// The engine version of the database in the green environment. Specify the engine
 	// version to upgrade to in the green environment.
 	TargetEngineVersion *string
+
+	// Whether to upgrade the storage file system configuration on the green database.
+	// This option migrates the green DB instance from the older 32-bit file system to
+	// the preferred configuration. For more information, see Upgrading the storage
+	// file system for a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem)
+	// .
+	UpgradeTargetStorageConfig *bool
 
 	noSmithyDocumentSerde
 }

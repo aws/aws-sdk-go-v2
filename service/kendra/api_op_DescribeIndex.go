@@ -102,8 +102,7 @@ type DescribeIndexOutput struct {
 	UserContextPolicy types.UserContextPolicy
 
 	// Whether you have enabled the configuration for fetching access levels of groups
-	// and users from an IAM Identity Center (successor to Single Sign-On) identity
-	// source.
+	// and users from an IAM Identity Center identity source.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration for the Amazon Kendra index.

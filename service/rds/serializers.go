@@ -10215,6 +10215,11 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 		objectKey.String(*v.TargetDBClusterParameterGroupName)
 	}
 
+	if v.TargetDBInstanceClass != nil {
+		objectKey := object.Key("TargetDBInstanceClass")
+		objectKey.String(*v.TargetDBInstanceClass)
+	}
+
 	if v.TargetDBParameterGroupName != nil {
 		objectKey := object.Key("TargetDBParameterGroupName")
 		objectKey.String(*v.TargetDBParameterGroupName)
@@ -10223,6 +10228,11 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 	if v.TargetEngineVersion != nil {
 		objectKey := object.Key("TargetEngineVersion")
 		objectKey.String(*v.TargetEngineVersion)
+	}
+
+	if v.UpgradeTargetStorageConfig != nil {
+		objectKey := object.Key("UpgradeTargetStorageConfig")
+		objectKey.Boolean(*v.UpgradeTargetStorageConfig)
 	}
 
 	return nil
@@ -11206,6 +11216,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.UpgradeStorageConfig != nil {
+		objectKey := object.Key("UpgradeStorageConfig")
+		objectKey.Boolean(*v.UpgradeStorageConfig)
 	}
 
 	if v.UseDefaultProcessorFeatures != nil {

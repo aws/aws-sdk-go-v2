@@ -9594,6 +9594,47 @@ func awsAwsjson11_deserializeDocumentChangeDetectingColumns(v *[]string, value i
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCollapsedResultDetail(v **types.CollapsedResultDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CollapsedResultDetail
+	if *v == nil {
+		sv = &types.CollapsedResultDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DocumentAttribute":
+			if err := awsAwsjson11_deserializeDocumentDocumentAttribute(&sv.DocumentAttribute, value); err != nil {
+				return err
+			}
+
+		case "ExpandedResults":
+			if err := awsAwsjson11_deserializeDocumentExpandedResultList(&sv.ExpandedResults, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentColumnConfiguration(v **types.ColumnConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12337,6 +12378,113 @@ func awsAwsjson11_deserializeDocumentExcludeUserAccountsList(v *[]string, value 
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExpandedResultItem(v **types.ExpandedResultItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExpandedResultItem
+	if *v == nil {
+		sv = &types.ExpandedResultItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DocumentAttributes":
+			if err := awsAwsjson11_deserializeDocumentDocumentAttributeList(&sv.DocumentAttributes, value); err != nil {
+				return err
+			}
+
+		case "DocumentExcerpt":
+			if err := awsAwsjson11_deserializeDocumentTextWithHighlights(&sv.DocumentExcerpt, value); err != nil {
+				return err
+			}
+
+		case "DocumentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentId to be of type string, got %T instead", value)
+				}
+				sv.DocumentId = ptr.String(jtv)
+			}
+
+		case "DocumentTitle":
+			if err := awsAwsjson11_deserializeDocumentTextWithHighlights(&sv.DocumentTitle, value); err != nil {
+				return err
+			}
+
+		case "DocumentURI":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.DocumentURI = ptr.String(jtv)
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResultId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExpandedResultList(v *[]types.ExpandedResultItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ExpandedResultItem
+	if *v == nil {
+		cv = []types.ExpandedResultItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ExpandedResultItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentExpandedResultItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -15903,6 +16051,11 @@ func awsAwsjson11_deserializeDocumentQueryResultItem(v **types.QueryResultItem, 
 		switch key {
 		case "AdditionalAttributes":
 			if err := awsAwsjson11_deserializeDocumentAdditionalResultAttributeList(&sv.AdditionalAttributes, value); err != nil {
+				return err
+			}
+
+		case "CollapsedResultDetail":
+			if err := awsAwsjson11_deserializeDocumentCollapsedResultDetail(&sv.CollapsedResultDetail, value); err != nil {
 				return err
 			}
 

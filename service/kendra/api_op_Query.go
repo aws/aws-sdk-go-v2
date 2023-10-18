@@ -16,7 +16,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches an index given an input query. You can configure boosting or relevance
+// Searches an index given an input query. If you are working with large language
+// models (LLMs) or implementing retrieval augmented generation (RAG) systems, you
+// can use Amazon Kendra's Retrieve (https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html)
+// API, which can return longer semantically relevant passages. We recommend using
+// the Retrieve API instead of filing a service limit increase to increase the
+// Query API document excerpt length. You can configure boosting or relevance
 // tuning at the query level to override boosting at the index level, filter based
 // on document fields/attributes and faceted search, and filter based on the user
 // or their group access to documents. You can also include certain fields in the
@@ -61,6 +66,11 @@ type QueryInput struct {
 	// you can create a set of filtering rules that a document must satisfy to be
 	// included in the query results.
 	AttributeFilter *types.AttributeFilter
+
+	// Provides configuration to determine how to group results by document attribute
+	// value, and how to display them (collapsed or expanded) under a designated
+	// primary document for each group.
+	CollapseConfiguration *types.CollapseConfiguration
 
 	// Overrides relevance tuning configurations of fields/attributes set at the index
 	// level. If you use this API to override the relevance tuning configured at the
@@ -107,6 +117,15 @@ type QueryInput struct {
 	// don't provide sorting configuration, the results are sorted by the relevance
 	// that Amazon Kendra determines for the result.
 	SortingConfiguration *types.SortingConfiguration
+
+	// Provides configuration information to determine how the results of a query are
+	// sorted. You can set upto 3 fields that Amazon Kendra should sort the results on,
+	// and specify whether the results should be sorted in ascending or descending
+	// order. The sort field quota can be increased. If you don't provide a sorting
+	// configuration, the results are sorted by the relevance that Amazon Kendra
+	// determines for the result. In the case of ties in sorting the results, the
+	// results are sorted by relevance.
+	SortingConfigurations []types.SortingConfiguration
 
 	// Enables suggested spell corrections for queries.
 	SpellCorrectionConfiguration *types.SpellCorrectionConfiguration

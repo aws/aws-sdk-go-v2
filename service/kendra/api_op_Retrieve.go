@@ -29,6 +29,10 @@ import (
 //   - Override boosting at the index level
 //   - Filter based on document fields or attributes
 //   - Filter based on the user or their group access to documents
+//   - View the confidence score bucket for a retrieved passage result. The
+//     confidence bucket provides a relative ranking that indicates how confident
+//     Amazon Kendra is that the response is relevant to the query. Confidence score
+//     buckets are currently available only for English.
 //
 // You can also include certain fields in the response that might provide useful
 // additional information. The Retrieve API shares the number of query capacity

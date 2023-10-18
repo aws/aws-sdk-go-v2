@@ -68,8 +68,9 @@ type ExportTableToPointInTimeInput struct {
 	ExportTime *time.Time
 
 	// Choice of whether to execute as a full export or incremental export. Valid
-	// values are FULL_EXPORT or INCREMENTAL_EXPORT . If INCREMENTAL_EXPORT is
-	// provided, the IncrementalExportSpecification must also be used.
+	// values are FULL_EXPORT or INCREMENTAL_EXPORT. The default value is FULL_EXPORT.
+	// If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also
+	// be used.
 	ExportType types.ExportType
 
 	// Optional object containing the parameters specific to an incremental export.

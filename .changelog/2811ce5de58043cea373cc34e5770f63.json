@@ -1,0 +1,8 @@
+{
+    "id": "2811ce5d-e580-43ce-a373-cc34e5770f63",
+    "type": "feature",
+    "description": "This release adds an max limit of 25 recommendation ids for NotifyRecommendationsReceived API.",
+    "modules": [
+        "service/wisdom"
+    ]
+}

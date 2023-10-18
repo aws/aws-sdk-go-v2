@@ -29449,6 +29449,22 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				sv.Iops = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("IsStorageConfigUpgradeAvailable", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.IsStorageConfigUpgradeAvailable = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

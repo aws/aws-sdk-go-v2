@@ -775,6 +775,26 @@ func (MetricType) Values() []MetricType {
 	}
 }
 
+type MissingAttributeKeyStrategy string
+
+// Enum values for MissingAttributeKeyStrategy
+const (
+	MissingAttributeKeyStrategyIgnore   MissingAttributeKeyStrategy = "IGNORE"
+	MissingAttributeKeyStrategyCollapse MissingAttributeKeyStrategy = "COLLAPSE"
+	MissingAttributeKeyStrategyExpand   MissingAttributeKeyStrategy = "EXPAND"
+)
+
+// Values returns all known values for MissingAttributeKeyStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MissingAttributeKeyStrategy) Values() []MissingAttributeKeyStrategy {
+	return []MissingAttributeKeyStrategy{
+		"IGNORE",
+		"COLLAPSE",
+		"EXPAND",
+	}
+}
+
 type Mode string
 
 // Enum values for Mode
