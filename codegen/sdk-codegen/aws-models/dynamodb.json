@@ -3752,7 +3752,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3795,7 +3794,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3808,7 +3808,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3822,7 +3821,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3845,7 +3843,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3880,7 +3877,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3891,14 +3887,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3912,14 +3910,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3928,18 +3924,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -3948,7 +3943,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -3968,14 +3964,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3989,7 +3987,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4009,7 +4006,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4020,14 +4016,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4065,9 +4063,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -5250,7 +5250,7 @@
                 "ExportType": {
                     "target": "com.amazonaws.dynamodb#ExportType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>. If <code>INCREMENTAL_EXPORT</code> is provided, the <code>IncrementalExportSpecification</code> must also be used.</p>"
+                        "smithy.api#documentation": "<p>The type of export that was performed. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>.</p>"
                     }
                 },
                 "IncrementalExportSpecification": {
@@ -5355,7 +5355,7 @@
                 "ExportType": {
                     "target": "com.amazonaws.dynamodb#ExportType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>. If <code>INCREMENTAL_EXPORT</code> is provided, the <code>IncrementalExportSpecification</code> must also be used.</p>"
+                        "smithy.api#documentation": "<p>The type of export that was performed. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>.</p>"
                     }
                 }
             },
@@ -5458,7 +5458,7 @@
                 "ExportType": {
                     "target": "com.amazonaws.dynamodb#ExportType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>. If <code>INCREMENTAL_EXPORT</code> is provided, the <code>IncrementalExportSpecification</code> must also be used.</p>"
+                        "smithy.api#documentation": "<p>Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. The default value is FULL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.</p>"
                     }
                 },
                 "IncrementalExportSpecification": {
@@ -6514,7 +6514,7 @@
                 "ExportViewType": {
                     "target": "com.amazonaws.dynamodb#ExportViewType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choice of whether to output the previous item image prior to the start time of the incremental export. Valid values are <code>NEW_AND_OLD_IMAGES</code> and <code>NEW_IMAGES</code>.</p>"
+                        "smithy.api#documentation": "<p>The view type that was chosen for the export. Valid values are <code>NEW_AND_OLD_IMAGES</code> and <code>NEW_IMAGES</code>. The default value is <code>NEW_AND_OLD_IMAGES</code>.</p>"
                     }
                 }
             },
@@ -9951,7 +9951,7 @@
                 "FilterExpression": {
                     "target": "com.amazonaws.dynamodb#ConditionExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that contains conditions that DynamoDB applies after the <code>Scan</code>\n            operation, but before the data is returned to you. Items that do not satisfy the\n                <code>FilterExpression</code> criteria are not returned.</p>\n         <note>\n            <p>A <code>FilterExpression</code> is applied after the items have already been read;\n                the process of filtering does not consume any additional read capacity units.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression\">Filter Expressions</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A string that contains conditions that DynamoDB applies after the <code>Scan</code>\n            operation, but before the data is returned to you. Items that do not satisfy the\n                <code>FilterExpression</code> criteria are not returned.</p>\n         <note>\n            <p>A <code>FilterExpression</code> is applied after the items have already been read;\n                the process of filtering does not consume any additional read capacity units.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression\">Filter Expressions</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "ExpressionAttributeNames": {
@@ -11069,7 +11069,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The entire transaction request was canceled.</p>\n         <p>DynamoDB cancels a <code>TransactWriteItems</code> request under the following\n            circumstances:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactWriteItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>More than one action in the <code>TransactWriteItems</code> operation\n                    targets the same item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (larger than 400 KB), or a local secondary\n                    index (LSI) becomes too large, or a similar validation error occurs because of\n                    changes made by the transaction.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <p>DynamoDB cancels a <code>TransactGetItems</code> request under the\n            following circumstances:</p>\n         <ul>\n            <li>\n               <p>There is an ongoing <code>TransactGetItems</code> operation that conflicts\n                    with a concurrent <code>PutItem</code>, <code>UpdateItem</code>,\n                        <code>DeleteItem</code> or <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactGetItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactGetItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If using Java, DynamoDB lists the cancellation reasons on the\n                    <code>CancellationReasons</code> property. This property is not set for other\n                languages. Transaction cancellation reasons are ordered in the order of requested\n                items, if an item has no error it will have <code>None</code> code and\n                    <code>Null</code> message.</p>\n         </note>\n         <p>Cancellation reason codes and possible error messages:</p>\n         <ul>\n            <li>\n               <p>No Errors:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>None</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: <code>null</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Conditional Check Failed:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ConditionalCheckFailed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: The conditional request failed. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Item Collection Size Limit Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ItemCollectionSizeLimitExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Collection size exceeded.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Transaction Conflict:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>TransactionConflict</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Transaction is ongoing for the item.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Provisioned Throughput Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ProvisionedThroughputExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages:</p>\n                     <ul>\n                        <li>\n                           <p>The level of configured provisioned throughput for the\n                                    table was exceeded. Consider increasing your provisioning level\n                                    with the UpdateTable API.</p>\n                           <note>\n                              <p>This Message is received when provisioned throughput is\n                                        exceeded is on a provisioned DynamoDB\n                                        table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>The level of configured provisioned throughput for one or\n                                    more global secondary indexes of the table was exceeded.\n                                    Consider increasing your provisioning level for the\n                                    under-provisioned global secondary indexes with the UpdateTable\n                                    API.</p>\n                           <note>\n                              <p>This message is returned when provisioned throughput is\n                                        exceeded is on a provisioned GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Throttling Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ThrottlingError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>Throughput exceeds the current capacity of your table or\n                                    index. DynamoDB is automatically scaling your table or\n                                    index so please try again shortly. If exceptions persist, check\n                                    if you have a hot key:\n                                    https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand table as DynamoDB is automatically\n                                        scaling the table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>Throughput exceeds the current capacity for one or more\n                                    global secondary indexes. DynamoDB is automatically\n                                    scaling your index so please try again shortly.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on\n                                        an On-Demand GSI as DynamoDB is automatically\n                                        scaling the GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Validation Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ValidationError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>One or more parameter values were invalid.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key beyond allowed size limits.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key to unsupported type.</p>\n                        </li>\n                        <li>\n                           <p>An operand in the update expression has an incorrect data\n                                    type.</p>\n                        </li>\n                        <li>\n                           <p>Item size to update has exceeded the maximum allowed\n                                    size.</p>\n                        </li>\n                        <li>\n                           <p>Number overflow. Attempting to store a number with\n                                    magnitude larger than supported range.</p>\n                        </li>\n                        <li>\n                           <p>Type mismatch for attribute to update.</p>\n                        </li>\n                        <li>\n                           <p>Nesting Levels have exceeded supported limits.</p>\n                        </li>\n                        <li>\n                           <p>The document path provided in the update expression is\n                                    invalid for update.</p>\n                        </li>\n                        <li>\n                           <p>The provided expression refers to an attribute that does\n                                    not exist in the item.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The entire transaction request was canceled.</p>\n         <p>DynamoDB cancels a <code>TransactWriteItems</code> request under the following\n            circumstances:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactWriteItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>More than one action in the <code>TransactWriteItems</code> operation\n                    targets the same item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (larger than 400 KB), or a local secondary\n                    index (LSI) becomes too large, or a similar validation error occurs because of\n                    changes made by the transaction.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n               <p>\n                    There is an ongoing <code>TransactWriteItems</code> operation that conflicts with a concurrent \n                    <code>TransactWriteItems</code> request. In this case the <code>TransactWriteItems</code> operation \n                    fails with a <code>TransactionCanceledException</code>.\n                </p>\n            </li>\n         </ul>\n         <p>DynamoDB cancels a <code>TransactGetItems</code> request under the\n            following circumstances:</p>\n         <ul>\n            <li>\n               <p>There is an ongoing <code>TransactGetItems</code> operation that conflicts\n                    with a concurrent <code>PutItem</code>, <code>UpdateItem</code>,\n                        <code>DeleteItem</code> or <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactGetItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactGetItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If using Java, DynamoDB lists the cancellation reasons on the\n                    <code>CancellationReasons</code> property. This property is not set for other\n                languages. Transaction cancellation reasons are ordered in the order of requested\n                items, if an item has no error it will have <code>None</code> code and\n                    <code>Null</code> message.</p>\n         </note>\n         <p>Cancellation reason codes and possible error messages:</p>\n         <ul>\n            <li>\n               <p>No Errors:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>None</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: <code>null</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Conditional Check Failed:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ConditionalCheckFailed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: The conditional request failed. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Item Collection Size Limit Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ItemCollectionSizeLimitExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Collection size exceeded.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Transaction Conflict:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>TransactionConflict</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Transaction is ongoing for the item.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Provisioned Throughput Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ProvisionedThroughputExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages:</p>\n                     <ul>\n                        <li>\n                           <p>The level of configured provisioned throughput for the\n                                    table was exceeded. Consider increasing your provisioning level\n                                    with the UpdateTable API.</p>\n                           <note>\n                              <p>This Message is received when provisioned throughput is\n                                        exceeded is on a provisioned DynamoDB\n                                        table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>The level of configured provisioned throughput for one or\n                                    more global secondary indexes of the table was exceeded.\n                                    Consider increasing your provisioning level for the\n                                    under-provisioned global secondary indexes with the UpdateTable\n                                    API.</p>\n                           <note>\n                              <p>This message is returned when provisioned throughput is\n                                        exceeded is on a provisioned GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Throttling Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ThrottlingError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>Throughput exceeds the current capacity of your table or\n                                    index. DynamoDB is automatically scaling your table or\n                                    index so please try again shortly. If exceptions persist, check\n                                    if you have a hot key:\n                                    https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand table as DynamoDB is automatically\n                                        scaling the table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>Throughput exceeds the current capacity for one or more\n                                    global secondary indexes. DynamoDB is automatically\n                                    scaling your index so please try again shortly.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on\n                                        an On-Demand GSI as DynamoDB is automatically\n                                        scaling the GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Validation Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ValidationError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>One or more parameter values were invalid.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key beyond allowed size limits.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key to unsupported type.</p>\n                        </li>\n                        <li>\n                           <p>An operand in the update expression has an incorrect data\n                                    type.</p>\n                        </li>\n                        <li>\n                           <p>Item size to update has exceeded the maximum allowed\n                                    size.</p>\n                        </li>\n                        <li>\n                           <p>Number overflow. Attempting to store a number with\n                                    magnitude larger than supported range.</p>\n                        </li>\n                        <li>\n                           <p>Type mismatch for attribute to update.</p>\n                        </li>\n                        <li>\n                           <p>Nesting Levels have exceeded supported limits.</p>\n                        </li>\n                        <li>\n                           <p>The document path provided in the update expression is\n                                    invalid for update.</p>\n                        </li>\n                        <li>\n                           <p>The provided expression refers to an attribute that does\n                                    not exist in the item.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },

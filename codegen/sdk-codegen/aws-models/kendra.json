@@ -288,7 +288,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -331,7 +330,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -344,7 +344,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -358,7 +357,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -381,7 +379,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -416,7 +413,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -427,14 +423,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -448,14 +446,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -464,11 +460,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -479,14 +475,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -500,7 +498,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -520,7 +517,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -531,14 +527,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -549,9 +547,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1694,7 +1694,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more documents from an index. The documents must have been added with\n            the <code>BatchPutDocument</code> API.</p>\n         <p>The documents are deleted asynchronously. You can see the progress of the deletion by\n            using Amazon Web Services CloudWatch. Any error messages related to the processing of the\n            batch are sent to your Amazon Web Services CloudWatch log. You can also use the \n            <code>BatchGetDocumentStatus</code> API to monitor the progress of deleting your documents.</p>\n         <p>Deleting documents from an index using <code>BatchDeleteDocument</code> could take up \n            to an hour or more, depending on the number of documents you want to delete.</p>"
+                "smithy.api#documentation": "<p>Removes one or more documents from an index. The documents must have been added with\n            the <code>BatchPutDocument</code> API.</p>\n         <p>The documents are deleted asynchronously. You can see the progress of the deletion by\n            using Amazon Web Services\n            CloudWatch. Any error messages related to the processing of the batch are sent to\n            your Amazon Web Services\n            CloudWatch log. You can also use the <code>BatchGetDocumentStatus</code> API to\n            monitor the progress of deleting your documents.</p>\n         <p>Deleting documents from an index using <code>BatchDeleteDocument</code> could take up\n            to an hour or more, depending on the number of documents you want to delete.</p>"
             }
         },
         "com.amazonaws.kendra#BatchDeleteDocumentRequest": {
@@ -2007,7 +2007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more documents to an index.</p>\n         <p>The <code>BatchPutDocument</code> API enables you to ingest inline documents or a set\n            of documents stored in an Amazon S3 bucket. Use this API to ingest your text and\n            unstructured text into an index, add custom attributes to the documents, and to attach\n            an access control list to the documents added to the index.</p>\n         <p>The documents are indexed asynchronously. You can see the progress of the batch using \n            Amazon Web Services CloudWatch. Any error messages related to processing the batch \n            are sent to your Amazon Web Services CloudWatch log. You can also use the \n            <code>BatchGetDocumentStatus</code> API to monitor the progress of indexing your documents.</p>\n         <p>For an example of ingesting inline documents using Python and Java SDKs, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html\">Adding files\n                directly to an index</a>.</p>"
+                "smithy.api#documentation": "<p>Adds one or more documents to an index.</p>\n         <p>The <code>BatchPutDocument</code> API enables you to ingest inline documents or a set\n            of documents stored in an Amazon S3 bucket. Use this API to ingest your text and\n            unstructured text into an index, add custom attributes to the documents, and to attach\n            an access control list to the documents added to the index.</p>\n         <p>The documents are indexed asynchronously. You can see the progress of the batch using\n                Amazon Web Services\n            CloudWatch. Any error messages related to processing the batch are sent to your\n                Amazon Web Services\n            CloudWatch log. You can also use the <code>BatchGetDocumentStatus</code> API to\n            monitor the progress of indexing your documents.</p>\n         <p>For an example of ingesting inline documents using Python and Java SDKs, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html\">Adding files\n                directly to an index</a>.</p>"
             }
         },
         "com.amazonaws.kendra#BatchPutDocumentRequest": {
@@ -2023,7 +2023,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n            your S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access\n            your S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for Amazon Kendra</a>.</p>"
                     }
                 },
                 "Documents": {
@@ -2050,7 +2050,7 @@
                 "FailedDocuments": {
                     "target": "com.amazonaws.kendra#BatchPutDocumentResponseFailedDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of documents that were not added to the index because the document failed a\n            validation check. Each document contains an error message that indicates why the\n            document couldn't be added to the index.</p>\n         <p>If there was an error adding a document to an index the error is reported in your\n                Amazon Web Services CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring \n                    Amazon Kendra with Amazon CloudWatch logs</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of documents that were not added to the index because the document failed a\n            validation check. Each document contains an error message that indicates why the\n            document couldn't be added to the index.</p>\n         <p>If there was an error adding a document to an index the error is reported in your\n                Amazon Web Services CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring Amazon Kendra with Amazon CloudWatch logs</a>.</p>"
                     }
                 }
             },
@@ -2317,6 +2317,67 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.kendra#CollapseConfiguration": {
+            "type": "structure",
+            "members": {
+                "DocumentAttributeKey": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document attribute used to group search results. You can use any attribute that\n            has the <code>Sortable</code> flag set to true. You can also sort by any of the\n            following built-in attributes:\"_category\",\"_created_at\", \"_last_updated_at\", \"_version\",\n            \"_view_count\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SortingConfigurations": {
+                    "target": "com.amazonaws.kendra#SortingConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A prioritized list of document attributes/fields that determine the primary document\n            among those in a collapsed group.</p>"
+                    }
+                },
+                "MissingAttributeKeyStrategy": {
+                    "target": "com.amazonaws.kendra#MissingAttributeKeyStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the behavior for documents without a value for the collapse\n            attribute.</p>\n         <p>Amazon Kendra offers three customization options:</p>\n         <ul>\n            <li>\n               <p>Choose to <code>COLLAPSE</code> all documents with null or missing values in\n                    one group. This is the default configuration.</p>\n            </li>\n            <li>\n               <p>Choose to <code>IGNORE</code> documents with null or missing values. Ignored\n                    documents will not appear in query results.</p>\n            </li>\n            <li>\n               <p>Choose to <code>EXPAND</code> each document with a null or missing value into\n                    a group of its own.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Expand": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to expand the collapsed results.</p>"
+                    }
+                },
+                "ExpandConfiguration": {
+                    "target": "com.amazonaws.kendra#ExpandConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration information to customize expansion options for a collapsed\n            group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how to group results by document attribute value, and how to display them\n            collapsed/expanded under a designated primary document for each group.</p>"
+            }
+        },
+        "com.amazonaws.kendra#CollapsedResultDetail": {
+            "type": "structure",
+            "members": {
+                "DocumentAttribute": {
+                    "target": "com.amazonaws.kendra#DocumentAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the document attribute that results are collapsed on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpandedResults": {
+                    "target": "com.amazonaws.kendra#ExpandedResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of results in the collapsed group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about a collapsed group of search results.</p>"
             }
         },
         "com.amazonaws.kendra#ColumnConfiguration": {
@@ -3587,7 +3648,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n            <code>Query</code> API, <code>GetQuerySuggestions</code> API, and other required APIs. \n            The role also must include permission to access IAM Identity Center (successor to Single Sign-On) that stores your \n            user and group information. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n            <code>Query</code> API, <code>GetQuerySuggestions</code> API, and other required APIs. \n            The role also must include permission to access IAM Identity Center that stores your \n            user and group information. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for Amazon Kendra</a>.</p>"
                     }
                 },
                 "Configuration": {
@@ -3950,7 +4011,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center (successor to Single Sign-On) \n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center \n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
                     }
                 }
             },
@@ -6182,7 +6243,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you have enabled the configuration for fetching access levels of groups and\n         users from an IAM Identity Center (successor to Single Sign-On) identity source.</p>"
+                        "smithy.api#documentation": "<p>Whether you have enabled the configuration for fetching access levels of groups and\n         users from an IAM Identity Center identity source.</p>"
                     }
                 }
             },
@@ -6868,7 +6929,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.kendra#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file type of the document in the <code>Blob</code> field.</p>\n         <p>If you want to index snippets or subsets of HTML documents instead of the entirety \n            of the HTML documents, you must add the <code>HTML</code> start and closing tags \n            (<code><HTML>content</HTML></code>) around the content.</p>"
+                        "smithy.api#documentation": "<p>The file type of the document in the <code>Blob</code> field.</p>\n         <p>If you want to index snippets or subsets of HTML documents instead of the entirety of\n            the HTML documents, you must add the <code>HTML</code> start and closing tags\n                (<code><HTML>content</HTML></code>) around the content.</p>"
                     }
                 },
                 "AccessControlConfigurationId": {
@@ -7574,6 +7635,70 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.kendra#ExpandConfiguration": {
+            "type": "structure",
+            "members": {
+                "MaxResultItemsToExpand": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of collapsed search result groups to expand. If you set this value to 10,\n            for example, only the first 10 out of 100 result groups will have expand functionality.\n        </p>"
+                    }
+                },
+                "MaxExpandedResultsPerItem": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of expanded results to show per collapsed primary document. For instance,\n            if you set this value to 3, then at most 3 results per collapsed group will be\n            displayed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration information needed to customize how collapsed search\n            result groups expand.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ExpandedResultItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the expanded result.</p>"
+                    }
+                },
+                "DocumentId": {
+                    "target": "com.amazonaws.kendra#DocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idenitifier of the document.</p>"
+                    }
+                },
+                "DocumentTitle": {
+                    "target": "com.amazonaws.kendra#TextWithHighlights"
+                },
+                "DocumentExcerpt": {
+                    "target": "com.amazonaws.kendra#TextWithHighlights"
+                },
+                "DocumentURI": {
+                    "target": "com.amazonaws.kendra#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the original location of the document.</p>"
+                    }
+                },
+                "DocumentAttributes": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of document attributes assigned to a document in the search results. For\n            example, the document author (\"_author\") or the source URI (\"_source_uri\") of the\n            document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A single expanded result in a collapsed group of search results.</p>\n         <p>An expanded result item contains information about an expanded result document within\n            a collapsed group of search results. This includes the original location of the\n            document, a list of attributes assigned to the document, and relevant text from the\n            document that satisfies the query. </p>"
+            }
+        },
+        "com.amazonaws.kendra#ExpandedResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#ExpandedResultItem"
             }
         },
         "com.amazonaws.kendra#ExperienceConfiguration": {
@@ -11084,6 +11209,29 @@
                 }
             }
         },
+        "com.amazonaws.kendra#MissingAttributeKeyStrategy": {
+            "type": "enum",
+            "members": {
+                "IGNORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORE"
+                    }
+                },
+                "COLLAPSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLLAPSE"
+                    }
+                },
+                "EXPAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPAND"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#Mode": {
             "type": "enum",
             "members": {
@@ -11622,7 +11770,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches an index given an input query.</p>\n         <p>You can configure boosting or relevance tuning at the query level to override boosting \n         at the index level, filter based on document fields/attributes and faceted search, and \n         filter based on the user or their group access to documents. You can also include certain \n         fields in the response that might provide useful additional information.</p>\n         <p>A query response contains three types of results.</p>\n         <ul>\n            <li>\n               <p>Relevant suggested answers. The answers can be either a text excerpt or table \n               excerpt. The answer can be highlighted in the excerpt.</p>\n            </li>\n            <li>\n               <p>Matching FAQs or questions-answer from your FAQ file.</p>\n            </li>\n            <li>\n               <p>Relevant documents. This result type includes an excerpt of the document with \n               the document title. The searched terms can be highlighted in the excerpt.</p>\n            </li>\n         </ul>\n         <p>You can specify that the query return only one type of result using the \n         <code>QueryResultTypeFilter</code> parameter. Each query returns the 100 \n         most relevant results. If you filter result type to only question-answers, \n         a maximum of four results are returned. If you filter result type to only \n         answers, a maximum of three results are returned.</p>"
+                "smithy.api#documentation": "<p>Searches an index given an input query.</p>\n         <note>\n            <p>If you are working with large language models (LLMs) or implementing retrieval\n            augmented generation (RAG) systems, you can use Amazon Kendra's <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html\">Retrieve</a> API, which can return longer semantically relevant passages. We\n            recommend using the <code>Retrieve</code> API instead of filing a service limit increase\n            to increase the <code>Query</code> API document excerpt length.</p>\n         </note>\n         <p>You can configure boosting or relevance tuning at the query level to override boosting\n         at the index level, filter based on document fields/attributes and faceted search, and\n         filter based on the user or their group access to documents. You can also include certain\n         fields in the response that might provide useful additional information.</p>\n         <p>A query response contains three types of results.</p>\n         <ul>\n            <li>\n               <p>Relevant suggested answers. The answers can be either a text excerpt or table\n               excerpt. The answer can be highlighted in the excerpt.</p>\n            </li>\n            <li>\n               <p>Matching FAQs or questions-answer from your FAQ file.</p>\n            </li>\n            <li>\n               <p>Relevant documents. This result type includes an excerpt of the document with the\n               document title. The searched terms can be highlighted in the excerpt.</p>\n            </li>\n         </ul>\n         <p>You can specify that the query return only one type of result using the\n            <code>QueryResultTypeFilter</code> parameter. Each query returns the 100 most relevant\n         results. If you filter result type to only question-answers, a maximum of four results are\n         returned. If you filter result type to only answers, a maximum of three results are\n         returned.</p>"
             }
         },
         "com.amazonaws.kendra#QueryCapacityUnit": {
@@ -11679,37 +11827,37 @@
                 "AttributeFilter": {
                     "target": "com.amazonaws.kendra#AttributeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide \n         one attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, \n         and <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of \n         filtering rules that a document must satisfy to be included in the query results.</p>"
+                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide one attribute\n         filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and\n            <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of filtering rules\n         that a document must satisfy to be included in the query results.</p>"
                     }
                 },
                 "Facets": {
                     "target": "com.amazonaws.kendra#FacetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of documents fields/attributes for faceted search. Amazon Kendra returns a \n         count for each field key specified. This helps your users narrow their search.</p>"
+                        "smithy.api#documentation": "<p>An array of documents fields/attributes for faceted search. Amazon Kendra returns a\n         count for each field key specified. This helps your users narrow their search.</p>"
                     }
                 },
                 "RequestedDocumentAttributes": {
                     "target": "com.amazonaws.kendra#DocumentAttributeKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of document fields/attributes to include in the response. You can limit the \n         response to include certain document fields. By default, all document attributes are \n         included in the response.</p>"
+                        "smithy.api#documentation": "<p>An array of document fields/attributes to include in the response. You can limit the\n         response to include certain document fields. By default, all document attributes are\n         included in the response.</p>"
                     }
                 },
                 "QueryResultTypeFilter": {
                     "target": "com.amazonaws.kendra#QueryResultType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the type of query result or response. Only results for the specified type are \n         returned.</p>"
+                        "smithy.api#documentation": "<p>Sets the type of query result or response. Only results for the specified type are\n         returned.</p>"
                     }
                 },
                 "DocumentRelevanceOverrideConfigurations": {
                     "target": "com.amazonaws.kendra#DocumentRelevanceOverrideConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides relevance tuning configurations of fields/attributes set at the index level.</p>\n         <p>If you use this API to override the relevance tuning configured at the index level, but there \n         is no relevance tuning configured at the index level, then Amazon Kendra does not apply any \n         relevance tuning.</p>\n         <p>If there is relevance tuning configured for fields at the index level, and you use this API to \n         override only some of these fields, then for the fields you did not override, the importance is \n         set to 1.</p>"
+                        "smithy.api#documentation": "<p>Overrides relevance tuning configurations of fields/attributes set at the index\n         level.</p>\n         <p>If you use this API to override the relevance tuning configured at the index level, but\n         there is no relevance tuning configured at the index level, then Amazon Kendra does\n         not apply any relevance tuning.</p>\n         <p>If there is relevance tuning configured for fields at the index level, and you use this\n         API to override only some of these fields, then for the fields you did not override, the\n         importance is set to 1.</p>"
                     }
                 },
                 "PageNumber": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Query results are returned in pages the size of the <code>PageSize</code> parameter. \n         By default, Amazon Kendra returns the first page of results. Use this parameter to \n         get result pages after the first one.</p>"
+                        "smithy.api#documentation": "<p>Query results are returned in pages the size of the <code>PageSize</code> parameter. By\n         default, Amazon Kendra returns the first page of results. Use this parameter to get\n         result pages after the first one.</p>"
                     }
                 },
                 "PageSize": {
@@ -11721,7 +11869,13 @@
                 "SortingConfiguration": {
                     "target": "com.amazonaws.kendra#SortingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information that determines how the results of the query are sorted. You can\n         set the field that Amazon Kendra should sort the results on, and specify whether the\n         results should be sorted in ascending or descending order. In the case of ties in sorting\n         the results, the results are sorted by relevance.</p>\n         <p>If you don't provide sorting configuration, the results are sorted by the relevance that \n         Amazon Kendra determines for the result.</p>"
+                        "smithy.api#documentation": "<p>Provides information that determines how the results of the query are sorted. You can\n         set the field that Amazon Kendra should sort the results on, and specify whether the\n         results should be sorted in ascending or descending order. In the case of ties in sorting\n         the results, the results are sorted by relevance.</p>\n         <p>If you don't provide sorting configuration, the results are sorted by the relevance that\n            Amazon Kendra determines for the result.</p>"
+                    }
+                },
+                "SortingConfigurations": {
+                    "target": "com.amazonaws.kendra#SortingConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration information to determine how the results of a query are\n         sorted.</p>\n         <p>You can set upto 3 fields that Amazon Kendra should sort the results on, and\n         specify whether the results should be sorted in ascending or descending order. The sort\n         field quota can be increased.</p>\n         <p>If you don't provide a sorting configuration, the results are sorted by the relevance\n         that Amazon Kendra determines for the result. In the case of ties in sorting the\n         results, the results are sorted by relevance. </p>"
                     }
                 },
                 "UserContext": {
@@ -11741,6 +11895,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables suggested spell corrections for queries.</p>"
                     }
+                },
+                "CollapseConfiguration": {
+                    "target": "com.amazonaws.kendra#CollapseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration to determine how to group results by document attribute value,\n         and how to display them (collapsed or expanded) under a designated primary document for\n         each group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11753,7 +11913,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.kendra#QueryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the search. You also use <code>QueryId</code> to identify the\n         search when using the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html\">SubmitFeedback</a> API.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the search. You also use <code>QueryId</code> to identify the search\n         when using the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html\">SubmitFeedback</a>\n         API.</p>"
                     }
                 },
                 "ResultItems": {
@@ -11771,7 +11931,7 @@
                 "TotalNumberOfResults": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items found by the search. However, you can only retrieve up to \n         100 items. For example, if the search found 192 items, you can only retrieve the first \n         100 of the items.</p>"
+                        "smithy.api#documentation": "<p>The total number of items found by the search. However, you can only retrieve up to 100\n         items. For example, if the search found 192 items, you can only retrieve the first 100 of\n         the items.</p>"
                     }
                 },
                 "Warnings": {
@@ -11789,7 +11949,7 @@
                 "FeaturedResultsItems": {
                     "target": "com.amazonaws.kendra#FeaturedResultsItemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of featured result items. Featured results are displayed at \n         the top of the search results page, placed above all other results for \n         certain queries. If there's an exact match of a query, then certain \n         documents are featured in the search results.</p>"
+                        "smithy.api#documentation": "<p>The list of featured result items. Featured results are displayed at the top of the\n         search results page, placed above all other results for certain queries. If there's an\n         exact match of a query, then certain documents are featured in the search results.</p>"
                     }
                 }
             },
@@ -11887,6 +12047,12 @@
                     "target": "com.amazonaws.kendra#TableExcerpt",
                     "traits": {
                         "smithy.api#documentation": "<p>An excerpt from a table within a document.</p>"
+                    }
+                },
+                "CollapsedResultDetail": {
+                    "target": "com.amazonaws.kendra#CollapsedResultDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about a collapsed group of search results.</p>"
                     }
                 }
             },
@@ -12369,7 +12535,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves relevant passages or text excerpts given an input query.</p>\n         <p>This API is similar to the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html\">Query</a> \n            API. However, by default, the <code>Query</code> API only \n            returns excerpt passages of up to 100 token words. With the \n            <code>Retrieve</code> API, you can retrieve longer passages of up to \n            200 token words and up to 100 semantically relevant passages. This doesn't \n            include question-answer or FAQ type responses from your index. The passages \n            are text excerpts that can be semantically extracted from multiple documents \n            and multiple parts of the same document. If in extreme cases your documents \n            produce zero passages using the <code>Retrieve</code> API, you can alternatively \n            use the <code>Query</code> API and its types of responses.</p>\n         <p>You can also do the following:</p>\n         <ul>\n            <li>\n               <p>Override boosting at the index level</p>\n            </li>\n            <li>\n               <p>Filter based on document fields or attributes</p>\n            </li>\n            <li>\n               <p>Filter based on the user or their group access to documents</p>\n            </li>\n         </ul>\n         <p>You can also include certain fields in the response that might provide useful\n            additional information.</p>\n         <p>The <code>Retrieve</code> API shares the number of <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_CapacityUnitsConfiguration.html\">query capacity \n            units</a> that you set for your index. For more information on what's included in \n            a single capacity unit and the default base capacity for an index, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting \n                capacity</a>.</p>"
+                "smithy.api#documentation": "<p>Retrieves relevant passages or text excerpts given an input query.</p>\n         <p>This API is similar to the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html\">Query</a> API. However, by\n            default, the <code>Query</code> API only returns excerpt passages of up to 100 token\n            words. With the <code>Retrieve</code> API, you can retrieve longer passages of up to 200\n            token words and up to 100 semantically relevant passages. This doesn't include\n            question-answer or FAQ type responses from your index. The passages are text excerpts\n            that can be semantically extracted from multiple documents and multiple parts of the\n            same document. If in extreme cases your documents produce zero passages using the\n                <code>Retrieve</code> API, you can alternatively use the <code>Query</code> API and\n            its types of responses.</p>\n         <p>You can also do the following:</p>\n         <ul>\n            <li>\n               <p>Override boosting at the index level</p>\n            </li>\n            <li>\n               <p>Filter based on document fields or attributes</p>\n            </li>\n            <li>\n               <p>Filter based on the user or their group access to documents</p>\n            </li>\n            <li>\n               <p>View the confidence score bucket for a retrieved passage result. The\n                    confidence bucket provides a relative ranking that indicates how confident\n                        Amazon Kendra is that the response is relevant to the query.</p>\n               <note>\n                  <p>Confidence score buckets are currently available only for English.</p>\n               </note>\n            </li>\n         </ul>\n         <p>You can also include certain fields in the response that might provide useful\n            additional information.</p>\n         <p>The <code>Retrieve</code> API shares the number of <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_CapacityUnitsConfiguration.html\">query capacity\n                units</a> that you set for your index. For more information on what's included\n            in a single capacity unit and the default base capacity for an index, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting\n                capacity</a>.</p>"
             }
         },
         "com.amazonaws.kendra#RetrieveRequest": {
@@ -12378,45 +12544,45 @@
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index to retrieve relevant passages for the \n            search.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index to retrieve relevant passages for the search.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryText": {
                     "target": "com.amazonaws.kendra#QueryText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input query text to retrieve relevant passages for the search. \n            Amazon Kendra truncates queries at 30 token words, which excludes \n            punctuation and stop words. Truncation still applies if you use Boolean \n            or more advanced, complex queries.</p>",
+                        "smithy.api#documentation": "<p>The input query text to retrieve relevant passages for the search. Amazon Kendra\n            truncates queries at 30 token words, which excludes punctuation and stop words.\n            Truncation still applies if you use Boolean or more advanced, complex queries.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AttributeFilter": {
                     "target": "com.amazonaws.kendra#AttributeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide \n            one attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, \n            and <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of \n            filtering rules that a document must satisfy to be included in the query results.</p>"
+                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide one\n            attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and\n                <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of filtering\n            rules that a document must satisfy to be included in the query results.</p>"
                     }
                 },
                 "RequestedDocumentAttributes": {
                     "target": "com.amazonaws.kendra#DocumentAttributeKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of document fields/attributes to include in the response. You can limit \n            the response to include certain document fields. By default, all document \n            fields are included in the response.</p>"
+                        "smithy.api#documentation": "<p>A list of document fields/attributes to include in the response. You can limit the\n            response to include certain document fields. By default, all document fields are\n            included in the response.</p>"
                     }
                 },
                 "DocumentRelevanceOverrideConfigurations": {
                     "target": "com.amazonaws.kendra#DocumentRelevanceOverrideConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides relevance tuning configurations of fields/attributes set at the index \n            level.</p>\n         <p>If you use this API to override the relevance tuning configured at the index level, \n            but there is no relevance tuning configured at the index level, then \n            Amazon Kendra does not apply any relevance tuning.</p>\n         <p>If there is relevance tuning configured for fields at the index level, and you use \n            this API to override only some of these fields, then for the fields you did not \n            override, the importance is set to 1.</p>"
+                        "smithy.api#documentation": "<p>Overrides relevance tuning configurations of fields/attributes set at the index\n            level.</p>\n         <p>If you use this API to override the relevance tuning configured at the index level,\n            but there is no relevance tuning configured at the index level, then Amazon Kendra\n            does not apply any relevance tuning.</p>\n         <p>If there is relevance tuning configured for fields at the index level, and you use\n            this API to override only some of these fields, then for the fields you did not\n            override, the importance is set to 1.</p>"
                     }
                 },
                 "PageNumber": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieved relevant passages are returned in pages the size of the \n            <code>PageSize</code> parameter. By default, Amazon Kendra returns the first page \n            of results. Use this parameter to get result pages after the first one.</p>"
+                        "smithy.api#documentation": "<p>Retrieved relevant passages are returned in pages the size of the\n                <code>PageSize</code> parameter. By default, Amazon Kendra returns the first\n            page of results. Use this parameter to get result pages after the first one.</p>"
                     }
                 },
                 "PageSize": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the number of retrieved relevant passages that are returned in each page of \n            results. The default page size is 10. The maximum number of results returned is 100. \n            If you ask for more than 100 results, only 100 are returned.</p>"
+                        "smithy.api#documentation": "<p>Sets the number of retrieved relevant passages that are returned in each page of\n            results. The default page size is 10. The maximum number of results returned is 100. If\n            you ask for more than 100 results, only 100 are returned.</p>"
                     }
                 },
                 "UserContext": {
@@ -12436,7 +12602,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.kendra#QueryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of query used for the search. You also use <code>QueryId</code> to \n            identify the search when using the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html\">Submitfeedback</a> API.</p>"
+                        "smithy.api#documentation": "<p>The identifier of query used for the search. You also use <code>QueryId</code> to\n            identify the search when using the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html\">Submitfeedback</a>\n            API.</p>"
                     }
                 },
                 "ResultItems": {
@@ -12486,13 +12652,13 @@
                 "DocumentAttributes": {
                     "target": "com.amazonaws.kendra#DocumentAttributeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of document fields/attributes assigned to a document in the \n            search results. For example, the document author (<code>_author</code>) \n            or the source URI (<code>_source_uri</code>) of the document.</p>"
+                        "smithy.api#documentation": "<p>An array of document fields/attributes assigned to a document in the search results.\n            For example, the document author (<code>_author</code>) or the source URI\n                (<code>_source_uri</code>) of the document.</p>"
                     }
                 },
                 "ScoreAttributes": {
                     "target": "com.amazonaws.kendra#ScoreAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The confidence score bucket for a retrieved passage result. The confidence \n            bucket provides a relative ranking that indicates how confident Amazon Kendra \n            is that the response is relevant to the query.</p>"
+                        "smithy.api#documentation": "<p>The confidence score bucket for a retrieved passage result. The confidence bucket\n            provides a relative ranking that indicates how confident Amazon Kendra is that the\n            response is relevant to the query.</p>"
                     }
                 }
             },
@@ -13876,6 +14042,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the document attribute to use to sort the response to a Amazon Kendra\n            query. You can specify a single attribute for sorting. The attribute must have the\n                <code>Sortable</code> flag set to <code>true</code>, otherwise Amazon Kendra\n            returns an exception.</p>\n         <p>You can sort attributes of the following types.</p>\n         <ul>\n            <li>\n               <p>Date value</p>\n            </li>\n            <li>\n               <p>Long value</p>\n            </li>\n            <li>\n               <p>String value</p>\n            </li>\n         </ul>\n         <p>You can't sort attributes of the following type.</p>\n         <ul>\n            <li>\n               <p>String list value</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.kendra#SortingConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SortingConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.kendra#SourceDocument": {
@@ -15379,7 +15556,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On)\n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an IAM Identity Center\n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
                     }
                 }
             },
@@ -15718,13 +15895,13 @@
                 "UserGroupResolutionMode": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to get users and groups. \n         IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups\n         must exist in an IAM Identity Center identity source in order to use this mode.</p>",
+                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to get users and groups. \n         IAM Identity Center is currently the only available mode. Your users and groups\n         must exist in an IAM Identity Center identity source in order to use this mode.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to get users and groups from\n         an IAM Identity Center (successor to Single Sign-On) identity source. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents. You can\n         also use the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping</a> API to\n         map users to their groups so that you only need to provide the user ID when you issue the\n         query.</p>\n         <p>To set up an IAM Identity Center identity source in the console to use with Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started with an IAM Identity Center identity source</a>. You must also grant the required permissions to\n         use IAM Identity Center with Amazon Kendra. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for IAM Identity Center</a>.</p>\n         <p>Amazon Kendra currently does not support using\n            <code>UserGroupResolutionConfiguration</code> with an Amazon Web Services organization\n         member account for your IAM Identity Center identify source. You must create your index in\n         the management account for the organization in order to use\n            <code>UserGroupResolutionConfiguration</code>.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to get users and groups from\n         an IAM Identity Center identity source. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents. You can\n         also use the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping</a> API to\n         map users to their groups so that you only need to provide the user ID when you issue the\n         query.</p>\n         <p>To set up an IAM Identity Center identity source in the console to use with Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started with an IAM Identity Center identity source</a>. You must also grant the required permissions to\n         use IAM Identity Center with Amazon Kendra. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for IAM Identity Center</a>.</p>\n         <p>Amazon Kendra currently does not support using\n            <code>UserGroupResolutionConfiguration</code> with an Amazon Web Services organization\n         member account for your IAM Identity Center identify source. You must create your index in\n         the management account for the organization in order to use\n            <code>UserGroupResolutionConfiguration</code>.</p>"
             }
         },
         "com.amazonaws.kendra#UserGroupResolutionMode": {
