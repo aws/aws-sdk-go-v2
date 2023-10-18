@@ -1,3 +1,7 @@
+# v1.16.0 (2023-10-18)
+
+* **Feature**: This release adds an max limit of 25 recommendation ids for NotifyRecommendationsReceived API.
+
 # v1.15.7 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

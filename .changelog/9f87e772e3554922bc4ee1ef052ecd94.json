@@ -1,8 +1,0 @@
-{
-    "id": "9f87e772-e355-4922-bc4e-e1ef052ecd94",
-    "type": "feature",
-    "description": "This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.",
-    "modules": [
-        "service/rds"
-    ]
-}

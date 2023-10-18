@@ -1,3 +1,7 @@
+# v1.57.0 (2023-10-18)
+
+* **Feature**: This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+
 # v1.56.0 (2023-10-12)
 
 * **Feature**: This release adds support for adding a dedicated log volume to open-source RDS instances.

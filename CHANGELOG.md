@@ -1,3 +1,21 @@
+# Release (2023-10-18)
+
+## General Highlights
+* **Feature**: Add handwritten paginators that were present in some services in the v1 SDK.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.18.11](service/cloud9/CHANGELOG.md#v11811-2023-10-18)
+  * **Documentation**: Update to imageId parameter behavior and dates updated.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.23.0](service/dynamodb/CHANGELOG.md#v1230-2023-10-18)
+  * **Documentation**: Updating descriptions for several APIs.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.44.0](service/kendra/CHANGELOG.md#v1440-2023-10-18)
+  * **Feature**: Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.57.0](service/rds/CHANGELOG.md#v1570-2023-10-18)
+  * **Feature**: This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.16.0](service/wisdom/CHANGELOG.md#v1160-2023-10-18)
+  * **Feature**: This release adds an max limit of 25 recommendation ids for NotifyRecommendationsReceived API.
+
 # Release (2023-10-17)
 
 ## Module Highlights

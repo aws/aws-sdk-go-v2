@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.19.7
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.7
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.22.2
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.125.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.4
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/iot v1.40.2
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.19.2
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.24.7
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.28.7
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.56.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.57.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.30.2

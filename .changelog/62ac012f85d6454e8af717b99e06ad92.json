@@ -1,8 +1,0 @@
-{
-    "id": "62ac012f-85d6-454e-8af7-17b99e06ad92",
-    "type": "documentation",
-    "description": "Updating descriptions for several APIs.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

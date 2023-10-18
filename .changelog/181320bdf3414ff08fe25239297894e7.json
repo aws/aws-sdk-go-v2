@@ -1,8 +1,0 @@
-{
-    "id": "181320bd-f341-4ff0-8fe2-5239297894e7",
-    "type": "feature",
-    "description": "Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results",
-    "modules": [
-        "service/kendra"
-    ]
-}

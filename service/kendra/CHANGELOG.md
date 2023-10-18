@@ -1,3 +1,7 @@
+# v1.44.0 (2023-10-18)
+
+* **Feature**: Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results
+
 # v1.43.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

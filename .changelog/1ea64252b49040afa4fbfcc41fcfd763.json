@@ -1,8 +1,0 @@
-{
-    "id": "1ea64252-b490-40af-a4fb-fcc41fcfd763",
-    "type": "documentation",
-    "description": "Update to imageId parameter behavior and dates updated.",
-    "modules": [
-        "service/cloud9"
-    ]
-}

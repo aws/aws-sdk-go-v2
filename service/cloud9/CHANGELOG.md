@@ -1,3 +1,7 @@
+# v1.18.11 (2023-10-18)
+
+* **Documentation**: Update to imageId parameter behavior and dates updated.
+
 # v1.18.10 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions
