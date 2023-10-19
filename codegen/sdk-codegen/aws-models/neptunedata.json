@@ -239,7 +239,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -258,7 +257,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -286,13 +284,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -305,7 +304,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -319,7 +317,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -342,7 +339,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -377,11 +373,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -392,16 +386,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -415,14 +412,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -431,15 +426,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -450,16 +444,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -473,7 +470,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -493,11 +489,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -508,20 +502,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -532,18 +528,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -979,7 +979,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a Gremlin query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status-cancel.html\">Gremlin\n      query cancellation</a> for more information.</p>",
+                "smithy.api#documentation": "<p>Cancels a Gremlin query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status-cancel.html\">Gremlin\n      query cancellation</a> for more information.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery\">neptune-db:CancelQuery</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/gremlin/status/{queryId}",
@@ -1068,7 +1068,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a specified load job. This is an HTTP <code>DELETE</code>\n      request.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune\n      Loader Get-Status API</a> for more information.</p>",
+                "smithy.api#documentation": "<p>Cancels a specified load job. This is an HTTP <code>DELETE</code>\n      request. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune\n      Loader Get-Status API</a> for more information.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelloaderjob\">neptune-db:CancelLoaderJob</a>\n      IAM action in that cluster..</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/loader/{loadId}",
@@ -1151,7 +1151,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a Neptune ML data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The\n      <code>dataprocessing</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Cancels a Neptune ML data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The\n      <code>dataprocessing</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmldataprocessingjob\">neptune-db:CancelMLDataProcessingJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ml/dataprocessing/{id}",
@@ -1248,7 +1248,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Cancels a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmlmodeltrainingjob\">neptune-db:CancelMLModelTrainingJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ml/modeltraining/{id}",
@@ -1345,7 +1345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>",
+                "smithy.api#documentation": "<p>Cancels a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmlmodeltransformjob\">neptune-db:CancelMLModelTransformJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ml/modeltransform/{id}",
@@ -1454,7 +1454,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a specified openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune\n      openCypher status endpoint</a> for more information.</p>",
+                "smithy.api#documentation": "<p>Cancels a specified openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune\n      openCypher status endpoint</a> for more information.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery\">neptune-db:CancelQuery</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/opencypher/status/{queryId}",
@@ -1684,7 +1684,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Neptune ML inference endpoint that lets you query\n      one specific model that the model-training process constructed. See\n      <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new Neptune ML inference endpoint that lets you query\n      one specific model that the model-training process constructed. See\n      <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#createmlendpoint\">neptune-db:CreateMLEndpoint</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ml/endpoints",
@@ -1872,7 +1872,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the creation of a Neptune ML inference endpoint. See\n      <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>",
+                "smithy.api#documentation": "<p>Cancels the creation of a Neptune ML inference endpoint. See\n      <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletemlendpoint\">neptune-db:DeleteMLEndpoint</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ml/endpoints/{id}",
@@ -1975,7 +1975,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes statistics for Gremlin and openCypher (property graph)\n      data.</p>",
+                "smithy.api#documentation": "<p>Deletes statistics for Gremlin and openCypher (property graph)\n      data.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics\">neptune-db:DeleteStatistics</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/propertygraph/statistics"
@@ -2060,7 +2060,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes SPARQL statistics</p>",
+                "smithy.api#documentation": "<p>Deletes SPARQL statistics</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics\">neptune-db:DeleteStatistics</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/sparql/statistics"
@@ -2223,7 +2223,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The fast reset REST API lets you reset a Neptune graph quicky\n      and easily, removing all of its data.</p>\n         <p>Neptune fast reset is a two-step process. First you call <code>ExecuteFastReset</code>\n      with <code>action</code> set to <code>initiateDatabaseReset</code>. This returns a\n      UUID token which you then include when calling <code>ExecuteFastReset</code> again\n      with <code>action</code> set to <code>performDatabaseReset</code>. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-fast-reset.html\">Empty an Amazon Neptune\n      DB cluster using the fast reset API</a>.</p>",
+                "smithy.api#documentation": "<p>The fast reset REST API lets you reset a Neptune graph quicky\n      and easily, removing all of its data.</p>\n         <p>Neptune fast reset is a two-step process. First you call <code>ExecuteFastReset</code>\n      with <code>action</code> set to <code>initiateDatabaseReset</code>. This returns a\n      UUID token which you then include when calling <code>ExecuteFastReset</code> again\n      with <code>action</code> set to <code>performDatabaseReset</code>. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-fast-reset.html\">Empty an Amazon Neptune\n      DB cluster using the fast reset API</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#resetdatabase\">neptune-db:ResetDatabase</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/system",
@@ -2345,7 +2345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Executes a Gremlin Explain query.</p>\n         <p>Amazon Neptune has added a Gremlin feature named <code>explain</code>\n      that provides is a self-service tool for understanding the execution\n      approach being taken by the Neptune engine for the query. You invoke\n      it by adding an <code>explain</code> parameter to an HTTP call that\n      submits a Gremlin query.</p>\n         <p>The explain feature provides information about the logical structure\n      of query execution plans. You can use this information to identify\n      potential evaluation and execution bottlenecks and to tune your query,\n      as explained  in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-traversal-tuning.html\">Tuning\n      Gremlin queries</a>. You can also use query hints to improve\n      query execution plans.</p>",
+                "smithy.api#documentation": "<p>Executes a Gremlin Explain query.</p>\n         <p>Amazon Neptune has added a Gremlin feature named <code>explain</code>\n      that provides is a self-service tool for understanding the execution\n      approach being taken by the Neptune engine for the query. You invoke\n      it by adding an <code>explain</code> parameter to an HTTP call that\n      submits a Gremlin query.</p>\n         <p>The explain feature provides information about the logical structure\n      of query execution plans. You can use this information to identify\n      potential evaluation and execution bottlenecks and to tune your query,\n      as explained  in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-traversal-tuning.html\">Tuning\n      Gremlin queries</a>. You can also use query hints to improve\n      query execution plans.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows one of the following IAM actions\n      in that cluster, depending on the query:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery\">neptune-db:ReadDataViaQuery</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery\">neptune-db:WriteDataViaQuery</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery\">neptune-db:DeleteDataViaQuery</a>\n               </p>\n            </li>\n         </ul>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Gremlin</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      Gremlin queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/gremlin/explain",
@@ -2455,7 +2455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Executes a Gremlin Profile query, which runs a specified traversal,\n      collects various metrics about the run, and produces a profile report\n      as output. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-profile-api.html\">Gremlin profile\n      API in Neptune</a> for details.</p>",
+                "smithy.api#documentation": "<p>Executes a Gremlin Profile query, which runs a specified traversal,\n      collects various metrics about the run, and produces a profile report\n      as output. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-profile-api.html\">Gremlin profile\n      API in Neptune</a> for details.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery\">neptune-db:ReadDataViaQuery</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Gremlin</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      Gremlin queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/gremlin/profile",
@@ -2593,7 +2593,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This commands executes a Gremlin query. Amazon Neptune is compatible\n      with Apache TinkerPop3 and Gremlin, so you can use the Gremlin traversal\n      language to query the graph, as described under <a href=\"https://tinkerpop.apache.org/docs/current/reference/#graph\">The\n      Graph</a> in the Apache TinkerPop3 documentation.\n      More details can also be found in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html\">Accessing a\n      Neptune graph with Gremlin</a>.</p>",
+                "smithy.api#documentation": "<p>This commands executes a Gremlin query. Amazon Neptune is compatible\n      with Apache TinkerPop3 and Gremlin, so you can use the Gremlin traversal\n      language to query the graph, as described under <a href=\"https://tinkerpop.apache.org/docs/current/reference/#graph\">The\n      Graph</a> in the Apache TinkerPop3 documentation.\n      More details can also be found in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html\">Accessing a\n      Neptune graph with Gremlin</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that enables one of the following IAM actions\n      in that cluster, depending on the query:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery\">neptune-db:ReadDataViaQuery</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery\">neptune-db:WriteDataViaQuery</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery\">neptune-db:DeleteDataViaQuery</a>\n               </p>\n            </li>\n         </ul>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Gremlin</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      Gremlin queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/gremlin",
@@ -2730,7 +2730,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Executes an openCypher <code>explain</code> request. See\n      <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-explain.html\">The\n      openCypher explain feature</a> for more information.</p>",
+                "smithy.api#documentation": "<p>Executes an openCypher <code>explain</code> request. See\n      <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-explain.html\">The\n      openCypher explain feature</a> for more information.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery\">neptune-db:ReadDataViaQuery</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Opencypher</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      openCypher queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/opencypher/explain",
@@ -2859,7 +2859,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Executes an openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html\">Accessing\n      the Neptune Graph with openCypher</a> for more information.</p>\n         <p>Neptune supports building graph applications using openCypher,\n      which is currently one of the most popular query languages among\n      developers working with graph databases. Developers, business analysts,\n      and data scientists like openCypher's declarative, SQL-inspired syntax\n      because it provides a familiar structure in which to querying property\n       graphs.</p>\n         <p>The openCypher language was originally developed by Neo4j, then\n      open-sourced in 2015 and contributed to the <a href=\"https://opencypher.org/\">openCypher project</a> under an Apache\n      2 open-source license.</p>",
+                "smithy.api#documentation": "<p>Executes an openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html\">Accessing\n      the Neptune Graph with openCypher</a> for more information.</p>\n         <p>Neptune supports building graph applications using openCypher,\n      which is currently one of the most popular query languages among\n      developers working with graph databases. Developers, business analysts,\n      and data scientists like openCypher's declarative, SQL-inspired syntax\n      because it provides a familiar structure in which to querying property\n       graphs.</p>\n         <p>The openCypher language was originally developed by Neo4j, then\n      open-sourced in 2015 and contributed to the <a href=\"https://opencypher.org/\">openCypher project</a> under an Apache\n      2 open-source license.</p>\n         <p>Note that when invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows one of the following IAM actions\n      in that cluster, depending on the query:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery\">neptune-db:ReadDataViaQuery</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery\">neptune-db:WriteDataViaQuery</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery\">neptune-db:DeleteDataViaQuery</a>\n               </p>\n            </li>\n         </ul>\n         <p>Note also that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Opencypher</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      openCypher queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/opencypher",
@@ -2881,7 +2881,7 @@
                 "parameters": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The openCypher query parameters for query execution. \n      See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/opencypher-parameterized-queries.html\">Examples\n      of openCypher parameterized queries</a> for more information.</p>"
+                        "smithy.api#documentation": "<p>The openCypher query parameters for query execution.\n      See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/opencypher-parameterized-queries.html\">Examples\n      of openCypher parameterized queries</a> for more information.</p>"
                     }
                 }
             },
@@ -3057,7 +3057,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Check the status of the graph database on the host.</p>",
+                "smithy.api#documentation": "<p>Retrieves the status of the graph database on the host.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getenginestatus\">neptune-db:GetEngineStatus</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/status",
@@ -3211,7 +3211,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the status of a specified Gremlin query.</p>",
+                "smithy.api#documentation": "<p>Gets the status of a specified Gremlin query.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getquerystatus\">neptune-db:GetQueryStatus</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Gremlin</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      Gremlin queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/gremlin/status/{queryId}",
@@ -3312,7 +3312,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets status information about a specified load job.\n      Neptune keeps track of the most recent 1,024 bulk load jobs,\n      and stores the last 10,000 error details per job.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune\n      Loader Get-Status API</a> for more information.</p>",
+                "smithy.api#documentation": "<p>Gets status information about a specified load job.\n      Neptune keeps track of the most recent 1,024 bulk load jobs,\n      and stores the last 10,000 error details per job.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune\n      Loader Get-Status API</a> for more information.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus\">neptune-db:GetLoaderJobStatus</a>\n      IAM action in that cluster..</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/loader/{loadId}",
@@ -3431,7 +3431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a specified data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The\n      <code>dataprocessing</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a specified data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The\n      <code>dataprocessing</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmldataprocessingjobstatus\">neptune-db:neptune-db:GetMLDataProcessingJobStatus</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/dataprocessing/{id}",
@@ -3533,7 +3533,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about an inference endpoint. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about an inference endpoint. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlendpointstatus\">neptune-db:GetMLEndpointStatus</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/endpoints/{id}",
@@ -3641,7 +3641,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlmodeltrainingjobstatus\">neptune-db:GetMLModelTrainingJobStatus</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/modeltraining/{id}",
@@ -3761,7 +3761,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>",
+                "smithy.api#documentation": "<p>Gets information about a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlmodeltransformjobstatus\">neptune-db:GetMLModelTransformJobStatus</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/modeltransform/{id}",
@@ -3893,7 +3893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the status of a specified openCypher query.</p>",
+                "smithy.api#documentation": "<p>Retrieves the status of a specified openCypher query.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getquerystatus\">neptune-db:GetQueryStatus</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Opencypher</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      openCypher queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/opencypher/status/{queryId}",
@@ -3994,7 +3994,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets property graph statistics (Gremlin and openCypher).</p>",
+                "smithy.api#documentation": "<p>Gets property graph statistics (Gremlin and openCypher).</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus\">neptune-db:GetStatisticsStatus</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/propertygraph/statistics",
@@ -4009,7 +4009,7 @@
                 "status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP return code of the request. If the request succeeded,\n      the code is 200. See <a href=\"docs.aws.amazon.comneptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors\">Common\n      error codes for DFE statistics request</a> for a list of common errors.</p>",
+                        "smithy.api#documentation": "<p>The HTTP return code of the request. If the request succeeded,\n      the code is 200. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors\">Common\n      error codes for DFE statistics request</a> for a list of common errors.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4072,7 +4072,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a stream for a property graph.</p>\n         <p>With the Neptune Streams feature, you can generate a complete\n      sequence of change-log entries that record every change made to your\n      graph data as it happens. <code>GetPropertygraphStream</code> lets\n      you collect these change-log entries for a property graph.</p>\n         <p>The Neptune streams feature needs to be enabled on your Neptune\n      DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a>\n      DB cluster parameter to <code>1</code>.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing\n    graph changes in real time using Neptune streams</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a stream for a property graph.</p>\n         <p>With the Neptune Streams feature, you can generate a complete\n      sequence of change-log entries that record every change made to your\n      graph data as it happens. <code>GetPropertygraphStream</code> lets\n      you collect these change-log entries for a property graph.</p>\n         <p>The Neptune streams feature needs to be enabled on your Neptune\n      DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a>\n      DB cluster parameter to <code>1</code>.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing\n      graph changes in real time using Neptune streams</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstreamrecords\">neptune-db:GetStreamRecords</a>\n      IAM action in that cluster.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that enables one of the following IAM actions,\n      depending on the query:</p>\n         <p>Note that you can restrict property-graph queries using the\n      following IAM context keys:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Gremlin</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Opencypher</a>\n               </p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/propertygraph/stream",
@@ -4222,7 +4222,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a graph summary for a property graph.</p>",
+                "smithy.api#documentation": "<p>Gets a graph summary for a property graph.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getgraphsummary\">neptune-db:GetGraphSummary</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/propertygraph/statistics/summary",
@@ -4318,7 +4318,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a graph summary for an RDF graph.</p>",
+                "smithy.api#documentation": "<p>Gets a graph summary for an RDF graph.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getgraphsummary\">neptune-db:GetGraphSummary</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/rdf/statistics/summary",
@@ -4429,7 +4429,7 @@
                 "status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP return code of the request. If the request succeeded,\n      the code is 200. See <a href=\"docs.aws.amazon.comneptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors\">Common\n      error codes for DFE statistics request</a> for a list of common errors.</p>",
+                        "smithy.api#documentation": "<p>The HTTP return code of the request. If the request succeeded,\n      the code is 200. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors\">Common\n      error codes for DFE statistics request</a> for a list of common errors.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus\">neptune-db:GetStatisticsStatus</a>\n      IAM action in that cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4492,7 +4492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a stream for an RDF graph.</p>\n         <p>With the Neptune Streams feature, you can generate a complete\n      sequence of change-log entries that record every change made to your\n      graph data as it happens. <code>GetSparqlStream</code> lets\n      you collect these change-log entries for an RDF graph.</p>\n         <p>The Neptune streams feature needs to be enabled on your Neptune\n      DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a>\n      DB cluster parameter to <code>1</code>.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing\n    graph changes in real time using Neptune streams</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a stream for an RDF graph.</p>\n         <p>With the Neptune Streams feature, you can generate a complete\n      sequence of change-log entries that record every change made to your\n      graph data as it happens. <code>GetSparqlStream</code> lets\n      you collect these change-log entries for an RDF graph.</p>\n         <p>The Neptune streams feature needs to be enabled on your Neptune\n      DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a>\n      DB cluster parameter to <code>1</code>.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing\n    graph changes in real time using Neptune streams</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstreamrecords\">neptune-db:GetStreamRecords</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Sparql</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      SPARQL queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/sparql/stream",
@@ -4910,7 +4910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists active Gremlin queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html\">Gremlin query\n      status API</a> for details about the output.</p>",
+                "smithy.api#documentation": "<p>Lists active Gremlin queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html\">Gremlin query\n      status API</a> for details about the output.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getquerystatus\">neptune-db:GetQueryStatus</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Gremlin</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      Gremlin queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/gremlin/status",
@@ -5007,7 +5007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of the <code>loadIds</code> for all active\n      loader jobs.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of the <code>loadIds</code> for all active\n      loader jobs.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listloaderjobs\">neptune-db:ListLoaderJobs</a>\n      IAM action in that cluster..</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/loader",
@@ -5108,7 +5108,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Neptune ML data processing jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html#machine-learning-api-dataprocessing-list-jobs\">Listing\n      active data-processing jobs using the Neptune ML dataprocessing command</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Neptune ML data processing jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html#machine-learning-api-dataprocessing-list-jobs\">Listing\n      active data-processing jobs using the Neptune ML dataprocessing command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmldataprocessingjobs\">neptune-db:ListMLDataProcessingJobs</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/dataprocessing",
@@ -5201,7 +5201,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists existing inference endpoints. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>",
+                "smithy.api#documentation": "<p>Lists existing inference endpoints. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing\n      inference endpoints using the endpoints command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlendpoints\">neptune-db:ListMLEndpoints</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/endpoints",
@@ -5294,7 +5294,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists Neptune ML model-training jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Lists Neptune ML model-training jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#neptune-db:listmlmodeltrainingjobs\">neptune-db:neptune-db:ListMLModelTrainingJobs</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/modeltraining",
@@ -5387,7 +5387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of model transform job IDs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of model transform job IDs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlmodeltransformjobs\">neptune-db:ListMLModelTransformJobs</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ml/modeltransform",
@@ -5498,7 +5498,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists active openCypher queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune\n      openCypher status endpoint</a> for more information.</p>",
+                "smithy.api#documentation": "<p>Lists active openCypher queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune\n      openCypher status endpoint</a> for more information.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getquerystatus\">neptune-db:GetQueryStatus</a>\n      IAM action in that cluster.</p>\n         <p>Note that the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys\">neptune-db:QueryLanguage:Opencypher</a>\n      IAM condition key can be used in the policy document to restrict the use of\n      openCypher queries (see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html\">Condition\n      keys available in Neptune IAM data-access policy statements</a>).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/opencypher/status",
@@ -5720,7 +5720,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Manages the generation and use of property graph statistics.</p>",
+                "smithy.api#documentation": "<p>Manages the generation and use of property graph statistics.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#managestatistics\">neptune-db:ManageStatistics</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/propertygraph/statistics",
@@ -5814,7 +5814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Manages the generation and use of RDF graph statistics.</p>",
+                "smithy.api#documentation": "<p>Manages the generation and use of RDF graph statistics.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#managestatistics\">neptune-db:ManageStatistics</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/sparql/statistics",
@@ -6661,7 +6661,7 @@
                 "graphSummary": {
                     "target": "com.amazonaws.neptunedata#RDFGraphSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>The graph summary of an RDF graph. See <a href=\"https://docs.aws.amazon.com/neptune-graph-summary.html#neptune-graph-summary-rdf-response\">Graph\n      summary response for an RDF graph</a>.</p>"
+                        "smithy.api#documentation": "<p>The graph summary of an RDF graph. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-rdf-response\">Graph\n      summary response for an RDF graph</a>.</p>"
                     }
                 }
             },
@@ -7043,7 +7043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a Neptune bulk loader job to load data from an Amazon S3\n      bucket into a Neptune DB instance. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html\">Using the Amazon Neptune\n      Bulk Loader to Ingest Data</a>.</p>",
+                "smithy.api#documentation": "<p>Starts a Neptune bulk loader job to load data from an Amazon S3\n      bucket into a Neptune DB instance. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html\">Using the Amazon Neptune\n      Bulk Loader to Ingest Data</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startloaderjob\">neptune-db:StartLoaderJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/loader",
@@ -7203,7 +7203,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Neptune ML data processing job for processing the\n      graph data exported from Neptune for training. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The\n      <code>dataprocessing</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new Neptune ML data processing job for processing the\n      graph data exported from Neptune for training. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The\n      <code>dataprocessing</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeldataprocessingjob\">neptune-db:StartMLModelDataProcessingJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ml/dataprocessing",
@@ -7381,7 +7381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model\n      training using the <code>modeltraining</code> command</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeltrainingjob\">neptune-db:StartMLModelTrainingJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ml/modeltraining",
@@ -7577,7 +7577,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use\n      a trained model to generate new model artifacts</a>.</p>\n         <p>When invoking this operation in a Neptune cluster that has IAM\n      authentication enabled, the IAM user or role making the request must\n      have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeltransformjob\">neptune-db:StartMLModelTransformJob</a>\n      IAM action in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ml/modeltransform",
