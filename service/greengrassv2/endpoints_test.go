@@ -5,8 +5,10 @@ package greengrassv2
 import (
 	"context"
 	smithy "github.com/aws/smithy-go"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
 	"net/http"
 	"net/url"
@@ -777,15 +779,21 @@ func TestEndpointCase19(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":          "sigv4",
-					"signingName":   "greengrass",
-					"signingRegion": "us-gov-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "greengrass")
+						smithyhttp.SetSigV4ASigningName(&sp, "greengrass")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -826,15 +834,21 @@ func TestEndpointCase20(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":          "sigv4",
-					"signingName":   "greengrass",
-					"signingRegion": "us-gov-west-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "greengrass")
+						smithyhttp.SetSigV4ASigningName(&sp, "greengrass")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 

@@ -105,6 +105,25 @@ func (c *Client) addOperationHttpPrefixHeadersMiddlewares(stack *middleware.Stac
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "HttpPrefixHeaders",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

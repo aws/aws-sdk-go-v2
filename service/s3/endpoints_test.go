@@ -5,8 +5,10 @@ package s3
 import (
 	"context"
 	smithy "github.com/aws/smithy-go"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
 	"net/http"
 	"net/url"
@@ -170,16 +172,23 @@ func TestEndpointCase6(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -338,16 +347,23 @@ func TestEndpointCase12(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -391,16 +407,23 @@ func TestEndpointCase13(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -444,18 +467,23 @@ func TestEndpointCase14(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name": "sigv4a",
-					"signingRegionSet": []interface{}{
-						"*",
-					},
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -591,16 +619,23 @@ func TestEndpointCase19(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -690,16 +725,23 @@ func TestEndpointCase22(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -765,16 +807,23 @@ func TestEndpointCase24(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -817,16 +866,23 @@ func TestEndpointCase25(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -870,16 +926,23 @@ func TestEndpointCase26(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -923,16 +986,23 @@ func TestEndpointCase27(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -976,16 +1046,23 @@ func TestEndpointCase28(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1052,16 +1129,23 @@ func TestEndpointCase30(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1129,16 +1213,23 @@ func TestEndpointCase32(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1183,16 +1274,23 @@ func TestEndpointCase33(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1232,16 +1330,23 @@ func TestEndpointCase34(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1281,16 +1386,23 @@ func TestEndpointCase35(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1330,16 +1442,23 @@ func TestEndpointCase36(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1379,16 +1498,23 @@ func TestEndpointCase37(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1429,16 +1555,23 @@ func TestEndpointCase38(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1499,16 +1632,23 @@ func TestEndpointCase40(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1551,16 +1691,23 @@ func TestEndpointCase41(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1603,16 +1750,23 @@ func TestEndpointCase42(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1656,16 +1810,23 @@ func TestEndpointCase43(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1709,16 +1870,23 @@ func TestEndpointCase44(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1762,16 +1930,23 @@ func TestEndpointCase45(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1815,16 +1990,23 @@ func TestEndpointCase46(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1868,16 +2050,23 @@ func TestEndpointCase47(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1921,16 +2110,23 @@ func TestEndpointCase48(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -1972,16 +2168,23 @@ func TestEndpointCase49(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2023,16 +2226,23 @@ func TestEndpointCase50(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2074,16 +2284,23 @@ func TestEndpointCase51(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2125,16 +2342,23 @@ func TestEndpointCase52(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2177,16 +2401,23 @@ func TestEndpointCase53(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2230,16 +2461,23 @@ func TestEndpointCase54(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2282,16 +2520,23 @@ func TestEndpointCase55(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2334,16 +2579,23 @@ func TestEndpointCase56(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2387,16 +2639,23 @@ func TestEndpointCase57(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2440,16 +2699,23 @@ func TestEndpointCase58(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2493,16 +2759,23 @@ func TestEndpointCase59(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2546,16 +2819,23 @@ func TestEndpointCase60(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2600,16 +2880,23 @@ func TestEndpointCase61(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2654,16 +2941,23 @@ func TestEndpointCase62(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2708,16 +3002,23 @@ func TestEndpointCase63(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2762,16 +3063,23 @@ func TestEndpointCase64(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2816,16 +3124,23 @@ func TestEndpointCase65(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2870,16 +3185,23 @@ func TestEndpointCase66(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2923,16 +3245,23 @@ func TestEndpointCase67(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -2976,16 +3305,23 @@ func TestEndpointCase68(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
-					"name":                  "sigv4",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3030,16 +3366,23 @@ func TestEndpointCase69(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3084,16 +3427,23 @@ func TestEndpointCase70(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3138,16 +3488,23 @@ func TestEndpointCase71(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3192,16 +3549,23 @@ func TestEndpointCase72(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3247,16 +3611,23 @@ func TestEndpointCase73(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3303,16 +3674,23 @@ func TestEndpointCase74(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3356,16 +3734,23 @@ func TestEndpointCase75(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3425,16 +3810,23 @@ func TestEndpointCase77(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3478,16 +3870,23 @@ func TestEndpointCase78(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3592,16 +3991,23 @@ func TestEndpointCase82(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3662,16 +4068,23 @@ func TestEndpointCase84(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3712,16 +4125,23 @@ func TestEndpointCase85(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3762,16 +4182,23 @@ func TestEndpointCase86(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3812,16 +4239,23 @@ func TestEndpointCase87(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3865,16 +4299,23 @@ func TestEndpointCase88(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3917,16 +4358,23 @@ func TestEndpointCase89(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -3970,16 +4418,23 @@ func TestEndpointCase90(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4021,16 +4476,23 @@ func TestEndpointCase91(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4073,16 +4535,23 @@ func TestEndpointCase92(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4171,16 +4640,23 @@ func TestEndpointCase95(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4224,16 +4700,23 @@ func TestEndpointCase96(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4276,16 +4759,23 @@ func TestEndpointCase97(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4352,16 +4842,23 @@ func TestEndpointCase99(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4405,16 +4902,23 @@ func TestEndpointCase100(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4458,16 +4962,23 @@ func TestEndpointCase101(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4512,16 +5023,23 @@ func TestEndpointCase102(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4590,16 +5108,23 @@ func TestEndpointCase104(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east-1",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4729,16 +5254,23 @@ func TestEndpointCase109(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4782,16 +5314,23 @@ func TestEndpointCase110(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4834,16 +5373,23 @@ func TestEndpointCase111(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4883,16 +5429,23 @@ func TestEndpointCase112(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -4959,16 +5512,23 @@ func TestEndpointCase114(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5033,16 +5593,23 @@ func TestEndpointCase116(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5087,16 +5654,23 @@ func TestEndpointCase117(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5179,16 +5753,23 @@ func TestEndpointCase120(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5250,16 +5831,23 @@ func TestEndpointCase122(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-1",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5573,16 +6161,23 @@ func TestEndpointCase137(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-2",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5624,16 +6219,23 @@ func TestEndpointCase138(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-2",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5674,16 +6276,23 @@ func TestEndpointCase139(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-2",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5725,16 +6334,23 @@ func TestEndpointCase140(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-2",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5776,16 +6392,23 @@ func TestEndpointCase141(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-2",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5828,16 +6451,23 @@ func TestEndpointCase142(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingRegion":         "us-east-2",
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5881,16 +6511,23 @@ func TestEndpointCase143(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5934,16 +6571,23 @@ func TestEndpointCase144(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -5987,16 +6631,23 @@ func TestEndpointCase145(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6040,16 +6691,23 @@ func TestEndpointCase146(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6093,16 +6751,23 @@ func TestEndpointCase147(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6146,16 +6811,23 @@ func TestEndpointCase148(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6222,16 +6894,23 @@ func TestEndpointCase150(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6275,16 +6954,23 @@ func TestEndpointCase151(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6374,16 +7060,23 @@ func TestEndpointCase154(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6427,16 +7120,23 @@ func TestEndpointCase155(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6480,16 +7180,23 @@ func TestEndpointCase156(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6533,16 +7240,23 @@ func TestEndpointCase157(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6586,16 +7300,23 @@ func TestEndpointCase158(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6639,16 +7360,23 @@ func TestEndpointCase159(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6715,16 +7443,23 @@ func TestEndpointCase161(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6767,16 +7502,23 @@ func TestEndpointCase162(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingName":           "s3",
-					"signingRegion":         "us-gov-west-1",
-					"disableDoubleEncoding": true,
-					"name":                  "sigv4",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6843,16 +7585,23 @@ func TestEndpointCase164(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6919,16 +7668,23 @@ func TestEndpointCase166(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -6971,16 +7727,23 @@ func TestEndpointCase167(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7024,16 +7787,23 @@ func TestEndpointCase168(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7123,16 +7893,23 @@ func TestEndpointCase171(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7199,16 +7976,23 @@ func TestEndpointCase173(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7251,16 +8035,23 @@ func TestEndpointCase174(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7304,16 +8095,23 @@ func TestEndpointCase175(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7357,16 +8155,23 @@ func TestEndpointCase176(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
-					"name":                  "sigv4",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7433,16 +8238,23 @@ func TestEndpointCase178(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7509,16 +8321,23 @@ func TestEndpointCase180(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7561,16 +8380,23 @@ func TestEndpointCase181(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7615,16 +8441,23 @@ func TestEndpointCase182(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7669,16 +8502,23 @@ func TestEndpointCase183(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7795,16 +8635,23 @@ func TestEndpointCase187(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7849,16 +8696,23 @@ func TestEndpointCase188(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -7903,16 +8757,23 @@ func TestEndpointCase189(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8028,16 +8889,23 @@ func TestEndpointCase193(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8082,16 +8950,23 @@ func TestEndpointCase194(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8136,16 +9011,23 @@ func TestEndpointCase195(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8262,16 +9144,23 @@ func TestEndpointCase199(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8315,16 +9204,23 @@ func TestEndpointCase200(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8368,16 +9264,23 @@ func TestEndpointCase201(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8444,16 +9347,23 @@ func TestEndpointCase203(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8497,16 +9407,23 @@ func TestEndpointCase204(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "cn-north-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8619,16 +9536,23 @@ func TestEndpointCase208(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8672,16 +9596,23 @@ func TestEndpointCase209(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8748,16 +9679,23 @@ func TestEndpointCase211(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "af-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8800,16 +9738,23 @@ func TestEndpointCase212(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8853,16 +9798,23 @@ func TestEndpointCase213(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -8956,16 +9908,23 @@ func TestEndpointCase216(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9009,16 +9968,23 @@ func TestEndpointCase217(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9086,16 +10052,23 @@ func TestEndpointCase219(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9227,16 +10200,23 @@ func TestEndpointCase224(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9280,16 +10260,23 @@ func TestEndpointCase225(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9333,16 +10320,23 @@ func TestEndpointCase226(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9386,16 +10380,23 @@ func TestEndpointCase227(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9439,16 +10440,23 @@ func TestEndpointCase228(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9515,16 +10523,23 @@ func TestEndpointCase230(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9638,16 +10653,23 @@ func TestEndpointCase234(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-gov-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9691,16 +10713,23 @@ func TestEndpointCase235(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-gov-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -9998,16 +11027,23 @@ func TestEndpointCase247(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10074,16 +11110,23 @@ func TestEndpointCase249(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10127,16 +11170,23 @@ func TestEndpointCase250(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-west-2",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10179,16 +11229,23 @@ func TestEndpointCase251(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10231,16 +11288,23 @@ func TestEndpointCase252(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10371,16 +11435,23 @@ func TestEndpointCase257(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-object-lambda",
-					"disableDoubleEncoding": true,
-					"signingRegion":         "us-east.special",
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-object-lambda")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east.special")
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10423,16 +11494,23 @@ func TestEndpointCase258(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-west-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10475,16 +11553,23 @@ func TestEndpointCase259(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "ap-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "ap-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10527,16 +11612,23 @@ func TestEndpointCase260(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10579,16 +11671,23 @@ func TestEndpointCase261(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "me-south-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "me-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10632,16 +11731,23 @@ func TestEndpointCase262(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10685,16 +11791,23 @@ func TestEndpointCase263(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3-outposts",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10826,16 +11939,23 @@ func TestEndpointCase268(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "snow",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "snow")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10878,16 +11998,23 @@ func TestEndpointCase269(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "snow",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "snow")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10931,16 +12058,23 @@ func TestEndpointCase270(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "snow",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "snow")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 
@@ -10984,16 +12118,23 @@ func TestEndpointCase271(t *testing.T) {
 		URI:     *uri,
 		Headers: http.Header{},
 		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "snow",
-					"disableDoubleEncoding": true,
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "snow")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
 				},
 			})
-			return properties
+			return out
 		}(),
 	}
 

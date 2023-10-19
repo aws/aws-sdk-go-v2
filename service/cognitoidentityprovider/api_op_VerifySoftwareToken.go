@@ -138,6 +138,25 @@ func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.St
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "VerifySoftwareToken",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

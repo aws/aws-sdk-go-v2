@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, o
 	if err = addRetryMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
-		return err
-	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
 		return err
 	}
@@ -181,6 +178,25 @@ func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "DescribeInput",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
 		return err
 	}
 	return nil

@@ -11,8 +11,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	smithy "github.com/aws/smithy-go"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -46,6 +49,10 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPClient(&options)
 
 	resolveHTTPSignerV4(&options)
+
+	resolveAuthSchemeResolver(&options)
+
+	resolveAuthSchemes(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -150,6 +157,20 @@ type Options struct {
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
 	HTTPClient HTTPClient
+
+	// The auth scheme resolver which determines how to authenticate for each
+	// operation.
+	AuthSchemeResolver AuthSchemeResolver
+
+	// The list of auth schemes supported by the client.
+	AuthSchemes []smithyhttp.AuthScheme
+}
+
+func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolver {
+	if schemeID == "aws.auth#sigv4" {
+		return &internalauthsmithy.CredentialsProviderAdapter{Provider: o.Credentials}
+	}
+	return nil
 }
 
 // WithAPIOptions returns a functional option for setting the Client's APIOptions
@@ -227,6 +248,15 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		}
 	}
 	return result, metadata, err
+}
+func resolveAuthSchemeResolver(options *Options) {
+	options.AuthSchemeResolver = &defaultAuthSchemeResolver{}
+}
+
+func resolveAuthSchemes(options *Options) {
+	options.AuthSchemes = []smithyhttp.AuthScheme{
+		internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{Signer: options.HTTPSignerV4}),
+	}
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
@@ -416,15 +446,6 @@ func addClientUserAgent(stack *middleware.Stack, options Options) error {
 	}
 
 	return nil
-}
-
-func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
-	mw := v4.NewSignHTTPRequestMiddleware(v4.SignHTTPRequestMiddlewareOptions{
-		CredentialsProvider: o.Credentials,
-		Signer:              o.HTTPSignerV4,
-		LogSigning:          o.ClientLogMode.IsSigning(),
-	})
-	return stack.Finalize.Add(mw, middleware.After)
 }
 
 type HTTPSignerV4 interface {

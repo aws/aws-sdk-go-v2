@@ -103,6 +103,25 @@ func (c *Client) addOperationStreamingTraitsRequireLengthMiddlewares(stack *midd
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "StreamingTraitsRequireLength",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

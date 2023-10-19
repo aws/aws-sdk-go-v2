@@ -199,6 +199,25 @@ func (c *Client) addOperationSignUpMiddlewares(stack *middleware.Stack, options 
 	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "SignUp",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

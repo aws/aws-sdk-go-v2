@@ -39,10 +39,9 @@ import software.amazon.smithy.model.traits.Trait;
 import software.amazon.smithy.utils.ListUtils;
 
 /**
- * Generates Client Configuration, Middleware, and Config Resolvers for AWS Signature Version 4 support.
+ * Generates Client Configuration and Config Resolvers for AWS Signature Version 4 support.
  */
 public final class AwsSignatureVersion4 implements GoIntegration {
-    public static final String REGISTER_MIDDLEWARE_FUNCTION = "addHTTPSignerV4Middleware";
     public static final String SIGNER_INTERFACE_NAME = "HTTPSignerV4";
     public static final String SIGNER_CONFIG_FIELD_NAME = SIGNER_INTERFACE_NAME;
     public static final String NEW_SIGNER_FUNC_NAME = "newDefaultV4Signer";
@@ -66,7 +65,6 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         ServiceShape serviceShape = settings.getService(model);
         if (isSupportedAuthentication(model, serviceShape)) {
             goDelegator.useShapeWriter(serviceShape, writer -> {
-                writeMiddlewareRegister(model, writer, serviceShape);
                 writerSignerInterface(writer);
                 writerConfigFieldResolver(writer, serviceShape);
                 writeNewV4SignerFunc(writer, serviceShape);
@@ -130,25 +128,6 @@ public final class AwsSignatureVersion4 implements GoIntegration {
                                 .resolver(SymbolUtils.createValueSymbolBuilder(SIGNER_RESOLVER).build())
                                 .build())
                 .build());
-    }
-
-    private void writeMiddlewareRegister(Model model, GoWriter writer, ServiceShape serviceShape) {
-        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
-        writer.openBlock("func $L(stack $P, o Options) error {", "}", REGISTER_MIDDLEWARE_FUNCTION,
-                SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
-                    Symbol newMiddlewareSymbol = SymbolUtils.createValueSymbolBuilder(
-                            "NewSignHTTPRequestMiddleware", AwsGoDependency.AWS_SIGNER_V4).build();
-                    Symbol middlewareOptionsSymbol = SymbolUtils.createValueSymbolBuilder(
-                            "SignHTTPRequestMiddlewareOptions", AwsGoDependency.AWS_SIGNER_V4).build();
-
-                    writer.openBlock("mw := $T($T{", "})", newMiddlewareSymbol, middlewareOptionsSymbol, () -> {
-                        writer.write("CredentialsProvider: o.$L,", AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
-                        writer.write("Signer: o.$L,", SIGNER_CONFIG_FIELD_NAME);
-                        writer.write("LogSigning: o.$L.IsSigning(),", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
-                    });
-                    writer.write("return stack.Finalize.Add(mw, middleware.After)");
-                });
-        writer.write("");
     }
 
     /**

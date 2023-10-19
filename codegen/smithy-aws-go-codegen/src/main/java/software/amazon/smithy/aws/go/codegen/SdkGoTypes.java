@@ -33,6 +33,19 @@ public final class SdkGoTypes {
     }
 
     public static final class Internal {
+        public static final class Auth {
+            public static final Symbol HTTPAuthScheme = AwsGoDependency.INTERNAL_AUTH.pointableSymbol("HTTPAuthScheme");
+            public static final Symbol NewHTTPAuthScheme = AwsGoDependency.INTERNAL_AUTH.valueSymbol("NewHTTPAuthScheme");
+
+            public static final class Smithy {
+                public static final Symbol CredentialsAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("CredentialsAdapter");
+                public static final Symbol CredentialsProviderAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("CredentialsProviderAdapter");
+                public static final Symbol V4SignerAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("V4SignerAdapter");
+                public static final Symbol BearerTokenAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("BearerTokenAdapter");
+                public static final Symbol BearerTokenProviderAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("BearerTokenProviderAdapter");
+                public static final Symbol BearerTokenSignerAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("BearerTokenSignerAdapter");
+            }
+        }
         public static final class Endpoints {
             public static final Symbol MapFIPSRegion = AwsGoDependency.INTERNAL_ENDPOINTS.valueSymbol("MapFIPSRegion");
         }

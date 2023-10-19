@@ -93,9 +93,6 @@ func (c *Client) addOperationDeleteAccessPointForObjectLambdaMiddlewares(stack *
 	if err = addRetryMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
-		return err
-	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
 		return err
 	}
@@ -148,6 +145,25 @@ func (c *Client) addOperationDeleteAccessPointForObjectLambdaMiddlewares(stack *
 		return err
 	}
 	if err = s3controlcust.AddDisableHostPrefixMiddleware(stack); err != nil {
+		return err
+	}
+	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
+		operation: "DeleteAccessPointForObjectLambda",
+		options:   options,
+	}, "ResolveEndpointV2", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	err = stack.Finalize.Add(&getIdentityMiddleware{
+		options: options,
+	}, middleware.Before)
+	if err != nil {
 		return err
 	}
 	return nil
