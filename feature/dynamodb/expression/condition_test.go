@@ -1397,7 +1397,7 @@ func TestContainsCondition(t *testing.T) {
 		err          condErrorMode
 	}{
 		{
-			name:  "basic contains",
+			name:  "basic contains string",
 			input: Name("foo").Contains("bar"),
 			expectedNode: exprNode{
 				children: []exprNode{
@@ -1408,6 +1408,44 @@ func TestContainsCondition(t *testing.T) {
 					{
 						values: []types.AttributeValue{
 							&types.AttributeValueMemberS{Value: "bar"},
+						},
+						fmtExpr: "$v",
+					},
+				},
+				fmtExpr: "contains ($c, $c)",
+			},
+		},
+		{
+			name:  "basic contains number int",
+			input: Name("foo").Contains(2),
+			expectedNode: exprNode{
+				children: []exprNode{
+					{
+						names:   []string{"foo"},
+						fmtExpr: "$n",
+					},
+					{
+						values: []types.AttributeValue{
+							&types.AttributeValueMemberN{Value: "2"},
+						},
+						fmtExpr: "$v",
+					},
+				},
+				fmtExpr: "contains ($c, $c)",
+			},
+		},
+		{
+			name:  "basic contains number float",
+			input: Name("foo").Contains(2.23),
+			expectedNode: exprNode{
+				children: []exprNode{
+					{
+						names:   []string{"foo"},
+						fmtExpr: "$n",
+					},
+					{
+						values: []types.AttributeValue{
+							&types.AttributeValueMemberN{Value: "2.23"},
 						},
 						fmtExpr: "$v",
 					},
